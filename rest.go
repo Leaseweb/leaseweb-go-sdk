@@ -42,7 +42,7 @@ type leasewebClient struct {
 var lswClient *leasewebClient
 
 const (
-	DEFAULT_BASE_URL = "https://api.staging.devleaseweb.com"
+	DEFAULT_BASE_URL = "https://api.leaseweb.com"
 	GET              = "GET"
 	POST             = "POST"
 	PUT              = "PUT"

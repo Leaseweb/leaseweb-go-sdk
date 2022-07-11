@@ -8,7 +8,8 @@
 - `virtual_servers.*`
 - `private_cloud.*`
 - `hosting.*`
-- `abuse.*`
+- `abuse.GetAbuseReportAttachments`
+- `abuse.GetAbuseReportMessageAttachments`
 - `customer_account.*`
 - `services.*`
 - `dedicated_network_equipment.*`
