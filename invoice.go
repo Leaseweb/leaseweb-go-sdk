@@ -57,12 +57,6 @@ type Line struct {
 	UnitAmount  float32 `json:"unitAmount"`
 }
 
-type Metadata struct {
-	Limit      int `json:"limit"`
-	Offset     int `json:"offset"`
-	TotalCount int `json:"totalCount"`
-}
-
 type Contract struct {
 	ContractId  string  `json:"contractId"`
 	Currency    string  `json:"currency"`

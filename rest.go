@@ -8,6 +8,12 @@ import (
 	"strings"
 )
 
+type Metadata struct {
+	Limit      int `json:"limit"`
+	Offset     int `json:"offset"`
+	TotalCount int `json:"totalCount"`
+}
+
 type LeasewebApi interface {
 	SetVersion(version string)
 	GetVersion() string
