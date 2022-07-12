@@ -9,6 +9,5 @@
 - `hosting.*`
 - `abuse.GetAbuseReportAttachments`
 - `abuse.GetAbuseReportMessageAttachments`
-- `customer_account.*`
 - `services.*`
 - `dedicated_network_equipment.*`
