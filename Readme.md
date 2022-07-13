@@ -5,7 +5,6 @@
 - `private_networking.*`
 - `ip_management.*`
 - `virtual_servers.*`
-- `private_cloud.*`
 - `hosting.*`
 - `abuse.GetAbuseReportAttachments`
 - `abuse.GetAbuseReportMessageAttachments`
