@@ -1,4 +1,14 @@
-### Following functionality should be implemented:
+# Leaseweb Go SDK
+
+This package provides a client for Leaseweb's REST API.
+
+### Installation
+
+```bash
+    go get github.com/majidkarimizadeh/leaseweb-go-sdk
+```
+
+### TODO:
 - `remote_managment.GetProfile`
 - `dedicated_servers.*`
 - `dedicated_rack.*`
