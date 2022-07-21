@@ -5,7 +5,7 @@ This package provides a client for Leaseweb's REST API.
 ### Installation
 
 ```bash
-    go get github.com/majidkarimizadeh/leaseweb-go-sdk
+go get github.com/majidkarimizadeh/leaseweb-go-sdk
 ```
 
 ### TODO:
