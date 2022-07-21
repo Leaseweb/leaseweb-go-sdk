@@ -13,21 +13,6 @@ type AbuseApi struct {
 	version string
 }
 
-func (aba *AbuseApi) SetVersion(version string) {
-	aba.version = version
-}
-
-func (aba AbuseApi) GetVersion() string {
-	if aba.version == "" {
-		return ABUSE_API_DEFAULT_VERSION
-	}
-	return aba.version
-}
-
-func (aba AbuseApi) GetPath() string {
-	return "/abuse"
-}
-
 type AbuseReport struct {
 	Id                  string               `json:"id"`
 	Subject             string               `json:"subject"`
@@ -84,8 +69,19 @@ type Resolutions struct {
 	Resolutions []Resolution `json:"resolutions"`
 }
 
-func (aba AbuseApi) ListAbuseReports(args ...interface{}) (AbuseReports, error) {
+func (aba *AbuseApi) SetVersion(version string) {
+	aba.version = version
+}
 
+func (aba AbuseApi) getPath(endpoint string) string {
+	version := aba.version
+	if version == "" {
+		version = ABUSE_API_DEFAULT_VERSION
+	}
+	return "/abuse/" + version + endpoint
+}
+
+func (aba AbuseApi) ListAbuseReports(args ...interface{}) (*AbuseReports, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -102,42 +98,24 @@ func (aba AbuseApi) ListAbuseReports(args ...interface{}) (AbuseReports, error) 
 		v.Add("limit", fmt.Sprint(args[2]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := aba.getPath("/reports?" + v.Encode())
+	result := &AbuseReports{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	abuseReports := &AbuseReports{}
-	r := leasewebRequest{
-		response: abuseReports,
-		method:   GET,
-		endpoint: aba.GetPath() + "/" + aba.GetVersion() + "/reports" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return AbuseReports{}, err
-	}
-
-	return *abuseReports, nil
+	return result, nil
 }
 
-func (aba AbuseApi) GetAbuseReport(abuseReportId string) (AbuseReport, error) {
-
-	abuseReport := &AbuseReport{}
-	r := leasewebRequest{
-		response: abuseReport,
-		method:   GET,
-		endpoint: aba.GetPath() + "/" + aba.GetVersion() + "/reports/" + abuseReportId,
+func (aba AbuseApi) GetAbuseReport(abuseReportId string) (*AbuseReport, error) {
+	path := aba.getPath("/reports/" + abuseReportId)
+	result := &AbuseReport{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return AbuseReport{}, err
-	}
-
-	return *abuseReport, nil
+	return result, nil
 }
 
-func (aba AbuseApi) GetAbuseReportMessages(abuseReportId string, args ...int) (AbuseMessages, error) {
+func (aba AbuseApi) GetAbuseReportMessages(abuseReportId string, args ...int) (*AbuseMessages, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -146,67 +124,39 @@ func (aba AbuseApi) GetAbuseReportMessages(abuseReportId string, args ...int) (A
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := aba.getPath("/reports/" + abuseReportId + "/messages" + v.Encode())
+	result := &AbuseMessages{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	abuseMessages := &AbuseMessages{}
-	r := leasewebRequest{
-		response: abuseMessages,
-		method:   GET,
-		endpoint: aba.GetPath() + "/" + aba.GetVersion() + "/reports/" + abuseReportId + "/messages" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return AbuseMessages{}, err
-	}
-
-	return *abuseMessages, nil
+	return result, nil
 }
 
 func (aba AbuseApi) CreateNewAbuseReportMessage(abuseReportId string, body string) ([]string, error) {
-	var resp []string
-	r := leasewebRequest{
-		payload:  map[string]string{body: body},
-		response: &resp,
-		method:   POST,
-		endpoint: aba.GetPath() + "/" + aba.GetVersion() + "/reports/" + abuseReportId + "/messages",
+	var result []string
+	payload := map[string]string{body: body}
+	path := aba.getPath("/reports/" + abuseReportId + "/messages")
+	if err := doRequest(POST, path, &result, payload); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return []string{}, err
-	}
-
-	return resp, nil
+	return result, nil
 }
 
-func (aba AbuseApi) ListResolutionOptions(abuseReportId string) (Resolutions, error) {
-	resolutions := &Resolutions{}
-	r := leasewebRequest{
-		response: resolutions,
-		method:   GET,
-		endpoint: aba.GetPath() + "/" + aba.GetVersion() + "/reports/" + abuseReportId + "/resolutions",
+func (aba AbuseApi) ListResolutionOptions(abuseReportId string) (*Resolutions, error) {
+	path := aba.getPath("/reports/" + abuseReportId + "/resolutions")
+	result := &Resolutions{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return Resolutions{}, err
-	}
-
-	return *resolutions, nil
+	return result, nil
 }
 
 func (aba AbuseApi) ResolveAbuseReport(abuseReportId string, resolutions []string) error {
-	r := leasewebRequest{
-		payload:  map[string][]string{"resolutions": resolutions},
-		method:   POST,
-		endpoint: aba.GetPath() + "/" + aba.GetVersion() + "/reports/" + abuseReportId + "/resolve",
-	}
-	err := doRequest(r)
-	if err != nil {
+	payload := map[string][]string{"resolutions": resolutions}
+	path := aba.getPath("/reports/" + abuseReportId + "/resolve")
+	if err := doRequest(POST, path, nil, payload); err != nil {
 		return err
 	}
-
 	return nil
 }
 

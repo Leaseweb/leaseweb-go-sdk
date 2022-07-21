@@ -11,21 +11,6 @@ type RemoteManagementApi struct {
 	version string
 }
 
-func (rma *RemoteManagementApi) SetVersion(version string) {
-	rma.version = version
-}
-
-func (rma RemoteManagementApi) GetVersion() string {
-	if rma.version == "" {
-		return REMOTE_MANAGEMENT_API_DEFAULT_VERSION
-	}
-	return rma.version
-}
-
-func (rma RemoteManagementApi) GetPath() string {
-	return "/bareMetals"
-}
-
 type Profiles struct {
 	Metadata Metadata  `json:"_metadata"`
 	Profiles []Profile `json:"profiles"`
@@ -37,22 +22,28 @@ type Profile struct {
 	SatelliteDataCenters []string `json:"satelliteDatacenters"`
 }
 
-func (rma RemoteManagementApi) ChangeCredentials(password string) error {
+func (rma *RemoteManagementApi) SetVersion(version string) {
+	rma.version = version
+}
 
-	r := leasewebRequest{
-		payload:  map[string]string{password: password},
-		method:   POST,
-		endpoint: rma.GetPath() + "/" + rma.GetVersion() + "/remoteManagement/changeCredentials",
+func (rma RemoteManagementApi) getPath(endpoint string) string {
+	version := rma.version
+	if version == "" {
+		version = REMOTE_MANAGEMENT_API_DEFAULT_VERSION
 	}
-	err := doRequest(r)
-	if err != nil {
+	return "/bareMetals/" + version + endpoint
+}
+
+func (rma RemoteManagementApi) ChangeCredentials(password string) error {
+	payload := map[string]string{password: password}
+	path := rma.getPath("/remoteManagement/changeCredentials")
+	if err := doRequest(POST, path, nil, payload); err != nil {
 		return err
 	}
-
 	return nil
 }
 
-func (rma RemoteManagementApi) ListProfiles(args ...int) (Profiles, error) {
+func (rma RemoteManagementApi) ListProfiles(args ...int) (*Profiles, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -61,23 +52,12 @@ func (rma RemoteManagementApi) ListProfiles(args ...int) (Profiles, error) {
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := rma.getPath("/remoteManagement/profiles" + v.Encode())
+	result := &Profiles{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	profiles := &Profiles{}
-	r := leasewebRequest{
-		response: profiles,
-		method:   GET,
-		endpoint: rma.GetPath() + "/" + rma.GetVersion() + "/remoteManagement/profiles" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return Profiles{}, err
-	}
-
-	return *profiles, nil
+	return result, nil
 }
 
 // TODO: GetProfile should be tested

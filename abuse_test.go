@@ -139,76 +139,52 @@ func TestListAbuseReportsBeEmpty(t *testing.T) {
 	assert.Equal(len(response.AbuseReports), 0)
 }
 
-func TestListAbuseReportsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.ListAbuseReports()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestListAbuseReportsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.ListAbuseReports()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestListAbuseReportsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.ListAbuseReports()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestListAbuseReportsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.ListAbuseReports()
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.ListAbuseReports()
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.ListAbuseReports()
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetAbuseReport(t *testing.T) {
@@ -310,93 +286,63 @@ func TestGetAbuseReport(t *testing.T) {
 	assert.Equal(message2.Attachment.Filename, "notification.png")
 }
 
-func TestGetAbuseReportNotFound(t *testing.T) {
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	response, err := abuseApi.GetAbuseReport("wrong-id")
-
-	assert := assert.New(t)
-	assert.Empty(response)
-	assert.NotNil(err)
-}
-
-func TestGetAbuseReportError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.GetAbuseReport("123456")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetAbuseReportError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.GetAbuseReport("123456")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestGetAbuseReportError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.GetAbuseReport("123456")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestGetAbuseReportServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.GetAbuseReport("wrong-id")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.GetAbuseReport("123456")
+			},
+			ExpectedError: LeasewebError{},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.GetAbuseReport("123456")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.GetAbuseReport("123456")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetAbuseReportMessages(t *testing.T) {
@@ -511,76 +457,63 @@ func TestGetAbuseReportMessagesBeEmpty(t *testing.T) {
 	assert.Equal(response.Metadata.Limit, 10)
 }
 
-func TestGetAbuseReportMessagesError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.GetAbuseReportMessages("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetAbuseReportMessagesError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.GetAbuseReportMessages("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestGetAbuseReportMessagesError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.GetAbuseReportMessages("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestGetAbuseReportMessagesServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.GetAbuseReportMessages("123456789")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.GetAbuseReportMessages("123456789")
+			},
+			ExpectedError: LeasewebError{},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.GetAbuseReportMessages("123456789")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.GetAbuseReportMessages("123456789")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestCreateNewAbuseReportMessage(t *testing.T) {
@@ -602,76 +535,52 @@ func TestCreateNewAbuseReportMessage(t *testing.T) {
 	assert.Equal(resp[0], "To make sure the request has been processed please see if the message is added to the list.")
 }
 
-func TestCreateNewAbuseReportMessageError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.CreateNewAbuseReportMessage("123456789", "message body...")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestCreateNewAbuseReportMessageError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.CreateNewAbuseReportMessage("123456789", "message body...")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestCreateNewAbuseReportMessageError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.CreateNewAbuseReportMessage("123456789", "message body...")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestCreateNewAbuseReportMessageServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.CreateNewAbuseReportMessage("123456789", "message body...")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.CreateNewAbuseReportMessage("123456789", "message body...")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.CreateNewAbuseReportMessage("123456789", "message body...")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestListResolutionOptions(t *testing.T) {
@@ -728,80 +637,55 @@ func TestListResolutionOptionsBeEmpty(t *testing.T) {
 	assert.Empty(response.Resolutions)
 }
 
-func TestListResolutionOptionsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.ListResolutionOptions("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestListResolutionOptionsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.ListResolutionOptions("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestListResolutionOptionsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	resp, err := abuseApi.ListResolutionOptions("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestListResolutionOptionsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.ListResolutionOptions("123456789")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.ListResolutionOptions("123456789")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return AbuseApi{}.ListResolutionOptions("123456789")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestResolveAbuseReport(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -817,71 +701,50 @@ func TestResolveAbuseReport(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestResolveAbuseReportError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	err := abuseApi.ResolveAbuseReport("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
-
-	assert := assert.New(t)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestResolveAbuseReportError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	err := abuseApi.ResolveAbuseReport("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
-
-	assert := assert.New(t)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestResolveAbuseReportError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	abuseApi := AbuseApi{}
-	err := abuseApi.ResolveAbuseReport("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
-
-	assert := assert.New(t)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestResolveAbuseReportServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return nil, AbuseApi{}.ResolveAbuseReport("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return nil, AbuseApi{}.ResolveAbuseReport("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return nil, AbuseApi{}.ResolveAbuseReport("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }

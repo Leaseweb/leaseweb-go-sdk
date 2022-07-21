@@ -13,21 +13,6 @@ type CustomerAccountApi struct {
 	version string
 }
 
-func (cai *CustomerAccountApi) SetVersion(version string) {
-	cai.version = version
-}
-
-func (cai CustomerAccountApi) GetVersion() string {
-	if cai.version == "" {
-		return CUSTOMER_ACCOUNT_API_DEFAULT_VERSION
-	}
-	return cai.version
-}
-
-func (cai CustomerAccountApi) GetPath() string {
-	return "/account"
-}
-
 type CustomerAccount struct {
 	Name         string  `json:"name"`
 	ResellerTier string  `json:"resellerTier"`
@@ -68,39 +53,37 @@ type Phone struct {
 	Number      string `json:"number"`
 }
 
-func (cai CustomerAccountApi) GetCustomerAccount() (CustomerAccount, error) {
+func (cai *CustomerAccountApi) SetVersion(version string) {
+	cai.version = version
+}
 
-	customerAccount := &CustomerAccount{}
-	r := leasewebRequest{
-		response: customerAccount,
-		method:   GET,
-		endpoint: cai.GetPath() + "/" + cai.GetVersion() + "/details",
+func (cai CustomerAccountApi) getPath(endpoint string) string {
+	version := cai.version
+	if version == "" {
+		version = CUSTOMER_ACCOUNT_API_DEFAULT_VERSION
 	}
-	err := doRequest(r)
-	if err != nil {
-		return CustomerAccount{}, err
-	}
+	return "/account/" + version + endpoint
+}
 
-	return *customerAccount, nil
+func (cai CustomerAccountApi) GetCustomerAccount() (*CustomerAccount, error) {
+	path := cai.getPath("/details")
+	result := &CustomerAccount{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 func (cai CustomerAccountApi) UpdateCustomerAccount(ad Address) error {
-
-	r := leasewebRequest{
-		payload:  map[string]Address{"address": ad},
-		method:   PUT,
-		endpoint: cai.GetPath() + "/" + cai.GetVersion() + "/details",
-	}
-	err := doRequest(r)
-	if err != nil {
+	path := cai.getPath("/details")
+	payload := map[string]Address{"address": ad}
+	if err := doRequest(PUT, path, nil, payload); err != nil {
 		return err
 	}
-
 	return nil
 }
 
-func (cai CustomerAccountApi) ListContacts(args ...interface{}) (Contacts, error) {
-
+func (cai CustomerAccountApi) ListContacts(args ...interface{}) (*Contacts, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -117,78 +100,44 @@ func (cai CustomerAccountApi) ListContacts(args ...interface{}) (Contacts, error
 		v.Add("primaryRoles", strings.Join(primaryRoles, ","))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := cai.getPath("/contacts?" + v.Encode())
+	result := &Contacts{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	contacts := &Contacts{}
-	r := leasewebRequest{
-		response: contacts,
-		method:   GET,
-		endpoint: cai.GetPath() + "/" + cai.GetVersion() + "/contacts" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return Contacts{}, err
-	}
-
-	return *contacts, nil
+	return result, nil
 }
 
-func (cai CustomerAccountApi) CreateContact(newContact Contact) (Contact, error) {
-
-	contact := &Contact{}
-	r := leasewebRequest{
-		payload:  newContact,
-		response: contact,
-		method:   POST,
-		endpoint: cai.GetPath() + "/" + cai.GetVersion() + "/contacts",
+func (cai CustomerAccountApi) CreateContact(newContact Contact) (*Contact, error) {
+	path := cai.getPath("/contacts")
+	result := &Contact{}
+	if err := doRequest(POST, path, result, newContact); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return Contact{}, err
-	}
-
-	return *contact, nil
+	return result, nil
 }
 
 func (cai CustomerAccountApi) DeleteContact(contactId string) error {
-
-	r := leasewebRequest{
-		method:   DELETE,
-		endpoint: cai.GetPath() + "/" + cai.GetVersion() + "/contacts/" + contactId,
-	}
-	err := doRequest(r)
-	if err != nil {
+	path := cai.getPath("/contacts/" + contactId)
+	if err := doRequest(DELETE, path); err != nil {
 		return err
 	}
-
 	return nil
 }
 
-func (cai CustomerAccountApi) GetContact(contactId string) (Contact, error) {
-
-	contact := &Contact{}
-	r := leasewebRequest{
-		response: contact,
-		method:   GET,
-		endpoint: cai.GetPath() + "/" + cai.GetVersion() + "/contacts/" + contactId,
+func (cai CustomerAccountApi) GetContact(contactId string) (*Contact, error) {
+	path := cai.getPath("/contacts" + contactId)
+	result := &Contact{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return Contact{}, err
-	}
-
-	return *contact, nil
+	return result, nil
 }
 
 func (cai CustomerAccountApi) UpdateContact(contactId string, phone Phone, roles []string, args ...interface{}) error {
-
 	payload := make(map[string]interface{})
 	payload["phone"] = phone
 	payload["roles"] = roles
-
 	if len(args) >= 1 {
 		payload["mobile"] = args[0].(Phone)
 	}
@@ -196,30 +145,18 @@ func (cai CustomerAccountApi) UpdateContact(contactId string, phone Phone, roles
 		payload["description"] = fmt.Sprint(args[1])
 	}
 
-	r := leasewebRequest{
-		payload:  payload,
-		method:   PUT,
-		endpoint: cai.GetPath() + "/" + cai.GetVersion() + "/contacts/" + contactId,
-	}
-	err := doRequest(r)
-	if err != nil {
+	path := cai.getPath("/contacts" + contactId)
+	if err := doRequest(PUT, path, nil, payload); err != nil {
 		return err
 	}
-
 	return nil
 }
 
 func (cai CustomerAccountApi) AssignPrimaryRolesToContact(contactId string, roles []string) error {
-
-	r := leasewebRequest{
-		payload:  map[string][]string{"roles": roles},
-		method:   POST,
-		endpoint: cai.GetPath() + "/" + cai.GetVersion() + "/contacts/" + contactId,
-	}
-	err := doRequest(r)
-	if err != nil {
+	payload := map[string][]string{"roles": roles}
+	path := cai.getPath("/contacts" + contactId)
+	if err := doRequest(POST, path, nil, payload); err != nil {
 		return err
 	}
-
 	return nil
 }

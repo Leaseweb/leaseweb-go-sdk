@@ -11,21 +11,6 @@ type InvoiceApi struct {
 	version string
 }
 
-func (ia *InvoiceApi) SetVersion(version string) {
-	ia.version = version
-}
-
-func (ia InvoiceApi) GetVersion() string {
-	if ia.version == "" {
-		return INVOICE_API_DEFAULT_VERSION
-	}
-	return ia.version
-}
-
-func (ia InvoiceApi) GetPath() string {
-	return "/invoices"
-}
-
 type Invoice struct {
 	Currency                string   `json:"currency"`
 	Date                    string   `json:"date"`
@@ -84,8 +69,19 @@ type ProForma struct {
 	Contracts    []Contract `json:"contractItems"`
 }
 
-func (ia InvoiceApi) ListInvoices(args ...int) (Invoices, error) {
+func (ia *InvoiceApi) SetVersion(version string) {
+	ia.version = version
+}
 
+func (ia InvoiceApi) getPath(endpoint string) string {
+	version := ia.version
+	if version == "" {
+		version = INVOICE_API_DEFAULT_VERSION
+	}
+	return "/invoices/" + version + endpoint
+}
+
+func (ia InvoiceApi) ListInvoices(args ...int) (*Invoices, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -94,26 +90,15 @@ func (ia InvoiceApi) ListInvoices(args ...int) (Invoices, error) {
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := ia.getPath("/invoices?" + v.Encode())
+	result := &Invoices{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	invoices := &Invoices{}
-	r := leasewebRequest{
-		response: invoices,
-		method:   GET,
-		endpoint: ia.GetPath() + "/" + ia.GetVersion() + "/invoices" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return Invoices{}, err
-	}
-
-	return *invoices, nil
+	return result, nil
 }
 
-func (ia InvoiceApi) GetProForma(args ...int) (ProForma, error) {
+func (ia InvoiceApi) GetProForma(args ...int) (*ProForma, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -122,37 +107,19 @@ func (ia InvoiceApi) GetProForma(args ...int) (ProForma, error) {
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := ia.getPath("/invoices/proforma?" + v.Encode())
+	result := &ProForma{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	proForma := &ProForma{}
-	r := leasewebRequest{
-		response: proForma,
-		method:   GET,
-		endpoint: ia.GetPath() + "/" + ia.GetVersion() + "/invoices/proforma" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return ProForma{}, err
-	}
-
-	return *proForma, nil
+	return result, nil
 }
 
-func (ia InvoiceApi) GetInvoice(invoiceId string) (Invoice, error) {
-
-	invoice := &Invoice{}
-	r := leasewebRequest{
-		response: invoice,
-		method:   GET,
-		endpoint: ia.GetPath() + "/" + ia.GetVersion() + "/invoices/" + invoiceId,
+func (ia InvoiceApi) GetInvoice(invoiceId string) (*Invoice, error) {
+	path := ia.getPath("/invoices/" + invoiceId)
+	result := &Invoice{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return Invoice{}, err
-	}
-
-	return *invoice, nil
+	return result, nil
 }

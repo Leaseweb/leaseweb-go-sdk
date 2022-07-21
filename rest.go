@@ -8,23 +8,31 @@ import (
 	"strings"
 )
 
+var lswClient *leasewebClient
+
+const (
+	DEFAULT_BASE_URL = "https://api.leaseweb.com"
+	GET              = "GET"
+	POST             = "POST"
+	PUT              = "PUT"
+	DELETE           = "DELETE"
+)
+
 type Metadata struct {
 	Limit      int `json:"limit"`
 	Offset     int `json:"offset"`
 	TotalCount int `json:"totalCount"`
 }
 
-type LeasewebApi interface {
+type leasewebApi interface {
 	SetVersion(version string)
-	GetVersion() string
-	GetPath() string
+	getPath() string
 }
 
-type leasewebRequest struct {
-	response interface{}
-	payload  interface{}
-	method   string
-	endpoint string
+type leasewebClient struct {
+	client  *http.Client
+	apiKey  string
+	baseUrl string
 }
 
 type LeasewebError struct {
@@ -38,22 +46,6 @@ type LeasewebError struct {
 func (le *LeasewebError) Error() string {
 	return le.ErrorMessage
 }
-
-type leasewebClient struct {
-	client  *http.Client
-	apiKey  string
-	baseUrl string
-}
-
-var lswClient *leasewebClient
-
-const (
-	DEFAULT_BASE_URL = "https://api.leaseweb.com"
-	GET              = "GET"
-	POST             = "POST"
-	PUT              = "PUT"
-	DELETE           = "DELETE"
-)
 
 func InitLeasewebClient(key string) {
 	lswClient = &leasewebClient{
@@ -69,17 +61,19 @@ func getBaseUrl() string {
 	return DEFAULT_BASE_URL
 }
 
-func doRequest(r leasewebRequest) error {
-	var payload io.Reader
-	if r.method == POST || r.method == PUT {
-		b, err := json.Marshal(r.payload)
-		if err != nil {
-			return err
+func doRequest(method string, endpoint string, args ...interface{}) error {
+	var tmpPayload io.Reader
+	if method == POST || method == PUT {
+		if len(args) > 1 {
+			b, err := json.Marshal(args[1])
+			if err != nil {
+				return err
+			}
+			tmpPayload = strings.NewReader(string(b))
 		}
-		payload = strings.NewReader(string(b))
 	}
 
-	req, err := http.NewRequest(r.method, getBaseUrl()+r.endpoint, payload)
+	req, err := http.NewRequest(method, getBaseUrl()+endpoint, tmpPayload)
 	if err != nil {
 		return err
 	}
@@ -103,17 +97,16 @@ func doRequest(r leasewebRequest) error {
 	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
 	if !statusOK {
 		lswErr := &LeasewebError{}
-		err = json.Unmarshal(respBody, lswErr)
-		if err != nil {
+		if err = json.Unmarshal(respBody, lswErr); err != nil {
 			return err
 		}
 		return lswErr
 	}
 
-	err = json.Unmarshal(respBody, r.response)
-	if err != nil {
-		return err
+	if len(args) > 0 {
+		if err = json.Unmarshal(respBody, &args[0]); err != nil {
+			return err
+		}
 	}
-
 	return nil
 }

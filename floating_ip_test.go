@@ -100,78 +100,55 @@ func TestListRangesPaginateAndFilter(t *testing.T) {
 	assert.Equal(range1.Type, "SITE")
 }
 
-func TestListRangesError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.ListRanges()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestListRangesError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.ListRanges()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestListRangesError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.ListRanges()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+func TestListRangesServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.ListRanges()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "ACCESS_DENIED",
+				ErrorMessage:  "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.ListRanges()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.ListRanges()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetRange(t *testing.T) {
@@ -205,103 +182,70 @@ func TestGetRange(t *testing.T) {
 	assert.Equal(response.Type, "SITE")
 }
 
-func TestGetRangeError403(t *testing.T) {
+func TestGetRangeServerErrors(t *testing.T) {
 
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.GetRange("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetRangeError404(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, `{"correlationId": "39e010ed-0e93-42c3-c28f-3ffc373553d5", "errorCode": "404", "errorMessage": "Range with id 88.17.0.0_17 does not exist"}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.GetRange("wrong range id")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Range with id 88.17.0.0_17 does not exist")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "39e010ed-0e93-42c3-c28f-3ffc373553d5")
-	assert.Equal(lswErr.ErrorCode, "404")
-}
-
-func TestGetRangeError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.GetRange("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestGetRangeError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.GetRange("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.GetRange("123456789")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{"correlationId": "39e010ed-0e93-42c3-c28f-3ffc373553d5", "errorCode": "404", "errorMessage": "Range with id 88.17.0.0_17 does not exist"}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.GetRange("123456789")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
+				ErrorCode:     "404",
+				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.GetRange("123456789")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.GetRange("123456789")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestListRangeDefinitions(t *testing.T) {
@@ -425,78 +369,69 @@ func TestListRangeDefinitionsPaginateAndFilter(t *testing.T) {
 	assert.Equal(floatingIpDefinition1.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestListRangeDefinitionsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.ListRangeDefinitions("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestListRangeDefinitionsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.ListRangeDefinitions("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestListRangeDefinitionsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.ListRangeDefinitions("123456789")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+func TestListRangeDefinitionsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.ListRangeDefinitions("123456789")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{"correlationId": "39e010ed-0e93-42c3-c28f-3ffc373553d5", "errorCode": "404", "errorMessage": "Range with id 88.17.0.0_17 does not exist"}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.ListRangeDefinitions("123456789")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
+				ErrorCode:     "404",
+				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.ListRangeDefinitions("123456789")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.ListRangeDefinitions("123456789")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestCreateRangeDefinition(t *testing.T) {
@@ -540,103 +475,68 @@ func TestCreateRangeDefinition(t *testing.T) {
 	assert.Equal(response.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestCreateRangeDefinitionError400(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "945bef2e-1caf-4027-bd0a-8976848f3dee", "errorCode": "400", "errorMessage": "Validation Failed"}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.CreateRangeDefinition("10.0.0.0_29", "wrong 1", "wrong 2")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Validation Failed")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "945bef2e-1caf-4027-bd0a-8976848f3dee")
-	assert.Equal(lswErr.ErrorCode, "400")
-}
-
-func TestCreateRangeDefinitionError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestCreateRangeDefinitionError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestCreateRangeDefinitionError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+func TestCreateRangeDefinitionServerError(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 400",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusBadRequest)
+				fmt.Fprintf(w, `{"errorCode": "400", "errorMessage": "Validation Failed"}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "400",
+				ErrorMessage: "Validation Failed",
+			},
+		},
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetRangeDefinition(t *testing.T) {
@@ -680,78 +580,54 @@ func TestGetRangeDefinition(t *testing.T) {
 	assert.Equal(response.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestGetRangeDefinitionError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.GetRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetRangeDefinitionError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.GetRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestGetRangeDefinitionError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.GetRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+func TestGetRangeDefinitionServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.GetRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.GetRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.GetRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestUpdateRangeDefinition(t *testing.T) {
@@ -795,103 +671,69 @@ func TestUpdateRangeDefinition(t *testing.T) {
 	assert.Equal(response.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestUpdateRangeDefinitionError400(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "945bef2e-1caf-4027-bd0a-8976848f3dee", "errorCode": "400", "errorMessage": "Validation Failed"}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.UpdateRangeDefinition("wrong 1", "88.17.34.108_32", "95.10.126.1")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Validation Failed")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "945bef2e-1caf-4027-bd0a-8976848f3dee")
-	assert.Equal(lswErr.ErrorCode, "400")
-}
-
-func TestUpdateRangeDefinitionError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.UpdateRangeDefinition("88.17.0.0_17", "88.17.34.108_32", "95.10.126.1")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestUpdateRangeDefinitionError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.UpdateRangeDefinition("88.17.0.0_17", "88.17.34.108_32", "95.10.126.1")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestUpdateRangeDefinitionError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.UpdateRangeDefinition("88.17.0.0_17", "88.17.34.108_32", "95.10.126.1")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+func TestUpdateRangeDefinitionServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 400",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusBadRequest)
+				fmt.Fprintf(w, `{"correlationId": "945bef2e-1caf-4027-bd0a-8976848f3dee", "errorCode": "400", "errorMessage": "Validation Failed"}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.UpdateRangeDefinition("wrong 1", "88.17.34.108_32", "95.10.126.1")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "945bef2e-1caf-4027-bd0a-8976848f3dee",
+				ErrorCode:     "400",
+				ErrorMessage:  "Validation Failed",
+			},
+		},
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.UpdateRangeDefinition("wrong 1", "88.17.34.108_32", "95.10.126.1")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.UpdateRangeDefinition("wrong 1", "88.17.34.108_32", "95.10.126.1")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.UpdateRangeDefinition("wrong 1", "88.17.34.108_32", "95.10.126.1")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestRemoveRangeDefinition(t *testing.T) {
@@ -935,101 +777,53 @@ func TestRemoveRangeDefinition(t *testing.T) {
 	assert.Equal(response.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestRemoveRangeDefinitionError403(t *testing.T) {
+func TestRemoveRangeDefinitionServerErrors(t *testing.T) {
 
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestRemoveRangeDefinitionError404(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, `{"correlationId": "39e010ed-0e93-42c3-c28f-3ffc373553d5", "errorCode": "404", "errorMessage": "Floating Ip definition with id 88.17.34.108_32 does not exist."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Floating Ip definition with id 88.17.34.108_32 does not exist.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "39e010ed-0e93-42c3-c28f-3ffc373553d5")
-	assert.Equal(lswErr.ErrorCode, "404")
-}
-
-func TestRemoveRangeDefinitionError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestRemoveRangeDefinitionError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	floatingIpApi := FloatingIpApi{}
-	resp, err := floatingIpApi.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return FloatingIpApi{}.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }

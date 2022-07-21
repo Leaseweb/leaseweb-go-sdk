@@ -13,21 +13,6 @@ type FloatingIpApi struct {
 	version string
 }
 
-func (fia *FloatingIpApi) SetVersion(version string) {
-	fia.version = version
-}
-
-func (fia FloatingIpApi) GetVersion() string {
-	if fia.version == "" {
-		return FLOATING_IP_API_DEFAULT_VERSION
-	}
-	return fia.version
-}
-
-func (fia FloatingIpApi) GetPath() string {
-	return "/floatingIps"
-}
-
 type FloatingIpRange struct {
 	Id         string `json:"id"`
 	Range      string `json:"range"`
@@ -61,8 +46,19 @@ type FloatingIpDefinitions struct {
 	Metadata              Metadata               `json:"_metadata"`
 }
 
-func (fia FloatingIpApi) ListRanges(args ...interface{}) (FloatingIpRanges, error) {
+func (fia *FloatingIpApi) SetVersion(version string) {
+	fia.version = version
+}
 
+func (fia FloatingIpApi) getPath(endpoint string) string {
+	version := fia.version
+	if version == "" {
+		version = FLOATING_IP_API_DEFAULT_VERSION
+	}
+	return "/floatingIps/" + version + endpoint
+}
+
+func (fia FloatingIpApi) ListRanges(args ...interface{}) (*FloatingIpRanges, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -82,43 +78,24 @@ func (fia FloatingIpApi) ListRanges(args ...interface{}) (FloatingIpRanges, erro
 		v.Add("location", fmt.Sprint(args[1]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := fia.getPath("/ranges?" + v.Encode())
+	result := &FloatingIpRanges{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	floatingIpRanges := &FloatingIpRanges{}
-	r := leasewebRequest{
-		response: floatingIpRanges,
-		method:   GET,
-		endpoint: fia.GetPath() + "/" + fia.GetVersion() + "/ranges" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return FloatingIpRanges{}, err
-	}
-
-	return *floatingIpRanges, nil
+	return result, nil
 }
 
-func (fia FloatingIpApi) GetRange(rangeId string) (FloatingIpRange, error) {
-
-	floatingIpRange := &FloatingIpRange{}
-	r := leasewebRequest{
-		response: floatingIpRange,
-		method:   GET,
-		endpoint: fia.GetPath() + "/" + fia.GetVersion() + "/ranges/" + rangeId,
+func (fia FloatingIpApi) GetRange(rangeId string) (*FloatingIpRange, error) {
+	path := fia.getPath("/ranges/" + rangeId)
+	result := &FloatingIpRange{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return FloatingIpRange{}, err
-	}
-
-	return *floatingIpRange, nil
+	return result, nil
 }
 
-func (fia FloatingIpApi) ListRangeDefinitions(rangeId string, args ...interface{}) (FloatingIpDefinitions, error) {
-
+func (fia FloatingIpApi) ListRangeDefinitions(rangeId string, args ...interface{}) (*FloatingIpDefinitions, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -138,87 +115,48 @@ func (fia FloatingIpApi) ListRangeDefinitions(rangeId string, args ...interface{
 		v.Add("location", fmt.Sprint(args[1]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions?" + v.Encode())
+	result := &FloatingIpDefinitions{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	floatingIpDefinitions := &FloatingIpDefinitions{}
-	r := leasewebRequest{
-		response: floatingIpDefinitions,
-		method:   GET,
-		endpoint: fia.GetPath() + "/" + fia.GetVersion() + "/ranges/" + rangeId + "/floatingIpDefinitions" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return FloatingIpDefinitions{}, err
-	}
-
-	return *floatingIpDefinitions, nil
+	return result, nil
 }
 
-func (fia FloatingIpApi) CreateRangeDefinition(rangeId string, floatingIp string, anchorIp string) (FloatingIpDefinition, error) {
-
-	floatingIpDefinition := &FloatingIpDefinition{}
-	r := leasewebRequest{
-		response: floatingIpDefinition,
-		payload:  map[string]string{"floatingIp": floatingIp, "anchorIp": anchorIp},
-		method:   POST,
-		endpoint: fia.GetPath() + "/" + fia.GetVersion() + "/ranges/" + rangeId + "/floatingIpDefinitions",
+func (fia FloatingIpApi) CreateRangeDefinition(rangeId string, floatingIp string, anchorIp string) (*FloatingIpDefinition, error) {
+	payload := map[string]string{"floatingIp": floatingIp, "anchorIp": anchorIp}
+	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions")
+	result := &FloatingIpDefinition{}
+	if err := doRequest(POST, path, result, payload); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return FloatingIpDefinition{}, err
-	}
-
-	return *floatingIpDefinition, nil
+	return result, nil
 }
 
-func (fia FloatingIpApi) GetRangeDefinition(rangeId string, floatingIpDefinitionId string) (FloatingIpDefinition, error) {
-
-	floatingIpDefinition := &FloatingIpDefinition{}
-	r := leasewebRequest{
-		response: floatingIpDefinition,
-		method:   GET,
-		endpoint: fia.GetPath() + "/" + fia.GetVersion() + "/ranges/" + rangeId + "/floatingIpDefinitions/" + floatingIpDefinitionId,
+func (fia FloatingIpApi) GetRangeDefinition(rangeId string, floatingIpDefinitionId string) (*FloatingIpDefinition, error) {
+	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions/" + floatingIpDefinitionId)
+	result := &FloatingIpDefinition{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return FloatingIpDefinition{}, err
-	}
-
-	return *floatingIpDefinition, nil
+	return result, nil
 }
 
-func (fia FloatingIpApi) UpdateRangeDefinition(rangeId string, floatingIpDefinitionId string, anchorIp string) (FloatingIpDefinition, error) {
-
-	floatingIpDefinition := &FloatingIpDefinition{}
-	r := leasewebRequest{
-		response: floatingIpDefinition,
-		payload:  map[string]string{"anchorIp": anchorIp},
-		method:   PUT,
-		endpoint: fia.GetPath() + "/" + fia.GetVersion() + "/ranges/" + rangeId + "/floatingIpDefinitions/" + floatingIpDefinitionId,
+func (fia FloatingIpApi) UpdateRangeDefinition(rangeId string, floatingIpDefinitionId string, anchorIp string) (*FloatingIpDefinition, error) {
+	payload := map[string]string{"anchorIp": anchorIp}
+	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions/" + floatingIpDefinitionId)
+	result := &FloatingIpDefinition{}
+	if err := doRequest(PUT, path, result, payload); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return FloatingIpDefinition{}, err
-	}
-
-	return *floatingIpDefinition, nil
+	return result, nil
 }
 
-func (fia FloatingIpApi) RemoveRangeDefinition(rangeId string, floatingIpDefinitionId string) (FloatingIpDefinition, error) {
-
-	floatingIpDefinition := &FloatingIpDefinition{}
-	r := leasewebRequest{
-		response: floatingIpDefinition,
-		method:   DELETE,
-		endpoint: fia.GetPath() + "/" + fia.GetVersion() + "/ranges/" + rangeId + "/floatingIpDefinitions/" + floatingIpDefinitionId,
+func (fia FloatingIpApi) RemoveRangeDefinition(rangeId string, floatingIpDefinitionId string) (*FloatingIpDefinition, error) {
+	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions/" + floatingIpDefinitionId)
+	result := &FloatingIpDefinition{}
+	if err := doRequest(DELETE, path, result); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return FloatingIpDefinition{}, err
-	}
-
-	return *floatingIpDefinition, nil
+	return result, nil
 }

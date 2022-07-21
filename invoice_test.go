@@ -11,9 +11,6 @@ import (
 func TestListInvoices(t *testing.T) {
 
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 2}, "invoices": [
 			{
 				"currency": "EUR",
@@ -113,105 +110,70 @@ func TestListInvoicesPaginate(t *testing.T) {
 	assert.Equal(len(response.Invoices), 1)
 }
 
-func TestListInvoicesError401(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.ListInvoices()
-
-	assert := assert.New(t)
-
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "You are not authorized to view this resource.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "401")
-}
-
-func TestListInvoicesError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.ListInvoices()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Access to the requested resource is forbidden.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "403")
-}
-
-func TestListInvoicesError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.ListInvoices()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The API could not handle your request at this time.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestListInvoicesError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.ListInvoices()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The API is not available at the moment.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+func TestListInvoicesServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 401",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusUnauthorized)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.ListInvoices()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "401",
+				ErrorMessage:  "You are not authorized to view this resource.",
+			},
+		},
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.ListInvoices()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "403",
+				ErrorMessage:  "Access to the requested resource is forbidden.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.ListInvoices()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The API could not handle your request at this time.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.ListInvoices()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The API is not available at the moment.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetProForma(t *testing.T) {
@@ -352,104 +314,71 @@ func TestGetProFormaPaginate(t *testing.T) {
 	assert.Equal(contract1.StartDate, "2022-03-01T00:00:00+00:00")
 }
 
-func TestGetProFormaError401(t *testing.T) {
+func TestGetProFormaServerErrors(t *testing.T) {
 
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.GetProForma()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "You are not authorized to view this resource.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "401")
-}
-
-func TestGetProFormaError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.GetProForma()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Access to the requested resource is forbidden.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "403")
-}
-
-func TestGetProFormaError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.GetProForma()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The API could not handle your request at this time.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestGetProFormaError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.GetProForma()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The API is not available at the moment.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 401",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusUnauthorized)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.GetProForma()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "401",
+				ErrorMessage:  "You are not authorized to view this resource.",
+			},
+		},
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.GetProForma()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "403",
+				ErrorMessage:  "Access to the requested resource is forbidden.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.GetProForma()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The API could not handle your request at this time.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.GetProForma()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The API is not available at the moment.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetInvoice(t *testing.T) {
@@ -524,106 +453,69 @@ func TestGetInvoice(t *testing.T) {
 	assert.Equal(response.Lines[0].UnitAmount, float32(152.5))
 }
 
-func TestGetInvoiceError401(t *testing.T) {
+func TestGetInvoiceServerErrors(t *testing.T) {
 
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.GetInvoice("000000001")
-
-	assert := assert.New(t)
-
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "You are not authorized to view this resource.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "401")
-}
-
-func TestGetInvoiceError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.GetInvoice("000000001")
-
-	assert := assert.New(t)
-
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Access to the requested resource is forbidden.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "403")
-}
-
-func TestGetInvoiceError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.GetInvoice("000000001")
-
-	assert := assert.New(t)
-
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The API could not handle your request at this time.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestGetInvoiceError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.GetInvoice("000000001")
-
-	assert := assert.New(t)
-
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The API is not available at the moment.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 401",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusUnauthorized)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.GetInvoice("000000001")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "401",
+				ErrorMessage:  "You are not authorized to view this resource.",
+			},
+		},
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.GetInvoice("000000001")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "403",
+				ErrorMessage:  "Access to the requested resource is forbidden.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.GetInvoice("000000001")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The API could not handle your request at this time.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return InvoiceApi{}.GetInvoice("000000001")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The API is not available at the moment.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }

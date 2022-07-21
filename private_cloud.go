@@ -11,21 +11,6 @@ type PrivateCloudApi struct {
 	version string
 }
 
-func (pca *PrivateCloudApi) SetVersion(version string) {
-	pca.version = version
-}
-
-func (pca PrivateCloudApi) GetVersion() string {
-	if pca.version == "" {
-		return PRIVATE_CLOUD_API_DEFAULT_VERSION
-	}
-	return pca.version
-}
-
-func (pca PrivateCloudApi) GetPath() string {
-	return "/cloud"
-}
-
 type PrivateClouds struct {
 	PrivateClouds []PrivateCloud `json:"privateClouds"`
 	Metadata      Metadata       `json:"_metadata"`
@@ -157,8 +142,19 @@ type StorageMetric struct {
 	Storage BasicMetric `json:"STORAGE"`
 }
 
-func (pca PrivateCloudApi) ListPrivateClouds(args ...interface{}) (PrivateClouds, error) {
+func (pca *PrivateCloudApi) SetVersion(version string) {
+	pca.version = version
+}
 
+func (pca PrivateCloudApi) getPath(endpoint string) string {
+	version := pca.version
+	if version == "" {
+		version = PRIVATE_CLOUD_API_DEFAULT_VERSION
+	}
+	return "/cloud/" + version + endpoint
+}
+
+func (pca PrivateCloudApi) ListPrivateClouds(args ...interface{}) (*PrivateClouds, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -167,43 +163,24 @@ func (pca PrivateCloudApi) ListPrivateClouds(args ...interface{}) (PrivateClouds
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := pca.getPath("/privateClouds?" + v.Encode())
+	result := &PrivateClouds{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	privateClouds := &PrivateClouds{}
-	r := leasewebRequest{
-		response: privateClouds,
-		method:   GET,
-		endpoint: pca.GetPath() + "/" + pca.GetVersion() + "/privateClouds" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return PrivateClouds{}, err
-	}
-
-	return *privateClouds, nil
+	return result, nil
 }
 
-func (pca PrivateCloudApi) GetPrivateCloud(privateCloudId string) (PrivateCloud, error) {
-
-	privateCloud := &PrivateCloud{}
-	r := leasewebRequest{
-		response: privateCloud,
-		method:   GET,
-		endpoint: pca.GetPath() + "/" + pca.GetVersion() + "/privateClouds/" + privateCloudId,
+func (pca PrivateCloudApi) GetPrivateCloud(privateCloudId string) (*PrivateCloud, error) {
+	path := pca.getPath("/privateClouds/" + privateCloudId)
+	result := &PrivateCloud{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return PrivateCloud{}, err
-	}
-
-	return *privateCloud, nil
+	return result, nil
 }
 
-func (pca PrivateCloudApi) ListCredentials(privateCloudId string, credentialType string, args ...int) (Credentials, error) {
-
+func (pca PrivateCloudApi) ListCredentials(privateCloudId string, credentialType string, args ...int) (*Credentials, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -212,43 +189,24 @@ func (pca PrivateCloudApi) ListCredentials(privateCloudId string, credentialType
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := pca.getPath("/privateClouds/" + privateCloudId + "/credentials/" + credentialType + v.Encode())
+	result := &Credentials{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	credentials := &Credentials{}
-	r := leasewebRequest{
-		response: credentials,
-		method:   GET,
-		endpoint: pca.GetPath() + "/" + pca.GetVersion() + "/privateClouds/" + privateCloudId + "/credentials/" + credentialType + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return Credentials{}, err
-	}
-
-	return *credentials, nil
+	return result, nil
 }
 
-func (pca PrivateCloudApi) GetCredentials(privateCloudId string, credentialType string, username string) (Credential, error) {
-
-	credential := &Credential{}
-	r := leasewebRequest{
-		response: credential,
-		method:   GET,
-		endpoint: pca.GetPath() + "/" + pca.GetVersion() + "/privateClouds/" + privateCloudId + "/credentials/" + credentialType + "/" + username,
+func (pca PrivateCloudApi) GetCredentials(privateCloudId string, credentialType string, username string) (*Credential, error) {
+	path := pca.getPath("/privateClouds/" + privateCloudId + "/credentials/" + credentialType + "/" + username)
+	result := &Credential{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-	err := doRequest(r)
-	if err != nil {
-		return Credential{}, err
-	}
-
-	return *credential, nil
+	return result, nil
 }
 
-func (pca PrivateCloudApi) GetDataTrafficMetrics(privateCloudId string, args ...interface{}) (DataTrafficMetrics, error) {
-
+func (pca PrivateCloudApi) GetDataTrafficMetrics(privateCloudId string, args ...interface{}) (*DataTrafficMetrics, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -263,27 +221,15 @@ func (pca PrivateCloudApi) GetDataTrafficMetrics(privateCloudId string, args ...
 		v.Add("to", fmt.Sprint(args[3]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/datatraffic?" + v.Encode())
+	result := &DataTrafficMetrics{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	dataTrafficMetrics := &DataTrafficMetrics{}
-	r := leasewebRequest{
-		response: dataTrafficMetrics,
-		method:   GET,
-		endpoint: pca.GetPath() + "/" + pca.GetVersion() + "/privateClouds/" + privateCloudId + "/metrics/datatraffic" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return DataTrafficMetrics{}, err
-	}
-
-	return *dataTrafficMetrics, nil
+	return result, nil
 }
 
-func (pca PrivateCloudApi) GetBandWidthMetrics(privateCloudId string, args ...interface{}) (BandWidthMetrics, error) {
-
+func (pca PrivateCloudApi) GetBandWidthMetrics(privateCloudId string, args ...interface{}) (*BandWidthMetrics, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -298,27 +244,15 @@ func (pca PrivateCloudApi) GetBandWidthMetrics(privateCloudId string, args ...in
 		v.Add("to", fmt.Sprint(args[3]))
 	}
 
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/bandwidth?" + v.Encode())
+	result := &BandWidthMetrics{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	bandWidthMetrics := &BandWidthMetrics{}
-	r := leasewebRequest{
-		response: bandWidthMetrics,
-		method:   GET,
-		endpoint: pca.GetPath() + "/" + pca.GetVersion() + "/privateClouds/" + privateCloudId + "/metrics/bandwidth" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return BandWidthMetrics{}, err
-	}
-
-	return *bandWidthMetrics, nil
+	return result, nil
 }
 
-func (pca PrivateCloudApi) GetCpuMetrics(privateCloudId string, args ...interface{}) (CpuMetrics, error) {
-
+func (pca PrivateCloudApi) GetCpuMetrics(privateCloudId string, args ...interface{}) (*CpuMetrics, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -332,28 +266,15 @@ func (pca PrivateCloudApi) GetCpuMetrics(privateCloudId string, args ...interfac
 	if len(args) >= 4 {
 		v.Add("to", fmt.Sprint(args[3]))
 	}
-
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/cpu?" + v.Encode())
+	result := &CpuMetrics{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	cpuMetrics := &CpuMetrics{}
-	r := leasewebRequest{
-		response: cpuMetrics,
-		method:   GET,
-		endpoint: pca.GetPath() + "/" + pca.GetVersion() + "/privateClouds/" + privateCloudId + "/metrics/cpu" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return CpuMetrics{}, err
-	}
-
-	return *cpuMetrics, nil
+	return result, nil
 }
 
-func (pca PrivateCloudApi) GetMemoryMetrics(privateCloudId string, args ...interface{}) (MemoryMetrics, error) {
-
+func (pca PrivateCloudApi) GetMemoryMetrics(privateCloudId string, args ...interface{}) (*MemoryMetrics, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -367,28 +288,15 @@ func (pca PrivateCloudApi) GetMemoryMetrics(privateCloudId string, args ...inter
 	if len(args) >= 4 {
 		v.Add("to", fmt.Sprint(args[3]))
 	}
-
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/memory?" + v.Encode())
+	result := &MemoryMetrics{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	memoryMetrics := &MemoryMetrics{}
-	r := leasewebRequest{
-		response: memoryMetrics,
-		method:   GET,
-		endpoint: pca.GetPath() + "/" + pca.GetVersion() + "/privateClouds/" + privateCloudId + "/metrics/memory" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return MemoryMetrics{}, err
-	}
-
-	return *memoryMetrics, nil
+	return result, nil
 }
 
-func (pca PrivateCloudApi) GetStorageMetrics(privateCloudId string, args ...interface{}) (StorageMetrics, error) {
-
+func (pca PrivateCloudApi) GetStorageMetrics(privateCloudId string, args ...interface{}) (*StorageMetrics, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -402,22 +310,10 @@ func (pca PrivateCloudApi) GetStorageMetrics(privateCloudId string, args ...inte
 	if len(args) >= 4 {
 		v.Add("to", fmt.Sprint(args[3]))
 	}
-
-	queryString := ""
-	if v.Encode() != "" {
-		queryString = "?" + v.Encode()
+	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/storage?" + v.Encode())
+	result := &StorageMetrics{}
+	if err := doRequest(GET, path, result); err != nil {
+		return nil, err
 	}
-
-	storageMetrics := &StorageMetrics{}
-	r := leasewebRequest{
-		response: storageMetrics,
-		method:   GET,
-		endpoint: pca.GetPath() + "/" + pca.GetVersion() + "/privateClouds/" + privateCloudId + "/metrics/storage" + queryString,
-	}
-	err := doRequest(r)
-	if err != nil {
-		return StorageMetrics{}, err
-	}
-
-	return *storageMetrics, nil
+	return result, nil
 }

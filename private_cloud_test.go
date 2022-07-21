@@ -138,80 +138,55 @@ func TestListPrivateCloudsPaginate(t *testing.T) {
 	assert.Equal(len(response.PrivateClouds), 0)
 }
 
-func TestListPrivateCloudsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.ListPrivateClouds()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestListPrivateCloudsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.ListPrivateClouds()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestListPrivateCloudsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	invoiceApi := InvoiceApi{}
-	resp, err := invoiceApi.ListInvoices()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestListPrivateCloudsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.ListPrivateClouds()
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.ListPrivateClouds()
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.ListPrivateClouds()
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetPrivateCloud(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -293,105 +268,70 @@ func TestGetPrivateCloud(t *testing.T) {
 	assert.Equal(response.NetworkTraffic.Type, "DATATRAFFIC")
 }
 
-func TestGetPrivateCloudError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetPrivateCloud("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetPrivateCloudError404(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetPrivateCloud("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Resource 218030 was not found")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "404")
-	assert.Equal(lswErr.UserMessage, "Resource with id 218030 not found.")
-}
-
-func TestGetPrivateCloudError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetPrivateCloud("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestGetPrivateCloudError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetPrivateCloud("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestGetPrivateCloudServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetPrivateCloud("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetPrivateCloud("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "404",
+				ErrorMessage: "Resource 218030 was not found",
+				UserMessage:  "Resource with id 218030 not found.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetPrivateCloud("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetPrivateCloud("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestListCredentials(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -475,105 +415,70 @@ func TestListCredentialsPaginate(t *testing.T) {
 	assert.Equal(credential.Domain, "123456")
 }
 
-func TestListCredentialsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.ListCredentials("12345678", "REMOTE_MANAGEMENT")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestListCredentialsError404(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.ListCredentials("218030", "REMOTE_MANAGEMENT")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Resource 218030 was not found")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "404")
-	assert.Equal(lswErr.UserMessage, "Resource with id 218030 not found.")
-}
-
-func TestListCredentialsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.ListCredentials("12345678", "REMOTE_MANAGEMENT")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestListCredentialsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.ListCredentials("12345678", "REMOTE_MANAGEMENT")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestListCredentialsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.ListCredentials("12345678", "REMOTE_MANAGEMENT")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.ListCredentials("12345678", "REMOTE_MANAGEMENT")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "404",
+				ErrorMessage: "Resource 218030 was not found",
+				UserMessage:  "Resource with id 218030 not found.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.ListCredentials("12345678", "REMOTE_MANAGEMENT")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.ListCredentials("12345678", "REMOTE_MANAGEMENT")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetCredentials(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -599,105 +504,70 @@ func TestGetCredentials(t *testing.T) {
 	assert.Equal(response.Domain, "123456")
 }
 
-func TestGetCredentialsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetCredentialsError404(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Resource 218030 was not found")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "404")
-	assert.Equal(lswErr.UserMessage, "Resource with id 218030 not found.")
-}
-
-func TestGetCredentialsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestGetCredentialsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestGetCredentialsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "404",
+				ErrorMessage: "Resource 218030 was not found",
+				UserMessage:  "Resource with id 218030 not found.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetDataTrafficMetrics(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -764,7 +634,6 @@ func TestGetDataTrafficMetrics(t *testing.T) {
 }
 
 func TestGetDataTrafficMetricsWithFilter(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -830,105 +699,70 @@ func TestGetDataTrafficMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metric.DataTrafficUp.Values[1].Value, 2500)
 }
 
-func TestGetDataTrafficMetricsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetDataTrafficMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetDataTrafficMetricsError404(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetDataTrafficMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Resource 218030 was not found")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "404")
-	assert.Equal(lswErr.UserMessage, "Resource with id 218030 not found.")
-}
-
-func TestGetDataTrafficMetricsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetDataTrafficMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestGetDataTrafficMetricsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetDataTrafficMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestGetDataTrafficMetricsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetDataTrafficMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetDataTrafficMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "404",
+				ErrorMessage: "Resource 218030 was not found",
+				UserMessage:  "Resource with id 218030 not found.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetDataTrafficMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetDataTrafficMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetBandWidthMetrics(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -995,7 +829,6 @@ func TestGetBandWidthMetrics(t *testing.T) {
 }
 
 func TestGetBandWidthMetricsWithFilter(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -1061,105 +894,70 @@ func TestGetBandWidthMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metric.UpPublic.Values[1].Value, 158317519)
 }
 
-func TestGetBandWidthMetricsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetBandWidthMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetBandWidthMetricsError404(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetBandWidthMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Resource 218030 was not found")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "404")
-	assert.Equal(lswErr.UserMessage, "Resource with id 218030 not found.")
-}
-
-func TestGetBandWidthMetricsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetBandWidthMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestGetBandWidthMetricsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetBandWidthMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestGetBandWidthMetricsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetBandWidthMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetBandWidthMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "404",
+				ErrorMessage: "Resource 218030 was not found",
+				UserMessage:  "Resource with id 218030 not found.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetBandWidthMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetBandWidthMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetCpuMetrics(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -1256,105 +1054,70 @@ func TestGetCpuMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metric.Cpu.Values[1].Value, 24)
 }
 
-func TestGetCpuMetricsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetCpuMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetCpuMetricsError404(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetCpuMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Resource 218030 was not found")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "404")
-	assert.Equal(lswErr.UserMessage, "Resource with id 218030 not found.")
-}
-
-func TestGetCpuMetricsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetCpuMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestGetCpuMetricsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetCpuMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestGetCpuMetricsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetCpuMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetCpuMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "404",
+				ErrorMessage: "Resource 218030 was not found",
+				UserMessage:  "Resource with id 218030 not found.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetCpuMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetCpuMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetMemoryMetrics(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -1451,105 +1214,70 @@ func TestGetMemoryMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metric.Memory.Values[1].Value, 16)
 }
 
-func TestGetMemoryMetricsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetMemoryMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetMemoryMetricsError404(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetMemoryMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Resource 218030 was not found")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "404")
-	assert.Equal(lswErr.UserMessage, "Resource with id 218030 not found.")
-}
-
-func TestGetMemoryMetricsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetMemoryMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestGetMemoryMetricsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetMemoryMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestGetMemoryMetricsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetMemoryMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetMemoryMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "404",
+				ErrorMessage: "Resource 218030 was not found",
+				UserMessage:  "Resource with id 218030 not found.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetMemoryMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetMemoryMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestGetStorageMetrics(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -1646,99 +1374,65 @@ func TestGetStorageMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metric.Storage.Values[1].Value, 2500)
 }
 
-func TestGetStorageMetricsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetStorageMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "ACCESS_DENIED")
-}
-
-func TestGetStorageMetricsError404(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetStorageMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "Resource 218030 was not found")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "404")
-	assert.Equal(lswErr.UserMessage, "Resource with id 218030 not found.")
-}
-
-func TestGetStorageMetricsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetStorageMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "SERVER_ERROR")
-}
-
-func TestGetStorageMetricsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	privateCloudApi := PrivateCloudApi{}
-	resp, err := privateCloudApi.GetStorageMetrics("218030")
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.ErrorCode, "TEMPORARILY_UNAVAILABLE")
+func TestGetStorageMetricsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetStorageMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "ACCESS_DENIED",
+				ErrorMessage: "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 404",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusNotFound)
+				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetStorageMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "404",
+				ErrorMessage: "Resource 218030 was not found",
+				UserMessage:  "Resource with id 218030 not found.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetStorageMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "SERVER_ERROR",
+				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return PrivateCloudApi{}.GetStorageMetrics("218030")
+			},
+			ExpectedError: LeasewebError{
+				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
+				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }

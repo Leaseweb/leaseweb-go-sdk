@@ -25,101 +25,70 @@ func TestChangeCredentials(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestTestChangeCredentialsError401(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
-	})
-	defer teardown()
-
-	remoteManagementApi := RemoteManagementApi{}
-	err := remoteManagementApi.ChangeCredentials("new password")
-
-	assert := assert.New(t)
-
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "You are not authorized to view this resource.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "401")
-}
-
-func TestTestChangeCredentialsError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	remoteManagementApi := RemoteManagementApi{}
-	err := remoteManagementApi.ChangeCredentials("new password")
-
-	assert := assert.New(t)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "403")
-}
-
-func TestTestChangeCredentialsError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	remoteManagementApi := RemoteManagementApi{}
-	err := remoteManagementApi.ChangeCredentials("new password")
-
-	assert := assert.New(t)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestTestChangeCredentialsError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	remoteManagementApi := RemoteManagementApi{}
-	err := remoteManagementApi.ChangeCredentials("new password")
-
-	assert := assert.New(t)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+func TestTestChangeCredentialsServerErrors(t *testing.T) {
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 401",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusUnauthorized)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return nil, RemoteManagementApi{}.ChangeCredentials("new password")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "401",
+				ErrorMessage:  "You are not authorized to view this resource.",
+			},
+		},
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return nil, RemoteManagementApi{}.ChangeCredentials("new password")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "403",
+				ErrorMessage:  "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return nil, RemoteManagementApi{}.ChangeCredentials("new password")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return nil, RemoteManagementApi{}.ChangeCredentials("new password")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
 
 func TestListProfiles(t *testing.T) {
@@ -213,102 +182,69 @@ func TestListProfilesPaginate(t *testing.T) {
 	assert.Equal(profile1.SatelliteDataCenters[1], "AMS-15")
 }
 
-func TestTestListProfilesError401(t *testing.T) {
+func TestTestListProfilesServerErrors(t *testing.T) {
 
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
-	})
-	defer teardown()
-
-	remoteManagementApi := RemoteManagementApi{}
-	resp, err := remoteManagementApi.ListProfiles()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "You are not authorized to view this resource.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "401")
-}
-
-func TestTestListProfilesError403(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusForbidden)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
-	})
-	defer teardown()
-
-	remoteManagementApi := RemoteManagementApi{}
-	resp, err := remoteManagementApi.ListProfiles()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The access token is expired or invalid.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "403")
-}
-
-func TestTestListProfilesError500(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
-	})
-	defer teardown()
-
-	remoteManagementApi := RemoteManagementApi{}
-	resp, err := remoteManagementApi.ListProfiles()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server encountered an unexpected condition that prevented it from fulfilling the request.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "500")
-}
-
-func TestTestListProfilesError503(t *testing.T) {
-
-	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-		fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
-	})
-	defer teardown()
-
-	remoteManagementApi := RemoteManagementApi{}
-	resp, err := remoteManagementApi.ListProfiles()
-
-	assert := assert.New(t)
-	assert.Empty(resp)
-	assert.NotNil(err)
-	assert.Equal(err.Error(), "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.")
-
-	lswErr, ok := err.(*LeasewebError)
-	assert.Equal(true, ok)
-	assert.Equal(lswErr.CorrelationId, "289346a1-3eaf-4da4-b707-62ef12eb08be")
-	assert.Equal(lswErr.ErrorCode, "503")
+	serverErrorTests := []serverErrorTest{
+		{
+			Title: "error 401",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusUnauthorized)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return RemoteManagementApi{}.ListProfiles()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "401",
+				ErrorMessage:  "You are not authorized to view this resource.",
+			},
+		},
+		{
+			Title: "error 403",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusForbidden)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return RemoteManagementApi{}.ListProfiles()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "403",
+				ErrorMessage:  "The access token is expired or invalid.",
+			},
+		},
+		{
+			Title: "error 500",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return RemoteManagementApi{}.ListProfiles()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "500",
+				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+			},
+		},
+		{
+			Title: "error 503",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				w.WriteHeader(http.StatusServiceUnavailable)
+				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return RemoteManagementApi{}.ListProfiles()
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
+				ErrorCode:     "503",
+				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+			},
+		},
+	}
+	assertServerErrorTests(t, serverErrorTests)
 }
