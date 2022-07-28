@@ -12,6 +12,7 @@ import (
 )
 
 var ctx = ctxT{}
+var testApiKey = "test-api-key"
 
 type serverErrorTest struct {
 	Title         string
@@ -75,10 +76,6 @@ func teardown() {
 }
 
 func TestMain(m *testing.M) {
-	InitLeasewebClient("test-api-key")
-	// TODO: the following code must tested
-	// if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-	// 	t.Errorf("request did not have x-lsw-auth header set!")
-	// }
+	InitLeasewebClient(testApiKey)
 	os.Exit(m.Run())
 }
