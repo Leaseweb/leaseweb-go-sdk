@@ -38,13 +38,6 @@ type PrivateCloudContract struct {
 	Currency          string  `json:"currency"`
 }
 
-type NetworkTraffic struct {
-	Type             string `json:"type"`
-	TrafficType      string `json:"trafficType"`
-	DataTrafficUnit  string `json:"datatrafficUnit"`
-	DataTrafficLimit int    `json:"datatrafficLimit"`
-}
-
 type PrivateCloudIp struct {
 	Ip      string `json:"ip"`
 	Version int    `json:"version"`
@@ -78,23 +71,6 @@ type UnitAmountPair struct {
 	Amount int    `json:"amount"`
 }
 
-type TimeValuePair struct {
-	Timestamp string `json:"timestamp"`
-	Value     int    `json:"value"`
-}
-
-type BasicMetric struct {
-	Unit   string          `json:"unit"`
-	Values []TimeValuePair `json:"values"`
-}
-
-type MetricMetadata struct {
-	From        string `json:"from"`
-	To          string `json:"to"`
-	Granularity string `json:"granularity"`
-	Aggregation string `json:"aggregation"`
-}
-
 type DataTrafficMetrics struct {
 	Metric   DataTrafficMetric `json:"metrics"`
 	Metadata MetricMetadata    `json:"_metadata"`
@@ -103,16 +79,6 @@ type DataTrafficMetrics struct {
 type DataTrafficMetric struct {
 	DataTrafficUp   BasicMetric `json:"DATATRAFFIC_UP"`
 	DataTrafficDown BasicMetric `json:"DATATRAFFIC_DOWN"`
-}
-
-type BandWidthMetrics struct {
-	Metric   BandWidthMetric `json:"metrics"`
-	Metadata MetricMetadata  `json:"_metadata"`
-}
-
-type BandWidthMetric struct {
-	UpPublic   BasicMetric `json:"UP_PUBLIC"`
-	DownPublic BasicMetric `json:"DOWN_PUBLIC"`
 }
 
 type CpuMetrics struct {
