@@ -10,7 +10,6 @@ go get github.com/majidkarimizadeh/leaseweb-go-sdk
 
 ### TODO:
 - `remote_managment.GetProfile`
-- `dedicated_servers.*`
 - `dedicated_rack.*`
 - `private_networking.*`
 - `ip_management.*`
