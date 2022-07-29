@@ -11,7 +11,6 @@ go get github.com/majidkarimizadeh/leaseweb-go-sdk
 ### TODO:
 - `dedicated_rack.*`
 - `private_networking.*`
-- `ip_management.*`
 - `hosting.*`
 - `services.*`
 - `dedicated_network_equipment.*`
