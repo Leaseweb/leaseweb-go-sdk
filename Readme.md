@@ -13,7 +13,6 @@ go get github.com/majidkarimizadeh/leaseweb-go-sdk
 - `dedicated_rack.*`
 - `private_networking.*`
 - `ip_management.*`
-- `virtual_servers.*`
 - `hosting.*`
 - `abuse.GetAbuseReportAttachments`
 - `abuse.GetAbuseReportMessageAttachments`
