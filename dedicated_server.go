@@ -17,17 +17,17 @@ type DedicatedServers struct {
 }
 
 type DedicatedServer struct {
-	AssetId             string                  `json:"assetId"`
-	Contract            DedicatedServerContract `json:"contract"`
-	FeatureAvailability FeatureAvailability     `json:"featureAvailability"`
-	Id                  string                  `json:"id"`
-	Location            Location                `json:"location"`
-	NetworkInterfaces   NetworkInterfaces       `json:"networkInterfaces"`
-	PowerPorts          []Port                  `json:"powerPorts"`
-	PrivateNetworks     []PrivateNetwork        `json:"privateNetworks"`
-	Rack                Rack                    `json:"rack"`
-	SerialNumber        string                  `json:"serialNumber"`
-	Specs               DedicatedServerSpecs    `json:"specs"`
+	AssetId             string                          `json:"assetId"`
+	Contract            DedicatedServerContract         `json:"contract"`
+	FeatureAvailability FeatureAvailability             `json:"featureAvailability"`
+	Id                  string                          `json:"id"`
+	Location            Location                        `json:"location"`
+	NetworkInterfaces   NetworkInterfaces               `json:"networkInterfaces"`
+	PowerPorts          []Port                          `json:"powerPorts"`
+	PrivateNetworks     []DedicatedServerPrivateNetwork `json:"privateNetworks"`
+	Rack                Rack                            `json:"rack"`
+	SerialNumber        string                          `json:"serialNumber"`
+	Specs               DedicatedServerSpecs            `json:"specs"`
 }
 
 type DedicatedServerSpecs struct {
@@ -63,22 +63,22 @@ type DedicatedServerSpecPciCard struct {
 }
 
 type DedicatedServerContract struct {
-	BillingCycle      int               `json:"billingCycle"`
-	BillingFrequency  string            `json:"billingFrequency"`
-	ContractTerm      int               `json:"contractTerm"`
-	Currency          string            `json:"currency"`
-	EndsAt            string            `json:"endsAt"`
-	StartsAt          string            `json:"startsAt"`
-	CustomerId        string            `json:"customerId"`
-	DeliveryStatus    string            `json:"deliveryStatus"`
-	Id                string            `json:"id"`
-	Reference         string            `json:"reference"`
-	SalesOrgId        string            `json:"salesOrgId"`
-	NetworkTraffic    NetworkTraffic    `json:"networkTraffic"`
-	PricePerFrequency int               `json:"pricePerFrequency"`
-	PrivateNetworks   []PrivateNetwork  `json:"privateNetworks"`
-	Sla               string            `json:"sla"`
-	SoftwareLicenses  []SoftwareLicense `json:"softwareLicenses"`
+	BillingCycle      int                             `json:"billingCycle"`
+	BillingFrequency  string                          `json:"billingFrequency"`
+	ContractTerm      int                             `json:"contractTerm"`
+	Currency          string                          `json:"currency"`
+	EndsAt            string                          `json:"endsAt"`
+	StartsAt          string                          `json:"startsAt"`
+	CustomerId        string                          `json:"customerId"`
+	DeliveryStatus    string                          `json:"deliveryStatus"`
+	Id                string                          `json:"id"`
+	Reference         string                          `json:"reference"`
+	SalesOrgId        string                          `json:"salesOrgId"`
+	NetworkTraffic    NetworkTraffic                  `json:"networkTraffic"`
+	PricePerFrequency int                             `json:"pricePerFrequency"`
+	PrivateNetworks   []DedicatedServerPrivateNetwork `json:"privateNetworks"`
+	Sla               string                          `json:"sla"`
+	SoftwareLicenses  []SoftwareLicense               `json:"softwareLicenses"`
 }
 
 type SoftwareLicense struct {
@@ -120,7 +120,7 @@ type Port struct {
 	Port string `json:"port"`
 }
 
-type PrivateNetwork struct {
+type DedicatedServerPrivateNetwork struct {
 	Id        string `json:"id"`
 	LinkSpeed int    `json:"linkSpeed"`
 	Status    string `json:"status"`
