@@ -9,12 +9,12 @@ go get github.com/majidkarimizadeh/leaseweb-go-sdk
 ```
 
 ### TODO:
-- `remote_managment.GetProfile`
 - `dedicated_rack.*`
 - `private_networking.*`
 - `ip_management.*`
 - `hosting.*`
-- `abuse.GetAbuseReportAttachments`
-- `abuse.GetAbuseReportMessageAttachments`
 - `services.*`
 - `dedicated_network_equipment.*`
+- `remote_managment.GetProfile`
+- `abuse.GetAbuseReportAttachments`
+- `abuse.GetAbuseReportMessageAttachments`
