@@ -54,31 +54,9 @@ type Cpu struct {
 	Cores int `json:"cores"`
 }
 
-type Credential struct {
-	Type     string `json:"type"`
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Domain   string `json:"domain"`
-}
-
-type Credentials struct {
-	Credentials []Credential `json:"credentials"`
-	Metadata    Metadata     `json:"_metadata"`
-}
-
 type UnitAmountPair struct {
 	Unit   string `json:"unit"`
 	Amount int    `json:"amount"`
-}
-
-type DataTrafficMetrics struct {
-	Metric   DataTrafficMetric `json:"metrics"`
-	Metadata MetricMetadata    `json:"_metadata"`
-}
-
-type DataTrafficMetric struct {
-	DataTrafficUp   BasicMetric `json:"DATATRAFFIC_UP"`
-	DataTrafficDown BasicMetric `json:"DATATRAFFIC_DOWN"`
 }
 
 type CpuMetrics struct {
