@@ -505,7 +505,7 @@ func TestCancelServiceServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
-				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, http.MethodPost, r.Method)
 				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
@@ -522,7 +522,7 @@ func TestCancelServiceServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
-				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, http.MethodPost, r.Method)
 				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
@@ -539,7 +539,7 @@ func TestCancelServiceServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
-				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, http.MethodPost, r.Method)
 				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
@@ -556,7 +556,7 @@ func TestCancelServiceServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
-				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, http.MethodPost, r.Method)
 				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
@@ -593,7 +593,7 @@ func TestUncancelServiceServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
-				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, http.MethodPost, r.Method)
 				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
@@ -610,7 +610,7 @@ func TestUncancelServiceServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
-				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, http.MethodPost, r.Method)
 				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
@@ -627,7 +627,7 @@ func TestUncancelServiceServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
-				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, http.MethodPost, r.Method)
 				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
@@ -644,7 +644,7 @@ func TestUncancelServiceServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
-				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, http.MethodPost, r.Method)
 				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
