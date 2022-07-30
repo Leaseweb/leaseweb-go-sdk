@@ -2,6 +2,7 @@ package leaseweb
 
 import (
 	"fmt"
+	"net/http"
 	"net/url"
 )
 
@@ -27,10 +28,7 @@ func (rma RemoteManagementApi) getPath(endpoint string) string {
 func (rma RemoteManagementApi) ChangeCredentials(password string) error {
 	payload := map[string]string{password: password}
 	path := rma.getPath("/remoteManagement/changeCredentials")
-	if err := doRequest(POST, path, nil, payload); err != nil {
-		return err
-	}
-	return nil
+	return doRequest(http.MethodPost, path, nil, payload)
 }
 
 func (rma RemoteManagementApi) ListProfiles(args ...int) (*Profiles, error) {
@@ -44,7 +42,7 @@ func (rma RemoteManagementApi) ListProfiles(args ...int) (*Profiles, error) {
 
 	path := rma.getPath("/remoteManagement/profiles" + v.Encode())
 	result := &Profiles{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil

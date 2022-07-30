@@ -167,10 +167,7 @@ func (vsa VirtualServerApi) Reinstall(virtualServerId, operatingSystemId string)
 func (vsa VirtualServerApi) UpdateCredential(virtualServerId, username, credentialType, password string) error {
 	payload := map[string]string{"username": username, "type": credentialType, "password": password}
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/credentials")
-	if err := doRequest(http.MethodPut, path, nil, payload); err != nil {
-		return err
-	}
-	return nil
+	return doRequest(http.MethodPut, path, nil, payload)
 }
 
 func (vsa VirtualServerApi) ListCredentials(virtualServerId, credentialType string, args ...int) (*Credentials, error) {

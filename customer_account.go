@@ -2,6 +2,7 @@ package leaseweb
 
 import (
 	"fmt"
+	"net/http"
 	"net/url"
 	"reflect"
 	"strings"
@@ -58,7 +59,7 @@ func (cai CustomerAccountApi) getPath(endpoint string) string {
 func (cai CustomerAccountApi) GetCustomerAccount() (*CustomerAccount, error) {
 	path := cai.getPath("/details")
 	result := &CustomerAccount{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -67,10 +68,7 @@ func (cai CustomerAccountApi) GetCustomerAccount() (*CustomerAccount, error) {
 func (cai CustomerAccountApi) UpdateCustomerAccount(ad Address) error {
 	path := cai.getPath("/details")
 	payload := map[string]Address{"address": ad}
-	if err := doRequest(PUT, path, nil, payload); err != nil {
-		return err
-	}
-	return nil
+	return doRequest(http.MethodPut, path, nil, payload)
 }
 
 func (cai CustomerAccountApi) ListContacts(args ...interface{}) (*Contacts, error) {
@@ -92,7 +90,7 @@ func (cai CustomerAccountApi) ListContacts(args ...interface{}) (*Contacts, erro
 
 	path := cai.getPath("/contacts?" + v.Encode())
 	result := &Contacts{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -101,7 +99,7 @@ func (cai CustomerAccountApi) ListContacts(args ...interface{}) (*Contacts, erro
 func (cai CustomerAccountApi) CreateContact(newContact Contact) (*Contact, error) {
 	path := cai.getPath("/contacts")
 	result := &Contact{}
-	if err := doRequest(POST, path, result, newContact); err != nil {
+	if err := doRequest(http.MethodPost, path, result, newContact); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -109,16 +107,13 @@ func (cai CustomerAccountApi) CreateContact(newContact Contact) (*Contact, error
 
 func (cai CustomerAccountApi) DeleteContact(contactId string) error {
 	path := cai.getPath("/contacts/" + contactId)
-	if err := doRequest(DELETE, path); err != nil {
-		return err
-	}
-	return nil
+	return doRequest(http.MethodDelete, path)
 }
 
 func (cai CustomerAccountApi) GetContact(contactId string) (*Contact, error) {
 	path := cai.getPath("/contacts" + contactId)
 	result := &Contact{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -136,17 +131,11 @@ func (cai CustomerAccountApi) UpdateContact(contactId string, phone Phone, roles
 	}
 
 	path := cai.getPath("/contacts" + contactId)
-	if err := doRequest(PUT, path, nil, payload); err != nil {
-		return err
-	}
-	return nil
+	return doRequest(http.MethodPut, path, nil, payload)
 }
 
 func (cai CustomerAccountApi) AssignPrimaryRolesToContact(contactId string, roles []string) error {
 	payload := map[string][]string{"roles": roles}
 	path := cai.getPath("/contacts" + contactId)
-	if err := doRequest(POST, path, nil, payload); err != nil {
-		return err
-	}
-	return nil
+	return doRequest(http.MethodPost, path, nil, payload)
 }

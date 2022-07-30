@@ -2,6 +2,7 @@ package leaseweb
 
 import (
 	"fmt"
+	"net/http"
 	"net/url"
 	"reflect"
 	"strings"
@@ -90,7 +91,7 @@ func (aba AbuseApi) ListAbuseReports(args ...interface{}) (*AbuseReports, error)
 
 	path := aba.getPath("/reports?" + v.Encode())
 	result := &AbuseReports{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -99,7 +100,7 @@ func (aba AbuseApi) ListAbuseReports(args ...interface{}) (*AbuseReports, error)
 func (aba AbuseApi) GetAbuseReport(abuseReportId string) (*AbuseReport, error) {
 	path := aba.getPath("/reports/" + abuseReportId)
 	result := &AbuseReport{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -116,7 +117,7 @@ func (aba AbuseApi) GetAbuseReportMessages(abuseReportId string, args ...int) (*
 
 	path := aba.getPath("/reports/" + abuseReportId + "/messages" + v.Encode())
 	result := &AbuseMessages{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -126,7 +127,7 @@ func (aba AbuseApi) CreateNewAbuseReportMessage(abuseReportId string, body strin
 	var result []string
 	payload := map[string]string{body: body}
 	path := aba.getPath("/reports/" + abuseReportId + "/messages")
-	if err := doRequest(POST, path, &result, payload); err != nil {
+	if err := doRequest(http.MethodPost, path, &result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -135,7 +136,7 @@ func (aba AbuseApi) CreateNewAbuseReportMessage(abuseReportId string, body strin
 func (aba AbuseApi) ListResolutionOptions(abuseReportId string) (*Resolutions, error) {
 	path := aba.getPath("/reports/" + abuseReportId + "/resolutions")
 	result := &Resolutions{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -144,10 +145,7 @@ func (aba AbuseApi) ListResolutionOptions(abuseReportId string) (*Resolutions, e
 func (aba AbuseApi) ResolveAbuseReport(abuseReportId string, resolutions []string) error {
 	payload := map[string][]string{"resolutions": resolutions}
 	path := aba.getPath("/reports/" + abuseReportId + "/resolve")
-	if err := doRequest(POST, path, nil, payload); err != nil {
-		return err
-	}
-	return nil
+	return doRequest(http.MethodPost, path, nil, payload)
 }
 
 // TODO

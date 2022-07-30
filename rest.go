@@ -10,13 +10,7 @@ import (
 
 var lswClient *leasewebClient
 
-const (
-	DEFAULT_BASE_URL = "https://api.leaseweb.com"
-	GET              = "GET"
-	POST             = "POST"
-	PUT              = "PUT"
-	DELETE           = "DELETE"
-)
+const DEFAULT_BASE_URL = "https://api.leaseweb.com"
 
 type leasewebClient struct {
 	client  *http.Client
@@ -52,7 +46,7 @@ func getBaseUrl() string {
 
 func doRequest(method string, endpoint string, args ...interface{}) error {
 	var tmpPayload io.Reader
-	if method == POST || method == PUT {
+	if method == http.MethodPost || method == http.MethodPut {
 		if len(args) > 1 {
 			b, err := json.Marshal(args[1])
 			if err != nil {

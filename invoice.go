@@ -2,6 +2,7 @@ package leaseweb
 
 import (
 	"fmt"
+	"net/http"
 	"net/url"
 )
 
@@ -82,7 +83,7 @@ func (ia InvoiceApi) ListInvoices(args ...int) (*Invoices, error) {
 
 	path := ia.getPath("/invoices?" + v.Encode())
 	result := &Invoices{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -99,7 +100,7 @@ func (ia InvoiceApi) GetProForma(args ...int) (*ProForma, error) {
 
 	path := ia.getPath("/invoices/proforma?" + v.Encode())
 	result := &ProForma{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -108,7 +109,7 @@ func (ia InvoiceApi) GetProForma(args ...int) (*ProForma, error) {
 func (ia InvoiceApi) GetInvoice(invoiceId string) (*Invoice, error) {
 	path := ia.getPath("/invoices/" + invoiceId)
 	result := &Invoice{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil

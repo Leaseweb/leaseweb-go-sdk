@@ -2,6 +2,7 @@ package leaseweb
 
 import (
 	"fmt"
+	"net/http"
 	"net/url"
 )
 
@@ -99,7 +100,7 @@ func (pca PrivateCloudApi) ListPrivateClouds(args ...interface{}) (*PrivateCloud
 
 	path := pca.getPath("/privateClouds?" + v.Encode())
 	result := &PrivateClouds{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -108,7 +109,7 @@ func (pca PrivateCloudApi) ListPrivateClouds(args ...interface{}) (*PrivateCloud
 func (pca PrivateCloudApi) GetPrivateCloud(privateCloudId string) (*PrivateCloud, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId)
 	result := &PrivateCloud{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -125,7 +126,7 @@ func (pca PrivateCloudApi) ListCredentials(privateCloudId string, credentialType
 
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/credentials/" + credentialType + v.Encode())
 	result := &Credentials{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -134,7 +135,7 @@ func (pca PrivateCloudApi) ListCredentials(privateCloudId string, credentialType
 func (pca PrivateCloudApi) GetCredentials(privateCloudId string, credentialType string, username string) (*Credential, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/credentials/" + credentialType + "/" + username)
 	result := &Credential{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -157,7 +158,7 @@ func (pca PrivateCloudApi) GetDataTrafficMetrics(privateCloudId string, args ...
 
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/datatraffic?" + v.Encode())
 	result := &DataTrafficMetrics{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -180,7 +181,7 @@ func (pca PrivateCloudApi) GetBandWidthMetrics(privateCloudId string, args ...in
 
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/bandwidth?" + v.Encode())
 	result := &BandWidthMetrics{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -202,7 +203,7 @@ func (pca PrivateCloudApi) GetCpuMetrics(privateCloudId string, args ...interfac
 	}
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/cpu?" + v.Encode())
 	result := &CpuMetrics{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -224,7 +225,7 @@ func (pca PrivateCloudApi) GetMemoryMetrics(privateCloudId string, args ...inter
 	}
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/memory?" + v.Encode())
 	result := &MemoryMetrics{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -246,7 +247,7 @@ func (pca PrivateCloudApi) GetStorageMetrics(privateCloudId string, args ...inte
 	}
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/storage?" + v.Encode())
 	result := &StorageMetrics{}
-	if err := doRequest(GET, path, result); err != nil {
+	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
