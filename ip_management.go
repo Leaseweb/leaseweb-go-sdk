@@ -115,10 +115,7 @@ func (ima IpManagementApi) NullRouteIp(ip string, params ...map[string]string) (
 
 func (ima IpManagementApi) RemoveNullRouteIp(ip string) error {
 	path := ima.getPath("/ips/" + ip + "/nullRoute")
-	if err := doRequest(http.MethodDelete, path); err != nil {
-		return err
-	}
-	return nil
+	return doRequest(http.MethodDelete, path)
 }
 
 func (ima IpManagementApi) ListNullRouteHistory(params ...map[string]interface{}) (*NullRoutes, error) {
