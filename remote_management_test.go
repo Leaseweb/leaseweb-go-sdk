@@ -9,11 +9,9 @@ import (
 )
 
 func TestChangeCredentials(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodPost, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		w.WriteHeader(http.StatusNoContent)
 	})
 	defer teardown()
@@ -30,6 +28,8 @@ func TestTestChangeCredentialsServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -45,6 +45,8 @@ func TestTestChangeCredentialsServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
@@ -60,6 +62,8 @@ func TestTestChangeCredentialsServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
@@ -75,6 +79,8 @@ func TestTestChangeCredentialsServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
@@ -92,11 +98,9 @@ func TestTestChangeCredentialsServerErrors(t *testing.T) {
 }
 
 func TestListProfiles(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 2}, "profiles": [
 			{
 				"datacenter": "AMS-01",
@@ -146,11 +150,9 @@ func TestListProfiles(t *testing.T) {
 }
 
 func TestListProfilesPaginate(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 1, "totalCount": 11}, "profiles": [
 			{
 				"datacenter": "AMS-02",
@@ -183,11 +185,12 @@ func TestListProfilesPaginate(t *testing.T) {
 }
 
 func TestTestListProfilesServerErrors(t *testing.T) {
-
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -203,6 +206,8 @@ func TestTestListProfilesServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
@@ -218,6 +223,8 @@ func TestTestListProfilesServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
@@ -233,6 +240,8 @@ func TestTestListProfilesServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},

@@ -9,11 +9,9 @@ import (
 )
 
 func TestGetCustomerAccount(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{
 			"address": {
 				"city": "Amsterdam",
@@ -54,6 +52,8 @@ func TestGetCustomerAccountServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -69,6 +69,8 @@ func TestGetCustomerAccountServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -84,6 +86,8 @@ func TestGetCustomerAccountServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -99,6 +103,8 @@ func TestGetCustomerAccountServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
@@ -116,11 +122,9 @@ func TestGetCustomerAccountServerErrors(t *testing.T) {
 }
 
 func TestUpdateCustomerAccount(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodPut, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		w.WriteHeader(http.StatusNoContent)
 	})
 	defer teardown()
@@ -137,6 +141,8 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPut, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -152,6 +158,8 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPut, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -167,6 +175,8 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 		{
 			Title: "error 405",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPut, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusMethodNotAllowed)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "405", "errorMessage": "AccountDetails modifications are not permitted for USA residents, please contact support for any modification request."}`)
 			},
@@ -182,6 +192,8 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPut, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -197,6 +209,8 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPut, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
@@ -213,11 +227,9 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 func TestListContacts(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 1}, "contacts": [
 			{
 				"description": "Mr.",
@@ -280,11 +292,9 @@ func TestListContacts(t *testing.T) {
 }
 
 func TestListContactsPaginateAndFilter(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{"_metadata":{"limit": 5, "offset": 1, "totalCount": 6}, "contacts": [
 			{
 				"description": "Mr.",
@@ -351,6 +361,8 @@ func TestListContactsServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -366,6 +378,8 @@ func TestListContactsServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -381,6 +395,8 @@ func TestListContactsServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -396,6 +412,8 @@ func TestListContactsServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
@@ -413,11 +431,9 @@ func TestListContactsServerErrors(t *testing.T) {
 }
 
 func TestCreateContact(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodPost, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{
 			"description": "Mr.",
 			"email": "john@doe.com",
@@ -471,6 +487,8 @@ func TestCreateContactServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -495,6 +513,8 @@ func TestCreateContactServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -519,6 +539,8 @@ func TestCreateContactServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -543,6 +565,8 @@ func TestCreateContactServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
@@ -570,9 +594,8 @@ func TestCreateContactServerErrors(t *testing.T) {
 
 func TestDeleteContact(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodDelete, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		w.WriteHeader(http.StatusNoContent)
 	})
 	defer teardown()
@@ -589,6 +612,8 @@ func TestDeleteContactServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodDelete, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -604,6 +629,8 @@ func TestDeleteContactServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodDelete, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -619,6 +646,8 @@ func TestDeleteContactServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodDelete, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -634,6 +663,8 @@ func TestDeleteContactServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodDelete, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
@@ -651,11 +682,9 @@ func TestDeleteContactServerErrors(t *testing.T) {
 }
 
 func TestGetContact(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{
 			"description": "Mr.",
 			"email": "john@doe.com",
@@ -713,6 +742,8 @@ func TestGetContactServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -728,6 +759,8 @@ func TestGetContactServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -743,6 +776,8 @@ func TestGetContactServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -758,6 +793,8 @@ func TestGetContactServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
@@ -775,11 +812,9 @@ func TestGetContactServerErrors(t *testing.T) {
 }
 
 func TestUpdateContact(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodPut, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		w.WriteHeader(http.StatusNoContent)
 	})
 	defer teardown()
@@ -801,6 +836,8 @@ func TestUpdateContactServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPut, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -822,6 +859,8 @@ func TestUpdateContactServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPut, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -843,6 +882,8 @@ func TestUpdateContactServerErrors(t *testing.T) {
 		{
 			Title: "error 404",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPut, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusNotFound)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
@@ -864,6 +905,8 @@ func TestUpdateContactServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPut, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -885,6 +928,8 @@ func TestUpdateContactServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPut, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
@@ -908,11 +953,9 @@ func TestUpdateContactServerErrors(t *testing.T) {
 }
 
 func TestAssignPrimaryRolesToContact(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodPost, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		w.WriteHeader(http.StatusNoContent)
 	})
 	defer teardown()
@@ -931,6 +974,8 @@ func TestAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -949,6 +994,8 @@ func TestAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -967,6 +1014,8 @@ func TestAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 		{
 			Title: "error 404",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusNotFound)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
@@ -985,6 +1034,8 @@ func TestAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -1003,6 +1054,8 @@ func TestAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},

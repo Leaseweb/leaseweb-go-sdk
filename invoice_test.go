@@ -9,8 +9,9 @@ import (
 )
 
 func TestListInvoices(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 2}, "invoices": [
 			{
 				"currency": "EUR",
@@ -72,9 +73,8 @@ func TestListInvoices(t *testing.T) {
 
 func TestListInvoicesBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 0}, "invoices": []}`)
 	})
 	defer teardown()
@@ -92,9 +92,8 @@ func TestListInvoicesBeEmpty(t *testing.T) {
 
 func TestListInvoicesPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 1, "totalCount": 11}, "invoices": [{"id": "00000001"}]}`)
 	})
 	defer teardown()
@@ -115,6 +114,8 @@ func TestListInvoicesServerErrors(t *testing.T) {
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -130,6 +131,8 @@ func TestListInvoicesServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -145,6 +148,8 @@ func TestListInvoicesServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -160,6 +165,8 @@ func TestListInvoicesServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
@@ -177,11 +184,9 @@ func TestListInvoicesServerErrors(t *testing.T) {
 }
 
 func TestGetProForma(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w,
 			`{"_metadata":{"limit": 10, "offset": 0, "totalCount": 2},
 			"contractItems": [
@@ -257,11 +262,9 @@ func TestGetProForma(t *testing.T) {
 }
 
 func TestGetProFormaPaginate(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w,
 			`{"_metadata":{"limit": 10, "offset": 1, "totalCount": 11},
 			"contractItems": [
@@ -315,11 +318,12 @@ func TestGetProFormaPaginate(t *testing.T) {
 }
 
 func TestGetProFormaServerErrors(t *testing.T) {
-
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -335,6 +339,8 @@ func TestGetProFormaServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -350,6 +356,8 @@ func TestGetProFormaServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -365,6 +373,8 @@ func TestGetProFormaServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
@@ -382,11 +392,9 @@ func TestGetProFormaServerErrors(t *testing.T) {
 }
 
 func TestGetInvoice(t *testing.T) {
-
 	setup(func(w http.ResponseWriter, r *http.Request) {
-		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
-			t.Errorf("request did not have x-lsw-auth header set!")
-		}
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `
 			{"credits": [
 				{
@@ -454,11 +462,12 @@ func TestGetInvoice(t *testing.T) {
 }
 
 func TestGetInvoiceServerErrors(t *testing.T) {
-
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusUnauthorized)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
@@ -474,6 +483,8 @@ func TestGetInvoiceServerErrors(t *testing.T) {
 		{
 			Title: "error 403",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusForbidden)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
@@ -489,6 +500,8 @@ func TestGetInvoiceServerErrors(t *testing.T) {
 		{
 			Title: "error 500",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusInternalServerError)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
@@ -504,6 +517,8 @@ func TestGetInvoiceServerErrors(t *testing.T) {
 		{
 			Title: "error 503",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodGet, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 				w.WriteHeader(http.StatusServiceUnavailable)
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
