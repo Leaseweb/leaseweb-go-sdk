@@ -7,11 +7,9 @@ import (
 	"strings"
 )
 
-const FLOATING_IP_API_DEFAULT_VERSION = "v2"
+const FLOATING_IP_API_VERSION = "v2"
 
-type FloatingIpApi struct {
-	version string
-}
+type FloatingIpApi struct{}
 
 type FloatingIpRange struct {
 	Id         string `json:"id"`
@@ -46,16 +44,8 @@ type FloatingIpDefinitions struct {
 	Metadata              Metadata               `json:"_metadata"`
 }
 
-func (fia *FloatingIpApi) SetVersion(version string) {
-	fia.version = version
-}
-
 func (fia FloatingIpApi) getPath(endpoint string) string {
-	version := fia.version
-	if version == "" {
-		version = FLOATING_IP_API_DEFAULT_VERSION
-	}
-	return "/floatingIps/" + version + endpoint
+	return "/floatingIps/" + FLOATING_IP_API_VERSION + endpoint
 }
 
 func (fia FloatingIpApi) ListRanges(args ...interface{}) (*FloatingIpRanges, error) {

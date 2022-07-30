@@ -18,11 +18,6 @@ const (
 	DELETE           = "DELETE"
 )
 
-type leasewebApi interface {
-	SetVersion(version string)
-	getPath() string
-}
-
 type leasewebClient struct {
 	client  *http.Client
 	apiKey  string

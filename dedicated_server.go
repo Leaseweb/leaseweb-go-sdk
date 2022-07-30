@@ -5,11 +5,9 @@ import (
 	"net/url"
 )
 
-const DEDICATED_SERVER_API_DEFAULT_VERSION = "v2"
+const DEDICATED_SERVER_API_VERSION = "v2"
 
-type DedicatedServerApi struct {
-	version string
-}
+type DedicatedServerApi struct{}
 
 type DedicatedServers struct {
 	Servers  []DedicatedServer `json:"servers"`
@@ -610,16 +608,8 @@ type RescueImage struct {
 	Name string `json:"name"`
 }
 
-func (dsa *DedicatedServerApi) SetVersion(version string) {
-	dsa.version = version
-}
-
 func (dsa DedicatedServerApi) getPath(endpoint string) string {
-	version := dsa.version
-	if version == "" {
-		version = DEDICATED_SERVER_API_DEFAULT_VERSION
-	}
-	return "/bareMetals/" + version + endpoint
+	return "/bareMetals/" + DEDICATED_SERVER_API_VERSION + endpoint
 }
 
 func (dsa DedicatedServerApi) List(args ...interface{}) (*DedicatedServers, error) {

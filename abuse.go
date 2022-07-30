@@ -7,11 +7,9 @@ import (
 	"strings"
 )
 
-const ABUSE_API_DEFAULT_VERSION = "v1"
+const ABUSE_API_VERSION = "v1"
 
-type AbuseApi struct {
-	version string
-}
+type AbuseApi struct{}
 
 type AbuseReport struct {
 	Id                  string               `json:"id"`
@@ -69,16 +67,8 @@ type Resolutions struct {
 	Resolutions []Resolution `json:"resolutions"`
 }
 
-func (aba *AbuseApi) SetVersion(version string) {
-	aba.version = version
-}
-
 func (aba AbuseApi) getPath(endpoint string) string {
-	version := aba.version
-	if version == "" {
-		version = ABUSE_API_DEFAULT_VERSION
-	}
-	return "/abuse/" + version + endpoint
+	return "/abuse/" + ABUSE_API_VERSION + endpoint
 }
 
 func (aba AbuseApi) ListAbuseReports(args ...interface{}) (*AbuseReports, error) {

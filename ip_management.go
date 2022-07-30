@@ -6,23 +6,9 @@ import (
 	"net/url"
 )
 
-const IP_MANAGEMENT_API_DEFAULT_VERSION = "v2"
+const IP_MANAGEMENT_API_VERSION = "v2"
 
-type IpManagementApi struct {
-	version string
-}
-
-func (ima *IpManagementApi) SetVersion(version string) {
-	ima.version = version
-}
-
-func (ima IpManagementApi) getPath(endpoint string) string {
-	version := ima.version
-	if version == "" {
-		version = IP_MANAGEMENT_API_DEFAULT_VERSION
-	}
-	return "/ipMgmt/" + version + endpoint
-}
+type IpManagementApi struct{}
 
 type Ips struct {
 	Ips      []Ip     `json:"ips"`
@@ -72,6 +58,10 @@ type NullRoute struct {
 	Comment              string             `json:"comment"`
 	EquipmentId          string             `json:"equipmentId"`
 	AssignedContract     IpAssignedContract `json:"assignedContract"`
+}
+
+func (ima IpManagementApi) getPath(endpoint string) string {
+	return "/ipMgmt/" + IP_MANAGEMENT_API_VERSION + endpoint
 }
 
 func (ima IpManagementApi) ListIps(params ...map[string]interface{}) (*Ips, error) {

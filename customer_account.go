@@ -7,11 +7,9 @@ import (
 	"strings"
 )
 
-const CUSTOMER_ACCOUNT_API_DEFAULT_VERSION = "v1"
+const CUSTOMER_ACCOUNT_API_VERSION = "v1"
 
-type CustomerAccountApi struct {
-	version string
-}
+type CustomerAccountApi struct{}
 
 type CustomerAccount struct {
 	Name         string  `json:"name"`
@@ -53,16 +51,8 @@ type Phone struct {
 	Number      string `json:"number"`
 }
 
-func (cai *CustomerAccountApi) SetVersion(version string) {
-	cai.version = version
-}
-
 func (cai CustomerAccountApi) getPath(endpoint string) string {
-	version := cai.version
-	if version == "" {
-		version = CUSTOMER_ACCOUNT_API_DEFAULT_VERSION
-	}
-	return "/account/" + version + endpoint
+	return "/account/" + CUSTOMER_ACCOUNT_API_VERSION + endpoint
 }
 
 func (cai CustomerAccountApi) GetCustomerAccount() (*CustomerAccount, error) {

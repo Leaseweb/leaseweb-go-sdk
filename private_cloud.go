@@ -5,11 +5,9 @@ import (
 	"net/url"
 )
 
-const PRIVATE_CLOUD_API_DEFAULT_VERSION = "v2"
+const PRIVATE_CLOUD_API_VERSION = "v2"
 
-type PrivateCloudApi struct {
-	version string
-}
+type PrivateCloudApi struct{}
 
 type PrivateClouds struct {
 	PrivateClouds []PrivateCloud `json:"privateClouds"`
@@ -86,16 +84,8 @@ type StorageMetric struct {
 	Storage BasicMetric `json:"STORAGE"`
 }
 
-func (pca *PrivateCloudApi) SetVersion(version string) {
-	pca.version = version
-}
-
 func (pca PrivateCloudApi) getPath(endpoint string) string {
-	version := pca.version
-	if version == "" {
-		version = PRIVATE_CLOUD_API_DEFAULT_VERSION
-	}
-	return "/cloud/" + version + endpoint
+	return "/cloud/" + PRIVATE_CLOUD_API_VERSION + endpoint
 }
 
 func (pca PrivateCloudApi) ListPrivateClouds(args ...interface{}) (*PrivateClouds, error) {
