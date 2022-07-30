@@ -6,11 +6,9 @@ import (
 	"net/url"
 )
 
-const VIRTUAL_SERVER_API_DEFAULT_VERSION = "v2"
+const VIRTUAL_SERVER_API_VERSION = "v2"
 
-type VirtualServerApi struct {
-	version string
-}
+type VirtualServerApi struct{}
 
 type VirtualServers struct {
 	VirtualServers []VirtualServer `json:"virtualServers"`
@@ -89,16 +87,8 @@ type Template struct {
 	Name string `json:"name"`
 }
 
-func (vsa *VirtualServerApi) SetVersion(version string) {
-	vsa.version = version
-}
-
 func (vsa VirtualServerApi) getPath(endpoint string) string {
-	version := vsa.version
-	if version == "" {
-		version = VIRTUAL_SERVER_API_DEFAULT_VERSION
-	}
-	return "/cloud/" + version + endpoint
+	return "/cloud/" + VIRTUAL_SERVER_API_VERSION + endpoint
 }
 
 func (vsa VirtualServerApi) ListVirtualServers(args ...int) (*VirtualServers, error) {

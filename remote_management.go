@@ -5,11 +5,9 @@ import (
 	"net/url"
 )
 
-const REMOTE_MANAGEMENT_API_DEFAULT_VERSION = "v2"
+const REMOTE_MANAGEMENT_API_VERSION = "v2"
 
-type RemoteManagementApi struct {
-	version string
-}
+type RemoteManagementApi struct{}
 
 type Profiles struct {
 	Metadata Metadata  `json:"_metadata"`
@@ -22,16 +20,8 @@ type Profile struct {
 	SatelliteDataCenters []string `json:"satelliteDatacenters"`
 }
 
-func (rma *RemoteManagementApi) SetVersion(version string) {
-	rma.version = version
-}
-
 func (rma RemoteManagementApi) getPath(endpoint string) string {
-	version := rma.version
-	if version == "" {
-		version = REMOTE_MANAGEMENT_API_DEFAULT_VERSION
-	}
-	return "/bareMetals/" + version + endpoint
+	return "/bareMetals/" + REMOTE_MANAGEMENT_API_VERSION + endpoint
 }
 
 func (rma RemoteManagementApi) ChangeCredentials(password string) error {

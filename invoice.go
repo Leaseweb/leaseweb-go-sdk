@@ -5,11 +5,9 @@ import (
 	"net/url"
 )
 
-const INVOICE_API_DEFAULT_VERSION = "v1"
+const INVOICE_API_VERSION = "v1"
 
-type InvoiceApi struct {
-	version string
-}
+type InvoiceApi struct{}
 
 type Invoice struct {
 	Currency                string   `json:"currency"`
@@ -69,16 +67,8 @@ type ProForma struct {
 	Contracts    []Contract `json:"contractItems"`
 }
 
-func (ia *InvoiceApi) SetVersion(version string) {
-	ia.version = version
-}
-
 func (ia InvoiceApi) getPath(endpoint string) string {
-	version := ia.version
-	if version == "" {
-		version = INVOICE_API_DEFAULT_VERSION
-	}
-	return "/invoices/" + version + endpoint
+	return "/invoices/" + INVOICE_API_VERSION + endpoint
 }
 
 func (ia InvoiceApi) ListInvoices(args ...int) (*Invoices, error) {

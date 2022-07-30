@@ -6,10 +6,9 @@ import (
 	"net/url"
 )
 
-const SERVICES_API_DEFAULT_VERSION = "v1"
+const SERVICES_API_VERSION = "v1"
 
 type ServicesApi struct {
-	version string
 }
 
 type Services struct {
@@ -49,16 +48,8 @@ type CancellationReason struct {
 	ReasonCode string `json:"reasonCode"`
 }
 
-func (sa *ServicesApi) SetVersion(version string) {
-	sa.version = version
-}
-
 func (sa ServicesApi) getPath(endpoint string) string {
-	version := sa.version
-	if version == "" {
-		version = SERVICES_API_DEFAULT_VERSION
-	}
-	return "/services/" + version + endpoint
+	return "/services/" + SERVICES_API_VERSION + endpoint
 }
 
 func (sa ServicesApi) ListServices(args ...int) (*Services, error) {

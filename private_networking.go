@@ -6,11 +6,9 @@ import (
 	"net/url"
 )
 
-const PRIVATE_NETWORKING_API_DEFAULT_VERSION = "v2"
+const PRIVATE_NETWORKING_API_VERSION = "v2"
 
-type PrivateNetworkingApi struct {
-	version string
-}
+type PrivateNetworkingApi struct{}
 
 type PrivateNetworks struct {
 	PrivateNetworks []PrivateNetwork `json:"privateNetworks"`
@@ -37,16 +35,8 @@ type DhcpReservation struct {
 	Sticky bool   `json:"sticky"`
 }
 
-func (pna *PrivateNetworkingApi) SetVersion(version string) {
-	pna.version = version
-}
-
 func (pna PrivateNetworkingApi) getPath(endpoint string) string {
-	version := pna.version
-	if version == "" {
-		version = PRIVATE_NETWORKING_API_DEFAULT_VERSION
-	}
-	return "/bareMetals/" + version + endpoint
+	return "/bareMetals/" + PRIVATE_NETWORKING_API_VERSION + endpoint
 }
 
 func (pna PrivateNetworkingApi) ListPrivateNetworks(args ...int) (*PrivateNetworks, error) {
