@@ -1546,17 +1546,17 @@ func TestVirtualServerGetDataTrafficMetrics(t *testing.T) {
 	assert.Equal(Metric.Metadata.From, "2016-10-20T09:00:00Z")
 	assert.Equal(Metric.Metadata.To, "2016-10-20T11:00:00Z")
 	assert.Equal(Metric.Metadata.Granularity, "DAY")
-	assert.Equal(Metric.Metric.DataTrafficDown.Unit, "B")
-	assert.Equal(Metric.Metric.DataTrafficDown.Values[0].Value, 900)
-	assert.Equal(Metric.Metric.DataTrafficDown.Values[0].Timestamp, "2016-10-20T09:00:00Z")
-	assert.Equal(Metric.Metric.DataTrafficDown.Values[1].Value, 2500)
-	assert.Equal(Metric.Metric.DataTrafficDown.Values[1].Timestamp, "2016-10-20T10:00:00Z")
+	assert.Equal(Metric.Metric.DownPublic.Unit, "B")
+	assert.Equal(Metric.Metric.DownPublic.Values[0].Value, 900)
+	assert.Equal(Metric.Metric.DownPublic.Values[0].Timestamp, "2016-10-20T09:00:00Z")
+	assert.Equal(Metric.Metric.DownPublic.Values[1].Value, 2500)
+	assert.Equal(Metric.Metric.DownPublic.Values[1].Timestamp, "2016-10-20T10:00:00Z")
 
-	assert.Equal(Metric.Metric.DataTrafficUp.Unit, "B")
-	assert.Equal(Metric.Metric.DataTrafficUp.Values[0].Value, 90)
-	assert.Equal(Metric.Metric.DataTrafficUp.Values[0].Timestamp, "2016-10-20T09:00:00Z")
-	assert.Equal(Metric.Metric.DataTrafficUp.Values[1].Value, 250)
-	assert.Equal(Metric.Metric.DataTrafficUp.Values[1].Timestamp, "2016-10-20T10:00:00Z")
+	assert.Equal(Metric.Metric.UpPublic.Unit, "B")
+	assert.Equal(Metric.Metric.UpPublic.Values[0].Value, 90)
+	assert.Equal(Metric.Metric.UpPublic.Values[0].Timestamp, "2016-10-20T09:00:00Z")
+	assert.Equal(Metric.Metric.UpPublic.Values[1].Value, 250)
+	assert.Equal(Metric.Metric.UpPublic.Values[1].Timestamp, "2016-10-20T10:00:00Z")
 }
 
 func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {

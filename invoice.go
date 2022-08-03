@@ -41,7 +41,7 @@ type Line struct {
 	UnitAmount  float32 `json:"unitAmount"`
 }
 
-type Contract struct {
+type InvoiceContract struct {
 	ContractId  string  `json:"contractId"`
 	Currency    string  `json:"currency"`
 	EndDate     string  `json:"endDate"`
@@ -59,13 +59,13 @@ type Invoices struct {
 }
 
 type ProForma struct {
-	Currency     string     `json:"currency"`
-	ProformaDate string     `json:"proformaDate"`
-	SubTotal     float32    `json:"subTotal"`
-	Total        float32    `json:"total"`
-	VatAmount    float32    `json:"vatAmount"`
-	Metadata     Metadata   `json:"_metadata"`
-	Contracts    []Contract `json:"contractItems"`
+	Currency     string            `json:"currency"`
+	ProformaDate string            `json:"proformaDate"`
+	SubTotal     float32           `json:"subTotal"`
+	Total        float32           `json:"total"`
+	VatAmount    float32           `json:"vatAmount"`
+	Metadata     Metadata          `json:"_metadata"`
+	Contracts    []InvoiceContract `json:"contractItems"`
 }
 
 func (ia InvoiceApi) getPath(endpoint string) string {

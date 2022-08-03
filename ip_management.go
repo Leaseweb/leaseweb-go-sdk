@@ -10,56 +10,6 @@ const IP_MANAGEMENT_API_VERSION = "v2"
 
 type IpManagementApi struct{}
 
-type Ips struct {
-	Ips      []Ip     `json:"ips"`
-	Metadata Metadata `json:"_metadata"`
-}
-
-type Ip struct {
-	Ip               string             `json:"ip"`
-	Version          int                `json:"version"`
-	Type             string             `json:"type"`
-	PrefixLength     int                `json:"prefixLength"`
-	Primary          bool               `json:"primary"`
-	ReverseLookup    string             `json:"reverseLookup"`
-	NullRouted       bool               `json:"nullRouted"`
-	UnnullingAllowed bool               `json:"unnullingAllowed"`
-	EquipmentId      string             `json:"equipmentId"`
-	AssignedContract IpAssignedContract `json:"assignedContract"`
-	Subnet           IpSubnet           `json:"subnet"`
-}
-
-type IpAssignedContract struct {
-	Id string `json:"id"`
-}
-
-type IpSubnet struct {
-	Id           string `json:"id"`
-	NetworkIp    string `json:"networkIp"`
-	PrefixLength int    `json:"prefixLength"`
-	Gateway      string `json:"gateway"`
-}
-
-type NullRoutes struct {
-	NullRoutes []NullRoute `json:"nullroutes"`
-	Metadata   Metadata    `json:"_metadata"`
-}
-
-type NullRoute struct {
-	Id                   string             `json:"id"`
-	Ip                   string             `json:"ip"`
-	NulledAt             string             `json:"nulledAt"`
-	NulledBy             string             `json:"nulledBy"`
-	NullLevel            int                `json:"nullLevel"`
-	AutomatedUnnullingAt string             `json:"automatedUnnullingAt"`
-	UnnulledAt           string             `json:"unnulledAt"`
-	UnnulledBy           string             `json:"unnulledBy"`
-	TicketId             string             `json:"ticketId"`
-	Comment              string             `json:"comment"`
-	EquipmentId          string             `json:"equipmentId"`
-	AssignedContract     IpAssignedContract `json:"assignedContract"`
-}
-
 func (ima IpManagementApi) getPath(endpoint string) string {
 	return "/ipMgmt/" + IP_MANAGEMENT_API_VERSION + endpoint
 }

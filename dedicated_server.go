@@ -16,17 +16,17 @@ type DedicatedServers struct {
 }
 
 type DedicatedServer struct {
-	AssetId             string                          `json:"assetId"`
-	Contract            DedicatedServerContract         `json:"contract"`
-	FeatureAvailability FeatureAvailability             `json:"featureAvailability"`
-	Id                  string                          `json:"id"`
-	Location            Location                        `json:"location"`
-	NetworkInterfaces   NetworkInterfaces               `json:"networkInterfaces"`
-	PowerPorts          []Port                          `json:"powerPorts"`
-	PrivateNetworks     []DedicatedServerPrivateNetwork `json:"privateNetworks"`
-	Rack                Rack                            `json:"rack"`
-	SerialNumber        string                          `json:"serialNumber"`
-	Specs               DedicatedServerSpecs            `json:"specs"`
+	AssetId             string               `json:"assetId"`
+	Contract            Contract             `json:"contract"`
+	FeatureAvailability FeatureAvailability  `json:"featureAvailability"`
+	Id                  string               `json:"id"`
+	Location            Location             `json:"location"`
+	NetworkInterfaces   NetworkInterfaces    `json:"networkInterfaces"`
+	PowerPorts          []Port               `json:"powerPorts"`
+	PrivateNetworks     []PrivateNetwork     `json:"privateNetworks"`
+	Rack                Rack                 `json:"rack"`
+	SerialNumber        string               `json:"serialNumber"`
+	Specs               DedicatedServerSpecs `json:"specs"`
 }
 
 type DedicatedServerSpecs struct {
@@ -61,72 +61,6 @@ type DedicatedServerSpecPciCard struct {
 	Description string `json:"description"`
 }
 
-type DedicatedServerContract struct {
-	BillingCycle      int                             `json:"billingCycle"`
-	BillingFrequency  string                          `json:"billingFrequency"`
-	ContractTerm      int                             `json:"contractTerm"`
-	Currency          string                          `json:"currency"`
-	EndsAt            string                          `json:"endsAt"`
-	StartsAt          string                          `json:"startsAt"`
-	CustomerId        string                          `json:"customerId"`
-	DeliveryStatus    string                          `json:"deliveryStatus"`
-	Id                string                          `json:"id"`
-	Reference         string                          `json:"reference"`
-	SalesOrgId        string                          `json:"salesOrgId"`
-	NetworkTraffic    NetworkTraffic                  `json:"networkTraffic"`
-	PricePerFrequency int                             `json:"pricePerFrequency"`
-	PrivateNetworks   []DedicatedServerPrivateNetwork `json:"privateNetworks"`
-	Sla               string                          `json:"sla"`
-	SoftwareLicenses  []SoftwareLicense               `json:"softwareLicenses"`
-}
-
-type SoftwareLicense struct {
-	Currency string  `json:"currency"`
-	Name     string  `json:"name"`
-	Price    float32 `json:"price"`
-}
-
-type FeatureAvailability struct {
-	Automation       bool `json:"automation"`
-	IpmiReboot       bool `json:"ipmiReboot"`
-	PowerCycle       bool `json:"powerCycle"`
-	PrivateNetwork   bool `json:"privateNetwork"`
-	RemoteManagement bool `json:"remoteManagement"`
-}
-
-type Location struct {
-	Rack  string `json:"rack"`
-	Site  string `json:"site"`
-	Suite string `json:"suite"`
-	Unit  string `json:"unit"`
-}
-
-type NetworkInterfaces struct {
-	Internal         NetworkInterface `json:"internal"`
-	Public           NetworkInterface `json:"public"`
-	RemoteManagement NetworkInterface `json:"remoteManagement"`
-}
-
-type NetworkInterface struct {
-	Gateway string `json:"gateway"`
-	Ip      string `json:"ip"`
-	Mac     string `json:"mac"`
-	Ports   []Port `json:"ports"`
-}
-
-type Port struct {
-	Name string `json:"name"`
-	Port string `json:"port"`
-}
-
-type DedicatedServerPrivateNetwork struct {
-	Id        string `json:"id"`
-	LinkSpeed int    `json:"linkSpeed"`
-	Status    string `json:"status"`
-	Subnet    string `json:"subnet"`
-	VLanId    string `json:"vlanId"`
-}
-
 type Rack struct {
 	Type string `json:"type"`
 }
@@ -142,7 +76,7 @@ type DedicatedServerHardware struct {
 type DedicatedServerHardwareInformation struct {
 	Chassis  DedicatedServerChassis   `json:"chassis"`
 	Cpu      []DedicatedServerCpu     `json:"cpu"`
-	Ipmi     DedicatedServerIpmi      `json:"ipmi"`
+	Ipmi     Ipmi                     `json:"ipmi"`
 	Disks    []DedicatedServerDisks   `json:"disks"`
 	Memories []DedicatedServerMemory  `json:"memory"`
 	Networks []DedicatedServerNetwork `json:"network"`
@@ -193,7 +127,7 @@ type DedicatedServerCpuCapabilities struct {
 	X8664   string `json:"x86-64"`
 }
 
-type DedicatedServerIpmi struct {
+type Ipmi struct {
 	Defgateway string `json:"defgateway"`
 	Firmware   string `json:"firmware"`
 	IpAddress  string `json:"ipaddress"`
@@ -336,28 +270,6 @@ type DedicatedServerNetworkCapabilitiesLinkSpeeds struct {
 	BTFD10   string `json:"10bt-fd"`
 }
 
-type DedicatedServerIps struct {
-	Metadata Metadata            `json:"_metadata"`
-	Ips      []DedicatedServerIp `json:"ips"`
-}
-
-type DedicatedServerIp struct {
-	DDOS          DedicatedServerIpDDOS `json:"ddos"`
-	FloatingIp    bool                  `json:"floatingIp"`
-	Gateway       string                `json:"gateway"`
-	Ip            string                `json:"ip"`
-	MainIp        bool                  `json:"mainIp"`
-	NetworkType   string                `json:"networkType"`
-	NullRouted    bool                  `json:"nullRouted"`
-	ReverseLookup string                `json:"reverseLookup"`
-	Version       int                   `json:"version"`
-}
-
-type DedicatedServerIpDDOS struct {
-	DetectionProfile string `json:"detectionProfile"`
-	ProtectionType   string `json:"protectionType"`
-}
-
 type DedicatedServerNullRoutes struct {
 	NullRoutes []DedicatedServerNullRoute `json:"nullRoutes"`
 	Metadata   Metadata                   `json:"_metadata"`
@@ -496,57 +408,6 @@ type DedicatedServerJobPayloadPartition struct {
 	Primary    bool   `json:"primary"`
 }
 
-type DedicatedServerCredentials struct {
-	Credentials []DedicatedServerCredential `json:"credentials"`
-	Metadata    Metadata                    `json:"_metadata"`
-}
-
-type DedicatedServerCredential struct {
-	Type     string `json:"type"`
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
-type DedicatedServerDataTrafficMetrics struct {
-	Metric   DedicatedServerDataTrafficMetric `json:"metrics"`
-	Metadata MetricMetadata                   `json:"_metadata"`
-}
-
-type DedicatedServerDataTrafficMetric struct {
-	UpPublic   BasicMetric `json:"UP_PUBLIC"`
-	DownPublic BasicMetric `json:"DOWN_PUBLIC"`
-}
-
-type BandWidthNotificationSettings struct {
-	Settings []DedicatedServerNotificationSetting `json:"bandwidthNotificationSettings"`
-	Metadata Metadata                             `json:"_metadata"`
-}
-
-type DataTrafficNotificationSettings struct {
-	Settings []DedicatedServerNotificationSetting `json:"datatrafficNotificationSettings"`
-	Metadata Metadata                             `json:"_metadata"`
-}
-
-type DedicatedServerNotificationSetting struct {
-	Actions             []DedicatedServerNotificationSettingAction `json:"actions"`
-	Frequency           string                                     `json:"frequency"`
-	Id                  string                                     `json:"id"`
-	LastCheckedAt       string                                     `json:"lastCheckedAt"`
-	Threshold           string                                     `json:"threshold"`
-	ThresholdExceededAt string                                     `json:"thresholdExceededAt"`
-	Unit                string                                     `json:"unit"`
-}
-
-type DedicatedServerNotificationSettingAction struct {
-	LastTriggeredAt string `json:"lastTriggeredAt"`
-	Type            string `json:"type"`
-}
-
-type DedicatedServerDdosNotificationSetting struct {
-	Nulling   string `json:"nulling"`
-	Scrubbing string `json:"scrubbing"`
-}
-
 type DedicatedServerPowerStatus struct {
 	Ipmi struct {
 		Status string `json:"status"`
@@ -671,7 +532,7 @@ func (dsa DedicatedServerApi) GetHardwareInformation(serverId string) (*Dedicate
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListIps(serverId string, args ...interface{}) (*DedicatedServerIps, error) {
+func (dsa DedicatedServerApi) ListIps(serverId string, args ...interface{}) (*Ips, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -693,43 +554,43 @@ func (dsa DedicatedServerApi) ListIps(serverId string, args ...interface{}) (*De
 	}
 
 	path := dsa.getPath("/servers/" + serverId + "/ips" + v.Encode())
-	result := &DedicatedServerIps{}
+	result := &Ips{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetIp(serverId, ip string) (*DedicatedServerIp, error) {
+func (dsa DedicatedServerApi) GetIp(serverId, ip string) (*Ip, error) {
 	path := dsa.getPath("/servers/" + serverId + "/ips/" + ip)
-	result := &DedicatedServerIp{}
+	result := &Ip{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) UpdateIp(serverId, ip string, payload map[string]string) (*DedicatedServerIp, error) {
+func (dsa DedicatedServerApi) UpdateIp(serverId, ip string, payload map[string]string) (*Ip, error) {
 	path := dsa.getPath("/servers/" + serverId + "/ips/" + ip)
-	result := &DedicatedServerIp{}
+	result := &Ip{}
 	if err := doRequest(http.MethodPut, path, result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) NullRouteAnIp(serverId, ip string) (*DedicatedServerIp, error) {
+func (dsa DedicatedServerApi) NullRouteAnIp(serverId, ip string) (*Ip, error) {
 	path := dsa.getPath("/servers/" + serverId + "/ips/" + ip + "/null")
-	result := &DedicatedServerIp{}
+	result := &Ip{}
 	if err := doRequest(http.MethodPost, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) RemoveNullRouteAnIp(serverId, ip string) (*DedicatedServerIp, error) {
+func (dsa DedicatedServerApi) RemoveNullRouteAnIp(serverId, ip string) (*Ip, error) {
 	path := dsa.getPath("/servers/" + serverId + "/ips/" + ip + "/unnull")
-	result := &DedicatedServerIp{}
+	result := &Ip{}
 	if err := doRequest(http.MethodPost, path, result); err != nil {
 		return nil, err
 	}
@@ -916,7 +777,7 @@ func (dsa DedicatedServerApi) LunchRescueMode(serverId string, payload map[strin
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListCredentials(serverId string, args ...int) (*DedicatedServerCredentials, error) {
+func (dsa DedicatedServerApi) ListCredentials(serverId string, args ...int) (*Credentials, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -925,7 +786,7 @@ func (dsa DedicatedServerApi) ListCredentials(serverId string, args ...int) (*De
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	result := &DedicatedServerCredentials{}
+	result := &Credentials{}
 	path := dsa.getPath("/servers/" + serverId + "/credentials?" + v.Encode())
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err
@@ -933,8 +794,8 @@ func (dsa DedicatedServerApi) ListCredentials(serverId string, args ...int) (*De
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CreateCredential(serverId, credentialType, username, password string) (*DedicatedServerCredential, error) {
-	result := &DedicatedServerCredential{}
+func (dsa DedicatedServerApi) CreateCredential(serverId, credentialType, username, password string) (*Credential, error) {
+	result := &Credential{}
 	payload := make(map[string]string)
 	payload["type"] = credentialType
 	payload["username"] = username
@@ -946,7 +807,7 @@ func (dsa DedicatedServerApi) CreateCredential(serverId, credentialType, usernam
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListCredentialsByType(serverId, credentialType string, args ...int) (*DedicatedServerCredentials, error) {
+func (dsa DedicatedServerApi) ListCredentialsByType(serverId, credentialType string, args ...int) (*Credentials, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -955,7 +816,7 @@ func (dsa DedicatedServerApi) ListCredentialsByType(serverId, credentialType str
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	result := &DedicatedServerCredentials{}
+	result := &Credentials{}
 	path := dsa.getPath("/servers/" + serverId + "/credentials/" + credentialType + "?" + v.Encode())
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err
@@ -963,8 +824,8 @@ func (dsa DedicatedServerApi) ListCredentialsByType(serverId, credentialType str
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetCredential(serverId, credentialType, username string) (*DedicatedServerCredential, error) {
-	result := &DedicatedServerCredential{}
+func (dsa DedicatedServerApi) GetCredential(serverId, credentialType, username string) (*Credential, error) {
+	result := &Credential{}
 	path := dsa.getPath("/servers/" + serverId + "/credentials/" + credentialType + "/" + username)
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err
@@ -977,8 +838,8 @@ func (dsa DedicatedServerApi) DeleteCredential(serverId, credentialType, usernam
 	return doRequest(http.MethodDelete, path)
 }
 
-func (dsa DedicatedServerApi) UpdateCredential(serverId, credentialType, username, password string) (*DedicatedServerCredential, error) {
-	result := &DedicatedServerCredential{}
+func (dsa DedicatedServerApi) UpdateCredential(serverId, credentialType, username, password string) (*Credential, error) {
+	result := &Credential{}
 	payload := map[string]string{"password": password}
 	path := dsa.getPath("/servers/" + serverId + "/credentials/" + credentialType + "/" + username)
 	if err := doRequest(http.MethodPut, path, result, payload); err != nil {
@@ -987,7 +848,7 @@ func (dsa DedicatedServerApi) UpdateCredential(serverId, credentialType, usernam
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetDataTrafficMetrics(serverId string, args ...interface{}) (*DedicatedServerDataTrafficMetrics, error) {
+func (dsa DedicatedServerApi) GetDataTrafficMetrics(serverId string, args ...interface{}) (*DataTrafficMetricsV1, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -1003,7 +864,7 @@ func (dsa DedicatedServerApi) GetDataTrafficMetrics(serverId string, args ...int
 	}
 
 	path := dsa.getPath("/servers/" + serverId + "/metrics/datatraffic?" + v.Encode())
-	result := &DedicatedServerDataTrafficMetrics{}
+	result := &DataTrafficMetricsV1{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
@@ -1050,13 +911,13 @@ func (dsa DedicatedServerApi) ListBandWidthNotificationSettings(serverId string,
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CreateBandWidthNotificationSetting(serverId, frequency, threshold, unit string) (*DedicatedServerNotificationSetting, error) {
+func (dsa DedicatedServerApi) CreateBandWidthNotificationSetting(serverId, frequency, threshold, unit string) (*NotificationSetting, error) {
 	payload := map[string]string{
 		"frequency": frequency,
 		"threshold": threshold,
 		"unit":      unit,
 	}
-	result := &DedicatedServerNotificationSetting{}
+	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/bandwidth")
 	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
 		return result, err
@@ -1069,8 +930,8 @@ func (dsa DedicatedServerApi) DeleteBandWidthNotificationSetting(serverId, notif
 	return doRequest(http.MethodDelete, path)
 }
 
-func (dsa DedicatedServerApi) GetBandWidthNotificationSetting(serverId, notificationId string) (*DedicatedServerNotificationSetting, error) {
-	result := &DedicatedServerNotificationSetting{}
+func (dsa DedicatedServerApi) GetBandWidthNotificationSetting(serverId, notificationId string) (*NotificationSetting, error) {
+	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/bandwidth/" + notificationId)
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err
@@ -1078,8 +939,8 @@ func (dsa DedicatedServerApi) GetBandWidthNotificationSetting(serverId, notifica
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) UpdateBandWidthNotificationSetting(serverId, notificationSettingId string, payload map[string]string) (*DedicatedServerNotificationSetting, error) {
-	result := &DedicatedServerNotificationSetting{}
+func (dsa DedicatedServerApi) UpdateBandWidthNotificationSetting(serverId, notificationSettingId string, payload map[string]string) (*NotificationSetting, error) {
+	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/bandwidth/" + notificationSettingId)
 	if err := doRequest(http.MethodPut, path, result, payload); err != nil {
 		return result, err
@@ -1104,13 +965,13 @@ func (dsa DedicatedServerApi) ListDataTrafficNotificationSettings(serverId strin
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CreateDataTrafficNotificationSetting(serverId, frequency, threshold, unit string) (*DedicatedServerNotificationSetting, error) {
+func (dsa DedicatedServerApi) CreateDataTrafficNotificationSetting(serverId, frequency, threshold, unit string) (*NotificationSetting, error) {
 	payload := map[string]string{
 		"frequency": frequency,
 		"threshold": threshold,
 		"unit":      unit,
 	}
-	result := &DedicatedServerNotificationSetting{}
+	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/datatraffic")
 	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
 		return result, err
@@ -1123,8 +984,8 @@ func (dsa DedicatedServerApi) DeleteDataTrafficNotificationSetting(serverId, not
 	return doRequest(http.MethodDelete, path)
 }
 
-func (dsa DedicatedServerApi) GetDataTrafficNotificationSetting(serverId, notificationId string) (*DedicatedServerNotificationSetting, error) {
-	result := &DedicatedServerNotificationSetting{}
+func (dsa DedicatedServerApi) GetDataTrafficNotificationSetting(serverId, notificationId string) (*NotificationSetting, error) {
+	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/datatraffic/" + notificationId)
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err
@@ -1132,8 +993,8 @@ func (dsa DedicatedServerApi) GetDataTrafficNotificationSetting(serverId, notifi
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) UpdateDataTrafficNotificationSetting(serverId, notificationSettingId string, payload map[string]string) (*DedicatedServerNotificationSetting, error) {
-	result := &DedicatedServerNotificationSetting{}
+func (dsa DedicatedServerApi) UpdateDataTrafficNotificationSetting(serverId, notificationSettingId string, payload map[string]string) (*NotificationSetting, error) {
+	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/datatraffic/" + notificationSettingId)
 	if err := doRequest(http.MethodPut, path, result, payload); err != nil {
 		return result, err
@@ -1141,8 +1002,8 @@ func (dsa DedicatedServerApi) UpdateDataTrafficNotificationSetting(serverId, not
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetDdosNotificationSetting(serverId string) (*DedicatedServerDdosNotificationSetting, error) {
-	result := &DedicatedServerDdosNotificationSetting{}
+func (dsa DedicatedServerApi) GetDdosNotificationSetting(serverId string) (*DdosNotificationSetting, error) {
+	result := &DdosNotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/ddos")
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err
