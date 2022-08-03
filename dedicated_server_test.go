@@ -512,7 +512,7 @@ func TestGet(t *testing.T) {
 	assert.Equal(Server.Contract.ContractTerm, 12)
 	assert.Equal(Server.Contract.Currency, "EUR")
 	assert.Equal(Server.Contract.EndsAt, "2017-10-01T01:00:00+0100")
-	assert.Equal(Server.Contract.PricePerFrequency, 49)
+	assert.Equal(Server.Contract.PricePerFrequency, float32(49))
 	assert.Equal(Server.Contract.NetworkTraffic.DataTrafficLimit, 100)
 	assert.Equal(Server.Contract.NetworkTraffic.DataTrafficUnit, "TB")
 	assert.Equal(Server.Contract.NetworkTraffic.TrafficType, "PREMIUM")

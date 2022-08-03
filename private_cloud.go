@@ -16,46 +16,15 @@ type PrivateClouds struct {
 }
 
 type PrivateCloud struct {
-	Id              string               `json:"id"`
-	CustomerId      string               `json:"customerId"`
-	DataCenter      string               `json:"dataCenter"`
-	ServiceOffering string               `json:"serviceOffering"`
-	Sla             string               `json:"sla"`
-	Contract        PrivateCloudContract `json:"contract"`
-	NetworkTraffic  NetworkTraffic       `json:"networkTraffic"`
-	Ips             []PrivateCloudIp     `json:"ips"`
-	Hardware        PrivateCloudHardware `json:"hardware"`
-}
-
-type PrivateCloudContract struct {
-	Id                string  `json:"id"`
-	StartsAt          string  `json:"startsAt"`
-	EndsAt            string  `json:"endsAt"`
-	BillingCycle      int     `json:"billingCycle"`
-	BillingFrequency  string  `json:"billingFrequency"`
-	PricePerFrequency float32 `json:"pricePerFrequency"`
-	Currency          string  `json:"currency"`
-}
-
-type PrivateCloudIp struct {
-	Ip      string `json:"ip"`
-	Version int    `json:"version"`
-	Type    string `json:"type"`
-}
-
-type PrivateCloudHardware struct {
-	Cpu     Cpu            `json:"cpu"`
-	Memory  UnitAmountPair `json:"memory"`
-	Storage UnitAmountPair `json:"storage"`
-}
-
-type Cpu struct {
-	Cores int `json:"cores"`
-}
-
-type UnitAmountPair struct {
-	Unit   string `json:"unit"`
-	Amount int    `json:"amount"`
+	Id              string         `json:"id"`
+	CustomerId      string         `json:"customerId"`
+	DataCenter      string         `json:"dataCenter"`
+	ServiceOffering string         `json:"serviceOffering"`
+	Sla             string         `json:"sla"`
+	Contract        Contract       `json:"contract"`
+	NetworkTraffic  NetworkTraffic `json:"networkTraffic"`
+	Ips             []Ip           `json:"ips"`
+	Hardware        Hardware       `json:"hardware"`
 }
 
 type CpuMetrics struct {
@@ -141,7 +110,7 @@ func (pca PrivateCloudApi) GetCredentials(privateCloudId string, credentialType 
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetDataTrafficMetrics(privateCloudId string, args ...interface{}) (*DataTrafficMetrics, error) {
+func (pca PrivateCloudApi) GetDataTrafficMetrics(privateCloudId string, args ...interface{}) (*DataTrafficMetricsV2, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -157,7 +126,7 @@ func (pca PrivateCloudApi) GetDataTrafficMetrics(privateCloudId string, args ...
 	}
 
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/datatraffic?" + v.Encode())
-	result := &DataTrafficMetrics{}
+	result := &DataTrafficMetricsV2{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}

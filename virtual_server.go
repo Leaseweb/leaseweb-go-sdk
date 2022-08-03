@@ -16,58 +16,26 @@ type VirtualServers struct {
 }
 
 type VirtualServer struct {
-	Id              string                `json:"id"`
-	Reference       string                `json:"reference"`
-	CustomerId      string                `json:"customerId"`
-	DataCenter      string                `json:"dataCenter"`
-	CloudServerId   string                `json:"cloudServerId"`
-	State           string                `json:"state"`
-	FirewallState   string                `json:"firewallState"`
-	Template        string                `json:"template"`
-	ServiceOffering string                `json:"serviceOffering"`
-	Sla             string                `json:"sla"`
-	Iso             VirtualServerIso      `json:"iso"`
-	Contract        VirtualServerContract `json:"contract"`
-	Ips             []VirtualServerIp     `json:"ips"`
-	Hardware        VirtualServerHardware `json:"hardware"`
-}
-
-type VirtualServerContract struct {
-	Id                string  `json:"id"`
-	StartsAt          string  `json:"startsAt"`
-	EndsAt            string  `json:"endsAt"`
-	BillingCycle      int     `json:"billingCycle"`
-	BillingFrequency  string  `json:"billingFrequency"`
-	Currency          string  `json:"currency"`
-	PricePerFrequency float32 `json:"pricePerFrequency"`
-}
-
-type VirtualServerIp struct {
-	Ip      string `json:"ip"`
-	Version int    `json:"version"`
-	Type    string `json:"type"`
+	Id              string           `json:"id"`
+	Reference       string           `json:"reference"`
+	CustomerId      string           `json:"customerId"`
+	DataCenter      string           `json:"dataCenter"`
+	CloudServerId   string           `json:"cloudServerId"`
+	State           string           `json:"state"`
+	FirewallState   string           `json:"firewallState"`
+	Template        string           `json:"template"`
+	ServiceOffering string           `json:"serviceOffering"`
+	Sla             string           `json:"sla"`
+	Iso             VirtualServerIso `json:"iso"`
+	Contract        Contract         `json:"contract"`
+	Ips             []Ip             `json:"ips"`
+	Hardware        Hardware         `json:"hardware"`
 }
 
 type VirtualServerIso struct {
 	Id          string `json:"id"`
 	Name        string `json:"name"`
 	DisplayName string `json:"displayName"`
-}
-
-type VirtualServerHardware struct {
-	Cpu struct {
-		Cores int `json:"cores"`
-	} `json:"cpu"`
-
-	Memory struct {
-		Unit   string `json:"unit"`
-		Amount int    `json:"amount"`
-	} `json:"memory"`
-
-	Storage struct {
-		Unit   string `json:"unit"`
-		Amount int    `json:"amount"`
-	} `json:"storage"`
 }
 
 type VirtualServerResult struct {
@@ -196,7 +164,7 @@ func (vsa VirtualServerApi) GetCredential(virtualServerId, username, credentialT
 	return result, nil
 }
 
-func (vsa VirtualServerApi) GetDataTrafficMetrics(virtualServerId string, args ...interface{}) (*DataTrafficMetrics, error) {
+func (vsa VirtualServerApi) GetDataTrafficMetrics(virtualServerId string, args ...interface{}) (*DataTrafficMetricsV2, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -212,7 +180,7 @@ func (vsa VirtualServerApi) GetDataTrafficMetrics(virtualServerId string, args .
 	}
 
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/metrics/datatraffic?" + v.Encode())
-	result := &DataTrafficMetrics{}
+	result := &DataTrafficMetricsV2{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}

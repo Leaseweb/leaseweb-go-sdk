@@ -15,15 +15,6 @@ type PrivateNetworks struct {
 	Metadata        Metadata         `json:"_metadata"`
 }
 
-type PrivateNetwork struct {
-	EquipmentCount int      `json:"equipmentCount"`
-	Id             string   `json:"id"`
-	Name           string   `json:"name"`
-	CreatedAt      string   `json:"createdAt"`
-	UpdatedAt      string   `json:"updatedAt"`
-	Servers        []string `json:"servers"`
-}
-
 type DhcpReservations struct {
 	DhcpReservations []DhcpReservation `json:"reservations"`
 	Metadata         Metadata          `json:"_metadata"`
