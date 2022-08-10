@@ -408,16 +408,6 @@ type DedicatedServerJobPayloadPartition struct {
 	Primary    bool   `json:"primary"`
 }
 
-type DedicatedServerPowerStatus struct {
-	Ipmi struct {
-		Status string `json:"status"`
-	} `json:"ipmi"`
-
-	Pdu struct {
-		Status string `json:"status"`
-	} `json:"pdu"`
-}
-
 type OperatingSystems struct {
 	Metadata         Metadata          `json:"_metadata"`
 	OperatingSystems []OperatingSystem `json:"operatingSystems"`
@@ -1024,8 +1014,8 @@ func (dsa DedicatedServerApi) PowerCycleServer(serverId string) error {
 	return doRequest(http.MethodPost, path)
 }
 
-func (dsa DedicatedServerApi) GetPowerStatus(serverId string) (*DedicatedServerPowerStatus, error) {
-	result := &DedicatedServerPowerStatus{}
+func (dsa DedicatedServerApi) GetPowerStatus(serverId string) (*PowerStatus, error) {
+	result := &PowerStatus{}
 	path := dsa.getPath("/servers/" + serverId + "/powerInfo")
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err
