@@ -59,10 +59,12 @@ type NetworkInterfaces struct {
 }
 
 type NetworkInterface struct {
-	Gateway string `json:"gateway"`
-	Ip      string `json:"ip"`
-	Mac     string `json:"mac"`
-	Ports   []Port `json:"ports"`
+	Gateway    string `json:"gateway"`
+	Ip         string `json:"ip"`
+	Mac        string `json:"mac"`
+	NullRouted bool   `json:"nullRouted"`
+	LocationId string `json:"locationId"`
+	Ports      []Port `json:"ports"`
 }
 
 type NullRoutes struct {
@@ -139,6 +141,7 @@ type NetworkTraffic struct {
 	TrafficType      string `json:"trafficType"`
 	DataTrafficUnit  string `json:"datatrafficUnit"`
 	DataTrafficLimit int    `json:"datatrafficLimit"`
+	ConnectivityType string `json:"connectivityType"`
 }
 
 type FeatureAvailability struct {
@@ -165,6 +168,7 @@ type Contract struct {
 	BillingCycle      int               `json:"billingCycle"`
 	BillingFrequency  string            `json:"billingFrequency"`
 	ContractTerm      int               `json:"contractTerm"`
+	ContractType      string            `json:"ContractType"`
 	Currency          string            `json:"currency"`
 	EndsAt            string            `json:"endsAt"`
 	StartsAt          string            `json:"startsAt"`
@@ -177,7 +181,10 @@ type Contract struct {
 	PricePerFrequency float32           `json:"pricePerFrequency"`
 	PrivateNetworks   []PrivateNetwork  `json:"privateNetworks"`
 	Sla               string            `json:"sla"`
+	Status            string            `json:"status"`
 	SoftwareLicenses  []SoftwareLicense `json:"softwareLicenses"`
+	AggregationPackId string            `json:"aggregationPackId"`
+	Subnets           []string          `json:"subnets"`
 }
 
 type PrivateNetwork struct {
@@ -243,4 +250,14 @@ type Hardware struct {
 		Unit   string `json:"unit"`
 		Amount int    `json:"amount"`
 	} `json:"storage"`
+}
+
+type PowerStatus struct {
+	Ipmi struct {
+		Status string `json:"status"`
+	} `json:"ipmi"`
+
+	Pdu struct {
+		Status string `json:"status"`
+	} `json:"pdu"`
 }
