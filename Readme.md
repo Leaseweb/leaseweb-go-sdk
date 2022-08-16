@@ -11,9 +11,3 @@ go get github.com/majidkarimizadeh/leaseweb-go-sdk
 ### Documentation
 The full documentation for Leaseweb go SDK is available in the [wiki](https://github.com/majidkarimizadeh/leaseweb-go-sdk/wiki).
 
-
-### TODO:
-- `hosting.*`
-- `remote_managment.GetProfile`
-- `abuse.GetAbuseReportAttachments`
-- `abuse.GetAbuseReportMessageAttachments`
