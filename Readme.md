@@ -1,6 +1,6 @@
 # Leaseweb Go SDK
 
-This package provides a client for Leaseweb's REST API.
+This package provides a golang client for Leaseweb's REST API.
 
 ### Installation
 
