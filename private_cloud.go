@@ -101,7 +101,7 @@ func (pca PrivateCloudApi) ListCredentials(privateCloudId string, credentialType
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetCredentials(privateCloudId string, credentialType string, username string) (*Credential, error) {
+func (pca PrivateCloudApi) GetCredential(privateCloudId string, credentialType string, username string) (*Credential, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/credentials/" + credentialType + "/" + username)
 	result := &Credential{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {

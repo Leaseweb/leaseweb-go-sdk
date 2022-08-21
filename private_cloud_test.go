@@ -493,7 +493,7 @@ func TestListCredentialsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetCredentials(t *testing.T) {
+func TestGetCredential(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -507,7 +507,7 @@ func TestGetCredentials(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
+	response, err := privateCloudApi.GetCredential("218030", "REMOTE_MANAGEMENT", "root")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -518,7 +518,7 @@ func TestGetCredentials(t *testing.T) {
 	assert.Equal(response.Domain, "123456")
 }
 
-func TestGetCredentialsServerErrors(t *testing.T) {
+func TestGetCredentialServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -529,7 +529,7 @@ func TestGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
+				return PrivateCloudApi{}.GetCredential("218030", "REMOTE_MANAGEMENT", "root")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -545,7 +545,7 @@ func TestGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
+				return PrivateCloudApi{}.GetCredential("218030", "REMOTE_MANAGEMENT", "root")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "404",
@@ -562,7 +562,7 @@ func TestGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
+				return PrivateCloudApi{}.GetCredential("218030", "REMOTE_MANAGEMENT", "root")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "SERVER_ERROR",
@@ -578,7 +578,7 @@ func TestGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCredentials("218030", "REMOTE_MANAGEMENT", "root")
+				return PrivateCloudApi{}.GetCredential("218030", "REMOTE_MANAGEMENT", "root")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
