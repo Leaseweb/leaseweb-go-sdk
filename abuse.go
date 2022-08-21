@@ -106,7 +106,7 @@ func (aba AbuseApi) GetAbuseReport(abuseReportId string) (*AbuseReport, error) {
 	return result, nil
 }
 
-func (aba AbuseApi) GetAbuseReportMessages(abuseReportId string, args ...int) (*AbuseMessages, error) {
+func (aba AbuseApi) ListAbuseReportMessages(abuseReportId string, args ...int) (*AbuseMessages, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -123,7 +123,7 @@ func (aba AbuseApi) GetAbuseReportMessages(abuseReportId string, args ...int) (*
 	return result, nil
 }
 
-func (aba AbuseApi) CreateNewAbuseReportMessage(abuseReportId string, body string) ([]string, error) {
+func (aba AbuseApi) CreateAbuseReportMessage(abuseReportId string, body string) ([]string, error) {
 	var result []string
 	payload := map[string]string{body: body}
 	path := aba.getPath("/reports/" + abuseReportId + "/messages")
