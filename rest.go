@@ -37,6 +37,10 @@ func InitLeasewebClient(key string) {
 	}
 }
 
+func SetBaseUrl(baseUrl string) {
+	lswClient.baseUrl = baseUrl
+}
+
 func getBaseUrl() string {
 	if lswClient.baseUrl != "" {
 		return lswClient.baseUrl
