@@ -270,20 +270,6 @@ type DedicatedServerNetworkCapabilitiesLinkSpeeds struct {
 	BTFD10   string `json:"10bt-fd"`
 }
 
-type DedicatedServerNullRoutes struct {
-	NullRoutes []DedicatedServerNullRoute `json:"nullRoutes"`
-	Metadata   Metadata                   `json:"_metadata"`
-}
-
-type DedicatedServerNullRoute struct {
-	AutomatedUnnullingAt string `json:"automatedUnnullingAt"`
-	Comment              string `json:"comment"`
-	Ip                   string `json:"ip"`
-	NullLevel            int    `json:"nullLevel"`
-	NulledAt             string `json:"nulledAt"`
-	TicketId             string `json:"ticketId"`
-}
-
 type DedicatedServerNetworkInterfaces struct {
 	NetworkInterfaces []DedicatedServerNetworkInterface `json:"networkInterfaces"`
 	Metadata          Metadata                          `json:"_metadata"`
@@ -587,7 +573,7 @@ func (dsa DedicatedServerApi) RemoveNullRouteAnIp(serverId, ip string) (*Ip, err
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListNullRouteHistory(serverId string, args ...int) (*DedicatedServerNullRoutes, error) {
+func (dsa DedicatedServerApi) ListNullRouteHistory(serverId string, args ...int) (*NullRoutes, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -597,7 +583,7 @@ func (dsa DedicatedServerApi) ListNullRouteHistory(serverId string, args ...int)
 	}
 
 	path := dsa.getPath("/servers/" + serverId + "/nullRouteHistory?" + v.Encode())
-	result := &DedicatedServerNullRoutes{}
+	result := &NullRoutes{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
