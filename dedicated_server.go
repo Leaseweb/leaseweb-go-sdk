@@ -49,12 +49,12 @@ type DedicatedServerSpecRam struct {
 }
 
 type DedicatedServerSpecHdd struct {
-	Amount          int    `json:"amount"`
-	Id              string `json:"id"`
-	PerformanceType string `json:"performanceType"`
-	Size            int    `json:"size"`
-	Type            string `json:"type"`
-	Unit            string `json:"unit"`
+	Amount          int     `json:"amount"`
+	Id              string  `json:"id"`
+	PerformanceType string  `json:"performanceType"`
+	Size            float32 `json:"size"`
+	Type            string  `json:"type"`
+	Unit            string  `json:"unit"`
 }
 
 type DedicatedServerSpecPciCard struct {

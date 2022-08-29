@@ -111,7 +111,7 @@ func (cai CustomerAccountApi) DeleteContact(contactId string) error {
 }
 
 func (cai CustomerAccountApi) GetContact(contactId string) (*Contact, error) {
-	path := cai.getPath("/contacts" + contactId)
+	path := cai.getPath("/contacts/" + contactId)
 	result := &Contact{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
