@@ -5,10 +5,20 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
 var lswClient *leasewebClient
+
+var defaultErrors = map[int]LeasewebError{
+	http.StatusBadRequest:          {ErrorCode: strconv.Itoa(http.StatusBadRequest), ErrorMessage: "Bad Request"},
+	http.StatusUnauthorized:        {ErrorCode: strconv.Itoa(http.StatusUnauthorized), ErrorMessage: "Unauthorized"},
+	http.StatusForbidden:           {ErrorCode: strconv.Itoa(http.StatusForbidden), ErrorMessage: "Forbidden"},
+	http.StatusNotFound:            {ErrorCode: strconv.Itoa(http.StatusNotFound), ErrorMessage: "Not Found"},
+	http.StatusServiceUnavailable:  {ErrorCode: strconv.Itoa(http.StatusServiceUnavailable), ErrorMessage: "Service Unavailable"},
+	http.StatusInternalServerError: {ErrorCode: strconv.Itoa(http.StatusInternalServerError), ErrorMessage: "Internal Server Error"},
+}
 
 const DEFAULT_BASE_URL = "https://api.leaseweb.com"
 
@@ -85,14 +95,17 @@ func doRequest(method string, endpoint string, args ...interface{}) error {
 	if !statusOK {
 		lswErr := &LeasewebError{}
 		if err = json.Unmarshal(respBody, lswErr); err != nil {
-			return err
+			if defaultError, ok := defaultErrors[resp.StatusCode]; ok {
+				return &defaultError
+			}
+			return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
 		}
 		return lswErr
 	}
 
 	if len(args) > 0 {
 		if err = json.Unmarshal(respBody, &args[0]); err != nil {
-			return err
+			return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
 		}
 	}
 	return nil

@@ -565,7 +565,7 @@ func TestGet(t *testing.T) {
 	assert.Equal(Server.Specs.Hdd[0].Amount, 2)
 	assert.Equal(Server.Specs.Hdd[0].Id, "SATA2TB")
 	assert.Empty(Server.Specs.Hdd[0].PerformanceType)
-	assert.Equal(Server.Specs.Hdd[0].Size, 2)
+	assert.Equal(Server.Specs.Hdd[0].Size, float32(2))
 	assert.Equal(Server.Specs.Hdd[0].Type, "SATA")
 	assert.Equal(Server.Specs.Hdd[0].Unit, "TB")
 	assert.Equal(Server.Specs.Ram.Size, 32)
