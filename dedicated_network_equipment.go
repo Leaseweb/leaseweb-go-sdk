@@ -10,31 +10,31 @@ const DEDICATED_NETWORK_EQUIPMENT_API_VERSION = "v2"
 
 type DedicatedNetworkEquipmentApi struct{}
 
-type NetworkEquipments struct {
-	NetworkEquipments []NetworkEquipment `json:"networkEquipments"`
-	Metadata          Metadata           `json:"_metadata"`
+type DedicatedNetworkEquipments struct {
+	NetworkEquipments []DedicatedNetworkEquipment `json:"networkEquipments"`
+	Metadata          Metadata                    `json:"_metadata"`
 }
 
-type NetworkEquipment struct {
-	Contract            Contract             `json:"contract"`
-	FeatureAvailability FeatureAvailability  `json:"featureAvailability"`
-	Id                  string               `json:"id"`
-	Name                string               `json:"name"`
-	Location            Location             `json:"location"`
-	NetworkInterfaces   NetworkInterfaces    `json:"networkInterfaces"`
-	PowerPorts          []Port               `json:"powerPorts"`
-	Type                string               `json:"type"`
-	SerialNumber        string               `json:"serialNumber"`
-	Rack                NetworkEquipmentRack `json:"rack"`
-	Specs               NetworkEquipmentSpec `json:"specs"`
+type DedicatedNetworkEquipment struct {
+	Contract            Contract                      `json:"contract"`
+	FeatureAvailability FeatureAvailability           `json:"featureAvailability"`
+	Id                  string                        `json:"id"`
+	Name                string                        `json:"name"`
+	Location            Location                      `json:"location"`
+	NetworkInterfaces   NetworkInterfaces             `json:"networkInterfaces"`
+	PowerPorts          []Port                        `json:"powerPorts"`
+	Type                string                        `json:"type"`
+	SerialNumber        string                        `json:"serialNumber"`
+	Rack                DedicatedNetworkEquipmentRack `json:"rack"`
+	Specs               DedicatedNetworkEquipmentSpec `json:"specs"`
 }
 
-type NetworkEquipmentRack struct {
+type DedicatedNetworkEquipmentRack struct {
 	Capacity string `json:"capacity"`
 	Id       string `json:"id"`
 }
 
-type NetworkEquipmentSpec struct {
+type DedicatedNetworkEquipmentSpec struct {
 	Brand string `json:"brand"`
 	Model string `json:"model"`
 }
@@ -43,7 +43,7 @@ func (dnea DedicatedNetworkEquipmentApi) getPath(endpoint string) string {
 	return "/bareMetals/" + DEDICATED_NETWORK_EQUIPMENT_API_VERSION + endpoint
 }
 
-func (dnea DedicatedNetworkEquipmentApi) List(args ...interface{}) (*NetworkEquipments, error) {
+func (dnea DedicatedNetworkEquipmentApi) List(args ...interface{}) (*DedicatedNetworkEquipments, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -71,16 +71,16 @@ func (dnea DedicatedNetworkEquipmentApi) List(args ...interface{}) (*NetworkEqui
 	}
 
 	path := dnea.getPath("/networkEquipments?" + v.Encode())
-	result := &NetworkEquipments{}
+	result := &DedicatedNetworkEquipments{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dnea DedicatedNetworkEquipmentApi) Get(networkEquipmentId string) (*NetworkEquipment, error) {
+func (dnea DedicatedNetworkEquipmentApi) Get(networkEquipmentId string) (*DedicatedNetworkEquipment, error) {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId)
-	result := &NetworkEquipment{}
+	result := &DedicatedNetworkEquipment{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}

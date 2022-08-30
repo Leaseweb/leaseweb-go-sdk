@@ -41,8 +41,8 @@ type FloatingIpDefinition struct {
 }
 
 type FloatingIpDefinitions struct {
-	FloatingIpDefinitions []FloatingIpDefinition `json:"floatingIpDefinitions"`
-	Metadata              Metadata               `json:"_metadata"`
+	Definitions []FloatingIpDefinition `json:"floatingIpDefinitions"`
+	Metadata    Metadata               `json:"_metadata"`
 }
 
 func (fia FloatingIpApi) getPath(endpoint string) string {

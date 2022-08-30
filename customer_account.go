@@ -13,13 +13,13 @@ const CUSTOMER_ACCOUNT_API_VERSION = "v1"
 type CustomerAccountApi struct{}
 
 type CustomerAccount struct {
-	Name         string  `json:"name"`
-	ResellerTier string  `json:"resellerTier"`
-	VatNumber    string  `json:"vatNumber"`
-	Address      Address `json:"address"`
+	Name         string                 `json:"name"`
+	ResellerTier string                 `json:"resellerTier"`
+	VatNumber    string                 `json:"vatNumber"`
+	Address      CustomerAccountAddress `json:"address"`
 }
 
-type Address struct {
+type CustomerAccountAddress struct {
 	City        string `json:"city"`
 	Country     string `json:"country"`
 	HouseNumber string `json:"houseNumber"`
@@ -29,24 +29,24 @@ type Address struct {
 	Street      string `json:"street"`
 }
 
-type Contacts struct {
-	Contacts []Contact `json:"contacts"`
-	Metadata Metadata  `json:"_metadata"`
+type CustomerAccountContacts struct {
+	Contacts []CustomerAccountContact `json:"contacts"`
+	Metadata Metadata                 `json:"_metadata"`
 }
 
-type Contact struct {
-	Description  string   `json:"description"`
-	Email        string   `json:"email"`
-	FirstName    string   `json:"firstName"`
-	Id           string   `json:"id"`
-	LastName     string   `json:"lastName"`
-	Roles        []string `json:"roles"`
-	PrimaryRoles []string `json:"primaryRoles"`
-	Mobile       Phone    `json:"mobile"`
-	Phone        Phone    `json:"phone"`
+type CustomerAccountContact struct {
+	Description  string               `json:"description"`
+	Email        string               `json:"email"`
+	FirstName    string               `json:"firstName"`
+	Id           string               `json:"id"`
+	LastName     string               `json:"lastName"`
+	Roles        []string             `json:"roles"`
+	PrimaryRoles []string             `json:"primaryRoles"`
+	Mobile       CustomerAccountPhone `json:"mobile"`
+	Phone        CustomerAccountPhone `json:"phone"`
 }
 
-type Phone struct {
+type CustomerAccountPhone struct {
 	CountryCode string `json:"countryCode"`
 	DialCode    string `json:"dialCode"`
 	Number      string `json:"number"`
@@ -56,7 +56,7 @@ func (cai CustomerAccountApi) getPath(endpoint string) string {
 	return "/account/" + CUSTOMER_ACCOUNT_API_VERSION + endpoint
 }
 
-func (cai CustomerAccountApi) GetCustomerAccount() (*CustomerAccount, error) {
+func (cai CustomerAccountApi) Get() (*CustomerAccount, error) {
 	path := cai.getPath("/details")
 	result := &CustomerAccount{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
@@ -65,13 +65,13 @@ func (cai CustomerAccountApi) GetCustomerAccount() (*CustomerAccount, error) {
 	return result, nil
 }
 
-func (cai CustomerAccountApi) UpdateCustomerAccount(ad Address) error {
+func (cai CustomerAccountApi) Update(ad CustomerAccountAddress) error {
 	path := cai.getPath("/details")
-	payload := map[string]Address{"address": ad}
+	payload := map[string]CustomerAccountAddress{"address": ad}
 	return doRequest(http.MethodPut, path, nil, payload)
 }
 
-func (cai CustomerAccountApi) ListContacts(args ...interface{}) (*Contacts, error) {
+func (cai CustomerAccountApi) ListContacts(args ...interface{}) (*CustomerAccountContacts, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -89,16 +89,16 @@ func (cai CustomerAccountApi) ListContacts(args ...interface{}) (*Contacts, erro
 	}
 
 	path := cai.getPath("/contacts?" + v.Encode())
-	result := &Contacts{}
+	result := &CustomerAccountContacts{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (cai CustomerAccountApi) CreateContact(newContact Contact) (*Contact, error) {
+func (cai CustomerAccountApi) CreateContact(newContact CustomerAccountContact) (*CustomerAccountContact, error) {
 	path := cai.getPath("/contacts")
-	result := &Contact{}
+	result := &CustomerAccountContact{}
 	if err := doRequest(http.MethodPost, path, result, newContact); err != nil {
 		return nil, err
 	}
@@ -110,21 +110,21 @@ func (cai CustomerAccountApi) DeleteContact(contactId string) error {
 	return doRequest(http.MethodDelete, path)
 }
 
-func (cai CustomerAccountApi) GetContact(contactId string) (*Contact, error) {
+func (cai CustomerAccountApi) GetContact(contactId string) (*CustomerAccountContact, error) {
 	path := cai.getPath("/contacts/" + contactId)
-	result := &Contact{}
+	result := &CustomerAccountContact{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (cai CustomerAccountApi) UpdateContact(contactId string, phone Phone, roles []string, args ...interface{}) error {
+func (cai CustomerAccountApi) UpdateContact(contactId string, phone CustomerAccountPhone, roles []string, args ...interface{}) error {
 	payload := make(map[string]interface{})
 	payload["phone"] = phone
 	payload["roles"] = roles
 	if len(args) >= 1 {
-		payload["mobile"] = args[0].(Phone)
+		payload["mobile"] = args[0].(CustomerAccountPhone)
 	}
 	if len(args) >= 2 {
 		payload["description"] = fmt.Sprint(args[1])

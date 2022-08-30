@@ -64,7 +64,7 @@ func TestIpManagementListIps(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := IpManagementApi{}.ListIps()
+	response, err := IpManagementApi{}.List()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -142,7 +142,7 @@ func TestIpManagementListIpsPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := IpManagementApi{}.ListIps(map[string]interface{}{"offset": 1})
+	response, err := IpManagementApi{}.List(map[string]interface{}{"offset": 1})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -179,7 +179,7 @@ func TestIpManagementListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.ListIps(map[string]interface{}{"offset": 1})
+				return IpManagementApi{}.List(map[string]interface{}{"offset": 1})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -196,7 +196,7 @@ func TestIpManagementListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.ListIps(map[string]interface{}{"offset": 1})
+				return IpManagementApi{}.List(map[string]interface{}{"offset": 1})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -213,7 +213,7 @@ func TestIpManagementListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.ListIps(map[string]interface{}{"offset": 1})
+				return IpManagementApi{}.List(map[string]interface{}{"offset": 1})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -230,7 +230,7 @@ func TestIpManagementListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.ListIps(map[string]interface{}{"offset": 1})
+				return IpManagementApi{}.List(map[string]interface{}{"offset": 1})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -269,7 +269,7 @@ func TestIpManagementGetIps(t *testing.T) {
 	})
 	defer teardown()
 
-	Ip, err := IpManagementApi{}.GetIp("192.0.2.1")
+	Ip, err := IpManagementApi{}.Get("192.0.2.1")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -300,7 +300,7 @@ func TestIpManagementGetIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.GetIp("192.0.2.1")
+				return IpManagementApi{}.Get("192.0.2.1")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -317,7 +317,7 @@ func TestIpManagementGetIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.GetIp("192.0.2.1")
+				return IpManagementApi{}.Get("192.0.2.1")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -334,7 +334,7 @@ func TestIpManagementGetIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.GetIp("192.0.2.1")
+				return IpManagementApi{}.Get("192.0.2.1")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -351,7 +351,7 @@ func TestIpManagementGetIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.GetIp("192.0.2.1")
+				return IpManagementApi{}.Get("192.0.2.1")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -363,7 +363,7 @@ func TestIpManagementGetIpsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestIpManagementUpdateIp(t *testing.T) {
+func TestIpManagementUpdate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -390,7 +390,7 @@ func TestIpManagementUpdateIp(t *testing.T) {
 	})
 	defer teardown()
 
-	Ip, err := IpManagementApi{}.UpdateIp("192.0.2.1", "mydomain1.example.com")
+	Ip, err := IpManagementApi{}.Update("192.0.2.1", "mydomain1.example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -410,7 +410,7 @@ func TestIpManagementUpdateIp(t *testing.T) {
 	assert.Equal(Ip.AssignedContract.Id, "5643634")
 }
 
-func TestIpManagementUpdateIpServerErrors(t *testing.T) {
+func TestIpManagementUpdateServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -421,7 +421,7 @@ func TestIpManagementUpdateIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.UpdateIp("192.0.2.1", "mydomain1.example.com")
+				return IpManagementApi{}.Update("192.0.2.1", "mydomain1.example.com")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -438,7 +438,7 @@ func TestIpManagementUpdateIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.UpdateIp("192.0.2.1", "mydomain1.example.com")
+				return IpManagementApi{}.Update("192.0.2.1", "mydomain1.example.com")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -455,7 +455,7 @@ func TestIpManagementUpdateIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.UpdateIp("192.0.2.1", "mydomain1.example.com")
+				return IpManagementApi{}.Update("192.0.2.1", "mydomain1.example.com")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -472,7 +472,7 @@ func TestIpManagementUpdateIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.UpdateIp("192.0.2.1", "mydomain1.example.com")
+				return IpManagementApi{}.Update("192.0.2.1", "mydomain1.example.com")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -484,7 +484,7 @@ func TestIpManagementUpdateIpServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestIpManagementNullRouteIp(t *testing.T) {
+func TestIpManagementNullRouteAnIp(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -512,7 +512,7 @@ func TestIpManagementNullRouteIp(t *testing.T) {
 		"ticketId":             "188612",
 		"comment":              "This IP is evil",
 	}
-	NullRoute, err := IpManagementApi{}.NullRouteIp("192.0.2.1", payload)
+	NullRoute, err := IpManagementApi{}.NullRouteAnIp("192.0.2.1", payload)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -530,7 +530,7 @@ func TestIpManagementNullRouteIp(t *testing.T) {
 	assert.Empty(NullRoute.UnnulledBy)
 }
 
-func TestIpManagementNullRouteIpServerErrors(t *testing.T) {
+func TestIpManagementNullRouteAnIpServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -546,7 +546,7 @@ func TestIpManagementNullRouteIpServerErrors(t *testing.T) {
 					"ticketId":             "188612",
 					"comment":              "This IP is evil",
 				}
-				return IpManagementApi{}.NullRouteIp("192.0.2.1", payload)
+				return IpManagementApi{}.NullRouteAnIp("192.0.2.1", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -568,7 +568,7 @@ func TestIpManagementNullRouteIpServerErrors(t *testing.T) {
 					"ticketId":             "188612",
 					"comment":              "This IP is evil",
 				}
-				return IpManagementApi{}.NullRouteIp("192.0.2.1", payload)
+				return IpManagementApi{}.NullRouteAnIp("192.0.2.1", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -590,7 +590,7 @@ func TestIpManagementNullRouteIpServerErrors(t *testing.T) {
 					"ticketId":             "188612",
 					"comment":              "This IP is evil",
 				}
-				return IpManagementApi{}.NullRouteIp("192.0.2.1", payload)
+				return IpManagementApi{}.NullRouteAnIp("192.0.2.1", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -612,7 +612,7 @@ func TestIpManagementNullRouteIpServerErrors(t *testing.T) {
 					"ticketId":             "188612",
 					"comment":              "This IP is evil",
 				}
-				return IpManagementApi{}.NullRouteIp("192.0.2.1", payload)
+				return IpManagementApi{}.NullRouteAnIp("192.0.2.1", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -624,7 +624,7 @@ func TestIpManagementNullRouteIpServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestIpManagementRemoveNullRouteIp(t *testing.T) {
+func TestIpManagementRemoveNullRouteAnIp(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodDelete, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -632,13 +632,13 @@ func TestIpManagementRemoveNullRouteIp(t *testing.T) {
 	})
 	defer teardown()
 
-	err := IpManagementApi{}.RemoveNullRouteIp("192.0.2.1")
+	err := IpManagementApi{}.RemoveNullRouteAnIp("192.0.2.1")
 
 	assert := assert.New(t)
 	assert.Nil(err)
 }
 
-func TestIpManagementRemoveNullRouteIpServerErrors(t *testing.T) {
+func TestIpManagementRemoveNullRouteAnIpServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -649,7 +649,7 @@ func TestIpManagementRemoveNullRouteIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, IpManagementApi{}.RemoveNullRouteIp("192.0.2.1")
+				return nil, IpManagementApi{}.RemoveNullRouteAnIp("192.0.2.1")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -666,7 +666,7 @@ func TestIpManagementRemoveNullRouteIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, IpManagementApi{}.RemoveNullRouteIp("192.0.2.1")
+				return nil, IpManagementApi{}.RemoveNullRouteAnIp("192.0.2.1")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -683,7 +683,7 @@ func TestIpManagementRemoveNullRouteIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, IpManagementApi{}.RemoveNullRouteIp("192.0.2.1")
+				return nil, IpManagementApi{}.RemoveNullRouteAnIp("192.0.2.1")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -700,7 +700,7 @@ func TestIpManagementRemoveNullRouteIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, IpManagementApi{}.RemoveNullRouteIp("192.0.2.1")
+				return nil, IpManagementApi{}.RemoveNullRouteAnIp("192.0.2.1")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -712,7 +712,7 @@ func TestIpManagementRemoveNullRouteIpServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestIpManagementListNullRouteHistory(t *testing.T) {
+func TestIpManagementListNullRoutes(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -760,7 +760,7 @@ func TestIpManagementListNullRouteHistory(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := IpManagementApi{}.ListNullRouteHistory()
+	response, err := IpManagementApi{}.ListNullRoutes()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -798,7 +798,7 @@ func TestIpManagementListNullRouteHistory(t *testing.T) {
 	assert.Equal(NullRoute2.UnnulledBy, "UnnullRunner")
 }
 
-func TestIpManagementListNullRouteHistoryPaginate(t *testing.T) {
+func TestIpManagementListNullRoutesPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -830,7 +830,7 @@ func TestIpManagementListNullRouteHistoryPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := IpManagementApi{}.ListNullRouteHistory(map[string]interface{}{"offset": 1})
+	response, err := IpManagementApi{}.ListNullRoutes(map[string]interface{}{"offset": 1})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -854,7 +854,7 @@ func TestIpManagementListNullRouteHistoryPaginate(t *testing.T) {
 	assert.Empty(NullRoute1.UnnulledBy)
 }
 
-func TestIpManagementListNullRouteHistoryServerErrors(t *testing.T) {
+func TestIpManagementListNullRoutesServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -865,7 +865,7 @@ func TestIpManagementListNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.ListNullRouteHistory(map[string]interface{}{"offset": 1})
+				return IpManagementApi{}.ListNullRoutes(map[string]interface{}{"offset": 1})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -882,7 +882,7 @@ func TestIpManagementListNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.ListNullRouteHistory(map[string]interface{}{"offset": 1})
+				return IpManagementApi{}.ListNullRoutes(map[string]interface{}{"offset": 1})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -899,7 +899,7 @@ func TestIpManagementListNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.ListNullRouteHistory(map[string]interface{}{"offset": 1})
+				return IpManagementApi{}.ListNullRoutes(map[string]interface{}{"offset": 1})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -916,7 +916,7 @@ func TestIpManagementListNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.ListNullRouteHistory(map[string]interface{}{"offset": 1})
+				return IpManagementApi{}.ListNullRoutes(map[string]interface{}{"offset": 1})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -928,7 +928,7 @@ func TestIpManagementListNullRouteHistoryServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestIpManagementGetNullRouteHistory(t *testing.T) {
+func TestIpManagementGetNullRoute(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -951,7 +951,7 @@ func TestIpManagementGetNullRouteHistory(t *testing.T) {
 	})
 	defer teardown()
 
-	NullRoute, err := IpManagementApi{}.GetNullRouteHistory("123456")
+	NullRoute, err := IpManagementApi{}.GetNullRoute("123456")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -970,7 +970,7 @@ func TestIpManagementGetNullRouteHistory(t *testing.T) {
 	assert.Empty(NullRoute.UnnulledBy)
 }
 
-func TestIpManagementGetNullRouteHistoryServerErrors(t *testing.T) {
+func TestIpManagementGetNullRouteServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -981,7 +981,7 @@ func TestIpManagementGetNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.GetNullRouteHistory("123456")
+				return IpManagementApi{}.GetNullRoute("123456")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -998,7 +998,7 @@ func TestIpManagementGetNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.GetNullRouteHistory("123456")
+				return IpManagementApi{}.GetNullRoute("123456")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1015,7 +1015,7 @@ func TestIpManagementGetNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.GetNullRouteHistory("123456")
+				return IpManagementApi{}.GetNullRoute("123456")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1032,7 +1032,7 @@ func TestIpManagementGetNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return IpManagementApi{}.GetNullRouteHistory("123456")
+				return IpManagementApi{}.GetNullRoute("123456")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1072,7 +1072,7 @@ func TestIpManagementUpdateNullRouteHistory(t *testing.T) {
 		"ticketId":             "188612",
 		"comment":              "This IP is evil",
 	}
-	NullRoute, err := IpManagementApi{}.UpdateNullRouteIp("123456", payload)
+	NullRoute, err := IpManagementApi{}.UpdateNullRoute("123456", payload)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1107,7 +1107,7 @@ func TestIpManagementUpdateNullRouteHistoryServerErrors(t *testing.T) {
 					"ticketId":             "188612",
 					"comment":              "This IP is evil",
 				}
-				return IpManagementApi{}.UpdateNullRouteIp("123456", payload)
+				return IpManagementApi{}.UpdateNullRoute("123456", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1129,7 +1129,7 @@ func TestIpManagementUpdateNullRouteHistoryServerErrors(t *testing.T) {
 					"ticketId":             "188612",
 					"comment":              "This IP is evil",
 				}
-				return IpManagementApi{}.UpdateNullRouteIp("123456", payload)
+				return IpManagementApi{}.UpdateNullRoute("123456", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1151,7 +1151,7 @@ func TestIpManagementUpdateNullRouteHistoryServerErrors(t *testing.T) {
 					"ticketId":             "188612",
 					"comment":              "This IP is evil",
 				}
-				return IpManagementApi{}.UpdateNullRouteIp("123456", payload)
+				return IpManagementApi{}.UpdateNullRoute("123456", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1173,7 +1173,7 @@ func TestIpManagementUpdateNullRouteHistoryServerErrors(t *testing.T) {
 					"ticketId":             "188612",
 					"comment":              "This IP is evil",
 				}
-				return IpManagementApi{}.UpdateNullRouteIp("123456", payload)
+				return IpManagementApi{}.UpdateNullRoute("123456", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

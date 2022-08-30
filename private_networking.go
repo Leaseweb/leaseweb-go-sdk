@@ -15,12 +15,12 @@ type PrivateNetworks struct {
 	Metadata        Metadata         `json:"_metadata"`
 }
 
-type DhcpReservations struct {
-	DhcpReservations []DhcpReservation `json:"reservations"`
-	Metadata         Metadata          `json:"_metadata"`
+type PrivateNetworkingDhcpReservations struct {
+	DhcpReservations []PrivateNetworkingDhcpReservation `json:"reservations"`
+	Metadata         Metadata                           `json:"_metadata"`
 }
 
-type DhcpReservation struct {
+type PrivateNetworkingDhcpReservation struct {
 	Ip     string `json:"ip"`
 	Mac    string `json:"mac"`
 	Sticky bool   `json:"sticky"`
@@ -30,7 +30,7 @@ func (pna PrivateNetworkingApi) getPath(endpoint string) string {
 	return "/bareMetals/" + PRIVATE_NETWORKING_API_VERSION + endpoint
 }
 
-func (pna PrivateNetworkingApi) ListPrivateNetworks(args ...int) (*PrivateNetworks, error) {
+func (pna PrivateNetworkingApi) List(args ...int) (*PrivateNetworks, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -47,7 +47,7 @@ func (pna PrivateNetworkingApi) ListPrivateNetworks(args ...int) (*PrivateNetwor
 	return result, nil
 }
 
-func (pna PrivateNetworkingApi) CreatePrivateNetwork(name string) (*PrivateNetwork, error) {
+func (pna PrivateNetworkingApi) Create(name string) (*PrivateNetwork, error) {
 	payload := map[string]string{
 		"name": name,
 	}
@@ -59,7 +59,7 @@ func (pna PrivateNetworkingApi) CreatePrivateNetwork(name string) (*PrivateNetwo
 	return result, nil
 }
 
-func (pna PrivateNetworkingApi) GetPrivateNetwork(id string) (*PrivateNetwork, error) {
+func (pna PrivateNetworkingApi) Get(id string) (*PrivateNetwork, error) {
 	path := pna.getPath("/privateNetworks/" + id)
 	result := &PrivateNetwork{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
@@ -68,7 +68,7 @@ func (pna PrivateNetworkingApi) GetPrivateNetwork(id string) (*PrivateNetwork, e
 	return result, nil
 }
 
-func (pna PrivateNetworkingApi) UpdatePrivateNetwork(id, name string) (*PrivateNetwork, error) {
+func (pna PrivateNetworkingApi) Update(id, name string) (*PrivateNetwork, error) {
 	payload := map[string]string{
 		"name": name,
 	}
@@ -80,12 +80,12 @@ func (pna PrivateNetworkingApi) UpdatePrivateNetwork(id, name string) (*PrivateN
 	return result, nil
 }
 
-func (pna PrivateNetworkingApi) DeletePrivateNetwork(id string) error {
+func (pna PrivateNetworkingApi) Delete(id string) error {
 	path := pna.getPath("/privateNetworks/" + id)
 	return doRequest(http.MethodDelete, path)
 }
 
-func (pna PrivateNetworkingApi) ListDhcpReservations(id string, args ...int) (*DhcpReservations, error) {
+func (pna PrivateNetworkingApi) ListDhcpReservations(id string, args ...int) (*PrivateNetworkingDhcpReservations, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -95,21 +95,21 @@ func (pna PrivateNetworkingApi) ListDhcpReservations(id string, args ...int) (*D
 	}
 
 	path := pna.getPath("/privateNetworks/" + id + "/reservations?" + v.Encode())
-	result := &DhcpReservations{}
+	result := &PrivateNetworkingDhcpReservations{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (pna PrivateNetworkingApi) CreateDhcpReservation(id, ip, mac string, sticky bool) (*DhcpReservation, error) {
+func (pna PrivateNetworkingApi) CreateDhcpReservation(id, ip, mac string, sticky bool) (*PrivateNetworkingDhcpReservation, error) {
 	payload := map[string]interface{}{
 		"ip":     ip,
 		"mac":    mac,
 		"sticky": sticky,
 	}
 	path := pna.getPath("/privateNetworks/" + id + "/reservations")
-	result := &DhcpReservation{}
+	result := &PrivateNetworkingDhcpReservation{}
 	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
 		return nil, err
 	}

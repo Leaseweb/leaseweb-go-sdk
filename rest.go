@@ -64,7 +64,7 @@ func doRequest(method string, endpoint string, args ...interface{}) error {
 		if len(args) > 1 {
 			b, err := json.Marshal(args[1])
 			if err != nil {
-				return err
+				return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
 			}
 			tmpPayload = strings.NewReader(string(b))
 		}
@@ -72,13 +72,13 @@ func doRequest(method string, endpoint string, args ...interface{}) error {
 
 	req, err := http.NewRequest(method, getBaseUrl()+endpoint, tmpPayload)
 	if err != nil {
-		return err
+		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
 	}
 
 	req.Header.Add("x-lsw-auth", lswClient.apiKey)
 	resp, err := lswClient.client.Do(req)
 	if err != nil {
-		return err
+		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
 	}
 	defer resp.Body.Close()
 
@@ -88,7 +88,7 @@ func doRequest(method string, endpoint string, args ...interface{}) error {
 
 	respBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return err
+		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
 	}
 
 	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300

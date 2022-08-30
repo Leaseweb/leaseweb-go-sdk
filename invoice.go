@@ -11,27 +11,27 @@ const INVOICE_API_VERSION = "v1"
 type InvoiceApi struct{}
 
 type Invoice struct {
-	Currency                string   `json:"currency"`
-	Date                    string   `json:"date"`
-	DueDate                 string   `json:"dueDate"`
-	Id                      string   `json:"id"`
-	IsPartialPaymentAllowed bool     `json:"isPartialPaymentAllowed"`
-	OpenAmount              float32  `json:"openAmount"`
-	Status                  string   `json:"status"`
-	TaxAmount               float32  `json:"taxAmount"`
-	Total                   float32  `json:"total"`
-	Credits                 []Credit `json:"credits"`
-	Lines                   []Line   `json:"lineItems"`
+	Currency                string          `json:"currency"`
+	Date                    string          `json:"date"`
+	DueDate                 string          `json:"dueDate"`
+	Id                      string          `json:"id"`
+	IsPartialPaymentAllowed bool            `json:"isPartialPaymentAllowed"`
+	OpenAmount              float32         `json:"openAmount"`
+	Status                  string          `json:"status"`
+	TaxAmount               float32         `json:"taxAmount"`
+	Total                   float32         `json:"total"`
+	Credits                 []InvoiceCredit `json:"credits"`
+	Lines                   []InvoiceLine   `json:"lineItems"`
 }
 
-type Credit struct {
+type InvoiceCredit struct {
 	Date      string  `json:"date"`
 	Id        string  `json:"id"`
 	TaxAmount float32 `json:"taxAmount"`
 	Total     float32 `json:"total"`
 }
 
-type Line struct {
+type InvoiceLine struct {
 	ContractId  string  `json:"contractId"`
 	EquipmentId string  `json:"equipmentId"`
 	Product     string  `json:"product"`
@@ -58,7 +58,7 @@ type Invoices struct {
 	Metadata Metadata  `json:"_metadata"`
 }
 
-type ProForma struct {
+type InvoiceProForma struct {
 	Currency     string            `json:"currency"`
 	ProformaDate string            `json:"proformaDate"`
 	SubTotal     float32           `json:"subTotal"`
@@ -72,7 +72,7 @@ func (ia InvoiceApi) getPath(endpoint string) string {
 	return "/invoices/" + INVOICE_API_VERSION + endpoint
 }
 
-func (ia InvoiceApi) ListInvoices(args ...int) (*Invoices, error) {
+func (ia InvoiceApi) List(args ...int) (*Invoices, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -89,7 +89,7 @@ func (ia InvoiceApi) ListInvoices(args ...int) (*Invoices, error) {
 	return result, nil
 }
 
-func (ia InvoiceApi) GetProForma(args ...int) (*ProForma, error) {
+func (ia InvoiceApi) ListProForma(args ...int) (*InvoiceProForma, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -99,14 +99,14 @@ func (ia InvoiceApi) GetProForma(args ...int) (*ProForma, error) {
 	}
 
 	path := ia.getPath("/invoices/proforma?" + v.Encode())
-	result := &ProForma{}
+	result := &InvoiceProForma{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (ia InvoiceApi) GetInvoice(invoiceId string) (*Invoice, error) {
+func (ia InvoiceApi) Get(invoiceId string) (*Invoice, error) {
 	path := ia.getPath("/invoices/" + invoiceId)
 	result := &Invoice{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {

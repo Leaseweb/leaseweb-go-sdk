@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestListVirtualServers(t *testing.T) {
+func TestVirtualServerList(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -112,7 +112,7 @@ func TestListVirtualServers(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := VirtualServerApi{}.ListVirtualServers()
+	response, err := VirtualServerApi{}.List()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -180,7 +180,7 @@ func TestListVirtualServers(t *testing.T) {
 	assert.Equal(virtualServer2.Hardware.Storage.Unit, "GB")
 }
 
-func TestListVirtualServersPaginate(t *testing.T) {
+func TestVirtualServerListPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -238,7 +238,7 @@ func TestListVirtualServersPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := VirtualServerApi{}.ListVirtualServers(1)
+	response, err := VirtualServerApi{}.List(1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -276,7 +276,7 @@ func TestListVirtualServersPaginate(t *testing.T) {
 	assert.Equal(virtualServer1.Template, "Ubuntu 14.04 64 40 20140707T1340")
 }
 
-func TestListVirtualServersServerErrors(t *testing.T) {
+func TestVirtualServerListServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -287,7 +287,7 @@ func TestListVirtualServersServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.ListVirtualServers()
+				return VirtualServerApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -304,7 +304,7 @@ func TestListVirtualServersServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.ListVirtualServers()
+				return VirtualServerApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -321,7 +321,7 @@ func TestListVirtualServersServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.ListVirtualServers()
+				return VirtualServerApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -338,7 +338,7 @@ func TestListVirtualServersServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.ListVirtualServers()
+				return VirtualServerApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -350,7 +350,7 @@ func TestListVirtualServersServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetVirtualServer(t *testing.T) {
+func TestVirtualServerGet(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -399,7 +399,7 @@ func TestGetVirtualServer(t *testing.T) {
 	})
 	defer teardown()
 
-	virtualServer, err := VirtualServerApi{}.GetVirtualServer("123456")
+	virtualServer, err := VirtualServerApi{}.Get("123456")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -431,7 +431,7 @@ func TestGetVirtualServer(t *testing.T) {
 	assert.Equal(virtualServer.Template, "Ubuntu 14.04 64 40 20140707T1340")
 }
 
-func TestGetVirtualServerServerErrors(t *testing.T) {
+func TestVirtualServerGetServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -442,7 +442,7 @@ func TestGetVirtualServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.GetVirtualServer("123456")
+				return VirtualServerApi{}.Get("123456")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -459,7 +459,7 @@ func TestGetVirtualServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.GetVirtualServer("123456")
+				return VirtualServerApi{}.Get("123456")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -476,7 +476,7 @@ func TestGetVirtualServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource '218030' was not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.GetVirtualServer("123456")
+				return VirtualServerApi{}.Get("123456")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -493,7 +493,7 @@ func TestGetVirtualServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.GetVirtualServer("123456")
+				return VirtualServerApi{}.Get("123456")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -510,7 +510,7 @@ func TestGetVirtualServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.GetVirtualServer("123456")
+				return VirtualServerApi{}.Get("123456")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -522,7 +522,7 @@ func TestGetVirtualServerServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdateVirtualServer(t *testing.T) {
+func TestVirtualServerUpdate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -571,7 +571,7 @@ func TestUpdateVirtualServer(t *testing.T) {
 	})
 	defer teardown()
 
-	virtualServer, err := VirtualServerApi{}.UpdateVirtualServer("123456", "Web server")
+	virtualServer, err := VirtualServerApi{}.Update("123456", "Web server")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -603,7 +603,7 @@ func TestUpdateVirtualServer(t *testing.T) {
 	assert.Equal(virtualServer.Template, "Ubuntu 14.04 64 40 20140707T1340")
 }
 
-func TestUpdateVirtualServerServerErrors(t *testing.T) {
+func TestVirtualServerUpdateServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -614,7 +614,7 @@ func TestUpdateVirtualServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.UpdateVirtualServer("123456", "Web server")
+				return VirtualServerApi{}.Update("123456", "Web server")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -631,7 +631,7 @@ func TestUpdateVirtualServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.UpdateVirtualServer("123456", "Web server")
+				return VirtualServerApi{}.Update("123456", "Web server")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -648,7 +648,7 @@ func TestUpdateVirtualServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource '218030' was not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.UpdateVirtualServer("123456", "Web server")
+				return VirtualServerApi{}.Update("123456", "Web server")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -665,7 +665,7 @@ func TestUpdateVirtualServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.UpdateVirtualServer("123456", "Web server")
+				return VirtualServerApi{}.Update("123456", "Web server")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -682,7 +682,7 @@ func TestUpdateVirtualServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return VirtualServerApi{}.UpdateVirtualServer("123456", "Web server")
+				return VirtualServerApi{}.Update("123456", "Web server")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -694,7 +694,7 @@ func TestUpdateVirtualServerServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestPowerOff(t *testing.T) {
+func TestVirtualServerPowerOff(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -717,7 +717,7 @@ func TestPowerOff(t *testing.T) {
 	assert.Equal(resp.CreatedAt, "2016-12-31T01:00:59+00:00")
 }
 
-func TestPowerOffServerErrors(t *testing.T) {
+func TestVirtualServerPowerOffServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -808,7 +808,7 @@ func TestPowerOffServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestPowerOn(t *testing.T) {
+func TestVirtualServerPowerOn(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -831,7 +831,7 @@ func TestPowerOn(t *testing.T) {
 	assert.Equal(resp.CreatedAt, "2016-12-31T01:00:59+00:00")
 }
 
-func TestPowerOnServerErrors(t *testing.T) {
+func TestVirtualServerPowerOnServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -922,7 +922,7 @@ func TestPowerOnServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestReboot(t *testing.T) {
+func TestVirtualServerReboot(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -945,7 +945,7 @@ func TestReboot(t *testing.T) {
 	assert.Equal(resp.CreatedAt, "2016-12-31T01:00:59+00:00")
 }
 
-func TestRebootServerErrors(t *testing.T) {
+func TestVirtualServerRebootServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -1036,7 +1036,7 @@ func TestRebootServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestReinstall(t *testing.T) {
+func TestVirtualServerReinstall(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1059,7 +1059,7 @@ func TestReinstall(t *testing.T) {
 	assert.Equal(resp.CreatedAt, "2016-12-31T01:00:59+00:00")
 }
 
-func TestReinstallServerErrors(t *testing.T) {
+func TestVirtualServerReinstallServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -1650,7 +1650,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListTemplates(t *testing.T) {
+func TestVirtualServerListTemplates(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1689,7 +1689,7 @@ func TestListTemplates(t *testing.T) {
 	assert.Equal(response.Templates[1].Name, "CentOS 7 (64-bit) Plesk")
 }
 
-func TestListTemplatesPaginate(t *testing.T) {
+func TestVirtualServerListTemplatesPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1722,7 +1722,7 @@ func TestListTemplatesPaginate(t *testing.T) {
 	assert.Equal(response.Templates[0].Name, "Windows Server 2012 R2 Standard (64-bit)")
 }
 
-func TestListTemplatesServerErrors(t *testing.T) {
+func TestVirtualServerListTemplatesServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",

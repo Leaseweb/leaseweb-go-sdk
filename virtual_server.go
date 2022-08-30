@@ -45,12 +45,12 @@ type VirtualServerResult struct {
 	CreatedAt string `json:"createdAt"`
 }
 
-type Templates struct {
-	Templates []Template `json:"templates"`
-	Metadata  Metadata   `json:"_metadata"`
+type VirtualServerTemplates struct {
+	Templates []VirtualServerTemplate `json:"templates"`
+	Metadata  Metadata                `json:"_metadata"`
 }
 
-type Template struct {
+type VirtualServerTemplate struct {
 	Id   string `json:"id"`
 	Name string `json:"name"`
 }
@@ -59,7 +59,7 @@ func (vsa VirtualServerApi) getPath(endpoint string) string {
 	return "/cloud/" + VIRTUAL_SERVER_API_VERSION + endpoint
 }
 
-func (vsa VirtualServerApi) ListVirtualServers(args ...int) (*VirtualServers, error) {
+func (vsa VirtualServerApi) List(args ...int) (*VirtualServers, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -76,7 +76,7 @@ func (vsa VirtualServerApi) ListVirtualServers(args ...int) (*VirtualServers, er
 	return result, nil
 }
 
-func (vsa VirtualServerApi) GetVirtualServer(virtualServerId string) (*VirtualServer, error) {
+func (vsa VirtualServerApi) Get(virtualServerId string) (*VirtualServer, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId)
 	result := &VirtualServer{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
@@ -85,7 +85,7 @@ func (vsa VirtualServerApi) GetVirtualServer(virtualServerId string) (*VirtualSe
 	return result, nil
 }
 
-func (vsa VirtualServerApi) UpdateVirtualServer(virtualServerId, reference string) (*VirtualServer, error) {
+func (vsa VirtualServerApi) Update(virtualServerId, reference string) (*VirtualServer, error) {
 	payload := map[string]string{"reference": reference}
 	path := vsa.getPath("/virtualServers/" + virtualServerId)
 	result := &VirtualServer{}
@@ -187,7 +187,7 @@ func (vsa VirtualServerApi) GetDataTrafficMetrics(virtualServerId string, args .
 	return result, nil
 }
 
-func (vsa VirtualServerApi) ListTemplates(virtualServerId string, args ...int) (*Templates, error) {
+func (vsa VirtualServerApi) ListTemplates(virtualServerId string, args ...int) (*VirtualServerTemplates, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -197,7 +197,7 @@ func (vsa VirtualServerApi) ListTemplates(virtualServerId string, args ...int) (
 	}
 
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/templates")
-	result := &Templates{}
+	result := &VirtualServerTemplates{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
