@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestChangeCredentials(t *testing.T) {
+func TestRemoteManagementChangeCredentials(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -23,7 +23,7 @@ func TestChangeCredentials(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestTestChangeCredentialsServerErrors(t *testing.T) {
+func TestRemoteManagementTestChangeCredentialsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -97,7 +97,7 @@ func TestTestChangeCredentialsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListProfiles(t *testing.T) {
+func TestRemoteManagementListProfiles(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -149,7 +149,7 @@ func TestListProfiles(t *testing.T) {
 	assert.Equal(profile2.SatelliteDataCenters[1], "AMS-15")
 }
 
-func TestListProfilesPaginate(t *testing.T) {
+func TestRemoteManagementListProfilesPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -184,7 +184,7 @@ func TestListProfilesPaginate(t *testing.T) {
 	assert.Equal(profile1.SatelliteDataCenters[1], "AMS-15")
 }
 
-func TestTestListProfilesServerErrors(t *testing.T) {
+func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",

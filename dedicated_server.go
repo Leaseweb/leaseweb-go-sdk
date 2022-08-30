@@ -24,7 +24,7 @@ type DedicatedServer struct {
 	NetworkInterfaces   NetworkInterfaces    `json:"networkInterfaces"`
 	PowerPorts          []Port               `json:"powerPorts"`
 	PrivateNetworks     []PrivateNetwork     `json:"privateNetworks"`
-	Rack                Rack                 `json:"rack"`
+	Rack                DedicatedServerRack  `json:"rack"`
 	SerialNumber        string               `json:"serialNumber"`
 	Specs               DedicatedServerSpecs `json:"specs"`
 }
@@ -61,7 +61,7 @@ type DedicatedServerSpecPciCard struct {
 	Description string `json:"description"`
 }
 
-type Rack struct {
+type DedicatedServerRack struct {
 	Type string `json:"type"`
 }
 
@@ -76,7 +76,7 @@ type DedicatedServerHardware struct {
 type DedicatedServerHardwareInformation struct {
 	Chassis  DedicatedServerChassis   `json:"chassis"`
 	Cpu      []DedicatedServerCpu     `json:"cpu"`
-	Ipmi     Ipmi                     `json:"ipmi"`
+	Ipmi     DedicatedServerIpmi      `json:"ipmi"`
 	Disks    []DedicatedServerDisks   `json:"disks"`
 	Memories []DedicatedServerMemory  `json:"memory"`
 	Networks []DedicatedServerNetwork `json:"network"`
@@ -127,7 +127,7 @@ type DedicatedServerCpuCapabilities struct {
 	X8664   string `json:"x86-64"`
 }
 
-type Ipmi struct {
+type DedicatedServerIpmi struct {
 	Defgateway string `json:"defgateway"`
 	Firmware   string `json:"firmware"`
 	IpAddress  string `json:"ipaddress"`
@@ -394,31 +394,31 @@ type DedicatedServerJobPayloadPartition struct {
 	Primary    bool   `json:"primary"`
 }
 
-type OperatingSystems struct {
-	Metadata         Metadata          `json:"_metadata"`
-	OperatingSystems []OperatingSystem `json:"operatingSystems"`
+type DedicatedServerOperatingSystems struct {
+	Metadata         Metadata                         `json:"_metadata"`
+	OperatingSystems []DedicatedServerOperatingSystem `json:"operatingSystems"`
 }
 
-type OperatingSystem struct {
-	Id                   string                  `json:"id"`
-	Name                 string                  `json:"name"`
-	Architecture         string                  `json:"architecture"`
-	Configurable         bool                    `json:"configurable"`
-	Family               string                  `json:"family"`
-	Type                 string                  `json:"type"`
-	Version              string                  `json:"version"`
-	Features             []string                `json:"features"`
-	SupportedBootDevices []string                `json:"supportedBootDevices"`
-	SupportedFileSystems []string                `json:"supportedFileSystems"`
-	Defaults             OperatingSystemDefaults `json:"defaults"`
+type DedicatedServerOperatingSystem struct {
+	Id                   string                                 `json:"id"`
+	Name                 string                                 `json:"name"`
+	Architecture         string                                 `json:"architecture"`
+	Configurable         bool                                   `json:"configurable"`
+	Family               string                                 `json:"family"`
+	Type                 string                                 `json:"type"`
+	Version              string                                 `json:"version"`
+	Features             []string                               `json:"features"`
+	SupportedBootDevices []string                               `json:"supportedBootDevices"`
+	SupportedFileSystems []string                               `json:"supportedFileSystems"`
+	Defaults             DedicatedServerOperatingSystemDefaults `json:"defaults"`
 }
 
-type OperatingSystemDefaults struct {
-	Device     string                     `json:"device"`
-	Partitions []OperatingSystemPartition `json:"partitions"`
+type DedicatedServerOperatingSystemDefaults struct {
+	Device     string                                    `json:"device"`
+	Partitions []DedicatedServerOperatingSystemPartition `json:"partitions"`
 }
 
-type OperatingSystemPartition struct {
+type DedicatedServerOperatingSystemPartition struct {
 	Bootable   bool   `json:"bootable"`
 	Filesystem string `json:"filesystem"`
 	Mountpoint string `json:"mountpoint"`
@@ -426,22 +426,22 @@ type OperatingSystemPartition struct {
 	Size       string `json:"size"`
 }
 
-type ControlPanels struct {
-	Metadata      Metadata       `json:"_metadata"`
-	ControlPanels []ControlPanel `json:"controlPanels"`
+type DedicatedServerControlPanels struct {
+	Metadata      Metadata                      `json:"_metadata"`
+	ControlPanels []DedicatedServerControlPanel `json:"controlPanels"`
 }
 
-type ControlPanel struct {
+type DedicatedServerControlPanel struct {
 	Id   string `json:"id"`
 	Name string `json:"name"`
 }
 
-type RescueImages struct {
-	Metadata     Metadata      `json:"_metadata"`
-	RescueImages []RescueImage `json:"rescueImages"`
+type DedicatedServerRescueImages struct {
+	Metadata     Metadata                     `json:"_metadata"`
+	RescueImages []DedicatedServerRescueImage `json:"rescueImages"`
 }
 
-type RescueImage struct {
+type DedicatedServerRescueImage struct {
 	Id   string `json:"id"`
 	Name string `json:"name"`
 }
@@ -573,7 +573,7 @@ func (dsa DedicatedServerApi) RemoveNullRouteAnIp(serverId, ip string) (*Ip, err
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListNullRouteHistory(serverId string, args ...int) (*NullRoutes, error) {
+func (dsa DedicatedServerApi) ListNullRoutes(serverId string, args ...int) (*NullRoutes, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -1019,7 +1019,7 @@ func (dsa DedicatedServerApi) PowerOnServer(serverId string) error {
 	return doRequest(http.MethodPost, path)
 }
 
-func (dsa DedicatedServerApi) ListOperatingSystems(args ...interface{}) (*OperatingSystems, error) {
+func (dsa DedicatedServerApi) ListOperatingSystems(args ...interface{}) (*DedicatedServerOperatingSystems, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -1031,7 +1031,7 @@ func (dsa DedicatedServerApi) ListOperatingSystems(args ...interface{}) (*Operat
 		v.Add("controlPanelId", fmt.Sprint(args[2]))
 	}
 
-	result := &OperatingSystems{}
+	result := &DedicatedServerOperatingSystems{}
 	path := dsa.getPath("/operatingSystems?" + v.Encode())
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err
@@ -1039,10 +1039,10 @@ func (dsa DedicatedServerApi) ListOperatingSystems(args ...interface{}) (*Operat
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetOperatingSystem(operatingSystemId, controlPanelId string) (*OperatingSystem, error) {
+func (dsa DedicatedServerApi) GetOperatingSystem(operatingSystemId, controlPanelId string) (*DedicatedServerOperatingSystem, error) {
 	v := url.Values{}
 	v.Add("controlPanelId", fmt.Sprint(controlPanelId))
-	result := &OperatingSystem{}
+	result := &DedicatedServerOperatingSystem{}
 	path := dsa.getPath("/operatingSystems/" + operatingSystemId + "?" + v.Encode())
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err
@@ -1050,7 +1050,7 @@ func (dsa DedicatedServerApi) GetOperatingSystem(operatingSystemId, controlPanel
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListControlPanels(args ...interface{}) (*ControlPanels, error) {
+func (dsa DedicatedServerApi) ListControlPanels(args ...interface{}) (*DedicatedServerControlPanels, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -1062,7 +1062,7 @@ func (dsa DedicatedServerApi) ListControlPanels(args ...interface{}) (*ControlPa
 		v.Add("operatingSystemId", fmt.Sprint(args[2]))
 	}
 
-	result := &ControlPanels{}
+	result := &DedicatedServerControlPanels{}
 	path := dsa.getPath("/controlPanels?" + v.Encode())
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err
@@ -1070,7 +1070,7 @@ func (dsa DedicatedServerApi) ListControlPanels(args ...interface{}) (*ControlPa
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListRescueImages(args ...interface{}) (*RescueImages, error) {
+func (dsa DedicatedServerApi) ListRescueImages(args ...interface{}) (*DedicatedServerRescueImages, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -1079,7 +1079,7 @@ func (dsa DedicatedServerApi) ListRescueImages(args ...interface{}) (*RescueImag
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	result := &RescueImages{}
+	result := &DedicatedServerRescueImages{}
 	path := dsa.getPath("/rescueImages?" + v.Encode())
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return result, err

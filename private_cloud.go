@@ -27,30 +27,30 @@ type PrivateCloud struct {
 	Hardware        Hardware       `json:"hardware"`
 }
 
-type CpuMetrics struct {
-	Metric   CpuMetric      `json:"metrics"`
-	Metadata MetricMetadata `json:"_metadata"`
+type PrivateCloudCpuMetrics struct {
+	Metric   PrivateCloudCpuMetric `json:"metrics"`
+	Metadata MetricMetadata        `json:"_metadata"`
 }
 
-type CpuMetric struct {
+type PrivateCloudCpuMetric struct {
 	Cpu BasicMetric `json:"CPU"`
 }
 
-type MemoryMetrics struct {
-	Metric   MemoryMetric   `json:"metrics"`
-	Metadata MetricMetadata `json:"_metadata"`
+type PrivateCloudMemoryMetrics struct {
+	Metric   PrivateCloudMemoryMetric `json:"metrics"`
+	Metadata MetricMetadata           `json:"_metadata"`
 }
 
-type MemoryMetric struct {
+type PrivateCloudMemoryMetric struct {
 	Memory BasicMetric `json:"MEMORY"`
 }
 
-type StorageMetrics struct {
-	Metric   StorageMetric  `json:"metrics"`
-	Metadata MetricMetadata `json:"_metadata"`
+type PrivateCloudStorageMetrics struct {
+	Metric   PrivateCloudStorageMetric `json:"metrics"`
+	Metadata MetricMetadata            `json:"_metadata"`
 }
 
-type StorageMetric struct {
+type PrivateCloudStorageMetric struct {
 	Storage BasicMetric `json:"STORAGE"`
 }
 
@@ -58,7 +58,7 @@ func (pca PrivateCloudApi) getPath(endpoint string) string {
 	return "/cloud/" + PRIVATE_CLOUD_API_VERSION + endpoint
 }
 
-func (pca PrivateCloudApi) ListPrivateClouds(args ...interface{}) (*PrivateClouds, error) {
+func (pca PrivateCloudApi) List(args ...interface{}) (*PrivateClouds, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -75,7 +75,7 @@ func (pca PrivateCloudApi) ListPrivateClouds(args ...interface{}) (*PrivateCloud
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetPrivateCloud(privateCloudId string) (*PrivateCloud, error) {
+func (pca PrivateCloudApi) Get(privateCloudId string) (*PrivateCloud, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId)
 	result := &PrivateCloud{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
@@ -156,7 +156,7 @@ func (pca PrivateCloudApi) GetBandWidthMetrics(privateCloudId string, args ...in
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetCpuMetrics(privateCloudId string, args ...interface{}) (*CpuMetrics, error) {
+func (pca PrivateCloudApi) GetCpuMetrics(privateCloudId string, args ...interface{}) (*PrivateCloudCpuMetrics, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -171,14 +171,14 @@ func (pca PrivateCloudApi) GetCpuMetrics(privateCloudId string, args ...interfac
 		v.Add("to", fmt.Sprint(args[3]))
 	}
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/cpu?" + v.Encode())
-	result := &CpuMetrics{}
+	result := &PrivateCloudCpuMetrics{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetMemoryMetrics(privateCloudId string, args ...interface{}) (*MemoryMetrics, error) {
+func (pca PrivateCloudApi) GetMemoryMetrics(privateCloudId string, args ...interface{}) (*PrivateCloudMemoryMetrics, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -193,14 +193,14 @@ func (pca PrivateCloudApi) GetMemoryMetrics(privateCloudId string, args ...inter
 		v.Add("to", fmt.Sprint(args[3]))
 	}
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/memory?" + v.Encode())
-	result := &MemoryMetrics{}
+	result := &PrivateCloudMemoryMetrics{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetStorageMetrics(privateCloudId string, args ...interface{}) (*StorageMetrics, error) {
+func (pca PrivateCloudApi) GetStorageMetrics(privateCloudId string, args ...interface{}) (*PrivateCloudStorageMetrics, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -215,7 +215,7 @@ func (pca PrivateCloudApi) GetStorageMetrics(privateCloudId string, args ...inte
 		v.Add("to", fmt.Sprint(args[3]))
 	}
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/storage?" + v.Encode())
-	result := &StorageMetrics{}
+	result := &PrivateCloudStorageMetrics{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}

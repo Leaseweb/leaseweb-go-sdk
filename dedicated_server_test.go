@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestList(t *testing.T) {
+func TestDedicatedServerList(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -142,7 +142,7 @@ func TestList(t *testing.T) {
 	assert.Equal(Server.Rack.Type, "SHARED")
 }
 
-func TestListBeEmpty(t *testing.T) {
+func TestDedicatedServerListBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -158,7 +158,7 @@ func TestListBeEmpty(t *testing.T) {
 	assert.Equal(len(response.Servers), 0)
 }
 
-func TestListPaginateAndFilter(t *testing.T) {
+func TestDedicatedServerListPaginateAndFilter(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -292,7 +292,7 @@ func TestListPaginateAndFilter(t *testing.T) {
 	assert.Equal(Server.Rack.Type, "SHARED")
 }
 
-func TestListServerErrors(t *testing.T) {
+func TestDedicatedServerListServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -366,7 +366,7 @@ func TestListServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGet(t *testing.T) {
+func TestDedicatedServerGet(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -574,7 +574,7 @@ func TestGet(t *testing.T) {
 	assert.Equal(Server.Specs.PciCards[1].Description, "2x30GE UTP card")
 }
 
-func TestGetServerErrors(t *testing.T) {
+func TestDedicatedServerGetServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -665,7 +665,7 @@ func TestGetServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdate(t *testing.T) {
+func TestDedicatedServerUpdate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -679,7 +679,7 @@ func TestUpdate(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestUpdateServerErrors(t *testing.T) {
+func TestDedicatedServerUpdateServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -775,7 +775,7 @@ func TestUpdateServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetHardwareInformation(t *testing.T) {
+func TestDedicatedServerGetHardwareInformation(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1111,7 +1111,7 @@ func TestGetHardwareInformation(t *testing.T) {
 	assert.Equal(Network.Settings.Speed, "1Gbit/s")
 }
 
-func TestGetHardwareInformationServerErrors(t *testing.T) {
+func TestDedicatedServerGetHardwareInformationServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -1202,7 +1202,7 @@ func TestGetHardwareInformationServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListIps(t *testing.T) {
+func TestDedicatedServerListIps(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1279,7 +1279,7 @@ func TestListIps(t *testing.T) {
 	assert.Equal(Ip2.Version, 6)
 }
 
-func TestListIpsBeEmpty(t *testing.T) {
+func TestDedicatedServerListIpsBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1295,7 +1295,7 @@ func TestListIpsBeEmpty(t *testing.T) {
 	assert.Equal(len(response.Ips), 0)
 }
 
-func TestListIpsFilterAndPagination(t *testing.T) {
+func TestDedicatedServerListIpsFilterAndPagination(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1346,7 +1346,7 @@ func TestListIpsFilterAndPagination(t *testing.T) {
 	assert.Equal(Ip1.Version, 4)
 }
 
-func TestListIpsServerErrors(t *testing.T) {
+func TestDedicatedServerListIpsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -1420,7 +1420,7 @@ func TestListIpsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetIp(t *testing.T) {
+func TestDedicatedServerGetIp(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1456,7 +1456,7 @@ func TestGetIp(t *testing.T) {
 	assert.Equal(Ip.Version, 4)
 }
 
-func TestGetIpServerErrors(t *testing.T) {
+func TestDedicatedServerGetIpServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -1547,7 +1547,7 @@ func TestGetIpServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdateIp(t *testing.T) {
+func TestDedicatedServerUpdateIp(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1584,7 +1584,7 @@ func TestUpdateIp(t *testing.T) {
 	assert.Equal(Ip.Version, 4)
 }
 
-func TestUpdateIpServerErrors(t *testing.T) {
+func TestDedicatedServerUpdateIpServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -1680,7 +1680,7 @@ func TestUpdateIpServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestNullRouteAnIp(t *testing.T) {
+func TestDedicatedServerNullRouteAnIp(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1716,7 +1716,7 @@ func TestNullRouteAnIp(t *testing.T) {
 	assert.Equal(Ip.Version, 4)
 }
 
-func TestNullRouteAnIpServerErrors(t *testing.T) {
+func TestDedicatedServerNullRouteAnIpServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -1807,7 +1807,7 @@ func TestNullRouteAnIpServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestRemoveNullRouteAnIp(t *testing.T) {
+func TestDedicatedServerRemoveNullRouteAnIp(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1843,7 +1843,7 @@ func TestRemoveNullRouteAnIp(t *testing.T) {
 	assert.Equal(Ip.Version, 4)
 }
 
-func TestRemoveNullRouteAnIpServerErrors(t *testing.T) {
+func TestDedicatedServerRemoveNullRouteAnIpServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -1934,7 +1934,7 @@ func TestRemoveNullRouteAnIpServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListNullRouteHistory(t *testing.T) {
+func TestDedicatedServerListNullRoutes(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1958,7 +1958,7 @@ func TestListNullRouteHistory(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedServerApi{}.ListNullRouteHistory("server-id")
+	response, err := DedicatedServerApi{}.ListNullRoutes("server-id")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 1)
@@ -1975,14 +1975,14 @@ func TestListNullRouteHistory(t *testing.T) {
 	assert.Equal(NullRoute.TicketId, "282912")
 }
 
-func TestListNullRouteHistoryBeEmpty(t *testing.T) {
+func TestDedicatedServerListNullRoutesBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 0}, "nullRoutes": []}`)
 	})
 	defer teardown()
-	response, err := DedicatedServerApi{}.ListNullRouteHistory("server-id")
+	response, err := DedicatedServerApi{}.ListNullRoutes("server-id")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1991,7 +1991,7 @@ func TestListNullRouteHistoryBeEmpty(t *testing.T) {
 	assert.Equal(len(response.NullRoutes), 0)
 }
 
-func TestListNullRouteHistoryFilterAndPagination(t *testing.T) {
+func TestDedicatedServerListNullRoutesFilterAndPagination(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2015,7 +2015,7 @@ func TestListNullRouteHistoryFilterAndPagination(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedServerApi{}.ListNullRouteHistory("server-id", 1)
+	response, err := DedicatedServerApi{}.ListNullRoutes("server-id", 1)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -2032,7 +2032,7 @@ func TestListNullRouteHistoryFilterAndPagination(t *testing.T) {
 	assert.Equal(NullRoute.TicketId, "282912")
 }
 
-func TestListNullRouteHistoryServerErrors(t *testing.T) {
+func TestDedicatedServerListNullRoutesServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -2043,7 +2043,7 @@ func TestListNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.ListNullRouteHistory("server-id")
+				return DedicatedServerApi{}.ListNullRoutes("server-id")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2060,7 +2060,7 @@ func TestListNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.ListNullRouteHistory("server-id")
+				return DedicatedServerApi{}.ListNullRoutes("server-id")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2077,7 +2077,7 @@ func TestListNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.ListNullRouteHistory("server-id")
+				return DedicatedServerApi{}.ListNullRoutes("server-id")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2094,7 +2094,7 @@ func TestListNullRouteHistoryServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.ListNullRouteHistory("server-id")
+				return DedicatedServerApi{}.ListNullRoutes("server-id")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2106,7 +2106,7 @@ func TestListNullRouteHistoryServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListNetworkInterfaces(t *testing.T) {
+func TestDedicatedServerListNetworkInterfaces(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2147,7 +2147,7 @@ func TestListNetworkInterfaces(t *testing.T) {
 	assert.Equal(NetworkInterface.Type, "PUBLIC")
 }
 
-func TestListNetworkInterfacesBeEmpty(t *testing.T) {
+func TestDedicatedServerListNetworkInterfacesBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2163,7 +2163,7 @@ func TestListNetworkInterfacesBeEmpty(t *testing.T) {
 	assert.Equal(len(response.NetworkInterfaces), 0)
 }
 
-func TestListNetworkInterfacesPagination(t *testing.T) {
+func TestDedicatedServerListNetworkInterfacesPagination(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2204,7 +2204,7 @@ func TestListNetworkInterfacesPagination(t *testing.T) {
 	assert.Equal(NetworkInterface.Type, "PUBLIC")
 }
 
-func TestListNetworkInterfacesServerErrors(t *testing.T) {
+func TestDedicatedServerListNetworkInterfacesServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -2278,7 +2278,7 @@ func TestListNetworkInterfacesServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCloseAllNetworkInterfaces(t *testing.T) {
+func TestDedicatedServerCloseAllNetworkInterfaces(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2291,7 +2291,7 @@ func TestCloseAllNetworkInterfaces(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestCloseAllNetworkInterfacesServerErrors(t *testing.T) {
+func TestDedicatedServerCloseAllNetworkInterfacesServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -2382,7 +2382,7 @@ func TestCloseAllNetworkInterfacesServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestOpenAllNetworkInterfaces(t *testing.T) {
+func TestDedicatedServerOpenAllNetworkInterfaces(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2395,7 +2395,7 @@ func TestOpenAllNetworkInterfaces(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestOpenAllNetworkInterfacesServerErrors(t *testing.T) {
+func TestDedicatedServerOpenAllNetworkInterfacesServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -2486,7 +2486,7 @@ func TestOpenAllNetworkInterfacesServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetNetworkInterface(t *testing.T) {
+func TestDedicatedServerGetNetworkInterface(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2513,7 +2513,7 @@ func TestGetNetworkInterface(t *testing.T) {
 	assert.Equal(NetworkInterface.Type, "PUBLIC")
 }
 
-func TestGetNetworkInterfaceServerErrors(t *testing.T) {
+func TestDedicatedServerGetNetworkInterfaceServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -2587,7 +2587,7 @@ func TestGetNetworkInterfaceServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCloseNetworkInterface(t *testing.T) {
+func TestDedicatedServerCloseNetworkInterface(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2600,7 +2600,7 @@ func TestCloseNetworkInterface(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestCloseNetworkInterfaceServerErrors(t *testing.T) {
+func TestDedicatedServerCloseNetworkInterfaceServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -2691,7 +2691,7 @@ func TestCloseNetworkInterfaceServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestOpenNetworkInterface(t *testing.T) {
+func TestDedicatedServerOpenNetworkInterface(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2704,7 +2704,7 @@ func TestOpenNetworkInterface(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestOpenNetworkInterfaceServerErrors(t *testing.T) {
+func TestDedicatedServerOpenNetworkInterfaceServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -2795,7 +2795,7 @@ func TestOpenNetworkInterfaceServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDeleteServerFromPrivateNetwork(t *testing.T) {
+func TestDedicatedServerDeleteServerFromPrivateNetwork(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodDelete, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2808,7 +2808,7 @@ func TestDeleteServerFromPrivateNetwork(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestDeleteServerFromPrivateNetworkServerErrors(t *testing.T) {
+func TestDedicatedServerDeleteServerFromPrivateNetworkServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -2899,7 +2899,7 @@ func TestDeleteServerFromPrivateNetworkServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestAddServerToPrivateNetwork(t *testing.T) {
+func TestDedicatedServerAddServerToPrivateNetwork(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -2912,7 +2912,7 @@ func TestAddServerToPrivateNetwork(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestAddServerToPrivateNetworkServerErrors(t *testing.T) {
+func TestDedicatedServerAddServerToPrivateNetworkServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -3003,7 +3003,7 @@ func TestAddServerToPrivateNetworkServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDeleteDhcpReservation(t *testing.T) {
+func TestDedicatedServerDeleteDhcpReservation(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodDelete, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -3016,7 +3016,7 @@ func TestDeleteDhcpReservation(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestDeleteDhcpReservationServerErrors(t *testing.T) {
+func TestDedicatedServerDeleteDhcpReservationServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -3107,7 +3107,7 @@ func TestDeleteDhcpReservationServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCreateDhcpReservation(t *testing.T) {
+func TestDedicatedServerCreateDhcpReservation(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -3121,7 +3121,7 @@ func TestCreateDhcpReservation(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestCreateDhcpReservationServerErrors(t *testing.T) {
+func TestDedicatedServerCreateDhcpReservationServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -3217,7 +3217,7 @@ func TestCreateDhcpReservationServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListDhcpReservation(t *testing.T) {
+func TestDedicatedServerListDhcpReservation(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -3272,7 +3272,7 @@ func TestListDhcpReservation(t *testing.T) {
 	assert.Equal(Lease1.UpdatedAt, "2019-11-18T19:29:01+00:00")
 }
 
-func TestListDhcpReservationBeEmpty(t *testing.T) {
+func TestDedicatedServerListDhcpReservationBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -3288,7 +3288,7 @@ func TestListDhcpReservationBeEmpty(t *testing.T) {
 	assert.Equal(len(response.Leases), 0)
 }
 
-func TestListDhcpReservationPagination(t *testing.T) {
+func TestDedicatedServerListDhcpReservationPagination(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -3343,7 +3343,7 @@ func TestListDhcpReservationPagination(t *testing.T) {
 	assert.Equal(Lease1.UpdatedAt, "2019-11-18T19:29:01+00:00")
 }
 
-func TestListDhcpReservationServerErrors(t *testing.T) {
+func TestDedicatedServerListDhcpReservationServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -3417,7 +3417,7 @@ func TestListDhcpReservationServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCancelActiveJob(t *testing.T) {
+func TestDedicatedServerCancelActiveJob(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -3543,7 +3543,7 @@ func TestCancelActiveJob(t *testing.T) {
 	assert.Equal(Job.Payload.X, 1)
 }
 
-func TestCancelActiveJobServerErrors(t *testing.T) {
+func TestDedicatedServerCancelActiveJobServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -3634,7 +3634,7 @@ func TestCancelActiveJobServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestExpireActiveJob(t *testing.T) {
+func TestDedicatedServerExpireActiveJob(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -3760,7 +3760,7 @@ func TestExpireActiveJob(t *testing.T) {
 	assert.Equal(Job.Payload.X, 1)
 }
 
-func TestExpireActiveJobServerErrors(t *testing.T) {
+func TestDedicatedServerExpireActiveJobServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -3851,7 +3851,7 @@ func TestExpireActiveJobServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestLunchHardwareScan(t *testing.T) {
+func TestDedicatedServerLunchHardwareScan(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -3942,7 +3942,7 @@ func TestLunchHardwareScan(t *testing.T) {
 	assert.Equal(Job.Payload.ServerId, "99944")
 }
 
-func TestLunchHardwareScanServerErrors(t *testing.T) {
+func TestDedicatedServerLunchHardwareScanServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -4038,7 +4038,7 @@ func TestLunchHardwareScanServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestLunchInstallation(t *testing.T) {
+func TestDedicatedServerLunchInstallation(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -4224,7 +4224,7 @@ func TestLunchInstallation(t *testing.T) {
 	assert.Equal(Job.Payload.Partitions[3].Primary, true)
 }
 
-func TestLunchInstallationServerErrors(t *testing.T) {
+func TestDedicatedServerLunchInstallationServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -4470,7 +4470,7 @@ func TestLunchInstallationServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestLunchIpmiRest(t *testing.T) {
+func TestDedicatedServerLunchIpmiRest(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -4565,7 +4565,7 @@ func TestLunchIpmiRest(t *testing.T) {
 	assert.Equal(Job.Payload.HasPublicIpmiIp, false)
 }
 
-func TestLunchIpmiRestServerErrors(t *testing.T) {
+func TestDedicatedServerLunchIpmiRestServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -4661,7 +4661,7 @@ func TestLunchIpmiRestServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListJobs(t *testing.T) {
+func TestDedicatedServerListJobs(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -4728,7 +4728,7 @@ func TestListJobs(t *testing.T) {
 	assert.Equal(Job.Uuid, "3a867358-5b4b-44ee-88ac-4274603ef641")
 }
 
-func TestListJobsBeEmpty(t *testing.T) {
+func TestDedicatedServerListJobsBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -4744,7 +4744,7 @@ func TestListJobsBeEmpty(t *testing.T) {
 	assert.Equal(len(response.Jobs), 0)
 }
 
-func TestListJobsPaginate(t *testing.T) {
+func TestDedicatedServerListJobsPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -4811,7 +4811,7 @@ func TestListJobsPaginate(t *testing.T) {
 	assert.Equal(Job.Uuid, "3a867358-5b4b-44ee-88ac-4274603ef641")
 }
 
-func TestListJobsServerErrors(t *testing.T) {
+func TestDedicatedServerListJobsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -4885,7 +4885,7 @@ func TestListJobsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetJob(t *testing.T) {
+func TestDedicatedServerGetJob(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -5011,7 +5011,7 @@ func TestGetJob(t *testing.T) {
 	assert.Equal(Job.Payload.Partitions[0].Size, "4096")
 }
 
-func TestGetJobServerErrors(t *testing.T) {
+func TestDedicatedServerGetJobServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -5102,7 +5102,7 @@ func TestGetJobServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestLunchRescueMode(t *testing.T) {
+func TestDedicatedServerLunchRescueMode(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -5202,7 +5202,7 @@ func TestLunchRescueMode(t *testing.T) {
 	assert.Equal(Job.Payload.IsUnassignedServer, false)
 }
 
-func TestLunchRescueModeServerErrors(t *testing.T) {
+func TestDedicatedServerLunchRescueModeServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -5512,7 +5512,7 @@ func TestDedicatedServerListCredentialsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCreateCredential(t *testing.T) {
+func TestDedicatedServerCreateCredential(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -5533,7 +5533,7 @@ func TestCreateCredential(t *testing.T) {
 	assert.Equal(resp.Password, "mys3cr3tp@ssw0rd")
 }
 
-func TestCreateCredentialServerErrors(t *testing.T) {
+func TestDedicatedServerCreateCredentialServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -5912,7 +5912,7 @@ func TestDedicatedServerGetCredentialsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDeleteCredentials(t *testing.T) {
+func TestDedicatedServerDeleteCredentials(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodDelete, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -5925,7 +5925,7 @@ func TestDeleteCredentials(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestDeleteCredentialsServerErrors(t *testing.T) {
+func TestDedicatedServerDeleteCredentialsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -6016,7 +6016,7 @@ func TestDeleteCredentialsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdateCredentials(t *testing.T) {
+func TestDedicatedServerUpdateCredentials(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -6037,7 +6037,7 @@ func TestUpdateCredentials(t *testing.T) {
 	assert.Equal(resp.Username, "admin")
 }
 
-func TestUpdateCredentialsServerErrors(t *testing.T) {
+func TestDedicatedServerUpdateCredentialsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -6436,7 +6436,7 @@ func TestDedicatedServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListBandWidthNotificationSettings(t *testing.T) {
+func TestDedicatedServerListBandWidthNotificationSettings(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -6507,7 +6507,7 @@ func TestListBandWidthNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[1].Unit, "Mbps")
 }
 
-func TestListBandWidthNotificationSettingsPaginate(t *testing.T) {
+func TestDedicatedServerListBandWidthNotificationSettingsPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -6555,7 +6555,7 @@ func TestListBandWidthNotificationSettingsPaginate(t *testing.T) {
 	assert.Equal(resp.Settings[0].Unit, "Gbps")
 }
 
-func TestListBandWidthNotificationSettingsServerErrors(t *testing.T) {
+func TestDedicatedServerListBandWidthNotificationSettingsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -6646,7 +6646,7 @@ func TestListBandWidthNotificationSettingsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCreateBandWidthNotificationSetting(t *testing.T) {
+func TestDedicatedServerCreateBandWidthNotificationSetting(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -6681,7 +6681,7 @@ func TestCreateBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Unit, "Gbps")
 }
 
-func TestCreateBandWidthNotificationSettingServerErrors(t *testing.T) {
+func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -6772,7 +6772,7 @@ func TestCreateBandWidthNotificationSettingServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDeleteBandWidthNotificationSetting(t *testing.T) {
+func TestDedicatedServerDeleteBandWidthNotificationSetting(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodDelete, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -6785,7 +6785,7 @@ func TestDeleteBandWidthNotificationSetting(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestDeleteBandWidthNotificationSettingServerErrors(t *testing.T) {
+func TestDedicatedServerDeleteBandWidthNotificationSettingServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -6876,7 +6876,7 @@ func TestDeleteBandWidthNotificationSettingServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetBandWidthNotificationSetting(t *testing.T) {
+func TestDedicatedServerGetBandWidthNotificationSetting(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -6911,7 +6911,7 @@ func TestGetBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Unit, "Gbps")
 }
 
-func TestGetBandWidthNotificationSettingServerErrors(t *testing.T) {
+func TestDedicatedServerGetBandWidthNotificationSettingServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -7002,7 +7002,7 @@ func TestGetBandWidthNotificationSettingServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdateBandWidthNotificationSetting(t *testing.T) {
+func TestDedicatedServerUpdateBandWidthNotificationSetting(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -7038,7 +7038,7 @@ func TestUpdateBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Unit, "Mbps")
 }
 
-func TestUpdateBandWidthNotificationSettingServerErrors(t *testing.T) {
+func TestDedicatedServerUpdateBandWidthNotificationSettingServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -7134,7 +7134,7 @@ func TestUpdateBandWidthNotificationSettingServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListDataTrafficNotificationSettings(t *testing.T) {
+func TestDedicatedServerListDataTrafficNotificationSettings(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -7205,7 +7205,7 @@ func TestListDataTrafficNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[1].Unit, "GB")
 }
 
-func TestListDataTrafficNotificationSettingsPaginate(t *testing.T) {
+func TestDedicatedServerListDataTrafficNotificationSettingsPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -7253,7 +7253,7 @@ func TestListDataTrafficNotificationSettingsPaginate(t *testing.T) {
 	assert.Equal(resp.Settings[0].Unit, "MB")
 }
 
-func TestListDataTrafficNotificationSettingsServerErrors(t *testing.T) {
+func TestDedicatedServerListDataTrafficNotificationSettingsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -7344,7 +7344,7 @@ func TestListDataTrafficNotificationSettingsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCreateDataTrafficNotificationSetting(t *testing.T) {
+func TestDedicatedServerCreateDataTrafficNotificationSetting(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -7379,7 +7379,7 @@ func TestCreateDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Unit, "GB")
 }
 
-func TestCreateDataTrafficNotificationSettingServerErrors(t *testing.T) {
+func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -7470,7 +7470,7 @@ func TestCreateDataTrafficNotificationSettingServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDeleteDataTrafficNotificationSetting(t *testing.T) {
+func TestDedicatedServerDeleteDataTrafficNotificationSetting(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodDelete, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -7483,7 +7483,7 @@ func TestDeleteDataTrafficNotificationSetting(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestDeleteDataTrafficNotificationSettingServerErrors(t *testing.T) {
+func TestDedicatedServerDeleteDataTrafficNotificationSettingServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -7574,7 +7574,7 @@ func TestDeleteDataTrafficNotificationSettingServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetDataTrafficNotificationSetting(t *testing.T) {
+func TestDedicatedServerGetDataTrafficNotificationSetting(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -7609,7 +7609,7 @@ func TestGetDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Unit, "GB")
 }
 
-func TestGetDataTrafficNotificationSettingServerErrors(t *testing.T) {
+func TestDedicatedServerGetDataTrafficNotificationSettingServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -7700,7 +7700,7 @@ func TestGetDataTrafficNotificationSettingServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdateDataTrafficNotificationSetting(t *testing.T) {
+func TestDedicatedServerUpdateDataTrafficNotificationSetting(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -7736,7 +7736,7 @@ func TestUpdateDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Unit, "GB")
 }
 
-func TestUpdateDataTrafficNotificationSettingServerErrors(t *testing.T) {
+func TestDedicatedServerUpdateDataTrafficNotificationSettingServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -7832,7 +7832,7 @@ func TestUpdateDataTrafficNotificationSettingServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetDdosNotificationSetting(t *testing.T) {
+func TestDedicatedServerGetDdosNotificationSetting(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -7851,7 +7851,7 @@ func TestGetDdosNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Scrubbing, "DISABLED")
 }
 
-func TestGetDdosNotificationSettingServerErrors(t *testing.T) {
+func TestDedicatedServerGetDdosNotificationSettingServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -7942,7 +7942,7 @@ func TestGetDdosNotificationSettingServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdateDdosNotificationSetting(t *testing.T) {
+func TestDedicatedServerUpdateDdosNotificationSetting(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -7955,7 +7955,7 @@ func TestUpdateDdosNotificationSetting(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestUpdateDdosNotificationSettingServerErrors(t *testing.T) {
+func TestDedicatedServerUpdateDdosNotificationSettingServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -8046,7 +8046,7 @@ func TestUpdateDdosNotificationSettingServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestPowerCycleServer(t *testing.T) {
+func TestDedicatedServerPowerCycleServer(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -8059,7 +8059,7 @@ func TestPowerCycleServer(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestPowerCycleServerServerErrors(t *testing.T) {
+func TestDedicatedServerPowerCycleServerServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -8150,7 +8150,7 @@ func TestPowerCycleServerServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestPowerOffServer(t *testing.T) {
+func TestDedicatedServerPowerOffServer(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -8163,7 +8163,7 @@ func TestPowerOffServer(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestPowerOffServerServerErrors(t *testing.T) {
+func TestDedicatedServerPowerOffServerServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -8254,7 +8254,7 @@ func TestPowerOffServerServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestPowerOnServer(t *testing.T) {
+func TestDedicatedServerPowerOnServer(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -8267,7 +8267,7 @@ func TestPowerOnServer(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestPowerOnServerServerErrors(t *testing.T) {
+func TestDedicatedServerPowerOnServerServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -8358,7 +8358,7 @@ func TestPowerOnServerServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetPowerStatus(t *testing.T) {
+func TestDedicatedServerGetPowerStatus(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -8381,7 +8381,7 @@ func TestGetPowerStatus(t *testing.T) {
 	assert.Equal(resp.Pdu.Status, "on")
 }
 
-func TestGetPowerStatusServerErrors(t *testing.T) {
+func TestDedicatedServerGetPowerStatusServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -8472,7 +8472,7 @@ func TestGetPowerStatusServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListOperatingSystems(t *testing.T) {
+func TestDedicatedServerListOperatingSystems(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -8510,7 +8510,7 @@ func TestListOperatingSystems(t *testing.T) {
 	assert.Equal(response.OperatingSystems[1].Name, "CentOS 7 (x86_64)")
 }
 
-func TestListOperatingSystemsPagination(t *testing.T) {
+func TestDedicatedServerListOperatingSystemsPagination(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -8542,7 +8542,7 @@ func TestListOperatingSystemsPagination(t *testing.T) {
 	assert.Equal(response.OperatingSystems[0].Name, "AlmaLinux 8 (x86_64)")
 }
 
-func TestListOperatingSystemsServerErrors(t *testing.T) {
+func TestDedicatedServerListOperatingSystemsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -8616,7 +8616,7 @@ func TestListOperatingSystemsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetOperatingSystem(t *testing.T) {
+func TestDedicatedServerGetOperatingSystem(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -8720,7 +8720,7 @@ func TestGetOperatingSystem(t *testing.T) {
 	assert.Equal(OperatingSystem.Version, "20.04")
 }
 
-func TestGetOperatingSystemServerErrors(t *testing.T) {
+func TestDedicatedServerGetOperatingSystemServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -8794,7 +8794,7 @@ func TestGetOperatingSystemServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListControlPanels(t *testing.T) {
+func TestDedicatedServerListControlPanels(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -8832,7 +8832,7 @@ func TestListControlPanels(t *testing.T) {
 	assert.Equal(response.ControlPanels[1].Name, "cPanel Premier 150")
 }
 
-func TestListControlPanelsPagination(t *testing.T) {
+func TestDedicatedServerListControlPanelsPagination(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -8864,7 +8864,7 @@ func TestListControlPanelsPagination(t *testing.T) {
 	assert.Equal(response.ControlPanels[0].Name, "cPanel Premier 100")
 }
 
-func TestListControlPanelsServerErrors(t *testing.T) {
+func TestDedicatedServerListControlPanelsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -8938,7 +8938,7 @@ func TestListControlPanelsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListRescueImages(t *testing.T) {
+func TestDedicatedServerListRescueImages(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -8976,7 +8976,7 @@ func TestListRescueImages(t *testing.T) {
 	assert.Equal(response.RescueImages[1].Name, "CentOS 7 Linux Rescue Image (amd64)")
 }
 
-func TestListRescueImagesPagination(t *testing.T) {
+func TestDedicatedServerListRescueImagesPagination(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -9008,7 +9008,7 @@ func TestListRescueImagesPagination(t *testing.T) {
 	assert.Equal(response.RescueImages[0].Name, "GRML Linux Rescue Image (amd64)")
 }
 
-func TestListRescueImagesServerErrors(t *testing.T) {
+func TestDedicatedServerListRescueImagesServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",

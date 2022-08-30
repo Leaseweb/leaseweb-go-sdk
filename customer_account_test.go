@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetCustomerAccount(t *testing.T) {
+func TestCustomerAccountGet(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -30,7 +30,7 @@ func TestGetCustomerAccount(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
-	response, err := customerAccountApi.GetCustomerAccount()
+	response, err := customerAccountApi.Get()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -47,7 +47,7 @@ func TestGetCustomerAccount(t *testing.T) {
 	assert.Equal(response.Address.Street, "luttenbergweg")
 }
 
-func TestGetCustomerAccountServerErrors(t *testing.T) {
+func TestCustomerAccountGetServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -58,7 +58,7 @@ func TestGetCustomerAccountServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.GetCustomerAccount()
+				return CustomerAccountApi{}.Get()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -75,7 +75,7 @@ func TestGetCustomerAccountServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.GetCustomerAccount()
+				return CustomerAccountApi{}.Get()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -92,7 +92,7 @@ func TestGetCustomerAccountServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.GetCustomerAccount()
+				return CustomerAccountApi{}.Get()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -109,7 +109,7 @@ func TestGetCustomerAccountServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.GetCustomerAccount()
+				return CustomerAccountApi{}.Get()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -121,7 +121,7 @@ func TestGetCustomerAccountServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdateCustomerAccount(t *testing.T) {
+func TestCustomerAccountUpdate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -130,13 +130,13 @@ func TestUpdateCustomerAccount(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
-	err := customerAccountApi.UpdateCustomerAccount(Address{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+	err := customerAccountApi.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 
 	assert := assert.New(t)
 	assert.Nil(err)
 }
 
-func TestUpdateCustomerAccountServerErrors(t *testing.T) {
+func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -147,7 +147,7 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.UpdateCustomerAccount(Address{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -164,7 +164,7 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.UpdateCustomerAccount(Address{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -181,7 +181,7 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "405", "errorMessage": "AccountDetails modifications are not permitted for USA residents, please contact support for any modification request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.UpdateCustomerAccount(Address{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -198,7 +198,7 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.UpdateCustomerAccount(Address{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -215,7 +215,7 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.UpdateCustomerAccount(Address{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -226,7 +226,7 @@ func TestUpdateCustomerAccountServerErrors(t *testing.T) {
 	}
 	assertServerErrorTests(t, serverErrorTests)
 }
-func TestListContacts(t *testing.T) {
+func TestCustomerAccountListContacts(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -291,7 +291,7 @@ func TestListContacts(t *testing.T) {
 	assert.Equal(contact.Phone.Number, "682212342")
 }
 
-func TestListContactsPaginateAndFilter(t *testing.T) {
+func TestCustomerAccountListContactsPaginateAndFilter(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -356,7 +356,7 @@ func TestListContactsPaginateAndFilter(t *testing.T) {
 	assert.Equal(contact.Phone.Number, "682212342")
 }
 
-func TestListContactsServerErrors(t *testing.T) {
+func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -430,7 +430,7 @@ func TestListContactsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCreateContact(t *testing.T) {
+func TestCustomerAccountCreateContact(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -457,14 +457,14 @@ func TestCreateContact(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
-	newContact := Contact{
+	newContact := CustomerAccountContact{
 		Description: "Mr.",
 		Email:       "john@doe.com",
 		FirstName:   "John",
 		LastName:    "Doe",
 		Roles:       []string{"GENERAL", "TECHNICAL", "BILLING"},
-		Mobile:      Phone{CountryCode: "NL", Number: "682212341"},
-		Phone:       Phone{CountryCode: "NL", Number: "682212342"},
+		Mobile:      CustomerAccountPhone{CountryCode: "NL", Number: "682212341"},
+		Phone:       CustomerAccountPhone{CountryCode: "NL", Number: "682212342"},
 	}
 	resp, err := customerAccountApi.CreateContact(newContact)
 
@@ -482,7 +482,7 @@ func TestCreateContact(t *testing.T) {
 	assert.Equal(resp.Phone.Number, "682212342")
 }
 
-func TestCreateContactServerErrors(t *testing.T) {
+func TestCustomerAccountCreateContactServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -493,14 +493,14 @@ func TestCreateContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				newContact := Contact{
+				newContact := CustomerAccountContact{
 					Description: "Mr.",
 					Email:       "john@doe.com",
 					FirstName:   "John",
 					LastName:    "Doe",
 					Roles:       []string{"GENERAL", "TECHNICAL", "BILLING"},
-					Mobile:      Phone{CountryCode: "NL", Number: "682212341"},
-					Phone:       Phone{CountryCode: "NL", Number: "682212342"},
+					Mobile:      CustomerAccountPhone{CountryCode: "NL", Number: "682212341"},
+					Phone:       CustomerAccountPhone{CountryCode: "NL", Number: "682212342"},
 				}
 				return CustomerAccountApi{}.CreateContact(newContact)
 			},
@@ -519,14 +519,14 @@ func TestCreateContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				newContact := Contact{
+				newContact := CustomerAccountContact{
 					Description: "Mr.",
 					Email:       "john@doe.com",
 					FirstName:   "John",
 					LastName:    "Doe",
 					Roles:       []string{"GENERAL", "TECHNICAL", "BILLING"},
-					Mobile:      Phone{CountryCode: "NL", Number: "682212341"},
-					Phone:       Phone{CountryCode: "NL", Number: "682212342"},
+					Mobile:      CustomerAccountPhone{CountryCode: "NL", Number: "682212341"},
+					Phone:       CustomerAccountPhone{CountryCode: "NL", Number: "682212342"},
 				}
 				return CustomerAccountApi{}.CreateContact(newContact)
 			},
@@ -545,14 +545,14 @@ func TestCreateContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				newContact := Contact{
+				newContact := CustomerAccountContact{
 					Description: "Mr.",
 					Email:       "john@doe.com",
 					FirstName:   "John",
 					LastName:    "Doe",
 					Roles:       []string{"GENERAL", "TECHNICAL", "BILLING"},
-					Mobile:      Phone{CountryCode: "NL", Number: "682212341"},
-					Phone:       Phone{CountryCode: "NL", Number: "682212342"},
+					Mobile:      CustomerAccountPhone{CountryCode: "NL", Number: "682212341"},
+					Phone:       CustomerAccountPhone{CountryCode: "NL", Number: "682212342"},
 				}
 				return CustomerAccountApi{}.CreateContact(newContact)
 			},
@@ -571,14 +571,14 @@ func TestCreateContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				newContact := Contact{
+				newContact := CustomerAccountContact{
 					Description: "Mr.",
 					Email:       "john@doe.com",
 					FirstName:   "John",
 					LastName:    "Doe",
 					Roles:       []string{"GENERAL", "TECHNICAL", "BILLING"},
-					Mobile:      Phone{CountryCode: "NL", Number: "682212341"},
-					Phone:       Phone{CountryCode: "NL", Number: "682212342"},
+					Mobile:      CustomerAccountPhone{CountryCode: "NL", Number: "682212341"},
+					Phone:       CustomerAccountPhone{CountryCode: "NL", Number: "682212342"},
 				}
 				return CustomerAccountApi{}.CreateContact(newContact)
 			},
@@ -592,7 +592,7 @@ func TestCreateContactServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDeleteContact(t *testing.T) {
+func TestCustomerAccountDeleteContact(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodDelete, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -607,7 +607,7 @@ func TestDeleteContact(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestDeleteContactServerErrors(t *testing.T) {
+func TestCustomerAccountDeleteContactServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -681,7 +681,7 @@ func TestDeleteContactServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetContact(t *testing.T) {
+func TestCustomerAccountGetContact(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -737,7 +737,7 @@ func TestGetContact(t *testing.T) {
 	assert.Equal(response.Phone.Number, "682212342")
 }
 
-func TestGetContactServerErrors(t *testing.T) {
+func TestCustomerAccountGetContactServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -811,7 +811,7 @@ func TestGetContactServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdateContact(t *testing.T) {
+func TestCustomerAccountUpdateContact(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -822,16 +822,16 @@ func TestUpdateContact(t *testing.T) {
 	customerAccountApi := CustomerAccountApi{}
 	err := customerAccountApi.UpdateContact(
 		"contact-id",
-		Phone{CountryCode: "NL", Number: "653388213"},
+		CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 		[]string{"GENERAL", "TECHNICAL"},
-		Phone{CountryCode: "NL", Number: "653388214"},
+		CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
 		"Description",
 	)
 	assert := assert.New(t)
 	assert.Nil(err)
 }
 
-func TestUpdateContactServerErrors(t *testing.T) {
+func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -844,9 +844,9 @@ func TestUpdateContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.UpdateContact(
 					"contact-id",
-					Phone{CountryCode: "NL", Number: "653388213"},
+					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
-					Phone{CountryCode: "NL", Number: "653388214"},
+					CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
 					"Description",
 				)
 			},
@@ -867,9 +867,9 @@ func TestUpdateContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.UpdateContact(
 					"contact-id",
-					Phone{CountryCode: "NL", Number: "653388213"},
+					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
-					Phone{CountryCode: "NL", Number: "653388214"},
+					CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
 					"Description",
 				)
 			},
@@ -890,9 +890,9 @@ func TestUpdateContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.UpdateContact(
 					"contact-id",
-					Phone{CountryCode: "NL", Number: "653388213"},
+					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
-					Phone{CountryCode: "NL", Number: "653388214"},
+					CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
 					"Description",
 				)
 			},
@@ -913,9 +913,9 @@ func TestUpdateContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.UpdateContact(
 					"contact-id",
-					Phone{CountryCode: "NL", Number: "653388213"},
+					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
-					Phone{CountryCode: "NL", Number: "653388214"},
+					CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
 					"Description",
 				)
 			},
@@ -936,9 +936,9 @@ func TestUpdateContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.UpdateContact(
 					"contact-id",
-					Phone{CountryCode: "NL", Number: "653388213"},
+					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
-					Phone{CountryCode: "NL", Number: "653388214"},
+					CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
 					"Description",
 				)
 			},
@@ -952,7 +952,7 @@ func TestUpdateContactServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestAssignPrimaryRolesToContact(t *testing.T) {
+func TestCustomerAccountAssignPrimaryRolesToContact(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -969,7 +969,7 @@ func TestAssignPrimaryRolesToContact(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestAssignPrimaryRolesToContactServerErrors(t *testing.T) {
+func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",

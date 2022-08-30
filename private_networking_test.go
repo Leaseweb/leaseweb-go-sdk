@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestListPrivateNetworks(t *testing.T) {
+func TestPrivateNetworkList(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -31,7 +31,7 @@ func TestListPrivateNetworks(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := PrivateNetworkingApi{}.ListPrivateNetworks()
+	response, err := PrivateNetworkingApi{}.List()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -48,7 +48,7 @@ func TestListPrivateNetworks(t *testing.T) {
 	assert.Equal(PrivateNetwork.UpdatedAt, "2015-07-16T13:06:45+0200")
 }
 
-func TestListPrivateNetworksPaginate(t *testing.T) {
+func TestPrivateNetworkListPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -71,7 +71,7 @@ func TestListPrivateNetworksPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := PrivateNetworkingApi{}.ListPrivateNetworks(1)
+	response, err := PrivateNetworkingApi{}.List(1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -88,7 +88,7 @@ func TestListPrivateNetworksPaginate(t *testing.T) {
 	assert.Equal(PrivateNetwork.UpdatedAt, "2015-07-16T13:06:45+0200")
 }
 
-func TestListPrivateNetworksServerErrors(t *testing.T) {
+func TestPrivateNetworkListServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -99,7 +99,7 @@ func TestListPrivateNetworksServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.ListPrivateNetworks()
+				return PrivateNetworkingApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -116,7 +116,7 @@ func TestListPrivateNetworksServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.ListPrivateNetworks()
+				return PrivateNetworkingApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -133,7 +133,7 @@ func TestListPrivateNetworksServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.ListPrivateNetworks()
+				return PrivateNetworkingApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -150,7 +150,7 @@ func TestListPrivateNetworksServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.ListPrivateNetworks()
+				return PrivateNetworkingApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -162,7 +162,7 @@ func TestListPrivateNetworksServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCreatePrivateNetwork(t *testing.T) {
+func TestPrivateNetworkCreate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -177,7 +177,7 @@ func TestCreatePrivateNetwork(t *testing.T) {
 	})
 	defer teardown()
 
-	PrivateNetwork, err := PrivateNetworkingApi{}.CreatePrivateNetwork("production")
+	PrivateNetwork, err := PrivateNetworkingApi{}.Create("production")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -189,7 +189,7 @@ func TestCreatePrivateNetwork(t *testing.T) {
 	assert.Equal(len(PrivateNetwork.Servers), 0)
 }
 
-func TestCreatePrivateNetworkServerErrors(t *testing.T) {
+func TestPrivateNetworkCreateServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -200,7 +200,7 @@ func TestCreatePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.CreatePrivateNetwork("production")
+				return PrivateNetworkingApi{}.Create("production")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -217,7 +217,7 @@ func TestCreatePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.CreatePrivateNetwork("production")
+				return PrivateNetworkingApi{}.Create("production")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -234,7 +234,7 @@ func TestCreatePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.CreatePrivateNetwork("production")
+				return PrivateNetworkingApi{}.Create("production")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -251,7 +251,7 @@ func TestCreatePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.CreatePrivateNetwork("production")
+				return PrivateNetworkingApi{}.Create("production")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -263,7 +263,7 @@ func TestCreatePrivateNetworkServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetPrivateNetwork(t *testing.T) {
+func TestPrivateNetworkGet(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -276,7 +276,7 @@ func TestGetPrivateNetwork(t *testing.T) {
 	})
 	defer teardown()
 
-	PrivateNetwork, err := PrivateNetworkingApi{}.GetPrivateNetwork("12345")
+	PrivateNetwork, err := PrivateNetworkingApi{}.Get("12345")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -286,7 +286,7 @@ func TestGetPrivateNetwork(t *testing.T) {
 	assert.Equal(PrivateNetwork.UpdatedAt, "2015-01-21T14:34:12+0000")
 }
 
-func TestGetPrivateNetworkServerErrors(t *testing.T) {
+func TestPrivateNetworkGetServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -297,7 +297,7 @@ func TestGetPrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.GetPrivateNetwork("12345")
+				return PrivateNetworkingApi{}.Get("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -314,7 +314,7 @@ func TestGetPrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.GetPrivateNetwork("12345")
+				return PrivateNetworkingApi{}.Get("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -331,7 +331,7 @@ func TestGetPrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.GetPrivateNetwork("12345")
+				return PrivateNetworkingApi{}.Get("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -348,7 +348,7 @@ func TestGetPrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.GetPrivateNetwork("12345")
+				return PrivateNetworkingApi{}.Get("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -360,7 +360,7 @@ func TestGetPrivateNetworkServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdatePrivateNetwork(t *testing.T) {
+func TestPrivateNetworkUpdate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -375,7 +375,7 @@ func TestUpdatePrivateNetwork(t *testing.T) {
 	})
 	defer teardown()
 
-	PrivateNetwork, err := PrivateNetworkingApi{}.UpdatePrivateNetwork("12345", "production")
+	PrivateNetwork, err := PrivateNetworkingApi{}.Update("12345", "production")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -387,7 +387,7 @@ func TestUpdatePrivateNetwork(t *testing.T) {
 	assert.Equal(len(PrivateNetwork.Servers), 0)
 }
 
-func TestUpdatePrivateNetworkServerErrors(t *testing.T) {
+func TestPrivateNetworkUpdateServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -398,7 +398,7 @@ func TestUpdatePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.UpdatePrivateNetwork("12345", "production")
+				return PrivateNetworkingApi{}.Update("12345", "production")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -415,7 +415,7 @@ func TestUpdatePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.UpdatePrivateNetwork("12345", "production")
+				return PrivateNetworkingApi{}.Update("12345", "production")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -432,7 +432,7 @@ func TestUpdatePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.UpdatePrivateNetwork("12345", "production")
+				return PrivateNetworkingApi{}.Update("12345", "production")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -449,7 +449,7 @@ func TestUpdatePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.UpdatePrivateNetwork("12345", "production")
+				return PrivateNetworkingApi{}.Update("12345", "production")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -461,7 +461,7 @@ func TestUpdatePrivateNetworkServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDeletePrivateNetwork(t *testing.T) {
+func TestPrivateNetworkDelete(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodDelete, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -469,13 +469,13 @@ func TestDeletePrivateNetwork(t *testing.T) {
 	})
 	defer teardown()
 
-	err := PrivateNetworkingApi{}.DeletePrivateNetwork("12345")
+	err := PrivateNetworkingApi{}.Delete("12345")
 
 	assert := assert.New(t)
 	assert.Nil(err)
 }
 
-func TestDeletePrivateNetworkServerErrors(t *testing.T) {
+func TestPrivateNetworkDeleteServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -486,7 +486,7 @@ func TestDeletePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.DeletePrivateNetwork("12345")
+				return nil, PrivateNetworkingApi{}.Delete("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -503,7 +503,7 @@ func TestDeletePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.DeletePrivateNetwork("12345")
+				return nil, PrivateNetworkingApi{}.Delete("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -520,7 +520,7 @@ func TestDeletePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.DeletePrivateNetwork("12345")
+				return nil, PrivateNetworkingApi{}.Delete("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -537,7 +537,7 @@ func TestDeletePrivateNetworkServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.DeletePrivateNetwork("12345")
+				return nil, PrivateNetworkingApi{}.Delete("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -549,7 +549,7 @@ func TestDeletePrivateNetworkServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListDhcpReservations(t *testing.T) {
+func TestPrivateNetworkListDhcpReservations(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -585,7 +585,7 @@ func TestListDhcpReservations(t *testing.T) {
 	assert.Equal(DhcpReservation.Sticky, true)
 }
 
-func TestListDhcpReservationsPaginate(t *testing.T) {
+func TestPrivateNetworkListDhcpReservationsPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -621,7 +621,7 @@ func TestListDhcpReservationsPaginate(t *testing.T) {
 	assert.Equal(DhcpReservation.Sticky, true)
 }
 
-func TestListDhcpReservationsServerErrors(t *testing.T) {
+func TestPrivateNetworkListDhcpReservationsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -695,7 +695,7 @@ func TestListDhcpReservationsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestPrivateNetworkingCreateDhcpReservation(t *testing.T) {
+func TestPrivateNetworkCreateDhcpReservation(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -716,7 +716,7 @@ func TestPrivateNetworkingCreateDhcpReservation(t *testing.T) {
 	assert.Equal(DhcpReservation.Sticky, true)
 }
 
-func TestPrivateNetworkingCreateDhcpReservationServerErrors(t *testing.T) {
+func TestPrivateNetworkCreateDhcpReservationServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -790,7 +790,7 @@ func TestPrivateNetworkingCreateDhcpReservationServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestPrivateNetworkingDeleteDhcpReservation(t *testing.T) {
+func TestPrivateNetworkDeleteDhcpReservation(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodDelete, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -804,7 +804,7 @@ func TestPrivateNetworkingDeleteDhcpReservation(t *testing.T) {
 	assert.Nil(err)
 }
 
-func TestPrivateNetworkingDeleteDhcpReservationServerErrors(t *testing.T) {
+func TestPrivateNetworkDeleteDhcpReservationServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",

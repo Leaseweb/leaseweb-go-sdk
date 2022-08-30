@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestListPrivateClouds(t *testing.T) {
+func TestPrivateCloudList(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -60,7 +60,7 @@ func TestListPrivateClouds(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.ListPrivateClouds()
+	response, err := privateCloudApi.List()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -96,7 +96,7 @@ func TestListPrivateClouds(t *testing.T) {
 	assert.Equal(privateCloud1.NetworkTraffic.Type, "DATATRAFFIC")
 }
 
-func TestListPrivateCloudsBeEmpty(t *testing.T) {
+func TestPrivateCloudListBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		if h := r.Header.Get("x-lsw-auth"); h != "test-api-key" {
 			t.Errorf("request did not have x-lsw-auth header set!")
@@ -106,7 +106,7 @@ func TestListPrivateCloudsBeEmpty(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.ListPrivateClouds()
+	response, err := privateCloudApi.List()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -116,7 +116,7 @@ func TestListPrivateCloudsBeEmpty(t *testing.T) {
 	assert.Equal(len(response.PrivateClouds), 0)
 }
 
-func TestListPrivateCloudsPaginate(t *testing.T) {
+func TestPrivateCloudListPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -125,7 +125,7 @@ func TestListPrivateCloudsPaginate(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.ListPrivateClouds(10, 20)
+	response, err := privateCloudApi.List(10, 20)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -135,7 +135,7 @@ func TestListPrivateCloudsPaginate(t *testing.T) {
 	assert.Equal(len(response.PrivateClouds), 0)
 }
 
-func TestListPrivateCloudsServerErrors(t *testing.T) {
+func TestPrivateCloudListServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -146,7 +146,7 @@ func TestListPrivateCloudsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.ListPrivateClouds()
+				return PrivateCloudApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -162,7 +162,7 @@ func TestListPrivateCloudsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.ListPrivateClouds()
+				return PrivateCloudApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "SERVER_ERROR",
@@ -178,7 +178,7 @@ func TestListPrivateCloudsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.ListPrivateClouds()
+				return PrivateCloudApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
@@ -189,7 +189,7 @@ func TestListPrivateCloudsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetPrivateCloud(t *testing.T) {
+func TestPrivateCloudGet(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -239,7 +239,7 @@ func TestGetPrivateCloud(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetPrivateCloud("218030")
+	response, err := privateCloudApi.Get("218030")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -270,7 +270,7 @@ func TestGetPrivateCloud(t *testing.T) {
 	assert.Equal(response.NetworkTraffic.Type, "DATATRAFFIC")
 }
 
-func TestGetPrivateCloudServerErrors(t *testing.T) {
+func TestPrivateCloudGetServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -281,7 +281,7 @@ func TestGetPrivateCloudServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetPrivateCloud("218030")
+				return PrivateCloudApi{}.Get("218030")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -297,7 +297,7 @@ func TestGetPrivateCloudServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetPrivateCloud("218030")
+				return PrivateCloudApi{}.Get("218030")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "404",
@@ -314,7 +314,7 @@ func TestGetPrivateCloudServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetPrivateCloud("218030")
+				return PrivateCloudApi{}.Get("218030")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "SERVER_ERROR",
@@ -330,7 +330,7 @@ func TestGetPrivateCloudServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetPrivateCloud("218030")
+				return PrivateCloudApi{}.Get("218030")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
@@ -341,7 +341,7 @@ func TestGetPrivateCloudServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListCredentials(t *testing.T) {
+func TestPrivateCloudListCredentials(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -371,7 +371,7 @@ func TestListCredentials(t *testing.T) {
 	assert.Equal(credential.Domain, "123456")
 }
 
-func TestListCredentialsBeEmpty(t *testing.T) {
+func TestPrivateCloudListCredentialsBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -390,7 +390,7 @@ func TestListCredentialsBeEmpty(t *testing.T) {
 	assert.Equal(len(response.Credentials), 0)
 }
 
-func TestListCredentialsPaginate(t *testing.T) {
+func TestPrivateCloudListCredentialsPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -422,7 +422,7 @@ func TestListCredentialsPaginate(t *testing.T) {
 	assert.Equal(credential.Domain, "123456")
 }
 
-func TestListCredentialsServerErrors(t *testing.T) {
+func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -493,7 +493,7 @@ func TestListCredentialsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetCredential(t *testing.T) {
+func TestPrivateCloudGetCredential(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -518,7 +518,7 @@ func TestGetCredential(t *testing.T) {
 	assert.Equal(response.Domain, "123456")
 }
 
-func TestGetCredentialServerErrors(t *testing.T) {
+func TestPrivateCloudGetCredentialServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -589,7 +589,7 @@ func TestGetCredentialServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetDataTrafficMetrics(t *testing.T) {
+func TestPrivateCloudGetDataTrafficMetrics(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -654,7 +654,7 @@ func TestGetDataTrafficMetrics(t *testing.T) {
 	assert.Equal(response.Metric.UpPublic.Values[1].Value, 2500)
 }
 
-func TestGetDataTrafficMetricsWithFilter(t *testing.T) {
+func TestPrivateCloudGetDataTrafficMetricsWithFilter(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -719,7 +719,7 @@ func TestGetDataTrafficMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metric.UpPublic.Values[1].Value, 2500)
 }
 
-func TestGetDataTrafficMetricsServerErrors(t *testing.T) {
+func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -790,7 +790,7 @@ func TestGetDataTrafficMetricsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetBandWidthMetrics(t *testing.T) {
+func TestPrivateCloudGetBandWidthMetrics(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -855,7 +855,7 @@ func TestGetBandWidthMetrics(t *testing.T) {
 	assert.Equal(response.Metric.UpPublic.Values[1].Value, 158317519)
 }
 
-func TestGetBandWidthMetricsWithFilter(t *testing.T) {
+func TestPrivateCloudGetBandWidthMetricsWithFilter(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -920,7 +920,7 @@ func TestGetBandWidthMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metric.UpPublic.Values[1].Value, 158317519)
 }
 
-func TestGetBandWidthMetricsServerErrors(t *testing.T) {
+func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -991,7 +991,7 @@ func TestGetBandWidthMetricsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetCpuMetrics(t *testing.T) {
+func TestPrivateCloudGetCpuMetrics(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1038,7 +1038,7 @@ func TestGetCpuMetrics(t *testing.T) {
 	assert.Equal(response.Metric.Cpu.Values[1].Value, 24)
 }
 
-func TestGetCpuMetricsWithFilter(t *testing.T) {
+func TestPrivateCloudGetCpuMetricsWithFilter(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1085,7 +1085,7 @@ func TestGetCpuMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metric.Cpu.Values[1].Value, 24)
 }
 
-func TestGetCpuMetricsServerErrors(t *testing.T) {
+func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -1156,7 +1156,7 @@ func TestGetCpuMetricsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetMemoryMetrics(t *testing.T) {
+func TestPrivateCloudGetMemoryMetrics(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1203,7 +1203,7 @@ func TestGetMemoryMetrics(t *testing.T) {
 	assert.Equal(response.Metric.Memory.Values[1].Value, 16)
 }
 
-func TestGetMemoryMetricsWithFilter(t *testing.T) {
+func TestPrivateCloudGetMemoryMetricsWithFilter(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1250,7 +1250,7 @@ func TestGetMemoryMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metric.Memory.Values[1].Value, 16)
 }
 
-func TestGetMemoryMetricsServerErrors(t *testing.T) {
+func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -1321,7 +1321,7 @@ func TestGetMemoryMetricsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetStorageMetrics(t *testing.T) {
+func TestPrivateCloudGetStorageMetrics(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1368,7 +1368,7 @@ func TestGetStorageMetrics(t *testing.T) {
 	assert.Equal(response.Metric.Storage.Values[1].Value, 2500)
 }
 
-func TestGetStorageMetricsWithFilter(t *testing.T) {
+func TestPrivateCloudGetStorageMetricsWithFilter(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -1415,7 +1415,7 @@ func TestGetStorageMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metric.Storage.Values[1].Value, 2500)
 }
 
-func TestGetStorageMetricsServerErrors(t *testing.T) {
+func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",

@@ -10,12 +10,12 @@ const REMOTE_MANAGEMENT_API_VERSION = "v2"
 
 type RemoteManagementApi struct{}
 
-type Profiles struct {
-	Metadata Metadata  `json:"_metadata"`
-	Profiles []Profile `json:"profiles"`
+type RemoteManagementProfiles struct {
+	Metadata Metadata                  `json:"_metadata"`
+	Profiles []RemoteManagementProfile `json:"profiles"`
 }
 
-type Profile struct {
+type RemoteManagementProfile struct {
 	DataCenter           string   `json:"datacenter"`
 	File                 string   `json:"file"`
 	SatelliteDataCenters []string `json:"satelliteDatacenters"`
@@ -31,7 +31,7 @@ func (rma RemoteManagementApi) ChangeCredentials(password string) error {
 	return doRequest(http.MethodPost, path, nil, payload)
 }
 
-func (rma RemoteManagementApi) ListProfiles(args ...int) (*Profiles, error) {
+func (rma RemoteManagementApi) ListProfiles(args ...int) (*RemoteManagementProfiles, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -41,24 +41,9 @@ func (rma RemoteManagementApi) ListProfiles(args ...int) (*Profiles, error) {
 	}
 
 	path := rma.getPath("/remoteManagement/profiles" + v.Encode())
-	result := &Profiles{}
+	result := &RemoteManagementProfiles{}
 	if err := doRequest(http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
-
-// TODO: GetProfile should be tested
-// func (rma RemoteManagementApi) GetProfile(datacenter string) (Profile, error) {
-// 	profile := &Profile{}
-// 	r := leasewebRequest{
-// 		response: profile,
-// 		method:   GET,
-// 		endpoint: rma.GetPath() + "/" + rma.GetVersion() + "/remoteManagement/profiles/lsw-rmvpn-" + datacenter + ".ovpn",
-// 	}
-// 	err := doRequest(r)
-// 	if err != nil {
-// 		return Profile{}, err
-// 	}
-// 	return *profile, nil
-// }

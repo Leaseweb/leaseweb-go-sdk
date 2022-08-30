@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestListAbuseReports(t *testing.T) {
+func TestAbuseList(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -40,16 +40,16 @@ func TestListAbuseReports(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.ListAbuseReports()
+	response, err := abuseApi.List()
 
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
 	assert.Equal(response.Metadata.Offset, 0)
 	assert.Equal(response.Metadata.Limit, 10)
-	assert.Equal(len(response.AbuseReports), 2)
+	assert.Equal(len(response.Reports), 2)
 
-	abuseReport1 := response.AbuseReports[0]
+	abuseReport1 := response.Reports[0]
 	assert.Equal(abuseReport1.Id, "000000")
 	assert.Equal(abuseReport1.Subject, "Report description 1")
 	assert.Equal(abuseReport1.Status, "OPEN")
@@ -60,7 +60,7 @@ func TestListAbuseReports(t *testing.T) {
 	assert.Equal(abuseReport1.LegalEntityId, "2000")
 	assert.Equal(abuseReport1.Deadline, "2022-03-01T00:00:00+00:00")
 
-	abuseReport2 := response.AbuseReports[1]
+	abuseReport2 := response.Reports[1]
 	assert.Equal(abuseReport2.Id, "000001")
 	assert.Equal(abuseReport2.Subject, "Report description 2")
 	assert.Equal(abuseReport2.Status, "CLOSED")
@@ -72,7 +72,7 @@ func TestListAbuseReports(t *testing.T) {
 	assert.Equal(abuseReport2.Deadline, "2022-05-01T00:00:00+00:00")
 }
 
-func TestListAbuseReportsPaginateAndPassStatuses(t *testing.T) {
+func TestAbuseListPaginateAndPassStatuses(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -94,16 +94,16 @@ func TestListAbuseReportsPaginateAndPassStatuses(t *testing.T) {
 
 	abuseApi := AbuseApi{}
 
-	response, err := abuseApi.ListAbuseReports(1, [2]string{"OPEN", "WAITING"})
+	response, err := abuseApi.List(1, [2]string{"OPEN", "WAITING"})
 
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
 	assert.Equal(response.Metadata.Offset, 1)
 	assert.Equal(response.Metadata.Limit, 10)
-	assert.Equal(len(response.AbuseReports), 1)
+	assert.Equal(len(response.Reports), 1)
 
-	abuseReport1 := response.AbuseReports[0]
+	abuseReport1 := response.Reports[0]
 	assert.Equal(abuseReport1.Id, "000000")
 	assert.Equal(abuseReport1.Subject, "Report description 1")
 	assert.Equal(abuseReport1.Status, "OPEN")
@@ -115,7 +115,7 @@ func TestListAbuseReportsPaginateAndPassStatuses(t *testing.T) {
 	assert.Equal(abuseReport1.Deadline, "2022-03-01T00:00:00+00:00")
 }
 
-func TestListAbuseReportsBeEmpty(t *testing.T) {
+func TestAbuseListBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -124,17 +124,17 @@ func TestListAbuseReportsBeEmpty(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.ListAbuseReports()
+	response, err := abuseApi.List()
 
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
 	assert.Equal(response.Metadata.Offset, 0)
 	assert.Equal(response.Metadata.Limit, 10)
-	assert.Equal(len(response.AbuseReports), 0)
+	assert.Equal(len(response.Reports), 0)
 }
 
-func TestListAbuseReportsServerErrors(t *testing.T) {
+func TestAbuseListServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -145,7 +145,7 @@ func TestListAbuseReportsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListAbuseReports()
+				return AbuseApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -161,7 +161,7 @@ func TestListAbuseReportsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListAbuseReports()
+				return AbuseApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "SERVER_ERROR",
@@ -177,7 +177,7 @@ func TestListAbuseReportsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListAbuseReports()
+				return AbuseApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
@@ -188,7 +188,7 @@ func TestListAbuseReportsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetAbuseReport(t *testing.T) {
+func TestAbuseGet(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -245,7 +245,7 @@ func TestGetAbuseReport(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.GetAbuseReport("000005")
+	response, err := abuseApi.Get("000005")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -285,7 +285,7 @@ func TestGetAbuseReport(t *testing.T) {
 	assert.Equal(message2.Attachment.Filename, "notification.png")
 }
 
-func TestGetAbuseReportServerErrors(t *testing.T) {
+func TestAbuseGetServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -296,7 +296,7 @@ func TestGetAbuseReportServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.GetAbuseReport("wrong-id")
+				return AbuseApi{}.Get("wrong-id")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -312,7 +312,7 @@ func TestGetAbuseReportServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.GetAbuseReport("123456")
+				return AbuseApi{}.Get("123456")
 			},
 			ExpectedError: LeasewebError{},
 		},
@@ -325,7 +325,7 @@ func TestGetAbuseReportServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.GetAbuseReport("123456")
+				return AbuseApi{}.Get("123456")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "SERVER_ERROR",
@@ -341,7 +341,7 @@ func TestGetAbuseReportServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.GetAbuseReport("123456")
+				return AbuseApi{}.Get("123456")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
@@ -352,7 +352,7 @@ func TestGetAbuseReportServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListAbuseReportMessages(t *testing.T) {
+func TestAbuseListMessages(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -377,7 +377,7 @@ func TestListAbuseReportMessages(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.ListAbuseReportMessages("123456789")
+	response, err := abuseApi.ListMessages("123456789")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -401,7 +401,7 @@ func TestListAbuseReportMessages(t *testing.T) {
 	assert.Equal(message2.Attachment.Filename, "notification.png")
 }
 
-func TestListAbuseReportMessagesPaginate(t *testing.T) {
+func TestAbuseListMessagesPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -421,7 +421,7 @@ func TestListAbuseReportMessagesPaginate(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.ListAbuseReportMessages("123456789", 1)
+	response, err := abuseApi.ListMessages("123456789", 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -440,7 +440,7 @@ func TestListAbuseReportMessagesPaginate(t *testing.T) {
 	assert.Equal(message1.Attachment.Filename, "notification.png")
 }
 
-func TestListAbuseReportMessagesBeEmpty(t *testing.T) {
+func TestAbuseListMessagesBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -449,7 +449,7 @@ func TestListAbuseReportMessagesBeEmpty(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.ListAbuseReportMessages("123456789")
+	response, err := abuseApi.ListMessages("123456789")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -459,7 +459,7 @@ func TestListAbuseReportMessagesBeEmpty(t *testing.T) {
 	assert.Equal(response.Metadata.Limit, 10)
 }
 
-func TestListAbuseReportMessagesServerErrors(t *testing.T) {
+func TestAbuseListMessagesServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -470,7 +470,7 @@ func TestListAbuseReportMessagesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListAbuseReportMessages("123456789")
+				return AbuseApi{}.ListMessages("123456789")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -486,7 +486,7 @@ func TestListAbuseReportMessagesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListAbuseReportMessages("123456789")
+				return AbuseApi{}.ListMessages("123456789")
 			},
 			ExpectedError: LeasewebError{},
 		},
@@ -499,7 +499,7 @@ func TestListAbuseReportMessagesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListAbuseReportMessages("123456789")
+				return AbuseApi{}.ListMessages("123456789")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "SERVER_ERROR",
@@ -515,7 +515,7 @@ func TestListAbuseReportMessagesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListAbuseReportMessages("123456789")
+				return AbuseApi{}.ListMessages("123456789")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
@@ -526,7 +526,7 @@ func TestListAbuseReportMessagesServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCreateAbuseReportMessage(t *testing.T) {
+func TestAbuseCreateMessage(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -536,14 +536,14 @@ func TestCreateAbuseReportMessage(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	resp, err := abuseApi.CreateAbuseReportMessage("123456789", "message body...")
+	resp, err := abuseApi.CreateMessage("123456789", "message body...")
 
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp[0], "To make sure the request has been processed please see if the message is added to the list.")
 }
 
-func TestCreateAbuseReportMessageServerErrors(t *testing.T) {
+func TestAbuseCreateMessageServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -554,7 +554,7 @@ func TestCreateAbuseReportMessageServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.CreateAbuseReportMessage("123456789", "message body...")
+				return AbuseApi{}.CreateMessage("123456789", "message body...")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -570,7 +570,7 @@ func TestCreateAbuseReportMessageServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.CreateAbuseReportMessage("123456789", "message body...")
+				return AbuseApi{}.CreateMessage("123456789", "message body...")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "SERVER_ERROR",
@@ -586,7 +586,7 @@ func TestCreateAbuseReportMessageServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.CreateAbuseReportMessage("123456789", "message body...")
+				return AbuseApi{}.CreateMessage("123456789", "message body...")
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
@@ -597,7 +597,7 @@ func TestCreateAbuseReportMessageServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListResolutionOptions(t *testing.T) {
+func TestAbuseListResolutionOptions(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -633,7 +633,7 @@ func TestListResolutionOptions(t *testing.T) {
 	assert.Equal(response.Resolutions[3].Id, "DUPLICATE")
 }
 
-func TestListResolutionOptionsBeEmpty(t *testing.T) {
+func TestAbuseListResolutionOptionsBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -649,7 +649,7 @@ func TestListResolutionOptionsBeEmpty(t *testing.T) {
 	assert.Empty(response.Resolutions)
 }
 
-func TestListResolutionOptionsServerErrors(t *testing.T) {
+func TestAbuseListResolutionOptionsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -703,7 +703,7 @@ func TestListResolutionOptionsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestResolveAbuseReport(t *testing.T) {
+func TestAbuseResolve(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -712,13 +712,13 @@ func TestResolveAbuseReport(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	err := abuseApi.ResolveAbuseReport("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+	err := abuseApi.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 
 	assert := assert.New(t)
 	assert.Nil(err)
 }
 
-func TestResolveAbuseReportServerErrors(t *testing.T) {
+func TestAbuseResolveServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -729,7 +729,7 @@ func TestResolveAbuseReportServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, AbuseApi{}.ResolveAbuseReport("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+				return nil, AbuseApi{}.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -745,7 +745,7 @@ func TestResolveAbuseReportServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, AbuseApi{}.ResolveAbuseReport("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+				return nil, AbuseApi{}.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "SERVER_ERROR",
@@ -761,7 +761,7 @@ func TestResolveAbuseReportServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, AbuseApi{}.ResolveAbuseReport("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+				return nil, AbuseApi{}.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
 			ExpectedError: LeasewebError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",

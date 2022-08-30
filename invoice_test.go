@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestListInvoices(t *testing.T) {
+func TestInvoiceList(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -40,7 +40,7 @@ func TestListInvoices(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.ListInvoices()
+	response, err := invoiceApi.List()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -71,7 +71,7 @@ func TestListInvoices(t *testing.T) {
 	assert.Equal(invoices2.Total, float32(34))
 }
 
-func TestListInvoicesBeEmpty(t *testing.T) {
+func TestInvoiceListBeEmpty(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -80,7 +80,7 @@ func TestListInvoicesBeEmpty(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.ListInvoices()
+	response, err := invoiceApi.List()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -90,7 +90,7 @@ func TestListInvoicesBeEmpty(t *testing.T) {
 	assert.Equal(len(response.Invoices), 0)
 }
 
-func TestListInvoicesPaginate(t *testing.T) {
+func TestInvoiceListPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -99,7 +99,7 @@ func TestListInvoicesPaginate(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.ListInvoices(1)
+	response, err := invoiceApi.List(1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -109,7 +109,7 @@ func TestListInvoicesPaginate(t *testing.T) {
 	assert.Equal(len(response.Invoices), 1)
 }
 
-func TestListInvoicesServerErrors(t *testing.T) {
+func TestInvoiceListServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -120,7 +120,7 @@ func TestListInvoicesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.ListInvoices()
+				return InvoiceApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -137,7 +137,7 @@ func TestListInvoicesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.ListInvoices()
+				return InvoiceApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -154,7 +154,7 @@ func TestListInvoicesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.ListInvoices()
+				return InvoiceApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -171,7 +171,7 @@ func TestListInvoicesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.ListInvoices()
+				return InvoiceApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -183,7 +183,7 @@ func TestListInvoicesServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetProForma(t *testing.T) {
+func TestInvoiceListProForma(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -223,7 +223,7 @@ func TestGetProForma(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.GetProForma()
+	response, err := invoiceApi.ListProForma()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -261,7 +261,7 @@ func TestGetProForma(t *testing.T) {
 	assert.Equal(contract2.StartDate, "2020-02-01T00:00:00+00:00")
 }
 
-func TestGetProFormaPaginate(t *testing.T) {
+func TestInvoiceListProFormaPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -290,7 +290,7 @@ func TestGetProFormaPaginate(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.GetProForma(1)
+	response, err := invoiceApi.ListProForma(1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -317,7 +317,7 @@ func TestGetProFormaPaginate(t *testing.T) {
 	assert.Equal(contract1.StartDate, "2022-03-01T00:00:00+00:00")
 }
 
-func TestGetProFormaServerErrors(t *testing.T) {
+func TestInvoiceListProFormaServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -328,7 +328,7 @@ func TestGetProFormaServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.GetProForma()
+				return InvoiceApi{}.ListProForma()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -345,7 +345,7 @@ func TestGetProFormaServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.GetProForma()
+				return InvoiceApi{}.ListProForma()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -362,7 +362,7 @@ func TestGetProFormaServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.GetProForma()
+				return InvoiceApi{}.ListProForma()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -379,7 +379,7 @@ func TestGetProFormaServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.GetProForma()
+				return InvoiceApi{}.ListProForma()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -391,7 +391,7 @@ func TestGetProFormaServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetInvoice(t *testing.T) {
+func TestInvoiceGet(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -429,7 +429,7 @@ func TestGetInvoice(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.GetInvoice("00000001")
+	response, err := invoiceApi.Get("00000001")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -461,7 +461,7 @@ func TestGetInvoice(t *testing.T) {
 	assert.Equal(response.Lines[0].UnitAmount, float32(152.5))
 }
 
-func TestGetInvoiceServerErrors(t *testing.T) {
+func TestInvoiceGetServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -472,7 +472,7 @@ func TestGetInvoiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.GetInvoice("000000001")
+				return InvoiceApi{}.Get("000000001")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -489,7 +489,7 @@ func TestGetInvoiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.GetInvoice("000000001")
+				return InvoiceApi{}.Get("000000001")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -506,7 +506,7 @@ func TestGetInvoiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.GetInvoice("000000001")
+				return InvoiceApi{}.Get("000000001")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -523,7 +523,7 @@ func TestGetInvoiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.GetInvoice("000000001")
+				return InvoiceApi{}.Get("000000001")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

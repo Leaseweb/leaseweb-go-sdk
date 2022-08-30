@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestListServices(t *testing.T) {
+func TestServicesList(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -61,7 +61,7 @@ func TestListServices(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := ServicesApi{}.ListServices()
+	response, err := ServicesApi{}.List()
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -108,7 +108,7 @@ func TestListServices(t *testing.T) {
 	assert.Equal(service2.Uncancellable, false)
 }
 
-func TestListServicesPaginate(t *testing.T) {
+func TestServicesListPaginate(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -144,7 +144,7 @@ func TestListServicesPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := ServicesApi{}.ListServices(1)
+	response, err := ServicesApi{}.List(1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -174,7 +174,7 @@ func TestListServicesPaginate(t *testing.T) {
 	assert.Equal(service1.Uncancellable, true)
 }
 
-func TestListServicesServerErrors(t *testing.T) {
+func TestServicesListServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -185,7 +185,7 @@ func TestListServicesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.ListServices()
+				return ServicesApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -202,7 +202,7 @@ func TestListServicesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.ListServices()
+				return ServicesApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -219,7 +219,7 @@ func TestListServicesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.ListServices()
+				return ServicesApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -236,7 +236,7 @@ func TestListServicesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.ListServices()
+				return ServicesApi{}.List()
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -248,7 +248,7 @@ func TestListServicesServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListCancellationReasons(t *testing.T) {
+func TestServicesListCancellationReasons(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -286,7 +286,7 @@ func TestListCancellationReasons(t *testing.T) {
 	assert.Equal(Reason3.ReasonCode, "CANCEL_PURCHASED_OTHER")
 }
 
-func TestListCancellationReasonsServerErrors(t *testing.T) {
+func TestServicesListCancellationReasonsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -360,7 +360,7 @@ func TestListCancellationReasonsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetService(t *testing.T) {
+func TestServicesGet(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -387,7 +387,7 @@ func TestGetService(t *testing.T) {
 	})
 	defer teardown()
 
-	Service, err := ServicesApi{}.GetService("12345")
+	Service, err := ServicesApi{}.Get("12345")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -412,7 +412,7 @@ func TestGetService(t *testing.T) {
 	assert.Equal(Service.Uncancellable, true)
 }
 
-func TestGetServiceServerErrors(t *testing.T) {
+func TestServicesGetServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -423,7 +423,7 @@ func TestGetServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.GetService("12345")
+				return ServicesApi{}.Get("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -440,7 +440,7 @@ func TestGetServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.GetService("12345")
+				return ServicesApi{}.Get("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -457,7 +457,7 @@ func TestGetServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.GetService("12345")
+				return ServicesApi{}.Get("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -474,7 +474,7 @@ func TestGetServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.GetService("12345")
+				return ServicesApi{}.Get("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -486,7 +486,7 @@ func TestGetServiceServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCancelService(t *testing.T) {
+func TestServicesCancel(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -494,13 +494,13 @@ func TestCancelService(t *testing.T) {
 	})
 	defer teardown()
 
-	err := ServicesApi{}.CancelService("12345", "reason", "reason code")
+	err := ServicesApi{}.Cancel("12345", "reason", "reason code")
 
 	assert := assert.New(t)
 	assert.Nil(err)
 }
 
-func TestCancelServiceServerErrors(t *testing.T) {
+func TestServicesCancelServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -511,7 +511,7 @@ func TestCancelServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.CancelService("12345", "reason", "reason code")
+				return nil, ServicesApi{}.Cancel("12345", "reason", "reason code")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -528,7 +528,7 @@ func TestCancelServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.CancelService("12345", "reason", "reason code")
+				return nil, ServicesApi{}.Cancel("12345", "reason", "reason code")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -545,7 +545,7 @@ func TestCancelServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.CancelService("12345", "reason", "reason code")
+				return nil, ServicesApi{}.Cancel("12345", "reason", "reason code")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -562,7 +562,7 @@ func TestCancelServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.CancelService("12345", "reason", "reason code")
+				return nil, ServicesApi{}.Cancel("12345", "reason", "reason code")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -574,7 +574,7 @@ func TestCancelServiceServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUncancelService(t *testing.T) {
+func TestServicesUncancel(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -582,13 +582,13 @@ func TestUncancelService(t *testing.T) {
 	})
 	defer teardown()
 
-	err := ServicesApi{}.UncancelService("12345")
+	err := ServicesApi{}.Uncancel("12345")
 
 	assert := assert.New(t)
 	assert.Nil(err)
 }
 
-func TestUncancelServiceServerErrors(t *testing.T) {
+func TestServicesUncancelServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -599,7 +599,7 @@ func TestUncancelServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.UncancelService("12345")
+				return nil, ServicesApi{}.Uncancel("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -616,7 +616,7 @@ func TestUncancelServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.UncancelService("12345")
+				return nil, ServicesApi{}.Uncancel("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -633,7 +633,7 @@ func TestUncancelServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.UncancelService("12345")
+				return nil, ServicesApi{}.Uncancel("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -650,7 +650,7 @@ func TestUncancelServiceServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.UncancelService("12345")
+				return nil, ServicesApi{}.Uncancel("12345")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

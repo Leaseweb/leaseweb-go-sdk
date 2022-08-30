@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestListRanges(t *testing.T) {
+func TestFloatingIpListRanges(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -60,7 +60,7 @@ func TestListRanges(t *testing.T) {
 	assert.Equal(range2.Type, "METRO")
 }
 
-func TestListRangesPaginateAndFilter(t *testing.T) {
+func TestFloatingIpListRangesPaginateAndFilter(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -96,7 +96,7 @@ func TestListRangesPaginateAndFilter(t *testing.T) {
 	assert.Equal(range1.Type, "SITE")
 }
 
-func TestListRangesServerErrors(t *testing.T) {
+func TestFloatingIpListRangesServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -153,7 +153,7 @@ func TestListRangesServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetRange(t *testing.T) {
+func TestFloatingIpGetRange(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -182,7 +182,7 @@ func TestGetRange(t *testing.T) {
 	assert.Equal(response.Type, "SITE")
 }
 
-func TestGetRangeServerErrors(t *testing.T) {
+func TestFloatingIpGetRangeServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -255,7 +255,7 @@ func TestGetRangeServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestListRangeDefinitions(t *testing.T) {
+func TestFloatingIpListRangeDefinitions(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -298,9 +298,9 @@ func TestListRangeDefinitions(t *testing.T) {
 	assert.Equal(response.Metadata.TotalCount, 2)
 	assert.Equal(response.Metadata.Offset, 0)
 	assert.Equal(response.Metadata.Limit, 10)
-	assert.Equal(len(response.FloatingIpDefinitions), 2)
+	assert.Equal(len(response.Definitions), 2)
 
-	floatingIpDefinition1 := response.FloatingIpDefinitions[0]
+	floatingIpDefinition1 := response.Definitions[0]
 	assert.Equal(floatingIpDefinition1.Id, "88.17.34.108_32")
 	assert.Equal(floatingIpDefinition1.RangeId, "88.17.0.0_17")
 	assert.Equal(floatingIpDefinition1.CustomerId, "10001234")
@@ -313,7 +313,7 @@ func TestListRangeDefinitions(t *testing.T) {
 	assert.Equal(floatingIpDefinition1.CreatedAt, "2019-03-13T09:10:02+0000")
 	assert.Equal(floatingIpDefinition1.UpdatedAt, "2019-03-13T09:10:02+0000")
 
-	floatingIpDefinition2 := response.FloatingIpDefinitions[1]
+	floatingIpDefinition2 := response.Definitions[1]
 	assert.Equal(floatingIpDefinition2.Id, "88.17.34.109_32")
 	assert.Equal(floatingIpDefinition2.RangeId, "88.17.0.0_17")
 	assert.Equal(floatingIpDefinition2.CustomerId, "10001234")
@@ -327,7 +327,7 @@ func TestListRangeDefinitions(t *testing.T) {
 	assert.Equal(floatingIpDefinition2.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestListRangeDefinitionsPaginateAndFilter(t *testing.T) {
+func TestFloatingIpListRangeDefinitionsPaginateAndFilter(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -358,7 +358,7 @@ func TestListRangeDefinitionsPaginateAndFilter(t *testing.T) {
 	assert.Equal(response.Metadata.Offset, 1)
 	assert.Equal(response.Metadata.Limit, 10)
 
-	floatingIpDefinition1 := response.FloatingIpDefinitions[0]
+	floatingIpDefinition1 := response.Definitions[0]
 	assert.Equal(floatingIpDefinition1.Id, "88.17.34.108_32")
 	assert.Equal(floatingIpDefinition1.RangeId, "88.17.0.0_17")
 	assert.Equal(floatingIpDefinition1.CustomerId, "10001234")
@@ -372,7 +372,7 @@ func TestListRangeDefinitionsPaginateAndFilter(t *testing.T) {
 	assert.Equal(floatingIpDefinition1.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestListRangeDefinitionsServerErrors(t *testing.T) {
+func TestFloatingIpListRangeDefinitionsServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -445,7 +445,7 @@ func TestListRangeDefinitionsServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestCreateRangeDefinition(t *testing.T) {
+func TestFloatingIpCreateRangeDefinition(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -484,7 +484,7 @@ func TestCreateRangeDefinition(t *testing.T) {
 	assert.Equal(response.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestCreateRangeDefinitionServerError(t *testing.T) {
+func TestFloatingIpCreateRangeDefinitionServerError(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 400",
@@ -556,7 +556,7 @@ func TestCreateRangeDefinitionServerError(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestGetRangeDefinition(t *testing.T) {
+func TestFloatingIpGetRangeDefinition(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -595,7 +595,7 @@ func TestGetRangeDefinition(t *testing.T) {
 	assert.Equal(response.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestGetRangeDefinitionServerErrors(t *testing.T) {
+func TestFloatingIpGetRangeDefinitionServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 403",
@@ -651,7 +651,7 @@ func TestGetRangeDefinitionServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestUpdateRangeDefinition(t *testing.T) {
+func TestFloatingIpUpdateRangeDefinition(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -690,7 +690,7 @@ func TestUpdateRangeDefinition(t *testing.T) {
 	assert.Equal(response.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestUpdateRangeDefinitionServerErrors(t *testing.T) {
+func TestFloatingIpUpdateRangeDefinitionServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 400",
@@ -763,7 +763,7 @@ func TestUpdateRangeDefinitionServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestRemoveRangeDefinition(t *testing.T) {
+func TestFloatingIpRemoveRangeDefinition(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodDelete, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -802,7 +802,7 @@ func TestRemoveRangeDefinition(t *testing.T) {
 	assert.Equal(response.UpdatedAt, "2019-03-13T09:10:02+0000")
 }
 
-func TestRemoveRangeDefinitionServerErrors(t *testing.T) {
+func TestFloatingIpRemoveRangeDefinitionServerErrors(t *testing.T) {
 
 	serverErrorTests := []serverErrorTest{
 		{
