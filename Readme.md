@@ -8,6 +8,22 @@ This package provides a golang client for Leaseweb's REST API.
 go get github.com/majidkarimizadeh/leaseweb-go-sdk
 ```
 
+### Generate your API Key
+You can generate your API key at the [Customer Portal](https://secure.leaseweb.com/)
+
+### Authenticate and make first call
+```golang
+import LSW "github.com/majidkarimizadeh/leaseweb-go-sdk"
+
+func main() {
+    LSW.InitLeasewebClient("api key here")
+    result, err := LSW.DedicatedServerApi{}.List()
+    if err == nil {
+        fmt.Println(result)
+    }
+}
+```
+
 ### Documentation
 The full documentation for Leaseweb go SDK is available in the [wiki](https://github.com/majidkarimizadeh/leaseweb-go-sdk/wiki).
 
