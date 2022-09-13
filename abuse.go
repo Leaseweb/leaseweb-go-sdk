@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -27,7 +28,7 @@ type AbuseReport struct {
 	DetectedIpAddresses []string                  `json:"detectedIpAddresses"`
 	DetectedDomainNames []AbuseDetectedDomainName `json:"detectedDomainNames"`
 	Attachments         []AbuseAttachment         `json:"attachments"`
-	TotalMessagesCount  int                       `json:"totalMessagesCount"`
+	TotalMessagesCount  json.Number               `json:"totalMessagesCount"`
 	LatestMessages      []AbuseMessage            `json:"latestMessages"`
 }
 

@@ -41,7 +41,7 @@ func TestPrivateNetworkList(t *testing.T) {
 	assert.Equal(len(response.PrivateNetworks), 1)
 
 	PrivateNetwork := response.PrivateNetworks[0]
-	assert.Equal(PrivateNetwork.EquipmentCount, 4)
+	assert.Equal(PrivateNetwork.EquipmentCount.String(), "4")
 	assert.Equal(PrivateNetwork.Id, "811")
 	assert.Equal(PrivateNetwork.Name, "default")
 	assert.Equal(PrivateNetwork.CreatedAt, "2015-07-16T13:06:45+0200")
@@ -81,7 +81,7 @@ func TestPrivateNetworkListPaginate(t *testing.T) {
 	assert.Equal(len(response.PrivateNetworks), 1)
 
 	PrivateNetwork := response.PrivateNetworks[0]
-	assert.Equal(PrivateNetwork.EquipmentCount, 4)
+	assert.Equal(PrivateNetwork.EquipmentCount.String(), "4")
 	assert.Equal(PrivateNetwork.Id, "811")
 	assert.Equal(PrivateNetwork.Name, "default")
 	assert.Equal(PrivateNetwork.CreatedAt, "2015-07-16T13:06:45+0200")
@@ -181,7 +181,7 @@ func TestPrivateNetworkCreate(t *testing.T) {
 
 	assert := assert.New(t)
 	assert.Nil(err)
-	assert.Equal(PrivateNetwork.EquipmentCount, 0)
+	assert.Equal(PrivateNetwork.EquipmentCount.String(), "0")
 	assert.Equal(PrivateNetwork.Id, "12345")
 	assert.Equal(PrivateNetwork.Name, "production")
 	assert.Equal(PrivateNetwork.CreatedAt, "2015-01-21T14:34:12+0000")
@@ -379,7 +379,7 @@ func TestPrivateNetworkUpdate(t *testing.T) {
 
 	assert := assert.New(t)
 	assert.Nil(err)
-	assert.Equal(PrivateNetwork.EquipmentCount, 0)
+	assert.Equal(PrivateNetwork.EquipmentCount.String(), "0")
 	assert.Equal(PrivateNetwork.Id, "12345")
 	assert.Equal(PrivateNetwork.Name, "production")
 	assert.Equal(PrivateNetwork.CreatedAt, "2015-01-21T14:34:12+0000")

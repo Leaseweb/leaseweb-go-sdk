@@ -267,7 +267,7 @@ func TestAbuseGet(t *testing.T) {
 	assert.Equal(response.Attachments[0].Id, "1abd8e7f-0fdf-453c-b1f5-8fef436acbbe")
 	assert.Equal(response.Attachments[0].MimeType, "part/xml")
 	assert.Equal(response.Attachments[0].Filename, "000001.xml")
-	assert.Equal(response.TotalMessagesCount, 2)
+	assert.Equal(response.TotalMessagesCount.String(), "2")
 	assert.Equal(len(response.LatestMessages), 2)
 
 	message1 := response.LatestMessages[0]

@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -18,24 +19,24 @@ type Services struct {
 type Service struct {
 	// TODO;
 	// "attributes": {}
-	BillingCycle        string  `json:"billingCycle"`
-	Cancellable         bool    `json:"cancellable"`
-	ContractId          string  `json:"contractId"`
-	ContractTerm        string  `json:"contractTerm"`
-	ContractTermEndDate string  `json:"contractTermEndDate"`
-	Currency            string  `json:"currency"`
-	DeliveryDate        string  `json:"deliveryDate"`
-	DeliveryEstimate    string  `json:"deliveryEstimate"`
-	EndDate             string  `json:"endDate"`
-	EquipmentId         string  `json:"equipmentId"`
-	Id                  string  `json:"id"`
-	OrderDate           string  `json:"orderDate"`
-	PricePerFrequency   float32 `json:"pricePerFrequency"`
-	ProductId           string  `json:"productId"`
-	Reference           string  `json:"reference"`
-	StartDate           string  `json:"startDate"`
-	Status              string  `json:"status"`
-	Uncancellable       bool    `json:"uncancellable"`
+	BillingCycle        string      `json:"billingCycle"`
+	Cancellable         bool        `json:"cancellable"`
+	ContractId          string      `json:"contractId"`
+	ContractTerm        string      `json:"contractTerm"`
+	ContractTermEndDate string      `json:"contractTermEndDate"`
+	Currency            string      `json:"currency"`
+	DeliveryDate        string      `json:"deliveryDate"`
+	DeliveryEstimate    string      `json:"deliveryEstimate"`
+	EndDate             string      `json:"endDate"`
+	EquipmentId         string      `json:"equipmentId"`
+	Id                  string      `json:"id"`
+	OrderDate           string      `json:"orderDate"`
+	PricePerFrequency   json.Number `json:"pricePerFrequency"`
+	ProductId           string      `json:"productId"`
+	Reference           string      `json:"reference"`
+	StartDate           string      `json:"startDate"`
+	Status              string      `json:"status"`
+	Uncancellable       bool        `json:"uncancellable"`
 }
 
 type ServicesCancellationReasons struct {
