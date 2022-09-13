@@ -1,5 +1,7 @@
 package leaseweb
 
+import "encoding/json"
+
 type Credentials struct {
 	Credentials []Credential `json:"credentials"`
 	Metadata    Metadata     `json:"_metadata"`
@@ -25,9 +27,9 @@ type Ip struct {
 	NetworkType      string             `json:"networkType"`
 	NullRouted       bool               `json:"nullRouted"`
 	ReverseLookup    string             `json:"reverseLookup"`
-	Version          int                `json:"version"`
+	Version          json.Number        `json:"version"`
 	Type             string             `json:"type"`
-	PrefixLength     int                `json:"prefixLength"`
+	PrefixLength     json.Number        `json:"prefixLength"`
 	Primary          bool               `json:"primary"`
 	UnnullingAllowed bool               `json:"unnullingAllowed"`
 	EquipmentId      string             `json:"equipmentId"`
@@ -42,10 +44,10 @@ type IpDdos struct {
 }
 
 type IpSubnet struct {
-	Id           string `json:"id"`
-	NetworkIp    string `json:"networkIp"`
-	PrefixLength int    `json:"prefixLength"`
-	Gateway      string `json:"gateway"`
+	Id           string      `json:"id"`
+	NetworkIp    string      `json:"networkIp"`
+	PrefixLength json.Number `json:"prefixLength"`
+	Gateway      string      `json:"gateway"`
 }
 
 type IpAssignedContract struct {
@@ -77,7 +79,7 @@ type NullRoute struct {
 	Ip                   string             `json:"ip"`
 	NulledAt             string             `json:"nulledAt"`
 	NulledBy             string             `json:"nulledBy"`
-	NullLevel            int                `json:"nullLevel"`
+	NullLevel            json.Number        `json:"nullLevel"`
 	AutomatedUnnullingAt string             `json:"automatedUnnullingAt"`
 	UnnulledAt           string             `json:"unnulledAt"`
 	UnnulledBy           string             `json:"unnulledBy"`
@@ -120,8 +122,8 @@ type Metadata struct {
 }
 
 type TimestampValuePair struct {
-	Timestamp string `json:"timestamp"`
-	Value     int    `json:"value"`
+	Timestamp string      `json:"timestamp"`
+	Value     json.Number `json:"value"`
 }
 
 type BasicMetric struct {
@@ -137,11 +139,11 @@ type MetricMetadata struct {
 }
 
 type NetworkTraffic struct {
-	Type             string `json:"type"`
-	TrafficType      string `json:"trafficType"`
-	DataTrafficUnit  string `json:"datatrafficUnit"`
-	DataTrafficLimit int    `json:"datatrafficLimit"`
-	ConnectivityType string `json:"connectivityType"`
+	Type             string      `json:"type"`
+	TrafficType      string      `json:"trafficType"`
+	DataTrafficUnit  string      `json:"datatrafficUnit"`
+	DataTrafficLimit json.Number `json:"datatrafficLimit"`
+	ConnectivityType string      `json:"connectivityType"`
 }
 
 type FeatureAvailability struct {
@@ -165,9 +167,9 @@ type Port struct {
 }
 
 type Contract struct {
-	BillingCycle      int               `json:"billingCycle"`
+	BillingCycle      json.Number       `json:"billingCycle"`
 	BillingFrequency  string            `json:"billingFrequency"`
-	ContractTerm      int               `json:"contractTerm"`
+	ContractTerm      json.Number       `json:"contractTerm"`
 	ContractType      string            `json:"ContractType"`
 	Currency          string            `json:"currency"`
 	EndsAt            string            `json:"endsAt"`
@@ -178,7 +180,7 @@ type Contract struct {
 	Reference         string            `json:"reference"`
 	SalesOrgId        string            `json:"salesOrgId"`
 	NetworkTraffic    NetworkTraffic    `json:"networkTraffic"`
-	PricePerFrequency float32           `json:"pricePerFrequency"`
+	PricePerFrequency json.Number       `json:"pricePerFrequency"`
 	PrivateNetworks   []PrivateNetwork  `json:"privateNetworks"`
 	Sla               string            `json:"sla"`
 	Status            string            `json:"status"`
@@ -188,22 +190,22 @@ type Contract struct {
 }
 
 type PrivateNetwork struct {
-	Id             string   `json:"id"`
-	LinkSpeed      int      `json:"linkSpeed"`
-	Status         string   `json:"status"`
-	Subnet         string   `json:"subnet"`
-	VLanId         string   `json:"vlanId"`
-	EquipmentCount int      `json:"equipmentCount"`
-	Name           string   `json:"name"`
-	CreatedAt      string   `json:"createdAt"`
-	UpdatedAt      string   `json:"updatedAt"`
-	Servers        []string `json:"servers"`
+	Id             string      `json:"id"`
+	LinkSpeed      json.Number `json:"linkSpeed"`
+	Status         string      `json:"status"`
+	Subnet         string      `json:"subnet"`
+	VLanId         string      `json:"vlanId"`
+	EquipmentCount json.Number `json:"equipmentCount"`
+	Name           string      `json:"name"`
+	CreatedAt      string      `json:"createdAt"`
+	UpdatedAt      string      `json:"updatedAt"`
+	Servers        []string    `json:"servers"`
 }
 
 type SoftwareLicense struct {
-	Currency string  `json:"currency"`
-	Name     string  `json:"name"`
-	Price    float32 `json:"price"`
+	Currency string      `json:"currency"`
+	Name     string      `json:"name"`
+	Price    json.Number `json:"price"`
 }
 
 type DdosNotificationSetting struct {
@@ -238,17 +240,17 @@ type NotificationSettingAction struct {
 
 type Hardware struct {
 	Cpu struct {
-		Cores int `json:"cores"`
+		Cores json.Number `json:"cores"`
 	} `json:"cpu"`
 
 	Memory struct {
-		Unit   string `json:"unit"`
-		Amount int    `json:"amount"`
+		Unit   string      `json:"unit"`
+		Amount json.Number `json:"amount"`
 	} `json:"memory"`
 
 	Storage struct {
-		Unit   string `json:"unit"`
-		Amount int    `json:"amount"`
+		Unit   string      `json:"unit"`
+		Amount json.Number `json:"amount"`
 	} `json:"storage"`
 }
 

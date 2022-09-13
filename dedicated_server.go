@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -39,22 +40,22 @@ type DedicatedServerSpecs struct {
 }
 
 type DedicatedServerSpecCpu struct {
-	Quantity int    `json:"quantity"`
-	Type     string `json:"type"`
+	Quantity json.Number `json:"quantity"`
+	Type     string      `json:"type"`
 }
 
 type DedicatedServerSpecRam struct {
-	Size int    `json:"size"`
-	Unit string `json:"unit"`
+	Size json.Number `json:"size"`
+	Unit string      `json:"unit"`
 }
 
 type DedicatedServerSpecHdd struct {
-	Amount          int     `json:"amount"`
-	Id              string  `json:"id"`
-	PerformanceType string  `json:"performanceType"`
-	Size            float32 `json:"size"`
-	Type            string  `json:"type"`
-	Unit            string  `json:"unit"`
+	Amount          json.Number `json:"amount"`
+	Id              string      `json:"id"`
+	PerformanceType string      `json:"performanceType"`
+	Size            json.Number `json:"size"`
+	Type            string      `json:"type"`
+	Unit            string      `json:"unit"`
 }
 
 type DedicatedServerSpecPciCard struct {
@@ -347,19 +348,19 @@ type DedicatedServerJobPayload struct {
 	RaidLevel          string                               `json:"raidLevel"`
 	ServerId           string                               `json:"serverId"`
 	Timezone           string                               `json:"timezone"`
-	X                  int                                  `json:"x"`
+	X                  json.Number                          `json:"x"`
 }
 
 type DedicatedServerJobProgress struct {
-	Canceled   int `json:"canceled"`
-	Expired    int `json:"expired"`
-	Failed     int `json:"failed"`
-	Finished   int `json:"finished"`
-	InProgress int `json:"inprogress"`
-	Pending    int `json:"pending"`
-	Percentage int `json:"percentage"`
-	Total      int `json:"total"`
-	Waiting    int `json:"waiting"`
+	Canceled   json.Number `json:"canceled"`
+	Expired    json.Number `json:"expired"`
+	Failed     json.Number `json:"failed"`
+	Finished   json.Number `json:"finished"`
+	InProgress json.Number `json:"inprogress"`
+	Pending    json.Number `json:"pending"`
+	Percentage json.Number `json:"percentage"`
+	Total      json.Number `json:"total"`
+	Waiting    json.Number `json:"waiting"`
 }
 
 type DedicatedServerJobTask struct {

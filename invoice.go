@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -16,41 +17,41 @@ type Invoice struct {
 	DueDate                 string          `json:"dueDate"`
 	Id                      string          `json:"id"`
 	IsPartialPaymentAllowed bool            `json:"isPartialPaymentAllowed"`
-	OpenAmount              float32         `json:"openAmount"`
+	OpenAmount              json.Number     `json:"openAmount"`
 	Status                  string          `json:"status"`
-	TaxAmount               float32         `json:"taxAmount"`
-	Total                   float32         `json:"total"`
+	TaxAmount               json.Number     `json:"taxAmount"`
+	Total                   json.Number     `json:"total"`
 	Credits                 []InvoiceCredit `json:"credits"`
 	Lines                   []InvoiceLine   `json:"lineItems"`
 }
 
 type InvoiceCredit struct {
-	Date      string  `json:"date"`
-	Id        string  `json:"id"`
-	TaxAmount float32 `json:"taxAmount"`
-	Total     float32 `json:"total"`
+	Date      string      `json:"date"`
+	Id        string      `json:"id"`
+	TaxAmount json.Number `json:"taxAmount"`
+	Total     json.Number `json:"total"`
 }
 
 type InvoiceLine struct {
-	ContractId  string  `json:"contractId"`
-	EquipmentId string  `json:"equipmentId"`
-	Product     string  `json:"product"`
-	Quantity    int     `json:"quantity"`
-	Reference   string  `json:"reference"`
-	TotalAmount float32 `json:"totalAmount"`
-	UnitAmount  float32 `json:"unitAmount"`
+	ContractId  string      `json:"contractId"`
+	EquipmentId string      `json:"equipmentId"`
+	Product     string      `json:"product"`
+	Quantity    json.Number `json:"quantity"`
+	Reference   string      `json:"reference"`
+	TotalAmount json.Number `json:"totalAmount"`
+	UnitAmount  json.Number `json:"unitAmount"`
 }
 
 type InvoiceContract struct {
-	ContractId  string  `json:"contractId"`
-	Currency    string  `json:"currency"`
-	EndDate     string  `json:"endDate"`
-	EquipmentId string  `json:"equipmentId"`
-	PoNumber    string  `json:"poNumber"`
-	Price       float32 `json:"price"`
-	Product     string  `json:"product"`
-	Reference   string  `json:"reference"`
-	StartDate   string  `json:"startDate"`
+	ContractId  string      `json:"contractId"`
+	Currency    string      `json:"currency"`
+	EndDate     string      `json:"endDate"`
+	EquipmentId string      `json:"equipmentId"`
+	PoNumber    string      `json:"poNumber"`
+	Price       json.Number `json:"price"`
+	Product     string      `json:"product"`
+	Reference   string      `json:"reference"`
+	StartDate   string      `json:"startDate"`
 }
 
 type Invoices struct {
@@ -61,9 +62,9 @@ type Invoices struct {
 type InvoiceProForma struct {
 	Currency     string            `json:"currency"`
 	ProformaDate string            `json:"proformaDate"`
-	SubTotal     float32           `json:"subTotal"`
-	Total        float32           `json:"total"`
-	VatAmount    float32           `json:"vatAmount"`
+	SubTotal     json.Number       `json:"subTotal"`
+	Total        json.Number       `json:"total"`
+	VatAmount    json.Number       `json:"vatAmount"`
 	Metadata     Metadata          `json:"_metadata"`
 	Contracts    []InvoiceContract `json:"contractItems"`
 }

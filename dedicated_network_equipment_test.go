@@ -465,9 +465,9 @@ func TestDedicatedNetworkEquipmentGet(t *testing.T) {
 	assert.Equal(NetworkEquipment.Contract.Id, "49031391001170")
 	assert.Equal(NetworkEquipment.Contract.Reference, "My Switch")
 	assert.Equal(NetworkEquipment.Contract.SalesOrgId, "2000")
-	assert.Equal(NetworkEquipment.Contract.BillingCycle, 1)
+	assert.Equal(NetworkEquipment.Contract.BillingCycle.String(), "1")
 	assert.Equal(NetworkEquipment.Contract.BillingFrequency, "MONTH")
-	assert.Equal(NetworkEquipment.Contract.ContractTerm, 12)
+	assert.Equal(NetworkEquipment.Contract.ContractTerm.String(), "12")
 	assert.Equal(NetworkEquipment.Contract.Currency, "EUR")
 	assert.Empty(NetworkEquipment.Contract.EndsAt)
 	assert.Empty(NetworkEquipment.Contract.NetworkTraffic.DataTrafficLimit)
@@ -475,7 +475,7 @@ func TestDedicatedNetworkEquipmentGet(t *testing.T) {
 	assert.Empty(NetworkEquipment.Contract.NetworkTraffic.TrafficType)
 	assert.Empty(NetworkEquipment.Contract.NetworkTraffic.Type)
 	assert.Equal(NetworkEquipment.Contract.NetworkTraffic.ConnectivityType, "INTERCONNECTED")
-	assert.Equal(NetworkEquipment.Contract.PricePerFrequency, float32(0.00))
+	assert.Equal(NetworkEquipment.Contract.PricePerFrequency.String(), "0.00")
 	assert.Equal(NetworkEquipment.Contract.Sla, "Platinum")
 	assert.Equal(NetworkEquipment.Contract.StartsAt, "2017-08-01T00:00:00Z")
 	assert.Empty(NetworkEquipment.Contract.AggregationPackId)
@@ -737,7 +737,7 @@ func TestDedicatedNetworkEquipmentListIps(t *testing.T) {
 	assert.Equal(Ip1.NetworkType, "PUBLIC")
 	assert.Equal(Ip1.NullRouted, true)
 	assert.Equal(Ip1.ReverseLookup, "domain.example.com")
-	assert.Equal(Ip1.Version, 4)
+	assert.Equal(Ip1.Version.String(), "4")
 
 	Ip2 := response.Ips[1]
 	assert.Equal(Ip2.DDOS.DetectionProfile, "STANDARD_DEFAULT")
@@ -749,7 +749,7 @@ func TestDedicatedNetworkEquipmentListIps(t *testing.T) {
 	assert.Equal(Ip2.NetworkType, "REMOTE_MANAGEMENT")
 	assert.Equal(Ip2.NullRouted, false)
 	assert.Equal(Ip2.ReverseLookup, "domain.example.com")
-	assert.Equal(Ip2.Version, 6)
+	assert.Equal(Ip2.Version.String(), "6")
 }
 
 func TestDedicatedNetworkEquipmentListIpsBeEmpty(t *testing.T) {
@@ -816,7 +816,7 @@ func TestDedicatedNetworkEquipmentListIpsFilterAndPagination(t *testing.T) {
 	assert.Equal(Ip1.NetworkType, "PUBLIC")
 	assert.Equal(Ip1.NullRouted, true)
 	assert.Equal(Ip1.ReverseLookup, "domain.example.com")
-	assert.Equal(Ip1.Version, 4)
+	assert.Equal(Ip1.Version.String(), "4")
 }
 
 func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
@@ -926,7 +926,7 @@ func TestDedicatedNetworkEquipmentGetIp(t *testing.T) {
 	assert.Equal(Ip.NetworkType, "PUBLIC")
 	assert.Equal(Ip.NullRouted, true)
 	assert.Equal(Ip.ReverseLookup, "domain.example.com")
-	assert.Equal(Ip.Version, 4)
+	assert.Equal(Ip.Version.String(), "4")
 }
 
 func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
@@ -1054,7 +1054,7 @@ func TestDedicatedNetworkEquipmentUpdateIp(t *testing.T) {
 	assert.Equal(Ip.NetworkType, "PUBLIC")
 	assert.Equal(Ip.NullRouted, true)
 	assert.Equal(Ip.ReverseLookup, "domain.example.com")
-	assert.Equal(Ip.Version, 4)
+	assert.Equal(Ip.Version.String(), "4")
 }
 
 func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
@@ -1186,7 +1186,7 @@ func TestDedicatedNetworkEquipmentNullRouteAnIp(t *testing.T) {
 	assert.Equal(Ip.NetworkType, "PUBLIC")
 	assert.Equal(Ip.NullRouted, false)
 	assert.Equal(Ip.ReverseLookup, "domain.example.com")
-	assert.Equal(Ip.Version, 4)
+	assert.Equal(Ip.Version.String(), "4")
 }
 
 func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
@@ -1313,7 +1313,7 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIp(t *testing.T) {
 	assert.Equal(Ip.NetworkType, "PUBLIC")
 	assert.Equal(Ip.NullRouted, false)
 	assert.Equal(Ip.ReverseLookup, "domain.example.com")
-	assert.Equal(Ip.Version, 4)
+	assert.Equal(Ip.Version.String(), "4")
 }
 
 func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) {
@@ -1443,7 +1443,7 @@ func TestDedicatedNetworkEquipmentListNullRoutes(t *testing.T) {
 	assert.Equal(NullRoute.AutomatedUnnullingAt, "2016-08-12T07:45:33+00:00")
 	assert.Equal(NullRoute.Comment, "Device Null Route related to DDoS Mitigation")
 	assert.Equal(NullRoute.Ip, "1.1.1.1/32")
-	assert.Equal(NullRoute.NullLevel, 3)
+	assert.Equal(NullRoute.NullLevel.String(), "3")
 	assert.Equal(NullRoute.NulledAt, "2016-08-12T07:40:27+00:00")
 	assert.Equal(NullRoute.TicketId, "282912")
 }
@@ -1500,7 +1500,7 @@ func TestDedicatedNetworkEquipmentListNullRoutesFilterAndPagination(t *testing.T
 	assert.Equal(NullRoute.AutomatedUnnullingAt, "2016-08-12T07:45:33+00:00")
 	assert.Equal(NullRoute.Comment, "Device Null Route related to DDoS Mitigation")
 	assert.Equal(NullRoute.Ip, "1.1.1.1/32")
-	assert.Equal(NullRoute.NullLevel, 3)
+	assert.Equal(NullRoute.NullLevel.String(), "3")
 	assert.Equal(NullRoute.NulledAt, "2016-08-12T07:40:27+00:00")
 	assert.Equal(NullRoute.TicketId, "282912")
 }

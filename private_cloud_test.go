@@ -78,19 +78,19 @@ func TestPrivateCloudList(t *testing.T) {
 	assert.Equal(privateCloud1.Contract.Id, "30000775")
 	assert.Equal(privateCloud1.Contract.StartsAt, "2015-11-01T00:00:00+02:00")
 	assert.Equal(privateCloud1.Contract.EndsAt, "2016-12-30T10:39:27+01:00")
-	assert.Equal(privateCloud1.Contract.BillingCycle, 12)
+	assert.Equal(privateCloud1.Contract.BillingCycle.String(), "12")
 	assert.Equal(privateCloud1.Contract.BillingFrequency, "MONTH")
-	assert.Equal(privateCloud1.Contract.PricePerFrequency, float32(0))
+	assert.Equal(privateCloud1.Contract.PricePerFrequency.String(), "0")
 	assert.Equal(privateCloud1.Contract.Currency, "EUR")
-	assert.Equal(privateCloud1.Hardware.Cpu.Cores, 25)
-	assert.Equal(privateCloud1.Hardware.Memory.Amount, 50)
+	assert.Equal(privateCloud1.Hardware.Cpu.Cores.String(), "25")
+	assert.Equal(privateCloud1.Hardware.Memory.Amount.String(), "50")
 	assert.Equal(privateCloud1.Hardware.Memory.Unit, "GB")
-	assert.Equal(privateCloud1.Hardware.Storage.Amount, 1)
+	assert.Equal(privateCloud1.Hardware.Storage.Amount.String(), "1")
 	assert.Equal(privateCloud1.Hardware.Storage.Unit, "GB")
 	assert.Equal(privateCloud1.Ips[0].Ip, "10.12.144.32")
 	assert.Equal(privateCloud1.Ips[0].Type, "PUBLIC")
-	assert.Equal(privateCloud1.Ips[0].Version, 4)
-	assert.Equal(privateCloud1.NetworkTraffic.DataTrafficLimit, 6)
+	assert.Equal(privateCloud1.Ips[0].Version.String(), "4")
+	assert.Equal(privateCloud1.NetworkTraffic.DataTrafficLimit.String(), "6")
 	assert.Equal(privateCloud1.NetworkTraffic.DataTrafficUnit, "TB")
 	assert.Equal(privateCloud1.NetworkTraffic.TrafficType, "PREMIUM")
 	assert.Equal(privateCloud1.NetworkTraffic.Type, "DATATRAFFIC")
@@ -252,19 +252,19 @@ func TestPrivateCloudGet(t *testing.T) {
 	assert.Equal(response.Contract.Id, "30000775")
 	assert.Equal(response.Contract.StartsAt, "2015-11-01T00:00:00+02:00")
 	assert.Equal(response.Contract.EndsAt, "2016-12-30T10:39:27+01:00")
-	assert.Equal(response.Contract.BillingCycle, 12)
+	assert.Equal(response.Contract.BillingCycle.String(), "12")
 	assert.Equal(response.Contract.BillingFrequency, "MONTH")
-	assert.Equal(response.Contract.PricePerFrequency, float32(0))
+	assert.Equal(response.Contract.PricePerFrequency.String(), "0")
 	assert.Equal(response.Contract.Currency, "EUR")
-	assert.Equal(response.Hardware.Cpu.Cores, 25)
-	assert.Equal(response.Hardware.Memory.Amount, 50)
+	assert.Equal(response.Hardware.Cpu.Cores.String(), "25")
+	assert.Equal(response.Hardware.Memory.Amount.String(), "50")
 	assert.Equal(response.Hardware.Memory.Unit, "GB")
-	assert.Equal(response.Hardware.Storage.Amount, 1)
+	assert.Equal(response.Hardware.Storage.Amount.String(), "1")
 	assert.Equal(response.Hardware.Storage.Unit, "GB")
 	assert.Equal(response.Ips[0].Ip, "10.12.144.32")
 	assert.Equal(response.Ips[0].Type, "PUBLIC")
-	assert.Equal(response.Ips[0].Version, 4)
-	assert.Equal(response.NetworkTraffic.DataTrafficLimit, 6)
+	assert.Equal(response.Ips[0].Version.String(), "4")
+	assert.Equal(response.NetworkTraffic.DataTrafficLimit.String(), "6")
 	assert.Equal(response.NetworkTraffic.DataTrafficUnit, "TB")
 	assert.Equal(response.NetworkTraffic.TrafficType, "PREMIUM")
 	assert.Equal(response.NetworkTraffic.Type, "DATATRAFFIC")
@@ -644,14 +644,14 @@ func TestPrivateCloudGetDataTrafficMetrics(t *testing.T) {
 	assert.Equal(response.Metadata.Granularity, "MONTH")
 	assert.Equal(response.Metric.DownPublic.Unit, "GB")
 	assert.Equal(response.Metric.DownPublic.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.DownPublic.Values[0].Value, 90)
+	assert.Equal(response.Metric.DownPublic.Values[0].Value.String(), "90")
 	assert.Equal(response.Metric.DownPublic.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.DownPublic.Values[1].Value, 250)
+	assert.Equal(response.Metric.DownPublic.Values[1].Value.String(), "250")
 	assert.Equal(response.Metric.UpPublic.Unit, "GB")
 	assert.Equal(response.Metric.UpPublic.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.UpPublic.Values[0].Value, 900)
+	assert.Equal(response.Metric.UpPublic.Values[0].Value.String(), "900")
 	assert.Equal(response.Metric.UpPublic.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.UpPublic.Values[1].Value, 2500)
+	assert.Equal(response.Metric.UpPublic.Values[1].Value.String(), "2500")
 }
 
 func TestPrivateCloudGetDataTrafficMetricsWithFilter(t *testing.T) {
@@ -709,14 +709,14 @@ func TestPrivateCloudGetDataTrafficMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metadata.Granularity, "MONTH")
 	assert.Equal(response.Metric.DownPublic.Unit, "GB")
 	assert.Equal(response.Metric.DownPublic.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.DownPublic.Values[0].Value, 90)
+	assert.Equal(response.Metric.DownPublic.Values[0].Value.String(), "90")
 	assert.Equal(response.Metric.DownPublic.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.DownPublic.Values[1].Value, 250)
+	assert.Equal(response.Metric.DownPublic.Values[1].Value.String(), "250")
 	assert.Equal(response.Metric.UpPublic.Unit, "GB")
 	assert.Equal(response.Metric.UpPublic.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.UpPublic.Values[0].Value, 900)
+	assert.Equal(response.Metric.UpPublic.Values[0].Value.String(), "900")
 	assert.Equal(response.Metric.UpPublic.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.UpPublic.Values[1].Value, 2500)
+	assert.Equal(response.Metric.UpPublic.Values[1].Value.String(), "2500")
 }
 
 func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
@@ -845,14 +845,14 @@ func TestPrivateCloudGetBandWidthMetrics(t *testing.T) {
 	assert.Equal(response.Metadata.Granularity, "MONTH")
 	assert.Equal(response.Metric.DownPublic.Unit, "bps")
 	assert.Equal(response.Metric.DownPublic.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.DownPublic.Values[0].Value, 28202556)
+	assert.Equal(response.Metric.DownPublic.Values[0].Value.String(), "28202556")
 	assert.Equal(response.Metric.DownPublic.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.DownPublic.Values[1].Value, 28202557)
+	assert.Equal(response.Metric.DownPublic.Values[1].Value.String(), "28202557")
 	assert.Equal(response.Metric.UpPublic.Unit, "bps")
 	assert.Equal(response.Metric.UpPublic.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.UpPublic.Values[0].Value, 158317518)
+	assert.Equal(response.Metric.UpPublic.Values[0].Value.String(), "158317518")
 	assert.Equal(response.Metric.UpPublic.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.UpPublic.Values[1].Value, 158317519)
+	assert.Equal(response.Metric.UpPublic.Values[1].Value.String(), "158317519")
 }
 
 func TestPrivateCloudGetBandWidthMetricsWithFilter(t *testing.T) {
@@ -910,14 +910,14 @@ func TestPrivateCloudGetBandWidthMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metadata.Granularity, "MONTH")
 	assert.Equal(response.Metric.DownPublic.Unit, "bps")
 	assert.Equal(response.Metric.DownPublic.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.DownPublic.Values[0].Value, 28202556)
+	assert.Equal(response.Metric.DownPublic.Values[0].Value.String(), "28202556")
 	assert.Equal(response.Metric.DownPublic.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.DownPublic.Values[1].Value, 28202557)
+	assert.Equal(response.Metric.DownPublic.Values[1].Value.String(), "28202557")
 	assert.Equal(response.Metric.UpPublic.Unit, "bps")
 	assert.Equal(response.Metric.UpPublic.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.UpPublic.Values[0].Value, 158317518)
+	assert.Equal(response.Metric.UpPublic.Values[0].Value.String(), "158317518")
 	assert.Equal(response.Metric.UpPublic.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.UpPublic.Values[1].Value, 158317519)
+	assert.Equal(response.Metric.UpPublic.Values[1].Value.String(), "158317519")
 }
 
 func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
@@ -1033,9 +1033,9 @@ func TestPrivateCloudGetCpuMetrics(t *testing.T) {
 	assert.Equal(response.Metadata.Granularity, "MONTH")
 	assert.Equal(response.Metric.Cpu.Unit, "CORES")
 	assert.Equal(response.Metric.Cpu.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.Cpu.Values[0].Value, 24)
+	assert.Equal(response.Metric.Cpu.Values[0].Value.String(), "24")
 	assert.Equal(response.Metric.Cpu.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.Cpu.Values[1].Value, 24)
+	assert.Equal(response.Metric.Cpu.Values[1].Value.String(), "24")
 }
 
 func TestPrivateCloudGetCpuMetricsWithFilter(t *testing.T) {
@@ -1080,9 +1080,9 @@ func TestPrivateCloudGetCpuMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metadata.Granularity, "MONTH")
 	assert.Equal(response.Metric.Cpu.Unit, "CORES")
 	assert.Equal(response.Metric.Cpu.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.Cpu.Values[0].Value, 24)
+	assert.Equal(response.Metric.Cpu.Values[0].Value.String(), "24")
 	assert.Equal(response.Metric.Cpu.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.Cpu.Values[1].Value, 24)
+	assert.Equal(response.Metric.Cpu.Values[1].Value.String(), "24")
 }
 
 func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
@@ -1198,9 +1198,9 @@ func TestPrivateCloudGetMemoryMetrics(t *testing.T) {
 	assert.Equal(response.Metadata.Granularity, "MONTH")
 	assert.Equal(response.Metric.Memory.Unit, "GB")
 	assert.Equal(response.Metric.Memory.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.Memory.Values[0].Value, 8)
+	assert.Equal(response.Metric.Memory.Values[0].Value.String(), "8")
 	assert.Equal(response.Metric.Memory.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.Memory.Values[1].Value, 16)
+	assert.Equal(response.Metric.Memory.Values[1].Value.String(), "16")
 }
 
 func TestPrivateCloudGetMemoryMetricsWithFilter(t *testing.T) {
@@ -1245,9 +1245,9 @@ func TestPrivateCloudGetMemoryMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metadata.Granularity, "MONTH")
 	assert.Equal(response.Metric.Memory.Unit, "GB")
 	assert.Equal(response.Metric.Memory.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.Memory.Values[0].Value, 8)
+	assert.Equal(response.Metric.Memory.Values[0].Value.String(), "8")
 	assert.Equal(response.Metric.Memory.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.Memory.Values[1].Value, 16)
+	assert.Equal(response.Metric.Memory.Values[1].Value.String(), "16")
 }
 
 func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
@@ -1363,9 +1363,9 @@ func TestPrivateCloudGetStorageMetrics(t *testing.T) {
 	assert.Equal(response.Metadata.Granularity, "MONTH")
 	assert.Equal(response.Metric.Storage.Unit, "GB")
 	assert.Equal(response.Metric.Storage.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.Storage.Values[0].Value, 900)
+	assert.Equal(response.Metric.Storage.Values[0].Value.String(), "900")
 	assert.Equal(response.Metric.Storage.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.Storage.Values[1].Value, 2500)
+	assert.Equal(response.Metric.Storage.Values[1].Value.String(), "2500")
 }
 
 func TestPrivateCloudGetStorageMetricsWithFilter(t *testing.T) {
@@ -1410,9 +1410,9 @@ func TestPrivateCloudGetStorageMetricsWithFilter(t *testing.T) {
 	assert.Equal(response.Metadata.Granularity, "MONTH")
 	assert.Equal(response.Metric.Storage.Unit, "GB")
 	assert.Equal(response.Metric.Storage.Values[0].Timestamp, "2017-07-01T00:00:00+00:00")
-	assert.Equal(response.Metric.Storage.Values[0].Value, 900)
+	assert.Equal(response.Metric.Storage.Values[0].Value.String(), "900")
 	assert.Equal(response.Metric.Storage.Values[1].Timestamp, "2017-07-02T00:00:00+00:00")
-	assert.Equal(response.Metric.Storage.Values[1].Value, 2500)
+	assert.Equal(response.Metric.Storage.Values[1].Value.String(), "2500")
 }
 
 func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {

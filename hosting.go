@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -96,7 +97,7 @@ type HostingResourceRecordSets struct {
 type HostingResourceRecordSet struct {
 	Name     string      `json:"name"`
 	Type     string      `json:"type"`
-	Ttl      int         `json:"ttl"`
+	Ttl      json.Number `json:"ttl"`
 	Content  []string    `json:"content"`
 	Editable bool        `json:"editable"`
 	Link     HostingLink `json:"_links"`
@@ -121,18 +122,18 @@ type HostingEmailMailboxes struct {
 }
 
 type HostingEmail struct {
-	Destination        string `json:"destination"`
-	Source             string `json:"source"`
-	Active             bool   `json:"active"`
-	SpamChecksEnabled  bool   `json:"spamChecksEnabled"`
-	VirusChecksEnabled bool   `json:"virusChecksEnabled"`
-	CurrentSize        int    `json:"currentSize"`
-	MaximumSize        int    `json:"maximumSize"`
-	Suspended          bool   `json:"suspended"`
-	LocalDelivery      bool   `json:"localDelivery"`
-	EmailAddress       string `json:"emailAddress"`
-	Body               string `json:"body"`
-	Subject            string `json:"subject"`
+	Destination        string      `json:"destination"`
+	Source             string      `json:"source"`
+	Active             bool        `json:"active"`
+	SpamChecksEnabled  bool        `json:"spamChecksEnabled"`
+	VirusChecksEnabled bool        `json:"virusChecksEnabled"`
+	CurrentSize        json.Number `json:"currentSize"`
+	MaximumSize        json.Number `json:"maximumSize"`
+	Suspended          bool        `json:"suspended"`
+	LocalDelivery      bool        `json:"localDelivery"`
+	EmailAddress       string      `json:"emailAddress"`
+	Body               string      `json:"body"`
+	Subject            string      `json:"subject"`
 	Embedded           struct {
 		AutoResponder struct {
 			Link HostingLink `json:"_links"`
