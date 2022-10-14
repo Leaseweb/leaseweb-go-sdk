@@ -1,4 +1,4 @@
-module github.com/majidkarimizadeh/leaseweb-go-sdk
+module github.com/LeaseWeb/leaseweb-go-sdk
 
 go 1.18
 
