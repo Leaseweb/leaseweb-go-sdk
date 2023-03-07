@@ -75,6 +75,10 @@ func doRequest(method string, endpoint string, args ...interface{}) error {
 		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
 	}
 
+	if method == http.MethodPost || method == http.MethodPut {
+		req.Header.Set("Content-Type", "application/json")
+	}
+
 	req.Header.Add("x-lsw-auth", lswClient.apiKey)
 	resp, err := lswClient.client.Do(req)
 	if err != nil {
