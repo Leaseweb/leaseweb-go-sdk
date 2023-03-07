@@ -228,7 +228,7 @@ type NotificationSetting struct {
 	Frequency           string                      `json:"frequency"`
 	Id                  string                      `json:"id"`
 	LastCheckedAt       string                      `json:"lastCheckedAt"`
-	Threshold           string                      `json:"threshold"`
+	Threshold           float64                     `json:"threshold,string"`
 	ThresholdExceededAt string                      `json:"thresholdExceededAt"`
 	Unit                string                      `json:"unit"`
 }
