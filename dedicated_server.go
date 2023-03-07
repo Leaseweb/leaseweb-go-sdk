@@ -727,6 +727,15 @@ func (dsa DedicatedServerApi) ListJobs(serverId string, args ...int) (*Dedicated
 	if len(args) >= 2 {
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
+	if len(args) >= 3 {
+		v.Add("type", fmt.Sprint(args[2]))
+	}
+	if len(args) >= 4 {
+		v.Add("status", fmt.Sprint(args[3]))
+	}
+	if len(args) >= 5 {
+		v.Add("isRunning", fmt.Sprint(args[4]))
+	}
 
 	result := &DedicatedServerJobs{}
 	path := dsa.getPath("/servers/" + serverId + "/jobs?" + v.Encode())
