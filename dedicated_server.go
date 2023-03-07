@@ -692,7 +692,7 @@ func (dsa DedicatedServerApi) ExpireActiveJob(serverId string) (*DedicatedServer
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) LunchHardwareScan(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) LaunchHardwareScan(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/hardwareScan")
 	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
@@ -701,7 +701,7 @@ func (dsa DedicatedServerApi) LunchHardwareScan(serverId string, payload map[str
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) LunchInstallation(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) LaunchInstallation(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/install")
 	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
@@ -710,7 +710,7 @@ func (dsa DedicatedServerApi) LunchInstallation(serverId string, payload map[str
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) LunchIpmiRest(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) LaunchIpmiRest(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/ipmiRest")
 	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
@@ -745,7 +745,7 @@ func (dsa DedicatedServerApi) GetJob(serverId, jobId string) (*DedicatedServerJo
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) LunchRescueMode(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) LaunchRescueMode(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/rescueMode")
 	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
