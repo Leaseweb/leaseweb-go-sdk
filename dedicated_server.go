@@ -888,10 +888,10 @@ func (dsa DedicatedServerApi) ListBandWidthNotificationSettings(serverId string,
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CreateBandWidthNotificationSetting(serverId, frequency, threshold, unit string) (*NotificationSetting, error) {
+func (dsa DedicatedServerApi) CreateBandWidthNotificationSetting(serverId string, frequency string, threshold float64, unit string) (*NotificationSetting, error) {
 	payload := map[string]string{
 		"frequency": frequency,
-		"threshold": threshold,
+		"threshold": fmt.Sprintf("%g", threshold),
 		"unit":      unit,
 	}
 	result := &NotificationSetting{}
@@ -942,10 +942,10 @@ func (dsa DedicatedServerApi) ListDataTrafficNotificationSettings(serverId strin
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CreateDataTrafficNotificationSetting(serverId, frequency, threshold, unit string) (*NotificationSetting, error) {
+func (dsa DedicatedServerApi) CreateDataTrafficNotificationSetting(serverId string, frequency string, threshold float64, unit string) (*NotificationSetting, error) {
 	payload := map[string]string{
 		"frequency": frequency,
-		"threshold": threshold,
+		"threshold": fmt.Sprintf("%g", threshold),
 		"unit":      unit,
 	}
 	result := &NotificationSetting{}
