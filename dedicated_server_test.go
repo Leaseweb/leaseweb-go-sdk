@@ -6667,7 +6667,7 @@ func TestDedicatedServerCreateBandWidthNotificationSetting(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+	resp, err := DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", 1, "Gbps")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -6692,7 +6692,7 @@ func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+				return DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", 1, "Gbps")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6709,7 +6709,7 @@ func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+				return DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", 1, "Gbps")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6726,7 +6726,7 @@ func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+				return DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", 1, "Gbps")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6743,7 +6743,7 @@ func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+				return DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", 1, "Gbps")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6760,7 +6760,7 @@ func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+				return DedicatedServerApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", 1, "Gbps")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7365,7 +7365,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSetting(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+	resp, err := DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", 1.0, "GB")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -7390,7 +7390,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *test
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", 1, "GB")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7407,7 +7407,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *test
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", 1, "GB")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7424,7 +7424,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *test
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", 1.0, "GB")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7441,7 +7441,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *test
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", 1, "GB")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7458,7 +7458,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *test
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", 1, "GB")
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
