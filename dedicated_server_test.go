@@ -3851,7 +3851,7 @@ func TestDedicatedServerExpireActiveJobServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDedicatedServerLunchHardwareScan(t *testing.T) {
+func TestDedicatedServerLaunchHardwareScan(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -3902,7 +3902,7 @@ func TestDedicatedServerLunchHardwareScan(t *testing.T) {
 	defer teardown()
 
 	payload := map[string]interface{}{"callbackUrl": "http://callback.url", "powerCycle": true}
-	Job, err := DedicatedServerApi{}.LunchHardwareScan("12345", payload)
+	Job, err := DedicatedServerApi{}.LaunchHardwareScan("12345", payload)
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -3942,7 +3942,7 @@ func TestDedicatedServerLunchHardwareScan(t *testing.T) {
 	assert.Equal(Job.Payload.ServerId, "99944")
 }
 
-func TestDedicatedServerLunchHardwareScanServerErrors(t *testing.T) {
+func TestDedicatedServerLaunchHardwareScanServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -3954,7 +3954,7 @@ func TestDedicatedServerLunchHardwareScanServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]interface{}{"callbackUrl": "http://callback.url", "powerCycle": true}
-				return DedicatedServerApi{}.LunchHardwareScan("12345", payload)
+				return DedicatedServerApi{}.LaunchHardwareScan("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3972,7 +3972,7 @@ func TestDedicatedServerLunchHardwareScanServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]interface{}{"callbackUrl": "http://callback.url", "powerCycle": true}
-				return DedicatedServerApi{}.LunchHardwareScan("12345", payload)
+				return DedicatedServerApi{}.LaunchHardwareScan("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3990,7 +3990,7 @@ func TestDedicatedServerLunchHardwareScanServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]interface{}{"callbackUrl": "http://callback.url", "powerCycle": true}
-				return DedicatedServerApi{}.LunchHardwareScan("12345", payload)
+				return DedicatedServerApi{}.LaunchHardwareScan("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4008,7 +4008,7 @@ func TestDedicatedServerLunchHardwareScanServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]interface{}{"callbackUrl": "http://callback.url", "powerCycle": true}
-				return DedicatedServerApi{}.LunchHardwareScan("12345", payload)
+				return DedicatedServerApi{}.LaunchHardwareScan("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4026,7 +4026,7 @@ func TestDedicatedServerLunchHardwareScanServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]interface{}{"callbackUrl": "http://callback.url", "powerCycle": true}
-				return DedicatedServerApi{}.LunchHardwareScan("12345", payload)
+				return DedicatedServerApi{}.LaunchHardwareScan("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4038,7 +4038,7 @@ func TestDedicatedServerLunchHardwareScanServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDedicatedServerLunchInstallation(t *testing.T) {
+func TestDedicatedServerLaunchInstallation(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -4157,7 +4157,7 @@ func TestDedicatedServerLunchInstallation(t *testing.T) {
 		},
 		"sshKeys": "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 	}
-	Job, err := DedicatedServerApi{}.LunchInstallation("12345", payload)
+	Job, err := DedicatedServerApi{}.LaunchInstallation("12345", payload)
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -4224,7 +4224,7 @@ func TestDedicatedServerLunchInstallation(t *testing.T) {
 	assert.Equal(Job.Payload.Partitions[3].Primary, true)
 }
 
-func TestDedicatedServerLunchInstallationServerErrors(t *testing.T) {
+func TestDedicatedServerLaunchInstallationServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -4266,7 +4266,7 @@ func TestDedicatedServerLunchInstallationServerErrors(t *testing.T) {
 					},
 					"sshKeys": "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 				}
-				return DedicatedServerApi{}.LunchInstallation("12345", payload)
+				return DedicatedServerApi{}.LaunchInstallation("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4314,7 +4314,7 @@ func TestDedicatedServerLunchInstallationServerErrors(t *testing.T) {
 					},
 					"sshKeys": "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 				}
-				return DedicatedServerApi{}.LunchInstallation("12345", payload)
+				return DedicatedServerApi{}.LaunchInstallation("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4362,7 +4362,7 @@ func TestDedicatedServerLunchInstallationServerErrors(t *testing.T) {
 					},
 					"sshKeys": "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 				}
-				return DedicatedServerApi{}.LunchInstallation("12345", payload)
+				return DedicatedServerApi{}.LaunchInstallation("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4410,7 +4410,7 @@ func TestDedicatedServerLunchInstallationServerErrors(t *testing.T) {
 					},
 					"sshKeys": "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 				}
-				return DedicatedServerApi{}.LunchInstallation("12345", payload)
+				return DedicatedServerApi{}.LaunchInstallation("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4458,7 +4458,7 @@ func TestDedicatedServerLunchInstallationServerErrors(t *testing.T) {
 					},
 					"sshKeys": "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 				}
-				return DedicatedServerApi{}.LunchInstallation("12345", payload)
+				return DedicatedServerApi{}.LaunchInstallation("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4470,7 +4470,7 @@ func TestDedicatedServerLunchInstallationServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDedicatedServerLunchIpmiRest(t *testing.T) {
+func TestDedicatedServerLaunchIpmiRest(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -4522,7 +4522,7 @@ func TestDedicatedServerLunchIpmiRest(t *testing.T) {
 	defer teardown()
 
 	payload := map[string]interface{}{"callbackUrl": "https://callbacks.example.org"}
-	Job, err := DedicatedServerApi{}.LunchIpmiRest("12345", payload)
+	Job, err := DedicatedServerApi{}.LaunchIpmiRest("12345", payload)
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -4565,7 +4565,7 @@ func TestDedicatedServerLunchIpmiRest(t *testing.T) {
 	assert.Equal(Job.Payload.HasPublicIpmiIp, false)
 }
 
-func TestDedicatedServerLunchIpmiRestServerErrors(t *testing.T) {
+func TestDedicatedServerLaunchIpmiRestServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -4577,7 +4577,7 @@ func TestDedicatedServerLunchIpmiRestServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]interface{}{"callbackUrl": "https://callbacks.example.org"}
-				return DedicatedServerApi{}.LunchIpmiRest("12345", payload)
+				return DedicatedServerApi{}.LaunchIpmiRest("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4595,7 +4595,7 @@ func TestDedicatedServerLunchIpmiRestServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]interface{}{"callbackUrl": "https://callbacks.example.org"}
-				return DedicatedServerApi{}.LunchIpmiRest("12345", payload)
+				return DedicatedServerApi{}.LaunchIpmiRest("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4613,7 +4613,7 @@ func TestDedicatedServerLunchIpmiRestServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]interface{}{"callbackUrl": "https://callbacks.example.org"}
-				return DedicatedServerApi{}.LunchIpmiRest("12345", payload)
+				return DedicatedServerApi{}.LaunchIpmiRest("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4631,7 +4631,7 @@ func TestDedicatedServerLunchIpmiRestServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]interface{}{"callbackUrl": "https://callbacks.example.org"}
-				return DedicatedServerApi{}.LunchIpmiRest("12345", payload)
+				return DedicatedServerApi{}.LaunchIpmiRest("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4649,7 +4649,7 @@ func TestDedicatedServerLunchIpmiRestServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]interface{}{"callbackUrl": "https://callbacks.example.org"}
-				return DedicatedServerApi{}.LunchIpmiRest("12345", payload)
+				return DedicatedServerApi{}.LaunchIpmiRest("12345", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5102,7 +5102,7 @@ func TestDedicatedServerGetJobServerErrors(t *testing.T) {
 	assertServerErrorTests(t, serverErrorTests)
 }
 
-func TestDedicatedServerLunchRescueMode(t *testing.T) {
+func TestDedicatedServerLaunchRescueMode(t *testing.T) {
 	setup(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPost, r.Method)
 		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
@@ -5159,7 +5159,7 @@ func TestDedicatedServerLunchRescueMode(t *testing.T) {
 		"rescueImageId": "GRML",
 		"sshKeys":       "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 	}
-	Job, err := DedicatedServerApi{}.LunchRescueMode("2349839", payload)
+	Job, err := DedicatedServerApi{}.LaunchRescueMode("2349839", payload)
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -5202,7 +5202,7 @@ func TestDedicatedServerLunchRescueMode(t *testing.T) {
 	assert.Equal(Job.Payload.IsUnassignedServer, false)
 }
 
-func TestDedicatedServerLunchRescueModeServerErrors(t *testing.T) {
+func TestDedicatedServerLaunchRescueModeServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
 			Title: "error 401",
@@ -5219,7 +5219,7 @@ func TestDedicatedServerLunchRescueModeServerErrors(t *testing.T) {
 					"rescueImageId": "GRML",
 					"sshKeys":       "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 				}
-				return DedicatedServerApi{}.LunchRescueMode("2349839", payload)
+				return DedicatedServerApi{}.LaunchRescueMode("2349839", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5242,7 +5242,7 @@ func TestDedicatedServerLunchRescueModeServerErrors(t *testing.T) {
 					"rescueImageId": "GRML",
 					"sshKeys":       "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 				}
-				return DedicatedServerApi{}.LunchRescueMode("2349839", payload)
+				return DedicatedServerApi{}.LaunchRescueMode("2349839", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5265,7 +5265,7 @@ func TestDedicatedServerLunchRescueModeServerErrors(t *testing.T) {
 					"rescueImageId": "GRML",
 					"sshKeys":       "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 				}
-				return DedicatedServerApi{}.LunchRescueMode("2349839", payload)
+				return DedicatedServerApi{}.LaunchRescueMode("2349839", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5288,7 +5288,7 @@ func TestDedicatedServerLunchRescueModeServerErrors(t *testing.T) {
 					"rescueImageId": "GRML",
 					"sshKeys":       "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 				}
-				return DedicatedServerApi{}.LunchRescueMode("2349839", payload)
+				return DedicatedServerApi{}.LaunchRescueMode("2349839", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5311,7 +5311,7 @@ func TestDedicatedServerLunchRescueModeServerErrors(t *testing.T) {
 					"rescueImageId": "GRML",
 					"sshKeys":       "ssh-rsa AAAAB3NzaC1y... user@domain.com",
 				}
-				return DedicatedServerApi{}.LunchRescueMode("2349839", payload)
+				return DedicatedServerApi{}.LaunchRescueMode("2349839", payload)
 			},
 			ExpectedError: LeasewebError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
