@@ -3,7 +3,6 @@ package leaseweb
 import (
 	"encoding/json"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
@@ -113,7 +112,7 @@ func doRequest(method string, path string, args ...interface{}) error {
 		return nil
 	}
 
-	respBody, err := ioutil.ReadAll(resp.Body)
+	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return err
 	}
