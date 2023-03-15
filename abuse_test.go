@@ -147,7 +147,7 @@ func TestAbuseListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -163,7 +163,7 @@ func TestAbuseListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -179,7 +179,7 @@ func TestAbuseListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -298,7 +298,7 @@ func TestAbuseGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.Get("wrong-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -314,7 +314,7 @@ func TestAbuseGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.Get("123456")
 			},
-			ExpectedError: LeasewebError{},
+			ExpectedError: ApiError{},
 		},
 		{
 			Title: "error 500",
@@ -327,7 +327,7 @@ func TestAbuseGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.Get("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -343,7 +343,7 @@ func TestAbuseGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.Get("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -472,7 +472,7 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.ListMessages("123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -488,7 +488,7 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.ListMessages("123456789")
 			},
-			ExpectedError: LeasewebError{},
+			ExpectedError: ApiError{},
 		},
 		{
 			Title: "error 500",
@@ -501,7 +501,7 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.ListMessages("123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -517,7 +517,7 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.ListMessages("123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -556,7 +556,7 @@ func TestAbuseCreateMessageServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.CreateMessage("123456789", "message body...")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -572,7 +572,7 @@ func TestAbuseCreateMessageServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.CreateMessage("123456789", "message body...")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -588,7 +588,7 @@ func TestAbuseCreateMessageServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.CreateMessage("123456789", "message body...")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -662,7 +662,7 @@ func TestAbuseListResolutionOptionsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.ListResolutionOptions("123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -678,7 +678,7 @@ func TestAbuseListResolutionOptionsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.ListResolutionOptions("123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -694,7 +694,7 @@ func TestAbuseListResolutionOptionsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return AbuseApi{}.ListResolutionOptions("123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -731,7 +731,7 @@ func TestAbuseResolveServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, AbuseApi{}.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -747,7 +747,7 @@ func TestAbuseResolveServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, AbuseApi{}.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -763,7 +763,7 @@ func TestAbuseResolveServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, AbuseApi{}.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},

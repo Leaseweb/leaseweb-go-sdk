@@ -11,7 +11,7 @@ import (
 
 var lswClient *leasewebClient
 
-var defaultErrors = map[int]LeasewebError{
+var defaultErrors = map[int]ApiError{
 	http.StatusBadRequest:          {ErrorCode: strconv.Itoa(http.StatusBadRequest), ErrorMessage: "Bad Request"},
 	http.StatusUnauthorized:        {ErrorCode: strconv.Itoa(http.StatusUnauthorized), ErrorMessage: "Unauthorized"},
 	http.StatusForbidden:           {ErrorCode: strconv.Itoa(http.StatusForbidden), ErrorMessage: "Forbidden"},
@@ -28,7 +28,7 @@ type leasewebClient struct {
 	baseUrl string
 }
 
-type LeasewebError struct {
+type ApiError struct {
 	ErrorCode     string              `json:"errorCode"`
 	ErrorMessage  string              `json:"errorMessage"`
 	ErrorDetails  map[string][]string `json:"errorDetails"`
@@ -37,7 +37,7 @@ type LeasewebError struct {
 	Reference     string              `json:"reference"`
 }
 
-func (le *LeasewebError) Error() string {
+func (le *ApiError) Error() string {
 	return le.ErrorMessage
 }
 
@@ -95,7 +95,7 @@ func doRequest(method string, path string, args ...interface{}) error {
 
 	req, err := http.NewRequest(method, url, tmpPayload)
 	if err != nil {
-		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+		return &ApiError{ErrorCode: "0", ErrorMessage: err.Error()}
 	}
 
 	if method == http.MethodPost || method == http.MethodPut {
@@ -105,7 +105,7 @@ func doRequest(method string, path string, args ...interface{}) error {
 	req.Header.Add("x-lsw-auth", lswClient.apiKey)
 	resp, err := lswClient.client.Do(req)
 	if err != nil {
-		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+		return &ApiError{ErrorCode: "0", ErrorMessage: err.Error()}
 	}
 	defer resp.Body.Close()
 
@@ -115,12 +115,12 @@ func doRequest(method string, path string, args ...interface{}) error {
 
 	respBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+		return &ApiError{ErrorCode: "0", ErrorMessage: err.Error()}
 	}
 
 	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
 	if !statusOK {
-		lswErr := &LeasewebError{}
+		lswErr := &ApiError{}
 		if err = json.Unmarshal(respBody, lswErr); err != nil {
 			if defaultError, ok := defaultErrors[resp.StatusCode]; ok {
 				return &defaultError

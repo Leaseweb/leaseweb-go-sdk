@@ -247,7 +247,7 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListDomains()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -264,7 +264,7 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListDomains()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -281,7 +281,7 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListDomains()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -375,7 +375,7 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetDomain("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -391,7 +391,7 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetDomain("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
 				ErrorCode:     "404",
 				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
@@ -408,7 +408,7 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetDomain("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -425,7 +425,7 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetDomain("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -475,7 +475,7 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetAvailability("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -491,7 +491,7 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetAvailability("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
 				ErrorCode:     "404",
 				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
@@ -508,7 +508,7 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetAvailability("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -525,7 +525,7 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetAvailability("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -632,7 +632,7 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListNameservers("example.com", 1)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -649,7 +649,7 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListNameservers("example.com", 1)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -666,7 +666,7 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListNameservers("example.com", 1)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -732,7 +732,7 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateNameservers("example.com", []string{"ns1.example.com", "ns2.example.com"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -749,7 +749,7 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateNameservers("example.com", []string{"ns1.example.com", "ns2.example.com"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -766,7 +766,7 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateNameservers("example.com", []string{"ns1.example.com", "ns2.example.com"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -783,7 +783,7 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateNameservers("example.com", []string{"ns1.example.com", "ns2.example.com"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -843,7 +843,7 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetDnsSecurity("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -859,7 +859,7 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetDnsSecurity("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
 				ErrorCode:     "404",
 				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
@@ -876,7 +876,7 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetDnsSecurity("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -893,7 +893,7 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetDnsSecurity("exmple.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -933,7 +933,7 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateDnsSecurity("example.com", map[string]interface{}{"status": "ENABLED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -950,7 +950,7 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateDnsSecurity("example.com", map[string]interface{}{"status": "ENABLED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -967,7 +967,7 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateDnsSecurity("example.com", map[string]interface{}{"status": "ENABLED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -984,7 +984,7 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateDnsSecurity("example.com", map[string]interface{}{"status": "ENABLED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1181,7 +1181,7 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListResourceRecordSets("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1198,7 +1198,7 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListResourceRecordSets("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1215,7 +1215,7 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListResourceRecordSets("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1289,7 +1289,7 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 					"content": []string{"85.17.150.51", "85.17.150.52", "85.17.150.53"},
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1311,7 +1311,7 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 					"content": []string{"85.17.150.51", "85.17.150.52", "85.17.150.53"},
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1333,7 +1333,7 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 					"content": []string{"85.17.150.51", "85.17.150.52", "85.17.150.53"},
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1355,7 +1355,7 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 					"content": []string{"85.17.150.51", "85.17.150.52", "85.17.150.53"},
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1392,7 +1392,7 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteResourceRecordSet("example.com", "example.com.", "A")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1409,7 +1409,7 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteResourceRecordSet("example.com", "example.com.", "A")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1426,7 +1426,7 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteResourceRecordSet("example.com", "example.com.", "A")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1443,7 +1443,7 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteResourceRecordSet("example.com", "example.com.", "A")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1508,7 +1508,7 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetResourceRecordSet("exmple.com", "example.com.", "A")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -1524,7 +1524,7 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetResourceRecordSet("exmple.com", "example.com.", "A")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
 				ErrorCode:     "404",
 				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
@@ -1541,7 +1541,7 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetResourceRecordSet("exmple.com", "example.com.", "A")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1558,7 +1558,7 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetResourceRecordSet("exmple.com", "example.com.", "A")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1619,7 +1619,7 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateResourceRecordSet("exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1636,7 +1636,7 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateResourceRecordSet("exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1653,7 +1653,7 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateResourceRecordSet("exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1670,7 +1670,7 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.UpdateResourceRecordSet("exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1707,7 +1707,7 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteResourceRecordSets("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1724,7 +1724,7 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteResourceRecordSets("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1741,7 +1741,7 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteResourceRecordSets("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1758,7 +1758,7 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteResourceRecordSets("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1798,7 +1798,7 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ValidateResourceRecordSet("example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1815,7 +1815,7 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ValidateResourceRecordSet("example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1832,7 +1832,7 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ValidateResourceRecordSet("example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1849,7 +1849,7 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ValidateResourceRecordSet("example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1903,7 +1903,7 @@ func TestHostingListCatchAllServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListCatchAll("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1920,7 +1920,7 @@ func TestHostingListCatchAllServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListCatchAll("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1937,7 +1937,7 @@ func TestHostingListCatchAllServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListCatchAll("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -2000,7 +2000,7 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 					"virusChecksEnabled": false,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2021,7 +2021,7 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 					"virusChecksEnabled": false,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2042,7 +2042,7 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 					"virusChecksEnabled": false,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -2063,7 +2063,7 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 					"virusChecksEnabled": false,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -2100,7 +2100,7 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteCatchAll("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2117,7 +2117,7 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteCatchAll("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2134,7 +2134,7 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteCatchAll("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -2151,7 +2151,7 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteCatchAll("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -2318,7 +2318,7 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListEmailAliases("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2335,7 +2335,7 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListEmailAliases("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -2352,7 +2352,7 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListEmailAliases("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -2422,7 +2422,7 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2445,7 +2445,7 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2468,7 +2468,7 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -2491,7 +2491,7 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -2549,7 +2549,7 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetEmailAlias("example.com", "source@example.com", "destination@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2566,7 +2566,7 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetEmailAlias("example.com", "source@example.com", "destination@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2583,7 +2583,7 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetEmailAlias("example.com", "source@example.com", "destination@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -2600,7 +2600,7 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetEmailAlias("example.com", "source@example.com", "destination@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -2666,7 +2666,7 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2687,7 +2687,7 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2708,7 +2708,7 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -2729,7 +2729,7 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -2766,7 +2766,7 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteEmailAlias("example.com", "source", "dest")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2783,7 +2783,7 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteEmailAlias("example.com", "source", "dest")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2800,7 +2800,7 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteEmailAlias("example.com", "source", "dest")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -2817,7 +2817,7 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteEmailAlias("example.com", "source", "dest")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -2984,7 +2984,7 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListDomainForwards("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3001,7 +3001,7 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListDomainForwards("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -3018,7 +3018,7 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListDomainForwards("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -3209,7 +3209,7 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListMailBoxes("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3226,7 +3226,7 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListMailBoxes("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -3243,7 +3243,7 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListMailBoxes("example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -3339,7 +3339,7 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 					"localDelivery":      true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3363,7 +3363,7 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 					"localDelivery":      true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3387,7 +3387,7 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 					"localDelivery":      true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -3411,7 +3411,7 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 					"localDelivery":      true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -3493,7 +3493,7 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetMailBox("example.com", "mailbox@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3510,7 +3510,7 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetMailBox("example.com", "mailbox@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3527,7 +3527,7 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetMailBox("example.com", "mailbox@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -3544,7 +3544,7 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetMailBox("example.com", "mailbox@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -3640,7 +3640,7 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 					"localDelivery":      true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3664,7 +3664,7 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 					"localDelivery":      true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3688,7 +3688,7 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 					"localDelivery":      true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -3712,7 +3712,7 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 					"localDelivery":      true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -3749,7 +3749,7 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteMailBox("example.com", "info@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3766,7 +3766,7 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteMailBox("example.com", "info@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3783,7 +3783,7 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteMailBox("example.com", "info@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -3800,7 +3800,7 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteMailBox("example.com", "info@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -3854,7 +3854,7 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetAutoResponder("example.com", "mailbox@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3871,7 +3871,7 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetAutoResponder("example.com", "mailbox@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3888,7 +3888,7 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetAutoResponder("example.com", "mailbox@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -3905,7 +3905,7 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetAutoResponder("example.com", "mailbox@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -3967,7 +3967,7 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 					"subject": "Out of office",
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3988,7 +3988,7 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 					"subject": "Out of office",
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -4009,7 +4009,7 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 					"subject": "Out of office",
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -4030,7 +4030,7 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 					"subject": "Out of office",
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -4067,7 +4067,7 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteAutoResponder("example.com", "info@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -4084,7 +4084,7 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteAutoResponder("example.com", "info@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -4101,7 +4101,7 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteAutoResponder("example.com", "info@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -4118,7 +4118,7 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteAutoResponder("example.com", "info@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -4285,7 +4285,7 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListForwards("example.com", "random@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -4302,7 +4302,7 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListForwards("example.com", "random@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -4319,7 +4319,7 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.ListForwards("example.com", "random@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -4389,7 +4389,7 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -4412,7 +4412,7 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -4435,7 +4435,7 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -4458,7 +4458,7 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -4516,7 +4516,7 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetForward("example.com", "random@example.com", "destination@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -4533,7 +4533,7 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetForward("example.com", "random@example.com", "destination@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -4550,7 +4550,7 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetForward("example.com", "random@example.com", "destination@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -4567,7 +4567,7 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return HostingApi{}.GetForward("example.com", "random@example.com", "destination@example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -4633,7 +4633,7 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -4654,7 +4654,7 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -4675,7 +4675,7 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -4696,7 +4696,7 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 					"virusChecksEnabled": true,
 				})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -4733,7 +4733,7 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteForward("example.com", "email", "dest")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -4750,7 +4750,7 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteForward("example.com", "email", "dest")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -4767,7 +4767,7 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteForward("example.com", "email", "dest")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -4784,7 +4784,7 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, HostingApi{}.DeleteForward("example.com", "email", "dest")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",

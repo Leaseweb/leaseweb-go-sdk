@@ -289,7 +289,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -306,7 +306,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -323,7 +323,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -340,7 +340,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -444,7 +444,7 @@ func TestVirtualServerGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Get("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -461,7 +461,7 @@ func TestVirtualServerGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Get("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -478,7 +478,7 @@ func TestVirtualServerGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Get("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource '218030' was not found",
@@ -495,7 +495,7 @@ func TestVirtualServerGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Get("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -512,7 +512,7 @@ func TestVirtualServerGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Get("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -616,7 +616,7 @@ func TestVirtualServerUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Update("123456", "Web server")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -633,7 +633,7 @@ func TestVirtualServerUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Update("123456", "Web server")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -650,7 +650,7 @@ func TestVirtualServerUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Update("123456", "Web server")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource '218030' was not found",
@@ -667,7 +667,7 @@ func TestVirtualServerUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Update("123456", "Web server")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -684,7 +684,7 @@ func TestVirtualServerUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Update("123456", "Web server")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -730,7 +730,7 @@ func TestVirtualServerPowerOffServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.PowerOff("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -747,7 +747,7 @@ func TestVirtualServerPowerOffServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.PowerOff("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -764,7 +764,7 @@ func TestVirtualServerPowerOffServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.PowerOff("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource '218030' was not found",
@@ -781,7 +781,7 @@ func TestVirtualServerPowerOffServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.PowerOff("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -798,7 +798,7 @@ func TestVirtualServerPowerOffServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.PowerOff("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -844,7 +844,7 @@ func TestVirtualServerPowerOnServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.PowerOn("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -861,7 +861,7 @@ func TestVirtualServerPowerOnServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.PowerOn("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -878,7 +878,7 @@ func TestVirtualServerPowerOnServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.PowerOn("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource '218030' was not found",
@@ -895,7 +895,7 @@ func TestVirtualServerPowerOnServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.PowerOn("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -912,7 +912,7 @@ func TestVirtualServerPowerOnServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.PowerOn("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -958,7 +958,7 @@ func TestVirtualServerRebootServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Reboot("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -975,7 +975,7 @@ func TestVirtualServerRebootServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Reboot("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -992,7 +992,7 @@ func TestVirtualServerRebootServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Reboot("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource '218030' was not found",
@@ -1009,7 +1009,7 @@ func TestVirtualServerRebootServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Reboot("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1026,7 +1026,7 @@ func TestVirtualServerRebootServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Reboot("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1072,7 +1072,7 @@ func TestVirtualServerReinstallServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Reinstall("123456", "CENTOS_7_64_PLESK")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1089,7 +1089,7 @@ func TestVirtualServerReinstallServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Reinstall("123456", "CENTOS_7_64_PLESK")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1106,7 +1106,7 @@ func TestVirtualServerReinstallServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Reinstall("123456", "CENTOS_7_64_PLESK")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource '218030' was not found",
@@ -1123,7 +1123,7 @@ func TestVirtualServerReinstallServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Reinstall("123456", "CENTOS_7_64_PLESK")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1140,7 +1140,7 @@ func TestVirtualServerReinstallServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.Reinstall("123456", "CENTOS_7_64_PLESK")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1180,7 +1180,7 @@ func TestVirtualServerUpdateCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, VirtualServerApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1197,7 +1197,7 @@ func TestVirtualServerUpdateCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, VirtualServerApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1214,7 +1214,7 @@ func TestVirtualServerUpdateCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, VirtualServerApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource '218030' was not found",
@@ -1231,7 +1231,7 @@ func TestVirtualServerUpdateCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, VirtualServerApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1248,7 +1248,7 @@ func TestVirtualServerUpdateCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, VirtualServerApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1341,7 +1341,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.ListCredentials("99944", "OPERATING_SYSTEM")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1358,7 +1358,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.ListCredentials("99944", "OPERATING_SYSTEM")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1375,7 +1375,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.ListCredentials("99944", "OPERATING_SYSTEM")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1392,7 +1392,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.ListCredentials("99944", "OPERATING_SYSTEM")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1435,7 +1435,7 @@ func TestVirtualServerGetCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.GetCredential("99944", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1452,7 +1452,7 @@ func TestVirtualServerGetCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.GetCredential("99944", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1469,7 +1469,7 @@ func TestVirtualServerGetCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.GetCredential("99944", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1486,7 +1486,7 @@ func TestVirtualServerGetCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.GetCredential("99944", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1572,7 +1572,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.GetDataTrafficMetrics("12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1589,7 +1589,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.GetDataTrafficMetrics("12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1606,7 +1606,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.GetDataTrafficMetrics("12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource '218030' was not found",
@@ -1623,7 +1623,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.GetDataTrafficMetrics("12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1640,7 +1640,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.GetDataTrafficMetrics("12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1735,7 +1735,7 @@ func TestVirtualServerListTemplatesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.ListTemplates("12345")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1752,7 +1752,7 @@ func TestVirtualServerListTemplatesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.ListTemplates("12345")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1769,7 +1769,7 @@ func TestVirtualServerListTemplatesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.ListTemplates("12345")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1786,7 +1786,7 @@ func TestVirtualServerListTemplatesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return VirtualServerApi{}.ListTemplates("12345")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",

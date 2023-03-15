@@ -181,7 +181,7 @@ func TestIpManagementListIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.List(map[string]interface{}{"offset": 1})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -198,7 +198,7 @@ func TestIpManagementListIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.List(map[string]interface{}{"offset": 1})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -215,7 +215,7 @@ func TestIpManagementListIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.List(map[string]interface{}{"offset": 1})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -232,7 +232,7 @@ func TestIpManagementListIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.List(map[string]interface{}{"offset": 1})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -302,7 +302,7 @@ func TestIpManagementGetIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.Get("192.0.2.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -319,7 +319,7 @@ func TestIpManagementGetIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.Get("192.0.2.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -336,7 +336,7 @@ func TestIpManagementGetIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.Get("192.0.2.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -353,7 +353,7 @@ func TestIpManagementGetIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.Get("192.0.2.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -423,7 +423,7 @@ func TestIpManagementUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.Update("192.0.2.1", "mydomain1.example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -440,7 +440,7 @@ func TestIpManagementUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.Update("192.0.2.1", "mydomain1.example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -457,7 +457,7 @@ func TestIpManagementUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.Update("192.0.2.1", "mydomain1.example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -474,7 +474,7 @@ func TestIpManagementUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.Update("192.0.2.1", "mydomain1.example.com")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -548,7 +548,7 @@ func TestIpManagementNullRouteAnIpServerErrors(t *testing.T) {
 				}
 				return IpManagementApi{}.NullRouteAnIp("192.0.2.1", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -570,7 +570,7 @@ func TestIpManagementNullRouteAnIpServerErrors(t *testing.T) {
 				}
 				return IpManagementApi{}.NullRouteAnIp("192.0.2.1", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -592,7 +592,7 @@ func TestIpManagementNullRouteAnIpServerErrors(t *testing.T) {
 				}
 				return IpManagementApi{}.NullRouteAnIp("192.0.2.1", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -614,7 +614,7 @@ func TestIpManagementNullRouteAnIpServerErrors(t *testing.T) {
 				}
 				return IpManagementApi{}.NullRouteAnIp("192.0.2.1", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -651,7 +651,7 @@ func TestIpManagementRemoveNullRouteAnIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, IpManagementApi{}.RemoveNullRouteAnIp("192.0.2.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -668,7 +668,7 @@ func TestIpManagementRemoveNullRouteAnIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, IpManagementApi{}.RemoveNullRouteAnIp("192.0.2.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -685,7 +685,7 @@ func TestIpManagementRemoveNullRouteAnIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, IpManagementApi{}.RemoveNullRouteAnIp("192.0.2.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -702,7 +702,7 @@ func TestIpManagementRemoveNullRouteAnIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, IpManagementApi{}.RemoveNullRouteAnIp("192.0.2.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -867,7 +867,7 @@ func TestIpManagementListNullRoutesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.ListNullRoutes(map[string]interface{}{"offset": 1})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -884,7 +884,7 @@ func TestIpManagementListNullRoutesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.ListNullRoutes(map[string]interface{}{"offset": 1})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -901,7 +901,7 @@ func TestIpManagementListNullRoutesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.ListNullRoutes(map[string]interface{}{"offset": 1})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -918,7 +918,7 @@ func TestIpManagementListNullRoutesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.ListNullRoutes(map[string]interface{}{"offset": 1})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -983,7 +983,7 @@ func TestIpManagementGetNullRouteServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.GetNullRoute("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1000,7 +1000,7 @@ func TestIpManagementGetNullRouteServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.GetNullRoute("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1017,7 +1017,7 @@ func TestIpManagementGetNullRouteServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.GetNullRoute("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1034,7 +1034,7 @@ func TestIpManagementGetNullRouteServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return IpManagementApi{}.GetNullRoute("123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -1109,7 +1109,7 @@ func TestIpManagementUpdateNullRouteHistoryServerErrors(t *testing.T) {
 				}
 				return IpManagementApi{}.UpdateNullRoute("123456", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1131,7 +1131,7 @@ func TestIpManagementUpdateNullRouteHistoryServerErrors(t *testing.T) {
 				}
 				return IpManagementApi{}.UpdateNullRoute("123456", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "ACCESS_DENIED",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1153,7 +1153,7 @@ func TestIpManagementUpdateNullRouteHistoryServerErrors(t *testing.T) {
 				}
 				return IpManagementApi{}.UpdateNullRoute("123456", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "SERVER_ERROR",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -1175,7 +1175,7 @@ func TestIpManagementUpdateNullRouteHistoryServerErrors(t *testing.T) {
 				}
 				return IpManagementApi{}.UpdateNullRoute("123456", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",

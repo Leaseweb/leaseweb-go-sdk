@@ -60,7 +60,7 @@ func TestCustomerAccountGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.Get()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -77,7 +77,7 @@ func TestCustomerAccountGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.Get()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -94,7 +94,7 @@ func TestCustomerAccountGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.Get()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -111,7 +111,7 @@ func TestCustomerAccountGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.Get()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -149,7 +149,7 @@ func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -166,7 +166,7 @@ func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -183,7 +183,7 @@ func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "405",
 				ErrorMessage:  "AccountDetails modifications are not permitted for USA residents, please contact support for any modification request.",
@@ -200,7 +200,7 @@ func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -217,7 +217,7 @@ func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -369,7 +369,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.ListContacts()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -386,7 +386,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.ListContacts()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -403,7 +403,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.ListContacts()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -420,7 +420,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.ListContacts()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -504,7 +504,7 @@ func TestCustomerAccountCreateContactServerErrors(t *testing.T) {
 				}
 				return CustomerAccountApi{}.CreateContact(newContact)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -530,7 +530,7 @@ func TestCustomerAccountCreateContactServerErrors(t *testing.T) {
 				}
 				return CustomerAccountApi{}.CreateContact(newContact)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -556,7 +556,7 @@ func TestCustomerAccountCreateContactServerErrors(t *testing.T) {
 				}
 				return CustomerAccountApi{}.CreateContact(newContact)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -582,7 +582,7 @@ func TestCustomerAccountCreateContactServerErrors(t *testing.T) {
 				}
 				return CustomerAccountApi{}.CreateContact(newContact)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -620,7 +620,7 @@ func TestCustomerAccountDeleteContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.DeleteContact("contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -637,7 +637,7 @@ func TestCustomerAccountDeleteContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.DeleteContact("contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -654,7 +654,7 @@ func TestCustomerAccountDeleteContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.DeleteContact("contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -671,7 +671,7 @@ func TestCustomerAccountDeleteContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, CustomerAccountApi{}.DeleteContact("contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -750,7 +750,7 @@ func TestCustomerAccountGetContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.GetContact("contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -767,7 +767,7 @@ func TestCustomerAccountGetContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.GetContact("contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -784,7 +784,7 @@ func TestCustomerAccountGetContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.GetContact("contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -801,7 +801,7 @@ func TestCustomerAccountGetContactServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return CustomerAccountApi{}.GetContact("contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -850,7 +850,7 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 					"Description",
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -873,7 +873,7 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 					"Description",
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -896,7 +896,7 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 					"Description",
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -919,7 +919,7 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 					"Description",
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -942,7 +942,7 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 					"Description",
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -985,7 +985,7 @@ func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 					[]string{"GENERAL", "TECHNICAL"},
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1005,7 +1005,7 @@ func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 					[]string{"GENERAL", "TECHNICAL"},
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -1025,7 +1025,7 @@ func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 					[]string{"GENERAL", "TECHNICAL"},
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1045,7 +1045,7 @@ func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 					[]string{"GENERAL", "TECHNICAL"},
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1065,7 +1065,7 @@ func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 					[]string{"GENERAL", "TECHNICAL"},
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
