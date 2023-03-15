@@ -309,7 +309,7 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -326,7 +326,7 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -343,7 +343,7 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -360,7 +360,7 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -527,7 +527,7 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.Get("12345")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -544,7 +544,7 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.Get("12345")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -561,7 +561,7 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.Get("12345")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -578,7 +578,7 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.Get("12345")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -614,7 +614,7 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.Update("2893829", "new reference")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -631,7 +631,7 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.Update("2893829", "new reference")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -648,7 +648,7 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.Update("2893829", "new reference")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -665,7 +665,7 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.Update("2893829", "new reference")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -832,7 +832,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListIps("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -849,7 +849,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListIps("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -866,7 +866,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListIps("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -883,7 +883,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListIps("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -942,7 +942,7 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -959,7 +959,7 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -976,7 +976,7 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -993,7 +993,7 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1010,7 +1010,7 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1071,7 +1071,7 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 				payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
 				return DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1089,7 +1089,7 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 				payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
 				return DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1107,7 +1107,7 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 				payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
 				return DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1125,7 +1125,7 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 				payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
 				return DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1143,7 +1143,7 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 				payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
 				return DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1202,7 +1202,7 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1219,7 +1219,7 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1236,7 +1236,7 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1253,7 +1253,7 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1270,7 +1270,7 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1329,7 +1329,7 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1346,7 +1346,7 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1363,7 +1363,7 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1380,7 +1380,7 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1397,7 +1397,7 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1518,7 +1518,7 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1535,7 +1535,7 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -1552,7 +1552,7 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1569,7 +1569,7 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1690,7 +1690,7 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1707,7 +1707,7 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1724,7 +1724,7 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1741,7 +1741,7 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1758,7 +1758,7 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1802,7 +1802,7 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1819,7 +1819,7 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1836,7 +1836,7 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1853,7 +1853,7 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1870,7 +1870,7 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1979,7 +1979,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1996,7 +1996,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2013,7 +2013,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2030,7 +2030,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2047,7 +2047,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2090,7 +2090,7 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2107,7 +2107,7 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2124,7 +2124,7 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2141,7 +2141,7 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2158,7 +2158,7 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2194,7 +2194,7 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2211,7 +2211,7 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2228,7 +2228,7 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2245,7 +2245,7 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2262,7 +2262,7 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2306,7 +2306,7 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2323,7 +2323,7 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2340,7 +2340,7 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2357,7 +2357,7 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2374,7 +2374,7 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2410,7 +2410,7 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2427,7 +2427,7 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2444,7 +2444,7 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2461,7 +2461,7 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2478,7 +2478,7 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2514,7 +2514,7 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2531,7 +2531,7 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2548,7 +2548,7 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2565,7 +2565,7 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2582,7 +2582,7 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2618,7 +2618,7 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2635,7 +2635,7 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2652,7 +2652,7 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2669,7 +2669,7 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2686,7 +2686,7 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2732,7 +2732,7 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2749,7 +2749,7 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2766,7 +2766,7 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2783,7 +2783,7 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2800,7 +2800,7 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",

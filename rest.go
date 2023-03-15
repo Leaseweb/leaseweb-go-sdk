@@ -3,7 +3,6 @@ package leaseweb
 import (
 	"encoding/json"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
@@ -11,7 +10,7 @@ import (
 
 var lswClient *leasewebClient
 
-var defaultErrors = map[int]LeasewebError{
+var defaultErrors = map[int]ApiError{
 	http.StatusBadRequest:          {ErrorCode: strconv.Itoa(http.StatusBadRequest), ErrorMessage: "Bad Request"},
 	http.StatusUnauthorized:        {ErrorCode: strconv.Itoa(http.StatusUnauthorized), ErrorMessage: "Unauthorized"},
 	http.StatusForbidden:           {ErrorCode: strconv.Itoa(http.StatusForbidden), ErrorMessage: "Forbidden"},
@@ -28,16 +27,37 @@ type leasewebClient struct {
 	baseUrl string
 }
 
-type LeasewebError struct {
-	ErrorCode     string `json:"errorCode"`
-	ErrorMessage  string `json:"errorMessage"`
-	CorrelationId string `json:"correlationId"`
-	UserMessage   string `json:"userMessage"`
-	Reference     string `json:"reference"`
+type ApiError struct {
+	ErrorCode     string              `json:"errorCode"`
+	ErrorMessage  string              `json:"errorMessage"`
+	ErrorDetails  map[string][]string `json:"errorDetails"`
+	CorrelationId string              `json:"correlationId"`
+	UserMessage   string              `json:"userMessage"`
+	Reference     string              `json:"reference"`
 }
 
-func (le *LeasewebError) Error() string {
-	return le.ErrorMessage
+func (le *ApiError) Error() string {
+	return "leaseweb: " + le.ErrorMessage
+}
+
+type DecodingError struct {
+	Method string
+	Url    string
+	Err    error
+}
+
+func (errd *DecodingError) Error() string {
+	return "leaseweb: decoding JSON response body failed (" + errd.Method + " " + errd.Url + ")"
+}
+
+type EncodingError struct {
+	Method string
+	Url    string
+	Err    error
+}
+
+func (erre *EncodingError) Error() string {
+	return "leaseweb: encoding JSON request body failed (" + erre.Method + " " + erre.Url + ")"
 }
 
 func InitLeasewebClient(key string) {
@@ -58,21 +78,23 @@ func getBaseUrl() string {
 	return DEFAULT_BASE_URL
 }
 
-func doRequest(method string, endpoint string, args ...interface{}) error {
+func doRequest(method string, path string, args ...interface{}) error {
+	url := getBaseUrl() + path
+
 	var tmpPayload io.Reader
 	if method == http.MethodPost || method == http.MethodPut {
 		if len(args) > 1 {
 			b, err := json.Marshal(args[1])
 			if err != nil {
-				return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+				return &EncodingError{Method: method, Url: url, Err: err}
 			}
 			tmpPayload = strings.NewReader(string(b))
 		}
 	}
 
-	req, err := http.NewRequest(method, getBaseUrl()+endpoint, tmpPayload)
+	req, err := http.NewRequest(method, url, tmpPayload)
 	if err != nil {
-		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+		return err
 	}
 
 	if method == http.MethodPost || method == http.MethodPut {
@@ -82,7 +104,7 @@ func doRequest(method string, endpoint string, args ...interface{}) error {
 	req.Header.Add("x-lsw-auth", lswClient.apiKey)
 	resp, err := lswClient.client.Do(req)
 	if err != nil {
-		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+		return err
 	}
 	defer resp.Body.Close()
 
@@ -90,26 +112,26 @@ func doRequest(method string, endpoint string, args ...interface{}) error {
 		return nil
 	}
 
-	respBody, err := ioutil.ReadAll(resp.Body)
+	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+		return err
 	}
 
 	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
 	if !statusOK {
-		lswErr := &LeasewebError{}
+		lswErr := &ApiError{}
 		if err = json.Unmarshal(respBody, lswErr); err != nil {
 			if defaultError, ok := defaultErrors[resp.StatusCode]; ok {
 				return &defaultError
 			}
-			return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+			return &DecodingError{Method: method, Url: url, Err: err}
 		}
 		return lswErr
 	}
 
 	if len(args) > 0 {
 		if err = json.Unmarshal(respBody, &args[0]); err != nil {
-			return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+			return &DecodingError{Method: method, Url: url, Err: err}
 		}
 	}
 	return nil

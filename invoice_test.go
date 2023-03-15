@@ -122,7 +122,7 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -139,7 +139,7 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -156,7 +156,7 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -173,7 +173,7 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.List()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -330,7 +330,7 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.ListProForma()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -347,7 +347,7 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.ListProForma()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -364,7 +364,7 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.ListProForma()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -381,7 +381,7 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.ListProForma()
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -474,7 +474,7 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.Get("000000001")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -491,7 +491,7 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.Get("000000001")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -508,7 +508,7 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.Get("000000001")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -525,7 +525,7 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 			FunctionCall: func() (interface{}, error) {
 				return InvoiceApi{}.Get("000000001")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",

@@ -18,7 +18,7 @@ type serverErrorTest struct {
 	Title         string
 	MockServer    func(http.ResponseWriter, *http.Request)
 	FunctionCall  func() (interface{}, error)
-	ExpectedError LeasewebError
+	ExpectedError ApiError
 }
 
 type ctxT struct {
@@ -35,14 +35,15 @@ func assertServerErrorTests(t *testing.T, serverErrorTests []serverErrorTest) {
 		assert := assert.New(t)
 		assert.Empty(resp)
 		assert.NotNil(err)
-		assert.Equal(err.Error(), serverErrorTest.ExpectedError.ErrorMessage)
-		lswErr, ok := err.(*LeasewebError)
+		assert.Equal(err.Error(), "leaseweb: "+serverErrorTest.ExpectedError.ErrorMessage)
+		lswErr, ok := err.(*ApiError)
 		assert.Equal(true, ok)
 		assert.Equal(lswErr.ErrorMessage, serverErrorTest.ExpectedError.ErrorMessage)
 		assert.Equal(lswErr.CorrelationId, serverErrorTest.ExpectedError.CorrelationId)
 		assert.Equal(lswErr.ErrorCode, serverErrorTest.ExpectedError.ErrorCode)
 		assert.Equal(lswErr.Reference, serverErrorTest.ExpectedError.Reference)
 		assert.Equal(lswErr.UserMessage, serverErrorTest.ExpectedError.UserMessage)
+		assert.Equal(lswErr.ErrorDetails, serverErrorTest.ExpectedError.ErrorDetails)
 	}
 }
 
