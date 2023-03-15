@@ -29,11 +29,12 @@ type leasewebClient struct {
 }
 
 type LeasewebError struct {
-	ErrorCode     string `json:"errorCode"`
-	ErrorMessage  string `json:"errorMessage"`
-	CorrelationId string `json:"correlationId"`
-	UserMessage   string `json:"userMessage"`
-	Reference     string `json:"reference"`
+	ErrorCode     string              `json:"errorCode"`
+	ErrorMessage  string              `json:"errorMessage"`
+	ErrorDetails  map[string][]string `json:"errorDetails"`
+	CorrelationId string              `json:"correlationId"`
+	UserMessage   string              `json:"userMessage"`
+	Reference     string              `json:"reference"`
 }
 
 func (le *LeasewebError) Error() string {

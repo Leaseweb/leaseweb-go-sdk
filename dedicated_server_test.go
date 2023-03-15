@@ -5536,6 +5536,27 @@ func TestDedicatedServerCreateCredential(t *testing.T) {
 func TestDedicatedServerCreateCredentialServerErrors(t *testing.T) {
 	serverErrorTests := []serverErrorTest{
 		{
+			Title: "error 400",
+			MockServer: func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, http.MethodPost, r.Method)
+				assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
+				w.WriteHeader(http.StatusUnauthorized)
+				fmt.Fprintf(w, `{"correlationId":"430495b4-c052-451a-a016-30d8f72ac59b","errorCode":"400","errorMessage":"Validation Failed","errorDetails":{"username":["Usernames can only contain alphanumeric values and @.-_ characters"],"password":["This field is missing."]}}`)
+			},
+			FunctionCall: func() (interface{}, error) {
+				return DedicatedServerApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "ro=ot", "")
+			},
+			ExpectedError: LeasewebError{
+				CorrelationId: "430495b4-c052-451a-a016-30d8f72ac59b",
+				ErrorCode:     "400",
+				ErrorMessage:  "Validation Failed",
+				ErrorDetails: map[string][]string{
+					"username": []string{"Usernames can only contain alphanumeric values and @.-_ characters"},
+					"password": []string{"This field is missing."},
+				},
+			},
+		},
+		{
 			Title: "error 401",
 			MockServer: func(w http.ResponseWriter, r *http.Request) {
 				assert.Equal(t, http.MethodPost, r.Method)

@@ -43,6 +43,7 @@ func assertServerErrorTests(t *testing.T, serverErrorTests []serverErrorTest) {
 		assert.Equal(lswErr.ErrorCode, serverErrorTest.ExpectedError.ErrorCode)
 		assert.Equal(lswErr.Reference, serverErrorTest.ExpectedError.Reference)
 		assert.Equal(lswErr.UserMessage, serverErrorTest.ExpectedError.UserMessage)
+		assert.Equal(lswErr.ErrorDetails, serverErrorTest.ExpectedError.ErrorDetails)
 	}
 }
 
