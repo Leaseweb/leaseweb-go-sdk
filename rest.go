@@ -37,7 +37,7 @@ type ApiError struct {
 }
 
 func (le *ApiError) Error() string {
-	return le.ErrorMessage
+	return "leaseweb: " + le.ErrorMessage
 }
 
 type DecodingError struct {
@@ -47,7 +47,7 @@ type DecodingError struct {
 }
 
 func (errd *DecodingError) Error() string {
-	return "Decoding JSON response body failed (" + errd.Method + " " + errd.Url + ")"
+	return "leaseweb: decoding JSON response body failed (" + errd.Method + " " + errd.Url + ")"
 }
 
 type EncodingError struct {
@@ -57,7 +57,7 @@ type EncodingError struct {
 }
 
 func (erre *EncodingError) Error() string {
-	return "Encoding JSON request body failed (" + erre.Method + " " + erre.Url + ")"
+	return "leaseweb: encoding JSON request body failed (" + erre.Method + " " + erre.Url + ")"
 }
 
 func InitLeasewebClient(key string) {
