@@ -41,6 +41,26 @@ func (le *LeasewebError) Error() string {
 	return le.ErrorMessage
 }
 
+type DecodingError struct {
+	Method string
+	Url    string
+	Err    error
+}
+
+func (errd *DecodingError) Error() string {
+	return "Decoding JSON response body failed (" + errd.Method + " " + errd.Url + ")"
+}
+
+type EncodingError struct {
+	Method string
+	Url    string
+	Err    error
+}
+
+func (erre *EncodingError) Error() string {
+	return "Encoding JSON request body failed (" + erre.Method + " " + erre.Url + ")"
+}
+
 func InitLeasewebClient(key string) {
 	lswClient = &leasewebClient{
 		client: &http.Client{},
@@ -60,18 +80,20 @@ func getBaseUrl() string {
 }
 
 func doRequest(method string, endpoint string, args ...interface{}) error {
+	url := getBaseUrl() + endpoint
+
 	var tmpPayload io.Reader
 	if method == http.MethodPost || method == http.MethodPut {
 		if len(args) > 1 {
 			b, err := json.Marshal(args[1])
 			if err != nil {
-				return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+				return &EncodingError{Method: method, Url: url, Err: err}
 			}
 			tmpPayload = strings.NewReader(string(b))
 		}
 	}
 
-	req, err := http.NewRequest(method, getBaseUrl()+endpoint, tmpPayload)
+	req, err := http.NewRequest(method, url, tmpPayload)
 	if err != nil {
 		return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
 	}
@@ -103,14 +125,14 @@ func doRequest(method string, endpoint string, args ...interface{}) error {
 			if defaultError, ok := defaultErrors[resp.StatusCode]; ok {
 				return &defaultError
 			}
-			return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+			return &DecodingError{Method: method, Url: url, Err: err}
 		}
 		return lswErr
 	}
 
 	if len(args) > 0 {
 		if err = json.Unmarshal(respBody, &args[0]); err != nil {
-			return &LeasewebError{ErrorCode: "0", ErrorMessage: err.Error()}
+			return &DecodingError{Method: method, Url: url, Err: err}
 		}
 	}
 	return nil
