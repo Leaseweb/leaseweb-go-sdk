@@ -95,7 +95,7 @@ func doRequest(method string, path string, args ...interface{}) error {
 
 	req, err := http.NewRequest(method, url, tmpPayload)
 	if err != nil {
-		return &ApiError{ErrorCode: "0", ErrorMessage: err.Error()}
+		return err
 	}
 
 	if method == http.MethodPost || method == http.MethodPut {
@@ -105,7 +105,7 @@ func doRequest(method string, path string, args ...interface{}) error {
 	req.Header.Add("x-lsw-auth", lswClient.apiKey)
 	resp, err := lswClient.client.Do(req)
 	if err != nil {
-		return &ApiError{ErrorCode: "0", ErrorMessage: err.Error()}
+		return err
 	}
 	defer resp.Body.Close()
 
@@ -115,7 +115,7 @@ func doRequest(method string, path string, args ...interface{}) error {
 
 	respBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return &ApiError{ErrorCode: "0", ErrorMessage: err.Error()}
+		return err
 	}
 
 	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
