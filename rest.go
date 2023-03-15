@@ -79,8 +79,8 @@ func getBaseUrl() string {
 	return DEFAULT_BASE_URL
 }
 
-func doRequest(method string, endpoint string, args ...interface{}) error {
-	url := getBaseUrl() + endpoint
+func doRequest(method string, path string, args ...interface{}) error {
+	url := getBaseUrl() + path
 
 	var tmpPayload io.Reader
 	if method == http.MethodPost || method == http.MethodPut {
