@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -34,7 +35,8 @@ func TestFloatingIpListRanges(t *testing.T) {
 	defer teardown()
 
 	floatingIpApi := FloatingIpApi{}
-	response, err := floatingIpApi.ListRanges()
+	ctx := context.Background()
+	response, err := floatingIpApi.ListRanges(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -78,7 +80,8 @@ func TestFloatingIpListRangesPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	floatingIpApi := FloatingIpApi{}
-	response, err := floatingIpApi.ListRanges(1, 10, []string{"SITE", "METRO"}, "AMS-01")
+	ctx := context.Background()
+	response, err := floatingIpApi.ListRanges(ctx, 1, 10, []string{"SITE", "METRO"}, "AMS-01")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -107,7 +110,8 @@ func TestFloatingIpListRangesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.ListRanges()
+				ctx := context.Background()
+				return FloatingIpApi{}.ListRanges(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -124,7 +128,8 @@ func TestFloatingIpListRangesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.ListRanges()
+				ctx := context.Background()
+				return FloatingIpApi{}.ListRanges(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -141,7 +146,8 @@ func TestFloatingIpListRangesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.ListRanges()
+				ctx := context.Background()
+				return FloatingIpApi{}.ListRanges(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -169,7 +175,8 @@ func TestFloatingIpGetRange(t *testing.T) {
 	defer teardown()
 
 	floatingIpApi := FloatingIpApi{}
-	response, err := floatingIpApi.GetRange("123456789")
+	ctx := context.Background()
+	response, err := floatingIpApi.GetRange(ctx, "123456789")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -193,7 +200,8 @@ func TestFloatingIpGetRangeServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.GetRange("123456789")
+				ctx := context.Background()
+				return FloatingIpApi{}.GetRange(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -209,7 +217,8 @@ func TestFloatingIpGetRangeServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "39e010ed-0e93-42c3-c28f-3ffc373553d5", "errorCode": "404", "errorMessage": "Range with id 88.17.0.0_17 does not exist"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.GetRange("123456789")
+				ctx := context.Background()
+				return FloatingIpApi{}.GetRange(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
@@ -226,7 +235,8 @@ func TestFloatingIpGetRangeServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.GetRange("123456789")
+				ctx := context.Background()
+				return FloatingIpApi{}.GetRange(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -243,7 +253,8 @@ func TestFloatingIpGetRangeServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.GetRange("123456789")
+				ctx := context.Background()
+				return FloatingIpApi{}.GetRange(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -291,7 +302,8 @@ func TestFloatingIpListRangeDefinitions(t *testing.T) {
 	defer teardown()
 
 	floatingIpApi := FloatingIpApi{}
-	response, err := floatingIpApi.ListRangeDefinitions("123456789")
+	ctx := context.Background()
+	response, err := floatingIpApi.ListRangeDefinitions(ctx, "123456789")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -350,7 +362,8 @@ func TestFloatingIpListRangeDefinitionsPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	floatingIpApi := FloatingIpApi{}
-	response, err := floatingIpApi.ListRangeDefinitions("123456789", 1, 10, []string{"SITE", "METRO"}, "AMS-01")
+	ctx := context.Background()
+	response, err := floatingIpApi.ListRangeDefinitions(ctx, "123456789", 1, 10, []string{"SITE", "METRO"}, "AMS-01")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -383,7 +396,8 @@ func TestFloatingIpListRangeDefinitionsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.ListRangeDefinitions("123456789")
+				ctx := context.Background()
+				return FloatingIpApi{}.ListRangeDefinitions(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -399,7 +413,8 @@ func TestFloatingIpListRangeDefinitionsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "39e010ed-0e93-42c3-c28f-3ffc373553d5", "errorCode": "404", "errorMessage": "Range with id 88.17.0.0_17 does not exist"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.ListRangeDefinitions("123456789")
+				ctx := context.Background()
+				return FloatingIpApi{}.ListRangeDefinitions(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
@@ -416,7 +431,8 @@ func TestFloatingIpListRangeDefinitionsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.ListRangeDefinitions("123456789")
+				ctx := context.Background()
+				return FloatingIpApi{}.ListRangeDefinitions(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -433,7 +449,8 @@ func TestFloatingIpListRangeDefinitionsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.ListRangeDefinitions("123456789")
+				ctx := context.Background()
+				return FloatingIpApi{}.ListRangeDefinitions(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -466,7 +483,8 @@ func TestFloatingIpCreateRangeDefinition(t *testing.T) {
 	defer teardown()
 
 	floatingIpApi := FloatingIpApi{}
-	response, err := floatingIpApi.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
+	ctx := context.Background()
+	response, err := floatingIpApi.CreateRangeDefinition(ctx, "10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -495,7 +513,8 @@ func TestFloatingIpCreateRangeDefinitionServerError(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "400", "errorMessage": "Validation Failed"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
+				ctx := context.Background()
+				return FloatingIpApi{}.CreateRangeDefinition(ctx, "10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "400",
@@ -511,7 +530,8 @@ func TestFloatingIpCreateRangeDefinitionServerError(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
+				ctx := context.Background()
+				return FloatingIpApi{}.CreateRangeDefinition(ctx, "10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -527,7 +547,8 @@ func TestFloatingIpCreateRangeDefinitionServerError(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
+				ctx := context.Background()
+				return FloatingIpApi{}.CreateRangeDefinition(ctx, "10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -544,7 +565,8 @@ func TestFloatingIpCreateRangeDefinitionServerError(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.CreateRangeDefinition("10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
+				ctx := context.Background()
+				return FloatingIpApi{}.CreateRangeDefinition(ctx, "10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -577,7 +599,8 @@ func TestFloatingIpGetRangeDefinition(t *testing.T) {
 	defer teardown()
 
 	floatingIpApi := FloatingIpApi{}
-	response, err := floatingIpApi.GetRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+	ctx := context.Background()
+	response, err := floatingIpApi.GetRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -606,7 +629,8 @@ func TestFloatingIpGetRangeDefinitionServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.GetRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+				ctx := context.Background()
+				return FloatingIpApi{}.GetRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -622,7 +646,8 @@ func TestFloatingIpGetRangeDefinitionServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.GetRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+				ctx := context.Background()
+				return FloatingIpApi{}.GetRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -639,7 +664,8 @@ func TestFloatingIpGetRangeDefinitionServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.GetRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+				ctx := context.Background()
+				return FloatingIpApi{}.GetRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -672,7 +698,8 @@ func TestFloatingIpUpdateRangeDefinition(t *testing.T) {
 	defer teardown()
 
 	floatingIpApi := FloatingIpApi{}
-	response, err := floatingIpApi.UpdateRangeDefinition("88.17.0.0_17", "88.17.34.108_32", "95.10.126.1")
+	ctx := context.Background()
+	response, err := floatingIpApi.UpdateRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32", "95.10.126.1")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -701,7 +728,8 @@ func TestFloatingIpUpdateRangeDefinitionServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "945bef2e-1caf-4027-bd0a-8976848f3dee", "errorCode": "400", "errorMessage": "Validation Failed"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.UpdateRangeDefinition("wrong 1", "88.17.34.108_32", "95.10.126.1")
+				ctx := context.Background()
+				return FloatingIpApi{}.UpdateRangeDefinition(ctx, "wrong 1", "88.17.34.108_32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "945bef2e-1caf-4027-bd0a-8976848f3dee",
@@ -718,7 +746,8 @@ func TestFloatingIpUpdateRangeDefinitionServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.UpdateRangeDefinition("wrong 1", "88.17.34.108_32", "95.10.126.1")
+				ctx := context.Background()
+				return FloatingIpApi{}.UpdateRangeDefinition(ctx, "wrong 1", "88.17.34.108_32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -734,7 +763,8 @@ func TestFloatingIpUpdateRangeDefinitionServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.UpdateRangeDefinition("wrong 1", "88.17.34.108_32", "95.10.126.1")
+				ctx := context.Background()
+				return FloatingIpApi{}.UpdateRangeDefinition(ctx, "wrong 1", "88.17.34.108_32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -751,7 +781,8 @@ func TestFloatingIpUpdateRangeDefinitionServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.UpdateRangeDefinition("wrong 1", "88.17.34.108_32", "95.10.126.1")
+				ctx := context.Background()
+				return FloatingIpApi{}.UpdateRangeDefinition(ctx, "wrong 1", "88.17.34.108_32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -784,7 +815,8 @@ func TestFloatingIpRemoveRangeDefinition(t *testing.T) {
 	defer teardown()
 
 	floatingIpApi := FloatingIpApi{}
-	response, err := floatingIpApi.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+	ctx := context.Background()
+	response, err := floatingIpApi.RemoveRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -814,7 +846,8 @@ func TestFloatingIpRemoveRangeDefinitionServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+				ctx := context.Background()
+				return FloatingIpApi{}.RemoveRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -830,7 +863,8 @@ func TestFloatingIpRemoveRangeDefinitionServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+				ctx := context.Background()
+				return FloatingIpApi{}.RemoveRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -847,7 +881,8 @@ func TestFloatingIpRemoveRangeDefinitionServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return FloatingIpApi{}.RemoveRangeDefinition("88.17.0.0_17", "88.17.34.108_32")
+				ctx := context.Background()
+				return FloatingIpApi{}.RemoveRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

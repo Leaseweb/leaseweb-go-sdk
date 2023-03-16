@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -61,7 +62,8 @@ func TestServicesList(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := ServicesApi{}.List()
+	ctx := context.Background()
+	response, err := ServicesApi{}.List(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -144,7 +146,8 @@ func TestServicesListPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := ServicesApi{}.List(1)
+	ctx := context.Background()
+	response, err := ServicesApi{}.List(ctx, 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -185,7 +188,8 @@ func TestServicesListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.List()
+				ctx := context.Background()
+				return ServicesApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -202,7 +206,8 @@ func TestServicesListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.List()
+				ctx := context.Background()
+				return ServicesApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -219,7 +224,8 @@ func TestServicesListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.List()
+				ctx := context.Background()
+				return ServicesApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -236,7 +242,8 @@ func TestServicesListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.List()
+				ctx := context.Background()
+				return ServicesApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -271,7 +278,8 @@ func TestServicesListCancellationReasons(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := ServicesApi{}.ListCancellationReasons()
+	ctx := context.Background()
+	response, err := ServicesApi{}.ListCancellationReasons(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -297,7 +305,8 @@ func TestServicesListCancellationReasonsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.ListCancellationReasons()
+				ctx := context.Background()
+				return ServicesApi{}.ListCancellationReasons(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -314,7 +323,8 @@ func TestServicesListCancellationReasonsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.ListCancellationReasons()
+				ctx := context.Background()
+				return ServicesApi{}.ListCancellationReasons(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -331,7 +341,8 @@ func TestServicesListCancellationReasonsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.ListCancellationReasons()
+				ctx := context.Background()
+				return ServicesApi{}.ListCancellationReasons(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -348,7 +359,8 @@ func TestServicesListCancellationReasonsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.ListCancellationReasons()
+				ctx := context.Background()
+				return ServicesApi{}.ListCancellationReasons(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -387,7 +399,8 @@ func TestServicesGet(t *testing.T) {
 	})
 	defer teardown()
 
-	Service, err := ServicesApi{}.Get("12345")
+	ctx := context.Background()
+	Service, err := ServicesApi{}.Get(ctx, "12345")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -423,7 +436,8 @@ func TestServicesGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.Get("12345")
+				ctx := context.Background()
+				return ServicesApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -440,7 +454,8 @@ func TestServicesGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.Get("12345")
+				ctx := context.Background()
+				return ServicesApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -457,7 +472,8 @@ func TestServicesGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.Get("12345")
+				ctx := context.Background()
+				return ServicesApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -474,7 +490,8 @@ func TestServicesGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return ServicesApi{}.Get("12345")
+				ctx := context.Background()
+				return ServicesApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -494,7 +511,8 @@ func TestServicesCancel(t *testing.T) {
 	})
 	defer teardown()
 
-	err := ServicesApi{}.Cancel("12345", "reason", "reason code")
+	ctx := context.Background()
+	err := ServicesApi{}.Cancel(ctx, "12345", "reason", "reason code")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -511,7 +529,8 @@ func TestServicesCancelServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.Cancel("12345", "reason", "reason code")
+				ctx := context.Background()
+				return nil, ServicesApi{}.Cancel(ctx, "12345", "reason", "reason code")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -528,7 +547,8 @@ func TestServicesCancelServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.Cancel("12345", "reason", "reason code")
+				ctx := context.Background()
+				return nil, ServicesApi{}.Cancel(ctx, "12345", "reason", "reason code")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -545,7 +565,8 @@ func TestServicesCancelServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.Cancel("12345", "reason", "reason code")
+				ctx := context.Background()
+				return nil, ServicesApi{}.Cancel(ctx, "12345", "reason", "reason code")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -562,7 +583,8 @@ func TestServicesCancelServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.Cancel("12345", "reason", "reason code")
+				ctx := context.Background()
+				return nil, ServicesApi{}.Cancel(ctx, "12345", "reason", "reason code")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -582,7 +604,8 @@ func TestServicesUncancel(t *testing.T) {
 	})
 	defer teardown()
 
-	err := ServicesApi{}.Uncancel("12345")
+	ctx := context.Background()
+	err := ServicesApi{}.Uncancel(ctx, "12345")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -599,7 +622,8 @@ func TestServicesUncancelServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.Uncancel("12345")
+				ctx := context.Background()
+				return nil, ServicesApi{}.Uncancel(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -616,7 +640,8 @@ func TestServicesUncancelServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.Uncancel("12345")
+				ctx := context.Background()
+				return nil, ServicesApi{}.Uncancel(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -633,7 +658,8 @@ func TestServicesUncancelServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.Uncancel("12345")
+				ctx := context.Background()
+				return nil, ServicesApi{}.Uncancel(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -650,7 +676,8 @@ func TestServicesUncancelServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, ServicesApi{}.Uncancel("12345")
+				ctx := context.Background()
+				return nil, ServicesApi{}.Uncancel(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

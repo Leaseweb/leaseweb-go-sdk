@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -25,13 +26,13 @@ func (rma RemoteManagementApi) getPath(endpoint string) string {
 	return "/bareMetals/" + REMOTE_MANAGEMENT_API_VERSION + endpoint
 }
 
-func (rma RemoteManagementApi) ChangeCredentials(password string) error {
+func (rma RemoteManagementApi) ChangeCredentials(ctx context.Context, password string) error {
 	payload := map[string]string{password: password}
 	path := rma.getPath("/remoteManagement/changeCredentials")
-	return doRequest(http.MethodPost, path, nil, payload)
+	return doRequest(ctx, http.MethodPost, path, nil, payload)
 }
 
-func (rma RemoteManagementApi) ListProfiles(args ...int) (*RemoteManagementProfiles, error) {
+func (rma RemoteManagementApi) ListProfiles(ctx context.Context, args ...int) (*RemoteManagementProfiles, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -42,7 +43,7 @@ func (rma RemoteManagementApi) ListProfiles(args ...int) (*RemoteManagementProfi
 
 	path := rma.getPath("/remoteManagement/profiles" + v.Encode())
 	result := &RemoteManagementProfiles{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil

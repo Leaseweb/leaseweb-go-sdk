@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -78,7 +79,7 @@ func getBaseUrl() string {
 	return DEFAULT_BASE_URL
 }
 
-func doRequest(method string, path string, args ...interface{}) error {
+func doRequest(ctx context.Context, method string, path string, args ...interface{}) error {
 	url := getBaseUrl() + path
 
 	var tmpPayload io.Reader
@@ -92,7 +93,7 @@ func doRequest(method string, path string, args ...interface{}) error {
 		}
 	}
 
-	req, err := http.NewRequest(method, url, tmpPayload)
+	req, err := http.NewRequestWithContext(ctx, method, url, tmpPayload)
 	if err != nil {
 		return err
 	}

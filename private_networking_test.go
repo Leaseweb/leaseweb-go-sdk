@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -31,7 +32,8 @@ func TestPrivateNetworkList(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := PrivateNetworkingApi{}.List()
+	ctx := context.Background()
+	response, err := PrivateNetworkingApi{}.List(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -71,7 +73,8 @@ func TestPrivateNetworkListPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := PrivateNetworkingApi{}.List(1)
+	ctx := context.Background()
+	response, err := PrivateNetworkingApi{}.List(ctx, 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -99,7 +102,8 @@ func TestPrivateNetworkListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.List()
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -116,7 +120,8 @@ func TestPrivateNetworkListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.List()
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -133,7 +138,8 @@ func TestPrivateNetworkListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.List()
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -150,7 +156,8 @@ func TestPrivateNetworkListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.List()
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -177,7 +184,8 @@ func TestPrivateNetworkCreate(t *testing.T) {
 	})
 	defer teardown()
 
-	PrivateNetwork, err := PrivateNetworkingApi{}.Create("production")
+	ctx := context.Background()
+	PrivateNetwork, err := PrivateNetworkingApi{}.Create(ctx, "production")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -200,7 +208,8 @@ func TestPrivateNetworkCreateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Create("production")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Create(ctx, "production")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -217,7 +226,8 @@ func TestPrivateNetworkCreateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Create("production")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Create(ctx, "production")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -234,7 +244,8 @@ func TestPrivateNetworkCreateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Create("production")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Create(ctx, "production")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -251,7 +262,8 @@ func TestPrivateNetworkCreateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Create("production")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Create(ctx, "production")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -276,7 +288,8 @@ func TestPrivateNetworkGet(t *testing.T) {
 	})
 	defer teardown()
 
-	PrivateNetwork, err := PrivateNetworkingApi{}.Get("12345")
+	ctx := context.Background()
+	PrivateNetwork, err := PrivateNetworkingApi{}.Get(ctx, "12345")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -297,7 +310,8 @@ func TestPrivateNetworkGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Get("12345")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -314,7 +328,8 @@ func TestPrivateNetworkGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Get("12345")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -331,7 +346,8 @@ func TestPrivateNetworkGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Get("12345")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -348,7 +364,8 @@ func TestPrivateNetworkGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Get("12345")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -375,7 +392,8 @@ func TestPrivateNetworkUpdate(t *testing.T) {
 	})
 	defer teardown()
 
-	PrivateNetwork, err := PrivateNetworkingApi{}.Update("12345", "production")
+	ctx := context.Background()
+	PrivateNetwork, err := PrivateNetworkingApi{}.Update(ctx, "12345", "production")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -398,7 +416,8 @@ func TestPrivateNetworkUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Update("12345", "production")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Update(ctx, "12345", "production")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -415,7 +434,8 @@ func TestPrivateNetworkUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Update("12345", "production")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Update(ctx, "12345", "production")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -432,7 +452,8 @@ func TestPrivateNetworkUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Update("12345", "production")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Update(ctx, "12345", "production")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -449,7 +470,8 @@ func TestPrivateNetworkUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.Update("12345", "production")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.Update(ctx, "12345", "production")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -469,7 +491,8 @@ func TestPrivateNetworkDelete(t *testing.T) {
 	})
 	defer teardown()
 
-	err := PrivateNetworkingApi{}.Delete("12345")
+	ctx := context.Background()
+	err := PrivateNetworkingApi{}.Delete(ctx, "12345")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -486,7 +509,8 @@ func TestPrivateNetworkDeleteServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.Delete("12345")
+				ctx := context.Background()
+				return nil, PrivateNetworkingApi{}.Delete(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -503,7 +527,8 @@ func TestPrivateNetworkDeleteServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.Delete("12345")
+				ctx := context.Background()
+				return nil, PrivateNetworkingApi{}.Delete(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -520,7 +545,8 @@ func TestPrivateNetworkDeleteServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.Delete("12345")
+				ctx := context.Background()
+				return nil, PrivateNetworkingApi{}.Delete(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -537,7 +563,8 @@ func TestPrivateNetworkDeleteServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.Delete("12345")
+				ctx := context.Background()
+				return nil, PrivateNetworkingApi{}.Delete(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -570,7 +597,8 @@ func TestPrivateNetworkListDhcpReservations(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := PrivateNetworkingApi{}.ListDhcpReservations("12345")
+	ctx := context.Background()
+	response, err := PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -606,7 +634,8 @@ func TestPrivateNetworkListDhcpReservationsPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := PrivateNetworkingApi{}.ListDhcpReservations("12345", 1)
+	ctx := context.Background()
+	response, err := PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345", 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -632,7 +661,8 @@ func TestPrivateNetworkListDhcpReservationsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.ListDhcpReservations("12345")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -649,7 +679,8 @@ func TestPrivateNetworkListDhcpReservationsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.ListDhcpReservations("12345")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -666,7 +697,8 @@ func TestPrivateNetworkListDhcpReservationsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.ListDhcpReservations("12345")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -683,7 +715,8 @@ func TestPrivateNetworkListDhcpReservationsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.ListDhcpReservations("12345")
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -707,7 +740,8 @@ func TestPrivateNetworkCreateDhcpReservation(t *testing.T) {
 	})
 	defer teardown()
 
-	DhcpReservation, err := PrivateNetworkingApi{}.CreateDhcpReservation("12345", "127.0.0.1", "d8:87:03:52:0a:0f", true)
+	ctx := context.Background()
+	DhcpReservation, err := PrivateNetworkingApi{}.CreateDhcpReservation(ctx, "12345", "127.0.0.1", "d8:87:03:52:0a:0f", true)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -727,7 +761,8 @@ func TestPrivateNetworkCreateDhcpReservationServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.CreateDhcpReservation("12345", "127.0.0.1", "d8:87:03:52:0a:0f", true)
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.CreateDhcpReservation(ctx, "12345", "127.0.0.1", "d8:87:03:52:0a:0f", true)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -744,7 +779,8 @@ func TestPrivateNetworkCreateDhcpReservationServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.CreateDhcpReservation("12345", "127.0.0.1", "d8:87:03:52:0a:0f", true)
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.CreateDhcpReservation(ctx, "12345", "127.0.0.1", "d8:87:03:52:0a:0f", true)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -761,7 +797,8 @@ func TestPrivateNetworkCreateDhcpReservationServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.CreateDhcpReservation("12345", "127.0.0.1", "d8:87:03:52:0a:0f", true)
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.CreateDhcpReservation(ctx, "12345", "127.0.0.1", "d8:87:03:52:0a:0f", true)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -778,7 +815,8 @@ func TestPrivateNetworkCreateDhcpReservationServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateNetworkingApi{}.CreateDhcpReservation("12345", "127.0.0.1", "d8:87:03:52:0a:0f", true)
+				ctx := context.Background()
+				return PrivateNetworkingApi{}.CreateDhcpReservation(ctx, "12345", "127.0.0.1", "d8:87:03:52:0a:0f", true)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -798,7 +836,8 @@ func TestPrivateNetworkDeleteDhcpReservation(t *testing.T) {
 	})
 	defer teardown()
 
-	err := PrivateNetworkingApi{}.DeleteDhcpReservation("12345", "127.0.0.1")
+	ctx := context.Background()
+	err := PrivateNetworkingApi{}.DeleteDhcpReservation(ctx, "12345", "127.0.0.1")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -815,7 +854,8 @@ func TestPrivateNetworkDeleteDhcpReservationServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.DeleteDhcpReservation("12345", "127.0.0.1")
+				ctx := context.Background()
+				return nil, PrivateNetworkingApi{}.DeleteDhcpReservation(ctx, "12345", "127.0.0.1")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -832,7 +872,8 @@ func TestPrivateNetworkDeleteDhcpReservationServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.DeleteDhcpReservation("12345", "127.0.0.1")
+				ctx := context.Background()
+				return nil, PrivateNetworkingApi{}.DeleteDhcpReservation(ctx, "12345", "127.0.0.1")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -849,7 +890,8 @@ func TestPrivateNetworkDeleteDhcpReservationServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.DeleteDhcpReservation("12345", "127.0.0.1")
+				ctx := context.Background()
+				return nil, PrivateNetworkingApi{}.DeleteDhcpReservation(ctx, "12345", "127.0.0.1")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -866,7 +908,8 @@ func TestPrivateNetworkDeleteDhcpReservationServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, PrivateNetworkingApi{}.DeleteDhcpReservation("12345", "127.0.0.1")
+				ctx := context.Background()
+				return nil, PrivateNetworkingApi{}.DeleteDhcpReservation(ctx, "12345", "127.0.0.1")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

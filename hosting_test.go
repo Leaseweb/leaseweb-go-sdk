@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -104,7 +105,8 @@ func TestHostingListDomains(t *testing.T) {
 	defer teardown()
 
 	hostingApi := HostingApi{}
-	response, err := hostingApi.ListDomains()
+	ctx := context.Background()
+	response, err := hostingApi.ListDomains(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -206,7 +208,8 @@ func TestHostingListDomainsPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	hostingApi := HostingApi{}
-	response, err := hostingApi.ListDomains(1)
+	ctx := context.Background()
+	response, err := hostingApi.ListDomains(ctx, 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -245,7 +248,8 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListDomains()
+				ctx := context.Background()
+				return HostingApi{}.ListDomains(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -262,7 +266,8 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListDomains()
+				ctx := context.Background()
+				return HostingApi{}.ListDomains(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -279,7 +284,8 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListDomains()
+				ctx := context.Background()
+				return HostingApi{}.ListDomains(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -339,7 +345,8 @@ func TestHostingGetDomain(t *testing.T) {
 	defer teardown()
 
 	hostingApi := HostingApi{}
-	domain, err := hostingApi.GetDomain("exmple.com")
+	ctx := context.Background()
+	domain, err := hostingApi.GetDomain(ctx, "exmple.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -373,7 +380,8 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetDomain("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetDomain(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -389,7 +397,8 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "39e010ed-0e93-42c3-c28f-3ffc373553d5", "errorCode": "404", "errorMessage": "Range with id 88.17.0.0_17 does not exist"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetDomain("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetDomain(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
@@ -406,7 +415,8 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetDomain("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetDomain(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -423,7 +433,8 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetDomain("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetDomain(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -452,7 +463,8 @@ func TestHostingGetAvailability(t *testing.T) {
 	defer teardown()
 
 	hostingApi := HostingApi{}
-	domain, err := hostingApi.GetAvailability("exmple.com")
+	ctx := context.Background()
+	domain, err := hostingApi.GetAvailability(ctx, "exmple.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -473,7 +485,8 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetAvailability("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetAvailability(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -489,7 +502,8 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "39e010ed-0e93-42c3-c28f-3ffc373553d5", "errorCode": "404", "errorMessage": "Range with id 88.17.0.0_17 does not exist"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetAvailability("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetAvailability(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
@@ -506,7 +520,8 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetAvailability("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetAvailability(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -523,7 +538,8 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetAvailability("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetAvailability(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -564,7 +580,8 @@ func TestHostingListNameservers(t *testing.T) {
 	defer teardown()
 
 	hostingApi := HostingApi{}
-	response, err := hostingApi.ListNameservers("example.com")
+	ctx := context.Background()
+	response, err := hostingApi.ListNameservers(ctx, "example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -605,7 +622,8 @@ func TestHostingListNameserversPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	hostingApi := HostingApi{}
-	response, err := hostingApi.ListNameservers("example.com", 1)
+	ctx := context.Background()
+	response, err := hostingApi.ListNameservers(ctx, "example.com", 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -630,7 +648,8 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListNameservers("example.com", 1)
+				ctx := context.Background()
+				return HostingApi{}.ListNameservers(ctx, "example.com", 1)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -647,7 +666,8 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListNameservers("example.com", 1)
+				ctx := context.Background()
+				return HostingApi{}.ListNameservers(ctx, "example.com", 1)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -664,7 +684,8 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListNameservers("example.com", 1)
+				ctx := context.Background()
+				return HostingApi{}.ListNameservers(ctx, "example.com", 1)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -704,7 +725,8 @@ func TestHostingUpdateNameservers(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := HostingApi{}.UpdateNameservers("example.com", []string{"ns1.example.com", "ns2.example.com"})
+	ctx := context.Background()
+	response, err := HostingApi{}.UpdateNameservers(ctx, "example.com", []string{"ns1.example.com", "ns2.example.com"})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -730,7 +752,8 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateNameservers("example.com", []string{"ns1.example.com", "ns2.example.com"})
+				ctx := context.Background()
+				return HostingApi{}.UpdateNameservers(ctx, "example.com", []string{"ns1.example.com", "ns2.example.com"})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -747,7 +770,8 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateNameservers("example.com", []string{"ns1.example.com", "ns2.example.com"})
+				ctx := context.Background()
+				return HostingApi{}.UpdateNameservers(ctx, "example.com", []string{"ns1.example.com", "ns2.example.com"})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -764,7 +788,8 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateNameservers("example.com", []string{"ns1.example.com", "ns2.example.com"})
+				ctx := context.Background()
+				return HostingApi{}.UpdateNameservers(ctx, "example.com", []string{"ns1.example.com", "ns2.example.com"})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -781,7 +806,8 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateNameservers("example.com", []string{"ns1.example.com", "ns2.example.com"})
+				ctx := context.Background()
+				return HostingApi{}.UpdateNameservers(ctx, "example.com", []string{"ns1.example.com", "ns2.example.com"})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -817,7 +843,8 @@ func TestHostingGetGetDnsSecurity(t *testing.T) {
 	defer teardown()
 
 	hostingApi := HostingApi{}
-	resp, err := hostingApi.GetDnsSecurity("exmple.com")
+	ctx := context.Background()
+	resp, err := hostingApi.GetDnsSecurity(ctx, "exmple.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -841,7 +868,8 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetDnsSecurity("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetDnsSecurity(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -857,7 +885,8 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "39e010ed-0e93-42c3-c28f-3ffc373553d5", "errorCode": "404", "errorMessage": "Range with id 88.17.0.0_17 does not exist"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetDnsSecurity("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetDnsSecurity(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
@@ -874,7 +903,8 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetDnsSecurity("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetDnsSecurity(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -891,7 +921,8 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetDnsSecurity("exmple.com")
+				ctx := context.Background()
+				return HostingApi{}.GetDnsSecurity(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -913,7 +944,8 @@ func TestHostingUpdateDnsSecurity(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := HostingApi{}.UpdateDnsSecurity("example.com", map[string]interface{}{"status": "ENABLED"})
+	ctx := context.Background()
+	response, err := HostingApi{}.UpdateDnsSecurity(ctx, "example.com", map[string]interface{}{"status": "ENABLED"})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -931,7 +963,8 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateDnsSecurity("example.com", map[string]interface{}{"status": "ENABLED"})
+				ctx := context.Background()
+				return HostingApi{}.UpdateDnsSecurity(ctx, "example.com", map[string]interface{}{"status": "ENABLED"})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -948,7 +981,8 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateDnsSecurity("example.com", map[string]interface{}{"status": "ENABLED"})
+				ctx := context.Background()
+				return HostingApi{}.UpdateDnsSecurity(ctx, "example.com", map[string]interface{}{"status": "ENABLED"})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -965,7 +999,8 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateDnsSecurity("example.com", map[string]interface{}{"status": "ENABLED"})
+				ctx := context.Background()
+				return HostingApi{}.UpdateDnsSecurity(ctx, "example.com", map[string]interface{}{"status": "ENABLED"})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -982,7 +1017,8 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateDnsSecurity("example.com", map[string]interface{}{"status": "ENABLED"})
+				ctx := context.Background()
+				return HostingApi{}.UpdateDnsSecurity(ctx, "example.com", map[string]interface{}{"status": "ENABLED"})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1059,7 +1095,8 @@ func TestHostingListResourceRecordSets(t *testing.T) {
 	defer teardown()
 
 	hostingApi := HostingApi{}
-	response, err := hostingApi.ListResourceRecordSets("example.com")
+	ctx := context.Background()
+	response, err := hostingApi.ListResourceRecordSets(ctx, "example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1142,7 +1179,8 @@ func TestHostingListResourceRecordSetsPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	hostingApi := HostingApi{}
-	response, err := hostingApi.ListResourceRecordSets("example.com", 1)
+	ctx := context.Background()
+	response, err := hostingApi.ListResourceRecordSets(ctx, "example.com", 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1179,7 +1217,8 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListResourceRecordSets("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListResourceRecordSets(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1196,7 +1235,8 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListResourceRecordSets("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListResourceRecordSets(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1213,7 +1253,8 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListResourceRecordSets("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListResourceRecordSets(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1251,7 +1292,8 @@ func TestHostingCreateResourceRecordSet(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.CreateResourceRecordSet("example.com", map[string]interface{}{
+	ctx := context.Background()
+	resp, err := HostingApi{}.CreateResourceRecordSet(ctx, "example.com", map[string]interface{}{
 		"name":    "example.com.",
 		"type":    "A",
 		"ttl":     3600,
@@ -1282,7 +1324,8 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateResourceRecordSet("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateResourceRecordSet(ctx, "example.com", map[string]interface{}{
 					"name":    "example.com.",
 					"type":    "A",
 					"ttl":     3600,
@@ -1304,7 +1347,8 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateResourceRecordSet("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateResourceRecordSet(ctx, "example.com", map[string]interface{}{
 					"name":    "example.com.",
 					"type":    "A",
 					"ttl":     3600,
@@ -1326,7 +1370,8 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateResourceRecordSet("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateResourceRecordSet(ctx, "example.com", map[string]interface{}{
 					"name":    "example.com.",
 					"type":    "A",
 					"ttl":     3600,
@@ -1348,7 +1393,8 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateResourceRecordSet("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateResourceRecordSet(ctx, "example.com", map[string]interface{}{
 					"name":    "example.com.",
 					"type":    "A",
 					"ttl":     3600,
@@ -1373,7 +1419,8 @@ func TestHostingDeleteResourceRecordSets(t *testing.T) {
 	})
 	defer teardown()
 
-	err := HostingApi{}.DeleteResourceRecordSets("example.com")
+	ctx := context.Background()
+	err := HostingApi{}.DeleteResourceRecordSets(ctx, "example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1390,7 +1437,8 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteResourceRecordSet("example.com", "example.com.", "A")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteResourceRecordSet(ctx, "example.com", "example.com.", "A")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1407,7 +1455,8 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteResourceRecordSet("example.com", "example.com.", "A")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteResourceRecordSet(ctx, "example.com", "example.com.", "A")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1424,7 +1473,8 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteResourceRecordSet("example.com", "example.com.", "A")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteResourceRecordSet(ctx, "example.com", "example.com.", "A")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1441,7 +1491,8 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteResourceRecordSet("example.com", "example.com.", "A")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteResourceRecordSet(ctx, "example.com", "example.com.", "A")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1479,7 +1530,8 @@ func TestHostingGetResourceRecordSet(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.GetResourceRecordSet("exmple.com", "example.com.", "A")
+	ctx := context.Background()
+	resp, err := HostingApi{}.GetResourceRecordSet(ctx, "exmple.com", "example.com.", "A")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1506,7 +1558,8 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetResourceRecordSet("exmple.com", "example.com.", "A")
+				ctx := context.Background()
+				return HostingApi{}.GetResourceRecordSet(ctx, "exmple.com", "example.com.", "A")
 			},
 			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
@@ -1522,7 +1575,8 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "39e010ed-0e93-42c3-c28f-3ffc373553d5", "errorCode": "404", "errorMessage": "Range with id 88.17.0.0_17 does not exist"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetResourceRecordSet("exmple.com", "example.com.", "A")
+				ctx := context.Background()
+				return HostingApi{}.GetResourceRecordSet(ctx, "exmple.com", "example.com.", "A")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
@@ -1539,7 +1593,8 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetResourceRecordSet("exmple.com", "example.com.", "A")
+				ctx := context.Background()
+				return HostingApi{}.GetResourceRecordSet(ctx, "exmple.com", "example.com.", "A")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1556,7 +1611,8 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetResourceRecordSet("exmple.com", "example.com.", "A")
+				ctx := context.Background()
+				return HostingApi{}.GetResourceRecordSet(ctx, "exmple.com", "example.com.", "A")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1592,7 +1648,8 @@ func TestHostingUpdateResourceRecordSet(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.UpdateResourceRecordSet("exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
+	ctx := context.Background()
+	resp, err := HostingApi{}.UpdateResourceRecordSet(ctx, "exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1617,7 +1674,8 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateResourceRecordSet("exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
+				ctx := context.Background()
+				return HostingApi{}.UpdateResourceRecordSet(ctx, "exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1634,7 +1692,8 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateResourceRecordSet("exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
+				ctx := context.Background()
+				return HostingApi{}.UpdateResourceRecordSet(ctx, "exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1651,7 +1710,8 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateResourceRecordSet("exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
+				ctx := context.Background()
+				return HostingApi{}.UpdateResourceRecordSet(ctx, "exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1668,7 +1728,8 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateResourceRecordSet("exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
+				ctx := context.Background()
+				return HostingApi{}.UpdateResourceRecordSet(ctx, "exmple.com", "example.com.", "A", []string{"85.17.150.54"}, 4200)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1688,7 +1749,8 @@ func TestHostingDeleteResourceRecordSet(t *testing.T) {
 	})
 	defer teardown()
 
-	err := HostingApi{}.DeleteResourceRecordSet("example.com", "example.com.", "A")
+	ctx := context.Background()
+	err := HostingApi{}.DeleteResourceRecordSet(ctx, "example.com", "example.com.", "A")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1705,7 +1767,8 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteResourceRecordSets("example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteResourceRecordSets(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1722,7 +1785,8 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteResourceRecordSets("example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteResourceRecordSets(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1739,7 +1803,8 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteResourceRecordSets("example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteResourceRecordSets(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1756,7 +1821,8 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteResourceRecordSets("example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteResourceRecordSets(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1778,7 +1844,8 @@ func TestHostingValidateResourceRecordSet(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.ValidateResourceRecordSet("example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
+	ctx := context.Background()
+	resp, err := HostingApi{}.ValidateResourceRecordSet(ctx, "example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1796,7 +1863,8 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ValidateResourceRecordSet("example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
+				ctx := context.Background()
+				return HostingApi{}.ValidateResourceRecordSet(ctx, "example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1813,7 +1881,8 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ValidateResourceRecordSet("example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
+				ctx := context.Background()
+				return HostingApi{}.ValidateResourceRecordSet(ctx, "example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1830,7 +1899,8 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ValidateResourceRecordSet("example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
+				ctx := context.Background()
+				return HostingApi{}.ValidateResourceRecordSet(ctx, "example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1847,7 +1917,8 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ValidateResourceRecordSet("example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
+				ctx := context.Background()
+				return HostingApi{}.ValidateResourceRecordSet(ctx, "example.com", "example.com.", "A", []string{"127.0.0.1"}, 3600)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1879,7 +1950,8 @@ func TestHostingListCatchAll(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.ListCatchAll("example.com")
+	ctx := context.Background()
+	resp, err := HostingApi{}.ListCatchAll(ctx, "example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1901,7 +1973,8 @@ func TestHostingListCatchAllServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListCatchAll("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListCatchAll(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1918,7 +1991,8 @@ func TestHostingListCatchAllServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListCatchAll("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListCatchAll(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1935,7 +2009,8 @@ func TestHostingListCatchAllServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListCatchAll("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListCatchAll(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1967,7 +2042,8 @@ func TestHostingUpdateOrCreateCatchAll(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.UpdateCatchAll("exmple.com", map[string]interface{}{
+	ctx := context.Background()
+	resp, err := HostingApi{}.UpdateCatchAll(ctx, "exmple.com", map[string]interface{}{
 		"destination":        "destination@example.org",
 		"spamChecksEnabled":  true,
 		"virusChecksEnabled": false,
@@ -1994,7 +2070,8 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateCatchAll("exmple.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateCatchAll(ctx, "exmple.com", map[string]interface{}{
 					"destination":        "destination@example.org",
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": false,
@@ -2015,7 +2092,8 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateCatchAll("exmple.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateCatchAll(ctx, "exmple.com", map[string]interface{}{
 					"destination":        "destination@example.org",
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": false,
@@ -2036,7 +2114,8 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateCatchAll("exmple.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateCatchAll(ctx, "exmple.com", map[string]interface{}{
 					"destination":        "destination@example.org",
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": false,
@@ -2057,7 +2136,8 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateCatchAll("exmple.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateCatchAll(ctx, "exmple.com", map[string]interface{}{
 					"destination":        "destination@example.org",
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": false,
@@ -2081,7 +2161,8 @@ func TestHostingDeleteCatchAll(t *testing.T) {
 	})
 	defer teardown()
 
-	err := HostingApi{}.DeleteCatchAll("example.com")
+	ctx := context.Background()
+	err := HostingApi{}.DeleteCatchAll(ctx, "example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -2098,7 +2179,8 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteCatchAll("example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteCatchAll(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2115,7 +2197,8 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteCatchAll("example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteCatchAll(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2132,7 +2215,8 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteCatchAll("example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteCatchAll(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2149,7 +2233,8 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteCatchAll("example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteCatchAll(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2215,7 +2300,8 @@ func TestHostingListEmailAliases(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := HostingApi{}.ListEmailAliases("example.com")
+	ctx := context.Background()
+	response, err := HostingApi{}.ListEmailAliases(ctx, "example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -2284,7 +2370,8 @@ func TestHostingListEmailAliasesPaginateAndFilter(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := HostingApi{}.ListEmailAliases("example.com", 1)
+	ctx := context.Background()
+	response, err := HostingApi{}.ListEmailAliases(ctx, "example.com", 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -2316,7 +2403,8 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListEmailAliases("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListEmailAliases(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2333,7 +2421,8 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListEmailAliases("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListEmailAliases(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2350,7 +2439,8 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListEmailAliases("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListEmailAliases(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2384,7 +2474,8 @@ func TestHostingCreateEmailAlias(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.CreateEmailAlias("example.com", map[string]interface{}{
+	ctx := context.Background()
+	resp, err := HostingApi{}.CreateEmailAlias(ctx, "example.com", map[string]interface{}{
 		"active":             true,
 		"destination":        "destination@example.com",
 		"source":             "source@example.com",
@@ -2414,7 +2505,8 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateEmailAlias("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateEmailAlias(ctx, "example.com", map[string]interface{}{
 					"active":             true,
 					"destination":        "destination@example.com",
 					"source":             "source@example.com",
@@ -2437,7 +2529,8 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateEmailAlias("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateEmailAlias(ctx, "example.com", map[string]interface{}{
 					"active":             true,
 					"destination":        "destination@example.com",
 					"source":             "source@example.com",
@@ -2460,7 +2553,8 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateEmailAlias("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateEmailAlias(ctx, "example.com", map[string]interface{}{
 					"active":             true,
 					"destination":        "destination@example.com",
 					"source":             "source@example.com",
@@ -2483,7 +2577,8 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateEmailAlias("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateEmailAlias(ctx, "example.com", map[string]interface{}{
 					"active":             true,
 					"destination":        "destination@example.com",
 					"source":             "source@example.com",
@@ -2523,7 +2618,8 @@ func TestHostingGetEmailAlias(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.GetEmailAlias("example.com", "source@example.com", "destination@example.com")
+	ctx := context.Background()
+	resp, err := HostingApi{}.GetEmailAlias(ctx, "example.com", "source@example.com", "destination@example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -2547,7 +2643,8 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetEmailAlias("example.com", "source@example.com", "destination@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetEmailAlias(ctx, "example.com", "source@example.com", "destination@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2564,7 +2661,8 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetEmailAlias("example.com", "source@example.com", "destination@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetEmailAlias(ctx, "example.com", "source@example.com", "destination@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2581,7 +2679,8 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetEmailAlias("example.com", "source@example.com", "destination@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetEmailAlias(ctx, "example.com", "source@example.com", "destination@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2598,7 +2697,8 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetEmailAlias("example.com", "source@example.com", "destination@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetEmailAlias(ctx, "example.com", "source@example.com", "destination@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2632,7 +2732,8 @@ func TestHostingUpdateEmailAlias(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.UpdateEmailAlias("example.com", "source@example.com", "destination@example.com", map[string]bool{
+	ctx := context.Background()
+	resp, err := HostingApi{}.UpdateEmailAlias(ctx, "example.com", "source@example.com", "destination@example.com", map[string]bool{
 		"active":             true,
 		"spamChecksEnabled":  true,
 		"virusChecksEnabled": true,
@@ -2660,7 +2761,8 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateEmailAlias("example.com", "source@example.com", "destination@example.com", map[string]bool{
+				ctx := context.Background()
+				return HostingApi{}.UpdateEmailAlias(ctx, "example.com", "source@example.com", "destination@example.com", map[string]bool{
 					"active":             true,
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": true,
@@ -2681,7 +2783,8 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateEmailAlias("example.com", "source@example.com", "destination@example.com", map[string]bool{
+				ctx := context.Background()
+				return HostingApi{}.UpdateEmailAlias(ctx, "example.com", "source@example.com", "destination@example.com", map[string]bool{
 					"active":             true,
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": true,
@@ -2702,7 +2805,8 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateEmailAlias("example.com", "source@example.com", "destination@example.com", map[string]bool{
+				ctx := context.Background()
+				return HostingApi{}.UpdateEmailAlias(ctx, "example.com", "source@example.com", "destination@example.com", map[string]bool{
 					"active":             true,
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": true,
@@ -2723,7 +2827,8 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateEmailAlias("example.com", "source@example.com", "destination@example.com", map[string]bool{
+				ctx := context.Background()
+				return HostingApi{}.UpdateEmailAlias(ctx, "example.com", "source@example.com", "destination@example.com", map[string]bool{
 					"active":             true,
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": true,
@@ -2747,7 +2852,8 @@ func TestHostingDeleteEmailAlias(t *testing.T) {
 	})
 	defer teardown()
 
-	err := HostingApi{}.DeleteEmailAlias("example.com", "source", "dest")
+	ctx := context.Background()
+	err := HostingApi{}.DeleteEmailAlias(ctx, "example.com", "source", "dest")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -2764,7 +2870,8 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteEmailAlias("example.com", "source", "dest")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteEmailAlias(ctx, "example.com", "source", "dest")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2781,7 +2888,8 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteEmailAlias("example.com", "source", "dest")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteEmailAlias(ctx, "example.com", "source", "dest")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2798,7 +2906,8 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteEmailAlias("example.com", "source", "dest")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteEmailAlias(ctx, "example.com", "source", "dest")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2815,7 +2924,8 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteEmailAlias("example.com", "source", "dest")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteEmailAlias(ctx, "example.com", "source", "dest")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2881,7 +2991,8 @@ func TestHostingListDomainForwards(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := HostingApi{}.ListDomainForwards("example.com")
+	ctx := context.Background()
+	response, err := HostingApi{}.ListDomainForwards(ctx, "example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -2950,7 +3061,8 @@ func TestHostingListDomainForwardsPaginateAndFilter(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := HostingApi{}.ListDomainForwards("example.com", 1)
+	ctx := context.Background()
+	response, err := HostingApi{}.ListDomainForwards(ctx, "example.com", 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -2982,7 +3094,8 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListDomainForwards("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListDomainForwards(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2999,7 +3112,8 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListDomainForwards("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListDomainForwards(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3016,7 +3130,8 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListDomainForwards("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListDomainForwards(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3090,7 +3205,8 @@ func TestHostingListMailBoxes(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := HostingApi{}.ListMailBoxes("example.com")
+	ctx := context.Background()
+	response, err := HostingApi{}.ListMailBoxes(ctx, "example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -3171,7 +3287,8 @@ func TestHostingListMailBoxesPaginateAndFilter(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := HostingApi{}.ListMailBoxes("example.com", 1)
+	ctx := context.Background()
+	response, err := HostingApi{}.ListMailBoxes(ctx, "example.com", 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -3207,7 +3324,8 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListMailBoxes("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListMailBoxes(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3224,7 +3342,8 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListMailBoxes("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListMailBoxes(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3241,7 +3360,8 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListMailBoxes("example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListMailBoxes(ctx, "example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3293,7 +3413,8 @@ func TestHostingCreateMailBox(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.CreateMailBox("example.com", map[string]interface{}{
+	ctx := context.Background()
+	resp, err := HostingApi{}.CreateMailBox(ctx, "example.com", map[string]interface{}{
 		"emailAddress":       "mailbox@example.com",
 		"active":             true,
 		"password":           "CHANGETHIS",
@@ -3330,7 +3451,8 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateMailBox("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateMailBox(ctx, "example.com", map[string]interface{}{
 					"emailAddress":       "mailbox@example.com",
 					"active":             true,
 					"password":           "CHANGETHIS",
@@ -3354,7 +3476,8 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateMailBox("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateMailBox(ctx, "example.com", map[string]interface{}{
 					"emailAddress":       "mailbox@example.com",
 					"active":             true,
 					"password":           "CHANGETHIS",
@@ -3378,7 +3501,8 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateMailBox("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateMailBox(ctx, "example.com", map[string]interface{}{
 					"emailAddress":       "mailbox@example.com",
 					"active":             true,
 					"password":           "CHANGETHIS",
@@ -3402,7 +3526,8 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateMailBox("example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateMailBox(ctx, "example.com", map[string]interface{}{
 					"emailAddress":       "mailbox@example.com",
 					"active":             true,
 					"password":           "CHANGETHIS",
@@ -3461,7 +3586,8 @@ func TestHostingGetMailBox(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.GetMailBox("example.com", "mailbox@example.com")
+	ctx := context.Background()
+	resp, err := HostingApi{}.GetMailBox(ctx, "example.com", "mailbox@example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -3491,7 +3617,8 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetMailBox("example.com", "mailbox@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetMailBox(ctx, "example.com", "mailbox@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3508,7 +3635,8 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetMailBox("example.com", "mailbox@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetMailBox(ctx, "example.com", "mailbox@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3525,7 +3653,8 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetMailBox("example.com", "mailbox@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetMailBox(ctx, "example.com", "mailbox@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3542,7 +3671,8 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetMailBox("example.com", "mailbox@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetMailBox(ctx, "example.com", "mailbox@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3594,7 +3724,8 @@ func TestHostingUpdateMailBox(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.UpdateMailBox("example.com", "mailbox@example.com", map[string]interface{}{
+	ctx := context.Background()
+	resp, err := HostingApi{}.UpdateMailBox(ctx, "example.com", "mailbox@example.com", map[string]interface{}{
 		"emailAddress":       "mailbox@example.com",
 		"active":             true,
 		"password":           "CHANGETHIS",
@@ -3631,7 +3762,8 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateMailBox("example.com", "mailbox@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateMailBox(ctx, "example.com", "mailbox@example.com", map[string]interface{}{
 					"emailAddress":       "mailbox@example.com",
 					"active":             true,
 					"password":           "CHANGETHIS",
@@ -3655,7 +3787,8 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateMailBox("example.com", "mailbox@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateMailBox(ctx, "example.com", "mailbox@example.com", map[string]interface{}{
 					"emailAddress":       "mailbox@example.com",
 					"active":             true,
 					"password":           "CHANGETHIS",
@@ -3679,7 +3812,8 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateMailBox("example.com", "mailbox@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateMailBox(ctx, "example.com", "mailbox@example.com", map[string]interface{}{
 					"emailAddress":       "mailbox@example.com",
 					"active":             true,
 					"password":           "CHANGETHIS",
@@ -3703,7 +3837,8 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateMailBox("example.com", "mailbox@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateMailBox(ctx, "example.com", "mailbox@example.com", map[string]interface{}{
 					"emailAddress":       "mailbox@example.com",
 					"active":             true,
 					"password":           "CHANGETHIS",
@@ -3730,7 +3865,8 @@ func TestHostingDeleteMailBox(t *testing.T) {
 	})
 	defer teardown()
 
-	err := HostingApi{}.DeleteMailBox("example.com", "info@example.com")
+	ctx := context.Background()
+	err := HostingApi{}.DeleteMailBox(ctx, "example.com", "info@example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -3747,7 +3883,8 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteMailBox("example.com", "info@example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteMailBox(ctx, "example.com", "info@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3764,7 +3901,8 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteMailBox("example.com", "info@example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteMailBox(ctx, "example.com", "info@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3781,7 +3919,8 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteMailBox("example.com", "info@example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteMailBox(ctx, "example.com", "info@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3798,7 +3937,8 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteMailBox("example.com", "info@example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteMailBox(ctx, "example.com", "info@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3830,7 +3970,8 @@ func TestHostingGetAutoResponder(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.GetAutoResponder("example.com", "mailbox@example.com")
+	ctx := context.Background()
+	resp, err := HostingApi{}.GetAutoResponder(ctx, "example.com", "mailbox@example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -3852,7 +3993,8 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetAutoResponder("example.com", "mailbox@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetAutoResponder(ctx, "example.com", "mailbox@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3869,7 +4011,8 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetAutoResponder("example.com", "mailbox@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetAutoResponder(ctx, "example.com", "mailbox@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3886,7 +4029,8 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetAutoResponder("example.com", "mailbox@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetAutoResponder(ctx, "example.com", "mailbox@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3903,7 +4047,8 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetAutoResponder("example.com", "mailbox@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetAutoResponder(ctx, "example.com", "mailbox@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3935,7 +4080,8 @@ func TestHostingUpdateOrCreateAutoResponder(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.UpdateAutoResponder("example.com", "mailbox@example.com", map[string]interface{}{
+	ctx := context.Background()
+	resp, err := HostingApi{}.UpdateAutoResponder(ctx, "example.com", "mailbox@example.com", map[string]interface{}{
 		"active":  true,
 		"body":    "I will be out of office until 14-12-2020. Please contact the reception desk for urgent matters.",
 		"subject": "Out of office",
@@ -3961,7 +4107,8 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateAutoResponder("example.com", "mailbox@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateAutoResponder(ctx, "example.com", "mailbox@example.com", map[string]interface{}{
 					"active":  true,
 					"body":    "I will be out of office until 14-12-2020. Please contact the reception desk for urgent matters.",
 					"subject": "Out of office",
@@ -3982,7 +4129,8 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateAutoResponder("example.com", "mailbox@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateAutoResponder(ctx, "example.com", "mailbox@example.com", map[string]interface{}{
 					"active":  true,
 					"body":    "I will be out of office until 14-12-2020. Please contact the reception desk for urgent matters.",
 					"subject": "Out of office",
@@ -4003,7 +4151,8 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateAutoResponder("example.com", "mailbox@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateAutoResponder(ctx, "example.com", "mailbox@example.com", map[string]interface{}{
 					"active":  true,
 					"body":    "I will be out of office until 14-12-2020. Please contact the reception desk for urgent matters.",
 					"subject": "Out of office",
@@ -4024,7 +4173,8 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateAutoResponder("example.com", "mailbox@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.UpdateAutoResponder(ctx, "example.com", "mailbox@example.com", map[string]interface{}{
 					"active":  true,
 					"body":    "I will be out of office until 14-12-2020. Please contact the reception desk for urgent matters.",
 					"subject": "Out of office",
@@ -4048,7 +4198,8 @@ func TestHostingDeleteAutoResponder(t *testing.T) {
 	})
 	defer teardown()
 
-	err := HostingApi{}.DeleteAutoResponder("example.com", "info@example.com")
+	ctx := context.Background()
+	err := HostingApi{}.DeleteAutoResponder(ctx, "example.com", "info@example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -4065,7 +4216,8 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteAutoResponder("example.com", "info@example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteAutoResponder(ctx, "example.com", "info@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4082,7 +4234,8 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteAutoResponder("example.com", "info@example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteAutoResponder(ctx, "example.com", "info@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4099,7 +4252,8 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteAutoResponder("example.com", "info@example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteAutoResponder(ctx, "example.com", "info@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4116,7 +4270,8 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteAutoResponder("example.com", "info@example.com")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteAutoResponder(ctx, "example.com", "info@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4182,7 +4337,8 @@ func TestHostingListForwards(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := HostingApi{}.ListForwards("example.com", "random@example.com")
+	ctx := context.Background()
+	response, err := HostingApi{}.ListForwards(ctx, "example.com", "random@example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -4251,7 +4407,8 @@ func TestHostingListForwardsPaginateAndFilter(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := HostingApi{}.ListForwards("example.com", "random@example.com", 1)
+	ctx := context.Background()
+	response, err := HostingApi{}.ListForwards(ctx, "example.com", "random@example.com", 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -4283,7 +4440,8 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListForwards("example.com", "random@example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListForwards(ctx, "example.com", "random@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4300,7 +4458,8 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListForwards("example.com", "random@example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListForwards(ctx, "example.com", "random@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4317,7 +4476,8 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId": "289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.ListForwards("example.com", "random@example.com")
+				ctx := context.Background()
+				return HostingApi{}.ListForwards(ctx, "example.com", "random@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4351,7 +4511,8 @@ func TestHostingCreateForward(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.CreateForward("example.com", "random@example.com", map[string]interface{}{
+	ctx := context.Background()
+	resp, err := HostingApi{}.CreateForward(ctx, "example.com", "random@example.com", map[string]interface{}{
 		"active":             true,
 		"destination":        "destination@example.com",
 		"source":             "source@example.com",
@@ -4381,7 +4542,8 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateForward("example.com", "random@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateForward(ctx, "example.com", "random@example.com", map[string]interface{}{
 					"active":             true,
 					"destination":        "destination@example.com",
 					"source":             "source@example.com",
@@ -4404,7 +4566,8 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateForward("example.com", "random@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateForward(ctx, "example.com", "random@example.com", map[string]interface{}{
 					"active":             true,
 					"destination":        "destination@example.com",
 					"source":             "source@example.com",
@@ -4427,7 +4590,8 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateForward("example.com", "random@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateForward(ctx, "example.com", "random@example.com", map[string]interface{}{
 					"active":             true,
 					"destination":        "destination@example.com",
 					"source":             "source@example.com",
@@ -4450,7 +4614,8 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.CreateForward("example.com", "random@example.com", map[string]interface{}{
+				ctx := context.Background()
+				return HostingApi{}.CreateForward(ctx, "example.com", "random@example.com", map[string]interface{}{
 					"active":             true,
 					"destination":        "destination@example.com",
 					"source":             "source@example.com",
@@ -4490,7 +4655,8 @@ func TestHostingGetForward(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.GetForward("example.com", "random@example.com", "destination@example.com")
+	ctx := context.Background()
+	resp, err := HostingApi{}.GetForward(ctx, "example.com", "random@example.com", "destination@example.com")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -4514,7 +4680,8 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetForward("example.com", "random@example.com", "destination@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetForward(ctx, "example.com", "random@example.com", "destination@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4531,7 +4698,8 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetForward("example.com", "random@example.com", "destination@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetForward(ctx, "example.com", "random@example.com", "destination@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4548,7 +4716,8 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetForward("example.com", "random@example.com", "destination@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetForward(ctx, "example.com", "random@example.com", "destination@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4565,7 +4734,8 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.GetForward("example.com", "random@example.com", "destination@example.com")
+				ctx := context.Background()
+				return HostingApi{}.GetForward(ctx, "example.com", "random@example.com", "destination@example.com")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4599,7 +4769,8 @@ func TestHostingUpdateForward(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := HostingApi{}.UpdateForward("example.com", "random@example.com", "destination@example.com", map[string]bool{
+	ctx := context.Background()
+	resp, err := HostingApi{}.UpdateForward(ctx, "example.com", "random@example.com", "destination@example.com", map[string]bool{
 		"active":             true,
 		"spamChecksEnabled":  true,
 		"virusChecksEnabled": true,
@@ -4627,7 +4798,8 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateForward("example.com", "random@example.com", "destination@example.com", map[string]bool{
+				ctx := context.Background()
+				return HostingApi{}.UpdateForward(ctx, "example.com", "random@example.com", "destination@example.com", map[string]bool{
 					"active":             true,
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": true,
@@ -4648,7 +4820,8 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateForward("example.com", "random@example.com", "destination@example.com", map[string]bool{
+				ctx := context.Background()
+				return HostingApi{}.UpdateForward(ctx, "example.com", "random@example.com", "destination@example.com", map[string]bool{
 					"active":             true,
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": true,
@@ -4669,7 +4842,8 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateForward("example.com", "random@example.com", "destination@example.com", map[string]bool{
+				ctx := context.Background()
+				return HostingApi{}.UpdateForward(ctx, "example.com", "random@example.com", "destination@example.com", map[string]bool{
 					"active":             true,
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": true,
@@ -4690,7 +4864,8 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return HostingApi{}.UpdateForward("example.com", "random@example.com", "destination@example.com", map[string]bool{
+				ctx := context.Background()
+				return HostingApi{}.UpdateForward(ctx, "example.com", "random@example.com", "destination@example.com", map[string]bool{
 					"active":             true,
 					"spamChecksEnabled":  true,
 					"virusChecksEnabled": true,
@@ -4714,7 +4889,8 @@ func TestHostingDeleteForward(t *testing.T) {
 	})
 	defer teardown()
 
-	err := HostingApi{}.DeleteForward("example.com", "email", "dest")
+	ctx := context.Background()
+	err := HostingApi{}.DeleteForward(ctx, "example.com", "email", "dest")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -4731,7 +4907,8 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteForward("example.com", "email", "dest")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteForward(ctx, "example.com", "email", "dest")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4748,7 +4925,8 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteForward("example.com", "email", "dest")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteForward(ctx, "example.com", "email", "dest")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4765,7 +4943,8 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteForward("example.com", "email", "dest")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteForward(ctx, "example.com", "email", "dest")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4782,7 +4961,8 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, HostingApi{}.DeleteForward("example.com", "email", "dest")
+				ctx := context.Background()
+				return nil, HostingApi{}.DeleteForward(ctx, "example.com", "email", "dest")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
