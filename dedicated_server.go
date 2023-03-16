@@ -333,24 +333,7 @@ type DedicatedServerJob struct {
 	} `json:"metadata"`
 }
 
-type DedicatedServerJobPayload struct {
-	Configurable       bool                                 `json:"configurable"`
-	Device             string                               `json:"device"`
-	FileServerBaseUrl  string                               `json:"fileserverBaseUrl"`
-	JobType            string                               `json:"jobType"`
-	NumberOfDisks      string                               `json:"numberOfDisks"`
-	OperatingSystemId  string                               `json:"operatingSystemId"`
-	OS                 DedicatedServerJobPayloadOs          `json:"os"`
-	Partitions         []DedicatedServerJobPayloadPartition `json:"partitions"`
-	Pop                string                               `json:"pop"`
-	IsUnassignedServer bool                                 `json:"isUnassignedServer"`
-	HasPublicIpmiIp    bool                                 `json:"hasPublicIpmiIp"`
-	PowerCycle         bool                                 `json:"powerCycle"`
-	RaidLevel          string                               `json:"raidLevel"`
-	ServerId           string                               `json:"serverId"`
-	Timezone           string                               `json:"timezone"`
-	X                  json.Number                          `json:"x"`
-}
+type DedicatedServerJobPayload map[string]interface{}
 
 type DedicatedServerJobProgress struct {
 	Canceled   json.Number `json:"canceled"`
