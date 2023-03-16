@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -112,7 +113,8 @@ func TestDedicatedNetworkEquipmentList(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedNetworkEquipmentApi{}.List()
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.List(ctx)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -188,7 +190,8 @@ func TestDedicatedNetworkEquipmentListBeEmpty(t *testing.T) {
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 0}, "networkEquipments": []}`)
 	})
 	defer teardown()
-	response, err := DedicatedNetworkEquipmentApi{}.List()
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.List(ctx)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -257,7 +260,8 @@ func TestDedicatedNetworkEquipmentListPaginateAndFilter(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedNetworkEquipmentApi{}.List(1)
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.List(ctx, 1)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -307,7 +311,8 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.List()
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -324,7 +329,8 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.List()
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -341,7 +347,8 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.List()
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -358,7 +365,8 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.List()
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -456,7 +464,8 @@ func TestDedicatedNetworkEquipmentGet(t *testing.T) {
 	})
 	defer teardown()
 
-	NetworkEquipment, err := DedicatedNetworkEquipmentApi{}.Get("12345")
+	ctx := context.Background()
+	NetworkEquipment, err := DedicatedNetworkEquipmentApi{}.Get(ctx, "12345")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -525,7 +534,8 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.Get("12345")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -542,7 +552,8 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.Get("12345")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -559,7 +570,8 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.Get("12345")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -576,7 +588,8 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.Get("12345")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.Get(ctx, "12345")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -596,7 +609,8 @@ func TestDedicatedNetworkEquipmentUpdate(t *testing.T) {
 	})
 	defer teardown()
 
-	err := DedicatedNetworkEquipmentApi{}.Update("2893829", "new reference")
+	ctx := context.Background()
+	err := DedicatedNetworkEquipmentApi{}.Update(ctx, "2893829", "new reference")
 	assert := assert.New(t)
 	assert.Nil(err)
 }
@@ -612,7 +626,8 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.Update("2893829", "new reference")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.Update(ctx, "2893829", "new reference")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -629,7 +644,8 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.Update("2893829", "new reference")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.Update(ctx, "2893829", "new reference")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -646,7 +662,8 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.Update("2893829", "new reference")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.Update(ctx, "2893829", "new reference")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -663,7 +680,8 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.Update("2893829", "new reference")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.Update(ctx, "2893829", "new reference")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -719,7 +737,8 @@ func TestDedicatedNetworkEquipmentListIps(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedNetworkEquipmentApi{}.ListIps("server-id")
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -759,7 +778,8 @@ func TestDedicatedNetworkEquipmentListIpsBeEmpty(t *testing.T) {
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 0}, "ips": []}`)
 	})
 	defer teardown()
-	response, err := DedicatedNetworkEquipmentApi{}.ListIps("server-id")
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -798,7 +818,8 @@ func TestDedicatedNetworkEquipmentListIpsFilterAndPagination(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedNetworkEquipmentApi{}.ListIps("server-id", 1, 10)
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", 1, 10)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -830,7 +851,8 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListIps("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -847,7 +869,8 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListIps("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -864,7 +887,8 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListIps("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -881,7 +905,8 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListIps("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -914,7 +939,8 @@ func TestDedicatedNetworkEquipmentGetIp(t *testing.T) {
 	})
 	defer teardown()
 
-	Ip, err := DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
+	ctx := context.Background()
+	Ip, err := DedicatedNetworkEquipmentApi{}.GetIp(ctx, "12345", "127.0.0.6")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Ip.DDOS.DetectionProfile, "ADVANCED_LOW_UDP")
@@ -940,7 +966,8 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -957,7 +984,8 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -974,7 +1002,8 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -991,7 +1020,8 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1008,7 +1038,8 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1042,7 +1073,8 @@ func TestDedicatedNetworkEquipmentUpdateIp(t *testing.T) {
 	defer teardown()
 
 	payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
-	Ip, err := DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
+	ctx := context.Background()
+	Ip, err := DedicatedNetworkEquipmentApi{}.UpdateIp(ctx, "12345", "127.0.0.6", payload)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Ip.DDOS.DetectionProfile, "ADVANCED_DEFAULT")
@@ -1069,7 +1101,8 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
-				return DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.UpdateIp(ctx, "12345", "127.0.0.6", payload)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1087,7 +1120,8 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
-				return DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.UpdateIp(ctx, "12345", "127.0.0.6", payload)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1105,7 +1139,8 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
-				return DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.UpdateIp(ctx, "12345", "127.0.0.6", payload)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1123,7 +1158,8 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
-				return DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.UpdateIp(ctx, "12345", "127.0.0.6", payload)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1141,7 +1177,8 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"detectionProfile": "ADVANCED_DEFAULT", "reverseLookup": "domain.example.com"}
-				return DedicatedNetworkEquipmentApi{}.UpdateIp("12345", "127.0.0.6", payload)
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.UpdateIp(ctx, "12345", "127.0.0.6", payload)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1174,7 +1211,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIp(t *testing.T) {
 	})
 	defer teardown()
 
-	Ip, err := DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
+	ctx := context.Background()
+	Ip, err := DedicatedNetworkEquipmentApi{}.NullRouteAnIp(ctx, "12345", "127.0.0.6")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Ip.DDOS.DetectionProfile, "ADVANCED_DEFAULT")
@@ -1200,7 +1238,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1217,7 +1256,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1234,7 +1274,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1251,7 +1292,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1268,7 +1310,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.NullRouteAnIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1301,7 +1344,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIp(t *testing.T) {
 	})
 	defer teardown()
 
-	Ip, err := DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
+	ctx := context.Background()
+	Ip, err := DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp(ctx, "12345", "127.0.0.6")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Ip.DDOS.DetectionProfile, "ADVANCED_DEFAULT")
@@ -1327,7 +1371,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1344,7 +1389,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1361,7 +1407,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1378,7 +1425,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1395,7 +1443,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp("12345", "127.0.0.6")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.RemoveNullRouteAnIp(ctx, "12345", "127.0.0.6")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1431,7 +1480,8 @@ func TestDedicatedNetworkEquipmentListNullRoutes(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id")
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 1)
@@ -1455,7 +1505,8 @@ func TestDedicatedNetworkEquipmentListNullRoutesBeEmpty(t *testing.T) {
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 0}, "nullRoutes": []}`)
 	})
 	defer teardown()
-	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id")
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1488,7 +1539,8 @@ func TestDedicatedNetworkEquipmentListNullRoutesFilterAndPagination(t *testing.T
 	})
 	defer teardown()
 
-	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id", 1)
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id", 1)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -1516,7 +1568,8 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1533,7 +1586,8 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1550,7 +1604,8 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1567,7 +1622,8 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListNullRoutes("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1611,7 +1667,8 @@ func TestDedicatedNetworkEquipmentListCredentials(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 4)
@@ -1636,7 +1693,8 @@ func TestDedicatedNetworkEquipmentListCredentialsBeEmpty(t *testing.T) {
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 0}, "credentials": []}`)
 	})
 	defer teardown()
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1665,7 +1723,8 @@ func TestDedicatedNetworkEquipmentListCredentialsPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -1688,7 +1747,8 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1705,7 +1765,8 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1722,7 +1783,8 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1739,7 +1801,8 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1756,7 +1819,8 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListCredentials("99944")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1780,7 +1844,8 @@ func TestDedicatedNetworkEquipmentCreateCredential(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+	ctx := context.Background()
+	resp, err := DedicatedNetworkEquipmentApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -1800,7 +1865,8 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1817,7 +1883,8 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1834,7 +1901,8 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1851,7 +1919,8 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1868,7 +1937,8 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1904,7 +1974,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByType(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -1925,7 +1996,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeBeEmpty(t *testing.T) {
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 0}, "credentials": []}`)
 	})
 	defer teardown()
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1954,7 +2026,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypePaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+	ctx := context.Background()
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -1977,7 +2050,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1994,7 +2068,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2011,7 +2086,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2028,7 +2104,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2045,7 +2122,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2069,7 +2147,8 @@ func TestDedicatedNetworkEquipmentGetCredentials(t *testing.T) {
 	})
 	defer teardown()
 
-	Credential, err := DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+	ctx := context.Background()
+	Credential, err := DedicatedNetworkEquipmentApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Credential.Password, "mys3cr3tp@ssw0rd")
@@ -2088,7 +2167,8 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2105,7 +2185,8 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2122,7 +2203,8 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2139,7 +2221,8 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2156,7 +2239,8 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2176,7 +2260,8 @@ func TestDedicatedNetworkEquipmentCredentials(t *testing.T) {
 	})
 	defer teardown()
 
-	err := DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+	ctx := context.Background()
+	err := DedicatedNetworkEquipmentApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 	assert := assert.New(t)
 	assert.Nil(err)
 }
@@ -2192,7 +2277,8 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2209,7 +2295,8 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2226,7 +2313,8 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2243,7 +2331,8 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2260,7 +2349,8 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2284,7 +2374,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentials(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+	ctx := context.Background()
+	resp, err := DedicatedNetworkEquipmentApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -2304,7 +2395,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2321,7 +2413,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2338,7 +2431,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2355,7 +2449,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2372,7 +2467,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2392,7 +2488,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServer(t *testing.T) {
 	})
 	defer teardown()
 
-	err := DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
+	ctx := context.Background()
+	err := DedicatedNetworkEquipmentApi{}.PowerCycleServer(ctx, "server id")
 	assert := assert.New(t)
 	assert.Nil(err)
 }
@@ -2408,7 +2505,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2425,7 +2523,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2442,7 +2541,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2459,7 +2559,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2476,7 +2577,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerCycleServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2496,7 +2598,8 @@ func TestDedicatedNetworkEquipmentPowerOffServer(t *testing.T) {
 	})
 	defer teardown()
 
-	err := DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
+	ctx := context.Background()
+	err := DedicatedNetworkEquipmentApi{}.PowerOffServer(ctx, "server id")
 	assert := assert.New(t)
 	assert.Nil(err)
 }
@@ -2512,7 +2615,8 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2529,7 +2633,8 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2546,7 +2651,8 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2563,7 +2669,8 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2580,7 +2687,8 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerOffServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2600,7 +2708,8 @@ func TestDedicatedNetworkEquipmentPowerOnServer(t *testing.T) {
 	})
 	defer teardown()
 
-	err := DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
+	ctx := context.Background()
+	err := DedicatedNetworkEquipmentApi{}.PowerOnServer(ctx, "server id")
 	assert := assert.New(t)
 	assert.Nil(err)
 }
@@ -2616,7 +2725,8 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2633,7 +2743,8 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2650,7 +2761,8 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2667,7 +2779,8 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2684,7 +2797,8 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer("server id")
+				ctx := context.Background()
+				return nil, DedicatedNetworkEquipmentApi{}.PowerOnServer(ctx, "server id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2711,7 +2825,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatus(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
+	ctx := context.Background()
+	resp, err := DedicatedNetworkEquipmentApi{}.GetPowerStatus(ctx, "server-id")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -2730,7 +2845,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetPowerStatus(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2747,7 +2863,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetPowerStatus(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2764,7 +2881,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetPowerStatus(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2781,7 +2899,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetPowerStatus(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2798,7 +2917,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedNetworkEquipmentApi{}.GetPowerStatus("server-id")
+				ctx := context.Background()
+				return DedicatedNetworkEquipmentApi{}.GetPowerStatus(ctx, "server-id")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

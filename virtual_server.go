@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -59,7 +60,7 @@ func (vsa VirtualServerApi) getPath(endpoint string) string {
 	return "/cloud/" + VIRTUAL_SERVER_API_VERSION + endpoint
 }
 
-func (vsa VirtualServerApi) List(args ...int) (*VirtualServers, error) {
+func (vsa VirtualServerApi) List(ctx context.Context, args ...int) (*VirtualServers, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -70,75 +71,75 @@ func (vsa VirtualServerApi) List(args ...int) (*VirtualServers, error) {
 
 	path := vsa.getPath("/virtualServers?" + v.Encode())
 	result := &VirtualServers{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (vsa VirtualServerApi) Get(virtualServerId string) (*VirtualServer, error) {
+func (vsa VirtualServerApi) Get(ctx context.Context, virtualServerId string) (*VirtualServer, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId)
 	result := &VirtualServer{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (vsa VirtualServerApi) Update(virtualServerId, reference string) (*VirtualServer, error) {
+func (vsa VirtualServerApi) Update(ctx context.Context, virtualServerId, reference string) (*VirtualServer, error) {
 	payload := map[string]string{"reference": reference}
 	path := vsa.getPath("/virtualServers/" + virtualServerId)
 	result := &VirtualServer{}
-	if err := doRequest(http.MethodPut, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (vsa VirtualServerApi) PowerOn(virtualServerId string) (*VirtualServerResult, error) {
+func (vsa VirtualServerApi) PowerOn(ctx context.Context, virtualServerId string) (*VirtualServerResult, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/powerOn")
 	result := &VirtualServerResult{}
-	if err := doRequest(http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (vsa VirtualServerApi) PowerOff(virtualServerId string) (*VirtualServerResult, error) {
+func (vsa VirtualServerApi) PowerOff(ctx context.Context, virtualServerId string) (*VirtualServerResult, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/powerOff")
 	result := &VirtualServerResult{}
-	if err := doRequest(http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (vsa VirtualServerApi) Reboot(virtualServerId string) (*VirtualServerResult, error) {
+func (vsa VirtualServerApi) Reboot(ctx context.Context, virtualServerId string) (*VirtualServerResult, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/reboot")
 	result := &VirtualServerResult{}
-	if err := doRequest(http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (vsa VirtualServerApi) Reinstall(virtualServerId, operatingSystemId string) (*VirtualServerResult, error) {
+func (vsa VirtualServerApi) Reinstall(ctx context.Context, virtualServerId, operatingSystemId string) (*VirtualServerResult, error) {
 	payload := map[string]string{"operatingSystemId": operatingSystemId}
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/reinstall")
 	result := &VirtualServerResult{}
-	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (vsa VirtualServerApi) UpdateCredential(virtualServerId, username, credentialType, password string) error {
+func (vsa VirtualServerApi) UpdateCredential(ctx context.Context, virtualServerId, username, credentialType, password string) error {
 	payload := map[string]string{"username": username, "type": credentialType, "password": password}
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/credentials")
-	return doRequest(http.MethodPut, path, nil, payload)
+	return doRequest(ctx, http.MethodPut, path, nil, payload)
 }
 
-func (vsa VirtualServerApi) ListCredentials(virtualServerId, credentialType string, args ...int) (*Credentials, error) {
+func (vsa VirtualServerApi) ListCredentials(ctx context.Context, virtualServerId, credentialType string, args ...int) (*Credentials, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -149,22 +150,22 @@ func (vsa VirtualServerApi) ListCredentials(virtualServerId, credentialType stri
 
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/credentials/" + credentialType + "?" + v.Encode())
 	result := &Credentials{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (vsa VirtualServerApi) GetCredential(virtualServerId, username, credentialType string) (*Credential, error) {
+func (vsa VirtualServerApi) GetCredential(ctx context.Context, virtualServerId, username, credentialType string) (*Credential, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/credentials/" + credentialType + "/" + username)
 	result := &Credential{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (vsa VirtualServerApi) GetDataTrafficMetrics(virtualServerId string, args ...interface{}) (*DataTrafficMetricsV2, error) {
+func (vsa VirtualServerApi) GetDataTrafficMetrics(ctx context.Context, virtualServerId string, args ...interface{}) (*DataTrafficMetricsV2, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -181,13 +182,13 @@ func (vsa VirtualServerApi) GetDataTrafficMetrics(virtualServerId string, args .
 
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/metrics/datatraffic?" + v.Encode())
 	result := &DataTrafficMetricsV2{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (vsa VirtualServerApi) ListTemplates(virtualServerId string, args ...int) (*VirtualServerTemplates, error) {
+func (vsa VirtualServerApi) ListTemplates(ctx context.Context, virtualServerId string, args ...int) (*VirtualServerTemplates, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -198,7 +199,7 @@ func (vsa VirtualServerApi) ListTemplates(virtualServerId string, args ...int) (
 
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/templates")
 	result := &VirtualServerTemplates{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil

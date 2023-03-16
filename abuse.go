@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -73,7 +74,7 @@ func (aba AbuseApi) getPath(endpoint string) string {
 	return "/abuse/" + ABUSE_API_VERSION + endpoint
 }
 
-func (aba AbuseApi) List(args ...interface{}) (*AbuseReports, error) {
+func (aba AbuseApi) List(ctx context.Context, args ...interface{}) (*AbuseReports, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -92,22 +93,22 @@ func (aba AbuseApi) List(args ...interface{}) (*AbuseReports, error) {
 
 	path := aba.getPath("/reports?" + v.Encode())
 	result := &AbuseReports{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (aba AbuseApi) Get(abuseReportId string) (*AbuseReport, error) {
+func (aba AbuseApi) Get(ctx context.Context, abuseReportId string) (*AbuseReport, error) {
 	path := aba.getPath("/reports/" + abuseReportId)
 	result := &AbuseReport{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (aba AbuseApi) ListMessages(abuseReportId string, args ...int) (*AbuseMessages, error) {
+func (aba AbuseApi) ListMessages(ctx context.Context, abuseReportId string, args ...int) (*AbuseMessages, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -118,35 +119,35 @@ func (aba AbuseApi) ListMessages(abuseReportId string, args ...int) (*AbuseMessa
 
 	path := aba.getPath("/reports/" + abuseReportId + "/messages" + v.Encode())
 	result := &AbuseMessages{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (aba AbuseApi) CreateMessage(abuseReportId string, body string) ([]string, error) {
+func (aba AbuseApi) CreateMessage(ctx context.Context, abuseReportId string, body string) ([]string, error) {
 	var result []string
 	payload := map[string]string{body: body}
 	path := aba.getPath("/reports/" + abuseReportId + "/messages")
-	if err := doRequest(http.MethodPost, path, &result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, &result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (aba AbuseApi) ListResolutionOptions(abuseReportId string) (*AbuseResolutions, error) {
+func (aba AbuseApi) ListResolutionOptions(ctx context.Context, abuseReportId string) (*AbuseResolutions, error) {
 	path := aba.getPath("/reports/" + abuseReportId + "/resolutions")
 	result := &AbuseResolutions{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (aba AbuseApi) Resolve(abuseReportId string, resolutions []string) error {
+func (aba AbuseApi) Resolve(ctx context.Context, abuseReportId string, resolutions []string) error {
 	payload := map[string][]string{"resolutions": resolutions}
 	path := aba.getPath("/reports/" + abuseReportId + "/resolve")
-	return doRequest(http.MethodPost, path, nil, payload)
+	return doRequest(ctx, http.MethodPost, path, nil, payload)
 }
 
 // TODO

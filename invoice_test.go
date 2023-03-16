@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -40,7 +41,8 @@ func TestInvoiceList(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.List()
+	ctx := context.Background()
+	response, err := invoiceApi.List(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -80,7 +82,8 @@ func TestInvoiceListBeEmpty(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.List()
+	ctx := context.Background()
+	response, err := invoiceApi.List(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -99,7 +102,8 @@ func TestInvoiceListPaginate(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.List(1)
+	ctx := context.Background()
+	response, err := invoiceApi.List(ctx, 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -120,7 +124,8 @@ func TestInvoiceListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.List()
+				ctx := context.Background()
+				return InvoiceApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -137,7 +142,8 @@ func TestInvoiceListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.List()
+				ctx := context.Background()
+				return InvoiceApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -154,7 +160,8 @@ func TestInvoiceListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.List()
+				ctx := context.Background()
+				return InvoiceApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -171,7 +178,8 @@ func TestInvoiceListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.List()
+				ctx := context.Background()
+				return InvoiceApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -223,7 +231,8 @@ func TestInvoiceListProForma(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.ListProForma()
+	ctx := context.Background()
+	response, err := invoiceApi.ListProForma(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -290,7 +299,8 @@ func TestInvoiceListProFormaPaginate(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.ListProForma(1)
+	ctx := context.Background()
+	response, err := invoiceApi.ListProForma(ctx, 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -328,7 +338,8 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.ListProForma()
+				ctx := context.Background()
+				return InvoiceApi{}.ListProForma(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -345,7 +356,8 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.ListProForma()
+				ctx := context.Background()
+				return InvoiceApi{}.ListProForma(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -362,7 +374,8 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.ListProForma()
+				ctx := context.Background()
+				return InvoiceApi{}.ListProForma(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -379,7 +392,8 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.ListProForma()
+				ctx := context.Background()
+				return InvoiceApi{}.ListProForma(ctx)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -429,7 +443,8 @@ func TestInvoiceGet(t *testing.T) {
 	defer teardown()
 
 	invoiceApi := InvoiceApi{}
-	response, err := invoiceApi.Get("00000001")
+	ctx := context.Background()
+	response, err := invoiceApi.Get(ctx, "00000001")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -472,7 +487,8 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.Get("000000001")
+				ctx := context.Background()
+				return InvoiceApi{}.Get(ctx, "000000001")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -489,7 +505,8 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.Get("000000001")
+				ctx := context.Background()
+				return InvoiceApi{}.Get(ctx, "000000001")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -506,7 +523,8 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.Get("000000001")
+				ctx := context.Background()
+				return InvoiceApi{}.Get(ctx, "000000001")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -523,7 +541,8 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return InvoiceApi{}.Get("000000001")
+				ctx := context.Background()
+				return InvoiceApi{}.Get(ctx, "000000001")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

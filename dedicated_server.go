@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -451,7 +452,7 @@ func (dsa DedicatedServerApi) getPath(endpoint string) string {
 	return "/bareMetals/" + DEDICATED_SERVER_API_VERSION + endpoint
 }
 
-func (dsa DedicatedServerApi) List(args ...interface{}) (*DedicatedServers, error) {
+func (dsa DedicatedServerApi) List(ctx context.Context, args ...interface{}) (*DedicatedServers, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -480,36 +481,36 @@ func (dsa DedicatedServerApi) List(args ...interface{}) (*DedicatedServers, erro
 
 	path := dsa.getPath("/servers?" + v.Encode())
 	result := &DedicatedServers{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) Get(serverId string) (*DedicatedServer, error) {
+func (dsa DedicatedServerApi) Get(ctx context.Context, serverId string) (*DedicatedServer, error) {
 	path := dsa.getPath("/servers/" + serverId)
 	result := &DedicatedServer{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) Update(serverId string, payload map[string]interface{}) error {
+func (dsa DedicatedServerApi) Update(ctx context.Context, serverId string, payload map[string]interface{}) error {
 	path := dsa.getPath("/servers/" + serverId)
-	return doRequest(http.MethodPut, path, nil, payload)
+	return doRequest(ctx, http.MethodPut, path, nil, payload)
 }
 
-func (dsa DedicatedServerApi) GetHardwareInformation(serverId string) (*DedicatedServerHardware, error) {
+func (dsa DedicatedServerApi) GetHardwareInformation(ctx context.Context, serverId string) (*DedicatedServerHardware, error) {
 	path := dsa.getPath("/servers/" + serverId + "/hardwareInfo")
 	result := &DedicatedServerHardware{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListIps(serverId string, args ...interface{}) (*Ips, error) {
+func (dsa DedicatedServerApi) ListIps(ctx context.Context, serverId string, args ...interface{}) (*Ips, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -532,49 +533,49 @@ func (dsa DedicatedServerApi) ListIps(serverId string, args ...interface{}) (*Ip
 
 	path := dsa.getPath("/servers/" + serverId + "/ips" + v.Encode())
 	result := &Ips{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetIp(serverId, ip string) (*Ip, error) {
+func (dsa DedicatedServerApi) GetIp(ctx context.Context, serverId, ip string) (*Ip, error) {
 	path := dsa.getPath("/servers/" + serverId + "/ips/" + ip)
 	result := &Ip{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) UpdateIp(serverId, ip string, payload map[string]string) (*Ip, error) {
+func (dsa DedicatedServerApi) UpdateIp(ctx context.Context, serverId, ip string, payload map[string]string) (*Ip, error) {
 	path := dsa.getPath("/servers/" + serverId + "/ips/" + ip)
 	result := &Ip{}
-	if err := doRequest(http.MethodPut, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) NullRouteAnIp(serverId, ip string) (*Ip, error) {
+func (dsa DedicatedServerApi) NullRouteAnIp(ctx context.Context, serverId, ip string) (*Ip, error) {
 	path := dsa.getPath("/servers/" + serverId + "/ips/" + ip + "/null")
 	result := &Ip{}
-	if err := doRequest(http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) RemoveNullRouteAnIp(serverId, ip string) (*Ip, error) {
+func (dsa DedicatedServerApi) RemoveNullRouteAnIp(ctx context.Context, serverId, ip string) (*Ip, error) {
 	path := dsa.getPath("/servers/" + serverId + "/ips/" + ip + "/unnull")
 	result := &Ip{}
-	if err := doRequest(http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListNullRoutes(serverId string, args ...int) (*NullRoutes, error) {
+func (dsa DedicatedServerApi) ListNullRoutes(ctx context.Context, serverId string, args ...int) (*NullRoutes, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -585,13 +586,13 @@ func (dsa DedicatedServerApi) ListNullRoutes(serverId string, args ...int) (*Nul
 
 	path := dsa.getPath("/servers/" + serverId + "/nullRouteHistory?" + v.Encode())
 	result := &NullRoutes{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListNetworkInterfaces(serverId string, args ...interface{}) (*DedicatedServerNetworkInterfaces, error) {
+func (dsa DedicatedServerApi) ListNetworkInterfaces(ctx context.Context, serverId string, args ...interface{}) (*DedicatedServerNetworkInterfaces, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -602,58 +603,58 @@ func (dsa DedicatedServerApi) ListNetworkInterfaces(serverId string, args ...int
 
 	path := dsa.getPath("/servers/" + serverId + "/networkInterfaces")
 	result := &DedicatedServerNetworkInterfaces{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CloseAllNetworkInterfaces(serverId string) error {
+func (dsa DedicatedServerApi) CloseAllNetworkInterfaces(ctx context.Context, serverId string) error {
 	path := dsa.getPath("/servers/" + serverId + "/networkInterfaces/close")
-	return doRequest(http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path)
 }
 
-func (dsa DedicatedServerApi) OpenAllNetworkInterfaces(serverId string) error {
+func (dsa DedicatedServerApi) OpenAllNetworkInterfaces(ctx context.Context, serverId string) error {
 	path := dsa.getPath("/servers/" + serverId + "/networkInterfaces/open")
-	return doRequest(http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path)
 }
 
-func (dsa DedicatedServerApi) GetNetworkInterface(serverId, networkType string) (*DedicatedServerNetworkInterface, error) {
+func (dsa DedicatedServerApi) GetNetworkInterface(ctx context.Context, serverId, networkType string) (*DedicatedServerNetworkInterface, error) {
 	path := dsa.getPath("/servers/" + serverId + "/networkInterfaces/" + networkType)
 	result := &DedicatedServerNetworkInterface{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CloseNetworkInterface(serverId, networkType string) error {
+func (dsa DedicatedServerApi) CloseNetworkInterface(ctx context.Context, serverId, networkType string) error {
 	path := dsa.getPath("/servers/" + serverId + "/networkInterfaces/" + networkType + "/close")
-	return doRequest(http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path)
 }
 
-func (dsa DedicatedServerApi) OpenNetworkInterface(serverId, networkType string) error {
+func (dsa DedicatedServerApi) OpenNetworkInterface(ctx context.Context, serverId, networkType string) error {
 	path := dsa.getPath("/servers/" + serverId + "/networkInterfaces/" + networkType + "/open")
-	return doRequest(http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path)
 }
 
-func (dsa DedicatedServerApi) DeleteServerFromPrivateNetwork(serverId, privateNetworkId string) error {
+func (dsa DedicatedServerApi) DeleteServerFromPrivateNetwork(ctx context.Context, serverId, privateNetworkId string) error {
 	path := dsa.getPath("/servers/" + serverId + "/privateNetworks/" + privateNetworkId)
-	return doRequest(http.MethodDelete, path)
+	return doRequest(ctx, http.MethodDelete, path)
 }
 
-func (dsa DedicatedServerApi) AddServerToPrivateNetwork(serverId, privateNetworkId string, linkSpeed int) error {
+func (dsa DedicatedServerApi) AddServerToPrivateNetwork(ctx context.Context, serverId, privateNetworkId string, linkSpeed int) error {
 	payload := map[string]int{"linkSpeed": linkSpeed}
 	path := dsa.getPath("/servers/" + serverId + "/privateNetworks/" + privateNetworkId)
-	return doRequest(http.MethodPut, path, nil, payload)
+	return doRequest(ctx, http.MethodPut, path, nil, payload)
 }
 
-func (dsa DedicatedServerApi) DeleteDhcpReservation(serverId string) error {
+func (dsa DedicatedServerApi) DeleteDhcpReservation(ctx context.Context, serverId string) error {
 	path := dsa.getPath("/servers/" + serverId + "/leases")
-	return doRequest(http.MethodDelete, path)
+	return doRequest(ctx, http.MethodDelete, path)
 }
 
-func (dsa DedicatedServerApi) ListDhcpReservation(serverId string, args ...interface{}) (*DedicatedServerDhcpReservations, error) {
+func (dsa DedicatedServerApi) ListDhcpReservation(ctx context.Context, serverId string, args ...interface{}) (*DedicatedServerDhcpReservations, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -663,63 +664,63 @@ func (dsa DedicatedServerApi) ListDhcpReservation(serverId string, args ...inter
 	}
 	path := dsa.getPath("/servers/" + serverId + "/leases" + v.Encode())
 	result := &DedicatedServerDhcpReservations{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CreateDhcpReservation(serverId string, payload map[string]string) error {
+func (dsa DedicatedServerApi) CreateDhcpReservation(ctx context.Context, serverId string, payload map[string]string) error {
 	path := dsa.getPath("/servers/" + serverId + "/leases")
-	return doRequest(http.MethodPost, path, nil, payload)
+	return doRequest(ctx, http.MethodPost, path, nil, payload)
 }
 
-func (dsa DedicatedServerApi) CancelActiveJob(serverId string) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) CancelActiveJob(ctx context.Context, serverId string) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/cancelActiveJob")
-	if err := doRequest(http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ExpireActiveJob(serverId string) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) ExpireActiveJob(ctx context.Context, serverId string) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/expireActiveJob")
-	if err := doRequest(http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) LaunchHardwareScan(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) LaunchHardwareScan(ctx context.Context, serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/hardwareScan")
-	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) LaunchInstallation(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) LaunchInstallation(ctx context.Context, serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/install")
-	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) LaunchIpmiRest(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) LaunchIpmiRest(ctx context.Context, serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/ipmiRest")
-	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListJobs(serverId string, args ...int) (*DedicatedServerJobs, error) {
+func (dsa DedicatedServerApi) ListJobs(ctx context.Context, serverId string, args ...int) (*DedicatedServerJobs, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -739,31 +740,31 @@ func (dsa DedicatedServerApi) ListJobs(serverId string, args ...int) (*Dedicated
 
 	result := &DedicatedServerJobs{}
 	path := dsa.getPath("/servers/" + serverId + "/jobs?" + v.Encode())
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetJob(serverId, jobId string) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) GetJob(ctx context.Context, serverId, jobId string) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/jobs/" + jobId)
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) LaunchRescueMode(serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
+func (dsa DedicatedServerApi) LaunchRescueMode(ctx context.Context, serverId string, payload map[string]interface{}) (*DedicatedServerJob, error) {
 	result := &DedicatedServerJob{}
 	path := dsa.getPath("/servers/" + serverId + "/rescueMode")
-	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListCredentials(serverId string, args ...int) (*Credentials, error) {
+func (dsa DedicatedServerApi) ListCredentials(ctx context.Context, serverId string, args ...int) (*Credentials, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -774,26 +775,26 @@ func (dsa DedicatedServerApi) ListCredentials(serverId string, args ...int) (*Cr
 
 	result := &Credentials{}
 	path := dsa.getPath("/servers/" + serverId + "/credentials?" + v.Encode())
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CreateCredential(serverId, credentialType, username, password string) (*Credential, error) {
+func (dsa DedicatedServerApi) CreateCredential(ctx context.Context, serverId, credentialType, username, password string) (*Credential, error) {
 	result := &Credential{}
 	payload := make(map[string]string)
 	payload["type"] = credentialType
 	payload["username"] = username
 	payload["password"] = password
 	path := dsa.getPath("/servers/" + serverId + "/credentials")
-	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListCredentialsByType(serverId, credentialType string, args ...int) (*Credentials, error) {
+func (dsa DedicatedServerApi) ListCredentialsByType(ctx context.Context, serverId, credentialType string, args ...int) (*Credentials, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -804,37 +805,37 @@ func (dsa DedicatedServerApi) ListCredentialsByType(serverId, credentialType str
 
 	result := &Credentials{}
 	path := dsa.getPath("/servers/" + serverId + "/credentials/" + credentialType + "?" + v.Encode())
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetCredential(serverId, credentialType, username string) (*Credential, error) {
+func (dsa DedicatedServerApi) GetCredential(ctx context.Context, serverId, credentialType, username string) (*Credential, error) {
 	result := &Credential{}
 	path := dsa.getPath("/servers/" + serverId + "/credentials/" + credentialType + "/" + username)
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) DeleteCredential(serverId, credentialType, username string) error {
+func (dsa DedicatedServerApi) DeleteCredential(ctx context.Context, serverId, credentialType, username string) error {
 	path := dsa.getPath("/servers/" + serverId + "/credentials/" + credentialType + "/" + username)
-	return doRequest(http.MethodDelete, path)
+	return doRequest(ctx, http.MethodDelete, path)
 }
 
-func (dsa DedicatedServerApi) UpdateCredential(serverId, credentialType, username, password string) (*Credential, error) {
+func (dsa DedicatedServerApi) UpdateCredential(ctx context.Context, serverId, credentialType, username, password string) (*Credential, error) {
 	result := &Credential{}
 	payload := map[string]string{"password": password}
 	path := dsa.getPath("/servers/" + serverId + "/credentials/" + credentialType + "/" + username)
-	if err := doRequest(http.MethodPut, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetDataTrafficMetrics(serverId string, args ...interface{}) (*DataTrafficMetricsV1, error) {
+func (dsa DedicatedServerApi) GetDataTrafficMetrics(ctx context.Context, serverId string, args ...interface{}) (*DataTrafficMetricsV1, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -851,13 +852,13 @@ func (dsa DedicatedServerApi) GetDataTrafficMetrics(serverId string, args ...int
 
 	path := dsa.getPath("/servers/" + serverId + "/metrics/datatraffic?" + v.Encode())
 	result := &DataTrafficMetricsV1{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetBandWidthMetrics(serverId string, args ...interface{}) (*BandWidthMetrics, error) {
+func (dsa DedicatedServerApi) GetBandWidthMetrics(ctx context.Context, serverId string, args ...interface{}) (*BandWidthMetrics, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("granularity", fmt.Sprint(args[0]))
@@ -874,13 +875,13 @@ func (dsa DedicatedServerApi) GetBandWidthMetrics(serverId string, args ...inter
 
 	path := dsa.getPath("/servers/" + serverId + "/metrics/bandwidth?" + v.Encode())
 	result := &BandWidthMetrics{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListBandWidthNotificationSettings(serverId string, args ...int) (*BandWidthNotificationSettings, error) {
+func (dsa DedicatedServerApi) ListBandWidthNotificationSettings(ctx context.Context, serverId string, args ...int) (*BandWidthNotificationSettings, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -891,13 +892,13 @@ func (dsa DedicatedServerApi) ListBandWidthNotificationSettings(serverId string,
 
 	result := &BandWidthNotificationSettings{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/bandwidth?" + v.Encode())
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CreateBandWidthNotificationSetting(serverId, frequency, threshold, unit string) (*NotificationSetting, error) {
+func (dsa DedicatedServerApi) CreateBandWidthNotificationSetting(ctx context.Context, serverId, frequency, threshold, unit string) (*NotificationSetting, error) {
 	payload := map[string]string{
 		"frequency": frequency,
 		"threshold": threshold,
@@ -905,36 +906,36 @@ func (dsa DedicatedServerApi) CreateBandWidthNotificationSetting(serverId, frequ
 	}
 	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/bandwidth")
-	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) DeleteBandWidthNotificationSetting(serverId, notificationId string) error {
+func (dsa DedicatedServerApi) DeleteBandWidthNotificationSetting(ctx context.Context, serverId, notificationId string) error {
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/bandwidth/" + notificationId)
-	return doRequest(http.MethodDelete, path)
+	return doRequest(ctx, http.MethodDelete, path)
 }
 
-func (dsa DedicatedServerApi) GetBandWidthNotificationSetting(serverId, notificationId string) (*NotificationSetting, error) {
+func (dsa DedicatedServerApi) GetBandWidthNotificationSetting(ctx context.Context, serverId, notificationId string) (*NotificationSetting, error) {
 	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/bandwidth/" + notificationId)
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) UpdateBandWidthNotificationSetting(serverId, notificationSettingId string, payload map[string]string) (*NotificationSetting, error) {
+func (dsa DedicatedServerApi) UpdateBandWidthNotificationSetting(ctx context.Context, serverId, notificationSettingId string, payload map[string]string) (*NotificationSetting, error) {
 	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/bandwidth/" + notificationSettingId)
-	if err := doRequest(http.MethodPut, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListDataTrafficNotificationSettings(serverId string, args ...int) (*DataTrafficNotificationSettings, error) {
+func (dsa DedicatedServerApi) ListDataTrafficNotificationSettings(ctx context.Context, serverId string, args ...int) (*DataTrafficNotificationSettings, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -945,13 +946,13 @@ func (dsa DedicatedServerApi) ListDataTrafficNotificationSettings(serverId strin
 
 	result := &DataTrafficNotificationSettings{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/datatraffic?" + v.Encode())
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) CreateDataTrafficNotificationSetting(serverId, frequency, threshold, unit string) (*NotificationSetting, error) {
+func (dsa DedicatedServerApi) CreateDataTrafficNotificationSetting(ctx context.Context, serverId, frequency, threshold, unit string) (*NotificationSetting, error) {
 	payload := map[string]string{
 		"frequency": frequency,
 		"threshold": threshold,
@@ -959,77 +960,77 @@ func (dsa DedicatedServerApi) CreateDataTrafficNotificationSetting(serverId, fre
 	}
 	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/datatraffic")
-	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) DeleteDataTrafficNotificationSetting(serverId, notificationId string) error {
+func (dsa DedicatedServerApi) DeleteDataTrafficNotificationSetting(ctx context.Context, serverId, notificationId string) error {
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/datatraffic/" + notificationId)
-	return doRequest(http.MethodDelete, path)
+	return doRequest(ctx, http.MethodDelete, path)
 }
 
-func (dsa DedicatedServerApi) GetDataTrafficNotificationSetting(serverId, notificationId string) (*NotificationSetting, error) {
+func (dsa DedicatedServerApi) GetDataTrafficNotificationSetting(ctx context.Context, serverId, notificationId string) (*NotificationSetting, error) {
 	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/datatraffic/" + notificationId)
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) UpdateDataTrafficNotificationSetting(serverId, notificationSettingId string, payload map[string]string) (*NotificationSetting, error) {
+func (dsa DedicatedServerApi) UpdateDataTrafficNotificationSetting(ctx context.Context, serverId, notificationSettingId string, payload map[string]string) (*NotificationSetting, error) {
 	result := &NotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/datatraffic/" + notificationSettingId)
-	if err := doRequest(http.MethodPut, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetDdosNotificationSetting(serverId string) (*DdosNotificationSetting, error) {
+func (dsa DedicatedServerApi) GetDdosNotificationSetting(ctx context.Context, serverId string) (*DdosNotificationSetting, error) {
 	result := &DdosNotificationSetting{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/ddos")
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) UpdateDdosNotificationSetting(serverId string, payload map[string]string) error {
+func (dsa DedicatedServerApi) UpdateDdosNotificationSetting(ctx context.Context, serverId string, payload map[string]string) error {
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/ddos/")
-	if err := doRequest(http.MethodPut, path, nil, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, nil, payload); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (dsa DedicatedServerApi) PowerCycleServer(serverId string) error {
+func (dsa DedicatedServerApi) PowerCycleServer(ctx context.Context, serverId string) error {
 	path := dsa.getPath("/servers/" + serverId + "/powerCycle")
-	return doRequest(http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path)
 }
 
-func (dsa DedicatedServerApi) GetPowerStatus(serverId string) (*PowerStatus, error) {
+func (dsa DedicatedServerApi) GetPowerStatus(ctx context.Context, serverId string) (*PowerStatus, error) {
 	result := &PowerStatus{}
 	path := dsa.getPath("/servers/" + serverId + "/powerInfo")
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) PowerOffServer(serverId string) error {
+func (dsa DedicatedServerApi) PowerOffServer(ctx context.Context, serverId string) error {
 	path := dsa.getPath("/servers/" + serverId + "/powerOff")
-	return doRequest(http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path)
 }
 
-func (dsa DedicatedServerApi) PowerOnServer(serverId string) error {
+func (dsa DedicatedServerApi) PowerOnServer(ctx context.Context, serverId string) error {
 	path := dsa.getPath("/servers/" + serverId + "/powerOn")
-	return doRequest(http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path)
 }
 
-func (dsa DedicatedServerApi) ListOperatingSystems(args ...interface{}) (*DedicatedServerOperatingSystems, error) {
+func (dsa DedicatedServerApi) ListOperatingSystems(ctx context.Context, args ...interface{}) (*DedicatedServerOperatingSystems, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -1043,24 +1044,24 @@ func (dsa DedicatedServerApi) ListOperatingSystems(args ...interface{}) (*Dedica
 
 	result := &DedicatedServerOperatingSystems{}
 	path := dsa.getPath("/operatingSystems?" + v.Encode())
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetOperatingSystem(operatingSystemId, controlPanelId string) (*DedicatedServerOperatingSystem, error) {
+func (dsa DedicatedServerApi) GetOperatingSystem(ctx context.Context, operatingSystemId, controlPanelId string) (*DedicatedServerOperatingSystem, error) {
 	v := url.Values{}
 	v.Add("controlPanelId", fmt.Sprint(controlPanelId))
 	result := &DedicatedServerOperatingSystem{}
 	path := dsa.getPath("/operatingSystems/" + operatingSystemId + "?" + v.Encode())
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListControlPanels(args ...interface{}) (*DedicatedServerControlPanels, error) {
+func (dsa DedicatedServerApi) ListControlPanels(ctx context.Context, args ...interface{}) (*DedicatedServerControlPanels, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -1074,13 +1075,13 @@ func (dsa DedicatedServerApi) ListControlPanels(args ...interface{}) (*Dedicated
 
 	result := &DedicatedServerControlPanels{}
 	path := dsa.getPath("/controlPanels?" + v.Encode())
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListRescueImages(args ...interface{}) (*DedicatedServerRescueImages, error) {
+func (dsa DedicatedServerApi) ListRescueImages(ctx context.Context, args ...interface{}) (*DedicatedServerRescueImages, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -1091,7 +1092,7 @@ func (dsa DedicatedServerApi) ListRescueImages(args ...interface{}) (*DedicatedS
 
 	result := &DedicatedServerRescueImages{}
 	path := dsa.getPath("/rescueImages?" + v.Encode())
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return result, err
 	}
 	return result, nil
