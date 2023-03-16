@@ -703,7 +703,7 @@ func (dsa DedicatedServerApi) LaunchIpmiRest(ctx context.Context, serverId strin
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListJobs(ctx context.Context, serverId string, args ...int) (*DedicatedServerJobs, error) {
+func (dsa DedicatedServerApi) ListJobs(ctx context.Context, serverId string, args ...interface{}) (*DedicatedServerJobs, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
