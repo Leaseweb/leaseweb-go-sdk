@@ -363,22 +363,6 @@ type DedicatedServerJobTaskStatusTimeStamp struct {
 	Waiting  string `json:"WAITING"`
 }
 
-type DedicatedServerJobPayloadOs struct {
-	Architecture string `json:"architecture"`
-	Family       string `json:"family"`
-	Name         string `json:"name"`
-	Type         string `json:"type"`
-	Version      string `json:"version"`
-}
-
-type DedicatedServerJobPayloadPartition struct {
-	FileSystem string `json:"filesystem"`
-	Size       string `json:"size"`
-	Bootable   bool   `json:"bootable"`
-	MountPoint string `json:"mountpoint"`
-	Primary    bool   `json:"primary"`
-}
-
 type DedicatedServerOperatingSystems struct {
 	Metadata         Metadata                         `json:"_metadata"`
 	OperatingSystems []DedicatedServerOperatingSystem `json:"operatingSystems"`
