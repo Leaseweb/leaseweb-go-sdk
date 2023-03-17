@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -82,7 +83,8 @@ func TestDedicatedRackList(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedRackApi{}.List()
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.List(ctx)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -128,7 +130,8 @@ func TestDedicatedRackListBeEmpty(t *testing.T) {
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 0}, "privateRacks": []}`)
 	})
 	defer teardown()
-	response, err := DedicatedRackApi{}.List()
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.List(ctx)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -182,7 +185,8 @@ func TestDedicatedRackListPaginateAndFilter(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedRackApi{}.List(1)
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.List(ctx, 1)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -217,9 +221,10 @@ func TestDedicatedRackListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.List()
+				ctx := context.Background()
+				return DedicatedRackApi{}.List(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -234,9 +239,10 @@ func TestDedicatedRackListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.List()
+				ctx := context.Background()
+				return DedicatedRackApi{}.List(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -251,9 +257,10 @@ func TestDedicatedRackListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.List()
+				ctx := context.Background()
+				return DedicatedRackApi{}.List(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -268,9 +275,10 @@ func TestDedicatedRackListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.List()
+				ctx := context.Background()
+				return DedicatedRackApi{}.List(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -338,7 +346,8 @@ func TestDedicatedRackGet(t *testing.T) {
 	})
 	defer teardown()
 
-	Rack, err := DedicatedRackApi{}.Get("2893829")
+	ctx := context.Background()
+	Rack, err := DedicatedRackApi{}.Get(ctx, "2893829")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -383,9 +392,10 @@ func TestDedicatedRackGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.Get("2893829")
+				ctx := context.Background()
+				return DedicatedRackApi{}.Get(ctx, "2893829")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -400,9 +410,10 @@ func TestDedicatedRackGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.Get("2893829")
+				ctx := context.Background()
+				return DedicatedRackApi{}.Get(ctx, "2893829")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -417,9 +428,10 @@ func TestDedicatedRackGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.Get("2893829")
+				ctx := context.Background()
+				return DedicatedRackApi{}.Get(ctx, "2893829")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -434,9 +446,10 @@ func TestDedicatedRackGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.Get("2893829")
+				ctx := context.Background()
+				return DedicatedRackApi{}.Get(ctx, "2893829")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -454,7 +467,8 @@ func TestDedicatedRackUpdate(t *testing.T) {
 	})
 	defer teardown()
 
-	err := DedicatedRackApi{}.Update("2893829", "new reference")
+	ctx := context.Background()
+	err := DedicatedRackApi{}.Update(ctx, "2893829", "new reference")
 	assert := assert.New(t)
 	assert.Nil(err)
 }
@@ -470,9 +484,10 @@ func TestDedicatedRackUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.Update("2893829", "new reference")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.Update(ctx, "2893829", "new reference")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -487,9 +502,10 @@ func TestDedicatedRackUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.Update("2893829", "new reference")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.Update(ctx, "2893829", "new reference")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -504,9 +520,10 @@ func TestDedicatedRackUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.Update("2893829", "new reference")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.Update(ctx, "2893829", "new reference")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -521,9 +538,10 @@ func TestDedicatedRackUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.Update("2893829", "new reference")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.Update(ctx, "2893829", "new reference")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -557,7 +575,8 @@ func TestDedicatedRackListNullRoutes(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedRackApi{}.ListNullRoutes("123456")
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.ListNullRoutes(ctx, "123456")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 1)
@@ -598,7 +617,8 @@ func TestDedicatedRackListNullRoutesPaginateAndFilter(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedRackApi{}.ListNullRoutes("123456", 1)
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.ListNullRoutes(ctx, "123456", 1)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -626,9 +646,10 @@ func TestDedicatedRackListNullRoutesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListNullRoutes("123456")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -643,9 +664,10 @@ func TestDedicatedRackListNullRoutesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListNullRoutes("123456")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -660,9 +682,10 @@ func TestDedicatedRackListNullRoutesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListNullRoutes("123456")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -677,9 +700,10 @@ func TestDedicatedRackListNullRoutesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListNullRoutes("123456")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -733,7 +757,8 @@ func TestDedicatedRackListIps(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedRackApi{}.ListIps("123456")
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.ListIps(ctx, "123456")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -796,7 +821,8 @@ func TestDedicatedRackListIpsPaginateAndFilter(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedRackApi{}.ListIps("123456", 1)
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.ListIps(ctx, "123456", 1)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -828,9 +854,10 @@ func TestDedicatedRackListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListIps("123456")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListIps(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -845,9 +872,10 @@ func TestDedicatedRackListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListIps("123456")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListIps(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -862,9 +890,10 @@ func TestDedicatedRackListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListIps("123456")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListIps(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -879,9 +908,10 @@ func TestDedicatedRackListIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListIps("123456")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListIps(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -912,7 +942,8 @@ func TestDedicatedRackGetIps(t *testing.T) {
 	})
 	defer teardown()
 
-	Ip, err := DedicatedRackApi{}.GetIp("123456", "12.123.123.1")
+	ctx := context.Background()
+	Ip, err := DedicatedRackApi{}.GetIp(ctx, "123456", "12.123.123.1")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -939,9 +970,10 @@ func TestDedicatedRackGetIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -956,9 +988,10 @@ func TestDedicatedRackGetIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -973,9 +1006,10 @@ func TestDedicatedRackGetIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -990,9 +1024,10 @@ func TestDedicatedRackGetIpsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1023,7 +1058,8 @@ func TestDedicatedRackUpdateIp(t *testing.T) {
 	})
 	defer teardown()
 
-	Ip, err := DedicatedRackApi{}.UpdateIp("123456", "12.123.123.1", map[string]string{"reverseLookup": "domain.example.com", "detectionProfile": "ADVANCED_LOW_UDP"})
+	ctx := context.Background()
+	Ip, err := DedicatedRackApi{}.UpdateIp(ctx, "123456", "12.123.123.1", map[string]string{"reverseLookup": "domain.example.com", "detectionProfile": "ADVANCED_LOW_UDP"})
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -1050,9 +1086,10 @@ func TestDedicatedRackUpdateIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.UpdateIp("123456", "12.123.123.1", map[string]string{"reverseLookup": "domain.example.com", "detectionProfile": "ADVANCED_LOW_UDP"})
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateIp(ctx, "123456", "12.123.123.1", map[string]string{"reverseLookup": "domain.example.com", "detectionProfile": "ADVANCED_LOW_UDP"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1067,9 +1104,10 @@ func TestDedicatedRackUpdateIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.UpdateIp("123456", "12.123.123.1", map[string]string{"reverseLookup": "domain.example.com", "detectionProfile": "ADVANCED_LOW_UDP"})
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateIp(ctx, "123456", "12.123.123.1", map[string]string{"reverseLookup": "domain.example.com", "detectionProfile": "ADVANCED_LOW_UDP"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -1084,9 +1122,10 @@ func TestDedicatedRackUpdateIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.UpdateIp("123456", "12.123.123.1", map[string]string{"reverseLookup": "domain.example.com", "detectionProfile": "ADVANCED_LOW_UDP"})
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateIp(ctx, "123456", "12.123.123.1", map[string]string{"reverseLookup": "domain.example.com", "detectionProfile": "ADVANCED_LOW_UDP"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1101,9 +1140,10 @@ func TestDedicatedRackUpdateIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.UpdateIp("123456", "12.123.123.1", map[string]string{"reverseLookup": "domain.example.com", "detectionProfile": "ADVANCED_LOW_UDP"})
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateIp(ctx, "123456", "12.123.123.1", map[string]string{"reverseLookup": "domain.example.com", "detectionProfile": "ADVANCED_LOW_UDP"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1134,7 +1174,8 @@ func TestDedicatedRackNullRouteAnIp(t *testing.T) {
 	})
 	defer teardown()
 
-	Ip, err := DedicatedRackApi{}.NullRouteAnIp("123456", "12.123.123.1")
+	ctx := context.Background()
+	Ip, err := DedicatedRackApi{}.NullRouteAnIp(ctx, "123456", "12.123.123.1")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -1161,9 +1202,10 @@ func TestDedicatedRackNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.NullRouteAnIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.NullRouteAnIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1178,9 +1220,10 @@ func TestDedicatedRackNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.NullRouteAnIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.NullRouteAnIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -1195,9 +1238,10 @@ func TestDedicatedRackNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.NullRouteAnIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.NullRouteAnIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1212,9 +1256,10 @@ func TestDedicatedRackNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.NullRouteAnIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.NullRouteAnIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1245,7 +1290,8 @@ func TestDedicatedRackRemoveNullRouteAnIp(t *testing.T) {
 	})
 	defer teardown()
 
-	Ip, err := DedicatedRackApi{}.RemoveNullRouteAnIp("123456", "12.123.123.1")
+	ctx := context.Background()
+	Ip, err := DedicatedRackApi{}.RemoveNullRouteAnIp(ctx, "123456", "12.123.123.1")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -1272,9 +1318,10 @@ func TestDedicatedRackRemoveNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.RemoveNullRouteAnIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.RemoveNullRouteAnIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1289,9 +1336,10 @@ func TestDedicatedRackRemoveNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.RemoveNullRouteAnIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.RemoveNullRouteAnIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -1306,9 +1354,10 @@ func TestDedicatedRackRemoveNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.RemoveNullRouteAnIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.RemoveNullRouteAnIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1323,9 +1372,10 @@ func TestDedicatedRackRemoveNullRouteAnIpServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.RemoveNullRouteAnIp("123456", "12.123.123.1")
+				ctx := context.Background()
+				return DedicatedRackApi{}.RemoveNullRouteAnIp(ctx, "123456", "12.123.123.1")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1367,7 +1417,8 @@ func TestDedicatedRackListCredentials(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedRackApi{}.ListCredentials("99944")
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.ListCredentials(ctx, "99944")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 4)
@@ -1392,7 +1443,8 @@ func TestDedicatedRackListCredentialsBeEmpty(t *testing.T) {
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 0}, "credentials": []}`)
 	})
 	defer teardown()
-	response, err := DedicatedRackApi{}.ListCredentials("99944")
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.ListCredentials(ctx, "99944")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1421,7 +1473,8 @@ func TestDedicatedRackListCredentialsPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedRackApi{}.ListCredentials("99944")
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.ListCredentials(ctx, "99944")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -1444,9 +1497,10 @@ func TestDedicatedRackListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListCredentials("99944")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListCredentials(ctx, "99944")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1461,9 +1515,10 @@ func TestDedicatedRackListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListCredentials("99944")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListCredentials(ctx, "99944")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1478,9 +1533,10 @@ func TestDedicatedRackListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListCredentials("99944")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListCredentials(ctx, "99944")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1495,9 +1551,10 @@ func TestDedicatedRackListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListCredentials("99944")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListCredentials(ctx, "99944")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1512,9 +1569,10 @@ func TestDedicatedRackListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListCredentials("99944")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListCredentials(ctx, "99944")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1536,7 +1594,8 @@ func TestDedicatedRackCreateCredential(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -1556,9 +1615,10 @@ func TestDedicatedRackCreateCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1573,9 +1633,10 @@ func TestDedicatedRackCreateCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1590,9 +1651,10 @@ func TestDedicatedRackCreateCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1607,9 +1669,10 @@ func TestDedicatedRackCreateCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1624,9 +1687,10 @@ func TestDedicatedRackCreateCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateCredential("12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateCredential(ctx, "12345", "OPERATING_SYSTEM", "root", "mys3cr3tp@ssw0rd")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1660,7 +1724,8 @@ func TestDedicatedRackListCredentialsByType(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedRackApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -1681,7 +1746,8 @@ func TestDedicatedRackListCredentialsByTypeBeEmpty(t *testing.T) {
 		fmt.Fprintf(w, `{"_metadata":{"limit": 10, "offset": 0, "totalCount": 0}, "credentials": []}`)
 	})
 	defer teardown()
-	response, err := DedicatedRackApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1710,7 +1776,8 @@ func TestDedicatedRackListCredentialsByTypePaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	response, err := DedicatedRackApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+	ctx := context.Background()
+	response, err := DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -1733,9 +1800,10 @@ func TestDedicatedRackListCredentialsByTypeServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1750,9 +1818,10 @@ func TestDedicatedRackListCredentialsByTypeServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1767,9 +1836,10 @@ func TestDedicatedRackListCredentialsByTypeServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1784,9 +1854,10 @@ func TestDedicatedRackListCredentialsByTypeServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1801,9 +1872,10 @@ func TestDedicatedRackListCredentialsByTypeServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListCredentialsByType("99944", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1825,7 +1897,8 @@ func TestDedicatedRackGetCredentials(t *testing.T) {
 	})
 	defer teardown()
 
-	Credential, err := DedicatedRackApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+	ctx := context.Background()
+	Credential, err := DedicatedRackApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Credential.Password, "mys3cr3tp@ssw0rd")
@@ -1844,9 +1917,10 @@ func TestDedicatedRackGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1861,9 +1935,10 @@ func TestDedicatedRackGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1878,9 +1953,10 @@ func TestDedicatedRackGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1895,9 +1971,10 @@ func TestDedicatedRackGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1912,9 +1989,10 @@ func TestDedicatedRackGetCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetCredential("12345", "OPERATING_SYSTEM", "root")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetCredential(ctx, "12345", "OPERATING_SYSTEM", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -1932,7 +2010,8 @@ func TestDedicatedRackDeleteCredentials(t *testing.T) {
 	})
 	defer teardown()
 
-	err := DedicatedRackApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+	ctx := context.Background()
+	err := DedicatedRackApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 	assert := assert.New(t)
 	assert.Nil(err)
 }
@@ -1948,9 +2027,10 @@ func TestDedicatedRackDeleteCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1965,9 +2045,10 @@ func TestDedicatedRackDeleteCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -1982,9 +2063,10 @@ func TestDedicatedRackDeleteCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1999,9 +2081,10 @@ func TestDedicatedRackDeleteCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2016,9 +2099,10 @@ func TestDedicatedRackDeleteCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteCredential("12345", "OPERATING_SYSTEM", "admin")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteCredential(ctx, "12345", "OPERATING_SYSTEM", "admin")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2040,7 +2124,8 @@ func TestDedicatedRackUpdateCredentials(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -2060,9 +2145,10 @@ func TestDedicatedRackUpdateCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2077,9 +2163,10 @@ func TestDedicatedRackUpdateCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2094,9 +2181,10 @@ func TestDedicatedRackUpdateCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2111,9 +2199,10 @@ func TestDedicatedRackUpdateCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2128,9 +2217,10 @@ func TestDedicatedRackUpdateCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.UpdateCredential("12345", "OPERATING_SYSTEM", "admin", "new password")
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateCredential(ctx, "12345", "OPERATING_SYSTEM", "admin", "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2183,7 +2273,8 @@ func TestDedicatedRackGetBandWidthMetrics(t *testing.T) {
 	})
 	defer teardown()
 
-	Metric, err := DedicatedRackApi{}.GetBandWidthMetrics("99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+	ctx := context.Background()
+	Metric, err := DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Metric.Metadata.Aggregation, "AVG")
@@ -2214,9 +2305,10 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetBandWidthMetrics("99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2231,9 +2323,10 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetBandWidthMetrics("99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2248,9 +2341,10 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetBandWidthMetrics("99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2265,9 +2359,10 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetBandWidthMetrics("99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2282,9 +2377,10 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetBandWidthMetrics("99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2337,7 +2433,8 @@ func TestDedicatedRackGetDataTrafficMetrics(t *testing.T) {
 	})
 	defer teardown()
 
-	Metric, err := DedicatedRackApi{}.GetDataTrafficMetrics("99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+	ctx := context.Background()
+	Metric, err := DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Metric.Metadata.Aggregation, "SUM")
@@ -2368,9 +2465,10 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDataTrafficMetrics("99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2385,9 +2483,10 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDataTrafficMetrics("99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2402,9 +2501,10 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDataTrafficMetrics("99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2419,9 +2519,10 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDataTrafficMetrics("99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2436,9 +2537,10 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDataTrafficMetrics("99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2459,7 +2561,8 @@ func TestDedicatedRackGetDdosNotificationSetting(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.GetDdosNotificationSetting("server-id")
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.GetDdosNotificationSetting(ctx, "server-id")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -2478,9 +2581,10 @@ func TestDedicatedRackGetDdosNotificationSettingServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDdosNotificationSetting("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDdosNotificationSetting(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2495,9 +2599,10 @@ func TestDedicatedRackGetDdosNotificationSettingServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDdosNotificationSetting("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDdosNotificationSetting(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2512,9 +2617,10 @@ func TestDedicatedRackGetDdosNotificationSettingServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDdosNotificationSetting("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDdosNotificationSetting(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2529,9 +2635,10 @@ func TestDedicatedRackGetDdosNotificationSettingServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDdosNotificationSetting("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDdosNotificationSetting(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2546,9 +2653,10 @@ func TestDedicatedRackGetDdosNotificationSettingServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDdosNotificationSetting("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDdosNotificationSetting(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2566,7 +2674,8 @@ func TestDedicatedRackUpdateDdosNotificationSetting(t *testing.T) {
 	})
 	defer teardown()
 
-	err := DedicatedRackApi{}.UpdateDdosNotificationSetting("server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
+	ctx := context.Background()
+	err := DedicatedRackApi{}.UpdateDdosNotificationSetting(ctx, "server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
 	assert := assert.New(t)
 	assert.Nil(err)
 }
@@ -2582,9 +2691,10 @@ func TestDedicatedRackUpdateDdosNotificationSettingServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.UpdateDdosNotificationSetting("server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.UpdateDdosNotificationSetting(ctx, "server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2599,9 +2709,10 @@ func TestDedicatedRackUpdateDdosNotificationSettingServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.UpdateDdosNotificationSetting("server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.UpdateDdosNotificationSetting(ctx, "server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2616,9 +2727,10 @@ func TestDedicatedRackUpdateDdosNotificationSettingServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.UpdateDdosNotificationSetting("server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.UpdateDdosNotificationSetting(ctx, "server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2633,9 +2745,10 @@ func TestDedicatedRackUpdateDdosNotificationSettingServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.UpdateDdosNotificationSetting("server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.UpdateDdosNotificationSetting(ctx, "server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2650,9 +2763,10 @@ func TestDedicatedRackUpdateDdosNotificationSettingServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.UpdateDdosNotificationSetting("server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.UpdateDdosNotificationSetting(ctx, "server id", map[string]string{"nulling": "DISABLED", "scrubbing": "ENABLED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2706,7 +2820,8 @@ func TestDedicatedRackListDataTrafficNotificationSettings(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.ListDataTrafficNotificationSettings("server-id")
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp.Metadata.TotalCount, 2)
@@ -2719,7 +2834,7 @@ func TestDedicatedRackListDataTrafficNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Empty(resp.Settings[0].LastCheckedAt)
-	assert.Equal(resp.Settings[0].Threshold, float64(1))
+	assert.Equal(resp.Settings[0].Threshold, "1")
 	assert.Empty(resp.Settings[0].ThresholdExceededAt)
 	assert.Equal(resp.Settings[0].Unit, "MB")
 
@@ -2728,7 +2843,7 @@ func TestDedicatedRackListDataTrafficNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[1].Frequency, "DAILY")
 	assert.Equal(resp.Settings[1].Id, "123456")
 	assert.Empty(resp.Settings[1].LastCheckedAt)
-	assert.Equal(resp.Settings[1].Threshold, float64(1))
+	assert.Equal(resp.Settings[1].Threshold, "1")
 	assert.Empty(resp.Settings[1].ThresholdExceededAt)
 	assert.Equal(resp.Settings[1].Unit, "GB")
 }
@@ -2763,7 +2878,8 @@ func TestDedicatedRackListDataTrafficNotificationSettingsPaginate(t *testing.T) 
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.ListDataTrafficNotificationSettings("server-id", 1)
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", 1)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp.Metadata.TotalCount, 11)
@@ -2776,7 +2892,7 @@ func TestDedicatedRackListDataTrafficNotificationSettingsPaginate(t *testing.T) 
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Empty(resp.Settings[0].LastCheckedAt)
-	assert.Equal(resp.Settings[0].Threshold, float64(1))
+	assert.Equal(resp.Settings[0].Threshold, "1")
 	assert.Empty(resp.Settings[0].ThresholdExceededAt)
 	assert.Equal(resp.Settings[0].Unit, "MB")
 }
@@ -2792,9 +2908,10 @@ func TestDedicatedRackListDataTrafficNotificationSettingsServerErrors(t *testing
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListDataTrafficNotificationSettings("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2809,9 +2926,10 @@ func TestDedicatedRackListDataTrafficNotificationSettingsServerErrors(t *testing
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListDataTrafficNotificationSettings("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2826,9 +2944,10 @@ func TestDedicatedRackListDataTrafficNotificationSettingsServerErrors(t *testing
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListDataTrafficNotificationSettings("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2843,9 +2962,10 @@ func TestDedicatedRackListDataTrafficNotificationSettingsServerErrors(t *testing
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListDataTrafficNotificationSettings("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2860,9 +2980,10 @@ func TestDedicatedRackListDataTrafficNotificationSettingsServerErrors(t *testing
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListDataTrafficNotificationSettings("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -2893,7 +3014,8 @@ func TestDedicatedRackCreateDataTrafficNotificationSetting(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -2902,7 +3024,7 @@ func TestDedicatedRackCreateDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, float64(1))
+	assert.Equal(resp.Threshold, "1")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "GB")
 }
@@ -2918,9 +3040,10 @@ func TestDedicatedRackCreateDataTrafficNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -2935,9 +3058,10 @@ func TestDedicatedRackCreateDataTrafficNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -2952,9 +3076,10 @@ func TestDedicatedRackCreateDataTrafficNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -2969,9 +3094,10 @@ func TestDedicatedRackCreateDataTrafficNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -2986,9 +3112,10 @@ func TestDedicatedRackCreateDataTrafficNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateDataTrafficNotificationSetting("server-id", "WEEKLY", "1", "GB")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -3006,7 +3133,8 @@ func TestDedicatedRackDeleteDataTrafficNotificationSetting(t *testing.T) {
 	})
 	defer teardown()
 
-	err := DedicatedRackApi{}.DeleteDataTrafficNotificationSetting("server id", "notification id")
+	ctx := context.Background()
+	err := DedicatedRackApi{}.DeleteDataTrafficNotificationSetting(ctx, "server id", "notification id")
 	assert := assert.New(t)
 	assert.Nil(err)
 }
@@ -3022,9 +3150,10 @@ func TestDedicatedRackDeleteDataTrafficNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteDataTrafficNotificationSetting("server id", "notification id")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteDataTrafficNotificationSetting(ctx, "server id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3039,9 +3168,10 @@ func TestDedicatedRackDeleteDataTrafficNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteDataTrafficNotificationSetting("server id", "notification id")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteDataTrafficNotificationSetting(ctx, "server id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3056,9 +3186,10 @@ func TestDedicatedRackDeleteDataTrafficNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteDataTrafficNotificationSetting("server id", "notification id")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteDataTrafficNotificationSetting(ctx, "server id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -3073,9 +3204,10 @@ func TestDedicatedRackDeleteDataTrafficNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteDataTrafficNotificationSetting("server id", "notification id")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteDataTrafficNotificationSetting(ctx, "server id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -3090,9 +3222,10 @@ func TestDedicatedRackDeleteDataTrafficNotificationSettingServerErrors(t *testin
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteDataTrafficNotificationSetting("server id", "notification id")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteDataTrafficNotificationSetting(ctx, "server id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -3123,7 +3256,8 @@ func TestDedicatedRackGetDataTrafficNotificationSetting(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.GetDataTrafficNotificationSetting("server-id", "notification id")
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.GetDataTrafficNotificationSetting(ctx, "server-id", "notification id")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -3132,7 +3266,7 @@ func TestDedicatedRackGetDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, float64(1))
+	assert.Equal(resp.Threshold, "1")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "GB")
 }
@@ -3148,9 +3282,10 @@ func TestDedicatedRackGetDataTrafficNotificationSettingServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDataTrafficNotificationSetting("server-id", "notification id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDataTrafficNotificationSetting(ctx, "server-id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3165,9 +3300,10 @@ func TestDedicatedRackGetDataTrafficNotificationSettingServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDataTrafficNotificationSetting("server-id", "notification id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDataTrafficNotificationSetting(ctx, "server-id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3182,9 +3318,10 @@ func TestDedicatedRackGetDataTrafficNotificationSettingServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDataTrafficNotificationSetting("server-id", "notification id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDataTrafficNotificationSetting(ctx, "server-id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -3199,9 +3336,10 @@ func TestDedicatedRackGetDataTrafficNotificationSettingServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDataTrafficNotificationSetting("server-id", "notification id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDataTrafficNotificationSetting(ctx, "server-id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -3216,9 +3354,10 @@ func TestDedicatedRackGetDataTrafficNotificationSettingServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetDataTrafficNotificationSetting("server-id", "notification id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetDataTrafficNotificationSetting(ctx, "server-id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -3250,7 +3389,8 @@ func TestDedicatedRackUpdateDataTrafficNotificationSetting(t *testing.T) {
 	defer teardown()
 
 	payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "GB"}
-	resp, err := DedicatedRackApi{}.UpdateDataTrafficNotificationSetting("server-id", "notification id", payload)
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.UpdateDataTrafficNotificationSetting(ctx, "server-id", "notification id", payload)
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -3259,7 +3399,7 @@ func TestDedicatedRackUpdateDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "MONTHLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, float64(2))
+	assert.Equal(resp.Threshold, "2")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "GB")
 }
@@ -3276,9 +3416,10 @@ func TestDedicatedRackUpdateDataTrafficNotificationSettingServerErrors(t *testin
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "GB"}
-				return DedicatedRackApi{}.UpdateDataTrafficNotificationSetting("server-id", "notification id", payload)
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateDataTrafficNotificationSetting(ctx, "server-id", "notification id", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3294,9 +3435,10 @@ func TestDedicatedRackUpdateDataTrafficNotificationSettingServerErrors(t *testin
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "GB"}
-				return DedicatedRackApi{}.UpdateDataTrafficNotificationSetting("server-id", "notification id", payload)
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateDataTrafficNotificationSetting(ctx, "server-id", "notification id", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3312,9 +3454,10 @@ func TestDedicatedRackUpdateDataTrafficNotificationSettingServerErrors(t *testin
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "GB"}
-				return DedicatedRackApi{}.UpdateDataTrafficNotificationSetting("server-id", "notification id", payload)
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateDataTrafficNotificationSetting(ctx, "server-id", "notification id", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -3330,9 +3473,10 @@ func TestDedicatedRackUpdateDataTrafficNotificationSettingServerErrors(t *testin
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "GB"}
-				return DedicatedRackApi{}.UpdateDataTrafficNotificationSetting("server-id", "notification id", payload)
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateDataTrafficNotificationSetting(ctx, "server-id", "notification id", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -3348,9 +3492,10 @@ func TestDedicatedRackUpdateDataTrafficNotificationSettingServerErrors(t *testin
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "GB"}
-				return DedicatedRackApi{}.UpdateDataTrafficNotificationSetting("server-id", "notification id", payload)
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateDataTrafficNotificationSetting(ctx, "server-id", "notification id", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -3404,7 +3549,8 @@ func TestDedicatedRackListBandWidthNotificationSettings(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.ListBandWidthNotificationSettings("server-id")
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp.Metadata.TotalCount, 2)
@@ -3417,7 +3563,7 @@ func TestDedicatedRackListBandWidthNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Equal(resp.Settings[0].LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Settings[0].Threshold, float64(1))
+	assert.Equal(resp.Settings[0].Threshold, "1")
 	assert.Equal(resp.Settings[0].ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Settings[0].Unit, "Gbps")
 
@@ -3426,7 +3572,7 @@ func TestDedicatedRackListBandWidthNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[1].Frequency, "DAILY")
 	assert.Equal(resp.Settings[1].Id, "123456")
 	assert.Equal(resp.Settings[1].LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Settings[1].Threshold, float64(1))
+	assert.Equal(resp.Settings[1].Threshold, "1")
 	assert.Equal(resp.Settings[1].ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Settings[1].Unit, "Mbps")
 }
@@ -3461,7 +3607,8 @@ func TestDedicatedRackListBandWidthNotificationSettingsPaginate(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.ListBandWidthNotificationSettings("server-id", 1)
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id", 1)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp.Metadata.TotalCount, 11)
@@ -3474,7 +3621,7 @@ func TestDedicatedRackListBandWidthNotificationSettingsPaginate(t *testing.T) {
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Equal(resp.Settings[0].LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Settings[0].Threshold, float64(1))
+	assert.Equal(resp.Settings[0].Threshold, "1")
 	assert.Equal(resp.Settings[0].ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Settings[0].Unit, "Gbps")
 }
@@ -3490,9 +3637,10 @@ func TestDedicatedRackListBandWidthNotificationSettingsServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListBandWidthNotificationSettings("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3507,9 +3655,10 @@ func TestDedicatedRackListBandWidthNotificationSettingsServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListBandWidthNotificationSettings("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3524,9 +3673,10 @@ func TestDedicatedRackListBandWidthNotificationSettingsServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListBandWidthNotificationSettings("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -3541,9 +3691,10 @@ func TestDedicatedRackListBandWidthNotificationSettingsServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListBandWidthNotificationSettings("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -3558,9 +3709,10 @@ func TestDedicatedRackListBandWidthNotificationSettingsServerErrors(t *testing.T
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.ListBandWidthNotificationSettings("server-id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -3591,7 +3743,8 @@ func TestDedicatedRackCreateBandWidthNotificationSetting(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -3600,7 +3753,7 @@ func TestDedicatedRackCreateBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, float64(1))
+	assert.Equal(resp.Threshold, "1")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "Gbps")
 }
@@ -3616,9 +3769,10 @@ func TestDedicatedRackCreateBandWidthNotificationSettingServerErrors(t *testing.
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3633,9 +3787,10 @@ func TestDedicatedRackCreateBandWidthNotificationSettingServerErrors(t *testing.
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3650,9 +3805,10 @@ func TestDedicatedRackCreateBandWidthNotificationSettingServerErrors(t *testing.
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -3667,9 +3823,10 @@ func TestDedicatedRackCreateBandWidthNotificationSettingServerErrors(t *testing.
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -3684,9 +3841,10 @@ func TestDedicatedRackCreateBandWidthNotificationSettingServerErrors(t *testing.
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.CreateBandWidthNotificationSetting("server-id", "WEEKLY", "1", "Gbps")
+				ctx := context.Background()
+				return DedicatedRackApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -3704,7 +3862,8 @@ func TestDedicatedRackDeleteBandWidthNotificationSetting(t *testing.T) {
 	})
 	defer teardown()
 
-	err := DedicatedRackApi{}.DeleteBandWidthNotificationSetting("server id", "notification id")
+	ctx := context.Background()
+	err := DedicatedRackApi{}.DeleteBandWidthNotificationSetting(ctx, "server id", "notification id")
 	assert := assert.New(t)
 	assert.Nil(err)
 }
@@ -3720,9 +3879,10 @@ func TestDedicatedRackDeleteBandWidthNotificationSettingServerErrors(t *testing.
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteBandWidthNotificationSetting("server id", "notification id")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteBandWidthNotificationSetting(ctx, "server id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3737,9 +3897,10 @@ func TestDedicatedRackDeleteBandWidthNotificationSettingServerErrors(t *testing.
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteBandWidthNotificationSetting("server id", "notification id")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteBandWidthNotificationSetting(ctx, "server id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3754,9 +3915,10 @@ func TestDedicatedRackDeleteBandWidthNotificationSettingServerErrors(t *testing.
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteBandWidthNotificationSetting("server id", "notification id")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteBandWidthNotificationSetting(ctx, "server id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -3771,9 +3933,10 @@ func TestDedicatedRackDeleteBandWidthNotificationSettingServerErrors(t *testing.
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteBandWidthNotificationSetting("server id", "notification id")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteBandWidthNotificationSetting(ctx, "server id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -3788,9 +3951,10 @@ func TestDedicatedRackDeleteBandWidthNotificationSettingServerErrors(t *testing.
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, DedicatedRackApi{}.DeleteBandWidthNotificationSetting("server id", "notification id")
+				ctx := context.Background()
+				return nil, DedicatedRackApi{}.DeleteBandWidthNotificationSetting(ctx, "server id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -3821,7 +3985,8 @@ func TestDedicatedRackGetBandWidthNotificationSetting(t *testing.T) {
 	})
 	defer teardown()
 
-	resp, err := DedicatedRackApi{}.GetBandWidthNotificationSetting("server-id", "notification id")
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.GetBandWidthNotificationSetting(ctx, "server-id", "notification id")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -3830,7 +3995,7 @@ func TestDedicatedRackGetBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, float64(1))
+	assert.Equal(resp.Threshold, "1")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "Gbps")
 }
@@ -3846,9 +4011,10 @@ func TestDedicatedRackGetBandWidthNotificationSettingServerErrors(t *testing.T) 
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetBandWidthNotificationSetting("server-id", "notification id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetBandWidthNotificationSetting(ctx, "server-id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3863,9 +4029,10 @@ func TestDedicatedRackGetBandWidthNotificationSettingServerErrors(t *testing.T) 
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetBandWidthNotificationSetting("server-id", "notification id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetBandWidthNotificationSetting(ctx, "server-id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -3880,9 +4047,10 @@ func TestDedicatedRackGetBandWidthNotificationSettingServerErrors(t *testing.T) 
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetBandWidthNotificationSetting("server-id", "notification id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetBandWidthNotificationSetting(ctx, "server-id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -3897,9 +4065,10 @@ func TestDedicatedRackGetBandWidthNotificationSettingServerErrors(t *testing.T) 
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetBandWidthNotificationSetting("server-id", "notification id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetBandWidthNotificationSetting(ctx, "server-id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -3914,9 +4083,10 @@ func TestDedicatedRackGetBandWidthNotificationSettingServerErrors(t *testing.T) 
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return DedicatedRackApi{}.GetBandWidthNotificationSetting("server-id", "notification id")
+				ctx := context.Background()
+				return DedicatedRackApi{}.GetBandWidthNotificationSetting(ctx, "server-id", "notification id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -3948,7 +4118,8 @@ func TestDedicatedRackUpdateBandWidthNotificationSetting(t *testing.T) {
 	defer teardown()
 
 	payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "Mbps"}
-	resp, err := DedicatedRackApi{}.UpdateBandWidthNotificationSetting("server-id", "notification id", payload)
+	ctx := context.Background()
+	resp, err := DedicatedRackApi{}.UpdateBandWidthNotificationSetting(ctx, "server-id", "notification id", payload)
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -3957,7 +4128,7 @@ func TestDedicatedRackUpdateBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "MONTHLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, float64(2))
+	assert.Equal(resp.Threshold, "2")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "Mbps")
 }
@@ -3974,9 +4145,10 @@ func TestDedicatedRackUpdateBandWidthNotificationSettingServerErrors(t *testing.
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "Mbps"}
-				return DedicatedRackApi{}.UpdateBandWidthNotificationSetting("server-id", "notification id", payload)
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateBandWidthNotificationSetting(ctx, "server-id", "notification id", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -3992,9 +4164,10 @@ func TestDedicatedRackUpdateBandWidthNotificationSettingServerErrors(t *testing.
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "Mbps"}
-				return DedicatedRackApi{}.UpdateBandWidthNotificationSetting("server-id", "notification id", payload)
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateBandWidthNotificationSetting(ctx, "server-id", "notification id", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -4010,9 +4183,10 @@ func TestDedicatedRackUpdateBandWidthNotificationSettingServerErrors(t *testing.
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "Mbps"}
-				return DedicatedRackApi{}.UpdateBandWidthNotificationSetting("server-id", "notification id", payload)
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateBandWidthNotificationSetting(ctx, "server-id", "notification id", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -4028,9 +4202,10 @@ func TestDedicatedRackUpdateBandWidthNotificationSettingServerErrors(t *testing.
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "Mbps"}
-				return DedicatedRackApi{}.UpdateBandWidthNotificationSetting("server-id", "notification id", payload)
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateBandWidthNotificationSetting(ctx, "server-id", "notification id", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -4046,9 +4221,10 @@ func TestDedicatedRackUpdateBandWidthNotificationSettingServerErrors(t *testing.
 			},
 			FunctionCall: func() (interface{}, error) {
 				payload := map[string]string{"frequency": "MONTHLY", "threshold": "2", "unit": "Mbps"}
-				return DedicatedRackApi{}.UpdateBandWidthNotificationSetting("server-id", "notification id", payload)
+				ctx := context.Background()
+				return DedicatedRackApi{}.UpdateBandWidthNotificationSetting(ctx, "server-id", "notification id", payload)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
