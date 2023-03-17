@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -52,7 +53,7 @@ func (sa ServicesApi) getPath(endpoint string) string {
 	return "/services/" + SERVICES_API_VERSION + endpoint
 }
 
-func (sa ServicesApi) List(args ...int) (*Services, error) {
+func (sa ServicesApi) List(ctx context.Context, args ...int) (*Services, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -63,40 +64,40 @@ func (sa ServicesApi) List(args ...int) (*Services, error) {
 
 	path := sa.getPath("/services?" + v.Encode())
 	result := &Services{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (sa ServicesApi) ListCancellationReasons() (*ServicesCancellationReasons, error) {
+func (sa ServicesApi) ListCancellationReasons(ctx context.Context) (*ServicesCancellationReasons, error) {
 	path := sa.getPath("/services/cancellationReasons")
 	result := &ServicesCancellationReasons{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (sa ServicesApi) Get(id string) (*Service, error) {
+func (sa ServicesApi) Get(ctx context.Context, id string) (*Service, error) {
 	path := sa.getPath("/services/" + id)
 	result := &Service{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (sa ServicesApi) Cancel(id, reason, reasonCode string) error {
+func (sa ServicesApi) Cancel(ctx context.Context, id, reason, reasonCode string) error {
 	payload := map[string]string{
 		"reason":     reason,
 		"reasonCode": reasonCode,
 	}
 	path := sa.getPath("/services/" + id + "/cancel")
-	return doRequest(http.MethodPost, path, nil, payload)
+	return doRequest(ctx, http.MethodPost, path, nil, payload)
 }
 
-func (sa ServicesApi) Uncancel(id string) error {
+func (sa ServicesApi) Uncancel(ctx context.Context, id string) error {
 	path := sa.getPath("/services/" + id + "/uncancel")
-	return doRequest(http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path)
 }

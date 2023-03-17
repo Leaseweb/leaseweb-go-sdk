@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -60,7 +61,8 @@ func TestPrivateCloudList(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.List()
+	ctx := context.Background()
+	response, err := privateCloudApi.List(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -106,7 +108,8 @@ func TestPrivateCloudListBeEmpty(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.List()
+	ctx := context.Background()
+	response, err := privateCloudApi.List(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -125,7 +128,8 @@ func TestPrivateCloudListPaginate(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.List(10, 20)
+	ctx := context.Background()
+	response, err := privateCloudApi.List(ctx, 10, 20)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -146,9 +150,10 @@ func TestPrivateCloudListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.List()
+				ctx := context.Background()
+				return PrivateCloudApi{}.List(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -162,9 +167,10 @@ func TestPrivateCloudListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.List()
+				ctx := context.Background()
+				return PrivateCloudApi{}.List(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -178,9 +184,10 @@ func TestPrivateCloudListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.List()
+				ctx := context.Background()
+				return PrivateCloudApi{}.List(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -239,7 +246,8 @@ func TestPrivateCloudGet(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.Get("218030")
+	ctx := context.Background()
+	response, err := privateCloudApi.Get(ctx, "218030")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -281,9 +289,10 @@ func TestPrivateCloudGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.Get("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.Get(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -297,9 +306,10 @@ func TestPrivateCloudGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.Get("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.Get(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "404",
 				ErrorMessage: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
@@ -314,9 +324,10 @@ func TestPrivateCloudGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.Get("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.Get(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -330,9 +341,10 @@ func TestPrivateCloudGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.Get("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.Get(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -356,7 +368,8 @@ func TestPrivateCloudListCredentials(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.ListCredentials("12345678", "REMOTE_MANAGEMENT")
+	ctx := context.Background()
+	response, err := privateCloudApi.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -380,7 +393,8 @@ func TestPrivateCloudListCredentialsBeEmpty(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.ListCredentials("12345678", "REMOTE_MANAGEMENT")
+	ctx := context.Background()
+	response, err := privateCloudApi.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -406,7 +420,8 @@ func TestPrivateCloudListCredentialsPaginate(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.ListCredentials("12345678", "REMOTE_MANAGEMENT", 1, 10)
+	ctx := context.Background()
+	response, err := privateCloudApi.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", 1, 10)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -433,9 +448,10 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.ListCredentials("12345678", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -449,9 +465,10 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.ListCredentials("12345678", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "404",
 				ErrorMessage: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
@@ -466,9 +483,10 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.ListCredentials("12345678", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -482,9 +500,10 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.ListCredentials("12345678", "REMOTE_MANAGEMENT")
+				ctx := context.Background()
+				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -507,7 +526,8 @@ func TestPrivateCloudGetCredential(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetCredential("218030", "REMOTE_MANAGEMENT", "root")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetCredential(ctx, "218030", "REMOTE_MANAGEMENT", "root")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -529,9 +549,10 @@ func TestPrivateCloudGetCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCredential("218030", "REMOTE_MANAGEMENT", "root")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetCredential(ctx, "218030", "REMOTE_MANAGEMENT", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -545,9 +566,10 @@ func TestPrivateCloudGetCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCredential("218030", "REMOTE_MANAGEMENT", "root")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetCredential(ctx, "218030", "REMOTE_MANAGEMENT", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "404",
 				ErrorMessage: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
@@ -562,9 +584,10 @@ func TestPrivateCloudGetCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCredential("218030", "REMOTE_MANAGEMENT", "root")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetCredential(ctx, "218030", "REMOTE_MANAGEMENT", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -578,9 +601,10 @@ func TestPrivateCloudGetCredentialServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCredential("218030", "REMOTE_MANAGEMENT", "root")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetCredential(ctx, "218030", "REMOTE_MANAGEMENT", "root")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -633,7 +657,8 @@ func TestPrivateCloudGetDataTrafficMetrics(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetDataTrafficMetrics("218030")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetDataTrafficMetrics(ctx, "218030")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -698,7 +723,8 @@ func TestPrivateCloudGetDataTrafficMetricsWithFilter(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetDataTrafficMetrics("218030", "SUM", "MONTH", "2017-07-01T00:00:00+00:00", "2017-07-02T00:00:00+00:00")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetDataTrafficMetrics(ctx, "218030", "SUM", "MONTH", "2017-07-01T00:00:00+00:00", "2017-07-02T00:00:00+00:00")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -730,9 +756,10 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetDataTrafficMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -746,9 +773,10 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetDataTrafficMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "404",
 				ErrorMessage: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
@@ -763,9 +791,10 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetDataTrafficMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -779,9 +808,10 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetDataTrafficMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -834,7 +864,8 @@ func TestPrivateCloudGetBandWidthMetrics(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetBandWidthMetrics("218030")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetBandWidthMetrics(ctx, "218030")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -899,7 +930,8 @@ func TestPrivateCloudGetBandWidthMetricsWithFilter(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetBandWidthMetrics("218030", "AVG", "MONTH", "2017-07-01T00:00:00+00:00", "2017-07-02T00:00:00+00:00")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetBandWidthMetrics(ctx, "218030", "AVG", "MONTH", "2017-07-01T00:00:00+00:00", "2017-07-02T00:00:00+00:00")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -931,9 +963,10 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetBandWidthMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -947,9 +980,10 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetBandWidthMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "404",
 				ErrorMessage: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
@@ -964,9 +998,10 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetBandWidthMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -980,9 +1015,10 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetBandWidthMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -1022,7 +1058,8 @@ func TestPrivateCloudGetCpuMetrics(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetCpuMetrics("218030")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetCpuMetrics(ctx, "218030")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1069,7 +1106,8 @@ func TestPrivateCloudGetCpuMetricsWithFilter(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetCpuMetrics("218030", "MAX", "MONTH", "2017-07-01T00:00:00+00:00", "2017-07-02T00:00:00+00:00")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetCpuMetrics(ctx, "218030", "MAX", "MONTH", "2017-07-01T00:00:00+00:00", "2017-07-02T00:00:00+00:00")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1096,9 +1134,10 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCpuMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -1112,9 +1151,10 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCpuMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "404",
 				ErrorMessage: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
@@ -1129,9 +1169,10 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCpuMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -1145,9 +1186,10 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetCpuMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -1187,7 +1229,8 @@ func TestPrivateCloudGetMemoryMetrics(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetMemoryMetrics("218030")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetMemoryMetrics(ctx, "218030")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1234,7 +1277,8 @@ func TestPrivateCloudGetMemoryMetricsWithFilter(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetMemoryMetrics("218030", "MAX", "MONTH", "2017-07-01T00:00:00+00:00", "2017-07-02T00:00:00+00:00")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetMemoryMetrics(ctx, "218030", "MAX", "MONTH", "2017-07-01T00:00:00+00:00", "2017-07-02T00:00:00+00:00")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1261,9 +1305,10 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetMemoryMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -1277,9 +1322,10 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetMemoryMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "404",
 				ErrorMessage: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
@@ -1294,9 +1340,10 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetMemoryMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -1310,9 +1357,10 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetMemoryMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -1352,7 +1400,8 @@ func TestPrivateCloudGetStorageMetrics(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetStorageMetrics("218030")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetStorageMetrics(ctx, "218030")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1399,7 +1448,8 @@ func TestPrivateCloudGetStorageMetricsWithFilter(t *testing.T) {
 	defer teardown()
 
 	privateCloudApi := PrivateCloudApi{}
-	response, err := privateCloudApi.GetStorageMetrics("218030", "MAX", "MONTH", "2017-07-01T00:00:00+00:00", "2017-07-02T00:00:00+00:00")
+	ctx := context.Background()
+	response, err := privateCloudApi.GetStorageMetrics(ctx, "218030", "MAX", "MONTH", "2017-07-01T00:00:00+00:00", "2017-07-02T00:00:00+00:00")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1426,9 +1476,10 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetStorageMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -1442,9 +1493,10 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "404", "errorMessage": "Resource 218030 was not found", "userMessage": "Resource with id 218030 not found."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetStorageMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "404",
 				ErrorMessage: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
@@ -1459,9 +1511,10 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetStorageMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -1475,9 +1528,10 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return PrivateCloudApi{}.GetStorageMetrics("218030")
+				ctx := context.Background()
+				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},

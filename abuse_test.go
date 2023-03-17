@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -40,7 +41,8 @@ func TestAbuseList(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.List()
+	ctx := context.Background()
+	response, err := abuseApi.List(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -94,7 +96,8 @@ func TestAbuseListPaginateAndPassStatuses(t *testing.T) {
 
 	abuseApi := AbuseApi{}
 
-	response, err := abuseApi.List(1, [2]string{"OPEN", "WAITING"})
+	ctx := context.Background()
+	response, err := abuseApi.List(ctx, 1, [2]string{"OPEN", "WAITING"})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -124,7 +127,8 @@ func TestAbuseListBeEmpty(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.List()
+	ctx := context.Background()
+	response, err := abuseApi.List(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -145,9 +149,10 @@ func TestAbuseListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.List()
+				ctx := context.Background()
+				return AbuseApi{}.List(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -161,9 +166,10 @@ func TestAbuseListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.List()
+				ctx := context.Background()
+				return AbuseApi{}.List(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -177,9 +183,10 @@ func TestAbuseListServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.List()
+				ctx := context.Background()
+				return AbuseApi{}.List(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -245,7 +252,8 @@ func TestAbuseGet(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.Get("000005")
+	ctx := context.Background()
+	response, err := abuseApi.Get(ctx, "000005")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -296,9 +304,10 @@ func TestAbuseGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.Get("wrong-id")
+				ctx := context.Background()
+				return AbuseApi{}.Get(ctx, "wrong-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -312,9 +321,10 @@ func TestAbuseGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.Get("123456")
+				ctx := context.Background()
+				return AbuseApi{}.Get(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{},
+			ExpectedError: ApiError{},
 		},
 		{
 			Title: "error 500",
@@ -325,9 +335,10 @@ func TestAbuseGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.Get("123456")
+				ctx := context.Background()
+				return AbuseApi{}.Get(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -341,9 +352,10 @@ func TestAbuseGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.Get("123456")
+				ctx := context.Background()
+				return AbuseApi{}.Get(ctx, "123456")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -377,7 +389,8 @@ func TestAbuseListMessages(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.ListMessages("123456789")
+	ctx := context.Background()
+	response, err := abuseApi.ListMessages(ctx, "123456789")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -421,7 +434,8 @@ func TestAbuseListMessagesPaginate(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.ListMessages("123456789", 1)
+	ctx := context.Background()
+	response, err := abuseApi.ListMessages(ctx, "123456789", 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -449,7 +463,8 @@ func TestAbuseListMessagesBeEmpty(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.ListMessages("123456789")
+	ctx := context.Background()
+	response, err := abuseApi.ListMessages(ctx, "123456789")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -470,9 +485,10 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListMessages("123456789")
+				ctx := context.Background()
+				return AbuseApi{}.ListMessages(ctx, "123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -486,9 +502,10 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListMessages("123456789")
+				ctx := context.Background()
+				return AbuseApi{}.ListMessages(ctx, "123456789")
 			},
-			ExpectedError: LeasewebError{},
+			ExpectedError: ApiError{},
 		},
 		{
 			Title: "error 500",
@@ -499,9 +516,10 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListMessages("123456789")
+				ctx := context.Background()
+				return AbuseApi{}.ListMessages(ctx, "123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -515,9 +533,10 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListMessages("123456789")
+				ctx := context.Background()
+				return AbuseApi{}.ListMessages(ctx, "123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -536,7 +555,8 @@ func TestAbuseCreateMessage(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	resp, err := abuseApi.CreateMessage("123456789", "message body...")
+	ctx := context.Background()
+	resp, err := abuseApi.CreateMessage(ctx, "123456789", "message body...")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -554,9 +574,10 @@ func TestAbuseCreateMessageServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.CreateMessage("123456789", "message body...")
+				ctx := context.Background()
+				return AbuseApi{}.CreateMessage(ctx, "123456789", "message body...")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -570,9 +591,10 @@ func TestAbuseCreateMessageServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.CreateMessage("123456789", "message body...")
+				ctx := context.Background()
+				return AbuseApi{}.CreateMessage(ctx, "123456789", "message body...")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -586,9 +608,10 @@ func TestAbuseCreateMessageServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.CreateMessage("123456789", "message body...")
+				ctx := context.Background()
+				return AbuseApi{}.CreateMessage(ctx, "123456789", "message body...")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -623,7 +646,8 @@ func TestAbuseListResolutionOptions(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.ListResolutionOptions("123456789")
+	ctx := context.Background()
+	response, err := abuseApi.ListResolutionOptions(ctx, "123456789")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -642,7 +666,8 @@ func TestAbuseListResolutionOptionsBeEmpty(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	response, err := abuseApi.ListResolutionOptions("123456789")
+	ctx := context.Background()
+	response, err := abuseApi.ListResolutionOptions(ctx, "123456789")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -660,9 +685,10 @@ func TestAbuseListResolutionOptionsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListResolutionOptions("123456789")
+				ctx := context.Background()
+				return AbuseApi{}.ListResolutionOptions(ctx, "123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -676,9 +702,10 @@ func TestAbuseListResolutionOptionsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListResolutionOptions("123456789")
+				ctx := context.Background()
+				return AbuseApi{}.ListResolutionOptions(ctx, "123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -692,9 +719,10 @@ func TestAbuseListResolutionOptionsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return AbuseApi{}.ListResolutionOptions("123456789")
+				ctx := context.Background()
+				return AbuseApi{}.ListResolutionOptions(ctx, "123456789")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
@@ -712,7 +740,8 @@ func TestAbuseResolve(t *testing.T) {
 	defer teardown()
 
 	abuseApi := AbuseApi{}
-	err := abuseApi.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+	ctx := context.Background()
+	err := abuseApi.Resolve(ctx, "123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -729,9 +758,10 @@ func TestAbuseResolveServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "ACCESS_DENIED", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, AbuseApi{}.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+				ctx := context.Background()
+				return nil, AbuseApi{}.Resolve(ctx, "123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "ACCESS_DENIED",
 				ErrorMessage: "The access token is expired or invalid.",
 			},
@@ -745,9 +775,10 @@ func TestAbuseResolveServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "SERVER_ERROR", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, AbuseApi{}.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+				ctx := context.Background()
+				return nil, AbuseApi{}.Resolve(ctx, "123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "SERVER_ERROR",
 				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
@@ -761,9 +792,10 @@ func TestAbuseResolveServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"errorCode": "TEMPORARILY_UNAVAILABLE", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, AbuseApi{}.Resolve("123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
+				ctx := context.Background()
+				return nil, AbuseApi{}.Resolve(ctx, "123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
 				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},

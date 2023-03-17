@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -17,7 +18,8 @@ func TestRemoteManagementChangeCredentials(t *testing.T) {
 	defer teardown()
 
 	remoteManagementApi := RemoteManagementApi{}
-	err := remoteManagementApi.ChangeCredentials("new password")
+	ctx := context.Background()
+	err := remoteManagementApi.ChangeCredentials(ctx, "new password")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -34,9 +36,10 @@ func TestRemoteManagementTestChangeCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, RemoteManagementApi{}.ChangeCredentials("new password")
+				ctx := context.Background()
+				return nil, RemoteManagementApi{}.ChangeCredentials(ctx, "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -51,9 +54,10 @@ func TestRemoteManagementTestChangeCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, RemoteManagementApi{}.ChangeCredentials("new password")
+				ctx := context.Background()
+				return nil, RemoteManagementApi{}.ChangeCredentials(ctx, "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -68,9 +72,10 @@ func TestRemoteManagementTestChangeCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, RemoteManagementApi{}.ChangeCredentials("new password")
+				ctx := context.Background()
+				return nil, RemoteManagementApi{}.ChangeCredentials(ctx, "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -85,9 +90,10 @@ func TestRemoteManagementTestChangeCredentialsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, RemoteManagementApi{}.ChangeCredentials("new password")
+				ctx := context.Background()
+				return nil, RemoteManagementApi{}.ChangeCredentials(ctx, "new password")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
@@ -124,7 +130,8 @@ func TestRemoteManagementListProfiles(t *testing.T) {
 	defer teardown()
 
 	remoteManagementApi := RemoteManagementApi{}
-	response, err := remoteManagementApi.ListProfiles()
+	ctx := context.Background()
+	response, err := remoteManagementApi.ListProfiles(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -167,7 +174,8 @@ func TestRemoteManagementListProfilesPaginate(t *testing.T) {
 	defer teardown()
 
 	remoteManagementApi := RemoteManagementApi{}
-	response, err := remoteManagementApi.ListProfiles(1)
+	ctx := context.Background()
+	response, err := remoteManagementApi.ListProfiles(ctx, 1)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -195,9 +203,10 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return RemoteManagementApi{}.ListProfiles()
+				ctx := context.Background()
+				return RemoteManagementApi{}.ListProfiles(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -212,9 +221,10 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "The access token is expired or invalid."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return RemoteManagementApi{}.ListProfiles()
+				ctx := context.Background()
+				return RemoteManagementApi{}.ListProfiles(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "The access token is expired or invalid.",
@@ -229,9 +239,10 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The server encountered an unexpected condition that prevented it from fulfilling the request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return RemoteManagementApi{}.ListProfiles()
+				ctx := context.Background()
+				return RemoteManagementApi{}.ListProfiles(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
@@ -246,9 +257,10 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return RemoteManagementApi{}.ListProfiles()
+				ctx := context.Background()
+				return RemoteManagementApi{}.ListProfiles(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",

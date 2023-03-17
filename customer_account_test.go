@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -30,7 +31,8 @@ func TestCustomerAccountGet(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
-	response, err := customerAccountApi.Get()
+	ctx := context.Background()
+	response, err := customerAccountApi.Get(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -58,9 +60,10 @@ func TestCustomerAccountGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.Get()
+				ctx := context.Background()
+				return CustomerAccountApi{}.Get(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -75,9 +78,10 @@ func TestCustomerAccountGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.Get()
+				ctx := context.Background()
+				return CustomerAccountApi{}.Get(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -92,9 +96,10 @@ func TestCustomerAccountGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.Get()
+				ctx := context.Background()
+				return CustomerAccountApi{}.Get(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -109,9 +114,10 @@ func TestCustomerAccountGetServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.Get()
+				ctx := context.Background()
+				return CustomerAccountApi{}.Get(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -130,7 +136,8 @@ func TestCustomerAccountUpdate(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
-	err := customerAccountApi.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+	ctx := context.Background()
+	err := customerAccountApi.Update(ctx, CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -147,9 +154,10 @@ func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+				ctx := context.Background()
+				return nil, CustomerAccountApi{}.Update(ctx, CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -164,9 +172,10 @@ func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+				ctx := context.Background()
+				return nil, CustomerAccountApi{}.Update(ctx, CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -181,9 +190,10 @@ func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "405", "errorMessage": "AccountDetails modifications are not permitted for USA residents, please contact support for any modification request."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+				ctx := context.Background()
+				return nil, CustomerAccountApi{}.Update(ctx, CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "405",
 				ErrorMessage:  "AccountDetails modifications are not permitted for USA residents, please contact support for any modification request.",
@@ -198,9 +208,10 @@ func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+				ctx := context.Background()
+				return nil, CustomerAccountApi{}.Update(ctx, CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -215,9 +226,10 @@ func TestCustomerAccountUpdateServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.Update(CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
+				ctx := context.Background()
+				return nil, CustomerAccountApi{}.Update(ctx, CustomerAccountAddress{City: "amsterdam", HouseNumber: "800", PostalCode: "1105 AB", Street: "Hessenbergweg"})
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -265,7 +277,8 @@ func TestCustomerAccountListContacts(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
-	resp, err := customerAccountApi.ListContacts()
+	ctx := context.Background()
+	resp, err := customerAccountApi.ListContacts(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -330,7 +343,8 @@ func TestCustomerAccountListContactsPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
-	resp, err := customerAccountApi.ListContacts(1, 5, []string{"GENERAL", "SECURITY", "TECHNICAL", "BILLING"})
+	ctx := context.Background()
+	resp, err := customerAccountApi.ListContacts(ctx, 1, 5, []string{"GENERAL", "SECURITY", "TECHNICAL", "BILLING"})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -367,9 +381,10 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.ListContacts()
+				ctx := context.Background()
+				return CustomerAccountApi{}.ListContacts(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -384,9 +399,10 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.ListContacts()
+				ctx := context.Background()
+				return CustomerAccountApi{}.ListContacts(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -401,9 +417,10 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.ListContacts()
+				ctx := context.Background()
+				return CustomerAccountApi{}.ListContacts(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -418,9 +435,10 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.ListContacts()
+				ctx := context.Background()
+				return CustomerAccountApi{}.ListContacts(ctx)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -466,7 +484,8 @@ func TestCustomerAccountCreateContact(t *testing.T) {
 		Mobile:      CustomerAccountPhone{CountryCode: "NL", Number: "682212341"},
 		Phone:       CustomerAccountPhone{CountryCode: "NL", Number: "682212342"},
 	}
-	resp, err := customerAccountApi.CreateContact(newContact)
+	ctx := context.Background()
+	resp, err := customerAccountApi.CreateContact(ctx, newContact)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -502,9 +521,10 @@ func TestCustomerAccountCreateContactServerErrors(t *testing.T) {
 					Mobile:      CustomerAccountPhone{CountryCode: "NL", Number: "682212341"},
 					Phone:       CustomerAccountPhone{CountryCode: "NL", Number: "682212342"},
 				}
-				return CustomerAccountApi{}.CreateContact(newContact)
+				ctx := context.Background()
+				return CustomerAccountApi{}.CreateContact(ctx, newContact)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -528,9 +548,10 @@ func TestCustomerAccountCreateContactServerErrors(t *testing.T) {
 					Mobile:      CustomerAccountPhone{CountryCode: "NL", Number: "682212341"},
 					Phone:       CustomerAccountPhone{CountryCode: "NL", Number: "682212342"},
 				}
-				return CustomerAccountApi{}.CreateContact(newContact)
+				ctx := context.Background()
+				return CustomerAccountApi{}.CreateContact(ctx, newContact)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -554,9 +575,10 @@ func TestCustomerAccountCreateContactServerErrors(t *testing.T) {
 					Mobile:      CustomerAccountPhone{CountryCode: "NL", Number: "682212341"},
 					Phone:       CustomerAccountPhone{CountryCode: "NL", Number: "682212342"},
 				}
-				return CustomerAccountApi{}.CreateContact(newContact)
+				ctx := context.Background()
+				return CustomerAccountApi{}.CreateContact(ctx, newContact)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -580,9 +602,10 @@ func TestCustomerAccountCreateContactServerErrors(t *testing.T) {
 					Mobile:      CustomerAccountPhone{CountryCode: "NL", Number: "682212341"},
 					Phone:       CustomerAccountPhone{CountryCode: "NL", Number: "682212342"},
 				}
-				return CustomerAccountApi{}.CreateContact(newContact)
+				ctx := context.Background()
+				return CustomerAccountApi{}.CreateContact(ctx, newContact)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -601,7 +624,8 @@ func TestCustomerAccountDeleteContact(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
-	err := customerAccountApi.DeleteContact("contact-id")
+	ctx := context.Background()
+	err := customerAccountApi.DeleteContact(ctx, "contact-id")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -618,9 +642,10 @@ func TestCustomerAccountDeleteContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.DeleteContact("contact-id")
+				ctx := context.Background()
+				return nil, CustomerAccountApi{}.DeleteContact(ctx, "contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -635,9 +660,10 @@ func TestCustomerAccountDeleteContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.DeleteContact("contact-id")
+				ctx := context.Background()
+				return nil, CustomerAccountApi{}.DeleteContact(ctx, "contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -652,9 +678,10 @@ func TestCustomerAccountDeleteContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.DeleteContact("contact-id")
+				ctx := context.Background()
+				return nil, CustomerAccountApi{}.DeleteContact(ctx, "contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -669,9 +696,10 @@ func TestCustomerAccountDeleteContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return nil, CustomerAccountApi{}.DeleteContact("contact-id")
+				ctx := context.Background()
+				return nil, CustomerAccountApi{}.DeleteContact(ctx, "contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -718,7 +746,8 @@ func TestCustomerAccountGetContact(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
-	response, err := customerAccountApi.GetContact("contact-id")
+	ctx := context.Background()
+	response, err := customerAccountApi.GetContact(ctx, "contact-id")
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -748,9 +777,10 @@ func TestCustomerAccountGetContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.GetContact("contact-id")
+				ctx := context.Background()
+				return CustomerAccountApi{}.GetContact(ctx, "contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -765,9 +795,10 @@ func TestCustomerAccountGetContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.GetContact("contact-id")
+				ctx := context.Background()
+				return CustomerAccountApi{}.GetContact(ctx, "contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -782,9 +813,10 @@ func TestCustomerAccountGetContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.GetContact("contact-id")
+				ctx := context.Background()
+				return CustomerAccountApi{}.GetContact(ctx, "contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -799,9 +831,10 @@ func TestCustomerAccountGetContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
-				return CustomerAccountApi{}.GetContact("contact-id")
+				ctx := context.Background()
+				return CustomerAccountApi{}.GetContact(ctx, "contact-id")
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -820,7 +853,9 @@ func TestCustomerAccountUpdateContact(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
+	ctx := context.Background()
 	err := customerAccountApi.UpdateContact(
+		ctx,
 		"contact-id",
 		CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 		[]string{"GENERAL", "TECHNICAL"},
@@ -842,7 +877,9 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
+				ctx := context.Background()
 				return nil, CustomerAccountApi{}.UpdateContact(
+					ctx,
 					"contact-id",
 					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
@@ -850,7 +887,7 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 					"Description",
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -865,7 +902,9 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
+				ctx := context.Background()
 				return nil, CustomerAccountApi{}.UpdateContact(
+					ctx,
 					"contact-id",
 					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
@@ -873,7 +912,7 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 					"Description",
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -888,7 +927,9 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
+				ctx := context.Background()
 				return nil, CustomerAccountApi{}.UpdateContact(
+					ctx,
 					"contact-id",
 					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
@@ -896,7 +937,7 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 					"Description",
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -911,7 +952,9 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
+				ctx := context.Background()
 				return nil, CustomerAccountApi{}.UpdateContact(
+					ctx,
 					"contact-id",
 					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
@@ -919,7 +962,7 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 					"Description",
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -934,7 +977,9 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
+				ctx := context.Background()
 				return nil, CustomerAccountApi{}.UpdateContact(
+					ctx,
 					"contact-id",
 					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
@@ -942,7 +987,7 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 					"Description",
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",
@@ -961,7 +1006,9 @@ func TestCustomerAccountAssignPrimaryRolesToContact(t *testing.T) {
 	defer teardown()
 
 	customerAccountApi := CustomerAccountApi{}
+	ctx := context.Background()
 	err := customerAccountApi.AssignPrimaryRolesToContact(
+		ctx,
 		"contact-id",
 		[]string{"GENERAL", "TECHNICAL"},
 	)
@@ -980,12 +1027,14 @@ func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "401", "errorMessage": "You are not authorized to view this resource."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
+				ctx := context.Background()
 				return nil, CustomerAccountApi{}.AssignPrimaryRolesToContact(
+					ctx,
 					"contact-id",
 					[]string{"GENERAL", "TECHNICAL"},
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "401",
 				ErrorMessage:  "You are not authorized to view this resource.",
@@ -1000,12 +1049,14 @@ func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "403", "errorMessage": "Access to the requested resource is forbidden."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
+				ctx := context.Background()
 				return nil, CustomerAccountApi{}.AssignPrimaryRolesToContact(
+					ctx,
 					"contact-id",
 					[]string{"GENERAL", "TECHNICAL"},
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "403",
 				ErrorMessage:  "Access to the requested resource is forbidden.",
@@ -1020,12 +1071,14 @@ func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "404", "errorMessage": "Resource not found"}`)
 			},
 			FunctionCall: func() (interface{}, error) {
+				ctx := context.Background()
 				return nil, CustomerAccountApi{}.AssignPrimaryRolesToContact(
+					ctx,
 					"contact-id",
 					[]string{"GENERAL", "TECHNICAL"},
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "404",
 				ErrorMessage:  "Resource not found",
@@ -1040,12 +1093,14 @@ func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "500", "errorMessage": "The API could not handle your request at this time."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
+				ctx := context.Background()
 				return nil, CustomerAccountApi{}.AssignPrimaryRolesToContact(
+					ctx,
 					"contact-id",
 					[]string{"GENERAL", "TECHNICAL"},
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "500",
 				ErrorMessage:  "The API could not handle your request at this time.",
@@ -1060,12 +1115,14 @@ func TestCustomerAccountAssignPrimaryRolesToContactServerErrors(t *testing.T) {
 				fmt.Fprintf(w, `{"correlationId":"289346a1-3eaf-4da4-b707-62ef12eb08be", "errorCode": "503", "errorMessage": "The API is not available at the moment."}`)
 			},
 			FunctionCall: func() (interface{}, error) {
+				ctx := context.Background()
 				return nil, CustomerAccountApi{}.AssignPrimaryRolesToContact(
+					ctx,
 					"contact-id",
 					[]string{"GENERAL", "TECHNICAL"},
 				)
 			},
-			ExpectedError: LeasewebError{
+			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
 				ErrorCode:     "503",
 				ErrorMessage:  "The API is not available at the moment.",

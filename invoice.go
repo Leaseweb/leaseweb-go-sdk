@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -73,7 +74,7 @@ func (ia InvoiceApi) getPath(endpoint string) string {
 	return "/invoices/" + INVOICE_API_VERSION + endpoint
 }
 
-func (ia InvoiceApi) List(args ...int) (*Invoices, error) {
+func (ia InvoiceApi) List(ctx context.Context, args ...int) (*Invoices, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -84,13 +85,13 @@ func (ia InvoiceApi) List(args ...int) (*Invoices, error) {
 
 	path := ia.getPath("/invoices?" + v.Encode())
 	result := &Invoices{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (ia InvoiceApi) ListProForma(args ...int) (*InvoiceProForma, error) {
+func (ia InvoiceApi) ListProForma(ctx context.Context, args ...int) (*InvoiceProForma, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -101,16 +102,16 @@ func (ia InvoiceApi) ListProForma(args ...int) (*InvoiceProForma, error) {
 
 	path := ia.getPath("/invoices/proforma?" + v.Encode())
 	result := &InvoiceProForma{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (ia InvoiceApi) Get(invoiceId string) (*Invoice, error) {
+func (ia InvoiceApi) Get(ctx context.Context, invoiceId string) (*Invoice, error) {
 	path := ia.getPath("/invoices/" + invoiceId)
 	result := &Invoice{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil

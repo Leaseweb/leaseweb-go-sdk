@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -56,22 +57,22 @@ func (cai CustomerAccountApi) getPath(endpoint string) string {
 	return "/account/" + CUSTOMER_ACCOUNT_API_VERSION + endpoint
 }
 
-func (cai CustomerAccountApi) Get() (*CustomerAccount, error) {
+func (cai CustomerAccountApi) Get(ctx context.Context) (*CustomerAccount, error) {
 	path := cai.getPath("/details")
 	result := &CustomerAccount{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (cai CustomerAccountApi) Update(ad CustomerAccountAddress) error {
+func (cai CustomerAccountApi) Update(ctx context.Context, ad CustomerAccountAddress) error {
 	path := cai.getPath("/details")
 	payload := map[string]CustomerAccountAddress{"address": ad}
-	return doRequest(http.MethodPut, path, nil, payload)
+	return doRequest(ctx, http.MethodPut, path, nil, payload)
 }
 
-func (cai CustomerAccountApi) ListContacts(args ...interface{}) (*CustomerAccountContacts, error) {
+func (cai CustomerAccountApi) ListContacts(ctx context.Context, args ...interface{}) (*CustomerAccountContacts, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -90,36 +91,36 @@ func (cai CustomerAccountApi) ListContacts(args ...interface{}) (*CustomerAccoun
 
 	path := cai.getPath("/contacts?" + v.Encode())
 	result := &CustomerAccountContacts{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (cai CustomerAccountApi) CreateContact(newContact CustomerAccountContact) (*CustomerAccountContact, error) {
+func (cai CustomerAccountApi) CreateContact(ctx context.Context, newContact CustomerAccountContact) (*CustomerAccountContact, error) {
 	path := cai.getPath("/contacts")
 	result := &CustomerAccountContact{}
-	if err := doRequest(http.MethodPost, path, result, newContact); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result, newContact); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (cai CustomerAccountApi) DeleteContact(contactId string) error {
+func (cai CustomerAccountApi) DeleteContact(ctx context.Context, contactId string) error {
 	path := cai.getPath("/contacts/" + contactId)
-	return doRequest(http.MethodDelete, path)
+	return doRequest(ctx, http.MethodDelete, path)
 }
 
-func (cai CustomerAccountApi) GetContact(contactId string) (*CustomerAccountContact, error) {
+func (cai CustomerAccountApi) GetContact(ctx context.Context, contactId string) (*CustomerAccountContact, error) {
 	path := cai.getPath("/contacts/" + contactId)
 	result := &CustomerAccountContact{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (cai CustomerAccountApi) UpdateContact(contactId string, phone CustomerAccountPhone, roles []string, args ...interface{}) error {
+func (cai CustomerAccountApi) UpdateContact(ctx context.Context, contactId string, phone CustomerAccountPhone, roles []string, args ...interface{}) error {
 	payload := make(map[string]interface{})
 	payload["phone"] = phone
 	payload["roles"] = roles
@@ -131,11 +132,11 @@ func (cai CustomerAccountApi) UpdateContact(contactId string, phone CustomerAcco
 	}
 
 	path := cai.getPath("/contacts" + contactId)
-	return doRequest(http.MethodPut, path, nil, payload)
+	return doRequest(ctx, http.MethodPut, path, nil, payload)
 }
 
-func (cai CustomerAccountApi) AssignPrimaryRolesToContact(contactId string, roles []string) error {
+func (cai CustomerAccountApi) AssignPrimaryRolesToContact(ctx context.Context, contactId string, roles []string) error {
 	payload := map[string][]string{"roles": roles}
 	path := cai.getPath("/contacts" + contactId)
-	return doRequest(http.MethodPost, path, nil, payload)
+	return doRequest(ctx, http.MethodPost, path, nil, payload)
 }

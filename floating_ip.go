@@ -1,6 +1,7 @@
 package leaseweb
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -49,7 +50,7 @@ func (fia FloatingIpApi) getPath(endpoint string) string {
 	return "/floatingIps/" + FLOATING_IP_API_VERSION + endpoint
 }
 
-func (fia FloatingIpApi) ListRanges(args ...interface{}) (*FloatingIpRanges, error) {
+func (fia FloatingIpApi) ListRanges(ctx context.Context, args ...interface{}) (*FloatingIpRanges, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -71,22 +72,22 @@ func (fia FloatingIpApi) ListRanges(args ...interface{}) (*FloatingIpRanges, err
 
 	path := fia.getPath("/ranges?" + v.Encode())
 	result := &FloatingIpRanges{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (fia FloatingIpApi) GetRange(rangeId string) (*FloatingIpRange, error) {
+func (fia FloatingIpApi) GetRange(ctx context.Context, rangeId string) (*FloatingIpRange, error) {
 	path := fia.getPath("/ranges/" + rangeId)
 	result := &FloatingIpRange{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (fia FloatingIpApi) ListRangeDefinitions(rangeId string, args ...interface{}) (*FloatingIpDefinitions, error) {
+func (fia FloatingIpApi) ListRangeDefinitions(ctx context.Context, rangeId string, args ...interface{}) (*FloatingIpDefinitions, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
@@ -108,45 +109,45 @@ func (fia FloatingIpApi) ListRangeDefinitions(rangeId string, args ...interface{
 
 	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions?" + v.Encode())
 	result := &FloatingIpDefinitions{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (fia FloatingIpApi) CreateRangeDefinition(rangeId string, floatingIp string, anchorIp string) (*FloatingIpDefinition, error) {
+func (fia FloatingIpApi) CreateRangeDefinition(ctx context.Context, rangeId string, floatingIp string, anchorIp string) (*FloatingIpDefinition, error) {
 	payload := map[string]string{"floatingIp": floatingIp, "anchorIp": anchorIp}
 	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions")
 	result := &FloatingIpDefinition{}
-	if err := doRequest(http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (fia FloatingIpApi) GetRangeDefinition(rangeId string, floatingIpDefinitionId string) (*FloatingIpDefinition, error) {
+func (fia FloatingIpApi) GetRangeDefinition(ctx context.Context, rangeId string, floatingIpDefinitionId string) (*FloatingIpDefinition, error) {
 	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions/" + floatingIpDefinitionId)
 	result := &FloatingIpDefinition{}
-	if err := doRequest(http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (fia FloatingIpApi) UpdateRangeDefinition(rangeId string, floatingIpDefinitionId string, anchorIp string) (*FloatingIpDefinition, error) {
+func (fia FloatingIpApi) UpdateRangeDefinition(ctx context.Context, rangeId string, floatingIpDefinitionId string, anchorIp string) (*FloatingIpDefinition, error) {
 	payload := map[string]string{"anchorIp": anchorIp}
 	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions/" + floatingIpDefinitionId)
 	result := &FloatingIpDefinition{}
-	if err := doRequest(http.MethodPut, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
 }
 
-func (fia FloatingIpApi) RemoveRangeDefinition(rangeId string, floatingIpDefinitionId string) (*FloatingIpDefinition, error) {
+func (fia FloatingIpApi) RemoveRangeDefinition(ctx context.Context, rangeId string, floatingIpDefinitionId string) (*FloatingIpDefinition, error) {
 	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions/" + floatingIpDefinitionId)
 	result := &FloatingIpDefinition{}
-	if err := doRequest(http.MethodDelete, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodDelete, path, result); err != nil {
 		return nil, err
 	}
 	return result, nil
