@@ -11,15 +11,6 @@ import (
 
 var lswClient *leasewebClient
 
-var defaultErrorMessages = map[int]string{
-	http.StatusBadRequest:          "Bad Request",
-	http.StatusUnauthorized:        "Unauthorized",
-	http.StatusForbidden:           "Forbidden",
-	http.StatusNotFound:            "Not Found",
-	http.StatusServiceUnavailable:  "Service Unavailable",
-	http.StatusInternalServerError: "Internal Server Error",
-}
-
 const DEFAULT_BASE_URL = "https://api.leaseweb.com"
 
 type leasewebClient struct {
@@ -124,13 +115,16 @@ func doRequest(ctx context.Context, method string, path string, args ...interfac
 
 	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
 	if !statusOK {
+		statusCode, statusMessage, ok := strings.Cut(resp.Status, " ")
+		if !ok {
+			statusCode = strconv.Itoa(resp.StatusCode)
+			statusMessage = "An error occurred"
+		}
+
 		apiErr := &ApiError{
 			ApiContext: ApiContext{method, url},
-			Code:       strconv.Itoa(resp.StatusCode),
-			Message:    "An error occurred",
-		}
-		if defaultErrorMessage, ok := defaultErrorMessages[resp.StatusCode]; ok {
-			apiErr.Message = defaultErrorMessage
+			Code:       statusCode,
+			Message:    statusMessage,
 		}
 		json.Unmarshal(respBody, apiErr)
 		return apiErr
