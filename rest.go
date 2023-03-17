@@ -131,7 +131,11 @@ func doRequest(ctx context.Context, method string, path string, args ...interfac
 			if defaultError, ok := defaultErrors[resp.StatusCode]; ok {
 				return &defaultError
 			}
-			return &DecodingError{ApiContext{method, url}, err}
+			return &ApiError{
+				ApiContext: ApiContext{method, url},
+				Code:       strconv.Itoa(resp.StatusCode),
+				Message:    "An error occurred",
+			}
 		}
 		return apiErr
 	}
