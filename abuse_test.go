@@ -324,7 +324,7 @@ func TestAbuseGetServerErrors(t *testing.T) {
 				ctx := context.Background()
 				return AbuseApi{}.Get(ctx, "123456")
 			},
-			ExpectedError: ApiError{},
+			ExpectedError: ApiError{Code: "404", Message: "Not Found"},
 		},
 		{
 			Title: "error 500",
@@ -505,7 +505,7 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 				ctx := context.Background()
 				return AbuseApi{}.ListMessages(ctx, "123456789")
 			},
-			ExpectedError: ApiError{},
+			ExpectedError: ApiError{Code: "404", Message: "Not Found"},
 		},
 		{
 			Title: "error 500",
