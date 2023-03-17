@@ -124,16 +124,16 @@ func doRequest(ctx context.Context, method string, path string, args ...interfac
 
 	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
 	if !statusOK {
-		lswErr := &ApiError{
+		apiErr := &ApiError{
 			ApiContext: ApiContext{method, url},
 		}
-		if err = json.Unmarshal(respBody, lswErr); err != nil {
+		if err = json.Unmarshal(respBody, apiErr); err != nil {
 			if defaultError, ok := defaultErrors[resp.StatusCode]; ok {
 				return &defaultError
 			}
 			return &DecodingError{ApiContext{method, url}, err}
 		}
-		return lswErr
+		return apiErr
 	}
 
 	if len(args) > 0 {
