@@ -333,24 +333,7 @@ type DedicatedServerJob struct {
 	} `json:"metadata"`
 }
 
-type DedicatedServerJobPayload struct {
-	Configurable       bool                                 `json:"configurable"`
-	Device             string                               `json:"device"`
-	FileServerBaseUrl  string                               `json:"fileserverBaseUrl"`
-	JobType            string                               `json:"jobType"`
-	NumberOfDisks      string                               `json:"numberOfDisks"`
-	OperatingSystemId  string                               `json:"operatingSystemId"`
-	OS                 DedicatedServerJobPayloadOs          `json:"os"`
-	Partitions         []DedicatedServerJobPayloadPartition `json:"partitions"`
-	Pop                string                               `json:"pop"`
-	IsUnassignedServer bool                                 `json:"isUnassignedServer"`
-	HasPublicIpmiIp    bool                                 `json:"hasPublicIpmiIp"`
-	PowerCycle         bool                                 `json:"powerCycle"`
-	RaidLevel          string                               `json:"raidLevel"`
-	ServerId           string                               `json:"serverId"`
-	Timezone           string                               `json:"timezone"`
-	X                  json.Number                          `json:"x"`
-}
+type DedicatedServerJobPayload map[string]interface{}
 
 type DedicatedServerJobProgress struct {
 	Canceled   json.Number `json:"canceled"`
@@ -378,22 +361,6 @@ type DedicatedServerJobTaskStatusTimeStamp struct {
 	Canceled string `json:"CANCELED"`
 	Pending  string `json:"PENDING"`
 	Waiting  string `json:"WAITING"`
-}
-
-type DedicatedServerJobPayloadOs struct {
-	Architecture string `json:"architecture"`
-	Family       string `json:"family"`
-	Name         string `json:"name"`
-	Type         string `json:"type"`
-	Version      string `json:"version"`
-}
-
-type DedicatedServerJobPayloadPartition struct {
-	FileSystem string `json:"filesystem"`
-	Size       string `json:"size"`
-	Bootable   bool   `json:"bootable"`
-	MountPoint string `json:"mountpoint"`
-	Primary    bool   `json:"primary"`
 }
 
 type DedicatedServerOperatingSystems struct {
@@ -720,7 +687,7 @@ func (dsa DedicatedServerApi) LaunchIpmiRest(ctx context.Context, serverId strin
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListJobs(ctx context.Context, serverId string, args ...int) (*DedicatedServerJobs, error) {
+func (dsa DedicatedServerApi) ListJobs(ctx context.Context, serverId string, args ...interface{}) (*DedicatedServerJobs, error) {
 	v := url.Values{}
 	if len(args) >= 1 {
 		v.Add("offset", fmt.Sprint(args[0]))
