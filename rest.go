@@ -28,7 +28,13 @@ type leasewebClient struct {
 	baseUrl string
 }
 
+type ApiContext struct {
+	Method string
+	Url    string
+}
+
 type ApiError struct {
+	ApiContext
 	Code          string              `json:"errorCode"`
 	Message       string              `json:"errorMessage"`
 	Details       map[string][]string `json:"errorDetails"`
@@ -42,9 +48,8 @@ func (le *ApiError) Error() string {
 }
 
 type DecodingError struct {
-	Method string
-	Url    string
-	Err    error
+	ApiContext
+	Err error
 }
 
 func (errd *DecodingError) Error() string {
@@ -52,9 +57,8 @@ func (errd *DecodingError) Error() string {
 }
 
 type EncodingError struct {
-	Method string
-	Url    string
-	Err    error
+	ApiContext
+	Err error
 }
 
 func (erre *EncodingError) Error() string {
@@ -87,7 +91,7 @@ func doRequest(ctx context.Context, method string, path string, args ...interfac
 		if len(args) > 1 {
 			b, err := json.Marshal(args[1])
 			if err != nil {
-				return &EncodingError{Method: method, Url: url, Err: err}
+				return &EncodingError{ApiContext{method, url}, err}
 			}
 			tmpPayload = strings.NewReader(string(b))
 		}
@@ -120,19 +124,21 @@ func doRequest(ctx context.Context, method string, path string, args ...interfac
 
 	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
 	if !statusOK {
-		lswErr := &ApiError{}
+		lswErr := &ApiError{
+			ApiContext: ApiContext{method, url},
+		}
 		if err = json.Unmarshal(respBody, lswErr); err != nil {
 			if defaultError, ok := defaultErrors[resp.StatusCode]; ok {
 				return &defaultError
 			}
-			return &DecodingError{Method: method, Url: url, Err: err}
+			return &DecodingError{ApiContext{method, url}, err}
 		}
 		return lswErr
 	}
 
 	if len(args) > 0 {
 		if err = json.Unmarshal(respBody, &args[0]); err != nil {
-			return &DecodingError{Method: method, Url: url, Err: err}
+			return &DecodingError{ApiContext{method, url}, err}
 		}
 	}
 	return nil
