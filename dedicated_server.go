@@ -349,7 +349,7 @@ type DedicatedServerJobProgress struct {
 
 type DedicatedServerJobTask struct {
 	Description      string                                `json:"description"`
-	ErrorMessage     string                                `json:"errorMessage"`
+	Message     string                                `json:"errorMessage"`
 	Flow             string                                `json:"flow"`
 	OnError          string                                `json:"onError"`
 	Status           string                                `json:"status"`

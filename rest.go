@@ -12,12 +12,12 @@ import (
 var lswClient *leasewebClient
 
 var defaultErrors = map[int]ApiError{
-	http.StatusBadRequest:          {ErrorCode: strconv.Itoa(http.StatusBadRequest), ErrorMessage: "Bad Request"},
-	http.StatusUnauthorized:        {ErrorCode: strconv.Itoa(http.StatusUnauthorized), ErrorMessage: "Unauthorized"},
-	http.StatusForbidden:           {ErrorCode: strconv.Itoa(http.StatusForbidden), ErrorMessage: "Forbidden"},
-	http.StatusNotFound:            {ErrorCode: strconv.Itoa(http.StatusNotFound), ErrorMessage: "Not Found"},
-	http.StatusServiceUnavailable:  {ErrorCode: strconv.Itoa(http.StatusServiceUnavailable), ErrorMessage: "Service Unavailable"},
-	http.StatusInternalServerError: {ErrorCode: strconv.Itoa(http.StatusInternalServerError), ErrorMessage: "Internal Server Error"},
+	http.StatusBadRequest:          {Code: strconv.Itoa(http.StatusBadRequest), Message: "Bad Request"},
+	http.StatusUnauthorized:        {Code: strconv.Itoa(http.StatusUnauthorized), Message: "Unauthorized"},
+	http.StatusForbidden:           {Code: strconv.Itoa(http.StatusForbidden), Message: "Forbidden"},
+	http.StatusNotFound:            {Code: strconv.Itoa(http.StatusNotFound), Message: "Not Found"},
+	http.StatusServiceUnavailable:  {Code: strconv.Itoa(http.StatusServiceUnavailable), Message: "Service Unavailable"},
+	http.StatusInternalServerError: {Code: strconv.Itoa(http.StatusInternalServerError), Message: "Internal Server Error"},
 }
 
 const DEFAULT_BASE_URL = "https://api.leaseweb.com"
@@ -29,16 +29,16 @@ type leasewebClient struct {
 }
 
 type ApiError struct {
-	ErrorCode     string              `json:"errorCode"`
-	ErrorMessage  string              `json:"errorMessage"`
-	ErrorDetails  map[string][]string `json:"errorDetails"`
+	Code          string              `json:"errorCode"`
+	Message       string              `json:"errorMessage"`
+	Details       map[string][]string `json:"errorDetails"`
 	CorrelationId string              `json:"correlationId"`
 	UserMessage   string              `json:"userMessage"`
 	Reference     string              `json:"reference"`
 }
 
 func (le *ApiError) Error() string {
-	return "leaseweb: " + le.ErrorMessage
+	return "leaseweb: " + le.Message
 }
 
 type DecodingError struct {

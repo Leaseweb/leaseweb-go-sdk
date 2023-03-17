@@ -154,8 +154,8 @@ func TestPrivateCloudListServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -171,8 +171,8 @@ func TestPrivateCloudListServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -188,8 +188,8 @@ func TestPrivateCloudListServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -293,8 +293,8 @@ func TestPrivateCloudGetServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.Get(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -310,8 +310,8 @@ func TestPrivateCloudGetServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.Get(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "404",
-				ErrorMessage: "Resource 218030 was not found",
+				Code:    "404",
+				Message: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
 			},
 		},
@@ -328,8 +328,8 @@ func TestPrivateCloudGetServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.Get(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -345,8 +345,8 @@ func TestPrivateCloudGetServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.Get(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -452,8 +452,8 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -469,8 +469,8 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "404",
-				ErrorMessage: "Resource 218030 was not found",
+				Code:    "404",
+				Message: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
 			},
 		},
@@ -487,8 +487,8 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -504,8 +504,8 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -553,8 +553,8 @@ func TestPrivateCloudGetCredentialServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetCredential(ctx, "218030", "REMOTE_MANAGEMENT", "root")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -570,8 +570,8 @@ func TestPrivateCloudGetCredentialServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetCredential(ctx, "218030", "REMOTE_MANAGEMENT", "root")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "404",
-				ErrorMessage: "Resource 218030 was not found",
+				Code:    "404",
+				Message: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
 			},
 		},
@@ -588,8 +588,8 @@ func TestPrivateCloudGetCredentialServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetCredential(ctx, "218030", "REMOTE_MANAGEMENT", "root")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -605,8 +605,8 @@ func TestPrivateCloudGetCredentialServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetCredential(ctx, "218030", "REMOTE_MANAGEMENT", "root")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -760,8 +760,8 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -777,8 +777,8 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "404",
-				ErrorMessage: "Resource 218030 was not found",
+				Code:    "404",
+				Message: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
 			},
 		},
@@ -795,8 +795,8 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -812,8 +812,8 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -967,8 +967,8 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -984,8 +984,8 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "404",
-				ErrorMessage: "Resource 218030 was not found",
+				Code:    "404",
+				Message: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
 			},
 		},
@@ -1002,8 +1002,8 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1019,8 +1019,8 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1138,8 +1138,8 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1155,8 +1155,8 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "404",
-				ErrorMessage: "Resource 218030 was not found",
+				Code:    "404",
+				Message: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
 			},
 		},
@@ -1173,8 +1173,8 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1190,8 +1190,8 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1309,8 +1309,8 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1326,8 +1326,8 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "404",
-				ErrorMessage: "Resource 218030 was not found",
+				Code:    "404",
+				Message: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
 			},
 		},
@@ -1344,8 +1344,8 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1361,8 +1361,8 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1480,8 +1480,8 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1497,8 +1497,8 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "404",
-				ErrorMessage: "Resource 218030 was not found",
+				Code:    "404",
+				Message: "Resource 218030 was not found",
 				UserMessage:  "Resource with id 218030 not found.",
 			},
 		},
@@ -1515,8 +1515,8 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1532,8 +1532,8 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
