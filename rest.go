@@ -77,13 +77,14 @@ func getBaseUrl() string {
 
 func doRequest(ctx context.Context, method string, path string, args ...interface{}) error {
 	url := getBaseUrl() + path
+	apiContext := ApiContext{method, url}
 
 	var tmpPayload io.Reader
 	if method == http.MethodPost || method == http.MethodPut {
 		if len(args) > 1 {
 			b, err := json.Marshal(args[1])
 			if err != nil {
-				return &EncodingError{ApiContext{method, url}, err}
+				return &EncodingError{apiContext, err}
 			}
 			tmpPayload = strings.NewReader(string(b))
 		}
@@ -123,7 +124,7 @@ func doRequest(ctx context.Context, method string, path string, args ...interfac
 		}
 
 		apiErr := &ApiError{
-			ApiContext: ApiContext{method, url},
+			ApiContext: apiContext,
 			Code:       statusCode,
 			Message:    statusMessage,
 		}
@@ -133,7 +134,7 @@ func doRequest(ctx context.Context, method string, path string, args ...interfac
 
 	if len(args) > 0 {
 		if err = json.Unmarshal(respBody, &args[0]); err != nil {
-			return &DecodingError{ApiContext{method, url}, err}
+			return &DecodingError{apiContext, err}
 		}
 	}
 	return nil
