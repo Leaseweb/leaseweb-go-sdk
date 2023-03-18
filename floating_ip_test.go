@@ -115,8 +115,8 @@ func TestFloatingIpListRangesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -133,8 +133,8 @@ func TestFloatingIpListRangesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -151,8 +151,8 @@ func TestFloatingIpListRangesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -204,8 +204,8 @@ func TestFloatingIpGetRangeServerErrors(t *testing.T) {
 				return FloatingIpApi{}.GetRange(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -222,8 +222,8 @@ func TestFloatingIpGetRangeServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
-				ErrorCode:     "404",
-				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
+				Code:     "404",
+				Message:  "Range with id 88.17.0.0_17 does not exist",
 			},
 		},
 		{
@@ -240,8 +240,8 @@ func TestFloatingIpGetRangeServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -258,8 +258,8 @@ func TestFloatingIpGetRangeServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -400,8 +400,8 @@ func TestFloatingIpListRangeDefinitionsServerErrors(t *testing.T) {
 				return FloatingIpApi{}.ListRangeDefinitions(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -418,8 +418,8 @@ func TestFloatingIpListRangeDefinitionsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
-				ErrorCode:     "404",
-				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
+				Code:     "404",
+				Message:  "Range with id 88.17.0.0_17 does not exist",
 			},
 		},
 		{
@@ -436,8 +436,8 @@ func TestFloatingIpListRangeDefinitionsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -454,8 +454,8 @@ func TestFloatingIpListRangeDefinitionsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -517,8 +517,8 @@ func TestFloatingIpCreateRangeDefinitionServerError(t *testing.T) {
 				return FloatingIpApi{}.CreateRangeDefinition(ctx, "10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "400",
-				ErrorMessage: "Validation Failed",
+				Code:    "400",
+				Message: "Validation Failed",
 			},
 		},
 		{
@@ -534,8 +534,8 @@ func TestFloatingIpCreateRangeDefinitionServerError(t *testing.T) {
 				return FloatingIpApi{}.CreateRangeDefinition(ctx, "10.0.0.0_29", "88.17.0.5/32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -552,8 +552,8 @@ func TestFloatingIpCreateRangeDefinitionServerError(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -570,8 +570,8 @@ func TestFloatingIpCreateRangeDefinitionServerError(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -633,8 +633,8 @@ func TestFloatingIpGetRangeDefinitionServerErrors(t *testing.T) {
 				return FloatingIpApi{}.GetRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -651,8 +651,8 @@ func TestFloatingIpGetRangeDefinitionServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -669,8 +669,8 @@ func TestFloatingIpGetRangeDefinitionServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -733,8 +733,8 @@ func TestFloatingIpUpdateRangeDefinitionServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "945bef2e-1caf-4027-bd0a-8976848f3dee",
-				ErrorCode:     "400",
-				ErrorMessage:  "Validation Failed",
+				Code:     "400",
+				Message:  "Validation Failed",
 			},
 		},
 		{
@@ -750,8 +750,8 @@ func TestFloatingIpUpdateRangeDefinitionServerErrors(t *testing.T) {
 				return FloatingIpApi{}.UpdateRangeDefinition(ctx, "wrong 1", "88.17.34.108_32", "95.10.126.1")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -768,8 +768,8 @@ func TestFloatingIpUpdateRangeDefinitionServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -786,8 +786,8 @@ func TestFloatingIpUpdateRangeDefinitionServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -850,8 +850,8 @@ func TestFloatingIpRemoveRangeDefinitionServerErrors(t *testing.T) {
 				return FloatingIpApi{}.RemoveRangeDefinition(ctx, "88.17.0.0_17", "88.17.34.108_32")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -868,8 +868,8 @@ func TestFloatingIpRemoveRangeDefinitionServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -886,8 +886,8 @@ func TestFloatingIpRemoveRangeDefinitionServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}

@@ -253,8 +253,8 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -271,8 +271,8 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -289,8 +289,8 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -384,8 +384,8 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 				return HostingApi{}.GetDomain(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -402,8 +402,8 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
-				ErrorCode:     "404",
-				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
+				Code:     "404",
+				Message:  "Range with id 88.17.0.0_17 does not exist",
 			},
 		},
 		{
@@ -420,8 +420,8 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -438,8 +438,8 @@ func TestHostingGetDomainServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -489,8 +489,8 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 				return HostingApi{}.GetAvailability(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -507,8 +507,8 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
-				ErrorCode:     "404",
-				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
+				Code:     "404",
+				Message:  "Range with id 88.17.0.0_17 does not exist",
 			},
 		},
 		{
@@ -525,8 +525,8 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -543,8 +543,8 @@ func TestHostingGetAvailabilityServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -653,8 +653,8 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -671,8 +671,8 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -689,8 +689,8 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -757,8 +757,8 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -775,8 +775,8 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -793,8 +793,8 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -811,8 +811,8 @@ func TestHostingUpdateNameserversServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -872,8 +872,8 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 				return HostingApi{}.GetDnsSecurity(ctx, "exmple.com")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -890,8 +890,8 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
-				ErrorCode:     "404",
-				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
+				Code:     "404",
+				Message:  "Range with id 88.17.0.0_17 does not exist",
 			},
 		},
 		{
@@ -908,8 +908,8 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -926,8 +926,8 @@ func TestHostingGetGetDnsSecurityServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -968,8 +968,8 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -986,8 +986,8 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1004,8 +1004,8 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1022,8 +1022,8 @@ func TestHostingUpdateDnsSecurityServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1222,8 +1222,8 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1240,8 +1240,8 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1258,8 +1258,8 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1334,8 +1334,8 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1357,8 +1357,8 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1380,8 +1380,8 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1403,8 +1403,8 @@ func TestHostingCreateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1442,8 +1442,8 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1460,8 +1460,8 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1478,8 +1478,8 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1496,8 +1496,8 @@ func TestHostingDeleteResourceRecordSetsServerError(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1562,8 +1562,8 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 				return HostingApi{}.GetResourceRecordSet(ctx, "exmple.com", "example.com.", "A")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1580,8 +1580,8 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "39e010ed-0e93-42c3-c28f-3ffc373553d5",
-				ErrorCode:     "404",
-				ErrorMessage:  "Range with id 88.17.0.0_17 does not exist",
+				Code:     "404",
+				Message:  "Range with id 88.17.0.0_17 does not exist",
 			},
 		},
 		{
@@ -1598,8 +1598,8 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1616,8 +1616,8 @@ func TestHostingGetResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1679,8 +1679,8 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1697,8 +1697,8 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1715,8 +1715,8 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1733,8 +1733,8 @@ func TestHostingUpdateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1772,8 +1772,8 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1790,8 +1790,8 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1808,8 +1808,8 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1826,8 +1826,8 @@ func TestHostingDeleteResourceRecordSetsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1868,8 +1868,8 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1886,8 +1886,8 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1904,8 +1904,8 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -1922,8 +1922,8 @@ func TestHostingValidateResourceRecordSetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -1978,8 +1978,8 @@ func TestHostingListCatchAllServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1996,8 +1996,8 @@ func TestHostingListCatchAllServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -2014,8 +2014,8 @@ func TestHostingListCatchAllServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -2079,8 +2079,8 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2101,8 +2101,8 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2123,8 +2123,8 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -2145,8 +2145,8 @@ func TestHostingUpdateOrCreateCatchAllServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -2184,8 +2184,8 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2202,8 +2202,8 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2220,8 +2220,8 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -2238,8 +2238,8 @@ func TestHostingDeleteCatchAllsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -2408,8 +2408,8 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2426,8 +2426,8 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -2444,8 +2444,8 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -2516,8 +2516,8 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2540,8 +2540,8 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2564,8 +2564,8 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -2588,8 +2588,8 @@ func TestHostingCreateEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -2648,8 +2648,8 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2666,8 +2666,8 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2684,8 +2684,8 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -2702,8 +2702,8 @@ func TestHostingGetEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -2770,8 +2770,8 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2792,8 +2792,8 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2814,8 +2814,8 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -2836,8 +2836,8 @@ func TestHostingUpdateEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -2875,8 +2875,8 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2893,8 +2893,8 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2911,8 +2911,8 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -2929,8 +2929,8 @@ func TestHostingDeleteEmailAliasServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -3099,8 +3099,8 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -3117,8 +3117,8 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -3135,8 +3135,8 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -3329,8 +3329,8 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -3347,8 +3347,8 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -3365,8 +3365,8 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -3463,8 +3463,8 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -3488,8 +3488,8 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -3513,8 +3513,8 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -3538,8 +3538,8 @@ func TestHostingCreateMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -3622,8 +3622,8 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -3640,8 +3640,8 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -3658,8 +3658,8 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -3676,8 +3676,8 @@ func TestHostingGetMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -3774,8 +3774,8 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -3799,8 +3799,8 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -3824,8 +3824,8 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -3849,8 +3849,8 @@ func TestHostingUpdateMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -3888,8 +3888,8 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -3906,8 +3906,8 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -3924,8 +3924,8 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -3942,8 +3942,8 @@ func TestHostingDeleteMailBoxServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -3998,8 +3998,8 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -4016,8 +4016,8 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -4034,8 +4034,8 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -4052,8 +4052,8 @@ func TestHostingGetAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -4116,8 +4116,8 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -4138,8 +4138,8 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -4160,8 +4160,8 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -4182,8 +4182,8 @@ func TestHostingUpdateOrCreateAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -4221,8 +4221,8 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -4239,8 +4239,8 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -4257,8 +4257,8 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -4275,8 +4275,8 @@ func TestHostingDeleteAutoResponderServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -4445,8 +4445,8 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -4463,8 +4463,8 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -4481,8 +4481,8 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -4553,8 +4553,8 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -4577,8 +4577,8 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -4601,8 +4601,8 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -4625,8 +4625,8 @@ func TestHostingCreateForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -4685,8 +4685,8 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -4703,8 +4703,8 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -4721,8 +4721,8 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -4739,8 +4739,8 @@ func TestHostingGetForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -4807,8 +4807,8 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -4829,8 +4829,8 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -4851,8 +4851,8 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -4873,8 +4873,8 @@ func TestHostingUpdateForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -4912,8 +4912,8 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -4930,8 +4930,8 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "ACCESS_DENIED",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "ACCESS_DENIED",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -4948,8 +4948,8 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "SERVER_ERROR",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "SERVER_ERROR",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -4966,8 +4966,8 @@ func TestHostingDeleteForwardServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "TEMPORARILY_UNAVAILABLE",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}

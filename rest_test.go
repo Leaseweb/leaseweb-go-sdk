@@ -35,15 +35,15 @@ func assertServerErrorTests(t *testing.T, serverErrorTests []serverErrorTest) {
 		assert := assert.New(t)
 		assert.Empty(resp)
 		assert.NotNil(err)
-		assert.Equal(err.Error(), "leaseweb: "+serverErrorTest.ExpectedError.ErrorMessage)
+		assert.Equal(err.Error(), "leaseweb: "+serverErrorTest.ExpectedError.Message)
 		lswErr, ok := err.(*ApiError)
 		assert.Equal(true, ok)
-		assert.Equal(lswErr.ErrorMessage, serverErrorTest.ExpectedError.ErrorMessage)
+		assert.Equal(lswErr.Message, serverErrorTest.ExpectedError.Message)
 		assert.Equal(lswErr.CorrelationId, serverErrorTest.ExpectedError.CorrelationId)
-		assert.Equal(lswErr.ErrorCode, serverErrorTest.ExpectedError.ErrorCode)
+		assert.Equal(lswErr.Code, serverErrorTest.ExpectedError.Code)
 		assert.Equal(lswErr.Reference, serverErrorTest.ExpectedError.Reference)
 		assert.Equal(lswErr.UserMessage, serverErrorTest.ExpectedError.UserMessage)
-		assert.Equal(lswErr.ErrorDetails, serverErrorTest.ExpectedError.ErrorDetails)
+		assert.Equal(lswErr.Details, serverErrorTest.ExpectedError.Details)
 	}
 }
 

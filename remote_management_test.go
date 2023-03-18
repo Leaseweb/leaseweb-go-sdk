@@ -41,8 +41,8 @@ func TestRemoteManagementTestChangeCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -59,8 +59,8 @@ func TestRemoteManagementTestChangeCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "403",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "403",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -77,8 +77,8 @@ func TestRemoteManagementTestChangeCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -95,8 +95,8 @@ func TestRemoteManagementTestChangeCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -208,8 +208,8 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "401",
-				ErrorMessage:  "You are not authorized to view this resource.",
+				Code:     "401",
+				Message:  "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -226,8 +226,8 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "403",
-				ErrorMessage:  "The access token is expired or invalid.",
+				Code:     "403",
+				Message:  "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -244,8 +244,8 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "500",
-				ErrorMessage:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:     "500",
+				Message:  "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -262,8 +262,8 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				ErrorCode:     "503",
-				ErrorMessage:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:     "503",
+				Message:  "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}

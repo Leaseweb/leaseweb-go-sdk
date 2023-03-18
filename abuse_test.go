@@ -153,8 +153,8 @@ func TestAbuseListServerErrors(t *testing.T) {
 				return AbuseApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -170,8 +170,8 @@ func TestAbuseListServerErrors(t *testing.T) {
 				return AbuseApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -187,8 +187,8 @@ func TestAbuseListServerErrors(t *testing.T) {
 				return AbuseApi{}.List(ctx)
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -308,8 +308,8 @@ func TestAbuseGetServerErrors(t *testing.T) {
 				return AbuseApi{}.Get(ctx, "wrong-id")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -324,7 +324,7 @@ func TestAbuseGetServerErrors(t *testing.T) {
 				ctx := context.Background()
 				return AbuseApi{}.Get(ctx, "123456")
 			},
-			ExpectedError: ApiError{},
+			ExpectedError: ApiError{Code: "404", Message: "Not Found"},
 		},
 		{
 			Title: "error 500",
@@ -339,8 +339,8 @@ func TestAbuseGetServerErrors(t *testing.T) {
 				return AbuseApi{}.Get(ctx, "123456")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -356,8 +356,8 @@ func TestAbuseGetServerErrors(t *testing.T) {
 				return AbuseApi{}.Get(ctx, "123456")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -489,8 +489,8 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 				return AbuseApi{}.ListMessages(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -505,7 +505,7 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 				ctx := context.Background()
 				return AbuseApi{}.ListMessages(ctx, "123456789")
 			},
-			ExpectedError: ApiError{},
+			ExpectedError: ApiError{Code: "404", Message: "Not Found"},
 		},
 		{
 			Title: "error 500",
@@ -520,8 +520,8 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 				return AbuseApi{}.ListMessages(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -537,8 +537,8 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 				return AbuseApi{}.ListMessages(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -578,8 +578,8 @@ func TestAbuseCreateMessageServerErrors(t *testing.T) {
 				return AbuseApi{}.CreateMessage(ctx, "123456789", "message body...")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -595,8 +595,8 @@ func TestAbuseCreateMessageServerErrors(t *testing.T) {
 				return AbuseApi{}.CreateMessage(ctx, "123456789", "message body...")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -612,8 +612,8 @@ func TestAbuseCreateMessageServerErrors(t *testing.T) {
 				return AbuseApi{}.CreateMessage(ctx, "123456789", "message body...")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -689,8 +689,8 @@ func TestAbuseListResolutionOptionsServerErrors(t *testing.T) {
 				return AbuseApi{}.ListResolutionOptions(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -706,8 +706,8 @@ func TestAbuseListResolutionOptionsServerErrors(t *testing.T) {
 				return AbuseApi{}.ListResolutionOptions(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -723,8 +723,8 @@ func TestAbuseListResolutionOptionsServerErrors(t *testing.T) {
 				return AbuseApi{}.ListResolutionOptions(ctx, "123456789")
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
@@ -762,8 +762,8 @@ func TestAbuseResolveServerErrors(t *testing.T) {
 				return nil, AbuseApi{}.Resolve(ctx, "123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "ACCESS_DENIED",
-				ErrorMessage: "The access token is expired or invalid.",
+				Code:    "ACCESS_DENIED",
+				Message: "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -779,8 +779,8 @@ func TestAbuseResolveServerErrors(t *testing.T) {
 				return nil, AbuseApi{}.Resolve(ctx, "123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "SERVER_ERROR",
-				ErrorMessage: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
+				Code:    "SERVER_ERROR",
+				Message: "The server encountered an unexpected condition that prevented it from fulfilling the request.",
 			},
 		},
 		{
@@ -796,8 +796,8 @@ func TestAbuseResolveServerErrors(t *testing.T) {
 				return nil, AbuseApi{}.Resolve(ctx, "123456789", []string{"CONTENT_REMOVED", "SUSPENDED"})
 			},
 			ExpectedError: ApiError{
-				ErrorCode:    "TEMPORARILY_UNAVAILABLE",
-				ErrorMessage: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
+				Code:    "TEMPORARILY_UNAVAILABLE",
+				Message: "The server is currently unable to handle the request due to a temporary overloading or maintenance of the server.",
 			},
 		},
 	}
