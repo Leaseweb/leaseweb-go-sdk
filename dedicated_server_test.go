@@ -2,6 +2,7 @@ package leaseweb
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"testing"
@@ -6748,7 +6749,7 @@ func TestDedicatedServerListBandWidthNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Equal(resp.Settings[0].LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Settings[0].Threshold, "1")
+	assert.Equal(resp.Settings[0].Threshold, json.Number("1"))
 	assert.Equal(resp.Settings[0].ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Settings[0].Unit, "Gbps")
 
@@ -6757,7 +6758,7 @@ func TestDedicatedServerListBandWidthNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[1].Frequency, "DAILY")
 	assert.Equal(resp.Settings[1].Id, "123456")
 	assert.Equal(resp.Settings[1].LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Settings[1].Threshold, "1")
+	assert.Equal(resp.Settings[1].Threshold, json.Number("1"))
 	assert.Equal(resp.Settings[1].ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Settings[1].Unit, "Mbps")
 }
@@ -6806,7 +6807,7 @@ func TestDedicatedServerListBandWidthNotificationSettingsPaginate(t *testing.T) 
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Equal(resp.Settings[0].LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Settings[0].Threshold, "1")
+	assert.Equal(resp.Settings[0].Threshold, json.Number("1"))
 	assert.Equal(resp.Settings[0].ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Settings[0].Unit, "Gbps")
 }
@@ -6929,7 +6930,7 @@ func TestDedicatedServerCreateBandWidthNotificationSetting(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	resp, err := DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
+	resp, err := DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", 1, "Gbps")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -6938,7 +6939,7 @@ func TestDedicatedServerCreateBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "1")
+	assert.Equal(resp.Threshold, json.Number("1"))
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "Gbps")
 }
@@ -6955,7 +6956,7 @@ func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testin
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
+				return DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", 1, "Gbps")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6973,7 +6974,7 @@ func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testin
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
+				return DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", 1, "Gbps")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6991,7 +6992,7 @@ func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testin
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
+				return DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", 1, "Gbps")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7009,7 +7010,7 @@ func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testin
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
+				return DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", 1, "Gbps")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7027,7 +7028,7 @@ func TestDedicatedServerCreateBandWidthNotificationSettingServerErrors(t *testin
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", "1", "Gbps")
+				return DedicatedServerApi{}.CreateBandWidthNotificationSetting(ctx, "server-id", "WEEKLY", 1, "Gbps")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7180,7 +7181,7 @@ func TestDedicatedServerGetBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "1")
+	assert.Equal(resp.Threshold, json.Number("1"))
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "Gbps")
 }
@@ -7313,7 +7314,7 @@ func TestDedicatedServerUpdateBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "MONTHLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "2")
+	assert.Equal(resp.Threshold, json.Number("2"))
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "Mbps")
 }
@@ -7477,7 +7478,7 @@ func TestDedicatedServerListDataTrafficNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Empty(resp.Settings[0].LastCheckedAt)
-	assert.Equal(resp.Settings[0].Threshold, "1")
+	assert.Equal(resp.Settings[0].Threshold, json.Number("1"))
 	assert.Empty(resp.Settings[0].ThresholdExceededAt)
 	assert.Equal(resp.Settings[0].Unit, "MB")
 
@@ -7486,7 +7487,7 @@ func TestDedicatedServerListDataTrafficNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[1].Frequency, "DAILY")
 	assert.Equal(resp.Settings[1].Id, "123456")
 	assert.Empty(resp.Settings[1].LastCheckedAt)
-	assert.Equal(resp.Settings[1].Threshold, "1")
+	assert.Equal(resp.Settings[1].Threshold, json.Number("1"))
 	assert.Empty(resp.Settings[1].ThresholdExceededAt)
 	assert.Equal(resp.Settings[1].Unit, "GB")
 }
@@ -7535,7 +7536,7 @@ func TestDedicatedServerListDataTrafficNotificationSettingsPaginate(t *testing.T
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Empty(resp.Settings[0].LastCheckedAt)
-	assert.Equal(resp.Settings[0].Threshold, "1")
+	assert.Equal(resp.Settings[0].Threshold, json.Number("1"))
 	assert.Empty(resp.Settings[0].ThresholdExceededAt)
 	assert.Equal(resp.Settings[0].Unit, "MB")
 }
@@ -7658,7 +7659,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSetting(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	resp, err := DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
+	resp, err := DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", 1, "GB")
 	assert := assert.New(t)
 	assert.Nil(err)
 
@@ -7667,7 +7668,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "1")
+	assert.Equal(resp.Threshold, json.Number("1"))
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "GB")
 }
@@ -7684,7 +7685,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *test
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
+				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", 1, "GB")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7702,7 +7703,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *test
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
+				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", 1, "GB")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7720,7 +7721,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *test
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
+				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", 1, "GB")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7738,7 +7739,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *test
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
+				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", 1, "GB")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7756,7 +7757,7 @@ func TestDedicatedServerCreateDataTrafficNotificationSettingServerErrors(t *test
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", "1", "GB")
+				return DedicatedServerApi{}.CreateDataTrafficNotificationSetting(ctx, "server-id", "WEEKLY", 1, "GB")
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7909,7 +7910,7 @@ func TestDedicatedServerGetDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "1")
+	assert.Equal(resp.Threshold, json.Number("1"))
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "GB")
 }
@@ -8042,7 +8043,7 @@ func TestDedicatedServerUpdateDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "MONTHLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "2")
+	assert.Equal(resp.Threshold, json.Number("2"))
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "GB")
 }
