@@ -14,10 +14,12 @@ You can generate your API key at the [Customer Portal](https://secure.leaseweb.c
 ### Authenticate and make first call
 ```golang
 import LSW "github.com/LeaseWeb/leaseweb-go-sdk"
+import "context"
 
 func main() {
     LSW.InitLeasewebClient("api key here")
-    result, err := LSW.DedicatedServerApi{}.List()
+    ctx := context.Background()
+    result, err := LSW.DedicatedServerApi{}.List(ctx)
     if err == nil {
         fmt.Println(result)
     }
