@@ -2834,7 +2834,7 @@ func TestDedicatedRackListDataTrafficNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Empty(resp.Settings[0].LastCheckedAt)
-	assert.Equal(resp.Settings[0].Threshold, "1")
+	assert.Equal(resp.Settings[0].Threshold.String(), "1")
 	assert.Empty(resp.Settings[0].ThresholdExceededAt)
 	assert.Equal(resp.Settings[0].Unit, "MB")
 
@@ -2843,7 +2843,7 @@ func TestDedicatedRackListDataTrafficNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[1].Frequency, "DAILY")
 	assert.Equal(resp.Settings[1].Id, "123456")
 	assert.Empty(resp.Settings[1].LastCheckedAt)
-	assert.Equal(resp.Settings[1].Threshold, "1")
+	assert.Equal(resp.Settings[1].Threshold.String(), "1")
 	assert.Empty(resp.Settings[1].ThresholdExceededAt)
 	assert.Equal(resp.Settings[1].Unit, "GB")
 }
@@ -2892,7 +2892,7 @@ func TestDedicatedRackListDataTrafficNotificationSettingsPaginate(t *testing.T) 
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Empty(resp.Settings[0].LastCheckedAt)
-	assert.Equal(resp.Settings[0].Threshold, "1")
+	assert.Equal(resp.Settings[0].Threshold.String(), "1")
 	assert.Empty(resp.Settings[0].ThresholdExceededAt)
 	assert.Equal(resp.Settings[0].Unit, "MB")
 }
@@ -3024,7 +3024,7 @@ func TestDedicatedRackCreateDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "1")
+	assert.Equal(resp.Threshold.String(), "1")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "GB")
 }
@@ -3266,7 +3266,7 @@ func TestDedicatedRackGetDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "1")
+	assert.Equal(resp.Threshold.String(), "1")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "GB")
 }
@@ -3399,7 +3399,7 @@ func TestDedicatedRackUpdateDataTrafficNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "MONTHLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "2")
+	assert.Equal(resp.Threshold.String(), "2")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "GB")
 }
@@ -3563,7 +3563,7 @@ func TestDedicatedRackListBandWidthNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Equal(resp.Settings[0].LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Settings[0].Threshold, "1")
+	assert.Equal(resp.Settings[0].Threshold.String(), "1")
 	assert.Equal(resp.Settings[0].ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Settings[0].Unit, "Gbps")
 
@@ -3572,7 +3572,7 @@ func TestDedicatedRackListBandWidthNotificationSettings(t *testing.T) {
 	assert.Equal(resp.Settings[1].Frequency, "DAILY")
 	assert.Equal(resp.Settings[1].Id, "123456")
 	assert.Equal(resp.Settings[1].LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Settings[1].Threshold, "1")
+	assert.Equal(resp.Settings[1].Threshold.String(), "1")
 	assert.Equal(resp.Settings[1].ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Settings[1].Unit, "Mbps")
 }
@@ -3621,7 +3621,7 @@ func TestDedicatedRackListBandWidthNotificationSettingsPaginate(t *testing.T) {
 	assert.Equal(resp.Settings[0].Frequency, "WEEKLY")
 	assert.Equal(resp.Settings[0].Id, "12345")
 	assert.Equal(resp.Settings[0].LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Settings[0].Threshold, "1")
+	assert.Equal(resp.Settings[0].Threshold.String(), "1")
 	assert.Equal(resp.Settings[0].ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Settings[0].Unit, "Gbps")
 }
@@ -3753,7 +3753,7 @@ func TestDedicatedRackCreateBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "1")
+	assert.Equal(resp.Threshold.String(), "1")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "Gbps")
 }
@@ -3995,7 +3995,7 @@ func TestDedicatedRackGetBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "WEEKLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "1")
+	assert.Equal(resp.Threshold.String(), "1")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "Gbps")
 }
@@ -4128,7 +4128,7 @@ func TestDedicatedRackUpdateBandWidthNotificationSetting(t *testing.T) {
 	assert.Equal(resp.Frequency, "MONTHLY")
 	assert.Equal(resp.Id, "12345")
 	assert.Equal(resp.LastCheckedAt, "2021-03-16T01:01:41+00:00")
-	assert.Equal(resp.Threshold, "2")
+	assert.Equal(resp.Threshold.String(), "2")
 	assert.Equal(resp.ThresholdExceededAt, "2021-03-16T01:01:41+00:00")
 	assert.Equal(resp.Unit, "Mbps")
 }
