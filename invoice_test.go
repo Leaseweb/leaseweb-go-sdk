@@ -129,8 +129,8 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -147,8 +147,8 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "Access to the requested resource is forbidden.",
+				Code:          "403",
+				Message:       "Access to the requested resource is forbidden.",
 			},
 		},
 		{
@@ -165,8 +165,8 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -183,8 +183,8 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -343,8 +343,8 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -361,8 +361,8 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "Access to the requested resource is forbidden.",
+				Code:          "403",
+				Message:       "Access to the requested resource is forbidden.",
 			},
 		},
 		{
@@ -379,8 +379,8 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -397,8 +397,8 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -492,8 +492,8 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -510,8 +510,8 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "Access to the requested resource is forbidden.",
+				Code:          "403",
+				Message:       "Access to the requested resource is forbidden.",
 			},
 		},
 		{
@@ -528,8 +528,8 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -546,8 +546,8 @@ func TestInvoiceGetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
