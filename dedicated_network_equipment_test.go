@@ -316,8 +316,8 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -334,8 +334,8 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "Access to the requested resource is forbidden.",
+				Code:          "403",
+				Message:       "Access to the requested resource is forbidden.",
 			},
 		},
 		{
@@ -352,8 +352,8 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -370,8 +370,8 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -539,8 +539,8 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -557,8 +557,8 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "Access to the requested resource is forbidden.",
+				Code:          "403",
+				Message:       "Access to the requested resource is forbidden.",
 			},
 		},
 		{
@@ -575,8 +575,8 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -593,8 +593,8 @@ func TestDedicatedNetworkEquipmentGetServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -631,8 +631,8 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -649,8 +649,8 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "Access to the requested resource is forbidden.",
+				Code:          "403",
+				Message:       "Access to the requested resource is forbidden.",
 			},
 		},
 		{
@@ -667,8 +667,8 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -685,8 +685,8 @@ func TestDedicatedNetworkEquipmentUpdateServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -856,8 +856,8 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -874,8 +874,8 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "Access to the requested resource is forbidden.",
+				Code:          "403",
+				Message:       "Access to the requested resource is forbidden.",
 			},
 		},
 		{
@@ -892,8 +892,8 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -910,8 +910,8 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -971,8 +971,8 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -989,8 +989,8 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1007,8 +1007,8 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -1025,8 +1025,8 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -1043,8 +1043,8 @@ func TestDedicatedNetworkEquipmentGetIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -1106,8 +1106,8 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1125,8 +1125,8 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1144,8 +1144,8 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -1163,8 +1163,8 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -1182,8 +1182,8 @@ func TestDedicatedNetworkEquipmentUpdateIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -1243,8 +1243,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1261,8 +1261,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1279,8 +1279,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -1297,8 +1297,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -1315,8 +1315,8 @@ func TestDedicatedNetworkEquipmentNullRouteAnIpServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -1376,8 +1376,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1394,8 +1394,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1412,8 +1412,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -1430,8 +1430,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -1448,8 +1448,8 @@ func TestDedicatedNetworkEquipmentRemoveNullRouteAnIpServerErrors(t *testing.T) 
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -1573,8 +1573,8 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1591,8 +1591,8 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "Access to the requested resource is forbidden.",
+				Code:          "403",
+				Message:       "Access to the requested resource is forbidden.",
 			},
 		},
 		{
@@ -1609,8 +1609,8 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -1627,8 +1627,8 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -1752,8 +1752,8 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1770,8 +1770,8 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1788,8 +1788,8 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -1806,8 +1806,8 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -1824,8 +1824,8 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -1870,8 +1870,8 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -1888,8 +1888,8 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -1906,8 +1906,8 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -1924,8 +1924,8 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -1942,8 +1942,8 @@ func TestDedicatedNetworkEquipmentCreateCredentialServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -2055,8 +2055,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2073,8 +2073,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2091,8 +2091,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -2109,8 +2109,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -2127,8 +2127,8 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -2172,8 +2172,8 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2190,8 +2190,8 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2208,8 +2208,8 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -2226,8 +2226,8 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -2244,8 +2244,8 @@ func TestDedicatedNetworkEquipmentGetCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -2282,8 +2282,8 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2300,8 +2300,8 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2318,8 +2318,8 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -2336,8 +2336,8 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -2354,8 +2354,8 @@ func TestDedicatedNetworkEquipmentCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -2400,8 +2400,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2418,8 +2418,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2436,8 +2436,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -2454,8 +2454,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -2472,8 +2472,8 @@ func TestDedicatedNetworkEquipmentUpdateCredentialsServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -2510,8 +2510,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2528,8 +2528,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2546,8 +2546,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -2564,8 +2564,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -2582,8 +2582,8 @@ func TestDedicatedNetworkEquipmentPowerCycleServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -2620,8 +2620,8 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2638,8 +2638,8 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2656,8 +2656,8 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -2674,8 +2674,8 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -2692,8 +2692,8 @@ func TestDedicatedNetworkEquipmentPowerOffServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -2730,8 +2730,8 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2748,8 +2748,8 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2766,8 +2766,8 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -2784,8 +2784,8 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -2802,8 +2802,8 @@ func TestDedicatedNetworkEquipmentPowerOnServerServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}
@@ -2850,8 +2850,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "401",
-				Message:  "You are not authorized to view this resource.",
+				Code:          "401",
+				Message:       "You are not authorized to view this resource.",
 			},
 		},
 		{
@@ -2868,8 +2868,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "403",
-				Message:  "The access token is expired or invalid.",
+				Code:          "403",
+				Message:       "The access token is expired or invalid.",
 			},
 		},
 		{
@@ -2886,8 +2886,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "404",
-				Message:  "Resource not found",
+				Code:          "404",
+				Message:       "Resource not found",
 			},
 		},
 		{
@@ -2904,8 +2904,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "500",
-				Message:  "The API could not handle your request at this time.",
+				Code:          "500",
+				Message:       "The API could not handle your request at this time.",
 			},
 		},
 		{
@@ -2922,8 +2922,8 @@ func TestDedicatedNetworkEquipmentGetPowerStatusServerErrors(t *testing.T) {
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
-				Code:     "503",
-				Message:  "The API is not available at the moment.",
+				Code:          "503",
+				Message:       "The API is not available at the moment.",
 			},
 		},
 	}

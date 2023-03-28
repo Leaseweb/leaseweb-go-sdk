@@ -310,9 +310,9 @@ func TestPrivateCloudGetServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.Get(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				Code:    "404",
-				Message: "Resource 218030 was not found",
-				UserMessage:  "Resource with id 218030 not found.",
+				Code:        "404",
+				Message:     "Resource 218030 was not found",
+				UserMessage: "Resource with id 218030 not found.",
 			},
 		},
 		{
@@ -469,9 +469,9 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT")
 			},
 			ExpectedError: ApiError{
-				Code:    "404",
-				Message: "Resource 218030 was not found",
-				UserMessage:  "Resource with id 218030 not found.",
+				Code:        "404",
+				Message:     "Resource 218030 was not found",
+				UserMessage: "Resource with id 218030 not found.",
 			},
 		},
 		{
@@ -570,9 +570,9 @@ func TestPrivateCloudGetCredentialServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetCredential(ctx, "218030", "REMOTE_MANAGEMENT", "root")
 			},
 			ExpectedError: ApiError{
-				Code:    "404",
-				Message: "Resource 218030 was not found",
-				UserMessage:  "Resource with id 218030 not found.",
+				Code:        "404",
+				Message:     "Resource 218030 was not found",
+				UserMessage: "Resource with id 218030 not found.",
 			},
 		},
 		{
@@ -777,9 +777,9 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				Code:    "404",
-				Message: "Resource 218030 was not found",
-				UserMessage:  "Resource with id 218030 not found.",
+				Code:        "404",
+				Message:     "Resource 218030 was not found",
+				UserMessage: "Resource with id 218030 not found.",
 			},
 		},
 		{
@@ -984,9 +984,9 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				Code:    "404",
-				Message: "Resource 218030 was not found",
-				UserMessage:  "Resource with id 218030 not found.",
+				Code:        "404",
+				Message:     "Resource 218030 was not found",
+				UserMessage: "Resource with id 218030 not found.",
 			},
 		},
 		{
@@ -1155,9 +1155,9 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				Code:    "404",
-				Message: "Resource 218030 was not found",
-				UserMessage:  "Resource with id 218030 not found.",
+				Code:        "404",
+				Message:     "Resource 218030 was not found",
+				UserMessage: "Resource with id 218030 not found.",
 			},
 		},
 		{
@@ -1326,9 +1326,9 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				Code:    "404",
-				Message: "Resource 218030 was not found",
-				UserMessage:  "Resource with id 218030 not found.",
+				Code:        "404",
+				Message:     "Resource 218030 was not found",
+				UserMessage: "Resource with id 218030 not found.",
 			},
 		},
 		{
@@ -1497,9 +1497,9 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030")
 			},
 			ExpectedError: ApiError{
-				Code:    "404",
-				Message: "Resource 218030 was not found",
-				UserMessage:  "Resource with id 218030 not found.",
+				Code:        "404",
+				Message:     "Resource 218030 was not found",
+				UserMessage: "Resource with id 218030 not found.",
 			},
 		},
 		{
