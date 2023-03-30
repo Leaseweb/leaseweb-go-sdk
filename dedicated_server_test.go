@@ -86,7 +86,7 @@ func TestDedicatedServerList(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.List(ctx)
+	response, err := DedicatedServerApi{}.List(ctx, DedicatedServerListOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 1)
@@ -152,7 +152,7 @@ func TestDedicatedServerListBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.List(ctx)
+	response, err := DedicatedServerApi{}.List(ctx, DedicatedServerListOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -238,7 +238,15 @@ func TestDedicatedServerListPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.List(ctx, 1, 10, "10.22.192.3", "AA:BB:CC:DD:EE:FF", "AMS-01")
+
+	opts := DedicatedServerListOptions{}
+	opts.Site = String("AMS-01")
+	opts.OffSet = Int(0)
+	opts.Limit = Int(10)
+	opts.IP = String("10.22.192.3")
+	opts.MacAddress = String("AA:BB:CC:DD:EE:FF")
+
+	response, err := DedicatedServerApi{}.List(ctx, opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -308,7 +316,7 @@ func TestDedicatedServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.List(ctx)
+				return DedicatedServerApi{}.List(ctx, DedicatedServerListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -326,7 +334,7 @@ func TestDedicatedServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.List(ctx)
+				return DedicatedServerApi{}.List(ctx, DedicatedServerListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -344,7 +352,7 @@ func TestDedicatedServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.List(ctx)
+				return DedicatedServerApi{}.List(ctx, DedicatedServerListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -362,7 +370,7 @@ func TestDedicatedServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.List(ctx)
+				return DedicatedServerApi{}.List(ctx, DedicatedServerListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

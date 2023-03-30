@@ -3,8 +3,11 @@ package leaseweb
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
+	"net/url"
+	"reflect"
 	"strconv"
 	"strings"
 )
@@ -73,6 +76,33 @@ func getBaseUrl() string {
 		return lswClient.baseUrl
 	}
 	return DEFAULT_BASE_URL
+}
+
+func structToURLValues(input interface{}) string {
+	queryValues := url.Values{}
+	structType := reflect.TypeOf(input)
+	structValue := reflect.ValueOf(input)
+
+	for i := 0; i < structType.NumField(); i++ {
+		field := structType.Field(i)
+		value := structValue.Field(i)
+
+		if !value.IsNil() {
+			queryParam := field.Tag.Get("queryParam")
+			if queryParam == "" {
+				queryParam = field.Name
+			}
+			val := value.Elem().Interface()
+
+			if strVal, ok := val.(string); ok {
+				queryValues.Add(queryParam, strVal)
+			} else {
+				queryValues.Add(queryParam, fmt.Sprintf("%v", val))
+			}
+		}
+	}
+
+	return queryValues.Encode()
 }
 
 func doRequest(ctx context.Context, method string, path string, args ...interface{}) error {

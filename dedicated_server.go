@@ -415,38 +415,25 @@ type DedicatedServerRescueImage struct {
 	Name string `json:"name"`
 }
 
+type DedicatedServerListOptions struct {
+	OffSet                *int    `queryParam:"offset"`
+	Limit                 *int    `queryParam:"limit"`
+	IP                    *string `queryParam:"ip"`
+	MacAddress            *string `queryParam:"macAddress"`
+	Site                  *string `queryParam:"site"`
+	PrivateRackID         *int    `queryParam:"privateRackId"`
+	Reference             *string `queryParam:"reference"`
+	PrivateNetworkCapable *bool   `queryParam:"privateNetworkCapable"`
+	PrivateNetworkEnabled *bool   `queryParam:"privateNetworkEnabled"`
+}
+
 func (dsa DedicatedServerApi) getPath(endpoint string) string {
 	return "/bareMetals/" + DEDICATED_SERVER_API_VERSION + endpoint
 }
 
-func (dsa DedicatedServerApi) List(ctx context.Context, args ...interface{}) (*DedicatedServers, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("ip", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("macAddress", fmt.Sprint(args[3]))
-	}
-	if len(args) >= 5 {
-		v.Add("site", fmt.Sprint(args[4]))
-	}
-	if len(args) >= 6 {
-		v.Add("privateRackId", fmt.Sprint(args[5]))
-	}
-	if len(args) >= 7 {
-		v.Add("privateNetworkCapable", fmt.Sprint(args[6]))
-	}
-	if len(args) >= 8 {
-		v.Add("privateNetworkEnabled", fmt.Sprint(args[7]))
-	}
-
-	path := dsa.getPath("/servers?" + v.Encode())
+func (dsa DedicatedServerApi) List(ctx context.Context, opts DedicatedServerListOptions) (*DedicatedServers, error) {
+	queryValues := structToURLValues(opts)
+	path := dsa.getPath("/servers?" + queryValues)
 	result := &DedicatedServers{}
 	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
