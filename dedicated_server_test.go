@@ -239,12 +239,13 @@ func TestDedicatedServerListPaginateAndFilter(t *testing.T) {
 
 	ctx := context.Background()
 
-	opts := DedicatedServerListOptions{}
-	opts.Site = String("AMS-01")
-	opts.OffSet = Int(0)
-	opts.Limit = Int(10)
-	opts.IP = String("10.22.192.3")
-	opts.MacAddress = String("AA:BB:CC:DD:EE:FF")
+	opts := DedicatedServerListOptions{
+		Site:       String("AMS-01"),
+		OffSet:     Int(0),
+		Limit:      Int(10),
+		IP:         String("10.22.192.3"),
+		MacAddress: String("AA:BB:CC:DD:EE:FF"),
+	}
 
 	response, err := DedicatedServerApi{}.List(ctx, opts)
 	assert := assert.New(t)
