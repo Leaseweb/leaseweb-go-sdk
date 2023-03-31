@@ -416,15 +416,15 @@ type DedicatedServerRescueImage struct {
 }
 
 type DedicatedServerListOptions struct {
-	OffSet                *int    `queryParam:"offset"`
-	Limit                 *int    `queryParam:"limit"`
-	IP                    *string `queryParam:"ip"`
-	MacAddress            *string `queryParam:"macAddress"`
-	Site                  *string `queryParam:"site"`
-	PrivateRackID         *int    `queryParam:"privateRackId"`
-	Reference             *string `queryParam:"reference"`
-	PrivateNetworkCapable *bool   `queryParam:"privateNetworkCapable"`
-	PrivateNetworkEnabled *bool   `queryParam:"privateNetworkEnabled"`
+	OffSet                *int    `param:"offset"`
+	Limit                 *int    `param:"limit"`
+	IP                    *string `param:"ip"`
+	MacAddress            *string `param:"macAddress"`
+	Site                  *string `param:"site"`
+	PrivateRackID         *int    `param:"privateRackId"`
+	Reference             *string `param:"reference"`
+	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
+	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
 }
 
 func (dsa DedicatedServerApi) getPath(endpoint string) string {

@@ -88,7 +88,7 @@ func structToURLValues(input interface{}) string {
 		value := structValue.Field(i)
 
 		if !value.IsNil() {
-			queryParam := field.Tag.Get("queryParam")
+			queryParam := field.Tag.Get("param")
 			if queryParam == "" {
 				queryParam = field.Name
 			}
