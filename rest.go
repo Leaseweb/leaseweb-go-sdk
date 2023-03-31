@@ -93,12 +93,7 @@ func structToURLValues(input interface{}) string {
 				queryParam = field.Name
 			}
 			val := value.Elem().Interface()
-
-			if strVal, ok := val.(string); ok {
-				queryValues.Add(queryParam, strVal)
-			} else {
-				queryValues.Add(queryParam, fmt.Sprintf("%v", val))
-			}
+			queryValues.Add(queryParam, fmt.Sprintf("%v", val))
 		}
 	}
 
