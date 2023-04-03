@@ -416,7 +416,7 @@ type DedicatedServerRescueImage struct {
 }
 
 type DedicatedServerListOptions struct {
-	OffSet                *int    `param:"offset"`
+	Offset                *int    `param:"offset"`
 	Limit                 *int    `param:"limit"`
 	IP                    *string `param:"ip"`
 	MacAddress            *string `param:"macAddress"`
