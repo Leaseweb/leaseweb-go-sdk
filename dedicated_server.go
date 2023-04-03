@@ -434,8 +434,7 @@ func (dsa DedicatedServerApi) getPath(endpoint string) string {
 }
 
 func (dsa DedicatedServerApi) List(ctx context.Context, opts DedicatedServerListOptions) (*DedicatedServers, error) {
-	queryValues := options.Encode(opts)
-	path := dsa.getPath("/servers?" + queryValues)
+	path := dsa.getPath("/servers?" + options.Encode(opts))
 	result := &DedicatedServers{}
 	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
