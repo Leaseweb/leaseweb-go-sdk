@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const DEDICATED_SERVER_API_VERSION = "v2"
@@ -432,7 +434,7 @@ func (dsa DedicatedServerApi) getPath(endpoint string) string {
 }
 
 func (dsa DedicatedServerApi) List(ctx context.Context, opts DedicatedServerListOptions) (*DedicatedServers, error) {
-	queryValues := structToURLValues(opts)
+	queryValues := options.Encode(opts)
 	path := dsa.getPath("/servers?" + queryValues)
 	result := &DedicatedServers{}
 	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
