@@ -40,9 +40,10 @@ func (pna PrivateNetworkingApi) List(ctx context.Context, args ...int) (*Private
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	path := pna.getPath("/privateNetworks?" + v.Encode())
+	path := pna.getPath("/privateNetworks")
+	query := v.Encode()
 	result := &PrivateNetworks{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -54,7 +55,7 @@ func (pna PrivateNetworkingApi) Create(ctx context.Context, name string) (*Priva
 	}
 	path := pna.getPath("/privateNetworks")
 	result := &PrivateNetwork{}
-	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -63,7 +64,7 @@ func (pna PrivateNetworkingApi) Create(ctx context.Context, name string) (*Priva
 func (pna PrivateNetworkingApi) Get(ctx context.Context, id string) (*PrivateNetwork, error) {
 	path := pna.getPath("/privateNetworks/" + id)
 	result := &PrivateNetwork{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -75,7 +76,7 @@ func (pna PrivateNetworkingApi) Update(ctx context.Context, id, name string) (*P
 	}
 	path := pna.getPath("/privateNetworks")
 	result := &PrivateNetwork{}
-	if err := doRequest(ctx, http.MethodPut, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -83,7 +84,7 @@ func (pna PrivateNetworkingApi) Update(ctx context.Context, id, name string) (*P
 
 func (pna PrivateNetworkingApi) Delete(ctx context.Context, id string) error {
 	path := pna.getPath("/privateNetworks/" + id)
-	return doRequest(ctx, http.MethodDelete, path)
+	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (pna PrivateNetworkingApi) ListDhcpReservations(ctx context.Context, id string, args ...int) (*PrivateNetworkingDhcpReservations, error) {
@@ -95,9 +96,10 @@ func (pna PrivateNetworkingApi) ListDhcpReservations(ctx context.Context, id str
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	path := pna.getPath("/privateNetworks/" + id + "/reservations?" + v.Encode())
+	path := pna.getPath("/privateNetworks/" + id + "/reservations")
+	query := v.Encode()
 	result := &PrivateNetworkingDhcpReservations{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -111,7 +113,7 @@ func (pna PrivateNetworkingApi) CreateDhcpReservation(ctx context.Context, id, i
 	}
 	path := pna.getPath("/privateNetworks/" + id + "/reservations")
 	result := &PrivateNetworkingDhcpReservation{}
-	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -119,5 +121,5 @@ func (pna PrivateNetworkingApi) CreateDhcpReservation(ctx context.Context, id, i
 
 func (pna PrivateNetworkingApi) DeleteDhcpReservation(ctx context.Context, id, ip string) error {
 	path := pna.getPath("/privateNetworks/" + id + "/reservations/" + ip)
-	return doRequest(ctx, http.MethodDelete, path)
+	return doRequest(ctx, http.MethodDelete, path, "")
 }

@@ -83,9 +83,10 @@ func (ia InvoiceApi) List(ctx context.Context, args ...int) (*Invoices, error) {
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	path := ia.getPath("/invoices?" + v.Encode())
+	path := ia.getPath("/invoices")
+	query := v.Encode()
 	result := &Invoices{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -100,9 +101,10 @@ func (ia InvoiceApi) ListProForma(ctx context.Context, args ...int) (*InvoicePro
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	path := ia.getPath("/invoices/proforma?" + v.Encode())
+	path := ia.getPath("/invoices/proforma")
+	query := v.Encode()
 	result := &InvoiceProForma{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -111,7 +113,7 @@ func (ia InvoiceApi) ListProForma(ctx context.Context, args ...int) (*InvoicePro
 func (ia InvoiceApi) Get(ctx context.Context, invoiceId string) (*Invoice, error) {
 	path := ia.getPath("/invoices/" + invoiceId)
 	result := &Invoice{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil

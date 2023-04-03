@@ -71,9 +71,10 @@ func (dnea DedicatedNetworkEquipmentApi) List(ctx context.Context, args ...inter
 		v.Add("privateNetworkEnabled", fmt.Sprint(args[7]))
 	}
 
-	path := dnea.getPath("/networkEquipments?" + v.Encode())
+	path := dnea.getPath("/networkEquipments")
+	query := v.Encode()
 	result := &DedicatedNetworkEquipments{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -82,7 +83,7 @@ func (dnea DedicatedNetworkEquipmentApi) List(ctx context.Context, args ...inter
 func (dnea DedicatedNetworkEquipmentApi) Get(ctx context.Context, networkEquipmentId string) (*DedicatedNetworkEquipment, error) {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId)
 	result := &DedicatedNetworkEquipment{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -91,7 +92,7 @@ func (dnea DedicatedNetworkEquipmentApi) Get(ctx context.Context, networkEquipme
 func (dnea DedicatedNetworkEquipmentApi) Update(ctx context.Context, networkEquipmentId, reference string) error {
 	payload := map[string]string{"reference": reference}
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId)
-	return doRequest(ctx, http.MethodPut, path, nil, payload)
+	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
 func (dnea DedicatedNetworkEquipmentApi) ListIps(ctx context.Context, networkEquipmentId string, args ...interface{}) (*Ips, error) {
@@ -115,9 +116,10 @@ func (dnea DedicatedNetworkEquipmentApi) ListIps(ctx context.Context, networkEqu
 		v.Add("ips", fmt.Sprint(args[5]))
 	}
 
-	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/ips" + v.Encode())
+	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/ips")
+	query := v.Encode()
 	result := &Ips{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -126,7 +128,7 @@ func (dnea DedicatedNetworkEquipmentApi) ListIps(ctx context.Context, networkEqu
 func (dnea DedicatedNetworkEquipmentApi) GetIp(ctx context.Context, networkEquipmentId, ip string) (*Ip, error) {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/ips/" + ip)
 	result := &Ip{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -135,7 +137,7 @@ func (dnea DedicatedNetworkEquipmentApi) GetIp(ctx context.Context, networkEquip
 func (dnea DedicatedNetworkEquipmentApi) UpdateIp(ctx context.Context, networkEquipmentId, ip string, payload map[string]string) (*Ip, error) {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/ips/" + ip)
 	result := &Ip{}
-	if err := doRequest(ctx, http.MethodPut, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -144,7 +146,7 @@ func (dnea DedicatedNetworkEquipmentApi) UpdateIp(ctx context.Context, networkEq
 func (dnea DedicatedNetworkEquipmentApi) NullRouteAnIp(ctx context.Context, networkEquipmentId, ip string) (*Ip, error) {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/ips/" + ip + "/null")
 	result := &Ip{}
-	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -153,7 +155,7 @@ func (dnea DedicatedNetworkEquipmentApi) NullRouteAnIp(ctx context.Context, netw
 func (dnea DedicatedNetworkEquipmentApi) RemoveNullRouteAnIp(ctx context.Context, networkEquipmentId, ip string) (*Ip, error) {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/ips/" + ip + "/unnull")
 	result := &Ip{}
-	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -168,9 +170,10 @@ func (dnea DedicatedNetworkEquipmentApi) ListNullRoutes(ctx context.Context, net
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/nullRouteHistory?" + v.Encode())
+	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/nullRouteHistory")
+	query := v.Encode()
 	result := &NullRoutes{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -186,8 +189,9 @@ func (dnea DedicatedNetworkEquipmentApi) ListCredentials(ctx context.Context, ne
 	}
 
 	result := &Credentials{}
-	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials?" + v.Encode())
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials")
+	query := v.Encode()
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -200,7 +204,7 @@ func (dnea DedicatedNetworkEquipmentApi) CreateCredential(ctx context.Context, n
 	payload["username"] = username
 	payload["password"] = password
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials")
-	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -216,8 +220,9 @@ func (dnea DedicatedNetworkEquipmentApi) ListCredentialsByType(ctx context.Conte
 	}
 
 	result := &Credentials{}
-	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials/" + credentialType + "?" + v.Encode())
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials/" + credentialType)
+	query := v.Encode()
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -226,7 +231,7 @@ func (dnea DedicatedNetworkEquipmentApi) ListCredentialsByType(ctx context.Conte
 func (dnea DedicatedNetworkEquipmentApi) GetCredential(ctx context.Context, networkEquipmentId, credentialType, username string) (*Credential, error) {
 	result := &Credential{}
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials/" + credentialType + "/" + username)
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -234,14 +239,14 @@ func (dnea DedicatedNetworkEquipmentApi) GetCredential(ctx context.Context, netw
 
 func (dnea DedicatedNetworkEquipmentApi) DeleteCredential(ctx context.Context, networkEquipmentId, credentialType, username string) error {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials/" + credentialType + "/" + username)
-	return doRequest(ctx, http.MethodDelete, path)
+	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (dnea DedicatedNetworkEquipmentApi) UpdateCredential(ctx context.Context, networkEquipmentId, credentialType, username, password string) (*Credential, error) {
 	result := &Credential{}
 	payload := map[string]string{"password": password}
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials/" + credentialType + "/" + username)
-	if err := doRequest(ctx, http.MethodPut, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -249,13 +254,13 @@ func (dnea DedicatedNetworkEquipmentApi) UpdateCredential(ctx context.Context, n
 
 func (dnea DedicatedNetworkEquipmentApi) PowerCycleServer(ctx context.Context, networkEquipmentId string) error {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/powerCycle")
-	return doRequest(ctx, http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path, "")
 }
 
 func (dnea DedicatedNetworkEquipmentApi) GetPowerStatus(ctx context.Context, networkEquipmentId string) (*PowerStatus, error) {
 	result := &PowerStatus{}
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/powerInfo")
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -263,10 +268,10 @@ func (dnea DedicatedNetworkEquipmentApi) GetPowerStatus(ctx context.Context, net
 
 func (dnea DedicatedNetworkEquipmentApi) PowerOffServer(ctx context.Context, networkEquipmentId string) error {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/powerOff")
-	return doRequest(ctx, http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path, "")
 }
 
 func (dnea DedicatedNetworkEquipmentApi) PowerOnServer(ctx context.Context, networkEquipmentId string) error {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/powerOn")
-	return doRequest(ctx, http.MethodPost, path)
+	return doRequest(ctx, http.MethodPost, path, "")
 }

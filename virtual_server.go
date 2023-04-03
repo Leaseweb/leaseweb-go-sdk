@@ -69,9 +69,10 @@ func (vsa VirtualServerApi) List(ctx context.Context, args ...int) (*VirtualServ
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	path := vsa.getPath("/virtualServers?" + v.Encode())
+	path := vsa.getPath("/virtualServers")
+	query := v.Encode()
 	result := &VirtualServers{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -80,7 +81,7 @@ func (vsa VirtualServerApi) List(ctx context.Context, args ...int) (*VirtualServ
 func (vsa VirtualServerApi) Get(ctx context.Context, virtualServerId string) (*VirtualServer, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId)
 	result := &VirtualServer{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -90,7 +91,7 @@ func (vsa VirtualServerApi) Update(ctx context.Context, virtualServerId, referen
 	payload := map[string]string{"reference": reference}
 	path := vsa.getPath("/virtualServers/" + virtualServerId)
 	result := &VirtualServer{}
-	if err := doRequest(ctx, http.MethodPut, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -99,7 +100,7 @@ func (vsa VirtualServerApi) Update(ctx context.Context, virtualServerId, referen
 func (vsa VirtualServerApi) PowerOn(ctx context.Context, virtualServerId string) (*VirtualServerResult, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/powerOn")
 	result := &VirtualServerResult{}
-	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -108,7 +109,7 @@ func (vsa VirtualServerApi) PowerOn(ctx context.Context, virtualServerId string)
 func (vsa VirtualServerApi) PowerOff(ctx context.Context, virtualServerId string) (*VirtualServerResult, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/powerOff")
 	result := &VirtualServerResult{}
-	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -117,7 +118,7 @@ func (vsa VirtualServerApi) PowerOff(ctx context.Context, virtualServerId string
 func (vsa VirtualServerApi) Reboot(ctx context.Context, virtualServerId string) (*VirtualServerResult, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/reboot")
 	result := &VirtualServerResult{}
-	if err := doRequest(ctx, http.MethodPost, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -127,7 +128,7 @@ func (vsa VirtualServerApi) Reinstall(ctx context.Context, virtualServerId, oper
 	payload := map[string]string{"operatingSystemId": operatingSystemId}
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/reinstall")
 	result := &VirtualServerResult{}
-	if err := doRequest(ctx, http.MethodPost, path, result, payload); err != nil {
+	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -136,7 +137,7 @@ func (vsa VirtualServerApi) Reinstall(ctx context.Context, virtualServerId, oper
 func (vsa VirtualServerApi) UpdateCredential(ctx context.Context, virtualServerId, username, credentialType, password string) error {
 	payload := map[string]string{"username": username, "type": credentialType, "password": password}
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/credentials")
-	return doRequest(ctx, http.MethodPut, path, nil, payload)
+	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
 func (vsa VirtualServerApi) ListCredentials(ctx context.Context, virtualServerId, credentialType string, args ...int) (*Credentials, error) {
@@ -148,9 +149,10 @@ func (vsa VirtualServerApi) ListCredentials(ctx context.Context, virtualServerId
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	path := vsa.getPath("/virtualServers/" + virtualServerId + "/credentials/" + credentialType + "?" + v.Encode())
+	path := vsa.getPath("/virtualServers/" + virtualServerId + "/credentials/" + credentialType)
+	query := v.Encode()
 	result := &Credentials{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -159,7 +161,7 @@ func (vsa VirtualServerApi) ListCredentials(ctx context.Context, virtualServerId
 func (vsa VirtualServerApi) GetCredential(ctx context.Context, virtualServerId, username, credentialType string) (*Credential, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/credentials/" + credentialType + "/" + username)
 	result := &Credential{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -180,9 +182,10 @@ func (vsa VirtualServerApi) GetDataTrafficMetrics(ctx context.Context, virtualSe
 		v.Add("to", fmt.Sprint(args[3]))
 	}
 
-	path := vsa.getPath("/virtualServers/" + virtualServerId + "/metrics/datatraffic?" + v.Encode())
+	path := vsa.getPath("/virtualServers/" + virtualServerId + "/metrics/datatraffic")
+	query := v.Encode()
 	result := &DataTrafficMetricsV2{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -199,7 +202,7 @@ func (vsa VirtualServerApi) ListTemplates(ctx context.Context, virtualServerId s
 
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/templates")
 	result := &VirtualServerTemplates{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
