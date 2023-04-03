@@ -91,7 +91,7 @@ func TestStructToURLValues(t *testing.T) {
 		{
 			name: "Test Case 1: Full options",
 			opts: DedicatedServerListOptions{
-				OffSet:                Int(0),
+				Offset:                Int(0),
 				Limit:                 Int(10),
 				IP:                    String("10.22.192.3"),
 				MacAddress:            String("AA:BB:CC:DD:EE:FF"),
@@ -106,7 +106,7 @@ func TestStructToURLValues(t *testing.T) {
 		{
 			name: "Test Case 2: Limited options",
 			opts: DedicatedServerListOptions{
-				OffSet:     Int(0),
+				Offset:     Int(0),
 				Limit:      Int(10),
 				MacAddress: String(""),
 				Site:       String("AMS-01"),

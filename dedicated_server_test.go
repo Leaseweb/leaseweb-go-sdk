@@ -241,7 +241,7 @@ func TestDedicatedServerListPaginateAndFilter(t *testing.T) {
 
 	opts := DedicatedServerListOptions{
 		Site:       String("AMS-01"),
-		OffSet:     Int(0),
+		Offset:     Int(0),
 		Limit:      Int(10),
 		IP:         String("10.22.192.3"),
 		MacAddress: String("AA:BB:CC:DD:EE:FF"),
