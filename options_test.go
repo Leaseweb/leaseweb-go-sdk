@@ -37,6 +37,11 @@ func TestEncode(t *testing.T) {
 			},
 			expected: "limit=10&macAddress=&offset=0&site=AMS-01",
 		},
+		{
+			name:     "Test Case 3: Empty struct",
+			opts:     DedicatedServerListOptions{},
+			expected: "",
+		},
 	}
 
 	for _, tc := range testCases {
