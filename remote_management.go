@@ -29,7 +29,7 @@ func (rma RemoteManagementApi) getPath(endpoint string) string {
 func (rma RemoteManagementApi) ChangeCredentials(ctx context.Context, password string) error {
 	payload := map[string]string{password: password}
 	path := rma.getPath("/remoteManagement/changeCredentials")
-	return doRequest(ctx, http.MethodPost, path, nil, payload)
+	return doRequest(ctx, http.MethodPost, path, "", nil, payload)
 }
 
 func (rma RemoteManagementApi) ListProfiles(ctx context.Context, args ...int) (*RemoteManagementProfiles, error) {
@@ -41,9 +41,10 @@ func (rma RemoteManagementApi) ListProfiles(ctx context.Context, args ...int) (*
 		v.Add("limit", fmt.Sprint(args[1]))
 	}
 
-	path := rma.getPath("/remoteManagement/profiles" + v.Encode())
+	path := rma.getPath("/remoteManagement/profiles")
+	query := v.Encode()
 	result := &RemoteManagementProfiles{}
-	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil

@@ -75,8 +75,12 @@ func getBaseUrl() string {
 	return DEFAULT_BASE_URL
 }
 
-func doRequest(ctx context.Context, method string, path string, args ...interface{}) error {
+func doRequest(ctx context.Context, method, path, query string, args ...interface{}) error {
 	url := getBaseUrl() + path
+	if query != "" {
+		url += "?" + query
+	}
+
 	apiContext := ApiContext{method, url}
 
 	var tmpPayload io.Reader
