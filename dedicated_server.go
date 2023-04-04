@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const DEDICATED_SERVER_API_VERSION = "v2"
@@ -415,38 +417,24 @@ type DedicatedServerRescueImage struct {
 	Name string `json:"name"`
 }
 
+type DedicatedServerListOptions struct {
+	Offset                *int    `param:"offset"`
+	Limit                 *int    `param:"limit"`
+	IP                    *string `param:"ip"`
+	MacAddress            *string `param:"macAddress"`
+	Site                  *string `param:"site"`
+	PrivateRackID         *int    `param:"privateRackId"`
+	Reference             *string `param:"reference"`
+	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
+	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
+}
+
 func (dsa DedicatedServerApi) getPath(endpoint string) string {
 	return "/bareMetals/" + DEDICATED_SERVER_API_VERSION + endpoint
 }
 
-func (dsa DedicatedServerApi) List(ctx context.Context, args ...interface{}) (*DedicatedServers, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("ip", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("macAddress", fmt.Sprint(args[3]))
-	}
-	if len(args) >= 5 {
-		v.Add("site", fmt.Sprint(args[4]))
-	}
-	if len(args) >= 6 {
-		v.Add("privateRackId", fmt.Sprint(args[5]))
-	}
-	if len(args) >= 7 {
-		v.Add("privateNetworkCapable", fmt.Sprint(args[6]))
-	}
-	if len(args) >= 8 {
-		v.Add("privateNetworkEnabled", fmt.Sprint(args[7]))
-	}
-
-	path := dsa.getPath("/servers?" + v.Encode())
+func (dsa DedicatedServerApi) List(ctx context.Context, opts DedicatedServerListOptions) (*DedicatedServers, error) {
+	path := dsa.getPath("/servers?" + options.Encode(opts))
 	result := &DedicatedServers{}
 	if err := doRequest(ctx, http.MethodGet, path, result); err != nil {
 		return nil, err
