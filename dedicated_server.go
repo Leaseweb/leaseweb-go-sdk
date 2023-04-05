@@ -429,6 +429,79 @@ type DedicatedServerListOptions struct {
 	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
 }
 
+type DedicatedServerIpListOptions struct {
+	NetworkType *string `param:"networkType"`
+	Version     *string `param:"version"`
+	NullRouted  *string `param:"nullRouted"`
+	IPs         *string `param:"ips"`
+	Limit       *int    `param:"limit"`
+	Offset      *int    `param:"offset"`
+}
+
+type DedicatedServerNullRouteHistoryOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedServerJobListOptions struct {
+	Limit     *int    `param:"limit"`
+	Offset    *int    `param:"offset"`
+	Type      *string `param:"type"`
+	Status    *string `param:"status"`
+	IsRunning *bool   `param:"isRunning"`
+}
+
+type DedicatedServerCredentialsListOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedServerCredentialsListTypeOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedServerMetricsDataTrafficOptions struct {
+	From        *string `param:"from"`
+	To          *string `param:"to"`
+	Granularity *string `param:"granularity"`
+	Aggregation *string `param:"aggregation"`
+}
+
+type DedicatedServerMetricsBandwidthOptions struct {
+	From        *string `param:"from"`
+	To          *string `param:"to"`
+	Granularity *string `param:"granularity"`
+	Aggregation *string `param:"aggregation"`
+}
+
+type DedicatedServerListBandwidthNotificationOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedServerListDatatrafficNotificationOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedServerListOperatingSystemsOptions struct {
+	Limit          *int    `param:"limit"`
+	Offset         *int    `param:"offset"`
+	ControlPanelId *string `param:"controlPanelId"`
+}
+
+type DedicatedServerListControlPanelsOptions struct {
+	Limit             *int    `param:"limit"`
+	Offset            *int    `param:"offset"`
+	OperatingSystemId *string `param:"operatingSystemId"`
+}
+
+type DedicatedServerRescueImagesListOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
 func (dsa DedicatedServerApi) getPath(endpoint string) string {
 	return "/bareMetals/" + DEDICATED_SERVER_API_VERSION + endpoint
 }
@@ -466,29 +539,9 @@ func (dsa DedicatedServerApi) GetHardwareInformation(ctx context.Context, server
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListIps(ctx context.Context, serverId string, args ...interface{}) (*Ips, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("networkType", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("version", fmt.Sprint(args[3]))
-	}
-	if len(args) >= 5 {
-		v.Add("nullRouted", fmt.Sprint(args[4]))
-	}
-	if len(args) >= 6 {
-		v.Add("ips", fmt.Sprint(args[5]))
-	}
-
+func (dsa DedicatedServerApi) ListIps(ctx context.Context, serverId string, opts DedicatedServerIpListOptions) (*Ips, error) {
 	path := dsa.getPath("/servers/" + serverId + "/ips")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &Ips{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -532,17 +585,9 @@ func (dsa DedicatedServerApi) RemoveNullRouteAnIp(ctx context.Context, serverId,
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListNullRoutes(ctx context.Context, serverId string, args ...int) (*NullRoutes, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dsa DedicatedServerApi) ListNullRoutes(ctx context.Context, serverId string, opts DedicatedServerNullRouteHistoryOptions) (*NullRoutes, error) {
 	path := dsa.getPath("/servers/" + serverId + "/nullRouteHistory")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &NullRoutes{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -550,15 +595,7 @@ func (dsa DedicatedServerApi) ListNullRoutes(ctx context.Context, serverId strin
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListNetworkInterfaces(ctx context.Context, serverId string, args ...interface{}) (*DedicatedServerNetworkInterfaces, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dsa DedicatedServerApi) ListNetworkInterfaces(ctx context.Context, serverId string) (*DedicatedServerNetworkInterfaces, error) {
 	path := dsa.getPath("/servers/" + serverId + "/networkInterfaces")
 	result := &DedicatedServerNetworkInterfaces{}
 	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
@@ -612,18 +649,10 @@ func (dsa DedicatedServerApi) DeleteDhcpReservation(ctx context.Context, serverI
 	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
-func (dsa DedicatedServerApi) ListDhcpReservation(ctx context.Context, serverId string, args ...interface{}) (*DedicatedServerDhcpReservations, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
+func (dsa DedicatedServerApi) ListDhcpReservation(ctx context.Context, serverId string) (*DedicatedServerDhcpReservations, error) {
 	path := dsa.getPath("/servers/" + serverId + "/leases")
-	query := v.Encode()
 	result := &DedicatedServerDhcpReservations{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -679,27 +708,10 @@ func (dsa DedicatedServerApi) LaunchIpmiRest(ctx context.Context, serverId strin
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListJobs(ctx context.Context, serverId string, args ...interface{}) (*DedicatedServerJobs, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("type", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("status", fmt.Sprint(args[3]))
-	}
-	if len(args) >= 5 {
-		v.Add("isRunning", fmt.Sprint(args[4]))
-	}
-
+func (dsa DedicatedServerApi) ListJobs(ctx context.Context, serverId string, opts DedicatedServerJobListOptions) (*DedicatedServerJobs, error) {
 	result := &DedicatedServerJobs{}
 	path := dsa.getPath("/servers/" + serverId + "/jobs")
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
@@ -724,18 +736,10 @@ func (dsa DedicatedServerApi) LaunchRescueMode(ctx context.Context, serverId str
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListCredentials(ctx context.Context, serverId string, args ...int) (*Credentials, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dsa DedicatedServerApi) ListCredentials(ctx context.Context, serverId string, opts DedicatedServerCredentialsListOptions) (*Credentials, error) {
 	result := &Credentials{}
 	path := dsa.getPath("/servers/" + serverId + "/credentials")
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
@@ -755,18 +759,10 @@ func (dsa DedicatedServerApi) CreateCredential(ctx context.Context, serverId, cr
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListCredentialsByType(ctx context.Context, serverId, credentialType string, args ...int) (*Credentials, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dsa DedicatedServerApi) ListCredentialsByType(ctx context.Context, serverId, credentialType string, opts DedicatedServerCredentialsListTypeOptions) (*Credentials, error) {
 	result := &Credentials{}
 	path := dsa.getPath("/servers/" + serverId + "/credentials/" + credentialType)
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
@@ -797,23 +793,9 @@ func (dsa DedicatedServerApi) UpdateCredential(ctx context.Context, serverId, cr
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetDataTrafficMetrics(ctx context.Context, serverId string, args ...interface{}) (*DataTrafficMetricsV1, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("granularity", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("aggregation", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("from", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("to", fmt.Sprint(args[3]))
-	}
-
+func (dsa DedicatedServerApi) GetDataTrafficMetrics(ctx context.Context, serverId string, opts DedicatedServerMetricsDataTrafficOptions) (*DataTrafficMetricsV1, error) {
 	path := dsa.getPath("/servers/" + serverId + "/metrics/datatraffic")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &DataTrafficMetricsV1{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -821,23 +803,9 @@ func (dsa DedicatedServerApi) GetDataTrafficMetrics(ctx context.Context, serverI
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetBandWidthMetrics(ctx context.Context, serverId string, args ...interface{}) (*BandWidthMetrics, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("granularity", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("aggregation", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("from", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("to", fmt.Sprint(args[3]))
-	}
-
+func (dsa DedicatedServerApi) GetBandWidthMetrics(ctx context.Context, serverId string, opts DedicatedServerMetricsBandwidthOptions) (*BandWidthMetrics, error) {
 	path := dsa.getPath("/servers/" + serverId + "/metrics/bandwidth")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &BandWidthMetrics{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -845,18 +813,10 @@ func (dsa DedicatedServerApi) GetBandWidthMetrics(ctx context.Context, serverId 
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListBandWidthNotificationSettings(ctx context.Context, serverId string, args ...int) (*BandWidthNotificationSettings, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dsa DedicatedServerApi) ListBandWidthNotificationSettings(ctx context.Context, serverId string, opts DedicatedServerListBandwidthNotificationOptions) (*BandWidthNotificationSettings, error) {
 	result := &BandWidthNotificationSettings{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/bandwidth")
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
@@ -901,18 +861,10 @@ func (dsa DedicatedServerApi) UpdateBandWidthNotificationSetting(ctx context.Con
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListDataTrafficNotificationSettings(ctx context.Context, serverId string, args ...int) (*DataTrafficNotificationSettings, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dsa DedicatedServerApi) ListDataTrafficNotificationSettings(ctx context.Context, serverId string, opts DedicatedServerListDatatrafficNotificationOptions) (*DataTrafficNotificationSettings, error) {
 	result := &DataTrafficNotificationSettings{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/datatraffic")
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
@@ -997,21 +949,10 @@ func (dsa DedicatedServerApi) PowerOnServer(ctx context.Context, serverId string
 	return doRequest(ctx, http.MethodPost, path, "")
 }
 
-func (dsa DedicatedServerApi) ListOperatingSystems(ctx context.Context, args ...interface{}) (*DedicatedServerOperatingSystems, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("controlPanelId", fmt.Sprint(args[2]))
-	}
-
+func (dsa DedicatedServerApi) ListOperatingSystems(ctx context.Context, opts DedicatedServerListOperatingSystemsOptions) (*DedicatedServerOperatingSystems, error) {
 	result := &DedicatedServerOperatingSystems{}
 	path := dsa.getPath("/operatingSystems")
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
@@ -1030,39 +971,20 @@ func (dsa DedicatedServerApi) GetOperatingSystem(ctx context.Context, operatingS
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListControlPanels(ctx context.Context, args ...interface{}) (*DedicatedServerControlPanels, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("operatingSystemId", fmt.Sprint(args[2]))
-	}
-
+func (dsa DedicatedServerApi) ListControlPanels(ctx context.Context, opts DedicatedServerListControlPanelsOptions) (*DedicatedServerControlPanels, error) {
 	result := &DedicatedServerControlPanels{}
 	path := dsa.getPath("/controlPanels")
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListRescueImages(ctx context.Context, args ...interface{}) (*DedicatedServerRescueImages, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dsa DedicatedServerApi) ListRescueImages(ctx context.Context, opts DedicatedServerRescueImagesListOptions) (*DedicatedServerRescueImages, error) {
 	result := &DedicatedServerRescueImages{}
 	path := dsa.getPath("/rescueImages")
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
