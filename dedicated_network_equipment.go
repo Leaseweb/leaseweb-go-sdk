@@ -2,9 +2,9 @@ package leaseweb
 
 import (
 	"context"
-	"fmt"
 	"net/http"
-	"net/url"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const DEDICATED_NETWORK_EQUIPMENT_API_VERSION = "v2"
@@ -40,39 +40,49 @@ type DedicatedNetworkEquipmentSpec struct {
 	Model string `json:"model"`
 }
 
+type DedicatedNetworkEquipmentListOptions struct {
+	Limit                 *int    `param:"limit"`
+	Offset                *int    `param:"offset"`
+	Reference             *string `param:"reference"`
+	IP                    *string `param:"ip"`
+	MacAddress            *string `param:"macAddress"`
+	Site                  *string `param:"site"`
+	PrivateRackID         *int    `param:"privateRackId"`
+	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
+	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
+}
+
+type DedicatedNetworkEquipmentIpListOptions struct {
+	NetworkType *string `param:"networkType"`
+	Version     *string `param:"version"`
+	NullRouted  *string `param:"nullRouted"`
+	IPs         *string `param:"ips"`
+	Limit       *int    `param:"limit"`
+	Offset      *int    `param:"offset"`
+}
+
+type DedicatedNetworkEquipmentNullRouteHistoryOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedNetworkEquipmentCredentialsListOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedNetworkEquipmentCredentialsListTypeOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
 func (dnea DedicatedNetworkEquipmentApi) getPath(endpoint string) string {
 	return "/bareMetals/" + DEDICATED_NETWORK_EQUIPMENT_API_VERSION + endpoint
 }
 
-func (dnea DedicatedNetworkEquipmentApi) List(ctx context.Context, args ...interface{}) (*DedicatedNetworkEquipments, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("ip", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("macAddress", fmt.Sprint(args[3]))
-	}
-	if len(args) >= 5 {
-		v.Add("site", fmt.Sprint(args[4]))
-	}
-	if len(args) >= 6 {
-		v.Add("privateRackId", fmt.Sprint(args[5]))
-	}
-	if len(args) >= 7 {
-		v.Add("privateNetworkCapable", fmt.Sprint(args[6]))
-	}
-	if len(args) >= 8 {
-		v.Add("privateNetworkEnabled", fmt.Sprint(args[7]))
-	}
-
+func (dnea DedicatedNetworkEquipmentApi) List(ctx context.Context, opts DedicatedNetworkEquipmentListOptions) (*DedicatedNetworkEquipments, error) {
 	path := dnea.getPath("/networkEquipments")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &DedicatedNetworkEquipments{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -95,29 +105,9 @@ func (dnea DedicatedNetworkEquipmentApi) Update(ctx context.Context, networkEqui
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
-func (dnea DedicatedNetworkEquipmentApi) ListIps(ctx context.Context, networkEquipmentId string, args ...interface{}) (*Ips, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("networkType", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("version", fmt.Sprint(args[3]))
-	}
-	if len(args) >= 5 {
-		v.Add("nullRouted", fmt.Sprint(args[4]))
-	}
-	if len(args) >= 6 {
-		v.Add("ips", fmt.Sprint(args[5]))
-	}
-
+func (dnea DedicatedNetworkEquipmentApi) ListIps(ctx context.Context, networkEquipmentId string, opts DedicatedNetworkEquipmentIpListOptions) (*Ips, error) {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/ips")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &Ips{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -161,17 +151,9 @@ func (dnea DedicatedNetworkEquipmentApi) RemoveNullRouteAnIp(ctx context.Context
 	return result, nil
 }
 
-func (dnea DedicatedNetworkEquipmentApi) ListNullRoutes(ctx context.Context, networkEquipmentId string, args ...interface{}) (*NullRoutes, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dnea DedicatedNetworkEquipmentApi) ListNullRoutes(ctx context.Context, networkEquipmentId string, opts DedicatedNetworkEquipmentNullRouteHistoryOptions) (*NullRoutes, error) {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/nullRouteHistory")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &NullRoutes{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -179,18 +161,10 @@ func (dnea DedicatedNetworkEquipmentApi) ListNullRoutes(ctx context.Context, net
 	return result, nil
 }
 
-func (dnea DedicatedNetworkEquipmentApi) ListCredentials(ctx context.Context, networkEquipmentId string, args ...int) (*Credentials, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dnea DedicatedNetworkEquipmentApi) ListCredentials(ctx context.Context, networkEquipmentId string, opts DedicatedNetworkEquipmentCredentialsListOptions) (*Credentials, error) {
 	result := &Credentials{}
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials")
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
@@ -210,18 +184,10 @@ func (dnea DedicatedNetworkEquipmentApi) CreateCredential(ctx context.Context, n
 	return result, nil
 }
 
-func (dnea DedicatedNetworkEquipmentApi) ListCredentialsByType(ctx context.Context, networkEquipmentId, credentialType string, args ...int) (*Credentials, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dnea DedicatedNetworkEquipmentApi) ListCredentialsByType(ctx context.Context, networkEquipmentId, credentialType string, opts DedicatedNetworkEquipmentCredentialsListTypeOptions) (*Credentials, error) {
 	result := &Credentials{}
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials/" + credentialType)
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
