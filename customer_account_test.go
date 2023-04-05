@@ -278,7 +278,7 @@ func TestCustomerAccountListContacts(t *testing.T) {
 
 	customerAccountApi := CustomerAccountApi{}
 	ctx := context.Background()
-	resp, err := customerAccountApi.ListContacts(ctx)
+	resp, err := customerAccountApi.ListContacts(ctx, CustomerAccountContactsListOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -344,7 +344,10 @@ func TestCustomerAccountListContactsPaginateAndFilter(t *testing.T) {
 
 	customerAccountApi := CustomerAccountApi{}
 	ctx := context.Background()
-	resp, err := customerAccountApi.ListContacts(ctx, 1, 5, []string{"GENERAL", "SECURITY", "TECHNICAL", "BILLING"})
+	opts := CustomerAccountContactsListOptions{
+		PrimaryRoles: String("GENERAL, SECURITY, TECHNICAL, BILLING"),
+	}
+	resp, err := customerAccountApi.ListContacts(ctx, opts)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -382,7 +385,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return CustomerAccountApi{}.ListContacts(ctx)
+				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountContactsListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -400,7 +403,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return CustomerAccountApi{}.ListContacts(ctx)
+				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountContactsListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -418,7 +421,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return CustomerAccountApi{}.ListContacts(ctx)
+				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountContactsListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -436,7 +439,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return CustomerAccountApi{}.ListContacts(ctx)
+				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountContactsListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -854,13 +857,18 @@ func TestCustomerAccountUpdateContact(t *testing.T) {
 
 	customerAccountApi := CustomerAccountApi{}
 	ctx := context.Background()
+	mobile := CustomerAccountPhone{CountryCode: "NL", Number: "653388214"}
+	description := "Description"
+	opts := CustomeAccountUpdateOptions{
+		Mobile:      &mobile,
+		Description: &description,
+	}
 	err := customerAccountApi.UpdateContact(
 		ctx,
 		"contact-id",
 		CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 		[]string{"GENERAL", "TECHNICAL"},
-		CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
-		"Description",
+		opts,
 	)
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -878,13 +886,16 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
+				mobile := CustomerAccountPhone{CountryCode: "NL", Number: "653388214"}
+				opts := CustomeAccountUpdateOptions{
+					Mobile: &mobile,
+				}
 				return nil, CustomerAccountApi{}.UpdateContact(
 					ctx,
 					"contact-id",
 					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
-					CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
-					"Description",
+					opts,
 				)
 			},
 			ExpectedError: ApiError{
@@ -903,13 +914,18 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
+				mobile := CustomerAccountPhone{CountryCode: "NL", Number: "653388214"}
+				description := "Description"
+				opts := CustomeAccountUpdateOptions{
+					Mobile:      &mobile,
+					Description: &description,
+				}
 				return nil, CustomerAccountApi{}.UpdateContact(
 					ctx,
 					"contact-id",
 					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
-					CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
-					"Description",
+					opts,
 				)
 			},
 			ExpectedError: ApiError{
@@ -928,13 +944,18 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
+				mobile := CustomerAccountPhone{CountryCode: "NL", Number: "653388214"}
+				description := "Description"
+				opts := CustomeAccountUpdateOptions{
+					Mobile:      &mobile,
+					Description: &description,
+				}
 				return nil, CustomerAccountApi{}.UpdateContact(
 					ctx,
 					"contact-id",
 					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
-					CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
-					"Description",
+					opts,
 				)
 			},
 			ExpectedError: ApiError{
@@ -953,13 +974,18 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
+				mobile := CustomerAccountPhone{CountryCode: "NL", Number: "653388214"}
+				description := "Description"
+				opts := CustomeAccountUpdateOptions{
+					Mobile:      &mobile,
+					Description: &description,
+				}
 				return nil, CustomerAccountApi{}.UpdateContact(
 					ctx,
 					"contact-id",
 					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
-					CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
-					"Description",
+					opts,
 				)
 			},
 			ExpectedError: ApiError{
@@ -978,13 +1004,18 @@ func TestCustomerAccountUpdateContactServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
+				mobile := CustomerAccountPhone{CountryCode: "NL", Number: "653388214"}
+				description := "Description"
+				opts := CustomeAccountUpdateOptions{
+					Mobile:      &mobile,
+					Description: &description,
+				}
 				return nil, CustomerAccountApi{}.UpdateContact(
 					ctx,
 					"contact-id",
 					CustomerAccountPhone{CountryCode: "NL", Number: "653388213"},
 					[]string{"GENERAL", "TECHNICAL"},
-					CustomerAccountPhone{CountryCode: "NL", Number: "653388214"},
-					"Description",
+					opts,
 				)
 			},
 			ExpectedError: ApiError{

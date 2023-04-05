@@ -57,7 +57,6 @@ type CustomerAccountContactsListOptions struct {
 
 type CustomeAccountUpdateOptions struct {
 	Description *string               `param:"description"`
-	Roles       *string               `param:"roles"`
 	Mobile      *CustomerAccountPhone `param:"mobile"`
 }
 
