@@ -2,9 +2,9 @@ package leaseweb
 
 import (
 	"context"
-	"fmt"
 	"net/http"
-	"net/url"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const DEDICATED_RACK_API_VERSION = "v2"
@@ -32,27 +32,69 @@ type DedicatedRackUnit struct {
 	ConnectedUnits []string `json:"connectedUnits"`
 }
 
+type DedicatedRackListOptions struct {
+	Limit                 *int    `param:"limit"`
+	Offset                *int    `param:"offset"`
+	Reference             *string `param:"reference"`
+	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
+	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
+}
+
+type DedicatedRackNullRouteHistoryOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedRackListIpsOptions struct {
+	NetworkType *string `param:"networkType"`
+	Version     *string `param:"version"`
+	NullRouted  *string `param:"nullRouted"`
+	IPs         *string `param:"ips"`
+	Limit       *int    `param:"limit"`
+	Offset      *int    `param:"offset"`
+}
+
+type DedicatedRackListCredentialsOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedRackListCredentialsByTypeOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedRackMetricsDataTrafficOptions struct {
+	From        *string `param:"from"`
+	To          *string `param:"to"`
+	Granularity *string `param:"granularity"`
+	Aggregation *string `param:"aggregation"`
+}
+
+type DedicatedRackMetricsBandwidthOptions struct {
+	From        *string `param:"from"`
+	To          *string `param:"to"`
+	Granularity *string `param:"granularity"`
+	Aggregation *string `param:"aggregation"`
+}
+
+type DedicatedRackListBandwidthNotificationOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type DedicatedRackListDatatrafficNotificationOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
 func (dra DedicatedRackApi) getPath(endpoint string) string {
 	return "/bareMetals/" + DEDICATED_RACK_API_VERSION + endpoint
 }
 
-func (dra DedicatedRackApi) List(ctx context.Context, args ...interface{}) (*DedicatedRacks, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("privateNetworkCapable", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("privateNetworkEnabled", fmt.Sprint(args[3]))
-	}
-
+func (dra DedicatedRackApi) List(ctx context.Context, opts DedicatedRackListOptions) (*DedicatedRacks, error) {
 	path := dra.getPath("/privateRacks")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &DedicatedRacks{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -75,17 +117,9 @@ func (dra DedicatedRackApi) Update(ctx context.Context, privateRackId, reference
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
-func (dra DedicatedRackApi) ListNullRoutes(ctx context.Context, privateRackId string, args ...interface{}) (*NullRoutes, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dra DedicatedRackApi) ListNullRoutes(ctx context.Context, privateRackId string, opts DedicatedRackNullRouteHistoryOptions) (*NullRoutes, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/nullRouteHistory")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &NullRoutes{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -93,29 +127,9 @@ func (dra DedicatedRackApi) ListNullRoutes(ctx context.Context, privateRackId st
 	return result, nil
 }
 
-func (dra DedicatedRackApi) ListIps(ctx context.Context, privateRackId string, args ...interface{}) (*Ips, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("networkType", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("version", fmt.Sprint(args[3]))
-	}
-	if len(args) >= 5 {
-		v.Add("nullRouted", fmt.Sprint(args[4]))
-	}
-	if len(args) >= 6 {
-		v.Add("ips", fmt.Sprint(args[5]))
-	}
-
+func (dra DedicatedRackApi) ListIps(ctx context.Context, privateRackId string, opts DedicatedRackListIpsOptions) (*Ips, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/ips")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &Ips{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -159,17 +173,9 @@ func (dra DedicatedRackApi) RemoveNullRouteAnIp(ctx context.Context, privateRack
 	return result, nil
 }
 
-func (dra DedicatedRackApi) ListCredentials(ctx context.Context, privateRackId string, args ...int) (*Credentials, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dra DedicatedRackApi) ListCredentials(ctx context.Context, privateRackId string, opts DedicatedRackListCredentialsOptions) (*Credentials, error) {
 	result := &Credentials{}
-	query := v.Encode()
+	query := options.Encode(opts)
 	path := dra.getPath("/privateRacks/" + privateRackId + "/credentials")
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
@@ -190,18 +196,10 @@ func (dra DedicatedRackApi) CreateCredential(ctx context.Context, privateRackId,
 	return result, nil
 }
 
-func (dra DedicatedRackApi) ListCredentialsByType(ctx context.Context, privateRackId, credentialType string, args ...int) (*Credentials, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dra DedicatedRackApi) ListCredentialsByType(ctx context.Context, privateRackId, credentialType string, opts DedicatedRackListCredentialsByTypeOptions) (*Credentials, error) {
 	result := &Credentials{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/credentials/" + credentialType)
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
@@ -232,23 +230,9 @@ func (dra DedicatedRackApi) UpdateCredential(ctx context.Context, privateRackId,
 	return result, nil
 }
 
-func (dra DedicatedRackApi) GetDataTrafficMetrics(ctx context.Context, privateRackId string, args ...interface{}) (*DataTrafficMetricsV1, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("granularity", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("aggregation", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("from", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("to", fmt.Sprint(args[3]))
-	}
-
+func (dra DedicatedRackApi) GetDataTrafficMetrics(ctx context.Context, privateRackId string, opts DedicatedRackMetricsDataTrafficOptions) (*DataTrafficMetricsV1, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/metrics/datatraffic")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &DataTrafficMetricsV1{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -256,23 +240,9 @@ func (dra DedicatedRackApi) GetDataTrafficMetrics(ctx context.Context, privateRa
 	return result, nil
 }
 
-func (dra DedicatedRackApi) GetBandWidthMetrics(ctx context.Context, privateRackId string, args ...interface{}) (*BandWidthMetrics, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("granularity", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("aggregation", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("from", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("to", fmt.Sprint(args[3]))
-	}
-
+func (dra DedicatedRackApi) GetBandWidthMetrics(ctx context.Context, privateRackId string, opts DedicatedRackMetricsBandwidthOptions) (*BandWidthMetrics, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/metrics/bandwidth")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &BandWidthMetrics{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -297,17 +267,9 @@ func (dra DedicatedRackApi) UpdateDdosNotificationSetting(ctx context.Context, p
 	return nil
 }
 
-func (dra DedicatedRackApi) ListBandWidthNotificationSettings(ctx context.Context, privateRackId string, args ...int) (*BandWidthNotificationSettings, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dra DedicatedRackApi) ListBandWidthNotificationSettings(ctx context.Context, privateRackId string, opts DedicatedRackListBandwidthNotificationOptions) (*BandWidthNotificationSettings, error) {
 	result := &BandWidthNotificationSettings{}
-	query := v.Encode()
+	query := options.Encode(opts)
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/bandwidth")
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
@@ -352,18 +314,10 @@ func (dra DedicatedRackApi) UpdateBandWidthNotificationSetting(ctx context.Conte
 	return result, nil
 }
 
-func (dra DedicatedRackApi) ListDataTrafficNotificationSettings(ctx context.Context, privateRackId string, args ...int) (*DataTrafficNotificationSettings, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (dra DedicatedRackApi) ListDataTrafficNotificationSettings(ctx context.Context, privateRackId string, opts DedicatedRackListDatatrafficNotificationOptions) (*DataTrafficNotificationSettings, error) {
 	result := &DataTrafficNotificationSettings{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/datatraffic")
-	query := v.Encode()
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
