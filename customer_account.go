@@ -2,11 +2,9 @@ package leaseweb
 
 import (
 	"context"
-	"fmt"
 	"net/http"
-	"net/url"
-	"reflect"
-	"strings"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const CUSTOMER_ACCOUNT_API_VERSION = "v1"
@@ -53,6 +51,16 @@ type CustomerAccountPhone struct {
 	Number      string `json:"number"`
 }
 
+type CustomerAccountContactsListOptions struct {
+	PrimaryRoles *string `param:"primaryRoles"`
+}
+
+type CustomeAccountUpdateOptions struct {
+	Description *string               `param:"description"`
+	Roles       *string               `param:"roles"`
+	Mobile      *CustomerAccountPhone `param:"mobile"`
+}
+
 func (cai CustomerAccountApi) getPath(endpoint string) string {
 	return "/account/" + CUSTOMER_ACCOUNT_API_VERSION + endpoint
 }
@@ -72,25 +80,9 @@ func (cai CustomerAccountApi) Update(ctx context.Context, ad CustomerAccountAddr
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
-func (cai CustomerAccountApi) ListContacts(ctx context.Context, args ...interface{}) (*CustomerAccountContacts, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		s := reflect.ValueOf(args[2])
-		var primaryRoles []string
-		for i := 0; i < s.Len(); i++ {
-			primaryRoles = append(primaryRoles, s.Index(i).String())
-		}
-		v.Add("primaryRoles", strings.Join(primaryRoles, ","))
-	}
-
+func (cai CustomerAccountApi) ListContacts(ctx context.Context, opts CustomerAccountContactsListOptions) (*CustomerAccountContacts, error) {
 	path := cai.getPath("/contacts")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &CustomerAccountContacts{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -121,18 +113,19 @@ func (cai CustomerAccountApi) GetContact(ctx context.Context, contactId string) 
 	return result, nil
 }
 
-func (cai CustomerAccountApi) UpdateContact(ctx context.Context, contactId string, phone CustomerAccountPhone, roles []string, args ...interface{}) error {
+func (cai CustomerAccountApi) UpdateContact(ctx context.Context, contactId string, phone CustomerAccountPhone, roles []string, opts CustomeAccountUpdateOptions) error {
 	payload := make(map[string]interface{})
 	payload["phone"] = phone
 	payload["roles"] = roles
-	if len(args) >= 1 {
-		payload["mobile"] = args[0].(CustomerAccountPhone)
+
+	if opts.Mobile != nil {
+		payload["mobile"] = *opts.Mobile
 	}
-	if len(args) >= 2 {
-		payload["description"] = fmt.Sprint(args[1])
+	if opts.Description != nil {
+		payload["description"] = *opts.Description
 	}
 
-	path := cai.getPath("/contacts" + contactId)
+	path := cai.getPath("/contacts/" + contactId)
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
