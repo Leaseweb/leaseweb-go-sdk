@@ -3,9 +3,9 @@ package leaseweb
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
-	"net/url"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const INVOICE_API_VERSION = "v1"
@@ -70,21 +70,23 @@ type InvoiceProForma struct {
 	Contracts    []InvoiceContract `json:"contractItems"`
 }
 
+type InvoiceListOptions struct {
+	Offset *int `param:"offset"`
+	Limit  *int `param:"limit"`
+}
+
+type InvoiceListProFormaOptions struct {
+	Offset *int `param:"offset"`
+	Limit  *int `param:"limit"`
+}
+
 func (ia InvoiceApi) getPath(endpoint string) string {
 	return "/invoices/" + INVOICE_API_VERSION + endpoint
 }
 
-func (ia InvoiceApi) List(ctx context.Context, args ...int) (*Invoices, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (ia InvoiceApi) List(ctx context.Context, opts InvoiceListOptions) (*Invoices, error) {
 	path := ia.getPath("/invoices")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &Invoices{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -92,17 +94,9 @@ func (ia InvoiceApi) List(ctx context.Context, args ...int) (*Invoices, error) {
 	return result, nil
 }
 
-func (ia InvoiceApi) ListProForma(ctx context.Context, args ...int) (*InvoiceProForma, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (ia InvoiceApi) ListProForma(ctx context.Context, opts InvoiceListProFormaOptions) (*InvoiceProForma, error) {
 	path := ia.getPath("/invoices/proforma")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &InvoiceProForma{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
