@@ -114,7 +114,7 @@ func TestVirtualServerList(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := VirtualServerApi{}.List(ctx)
+	response, err := VirtualServerApi{}.List(ctx, VirtualServerListOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -241,7 +241,10 @@ func TestVirtualServerListPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := VirtualServerApi{}.List(ctx, 1)
+	opts := VirtualServerListOptions{
+		Limit: Int(1),
+	}
+	response, err := VirtualServerApi{}.List(ctx, opts)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -291,7 +294,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.List(ctx)
+				return VirtualServerApi{}.List(ctx, VirtualServerListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -309,7 +312,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.List(ctx)
+				return VirtualServerApi{}.List(ctx, VirtualServerListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -327,7 +330,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.List(ctx)
+				return VirtualServerApi{}.List(ctx, VirtualServerListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -345,7 +348,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.List(ctx)
+				return VirtualServerApi{}.List(ctx, VirtualServerListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1332,7 +1335,7 @@ func TestVirtualServerListCredentials(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM")
+	response, err := VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", VirtualServerListCredentialsOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -1367,7 +1370,10 @@ func TestVirtualServerListCredentialsPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", 1)
+	opts := VirtualServerListCredentialsOptions{
+		Limit: Int(1),
+	}
+	response, err := VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -1391,7 +1397,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM")
+				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", VirtualServerListCredentialsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1409,7 +1415,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM")
+				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", VirtualServerListCredentialsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1427,7 +1433,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM")
+				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", VirtualServerListCredentialsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1445,7 +1451,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM")
+				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", VirtualServerListCredentialsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1600,7 +1606,13 @@ func TestVirtualServerGetDataTrafficMetrics(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	Metric, err := VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+	opts := VirtualServerMetricsDataTrafficOptions{
+		Granularity: String("DAY"),
+		Aggregation: String("SUM"),
+		From:        String("2016-10-20T09:00:00Z"),
+		To:          String("2016-10-20T11:00:00Z"),
+	}
+	Metric, err := VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Metric.Metadata.Aggregation, "SUM")
@@ -1632,7 +1644,13 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := VirtualServerMetricsDataTrafficOptions{
+					Granularity: String("DAY"),
+					Aggregation: String("SUM"),
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+				}
+				return VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1650,7 +1668,13 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := VirtualServerMetricsDataTrafficOptions{
+					Granularity: String("DAY"),
+					Aggregation: String("SUM"),
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+				}
+				return VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1668,7 +1692,13 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := VirtualServerMetricsDataTrafficOptions{
+					Granularity: String("DAY"),
+					Aggregation: String("SUM"),
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+				}
+				return VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1686,7 +1716,13 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := VirtualServerMetricsDataTrafficOptions{
+					Granularity: String("DAY"),
+					Aggregation: String("SUM"),
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+				}
+				return VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1704,7 +1740,13 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", "DAY", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := VirtualServerMetricsDataTrafficOptions{
+					Granularity: String("DAY"),
+					Aggregation: String("SUM"),
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+				}
+				return VirtualServerApi{}.GetDataTrafficMetrics(ctx, "12345", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1777,7 +1819,7 @@ func TestVirtualServerListTemplatesPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := VirtualServerApi{}.ListTemplates(ctx, "12345", 1)
+	response, err := VirtualServerApi{}.ListTemplates(ctx, "12345")
 
 	assert := assert.New(t)
 	assert.Nil(err)
