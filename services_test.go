@@ -63,7 +63,7 @@ func TestServicesList(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := ServicesApi{}.List(ctx)
+	response, err := ServicesApi{}.List(ctx, ServicesListOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -147,7 +147,10 @@ func TestServicesListPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := ServicesApi{}.List(ctx, 1)
+	opts := ServicesListOptions{
+		Limit: Int(1),
+	}
+	response, err := ServicesApi{}.List(ctx, opts)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -189,7 +192,7 @@ func TestServicesListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return ServicesApi{}.List(ctx)
+				return ServicesApi{}.List(ctx, ServicesListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -207,7 +210,7 @@ func TestServicesListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return ServicesApi{}.List(ctx)
+				return ServicesApi{}.List(ctx, ServicesListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -225,7 +228,7 @@ func TestServicesListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return ServicesApi{}.List(ctx)
+				return ServicesApi{}.List(ctx, ServicesListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -243,7 +246,7 @@ func TestServicesListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return ServicesApi{}.List(ctx)
+				return ServicesApi{}.List(ctx, ServicesListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
