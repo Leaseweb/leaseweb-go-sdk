@@ -175,7 +175,7 @@ func TestRemoteManagementListProfilesPaginate(t *testing.T) {
 
 	remoteManagementApi := RemoteManagementApi{}
 	ctx := context.Background()
-	response, err := remoteManagementApi.ListProfiles(ctx, 1)
+	response, err := remoteManagementApi.ListProfiles(ctx)
 
 	assert := assert.New(t)
 	assert.Nil(err)
