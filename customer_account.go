@@ -2,6 +2,7 @@ package leaseweb
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/LeaseWeb/leaseweb-go-sdk/options"
@@ -53,11 +54,6 @@ type CustomerAccountPhone struct {
 
 type CustomerAccountContactsListOptions struct {
 	PrimaryRoles *string `param:"primaryRoles"`
-}
-
-type CustomeAccountUpdateOptions struct {
-	Description *string               `param:"description"`
-	Mobile      *CustomerAccountPhone `param:"mobile"`
 }
 
 func (cai CustomerAccountApi) getPath(endpoint string) string {
@@ -112,19 +108,18 @@ func (cai CustomerAccountApi) GetContact(ctx context.Context, contactId string) 
 	return result, nil
 }
 
-func (cai CustomerAccountApi) UpdateContact(ctx context.Context, contactId string, phone CustomerAccountPhone, roles []string, opts CustomeAccountUpdateOptions) error {
+func (cai CustomerAccountApi) UpdateContact(ctx context.Context, contactId string, phone CustomerAccountPhone, roles []string, args ...interface{}) error {
 	payload := make(map[string]interface{})
 	payload["phone"] = phone
 	payload["roles"] = roles
-
-	if opts.Mobile != nil {
-		payload["mobile"] = *opts.Mobile
+	if len(args) >= 1 {
+		payload["mobile"] = args[0].(CustomerAccountPhone)
 	}
-	if opts.Description != nil {
-		payload["description"] = *opts.Description
+	if len(args) >= 2 {
+		payload["description"] = fmt.Sprint(args[1])
 	}
 
-	path := cai.getPath("/contacts/" + contactId)
+	path := cai.getPath("/contacts" + contactId)
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
