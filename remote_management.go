@@ -32,9 +32,8 @@ func (rma RemoteManagementApi) ChangeCredentials(ctx context.Context, password s
 
 func (rma RemoteManagementApi) ListProfiles(ctx context.Context) (*RemoteManagementProfiles, error) {
 	path := rma.getPath("/remoteManagement/profiles")
-	query := v.Encode()
 	result := &RemoteManagementProfiles{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
