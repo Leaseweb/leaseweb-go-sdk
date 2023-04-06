@@ -47,7 +47,7 @@ type DedicatedNetworkEquipmentListOptions struct {
 	IP                    *string `param:"ip"`
 	MacAddress            *string `param:"macAddress"`
 	Site                  *string `param:"site"`
-	PrivateRackID         *int    `param:"privateRackId"`
+	PrivateRackID         *string `param:"privateRackId"`
 	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
 	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
 }

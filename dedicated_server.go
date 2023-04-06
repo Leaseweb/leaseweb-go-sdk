@@ -423,7 +423,7 @@ type DedicatedServerListOptions struct {
 	IP                    *string `param:"ip"`
 	MacAddress            *string `param:"macAddress"`
 	Site                  *string `param:"site"`
-	PrivateRackID         *int    `param:"privateRackId"`
+	PrivateRackID         *string `param:"privateRackId"`
 	Reference             *string `param:"reference"`
 	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
 	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
