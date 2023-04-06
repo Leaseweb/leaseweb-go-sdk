@@ -2,9 +2,9 @@ package leaseweb
 
 import (
 	"context"
-	"fmt"
 	"net/http"
-	"net/url"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const VIRTUAL_SERVER_API_VERSION = "v2"
@@ -56,21 +56,30 @@ type VirtualServerTemplate struct {
 	Name string `json:"name"`
 }
 
+type VirtualServerListOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type VirtualServerListCredentialsOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type VirtualServerMetricsDataTrafficOptions struct {
+	Granularity *string `param:"granularity"`
+	Aggregation *string `param:"aggregation"`
+	From        *string `param:"from"`
+	To          *string `param:"to"`
+}
+
 func (vsa VirtualServerApi) getPath(endpoint string) string {
 	return "/cloud/" + VIRTUAL_SERVER_API_VERSION + endpoint
 }
 
-func (vsa VirtualServerApi) List(ctx context.Context, args ...int) (*VirtualServers, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (vsa VirtualServerApi) List(ctx context.Context, opts VirtualServerListOptions) (*VirtualServers, error) {
 	path := vsa.getPath("/virtualServers")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &VirtualServers{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -140,17 +149,9 @@ func (vsa VirtualServerApi) UpdateCredential(ctx context.Context, virtualServerI
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
-func (vsa VirtualServerApi) ListCredentials(ctx context.Context, virtualServerId, credentialType string, args ...int) (*Credentials, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (vsa VirtualServerApi) ListCredentials(ctx context.Context, virtualServerId, credentialType string, opts VirtualServerListCredentialsOptions) (*Credentials, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/credentials/" + credentialType)
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &Credentials{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -167,23 +168,9 @@ func (vsa VirtualServerApi) GetCredential(ctx context.Context, virtualServerId, 
 	return result, nil
 }
 
-func (vsa VirtualServerApi) GetDataTrafficMetrics(ctx context.Context, virtualServerId string, args ...interface{}) (*DataTrafficMetricsV2, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("granularity", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("aggregation", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("from", fmt.Sprint(args[2]))
-	}
-	if len(args) >= 4 {
-		v.Add("to", fmt.Sprint(args[3]))
-	}
-
+func (vsa VirtualServerApi) GetDataTrafficMetrics(ctx context.Context, virtualServerId string, opts VirtualServerMetricsDataTrafficOptions) (*DataTrafficMetricsV2, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/metrics/datatraffic")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &DataTrafficMetricsV2{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -191,15 +178,7 @@ func (vsa VirtualServerApi) GetDataTrafficMetrics(ctx context.Context, virtualSe
 	return result, nil
 }
 
-func (vsa VirtualServerApi) ListTemplates(ctx context.Context, virtualServerId string, args ...int) (*VirtualServerTemplates, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (vsa VirtualServerApi) ListTemplates(ctx context.Context, virtualServerId string) (*VirtualServerTemplates, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/templates")
 	result := &VirtualServerTemplates{}
 	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
