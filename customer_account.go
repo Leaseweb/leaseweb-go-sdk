@@ -11,7 +11,9 @@ import (
 
 const CUSTOMER_ACCOUNT_API_VERSION = "v1"
 
-type CustomerAccountApi struct{}
+type CustomerAccountApi struct {
+	Client *LeasewebClient
+}
 
 type CustomerAccount struct {
 	Name         string                 `json:"name"`
@@ -60,7 +62,8 @@ func (cai CustomerAccountApi) getPath(endpoint string) string {
 func (cai CustomerAccountApi) Get(ctx context.Context) (*CustomerAccount, error) {
 	path := cai.getPath("/details")
 	result := &CustomerAccount{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(cai.Client).
+		doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -69,7 +72,8 @@ func (cai CustomerAccountApi) Get(ctx context.Context) (*CustomerAccount, error)
 func (cai CustomerAccountApi) Update(ctx context.Context, ad CustomerAccountAddress) error {
 	path := cai.getPath("/details")
 	payload := map[string]CustomerAccountAddress{"address": ad}
-	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
+	return getClient(cai.Client).
+		doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
 func (cai CustomerAccountApi) ListContacts(ctx context.Context, args ...interface{}) (*CustomerAccountContacts, error) {
@@ -92,7 +96,8 @@ func (cai CustomerAccountApi) ListContacts(ctx context.Context, args ...interfac
 	path := cai.getPath("/contacts")
 	query := v.Encode()
 	result := &CustomerAccountContacts{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(cai.Client).
+		doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -101,7 +106,8 @@ func (cai CustomerAccountApi) ListContacts(ctx context.Context, args ...interfac
 func (cai CustomerAccountApi) CreateContact(ctx context.Context, newContact CustomerAccountContact) (*CustomerAccountContact, error) {
 	path := cai.getPath("/contacts")
 	result := &CustomerAccountContact{}
-	if err := doRequest(ctx, http.MethodPost, path, "", result, newContact); err != nil {
+	if err := getClient(cai.Client).
+		doRequest(ctx, http.MethodPost, path, "", result, newContact); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -109,13 +115,14 @@ func (cai CustomerAccountApi) CreateContact(ctx context.Context, newContact Cust
 
 func (cai CustomerAccountApi) DeleteContact(ctx context.Context, contactId string) error {
 	path := cai.getPath("/contacts/" + contactId)
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(cai.Client).
+		doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (cai CustomerAccountApi) GetContact(ctx context.Context, contactId string) (*CustomerAccountContact, error) {
 	path := cai.getPath("/contacts/" + contactId)
 	result := &CustomerAccountContact{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(cai.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -133,11 +140,13 @@ func (cai CustomerAccountApi) UpdateContact(ctx context.Context, contactId strin
 	}
 
 	path := cai.getPath("/contacts" + contactId)
-	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
+	return getClient(cai.Client).
+		doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
 func (cai CustomerAccountApi) AssignPrimaryRolesToContact(ctx context.Context, contactId string, roles []string) error {
 	payload := map[string][]string{"roles": roles}
 	path := cai.getPath("/contacts" + contactId)
-	return doRequest(ctx, http.MethodPost, path, "", nil, payload)
+	return getClient(cai.Client).
+		doRequest(ctx, http.MethodPost, path, "", nil, payload)
 }

@@ -10,7 +10,9 @@ import (
 
 const HOSTING_API_VERSION = "v2"
 
-type HostingApi struct{}
+type HostingApi struct {
+	Client *LeasewebClient
+}
 
 type HostingDomains struct {
 	Domains  []HostingDomain `json:"domains"`
@@ -162,7 +164,7 @@ func (ha HostingApi) ListDomains(ctx context.Context, args ...interface{}) (*Hos
 	path := ha.getPath("/domains")
 	query := v.Encode()
 	result := &HostingDomains{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -171,7 +173,7 @@ func (ha HostingApi) ListDomains(ctx context.Context, args ...interface{}) (*Hos
 func (ha HostingApi) GetDomain(ctx context.Context, domainName string) (*HostingDomain, error) {
 	path := ha.getPath("/domains/" + domainName)
 	result := &HostingDomain{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -180,7 +182,7 @@ func (ha HostingApi) GetDomain(ctx context.Context, domainName string) (*Hosting
 func (ha HostingApi) GetAvailability(ctx context.Context, domainName string) (*HostingDomainAvailability, error) {
 	path := ha.getPath("/domains/" + domainName + "/available")
 	result := &HostingDomainAvailability{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -198,7 +200,7 @@ func (ha HostingApi) ListNameservers(ctx context.Context, domainName string, arg
 	path := ha.getPath("/domains/" + domainName + "/nameservers")
 	query := v.Encode()
 	result := &HostingNameservers{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -209,7 +211,7 @@ func (ha HostingApi) UpdateNameservers(ctx context.Context, domainName string, n
 	payload["nameservers"] = nameservers
 	path := ha.getPath("/domains/" + domainName + "/nameservers")
 	result := &HostingNameservers{}
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -218,7 +220,7 @@ func (ha HostingApi) UpdateNameservers(ctx context.Context, domainName string, n
 func (ha HostingApi) GetDnsSecurity(ctx context.Context, domainName string) (*HostingDnsSecurity, error) {
 	path := ha.getPath("/domains/" + domainName + "/dnssec")
 	result := &HostingDnsSecurity{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -227,7 +229,7 @@ func (ha HostingApi) GetDnsSecurity(ctx context.Context, domainName string) (*Ho
 func (ha HostingApi) UpdateDnsSecurity(ctx context.Context, domainName string, payload map[string]interface{}) (*HostingInfoMessageResponse, error) {
 	path := ha.getPath("/domains/" + domainName + "/dnssec")
 	result := &HostingInfoMessageResponse{}
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -245,7 +247,7 @@ func (ha HostingApi) ListResourceRecordSets(ctx context.Context, domainName stri
 	path := ha.getPath("/domains/" + domainName + "/resourceRecordSets")
 	query := v.Encode()
 	result := &HostingResourceRecordSets{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -254,7 +256,7 @@ func (ha HostingApi) ListResourceRecordSets(ctx context.Context, domainName stri
 func (ha HostingApi) CreateResourceRecordSet(ctx context.Context, domainName string, payload map[string]interface{}) (*HostingResourceRecordSet, error) {
 	path := ha.getPath("/domains/" + domainName + "/resourceRecordSets")
 	result := &HostingResourceRecordSet{}
-	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -262,13 +264,13 @@ func (ha HostingApi) CreateResourceRecordSet(ctx context.Context, domainName str
 
 func (ha HostingApi) DeleteResourceRecordSets(ctx context.Context, domainName string) error {
 	path := ha.getPath("/domains/" + domainName + "/resourceRecordSets")
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(ha.Client).doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (ha HostingApi) GetResourceRecordSet(ctx context.Context, domainName, name, recordType string) (*HostingResourceRecordSet, error) {
 	path := ha.getPath("/domains/" + domainName + "/resourceRecordSets/" + name + "/" + recordType)
 	result := &HostingResourceRecordSet{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -280,7 +282,7 @@ func (ha HostingApi) UpdateResourceRecordSet(ctx context.Context, domainName, na
 	payload := make(map[string]interface{})
 	payload["content"] = content
 	payload["ttl"] = ttl
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -288,7 +290,7 @@ func (ha HostingApi) UpdateResourceRecordSet(ctx context.Context, domainName, na
 
 func (ha HostingApi) DeleteResourceRecordSet(ctx context.Context, domainName, name, recordType string) error {
 	path := ha.getPath("/domains/" + domainName + "/resourceRecordSets/" + name + "/" + recordType)
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(ha.Client).doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (ha HostingApi) ValidateResourceRecordSet(ctx context.Context, domainName, name, recordType string, content []string, ttl int) (*HostingInfoMessageResponse, error) {
@@ -299,7 +301,7 @@ func (ha HostingApi) ValidateResourceRecordSet(ctx context.Context, domainName, 
 	payload["type"] = recordType
 	payload["content"] = content
 	payload["ttl"] = ttl
-	if err := doRequest(ctx, http.MethodPost, path, "", result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPost, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -308,7 +310,7 @@ func (ha HostingApi) ValidateResourceRecordSet(ctx context.Context, domainName, 
 func (ha HostingApi) ListCatchAll(ctx context.Context, domainName string) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/catchAll")
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -317,7 +319,7 @@ func (ha HostingApi) ListCatchAll(ctx context.Context, domainName string) (*Host
 func (ha HostingApi) UpdateCatchAll(ctx context.Context, domainName string, payload map[string]interface{}) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/catchAll")
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -329,7 +331,7 @@ func (ha HostingApi) CreateCatchAll(ctx context.Context, domainName string, payl
 
 func (ha HostingApi) DeleteCatchAll(ctx context.Context, domainName string) error {
 	path := ha.getPath("/domains/" + domainName + "/catchAll")
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(ha.Client).doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (ha HostingApi) ListEmailAliases(ctx context.Context, domainName string, args ...interface{}) (*HostingEmailAliases, error) {
@@ -344,7 +346,7 @@ func (ha HostingApi) ListEmailAliases(ctx context.Context, domainName string, ar
 	path := ha.getPath("/domains/" + domainName + "/emailAliases")
 	query := v.Encode()
 	result := &HostingEmailAliases{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -353,7 +355,7 @@ func (ha HostingApi) ListEmailAliases(ctx context.Context, domainName string, ar
 func (ha HostingApi) CreateEmailAlias(ctx context.Context, domainName string, payload map[string]interface{}) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/emailAliases")
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -362,7 +364,7 @@ func (ha HostingApi) CreateEmailAlias(ctx context.Context, domainName string, pa
 func (ha HostingApi) GetEmailAlias(ctx context.Context, domainName, source, destination string) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/emailAliases/" + source + "/" + destination)
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -371,7 +373,7 @@ func (ha HostingApi) GetEmailAlias(ctx context.Context, domainName, source, dest
 func (ha HostingApi) UpdateEmailAlias(ctx context.Context, domainName, source, destination string, payload map[string]bool) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/emailAliases/" + source + "/" + destination)
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -379,7 +381,7 @@ func (ha HostingApi) UpdateEmailAlias(ctx context.Context, domainName, source, d
 
 func (ha HostingApi) DeleteEmailAlias(ctx context.Context, domainName, source, destination string) error {
 	path := ha.getPath("/domains/" + domainName + "/emailAliases/" + source + "/" + destination)
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(ha.Client).doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (ha HostingApi) ListDomainForwards(ctx context.Context, domainName string, args ...interface{}) (*HostingEmailForwards, error) {
@@ -394,7 +396,7 @@ func (ha HostingApi) ListDomainForwards(ctx context.Context, domainName string, 
 	path := ha.getPath("/domains/" + domainName + "/forwards")
 	query := v.Encode()
 	result := &HostingEmailForwards{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -412,7 +414,7 @@ func (ha HostingApi) ListMailBoxes(ctx context.Context, domainName string, args 
 	path := ha.getPath("/domains/" + domainName + "/mailboxes")
 	query := v.Encode()
 	result := &HostingEmailMailboxes{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -421,7 +423,7 @@ func (ha HostingApi) ListMailBoxes(ctx context.Context, domainName string, args 
 func (ha HostingApi) CreateMailBox(ctx context.Context, domainName string, payload map[string]interface{}) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes")
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -430,7 +432,7 @@ func (ha HostingApi) CreateMailBox(ctx context.Context, domainName string, paylo
 func (ha HostingApi) GetMailBox(ctx context.Context, domainName, emailAddress string) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress)
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -439,7 +441,7 @@ func (ha HostingApi) GetMailBox(ctx context.Context, domainName, emailAddress st
 func (ha HostingApi) UpdateMailBox(ctx context.Context, domainName, emailAddress string, payload map[string]interface{}) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress)
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -447,13 +449,13 @@ func (ha HostingApi) UpdateMailBox(ctx context.Context, domainName, emailAddress
 
 func (ha HostingApi) DeleteMailBox(ctx context.Context, domainName, emailAddress string) error {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress)
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(ha.Client).doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (ha HostingApi) GetAutoResponder(ctx context.Context, domainName, emailAddress string) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress + "/autoResponder")
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -462,7 +464,7 @@ func (ha HostingApi) GetAutoResponder(ctx context.Context, domainName, emailAddr
 func (ha HostingApi) UpdateAutoResponder(ctx context.Context, domainName, emailAddress string, payload map[string]interface{}) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress + "/autoResponder")
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -474,7 +476,7 @@ func (ha HostingApi) CreateAutoResponder(ctx context.Context, domainName, emailA
 
 func (ha HostingApi) DeleteAutoResponder(ctx context.Context, domainName, emailAddress string) error {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress + "/autoResponder")
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(ha.Client).doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (ha HostingApi) ListForwards(ctx context.Context, domainName, emailAddress string, args ...interface{}) (*HostingEmailForwards, error) {
@@ -489,7 +491,7 @@ func (ha HostingApi) ListForwards(ctx context.Context, domainName, emailAddress 
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress + "/forwards")
 	query := v.Encode()
 	result := &HostingEmailForwards{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -498,7 +500,7 @@ func (ha HostingApi) ListForwards(ctx context.Context, domainName, emailAddress 
 func (ha HostingApi) CreateForward(ctx context.Context, domainName, emailAddress string, payload map[string]interface{}) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress + "/forwards")
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -507,7 +509,7 @@ func (ha HostingApi) CreateForward(ctx context.Context, domainName, emailAddress
 func (ha HostingApi) GetForward(ctx context.Context, domainName, emailAddress, destination string) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress + "/forwards/" + destination)
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -516,7 +518,7 @@ func (ha HostingApi) GetForward(ctx context.Context, domainName, emailAddress, d
 func (ha HostingApi) UpdateForward(ctx context.Context, domainName, emailAddress, destination string, payload map[string]bool) (*HostingEmail, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress + "/forwards/" + destination)
 	result := &HostingEmail{}
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(ha.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -524,5 +526,5 @@ func (ha HostingApi) UpdateForward(ctx context.Context, domainName, emailAddress
 
 func (ha HostingApi) DeleteForward(ctx context.Context, domainName, emailAddress, destination string) error {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress + "/forwards/" + destination)
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(ha.Client).doRequest(ctx, http.MethodDelete, path, "")
 }

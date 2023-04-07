@@ -10,7 +10,9 @@ import (
 
 const SERVICES_API_VERSION = "v1"
 
-type ServicesApi struct{}
+type ServicesApi struct {
+	Client *LeasewebClient
+}
 
 type Services struct {
 	Services []Service `json:"services"`
@@ -65,7 +67,7 @@ func (sa ServicesApi) List(ctx context.Context, args ...int) (*Services, error) 
 	path := sa.getPath("/services")
 	query := v.Encode()
 	result := &Services{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(sa.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -74,7 +76,7 @@ func (sa ServicesApi) List(ctx context.Context, args ...int) (*Services, error) 
 func (sa ServicesApi) ListCancellationReasons(ctx context.Context) (*ServicesCancellationReasons, error) {
 	path := sa.getPath("/services/cancellationReasons")
 	result := &ServicesCancellationReasons{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(sa.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -83,7 +85,7 @@ func (sa ServicesApi) ListCancellationReasons(ctx context.Context) (*ServicesCan
 func (sa ServicesApi) Get(ctx context.Context, id string) (*Service, error) {
 	path := sa.getPath("/services/" + id)
 	result := &Service{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(sa.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -95,10 +97,10 @@ func (sa ServicesApi) Cancel(ctx context.Context, id, reason, reasonCode string)
 		"reasonCode": reasonCode,
 	}
 	path := sa.getPath("/services/" + id + "/cancel")
-	return doRequest(ctx, http.MethodPost, path, "", nil, payload)
+	return getClient(sa.Client).doRequest(ctx, http.MethodPost, path, "", nil, payload)
 }
 
 func (sa ServicesApi) Uncancel(ctx context.Context, id string) error {
 	path := sa.getPath("/services/" + id + "/uncancel")
-	return doRequest(ctx, http.MethodPost, path, "")
+	return getClient(sa.Client).doRequest(ctx, http.MethodPost, path, "")
 }

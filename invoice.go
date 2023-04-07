@@ -10,7 +10,9 @@ import (
 
 const INVOICE_API_VERSION = "v1"
 
-type InvoiceApi struct{}
+type InvoiceApi struct {
+	Client *LeasewebClient
+}
 
 type Invoice struct {
 	Currency                string          `json:"currency"`
@@ -86,7 +88,7 @@ func (ia InvoiceApi) List(ctx context.Context, args ...int) (*Invoices, error) {
 	path := ia.getPath("/invoices")
 	query := v.Encode()
 	result := &Invoices{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(ia.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -104,7 +106,7 @@ func (ia InvoiceApi) ListProForma(ctx context.Context, args ...int) (*InvoicePro
 	path := ia.getPath("/invoices/proforma")
 	query := v.Encode()
 	result := &InvoiceProForma{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(ia.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -113,7 +115,7 @@ func (ia InvoiceApi) ListProForma(ctx context.Context, args ...int) (*InvoicePro
 func (ia InvoiceApi) Get(ctx context.Context, invoiceId string) (*Invoice, error) {
 	path := ia.getPath("/invoices/" + invoiceId)
 	result := &Invoice{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(ia.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
