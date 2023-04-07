@@ -430,12 +430,12 @@ type DedicatedServerListOptions struct {
 }
 
 type DedicatedServerIpListOptions struct {
-	NetworkType *string `param:"networkType"`
-	Version     *string `param:"version"`
-	NullRouted  *string `param:"nullRouted"`
-	IPs         *string `param:"ips"`
-	Limit       *int    `param:"limit"`
-	Offset      *int    `param:"offset"`
+	NetworkType *string  `param:"networkType"`
+	Version     *string  `param:"version"`
+	NullRouted  *string  `param:"nullRouted"`
+	IPs         []string `param:"ips"`
+	Limit       *int     `param:"limit"`
+	Offset      *int     `param:"offset"`
 }
 
 type DedicatedServerNullRouteHistoryOptions struct {
