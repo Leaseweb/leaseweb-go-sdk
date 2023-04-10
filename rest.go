@@ -3,20 +3,52 @@ package leaseweb
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 	"strconv"
 	"strings"
 )
 
-var lswClient *leasewebClient
-
 const DEFAULT_BASE_URL = "https://api.leaseweb.com"
+const CONTEXT_ACCOUNT_KEY = "CONTEXT_ACCOUNT_KEY"
 
-type leasewebClient struct {
-	client  *http.Client
-	apiKey  string
-	baseUrl string
+var lswClient *client
+
+type Account struct {
+	ApiKey string
+}
+
+func getSelectedApiKey(ctx context.Context) string {
+
+	account := Account{}
+	ctxValue := ctx.Value(CONTEXT_ACCOUNT_KEY)
+	if ctxValue != nil {
+		account = ctxValue.(Account)
+	}
+
+	if account.ApiKey != "" {
+		return account.ApiKey
+	}
+	return lswClient.defaultAccount.ApiKey
+}
+
+func SetContextWithAccount(ctx context.Context, account Account) context.Context {
+	return context.WithValue(ctx, CONTEXT_ACCOUNT_KEY, account)
+}
+
+func SetDefaultAccount(account Account) {
+	lswClient = &client{
+		client:         &http.Client{},
+		baseUrl:        DEFAULT_BASE_URL,
+		defaultAccount: account,
+	}
+}
+
+type client struct {
+	client         *http.Client
+	baseUrl        string
+	defaultAccount Account
 }
 
 type ApiContext struct {
@@ -36,7 +68,6 @@ type ApiError struct {
 
 func (erra *ApiError) Error() string {
 	return "leaseweb: " + erra.Message
-
 }
 
 type DecodingError struct {
@@ -57,26 +88,23 @@ func (erre *EncodingError) Error() string {
 	return "leaseweb: encoding JSON request body failed (" + erre.Err.Error() + ")"
 }
 
+// Deprecated: Use SetDefaultAccount instead
 func InitLeasewebClient(key string) {
-	lswClient = &leasewebClient{
-		client: &http.Client{},
-		apiKey: key,
-	}
+	SetDefaultAccount(Account{ApiKey: key})
 }
 
+// Deprecated: This function will remove!
 func SetBaseUrl(baseUrl string) {
 	lswClient.baseUrl = baseUrl
 }
 
-func getBaseUrl() string {
-	if lswClient.baseUrl != "" {
-		return lswClient.baseUrl
-	}
-	return DEFAULT_BASE_URL
-}
-
 func doRequest(ctx context.Context, method, path, query string, args ...interface{}) error {
-	url := getBaseUrl() + path
+
+	if lswClient == nil {
+		return errors.New("leaseweb account not found! Please use `SetDefaultAccount` first")
+	}
+
+	url := lswClient.baseUrl + path
 	if query != "" {
 		url += "?" + query
 	}
@@ -103,7 +131,7 @@ func doRequest(ctx context.Context, method, path, query string, args ...interfac
 		req.Header.Set("Content-Type", "application/json")
 	}
 
-	req.Header.Add("x-lsw-auth", lswClient.apiKey)
+	req.Header.Add("x-lsw-auth", getSelectedApiKey(ctx))
 	resp, err := lswClient.client.Do(req)
 	if err != nil {
 		return err

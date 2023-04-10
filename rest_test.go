@@ -1,7 +1,9 @@
 package leaseweb
 
 import (
+	"context"
 	"crypto/tls"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -77,6 +79,41 @@ func teardown() {
 }
 
 func TestMain(m *testing.M) {
-	InitLeasewebClient(testApiKey)
+	SetDefaultAccount(Account{ApiKey: testApiKey})
 	os.Exit(m.Run())
+}
+
+func TestSetContextWithAccount(t *testing.T) {
+	newApiKey := "new account api key"
+	setup(func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, newApiKey, r.Header.Get("x-lsw-auth"))
+		fmt.Fprintf(w, `{}`)
+	})
+	defer teardown()
+
+	customerAccountApi := CustomerAccountApi{}
+	ctx := context.Background()
+	newCtx := SetContextWithAccount(ctx, Account{ApiKey: newApiKey})
+	_, err := customerAccountApi.Get(newCtx)
+
+	assert := assert.New(t)
+	assert.Nil(err)
+}
+
+func TestSetContextWithAccountWithOldCtx(t *testing.T) {
+	setup(func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, http.MethodGet, r.Method)
+		assert.Equal(t, testApiKey, r.Header.Get("x-lsw-auth"))
+		fmt.Fprintf(w, `{}`)
+	})
+	defer teardown()
+
+	customerAccountApi := CustomerAccountApi{}
+	ctx := context.Background()
+	SetContextWithAccount(ctx, Account{ApiKey: "api key"})
+	_, err := customerAccountApi.Get(ctx)
+
+	assert := assert.New(t)
+	assert.Nil(err)
 }
