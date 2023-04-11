@@ -4,13 +4,13 @@ import (
 	"testing"
 )
 
-type TestPaginationOptions struct {
+type PaginationOptions struct {
 	Limit  *int `param:"limit"`
 	Offset *int `param:"offset"`
 }
 
-type TestListOptions struct {
-	TestPaginationOptions
+type ListOptions struct {
+	PaginationOptions
 	MacAddress            *string `param:"macAddress"`
 	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
 }
@@ -18,18 +18,18 @@ type TestListOptions struct {
 func TestEncode(t *testing.T) {
 	testCases := []struct {
 		name     string
-		opts     TestListOptions
+		opts     ListOptions
 		expected string
 	}{
 		{
 			name: "Full options",
-			opts: func() TestListOptions {
+			opts: func() ListOptions {
 				macAddress := "AA:BB:CC:DD:EE:FF"
 				offset := 0
 				limit := 10
 				privateNetworkCapable := false
-				return TestListOptions{
-					TestPaginationOptions: TestPaginationOptions{
+				return ListOptions{
+					PaginationOptions: PaginationOptions{
 						Limit:  &limit,
 						Offset: &offset,
 					},
@@ -41,11 +41,11 @@ func TestEncode(t *testing.T) {
 		},
 		{
 			name: "Limited options",
-			opts: func() TestListOptions {
+			opts: func() ListOptions {
 				offset := 0
 				limit := 10
-				return TestListOptions{
-					TestPaginationOptions: TestPaginationOptions{
+				return ListOptions{
+					PaginationOptions: PaginationOptions{
 						Limit:  &limit,
 						Offset: &offset,
 					},
@@ -55,7 +55,7 @@ func TestEncode(t *testing.T) {
 		},
 		{
 			name:     "Empty struct",
-			opts:     TestListOptions{},
+			opts:     ListOptions{},
 			expected: "",
 		},
 	}
