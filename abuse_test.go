@@ -394,7 +394,7 @@ func TestAbuseListMessages(t *testing.T) {
 
 	abuseApi := AbuseApi{}
 	ctx := context.Background()
-	response, err := abuseApi.ListMessages(ctx, "123456789", AbuseListReportMessagesOptions{})
+	response, err := abuseApi.ListMessages(ctx, "123456789", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -439,7 +439,7 @@ func TestAbuseListMessagesPaginate(t *testing.T) {
 
 	abuseApi := AbuseApi{}
 	ctx := context.Background()
-	opts := AbuseListReportMessagesOptions{
+	opts := PaginationOptions{
 		Limit: Int(1),
 	}
 	response, err := abuseApi.ListMessages(ctx, "123456789", opts)
@@ -471,7 +471,7 @@ func TestAbuseListMessagesBeEmpty(t *testing.T) {
 
 	abuseApi := AbuseApi{}
 	ctx := context.Background()
-	response, err := abuseApi.ListMessages(ctx, "123456789", AbuseListReportMessagesOptions{})
+	response, err := abuseApi.ListMessages(ctx, "123456789", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -493,7 +493,7 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return AbuseApi{}.ListMessages(ctx, "123456789", AbuseListReportMessagesOptions{})
+				return AbuseApi{}.ListMessages(ctx, "123456789", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "ACCESS_DENIED",
@@ -510,7 +510,7 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return AbuseApi{}.ListMessages(ctx, "123456789", AbuseListReportMessagesOptions{})
+				return AbuseApi{}.ListMessages(ctx, "123456789", PaginationOptions{})
 			},
 			ExpectedError: ApiError{Code: "404", Message: "Not Found"},
 		},
@@ -524,7 +524,7 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return AbuseApi{}.ListMessages(ctx, "123456789", AbuseListReportMessagesOptions{})
+				return AbuseApi{}.ListMessages(ctx, "123456789", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "SERVER_ERROR",
@@ -541,7 +541,7 @@ func TestAbuseListMessagesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return AbuseApi{}.ListMessages(ctx, "123456789", AbuseListReportMessagesOptions{})
+				return AbuseApi{}.ListMessages(ctx, "123456789", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "TEMPORARILY_UNAVAILABLE",

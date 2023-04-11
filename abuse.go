@@ -74,11 +74,6 @@ type AbuseListReportsOptions struct {
 	Status *string `param:"status"`
 }
 
-type AbuseListReportMessagesOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
 func (aba AbuseApi) getPath(endpoint string) string {
 	return "/abuse/" + ABUSE_API_VERSION + endpoint
 }
@@ -102,7 +97,7 @@ func (aba AbuseApi) Get(ctx context.Context, abuseReportId string) (*AbuseReport
 	return result, nil
 }
 
-func (aba AbuseApi) ListMessages(ctx context.Context, abuseReportId string, opts AbuseListReportMessagesOptions) (*AbuseMessages, error) {
+func (aba AbuseApi) ListMessages(ctx context.Context, abuseReportId string, opts PaginationOptions) (*AbuseMessages, error) {
 	path := aba.getPath("/reports/" + abuseReportId + "/messages")
 	query := options.Encode(opts)
 	result := &AbuseMessages{}
