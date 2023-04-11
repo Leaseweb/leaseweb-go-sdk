@@ -30,20 +30,7 @@ func extractValuesFromStruct(ot reflect.Type, ov reflect.Value, v *url.Values) {
 		if otf.Type.Kind() == reflect.Struct {
 			extractValuesFromStruct(otf.Type, ovf, v)
 		} else if otf.Type.Kind() == reflect.Slice {
-			// Handle slices
-			param := otf.Tag.Get("param")
-			if param == "" {
-				param = otf.Name
-			}
-
-			sliceValues := []string{}
-			for j := 0; j < ovf.Len(); j++ {
-				val := ovf.Index(j).Interface()
-				sliceValues = append(sliceValues, fmt.Sprintf("%v", val))
-			}
-			joinedSliceValues := strings.Join(sliceValues, ",")
-			v.Add(param, joinedSliceValues)
-
+			handleSliceField(otf, ovf, v)
 		} else if !isNilOrInvalid(ovf) {
 			param := otf.Tag.Get("param")
 			if param == "" {
@@ -53,6 +40,21 @@ func extractValuesFromStruct(ot reflect.Type, ov reflect.Value, v *url.Values) {
 			v.Add(param, fmt.Sprintf("%v", val))
 		}
 	}
+}
+
+func handleSliceField(otf reflect.StructField, ovf reflect.Value, v *url.Values) {
+	param := otf.Tag.Get("param")
+	if param == "" {
+		param = otf.Name
+	}
+
+	sliceValues := []string{}
+	for j := 0; j < ovf.Len(); j++ {
+		val := ovf.Index(j).Interface()
+		sliceValues = append(sliceValues, fmt.Sprintf("%v", val))
+	}
+	joinedSliceValues := strings.Join(sliceValues, ",")
+	v.Add(param, joinedSliceValues)
 }
 
 func isNilOrInvalid(v reflect.Value) bool {
