@@ -97,9 +97,10 @@ func TestAbuseListPaginateAndPassStatuses(t *testing.T) {
 	abuseApi := AbuseApi{}
 
 	ctx := context.Background()
+	status := []string{"OPEN", "WAITING"}
 	opts := AbuseListReportsOptions{
 		Limit:  Int(1),
-		Status: String("OPEN,WAITING"),
+		Status: status,
 	}
 	response, err := abuseApi.List(ctx, opts)
 

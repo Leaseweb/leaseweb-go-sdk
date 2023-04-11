@@ -69,9 +69,9 @@ type AbuseResolutions struct {
 }
 
 type AbuseListReportsOptions struct {
-	Limit  *int    `param:"limit"`
-	Offset *int    `param:"offset"`
-	Status *string `param:"status"`
+	Limit  *int     `param:"limit"`
+	Offset *int     `param:"offset"`
+	Status []string `param:"status"`
 }
 
 func (aba AbuseApi) getPath(endpoint string) string {

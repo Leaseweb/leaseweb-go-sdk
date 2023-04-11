@@ -28,6 +28,16 @@ func extractValuesFromStruct(ot reflect.Type, ov reflect.Value, v *url.Values) {
 
 		if otf.Type.Kind() == reflect.Struct {
 			extractValuesFromStruct(otf.Type, ovf, v)
+		} else if otf.Type.Kind() == reflect.Slice {
+			// Handle slices
+			for j := 0; j < ovf.Len(); j++ {
+				param := otf.Tag.Get("param")
+				if param == "" {
+					param = otf.Name
+				}
+				val := ovf.Index(j).Interface()
+				v.Add(param, fmt.Sprintf("%v", val))
+			}
 		} else if !ovf.IsNil() {
 			param := otf.Tag.Get("param")
 			if param == "" {
