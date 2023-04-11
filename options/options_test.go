@@ -4,13 +4,19 @@ import (
 	"testing"
 )
 
-type PaginationOptions struct {
+type BasicOptions struct {
+	Count                 *int    `param:"count"`
+	MacAddress            *string `param:"macAddress"`
+	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
+}
+
+type ExtraOptions struct {
 	Limit  *int `param:"limit"`
 	Offset *int `param:"offset"`
 }
 
-type ListOptions struct {
-	PaginationOptions
+type AdvancedOptions struct {
+	ExtraOptions
 	MacAddress            *string `param:"macAddress"`
 	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
 }
@@ -18,18 +24,67 @@ type ListOptions struct {
 func TestEncode(t *testing.T) {
 	testCases := []struct {
 		name     string
-		opts     ListOptions
+		opts     BasicOptions
 		expected string
 	}{
 		{
-			name: "Full options",
-			opts: func() ListOptions {
+			name: "BasicOptions Full options",
+			opts: func() BasicOptions {
+				macAddress := "AA:BB:CC:DD:EE:FF"
+				count := 0
+				privateNetworkCapable := false
+				return BasicOptions{
+					Count:                 &count,
+					MacAddress:            &macAddress,
+					PrivateNetworkCapable: &privateNetworkCapable,
+				}
+			}(),
+			expected: "count=0&macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&privateNetworkCapable=false",
+		},
+		{
+			name: "BasicOptions Limited options",
+			opts: func() BasicOptions {
+				macAddress := ""
+				count := 0
+				return BasicOptions{
+					Count:      &count,
+					MacAddress: &macAddress,
+				}
+			}(),
+			expected: "count=0&macAddress=",
+		},
+		{
+			name:     "BasicOptions Empty struct",
+			opts:     BasicOptions{},
+			expected: "",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			result := Encode(tc.opts)
+			if result != tc.expected {
+				t.Errorf("Expected '%s', but got '%s'", tc.expected, result)
+			}
+		})
+	}
+}
+
+func TestEncodeWithExtraOptions(t *testing.T) {
+	testCases := []struct {
+		name     string
+		opts     AdvancedOptions
+		expected string
+	}{
+		{
+			name: "ExtraOptions Full options",
+			opts: func() AdvancedOptions {
 				macAddress := "AA:BB:CC:DD:EE:FF"
 				offset := 0
 				limit := 10
 				privateNetworkCapable := false
-				return ListOptions{
-					PaginationOptions: PaginationOptions{
+				return AdvancedOptions{
+					ExtraOptions: ExtraOptions{
 						Limit:  &limit,
 						Offset: &offset,
 					},
@@ -40,12 +95,12 @@ func TestEncode(t *testing.T) {
 			expected: "limit=10&macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&offset=0&privateNetworkCapable=false",
 		},
 		{
-			name: "Limited options",
-			opts: func() ListOptions {
+			name: "ExtraOptions Limited options",
+			opts: func() AdvancedOptions {
 				offset := 0
 				limit := 10
-				return ListOptions{
-					PaginationOptions: PaginationOptions{
+				return AdvancedOptions{
+					ExtraOptions: ExtraOptions{
 						Limit:  &limit,
 						Offset: &offset,
 					},
@@ -54,9 +109,16 @@ func TestEncode(t *testing.T) {
 			expected: "limit=10&offset=0",
 		},
 		{
-			name:     "Empty struct",
-			opts:     ListOptions{},
-			expected: "",
+			name: "Empty ExtraOptions",
+			opts: func() AdvancedOptions {
+				macAddress := "AA:BB:CC:DD:EE:FF"
+				privateNetworkCapable := false
+				return AdvancedOptions{
+					MacAddress:            &macAddress,
+					PrivateNetworkCapable: &privateNetworkCapable,
+				}
+			}(),
+			expected: "macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&privateNetworkCapable=false",
 		},
 	}
 
