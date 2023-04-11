@@ -2304,7 +2304,7 @@ func TestHostingListEmailAliases(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := HostingApi{}.ListEmailAliases(ctx, "example.com", HostingListEmailAliasesOptions{})
+	response, err := HostingApi{}.ListEmailAliases(ctx, "example.com", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -2374,7 +2374,7 @@ func TestHostingListEmailAliasesPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := HostingListEmailAliasesOptions{
+	opts := PaginationOptions{
 		Limit: Int(1),
 	}
 	response, err := HostingApi{}.ListEmailAliases(ctx, "example.com", opts)
@@ -2410,7 +2410,7 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListEmailAliases(ctx, "example.com", HostingListEmailAliasesOptions{})
+				return HostingApi{}.ListEmailAliases(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2428,7 +2428,7 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListEmailAliases(ctx, "example.com", HostingListEmailAliasesOptions{})
+				return HostingApi{}.ListEmailAliases(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2446,7 +2446,7 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListEmailAliases(ctx, "example.com", HostingListEmailAliasesOptions{})
+				return HostingApi{}.ListEmailAliases(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2998,7 +2998,7 @@ func TestHostingListDomainForwards(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := HostingApi{}.ListDomainForwards(ctx, "example.com", HostingListDomainForwardsOptions{})
+	response, err := HostingApi{}.ListDomainForwards(ctx, "example.com", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -3068,7 +3068,7 @@ func TestHostingListDomainForwardsPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := HostingListDomainForwardsOptions{
+	opts := PaginationOptions{
 		Limit: Int(1),
 	}
 	response, err := HostingApi{}.ListDomainForwards(ctx, "example.com", opts)
@@ -3104,7 +3104,7 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListDomainForwards(ctx, "example.com", HostingListDomainForwardsOptions{})
+				return HostingApi{}.ListDomainForwards(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3122,7 +3122,7 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListDomainForwards(ctx, "example.com", HostingListDomainForwardsOptions{})
+				return HostingApi{}.ListDomainForwards(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3140,7 +3140,7 @@ func TestHostingListDomainForwardsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListDomainForwards(ctx, "example.com", HostingListDomainForwardsOptions{})
+				return HostingApi{}.ListDomainForwards(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3215,7 +3215,7 @@ func TestHostingListMailBoxes(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := HostingApi{}.ListMailBoxes(ctx, "example.com", HostingListMailBoxesOptions{})
+	response, err := HostingApi{}.ListMailBoxes(ctx, "example.com", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -3297,7 +3297,7 @@ func TestHostingListMailBoxesPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := HostingListMailBoxesOptions{
+	opts := PaginationOptions{
 		Limit: Int(1),
 	}
 	response, err := HostingApi{}.ListMailBoxes(ctx, "example.com", opts)
@@ -3337,7 +3337,7 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListMailBoxes(ctx, "example.com", HostingListMailBoxesOptions{})
+				return HostingApi{}.ListMailBoxes(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3355,7 +3355,7 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListMailBoxes(ctx, "example.com", HostingListMailBoxesOptions{})
+				return HostingApi{}.ListMailBoxes(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3373,7 +3373,7 @@ func TestHostingListMailBoxesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListMailBoxes(ctx, "example.com", HostingListMailBoxesOptions{})
+				return HostingApi{}.ListMailBoxes(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

@@ -70,21 +70,11 @@ type InvoiceProForma struct {
 	Contracts    []InvoiceContract `json:"contractItems"`
 }
 
-type InvoiceListOptions struct {
-	Offset *int `param:"offset"`
-	Limit  *int `param:"limit"`
-}
-
-type InvoiceListProFormaOptions struct {
-	Offset *int `param:"offset"`
-	Limit  *int `param:"limit"`
-}
-
 func (ia InvoiceApi) getPath(endpoint string) string {
 	return "/invoices/" + INVOICE_API_VERSION + endpoint
 }
 
-func (ia InvoiceApi) List(ctx context.Context, opts InvoiceListOptions) (*Invoices, error) {
+func (ia InvoiceApi) List(ctx context.Context, opts PaginationOptions) (*Invoices, error) {
 	path := ia.getPath("/invoices")
 	query := options.Encode(opts)
 	result := &Invoices{}
@@ -94,7 +84,7 @@ func (ia InvoiceApi) List(ctx context.Context, opts InvoiceListOptions) (*Invoic
 	return result, nil
 }
 
-func (ia InvoiceApi) ListProForma(ctx context.Context, opts InvoiceListProFormaOptions) (*InvoiceProForma, error) {
+func (ia InvoiceApi) ListProForma(ctx context.Context, opts PaginationOptions) (*InvoiceProForma, error) {
 	path := ia.getPath("/invoices/proforma")
 	query := options.Encode(opts)
 	result := &InvoiceProForma{}

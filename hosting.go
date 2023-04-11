@@ -149,21 +149,6 @@ type HostingListOptions struct {
 	Type   *string `param:"type"`
 }
 
-type HostingListEmailAliasesOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
-type HostingListDomainForwardsOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
-type HostingListMailBoxesOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
 func (ha HostingApi) getPath(endpoint string) string {
 	return "/hosting/" + FLOATING_IP_API_VERSION + endpoint
 }
@@ -324,7 +309,7 @@ func (ha HostingApi) DeleteCatchAll(ctx context.Context, domainName string) erro
 	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
-func (ha HostingApi) ListEmailAliases(ctx context.Context, domainName string, opts HostingListEmailAliasesOptions) (*HostingEmailAliases, error) {
+func (ha HostingApi) ListEmailAliases(ctx context.Context, domainName string, opts PaginationOptions) (*HostingEmailAliases, error) {
 	path := ha.getPath("/domains/" + domainName + "/emailAliases")
 	query := options.Encode(opts)
 	result := &HostingEmailAliases{}
@@ -366,7 +351,7 @@ func (ha HostingApi) DeleteEmailAlias(ctx context.Context, domainName, source, d
 	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
-func (ha HostingApi) ListDomainForwards(ctx context.Context, domainName string, opts HostingListDomainForwardsOptions) (*HostingEmailForwards, error) {
+func (ha HostingApi) ListDomainForwards(ctx context.Context, domainName string, opts PaginationOptions) (*HostingEmailForwards, error) {
 	path := ha.getPath("/domains/" + domainName + "/forwards")
 	query := options.Encode(opts)
 	result := &HostingEmailForwards{}
@@ -376,7 +361,7 @@ func (ha HostingApi) ListDomainForwards(ctx context.Context, domainName string, 
 	return result, nil
 }
 
-func (ha HostingApi) ListMailBoxes(ctx context.Context, domainName string, opts HostingListMailBoxesOptions) (*HostingEmailMailboxes, error) {
+func (ha HostingApi) ListMailBoxes(ctx context.Context, domainName string, opts PaginationOptions) (*HostingEmailMailboxes, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes")
 	query := options.Encode(opts)
 	result := &HostingEmailMailboxes{}
