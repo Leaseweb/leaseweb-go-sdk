@@ -40,11 +40,6 @@ type DedicatedRackListOptions struct {
 	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
 }
 
-type DedicatedRackNullRouteHistoryOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
 type DedicatedRackListIpsOptions struct {
 	NetworkType *string  `param:"networkType"`
 	Version     *string  `param:"version"`
@@ -52,16 +47,6 @@ type DedicatedRackListIpsOptions struct {
 	IPs         []string `param:"ips"`
 	Limit       *int     `param:"limit"`
 	Offset      *int     `param:"offset"`
-}
-
-type DedicatedRackListCredentialsOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
-type DedicatedRackListCredentialsByTypeOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
 }
 
 type DedicatedRackMetricsDataTrafficOptions struct {
@@ -76,16 +61,6 @@ type DedicatedRackMetricsBandwidthOptions struct {
 	To          *string `param:"to"`
 	Granularity *string `param:"granularity"`
 	Aggregation *string `param:"aggregation"`
-}
-
-type DedicatedRackListBandwidthNotificationOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
-type DedicatedRackListDatatrafficNotificationOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
 }
 
 func (dra DedicatedRackApi) getPath(endpoint string) string {
@@ -117,7 +92,7 @@ func (dra DedicatedRackApi) Update(ctx context.Context, privateRackId, reference
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
-func (dra DedicatedRackApi) ListNullRoutes(ctx context.Context, privateRackId string, opts DedicatedRackNullRouteHistoryOptions) (*NullRoutes, error) {
+func (dra DedicatedRackApi) ListNullRoutes(ctx context.Context, privateRackId string, opts PaginationOptions) (*NullRoutes, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/nullRouteHistory")
 	query := options.Encode(opts)
 	result := &NullRoutes{}
@@ -173,7 +148,7 @@ func (dra DedicatedRackApi) RemoveNullRouteAnIp(ctx context.Context, privateRack
 	return result, nil
 }
 
-func (dra DedicatedRackApi) ListCredentials(ctx context.Context, privateRackId string, opts DedicatedRackListCredentialsOptions) (*Credentials, error) {
+func (dra DedicatedRackApi) ListCredentials(ctx context.Context, privateRackId string, opts PaginationOptions) (*Credentials, error) {
 	result := &Credentials{}
 	query := options.Encode(opts)
 	path := dra.getPath("/privateRacks/" + privateRackId + "/credentials")
@@ -196,7 +171,7 @@ func (dra DedicatedRackApi) CreateCredential(ctx context.Context, privateRackId,
 	return result, nil
 }
 
-func (dra DedicatedRackApi) ListCredentialsByType(ctx context.Context, privateRackId, credentialType string, opts DedicatedRackListCredentialsByTypeOptions) (*Credentials, error) {
+func (dra DedicatedRackApi) ListCredentialsByType(ctx context.Context, privateRackId, credentialType string, opts PaginationOptions) (*Credentials, error) {
 	result := &Credentials{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/credentials/" + credentialType)
 	query := options.Encode(opts)
@@ -267,7 +242,7 @@ func (dra DedicatedRackApi) UpdateDdosNotificationSetting(ctx context.Context, p
 	return nil
 }
 
-func (dra DedicatedRackApi) ListBandWidthNotificationSettings(ctx context.Context, privateRackId string, opts DedicatedRackListBandwidthNotificationOptions) (*BandWidthNotificationSettings, error) {
+func (dra DedicatedRackApi) ListBandWidthNotificationSettings(ctx context.Context, privateRackId string, opts PaginationOptions) (*BandWidthNotificationSettings, error) {
 	result := &BandWidthNotificationSettings{}
 	query := options.Encode(opts)
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/bandwidth")
@@ -314,7 +289,7 @@ func (dra DedicatedRackApi) UpdateBandWidthNotificationSetting(ctx context.Conte
 	return result, nil
 }
 
-func (dra DedicatedRackApi) ListDataTrafficNotificationSettings(ctx context.Context, privateRackId string, opts DedicatedRackListDatatrafficNotificationOptions) (*DataTrafficNotificationSettings, error) {
+func (dra DedicatedRackApi) ListDataTrafficNotificationSettings(ctx context.Context, privateRackId string, opts PaginationOptions) (*DataTrafficNotificationSettings, error) {
 	result := &DataTrafficNotificationSettings{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/datatraffic")
 	query := options.Encode(opts)
