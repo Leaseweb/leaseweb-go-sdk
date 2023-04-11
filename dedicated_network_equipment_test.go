@@ -262,7 +262,9 @@ func TestDedicatedNetworkEquipmentListPaginateAndFilter(t *testing.T) {
 
 	ctx := context.Background()
 	opts := DedicatedNetworkEquipmentListOptions{
-		Limit: Int(1),
+		PaginationOptions: PaginationOptions{
+			Limit: Int(1),
+		},
 	}
 	response, err := DedicatedNetworkEquipmentApi{}.List(ctx, opts)
 	assert := assert.New(t)
@@ -823,8 +825,10 @@ func TestDedicatedNetworkEquipmentListIpsFilterAndPagination(t *testing.T) {
 
 	ctx := context.Background()
 	opts := DedicatedNetworkEquipmentIpListOptions{
-		Limit:  Int(1),
-		Offset: Int(10),
+		PaginationOptions: PaginationOptions{
+			Limit:  Int(1),
+			Offset: Int(10),
+		},
 	}
 	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", opts)
 	assert := assert.New(t)

@@ -45,15 +45,13 @@ type FloatingIpDefinitions struct {
 }
 
 type FloatingIpListOptions struct {
-	Limit    *int    `param:"limit"`
-	Offset   *int    `param:"offset"`
+	PaginationOptions
 	Type     *string `param:"type"`
 	Location *string `param:"location"`
 }
 
 type FloatingIpListRangeDefinitionsOptions struct {
-	Limit    *int    `param:"limit"`
-	Offset   *int    `param:"offset"`
+	PaginationOptions
 	Location *string `param:"location"`
 	Type     *string `param:"type"`
 }

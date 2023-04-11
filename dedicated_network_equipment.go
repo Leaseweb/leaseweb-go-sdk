@@ -41,8 +41,7 @@ type DedicatedNetworkEquipmentSpec struct {
 }
 
 type DedicatedNetworkEquipmentListOptions struct {
-	Limit                 *int    `param:"limit"`
-	Offset                *int    `param:"offset"`
+	PaginationOptions
 	Reference             *string `param:"reference"`
 	IP                    *string `param:"ip"`
 	MacAddress            *string `param:"macAddress"`
@@ -53,12 +52,11 @@ type DedicatedNetworkEquipmentListOptions struct {
 }
 
 type DedicatedNetworkEquipmentIpListOptions struct {
+	PaginationOptions
 	NetworkType *string  `param:"networkType"`
 	Version     *string  `param:"version"`
 	NullRouted  *string  `param:"nullRouted"`
 	IPs         []string `param:"ips"`
-	Limit       *int     `param:"limit"`
-	Offset      *int     `param:"offset"`
 }
 
 func (dnea DedicatedNetworkEquipmentApi) getPath(endpoint string) string {

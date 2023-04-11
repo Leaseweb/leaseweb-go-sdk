@@ -50,8 +50,7 @@ type ServicesCancellationReason struct {
 }
 
 type ServicesListOptions struct {
-	Offset      *int    `param:"offset"`
-	Limit       *int    `param:"limit"`
+	PaginationOptions
 	ProductId   *string `param:"productId"`
 	Reference   *string `param:"reference"`
 	EquipmentId *string `param:"equipmentId"`

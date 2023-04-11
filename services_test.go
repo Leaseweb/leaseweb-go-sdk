@@ -148,7 +148,9 @@ func TestServicesListPaginate(t *testing.T) {
 
 	ctx := context.Background()
 	opts := ServicesListOptions{
-		Limit: Int(1),
+		PaginationOptions: PaginationOptions{
+			Limit: Int(1),
+		},
 	}
 	response, err := ServicesApi{}.List(ctx, opts)
 

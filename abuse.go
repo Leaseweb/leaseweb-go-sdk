@@ -69,8 +69,7 @@ type AbuseResolutions struct {
 }
 
 type AbuseListReportsOptions struct {
-	Limit  *int     `param:"limit"`
-	Offset *int     `param:"offset"`
+	PaginationOptions
 	Status []string `param:"status"`
 }
 

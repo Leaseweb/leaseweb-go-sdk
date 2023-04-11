@@ -33,20 +33,18 @@ type DedicatedRackUnit struct {
 }
 
 type DedicatedRackListOptions struct {
-	Limit                 *int    `param:"limit"`
-	Offset                *int    `param:"offset"`
+	PaginationOptions
 	Reference             *string `param:"reference"`
 	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
 	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
 }
 
 type DedicatedRackListIpsOptions struct {
+	PaginationOptions
 	NetworkType *string  `param:"networkType"`
 	Version     *string  `param:"version"`
 	NullRouted  *string  `param:"nullRouted"`
 	IPs         []string `param:"ips"`
-	Limit       *int     `param:"limit"`
-	Offset      *int     `param:"offset"`
 }
 
 type DedicatedRackMetricsDataTrafficOptions struct {

@@ -144,9 +144,8 @@ type HostingEmail struct {
 }
 
 type HostingListOptions struct {
-	Limit  *int    `param:"limit"`
-	Offset *int    `param:"offset"`
-	Type   *string `param:"type"`
+	PaginationOptions
+	Type *string `param:"type"`
 }
 
 func (ha HostingApi) getPath(endpoint string) string {

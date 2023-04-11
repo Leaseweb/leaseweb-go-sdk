@@ -82,8 +82,10 @@ func TestFloatingIpListRangesPaginateAndFilter(t *testing.T) {
 	floatingIpApi := FloatingIpApi{}
 	ctx := context.Background()
 	opts := FloatingIpListOptions{
-		Limit:    Int(1),
-		Offset:   Int(10),
+		PaginationOptions: PaginationOptions{
+			Limit:  Int(1),
+			Offset: Int(10),
+		},
 		Type:     String("SITE, METRO"),
 		Location: String("AMS-01"),
 	}
@@ -370,8 +372,10 @@ func TestFloatingIpListRangeDefinitionsPaginateAndFilter(t *testing.T) {
 	floatingIpApi := FloatingIpApi{}
 	ctx := context.Background()
 	opts := FloatingIpListRangeDefinitionsOptions{
-		Limit:    Int(1),
-		Offset:   Int(10),
+		PaginationOptions: PaginationOptions{
+			Limit:  Int(1),
+			Offset: Int(10),
+		},
 		Location: String("AMS-01"),
 		Type:     String("SITE, METRO"),
 	}

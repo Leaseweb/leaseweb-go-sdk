@@ -187,7 +187,9 @@ func TestDedicatedRackListPaginateAndFilter(t *testing.T) {
 
 	ctx := context.Background()
 	opts := DedicatedRackListOptions{
-		Limit: Int(1),
+		PaginationOptions: PaginationOptions{
+			Limit: Int(1),
+		},
 	}
 	response, err := DedicatedRackApi{}.List(ctx, opts)
 	assert := assert.New(t)
@@ -829,7 +831,9 @@ func TestDedicatedRackListIpsPaginateAndFilter(t *testing.T) {
 
 	ctx := context.Background()
 	opts := DedicatedRackListIpsOptions{
-		Limit: Int(1),
+		PaginationOptions: PaginationOptions{
+			Limit: Int(1),
+		},
 	}
 	response, err := DedicatedRackApi{}.ListIps(ctx, "123456", opts)
 	assert := assert.New(t)

@@ -210,7 +210,9 @@ func TestHostingListDomainsPaginateAndFilter(t *testing.T) {
 	hostingApi := HostingApi{}
 	ctx := context.Background()
 	opts := HostingListOptions{
-		Limit: Int(1),
+		PaginationOptions: PaginationOptions{
+			Limit: Int(1),
+		},
 	}
 	response, err := hostingApi.ListDomains(ctx, opts)
 
