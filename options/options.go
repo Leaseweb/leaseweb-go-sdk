@@ -8,64 +8,59 @@ import (
 )
 
 func Encode(opts interface{}) string {
-	values := extract(opts)
-	return values.Encode()
+	return extract(opts).Encode()
 }
 
-// extract recursively extracts URL values from an interface{} and returns them as url.Values
 func extract(opts interface{}) url.Values {
 	v := url.Values{}
 	ot := reflect.TypeOf(opts)
 	ov := reflect.ValueOf(opts)
-	extractValuesFromStruct(ot, ov, &v)
+
+	for i := 0; i < ot.NumField(); i++ {
+		ovf := ov.Field(i)
+
+		if ovf.Kind() == reflect.Invalid {
+			continue
+		}
+
+		if ovf.Kind() == reflect.Struct {
+			v = merge(v, extract(ovf.Interface()))
+			continue
+		}
+
+		otf := ot.Field(i)
+		p := otf.Tag.Get("param")
+		if p == "" {
+			p = otf.Name
+		}
+
+		if ovf.Kind() == reflect.Slice && !ovf.IsNil() {
+			s := []string{}
+			for i := 0; i < ovf.Len(); i++ {
+				val := ovf.Index(i).Interface()
+				s = append(s, fmt.Sprintf("%v", val))
+			}
+			v.Add(p, strings.Join(s, ","))
+		}
+
+		if ovf.Kind() != reflect.Pointer {
+			continue
+		}
+
+		if !ovf.IsNil() {
+			val := ovf.Elem().Interface()
+			v.Add(p, fmt.Sprintf("%v", val))
+		}
+	}
+
 	return v
 }
 
-// extractValuesFromStruct recursively extracts URL values from a struct type and value and stores them in url.Values
-func extractValuesFromStruct(ot reflect.Type, ov reflect.Value, v *url.Values) {
-	for i := 0; i < ot.NumField(); i++ {
-		otf := ot.Field(i)
-		ovf := ov.Field(i)
-
-		if otf.Type.Kind() == reflect.Struct {
-			extractValuesFromStruct(otf.Type, ovf, v)
-		} else if otf.Type.Kind() == reflect.Slice {
-			handleSliceField(otf, ovf, v)
-		} else if !isNilOrInvalid(ovf) {
-			param := otf.Tag.Get("param")
-			if param == "" {
-				param = otf.Name
-			}
-			val := ovf.Elem().Interface()
-			v.Add(param, fmt.Sprintf("%v", val))
+func merge(v1, v2 url.Values) url.Values {
+	for k, ls := range v2 {
+		for _, s := range ls {
+			v1.Add(k, s)
 		}
 	}
-}
-
-func handleSliceField(otf reflect.StructField, ovf reflect.Value, v *url.Values) {
-	param := otf.Tag.Get("param")
-	if param == "" {
-		param = otf.Name
-	}
-
-	sliceValues := []string{}
-	for j := 0; j < ovf.Len(); j++ {
-		val := ovf.Index(j).Interface()
-		sliceValues = append(sliceValues, fmt.Sprintf("%v", val))
-	}
-	if len(sliceValues) > 0 {
-		joinedSliceValues := strings.Join(sliceValues, ",")
-		v.Add(param, joinedSliceValues)
-	}
-}
-
-func isNilOrInvalid(v reflect.Value) bool {
-	switch v.Kind() {
-	case reflect.Chan, reflect.Func, reflect.Map, reflect.Ptr, reflect.Interface, reflect.Slice:
-		return v.IsNil()
-	case reflect.Invalid:
-		return true
-	default:
-		return false
-	}
+	return v1
 }
