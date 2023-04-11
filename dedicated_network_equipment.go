@@ -61,21 +61,6 @@ type DedicatedNetworkEquipmentIpListOptions struct {
 	Offset      *int     `param:"offset"`
 }
 
-type DedicatedNetworkEquipmentNullRouteHistoryOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
-type DedicatedNetworkEquipmentCredentialsListOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
-type DedicatedNetworkEquipmentCredentialsListTypeOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
 func (dnea DedicatedNetworkEquipmentApi) getPath(endpoint string) string {
 	return "/bareMetals/" + DEDICATED_NETWORK_EQUIPMENT_API_VERSION + endpoint
 }
@@ -151,7 +136,7 @@ func (dnea DedicatedNetworkEquipmentApi) RemoveNullRouteAnIp(ctx context.Context
 	return result, nil
 }
 
-func (dnea DedicatedNetworkEquipmentApi) ListNullRoutes(ctx context.Context, networkEquipmentId string, opts DedicatedNetworkEquipmentNullRouteHistoryOptions) (*NullRoutes, error) {
+func (dnea DedicatedNetworkEquipmentApi) ListNullRoutes(ctx context.Context, networkEquipmentId string, opts PaginationOptions) (*NullRoutes, error) {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/nullRouteHistory")
 	query := options.Encode(opts)
 	result := &NullRoutes{}
@@ -161,7 +146,7 @@ func (dnea DedicatedNetworkEquipmentApi) ListNullRoutes(ctx context.Context, net
 	return result, nil
 }
 
-func (dnea DedicatedNetworkEquipmentApi) ListCredentials(ctx context.Context, networkEquipmentId string, opts DedicatedNetworkEquipmentCredentialsListOptions) (*Credentials, error) {
+func (dnea DedicatedNetworkEquipmentApi) ListCredentials(ctx context.Context, networkEquipmentId string, opts PaginationOptions) (*Credentials, error) {
 	result := &Credentials{}
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials")
 	query := options.Encode(opts)
@@ -184,7 +169,7 @@ func (dnea DedicatedNetworkEquipmentApi) CreateCredential(ctx context.Context, n
 	return result, nil
 }
 
-func (dnea DedicatedNetworkEquipmentApi) ListCredentialsByType(ctx context.Context, networkEquipmentId, credentialType string, opts DedicatedNetworkEquipmentCredentialsListTypeOptions) (*Credentials, error) {
+func (dnea DedicatedNetworkEquipmentApi) ListCredentialsByType(ctx context.Context, networkEquipmentId, credentialType string, opts PaginationOptions) (*Credentials, error) {
 	result := &Credentials{}
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/credentials/" + credentialType)
 	query := options.Encode(opts)
