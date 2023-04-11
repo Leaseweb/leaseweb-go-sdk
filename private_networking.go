@@ -27,16 +27,11 @@ type PrivateNetworkingDhcpReservation struct {
 	Sticky bool   `json:"sticky"`
 }
 
-type PrivateNetworkingListOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
 func (pna PrivateNetworkingApi) getPath(endpoint string) string {
 	return "/bareMetals/" + PRIVATE_NETWORKING_API_VERSION + endpoint
 }
 
-func (pna PrivateNetworkingApi) List(ctx context.Context, opts PrivateNetworkingListOptions) (*PrivateNetworks, error) {
+func (pna PrivateNetworkingApi) List(ctx context.Context, opts PaginationOptions) (*PrivateNetworks, error) {
 	path := pna.getPath("/privateNetworks")
 	query := options.Encode(opts)
 	result := &PrivateNetworks{}

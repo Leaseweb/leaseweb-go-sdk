@@ -62,7 +62,7 @@ func TestPrivateCloudList(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	response, err := privateCloudApi.List(ctx, PrivateCloudListOptions{})
+	response, err := privateCloudApi.List(ctx, PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -109,7 +109,7 @@ func TestPrivateCloudListBeEmpty(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	response, err := privateCloudApi.List(ctx, PrivateCloudListOptions{})
+	response, err := privateCloudApi.List(ctx, PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -129,7 +129,7 @@ func TestPrivateCloudListPaginate(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	opts := PrivateCloudListOptions{
+	opts := PaginationOptions{
 		Limit:  Int(10),
 		Offset: Int(20),
 	}
@@ -155,7 +155,7 @@ func TestPrivateCloudListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.List(ctx, PrivateCloudListOptions{})
+				return PrivateCloudApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "ACCESS_DENIED",
@@ -172,7 +172,7 @@ func TestPrivateCloudListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.List(ctx, PrivateCloudListOptions{})
+				return PrivateCloudApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "SERVER_ERROR",
@@ -189,7 +189,7 @@ func TestPrivateCloudListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.List(ctx, PrivateCloudListOptions{})
+				return PrivateCloudApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "TEMPORARILY_UNAVAILABLE",
@@ -373,7 +373,7 @@ func TestPrivateCloudListCredentials(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	response, err := privateCloudApi.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PrivateCloudListCredentialsOptions{})
+	response, err := privateCloudApi.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -398,7 +398,7 @@ func TestPrivateCloudListCredentialsBeEmpty(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	response, err := privateCloudApi.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PrivateCloudListCredentialsOptions{})
+	response, err := privateCloudApi.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -425,7 +425,7 @@ func TestPrivateCloudListCredentialsPaginate(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	opts := PrivateCloudListCredentialsOptions{
+	opts := PaginationOptions{
 		Limit:  Int(1),
 		Offset: Int(10),
 	}
@@ -457,7 +457,7 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PrivateCloudListCredentialsOptions{})
+				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "ACCESS_DENIED",
@@ -474,7 +474,7 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PrivateCloudListCredentialsOptions{})
+				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:        "404",
@@ -492,7 +492,7 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PrivateCloudListCredentialsOptions{})
+				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "SERVER_ERROR",
@@ -509,7 +509,7 @@ func TestPrivateCloudListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PrivateCloudListCredentialsOptions{})
+				return PrivateCloudApi{}.ListCredentials(ctx, "12345678", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "TEMPORARILY_UNAVAILABLE",

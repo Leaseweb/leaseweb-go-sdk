@@ -114,7 +114,7 @@ func TestVirtualServerList(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := VirtualServerApi{}.List(ctx, VirtualServerListOptions{})
+	response, err := VirtualServerApi{}.List(ctx, PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -241,7 +241,7 @@ func TestVirtualServerListPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := VirtualServerListOptions{
+	opts := PaginationOptions{
 		Limit: Int(1),
 	}
 	response, err := VirtualServerApi{}.List(ctx, opts)
@@ -294,7 +294,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.List(ctx, VirtualServerListOptions{})
+				return VirtualServerApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -312,7 +312,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.List(ctx, VirtualServerListOptions{})
+				return VirtualServerApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -330,7 +330,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.List(ctx, VirtualServerListOptions{})
+				return VirtualServerApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -348,7 +348,7 @@ func TestVirtualServerListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.List(ctx, VirtualServerListOptions{})
+				return VirtualServerApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1335,7 +1335,7 @@ func TestVirtualServerListCredentials(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", VirtualServerListCredentialsOptions{})
+	response, err := VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -1370,7 +1370,7 @@ func TestVirtualServerListCredentialsPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := VirtualServerListCredentialsOptions{
+	opts := PaginationOptions{
 		Limit: Int(1),
 	}
 	response, err := VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", opts)
@@ -1397,7 +1397,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", VirtualServerListCredentialsOptions{})
+				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1415,7 +1415,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", VirtualServerListCredentialsOptions{})
+				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1433,7 +1433,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", VirtualServerListCredentialsOptions{})
+				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1451,7 +1451,7 @@ func TestVirtualServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", VirtualServerListCredentialsOptions{})
+				return VirtualServerApi{}.ListCredentials(ctx, "99944", "OPERATING_SYSTEM", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

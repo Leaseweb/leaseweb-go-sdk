@@ -56,16 +56,6 @@ type VirtualServerTemplate struct {
 	Name string `json:"name"`
 }
 
-type VirtualServerListOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
-type VirtualServerListCredentialsOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
 type VirtualServerMetricsDataTrafficOptions struct {
 	Granularity *string `param:"granularity"`
 	Aggregation *string `param:"aggregation"`
@@ -77,7 +67,7 @@ func (vsa VirtualServerApi) getPath(endpoint string) string {
 	return "/cloud/" + VIRTUAL_SERVER_API_VERSION + endpoint
 }
 
-func (vsa VirtualServerApi) List(ctx context.Context, opts VirtualServerListOptions) (*VirtualServers, error) {
+func (vsa VirtualServerApi) List(ctx context.Context, opts PaginationOptions) (*VirtualServers, error) {
 	path := vsa.getPath("/virtualServers")
 	query := options.Encode(opts)
 	result := &VirtualServers{}
@@ -149,7 +139,7 @@ func (vsa VirtualServerApi) UpdateCredential(ctx context.Context, virtualServerI
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
-func (vsa VirtualServerApi) ListCredentials(ctx context.Context, virtualServerId, credentialType string, opts VirtualServerListCredentialsOptions) (*Credentials, error) {
+func (vsa VirtualServerApi) ListCredentials(ctx context.Context, virtualServerId, credentialType string, opts PaginationOptions) (*Credentials, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/credentials/" + credentialType)
 	query := options.Encode(opts)
 	result := &Credentials{}

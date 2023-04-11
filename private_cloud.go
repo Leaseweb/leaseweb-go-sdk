@@ -55,16 +55,6 @@ type PrivateCloudStorageMetric struct {
 	Storage BasicMetric `json:"STORAGE"`
 }
 
-type PrivateCloudListOptions struct {
-	Offset *int `param:"offset"`
-	Limit  *int `param:"limit"`
-}
-
-type PrivateCloudListCredentialsOptions struct {
-	Offset *int `param:"offset"`
-	Limit  *int `param:"limit"`
-}
-
 type PrivateCloudMetricsDataTrafficOptions struct {
 	Granularity *string `param:"granularity"`
 	Aggregation *string `param:"aggregation"`
@@ -104,7 +94,7 @@ func (pca PrivateCloudApi) getPath(endpoint string) string {
 	return "/cloud/" + PRIVATE_CLOUD_API_VERSION + endpoint
 }
 
-func (pca PrivateCloudApi) List(ctx context.Context, opts PrivateCloudListOptions) (*PrivateClouds, error) {
+func (pca PrivateCloudApi) List(ctx context.Context, opts PaginationOptions) (*PrivateClouds, error) {
 	path := pca.getPath("/privateClouds")
 	query := options.Encode(opts)
 	result := &PrivateClouds{}
@@ -123,7 +113,7 @@ func (pca PrivateCloudApi) Get(ctx context.Context, privateCloudId string) (*Pri
 	return result, nil
 }
 
-func (pca PrivateCloudApi) ListCredentials(ctx context.Context, privateCloudId string, credentialType string, opts PrivateCloudListCredentialsOptions) (*Credentials, error) {
+func (pca PrivateCloudApi) ListCredentials(ctx context.Context, privateCloudId string, credentialType string, opts PaginationOptions) (*Credentials, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/credentials/" + credentialType)
 	query := options.Encode(opts)
 	result := &Credentials{}
