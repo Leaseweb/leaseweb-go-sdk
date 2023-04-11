@@ -418,8 +418,7 @@ type DedicatedServerRescueImage struct {
 }
 
 type DedicatedServerListOptions struct {
-	Offset                *int    `param:"offset"`
-	Limit                 *int    `param:"limit"`
+	PaginationOptions
 	IP                    *string `param:"ip"`
 	MacAddress            *string `param:"macAddress"`
 	Site                  *string `param:"site"`
@@ -430,35 +429,18 @@ type DedicatedServerListOptions struct {
 }
 
 type DedicatedServerIpListOptions struct {
+	PaginationOptions
 	NetworkType *string  `param:"networkType"`
 	Version     *string  `param:"version"`
 	NullRouted  *string  `param:"nullRouted"`
 	IPs         []string `param:"ips"`
-	Limit       *int     `param:"limit"`
-	Offset      *int     `param:"offset"`
-}
-
-type DedicatedServerNullRouteHistoryOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
 }
 
 type DedicatedServerJobListOptions struct {
-	Limit     *int    `param:"limit"`
-	Offset    *int    `param:"offset"`
+	PaginationOptions
 	Type      *string `param:"type"`
 	Status    *string `param:"status"`
 	IsRunning *bool   `param:"isRunning"`
-}
-
-type DedicatedServerCredentialsListOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
-type DedicatedServerCredentialsListTypeOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
 }
 
 type DedicatedServerMetricsDataTrafficOptions struct {
@@ -475,31 +457,14 @@ type DedicatedServerMetricsBandwidthOptions struct {
 	Aggregation *string `param:"aggregation"`
 }
 
-type DedicatedServerListBandwidthNotificationOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
-type DedicatedServerListDatatrafficNotificationOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
 type DedicatedServerListOperatingSystemsOptions struct {
-	Limit          *int    `param:"limit"`
-	Offset         *int    `param:"offset"`
+	PaginationOptions
 	ControlPanelId *string `param:"controlPanelId"`
 }
 
 type DedicatedServerListControlPanelsOptions struct {
-	Limit             *int    `param:"limit"`
-	Offset            *int    `param:"offset"`
+	PaginationOptions
 	OperatingSystemId *string `param:"operatingSystemId"`
-}
-
-type DedicatedServerRescueImagesListOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
 }
 
 func (dsa DedicatedServerApi) getPath(endpoint string) string {
@@ -585,7 +550,7 @@ func (dsa DedicatedServerApi) RemoveNullRouteAnIp(ctx context.Context, serverId,
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListNullRoutes(ctx context.Context, serverId string, opts DedicatedServerNullRouteHistoryOptions) (*NullRoutes, error) {
+func (dsa DedicatedServerApi) ListNullRoutes(ctx context.Context, serverId string, opts PaginationOptions) (*NullRoutes, error) {
 	path := dsa.getPath("/servers/" + serverId + "/nullRouteHistory")
 	query := options.Encode(opts)
 	result := &NullRoutes{}
@@ -736,7 +701,7 @@ func (dsa DedicatedServerApi) LaunchRescueMode(ctx context.Context, serverId str
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListCredentials(ctx context.Context, serverId string, opts DedicatedServerCredentialsListOptions) (*Credentials, error) {
+func (dsa DedicatedServerApi) ListCredentials(ctx context.Context, serverId string, opts PaginationOptions) (*Credentials, error) {
 	result := &Credentials{}
 	path := dsa.getPath("/servers/" + serverId + "/credentials")
 	query := options.Encode(opts)
@@ -759,7 +724,7 @@ func (dsa DedicatedServerApi) CreateCredential(ctx context.Context, serverId, cr
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListCredentialsByType(ctx context.Context, serverId, credentialType string, opts DedicatedServerCredentialsListTypeOptions) (*Credentials, error) {
+func (dsa DedicatedServerApi) ListCredentialsByType(ctx context.Context, serverId, credentialType string, opts PaginationOptions) (*Credentials, error) {
 	result := &Credentials{}
 	path := dsa.getPath("/servers/" + serverId + "/credentials/" + credentialType)
 	query := options.Encode(opts)
@@ -813,7 +778,7 @@ func (dsa DedicatedServerApi) GetBandWidthMetrics(ctx context.Context, serverId 
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListBandWidthNotificationSettings(ctx context.Context, serverId string, opts DedicatedServerListBandwidthNotificationOptions) (*BandWidthNotificationSettings, error) {
+func (dsa DedicatedServerApi) ListBandWidthNotificationSettings(ctx context.Context, serverId string, opts PaginationOptions) (*BandWidthNotificationSettings, error) {
 	result := &BandWidthNotificationSettings{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/bandwidth")
 	query := options.Encode(opts)
@@ -861,7 +826,7 @@ func (dsa DedicatedServerApi) UpdateBandWidthNotificationSetting(ctx context.Con
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListDataTrafficNotificationSettings(ctx context.Context, serverId string, opts DedicatedServerListDatatrafficNotificationOptions) (*DataTrafficNotificationSettings, error) {
+func (dsa DedicatedServerApi) ListDataTrafficNotificationSettings(ctx context.Context, serverId string, opts PaginationOptions) (*DataTrafficNotificationSettings, error) {
 	result := &DataTrafficNotificationSettings{}
 	path := dsa.getPath("/servers/" + serverId + "/notificationSettings/datatraffic")
 	query := options.Encode(opts)
@@ -981,7 +946,7 @@ func (dsa DedicatedServerApi) ListControlPanels(ctx context.Context, opts Dedica
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListRescueImages(ctx context.Context, opts DedicatedServerRescueImagesListOptions) (*DedicatedServerRescueImages, error) {
+func (dsa DedicatedServerApi) ListRescueImages(ctx context.Context, opts PaginationOptions) (*DedicatedServerRescueImages, error) {
 	result := &DedicatedServerRescueImages{}
 	path := dsa.getPath("/rescueImages")
 	query := options.Encode(opts)

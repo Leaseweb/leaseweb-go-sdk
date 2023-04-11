@@ -4,8 +4,13 @@ import (
 	"testing"
 )
 
-type ListOptions struct {
-	Offset                *int    `param:"offset"`
+type TestPaginationOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type TestListOptions struct {
+	TestPaginationOptions
 	MacAddress            *string `param:"macAddress"`
 	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
 }
@@ -13,38 +18,44 @@ type ListOptions struct {
 func TestEncode(t *testing.T) {
 	testCases := []struct {
 		name     string
-		opts     ListOptions
+		opts     TestListOptions
 		expected string
 	}{
 		{
-			name: "Test Case 1: Full options",
-			opts: func() ListOptions {
+			name: "Full options",
+			opts: func() TestListOptions {
 				macAddress := "AA:BB:CC:DD:EE:FF"
 				offset := 0
+				limit := 10
 				privateNetworkCapable := false
-				return ListOptions{
-					Offset:                &offset,
+				return TestListOptions{
+					TestPaginationOptions: TestPaginationOptions{
+						Limit:  &limit,
+						Offset: &offset,
+					},
 					MacAddress:            &macAddress,
 					PrivateNetworkCapable: &privateNetworkCapable,
 				}
 			}(),
-			expected: "macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&offset=0&privateNetworkCapable=false",
+			expected: "limit=10&macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&offset=0&privateNetworkCapable=false",
 		},
 		{
 			name: "Limited options",
-			opts: func() ListOptions {
-				macAddress := ""
+			opts: func() TestListOptions {
 				offset := 0
-				return ListOptions{
-					Offset:     &offset,
-					MacAddress: &macAddress,
+				limit := 10
+				return TestListOptions{
+					TestPaginationOptions: TestPaginationOptions{
+						Limit:  &limit,
+						Offset: &offset,
+					},
 				}
 			}(),
-			expected: "macAddress=&offset=0",
+			expected: "limit=10&offset=0",
 		},
 		{
 			name:     "Empty struct",
-			opts:     ListOptions{},
+			opts:     TestListOptions{},
 			expected: "",
 		},
 	}

@@ -240,9 +240,11 @@ func TestDedicatedServerListPaginateAndFilter(t *testing.T) {
 	ctx := context.Background()
 
 	opts := DedicatedServerListOptions{
+		PaginationOptions: PaginationOptions{
+			Offset: Int(0),
+			Limit:  Int(10),
+		},
 		Site:       String("AMS-01"),
-		Offset:     Int(0),
-		Limit:      Int(10),
 		IP:         String("10.22.192.3"),
 		MacAddress: String("AA:BB:CC:DD:EE:FF"),
 	}
@@ -1364,8 +1366,10 @@ func TestDedicatedServerListIpsFilterAndPagination(t *testing.T) {
 
 	ctx := context.Background()
 	opts := DedicatedServerIpListOptions{
-		Limit:  Int(10),
-		Offset: Int(0),
+		PaginationOptions: PaginationOptions{
+			Offset: Int(0),
+			Limit:  Int(10),
+		},
 	}
 	response, err := DedicatedServerApi{}.ListIps(ctx, "server-id", opts)
 	assert := assert.New(t)
@@ -2029,7 +2033,7 @@ func TestDedicatedServerListNullRoutes(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", DedicatedServerNullRouteHistoryOptions{})
+	response, err := DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 1)
@@ -2054,7 +2058,7 @@ func TestDedicatedServerListNullRoutesBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", DedicatedServerNullRouteHistoryOptions{})
+	response, err := DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -2088,7 +2092,7 @@ func TestDedicatedServerListNullRoutesFilterAndPagination(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := DedicatedServerNullRouteHistoryOptions{
+	opts := PaginationOptions{
 		Limit: Int(1),
 	}
 	response, err := DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", opts)
@@ -2120,7 +2124,7 @@ func TestDedicatedServerListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", DedicatedServerNullRouteHistoryOptions{})
+				return DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2138,7 +2142,7 @@ func TestDedicatedServerListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", DedicatedServerNullRouteHistoryOptions{})
+				return DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2156,7 +2160,7 @@ func TestDedicatedServerListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", DedicatedServerNullRouteHistoryOptions{})
+				return DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2174,7 +2178,7 @@ func TestDedicatedServerListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", DedicatedServerNullRouteHistoryOptions{})
+				return DedicatedServerApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4963,7 +4967,9 @@ func TestDedicatedServerListJobsPaginate(t *testing.T) {
 
 	ctx := context.Background()
 	opts := DedicatedServerJobListOptions{
-		Limit: Int(1),
+		PaginationOptions: PaginationOptions{
+			Limit: Int(10),
+		},
 	}
 	response, err := DedicatedServerApi{}.ListJobs(ctx, "99944", opts)
 	assert := assert.New(t)
@@ -5555,7 +5561,7 @@ func TestDedicatedServerListCredentials(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListCredentials(ctx, "99944", DedicatedServerCredentialsListOptions{})
+	response, err := DedicatedServerApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 4)
@@ -5581,7 +5587,7 @@ func TestDedicatedServerListCredentialsBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListCredentials(ctx, "99944", DedicatedServerCredentialsListOptions{})
+	response, err := DedicatedServerApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -5611,7 +5617,7 @@ func TestDedicatedServerListCredentialsPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListCredentials(ctx, "99944", DedicatedServerCredentialsListOptions{})
+	response, err := DedicatedServerApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -5635,7 +5641,7 @@ func TestDedicatedServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListCredentials(ctx, "99944", DedicatedServerCredentialsListOptions{})
+				return DedicatedServerApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5653,7 +5659,7 @@ func TestDedicatedServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListCredentials(ctx, "99944", DedicatedServerCredentialsListOptions{})
+				return DedicatedServerApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5671,7 +5677,7 @@ func TestDedicatedServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListCredentials(ctx, "99944", DedicatedServerCredentialsListOptions{})
+				return DedicatedServerApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5689,7 +5695,7 @@ func TestDedicatedServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListCredentials(ctx, "99944", DedicatedServerCredentialsListOptions{})
+				return DedicatedServerApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5707,7 +5713,7 @@ func TestDedicatedServerListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListCredentials(ctx, "99944", DedicatedServerCredentialsListOptions{})
+				return DedicatedServerApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5884,7 +5890,7 @@ func TestDedicatedServerListCredentialsByType(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", DedicatedServerCredentialsListTypeOptions{})
+	response, err := DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -5906,7 +5912,7 @@ func TestDedicatedServerListCredentialsByTypeBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", DedicatedServerCredentialsListTypeOptions{})
+	response, err := DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -5936,7 +5942,7 @@ func TestDedicatedServerListCredentialsByTypePaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", DedicatedServerCredentialsListTypeOptions{})
+	response, err := DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -5960,7 +5966,7 @@ func TestDedicatedServerListCredentialsByTypeServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", DedicatedServerCredentialsListTypeOptions{})
+				return DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5978,7 +5984,7 @@ func TestDedicatedServerListCredentialsByTypeServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", DedicatedServerCredentialsListTypeOptions{})
+				return DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5996,7 +6002,7 @@ func TestDedicatedServerListCredentialsByTypeServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", DedicatedServerCredentialsListTypeOptions{})
+				return DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6014,7 +6020,7 @@ func TestDedicatedServerListCredentialsByTypeServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", DedicatedServerCredentialsListTypeOptions{})
+				return DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6032,7 +6038,7 @@ func TestDedicatedServerListCredentialsByTypeServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", DedicatedServerCredentialsListTypeOptions{})
+				return DedicatedServerApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6826,7 +6832,7 @@ func TestDedicatedServerListBandWidthNotificationSettings(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	resp, err := DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", DedicatedServerListBandwidthNotificationOptions{})
+	resp, err := DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp.Metadata.TotalCount, 2)
@@ -6884,7 +6890,7 @@ func TestDedicatedServerListBandWidthNotificationSettingsPaginate(t *testing.T) 
 	defer teardown()
 
 	ctx := context.Background()
-	opts := DedicatedServerListBandwidthNotificationOptions{
+	opts := PaginationOptions{
 		Limit: Int(1),
 	}
 	resp, err := DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", opts)
@@ -6917,7 +6923,7 @@ func TestDedicatedServerListBandWidthNotificationSettingsServerErrors(t *testing
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", DedicatedServerListBandwidthNotificationOptions{})
+				return DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6935,7 +6941,7 @@ func TestDedicatedServerListBandWidthNotificationSettingsServerErrors(t *testing
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", DedicatedServerListBandwidthNotificationOptions{})
+				return DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6953,7 +6959,7 @@ func TestDedicatedServerListBandWidthNotificationSettingsServerErrors(t *testing
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", DedicatedServerListBandwidthNotificationOptions{})
+				return DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6971,7 +6977,7 @@ func TestDedicatedServerListBandWidthNotificationSettingsServerErrors(t *testing
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", DedicatedServerListBandwidthNotificationOptions{})
+				return DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -6989,7 +6995,7 @@ func TestDedicatedServerListBandWidthNotificationSettingsServerErrors(t *testing
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", DedicatedServerListBandwidthNotificationOptions{})
+				return DedicatedServerApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7558,7 +7564,7 @@ func TestDedicatedServerListDataTrafficNotificationSettings(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	resp, err := DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", DedicatedServerListDatatrafficNotificationOptions{})
+	resp, err := DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp.Metadata.TotalCount, 2)
@@ -7616,7 +7622,7 @@ func TestDedicatedServerListDataTrafficNotificationSettingsPaginate(t *testing.T
 	defer teardown()
 
 	ctx := context.Background()
-	opts := DedicatedServerListDatatrafficNotificationOptions{
+	opts := PaginationOptions{
 		Limit: Int(1),
 	}
 	resp, err := DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", opts)
@@ -7649,7 +7655,7 @@ func TestDedicatedServerListDataTrafficNotificationSettingsServerErrors(t *testi
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", DedicatedServerListDatatrafficNotificationOptions{})
+				return DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7667,7 +7673,7 @@ func TestDedicatedServerListDataTrafficNotificationSettingsServerErrors(t *testi
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", DedicatedServerListDatatrafficNotificationOptions{})
+				return DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7685,7 +7691,7 @@ func TestDedicatedServerListDataTrafficNotificationSettingsServerErrors(t *testi
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", DedicatedServerListDatatrafficNotificationOptions{})
+				return DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7703,7 +7709,7 @@ func TestDedicatedServerListDataTrafficNotificationSettingsServerErrors(t *testi
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", DedicatedServerListDatatrafficNotificationOptions{})
+				return DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -7721,7 +7727,7 @@ func TestDedicatedServerListDataTrafficNotificationSettingsServerErrors(t *testi
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", DedicatedServerListDatatrafficNotificationOptions{})
+				return DedicatedServerApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -9315,7 +9321,9 @@ func TestDedicatedServerListControlPanelsPagination(t *testing.T) {
 
 	ctx := context.Background()
 	opts := DedicatedServerListControlPanelsOptions{
-		Limit: Int(1),
+		PaginationOptions: PaginationOptions{
+			Limit: Int(10),
+		},
 	}
 	response, err := DedicatedServerApi{}.ListControlPanels(ctx, opts)
 	assert := assert.New(t)
@@ -9432,7 +9440,7 @@ func TestDedicatedServerListRescueImages(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListRescueImages(ctx, DedicatedServerRescueImagesListOptions{})
+	response, err := DedicatedServerApi{}.ListRescueImages(ctx, PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -9467,7 +9475,7 @@ func TestDedicatedServerListRescueImagesPagination(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := DedicatedServerRescueImagesListOptions{
+	opts := PaginationOptions{
 		Limit: Int(1),
 	}
 	response, err := DedicatedServerApi{}.ListRescueImages(ctx, opts)
@@ -9494,7 +9502,7 @@ func TestDedicatedServerListRescueImagesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListRescueImages(ctx, DedicatedServerRescueImagesListOptions{})
+				return DedicatedServerApi{}.ListRescueImages(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -9512,7 +9520,7 @@ func TestDedicatedServerListRescueImagesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListRescueImages(ctx, DedicatedServerRescueImagesListOptions{})
+				return DedicatedServerApi{}.ListRescueImages(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -9530,7 +9538,7 @@ func TestDedicatedServerListRescueImagesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListRescueImages(ctx, DedicatedServerRescueImagesListOptions{})
+				return DedicatedServerApi{}.ListRescueImages(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -9548,7 +9556,7 @@ func TestDedicatedServerListRescueImagesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListRescueImages(ctx, DedicatedServerRescueImagesListOptions{})
+				return DedicatedServerApi{}.ListRescueImages(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

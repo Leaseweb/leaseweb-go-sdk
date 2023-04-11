@@ -53,6 +53,11 @@ type EncodingError struct {
 	Err error
 }
 
+type PaginationOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
 func (erre *EncodingError) Error() string {
 	return "leaseweb: encoding JSON request body failed (" + erre.Err.Error() + ")"
 }
