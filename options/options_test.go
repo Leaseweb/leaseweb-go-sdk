@@ -93,7 +93,7 @@ func TestEncodeWithExtraOptions(t *testing.T) {
 					PrivateNetworkCapable: &privateNetworkCapable,
 				}
 			}(),
-			expected: "limit=10&macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&offset=0&privateNetworkCapable=false&status=",
+			expected: "limit=10&macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&offset=0&privateNetworkCapable=false",
 		},
 		{
 			name: "ExtraOptions Limited options",
@@ -107,7 +107,7 @@ func TestEncodeWithExtraOptions(t *testing.T) {
 					},
 				}
 			}(),
-			expected: "limit=10&offset=0&status=",
+			expected: "limit=10&offset=0",
 		},
 		{
 			name: "Empty ExtraOptions",
@@ -119,7 +119,7 @@ func TestEncodeWithExtraOptions(t *testing.T) {
 					PrivateNetworkCapable: &privateNetworkCapable,
 				}
 			}(),
-			expected: "macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&privateNetworkCapable=false&status=",
+			expected: "macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&privateNetworkCapable=false",
 		},
 		{
 			name: "CommaSeparatedValues",

@@ -53,8 +53,10 @@ func handleSliceField(otf reflect.StructField, ovf reflect.Value, v *url.Values)
 		val := ovf.Index(j).Interface()
 		sliceValues = append(sliceValues, fmt.Sprintf("%v", val))
 	}
-	joinedSliceValues := strings.Join(sliceValues, ",")
-	v.Add(param, joinedSliceValues)
+	if len(sliceValues) > 0 {
+		joinedSliceValues := strings.Join(sliceValues, ",")
+		v.Add(param, joinedSliceValues)
+	}
 }
 
 func isNilOrInvalid(v reflect.Value) bool {
