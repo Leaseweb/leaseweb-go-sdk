@@ -38,7 +38,7 @@ func extractValuesFromStruct(ot reflect.Type, ov reflect.Value, v *url.Values) {
 				val := ovf.Index(j).Interface()
 				v.Add(param, fmt.Sprintf("%v", val))
 			}
-		} else if !ovf.IsNil() {
+		} else if !isNilOrInvalid(ovf) {
 			param := otf.Tag.Get("param")
 			if param == "" {
 				param = otf.Name
@@ -46,5 +46,16 @@ func extractValuesFromStruct(ot reflect.Type, ov reflect.Value, v *url.Values) {
 			val := ovf.Elem().Interface()
 			v.Add(param, fmt.Sprintf("%v", val))
 		}
+	}
+}
+
+func isNilOrInvalid(v reflect.Value) bool {
+	switch v.Kind() {
+	case reflect.Chan, reflect.Func, reflect.Map, reflect.Ptr, reflect.Interface, reflect.Slice:
+		return v.IsNil()
+	case reflect.Invalid:
+		return true
+	default:
+		return false
 	}
 }
