@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"reflect"
+	"strings"
 )
 
 func Encode(opts interface{}) string {
@@ -30,14 +31,19 @@ func extractValuesFromStruct(ot reflect.Type, ov reflect.Value, v *url.Values) {
 			extractValuesFromStruct(otf.Type, ovf, v)
 		} else if otf.Type.Kind() == reflect.Slice {
 			// Handle slices
-			for j := 0; j < ovf.Len(); j++ {
-				param := otf.Tag.Get("param")
-				if param == "" {
-					param = otf.Name
-				}
-				val := ovf.Index(j).Interface()
-				v.Add(param, fmt.Sprintf("%v", val))
+			param := otf.Tag.Get("param")
+			if param == "" {
+				param = otf.Name
 			}
+
+			sliceValues := []string{}
+			for j := 0; j < ovf.Len(); j++ {
+				val := ovf.Index(j).Interface()
+				sliceValues = append(sliceValues, fmt.Sprintf("%v", val))
+			}
+			joinedSliceValues := strings.Join(sliceValues, ",")
+			v.Add(param, joinedSliceValues)
+
 		} else if !isNilOrInvalid(ovf) {
 			param := otf.Tag.Get("param")
 			if param == "" {

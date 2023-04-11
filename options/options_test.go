@@ -17,8 +17,9 @@ type ExtraOptions struct {
 
 type AdvancedOptions struct {
 	ExtraOptions
-	MacAddress            *string `param:"macAddress"`
-	PrivateNetworkCapable *bool   `param:"privateNetworkCapable"`
+	MacAddress            *string  `param:"macAddress"`
+	PrivateNetworkCapable *bool    `param:"privateNetworkCapable"`
+	Status                []string `param:"status"`
 }
 
 func TestEncode(t *testing.T) {
@@ -92,7 +93,7 @@ func TestEncodeWithExtraOptions(t *testing.T) {
 					PrivateNetworkCapable: &privateNetworkCapable,
 				}
 			}(),
-			expected: "limit=10&macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&offset=0&privateNetworkCapable=false",
+			expected: "limit=10&macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&offset=0&privateNetworkCapable=false&status=",
 		},
 		{
 			name: "ExtraOptions Limited options",
@@ -106,7 +107,7 @@ func TestEncodeWithExtraOptions(t *testing.T) {
 					},
 				}
 			}(),
-			expected: "limit=10&offset=0",
+			expected: "limit=10&offset=0&status=",
 		},
 		{
 			name: "Empty ExtraOptions",
@@ -118,7 +119,21 @@ func TestEncodeWithExtraOptions(t *testing.T) {
 					PrivateNetworkCapable: &privateNetworkCapable,
 				}
 			}(),
-			expected: "macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&privateNetworkCapable=false",
+			expected: "macAddress=AA%3ABB%3ACC%3ADD%3AEE%3AFF&privateNetworkCapable=false&status=",
+		},
+		{
+			name: "CommaSeparatedValues",
+			opts: func() AdvancedOptions {
+				status := []string{"OPEN", "WAITING"}
+				limit := 1
+				return AdvancedOptions{
+					ExtraOptions: ExtraOptions{
+						Limit: &limit,
+					},
+					Status: status,
+				}
+			}(),
+			expected: "limit=1&status=OPEN%2CWAITING",
 		},
 	}
 
