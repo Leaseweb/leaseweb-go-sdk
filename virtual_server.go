@@ -56,13 +56,6 @@ type VirtualServerTemplate struct {
 	Name string `json:"name"`
 }
 
-type VirtualServerMetricsDataTrafficOptions struct {
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-}
-
 func (vsa VirtualServerApi) getPath(endpoint string) string {
 	return "/cloud/" + VIRTUAL_SERVER_API_VERSION + endpoint
 }
@@ -158,7 +151,7 @@ func (vsa VirtualServerApi) GetCredential(ctx context.Context, virtualServerId, 
 	return result, nil
 }
 
-func (vsa VirtualServerApi) GetDataTrafficMetrics(ctx context.Context, virtualServerId string, opts VirtualServerMetricsDataTrafficOptions) (*DataTrafficMetricsV2, error) {
+func (vsa VirtualServerApi) GetDataTrafficMetrics(ctx context.Context, virtualServerId string, opts MetricsOptions) (*DataTrafficMetricsV2, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/metrics/datatraffic")
 	query := options.Encode(opts)
 	result := &DataTrafficMetricsV2{}

@@ -2287,7 +2287,7 @@ func TestDedicatedRackGetBandWidthMetrics(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := DedicatedRackMetricsBandwidthOptions{
+	opts := MetricsOptions{
 		From:        String("2016-10-20T09:00:00Z"),
 		To:          String("2016-10-20T11:00:00Z"),
 		Granularity: String("HOUR"),
@@ -2325,7 +2325,7 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := DedicatedRackMetricsBandwidthOptions{
+				opts := MetricsOptions{
 					From:        String("2016-10-20T09:00:00Z"),
 					To:          String("2016-10-20T11:00:00Z"),
 					Granularity: String("HOUR"),
@@ -2349,7 +2349,7 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := DedicatedRackMetricsBandwidthOptions{
+				opts := MetricsOptions{
 					From:        String("2016-10-20T09:00:00Z"),
 					To:          String("2016-10-20T11:00:00Z"),
 					Granularity: String("HOUR"),
@@ -2373,7 +2373,7 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := DedicatedRackMetricsBandwidthOptions{
+				opts := MetricsOptions{
 					From:        String("2016-10-20T09:00:00Z"),
 					To:          String("2016-10-20T11:00:00Z"),
 					Granularity: String("HOUR"),
@@ -2397,7 +2397,7 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := DedicatedRackMetricsBandwidthOptions{
+				opts := MetricsOptions{
 					From:        String("2016-10-20T09:00:00Z"),
 					To:          String("2016-10-20T11:00:00Z"),
 					Granularity: String("HOUR"),
@@ -2421,7 +2421,7 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := DedicatedRackMetricsBandwidthOptions{
+				opts := MetricsOptions{
 					From:        String("2016-10-20T09:00:00Z"),
 					To:          String("2016-10-20T11:00:00Z"),
 					Granularity: String("HOUR"),
@@ -2483,7 +2483,7 @@ func TestDedicatedRackGetDataTrafficMetrics(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := DedicatedRackMetricsDataTrafficOptions{
+	opts := MetricsOptions{
 		From:        String("2016-10-20T09:00:00Z"),
 		To:          String("2016-10-20T11:00:00Z"),
 		Granularity: String("HOUR"),
@@ -2521,7 +2521,7 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := DedicatedRackMetricsDataTrafficOptions{
+				opts := MetricsOptions{
 					From:        String("2016-10-20T09:00:00Z"),
 					To:          String("2016-10-20T11:00:00Z"),
 					Granularity: String("HOUR"),
@@ -2545,7 +2545,7 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := DedicatedRackMetricsDataTrafficOptions{
+				opts := MetricsOptions{
 					From:        String("2016-10-20T09:00:00Z"),
 					To:          String("2016-10-20T11:00:00Z"),
 					Granularity: String("HOUR"),
@@ -2569,7 +2569,7 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := DedicatedRackMetricsDataTrafficOptions{
+				opts := MetricsOptions{
 					From:        String("2016-10-20T09:00:00Z"),
 					To:          String("2016-10-20T11:00:00Z"),
 					Granularity: String("HOUR"),
@@ -2593,7 +2593,7 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := DedicatedRackMetricsDataTrafficOptions{
+				opts := MetricsOptions{
 					From:        String("2016-10-20T09:00:00Z"),
 					To:          String("2016-10-20T11:00:00Z"),
 					Granularity: String("HOUR"),
@@ -2617,7 +2617,7 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := DedicatedRackMetricsDataTrafficOptions{
+				opts := MetricsOptions{
 					From:        String("2016-10-20T09:00:00Z"),
 					To:          String("2016-10-20T11:00:00Z"),
 					Granularity: String("HOUR"),

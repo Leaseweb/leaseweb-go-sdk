@@ -47,20 +47,6 @@ type DedicatedRackListIpsOptions struct {
 	IPs         []string `param:"ips"`
 }
 
-type DedicatedRackMetricsDataTrafficOptions struct {
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-}
-
-type DedicatedRackMetricsBandwidthOptions struct {
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-}
-
 func (dra DedicatedRackApi) getPath(endpoint string) string {
 	return "/bareMetals/" + DEDICATED_RACK_API_VERSION + endpoint
 }
@@ -203,7 +189,7 @@ func (dra DedicatedRackApi) UpdateCredential(ctx context.Context, privateRackId,
 	return result, nil
 }
 
-func (dra DedicatedRackApi) GetDataTrafficMetrics(ctx context.Context, privateRackId string, opts DedicatedRackMetricsDataTrafficOptions) (*DataTrafficMetricsV1, error) {
+func (dra DedicatedRackApi) GetDataTrafficMetrics(ctx context.Context, privateRackId string, opts MetricsOptions) (*DataTrafficMetricsV1, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/metrics/datatraffic")
 	query := options.Encode(opts)
 	result := &DataTrafficMetricsV1{}
@@ -213,7 +199,7 @@ func (dra DedicatedRackApi) GetDataTrafficMetrics(ctx context.Context, privateRa
 	return result, nil
 }
 
-func (dra DedicatedRackApi) GetBandWidthMetrics(ctx context.Context, privateRackId string, opts DedicatedRackMetricsBandwidthOptions) (*BandWidthMetrics, error) {
+func (dra DedicatedRackApi) GetBandWidthMetrics(ctx context.Context, privateRackId string, opts MetricsOptions) (*BandWidthMetrics, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/metrics/bandwidth")
 	query := options.Encode(opts)
 	result := &BandWidthMetrics{}

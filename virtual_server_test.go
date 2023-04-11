@@ -1606,7 +1606,7 @@ func TestVirtualServerGetDataTrafficMetrics(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := VirtualServerMetricsDataTrafficOptions{
+	opts := MetricsOptions{
 		Granularity: String("DAY"),
 		Aggregation: String("SUM"),
 		From:        String("2016-10-20T09:00:00Z"),
@@ -1644,7 +1644,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := VirtualServerMetricsDataTrafficOptions{
+				opts := MetricsOptions{
 					Granularity: String("DAY"),
 					Aggregation: String("SUM"),
 					From:        String("2016-10-20T09:00:00Z"),
@@ -1668,7 +1668,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := VirtualServerMetricsDataTrafficOptions{
+				opts := MetricsOptions{
 					Granularity: String("DAY"),
 					Aggregation: String("SUM"),
 					From:        String("2016-10-20T09:00:00Z"),
@@ -1692,7 +1692,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := VirtualServerMetricsDataTrafficOptions{
+				opts := MetricsOptions{
 					Granularity: String("DAY"),
 					Aggregation: String("SUM"),
 					From:        String("2016-10-20T09:00:00Z"),
@@ -1716,7 +1716,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := VirtualServerMetricsDataTrafficOptions{
+				opts := MetricsOptions{
 					Granularity: String("DAY"),
 					Aggregation: String("SUM"),
 					From:        String("2016-10-20T09:00:00Z"),
@@ -1740,7 +1740,7 @@ func TestVirtualServerGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				opts := VirtualServerMetricsDataTrafficOptions{
+				opts := MetricsOptions{
 					Granularity: String("DAY"),
 					Aggregation: String("SUM"),
 					From:        String("2016-10-20T09:00:00Z"),

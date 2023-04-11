@@ -443,20 +443,6 @@ type DedicatedServerJobListOptions struct {
 	IsRunning *bool   `param:"isRunning"`
 }
 
-type DedicatedServerMetricsDataTrafficOptions struct {
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-}
-
-type DedicatedServerMetricsBandwidthOptions struct {
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-}
-
 type DedicatedServerListOperatingSystemsOptions struct {
 	PaginationOptions
 	ControlPanelId *string `param:"controlPanelId"`
@@ -758,7 +744,7 @@ func (dsa DedicatedServerApi) UpdateCredential(ctx context.Context, serverId, cr
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetDataTrafficMetrics(ctx context.Context, serverId string, opts DedicatedServerMetricsDataTrafficOptions) (*DataTrafficMetricsV1, error) {
+func (dsa DedicatedServerApi) GetDataTrafficMetrics(ctx context.Context, serverId string, opts MetricsOptions) (*DataTrafficMetricsV1, error) {
 	path := dsa.getPath("/servers/" + serverId + "/metrics/datatraffic")
 	query := options.Encode(opts)
 	result := &DataTrafficMetricsV1{}
@@ -768,7 +754,7 @@ func (dsa DedicatedServerApi) GetDataTrafficMetrics(ctx context.Context, serverI
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) GetBandWidthMetrics(ctx context.Context, serverId string, opts DedicatedServerMetricsBandwidthOptions) (*BandWidthMetrics, error) {
+func (dsa DedicatedServerApi) GetBandWidthMetrics(ctx context.Context, serverId string, opts MetricsOptions) (*BandWidthMetrics, error) {
 	path := dsa.getPath("/servers/" + serverId + "/metrics/bandwidth")
 	query := options.Encode(opts)
 	result := &BandWidthMetrics{}

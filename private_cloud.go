@@ -55,41 +55,6 @@ type PrivateCloudStorageMetric struct {
 	Storage BasicMetric `json:"STORAGE"`
 }
 
-type PrivateCloudMetricsDataTrafficOptions struct {
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-}
-
-type PrivateCloudMetricsBandWidthOptions struct {
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-}
-
-type PrivateCloudMetricsCpuOptions struct {
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-}
-
-type PrivateCloudMetricsMemoryOptions struct {
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-}
-
-type PrivateCloudMetricsStorageOptions struct {
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-}
-
 func (pca PrivateCloudApi) getPath(endpoint string) string {
 	return "/cloud/" + PRIVATE_CLOUD_API_VERSION + endpoint
 }
@@ -132,7 +97,7 @@ func (pca PrivateCloudApi) GetCredential(ctx context.Context, privateCloudId str
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetDataTrafficMetrics(ctx context.Context, privateCloudId string, opts PrivateCloudMetricsDataTrafficOptions) (*DataTrafficMetricsV2, error) {
+func (pca PrivateCloudApi) GetDataTrafficMetrics(ctx context.Context, privateCloudId string, opts MetricsOptions) (*DataTrafficMetricsV2, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/datatraffic")
 	query := options.Encode(opts)
 	result := &DataTrafficMetricsV2{}
@@ -142,7 +107,7 @@ func (pca PrivateCloudApi) GetDataTrafficMetrics(ctx context.Context, privateClo
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetBandWidthMetrics(ctx context.Context, privateCloudId string, opts PrivateCloudMetricsBandWidthOptions) (*BandWidthMetrics, error) {
+func (pca PrivateCloudApi) GetBandWidthMetrics(ctx context.Context, privateCloudId string, opts MetricsOptions) (*BandWidthMetrics, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/bandwidth")
 	query := options.Encode(opts)
 	result := &BandWidthMetrics{}
@@ -152,7 +117,7 @@ func (pca PrivateCloudApi) GetBandWidthMetrics(ctx context.Context, privateCloud
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetCpuMetrics(ctx context.Context, privateCloudId string, opts PrivateCloudMetricsCpuOptions) (*PrivateCloudCpuMetrics, error) {
+func (pca PrivateCloudApi) GetCpuMetrics(ctx context.Context, privateCloudId string, opts MetricsOptions) (*PrivateCloudCpuMetrics, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/cpu")
 	query := options.Encode(opts)
 	result := &PrivateCloudCpuMetrics{}
@@ -162,7 +127,7 @@ func (pca PrivateCloudApi) GetCpuMetrics(ctx context.Context, privateCloudId str
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetMemoryMetrics(ctx context.Context, privateCloudId string, opts PrivateCloudMetricsMemoryOptions) (*PrivateCloudMemoryMetrics, error) {
+func (pca PrivateCloudApi) GetMemoryMetrics(ctx context.Context, privateCloudId string, opts MetricsOptions) (*PrivateCloudMemoryMetrics, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/memory")
 	query := options.Encode(opts)
 	result := &PrivateCloudMemoryMetrics{}
@@ -172,7 +137,7 @@ func (pca PrivateCloudApi) GetMemoryMetrics(ctx context.Context, privateCloudId 
 	return result, nil
 }
 
-func (pca PrivateCloudApi) GetStorageMetrics(ctx context.Context, privateCloudId string, opts PrivateCloudMetricsStorageOptions) (*PrivateCloudStorageMetrics, error) {
+func (pca PrivateCloudApi) GetStorageMetrics(ctx context.Context, privateCloudId string, opts MetricsOptions) (*PrivateCloudStorageMetrics, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/storage")
 	query := options.Encode(opts)
 	result := &PrivateCloudStorageMetrics{}

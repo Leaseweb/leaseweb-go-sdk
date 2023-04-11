@@ -666,7 +666,7 @@ func TestPrivateCloudGetDataTrafficMetrics(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	response, err := privateCloudApi.GetDataTrafficMetrics(ctx, "218030", PrivateCloudMetricsDataTrafficOptions{})
+	response, err := privateCloudApi.GetDataTrafficMetrics(ctx, "218030", MetricsOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -732,7 +732,7 @@ func TestPrivateCloudGetDataTrafficMetricsWithFilter(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	opts := PrivateCloudMetricsDataTrafficOptions{
+	opts := MetricsOptions{
 		Granularity: String("MONTH"),
 		Aggregation: String("SUM"),
 		From:        String("2017-07-01T00:00:00+00:00"),
@@ -771,7 +771,7 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030", PrivateCloudMetricsDataTrafficOptions{})
+				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "ACCESS_DENIED",
@@ -788,7 +788,7 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030", PrivateCloudMetricsDataTrafficOptions{})
+				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:        "404",
@@ -806,7 +806,7 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030", PrivateCloudMetricsDataTrafficOptions{})
+				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "SERVER_ERROR",
@@ -823,7 +823,7 @@ func TestPrivateCloudGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030", PrivateCloudMetricsDataTrafficOptions{})
+				return PrivateCloudApi{}.GetDataTrafficMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "TEMPORARILY_UNAVAILABLE",
@@ -879,7 +879,7 @@ func TestPrivateCloudGetBandWidthMetrics(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	response, err := privateCloudApi.GetBandWidthMetrics(ctx, "218030", PrivateCloudMetricsBandWidthOptions{})
+	response, err := privateCloudApi.GetBandWidthMetrics(ctx, "218030", MetricsOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -945,7 +945,7 @@ func TestPrivateCloudGetBandWidthMetricsWithFilter(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	opts := PrivateCloudMetricsBandWidthOptions{
+	opts := MetricsOptions{
 		Granularity: String("MONTH"),
 		Aggregation: String("AVG"),
 		From:        String("2017-07-01T00:00:00+00:00"),
@@ -984,7 +984,7 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030", PrivateCloudMetricsBandWidthOptions{})
+				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "ACCESS_DENIED",
@@ -1001,7 +1001,7 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030", PrivateCloudMetricsBandWidthOptions{})
+				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:        "404",
@@ -1019,7 +1019,7 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030", PrivateCloudMetricsBandWidthOptions{})
+				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "SERVER_ERROR",
@@ -1036,7 +1036,7 @@ func TestPrivateCloudGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030", PrivateCloudMetricsBandWidthOptions{})
+				return PrivateCloudApi{}.GetBandWidthMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "TEMPORARILY_UNAVAILABLE",
@@ -1079,7 +1079,7 @@ func TestPrivateCloudGetCpuMetrics(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	response, err := privateCloudApi.GetCpuMetrics(ctx, "218030", PrivateCloudMetricsCpuOptions{})
+	response, err := privateCloudApi.GetCpuMetrics(ctx, "218030", MetricsOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1127,7 +1127,7 @@ func TestPrivateCloudGetCpuMetricsWithFilter(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	opts := PrivateCloudMetricsCpuOptions{
+	opts := MetricsOptions{
 		Granularity: String("MONTH"),
 		Aggregation: String("MAX"),
 		From:        String("2017-07-01T00:00:00+00:00"),
@@ -1161,7 +1161,7 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030", PrivateCloudMetricsCpuOptions{})
+				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "ACCESS_DENIED",
@@ -1178,7 +1178,7 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030", PrivateCloudMetricsCpuOptions{})
+				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:        "404",
@@ -1196,7 +1196,7 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030", PrivateCloudMetricsCpuOptions{})
+				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "SERVER_ERROR",
@@ -1213,7 +1213,7 @@ func TestPrivateCloudGetCpuMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030", PrivateCloudMetricsCpuOptions{})
+				return PrivateCloudApi{}.GetCpuMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "TEMPORARILY_UNAVAILABLE",
@@ -1256,7 +1256,7 @@ func TestPrivateCloudGetMemoryMetrics(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	response, err := privateCloudApi.GetMemoryMetrics(ctx, "218030", PrivateCloudMetricsMemoryOptions{})
+	response, err := privateCloudApi.GetMemoryMetrics(ctx, "218030", MetricsOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1304,7 +1304,7 @@ func TestPrivateCloudGetMemoryMetricsWithFilter(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	opts := PrivateCloudMetricsMemoryOptions{
+	opts := MetricsOptions{
 		Granularity: String("MONTH"),
 		Aggregation: String("MAX"),
 		From:        String("2017-07-01T00:00:00+00:00"),
@@ -1338,7 +1338,7 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030", PrivateCloudMetricsMemoryOptions{})
+				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "ACCESS_DENIED",
@@ -1355,7 +1355,7 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030", PrivateCloudMetricsMemoryOptions{})
+				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:        "404",
@@ -1373,7 +1373,7 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030", PrivateCloudMetricsMemoryOptions{})
+				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "SERVER_ERROR",
@@ -1390,7 +1390,7 @@ func TestPrivateCloudGetMemoryMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030", PrivateCloudMetricsMemoryOptions{})
+				return PrivateCloudApi{}.GetMemoryMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "TEMPORARILY_UNAVAILABLE",
@@ -1433,7 +1433,7 @@ func TestPrivateCloudGetStorageMetrics(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	response, err := privateCloudApi.GetStorageMetrics(ctx, "218030", PrivateCloudMetricsStorageOptions{})
+	response, err := privateCloudApi.GetStorageMetrics(ctx, "218030", MetricsOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1481,7 +1481,7 @@ func TestPrivateCloudGetStorageMetricsWithFilter(t *testing.T) {
 
 	privateCloudApi := PrivateCloudApi{}
 	ctx := context.Background()
-	opts := PrivateCloudMetricsStorageOptions{
+	opts := MetricsOptions{
 		Granularity: String("MONTH"),
 		Aggregation: String("MAX"),
 		From:        String("2017-07-01T00:00:00+00:00"),
@@ -1515,7 +1515,7 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030", PrivateCloudMetricsStorageOptions{})
+				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "ACCESS_DENIED",
@@ -1532,7 +1532,7 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030", PrivateCloudMetricsStorageOptions{})
+				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:        "404",
@@ -1550,7 +1550,7 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030", PrivateCloudMetricsStorageOptions{})
+				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "SERVER_ERROR",
@@ -1567,7 +1567,7 @@ func TestPrivateCloudGetStorageMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030", PrivateCloudMetricsStorageOptions{})
+				return PrivateCloudApi{}.GetStorageMetrics(ctx, "218030", MetricsOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "TEMPORARILY_UNAVAILABLE",
