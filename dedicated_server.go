@@ -436,7 +436,7 @@ type DedicatedServerListIpsOptions struct {
 	IPs         []string `param:"ips"`
 }
 
-type DedicatedServerJobListOptions struct {
+type DedicatedServerListJobOptions struct {
 	PaginationOptions
 	Type      *string `param:"type"`
 	Status    *string `param:"status"`
@@ -661,7 +661,7 @@ func (dsa DedicatedServerApi) LaunchIpmiRest(ctx context.Context, serverId strin
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListJobs(ctx context.Context, serverId string, opts DedicatedServerJobListOptions) (*DedicatedServerJobs, error) {
+func (dsa DedicatedServerApi) ListJobs(ctx context.Context, serverId string, opts DedicatedServerListJobOptions) (*DedicatedServerJobs, error) {
 	result := &DedicatedServerJobs{}
 	path := dsa.getPath("/servers/" + serverId + "/jobs")
 	query := options.Encode(opts)

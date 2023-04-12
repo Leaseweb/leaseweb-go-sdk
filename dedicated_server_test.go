@@ -4902,7 +4902,7 @@ func TestDedicatedServerListJobs(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerJobListOptions{})
+	response, err := DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerListJobOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 1)
@@ -4939,7 +4939,7 @@ func TestDedicatedServerListJobsBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerJobListOptions{})
+	response, err := DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerListJobOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -4987,7 +4987,7 @@ func TestDedicatedServerListJobsPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := DedicatedServerJobListOptions{
+	opts := DedicatedServerListJobOptions{
 		PaginationOptions: PaginationOptions{
 			Limit: Int(10),
 		},
@@ -5033,7 +5033,7 @@ func TestDedicatedServerListJobsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerJobListOptions{})
+				return DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerListJobOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5051,7 +5051,7 @@ func TestDedicatedServerListJobsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerJobListOptions{})
+				return DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerListJobOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5069,7 +5069,7 @@ func TestDedicatedServerListJobsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerJobListOptions{})
+				return DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerListJobOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -5087,7 +5087,7 @@ func TestDedicatedServerListJobsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerJobListOptions{})
+				return DedicatedServerApi{}.ListJobs(ctx, "99944", DedicatedServerListJobOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
