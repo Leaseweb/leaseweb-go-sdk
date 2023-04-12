@@ -428,7 +428,7 @@ type DedicatedServerListOptions struct {
 	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
 }
 
-type DedicatedServerIpListOptions struct {
+type DedicatedServerListIpsOptions struct {
 	PaginationOptions
 	NetworkType *string  `param:"networkType"`
 	Version     *string  `param:"version"`
@@ -490,7 +490,7 @@ func (dsa DedicatedServerApi) GetHardwareInformation(ctx context.Context, server
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListIps(ctx context.Context, serverId string, opts DedicatedServerIpListOptions) (*Ips, error) {
+func (dsa DedicatedServerApi) ListIps(ctx context.Context, serverId string, opts DedicatedServerListIpsOptions) (*Ips, error) {
 	path := dsa.getPath("/servers/" + serverId + "/ips")
 	query := options.Encode(opts)
 	result := &Ips{}

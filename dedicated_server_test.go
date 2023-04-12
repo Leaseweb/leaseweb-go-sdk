@@ -1284,7 +1284,7 @@ func TestDedicatedServerListIps(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerIpListOptions{})
+	response, err := DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerListIpsOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -1325,7 +1325,7 @@ func TestDedicatedServerListIpsBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerIpListOptions{})
+	response, err := DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerListIpsOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1365,7 +1365,7 @@ func TestDedicatedServerListIpsFilterAndPagination(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := DedicatedServerIpListOptions{
+	opts := DedicatedServerListIpsOptions{
 		PaginationOptions: PaginationOptions{
 			Offset: Int(0),
 			Limit:  Int(10),
@@ -1404,7 +1404,7 @@ func TestDedicatedServerListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerIpListOptions{})
+				return DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1422,7 +1422,7 @@ func TestDedicatedServerListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerIpListOptions{})
+				return DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1440,7 +1440,7 @@ func TestDedicatedServerListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerIpListOptions{})
+				return DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1458,7 +1458,7 @@ func TestDedicatedServerListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerIpListOptions{})
+				return DedicatedServerApi{}.ListIps(ctx, "server-id", DedicatedServerListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
