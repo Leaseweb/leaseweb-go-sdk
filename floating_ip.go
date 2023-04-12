@@ -44,7 +44,7 @@ type FloatingIpDefinitions struct {
 	Metadata    Metadata               `json:"_metadata"`
 }
 
-type FloatingIpListOptions struct {
+type FloatingIpListRangesOptions struct {
 	PaginationOptions
 	Type     *string `param:"type"`
 	Location *string `param:"location"`
@@ -60,7 +60,7 @@ func (fia FloatingIpApi) getPath(endpoint string) string {
 	return "/floatingIps/" + FLOATING_IP_API_VERSION + endpoint
 }
 
-func (fia FloatingIpApi) ListRanges(ctx context.Context, opts FloatingIpListOptions) (*FloatingIpRanges, error) {
+func (fia FloatingIpApi) ListRanges(ctx context.Context, opts FloatingIpListRangesOptions) (*FloatingIpRanges, error) {
 	path := fia.getPath("/ranges")
 	query := options.Encode(opts)
 	result := &FloatingIpRanges{}

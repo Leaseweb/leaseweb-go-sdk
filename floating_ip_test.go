@@ -36,7 +36,7 @@ func TestFloatingIpListRanges(t *testing.T) {
 
 	floatingIpApi := FloatingIpApi{}
 	ctx := context.Background()
-	response, err := floatingIpApi.ListRanges(ctx, FloatingIpListOptions{})
+	response, err := floatingIpApi.ListRanges(ctx, FloatingIpListRangesOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -81,7 +81,7 @@ func TestFloatingIpListRangesPaginateAndFilter(t *testing.T) {
 
 	floatingIpApi := FloatingIpApi{}
 	ctx := context.Background()
-	opts := FloatingIpListOptions{
+	opts := FloatingIpListRangesOptions{
 		PaginationOptions: PaginationOptions{
 			Limit:  Int(1),
 			Offset: Int(10),
@@ -119,7 +119,7 @@ func TestFloatingIpListRangesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return FloatingIpApi{}.ListRanges(ctx, FloatingIpListOptions{})
+				return FloatingIpApi{}.ListRanges(ctx, FloatingIpListRangesOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -137,7 +137,7 @@ func TestFloatingIpListRangesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return FloatingIpApi{}.ListRanges(ctx, FloatingIpListOptions{})
+				return FloatingIpApi{}.ListRanges(ctx, FloatingIpListRangesOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -155,7 +155,7 @@ func TestFloatingIpListRangesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return FloatingIpApi{}.ListRanges(ctx, FloatingIpListOptions{})
+				return FloatingIpApi{}.ListRanges(ctx, FloatingIpListRangesOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
