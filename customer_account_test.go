@@ -345,6 +345,10 @@ func TestCustomerAccountListContactsPaginateAndFilter(t *testing.T) {
 	customerAccountApi := CustomerAccountApi{}
 	ctx := context.Background()
 	opts := CustomerAccountContactsListOptions{
+		PaginationOptions: PaginationOptions{
+			Offset: Int(1),
+			Limit:  Int(5),
+		},
 		PrimaryRoles: []string{"GENERAL", "SECURITY", "TECHNICAL", "BILLING"},
 	}
 	resp, err := customerAccountApi.ListContacts(ctx, opts)

@@ -53,6 +53,7 @@ type CustomerAccountPhone struct {
 }
 
 type CustomerAccountContactsListOptions struct {
+	PaginationOptions
 	PrimaryRoles []string `param:"primaryRoles"`
 }
 
