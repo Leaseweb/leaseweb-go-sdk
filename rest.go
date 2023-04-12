@@ -53,18 +53,6 @@ type EncodingError struct {
 	Err error
 }
 
-type PaginationOptions struct {
-	Limit  *int `param:"limit"`
-	Offset *int `param:"offset"`
-}
-
-type MetricsOptions struct {
-	Granularity *string `param:"granularity"`
-	Aggregation *string `param:"aggregation"`
-	From        *string `param:"from"`
-	To          *string `param:"to"`
-}
-
 func (erre *EncodingError) Error() string {
 	return "leaseweb: encoding JSON request body failed (" + erre.Err.Error() + ")"
 }

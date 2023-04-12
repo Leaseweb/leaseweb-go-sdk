@@ -263,3 +263,15 @@ type PowerStatus struct {
 		Status string `json:"status"`
 	} `json:"pdu"`
 }
+
+type PaginationOptions struct {
+	Limit  *int `param:"limit"`
+	Offset *int `param:"offset"`
+}
+
+type MetricsOptions struct {
+	Granularity *string `param:"granularity"`
+	Aggregation *string `param:"aggregation"`
+	From        *string `param:"from"`
+	To          *string `param:"to"`
+}
