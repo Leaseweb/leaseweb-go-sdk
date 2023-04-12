@@ -19,10 +19,6 @@ func extract(opts interface{}) url.Values {
 	for i := 0; i < ot.NumField(); i++ {
 		ovf := ov.Field(i)
 
-		if ovf.Kind() == reflect.Invalid {
-			continue
-		}
-
 		if ovf.Kind() == reflect.Struct {
 			v = merge(v, extract(ovf.Interface()))
 			continue
