@@ -278,7 +278,7 @@ func TestCustomerAccountListContacts(t *testing.T) {
 
 	customerAccountApi := CustomerAccountApi{}
 	ctx := context.Background()
-	resp, err := customerAccountApi.ListContacts(ctx, CustomerAccountContactsListOptions{})
+	resp, err := customerAccountApi.ListContacts(ctx, CustomerAccountListContactsOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -344,7 +344,7 @@ func TestCustomerAccountListContactsPaginateAndFilter(t *testing.T) {
 
 	customerAccountApi := CustomerAccountApi{}
 	ctx := context.Background()
-	opts := CustomerAccountContactsListOptions{
+	opts := CustomerAccountListContactsOptions{
 		PaginationOptions: PaginationOptions{
 			Offset: Int(1),
 			Limit:  Int(5),
@@ -389,7 +389,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountContactsListOptions{})
+				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountListContactsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -407,7 +407,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountContactsListOptions{})
+				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountListContactsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -425,7 +425,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountContactsListOptions{})
+				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountListContactsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -443,7 +443,7 @@ func TestCustomerAccountListContactsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountContactsListOptions{})
+				return CustomerAccountApi{}.ListContacts(ctx, CustomerAccountListContactsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

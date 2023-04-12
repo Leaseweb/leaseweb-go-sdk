@@ -51,7 +51,7 @@ type DedicatedNetworkEquipmentListOptions struct {
 	PrivateNetworkEnabled *bool   `param:"privateNetworkEnabled"`
 }
 
-type DedicatedNetworkEquipmentIpListOptions struct {
+type DedicatedNetworkEquipmentListIpsOptions struct {
 	PaginationOptions
 	NetworkType *string  `param:"networkType"`
 	Version     *string  `param:"version"`
@@ -88,7 +88,7 @@ func (dnea DedicatedNetworkEquipmentApi) Update(ctx context.Context, networkEqui
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
-func (dnea DedicatedNetworkEquipmentApi) ListIps(ctx context.Context, networkEquipmentId string, opts DedicatedNetworkEquipmentIpListOptions) (*Ips, error) {
+func (dnea DedicatedNetworkEquipmentApi) ListIps(ctx context.Context, networkEquipmentId string, opts DedicatedNetworkEquipmentListIpsOptions) (*Ips, error) {
 	path := dnea.getPath("/networkEquipments/" + networkEquipmentId + "/ips")
 	query := options.Encode(opts)
 	result := &Ips{}

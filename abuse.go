@@ -68,7 +68,7 @@ type AbuseResolutions struct {
 	Resolutions []AbuseResolution `json:"resolutions"`
 }
 
-type AbuseListReportsOptions struct {
+type AbuseListOptions struct {
 	PaginationOptions
 	Status []string `param:"status"`
 }
@@ -77,7 +77,7 @@ func (aba AbuseApi) getPath(endpoint string) string {
 	return "/abuse/" + ABUSE_API_VERSION + endpoint
 }
 
-func (aba AbuseApi) List(ctx context.Context, opts AbuseListReportsOptions) (*AbuseReports, error) {
+func (aba AbuseApi) List(ctx context.Context, opts AbuseListOptions) (*AbuseReports, error) {
 	path := aba.getPath("/reports")
 	query := options.Encode(opts)
 	result := &AbuseReports{}

@@ -52,7 +52,7 @@ type CustomerAccountPhone struct {
 	Number      string `json:"number"`
 }
 
-type CustomerAccountContactsListOptions struct {
+type CustomerAccountListContactsOptions struct {
 	PaginationOptions
 	PrimaryRoles []string `param:"primaryRoles"`
 }
@@ -76,7 +76,7 @@ func (cai CustomerAccountApi) Update(ctx context.Context, ad CustomerAccountAddr
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
-func (cai CustomerAccountApi) ListContacts(ctx context.Context, opts CustomerAccountContactsListOptions) (*CustomerAccountContacts, error) {
+func (cai CustomerAccountApi) ListContacts(ctx context.Context, opts CustomerAccountListContactsOptions) (*CustomerAccountContacts, error) {
 	path := cai.getPath("/contacts")
 	query := options.Encode(opts)
 	result := &CustomerAccountContacts{}

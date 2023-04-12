@@ -743,7 +743,7 @@ func TestDedicatedNetworkEquipmentListIps(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentIpListOptions{})
+	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -784,7 +784,7 @@ func TestDedicatedNetworkEquipmentListIpsBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentIpListOptions{})
+	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -824,7 +824,7 @@ func TestDedicatedNetworkEquipmentListIpsFilterAndPagination(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	opts := DedicatedNetworkEquipmentIpListOptions{
+	opts := DedicatedNetworkEquipmentListIpsOptions{
 		PaginationOptions: PaginationOptions{
 			Limit:  Int(1),
 			Offset: Int(10),
@@ -863,7 +863,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentIpListOptions{})
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -881,7 +881,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentIpListOptions{})
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -899,7 +899,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentIpListOptions{})
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -917,7 +917,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentIpListOptions{})
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

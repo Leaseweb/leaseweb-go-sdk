@@ -42,7 +42,7 @@ func TestAbuseList(t *testing.T) {
 
 	abuseApi := AbuseApi{}
 	ctx := context.Background()
-	response, err := abuseApi.List(ctx, AbuseListReportsOptions{})
+	response, err := abuseApi.List(ctx, AbuseListOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -97,7 +97,7 @@ func TestAbuseListPaginateAndPassStatuses(t *testing.T) {
 	abuseApi := AbuseApi{}
 
 	ctx := context.Background()
-	opts := AbuseListReportsOptions{
+	opts := AbuseListOptions{
 		PaginationOptions: PaginationOptions{
 			Limit: Int(1),
 		},
@@ -134,7 +134,7 @@ func TestAbuseListBeEmpty(t *testing.T) {
 
 	abuseApi := AbuseApi{}
 	ctx := context.Background()
-	response, err := abuseApi.List(ctx, AbuseListReportsOptions{})
+	response, err := abuseApi.List(ctx, AbuseListOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -156,7 +156,7 @@ func TestAbuseListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return AbuseApi{}.List(ctx, AbuseListReportsOptions{})
+				return AbuseApi{}.List(ctx, AbuseListOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "ACCESS_DENIED",
@@ -173,7 +173,7 @@ func TestAbuseListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return AbuseApi{}.List(ctx, AbuseListReportsOptions{})
+				return AbuseApi{}.List(ctx, AbuseListOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "SERVER_ERROR",
@@ -190,7 +190,7 @@ func TestAbuseListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return AbuseApi{}.List(ctx, AbuseListReportsOptions{})
+				return AbuseApi{}.List(ctx, AbuseListOptions{})
 			},
 			ExpectedError: ApiError{
 				Code:    "TEMPORARILY_UNAVAILABLE",
