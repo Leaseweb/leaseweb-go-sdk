@@ -79,10 +79,11 @@ func (pna PrivateNetworkingApi) Delete(ctx context.Context, id string) error {
 	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
-func (pna PrivateNetworkingApi) ListDhcpReservations(ctx context.Context, id string) (*PrivateNetworkingDhcpReservations, error) {
+func (pna PrivateNetworkingApi) ListDhcpReservations(ctx context.Context, id string, opts PaginationOptions) (*PrivateNetworkingDhcpReservations, error) {
 	path := pna.getPath("/privateNetworks/" + id + "/reservations")
 	result := &PrivateNetworkingDhcpReservations{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	query := options.Encode(opts)
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil

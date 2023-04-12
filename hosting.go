@@ -180,10 +180,11 @@ func (ha HostingApi) GetAvailability(ctx context.Context, domainName string) (*H
 	return result, nil
 }
 
-func (ha HostingApi) ListNameservers(ctx context.Context, domainName string) (*HostingNameservers, error) {
+func (ha HostingApi) ListNameservers(ctx context.Context, domainName string, opts PaginationOptions) (*HostingNameservers, error) {
 	path := ha.getPath("/domains/" + domainName + "/nameservers")
 	result := &HostingNameservers{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	query := options.Encode(opts)
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -218,10 +219,11 @@ func (ha HostingApi) UpdateDnsSecurity(ctx context.Context, domainName string, p
 	return result, nil
 }
 
-func (ha HostingApi) ListResourceRecordSets(ctx context.Context, domainName string) (*HostingResourceRecordSets, error) {
+func (ha HostingApi) ListResourceRecordSets(ctx context.Context, domainName string, opts PaginationOptions) (*HostingResourceRecordSets, error) {
 	path := ha.getPath("/domains/" + domainName + "/resourceRecordSets")
 	result := &HostingResourceRecordSets{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	query := options.Encode(opts)
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -429,10 +431,11 @@ func (ha HostingApi) DeleteAutoResponder(ctx context.Context, domainName, emailA
 	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
-func (ha HostingApi) ListForwards(ctx context.Context, domainName, emailAddress string) (*HostingEmailForwards, error) {
+func (ha HostingApi) ListForwards(ctx context.Context, domainName, emailAddress string, opts PaginationOptions) (*HostingEmailForwards, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress + "/forwards")
 	result := &HostingEmailForwards{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	query := options.Encode(opts)
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil

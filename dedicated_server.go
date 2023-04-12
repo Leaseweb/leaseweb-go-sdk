@@ -546,10 +546,11 @@ func (dsa DedicatedServerApi) ListNullRoutes(ctx context.Context, serverId strin
 	return result, nil
 }
 
-func (dsa DedicatedServerApi) ListNetworkInterfaces(ctx context.Context, serverId string) (*DedicatedServerNetworkInterfaces, error) {
+func (dsa DedicatedServerApi) ListNetworkInterfaces(ctx context.Context, serverId string, opts PaginationOptions) (*DedicatedServerNetworkInterfaces, error) {
 	path := dsa.getPath("/servers/" + serverId + "/networkInterfaces")
 	result := &DedicatedServerNetworkInterfaces{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	query := options.Encode(opts)
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -600,10 +601,11 @@ func (dsa DedicatedServerApi) DeleteDhcpReservation(ctx context.Context, serverI
 	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
-func (dsa DedicatedServerApi) ListDhcpReservation(ctx context.Context, serverId string) (*DedicatedServerDhcpReservations, error) {
+func (dsa DedicatedServerApi) ListDhcpReservation(ctx context.Context, serverId string, opts PaginationOptions) (*DedicatedServerDhcpReservations, error) {
 	path := dsa.getPath("/servers/" + serverId + "/leases")
 	result := &DedicatedServerDhcpReservations{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	query := options.Encode(opts)
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil

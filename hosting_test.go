@@ -586,7 +586,7 @@ func TestHostingListNameservers(t *testing.T) {
 
 	hostingApi := HostingApi{}
 	ctx := context.Background()
-	response, err := hostingApi.ListNameservers(ctx, "example.com")
+	response, err := hostingApi.ListNameservers(ctx, "example.com", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -628,7 +628,7 @@ func TestHostingListNameserversPaginateAndFilter(t *testing.T) {
 
 	hostingApi := HostingApi{}
 	ctx := context.Background()
-	response, err := hostingApi.ListNameservers(ctx, "example.com")
+	response, err := hostingApi.ListNameservers(ctx, "example.com", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -654,7 +654,10 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListNameservers(ctx, "example.com")
+				opts := PaginationOptions{
+					Limit: Int(1),
+				}
+				return HostingApi{}.ListNameservers(ctx, "example.com", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -672,7 +675,10 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListNameservers(ctx, "example.com")
+				opts := PaginationOptions{
+					Limit: Int(1),
+				}
+				return HostingApi{}.ListNameservers(ctx, "example.com", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -690,7 +696,10 @@ func TestHostingListNameserversServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListNameservers(ctx, "example.com")
+				opts := PaginationOptions{
+					Limit: Int(1),
+				}
+				return HostingApi{}.ListNameservers(ctx, "example.com", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1101,7 +1110,7 @@ func TestHostingListResourceRecordSets(t *testing.T) {
 
 	hostingApi := HostingApi{}
 	ctx := context.Background()
-	response, err := hostingApi.ListResourceRecordSets(ctx, "example.com")
+	response, err := hostingApi.ListResourceRecordSets(ctx, "example.com", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1185,7 +1194,7 @@ func TestHostingListResourceRecordSetsPaginateAndFilter(t *testing.T) {
 
 	hostingApi := HostingApi{}
 	ctx := context.Background()
-	response, err := hostingApi.ListResourceRecordSets(ctx, "example.com")
+	response, err := hostingApi.ListResourceRecordSets(ctx, "example.com", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -1223,7 +1232,7 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListResourceRecordSets(ctx, "example.com")
+				return HostingApi{}.ListResourceRecordSets(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1241,7 +1250,10 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListResourceRecordSets(ctx, "example.com")
+				opts := PaginationOptions{
+					Limit: Int(1),
+				}
+				return HostingApi{}.ListResourceRecordSets(ctx, "example.com", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1259,7 +1271,7 @@ func TestHostingListResourceRecordSetsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListResourceRecordSets(ctx, "example.com")
+				return HostingApi{}.ListResourceRecordSets(ctx, "example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2412,7 +2424,10 @@ func TestHostingListEmailAliasesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListEmailAliases(ctx, "example.com", PaginationOptions{})
+				opts := PaginationOptions{
+					Limit: Int(1),
+				}
+				return HostingApi{}.ListEmailAliases(ctx, "example.com", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4352,7 +4367,7 @@ func TestHostingListForwards(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := HostingApi{}.ListForwards(ctx, "example.com", "random@example.com")
+	response, err := HostingApi{}.ListForwards(ctx, "example.com", "random@example.com", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -4422,7 +4437,10 @@ func TestHostingListForwardsPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := HostingApi{}.ListForwards(ctx, "example.com", "random@example.com")
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	response, err := HostingApi{}.ListForwards(ctx, "example.com", "random@example.com", opts)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -4455,7 +4473,7 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListForwards(ctx, "example.com", "random@example.com")
+				return HostingApi{}.ListForwards(ctx, "example.com", "random@example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4473,7 +4491,7 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListForwards(ctx, "example.com", "random@example.com")
+				return HostingApi{}.ListForwards(ctx, "example.com", "random@example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -4491,7 +4509,7 @@ func TestHostingListForwardsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListForwards(ctx, "example.com", "random@example.com")
+				return HostingApi{}.ListForwards(ctx, "example.com", "random@example.com", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

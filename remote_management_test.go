@@ -131,7 +131,7 @@ func TestRemoteManagementListProfiles(t *testing.T) {
 
 	remoteManagementApi := RemoteManagementApi{}
 	ctx := context.Background()
-	response, err := remoteManagementApi.ListProfiles(ctx)
+	response, err := remoteManagementApi.ListProfiles(ctx, PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -175,7 +175,10 @@ func TestRemoteManagementListProfilesPaginate(t *testing.T) {
 
 	remoteManagementApi := RemoteManagementApi{}
 	ctx := context.Background()
-	response, err := remoteManagementApi.ListProfiles(ctx)
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	response, err := remoteManagementApi.ListProfiles(ctx, opts)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -204,7 +207,7 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return RemoteManagementApi{}.ListProfiles(ctx)
+				return RemoteManagementApi{}.ListProfiles(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -222,7 +225,7 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return RemoteManagementApi{}.ListProfiles(ctx)
+				return RemoteManagementApi{}.ListProfiles(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -240,7 +243,7 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return RemoteManagementApi{}.ListProfiles(ctx)
+				return RemoteManagementApi{}.ListProfiles(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -258,7 +261,7 @@ func TestRemoteManagementTestListProfilesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return RemoteManagementApi{}.ListProfiles(ctx)
+				return RemoteManagementApi{}.ListProfiles(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

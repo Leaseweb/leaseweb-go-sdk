@@ -161,10 +161,11 @@ func (vsa VirtualServerApi) GetDataTrafficMetrics(ctx context.Context, virtualSe
 	return result, nil
 }
 
-func (vsa VirtualServerApi) ListTemplates(ctx context.Context, virtualServerId string) (*VirtualServerTemplates, error) {
+func (vsa VirtualServerApi) ListTemplates(ctx context.Context, virtualServerId string, opts PaginationOptions) (*VirtualServerTemplates, error) {
 	path := vsa.getPath("/virtualServers/" + virtualServerId + "/templates")
 	result := &VirtualServerTemplates{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	query := options.Encode(opts)
+	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil

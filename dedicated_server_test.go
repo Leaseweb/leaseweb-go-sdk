@@ -2215,7 +2215,10 @@ func TestDedicatedServerListNetworkInterfaces(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id")
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	response, err := DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 1)
@@ -2240,7 +2243,10 @@ func TestDedicatedServerListNetworkInterfacesBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id")
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	response, err := DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -2274,7 +2280,10 @@ func TestDedicatedServerListNetworkInterfacesPagination(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id")
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	response, err := DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -2303,7 +2312,10 @@ func TestDedicatedServerListNetworkInterfacesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id")
+				opts := PaginationOptions{
+					Limit: Int(1),
+				}
+				return DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2321,7 +2333,10 @@ func TestDedicatedServerListNetworkInterfacesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id")
+				opts := PaginationOptions{
+					Limit: Int(1),
+				}
+				return DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2339,7 +2354,10 @@ func TestDedicatedServerListNetworkInterfacesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id")
+				opts := PaginationOptions{
+					Limit: Int(1),
+				}
+				return DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2357,7 +2375,10 @@ func TestDedicatedServerListNetworkInterfacesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id")
+				opts := PaginationOptions{
+					Limit: Int(1),
+				}
+				return DedicatedServerApi{}.ListNetworkInterfaces(ctx, "server-id", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3394,7 +3415,7 @@ func TestDedicatedServerListDhcpReservation(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id")
+	response, err := DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 1)
@@ -3425,7 +3446,7 @@ func TestDedicatedServerListDhcpReservationBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id")
+	response, err := DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -3467,7 +3488,7 @@ func TestDedicatedServerListDhcpReservationPagination(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id")
+	response, err := DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -3502,7 +3523,7 @@ func TestDedicatedServerListDhcpReservationServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id")
+				return DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3520,7 +3541,7 @@ func TestDedicatedServerListDhcpReservationServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id")
+				return DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3538,7 +3559,7 @@ func TestDedicatedServerListDhcpReservationServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id")
+				return DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3556,7 +3577,7 @@ func TestDedicatedServerListDhcpReservationServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id")
+				return DedicatedServerApi{}.ListDhcpReservation(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

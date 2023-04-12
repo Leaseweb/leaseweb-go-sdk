@@ -601,7 +601,7 @@ func TestPrivateNetworkListDhcpReservations(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
+	response, err := PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345", PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -638,7 +638,10 @@ func TestPrivateNetworkListDhcpReservationsPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	response, err := PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345", opts)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -665,7 +668,7 @@ func TestPrivateNetworkListDhcpReservationsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
+				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -683,7 +686,7 @@ func TestPrivateNetworkListDhcpReservationsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
+				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -701,7 +704,7 @@ func TestPrivateNetworkListDhcpReservationsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
+				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -719,7 +722,7 @@ func TestPrivateNetworkListDhcpReservationsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345")
+				return PrivateNetworkingApi{}.ListDhcpReservations(ctx, "12345", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
