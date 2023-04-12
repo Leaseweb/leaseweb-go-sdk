@@ -345,7 +345,7 @@ func TestCustomerAccountListContactsPaginateAndFilter(t *testing.T) {
 	customerAccountApi := CustomerAccountApi{}
 	ctx := context.Background()
 	opts := CustomerAccountContactsListOptions{
-		PrimaryRoles: String("GENERAL, SECURITY, TECHNICAL, BILLING"),
+		PrimaryRoles: []string{"GENERAL", "SECURITY", "TECHNICAL", "BILLING"},
 	}
 	resp, err := customerAccountApi.ListContacts(ctx, opts)
 

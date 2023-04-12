@@ -52,8 +52,8 @@ type FloatingIpListOptions struct {
 
 type FloatingIpListRangeDefinitionsOptions struct {
 	PaginationOptions
-	Location *string `param:"location"`
-	Type     *string `param:"type"`
+	Location *string  `param:"location"`
+	Type     []string `param:"type"`
 }
 
 func (fia FloatingIpApi) getPath(endpoint string) string {

@@ -53,7 +53,7 @@ type CustomerAccountPhone struct {
 }
 
 type CustomerAccountContactsListOptions struct {
-	PrimaryRoles *string `param:"primaryRoles"`
+	PrimaryRoles []string `param:"primaryRoles"`
 }
 
 func (cai CustomerAccountApi) getPath(endpoint string) string {

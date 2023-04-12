@@ -377,7 +377,7 @@ func TestFloatingIpListRangeDefinitionsPaginateAndFilter(t *testing.T) {
 			Offset: Int(10),
 		},
 		Location: String("AMS-01"),
-		Type:     String("SITE, METRO"),
+		Type:     []string{"SITE", "METRO"},
 	}
 	response, err := floatingIpApi.ListRangeDefinitions(ctx, "123456789", opts)
 
