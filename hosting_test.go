@@ -106,7 +106,7 @@ func TestHostingListDomains(t *testing.T) {
 
 	hostingApi := HostingApi{}
 	ctx := context.Background()
-	response, err := hostingApi.ListDomains(ctx, HostingListOptions{})
+	response, err := hostingApi.ListDomains(ctx, HostingListDomainsOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -209,7 +209,7 @@ func TestHostingListDomainsPaginateAndFilter(t *testing.T) {
 
 	hostingApi := HostingApi{}
 	ctx := context.Background()
-	opts := HostingListOptions{
+	opts := HostingListDomainsOptions{
 		PaginationOptions: PaginationOptions{
 			Limit: Int(1),
 		},
@@ -254,7 +254,7 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListDomains(ctx, HostingListOptions{})
+				return HostingApi{}.ListDomains(ctx, HostingListDomainsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -272,7 +272,7 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListDomains(ctx, HostingListOptions{})
+				return HostingApi{}.ListDomains(ctx, HostingListDomainsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -290,7 +290,7 @@ func TestHostingListDomainsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return HostingApi{}.ListDomains(ctx, HostingListOptions{})
+				return HostingApi{}.ListDomains(ctx, HostingListDomainsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

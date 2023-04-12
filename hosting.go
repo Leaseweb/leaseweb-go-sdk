@@ -143,7 +143,7 @@ type HostingEmail struct {
 	Link HostingLink `json:"_links"`
 }
 
-type HostingListOptions struct {
+type HostingListDomainsOptions struct {
 	PaginationOptions
 	Type *string `param:"type"`
 }
@@ -152,7 +152,7 @@ func (ha HostingApi) getPath(endpoint string) string {
 	return "/hosting/" + FLOATING_IP_API_VERSION + endpoint
 }
 
-func (ha HostingApi) ListDomains(ctx context.Context, opts HostingListOptions) (*HostingDomains, error) {
+func (ha HostingApi) ListDomains(ctx context.Context, opts HostingListDomainsOptions) (*HostingDomains, error) {
 	path := ha.getPath("/domains")
 	query := options.Encode(opts)
 	result := &HostingDomains{}
