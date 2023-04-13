@@ -9,11 +9,11 @@ import (
 	"strings"
 )
 
-var lswClient *leasewebClient
+var lswClient *LeasewebClient
 
 const DEFAULT_BASE_URL = "https://api.leaseweb.com"
 
-type leasewebClient struct {
+type LeasewebClient struct {
 	client  *http.Client
 	apiKey  string
 	baseUrl string
@@ -58,10 +58,33 @@ func (erre *EncodingError) Error() string {
 }
 
 func InitLeasewebClient(key string) {
-	lswClient = &leasewebClient{
+	lswClient = NewLeaseWebClient(key)
+}
+
+type option func(client *LeasewebClient)
+
+func WithHTTPClient(client *http.Client) option {
+	return func(c *LeasewebClient) {
+		c.client = client
+	}
+}
+
+func NewLeaseWebClient(key string, opts ...option) *LeasewebClient {
+	client := &LeasewebClient{
 		client: &http.Client{},
 		apiKey: key,
 	}
+	for _, opt := range opts {
+		opt(client)
+	}
+	return client
+}
+
+func getClient(c *LeasewebClient) *LeasewebClient {
+	if c != nil {
+		return c
+	}
+	return lswClient
 }
 
 func SetBaseUrl(baseUrl string) {
@@ -75,7 +98,7 @@ func getBaseUrl() string {
 	return DEFAULT_BASE_URL
 }
 
-func doRequest(ctx context.Context, method, path, query string, args ...interface{}) error {
+func (lsw *LeasewebClient) doRequest(ctx context.Context, method, path, query string, args ...interface{}) error {
 	url := getBaseUrl() + path
 	if query != "" {
 		url += "?" + query
@@ -103,8 +126,8 @@ func doRequest(ctx context.Context, method, path, query string, args ...interfac
 		req.Header.Set("Content-Type", "application/json")
 	}
 
-	req.Header.Add("x-lsw-auth", lswClient.apiKey)
-	resp, err := lswClient.client.Do(req)
+	req.Header.Add("x-lsw-auth", lsw.apiKey)
+	resp, err := lsw.client.Do(req)
 	if err != nil {
 		return err
 	}

@@ -9,7 +9,9 @@ import (
 
 const DEDICATED_RACK_API_VERSION = "v2"
 
-type DedicatedRackApi struct{}
+type DedicatedRackApi struct {
+	Client *LeasewebClient
+}
 
 type DedicatedRacks struct {
 	PrivateRacks []DedicatedRack `json:"privateRacks"`
@@ -54,7 +56,7 @@ func (dra DedicatedRackApi) List(ctx context.Context, args ...interface{}) (*Ded
 	path := dra.getPath("/privateRacks")
 	query := v.Encode()
 	result := &DedicatedRacks{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -63,7 +65,7 @@ func (dra DedicatedRackApi) List(ctx context.Context, args ...interface{}) (*Ded
 func (dra DedicatedRackApi) Get(ctx context.Context, privateRackId string) (*DedicatedRack, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId)
 	result := &DedicatedRack{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -72,7 +74,7 @@ func (dra DedicatedRackApi) Get(ctx context.Context, privateRackId string) (*Ded
 func (dra DedicatedRackApi) Update(ctx context.Context, privateRackId, reference string) error {
 	payload := map[string]string{"reference": reference}
 	path := dra.getPath("/privateRacks/" + privateRackId)
-	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
+	return getClient(dra.Client).doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
 func (dra DedicatedRackApi) ListNullRoutes(ctx context.Context, privateRackId string, args ...interface{}) (*NullRoutes, error) {
@@ -87,7 +89,7 @@ func (dra DedicatedRackApi) ListNullRoutes(ctx context.Context, privateRackId st
 	path := dra.getPath("/privateRacks/" + privateRackId + "/nullRouteHistory")
 	query := v.Encode()
 	result := &NullRoutes{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -117,7 +119,7 @@ func (dra DedicatedRackApi) ListIps(ctx context.Context, privateRackId string, a
 	path := dra.getPath("/privateRacks/" + privateRackId + "/ips")
 	query := v.Encode()
 	result := &Ips{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -126,7 +128,7 @@ func (dra DedicatedRackApi) ListIps(ctx context.Context, privateRackId string, a
 func (dra DedicatedRackApi) GetIp(ctx context.Context, privateRackId, ip string) (*Ip, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/ips/" + ip)
 	result := &Ip{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -135,7 +137,7 @@ func (dra DedicatedRackApi) GetIp(ctx context.Context, privateRackId, ip string)
 func (dra DedicatedRackApi) UpdateIp(ctx context.Context, privateRackId, ip string, payload map[string]string) (*Ip, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/ips/" + ip)
 	result := &Ip{}
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -144,7 +146,7 @@ func (dra DedicatedRackApi) UpdateIp(ctx context.Context, privateRackId, ip stri
 func (dra DedicatedRackApi) NullRouteAnIp(ctx context.Context, privateRackId, ip string) (*Ip, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/ips/" + ip + "/null")
 	result := &Ip{}
-	if err := doRequest(ctx, http.MethodPost, path, "", result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodPost, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -153,7 +155,7 @@ func (dra DedicatedRackApi) NullRouteAnIp(ctx context.Context, privateRackId, ip
 func (dra DedicatedRackApi) RemoveNullRouteAnIp(ctx context.Context, privateRackId, ip string) (*Ip, error) {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/ips/" + ip + "/unnull")
 	result := &Ip{}
-	if err := doRequest(ctx, http.MethodPost, path, "", result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodPost, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -171,7 +173,7 @@ func (dra DedicatedRackApi) ListCredentials(ctx context.Context, privateRackId s
 	result := &Credentials{}
 	query := v.Encode()
 	path := dra.getPath("/privateRacks/" + privateRackId + "/credentials")
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -184,7 +186,7 @@ func (dra DedicatedRackApi) CreateCredential(ctx context.Context, privateRackId,
 	payload["username"] = username
 	payload["password"] = password
 	path := dra.getPath("/privateRacks/" + privateRackId + "/credentials")
-	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -202,7 +204,7 @@ func (dra DedicatedRackApi) ListCredentialsByType(ctx context.Context, privateRa
 	result := &Credentials{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/credentials/" + credentialType)
 	query := v.Encode()
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -211,7 +213,7 @@ func (dra DedicatedRackApi) ListCredentialsByType(ctx context.Context, privateRa
 func (dra DedicatedRackApi) GetCredential(ctx context.Context, privateRackId, credentialType, username string) (*Credential, error) {
 	result := &Credential{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/credentials/" + credentialType + "/" + username)
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -219,14 +221,14 @@ func (dra DedicatedRackApi) GetCredential(ctx context.Context, privateRackId, cr
 
 func (dra DedicatedRackApi) DeleteCredential(ctx context.Context, privateRackId, credentialType, username string) error {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/credentials/" + credentialType + "/" + username)
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(dra.Client).doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (dra DedicatedRackApi) UpdateCredential(ctx context.Context, privateRackId, credentialType, username, password string) (*Credential, error) {
 	result := &Credential{}
 	payload := map[string]string{"password": password}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/credentials/" + credentialType + "/" + username)
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -250,7 +252,7 @@ func (dra DedicatedRackApi) GetDataTrafficMetrics(ctx context.Context, privateRa
 	path := dra.getPath("/privateRacks/" + privateRackId + "/metrics/datatraffic")
 	query := v.Encode()
 	result := &DataTrafficMetricsV1{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -274,7 +276,7 @@ func (dra DedicatedRackApi) GetBandWidthMetrics(ctx context.Context, privateRack
 	path := dra.getPath("/privateRacks/" + privateRackId + "/metrics/bandwidth")
 	query := v.Encode()
 	result := &BandWidthMetrics{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -283,7 +285,7 @@ func (dra DedicatedRackApi) GetBandWidthMetrics(ctx context.Context, privateRack
 func (dra DedicatedRackApi) GetDdosNotificationSetting(ctx context.Context, privateRackId string) (*DdosNotificationSetting, error) {
 	result := &DdosNotificationSetting{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/ddos")
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -291,7 +293,7 @@ func (dra DedicatedRackApi) GetDdosNotificationSetting(ctx context.Context, priv
 
 func (dra DedicatedRackApi) UpdateDdosNotificationSetting(ctx context.Context, privateRackId string, payload map[string]string) error {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/ddos")
-	if err := doRequest(ctx, http.MethodPut, path, "", nil, payload); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodPut, path, "", nil, payload); err != nil {
 		return err
 	}
 	return nil
@@ -309,7 +311,7 @@ func (dra DedicatedRackApi) ListBandWidthNotificationSettings(ctx context.Contex
 	result := &BandWidthNotificationSettings{}
 	query := v.Encode()
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/bandwidth")
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -323,7 +325,7 @@ func (dra DedicatedRackApi) CreateBandWidthNotificationSetting(ctx context.Conte
 	}
 	result := &NotificationSetting{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/bandwidth")
-	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -331,13 +333,13 @@ func (dra DedicatedRackApi) CreateBandWidthNotificationSetting(ctx context.Conte
 
 func (dra DedicatedRackApi) DeleteBandWidthNotificationSetting(ctx context.Context, privateRackId, notificationId string) error {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/bandwidth/" + notificationId)
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(dra.Client).doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (dra DedicatedRackApi) GetBandWidthNotificationSetting(ctx context.Context, privateRackId, notificationId string) (*NotificationSetting, error) {
 	result := &NotificationSetting{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/bandwidth/" + notificationId)
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -346,7 +348,7 @@ func (dra DedicatedRackApi) GetBandWidthNotificationSetting(ctx context.Context,
 func (dra DedicatedRackApi) UpdateBandWidthNotificationSetting(ctx context.Context, privateRackId, notificationSettingId string, payload map[string]string) (*NotificationSetting, error) {
 	result := &NotificationSetting{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/bandwidth/" + notificationSettingId)
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -364,7 +366,7 @@ func (dra DedicatedRackApi) ListDataTrafficNotificationSettings(ctx context.Cont
 	result := &DataTrafficNotificationSettings{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/datatraffic")
 	query := v.Encode()
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -378,7 +380,7 @@ func (dra DedicatedRackApi) CreateDataTrafficNotificationSetting(ctx context.Con
 	}
 	result := &NotificationSetting{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/datatraffic")
-	if err := doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodPost, path, "", result, payload); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -386,13 +388,13 @@ func (dra DedicatedRackApi) CreateDataTrafficNotificationSetting(ctx context.Con
 
 func (dra DedicatedRackApi) DeleteDataTrafficNotificationSetting(ctx context.Context, privateRackId, notificationId string) error {
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/datatraffic/" + notificationId)
-	return doRequest(ctx, http.MethodDelete, path, "")
+	return getClient(dra.Client).doRequest(ctx, http.MethodDelete, path, "")
 }
 
 func (dra DedicatedRackApi) GetDataTrafficNotificationSetting(ctx context.Context, privateRackId, notificationId string) (*NotificationSetting, error) {
 	result := &NotificationSetting{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/datatraffic/" + notificationId)
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return result, err
 	}
 	return result, nil
@@ -401,7 +403,7 @@ func (dra DedicatedRackApi) GetDataTrafficNotificationSetting(ctx context.Contex
 func (dra DedicatedRackApi) UpdateDataTrafficNotificationSetting(ctx context.Context, privateRackId, notificationSettingId string, payload map[string]string) (*NotificationSetting, error) {
 	result := &NotificationSetting{}
 	path := dra.getPath("/privateRacks/" + privateRackId + "/notificationSettings/datatraffic/" + notificationSettingId)
-	if err := doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
+	if err := getClient(dra.Client).doRequest(ctx, http.MethodPut, path, "", result, payload); err != nil {
 		return result, err
 	}
 	return result, nil

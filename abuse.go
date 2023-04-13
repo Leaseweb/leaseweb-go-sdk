@@ -12,7 +12,9 @@ import (
 
 const ABUSE_API_VERSION = "v1"
 
-type AbuseApi struct{}
+type AbuseApi struct {
+	Client *LeasewebClient
+}
 
 type AbuseReport struct {
 	Id                  string                    `json:"id"`
@@ -94,7 +96,8 @@ func (aba AbuseApi) List(ctx context.Context, args ...interface{}) (*AbuseReport
 	path := aba.getPath("/reports")
 	query := v.Encode()
 	result := &AbuseReports{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(aba.Client).
+		doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -103,7 +106,8 @@ func (aba AbuseApi) List(ctx context.Context, args ...interface{}) (*AbuseReport
 func (aba AbuseApi) Get(ctx context.Context, abuseReportId string) (*AbuseReport, error) {
 	path := aba.getPath("/reports/" + abuseReportId)
 	result := &AbuseReport{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(aba.Client).
+		doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -121,7 +125,8 @@ func (aba AbuseApi) ListMessages(ctx context.Context, abuseReportId string, args
 	path := aba.getPath("/reports/" + abuseReportId + "/messages")
 	query := v.Encode()
 	result := &AbuseMessages{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(aba.Client).
+		doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -131,7 +136,8 @@ func (aba AbuseApi) CreateMessage(ctx context.Context, abuseReportId string, bod
 	var result []string
 	payload := map[string]string{body: body}
 	path := aba.getPath("/reports/" + abuseReportId + "/messages")
-	if err := doRequest(ctx, http.MethodPost, path, "", &result, payload); err != nil {
+	if err := getClient(aba.Client).
+		doRequest(ctx, http.MethodPost, path, "", &result, payload); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -140,7 +146,8 @@ func (aba AbuseApi) CreateMessage(ctx context.Context, abuseReportId string, bod
 func (aba AbuseApi) ListResolutionOptions(ctx context.Context, abuseReportId string) (*AbuseResolutions, error) {
 	path := aba.getPath("/reports/" + abuseReportId + "/resolutions")
 	result := &AbuseResolutions{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(aba.Client).
+		doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -149,7 +156,8 @@ func (aba AbuseApi) ListResolutionOptions(ctx context.Context, abuseReportId str
 func (aba AbuseApi) Resolve(ctx context.Context, abuseReportId string, resolutions []string) error {
 	payload := map[string][]string{"resolutions": resolutions}
 	path := aba.getPath("/reports/" + abuseReportId + "/resolve")
-	return doRequest(ctx, http.MethodPost, path, "", nil, payload)
+	return getClient(aba.Client).
+		doRequest(ctx, http.MethodPost, path, "", nil, payload)
 }
 
 // TODO

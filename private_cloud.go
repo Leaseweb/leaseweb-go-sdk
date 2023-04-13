@@ -9,7 +9,9 @@ import (
 
 const PRIVATE_CLOUD_API_VERSION = "v2"
 
-type PrivateCloudApi struct{}
+type PrivateCloudApi struct {
+	Client *LeasewebClient
+}
 
 type PrivateClouds struct {
 	PrivateClouds []PrivateCloud `json:"privateClouds"`
@@ -71,7 +73,7 @@ func (pca PrivateCloudApi) List(ctx context.Context, args ...interface{}) (*Priv
 	path := pca.getPath("/privateClouds")
 	query := v.Encode()
 	result := &PrivateClouds{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(pca.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -80,7 +82,7 @@ func (pca PrivateCloudApi) List(ctx context.Context, args ...interface{}) (*Priv
 func (pca PrivateCloudApi) Get(ctx context.Context, privateCloudId string) (*PrivateCloud, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId)
 	result := &PrivateCloud{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(pca.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -98,7 +100,7 @@ func (pca PrivateCloudApi) ListCredentials(ctx context.Context, privateCloudId s
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/credentials/" + credentialType)
 	query := v.Encode()
 	result := &Credentials{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(pca.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -107,7 +109,7 @@ func (pca PrivateCloudApi) ListCredentials(ctx context.Context, privateCloudId s
 func (pca PrivateCloudApi) GetCredential(ctx context.Context, privateCloudId string, credentialType string, username string) (*Credential, error) {
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/credentials/" + credentialType + "/" + username)
 	result := &Credential{}
-	if err := doRequest(ctx, http.MethodGet, path, "", result); err != nil {
+	if err := getClient(pca.Client).doRequest(ctx, http.MethodGet, path, "", result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -131,7 +133,7 @@ func (pca PrivateCloudApi) GetDataTrafficMetrics(ctx context.Context, privateClo
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/datatraffic")
 	query := v.Encode()
 	result := &DataTrafficMetricsV2{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(pca.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -155,7 +157,7 @@ func (pca PrivateCloudApi) GetBandWidthMetrics(ctx context.Context, privateCloud
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/bandwidth")
 	query := v.Encode()
 	result := &BandWidthMetrics{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(pca.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -178,7 +180,7 @@ func (pca PrivateCloudApi) GetCpuMetrics(ctx context.Context, privateCloudId str
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/cpu")
 	query := v.Encode()
 	result := &PrivateCloudCpuMetrics{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(pca.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -201,7 +203,7 @@ func (pca PrivateCloudApi) GetMemoryMetrics(ctx context.Context, privateCloudId 
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/memory")
 	query := v.Encode()
 	result := &PrivateCloudMemoryMetrics{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(pca.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
@@ -224,7 +226,7 @@ func (pca PrivateCloudApi) GetStorageMetrics(ctx context.Context, privateCloudId
 	path := pca.getPath("/privateClouds/" + privateCloudId + "/metrics/storage")
 	query := v.Encode()
 	result := &PrivateCloudStorageMetrics{}
-	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
+	if err := getClient(pca.Client).doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
 	return result, nil
