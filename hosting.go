@@ -3,9 +3,9 @@ package leaseweb
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
-	"net/url"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const HOSTING_API_VERSION = "v2"
@@ -143,24 +143,18 @@ type HostingEmail struct {
 	Link HostingLink `json:"_links"`
 }
 
+type HostingListDomainsOptions struct {
+	PaginationOptions
+	Type *string `param:"type"`
+}
+
 func (ha HostingApi) getPath(endpoint string) string {
 	return "/hosting/" + FLOATING_IP_API_VERSION + endpoint
 }
 
-func (ha HostingApi) ListDomains(ctx context.Context, args ...interface{}) (*HostingDomains, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		v.Add("type", fmt.Sprint(args[1]))
-	}
-
+func (ha HostingApi) ListDomains(ctx context.Context, opts HostingListDomainsOptions) (*HostingDomains, error) {
 	path := ha.getPath("/domains")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &HostingDomains{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -186,18 +180,10 @@ func (ha HostingApi) GetAvailability(ctx context.Context, domainName string) (*H
 	return result, nil
 }
 
-func (ha HostingApi) ListNameservers(ctx context.Context, domainName string, args ...interface{}) (*HostingNameservers, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (ha HostingApi) ListNameservers(ctx context.Context, domainName string, opts PaginationOptions) (*HostingNameservers, error) {
 	path := ha.getPath("/domains/" + domainName + "/nameservers")
-	query := v.Encode()
 	result := &HostingNameservers{}
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
@@ -233,18 +219,10 @@ func (ha HostingApi) UpdateDnsSecurity(ctx context.Context, domainName string, p
 	return result, nil
 }
 
-func (ha HostingApi) ListResourceRecordSets(ctx context.Context, domainName string, args ...interface{}) (*HostingResourceRecordSets, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (ha HostingApi) ListResourceRecordSets(ctx context.Context, domainName string, opts PaginationOptions) (*HostingResourceRecordSets, error) {
 	path := ha.getPath("/domains/" + domainName + "/resourceRecordSets")
-	query := v.Encode()
 	result := &HostingResourceRecordSets{}
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}
@@ -332,17 +310,9 @@ func (ha HostingApi) DeleteCatchAll(ctx context.Context, domainName string) erro
 	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
-func (ha HostingApi) ListEmailAliases(ctx context.Context, domainName string, args ...interface{}) (*HostingEmailAliases, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (ha HostingApi) ListEmailAliases(ctx context.Context, domainName string, opts PaginationOptions) (*HostingEmailAliases, error) {
 	path := ha.getPath("/domains/" + domainName + "/emailAliases")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &HostingEmailAliases{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -382,17 +352,9 @@ func (ha HostingApi) DeleteEmailAlias(ctx context.Context, domainName, source, d
 	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
-func (ha HostingApi) ListDomainForwards(ctx context.Context, domainName string, args ...interface{}) (*HostingEmailForwards, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (ha HostingApi) ListDomainForwards(ctx context.Context, domainName string, opts PaginationOptions) (*HostingEmailForwards, error) {
 	path := ha.getPath("/domains/" + domainName + "/forwards")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &HostingEmailForwards{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -400,17 +362,9 @@ func (ha HostingApi) ListDomainForwards(ctx context.Context, domainName string, 
 	return result, nil
 }
 
-func (ha HostingApi) ListMailBoxes(ctx context.Context, domainName string, args ...interface{}) (*HostingEmailMailboxes, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (ha HostingApi) ListMailBoxes(ctx context.Context, domainName string, opts PaginationOptions) (*HostingEmailMailboxes, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &HostingEmailMailboxes{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -477,18 +431,10 @@ func (ha HostingApi) DeleteAutoResponder(ctx context.Context, domainName, emailA
 	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
-func (ha HostingApi) ListForwards(ctx context.Context, domainName, emailAddress string, args ...interface{}) (*HostingEmailForwards, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (ha HostingApi) ListForwards(ctx context.Context, domainName, emailAddress string, opts PaginationOptions) (*HostingEmailForwards, error) {
 	path := ha.getPath("/domains/" + domainName + "/mailboxes/" + emailAddress + "/forwards")
-	query := v.Encode()
 	result := &HostingEmailForwards{}
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}

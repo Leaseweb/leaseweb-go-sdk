@@ -114,7 +114,7 @@ func TestDedicatedNetworkEquipmentList(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.List(ctx)
+	response, err := DedicatedNetworkEquipmentApi{}.List(ctx, DedicatedNetworkEquipmentListOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -191,7 +191,7 @@ func TestDedicatedNetworkEquipmentListBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.List(ctx)
+	response, err := DedicatedNetworkEquipmentApi{}.List(ctx, DedicatedNetworkEquipmentListOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -261,7 +261,12 @@ func TestDedicatedNetworkEquipmentListPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.List(ctx, 1)
+	opts := DedicatedNetworkEquipmentListOptions{
+		PaginationOptions: PaginationOptions{
+			Limit: Int(1),
+		},
+	}
+	response, err := DedicatedNetworkEquipmentApi{}.List(ctx, opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -312,7 +317,7 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.List(ctx)
+				return DedicatedNetworkEquipmentApi{}.List(ctx, DedicatedNetworkEquipmentListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -330,7 +335,7 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.List(ctx)
+				return DedicatedNetworkEquipmentApi{}.List(ctx, DedicatedNetworkEquipmentListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -348,7 +353,7 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.List(ctx)
+				return DedicatedNetworkEquipmentApi{}.List(ctx, DedicatedNetworkEquipmentListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -366,7 +371,7 @@ func TestDedicatedNetworkEquipmentListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.List(ctx)
+				return DedicatedNetworkEquipmentApi{}.List(ctx, DedicatedNetworkEquipmentListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -738,7 +743,7 @@ func TestDedicatedNetworkEquipmentListIps(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
+	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -779,7 +784,7 @@ func TestDedicatedNetworkEquipmentListIpsBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
+	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -819,7 +824,13 @@ func TestDedicatedNetworkEquipmentListIpsFilterAndPagination(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", 1, 10)
+	opts := DedicatedNetworkEquipmentListIpsOptions{
+		PaginationOptions: PaginationOptions{
+			Limit:  Int(1),
+			Offset: Int(10),
+		},
+	}
+	response, err := DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -852,7 +863,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -870,7 +881,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -888,7 +899,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -906,7 +917,7 @@ func TestDedicatedNetworkEquipmentListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id")
+				return DedicatedNetworkEquipmentApi{}.ListIps(ctx, "server-id", DedicatedNetworkEquipmentListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1481,7 +1492,7 @@ func TestDedicatedNetworkEquipmentListNullRoutes(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
+	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 1)
@@ -1506,7 +1517,7 @@ func TestDedicatedNetworkEquipmentListNullRoutesBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
+	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1540,7 +1551,10 @@ func TestDedicatedNetworkEquipmentListNullRoutesFilterAndPagination(t *testing.T
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id", 1)
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	response, err := DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -1569,7 +1583,7 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
+				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1587,7 +1601,7 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
+				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1605,7 +1619,7 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
+				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1623,7 +1637,7 @@ func TestDedicatedNetworkEquipmentListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id")
+				return DedicatedNetworkEquipmentApi{}.ListNullRoutes(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1668,7 +1682,7 @@ func TestDedicatedNetworkEquipmentListCredentials(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 4)
@@ -1694,7 +1708,7 @@ func TestDedicatedNetworkEquipmentListCredentialsBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1724,7 +1738,7 @@ func TestDedicatedNetworkEquipmentListCredentialsPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -1748,7 +1762,7 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
+				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1766,7 +1780,7 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
+				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1784,7 +1798,7 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
+				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1802,7 +1816,7 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
+				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1820,7 +1834,7 @@ func TestDedicatedNetworkEquipmentListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944")
+				return DedicatedNetworkEquipmentApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1975,7 +1989,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByType(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -1997,7 +2011,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -2027,7 +2041,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypePaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+	response, err := DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -2051,7 +2065,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2069,7 +2083,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2087,7 +2101,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2105,7 +2119,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2123,7 +2137,7 @@ func TestDedicatedNetworkEquipmentListCredentialsByTypeServerErrors(t *testing.T
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+				return DedicatedNetworkEquipmentApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

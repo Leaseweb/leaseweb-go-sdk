@@ -84,7 +84,7 @@ func TestDedicatedRackList(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.List(ctx)
+	response, err := DedicatedRackApi{}.List(ctx, DedicatedRackListOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -131,7 +131,7 @@ func TestDedicatedRackListBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.List(ctx)
+	response, err := DedicatedRackApi{}.List(ctx, DedicatedRackListOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -186,7 +186,12 @@ func TestDedicatedRackListPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.List(ctx, 1)
+	opts := DedicatedRackListOptions{
+		PaginationOptions: PaginationOptions{
+			Limit: Int(1),
+		},
+	}
+	response, err := DedicatedRackApi{}.List(ctx, opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -222,7 +227,7 @@ func TestDedicatedRackListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.List(ctx)
+				return DedicatedRackApi{}.List(ctx, DedicatedRackListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -240,7 +245,7 @@ func TestDedicatedRackListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.List(ctx)
+				return DedicatedRackApi{}.List(ctx, DedicatedRackListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -258,7 +263,7 @@ func TestDedicatedRackListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.List(ctx)
+				return DedicatedRackApi{}.List(ctx, DedicatedRackListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -276,7 +281,7 @@ func TestDedicatedRackListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.List(ctx)
+				return DedicatedRackApi{}.List(ctx, DedicatedRackListOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -576,7 +581,7 @@ func TestDedicatedRackListNullRoutes(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.ListNullRoutes(ctx, "123456")
+	response, err := DedicatedRackApi{}.ListNullRoutes(ctx, "123456", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 1)
@@ -618,7 +623,10 @@ func TestDedicatedRackListNullRoutesPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.ListNullRoutes(ctx, "123456", 1)
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	response, err := DedicatedRackApi{}.ListNullRoutes(ctx, "123456", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -647,7 +655,7 @@ func TestDedicatedRackListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456")
+				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -665,7 +673,7 @@ func TestDedicatedRackListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456")
+				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -683,7 +691,7 @@ func TestDedicatedRackListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456")
+				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -701,7 +709,7 @@ func TestDedicatedRackListNullRoutesServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456")
+				return DedicatedRackApi{}.ListNullRoutes(ctx, "123456", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -758,7 +766,7 @@ func TestDedicatedRackListIps(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.ListIps(ctx, "123456")
+	response, err := DedicatedRackApi{}.ListIps(ctx, "123456", DedicatedRackListIpsOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -822,7 +830,12 @@ func TestDedicatedRackListIpsPaginateAndFilter(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.ListIps(ctx, "123456", 1)
+	opts := DedicatedRackListIpsOptions{
+		PaginationOptions: PaginationOptions{
+			Limit: Int(1),
+		},
+	}
+	response, err := DedicatedRackApi{}.ListIps(ctx, "123456", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -855,7 +868,7 @@ func TestDedicatedRackListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListIps(ctx, "123456")
+				return DedicatedRackApi{}.ListIps(ctx, "123456", DedicatedRackListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -873,7 +886,7 @@ func TestDedicatedRackListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListIps(ctx, "123456")
+				return DedicatedRackApi{}.ListIps(ctx, "123456", DedicatedRackListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -891,7 +904,7 @@ func TestDedicatedRackListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListIps(ctx, "123456")
+				return DedicatedRackApi{}.ListIps(ctx, "123456", DedicatedRackListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -909,7 +922,7 @@ func TestDedicatedRackListIpsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListIps(ctx, "123456")
+				return DedicatedRackApi{}.ListIps(ctx, "123456", DedicatedRackListIpsOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1418,7 +1431,7 @@ func TestDedicatedRackListCredentials(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.ListCredentials(ctx, "99944")
+	response, err := DedicatedRackApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 4)
@@ -1444,7 +1457,7 @@ func TestDedicatedRackListCredentialsBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.ListCredentials(ctx, "99944")
+	response, err := DedicatedRackApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1474,7 +1487,7 @@ func TestDedicatedRackListCredentialsPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.ListCredentials(ctx, "99944")
+	response, err := DedicatedRackApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -1498,7 +1511,7 @@ func TestDedicatedRackListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListCredentials(ctx, "99944")
+				return DedicatedRackApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1516,7 +1529,7 @@ func TestDedicatedRackListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListCredentials(ctx, "99944")
+				return DedicatedRackApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1534,7 +1547,7 @@ func TestDedicatedRackListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListCredentials(ctx, "99944")
+				return DedicatedRackApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1552,7 +1565,7 @@ func TestDedicatedRackListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListCredentials(ctx, "99944")
+				return DedicatedRackApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1570,7 +1583,7 @@ func TestDedicatedRackListCredentialsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListCredentials(ctx, "99944")
+				return DedicatedRackApi{}.ListCredentials(ctx, "99944", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1725,7 +1738,7 @@ func TestDedicatedRackListCredentialsByType(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+	response, err := DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 2)
@@ -1747,7 +1760,7 @@ func TestDedicatedRackListCredentialsByTypeBeEmpty(t *testing.T) {
 	})
 	defer teardown()
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+	response, err := DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 0)
@@ -1777,7 +1790,7 @@ func TestDedicatedRackListCredentialsByTypePaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	response, err := DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+	response, err := DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(response.Metadata.TotalCount, 11)
@@ -1801,7 +1814,7 @@ func TestDedicatedRackListCredentialsByTypeServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1819,7 +1832,7 @@ func TestDedicatedRackListCredentialsByTypeServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1837,7 +1850,7 @@ func TestDedicatedRackListCredentialsByTypeServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1855,7 +1868,7 @@ func TestDedicatedRackListCredentialsByTypeServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -1873,7 +1886,7 @@ func TestDedicatedRackListCredentialsByTypeServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT")
+				return DedicatedRackApi{}.ListCredentialsByType(ctx, "99944", "REMOTE_MANAGEMENT", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2274,7 +2287,13 @@ func TestDedicatedRackGetBandWidthMetrics(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	Metric, err := DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+	opts := MetricsOptions{
+		From:        String("2016-10-20T09:00:00Z"),
+		To:          String("2016-10-20T11:00:00Z"),
+		Granularity: String("HOUR"),
+		Aggregation: String("AVG"),
+	}
+	Metric, err := DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Metric.Metadata.Aggregation, "AVG")
@@ -2306,7 +2325,13 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := MetricsOptions{
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+					Granularity: String("HOUR"),
+					Aggregation: String("AVG"),
+				}
+				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2324,7 +2349,13 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := MetricsOptions{
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+					Granularity: String("HOUR"),
+					Aggregation: String("AVG"),
+				}
+				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2342,7 +2373,13 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := MetricsOptions{
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+					Granularity: String("HOUR"),
+					Aggregation: String("AVG"),
+				}
+				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2360,7 +2397,13 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := MetricsOptions{
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+					Granularity: String("HOUR"),
+					Aggregation: String("AVG"),
+				}
+				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2378,7 +2421,13 @@ func TestDedicatedRackGetBandWidthMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", "HOUR", "AVG", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := MetricsOptions{
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+					Granularity: String("HOUR"),
+					Aggregation: String("AVG"),
+				}
+				return DedicatedRackApi{}.GetBandWidthMetrics(ctx, "99944", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2434,7 +2483,13 @@ func TestDedicatedRackGetDataTrafficMetrics(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	Metric, err := DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+	opts := MetricsOptions{
+		From:        String("2016-10-20T09:00:00Z"),
+		To:          String("2016-10-20T11:00:00Z"),
+		Granularity: String("HOUR"),
+		Aggregation: String("SUM"),
+	}
+	Metric, err := DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(Metric.Metadata.Aggregation, "SUM")
@@ -2466,7 +2521,13 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := MetricsOptions{
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+					Granularity: String("HOUR"),
+					Aggregation: String("SUM"),
+				}
+				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2484,7 +2545,13 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := MetricsOptions{
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+					Granularity: String("HOUR"),
+					Aggregation: String("SUM"),
+				}
+				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2502,7 +2569,13 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := MetricsOptions{
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+					Granularity: String("HOUR"),
+					Aggregation: String("SUM"),
+				}
+				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2520,7 +2593,13 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := MetricsOptions{
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+					Granularity: String("HOUR"),
+					Aggregation: String("SUM"),
+				}
+				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2538,7 +2617,13 @@ func TestDedicatedRackGetDataTrafficMetricsServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", "HOUR", "SUM", "2016-10-20T09:00:00Z", "2016-10-20T11:00:00Z")
+				opts := MetricsOptions{
+					From:        String("2016-10-20T09:00:00Z"),
+					To:          String("2016-10-20T11:00:00Z"),
+					Granularity: String("HOUR"),
+					Aggregation: String("SUM"),
+				}
+				return DedicatedRackApi{}.GetDataTrafficMetrics(ctx, "99944", opts)
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2821,7 +2906,7 @@ func TestDedicatedRackListDataTrafficNotificationSettings(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	resp, err := DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
+	resp, err := DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp.Metadata.TotalCount, 2)
@@ -2879,7 +2964,10 @@ func TestDedicatedRackListDataTrafficNotificationSettingsPaginate(t *testing.T) 
 	defer teardown()
 
 	ctx := context.Background()
-	resp, err := DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", 1)
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	resp, err := DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp.Metadata.TotalCount, 11)
@@ -2909,7 +2997,7 @@ func TestDedicatedRackListDataTrafficNotificationSettingsServerErrors(t *testing
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
+				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2927,7 +3015,7 @@ func TestDedicatedRackListDataTrafficNotificationSettingsServerErrors(t *testing
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
+				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2945,7 +3033,7 @@ func TestDedicatedRackListDataTrafficNotificationSettingsServerErrors(t *testing
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
+				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2963,7 +3051,7 @@ func TestDedicatedRackListDataTrafficNotificationSettingsServerErrors(t *testing
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
+				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -2981,7 +3069,7 @@ func TestDedicatedRackListDataTrafficNotificationSettingsServerErrors(t *testing
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id")
+				return DedicatedRackApi{}.ListDataTrafficNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3550,7 +3638,7 @@ func TestDedicatedRackListBandWidthNotificationSettings(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	resp, err := DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
+	resp, err := DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp.Metadata.TotalCount, 2)
@@ -3608,7 +3696,10 @@ func TestDedicatedRackListBandWidthNotificationSettingsPaginate(t *testing.T) {
 	defer teardown()
 
 	ctx := context.Background()
-	resp, err := DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id", 1)
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	resp, err := DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id", opts)
 	assert := assert.New(t)
 	assert.Nil(err)
 	assert.Equal(resp.Metadata.TotalCount, 11)
@@ -3638,7 +3729,7 @@ func TestDedicatedRackListBandWidthNotificationSettingsServerErrors(t *testing.T
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
+				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3656,7 +3747,7 @@ func TestDedicatedRackListBandWidthNotificationSettingsServerErrors(t *testing.T
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
+				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3674,7 +3765,7 @@ func TestDedicatedRackListBandWidthNotificationSettingsServerErrors(t *testing.T
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
+				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3692,7 +3783,7 @@ func TestDedicatedRackListBandWidthNotificationSettingsServerErrors(t *testing.T
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
+				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -3710,7 +3801,7 @@ func TestDedicatedRackListBandWidthNotificationSettingsServerErrors(t *testing.T
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id")
+				return DedicatedRackApi{}.ListBandWidthNotificationSettings(ctx, "server-id", PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

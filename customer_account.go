@@ -4,9 +4,8 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"net/url"
-	"reflect"
-	"strings"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const CUSTOMER_ACCOUNT_API_VERSION = "v1"
@@ -53,6 +52,11 @@ type CustomerAccountPhone struct {
 	Number      string `json:"number"`
 }
 
+type CustomerAccountListContactsOptions struct {
+	PaginationOptions
+	PrimaryRoles []string `param:"primaryRoles"`
+}
+
 func (cai CustomerAccountApi) getPath(endpoint string) string {
 	return "/account/" + CUSTOMER_ACCOUNT_API_VERSION + endpoint
 }
@@ -72,25 +76,9 @@ func (cai CustomerAccountApi) Update(ctx context.Context, ad CustomerAccountAddr
 	return doRequest(ctx, http.MethodPut, path, "", nil, payload)
 }
 
-func (cai CustomerAccountApi) ListContacts(ctx context.Context, args ...interface{}) (*CustomerAccountContacts, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		s := reflect.ValueOf(args[2])
-		var primaryRoles []string
-		for i := 0; i < s.Len(); i++ {
-			primaryRoles = append(primaryRoles, s.Index(i).String())
-		}
-		v.Add("primaryRoles", strings.Join(primaryRoles, ","))
-	}
-
+func (cai CustomerAccountApi) ListContacts(ctx context.Context, opts CustomerAccountListContactsOptions) (*CustomerAccountContacts, error) {
 	path := cai.getPath("/contacts")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &CustomerAccountContacts{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err

@@ -3,9 +3,9 @@ package leaseweb
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
-	"net/url"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const SERVICES_API_VERSION = "v1"
@@ -49,21 +49,20 @@ type ServicesCancellationReason struct {
 	ReasonCode string `json:"reasonCode"`
 }
 
+type ServicesListOptions struct {
+	PaginationOptions
+	ProductId   *string `param:"productId"`
+	Reference   *string `param:"reference"`
+	EquipmentId *string `param:"equipmentId"`
+}
+
 func (sa ServicesApi) getPath(endpoint string) string {
 	return "/services/" + SERVICES_API_VERSION + endpoint
 }
 
-func (sa ServicesApi) List(ctx context.Context, args ...int) (*Services, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (sa ServicesApi) List(ctx context.Context, opts ServicesListOptions) (*Services, error) {
 	path := sa.getPath("/services")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &Services{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err

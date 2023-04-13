@@ -2,9 +2,9 @@ package leaseweb
 
 import (
 	"context"
-	"fmt"
 	"net/http"
-	"net/url"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const PRIVATE_NETWORKING_API_VERSION = "v2"
@@ -31,17 +31,9 @@ func (pna PrivateNetworkingApi) getPath(endpoint string) string {
 	return "/bareMetals/" + PRIVATE_NETWORKING_API_VERSION + endpoint
 }
 
-func (pna PrivateNetworkingApi) List(ctx context.Context, args ...int) (*PrivateNetworks, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (pna PrivateNetworkingApi) List(ctx context.Context, opts PaginationOptions) (*PrivateNetworks, error) {
 	path := pna.getPath("/privateNetworks")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &PrivateNetworks{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -87,18 +79,10 @@ func (pna PrivateNetworkingApi) Delete(ctx context.Context, id string) error {
 	return doRequest(ctx, http.MethodDelete, path, "")
 }
 
-func (pna PrivateNetworkingApi) ListDhcpReservations(ctx context.Context, id string, args ...int) (*PrivateNetworkingDhcpReservations, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (pna PrivateNetworkingApi) ListDhcpReservations(ctx context.Context, id string, opts PaginationOptions) (*PrivateNetworkingDhcpReservations, error) {
 	path := pna.getPath("/privateNetworks/" + id + "/reservations")
-	query := v.Encode()
 	result := &PrivateNetworkingDhcpReservations{}
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}

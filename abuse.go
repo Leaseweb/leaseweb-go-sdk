@@ -3,11 +3,9 @@ package leaseweb
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
-	"net/url"
-	"reflect"
-	"strings"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const ABUSE_API_VERSION = "v1"
@@ -70,29 +68,18 @@ type AbuseResolutions struct {
 	Resolutions []AbuseResolution `json:"resolutions"`
 }
 
+type AbuseListOptions struct {
+	PaginationOptions
+	Status []string `param:"status"`
+}
+
 func (aba AbuseApi) getPath(endpoint string) string {
 	return "/abuse/" + ABUSE_API_VERSION + endpoint
 }
 
-func (aba AbuseApi) List(ctx context.Context, args ...interface{}) (*AbuseReports, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		s := reflect.ValueOf(args[1])
-		var statuses []string
-		for i := 0; i < s.Len(); i++ {
-			statuses = append(statuses, s.Index(i).String())
-		}
-		v.Add("status", strings.Join(statuses, ","))
-	}
-	if len(args) >= 3 {
-		v.Add("limit", fmt.Sprint(args[2]))
-	}
-
+func (aba AbuseApi) List(ctx context.Context, opts AbuseListOptions) (*AbuseReports, error) {
 	path := aba.getPath("/reports")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &AbuseReports{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -109,17 +96,9 @@ func (aba AbuseApi) Get(ctx context.Context, abuseReportId string) (*AbuseReport
 	return result, nil
 }
 
-func (aba AbuseApi) ListMessages(ctx context.Context, abuseReportId string, args ...int) (*AbuseMessages, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (aba AbuseApi) ListMessages(ctx context.Context, abuseReportId string, opts PaginationOptions) (*AbuseMessages, error) {
 	path := aba.getPath("/reports/" + abuseReportId + "/messages")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &AbuseMessages{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err

@@ -2,9 +2,9 @@ package leaseweb
 
 import (
 	"context"
-	"fmt"
 	"net/http"
-	"net/url"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const REMOTE_MANAGEMENT_API_VERSION = "v2"
@@ -32,18 +32,10 @@ func (rma RemoteManagementApi) ChangeCredentials(ctx context.Context, password s
 	return doRequest(ctx, http.MethodPost, path, "", nil, payload)
 }
 
-func (rma RemoteManagementApi) ListProfiles(ctx context.Context, args ...int) (*RemoteManagementProfiles, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-
+func (rma RemoteManagementApi) ListProfiles(ctx context.Context, opts PaginationOptions) (*RemoteManagementProfiles, error) {
 	path := rma.getPath("/remoteManagement/profiles")
-	query := v.Encode()
 	result := &RemoteManagementProfiles{}
+	query := options.Encode(opts)
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
 	}

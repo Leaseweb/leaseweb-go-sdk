@@ -42,7 +42,7 @@ func TestInvoiceList(t *testing.T) {
 
 	invoiceApi := InvoiceApi{}
 	ctx := context.Background()
-	response, err := invoiceApi.List(ctx)
+	response, err := invoiceApi.List(ctx, PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -83,7 +83,7 @@ func TestInvoiceListBeEmpty(t *testing.T) {
 
 	invoiceApi := InvoiceApi{}
 	ctx := context.Background()
-	response, err := invoiceApi.List(ctx)
+	response, err := invoiceApi.List(ctx, PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -103,7 +103,10 @@ func TestInvoiceListPaginate(t *testing.T) {
 
 	invoiceApi := InvoiceApi{}
 	ctx := context.Background()
-	response, err := invoiceApi.List(ctx, 1)
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	response, err := invoiceApi.List(ctx, opts)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -125,7 +128,7 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return InvoiceApi{}.List(ctx)
+				return InvoiceApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -143,7 +146,7 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return InvoiceApi{}.List(ctx)
+				return InvoiceApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -161,7 +164,7 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return InvoiceApi{}.List(ctx)
+				return InvoiceApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -179,7 +182,7 @@ func TestInvoiceListServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return InvoiceApi{}.List(ctx)
+				return InvoiceApi{}.List(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -232,7 +235,7 @@ func TestInvoiceListProForma(t *testing.T) {
 
 	invoiceApi := InvoiceApi{}
 	ctx := context.Background()
-	response, err := invoiceApi.ListProForma(ctx)
+	response, err := invoiceApi.ListProForma(ctx, PaginationOptions{})
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -300,7 +303,10 @@ func TestInvoiceListProFormaPaginate(t *testing.T) {
 
 	invoiceApi := InvoiceApi{}
 	ctx := context.Background()
-	response, err := invoiceApi.ListProForma(ctx, 1)
+	opts := PaginationOptions{
+		Limit: Int(1),
+	}
+	response, err := invoiceApi.ListProForma(ctx, opts)
 
 	assert := assert.New(t)
 	assert.Nil(err)
@@ -339,7 +345,7 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return InvoiceApi{}.ListProForma(ctx)
+				return InvoiceApi{}.ListProForma(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -357,7 +363,7 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return InvoiceApi{}.ListProForma(ctx)
+				return InvoiceApi{}.ListProForma(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -375,7 +381,7 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return InvoiceApi{}.ListProForma(ctx)
+				return InvoiceApi{}.ListProForma(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",
@@ -393,7 +399,7 @@ func TestInvoiceListProFormaServerErrors(t *testing.T) {
 			},
 			FunctionCall: func() (interface{}, error) {
 				ctx := context.Background()
-				return InvoiceApi{}.ListProForma(ctx)
+				return InvoiceApi{}.ListProForma(ctx, PaginationOptions{})
 			},
 			ExpectedError: ApiError{
 				CorrelationId: "289346a1-3eaf-4da4-b707-62ef12eb08be",

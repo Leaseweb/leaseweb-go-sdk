@@ -2,11 +2,9 @@ package leaseweb
 
 import (
 	"context"
-	"fmt"
 	"net/http"
-	"net/url"
-	"reflect"
-	"strings"
+
+	"github.com/LeaseWeb/leaseweb-go-sdk/options"
 )
 
 const FLOATING_IP_API_VERSION = "v2"
@@ -46,32 +44,25 @@ type FloatingIpDefinitions struct {
 	Metadata    Metadata               `json:"_metadata"`
 }
 
+type FloatingIpListRangesOptions struct {
+	PaginationOptions
+	Type     *string `param:"type"`
+	Location *string `param:"location"`
+}
+
+type FloatingIpListRangeDefinitionsOptions struct {
+	PaginationOptions
+	Location *string  `param:"location"`
+	Type     []string `param:"type"`
+}
+
 func (fia FloatingIpApi) getPath(endpoint string) string {
 	return "/floatingIps/" + FLOATING_IP_API_VERSION + endpoint
 }
 
-func (fia FloatingIpApi) ListRanges(ctx context.Context, args ...interface{}) (*FloatingIpRanges, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		s := reflect.ValueOf(args[3])
-		var types []string
-		for i := 0; i < s.Len(); i++ {
-			types = append(types, s.Index(i).String())
-		}
-		v.Add("type", strings.Join(types, ","))
-	}
-	if len(args) >= 4 {
-		v.Add("location", fmt.Sprint(args[1]))
-	}
-
+func (fia FloatingIpApi) ListRanges(ctx context.Context, opts FloatingIpListRangesOptions) (*FloatingIpRanges, error) {
 	path := fia.getPath("/ranges")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &FloatingIpRanges{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
@@ -88,28 +79,9 @@ func (fia FloatingIpApi) GetRange(ctx context.Context, rangeId string) (*Floatin
 	return result, nil
 }
 
-func (fia FloatingIpApi) ListRangeDefinitions(ctx context.Context, rangeId string, args ...interface{}) (*FloatingIpDefinitions, error) {
-	v := url.Values{}
-	if len(args) >= 1 {
-		v.Add("offset", fmt.Sprint(args[0]))
-	}
-	if len(args) >= 2 {
-		v.Add("limit", fmt.Sprint(args[1]))
-	}
-	if len(args) >= 3 {
-		s := reflect.ValueOf(args[3])
-		var types []string
-		for i := 0; i < s.Len(); i++ {
-			types = append(types, s.Index(i).String())
-		}
-		v.Add("type", strings.Join(types, ","))
-	}
-	if len(args) >= 4 {
-		v.Add("location", fmt.Sprint(args[1]))
-	}
-
+func (fia FloatingIpApi) ListRangeDefinitions(ctx context.Context, rangeId string, opts FloatingIpListRangeDefinitionsOptions) (*FloatingIpDefinitions, error) {
 	path := fia.getPath("/ranges/" + rangeId + "/floatingIpDefinitions")
-	query := v.Encode()
+	query := options.Encode(opts)
 	result := &FloatingIpDefinitions{}
 	if err := doRequest(ctx, http.MethodGet, path, query, result); err != nil {
 		return nil, err
