@@ -12,11 +12,14 @@ import (
 var lswClient *leasewebClient
 
 const DEFAULT_BASE_URL = "https://api.leaseweb.com"
+const DEFAULT_VERSION = "dev"
+const DEFAULT_USER_AGENT = "leaseweb-go-sdk/" + DEFAULT_VERSION
 
 type leasewebClient struct {
-	client  *http.Client
-	apiKey  string
-	baseUrl string
+	apiKey    string
+	baseUrl   string
+	client    *http.Client
+	userAgent string
 }
 
 type ApiContext struct {
@@ -59,13 +62,23 @@ func (erre *EncodingError) Error() string {
 
 func InitLeasewebClient(key string) {
 	lswClient = &leasewebClient{
-		client: &http.Client{},
-		apiKey: key,
+		client:    &http.Client{},
+		apiKey:    key,
+		userAgent: DEFAULT_USER_AGENT,
 	}
+}
+func SetUserAgent(userAgent string) {
+	lswClient.userAgent = userAgent
 }
 
 func SetBaseUrl(baseUrl string) {
 	lswClient.baseUrl = baseUrl
+}
+func getUserAgent() string {
+	if lswClient.userAgent != "" {
+		return DEFAULT_USER_AGENT + " " + lswClient.userAgent
+	}
+	return DEFAULT_USER_AGENT
 }
 
 func getBaseUrl() string {
@@ -104,6 +117,7 @@ func doRequest(ctx context.Context, method, path, query string, args ...interfac
 	}
 
 	req.Header.Add("x-lsw-auth", lswClient.apiKey)
+	req.Header.Set("User-Agent", getUserAgent())
 	resp, err := lswClient.client.Do(req)
 	if err != nil {
 		return err
