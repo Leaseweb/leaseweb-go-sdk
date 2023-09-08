@@ -467,6 +467,41 @@ func (dsa DedicatedServerApi) List(ctx context.Context, opts DedicatedServerList
 	return result, nil
 }
 
+// AllWithOpts will return all dedicated servers and allows filtering options be specified as an argument
+func (dsa DedicatedServerApi) AllWithOpts(ctx context.Context, opts DedicatedServerListOptions) ([]DedicatedServer, error) {
+	var allServers []DedicatedServer
+
+	// handle default pagination if Offset or Limit are undefined
+	if opts.PaginationOptions.Offset == nil || opts.PaginationOptions.Limit == nil {
+		opts.PaginationOptions = PaginationOptions{Offset: Int(0), Limit: Int(20)}
+	}
+
+	for {
+		// List all dedicated servers with defined opts
+		result, err := DedicatedServerApi{}.List(ctx, opts)
+		if err != nil {
+			return nil, err
+		}
+
+		// Break if no more servers are found
+		if len(result.Servers) == 0 {
+			break
+		}
+
+		// Append servers to list
+		allServers = append(allServers, result.Servers...)
+		// Increment Offset with the value of Limit
+		*opts.PaginationOptions.Offset += *opts.PaginationOptions.Limit
+	}
+
+	return allServers, nil
+}
+
+// All will return all dedicated servers without optional filters specified
+func (dsa DedicatedServerApi) All(ctx context.Context) ([]DedicatedServer, error) {
+	return dsa.AllWithOpts(ctx, DedicatedServerListOptions{})
+}
+
 func (dsa DedicatedServerApi) Get(ctx context.Context, serverId string) (*DedicatedServer, error) {
 	path := dsa.getPath("/servers/" + serverId)
 	result := &DedicatedServer{}
