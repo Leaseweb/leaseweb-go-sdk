@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -31,5 +30,4 @@ model_get_proforma_result.go
 model_get_proforma_result__metadata.go
 model_get_proforma_result_contract_items_inner.go
 response.go
-test/api_invoice_test.go
 utils.go

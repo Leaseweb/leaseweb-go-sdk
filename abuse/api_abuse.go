@@ -1260,7 +1260,7 @@ func (r ApiResolveReportRequest) Execute() (*http.Response, error) {
 /*
 ResolveReport Resolve a report
 
-
+Resolve a report
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param reportId Report Id

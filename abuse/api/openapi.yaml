@@ -705,7 +705,7 @@ paths:
       - abuse
   /reports/{reportId}/resolve:
     post:
-      description: ""
+      description: Resolve a report
       operationId: resolveReport
       parameters:
       - description: Report Id
