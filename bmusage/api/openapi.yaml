@@ -1,0 +1,1764 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: development-networkautomation@leaseweb.com
+    name: Network Automation Team
+  description: This documents the rest api bmusage api provides.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: bmusage
+  version: v2
+servers:
+- url: https://api.leaseweb.com/internal/bmusageapi/v2
+security:
+- OAuth2: []
+- BearerAuth: []
+- ApiKeyAuth: []
+tags:
+- description: Servers
+  name: Servers
+- description: Metrics
+  name: Metrics
+- description: Notification Settings
+  name: Notification Settings
+- description: Internal
+  name: Internal
+paths:
+  /servers/{serverId}/metrics/bandwidth:
+    get:
+      description: |
+        At this moment only bandwidth information for the public interface is supported.
+      operationId: servers-metrics-bandwidth
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Start of date interval in ISO-8601 format. The returned data
+          will include everything up from - and including - the specified date time.
+        example: 2019-06-01T00:00:00Z
+        explode: true
+        in: query
+        name: from
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: End of date interval in ISO-8601 format. The returned data will
+          include everything up until - but not including - the specified date time.
+        example: 2019-06-05T00:00:00Z
+        explode: true
+        in: query
+        name: to
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: "Specify the preferred interval for each metric. If granularity\
+          \ is omitted from the request, only one metric is returned."
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          enum:
+          - 5MIN
+          - HOUR
+          - DAY
+          - WEEK
+          - MONTH
+          - YEAR
+          type: string
+        style: form
+      - description: Aggregate each metric using the given aggregation function. When
+          the aggregation type `95TH` is specified the granularity parameter should
+          be omitted from the request.
+        explode: true
+        in: query
+        name: aggregation
+        required: true
+        schema:
+          enum:
+          - AVG
+          - 95TH
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  aggregation: AVG
+                  from: 2016-10-20T09:00:00Z
+                  granularity: HOUR
+                  to: 2016-10-20T11:00:00Z
+                metrics:
+                  DOWN_PUBLIC:
+                    unit: bps
+                    values:
+                    - timestamp: 2016-10-20T09:00:00Z
+                      value: 202499
+                    - timestamp: 2016-10-20T10:00:00Z
+                      value: 29900
+                  UP_PUBLIC:
+                    unit: bps
+                    values:
+                    - timestamp: 2016-10-20T09:00:00Z
+                      value: 43212393
+                    - timestamp: 2016-10-20T10:00:00Z
+                      value: 12342929
+              schema:
+                $ref: '#/components/schemas/metrics'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show bandwidth metrics
+      tags:
+      - bmusage
+  /servers/{serverId}/metrics/datatraffic:
+    get:
+      description: |
+        At this moment only bandwidth information for the public interface is supported.
+      operationId: getServerDataTrafficMetrics
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Start of date interval in ISO-8601 format. The returned data
+          will include everything up from - and including - the specified date time.
+        example: 2019-06-01T00:00:00Z
+        explode: true
+        in: query
+        name: from
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: End of date interval in ISO-8601 format. The returned data will
+          include everything up until - but not including - the specified date time.
+        example: 2019-06-05T00:00:00Z
+        explode: true
+        in: query
+        name: to
+        required: true
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: "Specify the preferred interval for each metric. If granularity\
+          \ is omitted from the request, only one metric is returned."
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          enum:
+          - DAY
+          - WEEK
+          - MONTH
+          - YEAR
+          type: string
+        style: form
+      - description: Aggregate each metric using the given aggregation function.
+        explode: true
+        in: query
+        name: aggregation
+        required: true
+        schema:
+          enum:
+          - SUM
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  aggregation: SUM
+                  from: 2016-10-20T09:00:00Z
+                  granularity: HOUR
+                  to: 2016-10-20T11:00:00Z
+                metrics:
+                  DOWN_PUBLIC:
+                    unit: B
+                    values:
+                    - timestamp: 2016-10-20T09:00:00Z
+                      value: 202499
+                    - timestamp: 2016-10-20T10:00:00Z
+                      value: 29900
+                  UP_PUBLIC:
+                    unit: B
+                    values:
+                    - timestamp: 2016-10-20T09:00:00Z
+                      value: 43212393
+                    - timestamp: 2016-10-20T10:00:00Z
+                      value: 12342929
+              schema:
+                $ref: '#/components/schemas/metrics'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show datatraffic metrics
+      tags:
+      - bmusage
+  /servers/{serverId}/notificationSettings/bandwidth:
+    get:
+      description: |
+        List all bandwidth notification settings for this server.
+      operationId: getServerBandwidthNotificationSettingList
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 2
+                bandwidthNotificationSettings:
+                - actions:
+                  - lastTriggeredAt: 2021-03-16T01:01:44+00:00
+                    type: EMAIL
+                  frequency: WEEKLY
+                  id: "12345"
+                  lastCheckedAt: 2021-03-16T01:01:41+00:00
+                  threshold: "1"
+                  thresholdExceededAt: 2021-03-16T01:01:41+00:00
+                  unit: Gbps
+                - actions:
+                  - lastTriggeredAt: 2021-03-16T01:01:44+00:00
+                    type: EMAIL
+                  frequency: DAILY
+                  id: "123456"
+                  lastCheckedAt: 2021-03-16T01:01:41+00:00
+                  threshold: "1"
+                  thresholdExceededAt: 2021-03-16T01:01:41+00:00
+                  unit: Mbps
+              schema:
+                $ref: '#/components/schemas/getServerBandwidthNotificationSettingListResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List bandwidth notification settings
+      tags:
+      - bmusage
+    post:
+      description: |
+        Create a new bandwidth notification setting for this server.
+      operationId: createServerBandwidthNotificationSetting.json
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              frequency: DAILY
+              threshold: "1"
+              unit: Gbps
+            schema:
+              $ref: '#/components/schemas/bandwidthNotificationSettingOpts'
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                actions:
+                - lastTriggeredAt: 2021-03-16T01:01:44+00:00
+                  type: EMAIL
+                frequency: WEEKLY
+                id: "12345"
+                lastCheckedAt: 2021-03-16T01:01:41+00:00
+                threshold: "1"
+                thresholdExceededAt: 2021-03-16T01:01:41+00:00
+                unit: Gbps
+              schema:
+                $ref: '#/components/schemas/bandwidthNotificationSetting'
+          description: Created.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Create a bandwidth notification setting
+      tags:
+      - bmusage
+  /servers/{serverId}/notificationSettings/bandwidth/{notificationSettingId}:
+    delete:
+      description: |
+        Remove a Bandwidth Notification setting for this server.
+      operationId: deleteServerBandwidthNotificationSetting
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of a notification setting
+        example: "839111"
+        explode: false
+        in: path
+        name: notificationSettingId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Delete a bandwidth notification setting
+      tags:
+      - bmusage
+    get:
+      description: |
+        Get a bandwidth notification setting for this server.
+      operationId: getServerBandwidthNotificationSetting
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of a notification setting
+        example: "839111"
+        explode: false
+        in: path
+        name: notificationSettingId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                actions:
+                - lastTriggeredAt: 2021-03-16T01:01:44+00:00
+                  type: EMAIL
+                frequency: WEEKLY
+                id: "12345"
+                lastCheckedAt: 2021-03-16T01:01:41+00:00
+                threshold: "1"
+                thresholdExceededAt: 2021-03-16T01:01:41+00:00
+                unit: Gbps
+              schema:
+                $ref: '#/components/schemas/bandwidthNotificationSetting'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show a bandwidth notification setting
+      tags:
+      - bmusage
+    put:
+      description: |
+        Update an existing bandwidth notification setting for this server.
+      operationId: updateServerBandwidthNotificationSetting
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of a notification setting
+        example: "839111"
+        explode: false
+        in: path
+        name: notificationSettingId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              frequency: DAILY
+              threshold: "1"
+              unit: Gbps
+            schema:
+              $ref: '#/components/schemas/bandwidthNotificationSettingOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                actions:
+                - lastTriggeredAt: 2021-03-16T01:01:44+00:00
+                  type: EMAIL
+                frequency: WEEKLY
+                id: "12345"
+                lastCheckedAt: 2021-03-16T01:01:41+00:00
+                threshold: "1"
+                thresholdExceededAt: 2021-03-16T01:01:41+00:00
+                unit: Gbps
+              schema:
+                $ref: '#/components/schemas/bandwidthNotificationSetting'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Update a bandwidth notification setting
+      tags:
+      - bmusage
+  /servers/{serverId}/notificationSettings/datatraffic:
+    get:
+      description: |
+        List all datatraffic notification settings for this server.
+      operationId: getServerDataTrafficNotificationSettingList
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                datatrafficNotificationSettings:
+                - id: "64371"
+                  frequency: DAILY
+                  threshold: "25000"
+                  unit: MB
+                  lastCheckedAt: null
+                  thresholdExceededAt: null
+                  actions:
+                  - type: EMAIL
+                    lastTriggeredAt: null
+                - id: "64372"
+                  frequency: MONTHLY
+                  threshold: "10000000"
+                  unit: MB
+                  lastCheckedAt: null
+                  thresholdExceededAt: null
+                  actions:
+                  - type: EMAIL
+                    lastTriggeredAt: null
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 2
+              schema:
+                $ref: '#/components/schemas/getServerDataTrafficNotificationSettingListResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List data traffic notification settings
+      tags:
+      - bmusage
+    post:
+      description: |
+        Create a new data traffic notification setting for this server.
+      operationId: createServerDataTrafficNotificationSetting
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              frequency: DAILY
+              threshold: "1"
+              unit: MB
+            schema:
+              $ref: '#/components/schemas/dataTrafficNotificationSettingOpts'
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                actions:
+                - lastTriggeredAt: 2021-03-16T01:01:44+00:00
+                  type: EMAIL
+                frequency: WEEKLY
+                id: "12345"
+                lastCheckedAt: 2021-03-16T01:01:41+00:00
+                threshold: "1"
+                thresholdExceededAt: 2021-03-16T01:01:41+00:00
+                unit: GB
+              schema:
+                $ref: '#/components/schemas/dataTrafficNotificationSetting'
+          description: Created.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Create a data traffic notification setting
+      tags:
+      - bmusage
+  /servers/{serverId}/notificationSettings/datatraffic/{notificationSettingId}:
+    delete:
+      description: |
+        Delete the given data traffic notification setting for this server.
+      operationId: deleteServerDataTrafficNotificationSetting
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of a notification setting
+        example: "839111"
+        explode: false
+        in: path
+        name: notificationSettingId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Delete a data traffic notification setting
+      tags:
+      - bmusage
+    get:
+      description: |
+        Get a datatraffic notification setting for this server.
+      operationId: getServerDataTrafficNotificationSetting
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of a notification setting
+        example: "839111"
+        explode: false
+        in: path
+        name: notificationSettingId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                actions:
+                - lastTriggeredAt: 2021-03-16T01:01:44+00:00
+                  type: EMAIL
+                frequency: WEEKLY
+                id: "12345"
+                lastCheckedAt: 2021-03-16T01:01:41+00:00
+                threshold: "1"
+                thresholdExceededAt: 2021-03-16T01:01:41+00:00
+                unit: GB
+              schema:
+                $ref: '#/components/schemas/dataTrafficNotificationSetting'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show a data traffic notification setting
+      tags:
+      - bmusage
+    put:
+      description: |
+        Update an existing data traffic notification setting for this server.
+      operationId: updateServerDataTrafficNotificationSetting
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of a notification setting
+        example: "839111"
+        explode: false
+        in: path
+        name: notificationSettingId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              frequency: DAILY
+              threshold: "1"
+              unit: GB
+            schema:
+              $ref: '#/components/schemas/dataTrafficNotificationSettingOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                frequency: DAILY
+                threshold: "1"
+                unit: MB
+              schema:
+                $ref: '#/components/schemas/dataTrafficNotificationSettingOpts'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Update a data traffic notification setting
+      tags:
+      - bmusage
+components:
+  parameters:
+    serverId:
+      description: The ID of a server
+      example: "12345"
+      explode: false
+      in: path
+      name: serverId
+      required: true
+      schema:
+        type: string
+      style: simple
+    limit:
+      description: Limit the number of results returned.
+      example: 20
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+      style: form
+    offset:
+      description: Return results starting from the given offset.
+      example: 10
+      explode: true
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+      style: form
+    notificationSettingId:
+      description: The ID of a notification setting
+      example: "839111"
+      explode: false
+      in: path
+      name: notificationSettingId
+      required: true
+      schema:
+        type: string
+      style: simple
+  responses:
+    "204":
+      description: No Content.
+    "400":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "400"
+            errorMessage: The API could not interpret your request correctly.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Bad Request.
+    "401":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "401"
+            errorMessage: You are not authorized to view this resource.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Authorized.
+    "403":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "403"
+            errorMessage: Access to the requested resource is forbidden.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Forbidden.
+    "500":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "500"
+            errorMessage: '''The API could not handle your request at this time.'
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Internal Server Error.
+  schemas:
+    metric:
+      example:
+        unit: unit
+        values:
+        - value: 0
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - value: 0
+          timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        unit:
+          description: The metric unit that's used
+          type: string
+        values:
+          items:
+            $ref: '#/components/schemas/metricValue'
+          type: array
+      title: metric
+      type: object
+    metrics:
+      example:
+        metrics:
+          DOWN_PUBLIC:
+            unit: unit
+            values:
+            - value: 0
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0
+              timestamp: 2000-01-23T04:56:07.000+00:00
+          UP_PUBLIC:
+            unit: unit
+            values:
+            - value: 0
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0
+              timestamp: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          granularity: granularity
+          aggregation: aggregation
+          from: 2000-01-23T04:56:07.000+00:00
+          to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/metricsMetadata'
+        metrics:
+          $ref: '#/components/schemas/metricValues'
+    errorResult:
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails:
+        - key:
+          - errorDetails
+          - errorDetails
+        - key:
+          - errorDetails
+          - errorDetails
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          items:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+          type: array
+      type: object
+    _metadata:
+      description: Metadata about the collection
+      example:
+        offset: 0
+        limit: 5
+        totalCount: 2
+      properties:
+        totalCount:
+          description: Total amount of orders in this collection
+          example: 2
+          type: number
+        offset:
+          default: 0
+          description: The offset used to generate this response
+          example: 0
+          type: number
+        limit:
+          default: 5
+          description: The limit used to generate this response
+          example: 5
+          type: number
+      title: metadata
+      type: object
+    notificationSetting:
+      properties:
+        actions:
+          description: An array of notification setting actions
+          items:
+            $ref: '#/components/schemas/actions'
+          type: array
+        frequency:
+          description: Frequency
+          enum:
+          - DAILY
+          - WEEKLY
+          - MONTHLY
+          type: string
+        id:
+          description: Identifier of the notification setting
+          type: string
+        lastCheckedAt:
+          description: Date timestamp when the system last checked the server for
+            threshold limit
+          nullable: true
+          type: string
+        threshold:
+          description: Threshold Value
+          type: string
+        thresholdExceededAt:
+          description: Date timestamp when the threshold exceeded the limit
+          nullable: true
+          type: string
+      type: object
+    bandwidthNotificationSetting:
+      allOf:
+      - $ref: '#/components/schemas/notificationSetting'
+      - properties:
+          unit:
+            description: Unit
+            enum:
+            - Mbps
+            - Gbps
+            type: string
+      example:
+        lastCheckedAt: lastCheckedAt
+        unit: Mbps
+        threshold: threshold
+        id: id
+        actions:
+        - lastTriggeredAt: lastTriggeredAt
+          type: EMAIL
+        - lastTriggeredAt: lastTriggeredAt
+          type: EMAIL
+        frequency: DAILY
+        thresholdExceededAt: thresholdExceededAt
+      title: bandwidthNotificationSetting
+    getServerBandwidthNotificationSettingListResult:
+      example:
+        bandwidthNotificationSettings:
+        - lastCheckedAt: lastCheckedAt
+          unit: Mbps
+          threshold: threshold
+          id: id
+          actions:
+          - lastTriggeredAt: lastTriggeredAt
+            type: EMAIL
+          - lastTriggeredAt: lastTriggeredAt
+            type: EMAIL
+          frequency: DAILY
+          thresholdExceededAt: thresholdExceededAt
+        - lastCheckedAt: lastCheckedAt
+          unit: Mbps
+          threshold: threshold
+          id: id
+          actions:
+          - lastTriggeredAt: lastTriggeredAt
+            type: EMAIL
+          - lastTriggeredAt: lastTriggeredAt
+            type: EMAIL
+          frequency: DAILY
+          thresholdExceededAt: thresholdExceededAt
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        bandwidthNotificationSettings:
+          description: An array of Bandwidth Notification Settings
+          items:
+            $ref: '#/components/schemas/bandwidthNotificationSetting'
+          type: array
+      type: object
+    bandwidthNotificationSettingOpts:
+      properties:
+        frequency:
+          description: Frequency for the Bandwidth Notification
+          enum:
+          - DAILY
+          - WEEKLY
+          - MONTHLY
+          type: string
+        threshold:
+          description: Threshold Value for the Bandwidth Notification
+          type: string
+        unit:
+          description: Unit for the Bandwidth Notification
+          enum:
+          - Gbps
+          - Mbps
+          type: string
+      required:
+      - frequency
+      - threshold
+      - unit
+      type: object
+    dataTrafficNotificationSetting:
+      allOf:
+      - $ref: '#/components/schemas/notificationSetting'
+      - properties:
+          unit:
+            description: Unit
+            enum:
+            - MB
+            - GB
+            - TB
+            type: string
+      example:
+        lastCheckedAt: lastCheckedAt
+        unit: MB
+        threshold: threshold
+        id: id
+        actions:
+        - lastTriggeredAt: lastTriggeredAt
+          type: EMAIL
+        - lastTriggeredAt: lastTriggeredAt
+          type: EMAIL
+        frequency: DAILY
+        thresholdExceededAt: thresholdExceededAt
+      title: dataTrafficNotificationSetting
+    getServerDataTrafficNotificationSettingListResult:
+      example:
+        datatrafficNotificationSettings:
+        - lastCheckedAt: lastCheckedAt
+          unit: MB
+          threshold: threshold
+          id: id
+          actions:
+          - lastTriggeredAt: lastTriggeredAt
+            type: EMAIL
+          - lastTriggeredAt: lastTriggeredAt
+            type: EMAIL
+          frequency: DAILY
+          thresholdExceededAt: thresholdExceededAt
+        - lastCheckedAt: lastCheckedAt
+          unit: MB
+          threshold: threshold
+          id: id
+          actions:
+          - lastTriggeredAt: lastTriggeredAt
+            type: EMAIL
+          - lastTriggeredAt: lastTriggeredAt
+            type: EMAIL
+          frequency: DAILY
+          thresholdExceededAt: thresholdExceededAt
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        datatrafficNotificationSettings:
+          description: An array of Data traffic Notification Settings
+          items:
+            $ref: '#/components/schemas/dataTrafficNotificationSetting'
+          type: array
+      type: object
+    dataTrafficNotificationSettingOpts:
+      example:
+        unit: MB
+        threshold: threshold
+        frequency: DAILY
+      properties:
+        frequency:
+          description: Frequency for the Data Traffic Notification
+          enum:
+          - DAILY
+          - WEEKLY
+          - MONTHLY
+          type: string
+        threshold:
+          description: Threshold Value for the Data Traffic Notification
+          type: string
+        unit:
+          description: Unit for the Data Traffic Notification
+          enum:
+          - MB
+          - GB
+          - TB
+          type: string
+      required:
+      - frequency
+      - threshold
+      - unit
+      type: object
+    metricValue:
+      description: An array of metrics grouped by granularity
+      example:
+        value: 0
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        timestamp:
+          description: The time of the current metric
+          format: date-time
+          type: string
+        value:
+          description: The value of the current metric
+          type: integer
+      title: metricValue
+      type: object
+    metricsMetadata:
+      description: Metadata about the collection
+      example:
+        granularity: granularity
+        aggregation: aggregation
+        from: 2000-01-23T04:56:07.000+00:00
+        to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        aggregation:
+          description: The aggregation type for this request
+          type: string
+        from:
+          description: Start of date interval in ISO-8601 format
+          format: date-time
+          type: string
+        granularity:
+          description: The interval for each metric
+          type: string
+        to:
+          description: End of date interval in ISO-8601 format
+          format: date-time
+          type: string
+      title: metricsMetadata
+      type: object
+    metricValues:
+      description: Object containing all metrics
+      example:
+        DOWN_PUBLIC:
+          unit: unit
+          values:
+          - value: 0
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        UP_PUBLIC:
+          unit: unit
+          values:
+          - value: 0
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0
+            timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        UP_PUBLIC:
+          $ref: '#/components/schemas/metric'
+        DOWN_PUBLIC:
+          $ref: '#/components/schemas/metric'
+      title: metricValues
+      type: object
+    actions:
+      example:
+        lastTriggeredAt: lastTriggeredAt
+        type: EMAIL
+      properties:
+        lastTriggeredAt:
+          description: Date timestamp when the last notification email triggered
+          nullable: true
+          type: string
+        type:
+          description: Type of action
+          enum:
+          - EMAIL
+          type: string
+      title: actions
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      description: API key authentication by setting `X-LSW-Auth` header.
+      in: header
+      name: X-LSW-Auth
+      type: apiKey
+    OAuth2:
+      flows:
+        clientCredentials:
+          refreshUrl: https://auth.leaseweb.com/token
+          scopes: {}
+          tokenUrl: https://auth.leaseweb.com/token
+      type: oauth2
+    BearerAuth:
+      scheme: bearer
+      type: http

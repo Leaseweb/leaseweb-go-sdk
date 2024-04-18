@@ -1,0 +1,3442 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: development-networkautomation@leaseweb.com
+    name: Network Automation Team
+  description: This documents the rest api dedicatedserver provides.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: Leaseweb API for dedicated servers
+  version: v2
+servers:
+- url: https://api.leaseweb.com/internal/dedicatedserverapi/v2
+security:
+- OAuth2: []
+- BearerAuth: []
+- ApiKeyAuth: []
+tags:
+- description: Network Equipment
+  name: Network Equipment
+- description: Servers
+  name: Servers
+- description: IPs
+  name: IPs
+- description: Private Networks
+  name: Private Networks
+- description: Internal
+  name: Internal
+paths:
+  /networkEquipments:
+    get:
+      description: |
+        List your Dedicated Network Equipment. This api call supports pagination. Use
+        the `limit` and `offset` query string parameters to paginate through all your
+        dedicated network equipment.
+
+        Every `network equipment` object in the json response lists a few properties
+        of a network equipment. Use the single resource api call to get more details
+        for a single network equipment.
+      operationId: getNetworkEquipmentList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Filter the list of network equipment by reference.
+        example: my-switch
+        explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list of network equipment by ip address.
+        example: 127.0.0.4
+        explode: true
+        in: query
+        name: ip
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list of network equipment by mac address.
+        example: aa:bb:cc:dd:ee:ff
+        explode: true
+        in: query
+        name: macAddress
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list of network equipment by site (location).
+        example: FRA-10
+        explode: true
+        in: query
+        name: site
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list of network equipment by dedicated rack id.
+        example: "123"
+        explode: true
+        in: query
+        name: privateRackId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list for private network capable network equipment
+        explode: true
+        in: query
+        name: privateNetworkCapable
+        required: false
+        schema:
+          enum:
+          - "true"
+          - "false"
+          type: string
+        style: form
+      - description: Filter the list for private network enabled network equipment
+        explode: true
+        in: query
+        name: privateNetworkEnabled
+        required: false
+        schema:
+          enum:
+          - "true"
+          - "false"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 20
+                  offset: 0
+                  totalCount: 2
+                networkEquipments:
+                - contract:
+                    customerId: "10085996"
+                    deliveryStatus: ACTIVE
+                    id: "49031391001170"
+                    reference: My Private Switch
+                    salesOrgId: "2000"
+                  featureAvailability:
+                    automation: true
+                    ipmiReboot: false
+                    powerCycle: true
+                    privateNetwork: false
+                    remoteManagement: false
+                  id: "12345"
+                  location:
+                    rack: YY11
+                    site: AMS-01
+                    suite: HALL3
+                    unit: "21"
+                  networkInterfaces:
+                    internal:
+                      gateway: null
+                      ip: null
+                      ports: []
+                    public:
+                      gateway: 127.0.2.254
+                      ip: 127.0.2.1/24
+                      locationId: ""
+                      nullRouted: false
+                      ports: []
+                    remoteManagement:
+                      gateway: null
+                      ip: null
+                      locationId: null
+                      ports: []
+                  type: SWITCH
+                - contract:
+                    customerId: "10085996"
+                    deliveryStatus: ACTIVE
+                    id: "49031513001110"
+                    reference: My Other Private Switch
+                    salesOrgId: "2000"
+                  featureAvailability:
+                    automation: false
+                    ipmiReboot: false
+                    powerCycle: false
+                    privateNetwork: false
+                    remoteManagement: false
+                  id: "45678"
+                  location:
+                    rack: XX00
+                    site: AMS-01
+                    suite: HALL3
+                    unit: "21"
+                  networkInterfaces:
+                    internal:
+                      gateway: null
+                      ip: null
+                      ports: []
+                    public:
+                      gateway: 127.1.1.254
+                      ip: 127.1.1.68/24
+                      locationId: ""
+                      nullRouted: false
+                      ports: []
+                    remoteManagement:
+                      gateway: null
+                      ip: null
+                      locationId: null
+                      ports: []
+                  type: SWITCH
+              schema:
+                $ref: '#/components/schemas/getNetworkEquipmentListResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List network equipment
+      tags:
+      - dedicatedserver
+  /networkEquipments/{networkEquipmentId}:
+    get:
+      description: |
+        Use this API to get information about a single network equipment.
+      operationId: getNetworkEquipment
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                contract:
+                  aggregationPackId: null
+                  billingCycle: 1
+                  billingFrequency: MONTH
+                  contractTerm: 12
+                  contractType: NORMAL
+                  currency: EUR
+                  customerId: "10085996"
+                  deliveryStatus: ACTIVE
+                  endsAt: null
+                  id: "49031391001170"
+                  networkTraffic:
+                    connectivityType: INTERCONNECTED
+                    datatrafficLimit: null
+                    datatrafficUnit: null
+                    trafficType: null
+                    type: null
+                  pricePerFrequency: "0.00"
+                  reference: My Switch
+                  salesOrgId: "2000"
+                  sla: Platinum
+                  startsAt: 2017-08-01T00:00:00Z
+                  status: ACTIVE
+                  subnets: []
+                featureAvailability:
+                  automation: true
+                  ipmiReboot: false
+                  powerCycle: true
+                  privateNetwork: false
+                  remoteManagement: false
+                id: "12345"
+                location:
+                  rack: YY11
+                  site: AMS-01
+                  suite: HALL3
+                  unit: "21"
+                name: ABC-DE-001
+                networkInterfaces:
+                  internal:
+                    gateway: null
+                    ip: null
+                    ports: []
+                  public:
+                    gateway: 127.0.0..254
+                    ip: 127.0.0..124/24
+                    locationId: ""
+                    nullRouted: false
+                    ports: []
+                  remoteManagement:
+                    gateway: null
+                    ip: null
+                    locationId: null
+                    ports: []
+                powerPorts:
+                - name: AMS-01-HALL3-YY11-PDU01
+                  port: "7"
+                rack:
+                  capacity: ""
+                  id: "11111"
+                serialNumber: XN51FPD0QX
+                specs:
+                  brand: HP
+                  model: PC 2530-48 J9781A
+                type: SWITCH
+              schema:
+                $ref: '#/components/schemas/networkEquipment'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get network equipment
+      tags:
+      - dedicatedserver
+    put:
+      description: |
+        Update the reference for a network equipment.
+      operationId: updateNetworkEquipmentReference
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              reference: my-private-switch
+            schema:
+              $ref: '#/components/schemas/updateNetworkEquipmentReferenceOpts'
+        required: true
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Update network equipment
+      tags:
+      - dedicatedserver
+  /networkEquipments/{networkEquipmentId}/ips:
+    get:
+      description: |
+        List all IP Addresses associated with this network equipment. Optionally
+        filtered.
+      operationId: getNetworkEquipmentIpList
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Filter the collection of ip addresses by network type
+        explode: true
+        in: query
+        name: networkType
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the collection by ip version
+        explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter Ips by Nulled-Status
+        explode: true
+        in: query
+        name: nullRouted
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the collection of Ips for the comma separated list of
+          Ips
+        explode: true
+        in: query
+        name: ips
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 2
+                ips:
+                - ddos:
+                    detectionProfile: ADVANCED_LOW_UDP
+                    protectionType: ADVANCED
+                  floatingIp: false
+                  gateway: 12.123.123.254
+                  ip: 12.123.123.1/24
+                  mainIp: true
+                  networkType: PUBLIC
+                  nullRouted: true
+                  reverseLookup: domain.example.com
+                  version: 4
+                - ddos:
+                    detectionProfile: STANDARD_DEFAULT
+                    protectionType: STANDARD
+                  floatingIp: false
+                  gateway: 2001:db8:85a3::8a2e:370:1
+                  ip: 2001:db8:85a3::8a2e:370:7334/64
+                  mainIp: false
+                  networkType: REMOTE_MANAGEMENT
+                  nullRouted: false
+                  reverseLookup: domain.example.com
+                  version: 6
+              schema:
+                $ref: '#/components/schemas/getNetworkEquipmentIpListResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List IPs
+      tags:
+      - dedicatedserver
+  /networkEquipments/{networkEquipmentId}/ips/{ip}:
+    get:
+      description: |
+        Get a single IP address associated with this network equipment.
+      operationId: getNetworkEquipmentIp
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The IP Address
+        example: 127.0.0.6
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ddos:
+                  detectionProfile: ADVANCED_LOW_UDP
+                  protectionType: ADVANCED
+                floatingIp: false
+                gateway: 12.123.123.254
+                ip: 12.123.123.1/24
+                mainIp: true
+                networkType: PUBLIC
+                nullRouted: false
+                reverseLookup: domain.example.com
+                version: 4
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show an IP
+      tags:
+      - dedicatedserver
+    put:
+      description: |
+        Update the reverse lookup or DDoS detection profile for the ip address.
+
+        DDoS detection profiles can only be changed if the IP address is protected
+        using Advanced DDoS protection.
+
+        For more information about DDoS detection profiles [click here](https://kb.leaseweb.com/products/cyber-security/ddos-ip-protection#DDOSIPProtection-DDoSIPProtectionAdvancedDetectionprofiles) for our KB related article.
+      operationId: updateNetworkEquipmentIp
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The IP Address
+        example: 127.0.0.6
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              detectionProfile: ADVANCED_LOW_UDP
+              reverseLookup: domain.example.com
+            schema:
+              $ref: '#/components/schemas/updateNetworkEquipmentIpOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ddos:
+                  detectionProfile: ADVANCED_LOW_UDP
+                  protectionType: ADVANCED
+                floatingIp: false
+                gateway: 12.123.123.254
+                ip: 12.123.123.1/24
+                mainIp: true
+                networkType: PUBLIC
+                nullRouted: false
+                reverseLookup: domain.example.com
+                version: 4
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Update an IP
+      tags:
+      - dedicatedserver
+  /networkEquipments/{networkEquipmentId}/ips/{ip}/null:
+    post:
+      description: |
+        Null the given IP address. It might take a few minutes before the change is
+        propagated across the network.
+      operationId: networkEquipments-ips-null
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The IP Address
+        example: 127.0.0.6
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                ddos:
+                  detectionProfile: ADVANCED_LOW_UDP
+                  protectionType: ADVANCED
+                floatingIp: false
+                gateway: 12.123.123.254
+                ip: 12.123.123.1/24
+                mainIp: true
+                networkType: PUBLIC
+                nullRouted: false
+                reverseLookup: domain.example.com
+                version: 4
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Null route an IP
+      tags:
+      - dedicatedserver
+  /networkEquipments/{networkEquipmentId}/ips/{ip}/unnull:
+    post:
+      description: |
+        Remove an existing null route for the given IP address. It might take a few
+        minutes before the change is propagated across the network.
+      operationId: unNullNetworkEquipmentIpRoute
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The IP Address
+        example: 127.0.0.6
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                ddos:
+                  detectionProfile: ADVANCED_LOW_UDP
+                  protectionType: ADVANCED
+                floatingIp: false
+                gateway: 12.123.123.254
+                ip: 12.123.123.1/24
+                mainIp: true
+                networkType: PUBLIC
+                nullRouted: false
+                reverseLookup: domain.example.com
+                version: 4
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Remove a null route
+      tags:
+      - dedicatedserver
+  /networkEquipments/{networkEquipmentId}/nullRouteHistory:
+    get:
+      description: |
+        Show all null route history for any ips associated with this a network
+        equipment.
+      operationId: getNetworkEquipmentNullRouteHistory
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 1
+                nullRoutes:
+                - automatedUnnullingAt: 2016-08-12T07:45:33+00:00
+                  comment: Device Null Route related to DDoS Mitigation
+                  ip: 1.1.1.1/32
+                  nullLevel: 3
+                  nulledAt: 2016-08-12T07:40:27+00:00
+                  ticketId: "282912"
+              schema:
+                $ref: '#/components/schemas/getNetworkEquipmentNullRouteHistoryResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show null route history
+      tags:
+      - dedicatedserver
+  /servers:
+    get:
+      description: |
+        List your Dedicated Servers. This api call supports pagination. Use the
+        `limit` and `offset` query string parameters to paginate through all your
+        dedicated servers.
+
+        Every `server` object in the json response lists a few properties of a server.
+        Use the single resource api call to get more details for a single server.
+      operationId: getServerList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Filter the list of servers by reference.
+        example: my-db
+        explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list of servers by ip address.
+        example: 127.0.0.4
+        explode: true
+        in: query
+        name: ip
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list of servers by mac address.
+        example: aa:bb:cc:dd:ee:ff
+        explode: true
+        in: query
+        name: macAddress
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list of servers by site (location).
+        example: FRA-10
+        explode: true
+        in: query
+        name: site
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list of servers by dedicated rack id.
+        example: "123"
+        explode: true
+        in: query
+        name: privateRackId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list for private network capable servers
+        explode: true
+        in: query
+        name: privateNetworkCapable
+        required: false
+        schema:
+          enum:
+          - "true"
+          - "false"
+          type: string
+        style: form
+      - description: Filter the list for private network enabled servers
+        explode: true
+        in: query
+        name: privateNetworkEnabled
+        required: false
+        schema:
+          enum:
+          - "true"
+          - "false"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 2
+                  offset: 80
+                  totalCount: 132
+                servers:
+                - assetId: "627293"
+                  contract:
+                    customerId: "32923828192"
+                    deliveryStatus: ACTIVE
+                    id: "674382"
+                    reference: database.server
+                    salesOrgId: "2300"
+                  featureAvailability:
+                    automation: true
+                    ipmiReboot: false
+                    powerCycle: true
+                    privateNetwork: true
+                    remoteManagement: false
+                  id: "12345"
+                  location:
+                    rack: A83
+                    site: AMS-01
+                    suite: "99"
+                    unit: 16-17
+                  networkInterfaces:
+                    internal:
+                      gateway: 10.22.192.12
+                      ip: 10.22.192.3
+                      mac: AA:BB:CC:DD:EE:FF
+                      ports:
+                      - name: EVO-AABB-01
+                        port: "30"
+                    public:
+                      gateway: 95.211.162.62
+                      ip: 95.211.162.0
+                      mac: AA:AC:CC:88:EE:E4
+                      ports: []
+                    remoteManagement:
+                      gateway: 10.22.192.126
+                      ip: 10.22.192.1
+                      mac: AA:AC:CC:88:EE:E4
+                      ports: []
+                  powerPorts:
+                  - name: EVO-JV12-APC02
+                    port: "10"
+                  privateNetworks:
+                  - id: "1"
+                    linkSpeed: 1000
+                    status: CONFIGURED
+                    subnet: 127.0.0.80/24
+                    vlanId: "2120"
+                  rack:
+                    type: SHARED
+                - assetId: "627294"
+                  contract:
+                    customerId: "32923828192"
+                    deliveryStatus: ACTIVE
+                    id: "929282"
+                    reference: web.server
+                    salesOrgId: "2300"
+                  featureAvailability:
+                    automation: false
+                    powerCycle: false
+                    privateNetwork: false
+                    remoteManagement: false
+                  id: "47854"
+                  location:
+                    rack: "13"
+                    site: AMS-01
+                    suite: A6
+                    unit: "18"
+                  networkInterfaces:
+                    internal: null
+                    public: null
+                    remoteManagement: null
+                  privateNetworks:
+                  - id: "2"
+                    linkSpeed: 1000
+                    status: CONFIGURED
+                    subnet: 127.0.0.80/24
+                    vlanId: "2130"
+                  rack:
+                    type: SHARED
+              schema:
+                $ref: '#/components/schemas/getServerListResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List servers
+      tags:
+      - dedicatedserver
+  /servers/{serverId}:
+    get:
+      description: |
+        Use this API to get information about a single server.
+      operationId: getServer
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                assetId: "627294"
+                contract:
+                  billingCycle: 12
+                  billingFrequency: MONTH
+                  contractTerm: 12
+                  currency: EUR
+                  customerId: "32923828192"
+                  deliveryStatus: ACTIVE
+                  endsAt: 2017-10-01T01:00:00+0100
+                  id: "674382"
+                  networkTraffic:
+                    datatrafficLimit: 100
+                    datatrafficUnit: TB|Mbps
+                    trafficType: PREMIUM|VOLUME
+                    type: 95|FLATFEE|DATATRAFFIC
+                  pricePerFrequency: 49
+                  privateNetworks:
+                  - id: "1"
+                    linkSpeed: 1000
+                    status: CONFIGURED
+                    subnet: 127.0.0.80/24
+                    vlanId: "2120"
+                  reference: database.server
+                  salesOrgId: "2300"
+                  sla: BRONZE
+                  softwareLicenses:
+                  - currency: EUR
+                    name: WINDOWS_2012_R2_SERVER
+                    price: 12.12
+                  startsAt: 2014-01-01T01:00:00+0100
+                featureAvailability:
+                  automation: true
+                  ipmiReboot: false
+                  powerCycle: true
+                  privateNetwork: true
+                  remoteManagement: false
+                id: "12345"
+                location:
+                  rack: "13"
+                  site: AMS-01
+                  suite: A6
+                  unit: 16-17
+                networkInterfaces:
+                  internal:
+                    gateway: 123.123.123.126
+                    ip: 123.123.123.123/27
+                    mac: AA:BB:CC:DD:EE:FF
+                    ports: []
+                  public:
+                    gateway: 123.123.123.126
+                    ip: 123.123.123.123/27
+                    mac: AA:BB:CC:DD:EE:FF
+                    ports:
+                    - name: EVO-JV12-1
+                      port: "33"
+                  remoteManagement: null
+                powerPorts:
+                - name: EVO-JV12-APC02
+                  port: "10"
+                rack:
+                  type: PRIVATE
+                serialNumber: JDK18291JK
+                specs:
+                  chassis: Dell R210 II
+                  cpu:
+                    quantity: 4
+                    type: Intel Xeon E3-1220
+                  hardwareRaidCapable: true
+                  hdd:
+                  - amount: 2
+                    id: SATA2TB
+                    performanceType: null
+                    size: 2
+                    type: SATA
+                    unit: TB
+                  pciCards:
+                  - description: 2x10GE UTP card
+                  - description: 2x30GE UTP card
+                  ram:
+                    size: 32
+                    unit: GB
+              schema:
+                $ref: '#/components/schemas/server'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get server
+      tags:
+      - dedicatedserver
+    put:
+      description: |
+        Update the reference for a server.
+      operationId: updateServerReference
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              reference: database-server
+            schema:
+              $ref: '#/components/schemas/updateServerReferenceOpts'
+        required: true
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Update server
+      tags:
+      - dedicatedserver
+  /servers/{serverId}/ips:
+    get:
+      description: |
+        List all IP Addresses associated with this server. Optionally filtered.
+      operationId: getServerIpList
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Filter the collection of ip addresses by network type
+        explode: true
+        in: query
+        name: networkType
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the collection by ip version
+        explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter Ips by Nulled-Status
+        explode: true
+        in: query
+        name: nullRouted
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the collection of Ips for the comma separated list of
+          Ips
+        explode: true
+        in: query
+        name: ips
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ddos:
+                  detectionProfile: ADVANCED_LOW_UDP
+                  protectionType: ADVANCED
+                floatingIp: false
+                gateway: 12.123.123.254
+                ip: 12.123.123.1/24
+                mainIp: true
+                networkType: PUBLIC
+                nullRouted: false
+                reverseLookup: domain.example.com
+                version: 4
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List IPs
+      tags:
+      - dedicatedserver
+  /servers/{serverId}/ips/{ip}:
+    get:
+      description: |
+        Get a single IP address associated with this server.
+      operationId: getServerIp
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The IP Address
+        example: 127.0.0.6
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ddos:
+                  detectionProfile: ADVANCED_LOW_UDP
+                  protectionType: ADVANCED
+                floatingIp: false
+                gateway: 12.123.123.254
+                ip: 12.123.123.1/24
+                mainIp: true
+                networkType: PUBLIC
+                nullRouted: false
+                reverseLookup: domain.example.com
+                version: 4
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show an IP
+      tags:
+      - dedicatedserver
+    put:
+      description: |
+        Update the reverse lookup or DDoS detection profile for the ip address.
+
+        DDoS detection profiles can only be changed if the IP address is protected
+        using Advanced DDoS protection.
+
+        For more information about DDoS detection profiles [click here](https://kb.leaseweb.com/products/cyber-security/ddos-ip-protection#DDOSIPProtection-DDoSIPProtectionAdvancedDetectionprofiles) for our KB related article.
+      operationId: putServerIp
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The IP Address
+        example: 127.0.0.6
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              detectionProfile: ADVANCED_LOW_UDP
+              reverseLookup: domain.example.com
+            schema:
+              $ref: '#/components/schemas/updateIpProfileOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ddos:
+                  detectionProfile: ADVANCED_LOW_UDP
+                  protectionType: ADVANCED
+                floatingIp: false
+                gateway: 12.123.123.254
+                ip: 12.123.123.1/24
+                mainIp: true
+                networkType: PUBLIC
+                nullRouted: false
+                reverseLookup: domain.example.com
+                version: 4
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Update an IP
+      tags:
+      - dedicatedserver
+  /servers/{serverId}/ips/{ip}/null:
+    post:
+      description: |
+        Null the given IP address. It might take a few minutes before the change is
+        propagated across the network.
+      operationId: nullIpRoute
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The IP Address
+        example: 127.0.0.6
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                ddos:
+                  detectionProfile: ADVANCED_LOW_UDP
+                  protectionType: ADVANCED
+                floatingIp: false
+                gateway: 12.123.123.254
+                ip: 12.123.123.1/24
+                mainIp: true
+                networkType: PUBLIC
+                nullRouted: false
+                reverseLookup: domain.example.com
+                version: 4
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Null route an IP
+      tags:
+      - dedicatedserver
+  /servers/{serverId}/ips/{ip}/unnull:
+    post:
+      description: |
+        Remove an existing null route for the given IP address. It might take a few
+        minutes before the change is propagated across the network.
+      operationId: removeNullIpRoute
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The IP Address
+        example: 127.0.0.6
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                ddos:
+                  detectionProfile: ADVANCED_LOW_UDP
+                  protectionType: ADVANCED
+                floatingIp: false
+                gateway: 12.123.123.254
+                ip: 12.123.123.1/24
+                mainIp: true
+                networkType: PUBLIC
+                nullRouted: false
+                reverseLookup: domain.example.com
+                version: 4
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Remove a null route
+      tags:
+      - dedicatedserver
+  /servers/{serverId}/nullRouteHistory:
+    get:
+      description: |
+        Show all null route history for any ips associated with this server.
+      operationId: getServerNullRouteHistory
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 1
+                nullRoutes:
+                - automatedUnnullingAt: 2016-08-12T07:45:33+00:00
+                  comment: Device Null Route related to DDoS Mitigation
+                  ip: 1.1.1.1/32
+                  nullLevel: 3
+                  nulledAt: 2016-08-12T07:40:27+00:00
+                  ticketId: "282912"
+              schema:
+                $ref: '#/components/schemas/getServerNullRouteHistoryResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show null route history
+      tags:
+      - dedicatedserver
+  /servers/{serverId}/privateNetworks/{privateNetworkId}:
+    delete:
+      description: |
+        This API call will remove the dedicated server from the private network.
+
+        It takes a few minutes before the server has been removed from the private
+        network.
+
+        To get the current status of the server you can call
+        `/bareMetals/v2/servers/{serverId}`.
+
+        While the server is being removed the status changes to `REMOVING`.
+      operationId: deleteServerFromPrivateNetwork
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of a Private Network
+        example: "892"
+        explode: false
+        in: path
+        name: privateNetworkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: f8d84555-9822-49fb-919a-d4945b201fe3
+                errorCode: "400"
+                errorMessage: Equipment 27072 is not part of private network 3943
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Delete a server from a private network
+      tags:
+      - dedicatedserver
+    put:
+      description: |
+        It takes a few minutes before the server has access to the private network.
+
+        To get the current status of the server you can call
+        `/bareMetals/v2/servers/{serverId}`.
+
+        Once the server is added to the private network the status changes from
+        `CONFIGURING` to `CONFIGURED`.
+      operationId: addServerToPrivateNetwork
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of a Private Network
+        example: "892"
+        explode: false
+        in: path
+        name: privateNetworkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              linkSpeed: 100
+            schema:
+              $ref: '#/components/schemas/addServerToPrivateNetworkOpts'
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: f8d84555-9822-49fb-919a-d4945b201fe3
+                errorCode: "400"
+                errorMessage: Equipment 27072 is not part of private network 3943
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Add a server to private network
+      tags:
+      - dedicatedserver
+components:
+  parameters:
+    limit:
+      description: Limit the number of results returned.
+      example: 20
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+      style: form
+    offset:
+      description: Return results starting from the given offset.
+      example: 10
+      explode: true
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+      style: form
+    networkEquipmentId:
+      description: The ID of a dedicated network equipment
+      example: "12345"
+      explode: false
+      in: path
+      name: networkEquipmentId
+      required: true
+      schema:
+        type: string
+      style: simple
+    ip:
+      description: The IP Address
+      example: 127.0.0.6
+      explode: false
+      in: path
+      name: ip
+      required: true
+      schema:
+        type: string
+      style: simple
+    serverId:
+      description: The ID of a server
+      example: "12345"
+      explode: false
+      in: path
+      name: serverId
+      required: true
+      schema:
+        type: string
+      style: simple
+    privateNetworkId:
+      description: The ID of a Private Network
+      example: "892"
+      explode: false
+      in: path
+      name: privateNetworkId
+      required: true
+      schema:
+        type: string
+      style: simple
+  responses:
+    "204":
+      description: No Content.
+    "400":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "400"
+            errorMessage: The API could not interpret your request correctly.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Bad Request.
+    "401":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "401"
+            errorMessage: You are not authorized to view this resource.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Authorized.
+    "403":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "403"
+            errorMessage: Access to the requested resource is forbidden.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Forbidden.
+    "404":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "404"
+            errorMessage: Resource not found
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Found.
+    "500":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "500"
+            errorMessage: '''The API could not handle your request at this time.'
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Internal Server Error.
+    "503":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "503"
+            errorMessage: The API is not available at the moment.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Service Unavailable.
+  schemas:
+    _metadata:
+      description: Metadata about the collection
+      example:
+        offset: 0
+        limit: 5
+        totalCount: 2
+      properties:
+        totalCount:
+          description: Total amount of orders in this collection
+          example: 2
+          type: number
+        offset:
+          default: 0
+          description: The offset used to generate this response
+          example: 0
+          type: number
+        limit:
+          default: 5
+          description: The limit used to generate this response
+          example: 5
+          type: number
+      title: metadata
+      type: object
+    powerport:
+      example:
+        port: port
+        name: name
+      properties:
+        name:
+          type: string
+        port:
+          type: string
+      type: object
+    rack:
+      description: Rack details where this network equipment is located at
+      example:
+        id: id
+        type: PRIVATE
+        capacity: capacity
+      properties:
+        id:
+          description: Rack id
+          type: string
+        capacity:
+          description: Rack capacity
+          type: string
+        type:
+          enum:
+          - PRIVATE
+          - SHARED
+          type: string
+      title: rack
+      type: object
+    networkEquipment:
+      example:
+        specs:
+          model: model
+          brand: brand
+        rack:
+          id: id
+          type: PRIVATE
+          capacity: capacity
+        networkInterfaces: "{}"
+        serialNumber: serialNumber
+        contract: "{}"
+        name: name
+        location: "{}"
+        id: id
+        type: type
+        featureAvailability: "{}"
+        powerPorts:
+        - port: port
+          name: name
+        - port: port
+          name: name
+      properties:
+        contract:
+          description: Contract information
+          type: object
+        featureAvailability:
+          description: List of features that are available for this network equipment
+          type: object
+        id:
+          description: Id of the network equipment
+          type: string
+        location:
+          description: Location of the network equipment
+          type: object
+        name:
+          description: The name of the network equipment
+          type: string
+        type:
+          description: The network equipment type
+          type: string
+        networkInterfaces:
+          description: Network interface information grouped by type
+          type: object
+        powerPorts:
+          description: List of ports that can be used to manage power of the network
+            equipment
+          items:
+            $ref: '#/components/schemas/powerport'
+          type: array
+        rack:
+          $ref: '#/components/schemas/rack'
+        serialNumber:
+          description: Serial number of network equipment
+          type: string
+        specs:
+          $ref: '#/components/schemas/networkEquipmentSpecs'
+      type: object
+    getNetworkEquipmentListResult:
+      example:
+        networkEquipments:
+        - specs:
+            model: model
+            brand: brand
+          rack:
+            id: id
+            type: PRIVATE
+            capacity: capacity
+          networkInterfaces: "{}"
+          serialNumber: serialNumber
+          contract: "{}"
+          name: name
+          location: "{}"
+          id: id
+          type: type
+          featureAvailability: "{}"
+          powerPorts:
+          - port: port
+            name: name
+          - port: port
+            name: name
+        - specs:
+            model: model
+            brand: brand
+          rack:
+            id: id
+            type: PRIVATE
+            capacity: capacity
+          networkInterfaces: "{}"
+          serialNumber: serialNumber
+          contract: "{}"
+          name: name
+          location: "{}"
+          id: id
+          type: type
+          featureAvailability: "{}"
+          powerPorts:
+          - port: port
+            name: name
+          - port: port
+            name: name
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        networkEquipments:
+          description: An array of network equipment
+          items:
+            $ref: '#/components/schemas/networkEquipment'
+          type: array
+      type: object
+    errorResult:
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails:
+        - key:
+          - errorDetails
+          - errorDetails
+        - key:
+          - errorDetails
+          - errorDetails
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          items:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+          type: array
+      type: object
+    updateNetworkEquipmentReferenceOpts:
+      properties:
+        reference:
+          description: The reference for this network equipment
+          type: string
+      required:
+      - reference
+      type: object
+    ip:
+      example:
+        floatingIp: true
+        reverseLookup: reverseLookup
+        ip: ip
+        nullRouted: true
+        mainIp: true
+        ddos:
+          detectionProfile: STANDARD_DEFAULT
+          protectionType: STANDARD
+        networkType: PUBLIC
+        version: 0
+        gateway: gateway
+      properties:
+        ddos:
+          $ref: '#/components/schemas/dDos'
+        floatingIp:
+          description: Indicates if the IP is a Floating IP
+          type: boolean
+        gateway:
+          description: Gateway
+          type: string
+        ip:
+          description: IP address in CIDR notation
+          type: string
+        mainIp:
+          description: IP address is main
+          type: boolean
+        networkType:
+          description: Type of network
+          enum:
+          - PUBLIC
+          - REMOTE_MANAGEMENT
+          type: string
+        nullRouted:
+          description: IP address null routed
+          type: boolean
+        reverseLookup:
+          description: The reverse lookup value
+          type: string
+        version:
+          description: IP version
+          type: integer
+      type: object
+    getNetworkEquipmentIpListResult:
+      example:
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+        ips:
+        - floatingIp: true
+          reverseLookup: reverseLookup
+          ip: ip
+          nullRouted: true
+          mainIp: true
+          ddos:
+            detectionProfile: STANDARD_DEFAULT
+            protectionType: STANDARD
+          networkType: PUBLIC
+          version: 0
+          gateway: gateway
+        - floatingIp: true
+          reverseLookup: reverseLookup
+          ip: ip
+          nullRouted: true
+          mainIp: true
+          ddos:
+            detectionProfile: STANDARD_DEFAULT
+            protectionType: STANDARD
+          networkType: PUBLIC
+          version: 0
+          gateway: gateway
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        ips:
+          description: An array of IP addresses
+          items:
+            $ref: '#/components/schemas/ip'
+          type: array
+      type: object
+    updateNetworkEquipmentIpOpts:
+      properties:
+        detectionProfile:
+          description: The detection profile value
+          enum:
+          - ADVANCED_DEFAULT
+          - ADVANCED_LOW_UDP
+          - ADVANCED_MED_UDP
+          type: string
+        reverseLookup:
+          description: The reverse lookup value
+          type: string
+      type: object
+    nullRoute:
+      example:
+        nullLevel: 0
+        ip: ip
+        automatedUnnullingAt: 2000-01-23T04:56:07.000+00:00
+        comment: comment
+        nulledAt: 2000-01-23T04:56:07.000+00:00
+        ticketId: ticketId
+      properties:
+        automatedUnnullingAt:
+          description: The time the null route was removed or will be removed.
+          format: date-time
+          type: string
+        comment:
+          description: An optional comment for the reason of the null route
+          type: string
+        ip:
+          description: The ip address that was null routed
+          type: string
+        nullLevel:
+          description: The level of the null route
+          type: integer
+        nulledAt:
+          description: The time the null route was created
+          format: date-time
+          type: string
+        ticketId:
+          description: A ticket number if available
+          type: string
+      title: nullRoute
+      type: object
+    getNetworkEquipmentNullRouteHistoryResult:
+      example:
+        nullRoutes:
+        - nullLevel: 0
+          ip: ip
+          automatedUnnullingAt: 2000-01-23T04:56:07.000+00:00
+          comment: comment
+          nulledAt: 2000-01-23T04:56:07.000+00:00
+          ticketId: ticketId
+        - nullLevel: 0
+          ip: ip
+          automatedUnnullingAt: 2000-01-23T04:56:07.000+00:00
+          comment: comment
+          nulledAt: 2000-01-23T04:56:07.000+00:00
+          ticketId: ticketId
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        nullRoutes:
+          description: An array of network equipment null route events
+          items:
+            $ref: '#/components/schemas/nullRoute'
+          type: array
+      type: object
+    linkSpeed:
+      description: The port speed in Mbps
+      enum:
+      - 100
+      - 1000
+      - 10000
+      type: integer
+    server:
+      example:
+        specs:
+          cpu:
+            quantity: 0
+            type: type
+          hdd:
+          - amount: 6
+            unit: unit
+            size: 1
+            id: id
+            type: type
+            performanceType: performanceType
+          - amount: 6
+            unit: unit
+            size: 1
+            id: id
+            type: type
+            performanceType: performanceType
+          hardwareRaidCapable: true
+          pciCards:
+          - description: description
+          - description: description
+          chassis: chassis
+          ram:
+            unit: unit
+            size: 5
+        rack:
+          id: id
+          type: PRIVATE
+          capacity: capacity
+        networkInterfaces: "{}"
+        serialNumber: serialNumber
+        assetId: assetId
+        contract: "{}"
+        location: "{}"
+        id: id
+        privateNetworks:
+        - subnet: 10.0.0.0/16
+          vlanId: "2130"
+          linkSpeed: null
+          id: "892"
+          status: status
+        - subnet: 10.0.0.0/16
+          vlanId: "2130"
+          linkSpeed: null
+          id: "892"
+          status: status
+        featureAvailability: "{}"
+        powerPorts:
+        - port: port
+          name: name
+        - port: port
+          name: name
+      properties:
+        assetId:
+          description: The Asset Id of the server
+          type: string
+        contract:
+          description: Contract information
+          type: object
+        featureAvailability:
+          description: List of features that are available for this server
+          type: object
+        id:
+          description: Id of the server
+          type: string
+        location:
+          description: Location of the server
+          type: object
+        networkInterfaces:
+          description: Network interface information grouped by type
+          type: object
+        powerPorts:
+          description: List of ports that can be used to manage power of the server
+          items:
+            $ref: '#/components/schemas/powerport'
+          type: array
+        privateNetworks:
+          description: An array of private networks
+          items:
+            $ref: '#/components/schemas/privateNetwork'
+          type: array
+        rack:
+          $ref: '#/components/schemas/rack'
+        serialNumber:
+          description: Serial number of server
+          type: string
+        specs:
+          $ref: '#/components/schemas/serverSpecs'
+      type: object
+    getServerListResult:
+      example:
+        servers:
+        - specs:
+            cpu:
+              quantity: 0
+              type: type
+            hdd:
+            - amount: 6
+              unit: unit
+              size: 1
+              id: id
+              type: type
+              performanceType: performanceType
+            - amount: 6
+              unit: unit
+              size: 1
+              id: id
+              type: type
+              performanceType: performanceType
+            hardwareRaidCapable: true
+            pciCards:
+            - description: description
+            - description: description
+            chassis: chassis
+            ram:
+              unit: unit
+              size: 5
+          rack:
+            id: id
+            type: PRIVATE
+            capacity: capacity
+          networkInterfaces: "{}"
+          serialNumber: serialNumber
+          assetId: assetId
+          contract: "{}"
+          location: "{}"
+          id: id
+          privateNetworks:
+          - subnet: 10.0.0.0/16
+            vlanId: "2130"
+            linkSpeed: null
+            id: "892"
+            status: status
+          - subnet: 10.0.0.0/16
+            vlanId: "2130"
+            linkSpeed: null
+            id: "892"
+            status: status
+          featureAvailability: "{}"
+          powerPorts:
+          - port: port
+            name: name
+          - port: port
+            name: name
+        - specs:
+            cpu:
+              quantity: 0
+              type: type
+            hdd:
+            - amount: 6
+              unit: unit
+              size: 1
+              id: id
+              type: type
+              performanceType: performanceType
+            - amount: 6
+              unit: unit
+              size: 1
+              id: id
+              type: type
+              performanceType: performanceType
+            hardwareRaidCapable: true
+            pciCards:
+            - description: description
+            - description: description
+            chassis: chassis
+            ram:
+              unit: unit
+              size: 5
+          rack:
+            id: id
+            type: PRIVATE
+            capacity: capacity
+          networkInterfaces: "{}"
+          serialNumber: serialNumber
+          assetId: assetId
+          contract: "{}"
+          location: "{}"
+          id: id
+          privateNetworks:
+          - subnet: 10.0.0.0/16
+            vlanId: "2130"
+            linkSpeed: null
+            id: "892"
+            status: status
+          - subnet: 10.0.0.0/16
+            vlanId: "2130"
+            linkSpeed: null
+            id: "892"
+            status: status
+          featureAvailability: "{}"
+          powerPorts:
+          - port: port
+            name: name
+          - port: port
+            name: name
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        servers:
+          description: An array of servers
+          items:
+            $ref: '#/components/schemas/server'
+          type: array
+      type: object
+    updateServerReferenceOpts:
+      properties:
+        reference:
+          description: The reference for this server
+          type: string
+      required:
+      - reference
+      type: object
+    updateIpProfileOpts:
+      properties:
+        detectionProfile:
+          description: The detection profile value
+          enum:
+          - ADVANCED_DEFAULT
+          - ADVANCED_LOW_UDP
+          - ADVANCED_MED_UDP
+          type: string
+        reverseLookup:
+          description: The reverse lookup value
+          type: string
+      type: object
+    getServerNullRouteHistoryResult:
+      example:
+        nullRoutes:
+        - nullLevel: 0
+          ip: ip
+          automatedUnnullingAt: 2000-01-23T04:56:07.000+00:00
+          comment: comment
+          nulledAt: 2000-01-23T04:56:07.000+00:00
+          ticketId: ticketId
+        - nullLevel: 0
+          ip: ip
+          automatedUnnullingAt: 2000-01-23T04:56:07.000+00:00
+          comment: comment
+          nulledAt: 2000-01-23T04:56:07.000+00:00
+          ticketId: ticketId
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        nullRoutes:
+          description: An array of server null route events
+          items:
+            $ref: '#/components/schemas/nullRoute'
+          type: array
+      type: object
+    addServerToPrivateNetworkOpts:
+      properties:
+        linkSpeed:
+          $ref: '#/components/schemas/linkSpeed'
+      required:
+      - linkSpeed
+      type: object
+    networkEquipmentSpecs:
+      description: Hardware information of the network equipment
+      example:
+        model: model
+        brand: brand
+      properties:
+        brand:
+          description: The brand of the network equipment
+          type: string
+        model:
+          description: The model of the network equipment
+          type: string
+      title: networkEquipmentSpecs
+      type: object
+    dDos:
+      description: DDoS IP Protection Details
+      example:
+        detectionProfile: STANDARD_DEFAULT
+        protectionType: STANDARD
+      properties:
+        detectionProfile:
+          description: The applied detection profile
+          enum:
+          - STANDARD_DEFAULT
+          - ADVANCED_DEFAULT
+          - ADVANCED_LOW_UDP
+          - ADVANCED_MED_UDP
+          type: string
+        protectionType:
+          description: The type of DDoS protection
+          enum:
+          - STANDARD
+          - ADVANCED
+          type: string
+      title: dDos
+      type: object
+    privateNetwork:
+      example:
+        subnet: 10.0.0.0/16
+        vlanId: "2130"
+        linkSpeed: null
+        id: "892"
+        status: status
+      properties:
+        id:
+          description: Private network id
+          example: "892"
+          type: string
+        linkSpeed:
+          $ref: '#/components/schemas/linkSpeed'
+        status:
+          description: Configuration status
+          type: string
+        subnet:
+          example: 10.0.0.0/16
+          type: string
+        vlanId:
+          description: VLAN id
+          example: "2130"
+          type: string
+      title: privateNetwork
+      type: object
+    cpu:
+      description: CPU of the server
+      example:
+        quantity: 0
+        type: type
+      properties:
+        quantity:
+          description: The quantity of CPUs in the server
+          type: integer
+        type:
+          description: The type of CPUs in the server
+          type: string
+      title: cpu
+      type: object
+    hdd:
+      description: A single object of the hard disk drive
+      example:
+        amount: 6
+        unit: unit
+        size: 1
+        id: id
+        type: type
+        performanceType: performanceType
+      properties:
+        id:
+          description: Id of the hard disk drive
+          type: string
+        amount:
+          description: The total amount of hard disk drives
+          type: integer
+        size:
+          description: The size number of the hard disk drive
+          type: integer
+        type:
+          description: The type of the hard disk drive
+          type: string
+        unit:
+          description: The unit of the hard disk drive
+          type: string
+        performanceType:
+          description: Hard disk drive performance type
+          nullable: true
+          type: string
+      title: hdd
+      type: object
+    pciCard:
+      description: A single object of the PCI card
+      example:
+        description: description
+      properties:
+        description:
+          description: The description of the PCI card of the server
+          type: string
+      title: pciCard
+      type: object
+    ram:
+      description: RAM of the server
+      example:
+        unit: unit
+        size: 5
+      properties:
+        size:
+          description: The total RAM size of the server
+          type: integer
+        unit:
+          description: RAM type of the server
+          type: string
+      title: ram
+      type: object
+    serverSpecs:
+      description: Hardware information of the server
+      example:
+        cpu:
+          quantity: 0
+          type: type
+        hdd:
+        - amount: 6
+          unit: unit
+          size: 1
+          id: id
+          type: type
+          performanceType: performanceType
+        - amount: 6
+          unit: unit
+          size: 1
+          id: id
+          type: type
+          performanceType: performanceType
+        hardwareRaidCapable: true
+        pciCards:
+        - description: description
+        - description: description
+        chassis: chassis
+        ram:
+          unit: unit
+          size: 5
+      properties:
+        chassis:
+          description: The chassis description of the server
+          type: string
+        cpu:
+          $ref: '#/components/schemas/cpu'
+        hardwareRaidCapable:
+          description: Hardware RAID capability of the server
+          type: boolean
+        hdd:
+          description: List of hard disk drives of the server
+          items:
+            $ref: '#/components/schemas/hdd'
+          type: array
+        pciCards:
+          description: List of PCI cards of the server
+          items:
+            $ref: '#/components/schemas/pciCard'
+          type: array
+        ram:
+          $ref: '#/components/schemas/ram'
+      title: serverSpecs
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      description: API key authentication by setting `X-LSW-Auth` header.
+      in: header
+      name: X-LSW-Auth
+      type: apiKey
+    OAuth2:
+      flows:
+        clientCredentials:
+          refreshUrl: https://auth.leaseweb.com/token
+          scopes: {}
+          tokenUrl: https://auth.leaseweb.com/token
+      type: oauth2
+    BearerAuth:
+      scheme: bearer
+      type: http

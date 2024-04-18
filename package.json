@@ -1,0 +1,21 @@
+{
+  "name": "leaseweb-go-sdk",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Leaseweb/leaseweb-go-sdk.git"
+  },
+  "version": "0.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "markdownlint-cli": "^0.39.0",
+    "prettier": "^3.2.5",
+    "prettier-plugin-sort-json": "^4.0.0"
+  },
+  "scripts": {
+    "markdown:format": "markdownlint -f --disable=MD013",
+    "markdown:lint": "markdownlint --disable=MD013",
+    "prettier:format": "prettier --write --ignore-unknown",
+    "prettier:lint": "prettier --check"
+  }
+}

@@ -1,0 +1,14 @@
+# Ignore markdown
+**/*.md
+
+# Ignore node stuff
+node_modules
+pnpm-lock.yaml
+
+# Ignore generated SDK
+bmp
+bmsdb
+bmusage
+dedicatedserver
+nse
+publicCloud

@@ -1,0 +1,770 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: development-networkautomation@leaseweb.com
+    name: Network Automation Team
+  description: This documents the rest api bmsdb provides.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: bmsdb
+  version: v2
+servers:
+- url: https://api.leaseweb.com/internal/bmsdb/v2
+security:
+- OAuth2: []
+- BearerAuth: []
+- ApiKeyAuth: []
+tags:
+- description: Servers
+  name: Servers
+- description: Internal
+  name: Internal
+paths:
+  /servers/{serverId}/hardwareInfo:
+    get:
+      description: |
+        This information is generated when running a hardware scan for your server. A
+        hardware scan collects hardware information about your system.
+      operationId: getServerHardware
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: "2378237"
+                parserVersion: "3.6"
+                result:
+                  chassis:
+                    description: Rack Mount Chassis
+                    firmware:
+                      date: 07/01/2013
+                      description: BIOS
+                      vendor: HP
+                      version: J01
+                    motherboard:
+                      product: ""
+                      serial: ""
+                      vendor: ""
+                    product: ProLiant DL120 G7 (647339-B21)
+                    serial: CZ33109CHV
+                    vendor: HP
+                  cpu:
+                  - capabilities:
+                      cpufreq: CPU Frequency scaling
+                      ht: HyperThreading
+                      vmx: false
+                      x86-64: 64bits extensions (x86-64)
+                    description: Intel(R) Xeon(R) CPU E31230
+                    hz: "2792640000"
+                    serial_number: ""
+                    settings:
+                      cores: "4"
+                      enabledcores: "4"
+                      threads: "8"
+                    slot: Proc 1
+                    vendor: Intel Corp.
+                  disks:
+                  - description: ATA Disk
+                    id: disk:0
+                    product: Hitachi HDS72302
+                    serial_number: MS77215W07S6SA
+                    size: "2000398934016"
+                    smartctl:
+                      ata_version: ATA8-ACS T13/1699-D revision 4
+                      attributes:
+                        Power_On_Hours:
+                          flag: 0x0012
+                          id: '  9'
+                          raw_value: "39832"
+                          thresh: "000"
+                          type: Old_age
+                          updated: Always
+                          value: "095"
+                          when_failed: "-"
+                          worst: "095"
+                        Reallocated_Sector_Ct:
+                          flag: 0x0033
+                          id: '  5'
+                          raw_value: "0"
+                          thresh: "005"
+                          type: Pre-fail
+                          updated: Always
+                          value: "100"
+                          when_failed: "-"
+                          worst: "100"
+                      device_model: Hitachi HDS723020BLE640
+                      execution_status: "0"
+                      firmware_version: MX4OAAB0
+                      is_sas: false
+                      overall_health: PASSED
+                      rpm: 7200 rpm
+                      sata_version: "SATA 3.0, 6.0 Gb/s (current: 6.0 Gb/s)"
+                      sector_size: "512 bytes logical, 4096 bytes physical"
+                      serial_number: MS77215W07S6SA
+                      smart_error_log: No Errors Logged
+                      smart_support:
+                        available: true
+                        enabled: true
+                      smartctl_version: "6.2"
+                      user_capacity: "2,000,398,934,016 bytes [2.00 TB]"
+                    vendor: Hitachi
+                  ipmi:
+                    defgateway: 10.19.79.126
+                    firmware: "1.88"
+                    ipaddress: 10.19.79.67
+                    ipsource: DHCP Address
+                    macaddress: 28:92:4a:33:48:e8
+                    subnetmask: 255.255.255.192
+                    vendor: Hewlett-Packard
+                  memory:
+                  - clock_hz: "1333000000"
+                    description: DIMM DDR3 Synchronous 1333 MHz (0.8 ns)
+                    id: memory/bank:0
+                    serial_number: 8369AF58
+                    size_bytes: "4294967296"
+                  - clock_hz: "1333000000"
+                    description: DIMM DDR3 Synchronous 1333 MHz (0.8 ns)
+                    id: memory/bank:1
+                    serial_number: 8369B174
+                    size_bytes: "4294967296"
+                  network:
+                  - capabilities:
+                      autonegotiation: Auto-negotiation
+                      bus_master: bus mastering
+                      cap_list: PCI capabilities listing
+                      ethernet: ""
+                      link_speeds:
+                        "1000bt-fd": 1Gbit/s (full duplex)
+                        "100bt": 100Mbit/s
+                        "100bt-fd": 100Mbit/s (full duplex)
+                        "10bt": 10Mbit/s
+                        "10bt-fd": 10Mbit/s (full duplex)
+                      msi: Message Signalled Interrupts
+                      msix: MSI-X
+                      pciexpress: PCI Express
+                      physical: Physical interface
+                      pm: Power Management
+                      tp: twisted pair
+                    lldp:
+                      chassis:
+                        description: "Juniper Networks, Inc. ex3300-48t Ethernet Switch,\
+                          \ kernel JUNOS 15.1R5.5, Build date: 2016-11-25 16:02:59\
+                          \ UTC Copyright (c) 1996-2016 Juniper Networks, Inc."
+                        mac_address: 4c:16:fc:3a:84:c0
+                        name: EVO-NS19-1
+                      port:
+                        auto_negotiation:
+                          enabled: "yes"
+                          supported: "yes"
+                        description: ge-0/0/2.0
+                      vlan:
+                        id: "0"
+                        label: VLAN
+                        name: default
+                    logical_name: eth0
+                    mac_address: 28:92:4a:33:48:e6
+                    product: 82574L Gigabit Network Connection
+                    settings:
+                      autonegotiation: "on"
+                      broadcast: "yes"
+                      driver: e1000e
+                      driverversion: 3.2.6-k
+                      duplex: full
+                      firmware: 2.1-2
+                      ip: 212.32.230.67
+                      latency: "0"
+                      link: "yes"
+                      multicast: "yes"
+                      port: twisted pair
+                      speed: 1Gbit/s
+                    vendor: Intel Corporation
+                scannedAt: 2017-09-27T14:21:01Z
+                serverId: "62264"
+              schema:
+                $ref: '#/components/schemas/getServerHardwareResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show hardware information
+      tags:
+      - bmsdb
+  /servers/{serverId}/hardwareScans:
+    get:
+      description: |
+        List all hardware scans for this server.
+      operationId: servers-hardwarescans-list
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 4
+                hardwareScans:
+                - id: "4"
+                  parserVersion: "4.0"
+                  scannedAt: 2017-01-04T12:00:00+02:00
+                  serverId: "123"
+                - id: "3"
+                  parserVersion: "4.0"
+                  scannedAt: 2017-01-03T12:00:00+02:00
+                  serverId: "123"
+                - id: "2"
+                  parserVersion: "4.0"
+                  scannedAt: 2017-01-02T12:00:00+02:00
+                  serverId: "123"
+                - id: "1"
+                  parserVersion: "4.0"
+                  scannedAt: 2017-01-01T12:00:00+02:00
+                  serverId: "123"
+              schema:
+                $ref: '#/components/schemas/getServerHardwareScanListResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List hardware scans
+      tags:
+      - bmsdb
+  /servers/{serverId}/hardwareScans/{hardwareScanId}:
+    get:
+      description: |
+        Returns detailed information of a hardware scan.
+      operationId: getServerHardwareScan
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID that identifies a hardware scan
+        explode: false
+        in: path
+        name: hardwareScanId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Defines the format of the response
+        example: json
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          default: json
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: "123"
+                parserVersion: "4.0"
+                result:
+                  chassis:
+                    description: Rack Mount Chassis
+                  cpu:
+                  - description: Xeon
+                  disks:
+                  - description: ATA Disk
+                    id: disk
+                  ipmi:
+                    macaddress: 12:34:56:78:90:AB
+                  memory:
+                  - description: DIMM DDR2
+                    id: memory/bank:0
+                  network:
+                  - mac_address: 11:22:33:44:55:66
+                scannedAt: 2017-01-01T12:00:00+02:00
+                serverId: "456"
+              schema:
+                $ref: '#/components/schemas/getServerHardwareScanResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show a hardware scan
+      tags:
+      - bmsdb
+components:
+  parameters:
+    serverId:
+      description: The ID of a server
+      example: "12345"
+      explode: false
+      in: path
+      name: serverId
+      required: true
+      schema:
+        type: string
+      style: simple
+    limit:
+      description: Limit the number of results returned.
+      example: 20
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+      style: form
+    offset:
+      description: Return results starting from the given offset.
+      example: 10
+      explode: true
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+      style: form
+  responses:
+    "400":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "400"
+            errorMessage: The API could not interpret your request correctly.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Bad Request.
+    "401":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "401"
+            errorMessage: You are not authorized to view this resource.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Authorized.
+    "403":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "403"
+            errorMessage: Access to the requested resource is forbidden.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Forbidden.
+    "500":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "500"
+            errorMessage: '''The API could not handle your request at this time.'
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Internal Server Error.
+  schemas:
+    getServerHardwareResult:
+      example:
+        result: "{}"
+        parserVersion: parserVersion
+        scannedAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+        serverId: serverId
+      properties:
+        id:
+          description: Id of this hardware scan result
+          type: string
+        parserVersion:
+          description: Version of the parser used for this hardware info
+          type: string
+        result:
+          description: "Hardware info e.g. chassis, cpu, memory and etc."
+          type: object
+        scannedAt:
+          description: Timestamp of hardware scan
+          format: date-time
+          type: string
+        serverId:
+          description: The server id
+          type: string
+      type: object
+    errorResult:
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails:
+        - key:
+          - errorDetails
+          - errorDetails
+        - key:
+          - errorDetails
+          - errorDetails
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          items:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+          type: array
+      type: object
+    _metadata:
+      description: Metadata about the collection
+      example:
+        offset: 0
+        limit: 5
+        totalCount: 2
+      properties:
+        totalCount:
+          description: Total amount of orders in this collection
+          example: 2
+          type: number
+        offset:
+          default: 0
+          description: The offset used to generate this response
+          example: 0
+          type: number
+        limit:
+          default: 5
+          description: The limit used to generate this response
+          example: 5
+          type: number
+      title: metadata
+      type: object
+    getServerHardwareScanListResult:
+      description: List of Hardware Scans executed in a server
+      example:
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+        hardwareScans:
+        - parserVersion: parserVersion
+          scannedAt: scannedAt
+          id: id
+          serverId: serverId
+        - parserVersion: parserVersion
+          scannedAt: scannedAt
+          id: id
+          serverId: serverId
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        hardwareScans:
+          description: Simple list of Hardware Scans
+          items:
+            $ref: '#/components/schemas/hardwareScan'
+          type: array
+      type: object
+    getServerHardwareScanResult:
+      description: Hardware Scan information
+      example:
+        result:
+          ipmi: "{}"
+          memory:
+          - "{}"
+          - "{}"
+          disks:
+          - "{}"
+          - "{}"
+          cpu:
+          - "{}"
+          - "{}"
+          chassis: "{}"
+          network:
+          - "{}"
+          - "{}"
+        parserVersion: parserVersion
+        scannedAt: scannedAt
+        id: id
+        serverId: serverId
+      properties:
+        id:
+          description: Hardware Scan ID
+          type: string
+        parserVersion:
+          type: string
+        result:
+          $ref: '#/components/schemas/results'
+        scannedAt:
+          description: Date time using the ISO-8601 format
+          type: string
+        serverId:
+          type: string
+      type: object
+    hardwareScan:
+      example:
+        parserVersion: parserVersion
+        scannedAt: scannedAt
+        id: id
+        serverId: serverId
+      properties:
+        id:
+          description: Hardware Scan id
+          type: string
+        parserVersion:
+          type: string
+        scannedAt:
+          description: Date time using the ISO-8601 format
+          type: string
+        serverId:
+          type: string
+      title: hardwareScan
+      type: object
+    results:
+      description: Hardware Scan results
+      example:
+        ipmi: "{}"
+        memory:
+        - "{}"
+        - "{}"
+        disks:
+        - "{}"
+        - "{}"
+        cpu:
+        - "{}"
+        - "{}"
+        chassis: "{}"
+        network:
+        - "{}"
+        - "{}"
+      properties:
+        chassis:
+          type: object
+        cpu:
+          items:
+            type: object
+          minItems: 1
+          type: array
+        disks:
+          items:
+            type: object
+          minItems: 1
+          type: array
+        ipmi:
+          type: object
+        memory:
+          items:
+            type: object
+          minItems: 1
+          type: array
+        network:
+          items:
+            type: object
+          minItems: 1
+          type: array
+      title: results
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      description: API key authentication by setting `X-LSW-Auth` header.
+      in: header
+      name: X-LSW-Auth
+      type: apiKey
+    OAuth2:
+      flows:
+        clientCredentials:
+          refreshUrl: https://auth.leaseweb.com/token
+          scopes: {}
+          tokenUrl: https://auth.leaseweb.com/token
+      type: oauth2
+    BearerAuth:
+      scheme: bearer
+      type: http

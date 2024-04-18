@@ -1,0 +1,1031 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: development-networkautomation@leaseweb.com
+    name: Network Automation Team
+  description: This documents the rest api nse api provides.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: nse
+  version: v2
+servers:
+- url: https://api.leaseweb.com/internal/nseapi/v2
+security:
+- OAuth2: []
+- BearerAuth: []
+- ApiKeyAuth: []
+tags:
+- description: Servers
+  name: Servers
+- description: Notification Settings
+  name: Notification Settings
+- description: Network Interfaces
+  name: Network Interfaces
+- description: Internal
+  name: Internal
+paths:
+  /actions/nullRoute:
+    post:
+      description: |
+        This API call is intented to be used _only_ by IPAM to announce or withdraw
+        null routes.
+
+        Clients needing to `null` or `unnull` IP Addresses should always use the IPAM
+        API for this.
+      operationId: updateNullRoute
+      requestBody:
+        content:
+          application/json:
+            example:
+              action: ANNOUNCE
+              ipAddress: 127.0.0.55/32
+            schema:
+              $ref: '#/components/schemas/updateNullRouteOpts'
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                message: Null route for IP address 127.0.0.55/32 will be announced
+                  shortly.
+              schema:
+                $ref: '#/components/schemas/updateNullRouteAcceptedResult'
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails:
+                  action:
+                  - This is not a valid action.
+                  ipAddress:
+                  - This is not a valid IPv4/IPv6 address.
+                errorMessage: Validation Failed.
+              schema:
+                $ref: '#/components/schemas/updateNullRouteBadRequestResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Announce/Withdraw Null Routes
+      tags:
+      - nse
+  /servers/{serverId}/networkInterfaces:
+    get:
+      description: |
+        List all network interfaces for this server, including their current status.
+      operationId: getNetworkInterfaceList
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 1
+                networkInterfaces:
+                - linkSpeed: 100Mbps
+                  operStatus: OPEN
+                  status: OPEN
+                  switchInterface: "33"
+                  switchName: EVO-AA11-1
+                  type: PUBLIC
+              schema:
+                $ref: '#/components/schemas/getNetworkInterfaceListResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List network interfaces
+      tags:
+      - nse
+  /servers/{serverId}/networkInterfaces/close:
+    post:
+      description: |
+        Close all network interfaces for this server.
+      operationId: closeNetworkInterfaces
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Close all network interfaces
+      tags:
+      - nse
+  /servers/{serverId}/networkInterfaces/open:
+    post:
+      description: |
+        Open all network interfaces of this server.
+      operationId: openNetworkInterfaces
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Open all network interfaces
+      tags:
+      - nse
+  /servers/{serverId}/networkInterfaces/{networkType}:
+    get:
+      description: |
+        Show the network interface of the given type of this server, including its
+        status.
+      operationId: getNetworkInterface
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The network type
+        explode: false
+        in: path
+        name: networkType
+        required: true
+        schema:
+          enum:
+          - public
+          - internal
+          - remoteManagement
+          example: public
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                linkSpeed: 100Mbps
+                operStatus: OPEN
+                status: OPEN
+                switchInterface: "33"
+                switchName: EVO-JV12-1
+                type: PUBLIC
+              schema:
+                $ref: '#/components/schemas/networkInterface'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show a network interface
+      tags:
+      - nse
+  /servers/{serverId}/networkInterfaces/{networkType}/close:
+    post:
+      description: |
+        Close the network interface of this type of this server.
+      operationId: closeNetworkInterface
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The network type
+        explode: false
+        in: path
+        name: networkType
+        required: true
+        schema:
+          enum:
+          - public
+          - internal
+          - remoteManagement
+          example: public
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Close network interface
+      tags:
+      - nse
+  /servers/{serverId}/networkInterfaces/{networkType}/open:
+    post:
+      description: |
+        Open all network interfaces of the given type for this server.
+      operationId: openNetworkInterface
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The network type
+        explode: false
+        in: path
+        name: networkType
+        required: true
+        schema:
+          enum:
+          - public
+          - internal
+          - remoteManagement
+          example: public
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Open network interface
+      tags:
+      - nse
+  /servers/{serverId}/notificationSettings/ddos:
+    get:
+      description: |
+        Show all DDoS Protection related notification settings for this server. These
+        settings control if you want to be notified via email in case a DDoS was
+        mitigated.
+      operationId: getDdosNotificationSettingList
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                nulling: ENABLED
+                scrubbing: DISABLED
+              schema:
+                $ref: '#/components/schemas/getDdosNotificationSettingResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Inspect DDoS notification settings
+      tags:
+      - nse
+    put:
+      description: |
+        Update your DDoS notification settings for this server.
+      operationId: updateServerDdosNotificationSetting
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              nulling: DISABLED
+              scrubbing: ENABLED
+            schema:
+              $ref: '#/components/schemas/updateDdosNotificationSettingOpts'
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Update DDoS notification settings
+      tags:
+      - nse
+components:
+  parameters:
+    serverId:
+      description: The ID of a server
+      example: "12345"
+      explode: false
+      in: path
+      name: serverId
+      required: true
+      schema:
+        type: string
+      style: simple
+    networkType:
+      description: The network type
+      explode: false
+      in: path
+      name: networkType
+      required: true
+      schema:
+        enum:
+        - public
+        - internal
+        - remoteManagement
+        example: public
+        type: string
+      style: simple
+  responses:
+    "204":
+      description: No Content.
+    "400":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "400"
+            errorMessage: The API could not interpret your request correctly.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Bad Request.
+    "401":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "401"
+            errorMessage: You are not authorized to view this resource.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Authorized.
+    "403":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "403"
+            errorMessage: Access to the requested resource is forbidden.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Forbidden.
+    "500":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "500"
+            errorMessage: '''The API could not handle your request at this time.'
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Internal Server Error.
+  schemas:
+    updateNullRouteOpts:
+      properties:
+        action:
+          description: The action to take
+          enum:
+          - ANNOUNCE
+          - WITHDRAW
+          example: WITHDRAW
+          type: string
+        ipAddress:
+          description: The IP address for which to announce or withdraw the null route
+          type: string
+      required:
+      - action
+      - ipAddress
+      type: object
+    updateNullRouteAcceptedResult:
+      example:
+        message: message
+      properties:
+        message:
+          description: A human friendly message describing the action that will be
+            taken
+          type: string
+      type: object
+    updateNullRouteBadRequestResult:
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails: "{}"
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorDetails:
+          description: An object describing the errors for the current request.
+          type: object
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+      type: object
+    errorResult:
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails:
+        - key:
+          - errorDetails
+          - errorDetails
+        - key:
+          - errorDetails
+          - errorDetails
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          items:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+          type: array
+      type: object
+    _metadata:
+      description: Metadata about the collection
+      example:
+        offset: 0
+        limit: 5
+        totalCount: 2
+      properties:
+        totalCount:
+          description: Total amount of orders in this collection
+          example: 2
+          type: number
+        offset:
+          default: 0
+          description: The offset used to generate this response
+          example: 0
+          type: number
+        limit:
+          default: 5
+          description: The limit used to generate this response
+          example: 5
+          type: number
+      title: metadata
+      type: object
+    networkInterface:
+      example:
+        switchInterface: switchInterface
+        switchName: switchName
+        operStatus: operStatus
+        linkSpeed: linkSpeed
+        type: type
+        status: status
+      properties:
+        linkSpeed:
+          description: The link speed
+          type: string
+        operStatus:
+          description: The operational status
+          type: string
+        status:
+          description: The administrative status
+          type: string
+        switchInterface:
+          description: The switch port number
+          type: string
+        switchName:
+          description: The switch name
+          type: string
+        type:
+          description: The network type
+          type: string
+      type: object
+    getNetworkInterfaceListResult:
+      example:
+        networkInterfaces:
+        - switchInterface: switchInterface
+          switchName: switchName
+          operStatus: operStatus
+          linkSpeed: linkSpeed
+          type: type
+          status: status
+        - switchInterface: switchInterface
+          switchName: switchName
+          operStatus: operStatus
+          linkSpeed: linkSpeed
+          type: type
+          status: status
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        networkInterfaces:
+          description: An array of network interfaces
+          items:
+            $ref: '#/components/schemas/networkInterface'
+          type: array
+      type: object
+    getDdosNotificationSettingResult:
+      example:
+        nulling: nulling
+        scrubbing: scrubbing
+      properties:
+        nulling:
+          description: Email notifications for nulling events
+          type: string
+        scrubbing:
+          description: Email notifications for scrubbing events
+          type: string
+      type: object
+    updateDdosNotificationSettingOpts:
+      properties:
+        nulling:
+          description: Enable or disable email notifications for nulling events
+          enum:
+          - ENABLED
+          - DISABLED
+          type: string
+        scrubbing:
+          description: Enable or disable email notifications for nulling events
+          enum:
+          - ENABLED
+          - DISABLED
+          type: string
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      description: API key authentication by setting `X-LSW-Auth` header.
+      in: header
+      name: X-LSW-Auth
+      type: apiKey
+    OAuth2:
+      flows:
+        clientCredentials:
+          refreshUrl: https://auth.leaseweb.com/token
+          scopes: {}
+          tokenUrl: https://auth.leaseweb.com/token
+      type: oauth2
+    BearerAuth:
+      scheme: bearer
+      type: http

@@ -1,0 +1,5100 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: development-networkautomation@leaseweb.com
+    name: Network Automation Team
+  description: This documents the rest api bmp api provides.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: bmp
+  version: v2
+servers:
+- url: https://api.leaseweb.com/internal/bmpapi/v2
+security:
+- OAuth2: []
+- BearerAuth: []
+- ApiKeyAuth: []
+tags:
+- description: Servers
+  name: Servers
+- description: Network Equipment
+  name: Network Equipment
+- description: DHCP Leases
+  name: DHCP Leases
+- description: Jobs
+  name: Jobs
+- description: Credentials
+  name: Credentials
+- description: Power
+  name: Power
+- description: Operating Systems
+  name: Operating Systems
+- description: Control Panels
+  name: Control Panels
+- description: Rescue Images
+  name: Rescue Images
+- description: Internal
+  name: Internal
+paths:
+  /controlPanels:
+    get:
+      description: |
+        An `id` of a control panel can be supplied when (re)installing a dedicated
+        server (for more information on how to install dedicated servers via the API
+        refer to the API documentation).
+      operationId: getControlPanelList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 2
+                controlPanels:
+                - id: CPANEL_PREMIER_100
+                  name: cPanel Premier 100
+                - id: CPANEL_PREMIER_150
+                  name: cPanel Premier 150
+                - id: CPANEL_PREMIER_200
+                  name: cPanel Premier 200
+                - id: CPANEL_PREMIER_250
+                  name: cPanel Premier 250
+                - id: PLESK_DEDSER_WEB_ADMIN
+                  name: Plesk Web Admin 10 Domains
+                - id: PLESK_DEDSER_WEB_PRO
+                  name: Plesk Web Pro 30 Domains
+                - id: PLESK_DEDSER_WEB_HOST
+                  name: Plesk Web Host Unlimited Domains
+                - id: VESTA
+                  name: Vesta CP
+              schema:
+                $ref: '#/components/schemas/controlPanelList'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List control panels
+      tags:
+      - bmp
+  /networkEquipments/{networkEquipmentId}/credentials:
+    get:
+      description: |
+        The credentials API allows you to store usernames and passwords securely.
+      operationId: networkEquipments-credentials-list
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 4
+                credentials:
+                - type: REMOTE_MANAGEMENT
+                  username: admin
+                - type: REMOTE_MANAGEMENT
+                  username: root
+                - type: OPERATING_SYSTEM
+                  username: root
+                - type: OPERATING_SYSTEM
+                  username: user
+              schema:
+                $ref: '#/components/schemas/credentialList'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List credentials
+      tags:
+      - bmp
+    post:
+      description: |
+        Password will NOT be updated on the network equipment. The ability to update
+        credentials is for convenience only. It provides a secure way to communicate
+        passwords with Leaseweb engineers in case support is required.
+      operationId: networkEquipments-credentials-post
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              password: mys3cr3tp@ssw0rd
+              type: OPERATING_SYSTEM
+              username: root
+            schema:
+              $ref: '#/components/schemas/createNetworkEquipmentCredentialOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                password: mys3cr3tp@ssw0rd
+                type: OPERATING_SYSTEM
+                username: root
+              schema:
+                $ref: '#/components/schemas/credential'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Create new credentials
+      tags:
+      - bmp
+  /networkEquipments/{networkEquipmentId}/credentials/{type}:
+    get:
+      description: |
+        List all the credentials filtered by the specified type that are associated
+        with this network equipment.
+      operationId: getNetworkEquipmentCredentialListByType
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Credential type
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          example: OPERATING_SYSTEM
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 1
+                credentials:
+                - type: OPERATING_SYSTEM
+                  username: root
+              schema:
+                $ref: '#/components/schemas/credentialList'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List credentials by type
+      tags:
+      - bmp
+  /networkEquipments/{networkEquipmentId}/credentials/{type}/{username}:
+    delete:
+      description: |
+        This action is purely administrative and will only remove the username and
+        password associated with this resource from our database.
+      operationId: deleteNetworkEquipmentCredential
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Credential type
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          example: OPERATING_SYSTEM
+          type: string
+        style: simple
+      - description: Username
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          example: root
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Delete user credentials
+      tags:
+      - bmp
+    get:
+      description: |
+        View the password for the given credential, identified by `type` and
+        `username`.
+      operationId: networkEquipments-credentials-get
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Credential type
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          example: OPERATING_SYSTEM
+          type: string
+        style: simple
+      - description: Username
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          example: root
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                password: mys3cr3tp@ssw0rd
+                type: OPERATING_SYSTEM
+                username: root
+              schema:
+                $ref: '#/components/schemas/credential'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show user credentials
+      tags:
+      - bmp
+    put:
+      description: |
+        The usernames or types cannot be changed. In order to change those remove this
+        credentials and create a new one.
+
+        This action is purely administrative and will only update the password
+        associated with this resource in our database.
+      operationId: updateNetworkEquipmentCredential
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Credential type
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          example: OPERATING_SYSTEM
+          type: string
+        style: simple
+      - description: Username
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          example: root
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              password: mys3cr3tp@ssw0rd
+            schema:
+              $ref: '#/components/schemas/updateNetworkEquipmentCredentialOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                password: mys3cr3tp@ssw0rd
+                type: OPERATING_SYSTEM
+                username: root
+              schema:
+                $ref: '#/components/schemas/credential'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Update user credentials
+      tags:
+      - bmp
+  /networkEquipments/{networkEquipmentId}/powerCycle:
+    post:
+      description: |
+        Powercyle the network equipment.
+      operationId: powerCycleNetworkEquipment
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Power cycle a network equipment
+      tags:
+      - bmp
+  /networkEquipments/{networkEquipmentId}/powerInfo:
+    get:
+      description: |
+        The network equipment can either be `ON` or `OFF`. Network Equipment can be
+        powered on or off by using the respective `/powerOn` and `/powerOff` API
+        calls. In addition network equipment can also be rebooted using the
+        `/powerCycle` API call.
+
+        The `pdu` object describes the power status from the power distribution unit
+        (PDU) point of view. If your network equipment is connected to multiple PDU
+        ports the `status` property will report `on` if at least one PDU port has
+        power.
+      operationId: getNetworkEquipmentPowerStatus
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                pdu:
+                  status: "on"
+              schema:
+                $ref: '#/components/schemas/getNetworkEquipmentPowerStatusResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show power status
+      tags:
+      - bmp
+  /networkEquipments/{networkEquipmentId}/powerOff:
+    post:
+      description: |
+        Power off the given network equipment.
+      operationId: powerNetworkEquipmentOff
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Power off network equipment
+      tags:
+      - bmp
+  /networkEquipments/{networkEquipmentId}/powerOn:
+    post:
+      description: |
+        Power on the given network equipment.
+      operationId: powerNetworkEquipmentOn
+      parameters:
+      - description: The ID of a dedicated network equipment
+        example: "12345"
+        explode: false
+        in: path
+        name: networkEquipmentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Power on network equipment
+      tags:
+      - bmp
+  /operatingSystems:
+    get:
+      description: |
+        An `id` of a operating system can be supplied when (re)installing a dedicated
+        server (for more information on how to install dedicated servers via the API
+        refer to the API documentation).
+      operationId: getOperatingSystemList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Filter operating systems by control panel id
+        explode: true
+        in: query
+        name: controlPanelId
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 100
+                  offset: 0
+                  totalCount: 26
+                operatingSystems:
+                - id: ALMALINUX_8_64BIT
+                  name: AlmaLinux 8 (x86_64)
+                - id: CENTOS_7_64BIT
+                  name: CentOS 7 (x86_64)
+                - id: ROCKY_LINUX_8_64BIT
+                  name: Rocky Linux 8 (x86_64)
+                - id: DEBIAN_11_64BIT
+                  name: Debian 11 (amd64)
+                - id: DEBIAN_10_64BIT
+                  name: Debian 10 (amd64)
+                - id: UBUNTU_22_04_64BIT
+                  name: Ubuntu 22.04 LTS (Jammy Jellyfish) (amd64)
+                - id: UBUNTU_20_04_64BIT
+                  name: Ubuntu 20.04 LTS (Focal Fossa) (amd64)
+                - id: UBUNTU_18_04_64BIT
+                  name: Ubuntu 18.04 LTS (Bionic Beaver) (amd64)
+                - id: WINDOWS_SERVER_2019_STANDARD_64BIT
+                  name: Windows Server 2019 Standard (x64)
+                - id: WINDOWS_SERVER_2019_DATACENTER_64BIT
+                  name: Windows Server 2019 Datacenter (x64)
+                - id: WINDOWS_SERVER_2016_STANDARD_64BIT
+                  name: Windows Server 2016 Standard (x64)
+                - id: WINDOWS_SERVER_2016_DATACENTER_64BIT
+                  name: Windows Server 2016 Datacenter (x64)
+                - id: WINDOWS_SERVER_2012_R2_STANDARD_64BIT
+                  name: Windows Server 2012 R2 Standard (x64)
+                - id: WINDOWS_SERVER_2012_R2_DATACENTER_64BIT
+                  name: Windows Server 2012 R2 Datacenter (x64)
+                - id: WINDOWS_SERVER_2012_STANDARD_64BIT
+                  name: Windows Server 2012 Standard (x64) (Only available to existing
+                    license holders)
+                - id: WINDOWS_SERVER_2012_DATACENTER_64BIT
+                  name: Windows Server 2012 Datacenter (x64) (Only available to existing
+                    license holders)
+                - id: ESXI_7_0_64BIT_CSTM
+                  name: ESXi 7.0 Targeted (x86_64)
+                - id: ESXI_7_0_64BIT
+                  name: ESXi 7.0 (x86_64)
+                - id: ESXI_6_7_64BIT_CSTM
+                  name: ESXi 6.7 Targeted (x86_64)
+                - id: ESXI_6_7_64BIT
+                  name: ESXi 6.7 (x86_64)
+                - id: ESXI_6_5_64BIT_CSTM
+                  name: ESXi 6.5 Targeted (x86_64)
+                - id: ESXI_6_5_64BIT
+                  name: ESXi 6.5 (x86_64)
+                - id: FREEBSD_13_64BIT
+                  name: FreeBSD 13.1 (amd64)
+                - id: FREEBSD_12_64BIT
+                  name: FreeBSD 12.3 (amd64)
+              schema:
+                $ref: '#/components/schemas/getOperatingSystemListResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List Operating Systems
+      tags:
+      - bmp
+  /operatingSystems/{operatingSystemId}:
+    get:
+      description: |
+        This detailed information shows default options when installing the given
+        operating system on a dedicated server.
+
+        For some operating systems these defaults can be adjusted when making the
+        `POST` request to `/install`. If the `configurable` parameter is `true` these
+        defaults can be adjusted by the client.
+      operationId: getOperatingSystem
+      parameters:
+      - description: Operating system ID
+        explode: false
+        in: path
+        name: operatingSystemId
+        required: true
+        schema:
+          example: UBUNTU_22_04_64BIT
+          type: string
+        style: simple
+      - description: The Control Panel ID
+        explode: true
+        in: query
+        name: controlPanelId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: CENTOS_7_64BIT
+                name: CentOS 7 (x86_64)
+                family: centos
+                version: "7"
+                architecture: 64bit
+                configurable: true
+                type: linux
+                features:
+                - PARTITIONING
+                - SW_RAID
+                - TIMEZONE
+                - HOSTNAME
+                - SSH_KEYS
+                - POST_INSTALL_SCRIPTS
+                - CONTROL_PANEL
+                - DB_MARIADB
+                - DB_REDIS
+                - DB_MONGODB
+                - DB_POSTGRESQL
+                supportedFileSystems:
+                - ext2
+                - ext3
+                - ext4
+                - xfs
+                - swap
+                supportedBootDevices:
+                - SATA_SAS
+                - NVME
+                defaults:
+                  device: SATA_SAS
+                  partitions:
+                  - mountpoint: /boot
+                    size: "1024"
+                    filesystem: ext2
+                  - size: "4096"
+                    filesystem: swap
+                  - mountpoint: /tmp
+                    size: "4096"
+                    filesystem: ext4
+                  - mountpoint: /
+                    size: '*'
+                    filesystem: ext4
+              schema:
+                $ref: '#/components/schemas/getOperatingSystemResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show an operating system
+      tags:
+      - bmp
+  /operatingSystems/{operatingSystemId}/controlPanels:
+    get:
+      description: |
+        An `id` of a control panel can be supplied when (re)installing a dedicated
+        server (for more information on how to install dedicated servers via the API
+        refer to the API documentation).
+
+        Not all operating systems support all control panels. Some operating systems
+        do not allow for installation of a control panel. To filter the list of
+        control panels which are supported for an operating system use the
+        `operatingSystemId` query string parameter to filter this list.
+      operationId: getControlPanelListByOperatingSystem
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Operating system ID
+        explode: false
+        in: path
+        name: operatingSystemId
+        required: true
+        schema:
+          example: UBUNTU_22_04_64BIT
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 2
+                controlPanels:
+                - id: CPANEL_PREMIER_100
+                  name: cPanel Premier 100
+                - id: CPANEL_PREMIER_150
+                  name: cPanel Premier 150
+                - id: CPANEL_PREMIER_200
+                  name: cPanel Premier 200
+                - id: CPANEL_PREMIER_250
+                  name: cPanel Premier 250
+                - id: PLESK_DEDSER_WEB_ADMIN
+                  name: Plesk Web Admin 10 Domains
+                - id: PLESK_DEDSER_WEB_PRO
+                  name: Plesk Web Pro 30 Domains
+                - id: PLESK_DEDSER_WEB_HOST
+                  name: Plesk Web Host Unlimited Domains
+                - id: VESTA
+                  name: Vesta CP
+              schema:
+                $ref: '#/components/schemas/controlPanelList'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List control panels
+      tags:
+      - bmp
+  /rescueImages:
+    get:
+      description: |
+        Lists all Rescue Images which are available for launching a dedicated server
+        into rescue mode.
+
+        A `rescueImageId` can be supplied to the `POST /rescueMode` API call and will
+        reboot your server into rescue mode.
+
+        Launching rescue mode for a server is often used to troubleshoot an existing
+        installation.
+
+        Note that launching rescue mode does not modify any data on the disks of your
+        server. It will require your server to be rebooted.
+      operationId: getRescueImageList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 2
+                rescueImages:
+                - id: GRML
+                  name: GRML Linux Rescue Image (amd64)
+                - id: CENTOS_7
+                  name: CentOS 7 Linux Rescue Image (amd64)
+                - id: FREEBSD
+                  name: FreeBSD Rescue Image (amd64)
+              schema:
+                $ref: '#/components/schemas/getRescueImageListResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Rescue Images
+      tags:
+      - bmp
+  /servers/{serverId}/cancelActiveJob:
+    post:
+      description: |
+        Canceling an active job will trigger the `onfail` flow of the current job
+        often resulting in a server reboot. If you do not want the server state to
+        change `expire` the active job instead.
+      operationId: cancelActiveJob
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                createdAt: 2021-01-09T08:54:06+0000
+                flow: '#stop'
+                isRunning: false
+                node: 80:18:44:E0:AF:C4!JGNTQ92
+                payload:
+                  configurable: true
+                  device: SATA2TB
+                  fileserverBaseUrl: ""
+                  jobType: install
+                  numberOfDisks: null
+                  operatingSystemId: UBUNTU_22_04_64BIT
+                  os:
+                    architecture: 64bit
+                    family: ubuntu
+                    name: Ubuntu 22.04 LTS (Jammy Jellyfish) (amd64)
+                    type: linux
+                    version: "22.04"
+                  partitions:
+                  - filesystem: swap
+                    size: 4096
+                  pop: AMS-01
+                  powerCycle: true
+                  raidLevel: null
+                  serverId: "99944"
+                  timezone: UTC
+                  x: 1
+                progress:
+                  canceled: 1
+                  expired: 0
+                  failed: 0
+                  finished: 0
+                  inprogress: 0
+                  pending: 0
+                  percentage: 0
+                  total: 1
+                  waiting: 0
+                serverId: "99944"
+                status: CANCELED
+                tasks:
+                - description: dummy
+                  errorMessage: The job was canceled by the api consumer
+                  flow: tasks
+                  onError: break
+                  status: CANCELED
+                  statusTimestamps:
+                    CANCELED: 2021-01-09T08:54:15+00:00
+                    PENDING: 2021-01-09T08:54:06+00:00
+                    WAITING: 2021-01-09T08:54:06+00:00
+                  uuid: 085ce145-39bd-4cb3-8e2b-53f17a97a463
+                type: install
+                updatedAt: 2021-01-09T08:54:15+0000
+                uuid: c77d8a6b-d255-4744-8b95-8bf4af6f8b48
+              schema:
+                $ref: '#/components/schemas/serverJob'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Cancel active job
+      tags:
+      - bmp
+  /servers/{serverId}/configureHardwareRaid:
+    post:
+      description: |
+        This is an `internal` only job that can be used to configure Hardware RAID on
+        servers that are Hardware RAID capable.
+
+        All existing data will be destroyed!
+      operationId: configureHardwareRaid
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              level: 1
+              numberOfDisks: 2
+              powerCycle: true
+              type: HW
+            schema:
+              $ref: '#/components/schemas/configureHardwareRaidOpts'
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 1
+                jobs:
+                - createdAt: 2018-01-09T10:38:12+0000
+                  flow: tasks
+                  isRunning: true
+                  node: 80:18:44:E0:AF:C4!JGNTQ92
+                  progress:
+                    canceled: 0
+                    expired: 0
+                    failed: 0
+                    finished: 0
+                    inprogress: 0
+                    pending: 1
+                    percentage: 0
+                    total: 1
+                    waiting: 0
+                  serverId: "99944"
+                  status: ACTIVE
+                  type: install
+                  updatedAt: 2018-01-09T10:38:12+0000
+                  uuid: 3a867358-5b4b-44ee-88ac-4274603ef641
+              schema:
+                $ref: '#/components/schemas/serverJobList'
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Configure Hardware Raid
+      tags:
+      - bmp
+  /servers/{serverId}/credentials:
+    get:
+      description: |
+        The credentials API allows you to store usernames and passwords securely.
+
+        During (re)installations, rescue modes and ipmi resets the newly generated
+        passwords are stored and can be retrieved using this API.
+      operationId: getServerCredentialList
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 4
+                credentials:
+                - type: REMOTE_MANAGEMENT
+                  username: admin
+                - type: REMOTE_MANAGEMENT
+                  username: root
+                - type: OPERATING_SYSTEM
+                  username: root
+                - type: OPERATING_SYSTEM
+                  username: user
+              schema:
+                $ref: '#/components/schemas/credentialList'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List credentials
+      tags:
+      - bmp
+    post:
+      description: |
+        Password will NOT be updated on the server. The ability to update credentials
+        is for convenience only. It provides a secure way to communicate passwords
+        with Leaseweb engineers in case support is required.
+      operationId: addServerCredential
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              password: mys3cr3tp@ssw0rd
+              type: OPERATING_SYSTEM
+              username: root
+            schema:
+              $ref: '#/components/schemas/createServerCredentialOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                password: mys3cr3tp@ssw0rd
+                type: OPERATING_SYSTEM
+                username: root
+              schema:
+                $ref: '#/components/schemas/credential'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Create new credentials
+      tags:
+      - bmp
+  /servers/{serverId}/credentials/{type}:
+    get:
+      description: |
+        List all the credentials filtered by the specified type that are associated
+        with this server.
+      operationId: servers-credentials-list-type
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Credential type
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          example: OPERATING_SYSTEM
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 1
+                credentials:
+                - type: OPERATING_SYSTEM
+                  username: root
+              schema:
+                $ref: '#/components/schemas/credentialList'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List credentials by type
+      tags:
+      - bmp
+  /servers/{serverId}/credentials/{type}/{username}:
+    delete:
+      description: |
+        This action is purely administrative and will only remove the username and
+        password associated with this resource from our database.
+      operationId: deleteServerCredential
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Credential type
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          example: OPERATING_SYSTEM
+          type: string
+        style: simple
+      - description: Username
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          example: root
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Delete server credential
+      tags:
+      - bmp
+    get:
+      description: |
+        View the password for the given credential, identified by `type` and
+        `username`. Auto generated credentials (during a re-install, rescue mode or
+        ipmi reset can be found here).
+      operationId: servers-credentials-get
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Credential type
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          example: OPERATING_SYSTEM
+          type: string
+        style: simple
+      - description: Username
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          example: root
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                password: mys3cr3tp@ssw0rd
+                type: OPERATING_SYSTEM
+                username: root
+              schema:
+                $ref: '#/components/schemas/credential'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show user credentials
+      tags:
+      - bmp
+    put:
+      description: |
+        The usernames or types cannot be changed. In order to change those remove this
+        credentials and create a new one.
+
+        This action is purely administrative and will only update the password
+        associated with this resource in our database.
+      operationId: servers-credentials-put
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Credential type
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          example: OPERATING_SYSTEM
+          type: string
+        style: simple
+      - description: Username
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          example: root
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              password: mys3cr3tp@ssw0rd
+            schema:
+              $ref: '#/components/schemas/updateServerCredentialOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                password: mys3cr3tp@ssw0rd
+                type: OPERATING_SYSTEM
+                username: root
+              schema:
+                $ref: '#/components/schemas/credential'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Update user credentials
+      tags:
+      - bmp
+  /servers/{serverId}/expireActiveJob:
+    post:
+      description: |
+        Expiring an active job will not have any influence on the current state of the
+        server and is merely an administrative action.
+
+        Often you want to `cancel` the job, resulting in a server reboot. In that
+        case\nuse the `/cancelActiveJob` API call instead.
+      operationId: expireActiveJob
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                createdAt: 2021-01-09T08:50:45+0000
+                flow: '#stop'
+                isRunning: false
+                node: 80:18:44:E0:AF:C4!JGNTQ92
+                payload:
+                  configurable: true
+                  device: SATA2TB
+                  fileserverBaseUrl: ""
+                  jobType: install
+                  numberOfDisks: null
+                  operatingSystemId: UBUNTU_22_04_64BIT
+                  os:
+                    architecture: 64bit
+                    family: ubuntu
+                    name: Ubuntu 22.04 LTS (Jammy Jellyfish) (amd64)
+                    type: linux
+                    version: "22.04"
+                  partitions:
+                  - filesystem: swap
+                    size: 4096
+                  pop: AMS-01
+                  powerCycle: true
+                  raidLevel: null
+                  serverId: "99944"
+                  timezone: UTC
+                  x: 1
+                progress:
+                  canceled: 0
+                  expired: 1
+                  failed: 0
+                  finished: 0
+                  inprogress: 0
+                  pending: 0
+                  percentage: 0
+                  total: 1
+                  waiting: 0
+                serverId: "99944"
+                status: EXPIRED
+                tasks:
+                - description: dummy
+                  errorMessage: The job was expired by the api consumer
+                  flow: tasks
+                  onError: break
+                  status: EXPIRED
+                  statusTimestamps:
+                    EXPIRED: 2021-01-09T08:51:54+00:00
+                    PENDING: 2021-01-09T08:50:45+00:00
+                    WAITING: 2021-01-09T08:50:45+00:00
+                  uuid: 0286423e-06ac-49bf-ace5-35af97bde4b1
+                type: install
+                updatedAt: 2021-01-09T08:51:54+0000
+                uuid: fe54dd20-a815-47da-bcb4-5550a160dbbe
+              schema:
+                $ref: '#/components/schemas/serverJob'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Expire active job
+      tags:
+      - bmp
+  /servers/{serverId}/hardwareScan:
+    post:
+      description: |
+        A hardware scan collects hardware related information from your server.
+
+        A hardware scan will require a reboot of your server. The contents of your
+        hard drive won't be altered in any way. After a successful hardware scan your
+        server is booted back into the original operating system.
+      operationId: scanHardware
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              powerCycle: false
+            schema:
+              $ref: '#/components/schemas/scanHardwareOpts'
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                createdAt: 2018-01-09T09:07:09+0000
+                flow: tasks
+                isRunning: true
+                node: 80:18:44:E0:AF:C4!JGNTQ92
+                payload:
+                  fileserverBaseUrl: ""
+                  jobType: hardwareScan
+                  pop: AMS-01
+                  powerCycle: true
+                  serverId: "99944"
+                progress:
+                  canceled: 0
+                  expired: 0
+                  failed: 0
+                  finished: 0
+                  inprogress: 0
+                  pending: 1
+                  percentage: 0
+                  total: 5
+                  waiting: 4
+                serverId: "99944"
+                status: ACTIVE
+                tasks:
+                - description: dummy
+                  errorMessage: null
+                  flow: tasks
+                  onError: break
+                  status: PENDING
+                  statusTimestamps:
+                    PENDING: 2018-01-09T10:38:12+00:00
+                    WAITING: 2018-01-09T10:38:12+00:00
+                  uuid: 8a10b74b-2a94-4a3b-88da-b9c07faa240d
+                type: hardwareScan
+                updatedAt: 2018-01-09T09:07:09+0000
+                uuid: 2dcca92d-b5df-4837-bd99-b568ac54569a
+              schema:
+                $ref: '#/components/schemas/serverJob'
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Launch hardware scan
+      tags:
+      - bmp
+  /servers/{serverId}/install:
+    post:
+      description: |
+        Install your server with an Operating System and optional Control Panel.
+
+        To retrieve a list of available operating systems use the
+        `/v2/operatingSystems` endpoint.
+
+        To retrieve a list of available control panels use the `/v2/controlPanels`
+        endpoint.
+
+        The default device / partitions to be used are operating system depended and
+        can be retrieved via the `/v2/operatingSystems/{operatingSystemId}` endpoint.
+
+        You are now able to target a specific diskset, like SATA1TB, SATA2TB, SSD256GB,
+        etc. To see which disksets are available in your server check the `/v2/servers/{serverId}`
+        endpoint and look for the corresponding diskset id from the hdd array.
+
+        For more information about Dedicated Server installation, [click here](https://kb.leaseweb.com/products/dedicated-server/reinstalling-your-dedicated-server) for our related Knowledge Base article.
+      operationId: installOperatingSystem
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              controlPanelId: PLESK_12
+              device: SATA2TB
+              hostname: ubuntu22.local
+              operatingSystemId: UBUNTU_22_04_64BIT
+              partitions:
+              - filesystem: ext2
+                mountpoint: /boot
+                size: "1024"
+              - filesystem: swap
+                size: "4096"
+              - filesystem: ext4
+                mountpoint: /tmp
+                size: "4096"
+              - filesystem: ext4
+                mountpoint: /
+                size: '*'
+              sshKeys: ssh-rsa AAAAB3NzaC1y... user@domain.com
+            schema:
+              $ref: '#/components/schemas/installOperatingSystemOpts'
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                createdAt: 2021-03-06T21:55:32+0000
+                flow: tasks
+                isRunning: true
+                node: AA:BB:CC:DD:EE:FF!DKFJKD8989
+                payload:
+                  configurable: true
+                  device: SATA2TB
+                  fileserverBaseUrl: 10.11.20.2
+                  isUnassignedServer: false
+                  jobType: install
+                  numberOfDisks: null
+                  operatingSystemId: UBUNTU_22_04_64BIT
+                  os:
+                    architecture: 64bit
+                    family: ubuntu
+                    name: Ubuntu 22.04 LTS (Jammy Jellyfish) (amd64)
+                    type: linux
+                    version: "22.04"
+                  partitions:
+                  - filesystem: ext2
+                    mountpoint: /boot
+                    size: 1024
+                  - filesystem: swap
+                    size: 4096
+                  - filesystem: ext4
+                    mountpoint: /tmp
+                    size: 4096
+                  - filesystem: ext4
+                    mountpoint: /
+                    size: '*'
+                  pop: AMS-01
+                  powerCycle: true
+                  raidLevel: null
+                  serverId: "12345"
+                  timezone: UTC
+                progress:
+                  canceled: 0
+                  expired: 0
+                  failed: 0
+                  finished: 0
+                  inprogress: 0
+                  pending: 1
+                  percentage: 0
+                  total: 26
+                  waiting: 25
+                serverId: "12345"
+                status: ACTIVE
+                tasks:
+                - description: dummy
+                  errorMessage: null
+                  flow: tasks
+                  onError: break
+                  status: PENDING
+                  statusTimestamps:
+                    PENDING: 2021-01-09T09:18:06+00:00
+                    WAITING: 2021-01-09T09:18:06+00:00
+                  uuid: c1a56a5a-ae38-4b12-acb6-0cba9ceb1016
+                type: install
+                updatedAt: 2021-03-06T21:55:32+0000
+                uuid: bcf2bedf-8450-4b22-86a8-f30aeb3a38f9
+              schema:
+                $ref: '#/components/schemas/serverJob'
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Launch installation
+      tags:
+      - bmp
+  /servers/{serverId}/ipmiReset:
+    post:
+      description: |
+        A reset makes sure that your IPMI interface of your server is compatible with
+        Leaseweb automation.
+
+        An IPMI reset will require a reboot of your server. The contents of your hard
+        drive won't be altered in any way. After a successful IPMI reset your server
+        is booted back into the original operating system.",
+      operationId: ipmiResetServer
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              callbackUrl: https://callbacks.example.org
+            schema:
+              $ref: '#/components/schemas/ipmiResetServerOpts'
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                createdAt: 2018-01-09T09:18:06+0000
+                flow: tasks
+                isRunning: true
+                node: 80:18:44:E0:AF:C4!JGNTQ92
+                payload:
+                  fileserverBaseUrl: ""
+                  hasPublicIpmiIp: false
+                  jobType: ipmiReset
+                  pop: AMS-01
+                  powerCycle: true
+                  serverId: "99944"
+                progress:
+                  canceled: 0
+                  expired: 0
+                  failed: 0
+                  finished: 0
+                  inprogress: 0
+                  pending: 1
+                  percentage: 0
+                  total: 1
+                  waiting: 0
+                serverId: "99944"
+                status: ACTIVE
+                tasks:
+                - description: dummy
+                  errorMessage: null
+                  flow: tasks
+                  onError: break
+                  status: PENDING
+                  statusTimestamps:
+                    PENDING: 2018-01-09T09:18:06+00:00
+                    WAITING: 2018-01-09T09:18:06+00:00
+                  uuid: c1a56a5a-ae38-4b12-acb6-0cba9ceb1016
+                type: ipmiReset
+                updatedAt: 2018-01-09T09:18:06+0000
+                uuid: 754154c2-cc7f-4d5f-b8bf-b654084ba4a9
+              schema:
+                $ref: '#/components/schemas/serverJob'
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Launch IPMI reset
+      tags:
+      - bmp
+  /servers/{serverId}/jobs:
+    get:
+      description: |
+        List all jobs for this server.
+      operationId: getServerJobList
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Filter the list of jobs by type.
+        example: install
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list of jobs by status.
+        example: CANCELED
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter the list for running jobs
+        example: "true"
+        explode: true
+        in: query
+        name: isRunning
+        required: false
+        schema:
+          enum:
+          - "true"
+          - "false"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 1
+                jobs:
+                - createdAt: 2018-01-09T10:38:12+0000
+                  flow: tasks
+                  isRunning: true
+                  node: 80:18:44:E0:AF:C4!JGNTQ92
+                  progress:
+                    canceled: 0
+                    expired: 0
+                    failed: 0
+                    finished: 0
+                    inprogress: 0
+                    pending: 1
+                    percentage: 0
+                    total: 1
+                    waiting: 0
+                  serverId: "99944"
+                  status: ACTIVE
+                  type: install
+                  updatedAt: 2018-01-09T10:38:12+0000
+                  uuid: 3a867358-5b4b-44ee-88ac-4274603ef641
+              schema:
+                $ref: '#/components/schemas/serverJobList'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List jobs
+      tags:
+      - bmp
+  /servers/{serverId}/jobs/{jobId}:
+    get:
+      description: |
+        Get a single job for this server.
+      operationId: servers-jobs-get
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of a Job
+        example: 3a867358-5b4b-44ee-88ac-4274603ef641
+        explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                createdAt: 2021-01-09T10:38:12+0000
+                flow: tasks
+                isRunning: true
+                metadata:
+                  BATCH_ID: biannual-os-upgrade-installs
+                node: 80:18:44:E0:AF:C4!JGNTQ92
+                payload:
+                  configurable: true
+                  device: SATA2TB
+                  fileserverBaseUrl: ""
+                  jobType: install
+                  numberOfDisks: null
+                  operatingSystemId: UBUNTU_22_04_64BIT
+                  os:
+                    architecture: 64bit
+                    family: ubuntu
+                    name: Ubuntu 22.04 LTS (Jammy Jellyfish) (amd64)
+                    type: linux
+                    version: "22.04"
+                  partitions:
+                  - filesystem: swap
+                    size: 4096
+                  pop: AMS-01
+                  powerCycle: true
+                  raidLevel: null
+                  serverId: "99944"
+                  timezone: UTC
+                  x: 1
+                progress:
+                  canceled: 0
+                  expired: 0
+                  failed: 0
+                  finished: 0
+                  inprogress: 0
+                  pending: 1
+                  percentage: 0
+                  total: 1
+                  waiting: 0
+                serverId: "99944"
+                status: ACTIVE
+                tasks:
+                - description: dummy
+                  errorMessage: null
+                  flow: tasks
+                  onError: break
+                  status: PENDING
+                  statusTimestamps:
+                    PENDING: 2021-01-09T10:38:12+00:00
+                    WAITING: 2021-01-09T10:38:12+00:00
+                  uuid: 8a10b74b-2a94-4a3b-88da-b9c07faa240d
+                type: install
+                updatedAt: 2021-01-09T10:38:12+0000
+                uuid: 3a867358-5b4b-44ee-88ac-4274603ef641
+              schema:
+                $ref: '#/components/schemas/serverJob'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show a job
+      tags:
+      - bmp
+  /servers/{serverId}/jobs/{jobId}/retry:
+    post:
+      description: |
+        Retry a job for a specific server.
+      operationId: retryServerJob
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The ID of a Job
+        example: 3a867358-5b4b-44ee-88ac-4274603ef641
+        explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                createdAt: 2021-01-09T10:38:12+0000
+                flow: tasks
+                isRunning: true
+                metadata:
+                  BATCH_ID: biannual-os-upgrade-installs
+                node: 80:18:44:E0:AF:C4!JGNTQ92
+                payload:
+                  configurable: true
+                  device: SATA2TB
+                  fileserverBaseUrl: ""
+                  jobType: install
+                  numberOfDisks: null
+                  operatingSystemId: UBUNTU_22_04_64BIT
+                  os:
+                    architecture: 64bit
+                    family: ubuntu
+                    name: Ubuntu 22.04 LTS (Jammy Jellyfish) (amd64)
+                    type: linux
+                    version: "22.04"
+                  partitions:
+                  - filesystem: swap
+                    size: 4096
+                  pop: AMS-01
+                  powerCycle: true
+                  raidLevel: null
+                  serverId: "99944"
+                  timezone: UTC
+                  x: 1
+                progress:
+                  canceled: 0
+                  expired: 0
+                  failed: 0
+                  finished: 0
+                  inprogress: 0
+                  pending: 1
+                  percentage: 0
+                  total: 1
+                  waiting: 0
+                serverId: "99944"
+                status: ACTIVE
+                tasks:
+                - description: dummy
+                  errorMessage: null
+                  flow: tasks
+                  onError: break
+                  status: PENDING
+                  statusTimestamps:
+                    PENDING: 2021-01-09T10:38:12+00:00
+                    WAITING: 2021-01-09T10:38:12+00:00
+                  uuid: 8a10b74b-2a94-4a3b-88da-b9c07faa240d
+                type: install
+                updatedAt: 2021-01-09T10:38:12+0000
+                uuid: 3a867358-5b4b-44ee-88ac-4274603ef641
+              schema:
+                $ref: '#/components/schemas/serverJob'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Retry a job
+      tags:
+      - bmp
+  /servers/{serverId}/leases:
+    delete:
+      description: |
+        Delete a DHCP reservation for this server.
+      operationId: servers-leases-delete
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Delete a DHCP reservation
+      tags:
+      - bmp
+    get:
+      description: |
+        Please note that this will only show reservations for the public network
+        interface.
+      operationId: getServerDhcpReservationList
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 1
+                leases:
+                - bootfile: http://mirror.leaseweb.com/ipxe-files/ubuntu-18.04.ipxe
+                  createdAt: 2019-10-18T17:31:01+00:00
+                  gateway: 192.168.0.254
+                  hostname: my-server
+                  ip: 192.168.0.100
+                  lastClientRequest:
+                    relayAgent: null
+                    type: DHCP_REQUEST
+                    userAgent: Ubuntu 18.04 dhcpc
+                  mac: AA:BB:CC:DD:EE:FF
+                  netmask: 255.255.255.0
+                  site: AMS-01
+                  updatedAt: 2019-11-18T19:29:01+00:00
+              schema:
+                $ref: '#/components/schemas/getServerDhcpReservationListResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: List DHCP reservations
+      tags:
+      - bmp
+    post:
+      description: |
+        After rebooting your server it will acquire this DHCP reservation and boot
+        from the specified `bootfile` url.
+
+        Please note that this API call will not reboot or power cycle your server.
+      operationId: createServerDhcpReservation
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              bootfile: http://example.com/bootme.ipxe
+              hostname: my-server
+            schema:
+              $ref: '#/components/schemas/createServerDhcpReservationOpts'
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Create a DHCP reservation
+      tags:
+      - bmp
+  /servers/{serverId}/powerCycle:
+    post:
+      description: |
+        Powercyle the server.
+      operationId: powerCycleServer
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Power cycle a server
+      tags:
+      - bmp
+  /servers/{serverId}/powerInfo:
+    get:
+      description: |
+        The server can either be `ON` or `OFF`. Servers can be powered on or off by
+        using the respective `/powerOn` and `/powerOff` API calls. In addition servers
+        can also be rebooted using the `/powerCycle` API call.
+
+        The `pdu` object describes the power status from the power distribution unit
+        (PDU) point of view. If your server is connected to multiple PDU ports the
+        `status` property will report `on` if at least one PDU port has power.
+
+        The `ipmi` object describes the power status by quering the remote management
+        interface of your server.
+
+        Note that `pdu.status` can report `on` but your server can still be powered
+        off if it was shutdown via `IPMI` for example.
+      operationId: getServerPowerStatus
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ipmi:
+                  status: "off"
+                pdu:
+                  status: "on"
+              schema:
+                $ref: '#/components/schemas/getServerPowerStatusResult'
+          description: Ok.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Show power status
+      tags:
+      - bmp
+  /servers/{serverId}/powerOff:
+    post:
+      description: |
+        Power off the given server.
+      operationId: powerServerOff
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Power off server
+      tags:
+      - bmp
+  /servers/{serverId}/powerOn:
+    post:
+      description: |
+        Power on the given server.
+      operationId: powerServerOn
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Power on server
+      tags:
+      - bmp
+  /servers/{serverId}/rescueMode:
+    post:
+      description: |
+        Rescue mode allows you to trouble shoot your server in case your installed
+        operating system is no longer reachable.
+
+        You can supply a `postInstallScript` key in the body of the request which
+        should contain a base64 encoded string with a valid script. This script will
+        be executed as soon as rescue mode is launched and can be used to further
+        automate the process. A requirement for the post install script is that it
+        starts with a shebang line like `#!/usr/bin/env bash`.
+
+        After a rescue mode is launched you can manually reboot the server. After this
+        reboot the server will boot into the existing operating system.
+
+        To get a list of available rescue images, you could do so by sending a `GET`
+        request to `/bareMetals/v2/rescueImages`.
+      operationId: enableServerRescueMode
+      parameters:
+      - description: The ID of a server
+        example: "12345"
+        explode: false
+        in: path
+        name: serverId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              callbackUrl: https://example.com/urlExecutedOnCallback
+              powerCycle: true
+              rescueImageId: GRML
+              sshKeys: ssh-rsa AAAAB3NzaC1y... user@domain.com
+            schema:
+              $ref: '#/components/schemas/enableServerRescueModeOpts'
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+                createdAt: 2018-03-06T22:53:31+0000
+                flow: tasks
+                isRunning: true
+                node: AA:BB:CC:DD:EE:FF!JKDJFK890
+                payload:
+                  fileserverBaseUrl: 10.11.20.2
+                  isUnassignedServer: false
+                  jobType: rescueMode
+                  pop: AMS-01
+                  powerCycle: true
+                  serverId: "2349839"
+                progress:
+                  canceled: 0
+                  expired: 0
+                  failed: 0
+                  finished: 0
+                  inprogress: 0
+                  pending: 1
+                  percentage: 0
+                  total: 12
+                  waiting: 11
+                serverId: "2349839"
+                status: ACTIVE
+                tasks:
+                - description: dummy
+                  errorMessage: null
+                  flow: tasks
+                  onError: break
+                  status: PENDING
+                  statusTimestamps:
+                    PENDING: 2018-01-09T10:38:12+00:00
+                    WAITING: 2018-01-09T10:38:12+00:00
+                  uuid: 8a10b74b-2a94-4a3b-88da-b9c07faa240d
+                type: rescueMode
+                updatedAt: 2018-03-06T22:53:31+0000
+                uuid: ac99431b-640d-4282-95a9-a444eedb9309
+              schema:
+                $ref: '#/components/schemas/serverJob'
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+      summary: Launch rescue mode
+      tags:
+      - bmp
+components:
+  parameters:
+    limit:
+      description: Limit the number of results returned.
+      example: 20
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+      style: form
+    offset:
+      description: Return results starting from the given offset.
+      example: 10
+      explode: true
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+      style: form
+    networkEquipmentId:
+      description: The ID of a dedicated network equipment
+      example: "12345"
+      explode: false
+      in: path
+      name: networkEquipmentId
+      required: true
+      schema:
+        type: string
+      style: simple
+    credentialsType:
+      description: Credential type
+      explode: false
+      in: path
+      name: type
+      required: true
+      schema:
+        example: OPERATING_SYSTEM
+        type: string
+      style: simple
+    credentialsUsername:
+      description: Username
+      explode: false
+      in: path
+      name: username
+      required: true
+      schema:
+        example: root
+        type: string
+      style: simple
+    operatingSystemId:
+      description: Operating system ID
+      explode: false
+      in: path
+      name: operatingSystemId
+      required: true
+      schema:
+        example: UBUNTU_22_04_64BIT
+        type: string
+      style: simple
+    serverId:
+      description: The ID of a server
+      example: "12345"
+      explode: false
+      in: path
+      name: serverId
+      required: true
+      schema:
+        type: string
+      style: simple
+  responses:
+    "204":
+      description: No Content.
+    "400":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "400"
+            errorMessage: The API could not interpret your request correctly.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Bad Request.
+    "401":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "401"
+            errorMessage: You are not authorized to view this resource.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Authorized.
+    "403":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "403"
+            errorMessage: Access to the requested resource is forbidden.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Forbidden.
+    "404":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "404"
+            errorMessage: Resource not found
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Found.
+    "500":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "500"
+            errorMessage: '''The API could not handle your request at this time.'
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Internal Server Error.
+  schemas:
+    _metadata:
+      description: Metadata about the collection
+      example:
+        offset: 0
+        limit: 5
+        totalCount: 2
+      properties:
+        totalCount:
+          description: Total amount of orders in this collection
+          example: 2
+          type: number
+        offset:
+          default: 0
+          description: The offset used to generate this response
+          example: 0
+          type: number
+        limit:
+          default: 5
+          description: The limit used to generate this response
+          example: 5
+          type: number
+      title: metadata
+      type: object
+    controlPanelList:
+      example:
+        controlPanels:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        controlPanels:
+          description: A list of control panels
+          items:
+            $ref: '#/components/schemas/controlPanel'
+          type: array
+      type: object
+    errorResult:
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails:
+        - key:
+          - errorDetails
+          - errorDetails
+        - key:
+          - errorDetails
+          - errorDetails
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          items:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+          type: array
+      type: object
+    credentialType:
+      description: The type of the credential
+      enum:
+      - OPERATING_SYSTEM
+      - CONTROL_PANEL
+      - REMOTE_MANAGEMENT
+      - RESCUE_MODE
+      - SWITCH
+      - PDU
+      - FIREWALL
+      - LOAD_BALANCER
+      title: credentialType
+      type: string
+    credential:
+      example:
+        password: password
+        type: null
+        username: username
+      properties:
+        password:
+          description: The password
+          type: string
+        type:
+          $ref: '#/components/schemas/credentialType'
+        username:
+          description: The username
+          type: string
+      title: credential
+      type: object
+    credentialList:
+      example:
+        credentials:
+        - password: password
+          type: null
+          username: username
+        - password: password
+          type: null
+          username: username
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        credentials:
+          description: An array of credentials
+          items:
+            $ref: '#/components/schemas/credential'
+          type: array
+      type: object
+    createNetworkEquipmentCredentialOpts:
+      properties:
+        password:
+          description: The password for the credentials
+          type: string
+        type:
+          $ref: '#/components/schemas/credentialType'
+        username:
+          description: The username for the credentials
+          type: string
+      required:
+      - password
+      - type
+      - username
+      type: object
+    updateNetworkEquipmentCredentialOpts:
+      properties:
+        password:
+          description: The password for the credentials
+          type: string
+      required:
+      - password
+      type: object
+    pdu:
+      description: Object describing the PDU power information
+      example:
+        status: status
+      properties:
+        status:
+          description: The current power status of the network equipment.
+          type: string
+      title: pdu
+      type: object
+    getNetworkEquipmentPowerStatusResult:
+      example:
+        pdu:
+          status: status
+      properties:
+        pdu:
+          $ref: '#/components/schemas/pdu'
+    getOperatingSystemListResult:
+      example:
+        operatingSystems:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        operatingSystems:
+          description: A list of operating systems
+          items:
+            $ref: '#/components/schemas/operatingSystem'
+          type: array
+      type: object
+    partition:
+      example:
+        size: size
+        filesystem: filesystem
+        mountpoint: mountpoint
+      properties:
+        filesystem:
+          description: File system in which partition would be mounted
+          type: string
+        mountpoint:
+          description: The partition mount point (eg `/home`). Mandatory for the root
+            partition (`/`) and not intended to be used in swap partition
+          type: string
+        size:
+          description: "Size of the partition (Normally in MB, but this is OS-specific)"
+          type: string
+      title: partition
+      type: object
+    getOperatingSystemResult:
+      example:
+        features:
+        - features
+        - features
+        supportedFileSystems:
+        - supportedFileSystems
+        - supportedFileSystems
+        defaults:
+          partitions:
+          - size: size
+            filesystem: filesystem
+            mountpoint: mountpoint
+          - size: size
+            filesystem: filesystem
+            mountpoint: mountpoint
+          device: device
+        name: name
+        id: id
+        family: family
+        type: type
+        version: version
+        configurable: true
+        supportedBootDevices:
+        - supportedBootDevices
+        - supportedBootDevices
+        architecture: architecture
+      properties:
+        architecture:
+          description: The architecture of the operating system
+          type: string
+        configurable:
+          description: If the default options are configurable or not
+          type: boolean
+        defaults:
+          $ref: '#/components/schemas/defaults'
+        family:
+          description: The operating system family
+          type: string
+        id:
+          description: The operating system ID
+          type: string
+        name:
+          description: A human readable name for the operating system
+          type: string
+        type:
+          description: The type of operating system
+          title: operatingSystemType
+          type: string
+        version:
+          description: The version of the operating system
+          type: string
+        features:
+          description: Operating system features
+          items:
+            type: string
+          type: array
+        supportedFileSystems:
+          description: Operating system supported file systems
+          items:
+            type: string
+          type: array
+        supportedBootDevices:
+          description: Operating system supported boot devices
+          items:
+            type: string
+          type: array
+      type: object
+    getRescueImageListResult:
+      example:
+        rescueImages:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        rescueImages:
+          description: A list of operating systems
+          items:
+            $ref: '#/components/schemas/rescueImage'
+          type: array
+      type: object
+    serverJob:
+      example:
+        metadata:
+          BATCH_ID: BATCH_ID
+        bareMetalId: bareMetalId
+        type: type
+        serverId: serverId
+        uuid: uuid
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        node: node
+        isRunning: true
+        payload: "{}"
+        progress: "{}"
+        flow: flow
+        tasks:
+        - onError: onError
+          errorMessage: errorMessage
+          description: description
+          statusTimestamps: "{}"
+          uuid: uuid
+          flow: flow
+          status: status
+        - onError: onError
+          errorMessage: errorMessage
+          description: description
+          statusTimestamps: "{}"
+          uuid: uuid
+          flow: flow
+          status: status
+        status: status
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        bareMetalId:
+          deprecated: true
+          description: "Id of the server (deprecated, use serverId instead)"
+          type: string
+        createdAt:
+          description: Creation timestamp
+          format: date-time
+          type: string
+        flow:
+          description: Job flow
+          type: string
+        isRunning:
+          description: Describes whether the job is running
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        node:
+          description: Node ID for this server
+          type: string
+        payload:
+          description: Payload of the current job
+          type: object
+        progress:
+          description: Describes progress of the jobs on the server
+          type: object
+        serverId:
+          description: Id of the server
+          type: string
+        status:
+          description: Status of the job
+          type: string
+        tasks:
+          description: List of tasks in the job
+          items:
+            $ref: '#/components/schemas/task'
+          type: array
+        type:
+          description: Type of the job
+          title: jobType
+          type: string
+        updatedAt:
+          description: Update timestamp
+          format: date-time
+          type: string
+        uuid:
+          description: Unique identifier of the job
+          type: string
+      type: object
+    raidType:
+      description: RAID type to apply to your installation. NONE is the equivalent
+        of pass-through mode on HW RAID equipped servers
+      enum:
+      - HW
+      - SW
+      - NONE
+      title: raidType
+      type: string
+    configureHardwareRaidOpts:
+      properties:
+        callbackUrl:
+          description: Url which will receive callbacks
+          format: uri
+          type: string
+        level:
+          description: "RAID level to apply, this value is only required if you specify\
+            \ a type HW"
+          enum:
+          - 0
+          - 1
+          - 5
+          - 10
+          type: integer
+        numberOfDisks:
+          description: The number of disks you want to apply RAID on. If not specified
+            all disks are used.
+          type: integer
+        powerCycle:
+          default: true
+          description: "If set to `true`, server will be power cycled in order to\
+            \ complete the operation"
+          type: boolean
+        type:
+          $ref: '#/components/schemas/raidType'
+      required:
+      - type
+      type: object
+    serverJobList:
+      example:
+        jobs:
+        - metadata:
+            BATCH_ID: BATCH_ID
+          bareMetalId: bareMetalId
+          type: type
+          serverId: serverId
+          uuid: uuid
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          node: node
+          isRunning: true
+          payload: "{}"
+          progress: "{}"
+          flow: flow
+          tasks:
+          - onError: onError
+            errorMessage: errorMessage
+            description: description
+            statusTimestamps: "{}"
+            uuid: uuid
+            flow: flow
+            status: status
+          - onError: onError
+            errorMessage: errorMessage
+            description: description
+            statusTimestamps: "{}"
+            uuid: uuid
+            flow: flow
+            status: status
+          status: status
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - metadata:
+            BATCH_ID: BATCH_ID
+          bareMetalId: bareMetalId
+          type: type
+          serverId: serverId
+          uuid: uuid
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          node: node
+          isRunning: true
+          payload: "{}"
+          progress: "{}"
+          flow: flow
+          tasks:
+          - onError: onError
+            errorMessage: errorMessage
+            description: description
+            statusTimestamps: "{}"
+            uuid: uuid
+            flow: flow
+            status: status
+          - onError: onError
+            errorMessage: errorMessage
+            description: description
+            statusTimestamps: "{}"
+            uuid: uuid
+            flow: flow
+            status: status
+          status: status
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        jobs:
+          description: An array of jobs
+          items:
+            $ref: '#/components/schemas/serverJob'
+          type: array
+      type: object
+    createServerCredentialOpts:
+      properties:
+        password:
+          description: The password for the credentials
+          type: string
+        type:
+          $ref: '#/components/schemas/credentialType'
+        username:
+          description: The username for the credentials
+          type: string
+      required:
+      - password
+      - type
+      - username
+      type: object
+    updateServerCredentialOpts:
+      properties:
+        password:
+          description: The password for the credentials
+          type: string
+      required:
+      - password
+      type: object
+    scanHardwareOpts:
+      properties:
+        callbackUrl:
+          description: Url which will receive callbacks
+          format: uri
+          type: string
+        powerCycle:
+          default: true
+          description: "If set to `true`, server will be power cycled in order to\
+            \ complete the operation"
+          type: boolean
+      type: object
+    installOperatingSystemOpts:
+      properties:
+        callbackUrl:
+          description: Url which will receive callbacks when the installation is finished
+            or failed
+          format: uri
+          type: string
+        controlPanelId:
+          description: Control panel identifier
+          type: string
+        device:
+          description: "Block devices in a disk set in which the partitions will be\
+            \ installed. Supported values are any disk set id, SATA_SAS or NVME"
+          type: string
+        hostname:
+          description: Hostname to be used in your installation
+          type: string
+        operatingSystemId:
+          description: Operating system identifier
+          type: string
+        partitions:
+          description: Array of partition objects that should be installed per partition
+          items:
+            $ref: '#/components/schemas/partition'
+          type: array
+        password:
+          description: "Server root password. If not provided, it would be automatically\
+            \ generated"
+          type: string
+        postInstallScript:
+          description: Base64 Encoded string containing a valid bash script to be
+            run right after the installation
+          type: string
+        powerCycle:
+          description: "If true, allows system reboots to happen automatically within\
+            \ the process. Otherwise, you should do them manually"
+          type: boolean
+        raid:
+          $ref: '#/components/schemas/raid'
+        sshKeys:
+          description: "List of public sshKeys to be setup in your installation, separated\
+            \ by new lines"
+          type: string
+        timezone:
+          description: Timezone represented as Geographical_Area/City
+          type: string
+      required:
+      - operatingSystemId
+      type: object
+    ipmiResetServerOpts:
+      properties:
+        callbackUrl:
+          description: Url which will receive callbacks
+          format: uri
+          type: string
+        powerCycle:
+          default: true
+          description: "If set to `true`, server will be power cycled in order to\
+            \ complete the operation"
+          type: boolean
+      type: object
+    getServerDhcpReservationListResult:
+      example:
+        leases:
+        - createdAt: createdAt
+          hostname: hostname
+          site: site
+          netmask: netmask
+          ip: ip
+          lastClientRequest:
+            relayAgent: relayAgent
+            userAgent: userAgent
+            type: type
+          bootfile: bootfile
+          gateway: gateway
+          mac: mac
+          updatedAt: updatedAt
+        - createdAt: createdAt
+          hostname: hostname
+          site: site
+          netmask: netmask
+          ip: ip
+          lastClientRequest:
+            relayAgent: relayAgent
+            userAgent: userAgent
+            type: type
+          bootfile: bootfile
+          gateway: gateway
+          mac: mac
+          updatedAt: updatedAt
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        leases:
+          description: An array of active DHCP reservations
+          items:
+            $ref: '#/components/schemas/lease'
+          type: array
+      type: object
+    createServerDhcpReservationOpts:
+      properties:
+        bootfile:
+          description: The URL of PXE boot you want your server to boot from
+          type: string
+        hostname:
+          description: The hostname for the server
+          type: string
+      required:
+      - bootfile
+      type: object
+    getServerPowerStatusResult:
+      example:
+        pdu:
+          status: status
+        ipmi:
+          status: status
+      properties:
+        ipmi:
+          $ref: '#/components/schemas/ipmi'
+        pdu:
+          $ref: '#/components/schemas/pdu'
+      type: object
+    enableServerRescueModeOpts:
+      properties:
+        callbackUrl:
+          description: Url which will receive callbacks
+          format: uri
+          type: string
+        password:
+          description: "Rescue mode password. If not provided, it would be automatically\
+            \ generated"
+          minLength: 1
+          type: string
+        postInstallScript:
+          description: Base64 Encoded string containing a valid bash script to be
+            run right after rescue mode is launched
+          type: string
+        powerCycle:
+          default: true
+          description: "If set to `true`, server will be power cycled in order to\
+            \ complete the operation"
+          type: boolean
+        rescueImageId:
+          default: GRML
+          description: Rescue image identifier
+          type: string
+        sshKeys:
+          description: User ssh keys
+          type: string
+      required:
+      - rescueImageId
+      type: object
+    controlPanel:
+      description: A single control panel
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: The unique ID of this control panel
+          type: string
+        name:
+          description: A human readable name describing the control panel
+          type: string
+      title: controlPanel
+      type: object
+    operatingSystem:
+      description: A single operating system
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: The unique ID of this operating system
+          type: string
+        name:
+          description: A human readable name describing the operating system
+          type: string
+      title: operatingSystem
+      type: object
+    defaults:
+      description: An object containing defaults for this operating system
+      example:
+        partitions:
+        - size: size
+          filesystem: filesystem
+          mountpoint: mountpoint
+        - size: size
+          filesystem: filesystem
+          mountpoint: mountpoint
+        device: device
+      properties:
+        device:
+          description: Device name
+          type: string
+        partitions:
+          items:
+            $ref: '#/components/schemas/partition'
+          type: array
+      title: defaults
+      type: object
+    rescueImage:
+      description: A single rescue image
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: The unique ID of this rescue image
+          type: string
+        name:
+          description: A human readable name describing the rescue image
+          type: string
+      title: rescueImage
+      type: object
+    metadata:
+      default: {}
+      description: The Job Metadata schema
+      example:
+        BATCH_ID: BATCH_ID
+      properties:
+        BATCH_ID:
+          description: Batch ID for batch jobs
+          type: string
+      title: metadata
+      type: object
+    task:
+      example:
+        onError: onError
+        errorMessage: errorMessage
+        description: description
+        statusTimestamps: "{}"
+        uuid: uuid
+        flow: flow
+        status: status
+      properties:
+        description:
+          description: Description of the task
+          type: string
+        errorMessage:
+          description: An optional error message
+          nullable: true
+          type: string
+        flow:
+          description: The flow this task is part of
+          type: string
+        onError:
+          description: The behaviour if this task fails
+          type: string
+        status:
+          description: The status of the task
+          type: string
+        statusTimestamps:
+          description: Timestamp for each state change
+          type: object
+        uuid:
+          description: Unique ID for this task
+          type: string
+      title: task
+      type: object
+    raid:
+      description: Contains RAID related information about the installation request
+      properties:
+        level:
+          description: "RAID level to apply to your installation, this value is only\
+            \ required if you specify a type HW or SW"
+          enum:
+          - 0
+          - 1
+          - 5
+          - 10
+          type: integer
+        numberOfDisks:
+          description: The number of disks you want to apply RAID on. If not specified
+            all disks are used
+          type: integer
+        type:
+          $ref: '#/components/schemas/raidType'
+      title: raid
+      type: object
+    lastClientRequest:
+      description: "If the server acquired this DHCP reservation, this object shows\
+        \ information about the client"
+      example:
+        relayAgent: relayAgent
+        userAgent: userAgent
+        type: type
+      properties:
+        relayAgent:
+          description: The relay agent that forwarded the DHCP traffic
+          nullable: true
+          type: string
+        type:
+          description: The type of DHCP packet requested by the client
+          title: dhcpPacketType
+          type: string
+        userAgent:
+          description: The user agent of the client making the DHCP request
+          type: string
+      title: lastClientRequest
+      type: object
+    lease:
+      description: A single DHCP reservation
+      example:
+        createdAt: createdAt
+        hostname: hostname
+        site: site
+        netmask: netmask
+        ip: ip
+        lastClientRequest:
+          relayAgent: relayAgent
+          userAgent: userAgent
+          type: type
+        bootfile: bootfile
+        gateway: gateway
+        mac: mac
+        updatedAt: updatedAt
+      properties:
+        bootfile:
+          description: The PXE bootfile the server will network boot from
+          type: string
+        createdAt:
+          description: The time when the DHCP reservation was created
+          type: string
+        gateway:
+          description: The gateway for this DHCP reservation
+          type: string
+        hostname:
+          description: The hostname for the server
+          type: string
+        ip:
+          description: The IP address this DHCP reservation is for
+          type: string
+        lastClientRequest:
+          $ref: '#/components/schemas/lastClientRequest'
+        mac:
+          description: The MAC address this DHCP reservation is for
+          type: string
+        netmask:
+          description: The netmask for this DHCP reservation
+          type: string
+        site:
+          description: The site serving this DHCP reservation
+          type: string
+        updatedAt:
+          description: The time when the DHCP reservation was last updated or used
+            by a client
+          type: string
+      title: lease
+      type: object
+    ipmi:
+      description: Object describing the IPMI power information
+      example:
+        status: status
+      properties:
+        status:
+          description: The current power status of the server.
+          type: string
+      title: ipmi
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      description: API key authentication by setting `X-LSW-Auth` header.
+      in: header
+      name: X-LSW-Auth
+      type: apiKey
+    OAuth2:
+      flows:
+        clientCredentials:
+          refreshUrl: https://auth.leaseweb.com/token
+          scopes: {}
+          tokenUrl: https://auth.leaseweb.com/token
+      type: oauth2
+    BearerAuth:
+      scheme: bearer
+      type: http
