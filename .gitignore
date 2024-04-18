@@ -41,6 +41,8 @@ go.work
 !README.md
 !LICENSE
 
+!**/*.md
+
 # !Makefile
 
 # ...even if they are in subdirectories
