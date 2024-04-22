@@ -1,4 +1,4 @@
-# ModelError
+# ErrorResult
 
 ## Properties
 
@@ -10,95 +10,95 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewModelError
+### NewErrorResult
 
-`func NewModelError() *ModelError`
+`func NewErrorResult() *ErrorResult`
 
-NewModelError instantiates a new ModelError object
+NewErrorResult instantiates a new ErrorResult object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewModelErrorWithDefaults
+### NewErrorResultWithDefaults
 
-`func NewModelErrorWithDefaults() *ModelError`
+`func NewErrorResultWithDefaults() *ErrorResult`
 
-NewModelErrorWithDefaults instantiates a new ModelError object
+NewErrorResultWithDefaults instantiates a new ErrorResult object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetCorrelationId
 
-`func (o *ModelError) GetCorrelationId() string`
+`func (o *ErrorResult) GetCorrelationId() string`
 
 GetCorrelationId returns the CorrelationId field if non-nil, zero value otherwise.
 
 ### GetCorrelationIdOk
 
-`func (o *ModelError) GetCorrelationIdOk() (*string, bool)`
+`func (o *ErrorResult) GetCorrelationIdOk() (*string, bool)`
 
 GetCorrelationIdOk returns a tuple with the CorrelationId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCorrelationId
 
-`func (o *ModelError) SetCorrelationId(v string)`
+`func (o *ErrorResult) SetCorrelationId(v string)`
 
 SetCorrelationId sets CorrelationId field to given value.
 
 ### HasCorrelationId
 
-`func (o *ModelError) HasCorrelationId() bool`
+`func (o *ErrorResult) HasCorrelationId() bool`
 
 HasCorrelationId returns a boolean if a field has been set.
 
 ### GetErrorCode
 
-`func (o *ModelError) GetErrorCode() string`
+`func (o *ErrorResult) GetErrorCode() string`
 
 GetErrorCode returns the ErrorCode field if non-nil, zero value otherwise.
 
 ### GetErrorCodeOk
 
-`func (o *ModelError) GetErrorCodeOk() (*string, bool)`
+`func (o *ErrorResult) GetErrorCodeOk() (*string, bool)`
 
 GetErrorCodeOk returns a tuple with the ErrorCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetErrorCode
 
-`func (o *ModelError) SetErrorCode(v string)`
+`func (o *ErrorResult) SetErrorCode(v string)`
 
 SetErrorCode sets ErrorCode field to given value.
 
 ### HasErrorCode
 
-`func (o *ModelError) HasErrorCode() bool`
+`func (o *ErrorResult) HasErrorCode() bool`
 
 HasErrorCode returns a boolean if a field has been set.
 
 ### GetErrorMessage
 
-`func (o *ModelError) GetErrorMessage() string`
+`func (o *ErrorResult) GetErrorMessage() string`
 
 GetErrorMessage returns the ErrorMessage field if non-nil, zero value otherwise.
 
 ### GetErrorMessageOk
 
-`func (o *ModelError) GetErrorMessageOk() (*string, bool)`
+`func (o *ErrorResult) GetErrorMessageOk() (*string, bool)`
 
 GetErrorMessageOk returns a tuple with the ErrorMessage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetErrorMessage
 
-`func (o *ModelError) SetErrorMessage(v string)`
+`func (o *ErrorResult) SetErrorMessage(v string)`
 
 SetErrorMessage sets ErrorMessage field to given value.
 
 ### HasErrorMessage
 
-`func (o *ModelError) HasErrorMessage() bool`
+`func (o *ErrorResult) HasErrorMessage() bool`
 
 HasErrorMessage returns a boolean if a field has been set.
 

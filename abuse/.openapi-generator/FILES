@@ -10,13 +10,13 @@ docs/AbuseAPI.md
 docs/Attachment.md
 docs/CreateReportMessageOpts.md
 docs/DetectedDomainNameList.md
+docs/ErrorResult.md
 docs/GetReportListResult.md
 docs/GetReportMessageListResult.md
 docs/GetReportResolutionListResult.md
 docs/GetReportResult.md
 docs/Message.md
 docs/Metadata.md
-docs/ModelError.md
 docs/Report.md
 docs/ResolutionList.md
 docs/ResolveReportResult.md
@@ -27,7 +27,7 @@ model__metadata.go
 model_attachment.go
 model_create_report_message_opts.go
 model_detected_domain_name_list.go
-model_error.go
+model_error_result.go
 model_get_report_list_result.go
 model_get_report_message_list_result.go
 model_get_report_resolution_list_result.go

@@ -6,6 +6,7 @@ api/openapi.yaml
 api_invoice.go
 client.go
 configuration.go
+docs/ErrorResult.md
 docs/GetInvoiceListResult.md
 docs/GetInvoiceListResultInvoicesInner.md
 docs/GetInvoiceListResultMetadata.md
@@ -16,11 +17,10 @@ docs/GetProformaResult.md
 docs/GetProformaResultContractItemsInner.md
 docs/GetProformaResultMetadata.md
 docs/InvoiceAPI.md
-docs/ModelError.md
 git_push.sh
 go.mod
 go.sum
-model_error.go
+model_error_result.go
 model_get_invoice_list_result.go
 model_get_invoice_list_result__metadata.go
 model_get_invoice_list_result_invoices_inner.go

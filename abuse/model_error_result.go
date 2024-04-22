@@ -14,11 +14,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the ModelError type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ModelError{}
+// checks if the ErrorResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ErrorResult{}
 
-// ModelError struct for ModelError
-type ModelError struct {
+// ErrorResult struct for ErrorResult
+type ErrorResult struct {
 	// The correlation ID of the current request.
 	CorrelationId *string `json:"correlationId,omitempty"`
 	// The error code.
@@ -27,25 +27,25 @@ type ModelError struct {
 	ErrorMessage *string `json:"errorMessage,omitempty"`
 }
 
-// NewModelError instantiates a new ModelError object
+// NewErrorResult instantiates a new ErrorResult object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewModelError() *ModelError {
-	this := ModelError{}
+func NewErrorResult() *ErrorResult {
+	this := ErrorResult{}
 	return &this
 }
 
-// NewModelErrorWithDefaults instantiates a new ModelError object
+// NewErrorResultWithDefaults instantiates a new ErrorResult object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewModelErrorWithDefaults() *ModelError {
-	this := ModelError{}
+func NewErrorResultWithDefaults() *ErrorResult {
+	this := ErrorResult{}
 	return &this
 }
 
 // GetCorrelationId returns the CorrelationId field value if set, zero value otherwise.
-func (o *ModelError) GetCorrelationId() string {
+func (o *ErrorResult) GetCorrelationId() string {
 	if o == nil || IsNil(o.CorrelationId) {
 		var ret string
 		return ret
@@ -55,7 +55,7 @@ func (o *ModelError) GetCorrelationId() string {
 
 // GetCorrelationIdOk returns a tuple with the CorrelationId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModelError) GetCorrelationIdOk() (*string, bool) {
+func (o *ErrorResult) GetCorrelationIdOk() (*string, bool) {
 	if o == nil || IsNil(o.CorrelationId) {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *ModelError) GetCorrelationIdOk() (*string, bool) {
 }
 
 // HasCorrelationId returns a boolean if a field has been set.
-func (o *ModelError) HasCorrelationId() bool {
+func (o *ErrorResult) HasCorrelationId() bool {
 	if o != nil && !IsNil(o.CorrelationId) {
 		return true
 	}
@@ -72,12 +72,12 @@ func (o *ModelError) HasCorrelationId() bool {
 }
 
 // SetCorrelationId gets a reference to the given string and assigns it to the CorrelationId field.
-func (o *ModelError) SetCorrelationId(v string) {
+func (o *ErrorResult) SetCorrelationId(v string) {
 	o.CorrelationId = &v
 }
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
-func (o *ModelError) GetErrorCode() string {
+func (o *ErrorResult) GetErrorCode() string {
 	if o == nil || IsNil(o.ErrorCode) {
 		var ret string
 		return ret
@@ -87,7 +87,7 @@ func (o *ModelError) GetErrorCode() string {
 
 // GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModelError) GetErrorCodeOk() (*string, bool) {
+func (o *ErrorResult) GetErrorCodeOk() (*string, bool) {
 	if o == nil || IsNil(o.ErrorCode) {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *ModelError) GetErrorCodeOk() (*string, bool) {
 }
 
 // HasErrorCode returns a boolean if a field has been set.
-func (o *ModelError) HasErrorCode() bool {
+func (o *ErrorResult) HasErrorCode() bool {
 	if o != nil && !IsNil(o.ErrorCode) {
 		return true
 	}
@@ -104,12 +104,12 @@ func (o *ModelError) HasErrorCode() bool {
 }
 
 // SetErrorCode gets a reference to the given string and assigns it to the ErrorCode field.
-func (o *ModelError) SetErrorCode(v string) {
+func (o *ErrorResult) SetErrorCode(v string) {
 	o.ErrorCode = &v
 }
 
 // GetErrorMessage returns the ErrorMessage field value if set, zero value otherwise.
-func (o *ModelError) GetErrorMessage() string {
+func (o *ErrorResult) GetErrorMessage() string {
 	if o == nil || IsNil(o.ErrorMessage) {
 		var ret string
 		return ret
@@ -119,7 +119,7 @@ func (o *ModelError) GetErrorMessage() string {
 
 // GetErrorMessageOk returns a tuple with the ErrorMessage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ModelError) GetErrorMessageOk() (*string, bool) {
+func (o *ErrorResult) GetErrorMessageOk() (*string, bool) {
 	if o == nil || IsNil(o.ErrorMessage) {
 		return nil, false
 	}
@@ -127,7 +127,7 @@ func (o *ModelError) GetErrorMessageOk() (*string, bool) {
 }
 
 // HasErrorMessage returns a boolean if a field has been set.
-func (o *ModelError) HasErrorMessage() bool {
+func (o *ErrorResult) HasErrorMessage() bool {
 	if o != nil && !IsNil(o.ErrorMessage) {
 		return true
 	}
@@ -136,11 +136,11 @@ func (o *ModelError) HasErrorMessage() bool {
 }
 
 // SetErrorMessage gets a reference to the given string and assigns it to the ErrorMessage field.
-func (o *ModelError) SetErrorMessage(v string) {
+func (o *ErrorResult) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
-func (o ModelError) MarshalJSON() ([]byte, error) {
+func (o ErrorResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -148,7 +148,7 @@ func (o ModelError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ModelError) ToMap() (map[string]interface{}, error) {
+func (o ErrorResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CorrelationId) {
 		toSerialize["correlationId"] = o.CorrelationId
@@ -162,38 +162,38 @@ func (o ModelError) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableModelError struct {
-	value *ModelError
+type NullableErrorResult struct {
+	value *ErrorResult
 	isSet bool
 }
 
-func (v NullableModelError) Get() *ModelError {
+func (v NullableErrorResult) Get() *ErrorResult {
 	return v.value
 }
 
-func (v *NullableModelError) Set(val *ModelError) {
+func (v *NullableErrorResult) Set(val *ErrorResult) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableModelError) IsSet() bool {
+func (v NullableErrorResult) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableModelError) Unset() {
+func (v *NullableErrorResult) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableModelError(val *ModelError) *NullableModelError {
-	return &NullableModelError{value: val, isSet: true}
+func NewNullableErrorResult(val *ErrorResult) *NullableErrorResult {
+	return &NullableErrorResult{value: val, isSet: true}
 }
 
-func (v NullableModelError) MarshalJSON() ([]byte, error) {
+func (v NullableErrorResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableModelError) UnmarshalJSON(src []byte) error {
+func (v *NullableErrorResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

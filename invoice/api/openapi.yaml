@@ -109,7 +109,7 @@ paths:
                 errorCode: "401"
                 errorMessage: You are not authorized to view this resource.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Not Authorized.
         "403":
           content:
@@ -119,7 +119,7 @@ paths:
                 errorCode: "403"
                 errorMessage: Access to the requested resource is forbidden.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Forbidden.
         "500":
           content:
@@ -129,7 +129,7 @@ paths:
                 errorCode: "500"
                 errorMessage: '''The API could not handle your request at this time.'
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Internal Server Error.
         "503":
           content:
@@ -139,7 +139,7 @@ paths:
                 errorCode: "503"
                 errorMessage: The API is not available at the moment.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: List invoices
       tags:
@@ -213,7 +213,7 @@ paths:
                 errorCode: "401"
                 errorMessage: You are not authorized to view this resource.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Not Authorized.
         "403":
           content:
@@ -223,7 +223,7 @@ paths:
                 errorCode: "403"
                 errorMessage: Access to the requested resource is forbidden.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Forbidden.
         "500":
           content:
@@ -233,7 +233,7 @@ paths:
                 errorCode: "500"
                 errorMessage: '''The API could not handle your request at this time.'
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Internal Server Error.
         "503":
           content:
@@ -243,7 +243,7 @@ paths:
                 errorCode: "503"
                 errorMessage: The API is not available at the moment.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: Pro Forma
       tags:
@@ -303,7 +303,7 @@ paths:
                 errorCode: "401"
                 errorMessage: You are not authorized to view this resource.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Not Authorized.
         "403":
           content:
@@ -313,7 +313,7 @@ paths:
                 errorCode: "403"
                 errorMessage: Access to the requested resource is forbidden.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Forbidden.
         "500":
           content:
@@ -323,7 +323,7 @@ paths:
                 errorCode: "500"
                 errorMessage: '''The API could not handle your request at this time.'
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Internal Server Error.
         "503":
           content:
@@ -333,7 +333,7 @@ paths:
                 errorCode: "503"
                 errorMessage: The API is not available at the moment.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: Inspect an invoice
       tags:
@@ -364,7 +364,7 @@ paths:
                 errorCode: "401"
                 errorMessage: You are not authorized to view this resource.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Not Authorized.
         "403":
           content:
@@ -374,7 +374,7 @@ paths:
                 errorCode: "403"
                 errorMessage: Access to the requested resource is forbidden.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Forbidden.
         "500":
           content:
@@ -384,7 +384,7 @@ paths:
                 errorCode: "500"
                 errorMessage: '''The API could not handle your request at this time.'
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Internal Server Error.
         "503":
           content:
@@ -394,7 +394,7 @@ paths:
                 errorCode: "503"
                 errorMessage: The API is not available at the moment.
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: Get invoice PDF
       tags:
@@ -440,7 +440,7 @@ components:
             errorCode: "401"
             errorMessage: You are not authorized to view this resource.
           schema:
-            $ref: '#/components/schemas/error'
+            $ref: '#/components/schemas/errorResult'
       description: Not Authorized.
     "403":
       content:
@@ -450,7 +450,7 @@ components:
             errorCode: "403"
             errorMessage: Access to the requested resource is forbidden.
           schema:
-            $ref: '#/components/schemas/error'
+            $ref: '#/components/schemas/errorResult'
       description: Forbidden.
     "500":
       content:
@@ -460,7 +460,7 @@ components:
             errorCode: "500"
             errorMessage: '''The API could not handle your request at this time.'
           schema:
-            $ref: '#/components/schemas/error'
+            $ref: '#/components/schemas/errorResult'
       description: Internal Server Error.
     "503":
       content:
@@ -470,7 +470,7 @@ components:
             errorCode: "503"
             errorMessage: The API is not available at the moment.
           schema:
-            $ref: '#/components/schemas/error'
+            $ref: '#/components/schemas/errorResult'
       description: Service Unavailable.
   schemas:
     getInvoiceListResult:
@@ -506,7 +506,7 @@ components:
           items:
             $ref: '#/components/schemas/getInvoiceListResult_invoices_inner'
           type: array
-    error:
+    errorResult:
       example:
         errorMessage: errorMessage
         errorCode: errorCode

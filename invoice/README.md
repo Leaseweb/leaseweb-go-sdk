@@ -86,6 +86,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ErrorResult](docs/ErrorResult.md)
  - [GetInvoiceListResult](docs/GetInvoiceListResult.md)
  - [GetInvoiceListResultInvoicesInner](docs/GetInvoiceListResultInvoicesInner.md)
  - [GetInvoiceListResultMetadata](docs/GetInvoiceListResultMetadata.md)
@@ -95,7 +96,6 @@ Class | Method | HTTP request | Description
  - [GetProformaResult](docs/GetProformaResult.md)
  - [GetProformaResultContractItemsInner](docs/GetProformaResultContractItemsInner.md)
  - [GetProformaResultMetadata](docs/GetProformaResultMetadata.md)
- - [ModelError](docs/ModelError.md)
 
 
 ## Documentation For Authorization
