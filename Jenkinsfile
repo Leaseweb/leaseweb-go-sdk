@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Deploy') {
+            steps {
+                sh 'git remote add github git@github.com:Leaseweb/leaseweb-go-sdk-tmp.git'
+                sh 'git push --mirror github'
+            }
+        }
+    }
+}
