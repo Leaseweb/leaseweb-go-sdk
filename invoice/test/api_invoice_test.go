@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/invoice"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/invoice"
 )
 
 func Test_invoice_InvoiceAPIService(t *testing.T) {

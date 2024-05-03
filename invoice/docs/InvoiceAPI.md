@@ -28,7 +28,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/invoice"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/invoice"
 )
 
 func main() {
@@ -98,7 +98,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/invoice"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/invoice"
 )
 
 func main() {
@@ -166,7 +166,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/invoice"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/invoice"
 )
 
 func main() {
@@ -234,7 +234,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/invoice"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/invoice"
 )
 
 func main() {

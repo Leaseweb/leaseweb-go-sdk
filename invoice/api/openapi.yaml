@@ -1,5 +1,6 @@
 openapi: 3.0.0
 info:
+  contact: {}
   description: "> The base URL for this API is: **https://api.leaseweb.com/invoices/v1/**"
   license:
     name: Apache 2.0
@@ -32,9 +33,13 @@ tags:
   x-traitTag: true
 - description: |
     Authentication for the APIs is required. To authenticate your call, you will need to sent your API key as `X-LSW-Auth` header.
+
     You can generate API keys in the [Customer Portal](https://secure.leaseweb.com/api-client-management/).
   name: API Key Authentication
   x-traitTag: true
+- description: |
+    Invoices
+  name: Invoices
 paths:
   /invoices:
     get:
@@ -473,6 +478,29 @@ components:
             $ref: '#/components/schemas/errorResult'
       description: Service Unavailable.
   schemas:
+    _metadata:
+      description: Metadata about the collection
+      example:
+        offset: 0
+        limit: 5
+        totalCount: 2
+      properties:
+        totalCount:
+          description: Total amount of orders in this collection
+          example: 2
+          type: number
+        offset:
+          default: 0
+          description: The offset used to generate this response
+          example: 0
+          type: number
+        limit:
+          default: 5
+          description: The limit used to generate this response
+          example: 5
+          type: number
+      title: metadata
+      type: object
     getInvoiceListResult:
       example:
         invoices:
@@ -496,21 +524,25 @@ components:
           status: "[\"OPEN\"]"
         _metadata:
           offset: 0
-          limit: 10
+          limit: 5
           totalCount: 2
       properties:
         _metadata:
-          $ref: '#/components/schemas/getInvoiceListResult__metadata'
+          $ref: '#/components/schemas/_metadata'
         invoices:
           description: An array of invoices.
           items:
-            $ref: '#/components/schemas/getInvoiceListResult_invoices_inner'
+            $ref: '#/components/schemas/invoice'
           type: array
     errorResult:
       example:
         errorMessage: errorMessage
         errorCode: errorCode
         correlationId: correlationId
+        errorDetails:
+          key:
+          - errorDetails
+          - errorDetails
       properties:
         correlationId:
           description: The correlation ID of the current request.
@@ -521,6 +553,12 @@ components:
         errorMessage:
           description: A human friendly description of the error.
           type: string
+        errorDetails:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
       type: object
     getProformaResult:
       example:
@@ -549,15 +587,15 @@ components:
         subTotal: 18.02
         _metadata:
           offset: 0
-          limit: 10
+          limit: 5
           totalCount: 2
         vatAmount: 1.99
       properties:
         _metadata:
-          $ref: '#/components/schemas/getProformaResult__metadata'
+          $ref: '#/components/schemas/_metadata'
         contractItems:
           items:
-            $ref: '#/components/schemas/getProformaResult_contractItems_inner'
+            $ref: '#/components/schemas/contractItem'
           type: array
         currency:
           description: The currency of the invoice. Based on ISO 4217
@@ -631,7 +669,7 @@ components:
         credits:
           description: All the credits attached to the invoice
           items:
-            $ref: '#/components/schemas/getInvoiceResult_credits_inner'
+            $ref: '#/components/schemas/credit'
           type: array
         currency:
           description: The currency of the invoice.
@@ -661,7 +699,7 @@ components:
         lineItems:
           description: All the line items attached to the invoice
           items:
-            $ref: '#/components/schemas/getInvoiceResult_lineItems_inner'
+            $ref: '#/components/schemas/lineItem'
           type: array
         openAmount:
           description: The open amount of the invoice
@@ -684,29 +722,7 @@ components:
           description: The total amount of the invoice
           format: float
           type: number
-    getInvoiceListResult__metadata:
-      description: Metadata about the collection.
-      example:
-        offset: 0
-        limit: 10
-        totalCount: 2
-      properties:
-        limit:
-          default: 10
-          description: The limit used to generate this response.
-          example: 10
-          type: integer
-        offset:
-          default: 0
-          description: The offset used to generate this response.
-          example: 0
-          type: integer
-        totalCount:
-          description: Total amount of invoices in this collection.
-          example: 2
-          type: integer
-      type: object
-    getInvoiceListResult_invoices_inner:
+    invoice:
       example:
         date: "[\"2019-05-01T00:00:00+00:00\"]"
         total: 1.4658129
@@ -764,30 +780,9 @@ components:
           description: The total amount of the invoice
           format: float
           type: number
+      title: invoice
       type: object
-    getProformaResult__metadata:
-      description: ""
-      example:
-        offset: 0
-        limit: 10
-        totalCount: 2
-      properties:
-        limit:
-          default: 10
-          description: Limit the number of results returned
-          example: 10
-          type: integer
-        offset:
-          default: 0
-          description: Return results starting from the given offset
-          example: 0
-          type: integer
-        totalCount:
-          description: Total amount of contract items.
-          example: 2
-          type: integer
-      type: object
-    getProformaResult_contractItems_inner:
+    contractItem:
       example:
         reference: My reference to my server.
         product: Backup
@@ -845,8 +840,9 @@ components:
           description: The start date of the contract
           example: 2020-01-01T00:00:00+00:00
           type: string
+      title: contractItem
       type: object
-    getInvoiceResult_credits_inner:
+    credit:
       example:
         date: "[\"2019-05-1T06:23:40+00:00\"]"
         total: 6.0274563
@@ -869,8 +865,9 @@ components:
           description: The total amount of the credit connected to the invoice
           format: float
           type: number
+      title: credit
       type: object
-    getInvoiceResult_lineItems_inner:
+    lineItem:
       example:
         reference: "[\"This is my reference\"]"
         fromDate: 2000-01-23T04:56:07.000+00:00
@@ -919,6 +916,7 @@ components:
           format: date-time
           nullable: true
           type: string
+      title: lineItem
       type: object
   securitySchemes:
     ApiKeyAuth:
@@ -926,3 +924,6 @@ components:
       in: header
       name: X-LSW-Auth
       type: apiKey
+    BearerAuth:
+      scheme: bearer
+      type: http

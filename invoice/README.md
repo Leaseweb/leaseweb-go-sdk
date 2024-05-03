@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import invoice "github.com/Leaseweb/leaseweb-go-sdk/invoice"
+import invoice "github.com/leaseweb/leaseweb-go-sdk/invoice"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -86,16 +86,15 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ContractItem](docs/ContractItem.md)
+ - [Credit](docs/Credit.md)
  - [ErrorResult](docs/ErrorResult.md)
  - [GetInvoiceListResult](docs/GetInvoiceListResult.md)
- - [GetInvoiceListResultInvoicesInner](docs/GetInvoiceListResultInvoicesInner.md)
- - [GetInvoiceListResultMetadata](docs/GetInvoiceListResultMetadata.md)
  - [GetInvoiceResult](docs/GetInvoiceResult.md)
- - [GetInvoiceResultCreditsInner](docs/GetInvoiceResultCreditsInner.md)
- - [GetInvoiceResultLineItemsInner](docs/GetInvoiceResultLineItemsInner.md)
  - [GetProformaResult](docs/GetProformaResult.md)
- - [GetProformaResultContractItemsInner](docs/GetProformaResultContractItemsInner.md)
- - [GetProformaResultMetadata](docs/GetProformaResultMetadata.md)
+ - [Invoice](docs/Invoice.md)
+ - [LineItem](docs/LineItem.md)
+ - [Metadata](docs/Metadata.md)
 
 
 ## Documentation For Authorization
@@ -120,6 +119,17 @@ auth := context.WithValue(
 			"X-LSW-Auth": {Key: "API_KEY_STRING"},
 		},
 	)
+r, err := client.Service.Operation(auth, args)
+```
+
+### BearerAuth
+
+- **Type**: HTTP Bearer token authentication
+
+Example
+
+```go
+auth := context.WithValue(context.Background(), invoice.ContextAccessToken, "BEARER_TOKEN_STRING")
 r, err := client.Service.Operation(auth, args)
 ```
 

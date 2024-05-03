@@ -19,9 +19,9 @@ var _ MappedNullable = &GetInvoiceListResult{}
 
 // GetInvoiceListResult struct for GetInvoiceListResult
 type GetInvoiceListResult struct {
-	Metadata *GetInvoiceListResultMetadata `json:"_metadata,omitempty"`
+	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of invoices.
-	Invoices []GetInvoiceListResultInvoicesInner `json:"invoices,omitempty"`
+	Invoices []Invoice `json:"invoices,omitempty"`
 }
 
 // NewGetInvoiceListResult instantiates a new GetInvoiceListResult object
@@ -42,9 +42,9 @@ func NewGetInvoiceListResultWithDefaults() *GetInvoiceListResult {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *GetInvoiceListResult) GetMetadata() GetInvoiceListResultMetadata {
+func (o *GetInvoiceListResult) GetMetadata() Metadata {
 	if o == nil || IsNil(o.Metadata) {
-		var ret GetInvoiceListResultMetadata
+		var ret Metadata
 		return ret
 	}
 	return *o.Metadata
@@ -52,7 +52,7 @@ func (o *GetInvoiceListResult) GetMetadata() GetInvoiceListResultMetadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetInvoiceListResult) GetMetadataOk() (*GetInvoiceListResultMetadata, bool) {
+func (o *GetInvoiceListResult) GetMetadataOk() (*Metadata, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
@@ -68,15 +68,15 @@ func (o *GetInvoiceListResult) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given GetInvoiceListResultMetadata and assigns it to the Metadata field.
-func (o *GetInvoiceListResult) SetMetadata(v GetInvoiceListResultMetadata) {
+// SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
+func (o *GetInvoiceListResult) SetMetadata(v Metadata) {
 	o.Metadata = &v
 }
 
 // GetInvoices returns the Invoices field value if set, zero value otherwise.
-func (o *GetInvoiceListResult) GetInvoices() []GetInvoiceListResultInvoicesInner {
+func (o *GetInvoiceListResult) GetInvoices() []Invoice {
 	if o == nil || IsNil(o.Invoices) {
-		var ret []GetInvoiceListResultInvoicesInner
+		var ret []Invoice
 		return ret
 	}
 	return o.Invoices
@@ -84,7 +84,7 @@ func (o *GetInvoiceListResult) GetInvoices() []GetInvoiceListResultInvoicesInner
 
 // GetInvoicesOk returns a tuple with the Invoices field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetInvoiceListResult) GetInvoicesOk() ([]GetInvoiceListResultInvoicesInner, bool) {
+func (o *GetInvoiceListResult) GetInvoicesOk() ([]Invoice, bool) {
 	if o == nil || IsNil(o.Invoices) {
 		return nil, false
 	}
@@ -100,8 +100,8 @@ func (o *GetInvoiceListResult) HasInvoices() bool {
 	return false
 }
 
-// SetInvoices gets a reference to the given []GetInvoiceListResultInvoicesInner and assigns it to the Invoices field.
-func (o *GetInvoiceListResult) SetInvoices(v []GetInvoiceListResultInvoicesInner) {
+// SetInvoices gets a reference to the given []Invoice and assigns it to the Invoices field.
+func (o *GetInvoiceListResult) SetInvoices(v []Invoice) {
 	o.Invoices = v
 }
 

@@ -25,6 +25,7 @@ type ErrorResult struct {
 	ErrorCode *string `json:"errorCode,omitempty"`
 	// A human friendly description of the error.
 	ErrorMessage *string `json:"errorMessage,omitempty"`
+	ErrorDetails *map[string][]string `json:"errorDetails,omitempty"`
 }
 
 // NewErrorResult instantiates a new ErrorResult object
@@ -140,6 +141,38 @@ func (o *ErrorResult) SetErrorMessage(v string) {
 	o.ErrorMessage = &v
 }
 
+// GetErrorDetails returns the ErrorDetails field value if set, zero value otherwise.
+func (o *ErrorResult) GetErrorDetails() map[string][]string {
+	if o == nil || IsNil(o.ErrorDetails) {
+		var ret map[string][]string
+		return ret
+	}
+	return *o.ErrorDetails
+}
+
+// GetErrorDetailsOk returns a tuple with the ErrorDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ErrorResult) GetErrorDetailsOk() (*map[string][]string, bool) {
+	if o == nil || IsNil(o.ErrorDetails) {
+		return nil, false
+	}
+	return o.ErrorDetails, true
+}
+
+// HasErrorDetails returns a boolean if a field has been set.
+func (o *ErrorResult) HasErrorDetails() bool {
+	if o != nil && !IsNil(o.ErrorDetails) {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorDetails gets a reference to the given map[string][]string and assigns it to the ErrorDetails field.
+func (o *ErrorResult) SetErrorDetails(v map[string][]string) {
+	o.ErrorDetails = &v
+}
+
 func (o ErrorResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -158,6 +191,9 @@ func (o ErrorResult) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ErrorMessage) {
 		toSerialize["errorMessage"] = o.ErrorMessage
+	}
+	if !IsNil(o.ErrorDetails) {
+		toSerialize["errorDetails"] = o.ErrorDetails
 	}
 	return toSerialize, nil
 }

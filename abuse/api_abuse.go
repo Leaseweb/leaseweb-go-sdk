@@ -557,9 +557,9 @@ func (r ApiGetReportListRequest) Execute() (*GetReportListResult, *http.Response
 }
 
 /*
-GetReportList get reports
+GetReportList List reports
 
-get reports
+List reports
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetReportListRequest
@@ -1348,6 +1348,17 @@ func (a *AbuseAPIService) ResolveReportExecute(r ApiResolveReportRequest) (*http
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ErrorResult
