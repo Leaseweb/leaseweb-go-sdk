@@ -20,7 +20,7 @@ var _ MappedNullable = &GetInvoiceResult{}
 // GetInvoiceResult struct for GetInvoiceResult
 type GetInvoiceResult struct {
 	// All the credits attached to the invoice
-	Credits []GetInvoiceResultCreditsInner `json:"credits,omitempty"`
+	Credits []Credit `json:"credits,omitempty"`
 	// The currency of the invoice.
 	Currency *string `json:"currency,omitempty"`
 	// The date the invoice was issued
@@ -32,7 +32,7 @@ type GetInvoiceResult struct {
 	// The invoice can be paid partially
 	IsPartialPaymentAllowed *bool `json:"isPartialPaymentAllowed,omitempty"`
 	// All the line items attached to the invoice
-	LineItems []GetInvoiceResultLineItemsInner `json:"lineItems,omitempty"`
+	LineItems []LineItem `json:"lineItems,omitempty"`
 	// The open amount of the invoice
 	OpenAmount *float32 `json:"openAmount,omitempty"`
 	// The status of the invoice.
@@ -61,9 +61,9 @@ func NewGetInvoiceResultWithDefaults() *GetInvoiceResult {
 }
 
 // GetCredits returns the Credits field value if set, zero value otherwise.
-func (o *GetInvoiceResult) GetCredits() []GetInvoiceResultCreditsInner {
+func (o *GetInvoiceResult) GetCredits() []Credit {
 	if o == nil || IsNil(o.Credits) {
-		var ret []GetInvoiceResultCreditsInner
+		var ret []Credit
 		return ret
 	}
 	return o.Credits
@@ -71,7 +71,7 @@ func (o *GetInvoiceResult) GetCredits() []GetInvoiceResultCreditsInner {
 
 // GetCreditsOk returns a tuple with the Credits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetInvoiceResult) GetCreditsOk() ([]GetInvoiceResultCreditsInner, bool) {
+func (o *GetInvoiceResult) GetCreditsOk() ([]Credit, bool) {
 	if o == nil || IsNil(o.Credits) {
 		return nil, false
 	}
@@ -87,8 +87,8 @@ func (o *GetInvoiceResult) HasCredits() bool {
 	return false
 }
 
-// SetCredits gets a reference to the given []GetInvoiceResultCreditsInner and assigns it to the Credits field.
-func (o *GetInvoiceResult) SetCredits(v []GetInvoiceResultCreditsInner) {
+// SetCredits gets a reference to the given []Credit and assigns it to the Credits field.
+func (o *GetInvoiceResult) SetCredits(v []Credit) {
 	o.Credits = v
 }
 
@@ -253,9 +253,9 @@ func (o *GetInvoiceResult) SetIsPartialPaymentAllowed(v bool) {
 }
 
 // GetLineItems returns the LineItems field value if set, zero value otherwise.
-func (o *GetInvoiceResult) GetLineItems() []GetInvoiceResultLineItemsInner {
+func (o *GetInvoiceResult) GetLineItems() []LineItem {
 	if o == nil || IsNil(o.LineItems) {
-		var ret []GetInvoiceResultLineItemsInner
+		var ret []LineItem
 		return ret
 	}
 	return o.LineItems
@@ -263,7 +263,7 @@ func (o *GetInvoiceResult) GetLineItems() []GetInvoiceResultLineItemsInner {
 
 // GetLineItemsOk returns a tuple with the LineItems field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetInvoiceResult) GetLineItemsOk() ([]GetInvoiceResultLineItemsInner, bool) {
+func (o *GetInvoiceResult) GetLineItemsOk() ([]LineItem, bool) {
 	if o == nil || IsNil(o.LineItems) {
 		return nil, false
 	}
@@ -279,8 +279,8 @@ func (o *GetInvoiceResult) HasLineItems() bool {
 	return false
 }
 
-// SetLineItems gets a reference to the given []GetInvoiceResultLineItemsInner and assigns it to the LineItems field.
-func (o *GetInvoiceResult) SetLineItems(v []GetInvoiceResultLineItemsInner) {
+// SetLineItems gets a reference to the given []LineItem and assigns it to the LineItems field.
+func (o *GetInvoiceResult) SetLineItems(v []LineItem) {
 	o.LineItems = v
 }
 

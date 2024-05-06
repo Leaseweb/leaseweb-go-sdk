@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Metadata** | Pointer to [**GetProformaResultMetadata**](GetProformaResultMetadata.md) |  | [optional] 
-**ContractItems** | Pointer to [**[]GetProformaResultContractItemsInner**](GetProformaResultContractItemsInner.md) |  | [optional] 
+**Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
+**ContractItems** | Pointer to [**[]ContractItem**](ContractItem.md) |  | [optional] 
 **Currency** | Pointer to **string** | The currency of the invoice. Based on ISO 4217 | [optional] 
 **ProformaDate** | Pointer to **string** | The date of the next invoice on which this proforma is based on. | [optional] 
 **SubTotal** | Pointer to **float32** | Total amount without vat which will be invoiced the upcoming month. | [optional] 
@@ -33,20 +33,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMetadata
 
-`func (o *GetProformaResult) GetMetadata() GetProformaResultMetadata`
+`func (o *GetProformaResult) GetMetadata() Metadata`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *GetProformaResult) GetMetadataOk() (*GetProformaResultMetadata, bool)`
+`func (o *GetProformaResult) GetMetadataOk() (*Metadata, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *GetProformaResult) SetMetadata(v GetProformaResultMetadata)`
+`func (o *GetProformaResult) SetMetadata(v Metadata)`
 
 SetMetadata sets Metadata field to given value.
 
@@ -58,20 +58,20 @@ HasMetadata returns a boolean if a field has been set.
 
 ### GetContractItems
 
-`func (o *GetProformaResult) GetContractItems() []GetProformaResultContractItemsInner`
+`func (o *GetProformaResult) GetContractItems() []ContractItem`
 
 GetContractItems returns the ContractItems field if non-nil, zero value otherwise.
 
 ### GetContractItemsOk
 
-`func (o *GetProformaResult) GetContractItemsOk() (*[]GetProformaResultContractItemsInner, bool)`
+`func (o *GetProformaResult) GetContractItemsOk() (*[]ContractItem, bool)`
 
 GetContractItemsOk returns a tuple with the ContractItems field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContractItems
 
-`func (o *GetProformaResult) SetContractItems(v []GetProformaResultContractItemsInner)`
+`func (o *GetProformaResult) SetContractItems(v []ContractItem)`
 
 SetContractItems sets ContractItems field to given value.
 

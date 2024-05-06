@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**CreateReportMessage**](AbuseAPI.md#CreateReportMessage) | **Post** /reports/{reportId}/messages | Create new message
 [**GetReport**](AbuseAPI.md#GetReport) | **Get** /reports/{reportId} | Inspect a report
 [**GetReportAttachmentList**](AbuseAPI.md#GetReportAttachmentList) | **Get** /reports/{reportId}/reportAttachments/{fileId} | Inspect a report attachment
-[**GetReportList**](AbuseAPI.md#GetReportList) | **Get** /reports | get reports
+[**GetReportList**](AbuseAPI.md#GetReportList) | **Get** /reports | List reports
 [**GetReportMessageAttachmentList**](AbuseAPI.md#GetReportMessageAttachmentList) | **Get** /reports/{reportId}/messageAttachments/{fileId} | Inspect a message attachment
 [**GetReportMessageList**](AbuseAPI.md#GetReportMessageList) | **Get** /reports/{reportId}/messages | List report messages
 [**GetReportResolutionList**](AbuseAPI.md#GetReportResolutionList) | **Get** /reports/{reportId}/resolutions | List resolution options
@@ -32,7 +32,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/abuse"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/abuse"
 )
 
 func main() {
@@ -104,7 +104,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/abuse"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/abuse"
 )
 
 func main() {
@@ -174,7 +174,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/abuse"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/abuse"
 )
 
 func main() {
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 > GetReportListResult GetReportList(ctx).Limit(limit).Offset(offset).Status(status).Execute()
 
-get reports
+List reports
 
 
 
@@ -245,7 +245,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/abuse"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/abuse"
 )
 
 func main() {
@@ -315,7 +315,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/abuse"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/abuse"
 )
 
 func main() {
@@ -386,7 +386,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/abuse"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/abuse"
 )
 
 func main() {
@@ -460,7 +460,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/abuse"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/abuse"
 )
 
 func main() {
@@ -530,7 +530,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/Leaseweb/leaseweb-go-sdk/abuse"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/abuse"
 )
 
 func main() {

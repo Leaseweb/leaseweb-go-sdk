@@ -19,8 +19,8 @@ var _ MappedNullable = &GetProformaResult{}
 
 // GetProformaResult struct for GetProformaResult
 type GetProformaResult struct {
-	Metadata *GetProformaResultMetadata `json:"_metadata,omitempty"`
-	ContractItems []GetProformaResultContractItemsInner `json:"contractItems,omitempty"`
+	Metadata *Metadata `json:"_metadata,omitempty"`
+	ContractItems []ContractItem `json:"contractItems,omitempty"`
 	// The currency of the invoice. Based on ISO 4217
 	Currency *string `json:"currency,omitempty"`
 	// The date of the next invoice on which this proforma is based on.
@@ -51,9 +51,9 @@ func NewGetProformaResultWithDefaults() *GetProformaResult {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *GetProformaResult) GetMetadata() GetProformaResultMetadata {
+func (o *GetProformaResult) GetMetadata() Metadata {
 	if o == nil || IsNil(o.Metadata) {
-		var ret GetProformaResultMetadata
+		var ret Metadata
 		return ret
 	}
 	return *o.Metadata
@@ -61,7 +61,7 @@ func (o *GetProformaResult) GetMetadata() GetProformaResultMetadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProformaResult) GetMetadataOk() (*GetProformaResultMetadata, bool) {
+func (o *GetProformaResult) GetMetadataOk() (*Metadata, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
@@ -77,15 +77,15 @@ func (o *GetProformaResult) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given GetProformaResultMetadata and assigns it to the Metadata field.
-func (o *GetProformaResult) SetMetadata(v GetProformaResultMetadata) {
+// SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
+func (o *GetProformaResult) SetMetadata(v Metadata) {
 	o.Metadata = &v
 }
 
 // GetContractItems returns the ContractItems field value if set, zero value otherwise.
-func (o *GetProformaResult) GetContractItems() []GetProformaResultContractItemsInner {
+func (o *GetProformaResult) GetContractItems() []ContractItem {
 	if o == nil || IsNil(o.ContractItems) {
-		var ret []GetProformaResultContractItemsInner
+		var ret []ContractItem
 		return ret
 	}
 	return o.ContractItems
@@ -93,7 +93,7 @@ func (o *GetProformaResult) GetContractItems() []GetProformaResultContractItemsI
 
 // GetContractItemsOk returns a tuple with the ContractItems field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetProformaResult) GetContractItemsOk() ([]GetProformaResultContractItemsInner, bool) {
+func (o *GetProformaResult) GetContractItemsOk() ([]ContractItem, bool) {
 	if o == nil || IsNil(o.ContractItems) {
 		return nil, false
 	}
@@ -109,8 +109,8 @@ func (o *GetProformaResult) HasContractItems() bool {
 	return false
 }
 
-// SetContractItems gets a reference to the given []GetProformaResultContractItemsInner and assigns it to the ContractItems field.
-func (o *GetProformaResult) SetContractItems(v []GetProformaResultContractItemsInner) {
+// SetContractItems gets a reference to the given []ContractItem and assigns it to the ContractItems field.
+func (o *GetProformaResult) SetContractItems(v []ContractItem) {
 	o.ContractItems = v
 }
 

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Credits** | Pointer to [**[]GetInvoiceResultCreditsInner**](GetInvoiceResultCreditsInner.md) | All the credits attached to the invoice | [optional] 
+**Credits** | Pointer to [**[]Credit**](Credit.md) | All the credits attached to the invoice | [optional] 
 **Currency** | Pointer to **string** | The currency of the invoice. | [optional] 
 **Date** | Pointer to **string** | The date the invoice was issued | [optional] 
 **DueDate** | Pointer to **string** | The date the invoice is due for payment | [optional] 
 **Id** | Pointer to **string** | The unique id of the invoice | [optional] 
 **IsPartialPaymentAllowed** | Pointer to **bool** | The invoice can be paid partially | [optional] 
-**LineItems** | Pointer to [**[]GetInvoiceResultLineItemsInner**](GetInvoiceResultLineItemsInner.md) | All the line items attached to the invoice | [optional] 
+**LineItems** | Pointer to [**[]LineItem**](LineItem.md) | All the line items attached to the invoice | [optional] 
 **OpenAmount** | Pointer to **float32** | The open amount of the invoice | [optional] 
 **Status** | Pointer to **string** | The status of the invoice. | [optional] 
 **TaxAmount** | Pointer to **float32** | The tax amount of the invoice | [optional] 
@@ -37,20 +37,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCredits
 
-`func (o *GetInvoiceResult) GetCredits() []GetInvoiceResultCreditsInner`
+`func (o *GetInvoiceResult) GetCredits() []Credit`
 
 GetCredits returns the Credits field if non-nil, zero value otherwise.
 
 ### GetCreditsOk
 
-`func (o *GetInvoiceResult) GetCreditsOk() (*[]GetInvoiceResultCreditsInner, bool)`
+`func (o *GetInvoiceResult) GetCreditsOk() (*[]Credit, bool)`
 
 GetCreditsOk returns a tuple with the Credits field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCredits
 
-`func (o *GetInvoiceResult) SetCredits(v []GetInvoiceResultCreditsInner)`
+`func (o *GetInvoiceResult) SetCredits(v []Credit)`
 
 SetCredits sets Credits field to given value.
 
@@ -187,20 +187,20 @@ HasIsPartialPaymentAllowed returns a boolean if a field has been set.
 
 ### GetLineItems
 
-`func (o *GetInvoiceResult) GetLineItems() []GetInvoiceResultLineItemsInner`
+`func (o *GetInvoiceResult) GetLineItems() []LineItem`
 
 GetLineItems returns the LineItems field if non-nil, zero value otherwise.
 
 ### GetLineItemsOk
 
-`func (o *GetInvoiceResult) GetLineItemsOk() (*[]GetInvoiceResultLineItemsInner, bool)`
+`func (o *GetInvoiceResult) GetLineItemsOk() (*[]LineItem, bool)`
 
 GetLineItemsOk returns a tuple with the LineItems field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLineItems
 
-`func (o *GetInvoiceResult) SetLineItems(v []GetInvoiceResultLineItemsInner)`
+`func (o *GetInvoiceResult) SetLineItems(v []LineItem)`
 
 SetLineItems sets LineItems field to given value.
 

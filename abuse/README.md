@@ -23,7 +23,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import abuse "github.com/Leaseweb/leaseweb-go-sdk/abuse"
+import abuse "github.com/leaseweb/leaseweb-go-sdk/abuse"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -82,7 +82,7 @@ Class | Method | HTTP request | Description
 *AbuseAPI* | [**CreateReportMessage**](docs/AbuseAPI.md#createreportmessage) | **Post** /reports/{reportId}/messages | Create new message
 *AbuseAPI* | [**GetReport**](docs/AbuseAPI.md#getreport) | **Get** /reports/{reportId} | Inspect a report
 *AbuseAPI* | [**GetReportAttachmentList**](docs/AbuseAPI.md#getreportattachmentlist) | **Get** /reports/{reportId}/reportAttachments/{fileId} | Inspect a report attachment
-*AbuseAPI* | [**GetReportList**](docs/AbuseAPI.md#getreportlist) | **Get** /reports | get reports
+*AbuseAPI* | [**GetReportList**](docs/AbuseAPI.md#getreportlist) | **Get** /reports | List reports
 *AbuseAPI* | [**GetReportMessageAttachmentList**](docs/AbuseAPI.md#getreportmessageattachmentlist) | **Get** /reports/{reportId}/messageAttachments/{fileId} | Inspect a message attachment
 *AbuseAPI* | [**GetReportMessageList**](docs/AbuseAPI.md#getreportmessagelist) | **Get** /reports/{reportId}/messages | List report messages
 *AbuseAPI* | [**GetReportResolutionList**](docs/AbuseAPI.md#getreportresolutionlist) | **Get** /reports/{reportId}/resolutions | List resolution options
@@ -128,6 +128,17 @@ auth := context.WithValue(
 			"X-LSW-Auth": {Key: "API_KEY_STRING"},
 		},
 	)
+r, err := client.Service.Operation(auth, args)
+```
+
+### BearerAuth
+
+- **Type**: HTTP Bearer token authentication
+
+Example
+
+```go
+auth := context.WithValue(context.Background(), abuse.ContextAccessToken, "BEARER_TOKEN_STRING")
 r, err := client.Service.Operation(auth, args)
 ```
 
