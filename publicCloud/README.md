@@ -87,8 +87,8 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**CancelInstanceTermination**](docs/PublicCloudAPI.md#cancelinstancetermination) | **Post** /instances/{instanceId}/cancelTermination | Cancel instance termination
 *PublicCloudAPI* | [**CreateLoadBalancerListener**](docs/PublicCloudAPI.md#createloadbalancerlistener) | **Post** /loadBalancers/{loadBalancerId}/listeners | Create listener
 *PublicCloudAPI* | [**CreateSnapshot**](docs/PublicCloudAPI.md#createsnapshot) | **Post** /instances/{instanceId}/snapshots | Create instance snapshot
-*PublicCloudAPI* | [**CredentialsDelete**](docs/PublicCloudAPI.md#credentialsdelete) | **Delete** /instances/{instanceId}/credentials | Delete all instance credentials
 *PublicCloudAPI* | [**DeleteCredential**](docs/PublicCloudAPI.md#deletecredential) | **Delete** /instances/{instanceId}/credentials/{type}/{username} | Delete credentials
+*PublicCloudAPI* | [**DeleteCredentials**](docs/PublicCloudAPI.md#deletecredentials) | **Delete** /instances/{instanceId}/credentials | Delete all instance credentials
 *PublicCloudAPI* | [**DeleteLoadBalancerListener**](docs/PublicCloudAPI.md#deleteloadbalancerlistener) | **Delete** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Delete load balancer listener
 *PublicCloudAPI* | [**DeleteSnapshot**](docs/PublicCloudAPI.md#deletesnapshot) | **Delete** /instances/{instanceId}/snapshots/{snapshotId} | Delete instance snapshot
 *PublicCloudAPI* | [**DeregisterLoadBalancerTargets**](docs/PublicCloudAPI.md#deregisterloadbalancertargets) | **Post** /loadBalancers/{loadBalancerId}/deregisterTargets | Deregister targets
@@ -100,6 +100,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**GetDataTrafficMetrics**](docs/PublicCloudAPI.md#getdatatrafficmetrics) | **Get** /instances/{instanceId}/metrics/datatraffic | Get instance data traffic metrics
 *PublicCloudAPI* | [**GetExpenses**](docs/PublicCloudAPI.md#getexpenses) | **Get** /equipments/{equipmentId}/expenses | Get costs for a given month.
 *PublicCloudAPI* | [**GetInstance**](docs/PublicCloudAPI.md#getinstance) | **Get** /instances/{instanceId} | Get instance details
+*PublicCloudAPI* | [**GetInstanceList**](docs/PublicCloudAPI.md#getinstancelist) | **Get** /instances | Get instance list
 *PublicCloudAPI* | [**GetInstanceTypeList**](docs/PublicCloudAPI.md#getinstancetypelist) | **Get** /instanceTypes | List instance types
 *PublicCloudAPI* | [**GetIp**](docs/PublicCloudAPI.md#getip) | **Get** /instances/{instanceId}/ips/{ip} | Get details about an instance&#39;s IP
 *PublicCloudAPI* | [**GetIpList**](docs/PublicCloudAPI.md#getiplist) | **Get** /instances/{instanceId}/ips | List instance&#39;s IPs
@@ -110,17 +111,17 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**GetLoadBalancerTargetList**](docs/PublicCloudAPI.md#getloadbalancertargetlist) | **Post** /loadBalancers/{loadBalancerId}/targets | List registered targets
 *PublicCloudAPI* | [**GetMarketAppList**](docs/PublicCloudAPI.md#getmarketapplist) | **Get** /marketApps | Get marketplace apps
 *PublicCloudAPI* | [**GetOperatingSystemList**](docs/PublicCloudAPI.md#getoperatingsystemlist) | **Get** /operatingSystems | List all available Operating Systems
+*PublicCloudAPI* | [**GetRegionList**](docs/PublicCloudAPI.md#getregionlist) | **Get** /regions | List regions
 *PublicCloudAPI* | [**GetReinstallOsList**](docs/PublicCloudAPI.md#getreinstalloslist) | **Get** /instances/{instanceId}/reinstall/operatingSystems | List OSes available for reinstall
 *PublicCloudAPI* | [**GetSnapshot**](docs/PublicCloudAPI.md#getsnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
 *PublicCloudAPI* | [**GetSnapshotList**](docs/PublicCloudAPI.md#getsnapshotlist) | **Get** /instances/{instanceId}/snapshots | List snapshots
 *PublicCloudAPI* | [**GetUpdateInstanceTypeList**](docs/PublicCloudAPI.md#getupdateinstancetypelist) | **Get** /instances/{instanceId}/instanceTypesUpdate | List available instance types for update
-*PublicCloudAPI* | [**InstanceList**](docs/PublicCloudAPI.md#instancelist) | **Get** /instances | Get instance list
 *PublicCloudAPI* | [**LaunchInstance**](docs/PublicCloudAPI.md#launchinstance) | **Post** /instances | Launch instance
 *PublicCloudAPI* | [**LaunchLoadBalancer**](docs/PublicCloudAPI.md#launchloadbalancer) | **Post** /loadBalancers | Launch Load balancer
 *PublicCloudAPI* | [**NullRouteIp**](docs/PublicCloudAPI.md#nullrouteip) | **Post** /instances/{instanceId}/ips/{ip}/null | Null route IP
 *PublicCloudAPI* | [**RebootInstance**](docs/PublicCloudAPI.md#rebootinstance) | **Post** /instances/{instanceId}/reboot | Reboot instance
-*PublicCloudAPI* | [**RegionsList**](docs/PublicCloudAPI.md#regionslist) | **Get** /regions | List regions
 *PublicCloudAPI* | [**RegisterLoadBalancerTargets**](docs/PublicCloudAPI.md#registerloadbalancertargets) | **Post** /loadBalancers/{loadBalancerId}/registerTargets | Register targets
+*PublicCloudAPI* | [**ReinstallInstance**](docs/PublicCloudAPI.md#reinstallinstance) | **Put** /instances/{instanceId}/reinstall | Reinstall instance
 *PublicCloudAPI* | [**RemoveFromPrivateNetwork**](docs/PublicCloudAPI.md#removefromprivatenetwork) | **Delete** /instances/{instanceId}/removeFromPrivateNetwork | Remove instance from Private Network
 *PublicCloudAPI* | [**RemoveIpNullRoute**](docs/PublicCloudAPI.md#removeipnullroute) | **Post** /instances/{instanceId}/ips/{ip}/unnull | Remove an IP null route
 *PublicCloudAPI* | [**ResetPassword**](docs/PublicCloudAPI.md#resetpassword) | **Post** /instances/{instanceId}/resetPassword | Reset instance password
@@ -201,6 +202,7 @@ Class | Method | HTTP request | Description
  - [PrivateNetworkSpeed](docs/PrivateNetworkSpeed.md)
  - [PublicNetworkSpeed](docs/PublicNetworkSpeed.md)
  - [Region](docs/Region.md)
+ - [ReinstallInstanceOpts](docs/ReinstallInstanceOpts.md)
  - [Snapshot](docs/Snapshot.md)
  - [StickySession](docs/StickySession.md)
  - [Storage](docs/Storage.md)
@@ -227,7 +229,7 @@ Class | Method | HTTP request | Description
 
 
 Authentication schemes defined for the API:
-### ApiKeyAuth
+### X-LSW-Auth
 
 - **Type**: API key
 - **API key parameter name**: X-LSW-Auth

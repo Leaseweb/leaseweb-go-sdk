@@ -36,6 +36,201 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DedicatedserverAPIService CancelActiveJob", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.CancelActiveJob(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService CloseNetworkInterface", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var networkType NetworkType
+
+		httpRes, err := apiClient.DedicatedserverAPI.CloseNetworkInterface(context.Background(), serverId, networkType).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService CloseNetworkInterfaces", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.CloseNetworkInterfaces(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService ConfigureHardwareRaid", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.ConfigureHardwareRaid(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService CreateNetworkEquipmentCredential", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.CreateNetworkEquipmentCredential(context.Background(), networkEquipmentId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService CreateServerBandwidthNotificationSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.CreateServerBandwidthNotificationSetting(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService CreateServerCredential", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.CreateServerCredential(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService CreateServerDataTrafficNotificationSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.CreateServerDataTrafficNotificationSetting(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService CreateServerDhcpReservation", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.CreateServerDhcpReservation(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService DeleteNetworkEquipmentCredential", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+		var type_ string
+		var username string
+
+		httpRes, err := apiClient.DedicatedserverAPI.DeleteNetworkEquipmentCredential(context.Background(), networkEquipmentId, type_, username).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService DeleteServerBandwidthNotificationSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var notificationSettingId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.DeleteServerBandwidthNotificationSetting(context.Background(), serverId, notificationSettingId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService DeleteServerCredential", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var type_ string
+		var username string
+
+		httpRes, err := apiClient.DedicatedserverAPI.DeleteServerCredential(context.Background(), serverId, type_, username).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService DeleteServerDataTrafficNotificationSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var notificationSettingId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.DeleteServerDataTrafficNotificationSetting(context.Background(), serverId, notificationSettingId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService DeleteServerDhcpReservation", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.DeleteServerDhcpReservation(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DedicatedserverAPIService DeleteServerFromPrivateNetwork", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -50,6 +245,74 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DedicatedserverAPIService EnableServerRescueMode", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.EnableServerRescueMode(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService ExpireActiveJob", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.ExpireActiveJob(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetControlPanelList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetControlPanelList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetControlPanelListByOperatingSystemId", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var operatingSystemId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetControlPanelListByOperatingSystemId(context.Background(), operatingSystemId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetDdosNotificationSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetDdosNotificationSetting(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DedicatedserverAPIService GetNetworkEquipment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -57,6 +320,51 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 		var networkEquipmentId string
 
 		resp, httpRes, err := apiClient.DedicatedserverAPI.GetNetworkEquipment(context.Background(), networkEquipmentId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetNetworkEquipmentCredential", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+		var type_ string
+		var username string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetNetworkEquipmentCredential(context.Background(), networkEquipmentId, type_, username).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetNetworkEquipmentCredentialList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetNetworkEquipmentCredentialList(context.Background(), networkEquipmentId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetNetworkEquipmentCredentialListByType", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+		var type_ string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetNetworkEquipmentCredentialListByType(context.Background(), networkEquipmentId, type_).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -119,6 +427,87 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DedicatedserverAPIService GetNetworkEquipmentPowerStatus", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetNetworkEquipmentPowerStatus(context.Background(), networkEquipmentId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetNetworkInterface", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var networkType NetworkType
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetNetworkInterface(context.Background(), serverId, networkType).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetNetworkInterfaceList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetNetworkInterfaceList(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetOperatingSystem", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var operatingSystemId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetOperatingSystem(context.Background(), operatingSystemId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetOperatingSystemList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetOperatingSystemList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetRescueImageList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetRescueImageList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DedicatedserverAPIService GetServer", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -126,6 +515,194 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 		var serverId string
 
 		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServer(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerBandwidthMetrics", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerBandwidthMetrics(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerBandwidthNotificationSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var notificationSettingId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerBandwidthNotificationSetting(context.Background(), serverId, notificationSettingId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerBandwidthNotificationSettingList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerBandwidthNotificationSettingList(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerCredential", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var type_ string
+		var username string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerCredential(context.Background(), serverId, type_, username).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerCredentialList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerCredentialList(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerCredentialListByType", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var type_ string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerCredentialListByType(context.Background(), serverId, type_).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerDataTrafficMetrics", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerDataTrafficMetrics(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerDataTrafficNotificationSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var notificationSettingId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerDataTrafficNotificationSetting(context.Background(), serverId, notificationSettingId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerDataTrafficNotificationSettingList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerDataTrafficNotificationSettingList(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerDhcpReservationList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerDhcpReservationList(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerHardware", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerHardware(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerHardwareScan", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var hardwareScanId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerHardwareScan(context.Background(), serverId, hardwareScanId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerHardwareScanList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerHardwareScanList(context.Background(), serverId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -162,6 +739,35 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DedicatedserverAPIService GetServerJob", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var jobId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerJob(context.Background(), serverId, jobId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService GetServerJobList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerJobList(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DedicatedserverAPIService GetServerList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -188,14 +794,41 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DedicatedserverAPIService NetworkEquipmentsIpsNull", func(t *testing.T) {
+	t.Run("Test DedicatedserverAPIService GetServerPowerStatus", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var networkEquipmentId string
-		var ip string
+		var serverId string
 
-		resp, httpRes, err := apiClient.DedicatedserverAPI.NetworkEquipmentsIpsNull(context.Background(), networkEquipmentId, ip).Execute()
+		resp, httpRes, err := apiClient.DedicatedserverAPI.GetServerPowerStatus(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService InstallOperatingSystem", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.InstallOperatingSystem(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService IpmiResetServer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.IpmiResetServer(context.Background(), serverId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -218,17 +851,122 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DedicatedserverAPIService PutServerIp", func(t *testing.T) {
+	t.Run("Test DedicatedserverAPIService NullNetworkEquipmentIpRoute", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+		var ip string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.NullNetworkEquipmentIpRoute(context.Background(), networkEquipmentId, ip).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService OpenNetworkInterface", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var serverId string
-		var ip string
+		var networkType NetworkType
 
-		resp, httpRes, err := apiClient.DedicatedserverAPI.PutServerIp(context.Background(), serverId, ip).Execute()
+		httpRes, err := apiClient.DedicatedserverAPI.OpenNetworkInterface(context.Background(), serverId, networkType).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService OpenNetworkInterfaces", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.OpenNetworkInterfaces(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService PowerCycleNetworkEquipment", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.PowerCycleNetworkEquipment(context.Background(), networkEquipmentId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService PowerCycleServer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.PowerCycleServer(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService PowerNetworkEquipmentOff", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.PowerNetworkEquipmentOff(context.Background(), networkEquipmentId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService PowerNetworkEquipmentOn", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.PowerNetworkEquipmentOn(context.Background(), networkEquipmentId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService PowerServerOff", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.PowerServerOff(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService PowerServerOn", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.PowerServerOn(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -248,6 +986,35 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DedicatedserverAPIService RetryServerJob", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var jobId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.RetryServerJob(context.Background(), serverId, jobId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService ScanHardware", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.ScanHardware(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DedicatedserverAPIService UnNullNetworkEquipmentIpRoute", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -256,6 +1023,50 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 		var ip string
 
 		resp, httpRes, err := apiClient.DedicatedserverAPI.UnNullNetworkEquipmentIpRoute(context.Background(), networkEquipmentId, ip).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService UpdateDdosNotificationSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+
+		httpRes, err := apiClient.DedicatedserverAPI.UpdateDdosNotificationSetting(context.Background(), serverId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService UpdateIpProfile", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var ip string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.UpdateIpProfile(context.Background(), serverId, ip).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService UpdateNetworkEquipmentCredential", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var networkEquipmentId string
+		var type_ string
+		var username string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.UpdateNetworkEquipmentCredential(context.Background(), networkEquipmentId, type_, username).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -287,6 +1098,64 @@ func Test_dedicatedserver_DedicatedserverAPIService(t *testing.T) {
 		httpRes, err := apiClient.DedicatedserverAPI.UpdateNetworkEquipmentReference(context.Background(), networkEquipmentId).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService UpdateNullRoute", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.UpdateNullRoute(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService UpdateServerBandwidthNotificationSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var notificationSettingId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.UpdateServerBandwidthNotificationSetting(context.Background(), serverId, notificationSettingId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService UpdateServerCredential", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var type_ string
+		var username string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.UpdateServerCredential(context.Background(), serverId, type_, username).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DedicatedserverAPIService UpdateServerDataTrafficNotificationSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var serverId string
+		var notificationSettingId string
+
+		resp, httpRes, err := apiClient.DedicatedserverAPI.UpdateServerDataTrafficNotificationSetting(context.Background(), serverId, notificationSettingId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

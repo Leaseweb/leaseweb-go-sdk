@@ -101,7 +101,7 @@ Class | Method | HTTP request | Description
 
 
 Authentication schemes defined for the API:
-### ApiKeyAuth
+### X-LSW-Auth
 
 - **Type**: API key
 - **API key parameter name**: X-LSW-Auth

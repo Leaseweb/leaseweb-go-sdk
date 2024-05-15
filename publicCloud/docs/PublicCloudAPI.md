@@ -9,8 +9,8 @@ Method | HTTP request | Description
 [**CancelInstanceTermination**](PublicCloudAPI.md#CancelInstanceTermination) | **Post** /instances/{instanceId}/cancelTermination | Cancel instance termination
 [**CreateLoadBalancerListener**](PublicCloudAPI.md#CreateLoadBalancerListener) | **Post** /loadBalancers/{loadBalancerId}/listeners | Create listener
 [**CreateSnapshot**](PublicCloudAPI.md#CreateSnapshot) | **Post** /instances/{instanceId}/snapshots | Create instance snapshot
-[**CredentialsDelete**](PublicCloudAPI.md#CredentialsDelete) | **Delete** /instances/{instanceId}/credentials | Delete all instance credentials
 [**DeleteCredential**](PublicCloudAPI.md#DeleteCredential) | **Delete** /instances/{instanceId}/credentials/{type}/{username} | Delete credentials
+[**DeleteCredentials**](PublicCloudAPI.md#DeleteCredentials) | **Delete** /instances/{instanceId}/credentials | Delete all instance credentials
 [**DeleteLoadBalancerListener**](PublicCloudAPI.md#DeleteLoadBalancerListener) | **Delete** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Delete load balancer listener
 [**DeleteSnapshot**](PublicCloudAPI.md#DeleteSnapshot) | **Delete** /instances/{instanceId}/snapshots/{snapshotId} | Delete instance snapshot
 [**DeregisterLoadBalancerTargets**](PublicCloudAPI.md#DeregisterLoadBalancerTargets) | **Post** /loadBalancers/{loadBalancerId}/deregisterTargets | Deregister targets
@@ -22,6 +22,7 @@ Method | HTTP request | Description
 [**GetDataTrafficMetrics**](PublicCloudAPI.md#GetDataTrafficMetrics) | **Get** /instances/{instanceId}/metrics/datatraffic | Get instance data traffic metrics
 [**GetExpenses**](PublicCloudAPI.md#GetExpenses) | **Get** /equipments/{equipmentId}/expenses | Get costs for a given month.
 [**GetInstance**](PublicCloudAPI.md#GetInstance) | **Get** /instances/{instanceId} | Get instance details
+[**GetInstanceList**](PublicCloudAPI.md#GetInstanceList) | **Get** /instances | Get instance list
 [**GetInstanceTypeList**](PublicCloudAPI.md#GetInstanceTypeList) | **Get** /instanceTypes | List instance types
 [**GetIp**](PublicCloudAPI.md#GetIp) | **Get** /instances/{instanceId}/ips/{ip} | Get details about an instance&#39;s IP
 [**GetIpList**](PublicCloudAPI.md#GetIpList) | **Get** /instances/{instanceId}/ips | List instance&#39;s IPs
@@ -32,17 +33,17 @@ Method | HTTP request | Description
 [**GetLoadBalancerTargetList**](PublicCloudAPI.md#GetLoadBalancerTargetList) | **Post** /loadBalancers/{loadBalancerId}/targets | List registered targets
 [**GetMarketAppList**](PublicCloudAPI.md#GetMarketAppList) | **Get** /marketApps | Get marketplace apps
 [**GetOperatingSystemList**](PublicCloudAPI.md#GetOperatingSystemList) | **Get** /operatingSystems | List all available Operating Systems
+[**GetRegionList**](PublicCloudAPI.md#GetRegionList) | **Get** /regions | List regions
 [**GetReinstallOsList**](PublicCloudAPI.md#GetReinstallOsList) | **Get** /instances/{instanceId}/reinstall/operatingSystems | List OSes available for reinstall
 [**GetSnapshot**](PublicCloudAPI.md#GetSnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
 [**GetSnapshotList**](PublicCloudAPI.md#GetSnapshotList) | **Get** /instances/{instanceId}/snapshots | List snapshots
 [**GetUpdateInstanceTypeList**](PublicCloudAPI.md#GetUpdateInstanceTypeList) | **Get** /instances/{instanceId}/instanceTypesUpdate | List available instance types for update
-[**InstanceList**](PublicCloudAPI.md#InstanceList) | **Get** /instances | Get instance list
 [**LaunchInstance**](PublicCloudAPI.md#LaunchInstance) | **Post** /instances | Launch instance
 [**LaunchLoadBalancer**](PublicCloudAPI.md#LaunchLoadBalancer) | **Post** /loadBalancers | Launch Load balancer
 [**NullRouteIp**](PublicCloudAPI.md#NullRouteIp) | **Post** /instances/{instanceId}/ips/{ip}/null | Null route IP
 [**RebootInstance**](PublicCloudAPI.md#RebootInstance) | **Post** /instances/{instanceId}/reboot | Reboot instance
-[**RegionsList**](PublicCloudAPI.md#RegionsList) | **Get** /regions | List regions
 [**RegisterLoadBalancerTargets**](PublicCloudAPI.md#RegisterLoadBalancerTargets) | **Post** /loadBalancers/{loadBalancerId}/registerTargets | Register targets
+[**ReinstallInstance**](PublicCloudAPI.md#ReinstallInstance) | **Put** /instances/{instanceId}/reinstall | Reinstall instance
 [**RemoveFromPrivateNetwork**](PublicCloudAPI.md#RemoveFromPrivateNetwork) | **Delete** /instances/{instanceId}/removeFromPrivateNetwork | Remove instance from Private Network
 [**RemoveIpNullRoute**](PublicCloudAPI.md#RemoveIpNullRoute) | **Post** /instances/{instanceId}/ips/{ip}/unnull | Remove an IP null route
 [**ResetPassword**](PublicCloudAPI.md#ResetPassword) | **Post** /instances/{instanceId}/resetPassword | Reset instance password
@@ -116,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -186,7 +187,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -254,7 +255,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -326,7 +327,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -394,75 +395,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CredentialsDelete
-
-> CredentialsDelete(ctx, instanceId).Execute()
-
-Delete all instance credentials
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
-)
-
-func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PublicCloudAPI.CredentialsDelete(context.Background(), instanceId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.CredentialsDelete``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**instanceId** | **string** | Instance&#39;s ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCredentialsDeleteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -536,7 +469,75 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteCredentials
+
+> DeleteCredentials(ctx, instanceId).Execute()
+
+Delete all instance credentials
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PublicCloudAPI.DeleteCredentials(context.Background(), instanceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.DeleteCredentials``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteCredentialsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -607,7 +608,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -676,7 +677,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -746,7 +747,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -814,7 +815,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -884,7 +885,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -960,7 +961,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1030,7 +1031,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1103,7 +1104,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1180,7 +1181,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1253,7 +1254,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1323,7 +1324,93 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetInstanceList
+
+> GetInstanceListResult GetInstanceList(ctx).Limit(limit).Offset(offset).Ip(ip).Reference(reference).Id(id).ContractType(contractType).ContractState(contractState).OperatingSystemId(operatingSystemId).State(state).Region(region).Type_(type_).Execute()
+
+Get instance list
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	limit := int32(20) // int32 | Limit the number of results returned. (optional)
+	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
+	ip := "10.0.0.1" // string |  (optional)
+	reference := "my-webserver" // string |  (optional)
+	id := "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" // string |  (optional)
+	contractType := openapiclient.contractType("HOURLY") // ContractType |  (optional)
+	contractState := openapiclient.contractState("ACTIVE") // ContractState |  (optional)
+	operatingSystemId := "UBUNTU_22_04_64BIT" // string | Available Operating Systems can be obtained using `/v1/operatingSystems`. (optional)
+	state := "RUNNING" // string |  (optional)
+	region := "eu-west-3" // string | Available regions can be obtained using `/v1/regions` (optional)
+	type_ := "lsw.c3.xlarge" // string | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetInstanceList(context.Background()).Limit(limit).Offset(offset).Ip(ip).Reference(reference).Id(id).ContractType(contractType).ContractState(contractState).OperatingSystemId(operatingSystemId).State(state).Region(region).Type_(type_).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetInstanceList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetInstanceList`: GetInstanceListResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetInstanceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetInstanceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int32** | Limit the number of results returned. | 
+ **offset** | **int32** | Return results starting from the given offset. | 
+ **ip** | **string** |  | 
+ **reference** | **string** |  | 
+ **id** | **string** |  | 
+ **contractType** | [**ContractType**](ContractType.md) |  | 
+ **contractState** | [**ContractState**](ContractState.md) |  | 
+ **operatingSystemId** | **string** | Available Operating Systems can be obtained using &#x60;/v1/operatingSystems&#x60;. | 
+ **state** | **string** |  | 
+ **region** | **string** | Available regions can be obtained using &#x60;/v1/regions&#x60; | 
+ **type_** | **string** | Available instance types for your region can be obtained using &#x60;/v1/instanceTypes&#x60;. | 
+
+### Return type
+
+[**GetInstanceListResult**](GetInstanceListResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1393,7 +1480,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1464,7 +1551,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1540,7 +1627,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1608,7 +1695,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1678,7 +1765,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1762,7 +1849,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1835,7 +1922,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1905,7 +1992,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -1966,7 +2053,7 @@ Other parameters are passed through a pointer to a apiGetMarketAppListRequest st
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2032,7 +2119,73 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRegionList
+
+> GetRegionListResult GetRegionList(ctx).Limit(limit).Offset(offset).Execute()
+
+List regions
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	limit := int32(20) // int32 | Limit the number of results returned. (optional)
+	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetRegionList(context.Background()).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetRegionList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRegionList`: GetRegionListResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetRegionList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRegionListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int32** | Limit the number of results returned. | 
+ **offset** | **int32** | Return results starting from the given offset. | 
+
+### Return type
+
+[**GetRegionListResult**](GetRegionListResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2102,7 +2255,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2173,7 +2326,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2247,7 +2400,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2321,93 +2474,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## InstanceList
-
-> GetInstanceListResult InstanceList(ctx).Limit(limit).Offset(offset).Ip(ip).Reference(reference).Id(id).ContractType(contractType).ContractState(contractState).OperatingSystemId(operatingSystemId).State(state).Region(region).Type_(type_).Execute()
-
-Get instance list
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
-)
-
-func main() {
-	limit := int32(20) // int32 | Limit the number of results returned. (optional)
-	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
-	ip := "10.0.0.1" // string |  (optional)
-	reference := "my-webserver" // string |  (optional)
-	id := "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" // string |  (optional)
-	contractType := openapiclient.contractType("HOURLY") // ContractType |  (optional)
-	contractState := openapiclient.contractState("ACTIVE") // ContractState |  (optional)
-	operatingSystemId := "UBUNTU_22_04_64BIT" // string | Available Operating Systems can be obtained using `/v1/operatingSystems`. (optional)
-	state := "RUNNING" // string |  (optional)
-	region := "eu-west-3" // string | Available regions can be obtained using `/v1/regions` (optional)
-	type_ := "lsw.c3.xlarge" // string | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.InstanceList(context.Background()).Limit(limit).Offset(offset).Ip(ip).Reference(reference).Id(id).ContractType(contractType).ContractState(contractState).OperatingSystemId(operatingSystemId).State(state).Region(region).Type_(type_).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.InstanceList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `InstanceList`: GetInstanceListResult
-	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.InstanceList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiInstanceListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **int32** | Limit the number of results returned. | 
- **offset** | **int32** | Return results starting from the given offset. | 
- **ip** | **string** |  | 
- **reference** | **string** |  | 
- **id** | **string** |  | 
- **contractType** | [**ContractType**](ContractType.md) |  | 
- **contractState** | [**ContractState**](ContractState.md) |  | 
- **operatingSystemId** | **string** | Available Operating Systems can be obtained using &#x60;/v1/operatingSystems&#x60;. | 
- **state** | **string** |  | 
- **region** | **string** | Available regions can be obtained using &#x60;/v1/regions&#x60; | 
- **type_** | **string** | Available instance types for your region can be obtained using &#x60;/v1/instanceTypes&#x60;. | 
-
-### Return type
-
-[**GetInstanceListResult**](GetInstanceListResult.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2473,7 +2540,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2539,7 +2606,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2614,7 +2681,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2682,73 +2749,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RegionsList
-
-> GetRegionListResult RegionsList(ctx).Limit(limit).Offset(offset).Execute()
-
-List regions
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
-)
-
-func main() {
-	limit := int32(20) // int32 | Limit the number of results returned. (optional)
-	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.RegionsList(context.Background()).Limit(limit).Offset(offset).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.RegionsList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `RegionsList`: GetRegionListResult
-	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.RegionsList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRegionsListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **int32** | Limit the number of results returned. | 
- **offset** | **int32** | Return results starting from the given offset. | 
-
-### Return type
-
-[**GetRegionListResult**](GetRegionListResult.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2818,7 +2819,77 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReinstallInstance
+
+> ReinstallInstance(ctx, instanceId).ReinstallInstanceOpts(reinstallInstanceOpts).Execute()
+
+Reinstall instance
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	reinstallInstanceOpts := *openapiclient.NewReinstallInstanceOpts("OperatingSystemId_example") // ReinstallInstanceOpts | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PublicCloudAPI.ReinstallInstance(context.Background(), instanceId).ReinstallInstanceOpts(reinstallInstanceOpts).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.ReinstallInstance``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReinstallInstanceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **reinstallInstanceOpts** | [**ReinstallInstanceOpts**](ReinstallInstanceOpts.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2886,7 +2957,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -2959,7 +3030,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3027,7 +3098,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3096,7 +3167,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3164,7 +3235,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3232,7 +3303,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3304,7 +3375,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3372,7 +3443,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3440,7 +3511,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3518,7 +3589,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3590,7 +3661,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3665,7 +3736,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3737,7 +3808,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -3810,7 +3881,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 

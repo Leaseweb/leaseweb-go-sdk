@@ -92,7 +92,7 @@ func (a *InvoiceAPIService) GetInvoiceExecute(r ApiGetInvoiceRequest) (*GetInvoi
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
@@ -268,7 +268,7 @@ func (a *InvoiceAPIService) GetInvoiceListExecute(r ApiGetInvoiceListRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
@@ -426,7 +426,7 @@ func (a *InvoiceAPIService) GetInvoicePdfExecute(r ApiGetInvoicePdfRequest) (*ht
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
@@ -593,7 +593,7 @@ func (a *InvoiceAPIService) GetProformaExecute(r ApiGetProformaRequest) (*GetPro
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key

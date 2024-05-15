@@ -15,7 +15,7 @@ info:
 servers:
 - url: https://api.leaseweb.com/invoices/v1
 security:
-- ApiKeyAuth: []
+- X-LSW-Auth: []
 tags:
 - description: |
     The API uses standard HTTP status codes to indicate the success or failure of the API call. The response will be JSON. Most APIs use the following format:
@@ -37,8 +37,7 @@ tags:
     You can generate API keys in the [Customer Portal](https://secure.leaseweb.com/api-client-management/).
   name: API Key Authentication
   x-traitTag: true
-- description: |
-    Invoices
+- description: ""
   name: Invoices
 paths:
   /invoices:
@@ -919,7 +918,7 @@ components:
       title: lineItem
       type: object
   securitySchemes:
-    ApiKeyAuth:
+    X-LSW-Auth:
       description: API key authentication by setting `X-LSW-Auth` header.
       in: header
       name: X-LSW-Auth

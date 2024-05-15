@@ -36,8 +36,7 @@ tags:
     You can generate API keys in the [Customer Portal](https://secure.leaseweb.com/api-client-management/).
   name: API Key Authentication
   x-traitTag: true
-- description: |
-    Abuse Reports
+- description: ""
   name: Abuse Reports
 paths:
   /reports:
@@ -147,7 +146,7 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       security:
-      - ApiKeyAuth: []
+      - X-LSW-Auth: []
       summary: List reports
       tags:
       - abuse
@@ -249,7 +248,7 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       security:
-      - ApiKeyAuth: []
+      - X-LSW-Auth: []
       summary: Inspect a report
       tags:
       - abuse
@@ -360,7 +359,7 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       security:
-      - ApiKeyAuth: []
+      - X-LSW-Auth: []
       summary: List report messages
       tags:
       - abuse
@@ -447,7 +446,7 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       security:
-      - ApiKeyAuth: []
+      - X-LSW-Auth: []
       summary: Create new message
       tags:
       - abuse
@@ -530,7 +529,7 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       security:
-      - ApiKeyAuth: []
+      - X-LSW-Auth: []
       summary: Inspect a message attachment
       tags:
       - abuse
@@ -613,7 +612,7 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       security:
-      - ApiKeyAuth: []
+      - X-LSW-Auth: []
       summary: Inspect a report attachment
       tags:
       - abuse
@@ -704,7 +703,7 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       security:
-      - ApiKeyAuth: []
+      - X-LSW-Auth: []
       summary: List resolution options
       tags:
       - abuse
@@ -797,7 +796,7 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       security:
-      - ApiKeyAuth: []
+      - X-LSW-Auth: []
       summary: Resolve a report
       tags:
       - abuse
@@ -1350,7 +1349,7 @@ components:
       title: resolutionList
       type: object
   securitySchemes:
-    ApiKeyAuth:
+    X-LSW-Auth:
       description: API key authentication by setting `X-LSW-Auth` header.
       in: header
       name: X-LSW-Auth

@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -216,7 +216,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -286,7 +286,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -357,7 +357,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -431,7 +431,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -501,7 +501,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 
@@ -571,7 +571,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[ApiKeyAuth](../README.md#ApiKeyAuth)
+[X-LSW-Auth](../README.md#X-LSW-Auth)
 
 ### HTTP request headers
 

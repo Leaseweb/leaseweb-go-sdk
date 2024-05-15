@@ -16,6 +16,7 @@ Install the following dependencies:
 
 ```sh
 go get github.com/stretchr/testify/assert
+go get golang.org/x/oauth2
 go get golang.org/x/net/context
 ```
 
@@ -79,73 +80,229 @@ All URIs are relative to *https://api.leaseweb.com/internal/dedicatedserverapi/v
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DedicatedserverAPI* | [**AddServerToPrivateNetwork**](docs/DedicatedserverAPI.md#addservertoprivatenetwork) | **Put** /servers/{serverId}/privateNetworks/{privateNetworkId} | Add a server to private network
+*DedicatedserverAPI* | [**CancelActiveJob**](docs/DedicatedserverAPI.md#cancelactivejob) | **Post** /servers/{serverId}/cancelActiveJob | Cancel active job
+*DedicatedserverAPI* | [**CloseNetworkInterface**](docs/DedicatedserverAPI.md#closenetworkinterface) | **Post** /servers/{serverId}/networkInterfaces/{networkType}/close | Close network interface
+*DedicatedserverAPI* | [**CloseNetworkInterfaces**](docs/DedicatedserverAPI.md#closenetworkinterfaces) | **Post** /servers/{serverId}/networkInterfaces/close | Close all network interfaces
+*DedicatedserverAPI* | [**ConfigureHardwareRaid**](docs/DedicatedserverAPI.md#configurehardwareraid) | **Post** /servers/{serverId}/configureHardwareRaid | Configure Hardware Raid
+*DedicatedserverAPI* | [**CreateNetworkEquipmentCredential**](docs/DedicatedserverAPI.md#createnetworkequipmentcredential) | **Post** /networkEquipments/{networkEquipmentId}/credentials | Create new network equipment credentials
+*DedicatedserverAPI* | [**CreateServerBandwidthNotificationSetting**](docs/DedicatedserverAPI.md#createserverbandwidthnotificationsetting) | **Post** /servers/{serverId}/notificationSettings/bandwidth | Create a bandwidth notification setting
+*DedicatedserverAPI* | [**CreateServerCredential**](docs/DedicatedserverAPI.md#createservercredential) | **Post** /servers/{serverId}/credentials | Create new server credentials
+*DedicatedserverAPI* | [**CreateServerDataTrafficNotificationSetting**](docs/DedicatedserverAPI.md#createserverdatatrafficnotificationsetting) | **Post** /servers/{serverId}/notificationSettings/datatraffic | Create a data traffic notification setting
+*DedicatedserverAPI* | [**CreateServerDhcpReservation**](docs/DedicatedserverAPI.md#createserverdhcpreservation) | **Post** /servers/{serverId}/leases | Create a DHCP reservation
+*DedicatedserverAPI* | [**DeleteNetworkEquipmentCredential**](docs/DedicatedserverAPI.md#deletenetworkequipmentcredential) | **Delete** /networkEquipments/{networkEquipmentId}/credentials/{type}/{username} | Delete network equipment credentials
+*DedicatedserverAPI* | [**DeleteServerBandwidthNotificationSetting**](docs/DedicatedserverAPI.md#deleteserverbandwidthnotificationsetting) | **Delete** /servers/{serverId}/notificationSettings/bandwidth/{notificationSettingId} | Delete a bandwidth notification setting
+*DedicatedserverAPI* | [**DeleteServerCredential**](docs/DedicatedserverAPI.md#deleteservercredential) | **Delete** /servers/{serverId}/credentials/{type}/{username} | Delete server credentials
+*DedicatedserverAPI* | [**DeleteServerDataTrafficNotificationSetting**](docs/DedicatedserverAPI.md#deleteserverdatatrafficnotificationsetting) | **Delete** /servers/{serverId}/notificationSettings/datatraffic/{notificationSettingId} | Delete a data traffic notification setting
+*DedicatedserverAPI* | [**DeleteServerDhcpReservation**](docs/DedicatedserverAPI.md#deleteserverdhcpreservation) | **Delete** /servers/{serverId}/leases | Delete a DHCP reservation
 *DedicatedserverAPI* | [**DeleteServerFromPrivateNetwork**](docs/DedicatedserverAPI.md#deleteserverfromprivatenetwork) | **Delete** /servers/{serverId}/privateNetworks/{privateNetworkId} | Delete a server from a private network
+*DedicatedserverAPI* | [**EnableServerRescueMode**](docs/DedicatedserverAPI.md#enableserverrescuemode) | **Post** /servers/{serverId}/rescueMode | Launch rescue mode
+*DedicatedserverAPI* | [**ExpireActiveJob**](docs/DedicatedserverAPI.md#expireactivejob) | **Post** /servers/{serverId}/expireActiveJob | Expire active job
+*DedicatedserverAPI* | [**GetControlPanelList**](docs/DedicatedserverAPI.md#getcontrolpanellist) | **Get** /controlPanels | List control panels
+*DedicatedserverAPI* | [**GetControlPanelListByOperatingSystemId**](docs/DedicatedserverAPI.md#getcontrolpanellistbyoperatingsystemid) | **Get** /operatingSystems/{operatingSystemId}/controlPanels | List control panels by Operating System
+*DedicatedserverAPI* | [**GetDdosNotificationSetting**](docs/DedicatedserverAPI.md#getddosnotificationsetting) | **Get** /servers/{serverId}/notificationSettings/ddos | Inspect DDoS notification settings
 *DedicatedserverAPI* | [**GetNetworkEquipment**](docs/DedicatedserverAPI.md#getnetworkequipment) | **Get** /networkEquipments/{networkEquipmentId} | Get network equipment
+*DedicatedserverAPI* | [**GetNetworkEquipmentCredential**](docs/DedicatedserverAPI.md#getnetworkequipmentcredential) | **Get** /networkEquipments/{networkEquipmentId}/credentials/{type}/{username} | Show network equipment credentials
+*DedicatedserverAPI* | [**GetNetworkEquipmentCredentialList**](docs/DedicatedserverAPI.md#getnetworkequipmentcredentiallist) | **Get** /networkEquipments/{networkEquipmentId}/credentials | List network equipment credentials
+*DedicatedserverAPI* | [**GetNetworkEquipmentCredentialListByType**](docs/DedicatedserverAPI.md#getnetworkequipmentcredentiallistbytype) | **Get** /networkEquipments/{networkEquipmentId}/credentials/{type} | List network equipment credentials by type
 *DedicatedserverAPI* | [**GetNetworkEquipmentIp**](docs/DedicatedserverAPI.md#getnetworkequipmentip) | **Get** /networkEquipments/{networkEquipmentId}/ips/{ip} | Show a network equipment IP
 *DedicatedserverAPI* | [**GetNetworkEquipmentIpList**](docs/DedicatedserverAPI.md#getnetworkequipmentiplist) | **Get** /networkEquipments/{networkEquipmentId}/ips | List IPs
 *DedicatedserverAPI* | [**GetNetworkEquipmentList**](docs/DedicatedserverAPI.md#getnetworkequipmentlist) | **Get** /networkEquipments | List network equipment
 *DedicatedserverAPI* | [**GetNetworkEquipmentNullRouteHistory**](docs/DedicatedserverAPI.md#getnetworkequipmentnullroutehistory) | **Get** /networkEquipments/{networkEquipmentId}/nullRouteHistory | Show null route history
+*DedicatedserverAPI* | [**GetNetworkEquipmentPowerStatus**](docs/DedicatedserverAPI.md#getnetworkequipmentpowerstatus) | **Get** /networkEquipments/{networkEquipmentId}/powerInfo | Show power status
+*DedicatedserverAPI* | [**GetNetworkInterface**](docs/DedicatedserverAPI.md#getnetworkinterface) | **Get** /servers/{serverId}/networkInterfaces/{networkType} | Show a network interface
+*DedicatedserverAPI* | [**GetNetworkInterfaceList**](docs/DedicatedserverAPI.md#getnetworkinterfacelist) | **Get** /servers/{serverId}/networkInterfaces | List network interfaces
+*DedicatedserverAPI* | [**GetOperatingSystem**](docs/DedicatedserverAPI.md#getoperatingsystem) | **Get** /operatingSystems/{operatingSystemId} | Show an operating system
+*DedicatedserverAPI* | [**GetOperatingSystemList**](docs/DedicatedserverAPI.md#getoperatingsystemlist) | **Get** /operatingSystems | List Operating Systems
+*DedicatedserverAPI* | [**GetRescueImageList**](docs/DedicatedserverAPI.md#getrescueimagelist) | **Get** /rescueImages | Rescue Images
 *DedicatedserverAPI* | [**GetServer**](docs/DedicatedserverAPI.md#getserver) | **Get** /servers/{serverId} | Get server
+*DedicatedserverAPI* | [**GetServerBandwidthMetrics**](docs/DedicatedserverAPI.md#getserverbandwidthmetrics) | **Get** /servers/{serverId}/metrics/bandwidth | Show bandwidth metrics
+*DedicatedserverAPI* | [**GetServerBandwidthNotificationSetting**](docs/DedicatedserverAPI.md#getserverbandwidthnotificationsetting) | **Get** /servers/{serverId}/notificationSettings/bandwidth/{notificationSettingId} | Show a bandwidth notification setting
+*DedicatedserverAPI* | [**GetServerBandwidthNotificationSettingList**](docs/DedicatedserverAPI.md#getserverbandwidthnotificationsettinglist) | **Get** /servers/{serverId}/notificationSettings/bandwidth | List bandwidth notification settings
+*DedicatedserverAPI* | [**GetServerCredential**](docs/DedicatedserverAPI.md#getservercredential) | **Get** /servers/{serverId}/credentials/{type}/{username} | Show server credentials
+*DedicatedserverAPI* | [**GetServerCredentialList**](docs/DedicatedserverAPI.md#getservercredentiallist) | **Get** /servers/{serverId}/credentials | List server credentials
+*DedicatedserverAPI* | [**GetServerCredentialListByType**](docs/DedicatedserverAPI.md#getservercredentiallistbytype) | **Get** /servers/{serverId}/credentials/{type} | List server credentials by type
+*DedicatedserverAPI* | [**GetServerDataTrafficMetrics**](docs/DedicatedserverAPI.md#getserverdatatrafficmetrics) | **Get** /servers/{serverId}/metrics/datatraffic | Show datatraffic metrics
+*DedicatedserverAPI* | [**GetServerDataTrafficNotificationSetting**](docs/DedicatedserverAPI.md#getserverdatatrafficnotificationsetting) | **Get** /servers/{serverId}/notificationSettings/datatraffic/{notificationSettingId} | Show a data traffic notification setting
+*DedicatedserverAPI* | [**GetServerDataTrafficNotificationSettingList**](docs/DedicatedserverAPI.md#getserverdatatrafficnotificationsettinglist) | **Get** /servers/{serverId}/notificationSettings/datatraffic | List data traffic notification settings
+*DedicatedserverAPI* | [**GetServerDhcpReservationList**](docs/DedicatedserverAPI.md#getserverdhcpreservationlist) | **Get** /servers/{serverId}/leases | List DHCP reservations
+*DedicatedserverAPI* | [**GetServerHardware**](docs/DedicatedserverAPI.md#getserverhardware) | **Get** /servers/{serverId}/hardwareInfo | Show hardware information
+*DedicatedserverAPI* | [**GetServerHardwareScan**](docs/DedicatedserverAPI.md#getserverhardwarescan) | **Get** /servers/{serverId}/hardwareScans/{hardwareScanId} | Show a hardware scan
+*DedicatedserverAPI* | [**GetServerHardwareScanList**](docs/DedicatedserverAPI.md#getserverhardwarescanlist) | **Get** /servers/{serverId}/hardwareScans | List hardware scans
 *DedicatedserverAPI* | [**GetServerIp**](docs/DedicatedserverAPI.md#getserverip) | **Get** /servers/{serverId}/ips/{ip} | Show a server IP
 *DedicatedserverAPI* | [**GetServerIpList**](docs/DedicatedserverAPI.md#getserveriplist) | **Get** /servers/{serverId}/ips | List IPs
+*DedicatedserverAPI* | [**GetServerJob**](docs/DedicatedserverAPI.md#getserverjob) | **Get** /servers/{serverId}/jobs/{jobId} | Show a job
+*DedicatedserverAPI* | [**GetServerJobList**](docs/DedicatedserverAPI.md#getserverjoblist) | **Get** /servers/{serverId}/jobs | List jobs
 *DedicatedserverAPI* | [**GetServerList**](docs/DedicatedserverAPI.md#getserverlist) | **Get** /servers | List servers
 *DedicatedserverAPI* | [**GetServerNullRouteHistory**](docs/DedicatedserverAPI.md#getservernullroutehistory) | **Get** /servers/{serverId}/nullRouteHistory | Show null route history
-*DedicatedserverAPI* | [**NetworkEquipmentsIpsNull**](docs/DedicatedserverAPI.md#networkequipmentsipsnull) | **Post** /networkEquipments/{networkEquipmentId}/ips/{ip}/null | Null route an IP
+*DedicatedserverAPI* | [**GetServerPowerStatus**](docs/DedicatedserverAPI.md#getserverpowerstatus) | **Get** /servers/{serverId}/powerInfo | Show power status
+*DedicatedserverAPI* | [**InstallOperatingSystem**](docs/DedicatedserverAPI.md#installoperatingsystem) | **Post** /servers/{serverId}/install | Launch installation
+*DedicatedserverAPI* | [**IpmiResetServer**](docs/DedicatedserverAPI.md#ipmiresetserver) | **Post** /servers/{serverId}/ipmiReset | Launch IPMI reset
 *DedicatedserverAPI* | [**NullIpRoute**](docs/DedicatedserverAPI.md#nulliproute) | **Post** /servers/{serverId}/ips/{ip}/null | Null route an IP
-*DedicatedserverAPI* | [**PutServerIp**](docs/DedicatedserverAPI.md#putserverip) | **Put** /servers/{serverId}/ips/{ip} | Update an IP
+*DedicatedserverAPI* | [**NullNetworkEquipmentIpRoute**](docs/DedicatedserverAPI.md#nullnetworkequipmentiproute) | **Post** /networkEquipments/{networkEquipmentId}/ips/{ip}/null | Null route an IP
+*DedicatedserverAPI* | [**OpenNetworkInterface**](docs/DedicatedserverAPI.md#opennetworkinterface) | **Post** /servers/{serverId}/networkInterfaces/{networkType}/open | Open network interface
+*DedicatedserverAPI* | [**OpenNetworkInterfaces**](docs/DedicatedserverAPI.md#opennetworkinterfaces) | **Post** /servers/{serverId}/networkInterfaces/open | Open all network interfaces
+*DedicatedserverAPI* | [**PowerCycleNetworkEquipment**](docs/DedicatedserverAPI.md#powercyclenetworkequipment) | **Post** /networkEquipments/{networkEquipmentId}/powerCycle | Power cycle a network equipment
+*DedicatedserverAPI* | [**PowerCycleServer**](docs/DedicatedserverAPI.md#powercycleserver) | **Post** /servers/{serverId}/powerCycle | Power cycle a server
+*DedicatedserverAPI* | [**PowerNetworkEquipmentOff**](docs/DedicatedserverAPI.md#powernetworkequipmentoff) | **Post** /networkEquipments/{networkEquipmentId}/powerOff | Power off network equipment
+*DedicatedserverAPI* | [**PowerNetworkEquipmentOn**](docs/DedicatedserverAPI.md#powernetworkequipmenton) | **Post** /networkEquipments/{networkEquipmentId}/powerOn | Power on network equipment
+*DedicatedserverAPI* | [**PowerServerOff**](docs/DedicatedserverAPI.md#powerserveroff) | **Post** /servers/{serverId}/powerOff | Power off server
+*DedicatedserverAPI* | [**PowerServerOn**](docs/DedicatedserverAPI.md#powerserveron) | **Post** /servers/{serverId}/powerOn | Power on server
 *DedicatedserverAPI* | [**RemoveNullIpRoute**](docs/DedicatedserverAPI.md#removenulliproute) | **Post** /servers/{serverId}/ips/{ip}/unnull | Remove a null route
+*DedicatedserverAPI* | [**RetryServerJob**](docs/DedicatedserverAPI.md#retryserverjob) | **Post** /servers/{serverId}/jobs/{jobId}/retry | Retry a job
+*DedicatedserverAPI* | [**ScanHardware**](docs/DedicatedserverAPI.md#scanhardware) | **Post** /servers/{serverId}/hardwareScan | Launch hardware scan
 *DedicatedserverAPI* | [**UnNullNetworkEquipmentIpRoute**](docs/DedicatedserverAPI.md#unnullnetworkequipmentiproute) | **Post** /networkEquipments/{networkEquipmentId}/ips/{ip}/unnull | Remove a null route
+*DedicatedserverAPI* | [**UpdateDdosNotificationSetting**](docs/DedicatedserverAPI.md#updateddosnotificationsetting) | **Put** /servers/{serverId}/notificationSettings/ddos | Update DDoS notification settings
+*DedicatedserverAPI* | [**UpdateIpProfile**](docs/DedicatedserverAPI.md#updateipprofile) | **Put** /servers/{serverId}/ips/{ip} | Update an IP
+*DedicatedserverAPI* | [**UpdateNetworkEquipmentCredential**](docs/DedicatedserverAPI.md#updatenetworkequipmentcredential) | **Put** /networkEquipments/{networkEquipmentId}/credentials/{type}/{username} | Update network equipment credentials
 *DedicatedserverAPI* | [**UpdateNetworkEquipmentIp**](docs/DedicatedserverAPI.md#updatenetworkequipmentip) | **Put** /networkEquipments/{networkEquipmentId}/ips/{ip} | Update an IP
 *DedicatedserverAPI* | [**UpdateNetworkEquipmentReference**](docs/DedicatedserverAPI.md#updatenetworkequipmentreference) | **Put** /networkEquipments/{networkEquipmentId} | Update network equipment
+*DedicatedserverAPI* | [**UpdateNullRoute**](docs/DedicatedserverAPI.md#updatenullroute) | **Post** /actions/nullRoute | Announce/Withdraw Null Routes
+*DedicatedserverAPI* | [**UpdateServerBandwidthNotificationSetting**](docs/DedicatedserverAPI.md#updateserverbandwidthnotificationsetting) | **Put** /servers/{serverId}/notificationSettings/bandwidth/{notificationSettingId} | Update a bandwidth notification setting
+*DedicatedserverAPI* | [**UpdateServerCredential**](docs/DedicatedserverAPI.md#updateservercredential) | **Put** /servers/{serverId}/credentials/{type}/{username} | Update server credentials
+*DedicatedserverAPI* | [**UpdateServerDataTrafficNotificationSetting**](docs/DedicatedserverAPI.md#updateserverdatatrafficnotificationsetting) | **Put** /servers/{serverId}/notificationSettings/datatraffic/{notificationSettingId} | Update a data traffic notification setting
 *DedicatedserverAPI* | [**UpdateServerReference**](docs/DedicatedserverAPI.md#updateserverreference) | **Put** /servers/{serverId} | Update server
 
 
 ## Documentation For Models
 
+ - [Actions](docs/Actions.md)
  - [AddServerToPrivateNetworkOpts](docs/AddServerToPrivateNetworkOpts.md)
+ - [Attribute](docs/Attribute.md)
+ - [Attributes](docs/Attributes.md)
+ - [AutoNegotiation](docs/AutoNegotiation.md)
+ - [BandwidthNotificationSetting](docs/BandwidthNotificationSetting.md)
+ - [BandwidthNotificationSettingOpts](docs/BandwidthNotificationSettingOpts.md)
+ - [Chassis](docs/Chassis.md)
+ - [ConfigureHardwareRaidOpts](docs/ConfigureHardwareRaidOpts.md)
  - [Contract](docs/Contract.md)
+ - [ControlPanel](docs/ControlPanel.md)
+ - [ControlPanelList](docs/ControlPanelList.md)
  - [Cpu](docs/Cpu.md)
+ - [Cpu1](docs/Cpu1.md)
+ - [CpuCapabilities](docs/CpuCapabilities.md)
+ - [CpuSettings](docs/CpuSettings.md)
+ - [CreateNetworkEquipmentCredentialOpts](docs/CreateNetworkEquipmentCredentialOpts.md)
+ - [CreateServerCredentialOpts](docs/CreateServerCredentialOpts.md)
+ - [CreateServerDhcpReservationOpts](docs/CreateServerDhcpReservationOpts.md)
+ - [Credential](docs/Credential.md)
+ - [CredentialList](docs/CredentialList.md)
+ - [CredentialType](docs/CredentialType.md)
+ - [CurrentServerJob](docs/CurrentServerJob.md)
  - [DDos](docs/DDos.md)
+ - [DataTrafficNotificationSetting](docs/DataTrafficNotificationSetting.md)
+ - [DataTrafficNotificationSettingOpts](docs/DataTrafficNotificationSettingOpts.md)
+ - [Defaults](docs/Defaults.md)
+ - [Disk](docs/Disk.md)
+ - [EnableServerRescueModeOpts](docs/EnableServerRescueModeOpts.md)
  - [ErrorResult](docs/ErrorResult.md)
  - [FeatureAvailability](docs/FeatureAvailability.md)
+ - [Firmware](docs/Firmware.md)
+ - [GetDdosNotificationSettingResult](docs/GetDdosNotificationSettingResult.md)
  - [GetNetworkEquipmentIpListResult](docs/GetNetworkEquipmentIpListResult.md)
  - [GetNetworkEquipmentListResult](docs/GetNetworkEquipmentListResult.md)
  - [GetNetworkEquipmentNullRouteHistoryResult](docs/GetNetworkEquipmentNullRouteHistoryResult.md)
+ - [GetNetworkEquipmentPowerStatusResult](docs/GetNetworkEquipmentPowerStatusResult.md)
+ - [GetNetworkInterfaceListResult](docs/GetNetworkInterfaceListResult.md)
+ - [GetOperatingSystemListResult](docs/GetOperatingSystemListResult.md)
+ - [GetOperatingSystemResult](docs/GetOperatingSystemResult.md)
+ - [GetRescueImageListResult](docs/GetRescueImageListResult.md)
+ - [GetServerBandwidthNotificationSettingListResult](docs/GetServerBandwidthNotificationSettingListResult.md)
+ - [GetServerDataTrafficNotificationSettingListResult](docs/GetServerDataTrafficNotificationSettingListResult.md)
+ - [GetServerDhcpReservationListResult](docs/GetServerDhcpReservationListResult.md)
+ - [GetServerHardwareResult](docs/GetServerHardwareResult.md)
+ - [GetServerHardwareScanListResult](docs/GetServerHardwareScanListResult.md)
+ - [GetServerHardwareScanResult](docs/GetServerHardwareScanResult.md)
  - [GetServerListResult](docs/GetServerListResult.md)
  - [GetServerNullRouteHistoryResult](docs/GetServerNullRouteHistoryResult.md)
+ - [GetServerPowerStatusResult](docs/GetServerPowerStatusResult.md)
+ - [HardwareScan](docs/HardwareScan.md)
+ - [HardwareScanChassis](docs/HardwareScanChassis.md)
+ - [HardwareScanCpu](docs/HardwareScanCpu.md)
+ - [HardwareScanDisk](docs/HardwareScanDisk.md)
+ - [HardwareScanMemory](docs/HardwareScanMemory.md)
+ - [HardwareScanResult](docs/HardwareScanResult.md)
+ - [HardwareScanResultIpmi](docs/HardwareScanResultIpmi.md)
+ - [HardwareScanResultNetwork](docs/HardwareScanResultNetwork.md)
  - [Hdd](docs/Hdd.md)
+ - [InstallOperatingSystemOpts](docs/InstallOperatingSystemOpts.md)
+ - [InstallOperatingSystemPayload](docs/InstallOperatingSystemPayload.md)
  - [Ip](docs/Ip.md)
+ - [Ipmi](docs/Ipmi.md)
+ - [Ipmi1](docs/Ipmi1.md)
+ - [IpmiResetServerOpts](docs/IpmiResetServerOpts.md)
+ - [JobType](docs/JobType.md)
+ - [LastClientRequest](docs/LastClientRequest.md)
+ - [Lease](docs/Lease.md)
  - [LinkSpeed](docs/LinkSpeed.md)
+ - [LinkSpeeds](docs/LinkSpeeds.md)
+ - [Lldp](docs/Lldp.md)
+ - [LldpChassis](docs/LldpChassis.md)
  - [Location](docs/Location.md)
+ - [MemoryBank](docs/MemoryBank.md)
  - [Metadata](docs/Metadata.md)
+ - [Metric](docs/Metric.md)
+ - [MetricValue](docs/MetricValue.md)
+ - [MetricValues](docs/MetricValues.md)
+ - [Metrics](docs/Metrics.md)
+ - [MetricsMetadata](docs/MetricsMetadata.md)
+ - [Motherboard](docs/Motherboard.md)
+ - [Network](docs/Network.md)
+ - [NetworkCapabilities](docs/NetworkCapabilities.md)
  - [NetworkEquipment](docs/NetworkEquipment.md)
  - [NetworkEquipmentSpecs](docs/NetworkEquipmentSpecs.md)
  - [NetworkInterface](docs/NetworkInterface.md)
  - [NetworkInterfaces](docs/NetworkInterfaces.md)
+ - [NetworkSettings](docs/NetworkSettings.md)
  - [NetworkTraffic](docs/NetworkTraffic.md)
  - [NetworkType](docs/NetworkType.md)
+ - [NotificationSetting](docs/NotificationSetting.md)
  - [NullRoute](docs/NullRoute.md)
+ - [OperatingSystem](docs/OperatingSystem.md)
+ - [OperationNetworkInterface](docs/OperationNetworkInterface.md)
+ - [Os](docs/Os.md)
+ - [Partition](docs/Partition.md)
+ - [Payload](docs/Payload.md)
  - [PciCard](docs/PciCard.md)
+ - [Pdu](docs/Pdu.md)
  - [Port](docs/Port.md)
+ - [Port1](docs/Port1.md)
  - [Powerport](docs/Powerport.md)
  - [PrivateNetwork](docs/PrivateNetwork.md)
+ - [Progress](docs/Progress.md)
  - [Rack](docs/Rack.md)
+ - [Raid](docs/Raid.md)
+ - [RaidType](docs/RaidType.md)
  - [Ram](docs/Ram.md)
+ - [RescueImage](docs/RescueImage.md)
+ - [Result](docs/Result.md)
+ - [ScanHardwareOpts](docs/ScanHardwareOpts.md)
  - [Server](docs/Server.md)
+ - [ServerJob](docs/ServerJob.md)
+ - [ServerJobList](docs/ServerJobList.md)
+ - [ServerJobPayload](docs/ServerJobPayload.md)
  - [ServerSpecs](docs/ServerSpecs.md)
+ - [SmartSupport](docs/SmartSupport.md)
+ - [Smartctl](docs/Smartctl.md)
  - [SoftwareLicense](docs/SoftwareLicense.md)
  - [Subnet](docs/Subnet.md)
+ - [Task](docs/Task.md)
+ - [UpdateDdosNotificationSettingOpts](docs/UpdateDdosNotificationSettingOpts.md)
  - [UpdateIpProfileOpts](docs/UpdateIpProfileOpts.md)
+ - [UpdateNetworkEquipmentCredentialOpts](docs/UpdateNetworkEquipmentCredentialOpts.md)
  - [UpdateNetworkEquipmentIpOpts](docs/UpdateNetworkEquipmentIpOpts.md)
  - [UpdateNetworkEquipmentReferenceOpts](docs/UpdateNetworkEquipmentReferenceOpts.md)
+ - [UpdateNullRouteAcceptedResult](docs/UpdateNullRouteAcceptedResult.md)
+ - [UpdateNullRouteOpts](docs/UpdateNullRouteOpts.md)
+ - [UpdateServerCredentialOpts](docs/UpdateServerCredentialOpts.md)
  - [UpdateServerReferenceOpts](docs/UpdateServerReferenceOpts.md)
+ - [Vlan](docs/Vlan.md)
 
 
 ## Documentation For Authorization
 
 
 Authentication schemes defined for the API:
-### ApiKeyAuth
+### X-LSW-Auth
 
 - **Type**: API key
 - **API key parameter name**: X-LSW-Auth
@@ -163,6 +320,33 @@ auth := context.WithValue(
 			"X-LSW-Auth": {Key: "API_KEY_STRING"},
 		},
 	)
+r, err := client.Service.Operation(auth, args)
+```
+
+### OAuth2
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: N/A
+
+Example
+
+```go
+auth := context.WithValue(context.Background(), dedicatedserver.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```go
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, dedicatedserver.ContextOAuth2, tokenSource)
 r, err := client.Service.Operation(auth, args)
 ```
 
@@ -196,5 +380,5 @@ Each of these functions takes a value of the given basic type and returns a poin
 
 ## Author
 
-
+development-networkautomation@leaseweb.com
 

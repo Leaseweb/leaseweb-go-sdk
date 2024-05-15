@@ -69,6 +69,7 @@ docs/PrivateNetworkSpeed.md
 docs/PublicCloudAPI.md
 docs/PublicNetworkSpeed.md
 docs/Region.md
+docs/ReinstallInstanceOpts.md
 docs/Snapshot.md
 docs/StickySession.md
 docs/Storage.md
@@ -154,6 +155,7 @@ model_private_network.go
 model_private_network_speed.go
 model_public_network_speed.go
 model_region.go
+model_reinstall_instance_opts.go
 model_snapshot.go
 model_sticky_session.go
 model_storage.go
