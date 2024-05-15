@@ -96,7 +96,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "go-sdk-3",
+		UserAgent:        "go-sdk-480",
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
