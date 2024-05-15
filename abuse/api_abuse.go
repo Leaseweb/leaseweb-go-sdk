@@ -100,7 +100,7 @@ func (a *AbuseAPIService) CreateReportMessageExecute(r ApiCreateReportMessageReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
@@ -271,7 +271,7 @@ func (a *AbuseAPIService) GetReportExecute(r ApiGetReportRequest) (*GetReportRes
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
@@ -433,7 +433,7 @@ func (a *AbuseAPIService) GetReportAttachmentListExecute(r ApiGetReportAttachmen
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
@@ -624,7 +624,7 @@ func (a *AbuseAPIService) GetReportListExecute(r ApiGetReportListRequest) (*GetR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
@@ -786,7 +786,7 @@ func (a *AbuseAPIService) GetReportMessageAttachmentListExecute(r ApiGetReportMe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
@@ -968,7 +968,7 @@ func (a *AbuseAPIService) GetReportMessageListExecute(r ApiGetReportMessageListR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
@@ -1139,7 +1139,7 @@ func (a *AbuseAPIService) GetReportResolutionListExecute(r ApiGetReportResolutio
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
@@ -1316,7 +1316,7 @@ func (a *AbuseAPIService) ResolveReportExecute(r ApiResolveReportRequest) (*http
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKeyAuth"]; ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key

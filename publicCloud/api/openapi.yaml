@@ -20,7 +20,7 @@ info:
 servers:
 - url: https://api.leaseweb.com/publicCloud/v1
 security:
-- ApiKeyAuth: []
+- X-LSW-Auth: []
 tags:
 - description: |
     The API uses standard HTTP status codes to indicate the success or failure of the API call. The response will be JSON. Most APIs use the following format:
@@ -42,51 +42,38 @@ tags:
     You can generate API keys in the [Customer Portal](https://secure.leaseweb.com/api-client-management/).
   name: API Key Authentication
   x-traitTag: true
-- description: |
-    Regions
+- description: ""
   name: Regions
 - description: ""
   name: Instance Types
-- description: |
-    Instances
+- description: ""
   name: Instances
-- description: |
-    Power
+- description: ""
   name: Power
-- description: |
-    Credentials
+- description: ""
   name: Credentials
-- description: |
-    Expenses
+- description: ""
   name: Expenses
-- description: |
-    ISOs
+- description: ""
   name: ISOs
-- description: |
-    Operating Systems
+- description: ""
   name: Operating Systems
-- description: |
-    Marketplace Apps
+- description: ""
   name: Marketplace Apps
-- description: |
-    Metrics
+- description: ""
   name: Metrics
-- description: |
-    Snapshots
+- description: ""
   name: Snapshots
-- description: |
-    IPs
+- description: ""
   name: IPs
-- description: |
-    Private Networks
+- description: ""
   name: Private Networks
-- description: |
-    Load Balancer
+- description: ""
   name: Load Balancer
 paths:
   /regions:
     get:
-      operationId: regions/list
+      operationId: getRegionList
       parameters:
       - description: Limit the number of results returned.
         example: 20
@@ -295,7 +282,7 @@ paths:
   /instances:
     get:
       description: List and filter instances
-      operationId: instance/list
+      operationId: getInstanceList
       parameters:
       - description: Limit the number of results returned.
         example: 20
@@ -1743,7 +1730,7 @@ paths:
   /instances/{instanceId}/credentials:
     delete:
       description: Delete all credentials stored for a given instance
-      operationId: credentials/delete
+      operationId: deleteCredentials
       parameters:
       - description: Instance's ID
         example: 695ddd91-051f-4dd6-9120-938a927a47d0
@@ -3362,6 +3349,104 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: List OSes available for reinstall
+      tags:
+      - publicCloud
+  /instances/{instanceId}/reinstall:
+    put:
+      description: |-
+        Recreates the instance, with optionally different Operating System and Marketplace App.
+
+        Cannot be performed when the instance has snapshots.
+
+        Available Operating Systems can be obtained using `/v1/instances/{instanceId}/reinstall/operatingSystems`.
+
+        Available Marketplace Apps can be obtained using `/v1/operatingSystems/{operatingSystemId}/marketApps`.
+      operationId: reinstallInstance
+      parameters:
+      - description: Instance's ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: instanceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              operatingSystemId: UBUNTU_22_04_64BIT
+            schema:
+              $ref: '#/components/schemas/reinstallInstanceOpts'
+        required: true
+      responses:
+        "202":
+          description: Accepted. The reinstall process has started and may take a
+            few moments to complete.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Reinstall instance
       tags:
       - publicCloud
   /loadBalancers:
@@ -7445,6 +7530,17 @@ components:
       items:
         $ref: '#/components/schemas/operatingSystem'
       type: array
+    reinstallInstanceOpts:
+      properties:
+        operatingSystemId:
+          description: The Operating System ID
+          type: string
+        marketAppId:
+          description: The Market App to be installed
+          type: string
+      required:
+      - operatingSystemId
+      type: object
     loadBalancerType:
       description: Load balancer type
       example: lsw.m3.large
@@ -8973,7 +9069,7 @@ components:
       title: trafficMetricsMetaData
       type: object
   securitySchemes:
-    ApiKeyAuth:
+    X-LSW-Auth:
       description: API key authentication by setting `X-LSW-Auth` header.
       in: header
       name: X-LSW-Auth

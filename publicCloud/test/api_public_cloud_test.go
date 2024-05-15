@@ -88,19 +88,6 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test PublicCloudAPIService CredentialsDelete", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var instanceId string
-
-		httpRes, err := apiClient.PublicCloudAPI.CredentialsDelete(context.Background(), instanceId).Execute()
-
-		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test PublicCloudAPIService DeleteCredential", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -110,6 +97,19 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 		var username string
 
 		httpRes, err := apiClient.PublicCloudAPI.DeleteCredential(context.Background(), instanceId, type_, username).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PublicCloudAPIService DeleteCredentials", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var instanceId string
+
+		httpRes, err := apiClient.PublicCloudAPI.DeleteCredentials(context.Background(), instanceId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -271,6 +271,18 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test PublicCloudAPIService GetInstanceList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.GetInstanceList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PublicCloudAPIService GetInstanceTypeList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -403,6 +415,18 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test PublicCloudAPIService GetRegionList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.GetRegionList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PublicCloudAPIService GetReinstallOsList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -453,18 +477,6 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 		var instanceId string
 
 		resp, httpRes, err := apiClient.PublicCloudAPI.GetUpdateInstanceTypeList(context.Background(), instanceId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test PublicCloudAPIService InstanceList", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.PublicCloudAPI.InstanceList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -524,18 +536,6 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test PublicCloudAPIService RegionsList", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.PublicCloudAPI.RegionsList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test PublicCloudAPIService RegisterLoadBalancerTargets", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -543,6 +543,19 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 		var loadBalancerId string
 
 		httpRes, err := apiClient.PublicCloudAPI.RegisterLoadBalancerTargets(context.Background(), loadBalancerId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PublicCloudAPIService ReinstallInstance", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var instanceId string
+
+		httpRes, err := apiClient.PublicCloudAPI.ReinstallInstance(context.Background(), instanceId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
