@@ -5507,6 +5507,145 @@ paths:
       summary: Get instance data traffic metrics
       tags:
       - publicCloud
+  /instances/{instanceId}/metrics/cpu:
+    get:
+      operationId: getCpuMetrics
+      parameters:
+      - description: Instance's ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: instanceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: How the metrics are grouped by
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          enum:
+          - 5m
+          - 10m
+          - 30m
+          - 60m
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                metrics:
+                  cpuMetrics:
+                    values:
+                    - value: 5.45
+                      timestamp: 2023-10-27T08:00:00+00:00
+                    - value: 8.98
+                      timestamp: 2023-10-27T08:05:32+00:00
+                    - value: 9.98
+                      timestamp: 2023-10-27T08:10:24+00:00
+                    unit: '%'
+                _metadata:
+                  from: 2023-10-27T08:00:00+00:00
+                  to: 2023-10-28T08:00:00+00:00
+                  granularity: 5m
+                  summary:
+                    cpuMetrics:
+                      average: 8.13 %
+                      expected: 8.13 %
+                      peak:
+                        value: 9.98 %
+                        timestamp: 2023-10-27T08:10:24+00:00
+              schema:
+                $ref: '#/components/schemas/getCpuMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get instance CPU metrics
+      tags:
+      - publicCloud
   /instances/{instanceId}/addToPrivateNetwork:
     put:
       description: |-
@@ -6200,6 +6339,41 @@ components:
         format: uuid
         type: string
       style: simple
+    from:
+      description: The start of the interval to get the metric
+      explode: true
+      in: query
+      name: from
+      required: false
+      schema:
+        format: date
+        type: string
+      style: form
+    to:
+      description: The end of the interval to get the metric. Must be greater than
+        the date provided in `from`
+      explode: true
+      in: query
+      name: to
+      required: false
+      schema:
+        format: date
+        type: string
+      style: form
+    cpuGranularity:
+      description: How the metrics are grouped by
+      explode: true
+      in: query
+      name: granularity
+      required: false
+      schema:
+        enum:
+        - 5m
+        - 10m
+        - 30m
+        - 60m
+        type: string
+      style: form
   responses:
     "204":
       description: No Content.
@@ -8200,6 +8374,33 @@ components:
         _metadata:
           $ref: '#/components/schemas/trafficMetricsMetaData'
       type: object
+    getCpuMetricsResult:
+      example:
+        metrics:
+          cpuMetrics:
+            unit: '%'
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          summary:
+            cpuMetrics:
+              average: 10 %
+              expected: 10 %
+              peak:
+                value: 90 %
+                timestamp: 2000-01-23T04:56:07.000+00:00
+          granularity: 5m
+          from: 2000-01-23T04:56:07.000+00:00
+          to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        metrics:
+          $ref: '#/components/schemas/getCpuMetricsResult_metrics'
+        _metadata:
+          $ref: '#/components/schemas/cpuMetricsMetadata'
+      type: object
     snapshot:
       example:
         displayName: displayName
@@ -9067,6 +9268,131 @@ components:
         summary:
           $ref: '#/components/schemas/summary'
       title: trafficMetricsMetaData
+      type: object
+    cpuMetricsValue:
+      example:
+        value: 0.8008281904610115
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        value:
+          description: CPU usage
+          type: number
+        timestamp:
+          format: date-time
+          type: string
+      title: cpuMetricsValue
+      type: object
+    cpuMetrics:
+      description: "CPU usage metrics, in percentage"
+      example:
+        unit: '%'
+        values:
+        - value: 0.8008281904610115
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - value: 0.8008281904610115
+          timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        values:
+          items:
+            $ref: '#/components/schemas/cpuMetricsValue'
+          type: array
+        unit:
+          enum:
+          - '%'
+          type: string
+      title: cpuMetrics
+      type: object
+    getCpuMetricsResult_metrics:
+      example:
+        cpuMetrics:
+          unit: '%'
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        cpuMetrics:
+          $ref: '#/components/schemas/cpuMetrics'
+      type: object
+    cpuMetricsMetadataSummaryPeak:
+      example:
+        value: 90 %
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        value:
+          description: The highest CPU usage given the provided aggregation and granularity
+          example: 90 %
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      title: cpuMetricsMetadataSummaryPeak
+      type: object
+    cpuMetricsMetadataSummary_cpuMetrics:
+      example:
+        average: 10 %
+        expected: 10 %
+        peak:
+          value: 90 %
+          timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        average:
+          description: "Average CPU based on the amount of grouped data points, in\
+            \ percentage"
+          example: 10 %
+          type: string
+        expected:
+          description: "Expected CPU given the average times the amount of days between\
+            \ the `from` and `to` dates, in percentage"
+          example: 10 %
+          type: string
+        peak:
+          $ref: '#/components/schemas/cpuMetricsMetadataSummaryPeak'
+      type: object
+    cpuMetricsMetadataSummary:
+      example:
+        cpuMetrics:
+          average: 10 %
+          expected: 10 %
+          peak:
+            value: 90 %
+            timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        cpuMetrics:
+          $ref: '#/components/schemas/cpuMetricsMetadataSummary_cpuMetrics'
+      title: cpuMetricsMetadataSummary
+      type: object
+    cpuMetricsMetadata:
+      example:
+        summary:
+          cpuMetrics:
+            average: 10 %
+            expected: 10 %
+            peak:
+              value: 90 %
+              timestamp: 2000-01-23T04:56:07.000+00:00
+        granularity: 5m
+        from: 2000-01-23T04:56:07.000+00:00
+        to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        from:
+          format: date-time
+          type: string
+        to:
+          format: date-time
+          type: string
+        granularity:
+          description: The provided granularity
+          enum:
+          - 5m
+          - 10m
+          - 30m
+          - 60m
+          type: string
+        summary:
+          $ref: '#/components/schemas/cpuMetricsMetadataSummary'
+      title: cpuMetricsMetadata
       type: object
   securitySchemes:
     X-LSW-Auth:

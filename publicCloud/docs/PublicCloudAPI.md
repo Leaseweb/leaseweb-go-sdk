@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**DeregisterLoadBalancerTargets**](PublicCloudAPI.md#DeregisterLoadBalancerTargets) | **Post** /loadBalancers/{loadBalancerId}/deregisterTargets | Deregister targets
 [**DetachIso**](PublicCloudAPI.md#DetachIso) | **Post** /instances/{instanceId}/detachIso | Detach ISO from instance
 [**GetConsoleAccessToInstance**](PublicCloudAPI.md#GetConsoleAccessToInstance) | **Get** /instances/{instanceId}/console | Get console access
+[**GetCpuMetrics**](PublicCloudAPI.md#GetCpuMetrics) | **Get** /instances/{instanceId}/metrics/cpu | Get instance CPU metrics
 [**GetCredential**](PublicCloudAPI.md#GetCredential) | **Get** /instances/{instanceId}/credentials/{type}/{username} | Get credentials by type and username
 [**GetCredentialList**](PublicCloudAPI.md#GetCredentialList) | **Get** /instances/{instanceId}/credentials | List credentials stored for instance
 [**GetCredentialListByType**](PublicCloudAPI.md#GetCredentialListByType) | **Get** /instances/{instanceId}/credentials/{type} | Get credentials by type
@@ -882,6 +883,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetConsoleAccessToInstanceResult**](GetConsoleAccessToInstanceResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCpuMetrics
+
+> GetCpuMetricsResult GetCpuMetrics(ctx, instanceId).From(from).To(to).Granularity(granularity).Execute()
+
+Get instance CPU metrics
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	from := time.Now() // string | The start of the interval to get the metric (optional)
+	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	granularity := "granularity_example" // string | How the metrics are grouped by (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetCpuMetrics(context.Background(), instanceId).From(from).To(to).Granularity(granularity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetCpuMetrics``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCpuMetrics`: GetCpuMetricsResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetCpuMetrics`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCpuMetricsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **from** | **string** | The start of the interval to get the metric | 
+ **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **granularity** | **string** | How the metrics are grouped by | 
+
+### Return type
+
+[**GetCpuMetricsResult**](GetCpuMetricsResult.md)
 
 ### Authorization
 

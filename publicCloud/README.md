@@ -94,6 +94,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**DeregisterLoadBalancerTargets**](docs/PublicCloudAPI.md#deregisterloadbalancertargets) | **Post** /loadBalancers/{loadBalancerId}/deregisterTargets | Deregister targets
 *PublicCloudAPI* | [**DetachIso**](docs/PublicCloudAPI.md#detachiso) | **Post** /instances/{instanceId}/detachIso | Detach ISO from instance
 *PublicCloudAPI* | [**GetConsoleAccessToInstance**](docs/PublicCloudAPI.md#getconsoleaccesstoinstance) | **Get** /instances/{instanceId}/console | Get console access
+*PublicCloudAPI* | [**GetCpuMetrics**](docs/PublicCloudAPI.md#getcpumetrics) | **Get** /instances/{instanceId}/metrics/cpu | Get instance CPU metrics
 *PublicCloudAPI* | [**GetCredential**](docs/PublicCloudAPI.md#getcredential) | **Get** /instances/{instanceId}/credentials/{type}/{username} | Get credentials by type and username
 *PublicCloudAPI* | [**GetCredentialList**](docs/PublicCloudAPI.md#getcredentiallist) | **Get** /instances/{instanceId}/credentials | List credentials stored for instance
 *PublicCloudAPI* | [**GetCredentialListByType**](docs/PublicCloudAPI.md#getcredentiallistbytype) | **Get** /instances/{instanceId}/credentials/{type} | Get credentials by type
@@ -149,12 +150,20 @@ Class | Method | HTTP request | Description
  - [ContractState](docs/ContractState.md)
  - [ContractType](docs/ContractType.md)
  - [Cpu](docs/Cpu.md)
+ - [CpuMetrics](docs/CpuMetrics.md)
+ - [CpuMetricsMetadata](docs/CpuMetricsMetadata.md)
+ - [CpuMetricsMetadataSummary](docs/CpuMetricsMetadataSummary.md)
+ - [CpuMetricsMetadataSummaryCpuMetrics](docs/CpuMetricsMetadataSummaryCpuMetrics.md)
+ - [CpuMetricsMetadataSummaryPeak](docs/CpuMetricsMetadataSummaryPeak.md)
+ - [CpuMetricsValue](docs/CpuMetricsValue.md)
  - [Credential](docs/Credential.md)
  - [CredentialType](docs/CredentialType.md)
  - [Ddos](docs/Ddos.md)
  - [ErrorResult](docs/ErrorResult.md)
  - [ExpenseResultInstance](docs/ExpenseResultInstance.md)
  - [GetConsoleAccessToInstanceResult](docs/GetConsoleAccessToInstanceResult.md)
+ - [GetCpuMetricsResult](docs/GetCpuMetricsResult.md)
+ - [GetCpuMetricsResultMetrics](docs/GetCpuMetricsResultMetrics.md)
  - [GetCredentialListByTypeResult](docs/GetCredentialListByTypeResult.md)
  - [GetCredentialListResult](docs/GetCredentialListResult.md)
  - [GetCredentialResult](docs/GetCredentialResult.md)

@@ -184,6 +184,20 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test PublicCloudAPIService GetCpuMetrics", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var instanceId string
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.GetCpuMetrics(context.Background(), instanceId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PublicCloudAPIService GetCredential", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
