@@ -37,7 +37,7 @@ type Instance struct {
 	// The product type
 	ProductType *string `json:"productType,omitempty"`
 	HasPublicIpV4 *bool `json:"hasPublicIpV4,omitempty"`
-	HasPrivateNetwork *bool `json:"hasPrivateNetwork,omitempty"`
+	includesPrivateNetwork *bool `json:"hasPrivateNetwork,omitempty"`
 	// Instance type
 	Type *string `json:"type,omitempty"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
@@ -423,36 +423,36 @@ func (o *Instance) SetHasPublicIpV4(v bool) {
 	o.HasPublicIpV4 = &v
 }
 
-// GetHasPrivateNetwork returns the HasPrivateNetwork field value if set, zero value otherwise.
-func (o *Instance) GetHasPrivateNetwork() bool {
-	if o == nil || IsNil(o.HasPrivateNetwork) {
+// GetincludesPrivateNetwork returns the includesPrivateNetwork field value if set, zero value otherwise.
+func (o *Instance) GetincludesPrivateNetwork() bool {
+	if o == nil || IsNil(o.includesPrivateNetwork) {
 		var ret bool
 		return ret
 	}
-	return *o.HasPrivateNetwork
+	return *o.includesPrivateNetwork
 }
 
-// GetHasPrivateNetworkOk returns a tuple with the HasPrivateNetwork field value if set, nil otherwise
+// GetincludesPrivateNetworkOk returns a tuple with the includesPrivateNetwork field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Instance) GetHasPrivateNetworkOk() (*bool, bool) {
-	if o == nil || IsNil(o.HasPrivateNetwork) {
+func (o *Instance) GetincludesPrivateNetworkOk() (*bool, bool) {
+	if o == nil || IsNil(o.includesPrivateNetwork) {
 		return nil, false
 	}
-	return o.HasPrivateNetwork, true
+	return o.includesPrivateNetwork, true
 }
 
-// HasHasPrivateNetwork returns a boolean if a field has been set.
-func (o *Instance) HasHasPrivateNetwork() bool {
-	if o != nil && !IsNil(o.HasPrivateNetwork) {
+// HasincludesPrivateNetwork returns a boolean if a field has been set.
+func (o *Instance) HasincludesPrivateNetwork() bool {
+	if o != nil && !IsNil(o.includesPrivateNetwork) {
 		return true
 	}
 
 	return false
 }
 
-// SetHasPrivateNetwork gets a reference to the given bool and assigns it to the HasPrivateNetwork field.
-func (o *Instance) SetHasPrivateNetwork(v bool) {
-	o.HasPrivateNetwork = &v
+// SetincludesPrivateNetwork gets a reference to the given bool and assigns it to the includesPrivateNetwork field.
+func (o *Instance) SetincludesPrivateNetwork(v bool) {
+	o.includesPrivateNetwork = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -826,8 +826,8 @@ func (o Instance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HasPublicIpV4) {
 		toSerialize["hasPublicIpV4"] = o.HasPublicIpV4
 	}
-	if !IsNil(o.HasPrivateNetwork) {
-		toSerialize["hasPrivateNetwork"] = o.HasPrivateNetwork
+	if !IsNil(o.includesPrivateNetwork) {
+		toSerialize["hasPrivateNetwork"] = o.includesPrivateNetwork
 	}
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type

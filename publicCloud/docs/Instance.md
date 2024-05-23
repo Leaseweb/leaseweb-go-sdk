@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **State** | Pointer to [**InstanceState**](InstanceState.md) |  | [optional] 
 **ProductType** | Pointer to **string** | The product type | [optional] 
 **HasPublicIpV4** | Pointer to **bool** |  | [optional] 
-**HasPrivateNetwork** | Pointer to **bool** |  | [optional] 
+**includesPrivateNetwork** | Pointer to **bool** |  | [optional] 
 **Type** | Pointer to **string** | Instance type | [optional] 
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
 **RootDiskStorageType** | Pointer to **string** | The root disk&#39;s storage type | [optional] 
@@ -320,30 +320,30 @@ SetHasPublicIpV4 sets HasPublicIpV4 field to given value.
 
 HasHasPublicIpV4 returns a boolean if a field has been set.
 
-### GetHasPrivateNetwork
+### GetincludesPrivateNetwork
 
-`func (o *Instance) GetHasPrivateNetwork() bool`
+`func (o *Instance) GetincludesPrivateNetwork() bool`
 
-GetHasPrivateNetwork returns the HasPrivateNetwork field if non-nil, zero value otherwise.
+GetincludesPrivateNetwork returns the includesPrivateNetwork field if non-nil, zero value otherwise.
 
-### GetHasPrivateNetworkOk
+### GetincludesPrivateNetworkOk
 
-`func (o *Instance) GetHasPrivateNetworkOk() (*bool, bool)`
+`func (o *Instance) GetincludesPrivateNetworkOk() (*bool, bool)`
 
-GetHasPrivateNetworkOk returns a tuple with the HasPrivateNetwork field if it's non-nil, zero value otherwise
+GetincludesPrivateNetworkOk returns a tuple with the includesPrivateNetwork field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHasPrivateNetwork
+### SetincludesPrivateNetwork
 
-`func (o *Instance) SetHasPrivateNetwork(v bool)`
+`func (o *Instance) SetincludesPrivateNetwork(v bool)`
 
-SetHasPrivateNetwork sets HasPrivateNetwork field to given value.
+SetincludesPrivateNetwork sets includesPrivateNetwork field to given value.
 
-### HasHasPrivateNetwork
+### HasincludesPrivateNetwork
 
-`func (o *Instance) HasHasPrivateNetwork() bool`
+`func (o *Instance) HasincludesPrivateNetwork() bool`
 
-HasHasPrivateNetwork returns a boolean if a field has been set.
+HasincludesPrivateNetwork returns a boolean if a field has been set.
 
 ### GetType
 
