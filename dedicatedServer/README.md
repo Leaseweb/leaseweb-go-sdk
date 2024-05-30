@@ -16,7 +16,6 @@ Install the following dependencies:
 
 ```sh
 go get github.com/stretchr/testify/assert
-go get golang.org/x/oauth2
 go get golang.org/x/net/context
 ```
 
@@ -83,7 +82,6 @@ Class | Method | HTTP request | Description
 *DedicatedServerAPI* | [**CancelActiveJob**](docs/DedicatedServerAPI.md#cancelactivejob) | **Post** /servers/{serverId}/cancelActiveJob | Cancel active job
 *DedicatedServerAPI* | [**CloseNetworkInterface**](docs/DedicatedServerAPI.md#closenetworkinterface) | **Post** /servers/{serverId}/networkInterfaces/{networkType}/close | Close network interface
 *DedicatedServerAPI* | [**CloseNetworkInterfaces**](docs/DedicatedServerAPI.md#closenetworkinterfaces) | **Post** /servers/{serverId}/networkInterfaces/close | Close all network interfaces
-*DedicatedServerAPI* | [**ConfigureHardwareRaid**](docs/DedicatedServerAPI.md#configurehardwareraid) | **Post** /servers/{serverId}/configureHardwareRaid | Configure Hardware Raid
 *DedicatedServerAPI* | [**CreateNetworkEquipmentCredential**](docs/DedicatedServerAPI.md#createnetworkequipmentcredential) | **Post** /networkEquipments/{networkEquipmentId}/credentials | Create new network equipment credentials
 *DedicatedServerAPI* | [**CreateServerBandwidthNotificationSetting**](docs/DedicatedServerAPI.md#createserverbandwidthnotificationsetting) | **Post** /servers/{serverId}/notificationSettings/bandwidth | Create a bandwidth notification setting
 *DedicatedServerAPI* | [**CreateServerCredential**](docs/DedicatedServerAPI.md#createservercredential) | **Post** /servers/{serverId}/credentials | Create new server credentials
@@ -126,8 +124,6 @@ Class | Method | HTTP request | Description
 *DedicatedServerAPI* | [**GetServerDataTrafficNotificationSettingList**](docs/DedicatedServerAPI.md#getserverdatatrafficnotificationsettinglist) | **Get** /servers/{serverId}/notificationSettings/datatraffic | List data traffic notification settings
 *DedicatedServerAPI* | [**GetServerDhcpReservationList**](docs/DedicatedServerAPI.md#getserverdhcpreservationlist) | **Get** /servers/{serverId}/leases | List DHCP reservations
 *DedicatedServerAPI* | [**GetServerHardware**](docs/DedicatedServerAPI.md#getserverhardware) | **Get** /servers/{serverId}/hardwareInfo | Show hardware information
-*DedicatedServerAPI* | [**GetServerHardwareScan**](docs/DedicatedServerAPI.md#getserverhardwarescan) | **Get** /servers/{serverId}/hardwareScans/{hardwareScanId} | Show a hardware scan
-*DedicatedServerAPI* | [**GetServerHardwareScanList**](docs/DedicatedServerAPI.md#getserverhardwarescanlist) | **Get** /servers/{serverId}/hardwareScans | List hardware scans
 *DedicatedServerAPI* | [**GetServerIp**](docs/DedicatedServerAPI.md#getserverip) | **Get** /servers/{serverId}/ips/{ip} | Show a server IP
 *DedicatedServerAPI* | [**GetServerIpList**](docs/DedicatedServerAPI.md#getserveriplist) | **Get** /servers/{serverId}/ips | List IPs
 *DedicatedServerAPI* | [**GetServerJob**](docs/DedicatedServerAPI.md#getserverjob) | **Get** /servers/{serverId}/jobs/{jobId} | Show a job
@@ -156,7 +152,6 @@ Class | Method | HTTP request | Description
 *DedicatedServerAPI* | [**UpdateNetworkEquipmentCredential**](docs/DedicatedServerAPI.md#updatenetworkequipmentcredential) | **Put** /networkEquipments/{networkEquipmentId}/credentials/{type}/{username} | Update network equipment credentials
 *DedicatedServerAPI* | [**UpdateNetworkEquipmentIp**](docs/DedicatedServerAPI.md#updatenetworkequipmentip) | **Put** /networkEquipments/{networkEquipmentId}/ips/{ip} | Update an IP
 *DedicatedServerAPI* | [**UpdateNetworkEquipmentReference**](docs/DedicatedServerAPI.md#updatenetworkequipmentreference) | **Put** /networkEquipments/{networkEquipmentId} | Update network equipment
-*DedicatedServerAPI* | [**UpdateNullRoute**](docs/DedicatedServerAPI.md#updatenullroute) | **Post** /actions/nullRoute | Announce/Withdraw Null Routes
 *DedicatedServerAPI* | [**UpdateServerBandwidthNotificationSetting**](docs/DedicatedServerAPI.md#updateserverbandwidthnotificationsetting) | **Put** /servers/{serverId}/notificationSettings/bandwidth/{notificationSettingId} | Update a bandwidth notification setting
 *DedicatedServerAPI* | [**UpdateServerCredential**](docs/DedicatedServerAPI.md#updateservercredential) | **Put** /servers/{serverId}/credentials/{type}/{username} | Update server credentials
 *DedicatedServerAPI* | [**UpdateServerDataTrafficNotificationSetting**](docs/DedicatedServerAPI.md#updateserverdatatrafficnotificationsetting) | **Put** /servers/{serverId}/notificationSettings/datatraffic/{notificationSettingId} | Update a data traffic notification setting
@@ -173,7 +168,6 @@ Class | Method | HTTP request | Description
  - [BandwidthNotificationSetting](docs/BandwidthNotificationSetting.md)
  - [BandwidthNotificationSettingOpts](docs/BandwidthNotificationSettingOpts.md)
  - [Chassis](docs/Chassis.md)
- - [ConfigureHardwareRaidOpts](docs/ConfigureHardwareRaidOpts.md)
  - [Contract](docs/Contract.md)
  - [ControlPanel](docs/ControlPanel.md)
  - [ControlPanelList](docs/ControlPanelList.md)
@@ -186,7 +180,6 @@ Class | Method | HTTP request | Description
  - [CreateServerDhcpReservationOpts](docs/CreateServerDhcpReservationOpts.md)
  - [Credential](docs/Credential.md)
  - [CredentialList](docs/CredentialList.md)
- - [CredentialType](docs/CredentialType.md)
  - [CurrentServerJob](docs/CurrentServerJob.md)
  - [DDos](docs/DDos.md)
  - [DataTrafficNotificationSetting](docs/DataTrafficNotificationSetting.md)
@@ -210,19 +203,9 @@ Class | Method | HTTP request | Description
  - [GetServerDataTrafficNotificationSettingListResult](docs/GetServerDataTrafficNotificationSettingListResult.md)
  - [GetServerDhcpReservationListResult](docs/GetServerDhcpReservationListResult.md)
  - [GetServerHardwareResult](docs/GetServerHardwareResult.md)
- - [GetServerHardwareScanListResult](docs/GetServerHardwareScanListResult.md)
- - [GetServerHardwareScanResult](docs/GetServerHardwareScanResult.md)
  - [GetServerListResult](docs/GetServerListResult.md)
  - [GetServerNullRouteHistoryResult](docs/GetServerNullRouteHistoryResult.md)
  - [GetServerPowerStatusResult](docs/GetServerPowerStatusResult.md)
- - [HardwareScan](docs/HardwareScan.md)
- - [HardwareScanChassis](docs/HardwareScanChassis.md)
- - [HardwareScanCpu](docs/HardwareScanCpu.md)
- - [HardwareScanDisk](docs/HardwareScanDisk.md)
- - [HardwareScanMemory](docs/HardwareScanMemory.md)
- - [HardwareScanResult](docs/HardwareScanResult.md)
- - [HardwareScanResultIpmi](docs/HardwareScanResultIpmi.md)
- - [HardwareScanResultNetwork](docs/HardwareScanResultNetwork.md)
  - [Hdd](docs/Hdd.md)
  - [InstallOperatingSystemOpts](docs/InstallOperatingSystemOpts.md)
  - [InstallOperatingSystemPayload](docs/InstallOperatingSystemPayload.md)
@@ -291,8 +274,6 @@ Class | Method | HTTP request | Description
  - [UpdateNetworkEquipmentCredentialOpts](docs/UpdateNetworkEquipmentCredentialOpts.md)
  - [UpdateNetworkEquipmentIpOpts](docs/UpdateNetworkEquipmentIpOpts.md)
  - [UpdateNetworkEquipmentReferenceOpts](docs/UpdateNetworkEquipmentReferenceOpts.md)
- - [UpdateNullRouteAcceptedResult](docs/UpdateNullRouteAcceptedResult.md)
- - [UpdateNullRouteOpts](docs/UpdateNullRouteOpts.md)
  - [UpdateServerCredentialOpts](docs/UpdateServerCredentialOpts.md)
  - [UpdateServerReferenceOpts](docs/UpdateServerReferenceOpts.md)
  - [Vlan](docs/Vlan.md)
@@ -320,33 +301,6 @@ auth := context.WithValue(
 			"X-LSW-Auth": {Key: "API_KEY_STRING"},
 		},
 	)
-r, err := client.Service.Operation(auth, args)
-```
-
-### OAuth2
-
-
-- **Type**: OAuth
-- **Flow**: application
-- **Authorization URL**: 
-- **Scopes**: N/A
-
-Example
-
-```go
-auth := context.WithValue(context.Background(), dedicatedServer.ContextAccessToken, "ACCESSTOKENSTRING")
-r, err := client.Service.Operation(auth, args)
-```
-
-Or via OAuth2 module to automatically refresh tokens and perform user authentication.
-
-```go
-import "golang.org/x/oauth2"
-
-/* Perform OAuth2 round trip request and obtain a token */
-
-tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
-auth := context.WithValue(oauth2.NoContext, dedicatedServer.ContextOAuth2, tokenSource)
 r, err := client.Service.Operation(auth, args)
 ```
 
@@ -380,5 +334,5 @@ Each of these functions takes a value of the given basic type and returns a poin
 
 ## Author
 
-development-networkautomation@leaseweb.com
+
 

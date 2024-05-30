@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**CancelActiveJob**](DedicatedServerAPI.md#CancelActiveJob) | **Post** /servers/{serverId}/cancelActiveJob | Cancel active job
 [**CloseNetworkInterface**](DedicatedServerAPI.md#CloseNetworkInterface) | **Post** /servers/{serverId}/networkInterfaces/{networkType}/close | Close network interface
 [**CloseNetworkInterfaces**](DedicatedServerAPI.md#CloseNetworkInterfaces) | **Post** /servers/{serverId}/networkInterfaces/close | Close all network interfaces
-[**ConfigureHardwareRaid**](DedicatedServerAPI.md#ConfigureHardwareRaid) | **Post** /servers/{serverId}/configureHardwareRaid | Configure Hardware Raid
 [**CreateNetworkEquipmentCredential**](DedicatedServerAPI.md#CreateNetworkEquipmentCredential) | **Post** /networkEquipments/{networkEquipmentId}/credentials | Create new network equipment credentials
 [**CreateServerBandwidthNotificationSetting**](DedicatedServerAPI.md#CreateServerBandwidthNotificationSetting) | **Post** /servers/{serverId}/notificationSettings/bandwidth | Create a bandwidth notification setting
 [**CreateServerCredential**](DedicatedServerAPI.md#CreateServerCredential) | **Post** /servers/{serverId}/credentials | Create new server credentials
@@ -51,8 +50,6 @@ Method | HTTP request | Description
 [**GetServerDataTrafficNotificationSettingList**](DedicatedServerAPI.md#GetServerDataTrafficNotificationSettingList) | **Get** /servers/{serverId}/notificationSettings/datatraffic | List data traffic notification settings
 [**GetServerDhcpReservationList**](DedicatedServerAPI.md#GetServerDhcpReservationList) | **Get** /servers/{serverId}/leases | List DHCP reservations
 [**GetServerHardware**](DedicatedServerAPI.md#GetServerHardware) | **Get** /servers/{serverId}/hardwareInfo | Show hardware information
-[**GetServerHardwareScan**](DedicatedServerAPI.md#GetServerHardwareScan) | **Get** /servers/{serverId}/hardwareScans/{hardwareScanId} | Show a hardware scan
-[**GetServerHardwareScanList**](DedicatedServerAPI.md#GetServerHardwareScanList) | **Get** /servers/{serverId}/hardwareScans | List hardware scans
 [**GetServerIp**](DedicatedServerAPI.md#GetServerIp) | **Get** /servers/{serverId}/ips/{ip} | Show a server IP
 [**GetServerIpList**](DedicatedServerAPI.md#GetServerIpList) | **Get** /servers/{serverId}/ips | List IPs
 [**GetServerJob**](DedicatedServerAPI.md#GetServerJob) | **Get** /servers/{serverId}/jobs/{jobId} | Show a job
@@ -81,7 +78,6 @@ Method | HTTP request | Description
 [**UpdateNetworkEquipmentCredential**](DedicatedServerAPI.md#UpdateNetworkEquipmentCredential) | **Put** /networkEquipments/{networkEquipmentId}/credentials/{type}/{username} | Update network equipment credentials
 [**UpdateNetworkEquipmentIp**](DedicatedServerAPI.md#UpdateNetworkEquipmentIp) | **Put** /networkEquipments/{networkEquipmentId}/ips/{ip} | Update an IP
 [**UpdateNetworkEquipmentReference**](DedicatedServerAPI.md#UpdateNetworkEquipmentReference) | **Put** /networkEquipments/{networkEquipmentId} | Update network equipment
-[**UpdateNullRoute**](DedicatedServerAPI.md#UpdateNullRoute) | **Post** /actions/nullRoute | Announce/Withdraw Null Routes
 [**UpdateServerBandwidthNotificationSetting**](DedicatedServerAPI.md#UpdateServerBandwidthNotificationSetting) | **Put** /servers/{serverId}/notificationSettings/bandwidth/{notificationSettingId} | Update a bandwidth notification setting
 [**UpdateServerCredential**](DedicatedServerAPI.md#UpdateServerCredential) | **Put** /servers/{serverId}/credentials/{type}/{username} | Update server credentials
 [**UpdateServerDataTrafficNotificationSetting**](DedicatedServerAPI.md#UpdateServerDataTrafficNotificationSetting) | **Put** /servers/{serverId}/notificationSettings/datatraffic/{notificationSettingId} | Update a data traffic notification setting
@@ -371,78 +367,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ConfigureHardwareRaid
-
-> ServerJobList ConfigureHardwareRaid(ctx, serverId).ConfigureHardwareRaidOpts(configureHardwareRaidOpts).Execute()
-
-Configure Hardware Raid
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/dedicatedServer"
-)
-
-func main() {
-	serverId := "12345" // string | The ID of a server
-	configureHardwareRaidOpts := *openapiclient.NewConfigureHardwareRaidOpts(openapiclient.raidType("HW")) // ConfigureHardwareRaidOpts |  (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DedicatedServerAPI.ConfigureHardwareRaid(context.Background(), serverId).ConfigureHardwareRaidOpts(configureHardwareRaidOpts).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedServerAPI.ConfigureHardwareRaid``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ConfigureHardwareRaid`: ServerJobList
-	fmt.Fprintf(os.Stdout, "Response from `DedicatedServerAPI.ConfigureHardwareRaid`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **string** | The ID of a server | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiConfigureHardwareRaidRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **configureHardwareRaidOpts** | [**ConfigureHardwareRaidOpts**](ConfigureHardwareRaidOpts.md) |  | 
-
-### Return type
-
-[**ServerJobList**](ServerJobList.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## CreateNetworkEquipmentCredential
 
 > Credential CreateNetworkEquipmentCredential(ctx, networkEquipmentId).CreateNetworkEquipmentCredentialOpts(createNetworkEquipmentCredentialOpts).Execute()
@@ -465,7 +389,7 @@ import (
 
 func main() {
 	networkEquipmentId := "12345" // string | The ID of a dedicated network equipment
-	createNetworkEquipmentCredentialOpts := *openapiclient.NewCreateNetworkEquipmentCredentialOpts("Password_example", openapiclient.credentialType("OPERATING_SYSTEM"), "Username_example") // CreateNetworkEquipmentCredentialOpts |  (optional)
+	createNetworkEquipmentCredentialOpts := *openapiclient.NewCreateNetworkEquipmentCredentialOpts("Password_example", "Type_example", "Username_example") // CreateNetworkEquipmentCredentialOpts |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -609,7 +533,7 @@ import (
 
 func main() {
 	serverId := "12345" // string | The ID of a server
-	createServerCredentialOpts := *openapiclient.NewCreateServerCredentialOpts("Password_example", openapiclient.credentialType("OPERATING_SYSTEM"), "Username_example") // CreateServerCredentialOpts |  (optional)
+	createServerCredentialOpts := *openapiclient.NewCreateServerCredentialOpts("Password_example", "Type_example", "Username_example") // CreateServerCredentialOpts |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3504,155 +3428,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetServerHardwareScan
-
-> GetServerHardwareScanResult GetServerHardwareScan(ctx, serverId, hardwareScanId).Format(format).Execute()
-
-Show a hardware scan
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/dedicatedServer"
-)
-
-func main() {
-	serverId := "12345" // string | The ID of a server
-	hardwareScanId := "hardwareScanId_example" // string | The ID that identifies a hardware scan
-	format := "json" // string | Defines the format of the response (optional) (default to "json")
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DedicatedServerAPI.GetServerHardwareScan(context.Background(), serverId, hardwareScanId).Format(format).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedServerAPI.GetServerHardwareScan``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetServerHardwareScan`: GetServerHardwareScanResult
-	fmt.Fprintf(os.Stdout, "Response from `DedicatedServerAPI.GetServerHardwareScan`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **string** | The ID of a server | 
-**hardwareScanId** | **string** | The ID that identifies a hardware scan | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetServerHardwareScanRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **format** | **string** | Defines the format of the response | [default to &quot;json&quot;]
-
-### Return type
-
-[**GetServerHardwareScanResult**](GetServerHardwareScanResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetServerHardwareScanList
-
-> GetServerHardwareScanListResult GetServerHardwareScanList(ctx, serverId).Limit(limit).Offset(offset).Execute()
-
-List hardware scans
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/dedicatedServer"
-)
-
-func main() {
-	serverId := "12345" // string | The ID of a server
-	limit := int32(20) // int32 | Limit the number of results returned. (optional)
-	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DedicatedServerAPI.GetServerHardwareScanList(context.Background(), serverId).Limit(limit).Offset(offset).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedServerAPI.GetServerHardwareScanList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetServerHardwareScanList`: GetServerHardwareScanListResult
-	fmt.Fprintf(os.Stdout, "Response from `DedicatedServerAPI.GetServerHardwareScanList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**serverId** | **string** | The ID of a server | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetServerHardwareScanListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **limit** | **int32** | Limit the number of results returned. | 
- **offset** | **int32** | Return results starting from the given offset. | 
-
-### Return type
-
-[**GetServerHardwareScanListResult**](GetServerHardwareScanListResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetServerIp
 
 > Ip GetServerIp(ctx, serverId, ip).Execute()
@@ -5668,72 +5443,6 @@ Name | Type | Description  | Notes
 ### Return type
 
  (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateNullRoute
-
-> UpdateNullRouteAcceptedResult UpdateNullRoute(ctx).UpdateNullRouteOpts(updateNullRouteOpts).Execute()
-
-Announce/Withdraw Null Routes
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/dedicatedServer"
-)
-
-func main() {
-	updateNullRouteOpts := *openapiclient.NewUpdateNullRouteOpts("WITHDRAW", "IpAddress_example") // UpdateNullRouteOpts |  (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DedicatedServerAPI.UpdateNullRoute(context.Background()).UpdateNullRouteOpts(updateNullRouteOpts).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedServerAPI.UpdateNullRoute``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateNullRoute`: UpdateNullRouteAcceptedResult
-	fmt.Fprintf(os.Stdout, "Response from `DedicatedServerAPI.UpdateNullRoute`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateNullRouteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **updateNullRouteOpts** | [**UpdateNullRouteOpts**](UpdateNullRouteOpts.md) |  | 
-
-### Return type
-
-[**UpdateNullRouteAcceptedResult**](UpdateNullRouteAcceptedResult.md)
 
 ### Authorization
 

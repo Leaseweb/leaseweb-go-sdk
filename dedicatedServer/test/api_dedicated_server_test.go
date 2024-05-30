@@ -77,20 +77,6 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DedicatedServerAPIService ConfigureHardwareRaid", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var serverId string
-
-		resp, httpRes, err := apiClient.DedicatedServerAPI.ConfigureHardwareRaid(context.Background(), serverId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test DedicatedServerAPIService CreateNetworkEquipmentCredential", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -681,35 +667,6 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test DedicatedServerAPIService GetServerHardwareScan", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var serverId string
-		var hardwareScanId string
-
-		resp, httpRes, err := apiClient.DedicatedServerAPI.GetServerHardwareScan(context.Background(), serverId, hardwareScanId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test DedicatedServerAPIService GetServerHardwareScanList", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var serverId string
-
-		resp, httpRes, err := apiClient.DedicatedServerAPI.GetServerHardwareScanList(context.Background(), serverId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test DedicatedServerAPIService GetServerIp", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -1098,18 +1055,6 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		httpRes, err := apiClient.DedicatedServerAPI.UpdateNetworkEquipmentReference(context.Background(), networkEquipmentId).Execute()
 
 		require.Nil(t, err)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test DedicatedServerAPIService UpdateNullRoute", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.DedicatedServerAPI.UpdateNullRoute(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

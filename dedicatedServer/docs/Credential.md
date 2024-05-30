@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Password** | Pointer to **string** | The password | [optional] 
-**Type** | Pointer to [**CredentialType**](CredentialType.md) |  | [optional] 
+**Type** | Pointer to **string** | The type of the credential | [optional] 
 **Username** | Pointer to **string** | The username | [optional] 
 
 ## Methods
@@ -54,20 +54,20 @@ HasPassword returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *Credential) GetType() CredentialType`
+`func (o *Credential) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *Credential) GetTypeOk() (*CredentialType, bool)`
+`func (o *Credential) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *Credential) SetType(v CredentialType)`
+`func (o *Credential) SetType(v string)`
 
 SetType sets Type field to given value.
 

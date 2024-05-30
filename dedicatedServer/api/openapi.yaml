@@ -1,8 +1,6 @@
 openapi: 3.0.0
 info:
-  contact:
-    email: development-networkautomation@leaseweb.com
-    name: Network Automation Team
+  contact: {}
   description: This documents the rest api dedicatedserver provides.
   license:
     name: Apache 2.0
@@ -4090,122 +4088,6 @@ paths:
       summary: Cancel active job
       tags:
       - dedicatedServer
-  /servers/{serverId}/configureHardwareRaid:
-    post:
-      description: |
-        This is an `internal` only job that can be used to configure Hardware RAID on
-        servers that are Hardware RAID capable.
-
-        All existing data will be destroyed!
-      operationId: configureHardwareRaid
-      parameters:
-      - description: The ID of a server
-        example: "12345"
-        explode: false
-        in: path
-        name: serverId
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            example:
-              level: 1
-              numberOfDisks: 2
-              powerCycle: true
-              type: HW
-            schema:
-              $ref: '#/components/schemas/configureHardwareRaidOpts'
-      responses:
-        "202":
-          content:
-            application/json:
-              example:
-                _metadata:
-                  limit: 10
-                  offset: 0
-                  totalCount: 1
-                jobs:
-                - createdAt: 2018-01-09T10:38:12+0000
-                  flow: tasks
-                  isRunning: true
-                  node: 80:18:44:E0:AF:C4!JGNTQ92
-                  progress:
-                    canceled: 0
-                    expired: 0
-                    failed: 0
-                    finished: 0
-                    inprogress: 0
-                    pending: 1
-                    percentage: 0
-                    total: 1
-                    waiting: 0
-                  serverId: "99944"
-                  status: ACTIVE
-                  type: install
-                  updatedAt: 2018-01-09T10:38:12+0000
-                  uuid: 3a867358-5b4b-44ee-88ac-4274603ef641
-              schema:
-                $ref: '#/components/schemas/serverJobList'
-          description: Accepted.
-        "400":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "400"
-                errorDetails: {}
-                errorMessage: The API could not interpret your request correctly.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Bad Request.
-        "401":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "401"
-                errorMessage: You are not authorized to view this resource.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Not Authorized.
-        "403":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-        "500":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "500"
-                errorMessage: '''The API could not handle your request at this time.'
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Internal Server Error.
-        "503":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-      security:
-      - X-LSW-Auth: []
-      summary: Configure Hardware Raid
-      tags:
-      - dedicatedServer
   /servers/{serverId}/credentials:
     get:
       description: |
@@ -6664,218 +6546,6 @@ paths:
       summary: Show hardware information
       tags:
       - dedicatedServer
-  /servers/{serverId}/hardwareScans:
-    get:
-      description: |
-        List all hardware scans for this server.
-      operationId: getServerHardwareScanList
-      parameters:
-      - description: The ID of a server
-        example: "12345"
-        explode: false
-        in: path
-        name: serverId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Limit the number of results returned.
-        example: 20
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: Return results starting from the given offset.
-        example: 10
-        explode: true
-        in: query
-        name: offset
-        required: false
-        schema:
-          type: integer
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                _metadata:
-                  limit: 10
-                  offset: 0
-                  totalCount: 4
-                hardwareScans:
-                - id: "4"
-                  parserVersion: "4.0"
-                  scannedAt: 2017-01-04T12:00:00+02:00
-                  serverId: "123"
-                - id: "3"
-                  parserVersion: "4.0"
-                  scannedAt: 2017-01-03T12:00:00+02:00
-                  serverId: "123"
-                - id: "2"
-                  parserVersion: "4.0"
-                  scannedAt: 2017-01-02T12:00:00+02:00
-                  serverId: "123"
-                - id: "1"
-                  parserVersion: "4.0"
-                  scannedAt: 2017-01-01T12:00:00+02:00
-                  serverId: "123"
-              schema:
-                $ref: '#/components/schemas/getServerHardwareScanListResult'
-          description: Ok.
-        "401":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "401"
-                errorMessage: You are not authorized to view this resource.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Not Authorized.
-        "403":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-        "500":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "500"
-                errorMessage: '''The API could not handle your request at this time.'
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Internal Server Error.
-        "503":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-      security:
-      - X-LSW-Auth: []
-      summary: List hardware scans
-      tags:
-      - dedicatedServer
-  /servers/{serverId}/hardwareScans/{hardwareScanId}:
-    get:
-      description: |
-        Returns detailed information of a hardware scan.
-      operationId: getServerHardwareScan
-      parameters:
-      - description: The ID of a server
-        example: "12345"
-        explode: false
-        in: path
-        name: serverId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The ID that identifies a hardware scan
-        explode: false
-        in: path
-        name: hardwareScanId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Defines the format of the response
-        example: json
-        explode: true
-        in: query
-        name: format
-        required: false
-        schema:
-          default: json
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                id: "123"
-                parserVersion: "4.0"
-                result:
-                  chassis:
-                    description: Rack Mount Chassis
-                  cpu:
-                  - description: Xeon
-                  disks:
-                  - description: ATA Disk
-                    id: disk
-                  ipmi:
-                    macaddress: 12:34:56:78:90:AB
-                  memory:
-                  - description: DIMM DDR2
-                    id: memory/bank:0
-                  network:
-                  - mac_address: 11:22:33:44:55:66
-                scannedAt: 2017-01-01T12:00:00+02:00
-                serverId: "456"
-              schema:
-                $ref: '#/components/schemas/getServerHardwareScanResult'
-          description: Ok.
-        "401":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "401"
-                errorMessage: You are not authorized to view this resource.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Not Authorized.
-        "403":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-        "500":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "500"
-                errorMessage: '''The API could not handle your request at this time.'
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Internal Server Error.
-        "503":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-      security:
-      - X-LSW-Auth: []
-      summary: Show a hardware scan
-      tags:
-      - dedicatedServer
   /servers/{serverId}/metrics/bandwidth:
     get:
       description: |
@@ -8075,89 +7745,6 @@ paths:
       security:
       - X-LSW-Auth: []
       summary: Update a data traffic notification setting
-      tags:
-      - dedicatedServer
-  /actions/nullRoute:
-    post:
-      description: |
-        This API call is intended to be used _only_ by IPAM to announce or withdraw
-        null routes.
-
-        Clients needing to `null` or `unnull` IP Addresses should always use the IPAM
-        API for this.
-      operationId: updateNullRoute
-      requestBody:
-        content:
-          application/json:
-            example:
-              action: ANNOUNCE
-              ipAddress: 127.0.0.55/32
-            schema:
-              $ref: '#/components/schemas/updateNullRouteOpts'
-      responses:
-        "202":
-          content:
-            application/json:
-              example:
-                message: Null route for IP address 127.0.0.55/32 will be announced
-                  shortly.
-              schema:
-                $ref: '#/components/schemas/updateNullRouteAcceptedResult'
-          description: Accepted.
-        "400":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "400"
-                errorDetails: {}
-                errorMessage: The API could not interpret your request correctly.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Bad Request.
-        "401":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "401"
-                errorMessage: You are not authorized to view this resource.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Not Authorized.
-        "403":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-        "500":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "500"
-                errorMessage: '''The API could not handle your request at this time.'
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Internal Server Error.
-        "503":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-      security:
-      - X-LSW-Auth: []
-      summary: Announce/Withdraw Null Routes
       tags:
       - dedicatedServer
   /servers/{serverId}/networkInterfaces:
@@ -10330,30 +9917,18 @@ components:
             $ref: '#/components/schemas/controlPanel'
           type: array
       type: object
-    credentialType:
-      description: The type of the credential
-      enum:
-      - OPERATING_SYSTEM
-      - CONTROL_PANEL
-      - REMOTE_MANAGEMENT
-      - RESCUE_MODE
-      - SWITCH
-      - PDU
-      - FIREWALL
-      - LOAD_BALANCER
-      title: credentialType
-      type: string
     credential:
       example:
         password: password
-        type: null
+        type: type
         username: username
       properties:
         password:
           description: The password
           type: string
         type:
-          $ref: '#/components/schemas/credentialType'
+          description: The type of the credential
+          type: string
         username:
           description: The username
           type: string
@@ -10363,10 +9938,10 @@ components:
       example:
         credentials:
         - password: password
-          type: null
+          type: type
           username: username
         - password: password
-          type: null
+          type: type
           username: username
         _metadata:
           offset: 0
@@ -10387,7 +9962,12 @@ components:
           description: The password for the credentials
           type: string
         type:
-          $ref: '#/components/schemas/credentialType'
+          description: |
+            Enum: `OPERATING_SYSTEM`, `CONTROL_PANEL`, `REMOTE_MANAGEMENT`, `RESCUE_MODE`, `SWITCH`, `PDU`, `FIREWALL`, `LOAD_BALANCER`
+
+            The type of the credential.
+          title: credentialType
+          type: string
         username:
           description: The username for the credentials
           type: string
@@ -10756,6 +10336,46 @@ components:
           description: Unique identifier of the job
           type: string
       type: object
+    createServerCredentialOpts:
+      properties:
+        password:
+          description: The password for the credentials
+          type: string
+        type:
+          description: |
+            Enum: `OPERATING_SYSTEM`, `CONTROL_PANEL`, `REMOTE_MANAGEMENT`, `RESCUE_MODE`, `SWITCH`, `PDU`, `FIREWALL`, `LOAD_BALANCER`
+
+            The type of the credential.
+          title: credentialType
+          type: string
+        username:
+          description: The username for the credentials
+          type: string
+      required:
+      - password
+      - type
+      - username
+      type: object
+    updateServerCredentialOpts:
+      properties:
+        password:
+          description: The password for the credentials
+          type: string
+      required:
+      - password
+      type: object
+    scanHardwareOpts:
+      properties:
+        callbackUrl:
+          description: Url which will receive callbacks
+          format: uri
+          type: string
+        powerCycle:
+          default: true
+          description: "If set to `true`, server will be power cycled in order to\
+            \ complete the operation"
+          type: boolean
+      type: object
     raidType:
       description: RAID type to apply to your installation. NONE is the equivalent
         of pass-through mode on HW RAID equipped servers
@@ -10765,34 +10385,66 @@ components:
       - NONE
       title: raidType
       type: string
-    configureHardwareRaidOpts:
+    installOperatingSystemOpts:
+      properties:
+        callbackUrl:
+          description: Url which will receive callbacks when the installation is finished
+            or failed
+          format: uri
+          type: string
+        controlPanelId:
+          description: Control panel identifier
+          type: string
+        device:
+          description: "Block devices in a disk set in which the partitions will be\
+            \ installed. Supported values are any disk set id, SATA_SAS or NVME"
+          type: string
+        hostname:
+          description: Hostname to be used in your installation
+          type: string
+        operatingSystemId:
+          description: Operating system identifier
+          type: string
+        partitions:
+          description: Array of partition objects that should be installed per partition
+          items:
+            $ref: '#/components/schemas/partition'
+          type: array
+        password:
+          description: "Server root password. If not provided, it would be automatically\
+            \ generated"
+          type: string
+        postInstallScript:
+          description: Base64 Encoded string containing a valid bash script to be
+            run right after the installation
+          type: string
+        powerCycle:
+          description: "If true, allows system reboots to happen automatically within\
+            \ the process. Otherwise, you should do them manually"
+          type: boolean
+        raid:
+          $ref: '#/components/schemas/raid'
+        sshKeys:
+          description: "List of public sshKeys to be setup in your installation, separated\
+            \ by new lines"
+          type: string
+        timezone:
+          description: Timezone represented as Geographical_Area/City
+          type: string
+      required:
+      - operatingSystemId
+      type: object
+    ipmiResetServerOpts:
       properties:
         callbackUrl:
           description: Url which will receive callbacks
           format: uri
           type: string
-        level:
-          description: "RAID level to apply, this value is only required if you specify\
-            \ a type HW"
-          enum:
-          - 0
-          - 1
-          - 5
-          - 10
-          type: integer
-        numberOfDisks:
-          description: The number of disks you want to apply RAID on. If not specified
-            all disks are used.
-          type: integer
         powerCycle:
           default: true
           description: "If set to `true`, server will be power cycled in order to\
             \ complete the operation"
           type: boolean
-        type:
-          $ref: '#/components/schemas/raidType'
-      required:
-      - type
       type: object
     serverJobList:
       example:
@@ -10935,102 +10587,6 @@ components:
           items:
             $ref: '#/components/schemas/serverJob'
           type: array
-      type: object
-    createServerCredentialOpts:
-      properties:
-        password:
-          description: The password for the credentials
-          type: string
-        type:
-          $ref: '#/components/schemas/credentialType'
-        username:
-          description: The username for the credentials
-          type: string
-      required:
-      - password
-      - type
-      - username
-      type: object
-    updateServerCredentialOpts:
-      properties:
-        password:
-          description: The password for the credentials
-          type: string
-      required:
-      - password
-      type: object
-    scanHardwareOpts:
-      properties:
-        callbackUrl:
-          description: Url which will receive callbacks
-          format: uri
-          type: string
-        powerCycle:
-          default: true
-          description: "If set to `true`, server will be power cycled in order to\
-            \ complete the operation"
-          type: boolean
-      type: object
-    installOperatingSystemOpts:
-      properties:
-        callbackUrl:
-          description: Url which will receive callbacks when the installation is finished
-            or failed
-          format: uri
-          type: string
-        controlPanelId:
-          description: Control panel identifier
-          type: string
-        device:
-          description: "Block devices in a disk set in which the partitions will be\
-            \ installed. Supported values are any disk set id, SATA_SAS or NVME"
-          type: string
-        hostname:
-          description: Hostname to be used in your installation
-          type: string
-        operatingSystemId:
-          description: Operating system identifier
-          type: string
-        partitions:
-          description: Array of partition objects that should be installed per partition
-          items:
-            $ref: '#/components/schemas/partition'
-          type: array
-        password:
-          description: "Server root password. If not provided, it would be automatically\
-            \ generated"
-          type: string
-        postInstallScript:
-          description: Base64 Encoded string containing a valid bash script to be
-            run right after the installation
-          type: string
-        powerCycle:
-          description: "If true, allows system reboots to happen automatically within\
-            \ the process. Otherwise, you should do them manually"
-          type: boolean
-        raid:
-          $ref: '#/components/schemas/raid'
-        sshKeys:
-          description: "List of public sshKeys to be setup in your installation, separated\
-            \ by new lines"
-          type: string
-        timezone:
-          description: Timezone represented as Geographical_Area/City
-          type: string
-      required:
-      - operatingSystemId
-      type: object
-    ipmiResetServerOpts:
-      properties:
-        callbackUrl:
-          description: Url which will receive callbacks
-          format: uri
-          type: string
-        powerCycle:
-          default: true
-          description: "If set to `true`, server will be power cycled in order to\
-            \ complete the operation"
-          type: boolean
       type: object
     currentServerJob:
       allOf:
@@ -11524,76 +11080,6 @@ components:
           example: "62264"
           type: string
       type: object
-    getServerHardwareScanListResult:
-      description: List of Hardware Scans executed in a server
-      example:
-        _metadata:
-          offset: 0
-          limit: 5
-          totalCount: 2
-        hardwareScans:
-        - parserVersion: parserVersion
-          scannedAt: scannedAt
-          id: id
-          serverId: serverId
-        - parserVersion: parserVersion
-          scannedAt: scannedAt
-          id: id
-          serverId: serverId
-      properties:
-        _metadata:
-          $ref: '#/components/schemas/_metadata'
-        hardwareScans:
-          description: Simple list of Hardware Scans
-          items:
-            $ref: '#/components/schemas/hardwareScan'
-          type: array
-      type: object
-    getServerHardwareScanResult:
-      description: Hardware Scan information
-      example:
-        result:
-          ipmi:
-            macaddress: 00:15:17:DB:63:01
-          memory:
-          - description: description
-            id: memory/bank:0
-          - description: description
-            id: memory/bank:0
-          disks:
-          - description: description
-            id: disk
-          - description: description
-            id: disk
-          cpu:
-          - description: description
-          - description: description
-          chassis:
-            description: description
-          network:
-          - mac_address: 00:15:17:DB:63:01
-          - mac_address: 00:15:17:DB:63:01
-        parserVersion: parserVersion
-        scannedAt: 2017-09-27T14:21:01Z
-        id: id
-        serverId: "62264"
-      properties:
-        id:
-          description: Hardware Scan ID
-          type: string
-        parserVersion:
-          type: string
-        result:
-          $ref: '#/components/schemas/hardwareScanResult'
-        scannedAt:
-          description: "Timestamp of hardware scan, the ISO-8601 format"
-          example: 2017-09-27T14:21:01Z
-          format: date-time
-          type: string
-        serverId:
-          example: "62264"
-          type: string
-      type: object
     metric:
       example:
         unit: unit
@@ -11842,31 +11328,6 @@ components:
       - frequency
       - threshold
       - unit
-      type: object
-    updateNullRouteOpts:
-      properties:
-        action:
-          description: The action to take
-          enum:
-          - ANNOUNCE
-          - WITHDRAW
-          example: WITHDRAW
-          type: string
-        ipAddress:
-          description: The IP address for which to announce or withdraw the null route
-          type: string
-      required:
-      - action
-      - ipAddress
-      type: object
-    updateNullRouteAcceptedResult:
-      example:
-        message: message
-      properties:
-        message:
-          description: A human friendly message describing the action that will be
-            taken
-          type: string
       type: object
     operationNetworkInterface:
       example:
@@ -13415,139 +12876,6 @@ components:
           title: network
           type: array
       title: result
-    hardwareScan:
-      example:
-        parserVersion: parserVersion
-        scannedAt: scannedAt
-        id: id
-        serverId: serverId
-      properties:
-        id:
-          description: Hardware Scan id
-          type: string
-        parserVersion:
-          type: string
-        scannedAt:
-          description: Date time using the ISO-8601 format
-          type: string
-        serverId:
-          type: string
-      title: hardwareScan
-      type: object
-    hardwareScanChassis:
-      example:
-        description: description
-      properties:
-        description:
-          type: string
-      title: hardwareScanChassis
-      type: object
-    hardwareScanCpu:
-      example:
-        description: description
-      properties:
-        description:
-          type: string
-      title: hardwareScanCpu
-      type: object
-    hardwareScanDisk:
-      example:
-        description: description
-        id: disk
-      properties:
-        description:
-          type: string
-        id:
-          example: disk
-          type: string
-      title: hardwareScanDisk
-      type: object
-    hardwareScanResultIpmi:
-      example:
-        macaddress: 00:15:17:DB:63:01
-      properties:
-        macaddress:
-          description: Represents a MAC Address in the standard colon delimited format.
-            Eg. `01:23:45:67:89:0A`
-          example: 00:15:17:DB:63:01
-          pattern: "([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\\
-            .[0-9a-fA-F]{4})$"
-          type: string
-      title: hardwareScanResultIpmi
-    hardwareScanMemory:
-      example:
-        description: description
-        id: memory/bank:0
-      properties:
-        description:
-          type: string
-        id:
-          example: memory/bank:0
-          type: string
-      title: hardwareScanMemory
-      type: object
-    hardwareScanResultNetwork:
-      example:
-        mac_address: 00:15:17:DB:63:01
-      properties:
-        mac_address:
-          description: Represents a MAC Address in the standard colon delimited format.
-            Eg. `01:23:45:67:89:0A`
-          example: 00:15:17:DB:63:01
-          pattern: "([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\\
-            .[0-9a-fA-F]{4})$"
-          type: string
-      title: hardwareScanResultNetwork
-    hardwareScanResult:
-      description: Hardware Scan results
-      example:
-        ipmi:
-          macaddress: 00:15:17:DB:63:01
-        memory:
-        - description: description
-          id: memory/bank:0
-        - description: description
-          id: memory/bank:0
-        disks:
-        - description: description
-          id: disk
-        - description: description
-          id: disk
-        cpu:
-        - description: description
-        - description: description
-        chassis:
-          description: description
-        network:
-        - mac_address: 00:15:17:DB:63:01
-        - mac_address: 00:15:17:DB:63:01
-      properties:
-        chassis:
-          $ref: '#/components/schemas/hardwareScanChassis'
-        cpu:
-          items:
-            $ref: '#/components/schemas/hardwareScanCpu'
-          minItems: 1
-          type: array
-        disks:
-          items:
-            $ref: '#/components/schemas/hardwareScanDisk'
-          minItems: 1
-          type: array
-        ipmi:
-          $ref: '#/components/schemas/hardwareScanResultIpmi'
-        memory:
-          items:
-            $ref: '#/components/schemas/hardwareScanMemory'
-          minItems: 1
-          type: array
-        network:
-          items:
-            $ref: '#/components/schemas/hardwareScanResultNetwork'
-          minItems: 1
-          type: array
-      title: hardwareScanResult
-      type: object
     metricValue:
       description: An array of metrics grouped by granularity
       example:
@@ -13633,14 +12961,6 @@ components:
       in: header
       name: X-LSW-Auth
       type: apiKey
-    OAuth2:
-      flows:
-        clientCredentials:
-          refreshUrl: https://auth.leaseweb.com/token
-          scopes: {}
-          tokenUrl: https://auth.leaseweb.com/token
-      type: oauth2
-      x-internal: true
     BearerAuth:
       scheme: bearer
       type: http
