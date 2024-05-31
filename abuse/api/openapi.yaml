@@ -1,0 +1,1359 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: |
+    This API provides ways to manage the abuse reports you might receive from Leaseweb. To use this API, please request access via your account manager and/or compliance officer. **LIMITED ACCESS**
+  license:
+    name: Apache 2.0
+    url: http://developer.leaseweb.com
+  title: Leaseweb API for Abuse Handling
+  version: v1
+  x-logo:
+    url: https://developer.leaseweb.com/images/logo.png
+    altText: Leaseweb developer documentation
+    backgroundColor: '#5484c6'
+    href: http://developer.leaseweb.com
+servers:
+- url: https://api.leaseweb.com/abuse/v1
+tags:
+- description: |
+    The API uses standard HTTP status codes to indicate the success or failure of the API call. The response will be JSON. Most APIs use the following format:
+
+    ```json
+    {
+        "errorCode": "APP00800",
+        "errorMessage": "The connection with the DB cannot be established.",
+        "correlationId": "550e8400-e29b-41d4-a716-446655440000",
+        "userMessage": "Cannot handle your request at the moment. Please try again later.",
+        "reference": "http://developer.leaseweb.com/errors/APP00800"
+    }
+    ```
+  name: Errors
+  x-traitTag: true
+- description: |
+    Authentication for the APIs is required. To authenticate your call, you will need to sent your API key as `X-LSW-Auth` header.
+
+    You can generate API keys in the [Customer Portal](https://secure.leaseweb.com/api-client-management/).
+  name: API Key Authentication
+  x-traitTag: true
+- description: ""
+  name: Abuse Reports
+paths:
+  /reports:
+    get:
+      description: List reports
+      operationId: getReportList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: |
+          Comma separated list of report statuses to filter on.
+        example: "OPEN,WAITING,CLOSED"
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          default: "OPEN,WAITING,CLOSED"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                reports:
+                - id: "000000"
+                  subject: Report description
+                  status: OPEN
+                  reportedAt: 2015-01-01T00:00:00+00:00
+                  updatedAt: 2015-01-01T00:00:00+00:00
+                  notifier: REDACTED_FOR_PRIVACY
+                  customerId: "10000001"
+                  legalEntityId: "2000"
+                  deadline: 2015-01-01T00:00:00+00:00
+                - id: "000001"
+                  subject: Report description
+                  status: CLOSED
+                  reportedAt: 2015-01-01T00:00:00+00:00
+                  updatedAt: 2015-01-01T00:00:00+00:00
+                  notifier: REDACTED_FOR_PRIVACY
+                  customerId: "10000001"
+                  legalEntityId: "2600"
+                  deadline: 2015-01-01T00:00:00+00:00
+                _metadata:
+                  totalCount: 2
+                  limit: 10
+                  offset: 0
+              schema:
+                $ref: '#/components/schemas/getReportListResult'
+          description: |
+            OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      security:
+      - X-LSW-Auth: []
+      summary: List reports
+      tags:
+      - abuse
+  /reports/{reportId}:
+    get:
+      description: ""
+      operationId: getReport
+      parameters:
+      - description: Report Id
+        example: abc123
+        explode: false
+        in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: "000005"
+                subject: Report description
+                status: CLOSED
+                abuseType: MALLWARE
+                reopened: false
+                reportedAt: 2015-01-01T00:00:00+0100
+                updatedAt: 2015-01-01T00:00:00+0100
+                notifier: notifier@email.com
+                customerId: "10000001"
+                legalEntityId: "2000"
+                body: string with content
+                deadline: 2015-01-01T00:00:00+0100
+                detectedIpAddresses:
+                - 127.0.0.1
+                detectedDomainNames:
+                - name: example.com
+                  ipAddresses:
+                  - 93.184.216.34
+                attachments:
+                - id: 1abd8e7f-0fdf-453c-b1f5-8fef436acbbe
+                  mimeType: part/xml
+                  filename: 000001.xml
+                totalMessagesCount: 2
+                latestMessages:
+                - postedBy: CUSTOMER
+                  postedAt: 2015-09-30T06:23:40+00:00
+                  body: "Hello, this is my first message!"
+                - postedBy: ABUSE_AGENT
+                  postedAt: 2015-10-08T08:25:29+00:00
+                  body: "Hi, this is our first reply."
+                  attachment:
+                    id: 436acbbe-0fdf-453c-b1f5-1abd8e7f8fef
+                    mimeType: image/png
+                    filename: notification.png
+              schema:
+                $ref: '#/components/schemas/getReportResult'
+          description: |
+            OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      security:
+      - X-LSW-Auth: []
+      summary: Inspect a report
+      tags:
+      - abuse
+  /reports/{reportId}/messages:
+    get:
+      description: ""
+      operationId: getReportMessageList
+      parameters:
+      - description: Report Id
+        example: abc123
+        explode: false
+        in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                messages:
+                - postedBy: CUSTOMER
+                  postedAt: 2015-09-30T06:23:40+00:00
+                  body: "Hello, this is my first message!"
+                - postedBy: ABUSE_AGENT
+                  postedAt: 2015-10-08T08:25:29+00:00
+                  body: "Hi, this is our first reply."
+                  attachment:
+                    id: 436acbbe-0fdf-453c-b1f5-1abd8e7f8fef
+                    mimeType: image/png
+                    filename: notification.png
+                _metadata:
+                  totalCount: 2
+                  limit: 10
+                  offset: 0
+              schema:
+                $ref: '#/components/schemas/getReportMessageListResult'
+          description: |
+            OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      security:
+      - X-LSW-Auth: []
+      summary: List report messages
+      tags:
+      - abuse
+    post:
+      description: Sent a new message to the Leaseweb compliance team related to an
+        abuse report.
+      operationId: createReportMessage
+      parameters:
+      - description: Report Id
+        example: abc123
+        explode: false
+        in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              body: "Hello, this is my first message."
+            schema:
+              $ref: '#/components/schemas/createReportMessageOpts'
+      responses:
+        "202":
+          content:
+            application/json:
+              example:
+              - To make sure the request has been processed please see if the message
+                is added to the list.
+              schema:
+                $ref: '#/components/schemas/createReportMessageResult'
+          description: |
+            Accepted.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      security:
+      - X-LSW-Auth: []
+      summary: Create new message
+      tags:
+      - abuse
+  /reports/{reportId}/messageAttachments/{fileId}:
+    get:
+      description: The compliance team sometimes add an attachment to a message. You
+        can use this endpoint to get the attachment. The content-type of the response
+        depends on the content of the attachment.
+      operationId: getReportMessageAttachmentList
+      parameters:
+      - description: Report Id
+        example: abc123
+        explode: false
+        in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: File Id
+        example: sdfa73-adsfs-4fadf-sdfasdfa
+        explode: false
+        in: path
+        name: fileId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Media type can be different per file because of its contents.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      security:
+      - X-LSW-Auth: []
+      summary: Inspect a message attachment
+      tags:
+      - abuse
+  /reports/{reportId}/reportAttachments/{fileId}:
+    get:
+      description: Use this endpoint to get an attachment which was created with the
+        abuse report. The content-type of the response depends on the content of the
+        attachment.
+      operationId: getReportAttachmentList
+      parameters:
+      - description: Report Id
+        example: abc123
+        explode: false
+        in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: File Id
+        example: sdfa73-adsfs-4fadf-sdfasdfa
+        explode: false
+        in: path
+        name: fileId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Media type can be different per file because of its contents.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      security:
+      - X-LSW-Auth: []
+      summary: Inspect a report attachment
+      tags:
+      - abuse
+  /reports/{reportId}/resolutions:
+    get:
+      description: "In order to resolve a report, you need to specify a resolution.\
+        \ Use this endpoint to retrieve a list of all possible resolution options\
+        \ for this report."
+      operationId: getReportResolutionList
+      parameters:
+      - description: Report Id
+        example: abc123
+        explode: false
+        in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                resolutions:
+                - id: CONTENT_REMOVED
+                  description: The mentioned content has been removed.
+                - id: DOMAINS_REMOVED
+                  description: The mentioned domain(s) has/have been removed from
+                    the LeaseWeb network.
+                - id: SUSPENDED
+                  description: The end customer (or responsible user) has been suspended.
+                - id: DUPLICATE
+                  description: This is either a duplicate or old notification and
+                    has already been resolved.
+              schema:
+                $ref: '#/components/schemas/getReportResolutionListResult'
+          description: |
+            OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      security:
+      - X-LSW-Auth: []
+      summary: List resolution options
+      tags:
+      - abuse
+  /reports/{reportId}/resolve:
+    post:
+      description: Resolve a report
+      operationId: resolveReport
+      parameters:
+      - description: Report Id
+        example: abc123
+        explode: false
+        in: path
+        name: reportId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              resolutions:
+              - CONTENT_REMOVED
+              - SUSPENDED
+            schema:
+              $ref: '#/components/schemas/resolveReportResult'
+      responses:
+        "204":
+          description: |
+            No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      security:
+      - X-LSW-Auth: []
+      summary: Resolve a report
+      tags:
+      - abuse
+components:
+  parameters:
+    limit:
+      description: Limit the number of results returned.
+      example: 20
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+      style: form
+    offset:
+      description: Return results starting from the given offset.
+      example: 10
+      explode: true
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+      style: form
+    status:
+      description: |
+        Comma separated list of report statuses to filter on.
+      example: "OPEN,WAITING,CLOSED"
+      explode: true
+      in: query
+      name: status
+      required: false
+      schema:
+        default: "OPEN,WAITING,CLOSED"
+        type: string
+      style: form
+    reportId:
+      description: Report Id
+      example: abc123
+      explode: false
+      in: path
+      name: reportId
+      required: true
+      schema:
+        type: string
+      style: simple
+    fileId:
+      description: File Id
+      example: sdfa73-adsfs-4fadf-sdfasdfa
+      explode: false
+      in: path
+      name: fileId
+      required: true
+      schema:
+        type: string
+      style: simple
+  responses:
+    "400":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "400"
+            errorDetails: {}
+            errorMessage: The API could not interpret your request correctly.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Bad Request.
+    "401":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "401"
+            errorMessage: You are not authorized to view this resource.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Authorized.
+    "403":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "403"
+            errorMessage: Access to the requested resource is forbidden.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Forbidden.
+    "404":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "404"
+            errorMessage: Resource not found
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Found.
+    "500":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "500"
+            errorMessage: '''The API could not handle your request at this time.'
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Internal Server Error.
+    "503":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "503"
+            errorMessage: The API is not available at the moment.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Service Unavailable.
+  schemas:
+    _metadata:
+      description: Metadata about the collection
+      example:
+        offset: 0
+        limit: 5
+        totalCount: 2
+      properties:
+        totalCount:
+          description: Total amount of orders in this collection
+          example: 2
+          type: number
+        offset:
+          default: 0
+          description: The offset used to generate this response
+          example: 0
+          type: number
+        limit:
+          default: 5
+          description: The limit used to generate this response
+          example: 5
+          type: number
+      title: metadata
+      type: object
+    getReportListResult:
+      example:
+        reports:
+        - reportedAt: 2015-01-01T00:00:00+00:00
+          legalEntityId: "2000"
+          subject: Report description
+          notifier: REDACTED_FOR_PRIVACY
+          customerId: "10000001"
+          id: "000000"
+          deadline: 2015-01-01T00:00:00+00:00
+          status: OPEN
+          updatedAt: 2015-01-01T00:00:00+00:00
+        - reportedAt: 2015-01-01T00:00:00+00:00
+          legalEntityId: "2000"
+          subject: Report description
+          notifier: REDACTED_FOR_PRIVACY
+          customerId: "10000001"
+          id: "000000"
+          deadline: 2015-01-01T00:00:00+00:00
+          status: OPEN
+          updatedAt: 2015-01-01T00:00:00+00:00
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        reports:
+          description: An array of abuse reports.
+          items:
+            $ref: '#/components/schemas/report'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      type: object
+    errorResult:
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails:
+          key:
+          - errorDetails
+          - errorDetails
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+      type: object
+    attachment:
+      example:
+        filename: 000001.xml
+        id: "[\"1abd8e7f-0fdf-453c-b1f5-8fef436acbbe\"]"
+        mimeType: part/xml
+      properties:
+        id:
+          description: The file ID of the attachment.
+          example: "[\"1abd8e7f-0fdf-453c-b1f5-8fef436acbbe\"]"
+          type: string
+        mimeType:
+          description: The MIME type of the attachment.
+          example: part/xml
+          type: string
+        filename:
+          description: The filename of the attachment.
+          example: 000001.xml
+          type: string
+      title: attachment
+      type: object
+    message:
+      example:
+        postedBy: CUSTOMER
+        postedAt: 2015-09-30T06:23:40+00:00
+        attachment:
+          filename: 000001.xml
+          id: "[\"1abd8e7f-0fdf-453c-b1f5-8fef436acbbe\"]"
+          mimeType: part/xml
+        body: I have resolved this issue.
+      properties:
+        postedBy:
+          description: A string to indicating if the message was posted by the customer
+            or the abuse agent.
+          enum:
+          - CUSTOMER
+          - ABUSE_AGENT
+          example: CUSTOMER
+          type: string
+        postedAt:
+          description: The timestamp when the message was posted.
+          example: 2015-09-30T06:23:40+00:00
+          type: string
+        body:
+          description: The posted message.
+          example: I have resolved this issue.
+          type: string
+        attachment:
+          $ref: '#/components/schemas/attachment'
+      title: message
+      type: object
+    getReportResult:
+      example:
+        reportedAt: 2015-01-01T00:00:00+00:00
+        reopened: false
+        attachments:
+        - filename: 000001.xml
+          id: "[\"1abd8e7f-0fdf-453c-b1f5-8fef436acbbe\"]"
+          mimeType: part/xml
+        - filename: 000001.xml
+          id: "[\"1abd8e7f-0fdf-453c-b1f5-8fef436acbbe\"]"
+          mimeType: part/xml
+        detectedIpAddresses:
+        - "[\"127.0.0.1\"]"
+        - "[\"127.0.0.1\"]"
+        subject: Report description
+        body: string with content
+        latestMessages:
+        - postedBy: CUSTOMER
+          postedAt: 2015-09-30T06:23:40+00:00
+          attachment:
+            filename: 000001.xml
+            id: "[\"1abd8e7f-0fdf-453c-b1f5-8fef436acbbe\"]"
+            mimeType: part/xml
+          body: I have resolved this issue.
+        - postedBy: CUSTOMER
+          postedAt: 2015-09-30T06:23:40+00:00
+          attachment:
+            filename: 000001.xml
+            id: "[\"1abd8e7f-0fdf-453c-b1f5-8fef436acbbe\"]"
+            mimeType: part/xml
+          body: I have resolved this issue.
+        abuseType: CONTENT
+        legalEntityId: "2000"
+        notifier: notifier@email.com
+        customerId: "10000001"
+        detectedDomainNames:
+        - name: "[\"example.com\"]"
+          ipAddresses:
+          - "[\"93.184.216.34\"]"
+          - "[\"93.184.216.34\"]"
+        - name: "[\"example.com\"]"
+          ipAddresses:
+          - "[\"93.184.216.34\"]"
+          - "[\"93.184.216.34\"]"
+        totalMessagesCount: 2
+        id: "000005"
+        deadline: 2015-01-01T00:00:00+00:00
+        status: OPEN
+        updatedAt: 2015-01-01T00:00:00+00:00
+      properties:
+        id:
+          description: The ID of the abuse report.
+          example: "000005"
+          type: string
+        subject:
+          description: The subject of the report.
+          example: Report description
+          type: string
+        status:
+          description: The current status of the report.
+          enum:
+          - OPEN
+          - WAITING
+          - CLOSED
+          example: OPEN
+          type: string
+        abuseType:
+          description: The abuse type of the report.
+          enum:
+          - CONTENT
+          - MALLWARE
+          - OTHER
+          type: string
+        reopened:
+          description: "When the report status is open, this indicates if the report\
+            \ was reopened."
+          example: false
+          type: boolean
+        reportedAt:
+          description: The date and time the report was reported at.
+          example: 2015-01-01T00:00:00+00:00
+          type: string
+        updatedAt:
+          description: When the report was updated last.
+          example: 2015-01-01T00:00:00+00:00
+          type: string
+        notifier:
+          description: The emailaddress of the notifier who reported the abuse.
+          example: notifier@email.com
+          type: string
+        customerId:
+          description: The customer ID of your account.
+          example: "10000001"
+          type: string
+        legalEntityId:
+          description: The legal entity ID of the customer account.
+          example: "2000"
+          type: string
+        body:
+          description: The report body content.
+          example: string with content
+          type: string
+        deadline:
+          description: The Deadline before when the report needs to be resolved.
+          example: 2015-01-01T00:00:00+00:00
+          type: string
+        detectedIpAddresses:
+          description: The IP-addresses detected in the report body.
+          items:
+            example: "[\"127.0.0.1\"]"
+            type: string
+          type: array
+        detectedDomainNames:
+          description: The domainnames detected in the report body.
+          items:
+            $ref: '#/components/schemas/detectedDomainNameList'
+          type: array
+        attachments:
+          description: All the files attached to the report.
+          items:
+            $ref: '#/components/schemas/attachment'
+          type: array
+        totalMessagesCount:
+          description: Total amount of messages in the report.
+          example: 2
+          type: integer
+        latestMessages:
+          description: Array of the last 5 messages in the report.
+          items:
+            $ref: '#/components/schemas/message'
+          type: array
+      type: object
+    getReportMessageListResult:
+      example:
+        messages:
+        - postedBy: CUSTOMER
+          postedAt: 2015-09-30T06:23:40+00:00
+          attachment:
+            filename: 000001.xml
+            id: "[\"1abd8e7f-0fdf-453c-b1f5-8fef436acbbe\"]"
+            mimeType: part/xml
+          body: I have resolved this issue.
+        - postedBy: CUSTOMER
+          postedAt: 2015-09-30T06:23:40+00:00
+          attachment:
+            filename: 000001.xml
+            id: "[\"1abd8e7f-0fdf-453c-b1f5-8fef436acbbe\"]"
+            mimeType: part/xml
+          body: I have resolved this issue.
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        messages:
+          description: An array of the posted messages.
+          items:
+            $ref: '#/components/schemas/message'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      type: object
+    createReportMessageOpts:
+      properties:
+        body:
+          description: |-
+            Plain text body of the message, for newlines use '
+            '.
+          example: I have resolved this issue.
+          type: string
+      required:
+      - body
+      type: object
+    createReportMessageResult:
+      items:
+        default: To make sure the request has been processed please see if the message
+          is added to the list.
+        description: "A message explaining the message is posted, but might not be\
+          \ processed yet, so /messages needs to be checked."
+        type: string
+      type: array
+    getReportResolutionListResult:
+      example:
+        resolutions:
+        - description: The mentioned content has been removed.
+          id: CONTENT_REMOVED
+        - description: The mentioned content has been removed.
+          id: CONTENT_REMOVED
+      properties:
+        resolutions:
+          description: Possible resolutions to resolve this report with.
+          items:
+            $ref: '#/components/schemas/resolutionList'
+          type: array
+      type: object
+    resolveReportResult:
+      properties:
+        resolutions:
+          description: List of selected resolution ID's to explain how the report
+            is resolved.
+          items:
+            description: ID of the selected resolution.
+            example: "[\"CONTENT_REMOVED\",\"SUSPENDED\"]"
+            title: resolutionList
+            type: string
+          type: array
+      required:
+      - resolutions
+      type: object
+    report:
+      example:
+        reportedAt: 2015-01-01T00:00:00+00:00
+        legalEntityId: "2000"
+        subject: Report description
+        notifier: REDACTED_FOR_PRIVACY
+        customerId: "10000001"
+        id: "000000"
+        deadline: 2015-01-01T00:00:00+00:00
+        status: OPEN
+        updatedAt: 2015-01-01T00:00:00+00:00
+      properties:
+        id:
+          description: The ID of the report.
+          example: "000000"
+          type: string
+        subject:
+          description: The subject of the  report.
+          example: Report description
+          type: string
+        status:
+          description: The current status of the report.
+          enum:
+          - OPEN
+          - WAITING
+          - CLOSED
+          example: OPEN
+          type: string
+        reportedAt:
+          description: The date and time the report was reported at.
+          example: 2015-01-01T00:00:00+00:00
+          type: string
+        updatedAt:
+          description: The date and time the report was last updated.
+          example: 2015-01-01T00:00:00+00:00
+          type: string
+        notifier:
+          default: REDACTED_FOR_PRIVACY
+          description: "Due to compliance, 'REDACTED_FOR_PRIVACY' is the default value."
+          type: string
+        customerId:
+          description: The customer ID of your account.
+          example: "10000001"
+          type: string
+        legalEntityId:
+          description: The legal entity ID of the customer account.
+          example: "2000"
+          type: string
+        deadline:
+          description: The deadline before when the report needs to be resolved.
+          example: 2015-01-01T00:00:00+00:00
+          type: string
+      title: report
+      type: object
+    detectedDomainNameList:
+      example:
+        name: "[\"example.com\"]"
+        ipAddresses:
+        - "[\"93.184.216.34\"]"
+        - "[\"93.184.216.34\"]"
+      properties:
+        name:
+          description: The domainname.
+          example: "[\"example.com\"]"
+          type: string
+        ipAddresses:
+          description: The IP-addresses the domainname resolves to.
+          items:
+            example: "[\"93.184.216.34\"]"
+            type: string
+          type: array
+      title: detectedDomainNameList
+      type: object
+    resolutionList:
+      example:
+        description: The mentioned content has been removed.
+        id: CONTENT_REMOVED
+      properties:
+        id:
+          description: The resolution ID to be used when calling /resolve.
+          example: CONTENT_REMOVED
+          type: string
+        description:
+          description: The actual text the report will be resolved with when resolving
+            with this resolution.
+          example: The mentioned content has been removed.
+          type: string
+      title: resolutionList
+      type: object
+  securitySchemes:
+    X-LSW-Auth:
+      description: API key authentication by setting `X-LSW-Auth` header.
+      in: header
+      name: X-LSW-Auth
+      type: apiKey
+    BearerAuth:
+      scheme: bearer
+      type: http

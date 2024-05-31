@@ -1,0 +1,928 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: "> The base URL for this API is: **https://api.leaseweb.com/invoices/v1/**"
+  license:
+    name: Apache 2.0
+    url: http://developer.leaseweb.com
+  title: Invoices
+  version: v1
+  x-logo:
+    url: https://developer.leaseweb.com/images/logo.png
+    altText: Leaseweb developer documentation
+    backgroundColor: '#5484c6'
+    href: http://developer.leaseweb.com
+servers:
+- url: https://api.leaseweb.com/invoices/v1
+security:
+- X-LSW-Auth: []
+tags:
+- description: |
+    The API uses standard HTTP status codes to indicate the success or failure of the API call. The response will be JSON. Most APIs use the following format:
+
+    ```json
+    {
+        "errorCode": "APP00800",
+        "errorMessage": "The connection with the DB cannot be established.",
+        "correlationId": "550e8400-e29b-41d4-a716-446655440000",
+        "userMessage": "Cannot handle your request at the moment. Please try again later.",
+        "reference": "http://developer.leaseweb.com/errors/APP00800"
+    }
+    ```
+  name: Errors
+  x-traitTag: true
+- description: |
+    Authentication for the APIs is required. To authenticate your call, you will need to sent your API key as `X-LSW-Auth` header.
+
+    You can generate API keys in the [Customer Portal](https://secure.leaseweb.com/api-client-management/).
+  name: API Key Authentication
+  x-traitTag: true
+- description: ""
+  name: Invoices
+paths:
+  /invoices:
+    get:
+      description: This endpoint will return an overview of all the invoices for the
+        customer.
+      operationId: getInvoiceList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 0
+                  offset: 0
+                  totalCount: 3
+                invoices:
+                - currency: EUR
+                  date: 2019-05-06T00:00:00+00:00
+                  dueDate: 2019-05-30T00:00:00+00:00
+                  id: "00000001"
+                  isPartialPaymentAllowed: true
+                  openAmount: 1756.21
+                  status: OVERDUE
+                  taxAmount: 0
+                  total: 1756.21
+                - currency: EUR
+                  date: 2019-05-06T00:00:00+00:00
+                  dueDate: 2019-05-30T00:00:00+00:00
+                  id: "00000002"
+                  isPartialPaymentAllowed: true
+                  openAmount: 34
+                  status: OPEN
+                  taxAmount: 0
+                  total: 34
+                - currency: EUR
+                  date: 2019-04-06T00:00:00+00:00
+                  dueDate: 2019-04-30T00:00:00+00:00
+                  id: "00000003"
+                  isPartialPaymentAllowed: false
+                  openAmount: 0
+                  status: PAID
+                  taxAmount: 0
+                  total: 14.37
+              schema:
+                $ref: '#/components/schemas/getInvoiceListResult'
+          description: |
+            OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List invoices
+      tags:
+      - invoice
+  /invoices/proforma:
+    get:
+      description: This endpoint will return an overview of contract items that will
+        be invoiced as of the 1st of the upcoming month.
+      operationId: getProforma
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 2
+                contractItems:
+                - contractId: "50000103"
+                  currency: EUR
+                  endDate: 2021-01-01T00:00:00+00:00
+                  equipmentId: "26430"
+                  poNumber: "40002154000110"
+                  price: 150.05
+                  product: Backup
+                  reference: this is a reference
+                  startDate: 2020-01-01T00:00:00+00:00
+                - contractId: "50000103"
+                  currency: EUR
+                  endDate: 2021-01-01T00:00:00+00:00
+                  equipmentId: "26430"
+                  poNumber: "40002154000110"
+                  price: 150.05
+                  product: Dedicated server
+                  reference: this is a reference
+                  startDate: 2020-01-01T00:00:00+00:00
+                currency: EUR
+                proformaDate: "2020-06-01T00: 00: 00+00: 00"
+                subTotal: 300.04
+                total: 352.55
+                vatAmount: 52.51
+              schema:
+                $ref: '#/components/schemas/getProformaResult'
+          description: |
+            OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Pro Forma
+      tags:
+      - invoice
+  /invoices/{invoiceId}:
+    get:
+      description: This endpoint will return a single invoice for the customer.
+      operationId: getInvoice
+      parameters:
+      - description: Invoice Id
+        example: "00000001"
+        explode: false
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                credits:
+                - date: 2019-05-06T00:00:00+00:00
+                  id: "00001211"
+                  taxAmount: 1.5
+                  total: 15
+                currency: EUR
+                date: 2019-05-06T00:00:00+00:00
+                dueDate: 2019-05-30T00:00:00+00:00
+                id: "00000001"
+                isPartialPaymentAllowed: true
+                lineItems:
+                - contractId: "12345678"
+                  equipmentId: "1234"
+                  product: Rackspace
+                  quantity: 1
+                  reference: This is a reference
+                  total: 151.5
+                  unitAmount: 151.5
+                  fromDate: 2023-02-01T00:00:00Z
+                  toDate: 2023-02-28T00:00:00Z
+                openAmount: 1756.21
+                status: OPEN
+                taxAmount: 0
+                total: 1756.21
+              schema:
+                $ref: '#/components/schemas/getInvoiceResult'
+          description: |
+            OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Inspect an invoice
+      tags:
+      - invoice
+  /invoices/{invoiceId}/pdf:
+    get:
+      description: This endpoint will return a PDf of a single invoice for the customer.
+      operationId: getInvoicePdf
+      parameters:
+      - description: Invoice Id
+        example: "00000001"
+        explode: false
+        in: path
+        name: invoiceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: |
+            Accepted.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get invoice PDF
+      tags:
+      - invoice
+components:
+  parameters:
+    limit:
+      description: Limit the number of results returned.
+      example: 20
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+      style: form
+    offset:
+      description: Return results starting from the given offset.
+      example: 10
+      explode: true
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+      style: form
+    invoiceId:
+      description: Invoice Id
+      example: "00000001"
+      explode: false
+      in: path
+      name: invoiceId
+      required: true
+      schema:
+        type: string
+      style: simple
+  responses:
+    "401":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "401"
+            errorMessage: You are not authorized to view this resource.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Authorized.
+    "403":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "403"
+            errorMessage: Access to the requested resource is forbidden.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Forbidden.
+    "500":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "500"
+            errorMessage: '''The API could not handle your request at this time.'
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Internal Server Error.
+    "503":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "503"
+            errorMessage: The API is not available at the moment.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Service Unavailable.
+  schemas:
+    _metadata:
+      description: Metadata about the collection
+      example:
+        offset: 0
+        limit: 5
+        totalCount: 2
+      properties:
+        totalCount:
+          description: Total amount of orders in this collection
+          example: 2
+          type: number
+        offset:
+          default: 0
+          description: The offset used to generate this response
+          example: 0
+          type: number
+        limit:
+          default: 5
+          description: The limit used to generate this response
+          example: 5
+          type: number
+      title: metadata
+      type: object
+    getInvoiceListResult:
+      example:
+        invoices:
+        - date: "[\"2019-05-01T00:00:00+00:00\"]"
+          total: 1.4658129
+          dueDate: "[\"2019-05-01T00:00:00+00:00\"]"
+          isPartialPaymentAllowed: false
+          currency: "[\"EUR\"]"
+          id: "[\"00000001\"]"
+          taxAmount: 6.0274563
+          openAmount: 0.8008282
+          status: "[\"OPEN\"]"
+        - date: "[\"2019-05-01T00:00:00+00:00\"]"
+          total: 1.4658129
+          dueDate: "[\"2019-05-01T00:00:00+00:00\"]"
+          isPartialPaymentAllowed: false
+          currency: "[\"EUR\"]"
+          id: "[\"00000001\"]"
+          taxAmount: 6.0274563
+          openAmount: 0.8008282
+          status: "[\"OPEN\"]"
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        invoices:
+          description: An array of invoices.
+          items:
+            $ref: '#/components/schemas/invoice'
+          type: array
+    errorResult:
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails:
+          key:
+          - errorDetails
+          - errorDetails
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+      type: object
+    getProformaResult:
+      example:
+        contractItems:
+        - reference: My reference to my server.
+          product: Backup
+          endDate: 2021-01-01T00:00:00+00:00
+          price: 18.01
+          contractId: "50000480"
+          currency: EUR
+          equipmentId: "10217403"
+          poNumber: "00000001"
+          startDate: 2020-01-01T00:00:00+00:00
+        - reference: My reference to my server.
+          product: Backup
+          endDate: 2021-01-01T00:00:00+00:00
+          price: 18.01
+          contractId: "50000480"
+          currency: EUR
+          equipmentId: "10217403"
+          poNumber: "00000001"
+          startDate: 2020-01-01T00:00:00+00:00
+        proformaDate: 2020-01-01T00:00:00+00:00
+        total: 20.01
+        currency: EUR
+        subTotal: 18.02
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+        vatAmount: 1.99
+      properties:
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+        contractItems:
+          items:
+            $ref: '#/components/schemas/contractItem'
+          type: array
+        currency:
+          description: The currency of the invoice. Based on ISO 4217
+          enum:
+          - EUR
+          - USD
+          - GBP
+          example: EUR
+          type: string
+        proformaDate:
+          description: The date of the next invoice on which this proforma is based
+            on.
+          example: 2020-01-01T00:00:00+00:00
+          type: string
+        subTotal:
+          description: Total amount without vat which will be invoiced the upcoming
+            month.
+          example: 18.02
+          format: float
+          type: number
+        total:
+          description: Total amount which will be invoiced the upcoming month.
+          example: 20.01
+          format: float
+          type: number
+        vatAmount:
+          description: The total amount of vat.
+          example: 1.99
+          format: float
+          type: number
+    getInvoiceResult:
+      example:
+        date: "[\"2019-05-01T00:00:00+00:00\"]"
+        lineItems:
+        - reference: "[\"This is my reference\"]"
+          fromDate: 2000-01-23T04:56:07.000+00:00
+          product: "[\"Rackspace\",\"Switch\"]"
+          total: 5.962134
+          quantity: 1
+          toDate: 2000-01-23T04:56:07.000+00:00
+          contractId: "[\"12346789\"]"
+          unitAmount: 5.637377
+          equipmentId: "[\"12346789\"]"
+        - reference: "[\"This is my reference\"]"
+          fromDate: 2000-01-23T04:56:07.000+00:00
+          product: "[\"Rackspace\",\"Switch\"]"
+          total: 5.962134
+          quantity: 1
+          toDate: 2000-01-23T04:56:07.000+00:00
+          contractId: "[\"12346789\"]"
+          unitAmount: 5.637377
+          equipmentId: "[\"12346789\"]"
+        total: 9.301444
+        credits:
+        - date: "[\"2019-05-1T06:23:40+00:00\"]"
+          total: 6.0274563
+          id: "[\"12346\"]"
+          taxAmount: 0.8008282
+        - date: "[\"2019-05-1T06:23:40+00:00\"]"
+          total: 6.0274563
+          id: "[\"12346\"]"
+          taxAmount: 0.8008282
+        dueDate: "[\"2019-05-01T00:00:00+00:00\"]"
+        isPartialPaymentAllowed: false
+        currency: "[\"EUR\"]"
+        id: "[\"00000001\"]"
+        taxAmount: 7.0614014
+        openAmount: 2.302136
+        status: "[\"OPEN\"]"
+      properties:
+        credits:
+          description: All the credits attached to the invoice
+          items:
+            $ref: '#/components/schemas/credit'
+          type: array
+        currency:
+          description: The currency of the invoice.
+          enum:
+          - EUR
+          - GBP
+          - USD
+          - SGD
+          example: "[\"EUR\"]"
+          type: string
+        date:
+          description: The date the invoice was issued
+          example: "[\"2019-05-01T00:00:00+00:00\"]"
+          type: string
+        dueDate:
+          description: The date the invoice is due for payment
+          example: "[\"2019-05-01T00:00:00+00:00\"]"
+          type: string
+        id:
+          description: The unique id of the invoice
+          example: "[\"00000001\"]"
+          type: string
+        isPartialPaymentAllowed:
+          description: The invoice can be paid partially
+          example: false
+          type: boolean
+        lineItems:
+          description: All the line items attached to the invoice
+          items:
+            $ref: '#/components/schemas/lineItem'
+          type: array
+        openAmount:
+          description: The open amount of the invoice
+          format: float
+          type: number
+        status:
+          description: The status of the invoice.
+          enum:
+          - OPEN
+          - PAID
+          - OVERDUE
+          - CANCELLED
+          example: "[\"OPEN\"]"
+          type: string
+        taxAmount:
+          description: The tax amount of the invoice
+          format: float
+          type: number
+        total:
+          description: The total amount of the invoice
+          format: float
+          type: number
+    invoice:
+      example:
+        date: "[\"2019-05-01T00:00:00+00:00\"]"
+        total: 1.4658129
+        dueDate: "[\"2019-05-01T00:00:00+00:00\"]"
+        isPartialPaymentAllowed: false
+        currency: "[\"EUR\"]"
+        id: "[\"00000001\"]"
+        taxAmount: 6.0274563
+        openAmount: 0.8008282
+        status: "[\"OPEN\"]"
+      properties:
+        currency:
+          description: The currency of the invoice.
+          enum:
+          - EUR
+          - GBP
+          - USD
+          - SGD
+          example: "[\"EUR\"]"
+          type: string
+        date:
+          description: The date the invoice was issued
+          example: "[\"2019-05-01T00:00:00+00:00\"]"
+          type: string
+        dueDate:
+          description: The date the invoice is due for payment
+          example: "[\"2019-05-01T00:00:00+00:00\"]"
+          type: string
+        id:
+          description: The unique id of the invoice
+          example: "[\"00000001\"]"
+          type: string
+        isPartialPaymentAllowed:
+          description: The invoice can be paid partially
+          example: false
+          type: boolean
+        openAmount:
+          description: The open amount of the invoice
+          format: float
+          type: number
+        status:
+          description: The status of the invoice.
+          enum:
+          - OPEN
+          - PAID
+          - OVERDUE
+          - CANCELLED
+          example: "[\"OPEN\"]"
+          type: string
+        taxAmount:
+          description: The tax amount of the invoice
+          format: float
+          type: number
+        total:
+          description: The total amount of the invoice
+          format: float
+          type: number
+      title: invoice
+      type: object
+    contractItem:
+      example:
+        reference: My reference to my server.
+        product: Backup
+        endDate: 2021-01-01T00:00:00+00:00
+        price: 18.01
+        contractId: "50000480"
+        currency: EUR
+        equipmentId: "10217403"
+        poNumber: "00000001"
+        startDate: 2020-01-01T00:00:00+00:00
+      properties:
+        contractId:
+          description: The unique id of the contract
+          example: "50000480"
+          type: string
+        currency:
+          description: The currency of the pro forma contract item
+          enum:
+          - EUR
+          - USD
+          - GBP
+          example: EUR
+          type: string
+        endDate:
+          description: The end date of the contract
+          example: 2021-01-01T00:00:00+00:00
+          type: string
+        equipmentId:
+          description: The unique id of the equipment
+          example: "10217403"
+          type: string
+        poNumber:
+          description: The purchase order number.
+          example: "00000001"
+          type: string
+        price:
+          description: The price of the contract item.
+          example: 18.01
+          format: float
+          type: number
+        product:
+          description: The identifier of a product.
+          enum:
+          - Dedicated server
+          - Virtual server
+          - Switch
+          - Backup
+          example: Backup
+          type: string
+        reference:
+          description: The reference a customer gave to the service
+          example: My reference to my server.
+          type: string
+        startDate:
+          description: The start date of the contract
+          example: 2020-01-01T00:00:00+00:00
+          type: string
+      title: contractItem
+      type: object
+    credit:
+      example:
+        date: "[\"2019-05-1T06:23:40+00:00\"]"
+        total: 6.0274563
+        id: "[\"12346\"]"
+        taxAmount: 0.8008282
+      properties:
+        date:
+          description: The date of the credit connected to the invoice
+          example: "[\"2019-05-1T06:23:40+00:00\"]"
+          type: string
+        id:
+          description: The unique id of the credit
+          example: "[\"12346\"]"
+          type: string
+        taxAmount:
+          description: The total tax amount of the credit connected to the invoice
+          format: float
+          type: number
+        total:
+          description: The total amount of the credit connected to the invoice
+          format: float
+          type: number
+      title: credit
+      type: object
+    lineItem:
+      example:
+        reference: "[\"This is my reference\"]"
+        fromDate: 2000-01-23T04:56:07.000+00:00
+        product: "[\"Rackspace\",\"Switch\"]"
+        total: 5.962134
+        quantity: 1
+        toDate: 2000-01-23T04:56:07.000+00:00
+        contractId: "[\"12346789\"]"
+        unitAmount: 5.637377
+        equipmentId: "[\"12346789\"]"
+      properties:
+        contractId:
+          description: The id of the contract
+          example: "[\"12346789\"]"
+          type: string
+        equipmentId:
+          description: The id of the equipment
+          example: "[\"12346789\"]"
+          type: string
+        product:
+          description: A string to indicate what kind of product this is.
+          example: "[\"Rackspace\",\"Switch\"]"
+          type: string
+        quantity:
+          description: The quantity of a product
+          type: integer
+        reference:
+          description: The reference a customer gave to the service
+          example: "[\"This is my reference\"]"
+          type: string
+        total:
+          description: The total amount of the product
+          format: float
+          type: number
+        unitAmount:
+          description: The amount it cost for a single product unit.
+          format: float
+          type: number
+        fromDate:
+          description: The product start date (UTC)
+          format: date-time
+          nullable: true
+          type: string
+        toDate:
+          description: The product end date (UTC)
+          format: date-time
+          nullable: true
+          type: string
+      title: lineItem
+      type: object
+  securitySchemes:
+    X-LSW-Auth:
+      description: API key authentication by setting `X-LSW-Auth` header.
+      in: header
+      name: X-LSW-Auth
+      type: apiKey
+    BearerAuth:
+      scheme: bearer
+      type: http
