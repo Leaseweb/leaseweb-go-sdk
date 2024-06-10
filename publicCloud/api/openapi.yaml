@@ -739,7 +739,7 @@ paths:
                     value: 100
                     unit: Mbps
                 region: eu-west-3
-                reference: my instance
+                reference: my webserver
                 operatingSystem:
                   id: UBUNTU_22_04_64BIT
                   name: Ubuntu 22.04 LTS (x86_64)
@@ -882,7 +882,7 @@ paths:
               example:
                 customerId: "111111111"
                 salesOrgId: "2000"
-                id: 15ca75e3-5b36-44af-98fe-e96cf402d17e
+                id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                 type: lsw.m3.large
                 resources:
                   cpu:
@@ -898,7 +898,7 @@ paths:
                     value: 100
                     unit: Mbps
                 region: eu-west-3
-                reference: web server
+                reference: my webserver
                 operatingSystem:
                   id: UBUNTU_20_04_64BIT
                   name: Ubuntu 20.04 LTS (x86_64)
