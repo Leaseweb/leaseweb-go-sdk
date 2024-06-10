@@ -8,10 +8,10 @@ info:
   title: Invoices
   version: v1
   x-logo:
-    url: https://developer.leaseweb.com/images/logo.png
     altText: Leaseweb developer documentation
     backgroundColor: '#5484c6'
     href: http://developer.leaseweb.com
+    url: https://developer.leaseweb.com/images/logo.png
 servers:
 - url: https://api.leaseweb.com/invoices/v1
 security:
@@ -918,11 +918,11 @@ components:
       title: lineItem
       type: object
   securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
     X-LSW-Auth:
       description: API key authentication by setting `X-LSW-Auth` header.
       in: header
       name: X-LSW-Auth
       type: apiKey
-    BearerAuth:
-      scheme: bearer
-      type: http

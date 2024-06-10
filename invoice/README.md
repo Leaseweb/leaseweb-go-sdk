@@ -101,6 +101,17 @@ Class | Method | HTTP request | Description
 
 
 Authentication schemes defined for the API:
+### BearerAuth
+
+- **Type**: HTTP Bearer token authentication
+
+Example
+
+```go
+auth := context.WithValue(context.Background(), invoice.ContextAccessToken, "BEARER_TOKEN_STRING")
+r, err := client.Service.Operation(auth, args)
+```
+
 ### X-LSW-Auth
 
 - **Type**: API key
@@ -119,17 +130,6 @@ auth := context.WithValue(
 			"X-LSW-Auth": {Key: "API_KEY_STRING"},
 		},
 	)
-r, err := client.Service.Operation(auth, args)
-```
-
-### BearerAuth
-
-- **Type**: HTTP Bearer token authentication
-
-Example
-
-```go
-auth := context.WithValue(context.Background(), invoice.ContextAccessToken, "BEARER_TOKEN_STRING")
 r, err := client.Service.Operation(auth, args)
 ```
 

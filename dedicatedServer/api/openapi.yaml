@@ -8,10 +8,10 @@ info:
   title: Leaseweb API for dedicated servers
   version: v2
   x-logo:
-    url: https://developer.leaseweb.com/images/logo.png
     altText: Leaseweb developer documentation
     backgroundColor: '#5484c6'
     href: http://developer.leaseweb.com
+    url: https://developer.leaseweb.com/images/logo.png
 servers:
 - url: https://api.leaseweb.com/internal/dedicatedserverapi/v2
 - url: https://api.leaseweb.com/internal/bmpapi/v2
@@ -1472,12 +1472,6 @@ paths:
                     name: WINDOWS_2012_R2_SERVER
                     price: 12.12
                   startsAt: 2014-01-01T01:00:00+0100
-                privateNetworks:
-                - id: "1"
-                  linkSpeed: 1000
-                  status: CONFIGURED
-                  subnet: 127.0.0.80/24
-                  vlanId: "2120"
                 featureAvailability:
                   automation: true
                   ipmiReboot: false
@@ -1513,6 +1507,12 @@ paths:
                 powerPorts:
                 - name: EVO-JV12-APC02
                   port: "10"
+                privateNetworks:
+                - id: "1"
+                  linkSpeed: 1000
+                  status: CONFIGURED
+                  subnet: 127.0.0.80/24
+                  vlanId: "2120"
                 rack:
                   type: PRIVATE
                 serialNumber: JDK18291JK
@@ -3664,34 +3664,8 @@ paths:
           content:
             application/json:
               example:
-                id: CENTOS_7_64BIT
-                name: CentOS 7 (x86_64)
-                family: centos
-                version: "7"
                 architecture: 64bit
                 configurable: true
-                type: linux
-                features:
-                - PARTITIONING
-                - SW_RAID
-                - TIMEZONE
-                - HOSTNAME
-                - SSH_KEYS
-                - POST_INSTALL_SCRIPTS
-                - CONTROL_PANEL
-                - DB_MARIADB
-                - DB_REDIS
-                - DB_MONGODB
-                - DB_POSTGRESQL
-                supportedFileSystems:
-                - ext2
-                - ext3
-                - ext4
-                - xfs
-                - swap
-                supportedBootDevices:
-                - SATA_SAS
-                - NVME
                 defaults:
                   device: SATA_SAS
                   partitions:
@@ -3706,6 +3680,32 @@ paths:
                   - mountpoint: /
                     size: '*'
                     filesystem: ext4
+                family: centos
+                features:
+                - PARTITIONING
+                - SW_RAID
+                - TIMEZONE
+                - HOSTNAME
+                - SSH_KEYS
+                - POST_INSTALL_SCRIPTS
+                - CONTROL_PANEL
+                - DB_MARIADB
+                - DB_REDIS
+                - DB_MONGODB
+                - DB_POSTGRESQL
+                id: CENTOS_7_64BIT
+                name: CentOS 7 (x86_64)
+                supportedBootDevices:
+                - SATA_SAS
+                - NVME
+                supportedFileSystems:
+                - ext2
+                - ext3
+                - ext4
+                - xfs
+                - swap
+                type: linux
+                version: "7"
               schema:
                 $ref: '#/components/schemas/getOperatingSystemResult'
           description: Ok.
@@ -7335,6 +7335,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  limit: 10
+                  offset: 0
+                  totalCount: 2
                 datatrafficNotificationSettings:
                 - id: "64371"
                   frequency: DAILY
@@ -7354,10 +7358,6 @@ paths:
                   actions:
                   - type: EMAIL
                     lastTriggeredAt: null
-                _metadata:
-                  limit: 10
-                  offset: 0
-                  totalCount: 2
               schema:
                 $ref: '#/components/schemas/getServerDataTrafficNotificationSettingListResult'
           description: Ok.
@@ -12956,11 +12956,11 @@ components:
       title: actions
       type: object
   securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
     X-LSW-Auth:
       description: API key authentication by setting `X-LSW-Auth` header.
       in: header
       name: X-LSW-Auth
       type: apiKey
-    BearerAuth:
-      scheme: bearer
-      type: http

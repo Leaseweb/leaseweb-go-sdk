@@ -13,10 +13,10 @@ info:
   title: LeaseWeb API for launching and managing Public Cloud instances
   version: v1
   x-logo:
-    url: https://developer.leaseweb.com/images/logo.png
     altText: Leaseweb developer documentation
     backgroundColor: '#5484c6'
     href: http://developer.leaseweb.com
+    url: https://developer.leaseweb.com/images/logo.png
 servers:
 - url: https://api.leaseweb.com/publicCloud/v1
 security:
@@ -100,6 +100,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 7
+                  limit: 20
+                  offset: 0
                 regions:
                 - name: eu-west-3
                   location: Amsterdam
@@ -115,10 +119,6 @@ paths:
                   location: Washington
                 - name: us-west-1
                   location: San Francisco
-                _metadata:
-                  totalCount: 7
-                  limit: 20
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getRegionListResult'
           description: OK.
@@ -200,6 +200,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 74
+                  limit: 1
+                  offset: 1
                 instanceTypes:
                 - name: lsw.c3.xlarge
                   resources:
@@ -231,10 +235,6 @@ paths:
                   storageTypes:
                   - CENTRAL
                   - LOCAL
-                _metadata:
-                  totalCount: 74
-                  limit: 1
-                  offset: 1
               schema:
                 $ref: '#/components/schemas/getInstanceTypeListResult'
           description: OK.
@@ -393,10 +393,14 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 1
+                  limit: 20
+                  offset: 0
                 instances:
                 - customerId: "11111111"
-                  id: 5fd135a9-3ff6-4794-8b92-8cd8747a3ea3
-                  type: lsw.c3.4xlarge
+                  id: ace712e9-a166-47f1-9065-4af0f7e7fce1
+                  type: lsw.m3.large
                   resources:
                     cpu:
                       value: 16
@@ -411,7 +415,7 @@ paths:
                       value: 100
                       unit: Mbps
                   region: eu-west-3
-                  reference: my-webserver
+                  reference: my webserver
                   operatingSystem:
                     id: UBUNTU_22_04_64BIT
                     name: Ubuntu 22.04 LTS (x86_64)
@@ -422,6 +426,7 @@ paths:
                   state: RUNNING
                   hasPublicIpV4: true
                   hasPrivateNetwork: false
+                  rootDiskStorageType: CENTRAL
                   rootDiskSize: 10
                   ips:
                   - ip: 10.32.60.12
@@ -442,10 +447,6 @@ paths:
                     createdAt: 2024-04-09T15:11:21+00:00
                     state: ACTIVE
                   iso: null
-                _metadata:
-                  totalCount: 1
-                  limit: 20
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getInstanceListResult'
           description: OK.
@@ -502,15 +503,15 @@ paths:
         content:
           application/json:
             example:
-              type: lsw.m3.large
-              region: eu-west-3
+              billingFrequency: 1
+              contractTerm: 0
+              contractType: HOURLY
               operatingSystemId: UBUNTU_20_04_64BIT
               reference: my-webserver
-              contractTerm: 0
-              billingFrequency: 1
-              contractType: HOURLY
+              region: eu-west-3
               rootDiskSize: 50
               rootDiskStorageType: CENTRAL
+              type: lsw.m3.large
             schema:
               $ref: '#/components/schemas/launchInstanceOpts'
         required: true
@@ -519,9 +520,41 @@ paths:
           content:
             application/json:
               example:
+                contract:
+                  billingFrequency: 1
+                  term: 0
+                  type: HOURLY
+                  endsAt: null
+                  renewalsAt: 2024-04-09T15:28:28+00:00
+                  createdAt: 2024-04-09T15:11:21+00:00
+                  state: ACTIVE
                 customerId: "11111111"
-                id: 6762182e-7ae9-4d0b-b3b7-bea5a49b3f94
-                type: lsw.m3.large
+                hasPrivateNetwork: false
+                hasPublicIpV4: true
+                id: ace712e9-a166-47f1-9065-4af0f7e7fce1
+                ips:
+                - ip: 10.32.60.12
+                  prefixLength: "27"
+                  version: 4
+                  nullRouted: false
+                  reverseLookup: null
+                  mainIp: false
+                  networkType: INTERNAL
+                  ddos:
+                    detectionProfile: STANDARD_DEFAULT
+                    protectionType: STANDARD
+                iso: null
+                marketAppId: null
+                operatingSystem:
+                  id: UBUNTU_22_04_64BIT
+                  name: Ubuntu 22.04 LTS (x86_64)
+                  version: "22.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                productType: INSTANCE
+                reference: my webserver
+                region: eu-west-3
                 resources:
                   cpu:
                     value: 2
@@ -535,33 +568,11 @@ paths:
                   privateNetworkSpeed:
                     value: 100
                     unit: Mbps
-                region: eu-west-3
-                reference: my webserver
-                operatingSystem:
-                  id: UBUNTU_22_04_64BIT
-                  name: Ubuntu 22.04 LTS (x86_64)
-                  version: "22.04"
-                  family: linux
-                  flavour: ubuntu
-                  architecture: x86_64
-                marketAppId: null
-                state: CREATING
-                productType: INSTANCE
-                hasPublicIpV4: true
-                hasPrivateNetwork: false
                 rootDiskSize: 5
                 rootDiskStorageType: CENTRAL
-                ips: []
-                contract:
-                  billingFrequency: 1
-                  term: 0
-                  type: HOURLY
-                  endsAt: null
-                  renewalsAt: 2024-04-09T15:28:28+00:00
-                  createdAt: 2024-04-09T15:11:21+00:00
-                  state: ACTIVE
-                startedAt: null
-                iso: null
+                startedAt: 2024-04-11T12:59:34+00:00
+                state: STOPPED
+                type: lsw.m3.large
               schema:
                 $ref: '#/components/schemas/instance'
           description: OK
@@ -722,9 +733,42 @@ paths:
           content:
             application/json:
               example:
+                contract:
+                  billingFrequency: 1
+                  term: 0
+                  type: HOURLY
+                  endsAt: null
+                  renewalsAt: 2024-04-09T15:28:28+00:00
+                  createdAt: 2024-04-09T15:11:21+00:00
+                  state: ACTIVE
                 customerId: "11111111"
+                hasPrivateNetwork: false
+                hasPublicIpV4: true
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
-                type: lsw.m3.large
+                ips:
+                - ip: 10.32.60.12
+                  prefixLength: "27"
+                  version: 4
+                  nullRouted: false
+                  reverseLookup: null
+                  mainIp: false
+                  networkType: INTERNAL
+                  ddos:
+                    detectionProfile: STANDARD_DEFAULT
+                    protectionType: STANDARD
+                iso: null
+                marketAppId: null
+                operatingSystem:
+                  id: UBUNTU_22_04_64BIT
+                  name: Ubuntu 22.04 LTS (x86_64)
+                  version: "22.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                privateNetwork: null
+                productType: INSTANCE
+                reference: my webserver
+                region: eu-west-3
                 resources:
                   cpu:
                     value: 2
@@ -738,44 +782,11 @@ paths:
                   privateNetworkSpeed:
                     value: 100
                     unit: Mbps
-                region: eu-west-3
-                reference: my webserver
-                operatingSystem:
-                  id: UBUNTU_22_04_64BIT
-                  name: Ubuntu 22.04 LTS (x86_64)
-                  version: "22.04"
-                  family: linux
-                  flavour: ubuntu
-                  architecture: x86_64
-                marketAppId: null
-                state: STOPPED
-                productType: INSTANCE
-                hasPublicIpV4: true
-                hasPrivateNetwork: false
                 rootDiskSize: 5
                 rootDiskStorageType: CENTRAL
-                ips:
-                - ip: 10.32.60.12
-                  prefixLength: "27"
-                  version: 4
-                  nullRouted: false
-                  reverseLookup: null
-                  mainIp: false
-                  networkType: INTERNAL
-                  ddos:
-                    detectionProfile: STANDARD_DEFAULT
-                    protectionType: STANDARD
-                contract:
-                  billingFrequency: 1
-                  term: 0
-                  type: HOURLY
-                  endsAt: null
-                  renewalsAt: 2024-04-09T15:28:28+00:00
-                  createdAt: 2024-04-09T15:11:21+00:00
-                  state: ACTIVE
                 startedAt: 2024-04-11T12:59:34+00:00
-                iso: null
-                privateNetwork: null
+                state: STOPPED
+                type: lsw.m3.large
               schema:
                 $ref: '#/components/schemas/instance'
           description: OK.
@@ -880,10 +891,39 @@ paths:
           content:
             application/json:
               example:
+                contract:
+                  billingFrequency: 1
+                  term: 0
+                  type: HOURLY
+                  endsAt: null
+                  renewalsAt: 2024-04-09T15:28:28+00:00
+                  createdAt: 2024-04-09T15:11:21+00:00
+                  state: ACTIVE
                 customerId: "111111111"
-                salesOrgId: "2000"
+                hasPrivateNetwork: false
+                hasPublicIpV4: true
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
-                type: lsw.m3.large
+                ips:
+                - ip: 10.32.60.12
+                  prefixLength: "27"
+                  version: 4
+                  reverseLookup: null
+                  mainIp: false
+                  networkType: INTERNAL
+                  nullRouted: false
+                  ddos:
+                    detectionProfile: STANDARD_DEFAULT
+                    protectionType: STANDARD
+                iso: null
+                operatingSystem:
+                  id: UBUNTU_20_04_64BIT
+                  name: Ubuntu 20.04 LTS (x86_64)
+                  version: "20.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                reference: my webserver
+                region: eu-west-3
                 resources:
                   cpu:
                     value: 1
@@ -897,40 +937,11 @@ paths:
                   privateNetworkSpeed:
                     value: 100
                     unit: Mbps
-                region: eu-west-3
-                reference: my webserver
-                operatingSystem:
-                  id: UBUNTU_20_04_64BIT
-                  name: Ubuntu 20.04 LTS (x86_64)
-                  version: "20.04"
-                  family: linux
-                  flavour: ubuntu
-                  architecture: x86_64
-                state: RUNNING
-                hasPublicIpV4: true
-                hasPrivateNetwork: false
                 rootDiskSize: 5
-                ips:
-                - ip: 10.32.60.12
-                  prefixLength: "27"
-                  version: 4
-                  reverseLookup: null
-                  mainIp: false
-                  networkType: INTERNAL
-                  nullRouted: false
-                  ddos:
-                    detectionProfile: STANDARD_DEFAULT
-                    protectionType: STANDARD
+                salesOrgId: "2000"
                 startedAt: 2024-04-09T15:11:37+00:00
-                contract:
-                  billingFrequency: 1
-                  term: 0
-                  type: HOURLY
-                  endsAt: null
-                  renewalsAt: 2024-04-09T15:28:28+00:00
-                  createdAt: 2024-04-09T15:11:21+00:00
-                  state: ACTIVE
-                iso: null
+                state: RUNNING
+                type: lsw.m3.large
               schema:
                 $ref: '#/components/schemas/instance'
           description: OK.
@@ -1457,6 +1468,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 2
+                  limit: 50
+                  offset: 0
                 instanceTypes:
                 - name: lsw.m3.xlarge
                   resources:
@@ -1672,10 +1687,6 @@ paths:
                           hourlyPrice: "0.00016"
                           monthlyPrice: "0.11680"
                   storageTypes: null
-                _metadata:
-                  totalCount: 2
-                  limit: 50
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getUpdateInstanceTypeListResult'
           description: OK.
@@ -1822,13 +1833,13 @@ paths:
           content:
             application/json:
               example:
-                credentials:
-                - type: OPERATING_SYSTEM
-                  username: root
                 _metadata:
                   totalCount: 1
                   limit: 20
                   offset: 0
+                credentials:
+                - type: OPERATING_SYSTEM
+                  username: root
               schema:
                 $ref: '#/components/schemas/getCredentialListResult'
           description: OK.
@@ -1903,9 +1914,9 @@ paths:
         content:
           application/json:
             example:
+              password: a$Ndes-3fad2-rfas@-
               type: OPERATING_SYSTEM
               username: another-user
-              password: a$Ndes-3fad2-rfas@-
             schema:
               $ref: '#/components/schemas/storeCredentialOpts'
         required: true
@@ -1914,9 +1925,9 @@ paths:
           content:
             application/json:
               example:
+                password: a$Ndes-3fad2-rfas@-
                 type: OPERATING_SYSTEM
                 username: another-user
-                password: a$Ndes-3fad2-rfas@-
               schema:
                 $ref: '#/components/schemas/storeCredentialResult'
           description: OK.
@@ -2012,13 +2023,13 @@ paths:
           content:
             application/json:
               example:
-                credentials:
-                - type: OPERATING_SYSTEM
-                  username: root
                 _metadata:
                   totalCount: 1
                   limit: 20
                   offset: 0
+                credentials:
+                - type: OPERATING_SYSTEM
+                  username: root
               schema:
                 $ref: '#/components/schemas/getCredentialListByTypeResult'
           description: OK.
@@ -2212,9 +2223,9 @@ paths:
           content:
             application/json:
               example:
+                password: "12341234"
                 type: OPERATING_SYSTEM
                 username: root
-                password: "12341234"
               schema:
                 $ref: '#/components/schemas/getCredentialResult'
           description: OK.
@@ -2327,9 +2338,9 @@ paths:
           content:
             application/json:
               example:
+                password: '@-n3w-Pa$$w0rD'
                 type: OPERATING_SYSTEM
                 username: another-user
-                password: '@-n3w-Pa$$w0rD'
               schema:
                 $ref: '#/components/schemas/updateCredentialResult'
           description: OK.
@@ -2648,15 +2659,15 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 2
+                  limit: 20
+                  offset: 0
                 isos:
                 - id: GRML
                   name: GRML 2022.11
                 - id: ACRONIS_BOOT_MEDIA
                   name: Acronis Boot Media
-                _metadata:
-                  totalCount: 2
-                  limit: 20
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getIsoListResult'
           description: OK.
@@ -2730,6 +2741,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 12
+                  limit: 20
+                  offset: 0
                 operatingSystems:
                 - id: UBUNTU_22_04_64BIT
                   name: Ubuntu 22.04 LTS (x86_64)
@@ -2851,10 +2866,6 @@ paths:
                   marketApps: []
                   storageTypes:
                   - CENTRAL
-                _metadata:
-                  totalCount: 12
-                  limit: 20
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getOperatingSystemListResult'
           description: OK.
@@ -2910,6 +2921,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 1
+                  limit: 20
+                  offset: 0
                 marketApps:
                 - id: LOADBALANCER
                   name: Load Balancer
@@ -2923,10 +2938,6 @@ paths:
                     family: linux
                     flavour: ubuntu
                     architecture: x86_64
-                _metadata:
-                  totalCount: 1
-                  limit: 20
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getMarketAppListResult'
           description: OK.
@@ -3561,6 +3572,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 1
+                  limit: 20
+                  offset: 0
                 loadBalancers:
                 - customerId: "11111111"
                   id: 5fd135a9-3ff6-4794-8b92-8cd8747a3ea3
@@ -3613,10 +3628,6 @@ paths:
                     xForwardedFor: false
                     idleTimeOut: 60
                     targetPort: 442
-                _metadata:
-                  totalCount: 1
-                  limit: 20
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getLoadBalancerListResult'
           description: OK.
@@ -3672,13 +3683,13 @@ paths:
         content:
           application/json:
             example:
-              type: lsw.m3.large
-              region: eu-west-3
-              reference: my-loadbalancer-1
               billingFrequency: 1
               contractType: HOURLY
+              reference: my-loadbalancer-1
+              region: eu-west-3
               rootDiskStorageType: CENTRAL
               targetPort: 443
+              type: lsw.m3.large
             schema:
               $ref: '#/components/schemas/launchLoadBalancerOpts'
         required: true
@@ -4011,13 +4022,13 @@ paths:
         content:
           application/json:
             example:
-              type: lsw.m3.xlarge
+              balance: ROUNDROBIN
+              contractType: HOURLY
+              idleTimeOut: 60
               reference: foo
               targetPort: 9000
+              type: lsw.m3.xlarge
               xForwardedFor: false
-              contractType: HOURLY
-              balance: ROUNDROBIN
-              idleTimeOut: 60
             schema:
               $ref: '#/components/schemas/updateLoadBalancerOpts'
         required: true
@@ -4538,6 +4549,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 2
+                  limit: 20
+                  offset: 0
                 targets:
                 - id: 0af98842-38a4-4fe5-8b6d-687730e8d8c1
                   reference: lb instance 1
@@ -4578,10 +4593,6 @@ paths:
                     reverseLookup: null
                     networkType: PUBLIC
                     mainIp: true
-                _metadata:
-                  totalCount: 2
-                  limit: 20
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getLoadBalancerTargetListResult'
           description: OK
@@ -4847,6 +4858,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 1
+                  limit: 20
+                  offset: 0
                 ips:
                 - ip: 10.0.0.1
                   prefixLength: "28"
@@ -4858,10 +4873,6 @@ paths:
                   ddos:
                     detectionProfile: STANDARD_DEFAULT
                     protectionType: STANDARD
-                _metadata:
-                  totalCount: 1
-                  limit: 20
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getIpListResult'
           description: OK.
@@ -5156,8 +5167,8 @@ paths:
         content:
           application/json:
             example:
-              comment: Getting DDoS
               automatedUnnulingAt: 2
+              comment: Getting DDoS
             schema:
               $ref: '#/components/schemas/nullRouteIpOpts'
         required: false
@@ -5408,21 +5419,6 @@ paths:
           content:
             application/json:
               example:
-                metrics:
-                  DOWN_PUBLIC:
-                    values:
-                    - value: 461323
-                      timestamp: 2023-10-27T00:00:00+00:00
-                    - value: 1249243
-                      timestamp: 2023-10-28T00:00:00+00:00
-                    unit: B
-                  UP_PUBLIC:
-                    values:
-                    - value: 437565
-                      timestamp: 2023-10-27T00:00:00+00:00
-                    - value: 6938590
-                      timestamp: 2023-10-28T00:00:00+00:00
-                    unit: B
                 _metadata:
                   from: 2023-10-01T00:00:00+00:00
                   to: 2023-10-31T00:00:00+00:00
@@ -5443,6 +5439,21 @@ paths:
                       peak:
                         value: 6.94 MB
                         timestamp: 2023-10-28T00:00:00+00:00
+                metrics:
+                  DOWN_PUBLIC:
+                    values:
+                    - value: 461323
+                      timestamp: 2023-10-27T00:00:00+00:00
+                    - value: 1249243
+                      timestamp: 2023-10-28T00:00:00+00:00
+                    unit: B
+                  UP_PUBLIC:
+                    values:
+                    - value: 437565
+                      timestamp: 2023-10-27T00:00:00+00:00
+                    - value: 6938590
+                      timestamp: 2023-10-28T00:00:00+00:00
+                    unit: B
               schema:
                 $ref: '#/components/schemas/getDataTrafficMetricsResult'
           description: OK.
@@ -5561,16 +5572,6 @@ paths:
           content:
             application/json:
               example:
-                metrics:
-                  cpuMetrics:
-                    values:
-                    - value: 5.45
-                      timestamp: 2023-10-27T08:00:00+00:00
-                    - value: 8.98
-                      timestamp: 2023-10-27T08:05:32+00:00
-                    - value: 9.98
-                      timestamp: 2023-10-27T08:10:24+00:00
-                    unit: '%'
                 _metadata:
                   from: 2023-10-27T08:00:00+00:00
                   to: 2023-10-28T08:00:00+00:00
@@ -5582,6 +5583,16 @@ paths:
                       peak:
                         value: 9.98 %
                         timestamp: 2023-10-27T08:10:24+00:00
+                metrics:
+                  cpuMetrics:
+                    values:
+                    - value: 5.45
+                      timestamp: 2023-10-27T08:00:00+00:00
+                    - value: 8.98
+                      timestamp: 2023-10-27T08:05:32+00:00
+                    - value: 9.98
+                      timestamp: 2023-10-27T08:10:24+00:00
+                    unit: '%'
               schema:
                 $ref: '#/components/schemas/getCpuMetricsResult'
           description: OK.
@@ -5859,15 +5870,15 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 1
+                  limit: 20
+                  offset: 0
                 snapshots:
                 - id: 624c53c3-48e9-41d1-833f-90a9abf5fd95
                   displayName: snapshot 1
                   state: READY
                   created: 2023-11-02T07:31:28+0000
-                _metadata:
-                  totalCount: 1
-                  limit: 20
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getSnapshotListResult'
           description: OK.
@@ -6127,10 +6138,10 @@ paths:
           content:
             application/json:
               example:
-                id: ef73e9e2-95cd-49ef-940f-a24e6ad6c4a0
-                displayName: snapshot 1
-                state: READY
                 created: 2023-11-02T07:31:28+0000
+                displayName: snapshot 1
+                id: ef73e9e2-95cd-49ef-940f-a24e6ad6c4a0
+                state: READY
               schema:
                 $ref: '#/components/schemas/snapshot'
           description: OK.
@@ -6366,6 +6377,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 3
+                  limit: 10
+                  offset: 0
                 autoScalingGroups:
                 - id: fb769dab-3daa-47e4-89ed-06a4b6499176
                   type: MANUAL
@@ -6505,10 +6520,6 @@ paths:
                     startedAt: 2024-05-28T08:50:51+00:00
                     configuration: null
                     privateNetwork: null
-                _metadata:
-                  totalCount: 3
-                  limit: 10
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getAutoScalingGroupListResult'
           description: OK
@@ -6607,21 +6618,21 @@ paths:
           content:
             application/json:
               example:
-                id: 4c3e9d29-9232-48af-93a7-7ec42b8c0f6d
-                type: MANUAL
-                state: CREATING
-                desiredAmount: 2
-                minimumAmount: null
-                maximumAmount: null
                 cpuThreshold: null
-                warmupTime: null
-                region: eu-west-3
-                reference: Manual Auto Scaling Group
                 createdAt: 2024-05-28T11:03:31+00:00
-                updatedAt: 2024-05-28T11:03:31+00:00
-                startsAt: null
+                desiredAmount: 2
                 endsAt: null
+                id: 4c3e9d29-9232-48af-93a7-7ec42b8c0f6d
                 loadBalancer: null
+                maximumAmount: null
+                minimumAmount: null
+                reference: Manual Auto Scaling Group
+                region: eu-west-3
+                startsAt: null
+                state: CREATING
+                type: MANUAL
+                updatedAt: 2024-05-28T11:03:31+00:00
+                warmupTime: null
               schema:
                 $ref: '#/components/schemas/autoScalingGroup'
           description: OK
@@ -6770,20 +6781,11 @@ paths:
           content:
             application/json:
               example:
-                id: fb769dab-3daa-47e4-89ed-06a4b6499176
-                type: MANUAL
-                state: ACTIVE
-                desiredAmount: 2
-                minimumAmount: null
-                maximumAmount: null
                 cpuThreshold: null
-                warmupTime: null
-                region: eu-west-3
-                reference: Manual Auto Scaling Group
                 createdAt: 2024-04-26T09:22:25+00:00
-                updatedAt: 2024-04-26T09:22:25+00:00
-                startsAt: null
+                desiredAmount: 2
                 endsAt: null
+                id: fb769dab-3daa-47e4-89ed-06a4b6499176
                 loadBalancer:
                   customerId: "12358132"
                   id: 32082a93-d1e2-4bc0-8f5e-8fe4312b0844
@@ -6816,6 +6818,15 @@ paths:
                   startedAt: 2024-05-28T08:50:51+00:00
                   configuration: null
                   privateNetwork: null
+                maximumAmount: null
+                minimumAmount: null
+                reference: Manual Auto Scaling Group
+                region: eu-west-3
+                startsAt: null
+                state: ACTIVE
+                type: MANUAL
+                updatedAt: 2024-04-26T09:22:25+00:00
+                warmupTime: null
               schema:
                 $ref: '#/components/schemas/autoScalingGroup'
           description: OK
@@ -6933,20 +6944,11 @@ paths:
           content:
             application/json:
               example:
-                id: 49e28a6c-3f2a-442e-b3b1-981856d21677
-                type: CPU_BASED
-                state: SCALING
-                desiredAmount: 4
-                minimumAmount: 4
-                maximumAmount: 8
                 cpuThreshold: 60
-                warmupTime: 400
-                region: eu-west-3
-                reference: CPU Based Auto Scaling
                 createdAt: 2024-05-13T15:49:52+00:00
-                updatedAt: 2024-05-13T15:49:52+00:00
-                startsAt: null
+                desiredAmount: 4
                 endsAt: null
+                id: 49e28a6c-3f2a-442e-b3b1-981856d21677
                 loadBalancer:
                   customerId: "12358132"
                   id: 52082a93-d1e2-4bc0-8f5e-8fe4312b0846
@@ -6979,6 +6981,15 @@ paths:
                   startedAt: 2024-05-28T08:50:51+00:00
                   configuration: null
                   privateNetwork: null
+                maximumAmount: 8
+                minimumAmount: 4
+                reference: CPU Based Auto Scaling
+                region: eu-west-3
+                startsAt: null
+                state: SCALING
+                type: CPU_BASED
+                updatedAt: 2024-05-13T15:49:52+00:00
+                warmupTime: 400
               schema:
                 $ref: '#/components/schemas/updateAutoScalingGroupResult'
           description: OK
@@ -7074,6 +7085,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 1
+                  limit: 10
+                  offset: 0
                 instances:
                 - id: 59bc4aa1-7e14-42cd-848f-7de2921ffdc0
                   type: lsw.m3.large
@@ -7104,10 +7119,6 @@ paths:
                     nullRouted: false
                     ddos: null
                   hasPrivateNetwork: false
-                _metadata:
-                  totalCount: 1
-                  limit: 10
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getAutoScalingGroupInstanceListResult'
           description: OK
@@ -11317,11 +11328,11 @@ components:
       title: loadBalancer
       type: object
   securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
     X-LSW-Auth:
       description: API key authentication by setting `X-LSW-Auth` header.
       in: header
       name: X-LSW-Auth
       type: apiKey
-    BearerAuth:
-      scheme: bearer
-      type: http

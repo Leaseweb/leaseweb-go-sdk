@@ -9,10 +9,10 @@ info:
   title: Leaseweb API for Abuse Handling
   version: v1
   x-logo:
-    url: https://developer.leaseweb.com/images/logo.png
     altText: Leaseweb developer documentation
     backgroundColor: '#5484c6'
     href: http://developer.leaseweb.com
+    url: https://developer.leaseweb.com/images/logo.png
 servers:
 - url: https://api.leaseweb.com/abuse/v1
 tags:
@@ -78,6 +78,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 2
+                  limit: 10
+                  offset: 0
                 reports:
                 - id: "000000"
                   subject: Report description
@@ -97,10 +101,6 @@ paths:
                   customerId: "10000001"
                   legalEntityId: "2600"
                   deadline: 2015-01-01T00:00:00+00:00
-                _metadata:
-                  totalCount: 2
-                  limit: 10
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getReportListResult'
           description: |
@@ -169,29 +169,21 @@ paths:
           content:
             application/json:
               example:
-                id: "000005"
-                subject: Report description
-                status: CLOSED
                 abuseType: MALLWARE
-                reopened: false
-                reportedAt: 2015-01-01T00:00:00+0100
-                updatedAt: 2015-01-01T00:00:00+0100
-                notifier: notifier@email.com
-                customerId: "10000001"
-                legalEntityId: "2000"
-                body: string with content
-                deadline: 2015-01-01T00:00:00+0100
-                detectedIpAddresses:
-                - 127.0.0.1
-                detectedDomainNames:
-                - name: example.com
-                  ipAddresses:
-                  - 93.184.216.34
                 attachments:
                 - id: 1abd8e7f-0fdf-453c-b1f5-8fef436acbbe
                   mimeType: part/xml
                   filename: 000001.xml
-                totalMessagesCount: 2
+                body: string with content
+                customerId: "10000001"
+                deadline: 2015-01-01T00:00:00+0100
+                detectedDomainNames:
+                - name: example.com
+                  ipAddresses:
+                  - 93.184.216.34
+                detectedIpAddresses:
+                - 127.0.0.1
+                id: "000005"
                 latestMessages:
                 - postedBy: CUSTOMER
                   postedAt: 2015-09-30T06:23:40+00:00
@@ -203,6 +195,14 @@ paths:
                     id: 436acbbe-0fdf-453c-b1f5-1abd8e7f8fef
                     mimeType: image/png
                     filename: notification.png
+                legalEntityId: "2000"
+                notifier: notifier@email.com
+                reopened: false
+                reportedAt: 2015-01-01T00:00:00+0100
+                status: CLOSED
+                subject: Report description
+                totalMessagesCount: 2
+                updatedAt: 2015-01-01T00:00:00+0100
               schema:
                 $ref: '#/components/schemas/getReportResult'
           description: |
@@ -289,6 +289,10 @@ paths:
           content:
             application/json:
               example:
+                _metadata:
+                  totalCount: 2
+                  limit: 10
+                  offset: 0
                 messages:
                 - postedBy: CUSTOMER
                   postedAt: 2015-09-30T06:23:40+00:00
@@ -300,10 +304,6 @@ paths:
                     id: 436acbbe-0fdf-453c-b1f5-1abd8e7f8fef
                     mimeType: image/png
                     filename: notification.png
-                _metadata:
-                  totalCount: 2
-                  limit: 10
-                  offset: 0
               schema:
                 $ref: '#/components/schemas/getReportMessageListResult'
           description: |
@@ -1349,11 +1349,11 @@ components:
       title: resolutionList
       type: object
   securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
     X-LSW-Auth:
       description: API key authentication by setting `X-LSW-Auth` header.
       in: header
       name: X-LSW-Auth
       type: apiKey
-    BearerAuth:
-      scheme: bearer
-      type: http
