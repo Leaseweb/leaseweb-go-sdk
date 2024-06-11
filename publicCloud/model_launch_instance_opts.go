@@ -24,7 +24,7 @@ type LaunchInstanceOpts struct {
 	// Region to launch the instance into
 	Region string `json:"region"`
 	// Instance type
-	Type *string `json:"type,omitempty"`
+	Type string `json:"type"`
 	// Operating System ID
 	OperatingSystemId string `json:"operatingSystemId"`
 	// Market App ID that must be installed into the instance
@@ -50,9 +50,10 @@ type _LaunchInstanceOpts LaunchInstanceOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchInstanceOpts(region string, operatingSystemId string, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string) *LaunchInstanceOpts {
+func NewLaunchInstanceOpts(region string, type_ string, operatingSystemId string, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string) *LaunchInstanceOpts {
 	this := LaunchInstanceOpts{}
 	this.Region = region
+	this.Type = type_
 	this.OperatingSystemId = operatingSystemId
 	this.ContractType = contractType
 	this.ContractTerm = contractTerm
@@ -93,36 +94,28 @@ func (o *LaunchInstanceOpts) SetRegion(v string) {
 	o.Region = v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
+// GetType returns the Type field value
 func (o *LaunchInstanceOpts) GetType() string {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Type
+
+	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *LaunchInstanceOpts) GetTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Type, true
+	return &o.Type, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *LaunchInstanceOpts) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
+// SetType sets field value
 func (o *LaunchInstanceOpts) SetType(v string) {
-	o.Type = &v
+	o.Type = v
 }
 
 // GetOperatingSystemId returns the OperatingSystemId field value
@@ -394,9 +387,7 @@ func (o LaunchInstanceOpts) MarshalJSON() ([]byte, error) {
 func (o LaunchInstanceOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["region"] = o.Region
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
+	toSerialize["type"] = o.Type
 	toSerialize["operatingSystemId"] = o.OperatingSystemId
 	if o.MarketAppId.IsSet() {
 		toSerialize["marketAppId"] = o.MarketAppId.Get()
@@ -423,6 +414,7 @@ func (o *LaunchInstanceOpts) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"region",
+		"type",
 		"operatingSystemId",
 		"contractType",
 		"contractTerm",

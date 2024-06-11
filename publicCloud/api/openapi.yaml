@@ -8140,6 +8140,7 @@ components:
       - operatingSystemId
       - region
       - rootDiskStorageType
+      - type
       type: object
     updateInstanceOpts:
       properties:

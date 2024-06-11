@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Region** | **string** | Region to launch the instance into | 
-**Type** | Pointer to **string** | Instance type | [optional] 
+**Type** | **string** | Instance type | 
 **OperatingSystemId** | **string** | Operating System ID | 
 **MarketAppId** | Pointer to **NullableString** | Market App ID that must be installed into the instance | [optional] 
 **Reference** | Pointer to **string** | An identifying name you can refer to the instance | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewLaunchInstanceOpts
 
-`func NewLaunchInstanceOpts(region string, operatingSystemId string, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string, ) *LaunchInstanceOpts`
+`func NewLaunchInstanceOpts(region string, type_ string, operatingSystemId string, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string, ) *LaunchInstanceOpts`
 
 NewLaunchInstanceOpts instantiates a new LaunchInstanceOpts object
 This constructor will assign default values to properties that have it defined,
@@ -74,11 +74,6 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
-### HasType
-
-`func (o *LaunchInstanceOpts) HasType() bool`
-
-HasType returns a boolean if a field has been set.
 
 ### GetOperatingSystemId
 

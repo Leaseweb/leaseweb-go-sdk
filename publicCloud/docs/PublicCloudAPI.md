@@ -2947,7 +2947,7 @@ import (
 )
 
 func main() {
-	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("Region_example", "UBUNTU_22_04_64BIT", "ContractType_example", int32(123), int32(123), "RootDiskStorageType_example") // LaunchInstanceOpts | 
+	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("Region_example", "lsw.m3.large", "UBUNTU_22_04_64BIT", "ContractType_example", int32(123), int32(123), "RootDiskStorageType_example") // LaunchInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
