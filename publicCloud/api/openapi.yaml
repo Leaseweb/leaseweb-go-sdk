@@ -7572,6 +7572,28 @@ components:
       - ACTIVE
       - DELETE_SCHEDULED
       type: string
+    operatingSystemId:
+      description: Operating System ID
+      enum:
+      - ALMALINUX_8_64BIT
+      - ALMALINUX_9_64BIT
+      - ARCH_LINUX_64BIT
+      - CENTOS_7_64BIT
+      - DEBIAN_10_64BIT
+      - DEBIAN_11_64BIT
+      - DEBIAN_12_64BIT
+      - FREEBSD_13_64BIT
+      - FREEBSD_14_64BIT
+      - ROCKY_LINUX_8_64BIT
+      - ROCKY_LINUX_9_64BIT
+      - UBUNTU_20_04_64BIT
+      - UBUNTU_22_04_64BIT
+      - UBUNTU_24_04_64BIT
+      - WINDOWS_SERVER_2016_STANDARD_64BIT
+      - WINDOWS_SERVER_2019_STANDARD_64BIT
+      - WINDOWS_SERVER_2022_STANDARD_64BIT
+      example: UBUNTU_24_04_64BIT
+      type: string
     operatingSystem:
       example:
         marketApps:
@@ -7579,7 +7601,7 @@ components:
         - LOADBALANCER
         flavour: ubuntu
         name: Ubuntu 20.04 LTS (x86_64)
-        id: UBUNTU_20_04_64BIT
+        id: UBUNTU_24_04_64BIT
         storageTypes:
         - CENTRAL
         - LOCAL
@@ -7588,8 +7610,7 @@ components:
         architecture: x86_64
       properties:
         id:
-          example: UBUNTU_20_04_64BIT
-          type: string
+          $ref: '#/components/schemas/operatingSystemId'
         name:
           example: Ubuntu 20.04 LTS (x86_64)
           type: string
@@ -7793,7 +7814,7 @@ components:
           - LOADBALANCER
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_20_04_64BIT
+          id: UBUNTU_24_04_64BIT
           storageTypes:
           - CENTRAL
           - LOCAL
@@ -7945,7 +7966,7 @@ components:
             - LOADBALANCER
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_20_04_64BIT
+            id: UBUNTU_24_04_64BIT
             storageTypes:
             - CENTRAL
             - LOCAL
@@ -8022,7 +8043,7 @@ components:
             - LOADBALANCER
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_20_04_64BIT
+            id: UBUNTU_24_04_64BIT
             storageTypes:
             - CENTRAL
             - LOCAL
@@ -8082,9 +8103,7 @@ components:
           title: instanceType
           type: string
         operatingSystemId:
-          description: Operating System ID
-          example: UBUNTU_22_04_64BIT
-          type: string
+          $ref: '#/components/schemas/operatingSystemId'
         marketAppId:
           description: Market App ID that must be installed into the instance
           example: CPANEL
@@ -8571,7 +8590,7 @@ components:
             - LOADBALANCER
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_20_04_64BIT
+            id: UBUNTU_24_04_64BIT
             storageTypes:
             - CENTRAL
             - LOCAL
@@ -8589,7 +8608,7 @@ components:
             - LOADBALANCER
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_20_04_64BIT
+            id: UBUNTU_24_04_64BIT
             storageTypes:
             - CENTRAL
             - LOCAL
@@ -9061,7 +9080,7 @@ components:
             - LOADBALANCER
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_20_04_64BIT
+            id: UBUNTU_24_04_64BIT
             storageTypes:
             - CENTRAL
             - LOCAL
@@ -9101,7 +9120,7 @@ components:
             - LOADBALANCER
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_20_04_64BIT
+            id: UBUNTU_24_04_64BIT
             storageTypes:
             - CENTRAL
             - LOCAL
@@ -10677,7 +10696,7 @@ components:
           - LOADBALANCER
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_20_04_64BIT
+          id: UBUNTU_24_04_64BIT
           storageTypes:
           - CENTRAL
           - LOCAL
@@ -10778,7 +10797,7 @@ components:
           - LOADBALANCER
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_20_04_64BIT
+          id: UBUNTU_24_04_64BIT
           storageTypes:
           - CENTRAL
           - LOCAL

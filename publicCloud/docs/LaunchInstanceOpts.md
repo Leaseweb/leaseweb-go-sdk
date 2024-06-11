@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Region** | **string** | Region to launch the instance into | 
 **Type** | **string** | Instance type | 
-**OperatingSystemId** | **string** | Operating System ID | 
+**OperatingSystemId** | [**OperatingSystemId**](OperatingSystemId.md) |  | 
 **MarketAppId** | Pointer to **NullableString** | Market App ID that must be installed into the instance | [optional] 
 **Reference** | Pointer to **string** | An identifying name you can refer to the instance | [optional] 
 **ContractType** | **string** |  | 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewLaunchInstanceOpts
 
-`func NewLaunchInstanceOpts(region string, type_ string, operatingSystemId string, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string, ) *LaunchInstanceOpts`
+`func NewLaunchInstanceOpts(region string, type_ string, operatingSystemId OperatingSystemId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string, ) *LaunchInstanceOpts`
 
 NewLaunchInstanceOpts instantiates a new LaunchInstanceOpts object
 This constructor will assign default values to properties that have it defined,
@@ -77,20 +77,20 @@ SetType sets Type field to given value.
 
 ### GetOperatingSystemId
 
-`func (o *LaunchInstanceOpts) GetOperatingSystemId() string`
+`func (o *LaunchInstanceOpts) GetOperatingSystemId() OperatingSystemId`
 
 GetOperatingSystemId returns the OperatingSystemId field if non-nil, zero value otherwise.
 
 ### GetOperatingSystemIdOk
 
-`func (o *LaunchInstanceOpts) GetOperatingSystemIdOk() (*string, bool)`
+`func (o *LaunchInstanceOpts) GetOperatingSystemIdOk() (*OperatingSystemId, bool)`
 
 GetOperatingSystemIdOk returns a tuple with the OperatingSystemId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperatingSystemId
 
-`func (o *LaunchInstanceOpts) SetOperatingSystemId(v string)`
+`func (o *LaunchInstanceOpts) SetOperatingSystemId(v OperatingSystemId)`
 
 SetOperatingSystemId sets OperatingSystemId field to given value.
 

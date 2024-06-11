@@ -25,8 +25,7 @@ type LaunchInstanceOpts struct {
 	Region string `json:"region"`
 	// Instance type
 	Type string `json:"type"`
-	// Operating System ID
-	OperatingSystemId string `json:"operatingSystemId"`
+	OperatingSystemId OperatingSystemId `json:"operatingSystemId"`
 	// Market App ID that must be installed into the instance
 	MarketAppId NullableString `json:"marketAppId,omitempty"`
 	// An identifying name you can refer to the instance
@@ -50,7 +49,7 @@ type _LaunchInstanceOpts LaunchInstanceOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchInstanceOpts(region string, type_ string, operatingSystemId string, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string) *LaunchInstanceOpts {
+func NewLaunchInstanceOpts(region string, type_ string, operatingSystemId OperatingSystemId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string) *LaunchInstanceOpts {
 	this := LaunchInstanceOpts{}
 	this.Region = region
 	this.Type = type_
@@ -119,9 +118,9 @@ func (o *LaunchInstanceOpts) SetType(v string) {
 }
 
 // GetOperatingSystemId returns the OperatingSystemId field value
-func (o *LaunchInstanceOpts) GetOperatingSystemId() string {
+func (o *LaunchInstanceOpts) GetOperatingSystemId() OperatingSystemId {
 	if o == nil {
-		var ret string
+		var ret OperatingSystemId
 		return ret
 	}
 
@@ -130,7 +129,7 @@ func (o *LaunchInstanceOpts) GetOperatingSystemId() string {
 
 // GetOperatingSystemIdOk returns a tuple with the OperatingSystemId field value
 // and a boolean to check if the value has been set.
-func (o *LaunchInstanceOpts) GetOperatingSystemIdOk() (*string, bool) {
+func (o *LaunchInstanceOpts) GetOperatingSystemIdOk() (*OperatingSystemId, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -138,7 +137,7 @@ func (o *LaunchInstanceOpts) GetOperatingSystemIdOk() (*string, bool) {
 }
 
 // SetOperatingSystemId sets field value
-func (o *LaunchInstanceOpts) SetOperatingSystemId(v string) {
+func (o *LaunchInstanceOpts) SetOperatingSystemId(v OperatingSystemId) {
 	o.OperatingSystemId = v
 }
 

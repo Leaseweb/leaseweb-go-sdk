@@ -19,7 +19,7 @@ var _ MappedNullable = &OperatingSystem{}
 
 // OperatingSystem struct for OperatingSystem
 type OperatingSystem struct {
-	Id *string `json:"id,omitempty"`
+	Id *OperatingSystemId `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Version *string `json:"version,omitempty"`
 	Family *string `json:"family,omitempty"`
@@ -48,9 +48,9 @@ func NewOperatingSystemWithDefaults() *OperatingSystem {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *OperatingSystem) GetId() string {
+func (o *OperatingSystem) GetId() OperatingSystemId {
 	if o == nil || IsNil(o.Id) {
-		var ret string
+		var ret OperatingSystemId
 		return ret
 	}
 	return *o.Id
@@ -58,7 +58,7 @@ func (o *OperatingSystem) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OperatingSystem) GetIdOk() (*string, bool) {
+func (o *OperatingSystem) GetIdOk() (*OperatingSystemId, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -74,8 +74,8 @@ func (o *OperatingSystem) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *OperatingSystem) SetId(v string) {
+// SetId gets a reference to the given OperatingSystemId and assigns it to the Id field.
+func (o *OperatingSystem) SetId(v OperatingSystemId) {
 	o.Id = &v
 }
 

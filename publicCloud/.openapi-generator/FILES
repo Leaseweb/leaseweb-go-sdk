@@ -78,6 +78,7 @@ docs/NetworkType.md
 docs/NullRouteIpOpts.md
 docs/OperatingSystem.md
 docs/OperatingSystemDetail.md
+docs/OperatingSystemId.md
 docs/Peak.md
 docs/Price.md
 docs/PrivateNetwork.md
@@ -183,6 +184,7 @@ model_network_type.go
 model_null_route_ip_opts.go
 model_operating_system.go
 model_operating_system_detail.go
+model_operating_system_id.go
 model_peak.go
 model_price.go
 model_private_network.go

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to [**OperatingSystemId**](OperatingSystemId.md) |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **Version** | Pointer to **string** |  | [optional] 
 **Family** | Pointer to **string** |  | [optional] 
@@ -34,20 +34,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *OperatingSystem) GetId() string`
+`func (o *OperatingSystem) GetId() OperatingSystemId`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *OperatingSystem) GetIdOk() (*string, bool)`
+`func (o *OperatingSystem) GetIdOk() (*OperatingSystemId, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *OperatingSystem) SetId(v string)`
+`func (o *OperatingSystem) SetId(v OperatingSystemId)`
 
 SetId sets Id field to given value.
 
