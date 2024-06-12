@@ -55,6 +55,7 @@ docs/HealthCheckStatus.md
 docs/Instance.md
 docs/InstanceResources.md
 docs/InstanceState.md
+docs/InstanceType.md
 docs/InstanceTypeDetails.md
 docs/Ip.md
 docs/Iso.md
@@ -162,6 +163,7 @@ model_health_check_status.go
 model_instance.go
 model_instance_resources.go
 model_instance_state.go
+model_instance_type.go
 model_instance_type_details.go
 model_ip.go
 model_iso.go

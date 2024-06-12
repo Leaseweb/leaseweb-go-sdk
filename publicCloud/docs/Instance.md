@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **ProductType** | Pointer to **string** | The product type | [optional] 
 **HasPublicIpV4** | Pointer to **bool** |  | [optional] 
 **includesPrivateNetwork** | Pointer to **bool** |  | [optional] 
-**Type** | Pointer to **string** | Instance type | [optional] 
+**Type** | Pointer to [**InstanceType**](InstanceType.md) |  | [optional] 
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
 **RootDiskStorageType** | Pointer to **string** | The root disk&#39;s storage type | [optional] 
 **Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
@@ -347,20 +347,20 @@ HasincludesPrivateNetwork returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *Instance) GetType() string`
+`func (o *Instance) GetType() InstanceType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *Instance) GetTypeOk() (*string, bool)`
+`func (o *Instance) GetTypeOk() (*InstanceType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *Instance) SetType(v string)`
+`func (o *Instance) SetType(v InstanceType)`
 
 SetType sets Type field to given value.
 

@@ -38,8 +38,7 @@ type Instance struct {
 	ProductType *string `json:"productType,omitempty"`
 	HasPublicIpV4 *bool `json:"hasPublicIpV4,omitempty"`
 	includesPrivateNetwork *bool `json:"hasPrivateNetwork,omitempty"`
-	// Instance type
-	Type *string `json:"type,omitempty"`
+	Type *InstanceType `json:"type,omitempty"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize *int32 `json:"rootDiskSize,omitempty"`
 	// The root disk's storage type
@@ -456,9 +455,9 @@ func (o *Instance) SetincludesPrivateNetwork(v bool) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *Instance) GetType() string {
+func (o *Instance) GetType() InstanceType {
 	if o == nil || IsNil(o.Type) {
-		var ret string
+		var ret InstanceType
 		return ret
 	}
 	return *o.Type
@@ -466,7 +465,7 @@ func (o *Instance) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Instance) GetTypeOk() (*string, bool) {
+func (o *Instance) GetTypeOk() (*InstanceType, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -482,8 +481,8 @@ func (o *Instance) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *Instance) SetType(v string) {
+// SetType gets a reference to the given InstanceType and assigns it to the Type field.
+func (o *Instance) SetType(v InstanceType) {
 	o.Type = &v
 }
 

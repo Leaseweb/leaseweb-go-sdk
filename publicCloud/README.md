@@ -196,6 +196,7 @@ Class | Method | HTTP request | Description
  - [Instance](docs/Instance.md)
  - [InstanceResources](docs/InstanceResources.md)
  - [InstanceState](docs/InstanceState.md)
+ - [InstanceType](docs/InstanceType.md)
  - [InstanceTypeDetails](docs/InstanceTypeDetails.md)
  - [Ip](docs/Ip.md)
  - [Iso](docs/Iso.md)

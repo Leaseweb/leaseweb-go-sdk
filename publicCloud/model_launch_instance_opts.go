@@ -23,8 +23,7 @@ var _ MappedNullable = &LaunchInstanceOpts{}
 type LaunchInstanceOpts struct {
 	// Region to launch the instance into
 	Region string `json:"region"`
-	// Instance type
-	Type string `json:"type"`
+	Type InstanceType `json:"type"`
 	OperatingSystemId OperatingSystemId `json:"operatingSystemId"`
 	// Market App ID that must be installed into the instance
 	MarketAppId NullableString `json:"marketAppId,omitempty"`
@@ -49,7 +48,7 @@ type _LaunchInstanceOpts LaunchInstanceOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchInstanceOpts(region string, type_ string, operatingSystemId OperatingSystemId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string) *LaunchInstanceOpts {
+func NewLaunchInstanceOpts(region string, type_ InstanceType, operatingSystemId OperatingSystemId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string) *LaunchInstanceOpts {
 	this := LaunchInstanceOpts{}
 	this.Region = region
 	this.Type = type_
@@ -94,9 +93,9 @@ func (o *LaunchInstanceOpts) SetRegion(v string) {
 }
 
 // GetType returns the Type field value
-func (o *LaunchInstanceOpts) GetType() string {
+func (o *LaunchInstanceOpts) GetType() InstanceType {
 	if o == nil {
-		var ret string
+		var ret InstanceType
 		return ret
 	}
 
@@ -105,7 +104,7 @@ func (o *LaunchInstanceOpts) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *LaunchInstanceOpts) GetTypeOk() (*string, bool) {
+func (o *LaunchInstanceOpts) GetTypeOk() (*InstanceType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -113,7 +112,7 @@ func (o *LaunchInstanceOpts) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *LaunchInstanceOpts) SetType(v string) {
+func (o *LaunchInstanceOpts) SetType(v InstanceType) {
 	o.Type = v
 }
 
