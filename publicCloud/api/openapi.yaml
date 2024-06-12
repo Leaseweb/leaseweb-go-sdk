@@ -7644,11 +7644,15 @@ components:
     instanceState:
       description: The instance's current state
       enum:
-      - RUNNING
-      - STOPPED
       - CREATING
-      - DESTROYING
       - DESTROYED
+      - DESTROYING
+      - FAILED
+      - RUNNING
+      - STARTING
+      - STOPPED
+      - STOPPING
+      - UNKNOWN
       type: string
     productType:
       description: The product type
@@ -8096,6 +8100,7 @@ components:
       properties:
         region:
           description: Region to launch the instance into
+          example: eu-west-3
           type: string
         type:
           description: Instance type
@@ -8151,6 +8156,7 @@ components:
         sshKey:
           description: Public SSH key to be installed into the instance. Must be used
             only on Linux/FreeBSD instances
+          example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCyXsJHPbU4eQaXJMwxkZrk51w/3km1xJYLGjza45Nf1whpyg4j15kjOk3UVTNi/OatPgx/Re16XPxwA1d0RS2uwtmehYjN3lvmNfJJcvvz+CGZe8HQG1FzE1nNy3arSGdHhjvJlXg1ooS7TNBgo8FO37Awv6YDd2JO1TinAS/wkw==
           type: string
       required:
       - billingFrequency

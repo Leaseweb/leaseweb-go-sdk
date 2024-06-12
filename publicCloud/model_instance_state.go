@@ -20,20 +20,28 @@ type InstanceState string
 
 // List of instanceState
 const (
-	RUNNING InstanceState = "RUNNING"
-	STOPPED InstanceState = "STOPPED"
 	CREATING InstanceState = "CREATING"
-	DESTROYING InstanceState = "DESTROYING"
 	DESTROYED InstanceState = "DESTROYED"
+	DESTROYING InstanceState = "DESTROYING"
+	FAILED InstanceState = "FAILED"
+	RUNNING InstanceState = "RUNNING"
+	STARTING InstanceState = "STARTING"
+	STOPPED InstanceState = "STOPPED"
+	STOPPING InstanceState = "STOPPING"
+	UNKNOWN InstanceState = "UNKNOWN"
 )
 
 // All allowed values of InstanceState enum
 var AllowedInstanceStateEnumValues = []InstanceState{
-	"RUNNING",
-	"STOPPED",
 	"CREATING",
-	"DESTROYING",
 	"DESTROYED",
+	"DESTROYING",
+	"FAILED",
+	"RUNNING",
+	"STARTING",
+	"STOPPED",
+	"STOPPING",
+	"UNKNOWN",
 }
 
 func (v *InstanceState) UnmarshalJSON(src []byte) error {
