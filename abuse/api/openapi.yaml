@@ -11,7 +11,7 @@ info:
   x-logo:
     altText: Leaseweb developer documentation
     backgroundColor: '#5484c6'
-    href: http://developer.leaseweb.com
+    href: https://developer.leaseweb.com
     url: https://developer.leaseweb.com/images/logo.png
 servers:
 - url: https://api.leaseweb.com/abuse/v1
@@ -25,7 +25,7 @@ tags:
         "errorMessage": "The connection with the DB cannot be established.",
         "correlationId": "550e8400-e29b-41d4-a716-446655440000",
         "userMessage": "Cannot handle your request at the moment. Please try again later.",
-        "reference": "http://developer.leaseweb.com/errors/APP00800"
+        "reference": "https://developer.leaseweb.com/errors/APP00800"
     }
     ```
   name: Errors

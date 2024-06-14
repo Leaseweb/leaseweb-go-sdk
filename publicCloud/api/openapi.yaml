@@ -15,7 +15,7 @@ info:
   x-logo:
     altText: Leaseweb developer documentation
     backgroundColor: '#5484c6'
-    href: http://developer.leaseweb.com
+    href: https://developer.leaseweb.com
     url: https://developer.leaseweb.com/images/logo.png
 servers:
 - url: https://api.leaseweb.com/publicCloud/v1
@@ -31,7 +31,7 @@ tags:
         "errorMessage": "The connection with the DB cannot be established.",
         "correlationId": "550e8400-e29b-41d4-a716-446655440000",
         "userMessage": "Cannot handle your request at the moment. Please try again later.",
-        "reference": "http://developer.leaseweb.com/errors/APP00800"
+        "reference": "https://developer.leaseweb.com/errors/APP00800"
     }
     ```
   name: Errors
@@ -170,7 +170,8 @@ paths:
       description: Get instance types
       operationId: getInstanceTypeList
       parameters:
-      - explode: true
+      - example: eu-west-3
+        explode: true
         in: query
         name: region
         required: true
@@ -1362,7 +1363,7 @@ paths:
           content:
             application/json:
               example:
-                url: http://public-cloud.leaseweb.com/resource/noVNC/vnc.html?autoconnect=true&port=8080&token=dvoPyDxbBl8LC9OsXI55CmAUmUA50lY19b0/v/7jrA6VkrdflVWw8S2XuxDZrBaaSo4XdBAYmpfqC0kUr2aOVHjMlGFb6movdnKNxvMOEmC0spwU9XbdZJrWXzGicCLT4X4GMxgN13nn1oDQb8k9ag2rMMxENyiPZ3bbV1iGuL4cWLEMad8hHFXjJ7P2MvbnpiasXK5wKuHadrR76778ZM22xxzvjarg9S6bAWziH1u3VdKIQyJMIrDmAdjYRqL1IHqrN+uLrY6WPzv+s51lnNYd0zeQtB7YWBZup8VDcZSt5C0GrYnZx3Vh4fXWOOsFlWZgdEGKf9oM9y9RX2G/jLlVeVv4LmVCN02GRr7SAfyx8WcuWGXS7WsxpXTzdxWEm9EMZDrPQhFiZKo20PXRdgT6KbdnqCI/j8z5iPAKGO3YI5BcK5sUdhHgFUMNgJUw/qhz71/xivIP8UKrWVgZMRWXmt6hNWIeHLqrdZ0n5m9It4Os8UaKgeBvwlFTpzNTUWxvoI0+2sa8GAmW3RCe9mfK3xvW/iy1MZ651cALLVmoj6imZl7K7P33iQ==
+                url: https://public-cloud.leaseweb.com/resource/noVNC/vnc.html?autoconnect=true&port=8080&token=dvoPyDxbBl8LC9OsXI55CmAUmUA50lY19b0/v/7jrA6VkrdflVWw8S2XuxDZrBaaSo4XdBAYmpfqC0kUr2aOVHjMlGFb6movdnKNxvMOEmC0spwU9XbdZJrWXzGicCLT4X4GMxgN13nn1oDQb8k9ag2rMMxENyiPZ3bbV1iGuL4cWLEMad8hHFXjJ7P2MvbnpiasXK5wKuHadrR76778ZM22xxzvjarg9S6bAWziH1u3VdKIQyJMIrDmAdjYRqL1IHqrN+uLrY6WPzv+s51lnNYd0zeQtB7YWBZup8VDcZSt5C0GrYnZx3Vh4fXWOOsFlWZgdEGKf9oM9y9RX2G/jLlVeVv4LmVCN02GRr7SAfyx8WcuWGXS7WsxpXTzdxWEm9EMZDrPQhFiZKo20PXRdgT6KbdnqCI/j8z5iPAKGO3YI5BcK5sUdhHgFUMNgJUw/qhz71/xivIP8UKrWVgZMRWXmt6hNWIeHLqrdZ0n5m9It4Os8UaKgeBvwlFTpzNTUWxvoI0+2sa8GAmW3RCe9mfK3xvW/iy1MZ651cALLVmoj6imZl7K7P33iQ==
               schema:
                 $ref: '#/components/schemas/getConsoleAccessToInstanceResult'
           description: OK.
@@ -6341,6 +6342,7 @@ paths:
           type: string
         style: form
       - description: The region in which the Auto Scaling Group was created
+        example: eu-west-3
         explode: true
         in: query
         name: region
@@ -7925,7 +7927,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         marketAppId: CPANEL
-        region: region
+        region: eu-west-3
         productType: productType
         salesOrgId: salesOrgId
         hasPublicIpV4: true
@@ -7946,6 +7948,7 @@ components:
           $ref: '#/components/schemas/instanceResources'
         region:
           description: The region in which the instance was launched
+          example: eu-west-3
           type: string
         reference:
           description: The identifying name set to the instance
@@ -8074,7 +8077,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           marketAppId: CPANEL
-          region: region
+          region: eu-west-3
           productType: productType
           salesOrgId: salesOrgId
           hasPublicIpV4: true
@@ -8151,7 +8154,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           marketAppId: CPANEL
-          region: region
+          region: eu-west-3
           productType: productType
           salesOrgId: salesOrgId
           hasPublicIpV4: true
@@ -8812,7 +8815,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         type: lsw.m3.large
-        region: region
+        region: eu-west-3
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -8850,6 +8853,7 @@ components:
           $ref: '#/components/schemas/instanceResources'
         region:
           description: The region where the load balancer was launched into
+          example: eu-west-3
           type: string
         reference:
           description: The identifying name set to the load balancer
@@ -8921,7 +8925,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: lsw.m3.large
-          region: region
+          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -8984,7 +8988,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: lsw.m3.large
-          region: region
+          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -9022,6 +9026,7 @@ components:
       properties:
         region:
           description: Region to launch the load balancer into
+          example: eu-west-3
           type: string
         type:
           description: Load balancer type
@@ -9505,7 +9510,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: lsw.m3.large
-          region: region
+          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -9532,7 +9537,7 @@ components:
         warmupTime: 5
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: ACTIVE
-        region: region
+        region: eu-west-3
         endsAt: 2000-01-23T04:56:07.000+00:00
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -9579,6 +9584,7 @@ components:
           type: integer
         region:
           description: The region in which the Auto Scaling Group was launched
+          example: eu-west-3
           type: string
         reference:
           description: The identifying name set to the auto scaling group
@@ -9661,7 +9667,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: null
             type: lsw.m3.large
-            region: region
+            region: eu-west-3
             ips:
             - prefixLength: "28"
               reverseLookup: reverseLookup
@@ -9688,7 +9694,7 @@ components:
           warmupTime: 5
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: ACTIVE
-          region: region
+          region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - cpuThreshold: 5
@@ -9742,7 +9748,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: null
             type: lsw.m3.large
-            region: region
+            region: eu-west-3
             ips:
             - prefixLength: "28"
               reverseLookup: reverseLookup
@@ -9769,7 +9775,7 @@ components:
           warmupTime: 5
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: ACTIVE
-          region: region
+          region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
         _metadata:
@@ -9941,7 +9947,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: lsw.m3.large
-          region: region
+          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -9968,7 +9974,7 @@ components:
         warmupTime: 5
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: ACTIVE
-        region: region
+        region: eu-west-3
         endsAt: 2000-01-23T04:56:07.000+00:00
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -10015,6 +10021,7 @@ components:
           type: integer
         region:
           description: The region in which the Auto Scaling Group was launched
+          example: eu-west-3
           type: string
         reference:
           description: The identifying name set to the auto scaling group
@@ -10063,7 +10070,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         type: type
-        region: region
+        region: eu-west-3
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -10098,6 +10105,7 @@ components:
           $ref: '#/components/schemas/instanceResources'
         region:
           description: The region in which the instance was launched
+          example: eu-west-3
           type: string
         reference:
           description: The identifying name set to the instance
@@ -10137,7 +10145,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: type
-          region: region
+          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -10178,7 +10186,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: type
-          region: region
+          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -11248,7 +11256,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         type: lsw.m3.large
-        region: region
+        region: eu-west-3
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -11287,6 +11295,7 @@ components:
           $ref: '#/components/schemas/instanceResources'
         region:
           description: The region where the load balancer was launched into
+          example: eu-west-3
           type: string
         reference:
           description: The identifying name set to the load balancer
@@ -11356,7 +11365,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         type: lsw.m3.large
-        region: region
+        region: eu-west-3
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -11395,6 +11404,7 @@ components:
           $ref: '#/components/schemas/instanceResources'
         region:
           description: The region where the load balancer was launched into
+          example: eu-west-3
           type: string
         reference:
           description: The identifying name set to the load balancer

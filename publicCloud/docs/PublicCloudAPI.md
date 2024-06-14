@@ -1138,7 +1138,7 @@ func main() {
 	id := "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" // string |  (optional)
 	instanceId := "6762182e-7ae9-4d0b-b3b7-bea5a49b3f94" // string |  (optional)
 	type_ := "type__example" // string | The Auto Scaling Group's type (optional)
-	region := "region_example" // string | The region in which the Auto Scaling Group was created (optional)
+	region := "eu-west-3" // string | The region in which the Auto Scaling Group was created (optional)
 	reference := "reference_example" // string | The reference used to identify identifies the Auto Scaling Group (optional)
 	state := "state_example" // string | The Auto Scaling Group's current state (optional)
 
@@ -1883,7 +1883,7 @@ import (
 )
 
 func main() {
-	region := "region_example" // string | 
+	region := "eu-west-3" // string | 
 	limit := int32(56) // int32 |  (optional) (default to 50)
 	offset := int32(56) // int32 |  (optional) (default to 0)
 
@@ -3013,7 +3013,7 @@ import (
 )
 
 func main() {
-	launchLoadBalancerOpts := *openapiclient.NewLaunchLoadBalancerOpts("Region_example", "lsw.m3.large", "ContractType_example", int32(123), "RootDiskStorageType_example", int32(123)) // LaunchLoadBalancerOpts | 
+	launchLoadBalancerOpts := *openapiclient.NewLaunchLoadBalancerOpts("eu-west-3", "lsw.m3.large", "ContractType_example", int32(123), "RootDiskStorageType_example", int32(123)) // LaunchLoadBalancerOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
