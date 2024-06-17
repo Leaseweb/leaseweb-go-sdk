@@ -1489,97 +1489,18 @@ paths:
                       value: 100
                       unit: Mbps
                   prices:
-                    eu-west-2:
-                      currency: GBP
-                      currencySymbol: £
-                      compute:
-                        hourlyPrice: "0.0783"
-                        monthlyPrice: "51.5000"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00004"
-                          monthlyPrice: "0.02604"
-                        central:
-                          hourlyPrice: "0.00010"
-                          monthlyPrice: "0.06944"
-                    ca-central-1:
-                      currency: CAD
-                      currencySymbol: CA$
-                      compute:
-                        hourlyPrice: "0.1347"
-                        monthlyPrice: "88.5800"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00006"
-                          monthlyPrice: "0.04479"
-                        central:
-                          hourlyPrice: "0.00016"
-                          monthlyPrice: "0.11944"
-                    eu-west-3:
-                      currency: EUR
-                      currencySymbol: €
-                      compute:
-                        hourlyPrice: "0.0902"
-                        monthlyPrice: "59.3300"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00004"
-                          monthlyPrice: "0.03000"
-                        central:
-                          hourlyPrice: "0.00011"
-                          monthlyPrice: "0.08000"
-                    eu-central-1:
-                      currency: EUR
-                      currencySymbol: €
-                      compute:
-                        hourlyPrice: "0.0902"
-                        monthlyPrice: "59.3300"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00004"
-                          monthlyPrice: "0.03000"
-                        central:
-                          hourlyPrice: "0.00011"
-                          monthlyPrice: "0.08000"
-                    us-east-1:
-                      currency: USD
-                      currencySymbol: $
-                      compute:
-                        hourlyPrice: "0.0986"
-                        monthlyPrice: "64.7900"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00004"
-                          monthlyPrice: "0.03276"
-                        central:
-                          hourlyPrice: "0.00012"
-                          monthlyPrice: "0.08736"
-                    us-west-1:
-                      currency: USD
-                      currencySymbol: $
-                      compute:
-                        hourlyPrice: "0.0986"
-                        monthlyPrice: "64.7900"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00004"
-                          monthlyPrice: "0.03276"
-                        central:
-                          hourlyPrice: "0.00012"
-                          monthlyPrice: "0.08736"
-                    ap-southeast-1:
-                      currency: SGD
-                      currencySymbol: S$
-                      compute:
-                        hourlyPrice: "0.1318"
-                        monthlyPrice: "86.6300"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00006"
-                          monthlyPrice: "0.04380"
-                        central:
-                          hourlyPrice: "0.00016"
-                          monthlyPrice: "0.11680"
+                    currency: EUR
+                    currencySymbol: €
+                    compute:
+                      hourlyPrice: "0.0902"
+                      monthlyPrice: "59.3300"
+                    storage:
+                      local:
+                        hourlyPrice: "0.00004"
+                        monthlyPrice: "0.03000"
+                      central:
+                        hourlyPrice: "0.00011"
+                        monthlyPrice: "0.08000"
                   storageTypes: null
                 - name: lsw.m3.2xlarge
                   resources:
@@ -1596,97 +1517,18 @@ paths:
                       value: 100
                       unit: Mbps
                   prices:
-                    eu-west-2:
-                      currency: GBP
-                      currencySymbol: £
-                      compute:
-                        hourlyPrice: "0.1562"
-                        monthlyPrice: "102.6500"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00004"
-                          monthlyPrice: "0.02604"
-                        central:
-                          hourlyPrice: "0.00010"
-                          monthlyPrice: "0.06944"
-                    ca-central-1:
-                      currency: CAD
-                      currencySymbol: CA$
-                      compute:
-                        hourlyPrice: "0.2687"
-                        monthlyPrice: "176.5700"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00006"
-                          monthlyPrice: "0.04479"
-                        central:
-                          hourlyPrice: "0.00016"
-                          monthlyPrice: "0.11944"
-                    eu-west-3:
-                      currency: EUR
-                      currencySymbol: €
-                      compute:
-                        hourlyPrice: "0.1799"
-                        monthlyPrice: "118.2700"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00004"
-                          monthlyPrice: "0.03000"
-                        central:
-                          hourlyPrice: "0.00011"
-                          monthlyPrice: "0.08000"
-                    eu-central-1:
-                      currency: EUR
-                      currencySymbol: €
-                      compute:
-                        hourlyPrice: "0.1799"
-                        monthlyPrice: "118.2700"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00004"
-                          monthlyPrice: "0.03000"
-                        central:
-                          hourlyPrice: "0.00011"
-                          monthlyPrice: "0.08000"
-                    us-east-1:
-                      currency: USD
-                      currencySymbol: $
-                      compute:
-                        hourlyPrice: "0.1965"
-                        monthlyPrice: "129.1500"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00004"
-                          monthlyPrice: "0.03276"
-                        central:
-                          hourlyPrice: "0.00012"
-                          monthlyPrice: "0.08736"
-                    us-west-1:
-                      currency: USD
-                      currencySymbol: $
-                      compute:
-                        hourlyPrice: "0.1965"
-                        monthlyPrice: "129.1500"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00004"
-                          monthlyPrice: "0.03276"
-                        central:
-                          hourlyPrice: "0.00012"
-                          monthlyPrice: "0.08736"
-                    ap-southeast-1:
-                      currency: SGD
-                      currencySymbol: S$
-                      compute:
-                        hourlyPrice: "0.2627"
-                        monthlyPrice: "172.6700"
-                      storage:
-                        local:
-                          hourlyPrice: "0.00006"
-                          monthlyPrice: "0.04380"
-                        central:
-                          hourlyPrice: "0.00016"
-                          monthlyPrice: "0.11680"
+                    currency: EUR
+                    currencySymbol: €
+                    compute:
+                      hourlyPrice: "0.0902"
+                      monthlyPrice: "59.3300"
+                    storage:
+                      local:
+                        hourlyPrice: "0.00004"
+                        monthlyPrice: "0.03000"
+                      central:
+                        hourlyPrice: "0.00011"
+                        monthlyPrice: "0.08000"
                   storageTypes: null
               schema:
                 $ref: '#/components/schemas/getUpdateInstanceTypeListResult'
@@ -7464,17 +7306,17 @@ components:
     price:
       example:
         compute:
-          monthlyPrice: monthlyPrice
-          hourlyPrice: hourlyPrice
+          monthlyPrice: "0.03000"
+          hourlyPrice: "0.00004"
         currencySymbol: $
         currency: USD
         storage:
           central:
-            monthlyPrice: monthlyPrice
-            hourlyPrice: hourlyPrice
+            monthlyPrice: "0.03000"
+            hourlyPrice: "0.00004"
           local:
-            monthlyPrice: monthlyPrice
-            hourlyPrice: hourlyPrice
+            monthlyPrice: "0.03000"
+            hourlyPrice: "0.00004"
       properties:
         currency:
           example: USD
@@ -7509,17 +7351,17 @@ components:
           - LOCAL
           prices:
             compute:
-              monthlyPrice: monthlyPrice
-              hourlyPrice: hourlyPrice
+              monthlyPrice: "0.03000"
+              hourlyPrice: "0.00004"
             currencySymbol: $
             currency: USD
             storage:
               central:
-                monthlyPrice: monthlyPrice
-                hourlyPrice: hourlyPrice
+                monthlyPrice: "0.03000"
+                hourlyPrice: "0.00004"
               local:
-                monthlyPrice: monthlyPrice
-                hourlyPrice: hourlyPrice
+                monthlyPrice: "0.03000"
+                hourlyPrice: "0.00004"
         - name: name
           resources:
             memory:
@@ -7539,17 +7381,17 @@ components:
           - LOCAL
           prices:
             compute:
-              monthlyPrice: monthlyPrice
-              hourlyPrice: hourlyPrice
+              monthlyPrice: "0.03000"
+              hourlyPrice: "0.00004"
             currencySymbol: $
             currency: USD
             storage:
               central:
-                monthlyPrice: monthlyPrice
-                hourlyPrice: hourlyPrice
+                monthlyPrice: "0.03000"
+                hourlyPrice: "0.00004"
               local:
-                monthlyPrice: monthlyPrice
-                hourlyPrice: hourlyPrice
+                monthlyPrice: "0.03000"
+                hourlyPrice: "0.00004"
         _metadata:
           offset: 0
           limit: 5
@@ -8306,19 +8148,18 @@ components:
           - CENTRAL
           - LOCAL
           prices:
-            key:
-              compute:
-                monthlyPrice: monthlyPrice
-                hourlyPrice: hourlyPrice
-              currencySymbol: $
-              currency: USD
-              storage:
-                central:
-                  monthlyPrice: monthlyPrice
-                  hourlyPrice: hourlyPrice
-                local:
-                  monthlyPrice: monthlyPrice
-                  hourlyPrice: hourlyPrice
+            compute:
+              monthlyPrice: "0.03000"
+              hourlyPrice: "0.00004"
+            currencySymbol: $
+            currency: USD
+            storage:
+              central:
+                monthlyPrice: "0.03000"
+                hourlyPrice: "0.00004"
+              local:
+                monthlyPrice: "0.03000"
+                hourlyPrice: "0.00004"
         - name: name
           resources:
             memory:
@@ -8337,19 +8178,18 @@ components:
           - CENTRAL
           - LOCAL
           prices:
-            key:
-              compute:
-                monthlyPrice: monthlyPrice
-                hourlyPrice: hourlyPrice
-              currencySymbol: $
-              currency: USD
-              storage:
-                central:
-                  monthlyPrice: monthlyPrice
-                  hourlyPrice: hourlyPrice
-                local:
-                  monthlyPrice: monthlyPrice
-                  hourlyPrice: hourlyPrice
+            compute:
+              monthlyPrice: "0.03000"
+              hourlyPrice: "0.00004"
+            currencySymbol: $
+            currency: USD
+            storage:
+              central:
+                monthlyPrice: "0.03000"
+                hourlyPrice: "0.00004"
+              local:
+                monthlyPrice: "0.03000"
+                hourlyPrice: "0.00004"
         _metadata:
           offset: 0
           limit: 5
@@ -10294,45 +10134,51 @@ components:
       type: object
     compute:
       example:
-        monthlyPrice: monthlyPrice
-        hourlyPrice: hourlyPrice
+        monthlyPrice: "0.03000"
+        hourlyPrice: "0.00004"
       properties:
         hourlyPrice:
+          example: "0.00004"
           type: string
         monthlyPrice:
+          example: "0.03000"
           type: string
       title: compute
       type: object
     local:
       example:
-        monthlyPrice: monthlyPrice
-        hourlyPrice: hourlyPrice
+        monthlyPrice: "0.03000"
+        hourlyPrice: "0.00004"
       properties:
         hourlyPrice:
+          example: "0.00004"
           type: string
         monthlyPrice:
+          example: "0.03000"
           type: string
       title: local
       type: object
     central:
       example:
-        monthlyPrice: monthlyPrice
-        hourlyPrice: hourlyPrice
+        monthlyPrice: "0.03000"
+        hourlyPrice: "0.00004"
       properties:
         hourlyPrice:
+          example: "0.00004"
           type: string
         monthlyPrice:
+          example: "0.03000"
           type: string
       title: central
       type: object
     storage:
       example:
         central:
-          monthlyPrice: monthlyPrice
-          hourlyPrice: hourlyPrice
+          monthlyPrice: "0.03000"
+          hourlyPrice: "0.00004"
         local:
-          monthlyPrice: monthlyPrice
-          hourlyPrice: hourlyPrice
+          monthlyPrice: "0.03000"
+          hourlyPrice: "0.00004"
       properties:
         local:
           $ref: '#/components/schemas/local'
@@ -10361,17 +10207,17 @@ components:
         - LOCAL
         prices:
           compute:
-            monthlyPrice: monthlyPrice
-            hourlyPrice: hourlyPrice
+            monthlyPrice: "0.03000"
+            hourlyPrice: "0.00004"
           currencySymbol: $
           currency: USD
           storage:
             central:
-              monthlyPrice: monthlyPrice
-              hourlyPrice: hourlyPrice
+              monthlyPrice: "0.03000"
+              hourlyPrice: "0.00004"
             local:
-              monthlyPrice: monthlyPrice
-              hourlyPrice: hourlyPrice
+              monthlyPrice: "0.03000"
+              hourlyPrice: "0.00004"
       properties:
         name:
           description: Instance type's name
@@ -10441,19 +10287,18 @@ components:
         - CENTRAL
         - LOCAL
         prices:
-          key:
-            compute:
-              monthlyPrice: monthlyPrice
-              hourlyPrice: hourlyPrice
-            currencySymbol: $
-            currency: USD
-            storage:
-              central:
-                monthlyPrice: monthlyPrice
-                hourlyPrice: hourlyPrice
-              local:
-                monthlyPrice: monthlyPrice
-                hourlyPrice: hourlyPrice
+          compute:
+            monthlyPrice: "0.03000"
+            hourlyPrice: "0.00004"
+          currencySymbol: $
+          currency: USD
+          storage:
+            central:
+              monthlyPrice: "0.03000"
+              hourlyPrice: "0.00004"
+            local:
+              monthlyPrice: "0.03000"
+              hourlyPrice: "0.00004"
       properties:
         name:
           description: Instance type's name
@@ -10461,9 +10306,7 @@ components:
         resources:
           $ref: '#/components/schemas/instanceResources'
         prices:
-          additionalProperties:
-            $ref: '#/components/schemas/price'
-          type: object
+          $ref: '#/components/schemas/price'
         storageTypes:
           description: The supported storage types for the instance type
           example:

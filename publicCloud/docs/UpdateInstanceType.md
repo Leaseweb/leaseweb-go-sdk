@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Instance type&#39;s name | [optional] 
 **Resources** | Pointer to [**InstanceResources**](InstanceResources.md) |  | [optional] 
-**Prices** | Pointer to [**map[string]Price**](Price.md) |  | [optional] 
+**Prices** | Pointer to [**Price**](Price.md) |  | [optional] 
 **StorageTypes** | Pointer to **[]string** | The supported storage types for the instance type | [optional] 
 
 ## Methods
@@ -80,20 +80,20 @@ HasResources returns a boolean if a field has been set.
 
 ### GetPrices
 
-`func (o *UpdateInstanceType) GetPrices() map[string]Price`
+`func (o *UpdateInstanceType) GetPrices() Price`
 
 GetPrices returns the Prices field if non-nil, zero value otherwise.
 
 ### GetPricesOk
 
-`func (o *UpdateInstanceType) GetPricesOk() (*map[string]Price, bool)`
+`func (o *UpdateInstanceType) GetPricesOk() (*Price, bool)`
 
 GetPricesOk returns a tuple with the Prices field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrices
 
-`func (o *UpdateInstanceType) SetPrices(v map[string]Price)`
+`func (o *UpdateInstanceType) SetPrices(v Price)`
 
 SetPrices sets Prices field to given value.
 

@@ -22,7 +22,7 @@ type UpdateInstanceType struct {
 	// Instance type's name
 	Name *string `json:"name,omitempty"`
 	Resources *InstanceResources `json:"resources,omitempty"`
-	Prices *map[string]Price `json:"prices,omitempty"`
+	Prices *Price `json:"prices,omitempty"`
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes,omitempty"`
 }
@@ -109,9 +109,9 @@ func (o *UpdateInstanceType) SetResources(v InstanceResources) {
 }
 
 // GetPrices returns the Prices field value if set, zero value otherwise.
-func (o *UpdateInstanceType) GetPrices() map[string]Price {
+func (o *UpdateInstanceType) GetPrices() Price {
 	if o == nil || IsNil(o.Prices) {
-		var ret map[string]Price
+		var ret Price
 		return ret
 	}
 	return *o.Prices
@@ -119,7 +119,7 @@ func (o *UpdateInstanceType) GetPrices() map[string]Price {
 
 // GetPricesOk returns a tuple with the Prices field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateInstanceType) GetPricesOk() (*map[string]Price, bool) {
+func (o *UpdateInstanceType) GetPricesOk() (*Price, bool) {
 	if o == nil || IsNil(o.Prices) {
 		return nil, false
 	}
@@ -135,8 +135,8 @@ func (o *UpdateInstanceType) HasPrices() bool {
 	return false
 }
 
-// SetPrices gets a reference to the given map[string]Price and assigns it to the Prices field.
-func (o *UpdateInstanceType) SetPrices(v map[string]Price) {
+// SetPrices gets a reference to the given Price and assigns it to the Prices field.
+func (o *UpdateInstanceType) SetPrices(v Price) {
 	o.Prices = &v
 }
 
