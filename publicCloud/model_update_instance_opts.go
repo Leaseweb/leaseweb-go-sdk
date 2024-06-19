@@ -19,7 +19,7 @@ var _ MappedNullable = &UpdateInstanceOpts{}
 
 // UpdateInstanceOpts struct for UpdateInstanceOpts
 type UpdateInstanceOpts struct {
-	Type *InstanceType `json:"type,omitempty"`
+	Type *InstanceTypeName `json:"type,omitempty"`
 	// An identifying name you can refer to the instance
 	Reference *string `json:"reference,omitempty"`
 	ContractType *string `json:"contractType,omitempty"`
@@ -49,9 +49,9 @@ func NewUpdateInstanceOptsWithDefaults() *UpdateInstanceOpts {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *UpdateInstanceOpts) GetType() InstanceType {
+func (o *UpdateInstanceOpts) GetType() InstanceTypeName {
 	if o == nil || IsNil(o.Type) {
-		var ret InstanceType
+		var ret InstanceTypeName
 		return ret
 	}
 	return *o.Type
@@ -59,7 +59,7 @@ func (o *UpdateInstanceOpts) GetType() InstanceType {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateInstanceOpts) GetTypeOk() (*InstanceType, bool) {
+func (o *UpdateInstanceOpts) GetTypeOk() (*InstanceTypeName, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *UpdateInstanceOpts) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given InstanceType and assigns it to the Type field.
-func (o *UpdateInstanceOpts) SetType(v InstanceType) {
+// SetType gets a reference to the given InstanceTypeName and assigns it to the Type field.
+func (o *UpdateInstanceOpts) SetType(v InstanceTypeName) {
 	o.Type = &v
 }
 

@@ -23,7 +23,7 @@ var _ MappedNullable = &LaunchInstanceOpts{}
 type LaunchInstanceOpts struct {
 	// Region to launch the instance into
 	Region string `json:"region"`
-	Type InstanceType `json:"type"`
+	Type InstanceTypeName `json:"type"`
 	OperatingSystemId OperatingSystemId `json:"operatingSystemId"`
 	// Market App ID that must be installed into the instance
 	MarketAppId NullableString `json:"marketAppId,omitempty"`
@@ -48,7 +48,7 @@ type _LaunchInstanceOpts LaunchInstanceOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchInstanceOpts(region string, type_ InstanceType, operatingSystemId OperatingSystemId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string) *LaunchInstanceOpts {
+func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, operatingSystemId OperatingSystemId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType string) *LaunchInstanceOpts {
 	this := LaunchInstanceOpts{}
 	this.Region = region
 	this.Type = type_
@@ -93,9 +93,9 @@ func (o *LaunchInstanceOpts) SetRegion(v string) {
 }
 
 // GetType returns the Type field value
-func (o *LaunchInstanceOpts) GetType() InstanceType {
+func (o *LaunchInstanceOpts) GetType() InstanceTypeName {
 	if o == nil {
-		var ret InstanceType
+		var ret InstanceTypeName
 		return ret
 	}
 
@@ -104,7 +104,7 @@ func (o *LaunchInstanceOpts) GetType() InstanceType {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *LaunchInstanceOpts) GetTypeOk() (*InstanceType, bool) {
+func (o *LaunchInstanceOpts) GetTypeOk() (*InstanceTypeName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -112,7 +112,7 @@ func (o *LaunchInstanceOpts) GetTypeOk() (*InstanceType, bool) {
 }
 
 // SetType sets field value
-func (o *LaunchInstanceOpts) SetType(v InstanceType) {
+func (o *LaunchInstanceOpts) SetType(v InstanceTypeName) {
 	o.Type = v
 }
 

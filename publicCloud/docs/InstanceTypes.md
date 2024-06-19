@@ -1,78 +1,78 @@
-# GetInstanceTypeListResult
+# InstanceTypes
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
-**InstanceTypes** | Pointer to [**[]InstanceTypeDetails**](InstanceTypeDetails.md) |  | [optional] 
+**InstanceTypes** | Pointer to [**[]InstanceType**](InstanceType.md) |  | [optional] 
 
 ## Methods
 
-### NewGetInstanceTypeListResult
+### NewInstanceTypes
 
-`func NewGetInstanceTypeListResult() *GetInstanceTypeListResult`
+`func NewInstanceTypes() *InstanceTypes`
 
-NewGetInstanceTypeListResult instantiates a new GetInstanceTypeListResult object
+NewInstanceTypes instantiates a new InstanceTypes object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewGetInstanceTypeListResultWithDefaults
+### NewInstanceTypesWithDefaults
 
-`func NewGetInstanceTypeListResultWithDefaults() *GetInstanceTypeListResult`
+`func NewInstanceTypesWithDefaults() *InstanceTypes`
 
-NewGetInstanceTypeListResultWithDefaults instantiates a new GetInstanceTypeListResult object
+NewInstanceTypesWithDefaults instantiates a new InstanceTypes object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetMetadata
 
-`func (o *GetInstanceTypeListResult) GetMetadata() Metadata`
+`func (o *InstanceTypes) GetMetadata() Metadata`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *GetInstanceTypeListResult) GetMetadataOk() (*Metadata, bool)`
+`func (o *InstanceTypes) GetMetadataOk() (*Metadata, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *GetInstanceTypeListResult) SetMetadata(v Metadata)`
+`func (o *InstanceTypes) SetMetadata(v Metadata)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *GetInstanceTypeListResult) HasMetadata() bool`
+`func (o *InstanceTypes) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
 ### GetInstanceTypes
 
-`func (o *GetInstanceTypeListResult) GetInstanceTypes() []InstanceTypeDetails`
+`func (o *InstanceTypes) GetInstanceTypes() []InstanceType`
 
 GetInstanceTypes returns the InstanceTypes field if non-nil, zero value otherwise.
 
 ### GetInstanceTypesOk
 
-`func (o *GetInstanceTypeListResult) GetInstanceTypesOk() (*[]InstanceTypeDetails, bool)`
+`func (o *InstanceTypes) GetInstanceTypesOk() (*[]InstanceType, bool)`
 
 GetInstanceTypesOk returns a tuple with the InstanceTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInstanceTypes
 
-`func (o *GetInstanceTypeListResult) SetInstanceTypes(v []InstanceTypeDetails)`
+`func (o *InstanceTypes) SetInstanceTypes(v []InstanceType)`
 
 SetInstanceTypes sets InstanceTypes field to given value.
 
 ### HasInstanceTypes
 
-`func (o *GetInstanceTypeListResult) HasInstanceTypes() bool`
+`func (o *InstanceTypes) HasInstanceTypes() bool`
 
 HasInstanceTypes returns a boolean if a field has been set.
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | Pointer to [**InstanceType**](InstanceType.md) |  | [optional] 
+**Type** | Pointer to [**InstanceTypeName**](InstanceTypeName.md) |  | [optional] 
 **Reference** | Pointer to **string** | An identifying name you can refer to the instance | [optional] 
 **ContractType** | Pointer to **string** |  | [optional] 
 **ContractTerm** | Pointer to **int32** | Contract commitment. Can only be used when updating the contract type from HOURLY and MONTHLY. | [optional] 
@@ -32,20 +32,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetType
 
-`func (o *UpdateInstanceOpts) GetType() InstanceType`
+`func (o *UpdateInstanceOpts) GetType() InstanceTypeName`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *UpdateInstanceOpts) GetTypeOk() (*InstanceType, bool)`
+`func (o *UpdateInstanceOpts) GetTypeOk() (*InstanceTypeName, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *UpdateInstanceOpts) SetType(v InstanceType)`
+`func (o *UpdateInstanceOpts) SetType(v InstanceTypeName)`
 
 SetType sets Type field to given value.
 

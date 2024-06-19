@@ -1,155 +1,142 @@
 # InstanceType
 
-## Enum
+## Properties
 
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Name** | Pointer to **string** | Instance type&#39;s name | [optional] 
+**Resources** | Pointer to [**InstanceResources**](InstanceResources.md) |  | [optional] 
+**StorageTypes** | Pointer to **[]string** | The supported storage types for the instance type | [optional] 
+**Prices** | Pointer to [**Price**](Price.md) |  | [optional] 
 
-* `M3_LARGE` (value: `"lsw.m3.large"`)
+## Methods
 
-* `M3_XLARGE` (value: `"lsw.m3.xlarge"`)
+### NewInstanceType
 
-* `M3_2XLARGE` (value: `"lsw.m3.2xlarge"`)
+`func NewInstanceType() *InstanceType`
 
-* `M4_LARGE` (value: `"lsw.m4.large"`)
+NewInstanceType instantiates a new InstanceType object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
 
-* `M4_XLARGE` (value: `"lsw.m4.xlarge"`)
+### NewInstanceTypeWithDefaults
 
-* `M4_2XLARGE` (value: `"lsw.m4.2xlarge"`)
+`func NewInstanceTypeWithDefaults() *InstanceType`
 
-* `M4_4XLARGE` (value: `"lsw.m4.4xlarge"`)
+NewInstanceTypeWithDefaults instantiates a new InstanceType object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
 
-* `M5_LARGE` (value: `"lsw.m5.large"`)
+### GetName
 
-* `M5_XLARGE` (value: `"lsw.m5.xlarge"`)
+`func (o *InstanceType) GetName() string`
 
-* `M5_2XLARGE` (value: `"lsw.m5.2xlarge"`)
+GetName returns the Name field if non-nil, zero value otherwise.
 
-* `M5_4XLARGE` (value: `"lsw.m5.4xlarge"`)
+### GetNameOk
 
-* `M5A_LARGE` (value: `"lsw.m5a.large"`)
+`func (o *InstanceType) GetNameOk() (*string, bool)`
 
-* `M5A_XLARGE` (value: `"lsw.m5a.xlarge"`)
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
 
-* `M5A_2XLARGE` (value: `"lsw.m5a.2xlarge"`)
+### SetName
 
-* `M5A_4XLARGE` (value: `"lsw.m5a.4xlarge"`)
+`func (o *InstanceType) SetName(v string)`
 
-* `M5A_8XLARGE` (value: `"lsw.m5a.8xlarge"`)
+SetName sets Name field to given value.
 
-* `M5A_12XLARGE` (value: `"lsw.m5a.12xlarge"`)
+### HasName
 
-* `M6A_LARGE` (value: `"lsw.m6a.large"`)
+`func (o *InstanceType) HasName() bool`
 
-* `M6A_XLARGE` (value: `"lsw.m6a.xlarge"`)
+HasName returns a boolean if a field has been set.
 
-* `M6A_2XLARGE` (value: `"lsw.m6a.2xlarge"`)
+### GetResources
 
-* `M6A_4XLARGE` (value: `"lsw.m6a.4xlarge"`)
+`func (o *InstanceType) GetResources() InstanceResources`
 
-* `M6A_8XLARGE` (value: `"lsw.m6a.8xlarge"`)
+GetResources returns the Resources field if non-nil, zero value otherwise.
 
-* `M6A_12XLARGE` (value: `"lsw.m6a.12xlarge"`)
+### GetResourcesOk
 
-* `M6A_16XLARGE` (value: `"lsw.m6a.16xlarge"`)
+`func (o *InstanceType) GetResourcesOk() (*InstanceResources, bool)`
 
-* `M6A_24XLARGE` (value: `"lsw.m6a.24xlarge"`)
+GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
 
-* `C3_LARGE` (value: `"lsw.c3.large"`)
+### SetResources
 
-* `C3_XLARGE` (value: `"lsw.c3.xlarge"`)
+`func (o *InstanceType) SetResources(v InstanceResources)`
 
-* `C3_2XLARGE` (value: `"lsw.c3.2xlarge"`)
+SetResources sets Resources field to given value.
 
-* `C3_4XLARGE` (value: `"lsw.c3.4xlarge"`)
+### HasResources
 
-* `C4_LARGE` (value: `"lsw.c4.large"`)
+`func (o *InstanceType) HasResources() bool`
 
-* `C4_XLARGE` (value: `"lsw.c4.xlarge"`)
+HasResources returns a boolean if a field has been set.
 
-* `C4_2XLARGE` (value: `"lsw.c4.2xlarge"`)
+### GetStorageTypes
 
-* `C4_4XLARGE` (value: `"lsw.c4.4xlarge"`)
+`func (o *InstanceType) GetStorageTypes() []string`
 
-* `C5_LARGE` (value: `"lsw.c5.large"`)
+GetStorageTypes returns the StorageTypes field if non-nil, zero value otherwise.
 
-* `C5_XLARGE` (value: `"lsw.c5.xlarge"`)
+### GetStorageTypesOk
 
-* `C5_2XLARGE` (value: `"lsw.c5.2xlarge"`)
+`func (o *InstanceType) GetStorageTypesOk() (*[]string, bool)`
 
-* `C5_4XLARGE` (value: `"lsw.c5.4xlarge"`)
+GetStorageTypesOk returns a tuple with the StorageTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
 
-* `C5A_LARGE` (value: `"lsw.c5a.large"`)
+### SetStorageTypes
 
-* `C5A_XLARGE` (value: `"lsw.c5a.xlarge"`)
+`func (o *InstanceType) SetStorageTypes(v []string)`
 
-* `C5A_2XLARGE` (value: `"lsw.c5a.2xlarge"`)
+SetStorageTypes sets StorageTypes field to given value.
 
-* `C5A_4XLARGE` (value: `"lsw.c5a.4xlarge"`)
+### HasStorageTypes
 
-* `C5A_9XLARGE` (value: `"lsw.c5a.9xlarge"`)
+`func (o *InstanceType) HasStorageTypes() bool`
 
-* `C5A_12XLARGE` (value: `"lsw.c5a.12xlarge"`)
+HasStorageTypes returns a boolean if a field has been set.
 
-* `C6A_LARGE` (value: `"lsw.c6a.large"`)
+### SetStorageTypesNil
 
-* `C6A_XLARGE` (value: `"lsw.c6a.xlarge"`)
+`func (o *InstanceType) SetStorageTypesNil(b bool)`
 
-* `C6A_2XLARGE` (value: `"lsw.c6a.2xlarge"`)
+ SetStorageTypesNil sets the value for StorageTypes to be an explicit nil
 
-* `C6A_4XLARGE` (value: `"lsw.c6a.4xlarge"`)
+### UnsetStorageTypes
+`func (o *InstanceType) UnsetStorageTypes()`
 
-* `C6A_8XLARGE` (value: `"lsw.c6a.8xlarge"`)
+UnsetStorageTypes ensures that no value is present for StorageTypes, not even an explicit nil
+### GetPrices
 
-* `C6A_12XLARGE` (value: `"lsw.c6a.12xlarge"`)
+`func (o *InstanceType) GetPrices() Price`
 
-* `C6A_16XLARGE` (value: `"lsw.c6a.16xlarge"`)
+GetPrices returns the Prices field if non-nil, zero value otherwise.
 
-* `C6A_24XLARGE` (value: `"lsw.c6a.24xlarge"`)
+### GetPricesOk
 
-* `R3_LARGE` (value: `"lsw.r3.large"`)
+`func (o *InstanceType) GetPricesOk() (*Price, bool)`
 
-* `R3_XLARGE` (value: `"lsw.r3.xlarge"`)
+GetPricesOk returns a tuple with the Prices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
 
-* `R3_2XLARGE` (value: `"lsw.r3.2xlarge"`)
+### SetPrices
 
-* `R4_LARGE` (value: `"lsw.r4.large"`)
+`func (o *InstanceType) SetPrices(v Price)`
 
-* `R4_XLARGE` (value: `"lsw.r4.xlarge"`)
+SetPrices sets Prices field to given value.
 
-* `R4_2XLARGE` (value: `"lsw.r4.2xlarge"`)
+### HasPrices
 
-* `R5_LARGE` (value: `"lsw.r5.large"`)
+`func (o *InstanceType) HasPrices() bool`
 
-* `R5_XLARGE` (value: `"lsw.r5.xlarge"`)
-
-* `R5_2XLARGE` (value: `"lsw.r5.2xlarge"`)
-
-* `R5A_LARGE` (value: `"lsw.r5a.large"`)
-
-* `R5A_XLARGE` (value: `"lsw.r5a.xlarge"`)
-
-* `R5A_2XLARGE` (value: `"lsw.r5a.2xlarge"`)
-
-* `R5A_4XLARGE` (value: `"lsw.r5a.4xlarge"`)
-
-* `R5A_8XLARGE` (value: `"lsw.r5a.8xlarge"`)
-
-* `R5A_12XLARGE` (value: `"lsw.r5a.12xlarge"`)
-
-* `R6A_LARGE` (value: `"lsw.r6a.large"`)
-
-* `R6A_XLARGE` (value: `"lsw.r6a.xlarge"`)
-
-* `R6A_2XLARGE` (value: `"lsw.r6a.2xlarge"`)
-
-* `R6A_4XLARGE` (value: `"lsw.r6a.4xlarge"`)
-
-* `R6A_8XLARGE` (value: `"lsw.r6a.8xlarge"`)
-
-* `R6A_12XLARGE` (value: `"lsw.r6a.12xlarge"`)
-
-* `R6A_16XLARGE` (value: `"lsw.r6a.16xlarge"`)
-
-* `R6A_24XLARGE` (value: `"lsw.r6a.24xlarge"`)
+HasPrices returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

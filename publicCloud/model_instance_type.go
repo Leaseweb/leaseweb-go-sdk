@@ -12,209 +12,190 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
-// InstanceType Instance type
-type InstanceType string
+// checks if the InstanceType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InstanceType{}
 
-// List of instanceType
-const (
-	M3_LARGE InstanceType = "lsw.m3.large"
-	M3_XLARGE InstanceType = "lsw.m3.xlarge"
-	M3_2XLARGE InstanceType = "lsw.m3.2xlarge"
-	M4_LARGE InstanceType = "lsw.m4.large"
-	M4_XLARGE InstanceType = "lsw.m4.xlarge"
-	M4_2XLARGE InstanceType = "lsw.m4.2xlarge"
-	M4_4XLARGE InstanceType = "lsw.m4.4xlarge"
-	M5_LARGE InstanceType = "lsw.m5.large"
-	M5_XLARGE InstanceType = "lsw.m5.xlarge"
-	M5_2XLARGE InstanceType = "lsw.m5.2xlarge"
-	M5_4XLARGE InstanceType = "lsw.m5.4xlarge"
-	M5A_LARGE InstanceType = "lsw.m5a.large"
-	M5A_XLARGE InstanceType = "lsw.m5a.xlarge"
-	M5A_2XLARGE InstanceType = "lsw.m5a.2xlarge"
-	M5A_4XLARGE InstanceType = "lsw.m5a.4xlarge"
-	M5A_8XLARGE InstanceType = "lsw.m5a.8xlarge"
-	M5A_12XLARGE InstanceType = "lsw.m5a.12xlarge"
-	M6A_LARGE InstanceType = "lsw.m6a.large"
-	M6A_XLARGE InstanceType = "lsw.m6a.xlarge"
-	M6A_2XLARGE InstanceType = "lsw.m6a.2xlarge"
-	M6A_4XLARGE InstanceType = "lsw.m6a.4xlarge"
-	M6A_8XLARGE InstanceType = "lsw.m6a.8xlarge"
-	M6A_12XLARGE InstanceType = "lsw.m6a.12xlarge"
-	M6A_16XLARGE InstanceType = "lsw.m6a.16xlarge"
-	M6A_24XLARGE InstanceType = "lsw.m6a.24xlarge"
-	C3_LARGE InstanceType = "lsw.c3.large"
-	C3_XLARGE InstanceType = "lsw.c3.xlarge"
-	C3_2XLARGE InstanceType = "lsw.c3.2xlarge"
-	C3_4XLARGE InstanceType = "lsw.c3.4xlarge"
-	C4_LARGE InstanceType = "lsw.c4.large"
-	C4_XLARGE InstanceType = "lsw.c4.xlarge"
-	C4_2XLARGE InstanceType = "lsw.c4.2xlarge"
-	C4_4XLARGE InstanceType = "lsw.c4.4xlarge"
-	C5_LARGE InstanceType = "lsw.c5.large"
-	C5_XLARGE InstanceType = "lsw.c5.xlarge"
-	C5_2XLARGE InstanceType = "lsw.c5.2xlarge"
-	C5_4XLARGE InstanceType = "lsw.c5.4xlarge"
-	C5A_LARGE InstanceType = "lsw.c5a.large"
-	C5A_XLARGE InstanceType = "lsw.c5a.xlarge"
-	C5A_2XLARGE InstanceType = "lsw.c5a.2xlarge"
-	C5A_4XLARGE InstanceType = "lsw.c5a.4xlarge"
-	C5A_9XLARGE InstanceType = "lsw.c5a.9xlarge"
-	C5A_12XLARGE InstanceType = "lsw.c5a.12xlarge"
-	C6A_LARGE InstanceType = "lsw.c6a.large"
-	C6A_XLARGE InstanceType = "lsw.c6a.xlarge"
-	C6A_2XLARGE InstanceType = "lsw.c6a.2xlarge"
-	C6A_4XLARGE InstanceType = "lsw.c6a.4xlarge"
-	C6A_8XLARGE InstanceType = "lsw.c6a.8xlarge"
-	C6A_12XLARGE InstanceType = "lsw.c6a.12xlarge"
-	C6A_16XLARGE InstanceType = "lsw.c6a.16xlarge"
-	C6A_24XLARGE InstanceType = "lsw.c6a.24xlarge"
-	R3_LARGE InstanceType = "lsw.r3.large"
-	R3_XLARGE InstanceType = "lsw.r3.xlarge"
-	R3_2XLARGE InstanceType = "lsw.r3.2xlarge"
-	R4_LARGE InstanceType = "lsw.r4.large"
-	R4_XLARGE InstanceType = "lsw.r4.xlarge"
-	R4_2XLARGE InstanceType = "lsw.r4.2xlarge"
-	R5_LARGE InstanceType = "lsw.r5.large"
-	R5_XLARGE InstanceType = "lsw.r5.xlarge"
-	R5_2XLARGE InstanceType = "lsw.r5.2xlarge"
-	R5A_LARGE InstanceType = "lsw.r5a.large"
-	R5A_XLARGE InstanceType = "lsw.r5a.xlarge"
-	R5A_2XLARGE InstanceType = "lsw.r5a.2xlarge"
-	R5A_4XLARGE InstanceType = "lsw.r5a.4xlarge"
-	R5A_8XLARGE InstanceType = "lsw.r5a.8xlarge"
-	R5A_12XLARGE InstanceType = "lsw.r5a.12xlarge"
-	R6A_LARGE InstanceType = "lsw.r6a.large"
-	R6A_XLARGE InstanceType = "lsw.r6a.xlarge"
-	R6A_2XLARGE InstanceType = "lsw.r6a.2xlarge"
-	R6A_4XLARGE InstanceType = "lsw.r6a.4xlarge"
-	R6A_8XLARGE InstanceType = "lsw.r6a.8xlarge"
-	R6A_12XLARGE InstanceType = "lsw.r6a.12xlarge"
-	R6A_16XLARGE InstanceType = "lsw.r6a.16xlarge"
-	R6A_24XLARGE InstanceType = "lsw.r6a.24xlarge"
-)
-
-// All allowed values of InstanceType enum
-var AllowedInstanceTypeEnumValues = []InstanceType{
-	"lsw.m3.large",
-	"lsw.m3.xlarge",
-	"lsw.m3.2xlarge",
-	"lsw.m4.large",
-	"lsw.m4.xlarge",
-	"lsw.m4.2xlarge",
-	"lsw.m4.4xlarge",
-	"lsw.m5.large",
-	"lsw.m5.xlarge",
-	"lsw.m5.2xlarge",
-	"lsw.m5.4xlarge",
-	"lsw.m5a.large",
-	"lsw.m5a.xlarge",
-	"lsw.m5a.2xlarge",
-	"lsw.m5a.4xlarge",
-	"lsw.m5a.8xlarge",
-	"lsw.m5a.12xlarge",
-	"lsw.m6a.large",
-	"lsw.m6a.xlarge",
-	"lsw.m6a.2xlarge",
-	"lsw.m6a.4xlarge",
-	"lsw.m6a.8xlarge",
-	"lsw.m6a.12xlarge",
-	"lsw.m6a.16xlarge",
-	"lsw.m6a.24xlarge",
-	"lsw.c3.large",
-	"lsw.c3.xlarge",
-	"lsw.c3.2xlarge",
-	"lsw.c3.4xlarge",
-	"lsw.c4.large",
-	"lsw.c4.xlarge",
-	"lsw.c4.2xlarge",
-	"lsw.c4.4xlarge",
-	"lsw.c5.large",
-	"lsw.c5.xlarge",
-	"lsw.c5.2xlarge",
-	"lsw.c5.4xlarge",
-	"lsw.c5a.large",
-	"lsw.c5a.xlarge",
-	"lsw.c5a.2xlarge",
-	"lsw.c5a.4xlarge",
-	"lsw.c5a.9xlarge",
-	"lsw.c5a.12xlarge",
-	"lsw.c6a.large",
-	"lsw.c6a.xlarge",
-	"lsw.c6a.2xlarge",
-	"lsw.c6a.4xlarge",
-	"lsw.c6a.8xlarge",
-	"lsw.c6a.12xlarge",
-	"lsw.c6a.16xlarge",
-	"lsw.c6a.24xlarge",
-	"lsw.r3.large",
-	"lsw.r3.xlarge",
-	"lsw.r3.2xlarge",
-	"lsw.r4.large",
-	"lsw.r4.xlarge",
-	"lsw.r4.2xlarge",
-	"lsw.r5.large",
-	"lsw.r5.xlarge",
-	"lsw.r5.2xlarge",
-	"lsw.r5a.large",
-	"lsw.r5a.xlarge",
-	"lsw.r5a.2xlarge",
-	"lsw.r5a.4xlarge",
-	"lsw.r5a.8xlarge",
-	"lsw.r5a.12xlarge",
-	"lsw.r6a.large",
-	"lsw.r6a.xlarge",
-	"lsw.r6a.2xlarge",
-	"lsw.r6a.4xlarge",
-	"lsw.r6a.8xlarge",
-	"lsw.r6a.12xlarge",
-	"lsw.r6a.16xlarge",
-	"lsw.r6a.24xlarge",
+// InstanceType struct for InstanceType
+type InstanceType struct {
+	// Instance type's name
+	Name *string `json:"name,omitempty"`
+	Resources *InstanceResources `json:"resources,omitempty"`
+	// The supported storage types for the instance type
+	StorageTypes []string `json:"storageTypes,omitempty"`
+	Prices *Price `json:"prices,omitempty"`
 }
 
-func (v *InstanceType) UnmarshalJSON(src []byte) error {
-	var value string
-	err := json.Unmarshal(src, &value)
-	if err != nil {
-		return err
-	}
-	enumTypeValue := InstanceType(value)
-	for _, existing := range AllowedInstanceTypeEnumValues {
-		if existing == enumTypeValue {
-			*v = enumTypeValue
-			return nil
-		}
-	}
-
-	return fmt.Errorf("%+v is not a valid InstanceType", value)
+// NewInstanceType instantiates a new InstanceType object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewInstanceType() *InstanceType {
+	this := InstanceType{}
+	return &this
 }
 
-// NewInstanceTypeFromValue returns a pointer to a valid InstanceType
-// for the value passed as argument, or an error if the value passed is not allowed by the enum
-func NewInstanceTypeFromValue(v string) (*InstanceType, error) {
-	ev := InstanceType(v)
-	if ev.IsValid() {
-		return &ev, nil
-	} else {
-		return nil, fmt.Errorf("invalid value '%v' for InstanceType: valid values are %v", v, AllowedInstanceTypeEnumValues)
-	}
+// NewInstanceTypeWithDefaults instantiates a new InstanceType object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewInstanceTypeWithDefaults() *InstanceType {
+	this := InstanceType{}
+	return &this
 }
 
-// IsValid return true if the value is valid for the enum, false otherwise
-func (v InstanceType) IsValid() bool {
-	for _, existing := range AllowedInstanceTypeEnumValues {
-		if existing == v {
-			return true
-		}
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *InstanceType) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
 	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InstanceType) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *InstanceType) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
 	return false
 }
 
-// Ptr returns reference to instanceType value
-func (v InstanceType) Ptr() *InstanceType {
-	return &v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *InstanceType) SetName(v string) {
+	o.Name = &v
+}
+
+// GetResources returns the Resources field value if set, zero value otherwise.
+func (o *InstanceType) GetResources() InstanceResources {
+	if o == nil || IsNil(o.Resources) {
+		var ret InstanceResources
+		return ret
+	}
+	return *o.Resources
+}
+
+// GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InstanceType) GetResourcesOk() (*InstanceResources, bool) {
+	if o == nil || IsNil(o.Resources) {
+		return nil, false
+	}
+	return o.Resources, true
+}
+
+// HasResources returns a boolean if a field has been set.
+func (o *InstanceType) HasResources() bool {
+	if o != nil && !IsNil(o.Resources) {
+		return true
+	}
+
+	return false
+}
+
+// SetResources gets a reference to the given InstanceResources and assigns it to the Resources field.
+func (o *InstanceType) SetResources(v InstanceResources) {
+	o.Resources = &v
+}
+
+// GetStorageTypes returns the StorageTypes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InstanceType) GetStorageTypes() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.StorageTypes
+}
+
+// GetStorageTypesOk returns a tuple with the StorageTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InstanceType) GetStorageTypesOk() ([]string, bool) {
+	if o == nil || IsNil(o.StorageTypes) {
+		return nil, false
+	}
+	return o.StorageTypes, true
+}
+
+// HasStorageTypes returns a boolean if a field has been set.
+func (o *InstanceType) HasStorageTypes() bool {
+	if o != nil && !IsNil(o.StorageTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageTypes gets a reference to the given []string and assigns it to the StorageTypes field.
+func (o *InstanceType) SetStorageTypes(v []string) {
+	o.StorageTypes = v
+}
+
+// GetPrices returns the Prices field value if set, zero value otherwise.
+func (o *InstanceType) GetPrices() Price {
+	if o == nil || IsNil(o.Prices) {
+		var ret Price
+		return ret
+	}
+	return *o.Prices
+}
+
+// GetPricesOk returns a tuple with the Prices field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *InstanceType) GetPricesOk() (*Price, bool) {
+	if o == nil || IsNil(o.Prices) {
+		return nil, false
+	}
+	return o.Prices, true
+}
+
+// HasPrices returns a boolean if a field has been set.
+func (o *InstanceType) HasPrices() bool {
+	if o != nil && !IsNil(o.Prices) {
+		return true
+	}
+
+	return false
+}
+
+// SetPrices gets a reference to the given Price and assigns it to the Prices field.
+func (o *InstanceType) SetPrices(v Price) {
+	o.Prices = &v
+}
+
+func (o InstanceType) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o InstanceType) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Resources) {
+		toSerialize["resources"] = o.Resources
+	}
+	if o.StorageTypes != nil {
+		toSerialize["storageTypes"] = o.StorageTypes
+	}
+	if !IsNil(o.Prices) {
+		toSerialize["prices"] = o.Prices
+	}
+	return toSerialize, nil
 }
 
 type NullableInstanceType struct {
@@ -252,4 +233,5 @@ func (v *NullableInstanceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
 

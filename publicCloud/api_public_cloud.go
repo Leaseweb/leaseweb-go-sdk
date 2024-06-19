@@ -4664,7 +4664,7 @@ func (r ApiGetInstanceTypeListRequest) Offset(offset int32) ApiGetInstanceTypeLi
 	return r
 }
 
-func (r ApiGetInstanceTypeListRequest) Execute() (*GetInstanceTypeListResult, *http.Response, error) {
+func (r ApiGetInstanceTypeListRequest) Execute() (*InstanceTypes, *http.Response, error) {
 	return r.ApiService.GetInstanceTypeListExecute(r)
 }
 
@@ -4684,13 +4684,13 @@ func (a *PublicCloudAPIService) GetInstanceTypeList(ctx context.Context) ApiGetI
 }
 
 // Execute executes the request
-//  @return GetInstanceTypeListResult
-func (a *PublicCloudAPIService) GetInstanceTypeListExecute(r ApiGetInstanceTypeListRequest) (*GetInstanceTypeListResult, *http.Response, error) {
+//  @return InstanceTypes
+func (a *PublicCloudAPIService) GetInstanceTypeListExecute(r ApiGetInstanceTypeListRequest) (*InstanceTypes, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetInstanceTypeListResult
+		localVarReturnValue  *InstanceTypes
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetInstanceTypeList")
@@ -7214,7 +7214,7 @@ func (r ApiGetUpdateInstanceTypeListRequest) Offset(offset int32) ApiGetUpdateIn
 	return r
 }
 
-func (r ApiGetUpdateInstanceTypeListRequest) Execute() (*GetUpdateInstanceTypeListResult, *http.Response, error) {
+func (r ApiGetUpdateInstanceTypeListRequest) Execute() (*InstanceTypes, *http.Response, error) {
 	return r.ApiService.GetUpdateInstanceTypeListExecute(r)
 }
 
@@ -7236,13 +7236,13 @@ func (a *PublicCloudAPIService) GetUpdateInstanceTypeList(ctx context.Context, i
 }
 
 // Execute executes the request
-//  @return GetUpdateInstanceTypeListResult
-func (a *PublicCloudAPIService) GetUpdateInstanceTypeListExecute(r ApiGetUpdateInstanceTypeListRequest) (*GetUpdateInstanceTypeListResult, *http.Response, error) {
+//  @return InstanceTypes
+func (a *PublicCloudAPIService) GetUpdateInstanceTypeListExecute(r ApiGetUpdateInstanceTypeListRequest) (*InstanceTypes, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetUpdateInstanceTypeListResult
+		localVarReturnValue  *InstanceTypes
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetUpdateInstanceTypeList")

@@ -1864,7 +1864,7 @@ Name | Type | Description  | Notes
 
 ## GetInstanceTypeList
 
-> GetInstanceTypeListResult GetInstanceTypeList(ctx).Region(region).Limit(limit).Offset(offset).Execute()
+> InstanceTypes GetInstanceTypeList(ctx).Region(region).Limit(limit).Offset(offset).Execute()
 
 List instance types
 
@@ -1894,7 +1894,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetInstanceTypeList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetInstanceTypeList`: GetInstanceTypeListResult
+	// response from `GetInstanceTypeList`: InstanceTypes
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetInstanceTypeList`: %v\n", resp)
 }
 ```
@@ -1916,7 +1916,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetInstanceTypeListResult**](GetInstanceTypeListResult.md)
+[**InstanceTypes**](InstanceTypes.md)
 
 ### Authorization
 
@@ -2854,7 +2854,7 @@ Name | Type | Description  | Notes
 
 ## GetUpdateInstanceTypeList
 
-> GetUpdateInstanceTypeListResult GetUpdateInstanceTypeList(ctx, instanceId).Limit(limit).Offset(offset).Execute()
+> InstanceTypes GetUpdateInstanceTypeList(ctx, instanceId).Limit(limit).Offset(offset).Execute()
 
 List available instance types for update
 
@@ -2884,7 +2884,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetUpdateInstanceTypeList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetUpdateInstanceTypeList`: GetUpdateInstanceTypeListResult
+	// response from `GetUpdateInstanceTypeList`: InstanceTypes
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetUpdateInstanceTypeList`: %v\n", resp)
 }
 ```
@@ -2910,7 +2910,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetUpdateInstanceTypeListResult**](GetUpdateInstanceTypeListResult.md)
+[**InstanceTypes**](InstanceTypes.md)
 
 ### Authorization
 
@@ -2947,7 +2947,7 @@ import (
 )
 
 func main() {
-	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.instanceType("lsw.m3.large"), openapiclient.operatingSystemId("ALMALINUX_8_64BIT"), "ContractType_example", int32(123), int32(123), "RootDiskStorageType_example") // LaunchInstanceOpts | 
+	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.instanceTypeName("lsw.m3.large"), openapiclient.operatingSystemId("ALMALINUX_8_64BIT"), "ContractType_example", int32(123), int32(123), "RootDiskStorageType_example") // LaunchInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

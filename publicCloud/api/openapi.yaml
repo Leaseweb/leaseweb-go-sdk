@@ -237,7 +237,7 @@ paths:
                   - CENTRAL
                   - LOCAL
               schema:
-                $ref: '#/components/schemas/getInstanceTypeListResult'
+                $ref: '#/components/schemas/instanceTypes'
           description: OK.
         "401":
           content:
@@ -1470,17 +1470,17 @@ paths:
             application/json:
               example:
                 _metadata:
-                  totalCount: 2
-                  limit: 50
-                  offset: 0
+                  totalCount: 74
+                  limit: 1
+                  offset: 1
                 instanceTypes:
-                - name: lsw.m3.xlarge
+                - name: lsw.c3.xlarge
                   resources:
                     cpu:
                       value: 4
                       unit: vCPU
                     memory:
-                      value: 15
+                      value: 7
                       unit: GiB
                     publicNetworkSpeed:
                       value: 1
@@ -1492,46 +1492,20 @@ paths:
                     currency: EUR
                     currencySymbol: €
                     compute:
-                      hourlyPrice: "0.0902"
-                      monthlyPrice: "59.3300"
+                      hourlyPrice: "0.0798"
+                      monthlyPrice: "52.5"
                     storage:
                       local:
-                        hourlyPrice: "0.00004"
-                        monthlyPrice: "0.03000"
+                        hourlyPrice: "0.0001"
+                        monthlyPrice: "0.03"
                       central:
-                        hourlyPrice: "0.00011"
-                        monthlyPrice: "0.08000"
-                  storageTypes: null
-                - name: lsw.m3.2xlarge
-                  resources:
-                    cpu:
-                      value: 8
-                      unit: vCPU
-                    memory:
-                      value: 30
-                      unit: GiB
-                    publicNetworkSpeed:
-                      value: 1
-                      unit: Gbps
-                    privateNetworkSpeed:
-                      value: 100
-                      unit: Mbps
-                  prices:
-                    currency: EUR
-                    currencySymbol: €
-                    compute:
-                      hourlyPrice: "0.0902"
-                      monthlyPrice: "59.3300"
-                    storage:
-                      local:
-                        hourlyPrice: "0.00004"
-                        monthlyPrice: "0.03000"
-                      central:
-                        hourlyPrice: "0.00011"
-                        monthlyPrice: "0.08000"
-                  storageTypes: null
+                        hourlyPrice: "0.0001"
+                        monthlyPrice: "0.08"
+                  storageTypes:
+                  - CENTRAL
+                  - LOCAL
               schema:
-                $ref: '#/components/schemas/getUpdateInstanceTypeListResult'
+                $ref: '#/components/schemas/instanceTypes'
           description: OK.
         "401":
           content:
@@ -7265,9 +7239,6 @@ components:
             type: array
           type: object
       type: object
-    name:
-      description: Instance type's name
-      type: string
     instanceResources:
       description: Resources available for the load balancer
       example:
@@ -7329,7 +7300,57 @@ components:
         storage:
           $ref: '#/components/schemas/storage'
       type: object
-    getInstanceTypeListResult:
+    instanceType:
+      example:
+        name: name
+        resources:
+          memory:
+            unit: GiB
+            value: 3.75
+          publicNetworkSpeed:
+            unit: Gbps
+            value: 1
+          cpu:
+            unit: vCPU
+            value: 2
+          privateNetworkSpeed:
+            unit: Mbps
+            value: 1000
+        storageTypes:
+        - CENTRAL
+        - LOCAL
+        prices:
+          compute:
+            monthlyPrice: "0.03000"
+            hourlyPrice: "0.00004"
+          currencySymbol: $
+          currency: USD
+          storage:
+            central:
+              monthlyPrice: "0.03000"
+              hourlyPrice: "0.00004"
+            local:
+              monthlyPrice: "0.03000"
+              hourlyPrice: "0.00004"
+      properties:
+        name:
+          description: Instance type's name
+          type: string
+        resources:
+          $ref: '#/components/schemas/instanceResources'
+        storageTypes:
+          description: The supported storage types for the instance type
+          example:
+          - CENTRAL
+          - LOCAL
+          items:
+            type: string
+          nullable: true
+          type: array
+        prices:
+          $ref: '#/components/schemas/price'
+      title: instanceType
+    instanceTypes:
       example:
         instanceTypes:
         - name: name
@@ -7401,7 +7422,7 @@ components:
           $ref: '#/components/schemas/_metadata'
         instanceTypes:
           items:
-            $ref: '#/components/schemas/instanceTypeDetails'
+            $ref: '#/components/schemas/instanceType'
           type: array
       type: object
     contractType:
@@ -7501,7 +7522,7 @@ components:
     productType:
       description: The product type
       type: string
-    instanceType:
+    instanceTypeName:
       description: Instance type
       enum:
       - lsw.m3.large
@@ -7807,7 +7828,7 @@ components:
         hasPrivateNetwork:
           type: boolean
         type:
-          $ref: '#/components/schemas/instanceType'
+          $ref: '#/components/schemas/instanceTypeName'
         rootDiskSize:
           description: The root disk's size in GB. Must be at least 5 GB for Linux
             and FreeBSD instances and 50 GB for Windows instances
@@ -8019,7 +8040,7 @@ components:
           example: eu-west-3
           type: string
         type:
-          $ref: '#/components/schemas/instanceType'
+          $ref: '#/components/schemas/instanceTypeName'
         operatingSystemId:
           $ref: '#/components/schemas/operatingSystemId'
         marketAppId:
@@ -8083,7 +8104,7 @@ components:
     updateInstanceOpts:
       properties:
         type:
-          $ref: '#/components/schemas/instanceType'
+          $ref: '#/components/schemas/instanceTypeName'
         reference:
           description: An identifying name you can refer to the instance
           type: string
@@ -8126,81 +8147,6 @@ components:
         url:
           description: The URL to the console
           type: string
-      type: object
-    getUpdateInstanceTypeListResult:
-      example:
-        instanceTypes:
-        - name: name
-          resources:
-            memory:
-              unit: GiB
-              value: 3.75
-            publicNetworkSpeed:
-              unit: Gbps
-              value: 1
-            cpu:
-              unit: vCPU
-              value: 2
-            privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
-          storageTypes:
-          - CENTRAL
-          - LOCAL
-          prices:
-            compute:
-              monthlyPrice: "0.03000"
-              hourlyPrice: "0.00004"
-            currencySymbol: $
-            currency: USD
-            storage:
-              central:
-                monthlyPrice: "0.03000"
-                hourlyPrice: "0.00004"
-              local:
-                monthlyPrice: "0.03000"
-                hourlyPrice: "0.00004"
-        - name: name
-          resources:
-            memory:
-              unit: GiB
-              value: 3.75
-            publicNetworkSpeed:
-              unit: Gbps
-              value: 1
-            cpu:
-              unit: vCPU
-              value: 2
-            privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
-          storageTypes:
-          - CENTRAL
-          - LOCAL
-          prices:
-            compute:
-              monthlyPrice: "0.03000"
-              hourlyPrice: "0.00004"
-            currencySymbol: $
-            currency: USD
-            storage:
-              central:
-                monthlyPrice: "0.03000"
-                hourlyPrice: "0.00004"
-              local:
-                monthlyPrice: "0.03000"
-                hourlyPrice: "0.00004"
-        _metadata:
-          offset: 0
-          limit: 5
-          totalCount: 2
-      properties:
-        _metadata:
-          $ref: '#/components/schemas/_metadata'
-        instanceTypes:
-          items:
-            $ref: '#/components/schemas/updateInstanceType'
-          type: array
       type: object
     credentialType:
       enum:
@@ -10186,56 +10132,6 @@ components:
           $ref: '#/components/schemas/central'
       title: storage
       type: object
-    instanceTypeDetails:
-      example:
-        name: name
-        resources:
-          memory:
-            unit: GiB
-            value: 3.75
-          publicNetworkSpeed:
-            unit: Gbps
-            value: 1
-          cpu:
-            unit: vCPU
-            value: 2
-          privateNetworkSpeed:
-            unit: Mbps
-            value: 1000
-        storageTypes:
-        - CENTRAL
-        - LOCAL
-        prices:
-          compute:
-            monthlyPrice: "0.03000"
-            hourlyPrice: "0.00004"
-          currencySymbol: $
-          currency: USD
-          storage:
-            central:
-              monthlyPrice: "0.03000"
-              hourlyPrice: "0.00004"
-            local:
-              monthlyPrice: "0.03000"
-              hourlyPrice: "0.00004"
-      properties:
-        name:
-          description: Instance type's name
-          type: string
-        resources:
-          $ref: '#/components/schemas/instanceResources'
-        storageTypes:
-          description: The supported storage types for the instance type
-          example:
-          - CENTRAL
-          - LOCAL
-          items:
-            type: string
-          nullable: true
-          type: array
-        prices:
-          $ref: '#/components/schemas/price'
-      title: instanceTypeDetails
     ddos:
       example:
         detectionProfile: STANDARD_DEFAULT
@@ -10267,56 +10163,6 @@ components:
           type: string
       title: privateNetwork
       type: object
-    updateInstanceType:
-      example:
-        name: name
-        resources:
-          memory:
-            unit: GiB
-            value: 3.75
-          publicNetworkSpeed:
-            unit: Gbps
-            value: 1
-          cpu:
-            unit: vCPU
-            value: 2
-          privateNetworkSpeed:
-            unit: Mbps
-            value: 1000
-        storageTypes:
-        - CENTRAL
-        - LOCAL
-        prices:
-          compute:
-            monthlyPrice: "0.03000"
-            hourlyPrice: "0.00004"
-          currencySymbol: $
-          currency: USD
-          storage:
-            central:
-              monthlyPrice: "0.03000"
-              hourlyPrice: "0.00004"
-            local:
-              monthlyPrice: "0.03000"
-              hourlyPrice: "0.00004"
-      properties:
-        name:
-          description: Instance type's name
-          type: string
-        resources:
-          $ref: '#/components/schemas/instanceResources'
-        prices:
-          $ref: '#/components/schemas/price'
-        storageTypes:
-          description: The supported storage types for the instance type
-          example:
-          - CENTRAL
-          - LOCAL
-          items:
-            type: string
-          nullable: true
-          type: array
-      title: updateInstanceType
     expenseResultInstance:
       example:
         hours: 14
