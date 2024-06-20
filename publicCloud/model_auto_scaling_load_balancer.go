@@ -15,12 +15,12 @@ import (
 	"time"
 )
 
-// checks if the LoadBalancer2 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &LoadBalancer2{}
+// checks if the AutoScalingLoadBalancer type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AutoScalingLoadBalancer{}
 
-// LoadBalancer2 struct for LoadBalancer2
-type LoadBalancer2 struct {
-	// The customers ID who owns the load balancer
+// AutoScalingLoadBalancer struct for AutoScalingLoadBalancer
+type AutoScalingLoadBalancer struct {
+	// The customer ID who owns the load balancer
 	CustomerId *string `json:"customerId,omitempty"`
 	// The load balancer unique identifier
 	Id *string `json:"id,omitempty"`
@@ -36,29 +36,29 @@ type LoadBalancer2 struct {
 	Contract *Contract `json:"contract,omitempty"`
 	// Date and time when the instance was started for the first time, right after launching it
 	StartedAt *time.Time `json:"startedAt,omitempty"`
-	Configuration NullableLoadBalancerConfiguration1 `json:"configuration,omitempty"`
+	Configuration NullableLoadBalancerConfiguration `json:"configuration,omitempty"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork,omitempty"`
 }
 
-// NewLoadBalancer2 instantiates a new LoadBalancer2 object
+// NewAutoScalingLoadBalancer instantiates a new AutoScalingLoadBalancer object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancer2() *LoadBalancer2 {
-	this := LoadBalancer2{}
+func NewAutoScalingLoadBalancer() *AutoScalingLoadBalancer {
+	this := AutoScalingLoadBalancer{}
 	return &this
 }
 
-// NewLoadBalancer2WithDefaults instantiates a new LoadBalancer2 object
+// NewAutoScalingLoadBalancerWithDefaults instantiates a new AutoScalingLoadBalancer object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewLoadBalancer2WithDefaults() *LoadBalancer2 {
-	this := LoadBalancer2{}
+func NewAutoScalingLoadBalancerWithDefaults() *AutoScalingLoadBalancer {
+	this := AutoScalingLoadBalancer{}
 	return &this
 }
 
 // GetCustomerId returns the CustomerId field value if set, zero value otherwise.
-func (o *LoadBalancer2) GetCustomerId() string {
+func (o *AutoScalingLoadBalancer) GetCustomerId() string {
 	if o == nil || IsNil(o.CustomerId) {
 		var ret string
 		return ret
@@ -68,7 +68,7 @@ func (o *LoadBalancer2) GetCustomerId() string {
 
 // GetCustomerIdOk returns a tuple with the CustomerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer2) GetCustomerIdOk() (*string, bool) {
+func (o *AutoScalingLoadBalancer) GetCustomerIdOk() (*string, bool) {
 	if o == nil || IsNil(o.CustomerId) {
 		return nil, false
 	}
@@ -76,7 +76,7 @@ func (o *LoadBalancer2) GetCustomerIdOk() (*string, bool) {
 }
 
 // HasCustomerId returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasCustomerId() bool {
+func (o *AutoScalingLoadBalancer) HasCustomerId() bool {
 	if o != nil && !IsNil(o.CustomerId) {
 		return true
 	}
@@ -85,12 +85,12 @@ func (o *LoadBalancer2) HasCustomerId() bool {
 }
 
 // SetCustomerId gets a reference to the given string and assigns it to the CustomerId field.
-func (o *LoadBalancer2) SetCustomerId(v string) {
+func (o *AutoScalingLoadBalancer) SetCustomerId(v string) {
 	o.CustomerId = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *LoadBalancer2) GetId() string {
+func (o *AutoScalingLoadBalancer) GetId() string {
 	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
@@ -100,7 +100,7 @@ func (o *LoadBalancer2) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer2) GetIdOk() (*string, bool) {
+func (o *AutoScalingLoadBalancer) GetIdOk() (*string, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -108,7 +108,7 @@ func (o *LoadBalancer2) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasId() bool {
+func (o *AutoScalingLoadBalancer) HasId() bool {
 	if o != nil && !IsNil(o.Id) {
 		return true
 	}
@@ -117,12 +117,12 @@ func (o *LoadBalancer2) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *LoadBalancer2) SetId(v string) {
+func (o *AutoScalingLoadBalancer) SetId(v string) {
 	o.Id = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *LoadBalancer2) GetType() string {
+func (o *AutoScalingLoadBalancer) GetType() string {
 	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
@@ -132,7 +132,7 @@ func (o *LoadBalancer2) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer2) GetTypeOk() (*string, bool) {
+func (o *AutoScalingLoadBalancer) GetTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -140,7 +140,7 @@ func (o *LoadBalancer2) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasType() bool {
+func (o *AutoScalingLoadBalancer) HasType() bool {
 	if o != nil && !IsNil(o.Type) {
 		return true
 	}
@@ -149,12 +149,12 @@ func (o *LoadBalancer2) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *LoadBalancer2) SetType(v string) {
+func (o *AutoScalingLoadBalancer) SetType(v string) {
 	o.Type = &v
 }
 
 // GetResources returns the Resources field value if set, zero value otherwise.
-func (o *LoadBalancer2) GetResources() InstanceResources {
+func (o *AutoScalingLoadBalancer) GetResources() InstanceResources {
 	if o == nil || IsNil(o.Resources) {
 		var ret InstanceResources
 		return ret
@@ -164,7 +164,7 @@ func (o *LoadBalancer2) GetResources() InstanceResources {
 
 // GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer2) GetResourcesOk() (*InstanceResources, bool) {
+func (o *AutoScalingLoadBalancer) GetResourcesOk() (*InstanceResources, bool) {
 	if o == nil || IsNil(o.Resources) {
 		return nil, false
 	}
@@ -172,7 +172,7 @@ func (o *LoadBalancer2) GetResourcesOk() (*InstanceResources, bool) {
 }
 
 // HasResources returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasResources() bool {
+func (o *AutoScalingLoadBalancer) HasResources() bool {
 	if o != nil && !IsNil(o.Resources) {
 		return true
 	}
@@ -181,12 +181,12 @@ func (o *LoadBalancer2) HasResources() bool {
 }
 
 // SetResources gets a reference to the given InstanceResources and assigns it to the Resources field.
-func (o *LoadBalancer2) SetResources(v InstanceResources) {
+func (o *AutoScalingLoadBalancer) SetResources(v InstanceResources) {
 	o.Resources = &v
 }
 
 // GetRegion returns the Region field value if set, zero value otherwise.
-func (o *LoadBalancer2) GetRegion() string {
+func (o *AutoScalingLoadBalancer) GetRegion() string {
 	if o == nil || IsNil(o.Region) {
 		var ret string
 		return ret
@@ -196,7 +196,7 @@ func (o *LoadBalancer2) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer2) GetRegionOk() (*string, bool) {
+func (o *AutoScalingLoadBalancer) GetRegionOk() (*string, bool) {
 	if o == nil || IsNil(o.Region) {
 		return nil, false
 	}
@@ -204,7 +204,7 @@ func (o *LoadBalancer2) GetRegionOk() (*string, bool) {
 }
 
 // HasRegion returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasRegion() bool {
+func (o *AutoScalingLoadBalancer) HasRegion() bool {
 	if o != nil && !IsNil(o.Region) {
 		return true
 	}
@@ -213,12 +213,12 @@ func (o *LoadBalancer2) HasRegion() bool {
 }
 
 // SetRegion gets a reference to the given string and assigns it to the Region field.
-func (o *LoadBalancer2) SetRegion(v string) {
+func (o *AutoScalingLoadBalancer) SetRegion(v string) {
 	o.Region = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *LoadBalancer2) GetReference() string {
+func (o *AutoScalingLoadBalancer) GetReference() string {
 	if o == nil || IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -228,7 +228,7 @@ func (o *LoadBalancer2) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer2) GetReferenceOk() (*string, bool) {
+func (o *AutoScalingLoadBalancer) GetReferenceOk() (*string, bool) {
 	if o == nil || IsNil(o.Reference) {
 		return nil, false
 	}
@@ -236,7 +236,7 @@ func (o *LoadBalancer2) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasReference() bool {
+func (o *AutoScalingLoadBalancer) HasReference() bool {
 	if o != nil && !IsNil(o.Reference) {
 		return true
 	}
@@ -245,12 +245,12 @@ func (o *LoadBalancer2) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *LoadBalancer2) SetReference(v string) {
+func (o *AutoScalingLoadBalancer) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetState returns the State field value if set, zero value otherwise.
-func (o *LoadBalancer2) GetState() InstanceState {
+func (o *AutoScalingLoadBalancer) GetState() InstanceState {
 	if o == nil || IsNil(o.State) {
 		var ret InstanceState
 		return ret
@@ -260,7 +260,7 @@ func (o *LoadBalancer2) GetState() InstanceState {
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer2) GetStateOk() (*InstanceState, bool) {
+func (o *AutoScalingLoadBalancer) GetStateOk() (*InstanceState, bool) {
 	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
@@ -268,7 +268,7 @@ func (o *LoadBalancer2) GetStateOk() (*InstanceState, bool) {
 }
 
 // HasState returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasState() bool {
+func (o *AutoScalingLoadBalancer) HasState() bool {
 	if o != nil && !IsNil(o.State) {
 		return true
 	}
@@ -277,12 +277,12 @@ func (o *LoadBalancer2) HasState() bool {
 }
 
 // SetState gets a reference to the given InstanceState and assigns it to the State field.
-func (o *LoadBalancer2) SetState(v InstanceState) {
+func (o *AutoScalingLoadBalancer) SetState(v InstanceState) {
 	o.State = &v
 }
 
 // GetIps returns the Ips field value if set, zero value otherwise.
-func (o *LoadBalancer2) GetIps() []Ip {
+func (o *AutoScalingLoadBalancer) GetIps() []Ip {
 	if o == nil || IsNil(o.Ips) {
 		var ret []Ip
 		return ret
@@ -292,7 +292,7 @@ func (o *LoadBalancer2) GetIps() []Ip {
 
 // GetIpsOk returns a tuple with the Ips field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer2) GetIpsOk() ([]Ip, bool) {
+func (o *AutoScalingLoadBalancer) GetIpsOk() ([]Ip, bool) {
 	if o == nil || IsNil(o.Ips) {
 		return nil, false
 	}
@@ -300,7 +300,7 @@ func (o *LoadBalancer2) GetIpsOk() ([]Ip, bool) {
 }
 
 // HasIps returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasIps() bool {
+func (o *AutoScalingLoadBalancer) HasIps() bool {
 	if o != nil && !IsNil(o.Ips) {
 		return true
 	}
@@ -309,12 +309,12 @@ func (o *LoadBalancer2) HasIps() bool {
 }
 
 // SetIps gets a reference to the given []Ip and assigns it to the Ips field.
-func (o *LoadBalancer2) SetIps(v []Ip) {
+func (o *AutoScalingLoadBalancer) SetIps(v []Ip) {
 	o.Ips = v
 }
 
 // GetContract returns the Contract field value if set, zero value otherwise.
-func (o *LoadBalancer2) GetContract() Contract {
+func (o *AutoScalingLoadBalancer) GetContract() Contract {
 	if o == nil || IsNil(o.Contract) {
 		var ret Contract
 		return ret
@@ -324,7 +324,7 @@ func (o *LoadBalancer2) GetContract() Contract {
 
 // GetContractOk returns a tuple with the Contract field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer2) GetContractOk() (*Contract, bool) {
+func (o *AutoScalingLoadBalancer) GetContractOk() (*Contract, bool) {
 	if o == nil || IsNil(o.Contract) {
 		return nil, false
 	}
@@ -332,7 +332,7 @@ func (o *LoadBalancer2) GetContractOk() (*Contract, bool) {
 }
 
 // HasContract returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasContract() bool {
+func (o *AutoScalingLoadBalancer) HasContract() bool {
 	if o != nil && !IsNil(o.Contract) {
 		return true
 	}
@@ -341,12 +341,12 @@ func (o *LoadBalancer2) HasContract() bool {
 }
 
 // SetContract gets a reference to the given Contract and assigns it to the Contract field.
-func (o *LoadBalancer2) SetContract(v Contract) {
+func (o *AutoScalingLoadBalancer) SetContract(v Contract) {
 	o.Contract = &v
 }
 
 // GetStartedAt returns the StartedAt field value if set, zero value otherwise.
-func (o *LoadBalancer2) GetStartedAt() time.Time {
+func (o *AutoScalingLoadBalancer) GetStartedAt() time.Time {
 	if o == nil || IsNil(o.StartedAt) {
 		var ret time.Time
 		return ret
@@ -356,7 +356,7 @@ func (o *LoadBalancer2) GetStartedAt() time.Time {
 
 // GetStartedAtOk returns a tuple with the StartedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer2) GetStartedAtOk() (*time.Time, bool) {
+func (o *AutoScalingLoadBalancer) GetStartedAtOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.StartedAt) {
 		return nil, false
 	}
@@ -364,7 +364,7 @@ func (o *LoadBalancer2) GetStartedAtOk() (*time.Time, bool) {
 }
 
 // HasStartedAt returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasStartedAt() bool {
+func (o *AutoScalingLoadBalancer) HasStartedAt() bool {
 	if o != nil && !IsNil(o.StartedAt) {
 		return true
 	}
@@ -373,14 +373,14 @@ func (o *LoadBalancer2) HasStartedAt() bool {
 }
 
 // SetStartedAt gets a reference to the given time.Time and assigns it to the StartedAt field.
-func (o *LoadBalancer2) SetStartedAt(v time.Time) {
+func (o *AutoScalingLoadBalancer) SetStartedAt(v time.Time) {
 	o.StartedAt = &v
 }
 
 // GetConfiguration returns the Configuration field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LoadBalancer2) GetConfiguration() LoadBalancerConfiguration1 {
+func (o *AutoScalingLoadBalancer) GetConfiguration() LoadBalancerConfiguration {
 	if o == nil || IsNil(o.Configuration.Get()) {
-		var ret LoadBalancerConfiguration1
+		var ret LoadBalancerConfiguration
 		return ret
 	}
 	return *o.Configuration.Get()
@@ -389,7 +389,7 @@ func (o *LoadBalancer2) GetConfiguration() LoadBalancerConfiguration1 {
 // GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoadBalancer2) GetConfigurationOk() (*LoadBalancerConfiguration1, bool) {
+func (o *AutoScalingLoadBalancer) GetConfigurationOk() (*LoadBalancerConfiguration, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -397,7 +397,7 @@ func (o *LoadBalancer2) GetConfigurationOk() (*LoadBalancerConfiguration1, bool)
 }
 
 // HasConfiguration returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasConfiguration() bool {
+func (o *AutoScalingLoadBalancer) HasConfiguration() bool {
 	if o != nil && o.Configuration.IsSet() {
 		return true
 	}
@@ -405,22 +405,22 @@ func (o *LoadBalancer2) HasConfiguration() bool {
 	return false
 }
 
-// SetConfiguration gets a reference to the given NullableLoadBalancerConfiguration1 and assigns it to the Configuration field.
-func (o *LoadBalancer2) SetConfiguration(v LoadBalancerConfiguration1) {
+// SetConfiguration gets a reference to the given NullableLoadBalancerConfiguration and assigns it to the Configuration field.
+func (o *AutoScalingLoadBalancer) SetConfiguration(v LoadBalancerConfiguration) {
 	o.Configuration.Set(&v)
 }
 // SetConfigurationNil sets the value for Configuration to be an explicit nil
-func (o *LoadBalancer2) SetConfigurationNil() {
+func (o *AutoScalingLoadBalancer) SetConfigurationNil() {
 	o.Configuration.Set(nil)
 }
 
 // UnsetConfiguration ensures that no value is present for Configuration, not even an explicit nil
-func (o *LoadBalancer2) UnsetConfiguration() {
+func (o *AutoScalingLoadBalancer) UnsetConfiguration() {
 	o.Configuration.Unset()
 }
 
 // GetPrivateNetwork returns the PrivateNetwork field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LoadBalancer2) GetPrivateNetwork() PrivateNetwork {
+func (o *AutoScalingLoadBalancer) GetPrivateNetwork() PrivateNetwork {
 	if o == nil || IsNil(o.PrivateNetwork.Get()) {
 		var ret PrivateNetwork
 		return ret
@@ -431,7 +431,7 @@ func (o *LoadBalancer2) GetPrivateNetwork() PrivateNetwork {
 // GetPrivateNetworkOk returns a tuple with the PrivateNetwork field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoadBalancer2) GetPrivateNetworkOk() (*PrivateNetwork, bool) {
+func (o *AutoScalingLoadBalancer) GetPrivateNetworkOk() (*PrivateNetwork, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -439,7 +439,7 @@ func (o *LoadBalancer2) GetPrivateNetworkOk() (*PrivateNetwork, bool) {
 }
 
 // HasPrivateNetwork returns a boolean if a field has been set.
-func (o *LoadBalancer2) HasPrivateNetwork() bool {
+func (o *AutoScalingLoadBalancer) HasPrivateNetwork() bool {
 	if o != nil && o.PrivateNetwork.IsSet() {
 		return true
 	}
@@ -448,20 +448,20 @@ func (o *LoadBalancer2) HasPrivateNetwork() bool {
 }
 
 // SetPrivateNetwork gets a reference to the given NullablePrivateNetwork and assigns it to the PrivateNetwork field.
-func (o *LoadBalancer2) SetPrivateNetwork(v PrivateNetwork) {
+func (o *AutoScalingLoadBalancer) SetPrivateNetwork(v PrivateNetwork) {
 	o.PrivateNetwork.Set(&v)
 }
 // SetPrivateNetworkNil sets the value for PrivateNetwork to be an explicit nil
-func (o *LoadBalancer2) SetPrivateNetworkNil() {
+func (o *AutoScalingLoadBalancer) SetPrivateNetworkNil() {
 	o.PrivateNetwork.Set(nil)
 }
 
 // UnsetPrivateNetwork ensures that no value is present for PrivateNetwork, not even an explicit nil
-func (o *LoadBalancer2) UnsetPrivateNetwork() {
+func (o *AutoScalingLoadBalancer) UnsetPrivateNetwork() {
 	o.PrivateNetwork.Unset()
 }
 
-func (o LoadBalancer2) MarshalJSON() ([]byte, error) {
+func (o AutoScalingLoadBalancer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -469,7 +469,7 @@ func (o LoadBalancer2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LoadBalancer2) ToMap() (map[string]interface{}, error) {
+func (o AutoScalingLoadBalancer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CustomerId) {
 		toSerialize["customerId"] = o.CustomerId
@@ -510,38 +510,38 @@ func (o LoadBalancer2) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableLoadBalancer2 struct {
-	value *LoadBalancer2
+type NullableAutoScalingLoadBalancer struct {
+	value *AutoScalingLoadBalancer
 	isSet bool
 }
 
-func (v NullableLoadBalancer2) Get() *LoadBalancer2 {
+func (v NullableAutoScalingLoadBalancer) Get() *AutoScalingLoadBalancer {
 	return v.value
 }
 
-func (v *NullableLoadBalancer2) Set(val *LoadBalancer2) {
+func (v *NullableAutoScalingLoadBalancer) Set(val *AutoScalingLoadBalancer) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableLoadBalancer2) IsSet() bool {
+func (v NullableAutoScalingLoadBalancer) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableLoadBalancer2) Unset() {
+func (v *NullableAutoScalingLoadBalancer) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableLoadBalancer2(val *LoadBalancer2) *NullableLoadBalancer2 {
-	return &NullableLoadBalancer2{value: val, isSet: true}
+func NewNullableAutoScalingLoadBalancer(val *AutoScalingLoadBalancer) *NullableAutoScalingLoadBalancer {
+	return &NullableAutoScalingLoadBalancer{value: val, isSet: true}
 }
 
-func (v NullableLoadBalancer2) MarshalJSON() ([]byte, error) {
+func (v NullableAutoScalingLoadBalancer) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableLoadBalancer2) UnmarshalJSON(src []byte) error {
+func (v *NullableAutoScalingLoadBalancer) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -19,7 +19,7 @@ var _ MappedNullable = &GetCpuMetricsResult{}
 
 // GetCpuMetricsResult struct for GetCpuMetricsResult
 type GetCpuMetricsResult struct {
-	Metrics *GetCpuMetricsResultMetrics `json:"metrics,omitempty"`
+	Metrics *CpuMetrics `json:"metrics,omitempty"`
 	Metadata *CpuMetricsMetadata `json:"_metadata,omitempty"`
 }
 
@@ -41,9 +41,9 @@ func NewGetCpuMetricsResultWithDefaults() *GetCpuMetricsResult {
 }
 
 // GetMetrics returns the Metrics field value if set, zero value otherwise.
-func (o *GetCpuMetricsResult) GetMetrics() GetCpuMetricsResultMetrics {
+func (o *GetCpuMetricsResult) GetMetrics() CpuMetrics {
 	if o == nil || IsNil(o.Metrics) {
-		var ret GetCpuMetricsResultMetrics
+		var ret CpuMetrics
 		return ret
 	}
 	return *o.Metrics
@@ -51,7 +51,7 @@ func (o *GetCpuMetricsResult) GetMetrics() GetCpuMetricsResultMetrics {
 
 // GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetCpuMetricsResult) GetMetricsOk() (*GetCpuMetricsResultMetrics, bool) {
+func (o *GetCpuMetricsResult) GetMetricsOk() (*CpuMetrics, bool) {
 	if o == nil || IsNil(o.Metrics) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *GetCpuMetricsResult) HasMetrics() bool {
 	return false
 }
 
-// SetMetrics gets a reference to the given GetCpuMetricsResultMetrics and assigns it to the Metrics field.
-func (o *GetCpuMetricsResult) SetMetrics(v GetCpuMetricsResultMetrics) {
+// SetMetrics gets a reference to the given CpuMetrics and assigns it to the Metrics field.
+func (o *GetCpuMetricsResult) SetMetrics(v CpuMetrics) {
 	o.Metrics = &v
 }
 

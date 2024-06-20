@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Metrics** | Pointer to [**GetCpuMetricsResultMetrics**](GetCpuMetricsResultMetrics.md) |  | [optional] 
+**Metrics** | Pointer to [**CpuMetrics**](CpuMetrics.md) |  | [optional] 
 **Metadata** | Pointer to [**CpuMetricsMetadata**](CpuMetricsMetadata.md) |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMetrics
 
-`func (o *GetCpuMetricsResult) GetMetrics() GetCpuMetricsResultMetrics`
+`func (o *GetCpuMetricsResult) GetMetrics() CpuMetrics`
 
 GetMetrics returns the Metrics field if non-nil, zero value otherwise.
 
 ### GetMetricsOk
 
-`func (o *GetCpuMetricsResult) GetMetricsOk() (*GetCpuMetricsResultMetrics, bool)`
+`func (o *GetCpuMetricsResult) GetMetricsOk() (*CpuMetrics, bool)`
 
 GetMetricsOk returns a tuple with the Metrics field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetrics
 
-`func (o *GetCpuMetricsResult) SetMetrics(v GetCpuMetricsResultMetrics)`
+`func (o *GetCpuMetricsResult) SetMetrics(v CpuMetrics)`
 
 SetMetrics sets Metrics field to given value.
 

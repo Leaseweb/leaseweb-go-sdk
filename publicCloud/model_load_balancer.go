@@ -39,6 +39,7 @@ type LoadBalancer struct {
 	StartedAt *time.Time `json:"startedAt,omitempty"`
 	Contract *Contract `json:"contract,omitempty"`
 	Configuration *LoadBalancerConfiguration `json:"configuration,omitempty"`
+	AutoScalingGroup NullableLoadBalancerAutoScalingGroup `json:"autoScalingGroup,omitempty"`
 }
 
 // NewLoadBalancer instantiates a new LoadBalancer object
@@ -442,6 +443,48 @@ func (o *LoadBalancer) SetConfiguration(v LoadBalancerConfiguration) {
 	o.Configuration = &v
 }
 
+// GetAutoScalingGroup returns the AutoScalingGroup field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LoadBalancer) GetAutoScalingGroup() LoadBalancerAutoScalingGroup {
+	if o == nil || IsNil(o.AutoScalingGroup.Get()) {
+		var ret LoadBalancerAutoScalingGroup
+		return ret
+	}
+	return *o.AutoScalingGroup.Get()
+}
+
+// GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LoadBalancer) GetAutoScalingGroupOk() (*LoadBalancerAutoScalingGroup, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AutoScalingGroup.Get(), o.AutoScalingGroup.IsSet()
+}
+
+// HasAutoScalingGroup returns a boolean if a field has been set.
+func (o *LoadBalancer) HasAutoScalingGroup() bool {
+	if o != nil && o.AutoScalingGroup.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoScalingGroup gets a reference to the given NullableLoadBalancerAutoScalingGroup and assigns it to the AutoScalingGroup field.
+func (o *LoadBalancer) SetAutoScalingGroup(v LoadBalancerAutoScalingGroup) {
+	o.AutoScalingGroup.Set(&v)
+}
+// SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
+func (o *LoadBalancer) SetAutoScalingGroupNil() {
+	o.AutoScalingGroup.Set(nil)
+}
+
+// UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
+func (o *LoadBalancer) UnsetAutoScalingGroup() {
+	o.AutoScalingGroup.Unset()
+}
+
 func (o LoadBalancer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -487,6 +530,9 @@ func (o LoadBalancer) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Configuration) {
 		toSerialize["configuration"] = o.Configuration
+	}
+	if o.AutoScalingGroup.IsSet() {
+		toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	}
 	return toSerialize, nil
 }

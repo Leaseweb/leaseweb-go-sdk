@@ -17,10 +17,9 @@ import (
 // checks if the CpuMetrics type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CpuMetrics{}
 
-// CpuMetrics CPU usage metrics, in percentage
+// CpuMetrics struct for CpuMetrics
 type CpuMetrics struct {
-	Values []CpuMetricsValue `json:"values,omitempty"`
-	Unit *string `json:"unit,omitempty"`
+	CpuMetrics *CpuMetricsMetrics `json:"cpuMetrics,omitempty"`
 }
 
 // NewCpuMetrics instantiates a new CpuMetrics object
@@ -40,68 +39,36 @@ func NewCpuMetricsWithDefaults() *CpuMetrics {
 	return &this
 }
 
-// GetValues returns the Values field value if set, zero value otherwise.
-func (o *CpuMetrics) GetValues() []CpuMetricsValue {
-	if o == nil || IsNil(o.Values) {
-		var ret []CpuMetricsValue
+// GetCpuMetrics returns the CpuMetrics field value if set, zero value otherwise.
+func (o *CpuMetrics) GetCpuMetrics() CpuMetricsMetrics {
+	if o == nil || IsNil(o.CpuMetrics) {
+		var ret CpuMetricsMetrics
 		return ret
 	}
-	return o.Values
+	return *o.CpuMetrics
 }
 
-// GetValuesOk returns a tuple with the Values field value if set, nil otherwise
+// GetCpuMetricsOk returns a tuple with the CpuMetrics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetrics) GetValuesOk() ([]CpuMetricsValue, bool) {
-	if o == nil || IsNil(o.Values) {
+func (o *CpuMetrics) GetCpuMetricsOk() (*CpuMetricsMetrics, bool) {
+	if o == nil || IsNil(o.CpuMetrics) {
 		return nil, false
 	}
-	return o.Values, true
+	return o.CpuMetrics, true
 }
 
-// HasValues returns a boolean if a field has been set.
-func (o *CpuMetrics) HasValues() bool {
-	if o != nil && !IsNil(o.Values) {
+// HasCpuMetrics returns a boolean if a field has been set.
+func (o *CpuMetrics) HasCpuMetrics() bool {
+	if o != nil && !IsNil(o.CpuMetrics) {
 		return true
 	}
 
 	return false
 }
 
-// SetValues gets a reference to the given []CpuMetricsValue and assigns it to the Values field.
-func (o *CpuMetrics) SetValues(v []CpuMetricsValue) {
-	o.Values = v
-}
-
-// GetUnit returns the Unit field value if set, zero value otherwise.
-func (o *CpuMetrics) GetUnit() string {
-	if o == nil || IsNil(o.Unit) {
-		var ret string
-		return ret
-	}
-	return *o.Unit
-}
-
-// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CpuMetrics) GetUnitOk() (*string, bool) {
-	if o == nil || IsNil(o.Unit) {
-		return nil, false
-	}
-	return o.Unit, true
-}
-
-// HasUnit returns a boolean if a field has been set.
-func (o *CpuMetrics) HasUnit() bool {
-	if o != nil && !IsNil(o.Unit) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnit gets a reference to the given string and assigns it to the Unit field.
-func (o *CpuMetrics) SetUnit(v string) {
-	o.Unit = &v
+// SetCpuMetrics gets a reference to the given CpuMetricsMetrics and assigns it to the CpuMetrics field.
+func (o *CpuMetrics) SetCpuMetrics(v CpuMetricsMetrics) {
+	o.CpuMetrics = &v
 }
 
 func (o CpuMetrics) MarshalJSON() ([]byte, error) {
@@ -114,11 +81,8 @@ func (o CpuMetrics) MarshalJSON() ([]byte, error) {
 
 func (o CpuMetrics) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Values) {
-		toSerialize["values"] = o.Values
-	}
-	if !IsNil(o.Unit) {
-		toSerialize["unit"] = o.Unit
+	if !IsNil(o.CpuMetrics) {
+		toSerialize["cpuMetrics"] = o.CpuMetrics
 	}
 	return toSerialize, nil
 }

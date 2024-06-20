@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Metrics** | Pointer to [**Metrics**](Metrics.md) |  | [optional] 
+**Metrics** | Pointer to [**DataTrafficMetrics**](DataTrafficMetrics.md) |  | [optional] 
 **Metadata** | Pointer to [**TrafficMetricsMetaData**](TrafficMetricsMetaData.md) |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMetrics
 
-`func (o *GetDataTrafficMetricsResult) GetMetrics() Metrics`
+`func (o *GetDataTrafficMetricsResult) GetMetrics() DataTrafficMetrics`
 
 GetMetrics returns the Metrics field if non-nil, zero value otherwise.
 
 ### GetMetricsOk
 
-`func (o *GetDataTrafficMetricsResult) GetMetricsOk() (*Metrics, bool)`
+`func (o *GetDataTrafficMetricsResult) GetMetricsOk() (*DataTrafficMetrics, bool)`
 
 GetMetricsOk returns a tuple with the Metrics field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetrics
 
-`func (o *GetDataTrafficMetricsResult) SetMetrics(v Metrics)`
+`func (o *GetDataTrafficMetricsResult) SetMetrics(v DataTrafficMetrics)`
 
 SetMetrics sets Metrics field to given value.
 

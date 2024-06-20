@@ -93,6 +93,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**DeleteCredentials**](docs/PublicCloudAPI.md#deletecredentials) | **Delete** /instances/{instanceId}/credentials | Delete all instance credentials
 *PublicCloudAPI* | [**DeleteLoadBalancerListener**](docs/PublicCloudAPI.md#deleteloadbalancerlistener) | **Delete** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Delete load balancer listener
 *PublicCloudAPI* | [**DeleteSnapshot**](docs/PublicCloudAPI.md#deletesnapshot) | **Delete** /instances/{instanceId}/snapshots/{snapshotId} | Delete instance snapshot
+*PublicCloudAPI* | [**DeregisterAutoScalingGroupLoadBalancer**](docs/PublicCloudAPI.md#deregisterautoscalinggrouploadbalancer) | **Post** /autoScalingGroups/{autoScalingGroupId}/deregisterLoadBalancer | Deregister Load balancer
 *PublicCloudAPI* | [**DeregisterLoadBalancerTargets**](docs/PublicCloudAPI.md#deregisterloadbalancertargets) | **Post** /loadBalancers/{loadBalancerId}/deregisterTargets | Deregister targets
 *PublicCloudAPI* | [**DetachIso**](docs/PublicCloudAPI.md#detachiso) | **Post** /instances/{instanceId}/detachIso | Detach ISO from instance
 *PublicCloudAPI* | [**GetAutoScalingGroup**](docs/PublicCloudAPI.md#getautoscalinggroup) | **Get** /autoScalingGroups/{autoScalingGroupId} | Get Auto Scaling Group details
@@ -126,6 +127,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**LaunchLoadBalancer**](docs/PublicCloudAPI.md#launchloadbalancer) | **Post** /loadBalancers | Launch Load balancer
 *PublicCloudAPI* | [**NullRouteIp**](docs/PublicCloudAPI.md#nullrouteip) | **Post** /instances/{instanceId}/ips/{ip}/null | Null route IP
 *PublicCloudAPI* | [**RebootInstance**](docs/PublicCloudAPI.md#rebootinstance) | **Post** /instances/{instanceId}/reboot | Reboot instance
+*PublicCloudAPI* | [**RegisterAutoScalingGroupLoadBalancer**](docs/PublicCloudAPI.md#registerautoscalinggrouploadbalancer) | **Post** /autoScalingGroups/{autoScalingGroupId}/registerLoadBalancer | Register Load balancer
 *PublicCloudAPI* | [**RegisterLoadBalancerTargets**](docs/PublicCloudAPI.md#registerloadbalancertargets) | **Post** /loadBalancers/{loadBalancerId}/registerTargets | Register targets
 *PublicCloudAPI* | [**ReinstallInstance**](docs/PublicCloudAPI.md#reinstallinstance) | **Put** /instances/{instanceId}/reinstall | Reinstall instance
 *PublicCloudAPI* | [**RemoveFromPrivateNetwork**](docs/PublicCloudAPI.md#removefromprivatenetwork) | **Delete** /instances/{instanceId}/removeFromPrivateNetwork | Remove instance from Private Network
@@ -150,6 +152,8 @@ Class | Method | HTTP request | Description
  - [AttachIsoOpts](docs/AttachIsoOpts.md)
  - [AutoScaledInstance](docs/AutoScaledInstance.md)
  - [AutoScalingGroup](docs/AutoScalingGroup.md)
+ - [AutoScalingGroupLoadBalancer](docs/AutoScalingGroupLoadBalancer.md)
+ - [AutoScalingLoadBalancer](docs/AutoScalingLoadBalancer.md)
  - [Billing](docs/Billing.md)
  - [Central](docs/Central.md)
  - [Certificate](docs/Certificate.md)
@@ -163,10 +167,12 @@ Class | Method | HTTP request | Description
  - [CpuMetricsMetadataSummary](docs/CpuMetricsMetadataSummary.md)
  - [CpuMetricsMetadataSummaryCpuMetrics](docs/CpuMetricsMetadataSummaryCpuMetrics.md)
  - [CpuMetricsMetadataSummaryPeak](docs/CpuMetricsMetadataSummaryPeak.md)
+ - [CpuMetricsMetrics](docs/CpuMetricsMetrics.md)
  - [CpuMetricsValue](docs/CpuMetricsValue.md)
  - [CreateAutoScalingGroupOpts](docs/CreateAutoScalingGroupOpts.md)
  - [Credential](docs/Credential.md)
  - [CredentialType](docs/CredentialType.md)
+ - [DataTrafficMetrics](docs/DataTrafficMetrics.md)
  - [Ddos](docs/Ddos.md)
  - [ErrorResult](docs/ErrorResult.md)
  - [ExpenseResultInstance](docs/ExpenseResultInstance.md)
@@ -174,7 +180,6 @@ Class | Method | HTTP request | Description
  - [GetAutoScalingGroupListResult](docs/GetAutoScalingGroupListResult.md)
  - [GetConsoleAccessToInstanceResult](docs/GetConsoleAccessToInstanceResult.md)
  - [GetCpuMetricsResult](docs/GetCpuMetricsResult.md)
- - [GetCpuMetricsResultMetrics](docs/GetCpuMetricsResultMetrics.md)
  - [GetCredentialListByTypeResult](docs/GetCredentialListByTypeResult.md)
  - [GetCredentialListResult](docs/GetCredentialListResult.md)
  - [GetCredentialResult](docs/GetCredentialResult.md)
@@ -202,10 +207,8 @@ Class | Method | HTTP request | Description
  - [LaunchInstanceOpts](docs/LaunchInstanceOpts.md)
  - [LaunchLoadBalancerOpts](docs/LaunchLoadBalancerOpts.md)
  - [LoadBalancer](docs/LoadBalancer.md)
- - [LoadBalancer1](docs/LoadBalancer1.md)
- - [LoadBalancer2](docs/LoadBalancer2.md)
+ - [LoadBalancerAutoScalingGroup](docs/LoadBalancerAutoScalingGroup.md)
  - [LoadBalancerConfiguration](docs/LoadBalancerConfiguration.md)
- - [LoadBalancerConfiguration1](docs/LoadBalancerConfiguration1.md)
  - [LoadBalancerListener](docs/LoadBalancerListener.md)
  - [LoadBalancerListenerOpts](docs/LoadBalancerListenerOpts.md)
  - [LoadBalancerTargetOpt](docs/LoadBalancerTargetOpt.md)
@@ -214,7 +217,6 @@ Class | Method | HTTP request | Description
  - [MarketApp](docs/MarketApp.md)
  - [Memory](docs/Memory.md)
  - [Metadata](docs/Metadata.md)
- - [Metrics](docs/Metrics.md)
  - [NetworkType](docs/NetworkType.md)
  - [NullRouteIpOpts](docs/NullRouteIpOpts.md)
  - [OperatingSystem](docs/OperatingSystem.md)
@@ -226,6 +228,7 @@ Class | Method | HTTP request | Description
  - [PrivateNetworkSpeed](docs/PrivateNetworkSpeed.md)
  - [PublicNetworkSpeed](docs/PublicNetworkSpeed.md)
  - [Region](docs/Region.md)
+ - [RegisterAutoScalingGroupLoadBalancerOpts](docs/RegisterAutoScalingGroupLoadBalancerOpts.md)
  - [ReinstallInstanceOpts](docs/ReinstallInstanceOpts.md)
  - [Snapshot](docs/Snapshot.md)
  - [StickySession](docs/StickySession.md)

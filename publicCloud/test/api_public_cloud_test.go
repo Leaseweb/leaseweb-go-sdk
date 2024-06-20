@@ -169,6 +169,20 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test PublicCloudAPIService DeregisterAutoScalingGroupLoadBalancer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var autoScalingGroupId string
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.DeregisterAutoScalingGroupLoadBalancer(context.Background(), autoScalingGroupId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PublicCloudAPIService DeregisterLoadBalancerTargets", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -611,6 +625,20 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 		httpRes, err := apiClient.PublicCloudAPI.RebootInstance(context.Background(), instanceId).Execute()
 
 		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PublicCloudAPIService RegisterAutoScalingGroupLoadBalancer", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var autoScalingGroupId string
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.RegisterAutoScalingGroupLoadBalancer(context.Background(), autoScalingGroupId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

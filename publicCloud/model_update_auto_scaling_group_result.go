@@ -48,7 +48,7 @@ type UpdateAutoScalingGroupResult struct {
 	StartsAt NullableTime `json:"startsAt,omitempty"`
 	// Only for \"SCHEDULED\" auto scaling group. Date and time (UTC) that the instances need to be terminated
 	EndsAt NullableTime `json:"endsAt,omitempty"`
-	LoadBalancer NullableLoadBalancer2 `json:"loadBalancer,omitempty"`
+	LoadBalancer NullableAutoScalingGroupLoadBalancer `json:"loadBalancer,omitempty"`
 }
 
 // NewUpdateAutoScalingGroupResult instantiates a new UpdateAutoScalingGroupResult object
@@ -587,9 +587,9 @@ func (o *UpdateAutoScalingGroupResult) UnsetEndsAt() {
 }
 
 // GetLoadBalancer returns the LoadBalancer field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateAutoScalingGroupResult) GetLoadBalancer() LoadBalancer2 {
+func (o *UpdateAutoScalingGroupResult) GetLoadBalancer() AutoScalingGroupLoadBalancer {
 	if o == nil || IsNil(o.LoadBalancer.Get()) {
-		var ret LoadBalancer2
+		var ret AutoScalingGroupLoadBalancer
 		return ret
 	}
 	return *o.LoadBalancer.Get()
@@ -598,7 +598,7 @@ func (o *UpdateAutoScalingGroupResult) GetLoadBalancer() LoadBalancer2 {
 // GetLoadBalancerOk returns a tuple with the LoadBalancer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateAutoScalingGroupResult) GetLoadBalancerOk() (*LoadBalancer2, bool) {
+func (o *UpdateAutoScalingGroupResult) GetLoadBalancerOk() (*AutoScalingGroupLoadBalancer, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -614,8 +614,8 @@ func (o *UpdateAutoScalingGroupResult) HasLoadBalancer() bool {
 	return false
 }
 
-// SetLoadBalancer gets a reference to the given NullableLoadBalancer2 and assigns it to the LoadBalancer field.
-func (o *UpdateAutoScalingGroupResult) SetLoadBalancer(v LoadBalancer2) {
+// SetLoadBalancer gets a reference to the given NullableAutoScalingGroupLoadBalancer and assigns it to the LoadBalancer field.
+func (o *UpdateAutoScalingGroupResult) SetLoadBalancer(v AutoScalingGroupLoadBalancer) {
 	o.LoadBalancer.Set(&v)
 }
 // SetLoadBalancerNil sets the value for LoadBalancer to be an explicit nil

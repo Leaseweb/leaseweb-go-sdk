@@ -15,11 +15,13 @@ import (
 	"time"
 )
 
-// checks if the AutoScalingGroup type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AutoScalingGroup{}
+// checks if the LoadBalancerAutoScalingGroup type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LoadBalancerAutoScalingGroup{}
 
-// AutoScalingGroup struct for AutoScalingGroup
-type AutoScalingGroup struct {
+// LoadBalancerAutoScalingGroup Auto Scaling Group in which the Load Balancer is registered
+type LoadBalancerAutoScalingGroup struct {
+	// The customer ID who owns the auto scaling group
+	CustomerId *string `json:"customerId,omitempty"`
 	// The Auto Scaling Group unique identifier
 	Id *string `json:"id,omitempty"`
 	// Auto Scaling Group type
@@ -48,28 +50,59 @@ type AutoScalingGroup struct {
 	StartsAt NullableTime `json:"startsAt,omitempty"`
 	// Only for \"SCHEDULED\" auto scaling group. Date and time (UTC) that the instances need to be terminated
 	EndsAt NullableTime `json:"endsAt,omitempty"`
-	LoadBalancer NullableAutoScalingLoadBalancer `json:"loadBalancer,omitempty"`
 }
 
-// NewAutoScalingGroup instantiates a new AutoScalingGroup object
+// NewLoadBalancerAutoScalingGroup instantiates a new LoadBalancerAutoScalingGroup object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAutoScalingGroup() *AutoScalingGroup {
-	this := AutoScalingGroup{}
+func NewLoadBalancerAutoScalingGroup() *LoadBalancerAutoScalingGroup {
+	this := LoadBalancerAutoScalingGroup{}
 	return &this
 }
 
-// NewAutoScalingGroupWithDefaults instantiates a new AutoScalingGroup object
+// NewLoadBalancerAutoScalingGroupWithDefaults instantiates a new LoadBalancerAutoScalingGroup object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAutoScalingGroupWithDefaults() *AutoScalingGroup {
-	this := AutoScalingGroup{}
+func NewLoadBalancerAutoScalingGroupWithDefaults() *LoadBalancerAutoScalingGroup {
+	this := LoadBalancerAutoScalingGroup{}
 	return &this
+}
+
+// GetCustomerId returns the CustomerId field value if set, zero value otherwise.
+func (o *LoadBalancerAutoScalingGroup) GetCustomerId() string {
+	if o == nil || IsNil(o.CustomerId) {
+		var ret string
+		return ret
+	}
+	return *o.CustomerId
+}
+
+// GetCustomerIdOk returns a tuple with the CustomerId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LoadBalancerAutoScalingGroup) GetCustomerIdOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomerId) {
+		return nil, false
+	}
+	return o.CustomerId, true
+}
+
+// HasCustomerId returns a boolean if a field has been set.
+func (o *LoadBalancerAutoScalingGroup) HasCustomerId() bool {
+	if o != nil && !IsNil(o.CustomerId) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomerId gets a reference to the given string and assigns it to the CustomerId field.
+func (o *LoadBalancerAutoScalingGroup) SetCustomerId(v string) {
+	o.CustomerId = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *AutoScalingGroup) GetId() string {
+func (o *LoadBalancerAutoScalingGroup) GetId() string {
 	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
@@ -79,7 +112,7 @@ func (o *AutoScalingGroup) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetIdOk() (*string, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetIdOk() (*string, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -87,7 +120,7 @@ func (o *AutoScalingGroup) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasId() bool {
+func (o *LoadBalancerAutoScalingGroup) HasId() bool {
 	if o != nil && !IsNil(o.Id) {
 		return true
 	}
@@ -96,12 +129,12 @@ func (o *AutoScalingGroup) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *AutoScalingGroup) SetId(v string) {
+func (o *LoadBalancerAutoScalingGroup) SetId(v string) {
 	o.Id = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *AutoScalingGroup) GetType() string {
+func (o *LoadBalancerAutoScalingGroup) GetType() string {
 	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
@@ -111,7 +144,7 @@ func (o *AutoScalingGroup) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetTypeOk() (*string, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -119,7 +152,7 @@ func (o *AutoScalingGroup) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasType() bool {
+func (o *LoadBalancerAutoScalingGroup) HasType() bool {
 	if o != nil && !IsNil(o.Type) {
 		return true
 	}
@@ -128,12 +161,12 @@ func (o *AutoScalingGroup) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *AutoScalingGroup) SetType(v string) {
+func (o *LoadBalancerAutoScalingGroup) SetType(v string) {
 	o.Type = &v
 }
 
 // GetState returns the State field value if set, zero value otherwise.
-func (o *AutoScalingGroup) GetState() string {
+func (o *LoadBalancerAutoScalingGroup) GetState() string {
 	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
@@ -143,7 +176,7 @@ func (o *AutoScalingGroup) GetState() string {
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetStateOk() (*string, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetStateOk() (*string, bool) {
 	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
@@ -151,7 +184,7 @@ func (o *AutoScalingGroup) GetStateOk() (*string, bool) {
 }
 
 // HasState returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasState() bool {
+func (o *LoadBalancerAutoScalingGroup) HasState() bool {
 	if o != nil && !IsNil(o.State) {
 		return true
 	}
@@ -160,12 +193,12 @@ func (o *AutoScalingGroup) HasState() bool {
 }
 
 // SetState gets a reference to the given string and assigns it to the State field.
-func (o *AutoScalingGroup) SetState(v string) {
+func (o *LoadBalancerAutoScalingGroup) SetState(v string) {
 	o.State = &v
 }
 
 // GetDesiredAmount returns the DesiredAmount field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoScalingGroup) GetDesiredAmount() int32 {
+func (o *LoadBalancerAutoScalingGroup) GetDesiredAmount() int32 {
 	if o == nil || IsNil(o.DesiredAmount.Get()) {
 		var ret int32
 		return ret
@@ -176,7 +209,7 @@ func (o *AutoScalingGroup) GetDesiredAmount() int32 {
 // GetDesiredAmountOk returns a tuple with the DesiredAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetDesiredAmountOk() (*int32, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetDesiredAmountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -184,7 +217,7 @@ func (o *AutoScalingGroup) GetDesiredAmountOk() (*int32, bool) {
 }
 
 // HasDesiredAmount returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasDesiredAmount() bool {
+func (o *LoadBalancerAutoScalingGroup) HasDesiredAmount() bool {
 	if o != nil && o.DesiredAmount.IsSet() {
 		return true
 	}
@@ -193,21 +226,21 @@ func (o *AutoScalingGroup) HasDesiredAmount() bool {
 }
 
 // SetDesiredAmount gets a reference to the given NullableInt32 and assigns it to the DesiredAmount field.
-func (o *AutoScalingGroup) SetDesiredAmount(v int32) {
+func (o *LoadBalancerAutoScalingGroup) SetDesiredAmount(v int32) {
 	o.DesiredAmount.Set(&v)
 }
 // SetDesiredAmountNil sets the value for DesiredAmount to be an explicit nil
-func (o *AutoScalingGroup) SetDesiredAmountNil() {
+func (o *LoadBalancerAutoScalingGroup) SetDesiredAmountNil() {
 	o.DesiredAmount.Set(nil)
 }
 
 // UnsetDesiredAmount ensures that no value is present for DesiredAmount, not even an explicit nil
-func (o *AutoScalingGroup) UnsetDesiredAmount() {
+func (o *LoadBalancerAutoScalingGroup) UnsetDesiredAmount() {
 	o.DesiredAmount.Unset()
 }
 
 // GetMinimumAmount returns the MinimumAmount field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoScalingGroup) GetMinimumAmount() int32 {
+func (o *LoadBalancerAutoScalingGroup) GetMinimumAmount() int32 {
 	if o == nil || IsNil(o.MinimumAmount.Get()) {
 		var ret int32
 		return ret
@@ -218,7 +251,7 @@ func (o *AutoScalingGroup) GetMinimumAmount() int32 {
 // GetMinimumAmountOk returns a tuple with the MinimumAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetMinimumAmountOk() (*int32, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetMinimumAmountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -226,7 +259,7 @@ func (o *AutoScalingGroup) GetMinimumAmountOk() (*int32, bool) {
 }
 
 // HasMinimumAmount returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasMinimumAmount() bool {
+func (o *LoadBalancerAutoScalingGroup) HasMinimumAmount() bool {
 	if o != nil && o.MinimumAmount.IsSet() {
 		return true
 	}
@@ -235,21 +268,21 @@ func (o *AutoScalingGroup) HasMinimumAmount() bool {
 }
 
 // SetMinimumAmount gets a reference to the given NullableInt32 and assigns it to the MinimumAmount field.
-func (o *AutoScalingGroup) SetMinimumAmount(v int32) {
+func (o *LoadBalancerAutoScalingGroup) SetMinimumAmount(v int32) {
 	o.MinimumAmount.Set(&v)
 }
 // SetMinimumAmountNil sets the value for MinimumAmount to be an explicit nil
-func (o *AutoScalingGroup) SetMinimumAmountNil() {
+func (o *LoadBalancerAutoScalingGroup) SetMinimumAmountNil() {
 	o.MinimumAmount.Set(nil)
 }
 
 // UnsetMinimumAmount ensures that no value is present for MinimumAmount, not even an explicit nil
-func (o *AutoScalingGroup) UnsetMinimumAmount() {
+func (o *LoadBalancerAutoScalingGroup) UnsetMinimumAmount() {
 	o.MinimumAmount.Unset()
 }
 
 // GetMaximumAmount returns the MaximumAmount field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoScalingGroup) GetMaximumAmount() int32 {
+func (o *LoadBalancerAutoScalingGroup) GetMaximumAmount() int32 {
 	if o == nil || IsNil(o.MaximumAmount.Get()) {
 		var ret int32
 		return ret
@@ -260,7 +293,7 @@ func (o *AutoScalingGroup) GetMaximumAmount() int32 {
 // GetMaximumAmountOk returns a tuple with the MaximumAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetMaximumAmountOk() (*int32, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetMaximumAmountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -268,7 +301,7 @@ func (o *AutoScalingGroup) GetMaximumAmountOk() (*int32, bool) {
 }
 
 // HasMaximumAmount returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasMaximumAmount() bool {
+func (o *LoadBalancerAutoScalingGroup) HasMaximumAmount() bool {
 	if o != nil && o.MaximumAmount.IsSet() {
 		return true
 	}
@@ -277,21 +310,21 @@ func (o *AutoScalingGroup) HasMaximumAmount() bool {
 }
 
 // SetMaximumAmount gets a reference to the given NullableInt32 and assigns it to the MaximumAmount field.
-func (o *AutoScalingGroup) SetMaximumAmount(v int32) {
+func (o *LoadBalancerAutoScalingGroup) SetMaximumAmount(v int32) {
 	o.MaximumAmount.Set(&v)
 }
 // SetMaximumAmountNil sets the value for MaximumAmount to be an explicit nil
-func (o *AutoScalingGroup) SetMaximumAmountNil() {
+func (o *LoadBalancerAutoScalingGroup) SetMaximumAmountNil() {
 	o.MaximumAmount.Set(nil)
 }
 
 // UnsetMaximumAmount ensures that no value is present for MaximumAmount, not even an explicit nil
-func (o *AutoScalingGroup) UnsetMaximumAmount() {
+func (o *LoadBalancerAutoScalingGroup) UnsetMaximumAmount() {
 	o.MaximumAmount.Unset()
 }
 
 // GetCpuThreshold returns the CpuThreshold field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoScalingGroup) GetCpuThreshold() int32 {
+func (o *LoadBalancerAutoScalingGroup) GetCpuThreshold() int32 {
 	if o == nil || IsNil(o.CpuThreshold.Get()) {
 		var ret int32
 		return ret
@@ -302,7 +335,7 @@ func (o *AutoScalingGroup) GetCpuThreshold() int32 {
 // GetCpuThresholdOk returns a tuple with the CpuThreshold field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetCpuThresholdOk() (*int32, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetCpuThresholdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -310,7 +343,7 @@ func (o *AutoScalingGroup) GetCpuThresholdOk() (*int32, bool) {
 }
 
 // HasCpuThreshold returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasCpuThreshold() bool {
+func (o *LoadBalancerAutoScalingGroup) HasCpuThreshold() bool {
 	if o != nil && o.CpuThreshold.IsSet() {
 		return true
 	}
@@ -319,21 +352,21 @@ func (o *AutoScalingGroup) HasCpuThreshold() bool {
 }
 
 // SetCpuThreshold gets a reference to the given NullableInt32 and assigns it to the CpuThreshold field.
-func (o *AutoScalingGroup) SetCpuThreshold(v int32) {
+func (o *LoadBalancerAutoScalingGroup) SetCpuThreshold(v int32) {
 	o.CpuThreshold.Set(&v)
 }
 // SetCpuThresholdNil sets the value for CpuThreshold to be an explicit nil
-func (o *AutoScalingGroup) SetCpuThresholdNil() {
+func (o *LoadBalancerAutoScalingGroup) SetCpuThresholdNil() {
 	o.CpuThreshold.Set(nil)
 }
 
 // UnsetCpuThreshold ensures that no value is present for CpuThreshold, not even an explicit nil
-func (o *AutoScalingGroup) UnsetCpuThreshold() {
+func (o *LoadBalancerAutoScalingGroup) UnsetCpuThreshold() {
 	o.CpuThreshold.Unset()
 }
 
 // GetWarmupTime returns the WarmupTime field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoScalingGroup) GetWarmupTime() int32 {
+func (o *LoadBalancerAutoScalingGroup) GetWarmupTime() int32 {
 	if o == nil || IsNil(o.WarmupTime.Get()) {
 		var ret int32
 		return ret
@@ -344,7 +377,7 @@ func (o *AutoScalingGroup) GetWarmupTime() int32 {
 // GetWarmupTimeOk returns a tuple with the WarmupTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetWarmupTimeOk() (*int32, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetWarmupTimeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -352,7 +385,7 @@ func (o *AutoScalingGroup) GetWarmupTimeOk() (*int32, bool) {
 }
 
 // HasWarmupTime returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasWarmupTime() bool {
+func (o *LoadBalancerAutoScalingGroup) HasWarmupTime() bool {
 	if o != nil && o.WarmupTime.IsSet() {
 		return true
 	}
@@ -361,21 +394,21 @@ func (o *AutoScalingGroup) HasWarmupTime() bool {
 }
 
 // SetWarmupTime gets a reference to the given NullableInt32 and assigns it to the WarmupTime field.
-func (o *AutoScalingGroup) SetWarmupTime(v int32) {
+func (o *LoadBalancerAutoScalingGroup) SetWarmupTime(v int32) {
 	o.WarmupTime.Set(&v)
 }
 // SetWarmupTimeNil sets the value for WarmupTime to be an explicit nil
-func (o *AutoScalingGroup) SetWarmupTimeNil() {
+func (o *LoadBalancerAutoScalingGroup) SetWarmupTimeNil() {
 	o.WarmupTime.Set(nil)
 }
 
 // UnsetWarmupTime ensures that no value is present for WarmupTime, not even an explicit nil
-func (o *AutoScalingGroup) UnsetWarmupTime() {
+func (o *LoadBalancerAutoScalingGroup) UnsetWarmupTime() {
 	o.WarmupTime.Unset()
 }
 
 // GetRegion returns the Region field value if set, zero value otherwise.
-func (o *AutoScalingGroup) GetRegion() string {
+func (o *LoadBalancerAutoScalingGroup) GetRegion() string {
 	if o == nil || IsNil(o.Region) {
 		var ret string
 		return ret
@@ -385,7 +418,7 @@ func (o *AutoScalingGroup) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetRegionOk() (*string, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetRegionOk() (*string, bool) {
 	if o == nil || IsNil(o.Region) {
 		return nil, false
 	}
@@ -393,7 +426,7 @@ func (o *AutoScalingGroup) GetRegionOk() (*string, bool) {
 }
 
 // HasRegion returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasRegion() bool {
+func (o *LoadBalancerAutoScalingGroup) HasRegion() bool {
 	if o != nil && !IsNil(o.Region) {
 		return true
 	}
@@ -402,12 +435,12 @@ func (o *AutoScalingGroup) HasRegion() bool {
 }
 
 // SetRegion gets a reference to the given string and assigns it to the Region field.
-func (o *AutoScalingGroup) SetRegion(v string) {
+func (o *LoadBalancerAutoScalingGroup) SetRegion(v string) {
 	o.Region = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
-func (o *AutoScalingGroup) GetReference() string {
+func (o *LoadBalancerAutoScalingGroup) GetReference() string {
 	if o == nil || IsNil(o.Reference) {
 		var ret string
 		return ret
@@ -417,7 +450,7 @@ func (o *AutoScalingGroup) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetReferenceOk() (*string, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetReferenceOk() (*string, bool) {
 	if o == nil || IsNil(o.Reference) {
 		return nil, false
 	}
@@ -425,7 +458,7 @@ func (o *AutoScalingGroup) GetReferenceOk() (*string, bool) {
 }
 
 // HasReference returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasReference() bool {
+func (o *LoadBalancerAutoScalingGroup) HasReference() bool {
 	if o != nil && !IsNil(o.Reference) {
 		return true
 	}
@@ -434,12 +467,12 @@ func (o *AutoScalingGroup) HasReference() bool {
 }
 
 // SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *AutoScalingGroup) SetReference(v string) {
+func (o *LoadBalancerAutoScalingGroup) SetReference(v string) {
 	o.Reference = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *AutoScalingGroup) GetCreatedAt() time.Time {
+func (o *LoadBalancerAutoScalingGroup) GetCreatedAt() time.Time {
 	if o == nil || IsNil(o.CreatedAt) {
 		var ret time.Time
 		return ret
@@ -449,7 +482,7 @@ func (o *AutoScalingGroup) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetCreatedAtOk() (*time.Time, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
@@ -457,7 +490,7 @@ func (o *AutoScalingGroup) GetCreatedAtOk() (*time.Time, bool) {
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasCreatedAt() bool {
+func (o *LoadBalancerAutoScalingGroup) HasCreatedAt() bool {
 	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
@@ -466,12 +499,12 @@ func (o *AutoScalingGroup) HasCreatedAt() bool {
 }
 
 // SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *AutoScalingGroup) SetCreatedAt(v time.Time) {
+func (o *LoadBalancerAutoScalingGroup) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *AutoScalingGroup) GetUpdatedAt() time.Time {
+func (o *LoadBalancerAutoScalingGroup) GetUpdatedAt() time.Time {
 	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
@@ -481,7 +514,7 @@ func (o *AutoScalingGroup) GetUpdatedAt() time.Time {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetUpdatedAtOk() (*time.Time, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetUpdatedAtOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
@@ -489,7 +522,7 @@ func (o *AutoScalingGroup) GetUpdatedAtOk() (*time.Time, bool) {
 }
 
 // HasUpdatedAt returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasUpdatedAt() bool {
+func (o *LoadBalancerAutoScalingGroup) HasUpdatedAt() bool {
 	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
@@ -498,12 +531,12 @@ func (o *AutoScalingGroup) HasUpdatedAt() bool {
 }
 
 // SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *AutoScalingGroup) SetUpdatedAt(v time.Time) {
+func (o *LoadBalancerAutoScalingGroup) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
 // GetStartsAt returns the StartsAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoScalingGroup) GetStartsAt() time.Time {
+func (o *LoadBalancerAutoScalingGroup) GetStartsAt() time.Time {
 	if o == nil || IsNil(o.StartsAt.Get()) {
 		var ret time.Time
 		return ret
@@ -514,7 +547,7 @@ func (o *AutoScalingGroup) GetStartsAt() time.Time {
 // GetStartsAtOk returns a tuple with the StartsAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetStartsAtOk() (*time.Time, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetStartsAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -522,7 +555,7 @@ func (o *AutoScalingGroup) GetStartsAtOk() (*time.Time, bool) {
 }
 
 // HasStartsAt returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasStartsAt() bool {
+func (o *LoadBalancerAutoScalingGroup) HasStartsAt() bool {
 	if o != nil && o.StartsAt.IsSet() {
 		return true
 	}
@@ -531,21 +564,21 @@ func (o *AutoScalingGroup) HasStartsAt() bool {
 }
 
 // SetStartsAt gets a reference to the given NullableTime and assigns it to the StartsAt field.
-func (o *AutoScalingGroup) SetStartsAt(v time.Time) {
+func (o *LoadBalancerAutoScalingGroup) SetStartsAt(v time.Time) {
 	o.StartsAt.Set(&v)
 }
 // SetStartsAtNil sets the value for StartsAt to be an explicit nil
-func (o *AutoScalingGroup) SetStartsAtNil() {
+func (o *LoadBalancerAutoScalingGroup) SetStartsAtNil() {
 	o.StartsAt.Set(nil)
 }
 
 // UnsetStartsAt ensures that no value is present for StartsAt, not even an explicit nil
-func (o *AutoScalingGroup) UnsetStartsAt() {
+func (o *LoadBalancerAutoScalingGroup) UnsetStartsAt() {
 	o.StartsAt.Unset()
 }
 
 // GetEndsAt returns the EndsAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoScalingGroup) GetEndsAt() time.Time {
+func (o *LoadBalancerAutoScalingGroup) GetEndsAt() time.Time {
 	if o == nil || IsNil(o.EndsAt.Get()) {
 		var ret time.Time
 		return ret
@@ -556,7 +589,7 @@ func (o *AutoScalingGroup) GetEndsAt() time.Time {
 // GetEndsAtOk returns a tuple with the EndsAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetEndsAtOk() (*time.Time, bool) {
+func (o *LoadBalancerAutoScalingGroup) GetEndsAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -564,7 +597,7 @@ func (o *AutoScalingGroup) GetEndsAtOk() (*time.Time, bool) {
 }
 
 // HasEndsAt returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasEndsAt() bool {
+func (o *LoadBalancerAutoScalingGroup) HasEndsAt() bool {
 	if o != nil && o.EndsAt.IsSet() {
 		return true
 	}
@@ -573,62 +606,20 @@ func (o *AutoScalingGroup) HasEndsAt() bool {
 }
 
 // SetEndsAt gets a reference to the given NullableTime and assigns it to the EndsAt field.
-func (o *AutoScalingGroup) SetEndsAt(v time.Time) {
+func (o *LoadBalancerAutoScalingGroup) SetEndsAt(v time.Time) {
 	o.EndsAt.Set(&v)
 }
 // SetEndsAtNil sets the value for EndsAt to be an explicit nil
-func (o *AutoScalingGroup) SetEndsAtNil() {
+func (o *LoadBalancerAutoScalingGroup) SetEndsAtNil() {
 	o.EndsAt.Set(nil)
 }
 
 // UnsetEndsAt ensures that no value is present for EndsAt, not even an explicit nil
-func (o *AutoScalingGroup) UnsetEndsAt() {
+func (o *LoadBalancerAutoScalingGroup) UnsetEndsAt() {
 	o.EndsAt.Unset()
 }
 
-// GetLoadBalancer returns the LoadBalancer field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AutoScalingGroup) GetLoadBalancer() AutoScalingLoadBalancer {
-	if o == nil || IsNil(o.LoadBalancer.Get()) {
-		var ret AutoScalingLoadBalancer
-		return ret
-	}
-	return *o.LoadBalancer.Get()
-}
-
-// GetLoadBalancerOk returns a tuple with the LoadBalancer field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetLoadBalancerOk() (*AutoScalingLoadBalancer, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.LoadBalancer.Get(), o.LoadBalancer.IsSet()
-}
-
-// HasLoadBalancer returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasLoadBalancer() bool {
-	if o != nil && o.LoadBalancer.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLoadBalancer gets a reference to the given NullableAutoScalingLoadBalancer and assigns it to the LoadBalancer field.
-func (o *AutoScalingGroup) SetLoadBalancer(v AutoScalingLoadBalancer) {
-	o.LoadBalancer.Set(&v)
-}
-// SetLoadBalancerNil sets the value for LoadBalancer to be an explicit nil
-func (o *AutoScalingGroup) SetLoadBalancerNil() {
-	o.LoadBalancer.Set(nil)
-}
-
-// UnsetLoadBalancer ensures that no value is present for LoadBalancer, not even an explicit nil
-func (o *AutoScalingGroup) UnsetLoadBalancer() {
-	o.LoadBalancer.Unset()
-}
-
-func (o AutoScalingGroup) MarshalJSON() ([]byte, error) {
+func (o LoadBalancerAutoScalingGroup) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -636,8 +627,11 @@ func (o AutoScalingGroup) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AutoScalingGroup) ToMap() (map[string]interface{}, error) {
+func (o LoadBalancerAutoScalingGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CustomerId) {
+		toSerialize["customerId"] = o.CustomerId
+	}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -680,44 +674,41 @@ func (o AutoScalingGroup) ToMap() (map[string]interface{}, error) {
 	if o.EndsAt.IsSet() {
 		toSerialize["endsAt"] = o.EndsAt.Get()
 	}
-	if o.LoadBalancer.IsSet() {
-		toSerialize["loadBalancer"] = o.LoadBalancer.Get()
-	}
 	return toSerialize, nil
 }
 
-type NullableAutoScalingGroup struct {
-	value *AutoScalingGroup
+type NullableLoadBalancerAutoScalingGroup struct {
+	value *LoadBalancerAutoScalingGroup
 	isSet bool
 }
 
-func (v NullableAutoScalingGroup) Get() *AutoScalingGroup {
+func (v NullableLoadBalancerAutoScalingGroup) Get() *LoadBalancerAutoScalingGroup {
 	return v.value
 }
 
-func (v *NullableAutoScalingGroup) Set(val *AutoScalingGroup) {
+func (v *NullableLoadBalancerAutoScalingGroup) Set(val *LoadBalancerAutoScalingGroup) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAutoScalingGroup) IsSet() bool {
+func (v NullableLoadBalancerAutoScalingGroup) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAutoScalingGroup) Unset() {
+func (v *NullableLoadBalancerAutoScalingGroup) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAutoScalingGroup(val *AutoScalingGroup) *NullableAutoScalingGroup {
-	return &NullableAutoScalingGroup{value: val, isSet: true}
+func NewNullableLoadBalancerAutoScalingGroup(val *LoadBalancerAutoScalingGroup) *NullableLoadBalancerAutoScalingGroup {
+	return &NullableLoadBalancerAutoScalingGroup{value: val, isSet: true}
 }
 
-func (v NullableAutoScalingGroup) MarshalJSON() ([]byte, error) {
+func (v NullableLoadBalancerAutoScalingGroup) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAutoScalingGroup) UnmarshalJSON(src []byte) error {
+func (v *NullableLoadBalancerAutoScalingGroup) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

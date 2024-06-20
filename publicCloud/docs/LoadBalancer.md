@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **StartedAt** | Pointer to **time.Time** | Date and time when the instance was started for the first time, right after launching it | [optional] 
 **Contract** | Pointer to [**Contract**](Contract.md) |  | [optional] 
 **Configuration** | Pointer to [**LoadBalancerConfiguration**](LoadBalancerConfiguration.md) |  | [optional] 
+**AutoScalingGroup** | Pointer to [**NullableLoadBalancerAutoScalingGroup**](LoadBalancerAutoScalingGroup.md) |  | [optional] 
 
 ## Methods
 
@@ -336,6 +337,41 @@ SetConfiguration sets Configuration field to given value.
 
 HasConfiguration returns a boolean if a field has been set.
 
+### GetAutoScalingGroup
+
+`func (o *LoadBalancer) GetAutoScalingGroup() LoadBalancerAutoScalingGroup`
+
+GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
+
+### GetAutoScalingGroupOk
+
+`func (o *LoadBalancer) GetAutoScalingGroupOk() (*LoadBalancerAutoScalingGroup, bool)`
+
+GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoScalingGroup
+
+`func (o *LoadBalancer) SetAutoScalingGroup(v LoadBalancerAutoScalingGroup)`
+
+SetAutoScalingGroup sets AutoScalingGroup field to given value.
+
+### HasAutoScalingGroup
+
+`func (o *LoadBalancer) HasAutoScalingGroup() bool`
+
+HasAutoScalingGroup returns a boolean if a field has been set.
+
+### SetAutoScalingGroupNil
+
+`func (o *LoadBalancer) SetAutoScalingGroupNil(b bool)`
+
+ SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
+
+### UnsetAutoScalingGroup
+`func (o *LoadBalancer) UnsetAutoScalingGroup()`
+
+UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

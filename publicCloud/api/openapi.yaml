@@ -3445,6 +3445,22 @@ paths:
                     xForwardedFor: false
                     idleTimeOut: 60
                     targetPort: 442
+                  autoScalingGroup:
+                    customerId: "11111111"
+                    id: fb769dab-3daa-47e4-89ed-06a4b6499176
+                    type: SCHEDULED
+                    state: CREATED
+                    desiredAmount: 2
+                    region: eu-west-3
+                    reference: ASG Reference
+                    createdAt: 2024-04-26T09:22:25+00:00
+                    updatedAt: 2024-04-26T09:22:25+00:00
+                    startsAt: 2024-06-18T14:00:00+00:00
+                    endsAt: 2024-06-20T15:00:00+00:00
+                    minimumAmount: null
+                    maximumAmount: null
+                    cpuThreshold: null
+                    warmupTime: null
               schema:
                 $ref: '#/components/schemas/getLoadBalancerListResult'
           description: OK.
@@ -6514,7 +6530,7 @@ paths:
       operationId: deleteAutoScalingGroup
       parameters:
       - description: Auto Scaling Group ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
         explode: false
         in: path
         name: autoScalingGroupId
@@ -6585,7 +6601,7 @@ paths:
       operationId: getAutoScalingGroup
       parameters:
       - description: Auto Scaling Group ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
         explode: false
         in: path
         name: autoScalingGroupId
@@ -6707,7 +6723,7 @@ paths:
       operationId: updateAutoScalingGroup
       parameters:
       - description: Auto Scaling Group ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
         explode: false
         in: path
         name: autoScalingGroupId
@@ -6766,7 +6782,7 @@ paths:
                 createdAt: 2024-05-13T15:49:52+00:00
                 desiredAmount: 4
                 endsAt: null
-                id: 49e28a6c-3f2a-442e-b3b1-981856d21677
+                id: fb769dab-3daa-47e4-89ed-06a4b6499176
                 loadBalancer:
                   customerId: "12358132"
                   id: 52082a93-d1e2-4bc0-8f5e-8fe4312b0846
@@ -6865,13 +6881,238 @@ paths:
       summary: Update Auto Scaling Group
       tags:
       - publicCloud
+  /autoScalingGroups/{autoScalingGroupId}/registerLoadBalancer:
+    post:
+      description: Associates a Load Balancer with an Auto Scaling Group to distribute
+        incoming traffic across the instances within the group.
+      operationId: registerAutoScalingGroupLoadBalancer
+      parameters:
+      - description: Auto Scaling Group ID
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
+        explode: false
+        in: path
+        name: autoScalingGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              loadBalancerId: 2b52cc0a-2de9-47c2-8ce2-eb1bb468cfcd
+            schema:
+              $ref: '#/components/schemas/registerAutoScalingGroupLoadBalancerOpts'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                cpuThreshold: null
+                createdAt: 2024-04-26T09:22:25+00:00
+                desiredAmount: 2
+                endsAt: null
+                id: fb769dab-3daa-47e4-89ed-06a4b6499176
+                loadBalancer:
+                  customerId: "12358132"
+                  id: 32082a93-d1e2-4bc0-8f5e-8fe4312b0844
+                  type: lsw.m3.large
+                  resources:
+                    cpu:
+                      value: 2
+                      unit: vCPU
+                    memory:
+                      value: 7
+                      unit: GiB
+                    publicNetworkSpeed:
+                      value: 1
+                      unit: Gbps
+                    privateNetworkSpeed:
+                      value: 100
+                      unit: Mbps
+                  region: eu-west-3
+                  reference: lb-integrated-with-asg
+                  state: RUNNING
+                  ips: []
+                  contract:
+                    billingFrequency: 1
+                    term: 0
+                    type: HOURLY
+                    endsAt: null
+                    renewalsAt: 2024-05-29T08:15:05+00:00
+                    createdAt: 2024-05-28T08:50:36+00:00
+                    state: ACTIVE
+                  startedAt: 2024-05-28T08:50:51+00:00
+                  configuration: null
+                  privateNetwork: null
+                maximumAmount: null
+                minimumAmount: null
+                reference: Manual Auto Scaling Group
+                region: eu-west-3
+                startsAt: null
+                state: ACTIVE
+                type: MANUAL
+                updatedAt: 2024-04-26T09:22:25+00:00
+                warmupTime: null
+              schema:
+                $ref: '#/components/schemas/autoScalingGroup'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Register Load balancer
+      tags:
+      - publicCloud
+  /autoScalingGroups/{autoScalingGroupId}/deregisterLoadBalancer:
+    post:
+      description: "Disassociates a Load Balancer from an Auto Scaling Group, stopping\
+        \ the distribution of incoming traffic to the instances within the group."
+      operationId: deregisterAutoScalingGroupLoadBalancer
+      parameters:
+      - description: Auto Scaling Group ID
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
+        explode: false
+        in: path
+        name: autoScalingGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                cpuThreshold: null
+                createdAt: 2024-04-26T09:22:25+00:00
+                desiredAmount: 2
+                endsAt: null
+                id: fb769dab-3daa-47e4-89ed-06a4b6499176
+                loadBalancer: null
+                maximumAmount: null
+                minimumAmount: null
+                reference: Manual Auto Scaling Group
+                region: eu-west-3
+                startsAt: null
+                state: ACTIVE
+                type: MANUAL
+                updatedAt: 2024-04-26T09:22:25+00:00
+                warmupTime: null
+              schema:
+                $ref: '#/components/schemas/autoScalingGroup'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Deregister Load balancer
+      tags:
+      - publicCloud
   /autoScalingGroups/{autoScalingGroupId}/instances:
     get:
       description: List instances belonging to an Auto Scaling Group
       operationId: getAutoScalingGroupInstanceList
       parameters:
       - description: Auto Scaling Group ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
         explode: false
         in: path
         name: autoScalingGroupId
@@ -7097,7 +7338,7 @@ components:
       style: form
     autoScalingGroupId:
       description: Auto Scaling Group ID
-      example: 695ddd91-051f-4dd6-9120-938a927a47d0
+      example: fb769dab-3daa-47e4-89ed-06a4b6499176
       explode: false
       in: path
       name: autoScalingGroupId
@@ -8558,9 +8799,47 @@ components:
           type: integer
       title: healthCheck
       type: object
+    loadBalancerConfiguration:
+      description: Different configuration assigned for the load balancer
+      example:
+        balance: ROUNDROBIN
+        healthCheck:
+          method: GET
+          port: 1
+          host: host
+          uri: /
+        idleTimeOut: 5
+        xForwardedFor: true
+        stickySession:
+          maxLifeTime: 6
+          enabled: true
+        targetPort: 5
+      properties:
+        stickySession:
+          $ref: '#/components/schemas/stickySession'
+        balance:
+          description: Algorithm to be used for load balancer
+          enum:
+          - ROUNDROBIN
+          - LEASTCONN
+          - SOURCE
+          type: string
+        healthCheck:
+          $ref: '#/components/schemas/healthCheck'
+        xForwardedFor:
+          description: Is xForwardedFor header enabled or not
+          type: boolean
+        idleTimeOut:
+          description: Time to close the connection if load balancer is idle
+          type: integer
+        targetPort:
+          description: Port on which the backend (target) servers are listening to
+            handle incoming requests
+          type: integer
+      title: loadBalancerConfiguration
+      type: object
     loadBalancer:
       example:
-        reference: reference
         configuration:
           balance: ROUNDROBIN
           healthCheck:
@@ -8574,6 +8853,22 @@ components:
             maxLifeTime: 6
             enabled: true
           targetPort: 5
+        autoScalingGroup:
+          cpuThreshold: 60
+          maximumAmount: 6
+          type: MANUAL
+          desiredAmount: 4
+          reference: Manual Auto Scaling Group
+          createdAt: 2024-05-28T11:03:31Z
+          customerId: "11111111"
+          minimumAmount: 2
+          startsAt: 2000-01-23T04:56:07.000+00:00
+          warmupTime: 400
+          id: fb769dab-3daa-47e4-89ed-06a4b6499176
+          state: ACTIVE
+          region: eu-west-3
+          endsAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2024-05-28T11:33:31Z
         rootDiskSize: 84
         contract:
           billingFrequency: 1
@@ -8583,7 +8878,6 @@ components:
           state: null
           type: null
           endsAt: 2023-11-30T16:31:28Z
-        customerId: customerId
         resources:
           memory:
             unit: GiB
@@ -8598,10 +8892,7 @@ components:
             unit: Mbps
             value: 1000
         startedAt: 2000-01-23T04:56:07.000+00:00
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
         type: lsw.m3.large
-        region: eu-west-3
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -8623,6 +8914,11 @@ components:
             protectionType: STANDARD
           networkType: internal
           version: 6
+        reference: reference
+        customerId: customerId
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: null
+        region: eu-west-3
       properties:
         customerId:
           description: The customer ID who owns the load balancer
@@ -8665,13 +8961,14 @@ components:
           $ref: '#/components/schemas/contract'
         configuration:
           $ref: '#/components/schemas/loadBalancerConfiguration'
-      title: loadBalancer
+        autoScalingGroup:
+          $ref: '#/components/schemas/loadBalancerAutoScalingGroup'
+      title: instanceLoadBalancer
       type: object
     getLoadBalancerListResult:
       example:
         loadBalancers:
-        - reference: reference
-          configuration:
+        - configuration:
             balance: ROUNDROBIN
             healthCheck:
               method: GET
@@ -8684,6 +8981,22 @@ components:
               maxLifeTime: 6
               enabled: true
             targetPort: 5
+          autoScalingGroup:
+            cpuThreshold: 60
+            maximumAmount: 6
+            type: MANUAL
+            desiredAmount: 4
+            reference: Manual Auto Scaling Group
+            createdAt: 2024-05-28T11:03:31Z
+            customerId: "11111111"
+            minimumAmount: 2
+            startsAt: 2000-01-23T04:56:07.000+00:00
+            warmupTime: 400
+            id: fb769dab-3daa-47e4-89ed-06a4b6499176
+            state: ACTIVE
+            region: eu-west-3
+            endsAt: 2000-01-23T04:56:07.000+00:00
+            updatedAt: 2024-05-28T11:33:31Z
           rootDiskSize: 84
           contract:
             billingFrequency: 1
@@ -8693,7 +9006,6 @@ components:
             state: null
             type: null
             endsAt: 2023-11-30T16:31:28Z
-          customerId: customerId
           resources:
             memory:
               unit: GiB
@@ -8708,10 +9020,7 @@ components:
               unit: Mbps
               value: 1000
           startedAt: 2000-01-23T04:56:07.000+00:00
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
           type: lsw.m3.large
-          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -8733,8 +9042,12 @@ components:
               protectionType: STANDARD
             networkType: internal
             version: 6
-        - reference: reference
-          configuration:
+          reference: reference
+          customerId: customerId
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+          region: eu-west-3
+        - configuration:
             balance: ROUNDROBIN
             healthCheck:
               method: GET
@@ -8747,6 +9060,22 @@ components:
               maxLifeTime: 6
               enabled: true
             targetPort: 5
+          autoScalingGroup:
+            cpuThreshold: 60
+            maximumAmount: 6
+            type: MANUAL
+            desiredAmount: 4
+            reference: Manual Auto Scaling Group
+            createdAt: 2024-05-28T11:03:31Z
+            customerId: "11111111"
+            minimumAmount: 2
+            startsAt: 2000-01-23T04:56:07.000+00:00
+            warmupTime: 400
+            id: fb769dab-3daa-47e4-89ed-06a4b6499176
+            state: ACTIVE
+            region: eu-west-3
+            endsAt: 2000-01-23T04:56:07.000+00:00
+            updatedAt: 2024-05-28T11:33:31Z
           rootDiskSize: 84
           contract:
             billingFrequency: 1
@@ -8756,7 +9085,6 @@ components:
             state: null
             type: null
             endsAt: 2023-11-30T16:31:28Z
-          customerId: customerId
           resources:
             memory:
               unit: GiB
@@ -8771,10 +9099,7 @@ components:
               unit: Mbps
               value: 1000
           startedAt: 2000-01-23T04:56:07.000+00:00
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
           type: lsw.m3.large
-          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -8796,6 +9121,11 @@ components:
               protectionType: STANDARD
             networkType: internal
             version: 6
+          reference: reference
+          customerId: customerId
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+          region: eu-west-3
         _metadata:
           offset: 0
           limit: 5
@@ -9167,7 +9497,7 @@ components:
           to: 2000-01-23T04:56:07.000+00:00
       properties:
         metrics:
-          $ref: '#/components/schemas/metrics'
+          $ref: '#/components/schemas/dataTrafficMetrics'
         _metadata:
           $ref: '#/components/schemas/trafficMetricsMetaData'
       type: object
@@ -9194,7 +9524,7 @@ components:
           to: 2000-01-23T04:56:07.000+00:00
       properties:
         metrics:
-          $ref: '#/components/schemas/getCpuMetricsResult_metrics'
+          $ref: '#/components/schemas/cpuMetrics'
         _metadata:
           $ref: '#/components/schemas/cpuMetricsMetadata'
       type: object
@@ -9264,12 +9594,12 @@ components:
               port: 1
               host: host
               uri: /
-            idleTimeOut: 2
+            idleTimeOut: 5
             xForwardedFor: true
             stickySession:
               maxLifeTime: 6
               enabled: true
-            targetPort: 7
+            targetPort: 5
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
@@ -9397,7 +9727,8 @@ components:
           nullable: true
           type: string
         loadBalancer:
-          $ref: '#/components/schemas/loadBalancer_1'
+          $ref: '#/components/schemas/autoScalingLoadBalancer'
+      title: instanceAutoScalingGroup
       type: object
     getAutoScalingGroupListResult:
       example:
@@ -9421,12 +9752,12 @@ components:
                 port: 1
                 host: host
                 uri: /
-              idleTimeOut: 2
+              idleTimeOut: 5
               xForwardedFor: true
               stickySession:
                 maxLifeTime: 6
                 enabled: true
-              targetPort: 7
+              targetPort: 5
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
@@ -9502,12 +9833,12 @@ components:
                 port: 1
                 host: host
                 uri: /
-              idleTimeOut: 2
+              idleTimeOut: 5
               xForwardedFor: true
               stickySession:
                 maxLifeTime: 6
                 enabled: true
-              targetPort: 7
+              targetPort: 5
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
@@ -9701,12 +10032,12 @@ components:
               port: 1
               host: host
               uri: /
-            idleTimeOut: 2
+            idleTimeOut: 5
             xForwardedFor: true
             stickySession:
               maxLifeTime: 6
               enabled: true
-            targetPort: 7
+            targetPort: 5
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
@@ -9834,7 +10165,16 @@ components:
           nullable: true
           type: string
         loadBalancer:
-          $ref: '#/components/schemas/loadBalancer_2'
+          $ref: '#/components/schemas/autoScalingGroupLoadBalancer'
+      type: object
+    registerAutoScalingGroupLoadBalancerOpts:
+      properties:
+        loadBalancerId:
+          description: Load balancer ID
+          example: 32082a93-d1e2-4bc0-8f5e-8fe4312b0844
+          type: string
+      required:
+      - loadBalancerId
       type: object
     autoScaledInstance:
       example:
@@ -10487,44 +10827,110 @@ components:
           $ref: '#/components/schemas/operatingSystem'
       title: marketApp
       type: object
-    loadBalancerConfiguration:
-      description: Different configuration assigned for the load balancer
+    loadBalancerAutoScalingGroup:
+      description: Auto Scaling Group in which the Load Balancer is registered
       example:
-        balance: ROUNDROBIN
-        healthCheck:
-          method: GET
-          port: 1
-          host: host
-          uri: /
-        idleTimeOut: 5
-        xForwardedFor: true
-        stickySession:
-          maxLifeTime: 6
-          enabled: true
-        targetPort: 5
+        cpuThreshold: 60
+        maximumAmount: 6
+        type: MANUAL
+        desiredAmount: 4
+        reference: Manual Auto Scaling Group
+        createdAt: 2024-05-28T11:03:31Z
+        customerId: "11111111"
+        minimumAmount: 2
+        startsAt: 2000-01-23T04:56:07.000+00:00
+        warmupTime: 400
+        id: fb769dab-3daa-47e4-89ed-06a4b6499176
+        state: ACTIVE
+        region: eu-west-3
+        endsAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2024-05-28T11:33:31Z
+      nullable: true
       properties:
-        stickySession:
-          $ref: '#/components/schemas/stickySession'
-        balance:
-          description: Algorithm to be used for load balancer
-          enum:
-          - ROUNDROBIN
-          - LEASTCONN
-          - SOURCE
+        customerId:
+          description: The customer ID who owns the auto scaling group
+          example: "11111111"
           type: string
-        healthCheck:
-          $ref: '#/components/schemas/healthCheck'
-        xForwardedFor:
-          description: Is xForwardedFor header enabled or not
-          type: boolean
-        idleTimeOut:
-          description: Time to close the connection if load balancer is idle
+        id:
+          description: The Auto Scaling Group unique identifier
+          example: fb769dab-3daa-47e4-89ed-06a4b6499176
+          format: uuid
+          type: string
+        type:
+          description: Auto Scaling Group type
+          example: MANUAL
+          type: string
+        state:
+          description: The Auto Scaling Group's current state.
+          enum:
+          - ACTIVE
+          - CREATING
+          - CREATED
+          - DESTROYED
+          - DESTROYING
+          - SCALING
+          - UPDATING
+          type: string
+        desiredAmount:
+          description: Number of instances that should be running
+          example: 4
+          nullable: true
           type: integer
-        targetPort:
-          description: Port on which the backend (target) servers are listening to
-            handle incoming requests
+        minimumAmount:
+          description: The minimum number of instances that should be running
+          example: 2
+          nullable: true
           type: integer
-      title: loadBalancerConfiguration
+        maximumAmount:
+          description: Only for "CPU_BASED" auto scaling group. The maximum number
+            of instances that can be running
+          example: 6
+          nullable: true
+          type: integer
+        cpuThreshold:
+          description: Only for "CPU_BASED" auto scaling group. The target average
+            CPU utilization for scaling
+          example: 60
+          nullable: true
+          type: integer
+        warmupTime:
+          description: Only for "CPU_BASED" auto scaling group. Warm-up time in seconds
+            for new instances
+          example: 400
+          nullable: true
+          type: integer
+        region:
+          description: The region in which the Auto Scaling Group was launched
+          example: eu-west-3
+          type: string
+        reference:
+          description: The identifying name set to the auto scaling group
+          example: Manual Auto Scaling Group
+          maxLength: 255
+          type: string
+        createdAt:
+          description: Date and time when the Auto Scaling Group was created
+          example: 2024-05-28T11:03:31Z
+          format: date-time
+          type: string
+        updatedAt:
+          description: Date and time when the Auto Scaling Group was last updated
+          example: 2024-05-28T11:33:31Z
+          format: date-time
+          type: string
+        startsAt:
+          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
+            that the instances need to be launched
+          format: date-time
+          nullable: true
+          type: string
+        endsAt:
+          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
+            that the instances need to be terminated
+          format: date-time
+          nullable: true
+          type: string
+      title: loadBalancerAutoScalingGroup
       type: object
     certificate:
       properties:
@@ -10646,7 +11052,7 @@ components:
           type: string
       title: peak
       type: object
-    metrics:
+    dataTrafficMetrics:
       example:
         DOWN_PUBLIC:
           unit: B
@@ -10667,7 +11073,7 @@ components:
           $ref: '#/components/schemas/trafficMetric'
         UP_PUBLIC:
           $ref: '#/components/schemas/trafficMetric'
-      title: metrics
+      title: dataTrafficMetrics
       type: object
     summary:
       example:
@@ -10747,7 +11153,7 @@ components:
           type: string
       title: cpuMetricsValue
       type: object
-    cpuMetrics:
+    cpuMetricsMetrics:
       description: "CPU usage metrics, in percentage"
       example:
         unit: '%'
@@ -10765,9 +11171,9 @@ components:
           enum:
           - '%'
           type: string
-      title: cpuMetrics
+      title: cpuMetricsMetrics
       type: object
-    getCpuMetricsResult_metrics:
+    cpuMetrics:
       example:
         cpuMetrics:
           unit: '%'
@@ -10778,7 +11184,8 @@ components:
             timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         cpuMetrics:
-          $ref: '#/components/schemas/cpuMetrics'
+          $ref: '#/components/schemas/cpuMetricsMetrics'
+      title: cpuMetrics
       type: object
     cpuMetricsMetadataSummaryPeak:
       example:
@@ -10794,7 +11201,7 @@ components:
           type: string
       title: cpuMetricsMetadataSummaryPeak
       type: object
-    cpuMetricsMetadataSummary_cpuMetrics:
+    cpuMetricsMetadataSummaryCpuMetrics:
       example:
         average: 10 %
         expected: 10 %
@@ -10814,6 +11221,7 @@ components:
           type: string
         peak:
           $ref: '#/components/schemas/cpuMetricsMetadataSummaryPeak'
+      title: cpuMetricsMetadataSummaryCpuMetrics
       type: object
     cpuMetricsMetadataSummary:
       example:
@@ -10825,7 +11233,7 @@ components:
             timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         cpuMetrics:
-          $ref: '#/components/schemas/cpuMetricsMetadataSummary_cpuMetrics'
+          $ref: '#/components/schemas/cpuMetricsMetadataSummaryCpuMetrics'
       title: cpuMetricsMetadataSummary
       type: object
     cpuMetricsMetadata:
@@ -10859,47 +11267,7 @@ components:
           $ref: '#/components/schemas/cpuMetricsMetadataSummary'
       title: cpuMetricsMetadata
       type: object
-    loadBalancerConfiguration_1:
-      description: Different configuration assigned for the load balancer
-      example:
-        balance: ROUNDROBIN
-        healthCheck:
-          method: GET
-          port: 1
-          host: host
-          uri: /
-        idleTimeOut: 2
-        xForwardedFor: true
-        stickySession:
-          maxLifeTime: 6
-          enabled: true
-        targetPort: 7
-      nullable: true
-      properties:
-        stickySession:
-          $ref: '#/components/schemas/stickySession'
-        balance:
-          description: Algorithm to be used for load balancer
-          enum:
-          - ROUNDROBIN
-          - LEASTCONN
-          - SOURCE
-          type: string
-        healthCheck:
-          $ref: '#/components/schemas/healthCheck'
-        xForwardedFor:
-          description: Is xForwardedFor header enabled or not
-          type: boolean
-        idleTimeOut:
-          description: Time to close the connection if load balancer is idle
-          type: integer
-        targetPort:
-          description: Port on which the backend (target) servers are listening to
-            handle incoming requests
-          type: integer
-      title: loadBalancerConfiguration
-      type: object
-    loadBalancer_1:
+    autoScalingLoadBalancer:
       example:
         reference: reference
         privateNetwork:
@@ -10913,12 +11281,12 @@ components:
             port: 1
             host: host
             uri: /
-          idleTimeOut: 2
+          idleTimeOut: 5
           xForwardedFor: true
           stickySession:
             maxLifeTime: 6
             enabled: true
-          targetPort: 7
+          targetPort: 5
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
@@ -11003,12 +11371,12 @@ components:
           format: date-time
           type: string
         configuration:
-          $ref: '#/components/schemas/loadBalancerConfiguration_1'
+          $ref: '#/components/schemas/loadBalancerConfiguration'
         privateNetwork:
           $ref: '#/components/schemas/privateNetwork'
-      title: loadBalancer
+      title: autoScalingLoadBalancer
       type: object
-    loadBalancer_2:
+    autoScalingGroupLoadBalancer:
       example:
         reference: reference
         privateNetwork:
@@ -11022,12 +11390,12 @@ components:
             port: 1
             host: host
             uri: /
-          idleTimeOut: 2
+          idleTimeOut: 5
           xForwardedFor: true
           stickySession:
             maxLifeTime: 6
             enabled: true
-          targetPort: 7
+          targetPort: 5
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
@@ -11112,10 +11480,10 @@ components:
           format: date-time
           type: string
         configuration:
-          $ref: '#/components/schemas/loadBalancerConfiguration_1'
+          $ref: '#/components/schemas/loadBalancerConfiguration'
         privateNetwork:
           $ref: '#/components/schemas/privateNetwork'
-      title: loadBalancer
+      title: autoScalingGroupLoadBalancer
       type: object
   securitySchemes:
     BearerAuth:

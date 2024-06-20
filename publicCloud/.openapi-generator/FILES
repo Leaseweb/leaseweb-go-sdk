@@ -9,6 +9,8 @@ configuration.go
 docs/AttachIsoOpts.md
 docs/AutoScaledInstance.md
 docs/AutoScalingGroup.md
+docs/AutoScalingGroupLoadBalancer.md
+docs/AutoScalingLoadBalancer.md
 docs/Billing.md
 docs/Central.md
 docs/Certificate.md
@@ -22,10 +24,12 @@ docs/CpuMetricsMetadata.md
 docs/CpuMetricsMetadataSummary.md
 docs/CpuMetricsMetadataSummaryCpuMetrics.md
 docs/CpuMetricsMetadataSummaryPeak.md
+docs/CpuMetricsMetrics.md
 docs/CpuMetricsValue.md
 docs/CreateAutoScalingGroupOpts.md
 docs/Credential.md
 docs/CredentialType.md
+docs/DataTrafficMetrics.md
 docs/Ddos.md
 docs/ErrorResult.md
 docs/ExpenseResultInstance.md
@@ -33,7 +37,6 @@ docs/GetAutoScalingGroupInstanceListResult.md
 docs/GetAutoScalingGroupListResult.md
 docs/GetConsoleAccessToInstanceResult.md
 docs/GetCpuMetricsResult.md
-docs/GetCpuMetricsResultMetrics.md
 docs/GetCredentialListByTypeResult.md
 docs/GetCredentialListResult.md
 docs/GetCredentialResult.md
@@ -61,10 +64,8 @@ docs/Iso.md
 docs/LaunchInstanceOpts.md
 docs/LaunchLoadBalancerOpts.md
 docs/LoadBalancer.md
-docs/LoadBalancer1.md
-docs/LoadBalancer2.md
+docs/LoadBalancerAutoScalingGroup.md
 docs/LoadBalancerConfiguration.md
-docs/LoadBalancerConfiguration1.md
 docs/LoadBalancerListener.md
 docs/LoadBalancerListenerOpts.md
 docs/LoadBalancerTargetOpt.md
@@ -73,7 +74,6 @@ docs/Local.md
 docs/MarketApp.md
 docs/Memory.md
 docs/Metadata.md
-docs/Metrics.md
 docs/NetworkType.md
 docs/NullRouteIpOpts.md
 docs/OperatingSystem.md
@@ -86,6 +86,7 @@ docs/PrivateNetworkSpeed.md
 docs/PublicCloudAPI.md
 docs/PublicNetworkSpeed.md
 docs/Region.md
+docs/RegisterAutoScalingGroupLoadBalancerOpts.md
 docs/ReinstallInstanceOpts.md
 docs/Snapshot.md
 docs/StickySession.md
@@ -115,6 +116,8 @@ model__metadata.go
 model_attach_iso_opts.go
 model_auto_scaled_instance.go
 model_auto_scaling_group.go
+model_auto_scaling_group_load_balancer.go
+model_auto_scaling_load_balancer.go
 model_billing.go
 model_central.go
 model_certificate.go
@@ -128,10 +131,12 @@ model_cpu_metrics_metadata.go
 model_cpu_metrics_metadata_summary.go
 model_cpu_metrics_metadata_summary_cpu_metrics.go
 model_cpu_metrics_metadata_summary_peak.go
+model_cpu_metrics_metrics.go
 model_cpu_metrics_value.go
 model_create_auto_scaling_group_opts.go
 model_credential.go
 model_credential_type.go
+model_data_traffic_metrics.go
 model_ddos.go
 model_error_result.go
 model_expense_result_instance.go
@@ -139,7 +144,6 @@ model_get_auto_scaling_group_instance_list_result.go
 model_get_auto_scaling_group_list_result.go
 model_get_console_access_to_instance_result.go
 model_get_cpu_metrics_result.go
-model_get_cpu_metrics_result_metrics.go
 model_get_credential_list_by_type_result.go
 model_get_credential_list_result.go
 model_get_credential_result.go
@@ -167,10 +171,8 @@ model_iso.go
 model_launch_instance_opts.go
 model_launch_load_balancer_opts.go
 model_load_balancer.go
-model_load_balancer_1.go
-model_load_balancer_2.go
+model_load_balancer_auto_scaling_group.go
 model_load_balancer_configuration.go
-model_load_balancer_configuration_1.go
 model_load_balancer_listener.go
 model_load_balancer_listener_opts.go
 model_load_balancer_target_opt.go
@@ -178,7 +180,6 @@ model_load_balancer_target_opts.go
 model_local.go
 model_market_app.go
 model_memory.go
-model_metrics.go
 model_network_type.go
 model_null_route_ip_opts.go
 model_operating_system.go
@@ -190,6 +191,7 @@ model_private_network.go
 model_private_network_speed.go
 model_public_network_speed.go
 model_region.go
+model_register_auto_scaling_group_load_balancer_opts.go
 model_reinstall_instance_opts.go
 model_snapshot.go
 model_sticky_session.go

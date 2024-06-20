@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**DeleteCredentials**](PublicCloudAPI.md#DeleteCredentials) | **Delete** /instances/{instanceId}/credentials | Delete all instance credentials
 [**DeleteLoadBalancerListener**](PublicCloudAPI.md#DeleteLoadBalancerListener) | **Delete** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Delete load balancer listener
 [**DeleteSnapshot**](PublicCloudAPI.md#DeleteSnapshot) | **Delete** /instances/{instanceId}/snapshots/{snapshotId} | Delete instance snapshot
+[**DeregisterAutoScalingGroupLoadBalancer**](PublicCloudAPI.md#DeregisterAutoScalingGroupLoadBalancer) | **Post** /autoScalingGroups/{autoScalingGroupId}/deregisterLoadBalancer | Deregister Load balancer
 [**DeregisterLoadBalancerTargets**](PublicCloudAPI.md#DeregisterLoadBalancerTargets) | **Post** /loadBalancers/{loadBalancerId}/deregisterTargets | Deregister targets
 [**DetachIso**](PublicCloudAPI.md#DetachIso) | **Post** /instances/{instanceId}/detachIso | Detach ISO from instance
 [**GetAutoScalingGroup**](PublicCloudAPI.md#GetAutoScalingGroup) | **Get** /autoScalingGroups/{autoScalingGroupId} | Get Auto Scaling Group details
@@ -48,6 +49,7 @@ Method | HTTP request | Description
 [**LaunchLoadBalancer**](PublicCloudAPI.md#LaunchLoadBalancer) | **Post** /loadBalancers | Launch Load balancer
 [**NullRouteIp**](PublicCloudAPI.md#NullRouteIp) | **Post** /instances/{instanceId}/ips/{ip}/null | Null route IP
 [**RebootInstance**](PublicCloudAPI.md#RebootInstance) | **Post** /instances/{instanceId}/reboot | Reboot instance
+[**RegisterAutoScalingGroupLoadBalancer**](PublicCloudAPI.md#RegisterAutoScalingGroupLoadBalancer) | **Post** /autoScalingGroups/{autoScalingGroupId}/registerLoadBalancer | Register Load balancer
 [**RegisterLoadBalancerTargets**](PublicCloudAPI.md#RegisterLoadBalancerTargets) | **Post** /loadBalancers/{loadBalancerId}/registerTargets | Register targets
 [**ReinstallInstance**](PublicCloudAPI.md#ReinstallInstance) | **Put** /instances/{instanceId}/reinstall | Reinstall instance
 [**RemoveFromPrivateNetwork**](PublicCloudAPI.md#RemoveFromPrivateNetwork) | **Delete** /instances/{instanceId}/removeFromPrivateNetwork | Remove instance from Private Network
@@ -501,7 +503,7 @@ import (
 )
 
 func main() {
-	autoScalingGroupId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Auto Scaling Group ID
+	autoScalingGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Auto Scaling Group ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -830,6 +832,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeregisterAutoScalingGroupLoadBalancer
+
+> AutoScalingGroup DeregisterAutoScalingGroupLoadBalancer(ctx, autoScalingGroupId).Execute()
+
+Deregister Load balancer
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	autoScalingGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Auto Scaling Group ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.DeregisterAutoScalingGroupLoadBalancer(context.Background(), autoScalingGroupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.DeregisterAutoScalingGroupLoadBalancer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeregisterAutoScalingGroupLoadBalancer`: AutoScalingGroup
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.DeregisterAutoScalingGroupLoadBalancer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**autoScalingGroupId** | **string** | Auto Scaling Group ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeregisterAutoScalingGroupLoadBalancerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**AutoScalingGroup**](AutoScalingGroup.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeregisterLoadBalancerTargets
 
 > DeregisterLoadBalancerTargets(ctx, loadBalancerId).LoadBalancerTargetOpts(loadBalancerTargetOpts).Execute()
@@ -989,7 +1061,7 @@ import (
 )
 
 func main() {
-	autoScalingGroupId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Auto Scaling Group ID
+	autoScalingGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Auto Scaling Group ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1059,7 +1131,7 @@ import (
 )
 
 func main() {
-	autoScalingGroupId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Auto Scaling Group ID
+	autoScalingGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Auto Scaling Group ID
 	limit := int32(20) // int32 | Limit the number of results returned. (optional)
 	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
 
@@ -3201,6 +3273,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## RegisterAutoScalingGroupLoadBalancer
+
+> AutoScalingGroup RegisterAutoScalingGroupLoadBalancer(ctx, autoScalingGroupId).RegisterAutoScalingGroupLoadBalancerOpts(registerAutoScalingGroupLoadBalancerOpts).Execute()
+
+Register Load balancer
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	autoScalingGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Auto Scaling Group ID
+	registerAutoScalingGroupLoadBalancerOpts := *openapiclient.NewRegisterAutoScalingGroupLoadBalancerOpts("32082a93-d1e2-4bc0-8f5e-8fe4312b0844") // RegisterAutoScalingGroupLoadBalancerOpts | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.RegisterAutoScalingGroupLoadBalancer(context.Background(), autoScalingGroupId).RegisterAutoScalingGroupLoadBalancerOpts(registerAutoScalingGroupLoadBalancerOpts).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.RegisterAutoScalingGroupLoadBalancer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `RegisterAutoScalingGroupLoadBalancer`: AutoScalingGroup
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.RegisterAutoScalingGroupLoadBalancer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**autoScalingGroupId** | **string** | Auto Scaling Group ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRegisterAutoScalingGroupLoadBalancerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **registerAutoScalingGroupLoadBalancerOpts** | [**RegisterAutoScalingGroupLoadBalancerOpts**](RegisterAutoScalingGroupLoadBalancerOpts.md) |  | 
+
+### Return type
+
+[**AutoScalingGroup**](AutoScalingGroup.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## RegisterLoadBalancerTargets
 
 > RegisterLoadBalancerTargets(ctx, loadBalancerId).LoadBalancerTargetOpts(loadBalancerTargetOpts).Execute()
@@ -3984,7 +4128,7 @@ import (
 )
 
 func main() {
-	autoScalingGroupId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Auto Scaling Group ID
+	autoScalingGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Auto Scaling Group ID
 	updateAutoScalingGroupOpts := *openapiclient.NewUpdateAutoScalingGroupOpts() // UpdateAutoScalingGroupOpts | 
 
 	configuration := openapiclient.NewConfiguration()

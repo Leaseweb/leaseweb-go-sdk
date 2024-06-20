@@ -19,7 +19,7 @@ var _ MappedNullable = &GetDataTrafficMetricsResult{}
 
 // GetDataTrafficMetricsResult struct for GetDataTrafficMetricsResult
 type GetDataTrafficMetricsResult struct {
-	Metrics *Metrics `json:"metrics,omitempty"`
+	Metrics *DataTrafficMetrics `json:"metrics,omitempty"`
 	Metadata *TrafficMetricsMetaData `json:"_metadata,omitempty"`
 }
 
@@ -41,9 +41,9 @@ func NewGetDataTrafficMetricsResultWithDefaults() *GetDataTrafficMetricsResult {
 }
 
 // GetMetrics returns the Metrics field value if set, zero value otherwise.
-func (o *GetDataTrafficMetricsResult) GetMetrics() Metrics {
+func (o *GetDataTrafficMetricsResult) GetMetrics() DataTrafficMetrics {
 	if o == nil || IsNil(o.Metrics) {
-		var ret Metrics
+		var ret DataTrafficMetrics
 		return ret
 	}
 	return *o.Metrics
@@ -51,7 +51,7 @@ func (o *GetDataTrafficMetricsResult) GetMetrics() Metrics {
 
 // GetMetricsOk returns a tuple with the Metrics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetDataTrafficMetricsResult) GetMetricsOk() (*Metrics, bool) {
+func (o *GetDataTrafficMetricsResult) GetMetricsOk() (*DataTrafficMetrics, bool) {
 	if o == nil || IsNil(o.Metrics) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *GetDataTrafficMetricsResult) HasMetrics() bool {
 	return false
 }
 
-// SetMetrics gets a reference to the given Metrics and assigns it to the Metrics field.
-func (o *GetDataTrafficMetricsResult) SetMetrics(v Metrics) {
+// SetMetrics gets a reference to the given DataTrafficMetrics and assigns it to the Metrics field.
+func (o *GetDataTrafficMetricsResult) SetMetrics(v DataTrafficMetrics) {
 	o.Metrics = &v
 }
 

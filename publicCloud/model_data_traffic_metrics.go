@@ -14,34 +14,34 @@ import (
 	"encoding/json"
 )
 
-// checks if the Metrics type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Metrics{}
+// checks if the DataTrafficMetrics type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DataTrafficMetrics{}
 
-// Metrics struct for Metrics
-type Metrics struct {
+// DataTrafficMetrics struct for DataTrafficMetrics
+type DataTrafficMetrics struct {
 	DOWN_PUBLIC *TrafficMetric `json:"DOWN_PUBLIC,omitempty"`
 	UP_PUBLIC *TrafficMetric `json:"UP_PUBLIC,omitempty"`
 }
 
-// NewMetrics instantiates a new Metrics object
+// NewDataTrafficMetrics instantiates a new DataTrafficMetrics object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetrics() *Metrics {
-	this := Metrics{}
+func NewDataTrafficMetrics() *DataTrafficMetrics {
+	this := DataTrafficMetrics{}
 	return &this
 }
 
-// NewMetricsWithDefaults instantiates a new Metrics object
+// NewDataTrafficMetricsWithDefaults instantiates a new DataTrafficMetrics object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewMetricsWithDefaults() *Metrics {
-	this := Metrics{}
+func NewDataTrafficMetricsWithDefaults() *DataTrafficMetrics {
+	this := DataTrafficMetrics{}
 	return &this
 }
 
 // GetDOWN_PUBLIC returns the DOWN_PUBLIC field value if set, zero value otherwise.
-func (o *Metrics) GetDOWN_PUBLIC() TrafficMetric {
+func (o *DataTrafficMetrics) GetDOWN_PUBLIC() TrafficMetric {
 	if o == nil || IsNil(o.DOWN_PUBLIC) {
 		var ret TrafficMetric
 		return ret
@@ -51,7 +51,7 @@ func (o *Metrics) GetDOWN_PUBLIC() TrafficMetric {
 
 // GetDOWN_PUBLICOk returns a tuple with the DOWN_PUBLIC field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Metrics) GetDOWN_PUBLICOk() (*TrafficMetric, bool) {
+func (o *DataTrafficMetrics) GetDOWN_PUBLICOk() (*TrafficMetric, bool) {
 	if o == nil || IsNil(o.DOWN_PUBLIC) {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *Metrics) GetDOWN_PUBLICOk() (*TrafficMetric, bool) {
 }
 
 // HasDOWN_PUBLIC returns a boolean if a field has been set.
-func (o *Metrics) HasDOWN_PUBLIC() bool {
+func (o *DataTrafficMetrics) HasDOWN_PUBLIC() bool {
 	if o != nil && !IsNil(o.DOWN_PUBLIC) {
 		return true
 	}
@@ -68,12 +68,12 @@ func (o *Metrics) HasDOWN_PUBLIC() bool {
 }
 
 // SetDOWN_PUBLIC gets a reference to the given TrafficMetric and assigns it to the DOWN_PUBLIC field.
-func (o *Metrics) SetDOWN_PUBLIC(v TrafficMetric) {
+func (o *DataTrafficMetrics) SetDOWN_PUBLIC(v TrafficMetric) {
 	o.DOWN_PUBLIC = &v
 }
 
 // GetUP_PUBLIC returns the UP_PUBLIC field value if set, zero value otherwise.
-func (o *Metrics) GetUP_PUBLIC() TrafficMetric {
+func (o *DataTrafficMetrics) GetUP_PUBLIC() TrafficMetric {
 	if o == nil || IsNil(o.UP_PUBLIC) {
 		var ret TrafficMetric
 		return ret
@@ -83,7 +83,7 @@ func (o *Metrics) GetUP_PUBLIC() TrafficMetric {
 
 // GetUP_PUBLICOk returns a tuple with the UP_PUBLIC field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Metrics) GetUP_PUBLICOk() (*TrafficMetric, bool) {
+func (o *DataTrafficMetrics) GetUP_PUBLICOk() (*TrafficMetric, bool) {
 	if o == nil || IsNil(o.UP_PUBLIC) {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *Metrics) GetUP_PUBLICOk() (*TrafficMetric, bool) {
 }
 
 // HasUP_PUBLIC returns a boolean if a field has been set.
-func (o *Metrics) HasUP_PUBLIC() bool {
+func (o *DataTrafficMetrics) HasUP_PUBLIC() bool {
 	if o != nil && !IsNil(o.UP_PUBLIC) {
 		return true
 	}
@@ -100,11 +100,11 @@ func (o *Metrics) HasUP_PUBLIC() bool {
 }
 
 // SetUP_PUBLIC gets a reference to the given TrafficMetric and assigns it to the UP_PUBLIC field.
-func (o *Metrics) SetUP_PUBLIC(v TrafficMetric) {
+func (o *DataTrafficMetrics) SetUP_PUBLIC(v TrafficMetric) {
 	o.UP_PUBLIC = &v
 }
 
-func (o Metrics) MarshalJSON() ([]byte, error) {
+func (o DataTrafficMetrics) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -112,7 +112,7 @@ func (o Metrics) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Metrics) ToMap() (map[string]interface{}, error) {
+func (o DataTrafficMetrics) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.DOWN_PUBLIC) {
 		toSerialize["DOWN_PUBLIC"] = o.DOWN_PUBLIC
@@ -123,38 +123,38 @@ func (o Metrics) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableMetrics struct {
-	value *Metrics
+type NullableDataTrafficMetrics struct {
+	value *DataTrafficMetrics
 	isSet bool
 }
 
-func (v NullableMetrics) Get() *Metrics {
+func (v NullableDataTrafficMetrics) Get() *DataTrafficMetrics {
 	return v.value
 }
 
-func (v *NullableMetrics) Set(val *Metrics) {
+func (v *NullableDataTrafficMetrics) Set(val *DataTrafficMetrics) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMetrics) IsSet() bool {
+func (v NullableDataTrafficMetrics) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMetrics) Unset() {
+func (v *NullableDataTrafficMetrics) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMetrics(val *Metrics) *NullableMetrics {
-	return &NullableMetrics{value: val, isSet: true}
+func NewNullableDataTrafficMetrics(val *DataTrafficMetrics) *NullableDataTrafficMetrics {
+	return &NullableDataTrafficMetrics{value: val, isSet: true}
 }
 
-func (v NullableMetrics) MarshalJSON() ([]byte, error) {
+func (v NullableDataTrafficMetrics) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMetrics) UnmarshalJSON(src []byte) error {
+func (v *NullableDataTrafficMetrics) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

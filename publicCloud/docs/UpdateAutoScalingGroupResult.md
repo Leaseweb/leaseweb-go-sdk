@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **UpdatedAt** | Pointer to **time.Time** | Date and time when the Auto Scaling Group was last updated | [optional] 
 **StartsAt** | Pointer to **NullableTime** | Only for \&quot;SCHEDULED\&quot; auto scaling group. Date and time (UTC) that the instances need to be launched | [optional] 
 **EndsAt** | Pointer to **NullableTime** | Only for \&quot;SCHEDULED\&quot; auto scaling group. Date and time (UTC) that the instances need to be terminated | [optional] 
-**LoadBalancer** | Pointer to [**NullableLoadBalancer2**](LoadBalancer2.md) |  | [optional] 
+**LoadBalancer** | Pointer to [**NullableAutoScalingGroupLoadBalancer**](AutoScalingGroupLoadBalancer.md) |  | [optional] 
 
 ## Methods
 
@@ -461,20 +461,20 @@ HasEndsAt returns a boolean if a field has been set.
 UnsetEndsAt ensures that no value is present for EndsAt, not even an explicit nil
 ### GetLoadBalancer
 
-`func (o *UpdateAutoScalingGroupResult) GetLoadBalancer() LoadBalancer2`
+`func (o *UpdateAutoScalingGroupResult) GetLoadBalancer() AutoScalingGroupLoadBalancer`
 
 GetLoadBalancer returns the LoadBalancer field if non-nil, zero value otherwise.
 
 ### GetLoadBalancerOk
 
-`func (o *UpdateAutoScalingGroupResult) GetLoadBalancerOk() (*LoadBalancer2, bool)`
+`func (o *UpdateAutoScalingGroupResult) GetLoadBalancerOk() (*AutoScalingGroupLoadBalancer, bool)`
 
 GetLoadBalancerOk returns a tuple with the LoadBalancer field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLoadBalancer
 
-`func (o *UpdateAutoScalingGroupResult) SetLoadBalancer(v LoadBalancer2)`
+`func (o *UpdateAutoScalingGroupResult) SetLoadBalancer(v AutoScalingGroupLoadBalancer)`
 
 SetLoadBalancer sets LoadBalancer field to given value.
 
