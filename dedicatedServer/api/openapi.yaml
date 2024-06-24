@@ -9212,6 +9212,7 @@ components:
             items:
               type: string
             type: array
+          title: errorDetails
           type: object
       type: object
     updateNetworkEquipmentReferenceOpts:
