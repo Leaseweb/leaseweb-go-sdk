@@ -9,7 +9,6 @@ configuration.go
 docs/AttachIsoOpts.md
 docs/AutoScaledInstance.md
 docs/AutoScalingGroup.md
-docs/AutoScalingGroupLoadBalancer.md
 docs/AutoScalingLoadBalancer.md
 docs/Billing.md
 docs/Central.md
@@ -74,6 +73,7 @@ docs/Local.md
 docs/MarketApp.md
 docs/Memory.md
 docs/Metadata.md
+docs/NetworkSpeed.md
 docs/NetworkType.md
 docs/NullRouteIpOpts.md
 docs/OperatingSystem.md
@@ -82,9 +82,7 @@ docs/OperatingSystemId.md
 docs/Peak.md
 docs/Price.md
 docs/PrivateNetwork.md
-docs/PrivateNetworkSpeed.md
 docs/PublicCloudAPI.md
-docs/PublicNetworkSpeed.md
 docs/Region.md
 docs/RegisterAutoScalingGroupLoadBalancerOpts.md
 docs/ReinstallInstanceOpts.md
@@ -102,7 +100,6 @@ docs/TrafficMetricSummary.md
 docs/TrafficMetricValue.md
 docs/TrafficMetricsMetaData.md
 docs/UpdateAutoScalingGroupOpts.md
-docs/UpdateAutoScalingGroupResult.md
 docs/UpdateCredentialOpts.md
 docs/UpdateCredentialResult.md
 docs/UpdateInstanceOpts.md
@@ -116,7 +113,6 @@ model__metadata.go
 model_attach_iso_opts.go
 model_auto_scaled_instance.go
 model_auto_scaling_group.go
-model_auto_scaling_group_load_balancer.go
 model_auto_scaling_load_balancer.go
 model_billing.go
 model_central.go
@@ -180,6 +176,7 @@ model_load_balancer_target_opts.go
 model_local.go
 model_market_app.go
 model_memory.go
+model_network_speed.go
 model_network_type.go
 model_null_route_ip_opts.go
 model_operating_system.go
@@ -188,8 +185,6 @@ model_operating_system_id.go
 model_peak.go
 model_price.go
 model_private_network.go
-model_private_network_speed.go
-model_public_network_speed.go
 model_region.go
 model_register_auto_scaling_group_load_balancer_opts.go
 model_reinstall_instance_opts.go
@@ -207,7 +202,6 @@ model_traffic_metric_summary.go
 model_traffic_metric_value.go
 model_traffic_metrics_meta_data.go
 model_update_auto_scaling_group_opts.go
-model_update_auto_scaling_group_result.go
 model_update_credential_opts.go
 model_update_credential_result.go
 model_update_instance_opts.go

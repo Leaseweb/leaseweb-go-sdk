@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the InstanceResources type satisfies the MappedNullable interface at compile time
@@ -19,18 +21,24 @@ var _ MappedNullable = &InstanceResources{}
 
 // InstanceResources Resources available for the load balancer
 type InstanceResources struct {
-	Cpu *Cpu `json:"cpu,omitempty"`
-	Memory *Memory `json:"memory,omitempty"`
-	PublicNetworkSpeed *PublicNetworkSpeed `json:"publicNetworkSpeed,omitempty"`
-	PrivateNetworkSpeed *PrivateNetworkSpeed `json:"privateNetworkSpeed,omitempty"`
+	Cpu Cpu `json:"cpu"`
+	Memory Memory `json:"memory"`
+	PublicNetworkSpeed NetworkSpeed `json:"publicNetworkSpeed"`
+	PrivateNetworkSpeed NetworkSpeed `json:"privateNetworkSpeed"`
 }
+
+type _InstanceResources InstanceResources
 
 // NewInstanceResources instantiates a new InstanceResources object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceResources() *InstanceResources {
+func NewInstanceResources(cpu Cpu, memory Memory, publicNetworkSpeed NetworkSpeed, privateNetworkSpeed NetworkSpeed) *InstanceResources {
 	this := InstanceResources{}
+	this.Cpu = cpu
+	this.Memory = memory
+	this.PublicNetworkSpeed = publicNetworkSpeed
+	this.PrivateNetworkSpeed = privateNetworkSpeed
 	return &this
 }
 
@@ -42,132 +50,100 @@ func NewInstanceResourcesWithDefaults() *InstanceResources {
 	return &this
 }
 
-// GetCpu returns the Cpu field value if set, zero value otherwise.
+// GetCpu returns the Cpu field value
 func (o *InstanceResources) GetCpu() Cpu {
-	if o == nil || IsNil(o.Cpu) {
+	if o == nil {
 		var ret Cpu
 		return ret
 	}
-	return *o.Cpu
+
+	return o.Cpu
 }
 
-// GetCpuOk returns a tuple with the Cpu field value if set, nil otherwise
+// GetCpuOk returns a tuple with the Cpu field value
 // and a boolean to check if the value has been set.
 func (o *InstanceResources) GetCpuOk() (*Cpu, bool) {
-	if o == nil || IsNil(o.Cpu) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Cpu, true
+	return &o.Cpu, true
 }
 
-// HasCpu returns a boolean if a field has been set.
-func (o *InstanceResources) HasCpu() bool {
-	if o != nil && !IsNil(o.Cpu) {
-		return true
-	}
-
-	return false
-}
-
-// SetCpu gets a reference to the given Cpu and assigns it to the Cpu field.
+// SetCpu sets field value
 func (o *InstanceResources) SetCpu(v Cpu) {
-	o.Cpu = &v
+	o.Cpu = v
 }
 
-// GetMemory returns the Memory field value if set, zero value otherwise.
+// GetMemory returns the Memory field value
 func (o *InstanceResources) GetMemory() Memory {
-	if o == nil || IsNil(o.Memory) {
+	if o == nil {
 		var ret Memory
 		return ret
 	}
-	return *o.Memory
+
+	return o.Memory
 }
 
-// GetMemoryOk returns a tuple with the Memory field value if set, nil otherwise
+// GetMemoryOk returns a tuple with the Memory field value
 // and a boolean to check if the value has been set.
 func (o *InstanceResources) GetMemoryOk() (*Memory, bool) {
-	if o == nil || IsNil(o.Memory) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Memory, true
+	return &o.Memory, true
 }
 
-// HasMemory returns a boolean if a field has been set.
-func (o *InstanceResources) HasMemory() bool {
-	if o != nil && !IsNil(o.Memory) {
-		return true
-	}
-
-	return false
-}
-
-// SetMemory gets a reference to the given Memory and assigns it to the Memory field.
+// SetMemory sets field value
 func (o *InstanceResources) SetMemory(v Memory) {
-	o.Memory = &v
+	o.Memory = v
 }
 
-// GetPublicNetworkSpeed returns the PublicNetworkSpeed field value if set, zero value otherwise.
-func (o *InstanceResources) GetPublicNetworkSpeed() PublicNetworkSpeed {
-	if o == nil || IsNil(o.PublicNetworkSpeed) {
-		var ret PublicNetworkSpeed
+// GetPublicNetworkSpeed returns the PublicNetworkSpeed field value
+func (o *InstanceResources) GetPublicNetworkSpeed() NetworkSpeed {
+	if o == nil {
+		var ret NetworkSpeed
 		return ret
 	}
-	return *o.PublicNetworkSpeed
+
+	return o.PublicNetworkSpeed
 }
 
-// GetPublicNetworkSpeedOk returns a tuple with the PublicNetworkSpeed field value if set, nil otherwise
+// GetPublicNetworkSpeedOk returns a tuple with the PublicNetworkSpeed field value
 // and a boolean to check if the value has been set.
-func (o *InstanceResources) GetPublicNetworkSpeedOk() (*PublicNetworkSpeed, bool) {
-	if o == nil || IsNil(o.PublicNetworkSpeed) {
+func (o *InstanceResources) GetPublicNetworkSpeedOk() (*NetworkSpeed, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PublicNetworkSpeed, true
+	return &o.PublicNetworkSpeed, true
 }
 
-// HasPublicNetworkSpeed returns a boolean if a field has been set.
-func (o *InstanceResources) HasPublicNetworkSpeed() bool {
-	if o != nil && !IsNil(o.PublicNetworkSpeed) {
-		return true
-	}
-
-	return false
+// SetPublicNetworkSpeed sets field value
+func (o *InstanceResources) SetPublicNetworkSpeed(v NetworkSpeed) {
+	o.PublicNetworkSpeed = v
 }
 
-// SetPublicNetworkSpeed gets a reference to the given PublicNetworkSpeed and assigns it to the PublicNetworkSpeed field.
-func (o *InstanceResources) SetPublicNetworkSpeed(v PublicNetworkSpeed) {
-	o.PublicNetworkSpeed = &v
-}
-
-// GetPrivateNetworkSpeed returns the PrivateNetworkSpeed field value if set, zero value otherwise.
-func (o *InstanceResources) GetPrivateNetworkSpeed() PrivateNetworkSpeed {
-	if o == nil || IsNil(o.PrivateNetworkSpeed) {
-		var ret PrivateNetworkSpeed
+// GetPrivateNetworkSpeed returns the PrivateNetworkSpeed field value
+func (o *InstanceResources) GetPrivateNetworkSpeed() NetworkSpeed {
+	if o == nil {
+		var ret NetworkSpeed
 		return ret
 	}
-	return *o.PrivateNetworkSpeed
+
+	return o.PrivateNetworkSpeed
 }
 
-// GetPrivateNetworkSpeedOk returns a tuple with the PrivateNetworkSpeed field value if set, nil otherwise
+// GetPrivateNetworkSpeedOk returns a tuple with the PrivateNetworkSpeed field value
 // and a boolean to check if the value has been set.
-func (o *InstanceResources) GetPrivateNetworkSpeedOk() (*PrivateNetworkSpeed, bool) {
-	if o == nil || IsNil(o.PrivateNetworkSpeed) {
+func (o *InstanceResources) GetPrivateNetworkSpeedOk() (*NetworkSpeed, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrivateNetworkSpeed, true
+	return &o.PrivateNetworkSpeed, true
 }
 
-// HasPrivateNetworkSpeed returns a boolean if a field has been set.
-func (o *InstanceResources) HasPrivateNetworkSpeed() bool {
-	if o != nil && !IsNil(o.PrivateNetworkSpeed) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrivateNetworkSpeed gets a reference to the given PrivateNetworkSpeed and assigns it to the PrivateNetworkSpeed field.
-func (o *InstanceResources) SetPrivateNetworkSpeed(v PrivateNetworkSpeed) {
-	o.PrivateNetworkSpeed = &v
+// SetPrivateNetworkSpeed sets field value
+func (o *InstanceResources) SetPrivateNetworkSpeed(v NetworkSpeed) {
+	o.PrivateNetworkSpeed = v
 }
 
 func (o InstanceResources) MarshalJSON() ([]byte, error) {
@@ -180,19 +156,51 @@ func (o InstanceResources) MarshalJSON() ([]byte, error) {
 
 func (o InstanceResources) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Cpu) {
-		toSerialize["cpu"] = o.Cpu
-	}
-	if !IsNil(o.Memory) {
-		toSerialize["memory"] = o.Memory
-	}
-	if !IsNil(o.PublicNetworkSpeed) {
-		toSerialize["publicNetworkSpeed"] = o.PublicNetworkSpeed
-	}
-	if !IsNil(o.PrivateNetworkSpeed) {
-		toSerialize["privateNetworkSpeed"] = o.PrivateNetworkSpeed
-	}
+	toSerialize["cpu"] = o.Cpu
+	toSerialize["memory"] = o.Memory
+	toSerialize["publicNetworkSpeed"] = o.PublicNetworkSpeed
+	toSerialize["privateNetworkSpeed"] = o.PrivateNetworkSpeed
 	return toSerialize, nil
+}
+
+func (o *InstanceResources) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"cpu",
+		"memory",
+		"publicNetworkSpeed",
+		"privateNetworkSpeed",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varInstanceResources := _InstanceResources{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInstanceResources)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InstanceResources(varInstanceResources)
+
+	return err
 }
 
 type NullableInstanceResources struct {

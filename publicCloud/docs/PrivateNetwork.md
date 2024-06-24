@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PrivateNetworkId** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
-**Subnet** | Pointer to **string** |  | [optional] 
+**PrivateNetworkId** | **string** |  | 
+**Status** | **string** |  | 
+**Subnet** | **string** |  | 
 
 ## Methods
 
 ### NewPrivateNetwork
 
-`func NewPrivateNetwork() *PrivateNetwork`
+`func NewPrivateNetwork(privateNetworkId string, status string, subnet string, ) *PrivateNetwork`
 
 NewPrivateNetwork instantiates a new PrivateNetwork object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetPrivateNetworkId sets PrivateNetworkId field to given value.
 
-### HasPrivateNetworkId
-
-`func (o *PrivateNetwork) HasPrivateNetworkId() bool`
-
-HasPrivateNetworkId returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *PrivateNetwork) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetSubnet
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetSubnet sets Subnet field to given value.
 
-### HasSubnet
-
-`func (o *PrivateNetwork) HasSubnet() bool`
-
-HasSubnet returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

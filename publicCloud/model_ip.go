@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Ip type satisfies the MappedNullable interface at compile time
@@ -20,25 +22,35 @@ var _ MappedNullable = &Ip{}
 // Ip struct for Ip
 type Ip struct {
 	// Ip Address
-	Ip *string `json:"ip,omitempty"`
+	Ip string `json:"ip"`
 	// The number of leading bits in the IP address
-	PrefixLength *string `json:"prefixLength,omitempty"`
+	PrefixLength string `json:"prefixLength"`
 	// Ip version
-	Version *int32 `json:"version,omitempty"`
+	Version int32 `json:"version"`
 	// Whether or not the IP has been nulled
-	NullRouted *bool `json:"nullRouted,omitempty"`
-	MainIp *bool `json:"mainIp,omitempty"`
-	NetworkType *NetworkType `json:"networkType,omitempty"`
-	ReverseLookup NullableString `json:"reverseLookup,omitempty"`
-	Ddos NullableDdos `json:"ddos,omitempty"`
+	NullRouted bool `json:"nullRouted"`
+	MainIp bool `json:"mainIp"`
+	NetworkType NetworkType `json:"networkType"`
+	ReverseLookup NullableString `json:"reverseLookup"`
+	Ddos NullableDdos `json:"ddos"`
 }
+
+type _Ip Ip
 
 // NewIp instantiates a new Ip object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIp() *Ip {
+func NewIp(ip string, prefixLength string, version int32, nullRouted bool, mainIp bool, networkType NetworkType, reverseLookup NullableString, ddos NullableDdos) *Ip {
 	this := Ip{}
+	this.Ip = ip
+	this.PrefixLength = prefixLength
+	this.Version = version
+	this.NullRouted = nullRouted
+	this.MainIp = mainIp
+	this.NetworkType = networkType
+	this.ReverseLookup = reverseLookup
+	this.Ddos = ddos
 	return &this
 }
 
@@ -50,208 +62,162 @@ func NewIpWithDefaults() *Ip {
 	return &this
 }
 
-// GetIp returns the Ip field value if set, zero value otherwise.
+// GetIp returns the Ip field value
 func (o *Ip) GetIp() string {
-	if o == nil || IsNil(o.Ip) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Ip
+
+	return o.Ip
 }
 
-// GetIpOk returns a tuple with the Ip field value if set, nil otherwise
+// GetIpOk returns a tuple with the Ip field value
 // and a boolean to check if the value has been set.
 func (o *Ip) GetIpOk() (*string, bool) {
-	if o == nil || IsNil(o.Ip) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Ip, true
+	return &o.Ip, true
 }
 
-// HasIp returns a boolean if a field has been set.
-func (o *Ip) HasIp() bool {
-	if o != nil && !IsNil(o.Ip) {
-		return true
-	}
-
-	return false
-}
-
-// SetIp gets a reference to the given string and assigns it to the Ip field.
+// SetIp sets field value
 func (o *Ip) SetIp(v string) {
-	o.Ip = &v
+	o.Ip = v
 }
 
-// GetPrefixLength returns the PrefixLength field value if set, zero value otherwise.
+// GetPrefixLength returns the PrefixLength field value
 func (o *Ip) GetPrefixLength() string {
-	if o == nil || IsNil(o.PrefixLength) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PrefixLength
+
+	return o.PrefixLength
 }
 
-// GetPrefixLengthOk returns a tuple with the PrefixLength field value if set, nil otherwise
+// GetPrefixLengthOk returns a tuple with the PrefixLength field value
 // and a boolean to check if the value has been set.
 func (o *Ip) GetPrefixLengthOk() (*string, bool) {
-	if o == nil || IsNil(o.PrefixLength) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrefixLength, true
+	return &o.PrefixLength, true
 }
 
-// HasPrefixLength returns a boolean if a field has been set.
-func (o *Ip) HasPrefixLength() bool {
-	if o != nil && !IsNil(o.PrefixLength) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrefixLength gets a reference to the given string and assigns it to the PrefixLength field.
+// SetPrefixLength sets field value
 func (o *Ip) SetPrefixLength(v string) {
-	o.PrefixLength = &v
+	o.PrefixLength = v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
+// GetVersion returns the Version field value
 func (o *Ip) GetVersion() int32 {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Version
+
+	return o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
 func (o *Ip) GetVersionOk() (*int32, bool) {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return &o.Version, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *Ip) HasVersion() bool {
-	if o != nil && !IsNil(o.Version) {
-		return true
-	}
-
-	return false
-}
-
-// SetVersion gets a reference to the given int32 and assigns it to the Version field.
+// SetVersion sets field value
 func (o *Ip) SetVersion(v int32) {
-	o.Version = &v
+	o.Version = v
 }
 
-// GetNullRouted returns the NullRouted field value if set, zero value otherwise.
+// GetNullRouted returns the NullRouted field value
 func (o *Ip) GetNullRouted() bool {
-	if o == nil || IsNil(o.NullRouted) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.NullRouted
+
+	return o.NullRouted
 }
 
-// GetNullRoutedOk returns a tuple with the NullRouted field value if set, nil otherwise
+// GetNullRoutedOk returns a tuple with the NullRouted field value
 // and a boolean to check if the value has been set.
 func (o *Ip) GetNullRoutedOk() (*bool, bool) {
-	if o == nil || IsNil(o.NullRouted) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NullRouted, true
+	return &o.NullRouted, true
 }
 
-// HasNullRouted returns a boolean if a field has been set.
-func (o *Ip) HasNullRouted() bool {
-	if o != nil && !IsNil(o.NullRouted) {
-		return true
-	}
-
-	return false
-}
-
-// SetNullRouted gets a reference to the given bool and assigns it to the NullRouted field.
+// SetNullRouted sets field value
 func (o *Ip) SetNullRouted(v bool) {
-	o.NullRouted = &v
+	o.NullRouted = v
 }
 
-// GetMainIp returns the MainIp field value if set, zero value otherwise.
+// GetMainIp returns the MainIp field value
 func (o *Ip) GetMainIp() bool {
-	if o == nil || IsNil(o.MainIp) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.MainIp
+
+	return o.MainIp
 }
 
-// GetMainIpOk returns a tuple with the MainIp field value if set, nil otherwise
+// GetMainIpOk returns a tuple with the MainIp field value
 // and a boolean to check if the value has been set.
 func (o *Ip) GetMainIpOk() (*bool, bool) {
-	if o == nil || IsNil(o.MainIp) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MainIp, true
+	return &o.MainIp, true
 }
 
-// HasMainIp returns a boolean if a field has been set.
-func (o *Ip) HasMainIp() bool {
-	if o != nil && !IsNil(o.MainIp) {
-		return true
-	}
-
-	return false
-}
-
-// SetMainIp gets a reference to the given bool and assigns it to the MainIp field.
+// SetMainIp sets field value
 func (o *Ip) SetMainIp(v bool) {
-	o.MainIp = &v
+	o.MainIp = v
 }
 
-// GetNetworkType returns the NetworkType field value if set, zero value otherwise.
+// GetNetworkType returns the NetworkType field value
 func (o *Ip) GetNetworkType() NetworkType {
-	if o == nil || IsNil(o.NetworkType) {
+	if o == nil {
 		var ret NetworkType
 		return ret
 	}
-	return *o.NetworkType
+
+	return o.NetworkType
 }
 
-// GetNetworkTypeOk returns a tuple with the NetworkType field value if set, nil otherwise
+// GetNetworkTypeOk returns a tuple with the NetworkType field value
 // and a boolean to check if the value has been set.
 func (o *Ip) GetNetworkTypeOk() (*NetworkType, bool) {
-	if o == nil || IsNil(o.NetworkType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NetworkType, true
+	return &o.NetworkType, true
 }
 
-// HasNetworkType returns a boolean if a field has been set.
-func (o *Ip) HasNetworkType() bool {
-	if o != nil && !IsNil(o.NetworkType) {
-		return true
-	}
-
-	return false
-}
-
-// SetNetworkType gets a reference to the given NetworkType and assigns it to the NetworkType field.
+// SetNetworkType sets field value
 func (o *Ip) SetNetworkType(v NetworkType) {
-	o.NetworkType = &v
+	o.NetworkType = v
 }
 
-// GetReverseLookup returns the ReverseLookup field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetReverseLookup returns the ReverseLookup field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *Ip) GetReverseLookup() string {
-	if o == nil || IsNil(o.ReverseLookup.Get()) {
+	if o == nil || o.ReverseLookup.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.ReverseLookup.Get()
 }
 
-// GetReverseLookupOk returns a tuple with the ReverseLookup field value if set, nil otherwise
+// GetReverseLookupOk returns a tuple with the ReverseLookup field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Ip) GetReverseLookupOk() (*string, bool) {
@@ -261,39 +227,23 @@ func (o *Ip) GetReverseLookupOk() (*string, bool) {
 	return o.ReverseLookup.Get(), o.ReverseLookup.IsSet()
 }
 
-// HasReverseLookup returns a boolean if a field has been set.
-func (o *Ip) HasReverseLookup() bool {
-	if o != nil && o.ReverseLookup.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetReverseLookup gets a reference to the given NullableString and assigns it to the ReverseLookup field.
+// SetReverseLookup sets field value
 func (o *Ip) SetReverseLookup(v string) {
 	o.ReverseLookup.Set(&v)
 }
-// SetReverseLookupNil sets the value for ReverseLookup to be an explicit nil
-func (o *Ip) SetReverseLookupNil() {
-	o.ReverseLookup.Set(nil)
-}
 
-// UnsetReverseLookup ensures that no value is present for ReverseLookup, not even an explicit nil
-func (o *Ip) UnsetReverseLookup() {
-	o.ReverseLookup.Unset()
-}
-
-// GetDdos returns the Ddos field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDdos returns the Ddos field value
+// If the value is explicit nil, the zero value for Ddos will be returned
 func (o *Ip) GetDdos() Ddos {
-	if o == nil || IsNil(o.Ddos.Get()) {
+	if o == nil || o.Ddos.Get() == nil {
 		var ret Ddos
 		return ret
 	}
+
 	return *o.Ddos.Get()
 }
 
-// GetDdosOk returns a tuple with the Ddos field value if set, nil otherwise
+// GetDdosOk returns a tuple with the Ddos field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Ip) GetDdosOk() (*Ddos, bool) {
@@ -303,27 +253,9 @@ func (o *Ip) GetDdosOk() (*Ddos, bool) {
 	return o.Ddos.Get(), o.Ddos.IsSet()
 }
 
-// HasDdos returns a boolean if a field has been set.
-func (o *Ip) HasDdos() bool {
-	if o != nil && o.Ddos.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDdos gets a reference to the given NullableDdos and assigns it to the Ddos field.
+// SetDdos sets field value
 func (o *Ip) SetDdos(v Ddos) {
 	o.Ddos.Set(&v)
-}
-// SetDdosNil sets the value for Ddos to be an explicit nil
-func (o *Ip) SetDdosNil() {
-	o.Ddos.Set(nil)
-}
-
-// UnsetDdos ensures that no value is present for Ddos, not even an explicit nil
-func (o *Ip) UnsetDdos() {
-	o.Ddos.Unset()
 }
 
 func (o Ip) MarshalJSON() ([]byte, error) {
@@ -336,31 +268,59 @@ func (o Ip) MarshalJSON() ([]byte, error) {
 
 func (o Ip) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Ip) {
-		toSerialize["ip"] = o.Ip
-	}
-	if !IsNil(o.PrefixLength) {
-		toSerialize["prefixLength"] = o.PrefixLength
-	}
-	if !IsNil(o.Version) {
-		toSerialize["version"] = o.Version
-	}
-	if !IsNil(o.NullRouted) {
-		toSerialize["nullRouted"] = o.NullRouted
-	}
-	if !IsNil(o.MainIp) {
-		toSerialize["mainIp"] = o.MainIp
-	}
-	if !IsNil(o.NetworkType) {
-		toSerialize["networkType"] = o.NetworkType
-	}
-	if o.ReverseLookup.IsSet() {
-		toSerialize["reverseLookup"] = o.ReverseLookup.Get()
-	}
-	if o.Ddos.IsSet() {
-		toSerialize["ddos"] = o.Ddos.Get()
-	}
+	toSerialize["ip"] = o.Ip
+	toSerialize["prefixLength"] = o.PrefixLength
+	toSerialize["version"] = o.Version
+	toSerialize["nullRouted"] = o.NullRouted
+	toSerialize["mainIp"] = o.MainIp
+	toSerialize["networkType"] = o.NetworkType
+	toSerialize["reverseLookup"] = o.ReverseLookup.Get()
+	toSerialize["ddos"] = o.Ddos.Get()
 	return toSerialize, nil
+}
+
+func (o *Ip) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"ip",
+		"prefixLength",
+		"version",
+		"nullRouted",
+		"mainIp",
+		"networkType",
+		"reverseLookup",
+		"ddos",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIp := _Ip{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varIp)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Ip(varIp)
+
+	return err
 }
 
 type NullableIp struct {

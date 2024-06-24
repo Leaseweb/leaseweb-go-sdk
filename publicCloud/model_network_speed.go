@@ -16,85 +16,85 @@ import (
 	"fmt"
 )
 
-// checks if the Iso type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Iso{}
+// checks if the NetworkSpeed type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NetworkSpeed{}
 
-// Iso struct for Iso
-type Iso struct {
-	Id string `json:"id"`
-	Name string `json:"name"`
+// NetworkSpeed Network speed in Gbps
+type NetworkSpeed struct {
+	Value int32 `json:"value"`
+	Unit string `json:"unit"`
 }
 
-type _Iso Iso
+type _NetworkSpeed NetworkSpeed
 
-// NewIso instantiates a new Iso object
+// NewNetworkSpeed instantiates a new NetworkSpeed object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIso(id string, name string) *Iso {
-	this := Iso{}
-	this.Id = id
-	this.Name = name
+func NewNetworkSpeed(value int32, unit string) *NetworkSpeed {
+	this := NetworkSpeed{}
+	this.Value = value
+	this.Unit = unit
 	return &this
 }
 
-// NewIsoWithDefaults instantiates a new Iso object
+// NewNetworkSpeedWithDefaults instantiates a new NetworkSpeed object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewIsoWithDefaults() *Iso {
-	this := Iso{}
+func NewNetworkSpeedWithDefaults() *NetworkSpeed {
+	this := NetworkSpeed{}
 	return &this
 }
 
-// GetId returns the Id field value
-func (o *Iso) GetId() string {
+// GetValue returns the Value field value
+func (o *NetworkSpeed) GetValue() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value
+// and a boolean to check if the value has been set.
+func (o *NetworkSpeed) GetValueOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Value, true
+}
+
+// SetValue sets field value
+func (o *NetworkSpeed) SetValue(v int32) {
+	o.Value = v
+}
+
+// GetUnit returns the Unit field value
+func (o *NetworkSpeed) GetUnit() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Id
+	return o.Unit
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetUnitOk returns a tuple with the Unit field value
 // and a boolean to check if the value has been set.
-func (o *Iso) GetIdOk() (*string, bool) {
+func (o *NetworkSpeed) GetUnitOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Id, true
+	return &o.Unit, true
 }
 
-// SetId sets field value
-func (o *Iso) SetId(v string) {
-	o.Id = v
+// SetUnit sets field value
+func (o *NetworkSpeed) SetUnit(v string) {
+	o.Unit = v
 }
 
-// GetName returns the Name field value
-func (o *Iso) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *Iso) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *Iso) SetName(v string) {
-	o.Name = v
-}
-
-func (o Iso) MarshalJSON() ([]byte, error) {
+func (o NetworkSpeed) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -102,20 +102,20 @@ func (o Iso) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Iso) ToMap() (map[string]interface{}, error) {
+func (o NetworkSpeed) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["name"] = o.Name
+	toSerialize["value"] = o.Value
+	toSerialize["unit"] = o.Unit
 	return toSerialize, nil
 }
 
-func (o *Iso) UnmarshalJSON(data []byte) (err error) {
+func (o *NetworkSpeed) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"id",
-		"name",
+		"value",
+		"unit",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -132,53 +132,53 @@ func (o *Iso) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varIso := _Iso{}
+	varNetworkSpeed := _NetworkSpeed{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIso)
+	err = decoder.Decode(&varNetworkSpeed)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Iso(varIso)
+	*o = NetworkSpeed(varNetworkSpeed)
 
 	return err
 }
 
-type NullableIso struct {
-	value *Iso
+type NullableNetworkSpeed struct {
+	value *NetworkSpeed
 	isSet bool
 }
 
-func (v NullableIso) Get() *Iso {
+func (v NullableNetworkSpeed) Get() *NetworkSpeed {
 	return v.value
 }
 
-func (v *NullableIso) Set(val *Iso) {
+func (v *NullableNetworkSpeed) Set(val *NetworkSpeed) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableIso) IsSet() bool {
+func (v NullableNetworkSpeed) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableIso) Unset() {
+func (v *NullableNetworkSpeed) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableIso(val *Iso) *NullableIso {
-	return &NullableIso{value: val, isSet: true}
+func NewNullableNetworkSpeed(val *NetworkSpeed) *NullableNetworkSpeed {
+	return &NullableNetworkSpeed{value: val, isSet: true}
 }
 
-func (v NullableIso) MarshalJSON() ([]byte, error) {
+func (v NullableNetworkSpeed) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableIso) UnmarshalJSON(src []byte) error {
+func (v *NullableNetworkSpeed) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

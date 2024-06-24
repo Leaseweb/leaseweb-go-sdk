@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BillingFrequency** | Pointer to **int32** | The billing frequency (in months) of the instance. | [optional] 
-**Term** | Pointer to **int32** | The contract commitment (in months) | [optional] 
-**Type** | Pointer to [**ContractType**](ContractType.md) |  | [optional] 
-**EndsAt** | Pointer to **NullableTime** |  | [optional] 
-**RenewalsAt** | Pointer to **time.Time** | Date when the contract will be automatically renewed | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Date when the contract was created | [optional] 
-**State** | Pointer to [**ContractState**](ContractState.md) |  | [optional] 
+**BillingFrequency** | **int32** | The billing frequency (in months) of the instance. | 
+**Term** | **int32** | The contract commitment (in months) | 
+**Type** | [**ContractType**](ContractType.md) |  | 
+**EndsAt** | **NullableTime** |  | 
+**RenewalsAt** | **time.Time** | Date when the contract will be automatically renewed | 
+**CreatedAt** | **time.Time** | Date when the contract was created | 
+**State** | [**ContractState**](ContractState.md) |  | 
 
 ## Methods
 
 ### NewContract
 
-`func NewContract() *Contract`
+`func NewContract(billingFrequency int32, term int32, type_ ContractType, endsAt NullableTime, renewalsAt time.Time, createdAt time.Time, state ContractState, ) *Contract`
 
 NewContract instantiates a new Contract object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetBillingFrequency sets BillingFrequency field to given value.
 
-### HasBillingFrequency
-
-`func (o *Contract) HasBillingFrequency() bool`
-
-HasBillingFrequency returns a boolean if a field has been set.
 
 ### GetTerm
 
@@ -75,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetTerm sets Term field to given value.
 
-### HasTerm
-
-`func (o *Contract) HasTerm() bool`
-
-HasTerm returns a boolean if a field has been set.
 
 ### GetType
 
@@ -100,11 +90,6 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
-### HasType
-
-`func (o *Contract) HasType() bool`
-
-HasType returns a boolean if a field has been set.
 
 ### GetEndsAt
 
@@ -125,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetEndsAt sets EndsAt field to given value.
 
-### HasEndsAt
-
-`func (o *Contract) HasEndsAt() bool`
-
-HasEndsAt returns a boolean if a field has been set.
 
 ### SetEndsAtNil
 
@@ -160,11 +140,6 @@ and a boolean to check if the value has been set.
 
 SetRenewalsAt sets RenewalsAt field to given value.
 
-### HasRenewalsAt
-
-`func (o *Contract) HasRenewalsAt() bool`
-
-HasRenewalsAt returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -185,11 +160,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *Contract) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetState
 
@@ -210,11 +180,6 @@ and a boolean to check if the value has been set.
 
 SetState sets State field to given value.
 
-### HasState
-
-`func (o *Contract) HasState() bool`
-
-HasState returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

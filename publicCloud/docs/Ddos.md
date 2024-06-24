@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DetectionProfile** | Pointer to **string** |  | [optional] 
-**ProtectionType** | Pointer to **string** |  | [optional] 
+**DetectionProfile** | **string** |  | 
+**ProtectionType** | **string** |  | 
 
 ## Methods
 
 ### NewDdos
 
-`func NewDdos() *Ddos`
+`func NewDdos(detectionProfile string, protectionType string, ) *Ddos`
 
 NewDdos instantiates a new Ddos object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetDetectionProfile sets DetectionProfile field to given value.
 
-### HasDetectionProfile
-
-`func (o *Ddos) HasDetectionProfile() bool`
-
-HasDetectionProfile returns a boolean if a field has been set.
 
 ### GetProtectionType
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetProtectionType sets ProtectionType field to given value.
 
-### HasProtectionType
-
-`func (o *Ddos) HasProtectionType() bool`
-
-HasProtectionType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

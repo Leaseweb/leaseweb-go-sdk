@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the StickySession type satisfies the MappedNullable interface at compile time
@@ -20,17 +22,21 @@ var _ MappedNullable = &StickySession{}
 // StickySession struct for StickySession
 type StickySession struct {
 	// If sticky session is enabled or not
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled"`
 	// Time that the Load Balancer routes the requests from one requester to the same target instance
-	MaxLifeTime *int32 `json:"maxLifeTime,omitempty"`
+	MaxLifeTime int32 `json:"maxLifeTime"`
 }
+
+type _StickySession StickySession
 
 // NewStickySession instantiates a new StickySession object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStickySession() *StickySession {
+func NewStickySession(enabled bool, maxLifeTime int32) *StickySession {
 	this := StickySession{}
+	this.Enabled = enabled
+	this.MaxLifeTime = maxLifeTime
 	return &this
 }
 
@@ -42,68 +48,52 @@ func NewStickySessionWithDefaults() *StickySession {
 	return &this
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
+// GetEnabled returns the Enabled field value
 func (o *StickySession) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Enabled
+
+	return o.Enabled
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// GetEnabledOk returns a tuple with the Enabled field value
 // and a boolean to check if the value has been set.
 func (o *StickySession) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Enabled, true
+	return &o.Enabled, true
 }
 
-// HasEnabled returns a boolean if a field has been set.
-func (o *StickySession) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+// SetEnabled sets field value
 func (o *StickySession) SetEnabled(v bool) {
-	o.Enabled = &v
+	o.Enabled = v
 }
 
-// GetMaxLifeTime returns the MaxLifeTime field value if set, zero value otherwise.
+// GetMaxLifeTime returns the MaxLifeTime field value
 func (o *StickySession) GetMaxLifeTime() int32 {
-	if o == nil || IsNil(o.MaxLifeTime) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxLifeTime
+
+	return o.MaxLifeTime
 }
 
-// GetMaxLifeTimeOk returns a tuple with the MaxLifeTime field value if set, nil otherwise
+// GetMaxLifeTimeOk returns a tuple with the MaxLifeTime field value
 // and a boolean to check if the value has been set.
 func (o *StickySession) GetMaxLifeTimeOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxLifeTime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxLifeTime, true
+	return &o.MaxLifeTime, true
 }
 
-// HasMaxLifeTime returns a boolean if a field has been set.
-func (o *StickySession) HasMaxLifeTime() bool {
-	if o != nil && !IsNil(o.MaxLifeTime) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxLifeTime gets a reference to the given int32 and assigns it to the MaxLifeTime field.
+// SetMaxLifeTime sets field value
 func (o *StickySession) SetMaxLifeTime(v int32) {
-	o.MaxLifeTime = &v
+	o.MaxLifeTime = v
 }
 
 func (o StickySession) MarshalJSON() ([]byte, error) {
@@ -116,13 +106,47 @@ func (o StickySession) MarshalJSON() ([]byte, error) {
 
 func (o StickySession) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
-	}
-	if !IsNil(o.MaxLifeTime) {
-		toSerialize["maxLifeTime"] = o.MaxLifeTime
-	}
+	toSerialize["enabled"] = o.Enabled
+	toSerialize["maxLifeTime"] = o.MaxLifeTime
 	return toSerialize, nil
+}
+
+func (o *StickySession) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"enabled",
+		"maxLifeTime",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varStickySession := _StickySession{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varStickySession)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StickySession(varStickySession)
+
+	return err
 }
 
 type NullableStickySession struct {

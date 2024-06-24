@@ -4,24 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CustomerId** | Pointer to **string** | The customer ID who owns the load balancer | [optional] 
-**Id** | Pointer to **string** | The load balancer unique identifier | [optional] 
-**Type** | Pointer to **string** | Load balancer type | [optional] 
-**Resources** | Pointer to [**InstanceResources**](InstanceResources.md) |  | [optional] 
-**Region** | Pointer to **string** | The region where the load balancer was launched into | [optional] 
-**Reference** | Pointer to **string** | The identifying name set to the load balancer | [optional] 
-**State** | Pointer to [**InstanceState**](InstanceState.md) |  | [optional] 
-**Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
-**Contract** | Pointer to [**Contract**](Contract.md) |  | [optional] 
-**StartedAt** | Pointer to **time.Time** | Date and time when the instance was started for the first time, right after launching it | [optional] 
-**Configuration** | Pointer to [**NullableLoadBalancerConfiguration**](LoadBalancerConfiguration.md) |  | [optional] 
-**PrivateNetwork** | Pointer to [**NullablePrivateNetwork**](PrivateNetwork.md) |  | [optional] 
+**Id** | **string** | The load balancer unique identifier | 
+**Type** | **string** | Load balancer type | 
+**Resources** | [**InstanceResources**](InstanceResources.md) |  | 
+**Region** | **string** | The region where the load balancer was launched into | 
+**Reference** | **string** | The identifying name set to the load balancer | 
+**State** | [**InstanceState**](InstanceState.md) |  | 
+**Ips** | [**[]Ip**](Ip.md) |  | 
+**Contract** | [**Contract**](Contract.md) |  | 
+**StartedAt** | **time.Time** | Date and time when the instance was started for the first time, right after launching it | 
 
 ## Methods
 
 ### NewAutoScalingLoadBalancer
 
-`func NewAutoScalingLoadBalancer() *AutoScalingLoadBalancer`
+`func NewAutoScalingLoadBalancer(id string, type_ string, resources InstanceResources, region string, reference string, state InstanceState, ips []Ip, contract Contract, startedAt time.Time, ) *AutoScalingLoadBalancer`
 
 NewAutoScalingLoadBalancer instantiates a new AutoScalingLoadBalancer object
 This constructor will assign default values to properties that have it defined,
@@ -35,31 +32,6 @@ will change when the set of required properties is changed
 NewAutoScalingLoadBalancerWithDefaults instantiates a new AutoScalingLoadBalancer object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetCustomerId
-
-`func (o *AutoScalingLoadBalancer) GetCustomerId() string`
-
-GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
-
-### GetCustomerIdOk
-
-`func (o *AutoScalingLoadBalancer) GetCustomerIdOk() (*string, bool)`
-
-GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomerId
-
-`func (o *AutoScalingLoadBalancer) SetCustomerId(v string)`
-
-SetCustomerId sets CustomerId field to given value.
-
-### HasCustomerId
-
-`func (o *AutoScalingLoadBalancer) HasCustomerId() bool`
-
-HasCustomerId returns a boolean if a field has been set.
 
 ### GetId
 
@@ -80,11 +52,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *AutoScalingLoadBalancer) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetType
 
@@ -105,11 +72,6 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
-### HasType
-
-`func (o *AutoScalingLoadBalancer) HasType() bool`
-
-HasType returns a boolean if a field has been set.
 
 ### GetResources
 
@@ -130,11 +92,6 @@ and a boolean to check if the value has been set.
 
 SetResources sets Resources field to given value.
 
-### HasResources
-
-`func (o *AutoScalingLoadBalancer) HasResources() bool`
-
-HasResources returns a boolean if a field has been set.
 
 ### GetRegion
 
@@ -155,11 +112,6 @@ and a boolean to check if the value has been set.
 
 SetRegion sets Region field to given value.
 
-### HasRegion
-
-`func (o *AutoScalingLoadBalancer) HasRegion() bool`
-
-HasRegion returns a boolean if a field has been set.
 
 ### GetReference
 
@@ -180,11 +132,6 @@ and a boolean to check if the value has been set.
 
 SetReference sets Reference field to given value.
 
-### HasReference
-
-`func (o *AutoScalingLoadBalancer) HasReference() bool`
-
-HasReference returns a boolean if a field has been set.
 
 ### GetState
 
@@ -205,11 +152,6 @@ and a boolean to check if the value has been set.
 
 SetState sets State field to given value.
 
-### HasState
-
-`func (o *AutoScalingLoadBalancer) HasState() bool`
-
-HasState returns a boolean if a field has been set.
 
 ### GetIps
 
@@ -230,11 +172,6 @@ and a boolean to check if the value has been set.
 
 SetIps sets Ips field to given value.
 
-### HasIps
-
-`func (o *AutoScalingLoadBalancer) HasIps() bool`
-
-HasIps returns a boolean if a field has been set.
 
 ### GetContract
 
@@ -255,11 +192,6 @@ and a boolean to check if the value has been set.
 
 SetContract sets Contract field to given value.
 
-### HasContract
-
-`func (o *AutoScalingLoadBalancer) HasContract() bool`
-
-HasContract returns a boolean if a field has been set.
 
 ### GetStartedAt
 
@@ -280,82 +212,7 @@ and a boolean to check if the value has been set.
 
 SetStartedAt sets StartedAt field to given value.
 
-### HasStartedAt
 
-`func (o *AutoScalingLoadBalancer) HasStartedAt() bool`
-
-HasStartedAt returns a boolean if a field has been set.
-
-### GetConfiguration
-
-`func (o *AutoScalingLoadBalancer) GetConfiguration() LoadBalancerConfiguration`
-
-GetConfiguration returns the Configuration field if non-nil, zero value otherwise.
-
-### GetConfigurationOk
-
-`func (o *AutoScalingLoadBalancer) GetConfigurationOk() (*LoadBalancerConfiguration, bool)`
-
-GetConfigurationOk returns a tuple with the Configuration field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConfiguration
-
-`func (o *AutoScalingLoadBalancer) SetConfiguration(v LoadBalancerConfiguration)`
-
-SetConfiguration sets Configuration field to given value.
-
-### HasConfiguration
-
-`func (o *AutoScalingLoadBalancer) HasConfiguration() bool`
-
-HasConfiguration returns a boolean if a field has been set.
-
-### SetConfigurationNil
-
-`func (o *AutoScalingLoadBalancer) SetConfigurationNil(b bool)`
-
- SetConfigurationNil sets the value for Configuration to be an explicit nil
-
-### UnsetConfiguration
-`func (o *AutoScalingLoadBalancer) UnsetConfiguration()`
-
-UnsetConfiguration ensures that no value is present for Configuration, not even an explicit nil
-### GetPrivateNetwork
-
-`func (o *AutoScalingLoadBalancer) GetPrivateNetwork() PrivateNetwork`
-
-GetPrivateNetwork returns the PrivateNetwork field if non-nil, zero value otherwise.
-
-### GetPrivateNetworkOk
-
-`func (o *AutoScalingLoadBalancer) GetPrivateNetworkOk() (*PrivateNetwork, bool)`
-
-GetPrivateNetworkOk returns a tuple with the PrivateNetwork field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPrivateNetwork
-
-`func (o *AutoScalingLoadBalancer) SetPrivateNetwork(v PrivateNetwork)`
-
-SetPrivateNetwork sets PrivateNetwork field to given value.
-
-### HasPrivateNetwork
-
-`func (o *AutoScalingLoadBalancer) HasPrivateNetwork() bool`
-
-HasPrivateNetwork returns a boolean if a field has been set.
-
-### SetPrivateNetworkNil
-
-`func (o *AutoScalingLoadBalancer) SetPrivateNetworkNil(b bool)`
-
- SetPrivateNetworkNil sets the value for PrivateNetwork to be an explicit nil
-
-### UnsetPrivateNetwork
-`func (o *AutoScalingLoadBalancer) UnsetPrivateNetwork()`
-
-UnsetPrivateNetwork ensures that no value is present for PrivateNetwork, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

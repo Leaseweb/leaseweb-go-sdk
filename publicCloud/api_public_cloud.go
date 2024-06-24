@@ -10430,7 +10430,7 @@ func (r ApiUpdateAutoScalingGroupRequest) UpdateAutoScalingGroupOpts(updateAutoS
 	return r
 }
 
-func (r ApiUpdateAutoScalingGroupRequest) Execute() (*UpdateAutoScalingGroupResult, *http.Response, error) {
+func (r ApiUpdateAutoScalingGroupRequest) Execute() (*AutoScalingGroup, *http.Response, error) {
 	return r.ApiService.UpdateAutoScalingGroupExecute(r)
 }
 
@@ -10452,13 +10452,13 @@ func (a *PublicCloudAPIService) UpdateAutoScalingGroup(ctx context.Context, auto
 }
 
 // Execute executes the request
-//  @return UpdateAutoScalingGroupResult
-func (a *PublicCloudAPIService) UpdateAutoScalingGroupExecute(r ApiUpdateAutoScalingGroupRequest) (*UpdateAutoScalingGroupResult, *http.Response, error) {
+//  @return AutoScalingGroup
+func (a *PublicCloudAPIService) UpdateAutoScalingGroupExecute(r ApiUpdateAutoScalingGroupRequest) (*AutoScalingGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *UpdateAutoScalingGroupResult
+		localVarReturnValue  *AutoScalingGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.UpdateAutoScalingGroup")

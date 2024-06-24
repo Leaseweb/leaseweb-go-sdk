@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to [**OperatingSystemId**](OperatingSystemId.md) |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
-**Version** | Pointer to **string** |  | [optional] 
-**Family** | Pointer to **string** |  | [optional] 
-**Flavour** | Pointer to **string** |  | [optional] 
-**Architecture** | Pointer to **string** |  | [optional] 
+**Id** | [**OperatingSystemId**](OperatingSystemId.md) |  | 
+**Name** | **string** |  | 
+**Version** | **string** |  | 
+**Family** | **string** |  | 
+**Flavour** | **string** |  | 
+**Architecture** | **string** |  | 
 **MarketApps** | Pointer to **[]string** |  | [optional] 
 **StorageTypes** | Pointer to **[]string** | The supported storage types for the instance type | [optional] 
 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewOperatingSystem
 
-`func NewOperatingSystem() *OperatingSystem`
+`func NewOperatingSystem(id OperatingSystemId, name string, version string, family string, flavour string, architecture string, ) *OperatingSystem`
 
 NewOperatingSystem instantiates a new OperatingSystem object
 This constructor will assign default values to properties that have it defined,
@@ -51,11 +51,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *OperatingSystem) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -76,11 +71,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *OperatingSystem) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetVersion
 
@@ -101,11 +91,6 @@ and a boolean to check if the value has been set.
 
 SetVersion sets Version field to given value.
 
-### HasVersion
-
-`func (o *OperatingSystem) HasVersion() bool`
-
-HasVersion returns a boolean if a field has been set.
 
 ### GetFamily
 
@@ -126,11 +111,6 @@ and a boolean to check if the value has been set.
 
 SetFamily sets Family field to given value.
 
-### HasFamily
-
-`func (o *OperatingSystem) HasFamily() bool`
-
-HasFamily returns a boolean if a field has been set.
 
 ### GetFlavour
 
@@ -151,11 +131,6 @@ and a boolean to check if the value has been set.
 
 SetFlavour sets Flavour field to given value.
 
-### HasFlavour
-
-`func (o *OperatingSystem) HasFlavour() bool`
-
-HasFlavour returns a boolean if a field has been set.
 
 ### GetArchitecture
 
@@ -176,11 +151,6 @@ and a boolean to check if the value has been set.
 
 SetArchitecture sets Architecture field to given value.
 
-### HasArchitecture
-
-`func (o *OperatingSystem) HasArchitecture() bool`
-
-HasArchitecture returns a boolean if a field has been set.
 
 ### GetMarketApps
 

@@ -4109,7 +4109,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAutoScalingGroup
 
-> UpdateAutoScalingGroupResult UpdateAutoScalingGroup(ctx, autoScalingGroupId).UpdateAutoScalingGroupOpts(updateAutoScalingGroupOpts).Execute()
+> AutoScalingGroup UpdateAutoScalingGroup(ctx, autoScalingGroupId).UpdateAutoScalingGroupOpts(updateAutoScalingGroupOpts).Execute()
 
 Update Auto Scaling Group
 
@@ -4138,7 +4138,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.UpdateAutoScalingGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateAutoScalingGroup`: UpdateAutoScalingGroupResult
+	// response from `UpdateAutoScalingGroup`: AutoScalingGroup
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.UpdateAutoScalingGroup`: %v\n", resp)
 }
 ```
@@ -4163,7 +4163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdateAutoScalingGroupResult**](UpdateAutoScalingGroupResult.md)
+[**AutoScalingGroup**](AutoScalingGroup.md)
 
 ### Authorization
 

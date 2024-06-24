@@ -4,27 +4,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The Auto Scaling Group unique identifier | [optional] 
-**Type** | Pointer to **string** | Auto Scaling Group type | [optional] 
-**State** | Pointer to **string** | The Auto Scaling Group&#39;s current state. | [optional] 
-**DesiredAmount** | Pointer to **NullableInt32** | Number of instances that should be running | [optional] 
-**MinimumAmount** | Pointer to **NullableInt32** | The minimum number of instances that should be running | [optional] 
-**MaximumAmount** | Pointer to **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. The maximum number of instances that can be running | [optional] 
-**CpuThreshold** | Pointer to **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. The target average CPU utilization for scaling | [optional] 
-**WarmupTime** | Pointer to **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. Warm-up time in seconds for new instances | [optional] 
-**Region** | Pointer to **string** | The region in which the Auto Scaling Group was launched | [optional] 
-**Reference** | Pointer to **string** | The identifying name set to the auto scaling group | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Date and time when the Auto Scaling Group was created | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Date and time when the Auto Scaling Group was last updated | [optional] 
-**StartsAt** | Pointer to **NullableTime** | Only for \&quot;SCHEDULED\&quot; auto scaling group. Date and time (UTC) that the instances need to be launched | [optional] 
-**EndsAt** | Pointer to **NullableTime** | Only for \&quot;SCHEDULED\&quot; auto scaling group. Date and time (UTC) that the instances need to be terminated | [optional] 
+**Id** | **string** | The Auto Scaling Group unique identifier | 
+**Type** | **string** | Auto Scaling Group type | 
+**State** | **string** | The Auto Scaling Group&#39;s current state. | 
+**DesiredAmount** | **NullableInt32** | Number of instances that should be running | 
+**MinimumAmount** | **NullableInt32** | The minimum number of instances that should be running | 
+**MaximumAmount** | **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. The maximum number of instances that can be running | 
+**CpuThreshold** | **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. The target average CPU utilization for scaling | 
+**WarmupTime** | **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. Warm-up time in seconds for new instances | 
+**CooldownTime** | **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. Cool-down time in seconds for new instances | 
+**Region** | **string** | The region in which the Auto Scaling Group was launched | 
+**Reference** | **string** | The identifying name set to the auto scaling group | 
+**CreatedAt** | **time.Time** | Date and time when the Auto Scaling Group was created | 
+**UpdatedAt** | **time.Time** | Date and time when the Auto Scaling Group was last updated | 
+**StartsAt** | **NullableTime** | Only for \&quot;SCHEDULED\&quot; auto scaling group. Date and time (UTC) that the instances need to be launched | 
+**EndsAt** | **NullableTime** | Only for \&quot;SCHEDULED\&quot; auto scaling group. Date and time (UTC) that the instances need to be terminated | 
 **LoadBalancer** | Pointer to [**NullableAutoScalingLoadBalancer**](AutoScalingLoadBalancer.md) |  | [optional] 
 
 ## Methods
 
 ### NewAutoScalingGroup
 
-`func NewAutoScalingGroup() *AutoScalingGroup`
+`func NewAutoScalingGroup(id string, type_ string, state string, desiredAmount NullableInt32, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, ) *AutoScalingGroup`
 
 NewAutoScalingGroup instantiates a new AutoScalingGroup object
 This constructor will assign default values to properties that have it defined,
@@ -58,11 +59,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *AutoScalingGroup) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetType
 
@@ -83,11 +79,6 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
-### HasType
-
-`func (o *AutoScalingGroup) HasType() bool`
-
-HasType returns a boolean if a field has been set.
 
 ### GetState
 
@@ -108,11 +99,6 @@ and a boolean to check if the value has been set.
 
 SetState sets State field to given value.
 
-### HasState
-
-`func (o *AutoScalingGroup) HasState() bool`
-
-HasState returns a boolean if a field has been set.
 
 ### GetDesiredAmount
 
@@ -133,11 +119,6 @@ and a boolean to check if the value has been set.
 
 SetDesiredAmount sets DesiredAmount field to given value.
 
-### HasDesiredAmount
-
-`func (o *AutoScalingGroup) HasDesiredAmount() bool`
-
-HasDesiredAmount returns a boolean if a field has been set.
 
 ### SetDesiredAmountNil
 
@@ -168,11 +149,6 @@ and a boolean to check if the value has been set.
 
 SetMinimumAmount sets MinimumAmount field to given value.
 
-### HasMinimumAmount
-
-`func (o *AutoScalingGroup) HasMinimumAmount() bool`
-
-HasMinimumAmount returns a boolean if a field has been set.
 
 ### SetMinimumAmountNil
 
@@ -203,11 +179,6 @@ and a boolean to check if the value has been set.
 
 SetMaximumAmount sets MaximumAmount field to given value.
 
-### HasMaximumAmount
-
-`func (o *AutoScalingGroup) HasMaximumAmount() bool`
-
-HasMaximumAmount returns a boolean if a field has been set.
 
 ### SetMaximumAmountNil
 
@@ -238,11 +209,6 @@ and a boolean to check if the value has been set.
 
 SetCpuThreshold sets CpuThreshold field to given value.
 
-### HasCpuThreshold
-
-`func (o *AutoScalingGroup) HasCpuThreshold() bool`
-
-HasCpuThreshold returns a boolean if a field has been set.
 
 ### SetCpuThresholdNil
 
@@ -273,11 +239,6 @@ and a boolean to check if the value has been set.
 
 SetWarmupTime sets WarmupTime field to given value.
 
-### HasWarmupTime
-
-`func (o *AutoScalingGroup) HasWarmupTime() bool`
-
-HasWarmupTime returns a boolean if a field has been set.
 
 ### SetWarmupTimeNil
 
@@ -289,6 +250,36 @@ HasWarmupTime returns a boolean if a field has been set.
 `func (o *AutoScalingGroup) UnsetWarmupTime()`
 
 UnsetWarmupTime ensures that no value is present for WarmupTime, not even an explicit nil
+### GetCooldownTime
+
+`func (o *AutoScalingGroup) GetCooldownTime() int32`
+
+GetCooldownTime returns the CooldownTime field if non-nil, zero value otherwise.
+
+### GetCooldownTimeOk
+
+`func (o *AutoScalingGroup) GetCooldownTimeOk() (*int32, bool)`
+
+GetCooldownTimeOk returns a tuple with the CooldownTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCooldownTime
+
+`func (o *AutoScalingGroup) SetCooldownTime(v int32)`
+
+SetCooldownTime sets CooldownTime field to given value.
+
+
+### SetCooldownTimeNil
+
+`func (o *AutoScalingGroup) SetCooldownTimeNil(b bool)`
+
+ SetCooldownTimeNil sets the value for CooldownTime to be an explicit nil
+
+### UnsetCooldownTime
+`func (o *AutoScalingGroup) UnsetCooldownTime()`
+
+UnsetCooldownTime ensures that no value is present for CooldownTime, not even an explicit nil
 ### GetRegion
 
 `func (o *AutoScalingGroup) GetRegion() string`
@@ -308,11 +299,6 @@ and a boolean to check if the value has been set.
 
 SetRegion sets Region field to given value.
 
-### HasRegion
-
-`func (o *AutoScalingGroup) HasRegion() bool`
-
-HasRegion returns a boolean if a field has been set.
 
 ### GetReference
 
@@ -333,11 +319,6 @@ and a boolean to check if the value has been set.
 
 SetReference sets Reference field to given value.
 
-### HasReference
-
-`func (o *AutoScalingGroup) HasReference() bool`
-
-HasReference returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -358,11 +339,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *AutoScalingGroup) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 
@@ -383,11 +359,6 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
-### HasUpdatedAt
-
-`func (o *AutoScalingGroup) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetStartsAt
 
@@ -408,11 +379,6 @@ and a boolean to check if the value has been set.
 
 SetStartsAt sets StartsAt field to given value.
 
-### HasStartsAt
-
-`func (o *AutoScalingGroup) HasStartsAt() bool`
-
-HasStartsAt returns a boolean if a field has been set.
 
 ### SetStartsAtNil
 
@@ -443,11 +409,6 @@ and a boolean to check if the value has been set.
 
 SetEndsAt sets EndsAt field to given value.
 
-### HasEndsAt
-
-`func (o *AutoScalingGroup) HasEndsAt() bool`
-
-HasEndsAt returns a boolean if a field has been set.
 
 ### SetEndsAtNil
 

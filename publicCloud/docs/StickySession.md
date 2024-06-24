@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Enabled** | Pointer to **bool** | If sticky session is enabled or not | [optional] 
-**MaxLifeTime** | Pointer to **int32** | Time that the Load Balancer routes the requests from one requester to the same target instance | [optional] 
+**Enabled** | **bool** | If sticky session is enabled or not | 
+**MaxLifeTime** | **int32** | Time that the Load Balancer routes the requests from one requester to the same target instance | 
 
 ## Methods
 
 ### NewStickySession
 
-`func NewStickySession() *StickySession`
+`func NewStickySession(enabled bool, maxLifeTime int32, ) *StickySession`
 
 NewStickySession instantiates a new StickySession object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetEnabled sets Enabled field to given value.
 
-### HasEnabled
-
-`func (o *StickySession) HasEnabled() bool`
-
-HasEnabled returns a boolean if a field has been set.
 
 ### GetMaxLifeTime
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetMaxLifeTime sets MaxLifeTime field to given value.
 
-### HasMaxLifeTime
-
-`func (o *StickySession) HasMaxLifeTime() bool`
-
-HasMaxLifeTime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

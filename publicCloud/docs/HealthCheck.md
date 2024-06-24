@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Method** | Pointer to **string** | HTTP method to be used for health check | [optional] 
-**Uri** | Pointer to **string** | URI to check in the target instances | [optional] 
-**Host** | Pointer to **NullableString** | Host for the health check if any | [optional] 
-**Port** | Pointer to **int32** | Port number | [optional] 
+**Method** | **string** | HTTP method to be used for health check | 
+**Uri** | **string** | URI to check in the target instances | 
+**Host** | **NullableString** | Host for the health check if any | 
+**Port** | **int32** | Port number | 
 
 ## Methods
 
 ### NewHealthCheck
 
-`func NewHealthCheck() *HealthCheck`
+`func NewHealthCheck(method string, uri string, host NullableString, port int32, ) *HealthCheck`
 
 NewHealthCheck instantiates a new HealthCheck object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetMethod sets Method field to given value.
 
-### HasMethod
-
-`func (o *HealthCheck) HasMethod() bool`
-
-HasMethod returns a boolean if a field has been set.
 
 ### GetUri
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetUri sets Uri field to given value.
 
-### HasUri
-
-`func (o *HealthCheck) HasUri() bool`
-
-HasUri returns a boolean if a field has been set.
 
 ### GetHost
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetHost sets Host field to given value.
 
-### HasHost
-
-`func (o *HealthCheck) HasHost() bool`
-
-HasHost returns a boolean if a field has been set.
 
 ### SetHostNil
 
@@ -132,11 +117,6 @@ and a boolean to check if the value has been set.
 
 SetPort sets Port field to given value.
 
-### HasPort
-
-`func (o *HealthCheck) HasPort() bool`
-
-HasPort returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

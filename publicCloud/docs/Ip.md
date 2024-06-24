@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ip** | Pointer to **string** | Ip Address | [optional] 
-**PrefixLength** | Pointer to **string** | The number of leading bits in the IP address | [optional] 
-**Version** | Pointer to **int32** | Ip version | [optional] 
-**NullRouted** | Pointer to **bool** | Whether or not the IP has been nulled | [optional] 
-**MainIp** | Pointer to **bool** |  | [optional] 
-**NetworkType** | Pointer to [**NetworkType**](NetworkType.md) |  | [optional] 
-**ReverseLookup** | Pointer to **NullableString** |  | [optional] 
-**Ddos** | Pointer to [**NullableDdos**](Ddos.md) |  | [optional] 
+**Ip** | **string** | Ip Address | 
+**PrefixLength** | **string** | The number of leading bits in the IP address | 
+**Version** | **int32** | Ip version | 
+**NullRouted** | **bool** | Whether or not the IP has been nulled | 
+**MainIp** | **bool** |  | 
+**NetworkType** | [**NetworkType**](NetworkType.md) |  | 
+**ReverseLookup** | **NullableString** |  | 
+**Ddos** | [**NullableDdos**](Ddos.md) |  | 
 
 ## Methods
 
 ### NewIp
 
-`func NewIp() *Ip`
+`func NewIp(ip string, prefixLength string, version int32, nullRouted bool, mainIp bool, networkType NetworkType, reverseLookup NullableString, ddos NullableDdos, ) *Ip`
 
 NewIp instantiates a new Ip object
 This constructor will assign default values to properties that have it defined,
@@ -51,11 +51,6 @@ and a boolean to check if the value has been set.
 
 SetIp sets Ip field to given value.
 
-### HasIp
-
-`func (o *Ip) HasIp() bool`
-
-HasIp returns a boolean if a field has been set.
 
 ### GetPrefixLength
 
@@ -76,11 +71,6 @@ and a boolean to check if the value has been set.
 
 SetPrefixLength sets PrefixLength field to given value.
 
-### HasPrefixLength
-
-`func (o *Ip) HasPrefixLength() bool`
-
-HasPrefixLength returns a boolean if a field has been set.
 
 ### GetVersion
 
@@ -101,11 +91,6 @@ and a boolean to check if the value has been set.
 
 SetVersion sets Version field to given value.
 
-### HasVersion
-
-`func (o *Ip) HasVersion() bool`
-
-HasVersion returns a boolean if a field has been set.
 
 ### GetNullRouted
 
@@ -126,11 +111,6 @@ and a boolean to check if the value has been set.
 
 SetNullRouted sets NullRouted field to given value.
 
-### HasNullRouted
-
-`func (o *Ip) HasNullRouted() bool`
-
-HasNullRouted returns a boolean if a field has been set.
 
 ### GetMainIp
 
@@ -151,11 +131,6 @@ and a boolean to check if the value has been set.
 
 SetMainIp sets MainIp field to given value.
 
-### HasMainIp
-
-`func (o *Ip) HasMainIp() bool`
-
-HasMainIp returns a boolean if a field has been set.
 
 ### GetNetworkType
 
@@ -176,11 +151,6 @@ and a boolean to check if the value has been set.
 
 SetNetworkType sets NetworkType field to given value.
 
-### HasNetworkType
-
-`func (o *Ip) HasNetworkType() bool`
-
-HasNetworkType returns a boolean if a field has been set.
 
 ### GetReverseLookup
 
@@ -201,11 +171,6 @@ and a boolean to check if the value has been set.
 
 SetReverseLookup sets ReverseLookup field to given value.
 
-### HasReverseLookup
-
-`func (o *Ip) HasReverseLookup() bool`
-
-HasReverseLookup returns a boolean if a field has been set.
 
 ### SetReverseLookupNil
 
@@ -236,11 +201,6 @@ and a boolean to check if the value has been set.
 
 SetDdos sets Ddos field to given value.
 
-### HasDdos
-
-`func (o *Ip) HasDdos() bool`
-
-HasDdos returns a boolean if a field has been set.
 
 ### SetDdosNil
 

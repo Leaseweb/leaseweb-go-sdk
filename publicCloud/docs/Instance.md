@@ -7,30 +7,31 @@ Name | Type | Description | Notes
 **EquipmentId** | Pointer to **string** | The customer&#39;s equipment ID | [optional] 
 **SalesOrgId** | Pointer to **string** |  | [optional] 
 **CustomerId** | Pointer to **string** | The customer ID who owns the instance | [optional] 
-**Id** | Pointer to **string** | The unique identifier of the instance | [optional] 
-**Resources** | Pointer to [**InstanceResources**](InstanceResources.md) |  | [optional] 
-**Region** | Pointer to **string** | The region in which the instance was launched | [optional] 
-**Reference** | Pointer to **string** | The identifying name set to the instance | [optional] 
-**OperatingSystem** | Pointer to [**OperatingSystem**](OperatingSystem.md) |  | [optional] 
-**State** | Pointer to [**InstanceState**](InstanceState.md) |  | [optional] 
-**ProductType** | Pointer to **string** | The product type | [optional] 
-**HasPublicIpV4** | Pointer to **bool** |  | [optional] 
-**includesPrivateNetwork** | Pointer to **bool** |  | [optional] 
-**Type** | Pointer to [**InstanceTypeName**](InstanceTypeName.md) |  | [optional] 
-**RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
-**RootDiskStorageType** | Pointer to **string** | The root disk&#39;s storage type | [optional] 
-**Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
-**StartedAt** | Pointer to **NullableTime** | Date and time when the instance was started for the first time, right after launching it | [optional] 
-**Contract** | Pointer to [**Contract**](Contract.md) |  | [optional] 
-**Iso** | Pointer to [**NullableIso**](Iso.md) |  | [optional] 
-**MarketAppId** | Pointer to **NullableString** | Market App ID that must be installed into the instance | [optional] 
-**PrivateNetwork** | Pointer to [**NullablePrivateNetwork**](PrivateNetwork.md) |  | [optional] 
+**Id** | **string** | The unique identifier of the instance | 
+**Resources** | [**InstanceResources**](InstanceResources.md) |  | 
+**Region** | **string** | The region in which the instance was launched | 
+**Reference** | **NullableString** | The identifying name set to the instance | 
+**OperatingSystem** | [**OperatingSystem**](OperatingSystem.md) |  | 
+**State** | [**InstanceState**](InstanceState.md) |  | 
+**ProductType** | **string** | The product type | 
+**HasPublicIpV4** | **bool** |  | 
+**includesPrivateNetwork** | **bool** |  | 
+**Type** | [**InstanceTypeName**](InstanceTypeName.md) |  | 
+**RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
+**RootDiskStorageType** | **string** | The root disk&#39;s storage type | 
+**Ips** | [**[]Ip**](Ip.md) |  | 
+**StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
+**Contract** | [**Contract**](Contract.md) |  | 
+**Iso** | [**NullableIso**](Iso.md) |  | 
+**MarketAppId** | **NullableString** | Market App ID that must be installed into the instance | 
+**PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
+**AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 
 ## Methods
 
 ### NewInstance
 
-`func NewInstance() *Instance`
+`func NewInstance(id string, resources InstanceResources, region string, reference NullableString, operatingSystem OperatingSystem, state InstanceState, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, type_ InstanceTypeName, rootDiskSize int32, rootDiskStorageType string, ips []Ip, startedAt NullableTime, contract Contract, iso NullableIso, marketAppId NullableString, privateNetwork NullablePrivateNetwork, autoScalingGroup NullableAutoScalingGroup, ) *Instance`
 
 NewInstance instantiates a new Instance object
 This constructor will assign default values to properties that have it defined,
@@ -139,11 +140,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *Instance) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetResources
 
@@ -164,11 +160,6 @@ and a boolean to check if the value has been set.
 
 SetResources sets Resources field to given value.
 
-### HasResources
-
-`func (o *Instance) HasResources() bool`
-
-HasResources returns a boolean if a field has been set.
 
 ### GetRegion
 
@@ -189,11 +180,6 @@ and a boolean to check if the value has been set.
 
 SetRegion sets Region field to given value.
 
-### HasRegion
-
-`func (o *Instance) HasRegion() bool`
-
-HasRegion returns a boolean if a field has been set.
 
 ### GetReference
 
@@ -214,12 +200,17 @@ and a boolean to check if the value has been set.
 
 SetReference sets Reference field to given value.
 
-### HasReference
 
-`func (o *Instance) HasReference() bool`
+### SetReferenceNil
 
-HasReference returns a boolean if a field has been set.
+`func (o *Instance) SetReferenceNil(b bool)`
 
+ SetReferenceNil sets the value for Reference to be an explicit nil
+
+### UnsetReference
+`func (o *Instance) UnsetReference()`
+
+UnsetReference ensures that no value is present for Reference, not even an explicit nil
 ### GetOperatingSystem
 
 `func (o *Instance) GetOperatingSystem() OperatingSystem`
@@ -239,11 +230,6 @@ and a boolean to check if the value has been set.
 
 SetOperatingSystem sets OperatingSystem field to given value.
 
-### HasOperatingSystem
-
-`func (o *Instance) HasOperatingSystem() bool`
-
-HasOperatingSystem returns a boolean if a field has been set.
 
 ### GetState
 
@@ -264,11 +250,6 @@ and a boolean to check if the value has been set.
 
 SetState sets State field to given value.
 
-### HasState
-
-`func (o *Instance) HasState() bool`
-
-HasState returns a boolean if a field has been set.
 
 ### GetProductType
 
@@ -289,11 +270,6 @@ and a boolean to check if the value has been set.
 
 SetProductType sets ProductType field to given value.
 
-### HasProductType
-
-`func (o *Instance) HasProductType() bool`
-
-HasProductType returns a boolean if a field has been set.
 
 ### GetHasPublicIpV4
 
@@ -314,11 +290,6 @@ and a boolean to check if the value has been set.
 
 SetHasPublicIpV4 sets HasPublicIpV4 field to given value.
 
-### HasHasPublicIpV4
-
-`func (o *Instance) HasHasPublicIpV4() bool`
-
-HasHasPublicIpV4 returns a boolean if a field has been set.
 
 ### GetincludesPrivateNetwork
 
@@ -339,11 +310,6 @@ and a boolean to check if the value has been set.
 
 SetincludesPrivateNetwork sets includesPrivateNetwork field to given value.
 
-### HasincludesPrivateNetwork
-
-`func (o *Instance) HasincludesPrivateNetwork() bool`
-
-HasincludesPrivateNetwork returns a boolean if a field has been set.
 
 ### GetType
 
@@ -364,11 +330,6 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
-### HasType
-
-`func (o *Instance) HasType() bool`
-
-HasType returns a boolean if a field has been set.
 
 ### GetRootDiskSize
 
@@ -389,11 +350,6 @@ and a boolean to check if the value has been set.
 
 SetRootDiskSize sets RootDiskSize field to given value.
 
-### HasRootDiskSize
-
-`func (o *Instance) HasRootDiskSize() bool`
-
-HasRootDiskSize returns a boolean if a field has been set.
 
 ### GetRootDiskStorageType
 
@@ -414,11 +370,6 @@ and a boolean to check if the value has been set.
 
 SetRootDiskStorageType sets RootDiskStorageType field to given value.
 
-### HasRootDiskStorageType
-
-`func (o *Instance) HasRootDiskStorageType() bool`
-
-HasRootDiskStorageType returns a boolean if a field has been set.
 
 ### GetIps
 
@@ -439,11 +390,6 @@ and a boolean to check if the value has been set.
 
 SetIps sets Ips field to given value.
 
-### HasIps
-
-`func (o *Instance) HasIps() bool`
-
-HasIps returns a boolean if a field has been set.
 
 ### GetStartedAt
 
@@ -464,11 +410,6 @@ and a boolean to check if the value has been set.
 
 SetStartedAt sets StartedAt field to given value.
 
-### HasStartedAt
-
-`func (o *Instance) HasStartedAt() bool`
-
-HasStartedAt returns a boolean if a field has been set.
 
 ### SetStartedAtNil
 
@@ -499,11 +440,6 @@ and a boolean to check if the value has been set.
 
 SetContract sets Contract field to given value.
 
-### HasContract
-
-`func (o *Instance) HasContract() bool`
-
-HasContract returns a boolean if a field has been set.
 
 ### GetIso
 
@@ -524,11 +460,6 @@ and a boolean to check if the value has been set.
 
 SetIso sets Iso field to given value.
 
-### HasIso
-
-`func (o *Instance) HasIso() bool`
-
-HasIso returns a boolean if a field has been set.
 
 ### SetIsoNil
 
@@ -559,11 +490,6 @@ and a boolean to check if the value has been set.
 
 SetMarketAppId sets MarketAppId field to given value.
 
-### HasMarketAppId
-
-`func (o *Instance) HasMarketAppId() bool`
-
-HasMarketAppId returns a boolean if a field has been set.
 
 ### SetMarketAppIdNil
 
@@ -594,11 +520,6 @@ and a boolean to check if the value has been set.
 
 SetPrivateNetwork sets PrivateNetwork field to given value.
 
-### HasPrivateNetwork
-
-`func (o *Instance) HasPrivateNetwork() bool`
-
-HasPrivateNetwork returns a boolean if a field has been set.
 
 ### SetPrivateNetworkNil
 
@@ -610,6 +531,36 @@ HasPrivateNetwork returns a boolean if a field has been set.
 `func (o *Instance) UnsetPrivateNetwork()`
 
 UnsetPrivateNetwork ensures that no value is present for PrivateNetwork, not even an explicit nil
+### GetAutoScalingGroup
+
+`func (o *Instance) GetAutoScalingGroup() AutoScalingGroup`
+
+GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
+
+### GetAutoScalingGroupOk
+
+`func (o *Instance) GetAutoScalingGroupOk() (*AutoScalingGroup, bool)`
+
+GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoScalingGroup
+
+`func (o *Instance) SetAutoScalingGroup(v AutoScalingGroup)`
+
+SetAutoScalingGroup sets AutoScalingGroup field to given value.
+
+
+### SetAutoScalingGroupNil
+
+`func (o *Instance) SetAutoScalingGroupNil(b bool)`
+
+ SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
+
+### UnsetAutoScalingGroup
+`func (o *Instance) UnsetAutoScalingGroup()`
+
+UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

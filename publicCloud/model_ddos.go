@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Ddos type satisfies the MappedNullable interface at compile time
@@ -19,16 +21,20 @@ var _ MappedNullable = &Ddos{}
 
 // Ddos struct for Ddos
 type Ddos struct {
-	DetectionProfile *string `json:"detectionProfile,omitempty"`
-	ProtectionType *string `json:"protectionType,omitempty"`
+	DetectionProfile string `json:"detectionProfile"`
+	ProtectionType string `json:"protectionType"`
 }
+
+type _Ddos Ddos
 
 // NewDdos instantiates a new Ddos object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDdos() *Ddos {
+func NewDdos(detectionProfile string, protectionType string) *Ddos {
 	this := Ddos{}
+	this.DetectionProfile = detectionProfile
+	this.ProtectionType = protectionType
 	return &this
 }
 
@@ -40,68 +46,52 @@ func NewDdosWithDefaults() *Ddos {
 	return &this
 }
 
-// GetDetectionProfile returns the DetectionProfile field value if set, zero value otherwise.
+// GetDetectionProfile returns the DetectionProfile field value
 func (o *Ddos) GetDetectionProfile() string {
-	if o == nil || IsNil(o.DetectionProfile) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DetectionProfile
+
+	return o.DetectionProfile
 }
 
-// GetDetectionProfileOk returns a tuple with the DetectionProfile field value if set, nil otherwise
+// GetDetectionProfileOk returns a tuple with the DetectionProfile field value
 // and a boolean to check if the value has been set.
 func (o *Ddos) GetDetectionProfileOk() (*string, bool) {
-	if o == nil || IsNil(o.DetectionProfile) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DetectionProfile, true
+	return &o.DetectionProfile, true
 }
 
-// HasDetectionProfile returns a boolean if a field has been set.
-func (o *Ddos) HasDetectionProfile() bool {
-	if o != nil && !IsNil(o.DetectionProfile) {
-		return true
-	}
-
-	return false
-}
-
-// SetDetectionProfile gets a reference to the given string and assigns it to the DetectionProfile field.
+// SetDetectionProfile sets field value
 func (o *Ddos) SetDetectionProfile(v string) {
-	o.DetectionProfile = &v
+	o.DetectionProfile = v
 }
 
-// GetProtectionType returns the ProtectionType field value if set, zero value otherwise.
+// GetProtectionType returns the ProtectionType field value
 func (o *Ddos) GetProtectionType() string {
-	if o == nil || IsNil(o.ProtectionType) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ProtectionType
+
+	return o.ProtectionType
 }
 
-// GetProtectionTypeOk returns a tuple with the ProtectionType field value if set, nil otherwise
+// GetProtectionTypeOk returns a tuple with the ProtectionType field value
 // and a boolean to check if the value has been set.
 func (o *Ddos) GetProtectionTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.ProtectionType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProtectionType, true
+	return &o.ProtectionType, true
 }
 
-// HasProtectionType returns a boolean if a field has been set.
-func (o *Ddos) HasProtectionType() bool {
-	if o != nil && !IsNil(o.ProtectionType) {
-		return true
-	}
-
-	return false
-}
-
-// SetProtectionType gets a reference to the given string and assigns it to the ProtectionType field.
+// SetProtectionType sets field value
 func (o *Ddos) SetProtectionType(v string) {
-	o.ProtectionType = &v
+	o.ProtectionType = v
 }
 
 func (o Ddos) MarshalJSON() ([]byte, error) {
@@ -114,13 +104,47 @@ func (o Ddos) MarshalJSON() ([]byte, error) {
 
 func (o Ddos) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DetectionProfile) {
-		toSerialize["detectionProfile"] = o.DetectionProfile
-	}
-	if !IsNil(o.ProtectionType) {
-		toSerialize["protectionType"] = o.ProtectionType
-	}
+	toSerialize["detectionProfile"] = o.DetectionProfile
+	toSerialize["protectionType"] = o.ProtectionType
 	return toSerialize, nil
+}
+
+func (o *Ddos) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"detectionProfile",
+		"protectionType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDdos := _Ddos{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDdos)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Ddos(varDdos)
+
+	return err
 }
 
 type NullableDdos struct {

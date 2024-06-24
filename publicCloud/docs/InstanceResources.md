@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Cpu** | Pointer to [**Cpu**](Cpu.md) |  | [optional] 
-**Memory** | Pointer to [**Memory**](Memory.md) |  | [optional] 
-**PublicNetworkSpeed** | Pointer to [**PublicNetworkSpeed**](PublicNetworkSpeed.md) |  | [optional] 
-**PrivateNetworkSpeed** | Pointer to [**PrivateNetworkSpeed**](PrivateNetworkSpeed.md) |  | [optional] 
+**Cpu** | [**Cpu**](Cpu.md) |  | 
+**Memory** | [**Memory**](Memory.md) |  | 
+**PublicNetworkSpeed** | [**NetworkSpeed**](NetworkSpeed.md) |  | 
+**PrivateNetworkSpeed** | [**NetworkSpeed**](NetworkSpeed.md) |  | 
 
 ## Methods
 
 ### NewInstanceResources
 
-`func NewInstanceResources() *InstanceResources`
+`func NewInstanceResources(cpu Cpu, memory Memory, publicNetworkSpeed NetworkSpeed, privateNetworkSpeed NetworkSpeed, ) *InstanceResources`
 
 NewInstanceResources instantiates a new InstanceResources object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetCpu sets Cpu field to given value.
 
-### HasCpu
-
-`func (o *InstanceResources) HasCpu() bool`
-
-HasCpu returns a boolean if a field has been set.
 
 ### GetMemory
 
@@ -72,61 +67,46 @@ and a boolean to check if the value has been set.
 
 SetMemory sets Memory field to given value.
 
-### HasMemory
-
-`func (o *InstanceResources) HasMemory() bool`
-
-HasMemory returns a boolean if a field has been set.
 
 ### GetPublicNetworkSpeed
 
-`func (o *InstanceResources) GetPublicNetworkSpeed() PublicNetworkSpeed`
+`func (o *InstanceResources) GetPublicNetworkSpeed() NetworkSpeed`
 
 GetPublicNetworkSpeed returns the PublicNetworkSpeed field if non-nil, zero value otherwise.
 
 ### GetPublicNetworkSpeedOk
 
-`func (o *InstanceResources) GetPublicNetworkSpeedOk() (*PublicNetworkSpeed, bool)`
+`func (o *InstanceResources) GetPublicNetworkSpeedOk() (*NetworkSpeed, bool)`
 
 GetPublicNetworkSpeedOk returns a tuple with the PublicNetworkSpeed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPublicNetworkSpeed
 
-`func (o *InstanceResources) SetPublicNetworkSpeed(v PublicNetworkSpeed)`
+`func (o *InstanceResources) SetPublicNetworkSpeed(v NetworkSpeed)`
 
 SetPublicNetworkSpeed sets PublicNetworkSpeed field to given value.
 
-### HasPublicNetworkSpeed
-
-`func (o *InstanceResources) HasPublicNetworkSpeed() bool`
-
-HasPublicNetworkSpeed returns a boolean if a field has been set.
 
 ### GetPrivateNetworkSpeed
 
-`func (o *InstanceResources) GetPrivateNetworkSpeed() PrivateNetworkSpeed`
+`func (o *InstanceResources) GetPrivateNetworkSpeed() NetworkSpeed`
 
 GetPrivateNetworkSpeed returns the PrivateNetworkSpeed field if non-nil, zero value otherwise.
 
 ### GetPrivateNetworkSpeedOk
 
-`func (o *InstanceResources) GetPrivateNetworkSpeedOk() (*PrivateNetworkSpeed, bool)`
+`func (o *InstanceResources) GetPrivateNetworkSpeedOk() (*NetworkSpeed, bool)`
 
 GetPrivateNetworkSpeedOk returns a tuple with the PrivateNetworkSpeed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrivateNetworkSpeed
 
-`func (o *InstanceResources) SetPrivateNetworkSpeed(v PrivateNetworkSpeed)`
+`func (o *InstanceResources) SetPrivateNetworkSpeed(v NetworkSpeed)`
 
 SetPrivateNetworkSpeed sets PrivateNetworkSpeed field to given value.
 
-### HasPrivateNetworkSpeed
-
-`func (o *InstanceResources) HasPrivateNetworkSpeed() bool`
-
-HasPrivateNetworkSpeed returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

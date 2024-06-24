@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | Pointer to **float32** |  | [optional] 
-**Unit** | Pointer to **string** |  | [optional] 
+**Value** | **float32** |  | 
+**Unit** | **string** |  | 
 
 ## Methods
 
 ### NewMemory
 
-`func NewMemory() *Memory`
+`func NewMemory(value float32, unit string, ) *Memory`
 
 NewMemory instantiates a new Memory object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetValue sets Value field to given value.
 
-### HasValue
-
-`func (o *Memory) HasValue() bool`
-
-HasValue returns a boolean if a field has been set.
 
 ### GetUnit
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetUnit sets Unit field to given value.
 
-### HasUnit
-
-`func (o *Memory) HasUnit() bool`
-
-HasUnit returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

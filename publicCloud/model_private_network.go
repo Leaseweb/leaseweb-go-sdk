@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PrivateNetwork type satisfies the MappedNullable interface at compile time
@@ -19,17 +21,22 @@ var _ MappedNullable = &PrivateNetwork{}
 
 // PrivateNetwork struct for PrivateNetwork
 type PrivateNetwork struct {
-	PrivateNetworkId *string `json:"privateNetworkId,omitempty"`
-	Status *string `json:"status,omitempty"`
-	Subnet *string `json:"subnet,omitempty"`
+	PrivateNetworkId string `json:"privateNetworkId"`
+	Status string `json:"status"`
+	Subnet string `json:"subnet"`
 }
+
+type _PrivateNetwork PrivateNetwork
 
 // NewPrivateNetwork instantiates a new PrivateNetwork object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrivateNetwork() *PrivateNetwork {
+func NewPrivateNetwork(privateNetworkId string, status string, subnet string) *PrivateNetwork {
 	this := PrivateNetwork{}
+	this.PrivateNetworkId = privateNetworkId
+	this.Status = status
+	this.Subnet = subnet
 	return &this
 }
 
@@ -41,100 +48,76 @@ func NewPrivateNetworkWithDefaults() *PrivateNetwork {
 	return &this
 }
 
-// GetPrivateNetworkId returns the PrivateNetworkId field value if set, zero value otherwise.
+// GetPrivateNetworkId returns the PrivateNetworkId field value
 func (o *PrivateNetwork) GetPrivateNetworkId() string {
-	if o == nil || IsNil(o.PrivateNetworkId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PrivateNetworkId
+
+	return o.PrivateNetworkId
 }
 
-// GetPrivateNetworkIdOk returns a tuple with the PrivateNetworkId field value if set, nil otherwise
+// GetPrivateNetworkIdOk returns a tuple with the PrivateNetworkId field value
 // and a boolean to check if the value has been set.
 func (o *PrivateNetwork) GetPrivateNetworkIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PrivateNetworkId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrivateNetworkId, true
+	return &o.PrivateNetworkId, true
 }
 
-// HasPrivateNetworkId returns a boolean if a field has been set.
-func (o *PrivateNetwork) HasPrivateNetworkId() bool {
-	if o != nil && !IsNil(o.PrivateNetworkId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrivateNetworkId gets a reference to the given string and assigns it to the PrivateNetworkId field.
+// SetPrivateNetworkId sets field value
 func (o *PrivateNetwork) SetPrivateNetworkId(v string) {
-	o.PrivateNetworkId = &v
+	o.PrivateNetworkId = v
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
+// GetStatus returns the Status field value
 func (o *PrivateNetwork) GetStatus() string {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Status
+
+	return o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *PrivateNetwork) GetStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Status, true
+	return &o.Status, true
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *PrivateNetwork) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given string and assigns it to the Status field.
+// SetStatus sets field value
 func (o *PrivateNetwork) SetStatus(v string) {
-	o.Status = &v
+	o.Status = v
 }
 
-// GetSubnet returns the Subnet field value if set, zero value otherwise.
+// GetSubnet returns the Subnet field value
 func (o *PrivateNetwork) GetSubnet() string {
-	if o == nil || IsNil(o.Subnet) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Subnet
+
+	return o.Subnet
 }
 
-// GetSubnetOk returns a tuple with the Subnet field value if set, nil otherwise
+// GetSubnetOk returns a tuple with the Subnet field value
 // and a boolean to check if the value has been set.
 func (o *PrivateNetwork) GetSubnetOk() (*string, bool) {
-	if o == nil || IsNil(o.Subnet) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Subnet, true
+	return &o.Subnet, true
 }
 
-// HasSubnet returns a boolean if a field has been set.
-func (o *PrivateNetwork) HasSubnet() bool {
-	if o != nil && !IsNil(o.Subnet) {
-		return true
-	}
-
-	return false
-}
-
-// SetSubnet gets a reference to the given string and assigns it to the Subnet field.
+// SetSubnet sets field value
 func (o *PrivateNetwork) SetSubnet(v string) {
-	o.Subnet = &v
+	o.Subnet = v
 }
 
 func (o PrivateNetwork) MarshalJSON() ([]byte, error) {
@@ -147,16 +130,49 @@ func (o PrivateNetwork) MarshalJSON() ([]byte, error) {
 
 func (o PrivateNetwork) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PrivateNetworkId) {
-		toSerialize["privateNetworkId"] = o.PrivateNetworkId
-	}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
-	if !IsNil(o.Subnet) {
-		toSerialize["subnet"] = o.Subnet
-	}
+	toSerialize["privateNetworkId"] = o.PrivateNetworkId
+	toSerialize["status"] = o.Status
+	toSerialize["subnet"] = o.Subnet
 	return toSerialize, nil
+}
+
+func (o *PrivateNetwork) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"privateNetworkId",
+		"status",
+		"subnet",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPrivateNetwork := _PrivateNetwork{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPrivateNetwork)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PrivateNetwork(varPrivateNetwork)
+
+	return err
 }
 
 type NullablePrivateNetwork struct {

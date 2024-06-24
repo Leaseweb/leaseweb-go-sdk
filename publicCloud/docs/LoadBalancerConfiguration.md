@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StickySession** | Pointer to [**NullableStickySession**](StickySession.md) |  | [optional] 
-**Balance** | Pointer to **string** | Algorithm to be used for load balancer | [optional] 
-**HealthCheck** | Pointer to [**NullableHealthCheck**](HealthCheck.md) |  | [optional] 
-**XForwardedFor** | Pointer to **bool** | Is xForwardedFor header enabled or not | [optional] 
-**IdleTimeOut** | Pointer to **int32** | Time to close the connection if load balancer is idle | [optional] 
-**TargetPort** | Pointer to **int32** | Port on which the backend (target) servers are listening to handle incoming requests | [optional] 
+**StickySession** | [**NullableStickySession**](StickySession.md) |  | 
+**Balance** | **string** | Algorithm to be used for load balancer | 
+**HealthCheck** | [**NullableHealthCheck**](HealthCheck.md) |  | 
+**XForwardedFor** | **bool** | Is xForwardedFor header enabled or not | 
+**IdleTimeOut** | **int32** | Time to close the connection if load balancer is idle | 
+**TargetPort** | **int32** | Port on which the backend (target) servers are listening to handle incoming requests | 
 
 ## Methods
 
 ### NewLoadBalancerConfiguration
 
-`func NewLoadBalancerConfiguration() *LoadBalancerConfiguration`
+`func NewLoadBalancerConfiguration(stickySession NullableStickySession, balance string, healthCheck NullableHealthCheck, xForwardedFor bool, idleTimeOut int32, targetPort int32, ) *LoadBalancerConfiguration`
 
 NewLoadBalancerConfiguration instantiates a new LoadBalancerConfiguration object
 This constructor will assign default values to properties that have it defined,
@@ -49,11 +49,6 @@ and a boolean to check if the value has been set.
 
 SetStickySession sets StickySession field to given value.
 
-### HasStickySession
-
-`func (o *LoadBalancerConfiguration) HasStickySession() bool`
-
-HasStickySession returns a boolean if a field has been set.
 
 ### SetStickySessionNil
 
@@ -84,11 +79,6 @@ and a boolean to check if the value has been set.
 
 SetBalance sets Balance field to given value.
 
-### HasBalance
-
-`func (o *LoadBalancerConfiguration) HasBalance() bool`
-
-HasBalance returns a boolean if a field has been set.
 
 ### GetHealthCheck
 
@@ -109,11 +99,6 @@ and a boolean to check if the value has been set.
 
 SetHealthCheck sets HealthCheck field to given value.
 
-### HasHealthCheck
-
-`func (o *LoadBalancerConfiguration) HasHealthCheck() bool`
-
-HasHealthCheck returns a boolean if a field has been set.
 
 ### SetHealthCheckNil
 
@@ -144,11 +129,6 @@ and a boolean to check if the value has been set.
 
 SetXForwardedFor sets XForwardedFor field to given value.
 
-### HasXForwardedFor
-
-`func (o *LoadBalancerConfiguration) HasXForwardedFor() bool`
-
-HasXForwardedFor returns a boolean if a field has been set.
 
 ### GetIdleTimeOut
 
@@ -169,11 +149,6 @@ and a boolean to check if the value has been set.
 
 SetIdleTimeOut sets IdleTimeOut field to given value.
 
-### HasIdleTimeOut
-
-`func (o *LoadBalancerConfiguration) HasIdleTimeOut() bool`
-
-HasIdleTimeOut returns a boolean if a field has been set.
 
 ### GetTargetPort
 
@@ -194,11 +169,6 @@ and a boolean to check if the value has been set.
 
 SetTargetPort sets TargetPort field to given value.
 
-### HasTargetPort
-
-`func (o *LoadBalancerConfiguration) HasTargetPort() bool`
-
-HasTargetPort returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

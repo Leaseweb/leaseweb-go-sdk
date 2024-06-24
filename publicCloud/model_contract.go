@@ -13,6 +13,8 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Contract type satisfies the MappedNullable interface at compile time
@@ -21,24 +23,33 @@ var _ MappedNullable = &Contract{}
 // Contract struct for Contract
 type Contract struct {
 	// The billing frequency (in months) of the instance.
-	BillingFrequency *int32 `json:"billingFrequency,omitempty"`
+	BillingFrequency int32 `json:"billingFrequency"`
 	// The contract commitment (in months)
-	Term *int32 `json:"term,omitempty"`
-	Type *ContractType `json:"type,omitempty"`
-	EndsAt NullableTime `json:"endsAt,omitempty"`
+	Term int32 `json:"term"`
+	Type ContractType `json:"type"`
+	EndsAt NullableTime `json:"endsAt"`
 	// Date when the contract will be automatically renewed
-	RenewalsAt *time.Time `json:"renewalsAt,omitempty"`
+	RenewalsAt time.Time `json:"renewalsAt"`
 	// Date when the contract was created
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	State *ContractState `json:"state,omitempty"`
+	CreatedAt time.Time `json:"createdAt"`
+	State ContractState `json:"state"`
 }
+
+type _Contract Contract
 
 // NewContract instantiates a new Contract object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContract() *Contract {
+func NewContract(billingFrequency int32, term int32, type_ ContractType, endsAt NullableTime, renewalsAt time.Time, createdAt time.Time, state ContractState) *Contract {
 	this := Contract{}
+	this.BillingFrequency = billingFrequency
+	this.Term = term
+	this.Type = type_
+	this.EndsAt = endsAt
+	this.RenewalsAt = renewalsAt
+	this.CreatedAt = createdAt
+	this.State = state
 	return &this
 }
 
@@ -50,112 +61,90 @@ func NewContractWithDefaults() *Contract {
 	return &this
 }
 
-// GetBillingFrequency returns the BillingFrequency field value if set, zero value otherwise.
+// GetBillingFrequency returns the BillingFrequency field value
 func (o *Contract) GetBillingFrequency() int32 {
-	if o == nil || IsNil(o.BillingFrequency) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.BillingFrequency
+
+	return o.BillingFrequency
 }
 
-// GetBillingFrequencyOk returns a tuple with the BillingFrequency field value if set, nil otherwise
+// GetBillingFrequencyOk returns a tuple with the BillingFrequency field value
 // and a boolean to check if the value has been set.
 func (o *Contract) GetBillingFrequencyOk() (*int32, bool) {
-	if o == nil || IsNil(o.BillingFrequency) {
+	if o == nil {
 		return nil, false
 	}
-	return o.BillingFrequency, true
+	return &o.BillingFrequency, true
 }
 
-// HasBillingFrequency returns a boolean if a field has been set.
-func (o *Contract) HasBillingFrequency() bool {
-	if o != nil && !IsNil(o.BillingFrequency) {
-		return true
-	}
-
-	return false
-}
-
-// SetBillingFrequency gets a reference to the given int32 and assigns it to the BillingFrequency field.
+// SetBillingFrequency sets field value
 func (o *Contract) SetBillingFrequency(v int32) {
-	o.BillingFrequency = &v
+	o.BillingFrequency = v
 }
 
-// GetTerm returns the Term field value if set, zero value otherwise.
+// GetTerm returns the Term field value
 func (o *Contract) GetTerm() int32 {
-	if o == nil || IsNil(o.Term) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Term
+
+	return o.Term
 }
 
-// GetTermOk returns a tuple with the Term field value if set, nil otherwise
+// GetTermOk returns a tuple with the Term field value
 // and a boolean to check if the value has been set.
 func (o *Contract) GetTermOk() (*int32, bool) {
-	if o == nil || IsNil(o.Term) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Term, true
+	return &o.Term, true
 }
 
-// HasTerm returns a boolean if a field has been set.
-func (o *Contract) HasTerm() bool {
-	if o != nil && !IsNil(o.Term) {
-		return true
-	}
-
-	return false
-}
-
-// SetTerm gets a reference to the given int32 and assigns it to the Term field.
+// SetTerm sets field value
 func (o *Contract) SetTerm(v int32) {
-	o.Term = &v
+	o.Term = v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
+// GetType returns the Type field value
 func (o *Contract) GetType() ContractType {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		var ret ContractType
 		return ret
 	}
-	return *o.Type
+
+	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *Contract) GetTypeOk() (*ContractType, bool) {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Type, true
+	return &o.Type, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *Contract) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given ContractType and assigns it to the Type field.
+// SetType sets field value
 func (o *Contract) SetType(v ContractType) {
-	o.Type = &v
+	o.Type = v
 }
 
-// GetEndsAt returns the EndsAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEndsAt returns the EndsAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *Contract) GetEndsAt() time.Time {
-	if o == nil || IsNil(o.EndsAt.Get()) {
+	if o == nil || o.EndsAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
+
 	return *o.EndsAt.Get()
 }
 
-// GetEndsAtOk returns a tuple with the EndsAt field value if set, nil otherwise
+// GetEndsAtOk returns a tuple with the EndsAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Contract) GetEndsAtOk() (*time.Time, bool) {
@@ -165,123 +154,81 @@ func (o *Contract) GetEndsAtOk() (*time.Time, bool) {
 	return o.EndsAt.Get(), o.EndsAt.IsSet()
 }
 
-// HasEndsAt returns a boolean if a field has been set.
-func (o *Contract) HasEndsAt() bool {
-	if o != nil && o.EndsAt.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEndsAt gets a reference to the given NullableTime and assigns it to the EndsAt field.
+// SetEndsAt sets field value
 func (o *Contract) SetEndsAt(v time.Time) {
 	o.EndsAt.Set(&v)
 }
-// SetEndsAtNil sets the value for EndsAt to be an explicit nil
-func (o *Contract) SetEndsAtNil() {
-	o.EndsAt.Set(nil)
-}
 
-// UnsetEndsAt ensures that no value is present for EndsAt, not even an explicit nil
-func (o *Contract) UnsetEndsAt() {
-	o.EndsAt.Unset()
-}
-
-// GetRenewalsAt returns the RenewalsAt field value if set, zero value otherwise.
+// GetRenewalsAt returns the RenewalsAt field value
 func (o *Contract) GetRenewalsAt() time.Time {
-	if o == nil || IsNil(o.RenewalsAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.RenewalsAt
+
+	return o.RenewalsAt
 }
 
-// GetRenewalsAtOk returns a tuple with the RenewalsAt field value if set, nil otherwise
+// GetRenewalsAtOk returns a tuple with the RenewalsAt field value
 // and a boolean to check if the value has been set.
 func (o *Contract) GetRenewalsAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.RenewalsAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RenewalsAt, true
+	return &o.RenewalsAt, true
 }
 
-// HasRenewalsAt returns a boolean if a field has been set.
-func (o *Contract) HasRenewalsAt() bool {
-	if o != nil && !IsNil(o.RenewalsAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetRenewalsAt gets a reference to the given time.Time and assigns it to the RenewalsAt field.
+// SetRenewalsAt sets field value
 func (o *Contract) SetRenewalsAt(v time.Time) {
-	o.RenewalsAt = &v
+	o.RenewalsAt = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *Contract) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *Contract) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *Contract) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *Contract) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetState returns the State field value if set, zero value otherwise.
+// GetState returns the State field value
 func (o *Contract) GetState() ContractState {
-	if o == nil || IsNil(o.State) {
+	if o == nil {
 		var ret ContractState
 		return ret
 	}
-	return *o.State
+
+	return o.State
 }
 
-// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
 func (o *Contract) GetStateOk() (*ContractState, bool) {
-	if o == nil || IsNil(o.State) {
+	if o == nil {
 		return nil, false
 	}
-	return o.State, true
+	return &o.State, true
 }
 
-// HasState returns a boolean if a field has been set.
-func (o *Contract) HasState() bool {
-	if o != nil && !IsNil(o.State) {
-		return true
-	}
-
-	return false
-}
-
-// SetState gets a reference to the given ContractState and assigns it to the State field.
+// SetState sets field value
 func (o *Contract) SetState(v ContractState) {
-	o.State = &v
+	o.State = v
 }
 
 func (o Contract) MarshalJSON() ([]byte, error) {
@@ -294,28 +241,57 @@ func (o Contract) MarshalJSON() ([]byte, error) {
 
 func (o Contract) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.BillingFrequency) {
-		toSerialize["billingFrequency"] = o.BillingFrequency
-	}
-	if !IsNil(o.Term) {
-		toSerialize["term"] = o.Term
-	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
-	if o.EndsAt.IsSet() {
-		toSerialize["endsAt"] = o.EndsAt.Get()
-	}
-	if !IsNil(o.RenewalsAt) {
-		toSerialize["renewalsAt"] = o.RenewalsAt
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
-	}
-	if !IsNil(o.State) {
-		toSerialize["state"] = o.State
-	}
+	toSerialize["billingFrequency"] = o.BillingFrequency
+	toSerialize["term"] = o.Term
+	toSerialize["type"] = o.Type
+	toSerialize["endsAt"] = o.EndsAt.Get()
+	toSerialize["renewalsAt"] = o.RenewalsAt
+	toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["state"] = o.State
 	return toSerialize, nil
+}
+
+func (o *Contract) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"billingFrequency",
+		"term",
+		"type",
+		"endsAt",
+		"renewalsAt",
+		"createdAt",
+		"state",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varContract := _Contract{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varContract)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Contract(varContract)
+
+	return err
 }
 
 type NullableContract struct {

@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Cpu type satisfies the MappedNullable interface at compile time
@@ -19,16 +21,20 @@ var _ MappedNullable = &Cpu{}
 
 // Cpu Number of cores
 type Cpu struct {
-	Value *int32 `json:"value,omitempty"`
-	Unit *string `json:"unit,omitempty"`
+	Value int32 `json:"value"`
+	Unit string `json:"unit"`
 }
+
+type _Cpu Cpu
 
 // NewCpu instantiates a new Cpu object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCpu() *Cpu {
+func NewCpu(value int32, unit string) *Cpu {
 	this := Cpu{}
+	this.Value = value
+	this.Unit = unit
 	return &this
 }
 
@@ -40,68 +46,52 @@ func NewCpuWithDefaults() *Cpu {
 	return &this
 }
 
-// GetValue returns the Value field value if set, zero value otherwise.
+// GetValue returns the Value field value
 func (o *Cpu) GetValue() int32 {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Value
+
+	return o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
 func (o *Cpu) GetValueOk() (*int32, bool) {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Value, true
+	return &o.Value, true
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *Cpu) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given int32 and assigns it to the Value field.
+// SetValue sets field value
 func (o *Cpu) SetValue(v int32) {
-	o.Value = &v
+	o.Value = v
 }
 
-// GetUnit returns the Unit field value if set, zero value otherwise.
+// GetUnit returns the Unit field value
 func (o *Cpu) GetUnit() string {
-	if o == nil || IsNil(o.Unit) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Unit
+
+	return o.Unit
 }
 
-// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// GetUnitOk returns a tuple with the Unit field value
 // and a boolean to check if the value has been set.
 func (o *Cpu) GetUnitOk() (*string, bool) {
-	if o == nil || IsNil(o.Unit) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Unit, true
+	return &o.Unit, true
 }
 
-// HasUnit returns a boolean if a field has been set.
-func (o *Cpu) HasUnit() bool {
-	if o != nil && !IsNil(o.Unit) {
-		return true
-	}
-
-	return false
-}
-
-// SetUnit gets a reference to the given string and assigns it to the Unit field.
+// SetUnit sets field value
 func (o *Cpu) SetUnit(v string) {
-	o.Unit = &v
+	o.Unit = v
 }
 
 func (o Cpu) MarshalJSON() ([]byte, error) {
@@ -114,13 +104,47 @@ func (o Cpu) MarshalJSON() ([]byte, error) {
 
 func (o Cpu) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Value) {
-		toSerialize["value"] = o.Value
-	}
-	if !IsNil(o.Unit) {
-		toSerialize["unit"] = o.Unit
-	}
+	toSerialize["value"] = o.Value
+	toSerialize["unit"] = o.Unit
 	return toSerialize, nil
+}
+
+func (o *Cpu) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"value",
+		"unit",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCpu := _Cpu{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCpu)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Cpu(varCpu)
+
+	return err
 }
 
 type NullableCpu struct {

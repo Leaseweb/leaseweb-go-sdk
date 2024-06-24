@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OperatingSystem type satisfies the MappedNullable interface at compile time
@@ -19,23 +21,31 @@ var _ MappedNullable = &OperatingSystem{}
 
 // OperatingSystem struct for OperatingSystem
 type OperatingSystem struct {
-	Id *OperatingSystemId `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Version *string `json:"version,omitempty"`
-	Family *string `json:"family,omitempty"`
-	Flavour *string `json:"flavour,omitempty"`
-	Architecture *string `json:"architecture,omitempty"`
+	Id OperatingSystemId `json:"id"`
+	Name string `json:"name"`
+	Version string `json:"version"`
+	Family string `json:"family"`
+	Flavour string `json:"flavour"`
+	Architecture string `json:"architecture"`
 	MarketApps []string `json:"marketApps,omitempty"`
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes,omitempty"`
 }
 
+type _OperatingSystem OperatingSystem
+
 // NewOperatingSystem instantiates a new OperatingSystem object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOperatingSystem() *OperatingSystem {
+func NewOperatingSystem(id OperatingSystemId, name string, version string, family string, flavour string, architecture string) *OperatingSystem {
 	this := OperatingSystem{}
+	this.Id = id
+	this.Name = name
+	this.Version = version
+	this.Family = family
+	this.Flavour = flavour
+	this.Architecture = architecture
 	return &this
 }
 
@@ -47,196 +57,148 @@ func NewOperatingSystemWithDefaults() *OperatingSystem {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *OperatingSystem) GetId() OperatingSystemId {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret OperatingSystemId
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *OperatingSystem) GetIdOk() (*OperatingSystemId, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *OperatingSystem) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given OperatingSystemId and assigns it to the Id field.
+// SetId sets field value
 func (o *OperatingSystem) SetId(v OperatingSystemId) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *OperatingSystem) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *OperatingSystem) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *OperatingSystem) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *OperatingSystem) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
+// GetVersion returns the Version field value
 func (o *OperatingSystem) GetVersion() string {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Version
+
+	return o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
 func (o *OperatingSystem) GetVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return &o.Version, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *OperatingSystem) HasVersion() bool {
-	if o != nil && !IsNil(o.Version) {
-		return true
-	}
-
-	return false
-}
-
-// SetVersion gets a reference to the given string and assigns it to the Version field.
+// SetVersion sets field value
 func (o *OperatingSystem) SetVersion(v string) {
-	o.Version = &v
+	o.Version = v
 }
 
-// GetFamily returns the Family field value if set, zero value otherwise.
+// GetFamily returns the Family field value
 func (o *OperatingSystem) GetFamily() string {
-	if o == nil || IsNil(o.Family) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Family
+
+	return o.Family
 }
 
-// GetFamilyOk returns a tuple with the Family field value if set, nil otherwise
+// GetFamilyOk returns a tuple with the Family field value
 // and a boolean to check if the value has been set.
 func (o *OperatingSystem) GetFamilyOk() (*string, bool) {
-	if o == nil || IsNil(o.Family) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Family, true
+	return &o.Family, true
 }
 
-// HasFamily returns a boolean if a field has been set.
-func (o *OperatingSystem) HasFamily() bool {
-	if o != nil && !IsNil(o.Family) {
-		return true
-	}
-
-	return false
-}
-
-// SetFamily gets a reference to the given string and assigns it to the Family field.
+// SetFamily sets field value
 func (o *OperatingSystem) SetFamily(v string) {
-	o.Family = &v
+	o.Family = v
 }
 
-// GetFlavour returns the Flavour field value if set, zero value otherwise.
+// GetFlavour returns the Flavour field value
 func (o *OperatingSystem) GetFlavour() string {
-	if o == nil || IsNil(o.Flavour) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Flavour
+
+	return o.Flavour
 }
 
-// GetFlavourOk returns a tuple with the Flavour field value if set, nil otherwise
+// GetFlavourOk returns a tuple with the Flavour field value
 // and a boolean to check if the value has been set.
 func (o *OperatingSystem) GetFlavourOk() (*string, bool) {
-	if o == nil || IsNil(o.Flavour) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Flavour, true
+	return &o.Flavour, true
 }
 
-// HasFlavour returns a boolean if a field has been set.
-func (o *OperatingSystem) HasFlavour() bool {
-	if o != nil && !IsNil(o.Flavour) {
-		return true
-	}
-
-	return false
-}
-
-// SetFlavour gets a reference to the given string and assigns it to the Flavour field.
+// SetFlavour sets field value
 func (o *OperatingSystem) SetFlavour(v string) {
-	o.Flavour = &v
+	o.Flavour = v
 }
 
-// GetArchitecture returns the Architecture field value if set, zero value otherwise.
+// GetArchitecture returns the Architecture field value
 func (o *OperatingSystem) GetArchitecture() string {
-	if o == nil || IsNil(o.Architecture) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Architecture
+
+	return o.Architecture
 }
 
-// GetArchitectureOk returns a tuple with the Architecture field value if set, nil otherwise
+// GetArchitectureOk returns a tuple with the Architecture field value
 // and a boolean to check if the value has been set.
 func (o *OperatingSystem) GetArchitectureOk() (*string, bool) {
-	if o == nil || IsNil(o.Architecture) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Architecture, true
+	return &o.Architecture, true
 }
 
-// HasArchitecture returns a boolean if a field has been set.
-func (o *OperatingSystem) HasArchitecture() bool {
-	if o != nil && !IsNil(o.Architecture) {
-		return true
-	}
-
-	return false
-}
-
-// SetArchitecture gets a reference to the given string and assigns it to the Architecture field.
+// SetArchitecture sets field value
 func (o *OperatingSystem) SetArchitecture(v string) {
-	o.Architecture = &v
+	o.Architecture = v
 }
 
 // GetMarketApps returns the MarketApps field value if set, zero value otherwise.
@@ -313,24 +275,12 @@ func (o OperatingSystem) MarshalJSON() ([]byte, error) {
 
 func (o OperatingSystem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Version) {
-		toSerialize["version"] = o.Version
-	}
-	if !IsNil(o.Family) {
-		toSerialize["family"] = o.Family
-	}
-	if !IsNil(o.Flavour) {
-		toSerialize["flavour"] = o.Flavour
-	}
-	if !IsNil(o.Architecture) {
-		toSerialize["architecture"] = o.Architecture
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["version"] = o.Version
+	toSerialize["family"] = o.Family
+	toSerialize["flavour"] = o.Flavour
+	toSerialize["architecture"] = o.Architecture
 	if !IsNil(o.MarketApps) {
 		toSerialize["marketApps"] = o.MarketApps
 	}
@@ -338,6 +288,48 @@ func (o OperatingSystem) ToMap() (map[string]interface{}, error) {
 		toSerialize["storageTypes"] = o.StorageTypes
 	}
 	return toSerialize, nil
+}
+
+func (o *OperatingSystem) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"name",
+		"version",
+		"family",
+		"flavour",
+		"architecture",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOperatingSystem := _OperatingSystem{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOperatingSystem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OperatingSystem(varOperatingSystem)
+
+	return err
 }
 
 type NullableOperatingSystem struct {

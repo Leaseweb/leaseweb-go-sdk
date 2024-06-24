@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the LoadBalancerConfiguration type satisfies the MappedNullable interface at compile time
@@ -19,24 +21,32 @@ var _ MappedNullable = &LoadBalancerConfiguration{}
 
 // LoadBalancerConfiguration Different configuration assigned for the load balancer
 type LoadBalancerConfiguration struct {
-	StickySession NullableStickySession `json:"stickySession,omitempty"`
+	StickySession NullableStickySession `json:"stickySession"`
 	// Algorithm to be used for load balancer
-	Balance *string `json:"balance,omitempty"`
-	HealthCheck NullableHealthCheck `json:"healthCheck,omitempty"`
+	Balance string `json:"balance"`
+	HealthCheck NullableHealthCheck `json:"healthCheck"`
 	// Is xForwardedFor header enabled or not
-	XForwardedFor *bool `json:"xForwardedFor,omitempty"`
+	XForwardedFor bool `json:"xForwardedFor"`
 	// Time to close the connection if load balancer is idle
-	IdleTimeOut *int32 `json:"idleTimeOut,omitempty"`
+	IdleTimeOut int32 `json:"idleTimeOut"`
 	// Port on which the backend (target) servers are listening to handle incoming requests
-	TargetPort *int32 `json:"targetPort,omitempty"`
+	TargetPort int32 `json:"targetPort"`
 }
+
+type _LoadBalancerConfiguration LoadBalancerConfiguration
 
 // NewLoadBalancerConfiguration instantiates a new LoadBalancerConfiguration object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerConfiguration() *LoadBalancerConfiguration {
+func NewLoadBalancerConfiguration(stickySession NullableStickySession, balance string, healthCheck NullableHealthCheck, xForwardedFor bool, idleTimeOut int32, targetPort int32) *LoadBalancerConfiguration {
 	this := LoadBalancerConfiguration{}
+	this.StickySession = stickySession
+	this.Balance = balance
+	this.HealthCheck = healthCheck
+	this.XForwardedFor = xForwardedFor
+	this.IdleTimeOut = idleTimeOut
+	this.TargetPort = targetPort
 	return &this
 }
 
@@ -48,16 +58,18 @@ func NewLoadBalancerConfigurationWithDefaults() *LoadBalancerConfiguration {
 	return &this
 }
 
-// GetStickySession returns the StickySession field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStickySession returns the StickySession field value
+// If the value is explicit nil, the zero value for StickySession will be returned
 func (o *LoadBalancerConfiguration) GetStickySession() StickySession {
-	if o == nil || IsNil(o.StickySession.Get()) {
+	if o == nil || o.StickySession.Get() == nil {
 		var ret StickySession
 		return ret
 	}
+
 	return *o.StickySession.Get()
 }
 
-// GetStickySessionOk returns a tuple with the StickySession field value if set, nil otherwise
+// GetStickySessionOk returns a tuple with the StickySession field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *LoadBalancerConfiguration) GetStickySessionOk() (*StickySession, bool) {
@@ -67,71 +79,47 @@ func (o *LoadBalancerConfiguration) GetStickySessionOk() (*StickySession, bool) 
 	return o.StickySession.Get(), o.StickySession.IsSet()
 }
 
-// HasStickySession returns a boolean if a field has been set.
-func (o *LoadBalancerConfiguration) HasStickySession() bool {
-	if o != nil && o.StickySession.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStickySession gets a reference to the given NullableStickySession and assigns it to the StickySession field.
+// SetStickySession sets field value
 func (o *LoadBalancerConfiguration) SetStickySession(v StickySession) {
 	o.StickySession.Set(&v)
 }
-// SetStickySessionNil sets the value for StickySession to be an explicit nil
-func (o *LoadBalancerConfiguration) SetStickySessionNil() {
-	o.StickySession.Set(nil)
-}
 
-// UnsetStickySession ensures that no value is present for StickySession, not even an explicit nil
-func (o *LoadBalancerConfiguration) UnsetStickySession() {
-	o.StickySession.Unset()
-}
-
-// GetBalance returns the Balance field value if set, zero value otherwise.
+// GetBalance returns the Balance field value
 func (o *LoadBalancerConfiguration) GetBalance() string {
-	if o == nil || IsNil(o.Balance) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Balance
+
+	return o.Balance
 }
 
-// GetBalanceOk returns a tuple with the Balance field value if set, nil otherwise
+// GetBalanceOk returns a tuple with the Balance field value
 // and a boolean to check if the value has been set.
 func (o *LoadBalancerConfiguration) GetBalanceOk() (*string, bool) {
-	if o == nil || IsNil(o.Balance) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Balance, true
+	return &o.Balance, true
 }
 
-// HasBalance returns a boolean if a field has been set.
-func (o *LoadBalancerConfiguration) HasBalance() bool {
-	if o != nil && !IsNil(o.Balance) {
-		return true
-	}
-
-	return false
-}
-
-// SetBalance gets a reference to the given string and assigns it to the Balance field.
+// SetBalance sets field value
 func (o *LoadBalancerConfiguration) SetBalance(v string) {
-	o.Balance = &v
+	o.Balance = v
 }
 
-// GetHealthCheck returns the HealthCheck field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetHealthCheck returns the HealthCheck field value
+// If the value is explicit nil, the zero value for HealthCheck will be returned
 func (o *LoadBalancerConfiguration) GetHealthCheck() HealthCheck {
-	if o == nil || IsNil(o.HealthCheck.Get()) {
+	if o == nil || o.HealthCheck.Get() == nil {
 		var ret HealthCheck
 		return ret
 	}
+
 	return *o.HealthCheck.Get()
 }
 
-// GetHealthCheckOk returns a tuple with the HealthCheck field value if set, nil otherwise
+// GetHealthCheckOk returns a tuple with the HealthCheck field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *LoadBalancerConfiguration) GetHealthCheckOk() (*HealthCheck, bool) {
@@ -141,123 +129,81 @@ func (o *LoadBalancerConfiguration) GetHealthCheckOk() (*HealthCheck, bool) {
 	return o.HealthCheck.Get(), o.HealthCheck.IsSet()
 }
 
-// HasHealthCheck returns a boolean if a field has been set.
-func (o *LoadBalancerConfiguration) HasHealthCheck() bool {
-	if o != nil && o.HealthCheck.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetHealthCheck gets a reference to the given NullableHealthCheck and assigns it to the HealthCheck field.
+// SetHealthCheck sets field value
 func (o *LoadBalancerConfiguration) SetHealthCheck(v HealthCheck) {
 	o.HealthCheck.Set(&v)
 }
-// SetHealthCheckNil sets the value for HealthCheck to be an explicit nil
-func (o *LoadBalancerConfiguration) SetHealthCheckNil() {
-	o.HealthCheck.Set(nil)
-}
 
-// UnsetHealthCheck ensures that no value is present for HealthCheck, not even an explicit nil
-func (o *LoadBalancerConfiguration) UnsetHealthCheck() {
-	o.HealthCheck.Unset()
-}
-
-// GetXForwardedFor returns the XForwardedFor field value if set, zero value otherwise.
+// GetXForwardedFor returns the XForwardedFor field value
 func (o *LoadBalancerConfiguration) GetXForwardedFor() bool {
-	if o == nil || IsNil(o.XForwardedFor) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.XForwardedFor
+
+	return o.XForwardedFor
 }
 
-// GetXForwardedForOk returns a tuple with the XForwardedFor field value if set, nil otherwise
+// GetXForwardedForOk returns a tuple with the XForwardedFor field value
 // and a boolean to check if the value has been set.
 func (o *LoadBalancerConfiguration) GetXForwardedForOk() (*bool, bool) {
-	if o == nil || IsNil(o.XForwardedFor) {
+	if o == nil {
 		return nil, false
 	}
-	return o.XForwardedFor, true
+	return &o.XForwardedFor, true
 }
 
-// HasXForwardedFor returns a boolean if a field has been set.
-func (o *LoadBalancerConfiguration) HasXForwardedFor() bool {
-	if o != nil && !IsNil(o.XForwardedFor) {
-		return true
-	}
-
-	return false
-}
-
-// SetXForwardedFor gets a reference to the given bool and assigns it to the XForwardedFor field.
+// SetXForwardedFor sets field value
 func (o *LoadBalancerConfiguration) SetXForwardedFor(v bool) {
-	o.XForwardedFor = &v
+	o.XForwardedFor = v
 }
 
-// GetIdleTimeOut returns the IdleTimeOut field value if set, zero value otherwise.
+// GetIdleTimeOut returns the IdleTimeOut field value
 func (o *LoadBalancerConfiguration) GetIdleTimeOut() int32 {
-	if o == nil || IsNil(o.IdleTimeOut) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.IdleTimeOut
+
+	return o.IdleTimeOut
 }
 
-// GetIdleTimeOutOk returns a tuple with the IdleTimeOut field value if set, nil otherwise
+// GetIdleTimeOutOk returns a tuple with the IdleTimeOut field value
 // and a boolean to check if the value has been set.
 func (o *LoadBalancerConfiguration) GetIdleTimeOutOk() (*int32, bool) {
-	if o == nil || IsNil(o.IdleTimeOut) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IdleTimeOut, true
+	return &o.IdleTimeOut, true
 }
 
-// HasIdleTimeOut returns a boolean if a field has been set.
-func (o *LoadBalancerConfiguration) HasIdleTimeOut() bool {
-	if o != nil && !IsNil(o.IdleTimeOut) {
-		return true
-	}
-
-	return false
-}
-
-// SetIdleTimeOut gets a reference to the given int32 and assigns it to the IdleTimeOut field.
+// SetIdleTimeOut sets field value
 func (o *LoadBalancerConfiguration) SetIdleTimeOut(v int32) {
-	o.IdleTimeOut = &v
+	o.IdleTimeOut = v
 }
 
-// GetTargetPort returns the TargetPort field value if set, zero value otherwise.
+// GetTargetPort returns the TargetPort field value
 func (o *LoadBalancerConfiguration) GetTargetPort() int32 {
-	if o == nil || IsNil(o.TargetPort) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.TargetPort
+
+	return o.TargetPort
 }
 
-// GetTargetPortOk returns a tuple with the TargetPort field value if set, nil otherwise
+// GetTargetPortOk returns a tuple with the TargetPort field value
 // and a boolean to check if the value has been set.
 func (o *LoadBalancerConfiguration) GetTargetPortOk() (*int32, bool) {
-	if o == nil || IsNil(o.TargetPort) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetPort, true
+	return &o.TargetPort, true
 }
 
-// HasTargetPort returns a boolean if a field has been set.
-func (o *LoadBalancerConfiguration) HasTargetPort() bool {
-	if o != nil && !IsNil(o.TargetPort) {
-		return true
-	}
-
-	return false
-}
-
-// SetTargetPort gets a reference to the given int32 and assigns it to the TargetPort field.
+// SetTargetPort sets field value
 func (o *LoadBalancerConfiguration) SetTargetPort(v int32) {
-	o.TargetPort = &v
+	o.TargetPort = v
 }
 
 func (o LoadBalancerConfiguration) MarshalJSON() ([]byte, error) {
@@ -270,25 +216,55 @@ func (o LoadBalancerConfiguration) MarshalJSON() ([]byte, error) {
 
 func (o LoadBalancerConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.StickySession.IsSet() {
-		toSerialize["stickySession"] = o.StickySession.Get()
-	}
-	if !IsNil(o.Balance) {
-		toSerialize["balance"] = o.Balance
-	}
-	if o.HealthCheck.IsSet() {
-		toSerialize["healthCheck"] = o.HealthCheck.Get()
-	}
-	if !IsNil(o.XForwardedFor) {
-		toSerialize["xForwardedFor"] = o.XForwardedFor
-	}
-	if !IsNil(o.IdleTimeOut) {
-		toSerialize["idleTimeOut"] = o.IdleTimeOut
-	}
-	if !IsNil(o.TargetPort) {
-		toSerialize["targetPort"] = o.TargetPort
-	}
+	toSerialize["stickySession"] = o.StickySession.Get()
+	toSerialize["balance"] = o.Balance
+	toSerialize["healthCheck"] = o.HealthCheck.Get()
+	toSerialize["xForwardedFor"] = o.XForwardedFor
+	toSerialize["idleTimeOut"] = o.IdleTimeOut
+	toSerialize["targetPort"] = o.TargetPort
 	return toSerialize, nil
+}
+
+func (o *LoadBalancerConfiguration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"stickySession",
+		"balance",
+		"healthCheck",
+		"xForwardedFor",
+		"idleTimeOut",
+		"targetPort",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLoadBalancerConfiguration := _LoadBalancerConfiguration{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varLoadBalancerConfiguration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LoadBalancerConfiguration(varLoadBalancerConfiguration)
+
+	return err
 }
 
 type NullableLoadBalancerConfiguration struct {

@@ -399,7 +399,11 @@ paths:
                   limit: 20
                   offset: 0
                 instances:
-                - customerId: "11111111"
+                - marketAppId: null
+                  productType: INSTANCE
+                  privateNetwork: null
+                  autoScalingGroup: null
+                  customerId: "11111111"
                   id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                   type: lsw.m3.large
                   resources:
@@ -521,6 +525,7 @@ paths:
           content:
             application/json:
               example:
+                autoScalingGroup: null
                 contract:
                   billingFrequency: 1
                   term: 0
@@ -553,6 +558,7 @@ paths:
                   family: linux
                   flavour: ubuntu
                   architecture: x86_64
+                privateNetwork: null
                 productType: INSTANCE
                 reference: my webserver
                 region: eu-west-3
@@ -734,6 +740,7 @@ paths:
           content:
             application/json:
               example:
+                autoScalingGroup: null
                 contract:
                   billingFrequency: 1
                   term: 0
@@ -892,6 +899,7 @@ paths:
           content:
             application/json:
               example:
+                autoScalingGroup: null
                 contract:
                   billingFrequency: 1
                   term: 0
@@ -916,6 +924,7 @@ paths:
                     detectionProfile: STANDARD_DEFAULT
                     protectionType: STANDARD
                 iso: null
+                marketAppId: null
                 operatingSystem:
                   id: UBUNTU_20_04_64BIT
                   name: Ubuntu 20.04 LTS (x86_64)
@@ -923,6 +932,8 @@ paths:
                   family: linux
                   flavour: ubuntu
                   architecture: x86_64
+                privateNetwork: null
+                productType: INSTANCE
                 reference: my webserver
                 region: eu-west-3
                 resources:
@@ -939,6 +950,7 @@ paths:
                     value: 100
                     unit: Mbps
                 rootDiskSize: 5
+                rootDiskStorageType: CENTRAL
                 salesOrgId: "2000"
                 startedAt: 2024-04-09T15:11:37+00:00
                 state: RUNNING
@@ -3576,6 +3588,7 @@ paths:
                   healthCheck: null
                   xForwardedFor: false
                   idleTimeOut: 60
+                  targetPort: 80
               schema:
                 $ref: '#/components/schemas/loadBalancer'
           description: OK
@@ -3781,6 +3794,7 @@ paths:
                   healthCheck: null
                   xForwardedFor: false
                   idleTimeOut: 60
+                  targetPort: 80
               schema:
                 $ref: '#/components/schemas/loadBalancer'
           description: OK.
@@ -3915,6 +3929,7 @@ paths:
                   healthCheck: null
                   xForwardedFor: false
                   idleTimeOut: 60
+                  targetPort: 80
               schema:
                 $ref: '#/components/schemas/loadBalancer'
           description: OK.
@@ -4405,6 +4420,7 @@ paths:
                     reverseLookup: null
                     networkType: INTERNAL
                     mainIp: false
+                    ddos: null
                   healthCheckStatus:
                     checkStatus: Connection timeout
                     status: DOWN
@@ -4426,6 +4442,7 @@ paths:
                     reverseLookup: null
                     networkType: PUBLIC
                     mainIp: true
+                    ddos: null
               schema:
                 $ref: '#/components/schemas/getLoadBalancerTargetListResult'
           description: OK
@@ -6224,6 +6241,7 @@ paths:
                   maximumAmount: null
                   cpuThreshold: null
                   warmupTime: null
+                  cooldownTime: null
                   region: eu-west-3
                   reference: Manual Auto Scaling Group
                   createdAt: 2024-04-26T09:22:25+00:00
@@ -6231,7 +6249,6 @@ paths:
                   startsAt: null
                   endsAt: null
                   loadBalancer:
-                    customerId: "12358132"
                     id: 32082a93-d1e2-4bc0-8f5e-8fe4312b0844
                     type: lsw.m3.large
                     resources:
@@ -6260,8 +6277,6 @@ paths:
                       createdAt: 2024-05-28T08:50:36+00:00
                       state: ACTIVE
                     startedAt: 2024-05-28T08:50:51+00:00
-                    configuration: null
-                    privateNetwork: null
                 - id: aa0f2138-3a83-46fe-bdcf-1ad231f94a26
                   type: SCHEDULED
                   state: SCALING
@@ -6269,6 +6284,7 @@ paths:
                   minimumAmount: null
                   maximumAmount: null
                   cpuThreshold: null
+                  cooldownTime: null
                   warmupTime: null
                   region: eu-west-3
                   reference: Scheduled Auto Scaling Group
@@ -6277,7 +6293,6 @@ paths:
                   startsAt: 2024-05-01T08:00:00+00:00
                   endsAt: 2024-05-01T12:00:00+00:00
                   loadBalancer:
-                    customerId: "12358132"
                     id: 42082a93-d1e2-4bc0-8f5e-8fe4312b0845
                     type: lsw.m3.large
                     resources:
@@ -6306,8 +6321,6 @@ paths:
                       createdAt: 2024-05-28T08:50:36+00:00
                       state: ACTIVE
                     startedAt: 2024-05-28T08:50:51+00:00
-                    configuration: null
-                    privateNetwork: null
                 - id: 49e28a6c-3f2a-442e-b3b1-981856d21677
                   type: CPU_BASED
                   state: CREATING
@@ -6316,6 +6329,7 @@ paths:
                   maximumAmount: 3
                   cpuThreshold: 50
                   warmupTime: 300
+                  cooldownTime: 300
                   region: eu-west-3
                   reference: CPU Based Auto Scaling Group
                   createdAt: 2024-05-13T15:49:52+00:00
@@ -6323,7 +6337,6 @@ paths:
                   startsAt: null
                   endsAt: null
                   loadBalancer:
-                    customerId: "12358132"
                     id: 52082a93-d1e2-4bc0-8f5e-8fe4312b0846
                     type: lsw.m3.large
                     resources:
@@ -6352,8 +6365,6 @@ paths:
                       createdAt: 2024-05-28T08:50:36+00:00
                       state: ACTIVE
                     startedAt: 2024-05-28T08:50:51+00:00
-                    configuration: null
-                    privateNetwork: null
               schema:
                 $ref: '#/components/schemas/getAutoScalingGroupListResult'
           description: OK
@@ -6452,6 +6463,7 @@ paths:
           content:
             application/json:
               example:
+                cooldownTime: null
                 cpuThreshold: null
                 createdAt: 2024-05-28T11:03:31+00:00
                 desiredAmount: 2
@@ -6615,13 +6627,13 @@ paths:
           content:
             application/json:
               example:
+                cooldownTime: null
                 cpuThreshold: null
                 createdAt: 2024-04-26T09:22:25+00:00
                 desiredAmount: 2
                 endsAt: null
                 id: fb769dab-3daa-47e4-89ed-06a4b6499176
                 loadBalancer:
-                  customerId: "12358132"
                   id: 32082a93-d1e2-4bc0-8f5e-8fe4312b0844
                   type: lsw.m3.large
                   resources:
@@ -6650,8 +6662,6 @@ paths:
                     createdAt: 2024-05-28T08:50:36+00:00
                     state: ACTIVE
                   startedAt: 2024-05-28T08:50:51+00:00
-                  configuration: null
-                  privateNetwork: null
                 maximumAmount: null
                 minimumAmount: null
                 reference: Manual Auto Scaling Group
@@ -6778,13 +6788,13 @@ paths:
           content:
             application/json:
               example:
+                cooldownTime: 400
                 cpuThreshold: 60
                 createdAt: 2024-05-13T15:49:52+00:00
                 desiredAmount: 4
                 endsAt: null
                 id: fb769dab-3daa-47e4-89ed-06a4b6499176
                 loadBalancer:
-                  customerId: "12358132"
                   id: 52082a93-d1e2-4bc0-8f5e-8fe4312b0846
                   type: lsw.m3.large
                   resources:
@@ -6798,8 +6808,8 @@ paths:
                       value: 1
                       unit: Gbps
                     privateNetworkSpeed:
-                      value: 100
-                      unit: Mbps
+                      value: 1
+                      unit: Gbps
                   region: eu-west-3
                   reference: lb-integrated-with-asg
                   state: RUNNING
@@ -6813,8 +6823,6 @@ paths:
                     createdAt: 2024-05-28T08:50:36+00:00
                     state: ACTIVE
                   startedAt: 2024-05-28T08:50:51+00:00
-                  configuration: null
-                  privateNetwork: null
                 maximumAmount: 8
                 minimumAmount: 4
                 reference: CPU Based Auto Scaling
@@ -6825,7 +6833,7 @@ paths:
                 updatedAt: 2024-05-13T15:49:52+00:00
                 warmupTime: 400
               schema:
-                $ref: '#/components/schemas/updateAutoScalingGroupResult'
+                $ref: '#/components/schemas/autoScalingGroup'
           description: OK
         "400":
           content:
@@ -6910,13 +6918,13 @@ paths:
           content:
             application/json:
               example:
+                cooldownTime: null
                 cpuThreshold: null
                 createdAt: 2024-04-26T09:22:25+00:00
                 desiredAmount: 2
                 endsAt: null
                 id: fb769dab-3daa-47e4-89ed-06a4b6499176
                 loadBalancer:
-                  customerId: "12358132"
                   id: 32082a93-d1e2-4bc0-8f5e-8fe4312b0844
                   type: lsw.m3.large
                   resources:
@@ -6945,8 +6953,6 @@ paths:
                     createdAt: 2024-05-28T08:50:36+00:00
                     state: ACTIVE
                   startedAt: 2024-05-28T08:50:51+00:00
-                  configuration: null
-                  privateNetwork: null
                 maximumAmount: null
                 minimumAmount: null
                 reference: Manual Auto Scaling Group
@@ -7034,6 +7040,7 @@ paths:
           content:
             application/json:
               example:
+                cooldownTime: null
                 cpuThreshold: null
                 createdAt: 2024-04-26T09:22:25+00:00
                 desiredAmount: 2
@@ -7481,6 +7488,23 @@ components:
           title: errorDetails
           type: object
       type: object
+    networkSpeed:
+      description: Network speed in Gbps
+      example:
+        unit: Gbps
+        value: 10
+      properties:
+        value:
+          example: 10
+          type: integer
+        unit:
+          example: Gbps
+          type: string
+      required:
+      - unit
+      - value
+      title: networkSpeed
+      type: object
     instanceResources:
       description: Resources available for the load balancer
       example:
@@ -7489,22 +7513,27 @@ components:
           value: 3.75
         publicNetworkSpeed:
           unit: Gbps
-          value: 1
+          value: 10
         cpu:
           unit: vCPU
           value: 2
         privateNetworkSpeed:
-          unit: Mbps
-          value: 1000
+          unit: Gbps
+          value: 10
       properties:
         cpu:
           $ref: '#/components/schemas/cpu'
         memory:
           $ref: '#/components/schemas/memory'
         publicNetworkSpeed:
-          $ref: '#/components/schemas/publicNetworkSpeed'
+          $ref: '#/components/schemas/networkSpeed'
         privateNetworkSpeed:
-          $ref: '#/components/schemas/privateNetworkSpeed'
+          $ref: '#/components/schemas/networkSpeed'
+      required:
+      - cpu
+      - memory
+      - privateNetworkSpeed
+      - publicNetworkSpeed
       title: instanceResource
       type: object
     storageTypes:
@@ -7551,13 +7580,13 @@ components:
             value: 3.75
           publicNetworkSpeed:
             unit: Gbps
-            value: 1
+            value: 10
           cpu:
             unit: vCPU
             value: 2
           privateNetworkSpeed:
-            unit: Mbps
-            value: 1000
+            unit: Gbps
+            value: 10
         storageTypes:
         - CENTRAL
         - LOCAL
@@ -7602,13 +7631,13 @@ components:
               value: 3.75
             publicNetworkSpeed:
               unit: Gbps
-              value: 1
+              value: 10
             cpu:
               unit: vCPU
               value: 2
             privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
+              unit: Gbps
+              value: 10
           storageTypes:
           - CENTRAL
           - LOCAL
@@ -7632,13 +7661,13 @@ components:
               value: 3.75
             publicNetworkSpeed:
               unit: Gbps
-              value: 1
+              value: 10
             cpu:
               unit: vCPU
               value: 2
             privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
+              unit: Gbps
+              value: 10
           storageTypes:
           - CENTRAL
           - LOCAL
@@ -7746,6 +7775,13 @@ components:
           items:
             type: string
           type: array
+      required:
+      - architecture
+      - family
+      - flavour
+      - id
+      - name
+      - version
       title: operatingSystem
       type: object
     instanceState:
@@ -7894,6 +7930,15 @@ components:
           type: string
         ddos:
           $ref: '#/components/schemas/ddos'
+      required:
+      - ddos
+      - ip
+      - mainIp
+      - networkType
+      - nullRouted
+      - prefixLength
+      - reverseLookup
+      - version
       title: ip
       type: object
     contract:
@@ -7937,6 +7982,14 @@ components:
           type: string
         state:
           $ref: '#/components/schemas/contractState'
+      required:
+      - billingFrequency
+      - createdAt
+      - endsAt
+      - renewalsAt
+      - state
+      - term
+      - type
       title: contract
       type: object
     iso:
@@ -7950,6 +8003,9 @@ components:
           type: string
         name:
           type: string
+      required:
+      - id
+      - name
       title: iso
       type: object
     marketAppId:
@@ -7957,6 +8013,192 @@ components:
       example: CPANEL
       nullable: true
       type: string
+    privateNetwork:
+      example:
+        subnet: 10.0.0.0/16
+        privateNetworkId: privateNetworkId
+        status: CONFIGURED
+      nullable: true
+      properties:
+        privateNetworkId:
+          type: string
+        status:
+          example: CONFIGURED
+          type: string
+        subnet:
+          example: 10.0.0.0/16
+          type: string
+      required:
+      - privateNetworkId
+      - status
+      - subnet
+      title: privateNetwork
+      type: object
+    loadBalancerType:
+      description: Load balancer type
+      example: lsw.m3.large
+      type: string
+    autoScalingGroup:
+      example:
+        cpuThreshold: 7
+        maximumAmount: 2
+        type: type
+        desiredAmount: 5
+        reference: reference
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        loadBalancer:
+          reference: reference
+          contract:
+            billingFrequency: 1
+            createdAt: 2023-11-30T16:31:28Z
+            term: 1
+            renewalsAt: 2023-11-30T16:31:28Z
+            state: null
+            type: null
+            endsAt: 2023-11-30T16:31:28Z
+          resources:
+            memory:
+              unit: GiB
+              value: 3.75
+            publicNetworkSpeed:
+              unit: Gbps
+              value: 10
+            cpu:
+              unit: vCPU
+              value: 2
+            privateNetworkSpeed:
+              unit: Gbps
+              value: 10
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+          type: lsw.m3.large
+          region: eu-west-3
+          ips:
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            ddos:
+              detectionProfile: STANDARD_DEFAULT
+              protectionType: STANDARD
+            networkType: internal
+            version: 6
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            ddos:
+              detectionProfile: STANDARD_DEFAULT
+              protectionType: STANDARD
+            networkType: internal
+            version: 6
+        minimumAmount: 5
+        startsAt: 2000-01-23T04:56:07.000+00:00
+        warmupTime: 9
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: ACTIVE
+        cooldownTime: 3
+        region: eu-west-3
+        endsAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          description: The Auto Scaling Group unique identifier
+          format: uuid
+          type: string
+        type:
+          description: Auto Scaling Group type
+          type: string
+        state:
+          description: The Auto Scaling Group's current state.
+          enum:
+          - ACTIVE
+          - CREATING
+          - CREATED
+          - DESTROYED
+          - DESTROYING
+          - SCALING
+          - UPDATING
+          type: string
+        desiredAmount:
+          description: Number of instances that should be running
+          nullable: true
+          type: integer
+        minimumAmount:
+          description: The minimum number of instances that should be running
+          nullable: true
+          type: integer
+        maximumAmount:
+          description: Only for "CPU_BASED" auto scaling group. The maximum number
+            of instances that can be running
+          nullable: true
+          type: integer
+        cpuThreshold:
+          description: Only for "CPU_BASED" auto scaling group. The target average
+            CPU utilization for scaling
+          nullable: true
+          type: integer
+        warmupTime:
+          description: Only for "CPU_BASED" auto scaling group. Warm-up time in seconds
+            for new instances
+          nullable: true
+          type: integer
+        cooldownTime:
+          description: Only for "CPU_BASED" auto scaling group. Cool-down time in
+            seconds for new instances
+          nullable: true
+          type: integer
+        region:
+          description: The region in which the Auto Scaling Group was launched
+          example: eu-west-3
+          type: string
+        reference:
+          description: The identifying name set to the auto scaling group
+          maxLength: 255
+          type: string
+        createdAt:
+          description: Date and time when the Auto Scaling Group was created
+          format: date-time
+          type: string
+        updatedAt:
+          description: Date and time when the Auto Scaling Group was last updated
+          format: date-time
+          type: string
+        startsAt:
+          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
+            that the instances need to be launched
+          format: date-time
+          nullable: true
+          type: string
+        endsAt:
+          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
+            that the instances need to be terminated
+          format: date-time
+          nullable: true
+          type: string
+        loadBalancer:
+          $ref: '#/components/schemas/autoScalingLoadBalancer'
+      required:
+      - cooldownTime
+      - cpuThreshold
+      - createdAt
+      - desiredAmount
+      - endsAt
+      - id
+      - maximumAmount
+      - minimumAmount
+      - reference
+      - region
+      - startsAt
+      - state
+      - type
+      - updatedAt
+      - warmupTime
+      title: instanceAutoScalingGroup
+      type: object
     instance:
       example:
         rootDiskStorageType: LOCAL
@@ -7967,6 +8209,71 @@ components:
           subnet: 10.0.0.0/16
           privateNetworkId: privateNetworkId
           status: CONFIGURED
+        autoScalingGroup:
+          cpuThreshold: 7
+          maximumAmount: 2
+          type: type
+          desiredAmount: 5
+          reference: reference
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          loadBalancer:
+            reference: reference
+            contract:
+              billingFrequency: 1
+              createdAt: 2023-11-30T16:31:28Z
+              term: 1
+              renewalsAt: 2023-11-30T16:31:28Z
+              state: null
+              type: null
+              endsAt: 2023-11-30T16:31:28Z
+            resources:
+              memory:
+                unit: GiB
+                value: 3.75
+              publicNetworkSpeed:
+                unit: Gbps
+                value: 10
+              cpu:
+                unit: vCPU
+                value: 2
+              privateNetworkSpeed:
+                unit: Gbps
+                value: 10
+            startedAt: 2000-01-23T04:56:07.000+00:00
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: null
+            type: lsw.m3.large
+            region: eu-west-3
+            ips:
+            - prefixLength: "28"
+              reverseLookup: reverseLookup
+              ip: 127.0.0.1
+              nullRouted: true
+              mainIp: true
+              ddos:
+                detectionProfile: STANDARD_DEFAULT
+                protectionType: STANDARD
+              networkType: internal
+              version: 6
+            - prefixLength: "28"
+              reverseLookup: reverseLookup
+              ip: 127.0.0.1
+              nullRouted: true
+              mainIp: true
+              ddos:
+                detectionProfile: STANDARD_DEFAULT
+                protectionType: STANDARD
+              networkType: internal
+              version: 6
+          minimumAmount: 5
+          startsAt: 2000-01-23T04:56:07.000+00:00
+          warmupTime: 9
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: ACTIVE
+          cooldownTime: 3
+          region: eu-west-3
+          endsAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         rootDiskSize: 84
         contract:
           billingFrequency: 1
@@ -7983,13 +8290,13 @@ components:
             value: 3.75
           publicNetworkSpeed:
             unit: Gbps
-            value: 1
+            value: 10
           cpu:
             unit: vCPU
             value: 2
           privateNetworkSpeed:
-            unit: Mbps
-            value: 1000
+            unit: Gbps
+            value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
         type: null
         equipmentId: equipmentId
@@ -8057,6 +8364,7 @@ components:
           type: string
         reference:
           description: The identifying name set to the instance
+          nullable: true
           type: string
         operatingSystem:
           $ref: '#/components/schemas/operatingSystem'
@@ -8104,6 +8412,28 @@ components:
           type: string
         privateNetwork:
           $ref: '#/components/schemas/privateNetwork'
+        autoScalingGroup:
+          $ref: '#/components/schemas/autoScalingGroup'
+      required:
+      - autoScalingGroup
+      - contract
+      - hasPrivateNetwork
+      - hasPublicIpV4
+      - id
+      - ips
+      - iso
+      - marketAppId
+      - operatingSystem
+      - privateNetwork
+      - productType
+      - reference
+      - region
+      - resources
+      - rootDiskSize
+      - rootDiskStorageType
+      - startedAt
+      - state
+      - type
       title: instance
       type: object
     getInstanceListResult:
@@ -8117,6 +8447,71 @@ components:
             subnet: 10.0.0.0/16
             privateNetworkId: privateNetworkId
             status: CONFIGURED
+          autoScalingGroup:
+            cpuThreshold: 7
+            maximumAmount: 2
+            type: type
+            desiredAmount: 5
+            reference: reference
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            loadBalancer:
+              reference: reference
+              contract:
+                billingFrequency: 1
+                createdAt: 2023-11-30T16:31:28Z
+                term: 1
+                renewalsAt: 2023-11-30T16:31:28Z
+                state: null
+                type: null
+                endsAt: 2023-11-30T16:31:28Z
+              resources:
+                memory:
+                  unit: GiB
+                  value: 3.75
+                publicNetworkSpeed:
+                  unit: Gbps
+                  value: 10
+                cpu:
+                  unit: vCPU
+                  value: 2
+                privateNetworkSpeed:
+                  unit: Gbps
+                  value: 10
+              startedAt: 2000-01-23T04:56:07.000+00:00
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              state: null
+              type: lsw.m3.large
+              region: eu-west-3
+              ips:
+              - prefixLength: "28"
+                reverseLookup: reverseLookup
+                ip: 127.0.0.1
+                nullRouted: true
+                mainIp: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+                networkType: internal
+                version: 6
+              - prefixLength: "28"
+                reverseLookup: reverseLookup
+                ip: 127.0.0.1
+                nullRouted: true
+                mainIp: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+                networkType: internal
+                version: 6
+            minimumAmount: 5
+            startsAt: 2000-01-23T04:56:07.000+00:00
+            warmupTime: 9
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: ACTIVE
+            cooldownTime: 3
+            region: eu-west-3
+            endsAt: 2000-01-23T04:56:07.000+00:00
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           rootDiskSize: 84
           contract:
             billingFrequency: 1
@@ -8133,13 +8528,13 @@ components:
               value: 3.75
             publicNetworkSpeed:
               unit: Gbps
-              value: 1
+              value: 10
             cpu:
               unit: vCPU
               value: 2
             privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
+              unit: Gbps
+              value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           type: null
           equipmentId: equipmentId
@@ -8194,6 +8589,71 @@ components:
             subnet: 10.0.0.0/16
             privateNetworkId: privateNetworkId
             status: CONFIGURED
+          autoScalingGroup:
+            cpuThreshold: 7
+            maximumAmount: 2
+            type: type
+            desiredAmount: 5
+            reference: reference
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            loadBalancer:
+              reference: reference
+              contract:
+                billingFrequency: 1
+                createdAt: 2023-11-30T16:31:28Z
+                term: 1
+                renewalsAt: 2023-11-30T16:31:28Z
+                state: null
+                type: null
+                endsAt: 2023-11-30T16:31:28Z
+              resources:
+                memory:
+                  unit: GiB
+                  value: 3.75
+                publicNetworkSpeed:
+                  unit: Gbps
+                  value: 10
+                cpu:
+                  unit: vCPU
+                  value: 2
+                privateNetworkSpeed:
+                  unit: Gbps
+                  value: 10
+              startedAt: 2000-01-23T04:56:07.000+00:00
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              state: null
+              type: lsw.m3.large
+              region: eu-west-3
+              ips:
+              - prefixLength: "28"
+                reverseLookup: reverseLookup
+                ip: 127.0.0.1
+                nullRouted: true
+                mainIp: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+                networkType: internal
+                version: 6
+              - prefixLength: "28"
+                reverseLookup: reverseLookup
+                ip: 127.0.0.1
+                nullRouted: true
+                mainIp: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+                networkType: internal
+                version: 6
+            minimumAmount: 5
+            startsAt: 2000-01-23T04:56:07.000+00:00
+            warmupTime: 9
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: ACTIVE
+            cooldownTime: 3
+            region: eu-west-3
+            endsAt: 2000-01-23T04:56:07.000+00:00
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           rootDiskSize: 84
           contract:
             billingFrequency: 1
@@ -8210,13 +8670,13 @@ components:
               value: 3.75
             publicNetworkSpeed:
               unit: Gbps
-              value: 1
+              value: 10
             cpu:
               unit: vCPU
               value: 2
             privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
+              unit: Gbps
+              value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           type: null
           equipmentId: equipmentId
@@ -8553,13 +9013,13 @@ components:
                 value: 3.75
               publicNetworkSpeed:
                 unit: Gbps
-                value: 1
+                value: 10
               cpu:
                 unit: vCPU
                 value: 2
               privateNetworkSpeed:
-                unit: Mbps
-                value: 1000
+                unit: Gbps
+                value: 10
             startedAt: 2023-11-30T16:31:46Z
             reference: test-instance
             billingType: POSTPAID
@@ -8585,13 +9045,13 @@ components:
                 value: 3.75
               publicNetworkSpeed:
                 unit: Gbps
-                value: 1
+                value: 10
               cpu:
                 unit: vCPU
                 value: 2
               privateNetworkSpeed:
-                unit: Mbps
-                value: 1000
+                unit: Gbps
+                value: 10
             startedAt: 2023-11-30T16:31:46Z
             reference: test-instance
             billingType: POSTPAID
@@ -8752,10 +9212,6 @@ components:
       required:
       - operatingSystemId
       type: object
-    loadBalancerType:
-      description: Load balancer type
-      example: lsw.m3.large
-      type: string
     stickySession:
       example:
         maxLifeTime: 6
@@ -8769,6 +9225,9 @@ components:
           description: Time that the Load Balancer routes the requests from one requester
             to the same target instance
           type: integer
+      required:
+      - enabled
+      - maxLifeTime
       title: stickySession
       type: object
     healthCheck:
@@ -8798,6 +9257,11 @@ components:
         port:
           description: Port number
           type: integer
+      required:
+      - host
+      - method
+      - port
+      - uri
       title: healthCheck
       type: object
     loadBalancerConfiguration:
@@ -8837,6 +9301,13 @@ components:
           description: Port on which the backend (target) servers are listening to
             handle incoming requests
           type: integer
+      required:
+      - balance
+      - healthCheck
+      - idleTimeOut
+      - stickySession
+      - targetPort
+      - xForwardedFor
       title: loadBalancerConfiguration
       type: object
     loadBalancer:
@@ -8885,13 +9356,13 @@ components:
             value: 3.75
           publicNetworkSpeed:
             unit: Gbps
-            value: 1
+            value: 10
           cpu:
             unit: vCPU
             value: 2
           privateNetworkSpeed:
-            unit: Mbps
-            value: 1000
+            unit: Gbps
+            value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
         type: lsw.m3.large
         ips:
@@ -9013,13 +9484,13 @@ components:
               value: 3.75
             publicNetworkSpeed:
               unit: Gbps
-              value: 1
+              value: 10
             cpu:
               unit: vCPU
               value: 2
             privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
+              unit: Gbps
+              value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           type: lsw.m3.large
           ips:
@@ -9092,13 +9563,13 @@ components:
               value: 3.75
             publicNetworkSpeed:
               unit: Gbps
-              value: 1
+              value: 10
             cpu:
               unit: vCPU
               value: 2
             privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
+              unit: Gbps
+              value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           type: lsw.m3.large
           ips:
@@ -9574,191 +10045,17 @@ components:
         _metadata:
           $ref: '#/components/schemas/_metadata'
       type: object
-    autoScalingGroup:
-      example:
-        cpuThreshold: 5
-        maximumAmount: 1
-        type: type
-        desiredAmount: 0
-        reference: reference
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        loadBalancer:
-          reference: reference
-          privateNetwork:
-            subnet: 10.0.0.0/16
-            privateNetworkId: privateNetworkId
-            status: CONFIGURED
-          configuration:
-            balance: ROUNDROBIN
-            healthCheck:
-              method: GET
-              port: 1
-              host: host
-              uri: /
-            idleTimeOut: 5
-            xForwardedFor: true
-            stickySession:
-              maxLifeTime: 6
-              enabled: true
-            targetPort: 5
-          contract:
-            billingFrequency: 1
-            createdAt: 2023-11-30T16:31:28Z
-            term: 1
-            renewalsAt: 2023-11-30T16:31:28Z
-            state: null
-            type: null
-            endsAt: 2023-11-30T16:31:28Z
-          customerId: customerId
-          resources:
-            memory:
-              unit: GiB
-              value: 3.75
-            publicNetworkSpeed:
-              unit: Gbps
-              value: 1
-            cpu:
-              unit: vCPU
-              value: 2
-            privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
-          startedAt: 2000-01-23T04:56:07.000+00:00
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          type: lsw.m3.large
-          region: eu-west-3
-          ips:
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: 6
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: 6
-        minimumAmount: 6
-        startsAt: 2000-01-23T04:56:07.000+00:00
-        warmupTime: 5
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: ACTIVE
-        region: eu-west-3
-        endsAt: 2000-01-23T04:56:07.000+00:00
-        updatedAt: 2000-01-23T04:56:07.000+00:00
-      properties:
-        id:
-          description: The Auto Scaling Group unique identifier
-          format: uuid
-          type: string
-        type:
-          description: Auto Scaling Group type
-          type: string
-        state:
-          description: The Auto Scaling Group's current state.
-          enum:
-          - ACTIVE
-          - CREATING
-          - CREATED
-          - DESTROYED
-          - DESTROYING
-          - SCALING
-          - UPDATING
-          type: string
-        desiredAmount:
-          description: Number of instances that should be running
-          nullable: true
-          type: integer
-        minimumAmount:
-          description: The minimum number of instances that should be running
-          nullable: true
-          type: integer
-        maximumAmount:
-          description: Only for "CPU_BASED" auto scaling group. The maximum number
-            of instances that can be running
-          nullable: true
-          type: integer
-        cpuThreshold:
-          description: Only for "CPU_BASED" auto scaling group. The target average
-            CPU utilization for scaling
-          nullable: true
-          type: integer
-        warmupTime:
-          description: Only for "CPU_BASED" auto scaling group. Warm-up time in seconds
-            for new instances
-          nullable: true
-          type: integer
-        region:
-          description: The region in which the Auto Scaling Group was launched
-          example: eu-west-3
-          type: string
-        reference:
-          description: The identifying name set to the auto scaling group
-          maxLength: 255
-          type: string
-        createdAt:
-          description: Date and time when the Auto Scaling Group was created
-          format: date-time
-          type: string
-        updatedAt:
-          description: Date and time when the Auto Scaling Group was last updated
-          format: date-time
-          type: string
-        startsAt:
-          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
-            that the instances need to be launched
-          format: date-time
-          nullable: true
-          type: string
-        endsAt:
-          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
-            that the instances need to be terminated
-          format: date-time
-          nullable: true
-          type: string
-        loadBalancer:
-          $ref: '#/components/schemas/autoScalingLoadBalancer'
-      title: instanceAutoScalingGroup
-      type: object
     getAutoScalingGroupListResult:
       example:
         autoScalingGroups:
-        - cpuThreshold: 5
-          maximumAmount: 1
+        - cpuThreshold: 7
+          maximumAmount: 2
           type: type
-          desiredAmount: 0
+          desiredAmount: 5
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
           loadBalancer:
             reference: reference
-            privateNetwork:
-              subnet: 10.0.0.0/16
-              privateNetworkId: privateNetworkId
-              status: CONFIGURED
-            configuration:
-              balance: ROUNDROBIN
-              healthCheck:
-                method: GET
-                port: 1
-                host: host
-                uri: /
-              idleTimeOut: 5
-              xForwardedFor: true
-              stickySession:
-                maxLifeTime: 6
-                enabled: true
-              targetPort: 5
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
@@ -9767,20 +10064,19 @@ components:
               state: null
               type: null
               endsAt: 2023-11-30T16:31:28Z
-            customerId: customerId
             resources:
               memory:
                 unit: GiB
                 value: 3.75
               publicNetworkSpeed:
                 unit: Gbps
-                value: 1
+                value: 10
               cpu:
                 unit: vCPU
                 value: 2
               privateNetworkSpeed:
-                unit: Mbps
-                value: 1000
+                unit: Gbps
+                value: 10
             startedAt: 2000-01-23T04:56:07.000+00:00
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: null
@@ -9807,39 +10103,23 @@ components:
                 protectionType: STANDARD
               networkType: internal
               version: 6
-          minimumAmount: 6
+          minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 5
+          warmupTime: 9
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: ACTIVE
+          cooldownTime: 3
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        - cpuThreshold: 5
-          maximumAmount: 1
+        - cpuThreshold: 7
+          maximumAmount: 2
           type: type
-          desiredAmount: 0
+          desiredAmount: 5
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
           loadBalancer:
             reference: reference
-            privateNetwork:
-              subnet: 10.0.0.0/16
-              privateNetworkId: privateNetworkId
-              status: CONFIGURED
-            configuration:
-              balance: ROUNDROBIN
-              healthCheck:
-                method: GET
-                port: 1
-                host: host
-                uri: /
-              idleTimeOut: 5
-              xForwardedFor: true
-              stickySession:
-                maxLifeTime: 6
-                enabled: true
-              targetPort: 5
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
@@ -9848,20 +10128,19 @@ components:
               state: null
               type: null
               endsAt: 2023-11-30T16:31:28Z
-            customerId: customerId
             resources:
               memory:
                 unit: GiB
                 value: 3.75
               publicNetworkSpeed:
                 unit: Gbps
-                value: 1
+                value: 10
               cpu:
                 unit: vCPU
                 value: 2
               privateNetworkSpeed:
-                unit: Mbps
-                value: 1000
+                unit: Gbps
+                value: 10
             startedAt: 2000-01-23T04:56:07.000+00:00
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: null
@@ -9888,11 +10167,12 @@ components:
                 protectionType: STANDARD
               networkType: internal
               version: 6
-          minimumAmount: 6
+          minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 5
+          warmupTime: 9
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: ACTIVE
+          cooldownTime: 3
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -10012,162 +10292,6 @@ components:
           format: date-time
           type: string
       type: object
-    updateAutoScalingGroupResult:
-      example:
-        cpuThreshold: 5
-        maximumAmount: 1
-        type: type
-        desiredAmount: 0
-        reference: reference
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        loadBalancer:
-          reference: reference
-          privateNetwork:
-            subnet: 10.0.0.0/16
-            privateNetworkId: privateNetworkId
-            status: CONFIGURED
-          configuration:
-            balance: ROUNDROBIN
-            healthCheck:
-              method: GET
-              port: 1
-              host: host
-              uri: /
-            idleTimeOut: 5
-            xForwardedFor: true
-            stickySession:
-              maxLifeTime: 6
-              enabled: true
-            targetPort: 5
-          contract:
-            billingFrequency: 1
-            createdAt: 2023-11-30T16:31:28Z
-            term: 1
-            renewalsAt: 2023-11-30T16:31:28Z
-            state: null
-            type: null
-            endsAt: 2023-11-30T16:31:28Z
-          customerId: customerId
-          resources:
-            memory:
-              unit: GiB
-              value: 3.75
-            publicNetworkSpeed:
-              unit: Gbps
-              value: 1
-            cpu:
-              unit: vCPU
-              value: 2
-            privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
-          startedAt: 2000-01-23T04:56:07.000+00:00
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          type: lsw.m3.large
-          region: eu-west-3
-          ips:
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: 6
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: 6
-        minimumAmount: 6
-        startsAt: 2000-01-23T04:56:07.000+00:00
-        warmupTime: 5
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: ACTIVE
-        region: eu-west-3
-        endsAt: 2000-01-23T04:56:07.000+00:00
-        updatedAt: 2000-01-23T04:56:07.000+00:00
-      properties:
-        id:
-          description: The Auto Scaling Group unique identifier
-          format: uuid
-          type: string
-        type:
-          description: Auto Scaling Group type
-          type: string
-        state:
-          description: The Auto Scaling Group's current state.
-          enum:
-          - ACTIVE
-          - CREATING
-          - CREATED
-          - DESTROYED
-          - DESTROYING
-          - SCALING
-          - UPDATING
-          type: string
-        desiredAmount:
-          description: Number of instances that should be running
-          nullable: true
-          type: integer
-        minimumAmount:
-          description: The minimum number of instances that should be running
-          nullable: true
-          type: integer
-        maximumAmount:
-          description: Only for "CPU_BASED" auto scaling group. The maximum number
-            of instances that can be running
-          nullable: true
-          type: integer
-        cpuThreshold:
-          description: Only for "CPU_BASED" auto scaling group. The target average
-            CPU utilization for scaling
-          nullable: true
-          type: integer
-        warmupTime:
-          description: Only for "CPU_BASED" auto scaling group. Warm-up time in seconds
-            for new instances
-          nullable: true
-          type: integer
-        region:
-          description: The region in which the Auto Scaling Group was launched
-          example: eu-west-3
-          type: string
-        reference:
-          description: The identifying name set to the auto scaling group
-          maxLength: 255
-          type: string
-        createdAt:
-          description: Date and time when the Auto Scaling Group was created
-          format: date-time
-          type: string
-        updatedAt:
-          description: Date and time when the Auto Scaling Group was last updated
-          format: date-time
-          type: string
-        startsAt:
-          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
-            that the instances need to be launched
-          format: date-time
-          nullable: true
-          type: string
-        endsAt:
-          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
-            that the instances need to be terminated
-          format: date-time
-          nullable: true
-          type: string
-        loadBalancer:
-          $ref: '#/components/schemas/autoScalingGroupLoadBalancer'
-      type: object
     registerAutoScalingGroupLoadBalancerOpts:
       properties:
         loadBalancerId:
@@ -10187,13 +10311,13 @@ components:
             value: 3.75
           publicNetworkSpeed:
             unit: Gbps
-            value: 1
+            value: 10
           cpu:
             unit: vCPU
             value: 2
           privateNetworkSpeed:
-            unit: Mbps
-            value: 1000
+            unit: Gbps
+            value: 10
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         type: type
@@ -10262,13 +10386,13 @@ components:
               value: 3.75
             publicNetworkSpeed:
               unit: Gbps
-              value: 1
+              value: 10
             cpu:
               unit: vCPU
               value: 2
             privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
+              unit: Gbps
+              value: 10
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: type
@@ -10303,13 +10427,13 @@ components:
               value: 3.75
             publicNetworkSpeed:
               unit: Gbps
-              value: 1
+              value: 10
             cpu:
               unit: vCPU
               value: 2
             privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
+              unit: Gbps
+              value: 10
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: type
@@ -10375,6 +10499,9 @@ components:
         unit:
           example: vCPU
           type: string
+      required:
+      - unit
+      - value
       title: cpu
       type: object
     memory:
@@ -10389,35 +10516,10 @@ components:
         unit:
           example: GiB
           type: string
+      required:
+      - unit
+      - value
       title: memory
-      type: object
-    publicNetworkSpeed:
-      description: Public network speed in Gbps
-      example:
-        unit: Gbps
-        value: 1
-      properties:
-        value:
-          example: 1
-          type: integer
-        unit:
-          example: Gbps
-          type: string
-      title: publicNetworkSpeed
-      type: object
-    privateNetworkSpeed:
-      description: Private network speed in Gbps
-      example:
-        unit: Mbps
-        value: 1000
-      properties:
-        value:
-          example: 1000
-          type: integer
-        unit:
-          example: Mbps
-          type: string
-      title: privateNetworkSpeed
       type: object
     compute:
       example:
@@ -10485,24 +10587,104 @@ components:
         protectionType:
           example: STANDARD
           type: string
+      required:
+      - detectionProfile
+      - protectionType
       title: ddos
       type: object
-    privateNetwork:
+    autoScalingLoadBalancer:
       example:
-        subnet: 10.0.0.0/16
-        privateNetworkId: privateNetworkId
-        status: CONFIGURED
+        reference: reference
+        contract:
+          billingFrequency: 1
+          createdAt: 2023-11-30T16:31:28Z
+          term: 1
+          renewalsAt: 2023-11-30T16:31:28Z
+          state: null
+          type: null
+          endsAt: 2023-11-30T16:31:28Z
+        resources:
+          memory:
+            unit: GiB
+            value: 3.75
+          publicNetworkSpeed:
+            unit: Gbps
+            value: 10
+          cpu:
+            unit: vCPU
+            value: 2
+          privateNetworkSpeed:
+            unit: Gbps
+            value: 10
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: null
+        type: lsw.m3.large
+        region: eu-west-3
+        ips:
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          ddos:
+            detectionProfile: STANDARD_DEFAULT
+            protectionType: STANDARD
+          networkType: internal
+          version: 6
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          ddos:
+            detectionProfile: STANDARD_DEFAULT
+            protectionType: STANDARD
+          networkType: internal
+          version: 6
       nullable: true
       properties:
-        privateNetworkId:
+        id:
+          description: The load balancer unique identifier
+          format: uuid
           type: string
-        status:
-          example: CONFIGURED
+        type:
+          description: Load balancer type
+          example: lsw.m3.large
           type: string
-        subnet:
-          example: 10.0.0.0/16
+        resources:
+          $ref: '#/components/schemas/instanceResources'
+        region:
+          description: The region where the load balancer was launched into
+          example: eu-west-3
           type: string
-      title: privateNetwork
+        reference:
+          description: The identifying name set to the load balancer
+          type: string
+        state:
+          $ref: '#/components/schemas/instanceState'
+        ips:
+          items:
+            $ref: '#/components/schemas/ip'
+          type: array
+        contract:
+          $ref: '#/components/schemas/contract'
+        startedAt:
+          description: "Date and time when the instance was started for the first\
+            \ time, right after launching it"
+          format: date-time
+          type: string
+      required:
+      - contract
+      - id
+      - ips
+      - reference
+      - region
+      - resources
+      - startedAt
+      - state
+      - type
+      title: autoScalingLoadBalancer
       type: object
     expenseResultInstance:
       example:
@@ -10522,13 +10704,13 @@ components:
             value: 3.75
           publicNetworkSpeed:
             unit: Gbps
-            value: 1
+            value: 10
           cpu:
             unit: vCPU
             value: 2
           privateNetworkSpeed:
-            unit: Mbps
-            value: 1000
+            unit: Gbps
+            value: 10
         startedAt: 2023-11-30T16:31:46Z
         reference: test-instance
         billingType: POSTPAID
@@ -10671,13 +10853,13 @@ components:
               value: 3.75
             publicNetworkSpeed:
               unit: Gbps
-              value: 1
+              value: 10
             cpu:
               unit: vCPU
               value: 2
             privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
+              unit: Gbps
+              value: 10
           startedAt: 2023-11-30T16:31:46Z
           reference: test-instance
           billingType: POSTPAID
@@ -10703,13 +10885,13 @@ components:
               value: 3.75
             publicNetworkSpeed:
               unit: Gbps
-              value: 1
+              value: 10
             cpu:
               unit: vCPU
               value: 2
             privateNetworkSpeed:
-              unit: Mbps
-              value: 1000
+              unit: Gbps
+              value: 10
           startedAt: 2023-11-30T16:31:46Z
           reference: test-instance
           billingType: POSTPAID
@@ -11267,224 +11449,6 @@ components:
         summary:
           $ref: '#/components/schemas/cpuMetricsMetadataSummary'
       title: cpuMetricsMetadata
-      type: object
-    autoScalingLoadBalancer:
-      example:
-        reference: reference
-        privateNetwork:
-          subnet: 10.0.0.0/16
-          privateNetworkId: privateNetworkId
-          status: CONFIGURED
-        configuration:
-          balance: ROUNDROBIN
-          healthCheck:
-            method: GET
-            port: 1
-            host: host
-            uri: /
-          idleTimeOut: 5
-          xForwardedFor: true
-          stickySession:
-            maxLifeTime: 6
-            enabled: true
-          targetPort: 5
-        contract:
-          billingFrequency: 1
-          createdAt: 2023-11-30T16:31:28Z
-          term: 1
-          renewalsAt: 2023-11-30T16:31:28Z
-          state: null
-          type: null
-          endsAt: 2023-11-30T16:31:28Z
-        customerId: customerId
-        resources:
-          memory:
-            unit: GiB
-            value: 3.75
-          publicNetworkSpeed:
-            unit: Gbps
-            value: 1
-          cpu:
-            unit: vCPU
-            value: 2
-          privateNetworkSpeed:
-            unit: Mbps
-            value: 1000
-        startedAt: 2000-01-23T04:56:07.000+00:00
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
-        type: lsw.m3.large
-        region: eu-west-3
-        ips:
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
-          networkType: internal
-          version: 6
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
-          networkType: internal
-          version: 6
-      nullable: true
-      properties:
-        customerId:
-          description: The customer ID who owns the load balancer
-          type: string
-        id:
-          description: The load balancer unique identifier
-          format: uuid
-          type: string
-        type:
-          description: Load balancer type
-          example: lsw.m3.large
-          type: string
-        resources:
-          $ref: '#/components/schemas/instanceResources'
-        region:
-          description: The region where the load balancer was launched into
-          example: eu-west-3
-          type: string
-        reference:
-          description: The identifying name set to the load balancer
-          type: string
-        state:
-          $ref: '#/components/schemas/instanceState'
-        ips:
-          items:
-            $ref: '#/components/schemas/ip'
-          type: array
-        contract:
-          $ref: '#/components/schemas/contract'
-        startedAt:
-          description: "Date and time when the instance was started for the first\
-            \ time, right after launching it"
-          format: date-time
-          type: string
-        configuration:
-          $ref: '#/components/schemas/loadBalancerConfiguration'
-        privateNetwork:
-          $ref: '#/components/schemas/privateNetwork'
-      title: autoScalingLoadBalancer
-      type: object
-    autoScalingGroupLoadBalancer:
-      example:
-        reference: reference
-        privateNetwork:
-          subnet: 10.0.0.0/16
-          privateNetworkId: privateNetworkId
-          status: CONFIGURED
-        configuration:
-          balance: ROUNDROBIN
-          healthCheck:
-            method: GET
-            port: 1
-            host: host
-            uri: /
-          idleTimeOut: 5
-          xForwardedFor: true
-          stickySession:
-            maxLifeTime: 6
-            enabled: true
-          targetPort: 5
-        contract:
-          billingFrequency: 1
-          createdAt: 2023-11-30T16:31:28Z
-          term: 1
-          renewalsAt: 2023-11-30T16:31:28Z
-          state: null
-          type: null
-          endsAt: 2023-11-30T16:31:28Z
-        customerId: customerId
-        resources:
-          memory:
-            unit: GiB
-            value: 3.75
-          publicNetworkSpeed:
-            unit: Gbps
-            value: 1
-          cpu:
-            unit: vCPU
-            value: 2
-          privateNetworkSpeed:
-            unit: Mbps
-            value: 1000
-        startedAt: 2000-01-23T04:56:07.000+00:00
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
-        type: lsw.m3.large
-        region: eu-west-3
-        ips:
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
-          networkType: internal
-          version: 6
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
-          networkType: internal
-          version: 6
-      nullable: true
-      properties:
-        customerId:
-          description: The customers ID who owns the load balancer
-          type: string
-        id:
-          description: The load balancer unique identifier
-          format: uuid
-          type: string
-        type:
-          description: Load balancer type
-          example: lsw.m3.large
-          type: string
-        resources:
-          $ref: '#/components/schemas/instanceResources'
-        region:
-          description: The region where the load balancer was launched into
-          example: eu-west-3
-          type: string
-        reference:
-          description: The identifying name set to the load balancer
-          type: string
-        state:
-          $ref: '#/components/schemas/instanceState'
-        ips:
-          items:
-            $ref: '#/components/schemas/ip'
-          type: array
-        contract:
-          $ref: '#/components/schemas/contract'
-        startedAt:
-          description: "Date and time when the instance was started for the first\
-            \ time, right after launching it"
-          format: date-time
-          type: string
-        configuration:
-          $ref: '#/components/schemas/loadBalancerConfiguration'
-        privateNetwork:
-          $ref: '#/components/schemas/privateNetwork'
-      title: autoScalingGroupLoadBalancer
       type: object
   securitySchemes:
     BearerAuth:

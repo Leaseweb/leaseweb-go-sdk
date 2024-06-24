@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the HealthCheck type satisfies the MappedNullable interface at compile time
@@ -20,21 +22,27 @@ var _ MappedNullable = &HealthCheck{}
 // HealthCheck struct for HealthCheck
 type HealthCheck struct {
 	// HTTP method to be used for health check
-	Method *string `json:"method,omitempty"`
+	Method string `json:"method"`
 	// URI to check in the target instances
-	Uri *string `json:"uri,omitempty"`
+	Uri string `json:"uri"`
 	// Host for the health check if any
-	Host NullableString `json:"host,omitempty"`
+	Host NullableString `json:"host"`
 	// Port number
-	Port *int32 `json:"port,omitempty"`
+	Port int32 `json:"port"`
 }
+
+type _HealthCheck HealthCheck
 
 // NewHealthCheck instantiates a new HealthCheck object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHealthCheck() *HealthCheck {
+func NewHealthCheck(method string, uri string, host NullableString, port int32) *HealthCheck {
 	this := HealthCheck{}
+	this.Method = method
+	this.Uri = uri
+	this.Host = host
+	this.Port = port
 	return &this
 }
 
@@ -46,80 +54,66 @@ func NewHealthCheckWithDefaults() *HealthCheck {
 	return &this
 }
 
-// GetMethod returns the Method field value if set, zero value otherwise.
+// GetMethod returns the Method field value
 func (o *HealthCheck) GetMethod() string {
-	if o == nil || IsNil(o.Method) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Method
+
+	return o.Method
 }
 
-// GetMethodOk returns a tuple with the Method field value if set, nil otherwise
+// GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
 func (o *HealthCheck) GetMethodOk() (*string, bool) {
-	if o == nil || IsNil(o.Method) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Method, true
+	return &o.Method, true
 }
 
-// HasMethod returns a boolean if a field has been set.
-func (o *HealthCheck) HasMethod() bool {
-	if o != nil && !IsNil(o.Method) {
-		return true
-	}
-
-	return false
-}
-
-// SetMethod gets a reference to the given string and assigns it to the Method field.
+// SetMethod sets field value
 func (o *HealthCheck) SetMethod(v string) {
-	o.Method = &v
+	o.Method = v
 }
 
-// GetUri returns the Uri field value if set, zero value otherwise.
+// GetUri returns the Uri field value
 func (o *HealthCheck) GetUri() string {
-	if o == nil || IsNil(o.Uri) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Uri
+
+	return o.Uri
 }
 
-// GetUriOk returns a tuple with the Uri field value if set, nil otherwise
+// GetUriOk returns a tuple with the Uri field value
 // and a boolean to check if the value has been set.
 func (o *HealthCheck) GetUriOk() (*string, bool) {
-	if o == nil || IsNil(o.Uri) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Uri, true
+	return &o.Uri, true
 }
 
-// HasUri returns a boolean if a field has been set.
-func (o *HealthCheck) HasUri() bool {
-	if o != nil && !IsNil(o.Uri) {
-		return true
-	}
-
-	return false
-}
-
-// SetUri gets a reference to the given string and assigns it to the Uri field.
+// SetUri sets field value
 func (o *HealthCheck) SetUri(v string) {
-	o.Uri = &v
+	o.Uri = v
 }
 
-// GetHost returns the Host field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetHost returns the Host field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *HealthCheck) GetHost() string {
-	if o == nil || IsNil(o.Host.Get()) {
+	if o == nil || o.Host.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Host.Get()
 }
 
-// GetHostOk returns a tuple with the Host field value if set, nil otherwise
+// GetHostOk returns a tuple with the Host field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HealthCheck) GetHostOk() (*string, bool) {
@@ -129,59 +123,33 @@ func (o *HealthCheck) GetHostOk() (*string, bool) {
 	return o.Host.Get(), o.Host.IsSet()
 }
 
-// HasHost returns a boolean if a field has been set.
-func (o *HealthCheck) HasHost() bool {
-	if o != nil && o.Host.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetHost gets a reference to the given NullableString and assigns it to the Host field.
+// SetHost sets field value
 func (o *HealthCheck) SetHost(v string) {
 	o.Host.Set(&v)
 }
-// SetHostNil sets the value for Host to be an explicit nil
-func (o *HealthCheck) SetHostNil() {
-	o.Host.Set(nil)
-}
 
-// UnsetHost ensures that no value is present for Host, not even an explicit nil
-func (o *HealthCheck) UnsetHost() {
-	o.Host.Unset()
-}
-
-// GetPort returns the Port field value if set, zero value otherwise.
+// GetPort returns the Port field value
 func (o *HealthCheck) GetPort() int32 {
-	if o == nil || IsNil(o.Port) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Port
+
+	return o.Port
 }
 
-// GetPortOk returns a tuple with the Port field value if set, nil otherwise
+// GetPortOk returns a tuple with the Port field value
 // and a boolean to check if the value has been set.
 func (o *HealthCheck) GetPortOk() (*int32, bool) {
-	if o == nil || IsNil(o.Port) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Port, true
+	return &o.Port, true
 }
 
-// HasPort returns a boolean if a field has been set.
-func (o *HealthCheck) HasPort() bool {
-	if o != nil && !IsNil(o.Port) {
-		return true
-	}
-
-	return false
-}
-
-// SetPort gets a reference to the given int32 and assigns it to the Port field.
+// SetPort sets field value
 func (o *HealthCheck) SetPort(v int32) {
-	o.Port = &v
+	o.Port = v
 }
 
 func (o HealthCheck) MarshalJSON() ([]byte, error) {
@@ -194,19 +162,51 @@ func (o HealthCheck) MarshalJSON() ([]byte, error) {
 
 func (o HealthCheck) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Method) {
-		toSerialize["method"] = o.Method
-	}
-	if !IsNil(o.Uri) {
-		toSerialize["uri"] = o.Uri
-	}
-	if o.Host.IsSet() {
-		toSerialize["host"] = o.Host.Get()
-	}
-	if !IsNil(o.Port) {
-		toSerialize["port"] = o.Port
-	}
+	toSerialize["method"] = o.Method
+	toSerialize["uri"] = o.Uri
+	toSerialize["host"] = o.Host.Get()
+	toSerialize["port"] = o.Port
 	return toSerialize, nil
+}
+
+func (o *HealthCheck) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"method",
+		"uri",
+		"host",
+		"port",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varHealthCheck := _HealthCheck{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varHealthCheck)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HealthCheck(varHealthCheck)
+
+	return err
 }
 
 type NullableHealthCheck struct {
