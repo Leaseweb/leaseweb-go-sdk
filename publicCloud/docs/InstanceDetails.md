@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Resources** | [**InstanceResources**](InstanceResources.md) |  | 
 **Region** | **string** | The region in which the instance was launched | 
 **Reference** | **NullableString** | The identifying name set to the instance | 
-**StartedAt** | **time.Time** | Date and time when the instance was started for the first time, right after launching it | 
+**StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
 **MarketAppId** | **NullableString** | Market App ID that must be installed into the instance | 
 **State** | [**State**](State.md) |  | 
 **ProductType** | **string** | The product type | 
@@ -22,13 +22,13 @@ Name | Type | Description | Notes
 **AutoScalingGroup** | [**NullableAutoScalingGroupDetails**](AutoScalingGroupDetails.md) |  | 
 **Iso** | [**NullableIso**](Iso.md) |  | 
 **PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
-**OperatingSystem** | [**OperatingSystemDetail**](OperatingSystemDetail.md) |  | 
+**OperatingSystem** | [**OperatingSystemDetails**](OperatingSystemDetails.md) |  | 
 
 ## Methods
 
 ### NewInstanceDetails
 
-`func NewInstanceDetails(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference NullableString, startedAt time.Time, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetail, ) *InstanceDetails`
+`func NewInstanceDetails(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ) *InstanceDetails`
 
 NewInstanceDetails instantiates a new InstanceDetails object
 This constructor will assign default values to properties that have it defined,
@@ -173,6 +173,16 @@ and a boolean to check if the value has been set.
 SetStartedAt sets StartedAt field to given value.
 
 
+### SetStartedAtNil
+
+`func (o *InstanceDetails) SetStartedAtNil(b bool)`
+
+ SetStartedAtNil sets the value for StartedAt to be an explicit nil
+
+### UnsetStartedAt
+`func (o *InstanceDetails) UnsetStartedAt()`
+
+UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
 ### GetMarketAppId
 
 `func (o *InstanceDetails) GetMarketAppId() string`
@@ -455,20 +465,20 @@ SetPrivateNetwork sets PrivateNetwork field to given value.
 UnsetPrivateNetwork ensures that no value is present for PrivateNetwork, not even an explicit nil
 ### GetOperatingSystem
 
-`func (o *InstanceDetails) GetOperatingSystem() OperatingSystemDetail`
+`func (o *InstanceDetails) GetOperatingSystem() OperatingSystemDetails`
 
 GetOperatingSystem returns the OperatingSystem field if non-nil, zero value otherwise.
 
 ### GetOperatingSystemOk
 
-`func (o *InstanceDetails) GetOperatingSystemOk() (*OperatingSystemDetail, bool)`
+`func (o *InstanceDetails) GetOperatingSystemOk() (*OperatingSystemDetails, bool)`
 
 GetOperatingSystemOk returns a tuple with the OperatingSystem field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperatingSystem
 
-`func (o *InstanceDetails) SetOperatingSystem(v OperatingSystemDetail)`
+`func (o *InstanceDetails) SetOperatingSystem(v OperatingSystemDetails)`
 
 SetOperatingSystem sets OperatingSystem field to given value.
 

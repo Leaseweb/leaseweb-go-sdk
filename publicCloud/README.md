@@ -221,7 +221,7 @@ Class | Method | HTTP request | Description
  - [NetworkType](docs/NetworkType.md)
  - [NullRouteIpOpts](docs/NullRouteIpOpts.md)
  - [OperatingSystem](docs/OperatingSystem.md)
- - [OperatingSystemDetail](docs/OperatingSystemDetail.md)
+ - [OperatingSystemDetails](docs/OperatingSystemDetails.md)
  - [OperatingSystemId](docs/OperatingSystemId.md)
  - [Peak](docs/Peak.md)
  - [Price](docs/Price.md)

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OperatingSystems** | Pointer to [**[]OperatingSystemDetail**](OperatingSystemDetail.md) |  | [optional] 
+**OperatingSystems** | Pointer to [**[]OperatingSystemDetails**](OperatingSystemDetails.md) |  | [optional] 
 **Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOperatingSystems
 
-`func (o *GetOperatingSystemListResult) GetOperatingSystems() []OperatingSystemDetail`
+`func (o *GetOperatingSystemListResult) GetOperatingSystems() []OperatingSystemDetails`
 
 GetOperatingSystems returns the OperatingSystems field if non-nil, zero value otherwise.
 
 ### GetOperatingSystemsOk
 
-`func (o *GetOperatingSystemListResult) GetOperatingSystemsOk() (*[]OperatingSystemDetail, bool)`
+`func (o *GetOperatingSystemListResult) GetOperatingSystemsOk() (*[]OperatingSystemDetails, bool)`
 
 GetOperatingSystemsOk returns a tuple with the OperatingSystems field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperatingSystems
 
-`func (o *GetOperatingSystemListResult) SetOperatingSystems(v []OperatingSystemDetail)`
+`func (o *GetOperatingSystemListResult) SetOperatingSystems(v []OperatingSystemDetails)`
 
 SetOperatingSystems sets OperatingSystems field to given value.
 

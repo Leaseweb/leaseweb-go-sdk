@@ -19,7 +19,7 @@ var _ MappedNullable = &GetOperatingSystemListResult{}
 
 // GetOperatingSystemListResult struct for GetOperatingSystemListResult
 type GetOperatingSystemListResult struct {
-	OperatingSystems []OperatingSystemDetail `json:"operatingSystems,omitempty"`
+	OperatingSystems []OperatingSystemDetails `json:"operatingSystems,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
 }
 
@@ -41,9 +41,9 @@ func NewGetOperatingSystemListResultWithDefaults() *GetOperatingSystemListResult
 }
 
 // GetOperatingSystems returns the OperatingSystems field value if set, zero value otherwise.
-func (o *GetOperatingSystemListResult) GetOperatingSystems() []OperatingSystemDetail {
+func (o *GetOperatingSystemListResult) GetOperatingSystems() []OperatingSystemDetails {
 	if o == nil || IsNil(o.OperatingSystems) {
-		var ret []OperatingSystemDetail
+		var ret []OperatingSystemDetails
 		return ret
 	}
 	return o.OperatingSystems
@@ -51,7 +51,7 @@ func (o *GetOperatingSystemListResult) GetOperatingSystems() []OperatingSystemDe
 
 // GetOperatingSystemsOk returns a tuple with the OperatingSystems field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetOperatingSystemListResult) GetOperatingSystemsOk() ([]OperatingSystemDetail, bool) {
+func (o *GetOperatingSystemListResult) GetOperatingSystemsOk() ([]OperatingSystemDetails, bool) {
 	if o == nil || IsNil(o.OperatingSystems) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *GetOperatingSystemListResult) HasOperatingSystems() bool {
 	return false
 }
 
-// SetOperatingSystems gets a reference to the given []OperatingSystemDetail and assigns it to the OperatingSystems field.
-func (o *GetOperatingSystemListResult) SetOperatingSystems(v []OperatingSystemDetail) {
+// SetOperatingSystems gets a reference to the given []OperatingSystemDetails and assigns it to the OperatingSystems field.
+func (o *GetOperatingSystemListResult) SetOperatingSystems(v []OperatingSystemDetails) {
 	o.OperatingSystems = v
 }
 

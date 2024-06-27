@@ -8627,7 +8627,7 @@ components:
       - subnet
       title: privateNetwork
       type: object
-    operatingSystemDetail:
+    operatingSystemDetails:
       allOf:
       - $ref: '#/components/schemas/operatingSystem'
       - properties:
@@ -8671,12 +8671,7 @@ components:
           privateNetwork:
             $ref: '#/components/schemas/privateNetwork'
           operatingSystem:
-            $ref: '#/components/schemas/operatingSystemDetail'
-          startedAt:
-            description: "Date and time when the instance was started for the first\
-              \ time, right after launching it"
-            format: date-time
-            type: string
+            $ref: '#/components/schemas/operatingSystemDetails'
         required:
         - iso
         - operatingSystem
@@ -9132,7 +9127,7 @@ components:
       properties:
         operatingSystems:
           items:
-            $ref: '#/components/schemas/operatingSystemDetail'
+            $ref: '#/components/schemas/operatingSystemDetails'
           type: array
         _metadata:
           $ref: '#/components/schemas/_metadata'
@@ -9186,7 +9181,7 @@ components:
       type: object
     getReinstallOsListResult:
       items:
-        $ref: '#/components/schemas/operatingSystemDetail'
+        $ref: '#/components/schemas/operatingSystemDetails'
       type: array
     reinstallInstanceOpts:
       properties:

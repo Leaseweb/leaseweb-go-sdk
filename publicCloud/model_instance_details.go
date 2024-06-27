@@ -31,7 +31,7 @@ type InstanceDetails struct {
 	// The identifying name set to the instance
 	Reference NullableString `json:"reference"`
 	// Date and time when the instance was started for the first time, right after launching it
-	StartedAt time.Time `json:"startedAt"`
+	StartedAt NullableTime `json:"startedAt"`
 	// Market App ID that must be installed into the instance
 	MarketAppId NullableString `json:"marketAppId"`
 	State State `json:"state"`
@@ -48,7 +48,7 @@ type InstanceDetails struct {
 	AutoScalingGroup NullableAutoScalingGroupDetails `json:"autoScalingGroup"`
 	Iso NullableIso `json:"iso"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork"`
-	OperatingSystem OperatingSystemDetail `json:"operatingSystem"`
+	OperatingSystem OperatingSystemDetails `json:"operatingSystem"`
 }
 
 type _InstanceDetails InstanceDetails
@@ -57,7 +57,7 @@ type _InstanceDetails InstanceDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceDetails(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference NullableString, startedAt time.Time, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetail) *InstanceDetails {
+func NewInstanceDetails(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails) *InstanceDetails {
 	this := InstanceDetails{}
 	this.Id = id
 	this.Type = type_
@@ -212,27 +212,29 @@ func (o *InstanceDetails) SetReference(v string) {
 }
 
 // GetStartedAt returns the StartedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *InstanceDetails) GetStartedAt() time.Time {
-	if o == nil {
+	if o == nil || o.StartedAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
 
-	return o.StartedAt
+	return *o.StartedAt.Get()
 }
 
 // GetStartedAtOk returns a tuple with the StartedAt field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InstanceDetails) GetStartedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.StartedAt, true
+	return o.StartedAt.Get(), o.StartedAt.IsSet()
 }
 
 // SetStartedAt sets field value
 func (o *InstanceDetails) SetStartedAt(v time.Time) {
-	o.StartedAt = v
+	o.StartedAt.Set(&v)
 }
 
 // GetMarketAppId returns the MarketAppId field value
@@ -532,9 +534,9 @@ func (o *InstanceDetails) SetPrivateNetwork(v PrivateNetwork) {
 }
 
 // GetOperatingSystem returns the OperatingSystem field value
-func (o *InstanceDetails) GetOperatingSystem() OperatingSystemDetail {
+func (o *InstanceDetails) GetOperatingSystem() OperatingSystemDetails {
 	if o == nil {
-		var ret OperatingSystemDetail
+		var ret OperatingSystemDetails
 		return ret
 	}
 
@@ -543,7 +545,7 @@ func (o *InstanceDetails) GetOperatingSystem() OperatingSystemDetail {
 
 // GetOperatingSystemOk returns a tuple with the OperatingSystem field value
 // and a boolean to check if the value has been set.
-func (o *InstanceDetails) GetOperatingSystemOk() (*OperatingSystemDetail, bool) {
+func (o *InstanceDetails) GetOperatingSystemOk() (*OperatingSystemDetails, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -551,7 +553,7 @@ func (o *InstanceDetails) GetOperatingSystemOk() (*OperatingSystemDetail, bool) 
 }
 
 // SetOperatingSystem sets field value
-func (o *InstanceDetails) SetOperatingSystem(v OperatingSystemDetail) {
+func (o *InstanceDetails) SetOperatingSystem(v OperatingSystemDetails) {
 	o.OperatingSystem = v
 }
 
@@ -570,7 +572,7 @@ func (o InstanceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["resources"] = o.Resources
 	toSerialize["region"] = o.Region
 	toSerialize["reference"] = o.Reference.Get()
-	toSerialize["startedAt"] = o.StartedAt
+	toSerialize["startedAt"] = o.StartedAt.Get()
 	toSerialize["marketAppId"] = o.MarketAppId.Get()
 	toSerialize["state"] = o.State
 	toSerialize["productType"] = o.ProductType
