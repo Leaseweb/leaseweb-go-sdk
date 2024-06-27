@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Type** | [**InstanceTypeName**](InstanceTypeName.md) |  | 
 **Resources** | [**InstanceResources**](InstanceResources.md) |  | 
 **Region** | **string** | The region in which the instance was launched | 
-**Reference** | **string** | The identifying name set to the instance | 
+**Reference** | **NullableString** | The identifying name set to the instance | 
 **StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
 **MarketAppId** | **NullableString** | Market App ID that must be installed into the instance | 
 **State** | [**State**](State.md) |  | 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewInstance
 
-`func NewInstance(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference string, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem, ) *Instance`
+`func NewInstance(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem, ) *Instance`
 
 NewInstance instantiates a new Instance object
 This constructor will assign default values to properties that have it defined,
@@ -141,6 +141,16 @@ and a boolean to check if the value has been set.
 SetReference sets Reference field to given value.
 
 
+### SetReferenceNil
+
+`func (o *Instance) SetReferenceNil(b bool)`
+
+ SetReferenceNil sets the value for Reference to be an explicit nil
+
+### UnsetReference
+`func (o *Instance) UnsetReference()`
+
+UnsetReference ensures that no value is present for Reference, not even an explicit nil
 ### GetStartedAt
 
 `func (o *Instance) GetStartedAt() time.Time`

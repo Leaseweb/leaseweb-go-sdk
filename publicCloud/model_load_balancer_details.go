@@ -30,7 +30,7 @@ type LoadBalancerDetails struct {
 	// The region where the load balancer was launched into
 	Region string `json:"region"`
 	// The identifying name set to the load balancer
-	Reference string `json:"reference"`
+	Reference NullableString `json:"reference"`
 	State State `json:"state"`
 	Contract Contract `json:"contract"`
 	// Date and time when the instance was started for the first time, right after launching it
@@ -49,7 +49,7 @@ type _LoadBalancerDetails LoadBalancerDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerDetails(id string, type_ string, resources InstanceResources, region string, reference string, state State, contract Contract, startedAt NullableTime, ips []Ip, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork) *LoadBalancerDetails {
+func NewLoadBalancerDetails(id string, type_ string, resources InstanceResources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ips []Ip, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork) *LoadBalancerDetails {
 	this := LoadBalancerDetails{}
 	this.Id = id
 	this.Type = type_
@@ -171,27 +171,29 @@ func (o *LoadBalancerDetails) SetRegion(v string) {
 }
 
 // GetReference returns the Reference field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *LoadBalancerDetails) GetReference() string {
-	if o == nil {
+	if o == nil || o.Reference.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Reference
+	return *o.Reference.Get()
 }
 
 // GetReferenceOk returns a tuple with the Reference field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *LoadBalancerDetails) GetReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Reference, true
+	return o.Reference.Get(), o.Reference.IsSet()
 }
 
 // SetReference sets field value
 func (o *LoadBalancerDetails) SetReference(v string) {
-	o.Reference = v
+	o.Reference.Set(&v)
 }
 
 // GetState returns the State field value
@@ -416,7 +418,7 @@ func (o LoadBalancerDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["resources"] = o.Resources
 	toSerialize["region"] = o.Region
-	toSerialize["reference"] = o.Reference
+	toSerialize["reference"] = o.Reference.Get()
 	toSerialize["state"] = o.State
 	toSerialize["contract"] = o.Contract
 	toSerialize["startedAt"] = o.StartedAt.Get()

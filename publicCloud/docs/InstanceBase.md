@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Type** | [**InstanceTypeName**](InstanceTypeName.md) |  | 
 **Resources** | [**InstanceResources**](InstanceResources.md) |  | 
 **Region** | **string** | The region in which the instance was launched | 
-**Reference** | **string** | The identifying name set to the instance | 
+**Reference** | **NullableString** | The identifying name set to the instance | 
 **StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
 **MarketAppId** | **NullableString** | Market App ID that must be installed into the instance | 
 **State** | [**State**](State.md) |  | 
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceBase
 
-`func NewInstanceBase(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference string, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, ) *InstanceBase`
+`func NewInstanceBase(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, ) *InstanceBase`
 
 NewInstanceBase instantiates a new InstanceBase object
 This constructor will assign default values to properties that have it defined,
@@ -140,6 +140,16 @@ and a boolean to check if the value has been set.
 SetReference sets Reference field to given value.
 
 
+### SetReferenceNil
+
+`func (o *InstanceBase) SetReferenceNil(b bool)`
+
+ SetReferenceNil sets the value for Reference to be an explicit nil
+
+### UnsetReference
+`func (o *InstanceBase) UnsetReference()`
+
+UnsetReference ensures that no value is present for Reference, not even an explicit nil
 ### GetStartedAt
 
 `func (o *InstanceBase) GetStartedAt() time.Time`

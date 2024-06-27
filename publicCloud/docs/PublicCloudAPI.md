@@ -2711,7 +2711,7 @@ Name | Type | Description  | Notes
 
 ## GetReinstallOsList
 
-> []OperatingSystemDetails GetReinstallOsList(ctx, instanceId).Execute()
+> []OperatingSystemDetail GetReinstallOsList(ctx, instanceId).Execute()
 
 List OSes available for reinstall
 
@@ -2739,7 +2739,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetReinstallOsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetReinstallOsList`: []OperatingSystemDetails
+	// response from `GetReinstallOsList`: []OperatingSystemDetail
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetReinstallOsList`: %v\n", resp)
 }
 ```
@@ -2763,7 +2763,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OperatingSystemDetails**](OperatingSystemDetails.md)
+[**[]OperatingSystemDetail**](OperatingSystemDetail.md)
 
 ### Authorization
 

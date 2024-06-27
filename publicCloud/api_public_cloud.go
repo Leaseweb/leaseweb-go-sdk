@@ -6827,7 +6827,7 @@ type ApiGetReinstallOsListRequest struct {
 	instanceId string
 }
 
-func (r ApiGetReinstallOsListRequest) Execute() ([]OperatingSystemDetails, *http.Response, error) {
+func (r ApiGetReinstallOsListRequest) Execute() ([]OperatingSystemDetail, *http.Response, error) {
 	return r.ApiService.GetReinstallOsListExecute(r)
 }
 
@@ -6849,13 +6849,13 @@ func (a *PublicCloudAPIService) GetReinstallOsList(ctx context.Context, instance
 }
 
 // Execute executes the request
-//  @return []OperatingSystemDetails
-func (a *PublicCloudAPIService) GetReinstallOsListExecute(r ApiGetReinstallOsListRequest) ([]OperatingSystemDetails, *http.Response, error) {
+//  @return []OperatingSystemDetail
+func (a *PublicCloudAPIService) GetReinstallOsListExecute(r ApiGetReinstallOsListRequest) ([]OperatingSystemDetail, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []OperatingSystemDetails
+		localVarReturnValue  []OperatingSystemDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetReinstallOsList")

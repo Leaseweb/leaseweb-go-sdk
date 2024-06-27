@@ -7881,6 +7881,7 @@ components:
           type: string
         reference:
           description: The identifying name set to the load balancer
+          nullable: true
           type: string
         state:
           $ref: '#/components/schemas/state'
@@ -8064,6 +8065,7 @@ components:
           type: string
         reference:
           description: The identifying name set to the instance
+          nullable: true
           type: string
         startedAt:
           description: "Date and time when the instance was started for the first\
@@ -8625,7 +8627,7 @@ components:
       - subnet
       title: privateNetwork
       type: object
-    operatingSystemDetails:
+    operatingSystemDetail:
       allOf:
       - $ref: '#/components/schemas/operatingSystem'
       - properties:
@@ -8645,7 +8647,7 @@ components:
         required:
         - marketApps
         - storageTypes
-        title: operatingSystemDetails
+        title: operatingSystemDetail
         type: object
       example:
         marketApps:
@@ -8669,7 +8671,7 @@ components:
           privateNetwork:
             $ref: '#/components/schemas/privateNetwork'
           operatingSystem:
-            $ref: '#/components/schemas/operatingSystemDetails'
+            $ref: '#/components/schemas/operatingSystemDetail'
           startedAt:
             description: "Date and time when the instance was started for the first\
               \ time, right after launching it"
@@ -9100,25 +9102,25 @@ components:
       example:
         operatingSystems:
         - marketApps:
-          - marketApps
-          - marketApps
+          - LOADBALANCER
+          - LOADBALANCER
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_20_04_64BIT
+          id: UBUNTU_24_04_64BIT
           storageTypes:
-          - LOCAL
+          - CENTRAL
           - LOCAL
           family: linux
           version: "20.04"
           architecture: x86_64
         - marketApps:
-          - marketApps
-          - marketApps
+          - LOADBALANCER
+          - LOADBALANCER
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_20_04_64BIT
+          id: UBUNTU_24_04_64BIT
           storageTypes:
-          - LOCAL
+          - CENTRAL
           - LOCAL
           family: linux
           version: "20.04"
@@ -9184,7 +9186,7 @@ components:
       type: object
     getReinstallOsListResult:
       items:
-        $ref: '#/components/schemas/operatingSystemDetails'
+        $ref: '#/components/schemas/operatingSystemDetail'
       type: array
     reinstallInstanceOpts:
       properties:
@@ -10808,54 +10810,6 @@ components:
         traffic:
           $ref: '#/components/schemas/traffic'
       title: billing
-      type: object
-    operatingSystemDetail:
-      example:
-        marketApps:
-        - marketApps
-        - marketApps
-        flavour: ubuntu
-        name: Ubuntu 20.04 LTS (x86_64)
-        id: UBUNTU_20_04_64BIT
-        storageTypes:
-        - LOCAL
-        - LOCAL
-        family: linux
-        version: "20.04"
-        architecture: x86_64
-      properties:
-        id:
-          example: UBUNTU_20_04_64BIT
-          type: string
-        name:
-          example: Ubuntu 20.04 LTS (x86_64)
-          type: string
-        version:
-          example: "20.04"
-          type: string
-        family:
-          example: linux
-          type: string
-        flavour:
-          example: ubuntu
-          type: string
-        architecture:
-          example: x86_64
-          type: string
-        marketApps:
-          description: The marketplace app IDs used to reference to on other operations
-          items:
-            type: string
-          type: array
-        storageTypes:
-          description: The storage types supported by the operating systems
-          items:
-            enum:
-            - LOCAL
-            - CENTRAL
-            type: string
-          type: array
-      title: operatingSystemDetail
       type: object
     marketApp:
       example:

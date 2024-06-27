@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Type** | **string** | Load balancer type | 
 **Resources** | [**InstanceResources**](InstanceResources.md) |  | 
 **Region** | **string** | The region where the load balancer was launched into | 
-**Reference** | **string** | The identifying name set to the load balancer | 
+**Reference** | **NullableString** | The identifying name set to the load balancer | 
 **State** | [**State**](State.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
 **StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewLoadBalancerDetails
 
-`func NewLoadBalancerDetails(id string, type_ string, resources InstanceResources, region string, reference string, state State, contract Contract, startedAt NullableTime, ips []Ip, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, ) *LoadBalancerDetails`
+`func NewLoadBalancerDetails(id string, type_ string, resources InstanceResources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ips []Ip, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, ) *LoadBalancerDetails`
 
 NewLoadBalancerDetails instantiates a new LoadBalancerDetails object
 This constructor will assign default values to properties that have it defined,
@@ -137,6 +137,16 @@ and a boolean to check if the value has been set.
 SetReference sets Reference field to given value.
 
 
+### SetReferenceNil
+
+`func (o *LoadBalancerDetails) SetReferenceNil(b bool)`
+
+ SetReferenceNil sets the value for Reference to be an explicit nil
+
+### UnsetReference
+`func (o *LoadBalancerDetails) UnsetReference()`
+
+UnsetReference ensures that no value is present for Reference, not even an explicit nil
 ### GetState
 
 `func (o *LoadBalancerDetails) GetState() State`
