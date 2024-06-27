@@ -19,7 +19,7 @@ var _ MappedNullable = &GetLoadBalancerListResult{}
 
 // GetLoadBalancerListResult struct for GetLoadBalancerListResult
 type GetLoadBalancerListResult struct {
-	LoadBalancers []LoadBalancer `json:"loadBalancers,omitempty"`
+	LoadBalancers []LoadBalancerDetails `json:"loadBalancers,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
 }
 
@@ -41,9 +41,9 @@ func NewGetLoadBalancerListResultWithDefaults() *GetLoadBalancerListResult {
 }
 
 // GetLoadBalancers returns the LoadBalancers field value if set, zero value otherwise.
-func (o *GetLoadBalancerListResult) GetLoadBalancers() []LoadBalancer {
+func (o *GetLoadBalancerListResult) GetLoadBalancers() []LoadBalancerDetails {
 	if o == nil || IsNil(o.LoadBalancers) {
-		var ret []LoadBalancer
+		var ret []LoadBalancerDetails
 		return ret
 	}
 	return o.LoadBalancers
@@ -51,7 +51,7 @@ func (o *GetLoadBalancerListResult) GetLoadBalancers() []LoadBalancer {
 
 // GetLoadBalancersOk returns a tuple with the LoadBalancers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetLoadBalancerListResult) GetLoadBalancersOk() ([]LoadBalancer, bool) {
+func (o *GetLoadBalancerListResult) GetLoadBalancersOk() ([]LoadBalancerDetails, bool) {
 	if o == nil || IsNil(o.LoadBalancers) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *GetLoadBalancerListResult) HasLoadBalancers() bool {
 	return false
 }
 
-// SetLoadBalancers gets a reference to the given []LoadBalancer and assigns it to the LoadBalancers field.
-func (o *GetLoadBalancerListResult) SetLoadBalancers(v []LoadBalancer) {
+// SetLoadBalancers gets a reference to the given []LoadBalancerDetails and assigns it to the LoadBalancers field.
+func (o *GetLoadBalancerListResult) SetLoadBalancers(v []LoadBalancerDetails) {
 	o.LoadBalancers = v
 }
 

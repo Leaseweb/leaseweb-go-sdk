@@ -28,7 +28,7 @@ type AutoScaledInstance struct {
 	Region *string `json:"region,omitempty"`
 	// The identifying name set to the instance
 	Reference *string `json:"reference,omitempty"`
-	State *InstanceState `json:"state,omitempty"`
+	State *State `json:"state,omitempty"`
 	ProductType *string `json:"productType,omitempty"`
 	includesPrivateNetwork *bool `json:"hasPrivateNetwork,omitempty"`
 	Ips []Ip `json:"ips,omitempty"`
@@ -212,9 +212,9 @@ func (o *AutoScaledInstance) SetReference(v string) {
 }
 
 // GetState returns the State field value if set, zero value otherwise.
-func (o *AutoScaledInstance) GetState() InstanceState {
+func (o *AutoScaledInstance) GetState() State {
 	if o == nil || IsNil(o.State) {
-		var ret InstanceState
+		var ret State
 		return ret
 	}
 	return *o.State
@@ -222,7 +222,7 @@ func (o *AutoScaledInstance) GetState() InstanceState {
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScaledInstance) GetStateOk() (*InstanceState, bool) {
+func (o *AutoScaledInstance) GetStateOk() (*State, bool) {
 	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
@@ -238,8 +238,8 @@ func (o *AutoScaledInstance) HasState() bool {
 	return false
 }
 
-// SetState gets a reference to the given InstanceState and assigns it to the State field.
-func (o *AutoScaledInstance) SetState(v InstanceState) {
+// SetState gets a reference to the given State and assigns it to the State field.
+func (o *AutoScaledInstance) SetState(v State) {
 	o.State = &v
 }
 

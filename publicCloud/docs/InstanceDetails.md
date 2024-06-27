@@ -1,4 +1,4 @@
-# Instance
+# InstanceDetails
 
 ## Properties
 
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Resources** | [**InstanceResources**](InstanceResources.md) |  | 
 **Region** | **string** | The region in which the instance was launched | 
 **Reference** | **string** | The identifying name set to the instance | 
-**StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
+**StartedAt** | **time.Time** | Date and time when the instance was started for the first time, right after launching it | 
 **MarketAppId** | **NullableString** | Market App ID that must be installed into the instance | 
 **State** | [**State**](State.md) |  | 
 **ProductType** | **string** | The product type | 
@@ -20,393 +20,445 @@ Name | Type | Description | Notes
 **Ips** | [**[]Ip**](Ip.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroupDetails**](AutoScalingGroupDetails.md) |  | 
-**OperatingSystem** | [**OperatingSystem**](OperatingSystem.md) |  | 
+**Iso** | [**NullableIso**](Iso.md) |  | 
+**PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
+**OperatingSystem** | [**OperatingSystemDetails**](OperatingSystemDetails.md) |  | 
 
 ## Methods
 
-### NewInstance
+### NewInstanceDetails
 
-`func NewInstance(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference string, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem, ) *Instance`
+`func NewInstanceDetails(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference string, startedAt time.Time, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ) *InstanceDetails`
 
-NewInstance instantiates a new Instance object
+NewInstanceDetails instantiates a new InstanceDetails object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewInstanceWithDefaults
+### NewInstanceDetailsWithDefaults
 
-`func NewInstanceWithDefaults() *Instance`
+`func NewInstanceDetailsWithDefaults() *InstanceDetails`
 
-NewInstanceWithDefaults instantiates a new Instance object
+NewInstanceDetailsWithDefaults instantiates a new InstanceDetails object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *Instance) GetId() string`
+`func (o *InstanceDetails) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *Instance) GetIdOk() (*string, bool)`
+`func (o *InstanceDetails) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *Instance) SetId(v string)`
+`func (o *InstanceDetails) SetId(v string)`
 
 SetId sets Id field to given value.
 
 
 ### GetType
 
-`func (o *Instance) GetType() InstanceTypeName`
+`func (o *InstanceDetails) GetType() InstanceTypeName`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *Instance) GetTypeOk() (*InstanceTypeName, bool)`
+`func (o *InstanceDetails) GetTypeOk() (*InstanceTypeName, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *Instance) SetType(v InstanceTypeName)`
+`func (o *InstanceDetails) SetType(v InstanceTypeName)`
 
 SetType sets Type field to given value.
 
 
 ### GetResources
 
-`func (o *Instance) GetResources() InstanceResources`
+`func (o *InstanceDetails) GetResources() InstanceResources`
 
 GetResources returns the Resources field if non-nil, zero value otherwise.
 
 ### GetResourcesOk
 
-`func (o *Instance) GetResourcesOk() (*InstanceResources, bool)`
+`func (o *InstanceDetails) GetResourcesOk() (*InstanceResources, bool)`
 
 GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResources
 
-`func (o *Instance) SetResources(v InstanceResources)`
+`func (o *InstanceDetails) SetResources(v InstanceResources)`
 
 SetResources sets Resources field to given value.
 
 
 ### GetRegion
 
-`func (o *Instance) GetRegion() string`
+`func (o *InstanceDetails) GetRegion() string`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *Instance) GetRegionOk() (*string, bool)`
+`func (o *InstanceDetails) GetRegionOk() (*string, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *Instance) SetRegion(v string)`
+`func (o *InstanceDetails) SetRegion(v string)`
 
 SetRegion sets Region field to given value.
 
 
 ### GetReference
 
-`func (o *Instance) GetReference() string`
+`func (o *InstanceDetails) GetReference() string`
 
 GetReference returns the Reference field if non-nil, zero value otherwise.
 
 ### GetReferenceOk
 
-`func (o *Instance) GetReferenceOk() (*string, bool)`
+`func (o *InstanceDetails) GetReferenceOk() (*string, bool)`
 
 GetReferenceOk returns a tuple with the Reference field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReference
 
-`func (o *Instance) SetReference(v string)`
+`func (o *InstanceDetails) SetReference(v string)`
 
 SetReference sets Reference field to given value.
 
 
 ### GetStartedAt
 
-`func (o *Instance) GetStartedAt() time.Time`
+`func (o *InstanceDetails) GetStartedAt() time.Time`
 
 GetStartedAt returns the StartedAt field if non-nil, zero value otherwise.
 
 ### GetStartedAtOk
 
-`func (o *Instance) GetStartedAtOk() (*time.Time, bool)`
+`func (o *InstanceDetails) GetStartedAtOk() (*time.Time, bool)`
 
 GetStartedAtOk returns a tuple with the StartedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStartedAt
 
-`func (o *Instance) SetStartedAt(v time.Time)`
+`func (o *InstanceDetails) SetStartedAt(v time.Time)`
 
 SetStartedAt sets StartedAt field to given value.
 
 
-### SetStartedAtNil
-
-`func (o *Instance) SetStartedAtNil(b bool)`
-
- SetStartedAtNil sets the value for StartedAt to be an explicit nil
-
-### UnsetStartedAt
-`func (o *Instance) UnsetStartedAt()`
-
-UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
 ### GetMarketAppId
 
-`func (o *Instance) GetMarketAppId() string`
+`func (o *InstanceDetails) GetMarketAppId() string`
 
 GetMarketAppId returns the MarketAppId field if non-nil, zero value otherwise.
 
 ### GetMarketAppIdOk
 
-`func (o *Instance) GetMarketAppIdOk() (*string, bool)`
+`func (o *InstanceDetails) GetMarketAppIdOk() (*string, bool)`
 
 GetMarketAppIdOk returns a tuple with the MarketAppId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMarketAppId
 
-`func (o *Instance) SetMarketAppId(v string)`
+`func (o *InstanceDetails) SetMarketAppId(v string)`
 
 SetMarketAppId sets MarketAppId field to given value.
 
 
 ### SetMarketAppIdNil
 
-`func (o *Instance) SetMarketAppIdNil(b bool)`
+`func (o *InstanceDetails) SetMarketAppIdNil(b bool)`
 
  SetMarketAppIdNil sets the value for MarketAppId to be an explicit nil
 
 ### UnsetMarketAppId
-`func (o *Instance) UnsetMarketAppId()`
+`func (o *InstanceDetails) UnsetMarketAppId()`
 
 UnsetMarketAppId ensures that no value is present for MarketAppId, not even an explicit nil
 ### GetState
 
-`func (o *Instance) GetState() State`
+`func (o *InstanceDetails) GetState() State`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *Instance) GetStateOk() (*State, bool)`
+`func (o *InstanceDetails) GetStateOk() (*State, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *Instance) SetState(v State)`
+`func (o *InstanceDetails) SetState(v State)`
 
 SetState sets State field to given value.
 
 
 ### GetProductType
 
-`func (o *Instance) GetProductType() string`
+`func (o *InstanceDetails) GetProductType() string`
 
 GetProductType returns the ProductType field if non-nil, zero value otherwise.
 
 ### GetProductTypeOk
 
-`func (o *Instance) GetProductTypeOk() (*string, bool)`
+`func (o *InstanceDetails) GetProductTypeOk() (*string, bool)`
 
 GetProductTypeOk returns a tuple with the ProductType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProductType
 
-`func (o *Instance) SetProductType(v string)`
+`func (o *InstanceDetails) SetProductType(v string)`
 
 SetProductType sets ProductType field to given value.
 
 
 ### GetHasPublicIpV4
 
-`func (o *Instance) GetHasPublicIpV4() bool`
+`func (o *InstanceDetails) GetHasPublicIpV4() bool`
 
 GetHasPublicIpV4 returns the HasPublicIpV4 field if non-nil, zero value otherwise.
 
 ### GetHasPublicIpV4Ok
 
-`func (o *Instance) GetHasPublicIpV4Ok() (*bool, bool)`
+`func (o *InstanceDetails) GetHasPublicIpV4Ok() (*bool, bool)`
 
 GetHasPublicIpV4Ok returns a tuple with the HasPublicIpV4 field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHasPublicIpV4
 
-`func (o *Instance) SetHasPublicIpV4(v bool)`
+`func (o *InstanceDetails) SetHasPublicIpV4(v bool)`
 
 SetHasPublicIpV4 sets HasPublicIpV4 field to given value.
 
 
 ### GetincludesPrivateNetwork
 
-`func (o *Instance) GetincludesPrivateNetwork() bool`
+`func (o *InstanceDetails) GetincludesPrivateNetwork() bool`
 
 GetincludesPrivateNetwork returns the includesPrivateNetwork field if non-nil, zero value otherwise.
 
 ### GetincludesPrivateNetworkOk
 
-`func (o *Instance) GetincludesPrivateNetworkOk() (*bool, bool)`
+`func (o *InstanceDetails) GetincludesPrivateNetworkOk() (*bool, bool)`
 
 GetincludesPrivateNetworkOk returns a tuple with the includesPrivateNetwork field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetincludesPrivateNetwork
 
-`func (o *Instance) SetincludesPrivateNetwork(v bool)`
+`func (o *InstanceDetails) SetincludesPrivateNetwork(v bool)`
 
 SetincludesPrivateNetwork sets includesPrivateNetwork field to given value.
 
 
 ### GetRootDiskSize
 
-`func (o *Instance) GetRootDiskSize() int32`
+`func (o *InstanceDetails) GetRootDiskSize() int32`
 
 GetRootDiskSize returns the RootDiskSize field if non-nil, zero value otherwise.
 
 ### GetRootDiskSizeOk
 
-`func (o *Instance) GetRootDiskSizeOk() (*int32, bool)`
+`func (o *InstanceDetails) GetRootDiskSizeOk() (*int32, bool)`
 
 GetRootDiskSizeOk returns a tuple with the RootDiskSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRootDiskSize
 
-`func (o *Instance) SetRootDiskSize(v int32)`
+`func (o *InstanceDetails) SetRootDiskSize(v int32)`
 
 SetRootDiskSize sets RootDiskSize field to given value.
 
 
 ### GetRootDiskStorageType
 
-`func (o *Instance) GetRootDiskStorageType() string`
+`func (o *InstanceDetails) GetRootDiskStorageType() string`
 
 GetRootDiskStorageType returns the RootDiskStorageType field if non-nil, zero value otherwise.
 
 ### GetRootDiskStorageTypeOk
 
-`func (o *Instance) GetRootDiskStorageTypeOk() (*string, bool)`
+`func (o *InstanceDetails) GetRootDiskStorageTypeOk() (*string, bool)`
 
 GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRootDiskStorageType
 
-`func (o *Instance) SetRootDiskStorageType(v string)`
+`func (o *InstanceDetails) SetRootDiskStorageType(v string)`
 
 SetRootDiskStorageType sets RootDiskStorageType field to given value.
 
 
 ### GetIps
 
-`func (o *Instance) GetIps() []Ip`
+`func (o *InstanceDetails) GetIps() []Ip`
 
 GetIps returns the Ips field if non-nil, zero value otherwise.
 
 ### GetIpsOk
 
-`func (o *Instance) GetIpsOk() (*[]Ip, bool)`
+`func (o *InstanceDetails) GetIpsOk() (*[]Ip, bool)`
 
 GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIps
 
-`func (o *Instance) SetIps(v []Ip)`
+`func (o *InstanceDetails) SetIps(v []Ip)`
 
 SetIps sets Ips field to given value.
 
 
 ### GetContract
 
-`func (o *Instance) GetContract() Contract`
+`func (o *InstanceDetails) GetContract() Contract`
 
 GetContract returns the Contract field if non-nil, zero value otherwise.
 
 ### GetContractOk
 
-`func (o *Instance) GetContractOk() (*Contract, bool)`
+`func (o *InstanceDetails) GetContractOk() (*Contract, bool)`
 
 GetContractOk returns a tuple with the Contract field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContract
 
-`func (o *Instance) SetContract(v Contract)`
+`func (o *InstanceDetails) SetContract(v Contract)`
 
 SetContract sets Contract field to given value.
 
 
 ### GetAutoScalingGroup
 
-`func (o *Instance) GetAutoScalingGroup() AutoScalingGroupDetails`
+`func (o *InstanceDetails) GetAutoScalingGroup() AutoScalingGroupDetails`
 
 GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
 
 ### GetAutoScalingGroupOk
 
-`func (o *Instance) GetAutoScalingGroupOk() (*AutoScalingGroupDetails, bool)`
+`func (o *InstanceDetails) GetAutoScalingGroupOk() (*AutoScalingGroupDetails, bool)`
 
 GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAutoScalingGroup
 
-`func (o *Instance) SetAutoScalingGroup(v AutoScalingGroupDetails)`
+`func (o *InstanceDetails) SetAutoScalingGroup(v AutoScalingGroupDetails)`
 
 SetAutoScalingGroup sets AutoScalingGroup field to given value.
 
 
 ### SetAutoScalingGroupNil
 
-`func (o *Instance) SetAutoScalingGroupNil(b bool)`
+`func (o *InstanceDetails) SetAutoScalingGroupNil(b bool)`
 
  SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
 
 ### UnsetAutoScalingGroup
-`func (o *Instance) UnsetAutoScalingGroup()`
+`func (o *InstanceDetails) UnsetAutoScalingGroup()`
 
 UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
+### GetIso
+
+`func (o *InstanceDetails) GetIso() Iso`
+
+GetIso returns the Iso field if non-nil, zero value otherwise.
+
+### GetIsoOk
+
+`func (o *InstanceDetails) GetIsoOk() (*Iso, bool)`
+
+GetIsoOk returns a tuple with the Iso field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIso
+
+`func (o *InstanceDetails) SetIso(v Iso)`
+
+SetIso sets Iso field to given value.
+
+
+### SetIsoNil
+
+`func (o *InstanceDetails) SetIsoNil(b bool)`
+
+ SetIsoNil sets the value for Iso to be an explicit nil
+
+### UnsetIso
+`func (o *InstanceDetails) UnsetIso()`
+
+UnsetIso ensures that no value is present for Iso, not even an explicit nil
+### GetPrivateNetwork
+
+`func (o *InstanceDetails) GetPrivateNetwork() PrivateNetwork`
+
+GetPrivateNetwork returns the PrivateNetwork field if non-nil, zero value otherwise.
+
+### GetPrivateNetworkOk
+
+`func (o *InstanceDetails) GetPrivateNetworkOk() (*PrivateNetwork, bool)`
+
+GetPrivateNetworkOk returns a tuple with the PrivateNetwork field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateNetwork
+
+`func (o *InstanceDetails) SetPrivateNetwork(v PrivateNetwork)`
+
+SetPrivateNetwork sets PrivateNetwork field to given value.
+
+
+### SetPrivateNetworkNil
+
+`func (o *InstanceDetails) SetPrivateNetworkNil(b bool)`
+
+ SetPrivateNetworkNil sets the value for PrivateNetwork to be an explicit nil
+
+### UnsetPrivateNetwork
+`func (o *InstanceDetails) UnsetPrivateNetwork()`
+
+UnsetPrivateNetwork ensures that no value is present for PrivateNetwork, not even an explicit nil
 ### GetOperatingSystem
 
-`func (o *Instance) GetOperatingSystem() OperatingSystem`
+`func (o *InstanceDetails) GetOperatingSystem() OperatingSystemDetails`
 
 GetOperatingSystem returns the OperatingSystem field if non-nil, zero value otherwise.
 
 ### GetOperatingSystemOk
 
-`func (o *Instance) GetOperatingSystemOk() (*OperatingSystem, bool)`
+`func (o *InstanceDetails) GetOperatingSystemOk() (*OperatingSystemDetails, bool)`
 
 GetOperatingSystemOk returns a tuple with the OperatingSystem field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperatingSystem
 
-`func (o *Instance) SetOperatingSystem(v OperatingSystem)`
+`func (o *InstanceDetails) SetOperatingSystem(v OperatingSystemDetails)`
 
 SetOperatingSystem sets OperatingSystem field to given value.
 

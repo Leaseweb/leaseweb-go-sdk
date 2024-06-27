@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LoadBalancers** | Pointer to [**[]LoadBalancer**](LoadBalancer.md) |  | [optional] 
+**LoadBalancers** | Pointer to [**[]LoadBalancerDetails**](LoadBalancerDetails.md) |  | [optional] 
 **Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetLoadBalancers
 
-`func (o *GetLoadBalancerListResult) GetLoadBalancers() []LoadBalancer`
+`func (o *GetLoadBalancerListResult) GetLoadBalancers() []LoadBalancerDetails`
 
 GetLoadBalancers returns the LoadBalancers field if non-nil, zero value otherwise.
 
 ### GetLoadBalancersOk
 
-`func (o *GetLoadBalancerListResult) GetLoadBalancersOk() (*[]LoadBalancer, bool)`
+`func (o *GetLoadBalancerListResult) GetLoadBalancersOk() (*[]LoadBalancerDetails, bool)`
 
 GetLoadBalancersOk returns a tuple with the LoadBalancers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLoadBalancers
 
-`func (o *GetLoadBalancerListResult) SetLoadBalancers(v []LoadBalancer)`
+`func (o *GetLoadBalancerListResult) SetLoadBalancers(v []LoadBalancerDetails)`
 
 SetLoadBalancers sets LoadBalancers field to given value.
 

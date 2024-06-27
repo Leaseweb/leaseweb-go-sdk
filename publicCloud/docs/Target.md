@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The instance unique identifier | [optional] 
 **Reference** | Pointer to **string** | The identifying name set to the instance | [optional] 
 **OperatingSystem** | Pointer to [**OperatingSystem**](OperatingSystem.md) |  | [optional] 
-**State** | Pointer to [**InstanceState**](InstanceState.md) |  | [optional] 
+**State** | Pointer to [**State**](State.md) |  | [optional] 
 **HealthCheckStatus** | Pointer to [**HealthCheckStatus**](HealthCheckStatus.md) |  | [optional] 
 **Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
 
@@ -107,20 +107,20 @@ HasOperatingSystem returns a boolean if a field has been set.
 
 ### GetState
 
-`func (o *Target) GetState() InstanceState`
+`func (o *Target) GetState() State`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *Target) GetStateOk() (*InstanceState, bool)`
+`func (o *Target) GetStateOk() (*State, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *Target) SetState(v InstanceState)`
+`func (o *Target) SetState(v State)`
 
 SetState sets State field to given value.
 

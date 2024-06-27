@@ -1,0 +1,348 @@
+# LoadBalancerDetails
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Id** | **string** | The load balancer unique identifier | 
+**Type** | **string** | Load balancer type | 
+**Resources** | [**InstanceResources**](InstanceResources.md) |  | 
+**Region** | **string** | The region where the load balancer was launched into | 
+**Reference** | **string** | The identifying name set to the load balancer | 
+**State** | [**State**](State.md) |  | 
+**Contract** | [**Contract**](Contract.md) |  | 
+**StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
+**RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
+**Ips** | [**[]Ip**](Ip.md) |  | 
+**Configuration** | [**NullableLoadBalancerConfiguration**](LoadBalancerConfiguration.md) |  | 
+**AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
+**PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
+
+## Methods
+
+### NewLoadBalancerDetails
+
+`func NewLoadBalancerDetails(id string, type_ string, resources InstanceResources, region string, reference string, state State, contract Contract, startedAt NullableTime, ips []Ip, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, ) *LoadBalancerDetails`
+
+NewLoadBalancerDetails instantiates a new LoadBalancerDetails object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewLoadBalancerDetailsWithDefaults
+
+`func NewLoadBalancerDetailsWithDefaults() *LoadBalancerDetails`
+
+NewLoadBalancerDetailsWithDefaults instantiates a new LoadBalancerDetails object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetId
+
+`func (o *LoadBalancerDetails) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *LoadBalancerDetails) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *LoadBalancerDetails) SetId(v string)`
+
+SetId sets Id field to given value.
+
+
+### GetType
+
+`func (o *LoadBalancerDetails) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *LoadBalancerDetails) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *LoadBalancerDetails) SetType(v string)`
+
+SetType sets Type field to given value.
+
+
+### GetResources
+
+`func (o *LoadBalancerDetails) GetResources() InstanceResources`
+
+GetResources returns the Resources field if non-nil, zero value otherwise.
+
+### GetResourcesOk
+
+`func (o *LoadBalancerDetails) GetResourcesOk() (*InstanceResources, bool)`
+
+GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResources
+
+`func (o *LoadBalancerDetails) SetResources(v InstanceResources)`
+
+SetResources sets Resources field to given value.
+
+
+### GetRegion
+
+`func (o *LoadBalancerDetails) GetRegion() string`
+
+GetRegion returns the Region field if non-nil, zero value otherwise.
+
+### GetRegionOk
+
+`func (o *LoadBalancerDetails) GetRegionOk() (*string, bool)`
+
+GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegion
+
+`func (o *LoadBalancerDetails) SetRegion(v string)`
+
+SetRegion sets Region field to given value.
+
+
+### GetReference
+
+`func (o *LoadBalancerDetails) GetReference() string`
+
+GetReference returns the Reference field if non-nil, zero value otherwise.
+
+### GetReferenceOk
+
+`func (o *LoadBalancerDetails) GetReferenceOk() (*string, bool)`
+
+GetReferenceOk returns a tuple with the Reference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReference
+
+`func (o *LoadBalancerDetails) SetReference(v string)`
+
+SetReference sets Reference field to given value.
+
+
+### GetState
+
+`func (o *LoadBalancerDetails) GetState() State`
+
+GetState returns the State field if non-nil, zero value otherwise.
+
+### GetStateOk
+
+`func (o *LoadBalancerDetails) GetStateOk() (*State, bool)`
+
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetState
+
+`func (o *LoadBalancerDetails) SetState(v State)`
+
+SetState sets State field to given value.
+
+
+### GetContract
+
+`func (o *LoadBalancerDetails) GetContract() Contract`
+
+GetContract returns the Contract field if non-nil, zero value otherwise.
+
+### GetContractOk
+
+`func (o *LoadBalancerDetails) GetContractOk() (*Contract, bool)`
+
+GetContractOk returns a tuple with the Contract field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContract
+
+`func (o *LoadBalancerDetails) SetContract(v Contract)`
+
+SetContract sets Contract field to given value.
+
+
+### GetStartedAt
+
+`func (o *LoadBalancerDetails) GetStartedAt() time.Time`
+
+GetStartedAt returns the StartedAt field if non-nil, zero value otherwise.
+
+### GetStartedAtOk
+
+`func (o *LoadBalancerDetails) GetStartedAtOk() (*time.Time, bool)`
+
+GetStartedAtOk returns a tuple with the StartedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartedAt
+
+`func (o *LoadBalancerDetails) SetStartedAt(v time.Time)`
+
+SetStartedAt sets StartedAt field to given value.
+
+
+### SetStartedAtNil
+
+`func (o *LoadBalancerDetails) SetStartedAtNil(b bool)`
+
+ SetStartedAtNil sets the value for StartedAt to be an explicit nil
+
+### UnsetStartedAt
+`func (o *LoadBalancerDetails) UnsetStartedAt()`
+
+UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
+### GetRootDiskSize
+
+`func (o *LoadBalancerDetails) GetRootDiskSize() int32`
+
+GetRootDiskSize returns the RootDiskSize field if non-nil, zero value otherwise.
+
+### GetRootDiskSizeOk
+
+`func (o *LoadBalancerDetails) GetRootDiskSizeOk() (*int32, bool)`
+
+GetRootDiskSizeOk returns a tuple with the RootDiskSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRootDiskSize
+
+`func (o *LoadBalancerDetails) SetRootDiskSize(v int32)`
+
+SetRootDiskSize sets RootDiskSize field to given value.
+
+### HasRootDiskSize
+
+`func (o *LoadBalancerDetails) HasRootDiskSize() bool`
+
+HasRootDiskSize returns a boolean if a field has been set.
+
+### GetIps
+
+`func (o *LoadBalancerDetails) GetIps() []Ip`
+
+GetIps returns the Ips field if non-nil, zero value otherwise.
+
+### GetIpsOk
+
+`func (o *LoadBalancerDetails) GetIpsOk() (*[]Ip, bool)`
+
+GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIps
+
+`func (o *LoadBalancerDetails) SetIps(v []Ip)`
+
+SetIps sets Ips field to given value.
+
+
+### GetConfiguration
+
+`func (o *LoadBalancerDetails) GetConfiguration() LoadBalancerConfiguration`
+
+GetConfiguration returns the Configuration field if non-nil, zero value otherwise.
+
+### GetConfigurationOk
+
+`func (o *LoadBalancerDetails) GetConfigurationOk() (*LoadBalancerConfiguration, bool)`
+
+GetConfigurationOk returns a tuple with the Configuration field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfiguration
+
+`func (o *LoadBalancerDetails) SetConfiguration(v LoadBalancerConfiguration)`
+
+SetConfiguration sets Configuration field to given value.
+
+
+### SetConfigurationNil
+
+`func (o *LoadBalancerDetails) SetConfigurationNil(b bool)`
+
+ SetConfigurationNil sets the value for Configuration to be an explicit nil
+
+### UnsetConfiguration
+`func (o *LoadBalancerDetails) UnsetConfiguration()`
+
+UnsetConfiguration ensures that no value is present for Configuration, not even an explicit nil
+### GetAutoScalingGroup
+
+`func (o *LoadBalancerDetails) GetAutoScalingGroup() AutoScalingGroup`
+
+GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
+
+### GetAutoScalingGroupOk
+
+`func (o *LoadBalancerDetails) GetAutoScalingGroupOk() (*AutoScalingGroup, bool)`
+
+GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoScalingGroup
+
+`func (o *LoadBalancerDetails) SetAutoScalingGroup(v AutoScalingGroup)`
+
+SetAutoScalingGroup sets AutoScalingGroup field to given value.
+
+
+### SetAutoScalingGroupNil
+
+`func (o *LoadBalancerDetails) SetAutoScalingGroupNil(b bool)`
+
+ SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
+
+### UnsetAutoScalingGroup
+`func (o *LoadBalancerDetails) UnsetAutoScalingGroup()`
+
+UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
+### GetPrivateNetwork
+
+`func (o *LoadBalancerDetails) GetPrivateNetwork() PrivateNetwork`
+
+GetPrivateNetwork returns the PrivateNetwork field if non-nil, zero value otherwise.
+
+### GetPrivateNetworkOk
+
+`func (o *LoadBalancerDetails) GetPrivateNetworkOk() (*PrivateNetwork, bool)`
+
+GetPrivateNetworkOk returns a tuple with the PrivateNetwork field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivateNetwork
+
+`func (o *LoadBalancerDetails) SetPrivateNetwork(v PrivateNetwork)`
+
+SetPrivateNetwork sets PrivateNetwork field to given value.
+
+
+### SetPrivateNetworkNil
+
+`func (o *LoadBalancerDetails) SetPrivateNetworkNil(b bool)`
+
+ SetPrivateNetworkNil sets the value for PrivateNetwork to be an explicit nil
+
+### UnsetPrivateNetwork
+`func (o *LoadBalancerDetails) UnsetPrivateNetwork()`
+
+UnsetPrivateNetwork ensures that no value is present for PrivateNetwork, not even an explicit nil
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

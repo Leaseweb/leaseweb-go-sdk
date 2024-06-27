@@ -17,11 +17,11 @@ import (
 	"fmt"
 )
 
-// checks if the Instance type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Instance{}
+// checks if the InstanceBase type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InstanceBase{}
 
-// Instance struct for Instance
-type Instance struct {
+// InstanceBase struct for InstanceBase
+type InstanceBase struct {
 	// The unique identifier of the instance
 	Id string `json:"id"`
 	Type InstanceTypeName `json:"type"`
@@ -46,17 +46,16 @@ type Instance struct {
 	Ips []Ip `json:"ips"`
 	Contract Contract `json:"contract"`
 	AutoScalingGroup NullableAutoScalingGroupDetails `json:"autoScalingGroup"`
-	OperatingSystem OperatingSystem `json:"operatingSystem"`
 }
 
-type _Instance Instance
+type _InstanceBase InstanceBase
 
-// NewInstance instantiates a new Instance object
+// NewInstanceBase instantiates a new InstanceBase object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstance(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference string, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem) *Instance {
-	this := Instance{}
+func NewInstanceBase(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference string, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails) *InstanceBase {
+	this := InstanceBase{}
 	this.Id = id
 	this.Type = type_
 	this.Resources = resources
@@ -73,20 +72,19 @@ func NewInstance(id string, type_ InstanceTypeName, resources InstanceResources,
 	this.Ips = ips
 	this.Contract = contract
 	this.AutoScalingGroup = autoScalingGroup
-	this.OperatingSystem = operatingSystem
 	return &this
 }
 
-// NewInstanceWithDefaults instantiates a new Instance object
+// NewInstanceBaseWithDefaults instantiates a new InstanceBase object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewInstanceWithDefaults() *Instance {
-	this := Instance{}
+func NewInstanceBaseWithDefaults() *InstanceBase {
+	this := InstanceBase{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *Instance) GetId() string {
+func (o *InstanceBase) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -97,7 +95,7 @@ func (o *Instance) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetIdOk() (*string, bool) {
+func (o *InstanceBase) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -105,12 +103,12 @@ func (o *Instance) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *Instance) SetId(v string) {
+func (o *InstanceBase) SetId(v string) {
 	o.Id = v
 }
 
 // GetType returns the Type field value
-func (o *Instance) GetType() InstanceTypeName {
+func (o *InstanceBase) GetType() InstanceTypeName {
 	if o == nil {
 		var ret InstanceTypeName
 		return ret
@@ -121,7 +119,7 @@ func (o *Instance) GetType() InstanceTypeName {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetTypeOk() (*InstanceTypeName, bool) {
+func (o *InstanceBase) GetTypeOk() (*InstanceTypeName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -129,12 +127,12 @@ func (o *Instance) GetTypeOk() (*InstanceTypeName, bool) {
 }
 
 // SetType sets field value
-func (o *Instance) SetType(v InstanceTypeName) {
+func (o *InstanceBase) SetType(v InstanceTypeName) {
 	o.Type = v
 }
 
 // GetResources returns the Resources field value
-func (o *Instance) GetResources() InstanceResources {
+func (o *InstanceBase) GetResources() InstanceResources {
 	if o == nil {
 		var ret InstanceResources
 		return ret
@@ -145,7 +143,7 @@ func (o *Instance) GetResources() InstanceResources {
 
 // GetResourcesOk returns a tuple with the Resources field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetResourcesOk() (*InstanceResources, bool) {
+func (o *InstanceBase) GetResourcesOk() (*InstanceResources, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -153,12 +151,12 @@ func (o *Instance) GetResourcesOk() (*InstanceResources, bool) {
 }
 
 // SetResources sets field value
-func (o *Instance) SetResources(v InstanceResources) {
+func (o *InstanceBase) SetResources(v InstanceResources) {
 	o.Resources = v
 }
 
 // GetRegion returns the Region field value
-func (o *Instance) GetRegion() string {
+func (o *InstanceBase) GetRegion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -169,7 +167,7 @@ func (o *Instance) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetRegionOk() (*string, bool) {
+func (o *InstanceBase) GetRegionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -177,12 +175,12 @@ func (o *Instance) GetRegionOk() (*string, bool) {
 }
 
 // SetRegion sets field value
-func (o *Instance) SetRegion(v string) {
+func (o *InstanceBase) SetRegion(v string) {
 	o.Region = v
 }
 
 // GetReference returns the Reference field value
-func (o *Instance) GetReference() string {
+func (o *InstanceBase) GetReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -193,7 +191,7 @@ func (o *Instance) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetReferenceOk() (*string, bool) {
+func (o *InstanceBase) GetReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -201,13 +199,13 @@ func (o *Instance) GetReferenceOk() (*string, bool) {
 }
 
 // SetReference sets field value
-func (o *Instance) SetReference(v string) {
+func (o *InstanceBase) SetReference(v string) {
 	o.Reference = v
 }
 
 // GetStartedAt returns the StartedAt field value
 // If the value is explicit nil, the zero value for time.Time will be returned
-func (o *Instance) GetStartedAt() time.Time {
+func (o *InstanceBase) GetStartedAt() time.Time {
 	if o == nil || o.StartedAt.Get() == nil {
 		var ret time.Time
 		return ret
@@ -219,7 +217,7 @@ func (o *Instance) GetStartedAt() time.Time {
 // GetStartedAtOk returns a tuple with the StartedAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Instance) GetStartedAtOk() (*time.Time, bool) {
+func (o *InstanceBase) GetStartedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -227,13 +225,13 @@ func (o *Instance) GetStartedAtOk() (*time.Time, bool) {
 }
 
 // SetStartedAt sets field value
-func (o *Instance) SetStartedAt(v time.Time) {
+func (o *InstanceBase) SetStartedAt(v time.Time) {
 	o.StartedAt.Set(&v)
 }
 
 // GetMarketAppId returns the MarketAppId field value
 // If the value is explicit nil, the zero value for string will be returned
-func (o *Instance) GetMarketAppId() string {
+func (o *InstanceBase) GetMarketAppId() string {
 	if o == nil || o.MarketAppId.Get() == nil {
 		var ret string
 		return ret
@@ -245,7 +243,7 @@ func (o *Instance) GetMarketAppId() string {
 // GetMarketAppIdOk returns a tuple with the MarketAppId field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Instance) GetMarketAppIdOk() (*string, bool) {
+func (o *InstanceBase) GetMarketAppIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -253,12 +251,12 @@ func (o *Instance) GetMarketAppIdOk() (*string, bool) {
 }
 
 // SetMarketAppId sets field value
-func (o *Instance) SetMarketAppId(v string) {
+func (o *InstanceBase) SetMarketAppId(v string) {
 	o.MarketAppId.Set(&v)
 }
 
 // GetState returns the State field value
-func (o *Instance) GetState() State {
+func (o *InstanceBase) GetState() State {
 	if o == nil {
 		var ret State
 		return ret
@@ -269,7 +267,7 @@ func (o *Instance) GetState() State {
 
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetStateOk() (*State, bool) {
+func (o *InstanceBase) GetStateOk() (*State, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -277,12 +275,12 @@ func (o *Instance) GetStateOk() (*State, bool) {
 }
 
 // SetState sets field value
-func (o *Instance) SetState(v State) {
+func (o *InstanceBase) SetState(v State) {
 	o.State = v
 }
 
 // GetProductType returns the ProductType field value
-func (o *Instance) GetProductType() string {
+func (o *InstanceBase) GetProductType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -293,7 +291,7 @@ func (o *Instance) GetProductType() string {
 
 // GetProductTypeOk returns a tuple with the ProductType field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetProductTypeOk() (*string, bool) {
+func (o *InstanceBase) GetProductTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -301,12 +299,12 @@ func (o *Instance) GetProductTypeOk() (*string, bool) {
 }
 
 // SetProductType sets field value
-func (o *Instance) SetProductType(v string) {
+func (o *InstanceBase) SetProductType(v string) {
 	o.ProductType = v
 }
 
 // GetHasPublicIpV4 returns the HasPublicIpV4 field value
-func (o *Instance) GetHasPublicIpV4() bool {
+func (o *InstanceBase) GetHasPublicIpV4() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -317,7 +315,7 @@ func (o *Instance) GetHasPublicIpV4() bool {
 
 // GetHasPublicIpV4Ok returns a tuple with the HasPublicIpV4 field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetHasPublicIpV4Ok() (*bool, bool) {
+func (o *InstanceBase) GetHasPublicIpV4Ok() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -325,12 +323,12 @@ func (o *Instance) GetHasPublicIpV4Ok() (*bool, bool) {
 }
 
 // SetHasPublicIpV4 sets field value
-func (o *Instance) SetHasPublicIpV4(v bool) {
+func (o *InstanceBase) SetHasPublicIpV4(v bool) {
 	o.HasPublicIpV4 = v
 }
 
 // GetincludesPrivateNetwork returns the includesPrivateNetwork field value
-func (o *Instance) GetincludesPrivateNetwork() bool {
+func (o *InstanceBase) GetincludesPrivateNetwork() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -341,7 +339,7 @@ func (o *Instance) GetincludesPrivateNetwork() bool {
 
 // GetincludesPrivateNetworkOk returns a tuple with the includesPrivateNetwork field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetincludesPrivateNetworkOk() (*bool, bool) {
+func (o *InstanceBase) GetincludesPrivateNetworkOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -349,12 +347,12 @@ func (o *Instance) GetincludesPrivateNetworkOk() (*bool, bool) {
 }
 
 // SetincludesPrivateNetwork sets field value
-func (o *Instance) SetincludesPrivateNetwork(v bool) {
+func (o *InstanceBase) SetincludesPrivateNetwork(v bool) {
 	o.includesPrivateNetwork = v
 }
 
 // GetRootDiskSize returns the RootDiskSize field value
-func (o *Instance) GetRootDiskSize() int32 {
+func (o *InstanceBase) GetRootDiskSize() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -365,7 +363,7 @@ func (o *Instance) GetRootDiskSize() int32 {
 
 // GetRootDiskSizeOk returns a tuple with the RootDiskSize field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetRootDiskSizeOk() (*int32, bool) {
+func (o *InstanceBase) GetRootDiskSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -373,12 +371,12 @@ func (o *Instance) GetRootDiskSizeOk() (*int32, bool) {
 }
 
 // SetRootDiskSize sets field value
-func (o *Instance) SetRootDiskSize(v int32) {
+func (o *InstanceBase) SetRootDiskSize(v int32) {
 	o.RootDiskSize = v
 }
 
 // GetRootDiskStorageType returns the RootDiskStorageType field value
-func (o *Instance) GetRootDiskStorageType() string {
+func (o *InstanceBase) GetRootDiskStorageType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -389,7 +387,7 @@ func (o *Instance) GetRootDiskStorageType() string {
 
 // GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetRootDiskStorageTypeOk() (*string, bool) {
+func (o *InstanceBase) GetRootDiskStorageTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -397,12 +395,12 @@ func (o *Instance) GetRootDiskStorageTypeOk() (*string, bool) {
 }
 
 // SetRootDiskStorageType sets field value
-func (o *Instance) SetRootDiskStorageType(v string) {
+func (o *InstanceBase) SetRootDiskStorageType(v string) {
 	o.RootDiskStorageType = v
 }
 
 // GetIps returns the Ips field value
-func (o *Instance) GetIps() []Ip {
+func (o *InstanceBase) GetIps() []Ip {
 	if o == nil {
 		var ret []Ip
 		return ret
@@ -413,7 +411,7 @@ func (o *Instance) GetIps() []Ip {
 
 // GetIpsOk returns a tuple with the Ips field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetIpsOk() ([]Ip, bool) {
+func (o *InstanceBase) GetIpsOk() ([]Ip, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -421,12 +419,12 @@ func (o *Instance) GetIpsOk() ([]Ip, bool) {
 }
 
 // SetIps sets field value
-func (o *Instance) SetIps(v []Ip) {
+func (o *InstanceBase) SetIps(v []Ip) {
 	o.Ips = v
 }
 
 // GetContract returns the Contract field value
-func (o *Instance) GetContract() Contract {
+func (o *InstanceBase) GetContract() Contract {
 	if o == nil {
 		var ret Contract
 		return ret
@@ -437,7 +435,7 @@ func (o *Instance) GetContract() Contract {
 
 // GetContractOk returns a tuple with the Contract field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetContractOk() (*Contract, bool) {
+func (o *InstanceBase) GetContractOk() (*Contract, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -445,13 +443,13 @@ func (o *Instance) GetContractOk() (*Contract, bool) {
 }
 
 // SetContract sets field value
-func (o *Instance) SetContract(v Contract) {
+func (o *InstanceBase) SetContract(v Contract) {
 	o.Contract = v
 }
 
 // GetAutoScalingGroup returns the AutoScalingGroup field value
 // If the value is explicit nil, the zero value for AutoScalingGroupDetails will be returned
-func (o *Instance) GetAutoScalingGroup() AutoScalingGroupDetails {
+func (o *InstanceBase) GetAutoScalingGroup() AutoScalingGroupDetails {
 	if o == nil || o.AutoScalingGroup.Get() == nil {
 		var ret AutoScalingGroupDetails
 		return ret
@@ -463,7 +461,7 @@ func (o *Instance) GetAutoScalingGroup() AutoScalingGroupDetails {
 // GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Instance) GetAutoScalingGroupOk() (*AutoScalingGroupDetails, bool) {
+func (o *InstanceBase) GetAutoScalingGroupOk() (*AutoScalingGroupDetails, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -471,35 +469,11 @@ func (o *Instance) GetAutoScalingGroupOk() (*AutoScalingGroupDetails, bool) {
 }
 
 // SetAutoScalingGroup sets field value
-func (o *Instance) SetAutoScalingGroup(v AutoScalingGroupDetails) {
+func (o *InstanceBase) SetAutoScalingGroup(v AutoScalingGroupDetails) {
 	o.AutoScalingGroup.Set(&v)
 }
 
-// GetOperatingSystem returns the OperatingSystem field value
-func (o *Instance) GetOperatingSystem() OperatingSystem {
-	if o == nil {
-		var ret OperatingSystem
-		return ret
-	}
-
-	return o.OperatingSystem
-}
-
-// GetOperatingSystemOk returns a tuple with the OperatingSystem field value
-// and a boolean to check if the value has been set.
-func (o *Instance) GetOperatingSystemOk() (*OperatingSystem, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.OperatingSystem, true
-}
-
-// SetOperatingSystem sets field value
-func (o *Instance) SetOperatingSystem(v OperatingSystem) {
-	o.OperatingSystem = v
-}
-
-func (o Instance) MarshalJSON() ([]byte, error) {
+func (o InstanceBase) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -507,7 +481,7 @@ func (o Instance) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Instance) ToMap() (map[string]interface{}, error) {
+func (o InstanceBase) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
@@ -525,11 +499,10 @@ func (o Instance) ToMap() (map[string]interface{}, error) {
 	toSerialize["ips"] = o.Ips
 	toSerialize["contract"] = o.Contract
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
-	toSerialize["operatingSystem"] = o.OperatingSystem
 	return toSerialize, nil
 }
 
-func (o *Instance) UnmarshalJSON(data []byte) (err error) {
+func (o *InstanceBase) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -550,7 +523,6 @@ func (o *Instance) UnmarshalJSON(data []byte) (err error) {
 		"ips",
 		"contract",
 		"autoScalingGroup",
-		"operatingSystem",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -567,53 +539,53 @@ func (o *Instance) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varInstance := _Instance{}
+	varInstanceBase := _InstanceBase{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInstance)
+	err = decoder.Decode(&varInstanceBase)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Instance(varInstance)
+	*o = InstanceBase(varInstanceBase)
 
 	return err
 }
 
-type NullableInstance struct {
-	value *Instance
+type NullableInstanceBase struct {
+	value *InstanceBase
 	isSet bool
 }
 
-func (v NullableInstance) Get() *Instance {
+func (v NullableInstanceBase) Get() *InstanceBase {
 	return v.value
 }
 
-func (v *NullableInstance) Set(val *Instance) {
+func (v *NullableInstanceBase) Set(val *InstanceBase) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableInstance) IsSet() bool {
+func (v NullableInstanceBase) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableInstance) Unset() {
+func (v *NullableInstanceBase) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableInstance(val *Instance) *NullableInstance {
-	return &NullableInstance{value: val, isSet: true}
+func NewNullableInstanceBase(val *InstanceBase) *NullableInstanceBase {
+	return &NullableInstanceBase{value: val, isSet: true}
 }
 
-func (v NullableInstance) MarshalJSON() ([]byte, error) {
+func (v NullableInstanceBase) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableInstance) UnmarshalJSON(src []byte) error {
+func (v *NullableInstanceBase) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

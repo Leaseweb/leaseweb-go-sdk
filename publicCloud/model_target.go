@@ -24,7 +24,7 @@ type Target struct {
 	// The identifying name set to the instance
 	Reference *string `json:"reference,omitempty"`
 	OperatingSystem *OperatingSystem `json:"operatingSystem,omitempty"`
-	State *InstanceState `json:"state,omitempty"`
+	State *State `json:"state,omitempty"`
 	HealthCheckStatus *HealthCheckStatus `json:"healthCheckStatus,omitempty"`
 	Ips []Ip `json:"ips,omitempty"`
 }
@@ -143,9 +143,9 @@ func (o *Target) SetOperatingSystem(v OperatingSystem) {
 }
 
 // GetState returns the State field value if set, zero value otherwise.
-func (o *Target) GetState() InstanceState {
+func (o *Target) GetState() State {
 	if o == nil || IsNil(o.State) {
-		var ret InstanceState
+		var ret State
 		return ret
 	}
 	return *o.State
@@ -153,7 +153,7 @@ func (o *Target) GetState() InstanceState {
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Target) GetStateOk() (*InstanceState, bool) {
+func (o *Target) GetStateOk() (*State, bool) {
 	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
@@ -169,8 +169,8 @@ func (o *Target) HasState() bool {
 	return false
 }
 
-// SetState gets a reference to the given InstanceState and assigns it to the State field.
-func (o *Target) SetState(v InstanceState) {
+// SetState gets a reference to the given State and assigns it to the State field.
+func (o *Target) SetState(v State) {
 	o.State = &v
 }
 

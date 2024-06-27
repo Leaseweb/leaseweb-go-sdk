@@ -17,11 +17,11 @@ import (
 	"fmt"
 )
 
-// checks if the AutoScalingGroup type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AutoScalingGroup{}
+// checks if the AutoScalingGroupDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AutoScalingGroupDetails{}
 
-// AutoScalingGroup struct for AutoScalingGroup
-type AutoScalingGroup struct {
+// AutoScalingGroupDetails struct for AutoScalingGroupDetails
+type AutoScalingGroupDetails struct {
 	// The Auto Scaling Group unique identifier
 	Id string `json:"id"`
 	// Auto Scaling Group type
@@ -52,16 +52,17 @@ type AutoScalingGroup struct {
 	WarmupTime NullableInt32 `json:"warmupTime"`
 	// Only for \"CPU_BASED\" auto scaling group. Cool-down time in seconds for new instances
 	CooldownTime NullableInt32 `json:"cooldownTime"`
+	LoadBalancer NullableLoadBalancer `json:"loadBalancer"`
 }
 
-type _AutoScalingGroup AutoScalingGroup
+type _AutoScalingGroupDetails AutoScalingGroupDetails
 
-// NewAutoScalingGroup instantiates a new AutoScalingGroup object
+// NewAutoScalingGroupDetails instantiates a new AutoScalingGroupDetails object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAutoScalingGroup(id string, type_ string, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32) *AutoScalingGroup {
-	this := AutoScalingGroup{}
+func NewAutoScalingGroupDetails(id string, type_ string, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, loadBalancer NullableLoadBalancer) *AutoScalingGroupDetails {
+	this := AutoScalingGroupDetails{}
 	this.Id = id
 	this.Type = type_
 	this.DesiredAmount = desiredAmount
@@ -76,19 +77,20 @@ func NewAutoScalingGroup(id string, type_ string, desiredAmount NullableInt32, r
 	this.CpuThreshold = cpuThreshold
 	this.WarmupTime = warmupTime
 	this.CooldownTime = cooldownTime
+	this.LoadBalancer = loadBalancer
 	return &this
 }
 
-// NewAutoScalingGroupWithDefaults instantiates a new AutoScalingGroup object
+// NewAutoScalingGroupDetailsWithDefaults instantiates a new AutoScalingGroupDetails object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAutoScalingGroupWithDefaults() *AutoScalingGroup {
-	this := AutoScalingGroup{}
+func NewAutoScalingGroupDetailsWithDefaults() *AutoScalingGroupDetails {
+	this := AutoScalingGroupDetails{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *AutoScalingGroup) GetId() string {
+func (o *AutoScalingGroupDetails) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -99,7 +101,7 @@ func (o *AutoScalingGroup) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetIdOk() (*string, bool) {
+func (o *AutoScalingGroupDetails) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -107,12 +109,12 @@ func (o *AutoScalingGroup) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *AutoScalingGroup) SetId(v string) {
+func (o *AutoScalingGroupDetails) SetId(v string) {
 	o.Id = v
 }
 
 // GetType returns the Type field value
-func (o *AutoScalingGroup) GetType() string {
+func (o *AutoScalingGroupDetails) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -123,7 +125,7 @@ func (o *AutoScalingGroup) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetTypeOk() (*string, bool) {
+func (o *AutoScalingGroupDetails) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -131,12 +133,12 @@ func (o *AutoScalingGroup) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *AutoScalingGroup) SetType(v string) {
+func (o *AutoScalingGroupDetails) SetType(v string) {
 	o.Type = v
 }
 
 // GetState returns the State field value if set, zero value otherwise.
-func (o *AutoScalingGroup) GetState() string {
+func (o *AutoScalingGroupDetails) GetState() string {
 	if o == nil || IsNil(o.State) {
 		var ret string
 		return ret
@@ -146,7 +148,7 @@ func (o *AutoScalingGroup) GetState() string {
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetStateOk() (*string, bool) {
+func (o *AutoScalingGroupDetails) GetStateOk() (*string, bool) {
 	if o == nil || IsNil(o.State) {
 		return nil, false
 	}
@@ -154,7 +156,7 @@ func (o *AutoScalingGroup) GetStateOk() (*string, bool) {
 }
 
 // HasState returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasState() bool {
+func (o *AutoScalingGroupDetails) HasState() bool {
 	if o != nil && !IsNil(o.State) {
 		return true
 	}
@@ -163,13 +165,13 @@ func (o *AutoScalingGroup) HasState() bool {
 }
 
 // SetState gets a reference to the given string and assigns it to the State field.
-func (o *AutoScalingGroup) SetState(v string) {
+func (o *AutoScalingGroupDetails) SetState(v string) {
 	o.State = &v
 }
 
 // GetDesiredAmount returns the DesiredAmount field value
 // If the value is explicit nil, the zero value for int32 will be returned
-func (o *AutoScalingGroup) GetDesiredAmount() int32 {
+func (o *AutoScalingGroupDetails) GetDesiredAmount() int32 {
 	if o == nil || o.DesiredAmount.Get() == nil {
 		var ret int32
 		return ret
@@ -181,7 +183,7 @@ func (o *AutoScalingGroup) GetDesiredAmount() int32 {
 // GetDesiredAmountOk returns a tuple with the DesiredAmount field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetDesiredAmountOk() (*int32, bool) {
+func (o *AutoScalingGroupDetails) GetDesiredAmountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -189,12 +191,12 @@ func (o *AutoScalingGroup) GetDesiredAmountOk() (*int32, bool) {
 }
 
 // SetDesiredAmount sets field value
-func (o *AutoScalingGroup) SetDesiredAmount(v int32) {
+func (o *AutoScalingGroupDetails) SetDesiredAmount(v int32) {
 	o.DesiredAmount.Set(&v)
 }
 
 // GetRegion returns the Region field value
-func (o *AutoScalingGroup) GetRegion() string {
+func (o *AutoScalingGroupDetails) GetRegion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -205,7 +207,7 @@ func (o *AutoScalingGroup) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetRegionOk() (*string, bool) {
+func (o *AutoScalingGroupDetails) GetRegionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -213,12 +215,12 @@ func (o *AutoScalingGroup) GetRegionOk() (*string, bool) {
 }
 
 // SetRegion sets field value
-func (o *AutoScalingGroup) SetRegion(v string) {
+func (o *AutoScalingGroupDetails) SetRegion(v string) {
 	o.Region = v
 }
 
 // GetReference returns the Reference field value
-func (o *AutoScalingGroup) GetReference() string {
+func (o *AutoScalingGroupDetails) GetReference() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -229,7 +231,7 @@ func (o *AutoScalingGroup) GetReference() string {
 
 // GetReferenceOk returns a tuple with the Reference field value
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetReferenceOk() (*string, bool) {
+func (o *AutoScalingGroupDetails) GetReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -237,12 +239,12 @@ func (o *AutoScalingGroup) GetReferenceOk() (*string, bool) {
 }
 
 // SetReference sets field value
-func (o *AutoScalingGroup) SetReference(v string) {
+func (o *AutoScalingGroupDetails) SetReference(v string) {
 	o.Reference = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *AutoScalingGroup) GetCreatedAt() time.Time {
+func (o *AutoScalingGroupDetails) GetCreatedAt() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -253,7 +255,7 @@ func (o *AutoScalingGroup) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetCreatedAtOk() (*time.Time, bool) {
+func (o *AutoScalingGroupDetails) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -261,12 +263,12 @@ func (o *AutoScalingGroup) GetCreatedAtOk() (*time.Time, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *AutoScalingGroup) SetCreatedAt(v time.Time) {
+func (o *AutoScalingGroupDetails) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value
-func (o *AutoScalingGroup) GetUpdatedAt() time.Time {
+func (o *AutoScalingGroupDetails) GetUpdatedAt() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -277,7 +279,7 @@ func (o *AutoScalingGroup) GetUpdatedAt() time.Time {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroup) GetUpdatedAtOk() (*time.Time, bool) {
+func (o *AutoScalingGroupDetails) GetUpdatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -285,13 +287,13 @@ func (o *AutoScalingGroup) GetUpdatedAtOk() (*time.Time, bool) {
 }
 
 // SetUpdatedAt sets field value
-func (o *AutoScalingGroup) SetUpdatedAt(v time.Time) {
+func (o *AutoScalingGroupDetails) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = v
 }
 
 // GetStartsAt returns the StartsAt field value
 // If the value is explicit nil, the zero value for time.Time will be returned
-func (o *AutoScalingGroup) GetStartsAt() time.Time {
+func (o *AutoScalingGroupDetails) GetStartsAt() time.Time {
 	if o == nil || o.StartsAt.Get() == nil {
 		var ret time.Time
 		return ret
@@ -303,7 +305,7 @@ func (o *AutoScalingGroup) GetStartsAt() time.Time {
 // GetStartsAtOk returns a tuple with the StartsAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetStartsAtOk() (*time.Time, bool) {
+func (o *AutoScalingGroupDetails) GetStartsAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -311,13 +313,13 @@ func (o *AutoScalingGroup) GetStartsAtOk() (*time.Time, bool) {
 }
 
 // SetStartsAt sets field value
-func (o *AutoScalingGroup) SetStartsAt(v time.Time) {
+func (o *AutoScalingGroupDetails) SetStartsAt(v time.Time) {
 	o.StartsAt.Set(&v)
 }
 
 // GetEndsAt returns the EndsAt field value
 // If the value is explicit nil, the zero value for time.Time will be returned
-func (o *AutoScalingGroup) GetEndsAt() time.Time {
+func (o *AutoScalingGroupDetails) GetEndsAt() time.Time {
 	if o == nil || o.EndsAt.Get() == nil {
 		var ret time.Time
 		return ret
@@ -329,7 +331,7 @@ func (o *AutoScalingGroup) GetEndsAt() time.Time {
 // GetEndsAtOk returns a tuple with the EndsAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetEndsAtOk() (*time.Time, bool) {
+func (o *AutoScalingGroupDetails) GetEndsAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -337,13 +339,13 @@ func (o *AutoScalingGroup) GetEndsAtOk() (*time.Time, bool) {
 }
 
 // SetEndsAt sets field value
-func (o *AutoScalingGroup) SetEndsAt(v time.Time) {
+func (o *AutoScalingGroupDetails) SetEndsAt(v time.Time) {
 	o.EndsAt.Set(&v)
 }
 
 // GetMinimumAmount returns the MinimumAmount field value
 // If the value is explicit nil, the zero value for int32 will be returned
-func (o *AutoScalingGroup) GetMinimumAmount() int32 {
+func (o *AutoScalingGroupDetails) GetMinimumAmount() int32 {
 	if o == nil || o.MinimumAmount.Get() == nil {
 		var ret int32
 		return ret
@@ -355,7 +357,7 @@ func (o *AutoScalingGroup) GetMinimumAmount() int32 {
 // GetMinimumAmountOk returns a tuple with the MinimumAmount field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetMinimumAmountOk() (*int32, bool) {
+func (o *AutoScalingGroupDetails) GetMinimumAmountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -363,13 +365,13 @@ func (o *AutoScalingGroup) GetMinimumAmountOk() (*int32, bool) {
 }
 
 // SetMinimumAmount sets field value
-func (o *AutoScalingGroup) SetMinimumAmount(v int32) {
+func (o *AutoScalingGroupDetails) SetMinimumAmount(v int32) {
 	o.MinimumAmount.Set(&v)
 }
 
 // GetMaximumAmount returns the MaximumAmount field value
 // If the value is explicit nil, the zero value for int32 will be returned
-func (o *AutoScalingGroup) GetMaximumAmount() int32 {
+func (o *AutoScalingGroupDetails) GetMaximumAmount() int32 {
 	if o == nil || o.MaximumAmount.Get() == nil {
 		var ret int32
 		return ret
@@ -381,7 +383,7 @@ func (o *AutoScalingGroup) GetMaximumAmount() int32 {
 // GetMaximumAmountOk returns a tuple with the MaximumAmount field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetMaximumAmountOk() (*int32, bool) {
+func (o *AutoScalingGroupDetails) GetMaximumAmountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -389,13 +391,13 @@ func (o *AutoScalingGroup) GetMaximumAmountOk() (*int32, bool) {
 }
 
 // SetMaximumAmount sets field value
-func (o *AutoScalingGroup) SetMaximumAmount(v int32) {
+func (o *AutoScalingGroupDetails) SetMaximumAmount(v int32) {
 	o.MaximumAmount.Set(&v)
 }
 
 // GetCpuThreshold returns the CpuThreshold field value
 // If the value is explicit nil, the zero value for int32 will be returned
-func (o *AutoScalingGroup) GetCpuThreshold() int32 {
+func (o *AutoScalingGroupDetails) GetCpuThreshold() int32 {
 	if o == nil || o.CpuThreshold.Get() == nil {
 		var ret int32
 		return ret
@@ -407,7 +409,7 @@ func (o *AutoScalingGroup) GetCpuThreshold() int32 {
 // GetCpuThresholdOk returns a tuple with the CpuThreshold field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetCpuThresholdOk() (*int32, bool) {
+func (o *AutoScalingGroupDetails) GetCpuThresholdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -415,13 +417,13 @@ func (o *AutoScalingGroup) GetCpuThresholdOk() (*int32, bool) {
 }
 
 // SetCpuThreshold sets field value
-func (o *AutoScalingGroup) SetCpuThreshold(v int32) {
+func (o *AutoScalingGroupDetails) SetCpuThreshold(v int32) {
 	o.CpuThreshold.Set(&v)
 }
 
 // GetWarmupTime returns the WarmupTime field value
 // If the value is explicit nil, the zero value for int32 will be returned
-func (o *AutoScalingGroup) GetWarmupTime() int32 {
+func (o *AutoScalingGroupDetails) GetWarmupTime() int32 {
 	if o == nil || o.WarmupTime.Get() == nil {
 		var ret int32
 		return ret
@@ -433,7 +435,7 @@ func (o *AutoScalingGroup) GetWarmupTime() int32 {
 // GetWarmupTimeOk returns a tuple with the WarmupTime field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetWarmupTimeOk() (*int32, bool) {
+func (o *AutoScalingGroupDetails) GetWarmupTimeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -441,13 +443,13 @@ func (o *AutoScalingGroup) GetWarmupTimeOk() (*int32, bool) {
 }
 
 // SetWarmupTime sets field value
-func (o *AutoScalingGroup) SetWarmupTime(v int32) {
+func (o *AutoScalingGroupDetails) SetWarmupTime(v int32) {
 	o.WarmupTime.Set(&v)
 }
 
 // GetCooldownTime returns the CooldownTime field value
 // If the value is explicit nil, the zero value for int32 will be returned
-func (o *AutoScalingGroup) GetCooldownTime() int32 {
+func (o *AutoScalingGroupDetails) GetCooldownTime() int32 {
 	if o == nil || o.CooldownTime.Get() == nil {
 		var ret int32
 		return ret
@@ -459,7 +461,7 @@ func (o *AutoScalingGroup) GetCooldownTime() int32 {
 // GetCooldownTimeOk returns a tuple with the CooldownTime field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AutoScalingGroup) GetCooldownTimeOk() (*int32, bool) {
+func (o *AutoScalingGroupDetails) GetCooldownTimeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -467,11 +469,37 @@ func (o *AutoScalingGroup) GetCooldownTimeOk() (*int32, bool) {
 }
 
 // SetCooldownTime sets field value
-func (o *AutoScalingGroup) SetCooldownTime(v int32) {
+func (o *AutoScalingGroupDetails) SetCooldownTime(v int32) {
 	o.CooldownTime.Set(&v)
 }
 
-func (o AutoScalingGroup) MarshalJSON() ([]byte, error) {
+// GetLoadBalancer returns the LoadBalancer field value
+// If the value is explicit nil, the zero value for LoadBalancer will be returned
+func (o *AutoScalingGroupDetails) GetLoadBalancer() LoadBalancer {
+	if o == nil || o.LoadBalancer.Get() == nil {
+		var ret LoadBalancer
+		return ret
+	}
+
+	return *o.LoadBalancer.Get()
+}
+
+// GetLoadBalancerOk returns a tuple with the LoadBalancer field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AutoScalingGroupDetails) GetLoadBalancerOk() (*LoadBalancer, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LoadBalancer.Get(), o.LoadBalancer.IsSet()
+}
+
+// SetLoadBalancer sets field value
+func (o *AutoScalingGroupDetails) SetLoadBalancer(v LoadBalancer) {
+	o.LoadBalancer.Set(&v)
+}
+
+func (o AutoScalingGroupDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -479,7 +507,7 @@ func (o AutoScalingGroup) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AutoScalingGroup) ToMap() (map[string]interface{}, error) {
+func (o AutoScalingGroupDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
@@ -498,10 +526,11 @@ func (o AutoScalingGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize["cpuThreshold"] = o.CpuThreshold.Get()
 	toSerialize["warmupTime"] = o.WarmupTime.Get()
 	toSerialize["cooldownTime"] = o.CooldownTime.Get()
+	toSerialize["loadBalancer"] = o.LoadBalancer.Get()
 	return toSerialize, nil
 }
 
-func (o *AutoScalingGroup) UnmarshalJSON(data []byte) (err error) {
+func (o *AutoScalingGroupDetails) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -520,6 +549,7 @@ func (o *AutoScalingGroup) UnmarshalJSON(data []byte) (err error) {
 		"cpuThreshold",
 		"warmupTime",
 		"cooldownTime",
+		"loadBalancer",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -536,53 +566,53 @@ func (o *AutoScalingGroup) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varAutoScalingGroup := _AutoScalingGroup{}
+	varAutoScalingGroupDetails := _AutoScalingGroupDetails{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAutoScalingGroup)
+	err = decoder.Decode(&varAutoScalingGroupDetails)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AutoScalingGroup(varAutoScalingGroup)
+	*o = AutoScalingGroupDetails(varAutoScalingGroupDetails)
 
 	return err
 }
 
-type NullableAutoScalingGroup struct {
-	value *AutoScalingGroup
+type NullableAutoScalingGroupDetails struct {
+	value *AutoScalingGroupDetails
 	isSet bool
 }
 
-func (v NullableAutoScalingGroup) Get() *AutoScalingGroup {
+func (v NullableAutoScalingGroupDetails) Get() *AutoScalingGroupDetails {
 	return v.value
 }
 
-func (v *NullableAutoScalingGroup) Set(val *AutoScalingGroup) {
+func (v *NullableAutoScalingGroupDetails) Set(val *AutoScalingGroupDetails) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAutoScalingGroup) IsSet() bool {
+func (v NullableAutoScalingGroupDetails) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAutoScalingGroup) Unset() {
+func (v *NullableAutoScalingGroupDetails) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAutoScalingGroup(val *AutoScalingGroup) *NullableAutoScalingGroup {
-	return &NullableAutoScalingGroup{value: val, isSet: true}
+func NewNullableAutoScalingGroupDetails(val *AutoScalingGroupDetails) *NullableAutoScalingGroupDetails {
+	return &NullableAutoScalingGroupDetails{value: val, isSet: true}
 }
 
-func (v NullableAutoScalingGroup) MarshalJSON() ([]byte, error) {
+func (v NullableAutoScalingGroupDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAutoScalingGroup) UnmarshalJSON(src []byte) error {
+func (v *NullableAutoScalingGroupDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

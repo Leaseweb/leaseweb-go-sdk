@@ -10,8 +10,6 @@ Name | Type | Description | Notes
 **Family** | **string** |  | 
 **Flavour** | **string** |  | 
 **Architecture** | **string** |  | 
-**MarketApps** | Pointer to **[]string** |  | [optional] 
-**StorageTypes** | Pointer to **[]string** | The supported storage types for the instance type | [optional] 
 
 ## Methods
 
@@ -151,56 +149,6 @@ and a boolean to check if the value has been set.
 
 SetArchitecture sets Architecture field to given value.
 
-
-### GetMarketApps
-
-`func (o *OperatingSystem) GetMarketApps() []string`
-
-GetMarketApps returns the MarketApps field if non-nil, zero value otherwise.
-
-### GetMarketAppsOk
-
-`func (o *OperatingSystem) GetMarketAppsOk() (*[]string, bool)`
-
-GetMarketAppsOk returns a tuple with the MarketApps field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMarketApps
-
-`func (o *OperatingSystem) SetMarketApps(v []string)`
-
-SetMarketApps sets MarketApps field to given value.
-
-### HasMarketApps
-
-`func (o *OperatingSystem) HasMarketApps() bool`
-
-HasMarketApps returns a boolean if a field has been set.
-
-### GetStorageTypes
-
-`func (o *OperatingSystem) GetStorageTypes() []string`
-
-GetStorageTypes returns the StorageTypes field if non-nil, zero value otherwise.
-
-### GetStorageTypesOk
-
-`func (o *OperatingSystem) GetStorageTypesOk() (*[]string, bool)`
-
-GetStorageTypesOk returns a tuple with the StorageTypes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStorageTypes
-
-`func (o *OperatingSystem) SetStorageTypes(v []string)`
-
-SetStorageTypes sets StorageTypes field to given value.
-
-### HasStorageTypes
-
-`func (o *OperatingSystem) HasStorageTypes() bool`
-
-HasStorageTypes returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -13,6 +13,8 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the LoadBalancer type satisfies the MappedNullable interface at compile time
@@ -20,34 +22,37 @@ var _ MappedNullable = &LoadBalancer{}
 
 // LoadBalancer struct for LoadBalancer
 type LoadBalancer struct {
-	// The customer ID who owns the load balancer
-	CustomerId *string `json:"customerId,omitempty"`
 	// The load balancer unique identifier
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	// Load balancer type
-	Type *string `json:"type,omitempty"`
-	Resources *InstanceResources `json:"resources,omitempty"`
+	Type string `json:"type"`
+	Resources InstanceResources `json:"resources"`
 	// The region where the load balancer was launched into
-	Region *string `json:"region,omitempty"`
+	Region string `json:"region"`
 	// The identifying name set to the load balancer
-	Reference *string `json:"reference,omitempty"`
-	State *InstanceState `json:"state,omitempty"`
-	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
-	RootDiskSize *int32 `json:"rootDiskSize,omitempty"`
-	Ips []Ip `json:"ips,omitempty"`
+	Reference string `json:"reference"`
+	State State `json:"state"`
+	Contract Contract `json:"contract"`
 	// Date and time when the instance was started for the first time, right after launching it
-	StartedAt *time.Time `json:"startedAt,omitempty"`
-	Contract *Contract `json:"contract,omitempty"`
-	Configuration *LoadBalancerConfiguration `json:"configuration,omitempty"`
-	AutoScalingGroup NullableLoadBalancerAutoScalingGroup `json:"autoScalingGroup,omitempty"`
+	StartedAt NullableTime `json:"startedAt"`
 }
+
+type _LoadBalancer LoadBalancer
 
 // NewLoadBalancer instantiates a new LoadBalancer object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancer() *LoadBalancer {
+func NewLoadBalancer(id string, type_ string, resources InstanceResources, region string, reference string, state State, contract Contract, startedAt NullableTime) *LoadBalancer {
 	this := LoadBalancer{}
+	this.Id = id
+	this.Type = type_
+	this.Resources = resources
+	this.Region = region
+	this.Reference = reference
+	this.State = state
+	this.Contract = contract
+	this.StartedAt = startedAt
 	return &this
 }
 
@@ -59,430 +64,198 @@ func NewLoadBalancerWithDefaults() *LoadBalancer {
 	return &this
 }
 
-// GetCustomerId returns the CustomerId field value if set, zero value otherwise.
-func (o *LoadBalancer) GetCustomerId() string {
-	if o == nil || IsNil(o.CustomerId) {
-		var ret string
-		return ret
-	}
-	return *o.CustomerId
-}
-
-// GetCustomerIdOk returns a tuple with the CustomerId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetCustomerIdOk() (*string, bool) {
-	if o == nil || IsNil(o.CustomerId) {
-		return nil, false
-	}
-	return o.CustomerId, true
-}
-
-// HasCustomerId returns a boolean if a field has been set.
-func (o *LoadBalancer) HasCustomerId() bool {
-	if o != nil && !IsNil(o.CustomerId) {
-		return true
-	}
-
-	return false
-}
-
-// SetCustomerId gets a reference to the given string and assigns it to the CustomerId field.
-func (o *LoadBalancer) SetCustomerId(v string) {
-	o.CustomerId = &v
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *LoadBalancer) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *LoadBalancer) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *LoadBalancer) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *LoadBalancer) SetId(v string) {
-	o.Id = &v
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *LoadBalancer) GetType() string {
-	if o == nil || IsNil(o.Type) {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *LoadBalancer) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *LoadBalancer) SetType(v string) {
-	o.Type = &v
-}
-
-// GetResources returns the Resources field value if set, zero value otherwise.
-func (o *LoadBalancer) GetResources() InstanceResources {
-	if o == nil || IsNil(o.Resources) {
-		var ret InstanceResources
-		return ret
-	}
-	return *o.Resources
-}
-
-// GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetResourcesOk() (*InstanceResources, bool) {
-	if o == nil || IsNil(o.Resources) {
-		return nil, false
-	}
-	return o.Resources, true
-}
-
-// HasResources returns a boolean if a field has been set.
-func (o *LoadBalancer) HasResources() bool {
-	if o != nil && !IsNil(o.Resources) {
-		return true
-	}
-
-	return false
-}
-
-// SetResources gets a reference to the given InstanceResources and assigns it to the Resources field.
-func (o *LoadBalancer) SetResources(v InstanceResources) {
-	o.Resources = &v
-}
-
-// GetRegion returns the Region field value if set, zero value otherwise.
-func (o *LoadBalancer) GetRegion() string {
-	if o == nil || IsNil(o.Region) {
-		var ret string
-		return ret
-	}
-	return *o.Region
-}
-
-// GetRegionOk returns a tuple with the Region field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetRegionOk() (*string, bool) {
-	if o == nil || IsNil(o.Region) {
-		return nil, false
-	}
-	return o.Region, true
-}
-
-// HasRegion returns a boolean if a field has been set.
-func (o *LoadBalancer) HasRegion() bool {
-	if o != nil && !IsNil(o.Region) {
-		return true
-	}
-
-	return false
-}
-
-// SetRegion gets a reference to the given string and assigns it to the Region field.
-func (o *LoadBalancer) SetRegion(v string) {
-	o.Region = &v
-}
-
-// GetReference returns the Reference field value if set, zero value otherwise.
-func (o *LoadBalancer) GetReference() string {
-	if o == nil || IsNil(o.Reference) {
-		var ret string
-		return ret
-	}
-	return *o.Reference
-}
-
-// GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetReferenceOk() (*string, bool) {
-	if o == nil || IsNil(o.Reference) {
-		return nil, false
-	}
-	return o.Reference, true
-}
-
-// HasReference returns a boolean if a field has been set.
-func (o *LoadBalancer) HasReference() bool {
-	if o != nil && !IsNil(o.Reference) {
-		return true
-	}
-
-	return false
-}
-
-// SetReference gets a reference to the given string and assigns it to the Reference field.
-func (o *LoadBalancer) SetReference(v string) {
-	o.Reference = &v
-}
-
-// GetState returns the State field value if set, zero value otherwise.
-func (o *LoadBalancer) GetState() InstanceState {
-	if o == nil || IsNil(o.State) {
-		var ret InstanceState
-		return ret
-	}
-	return *o.State
-}
-
-// GetStateOk returns a tuple with the State field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetStateOk() (*InstanceState, bool) {
-	if o == nil || IsNil(o.State) {
-		return nil, false
-	}
-	return o.State, true
-}
-
-// HasState returns a boolean if a field has been set.
-func (o *LoadBalancer) HasState() bool {
-	if o != nil && !IsNil(o.State) {
-		return true
-	}
-
-	return false
-}
-
-// SetState gets a reference to the given InstanceState and assigns it to the State field.
-func (o *LoadBalancer) SetState(v InstanceState) {
-	o.State = &v
-}
-
-// GetRootDiskSize returns the RootDiskSize field value if set, zero value otherwise.
-func (o *LoadBalancer) GetRootDiskSize() int32 {
-	if o == nil || IsNil(o.RootDiskSize) {
-		var ret int32
-		return ret
-	}
-	return *o.RootDiskSize
-}
-
-// GetRootDiskSizeOk returns a tuple with the RootDiskSize field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetRootDiskSizeOk() (*int32, bool) {
-	if o == nil || IsNil(o.RootDiskSize) {
-		return nil, false
-	}
-	return o.RootDiskSize, true
-}
-
-// HasRootDiskSize returns a boolean if a field has been set.
-func (o *LoadBalancer) HasRootDiskSize() bool {
-	if o != nil && !IsNil(o.RootDiskSize) {
-		return true
-	}
-
-	return false
-}
-
-// SetRootDiskSize gets a reference to the given int32 and assigns it to the RootDiskSize field.
-func (o *LoadBalancer) SetRootDiskSize(v int32) {
-	o.RootDiskSize = &v
-}
-
-// GetIps returns the Ips field value if set, zero value otherwise.
-func (o *LoadBalancer) GetIps() []Ip {
-	if o == nil || IsNil(o.Ips) {
-		var ret []Ip
-		return ret
-	}
-	return o.Ips
-}
-
-// GetIpsOk returns a tuple with the Ips field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetIpsOk() ([]Ip, bool) {
-	if o == nil || IsNil(o.Ips) {
-		return nil, false
-	}
-	return o.Ips, true
-}
-
-// HasIps returns a boolean if a field has been set.
-func (o *LoadBalancer) HasIps() bool {
-	if o != nil && !IsNil(o.Ips) {
-		return true
-	}
-
-	return false
-}
-
-// SetIps gets a reference to the given []Ip and assigns it to the Ips field.
-func (o *LoadBalancer) SetIps(v []Ip) {
-	o.Ips = v
-}
-
-// GetStartedAt returns the StartedAt field value if set, zero value otherwise.
-func (o *LoadBalancer) GetStartedAt() time.Time {
-	if o == nil || IsNil(o.StartedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.StartedAt
-}
-
-// GetStartedAtOk returns a tuple with the StartedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetStartedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.StartedAt) {
-		return nil, false
-	}
-	return o.StartedAt, true
-}
-
-// HasStartedAt returns a boolean if a field has been set.
-func (o *LoadBalancer) HasStartedAt() bool {
-	if o != nil && !IsNil(o.StartedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetStartedAt gets a reference to the given time.Time and assigns it to the StartedAt field.
-func (o *LoadBalancer) SetStartedAt(v time.Time) {
-	o.StartedAt = &v
-}
-
-// GetContract returns the Contract field value if set, zero value otherwise.
-func (o *LoadBalancer) GetContract() Contract {
-	if o == nil || IsNil(o.Contract) {
-		var ret Contract
-		return ret
-	}
-	return *o.Contract
-}
-
-// GetContractOk returns a tuple with the Contract field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetContractOk() (*Contract, bool) {
-	if o == nil || IsNil(o.Contract) {
-		return nil, false
-	}
-	return o.Contract, true
-}
-
-// HasContract returns a boolean if a field has been set.
-func (o *LoadBalancer) HasContract() bool {
-	if o != nil && !IsNil(o.Contract) {
-		return true
-	}
-
-	return false
-}
-
-// SetContract gets a reference to the given Contract and assigns it to the Contract field.
-func (o *LoadBalancer) SetContract(v Contract) {
-	o.Contract = &v
-}
-
-// GetConfiguration returns the Configuration field value if set, zero value otherwise.
-func (o *LoadBalancer) GetConfiguration() LoadBalancerConfiguration {
-	if o == nil || IsNil(o.Configuration) {
-		var ret LoadBalancerConfiguration
-		return ret
-	}
-	return *o.Configuration
-}
-
-// GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetConfigurationOk() (*LoadBalancerConfiguration, bool) {
-	if o == nil || IsNil(o.Configuration) {
-		return nil, false
-	}
-	return o.Configuration, true
-}
-
-// HasConfiguration returns a boolean if a field has been set.
-func (o *LoadBalancer) HasConfiguration() bool {
-	if o != nil && !IsNil(o.Configuration) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfiguration gets a reference to the given LoadBalancerConfiguration and assigns it to the Configuration field.
-func (o *LoadBalancer) SetConfiguration(v LoadBalancerConfiguration) {
-	o.Configuration = &v
-}
-
-// GetAutoScalingGroup returns the AutoScalingGroup field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LoadBalancer) GetAutoScalingGroup() LoadBalancerAutoScalingGroup {
-	if o == nil || IsNil(o.AutoScalingGroup.Get()) {
-		var ret LoadBalancerAutoScalingGroup
-		return ret
-	}
-	return *o.AutoScalingGroup.Get()
-}
-
-// GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoadBalancer) GetAutoScalingGroupOk() (*LoadBalancerAutoScalingGroup, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.AutoScalingGroup.Get(), o.AutoScalingGroup.IsSet()
+	return &o.Id, true
 }
 
-// HasAutoScalingGroup returns a boolean if a field has been set.
-func (o *LoadBalancer) HasAutoScalingGroup() bool {
-	if o != nil && o.AutoScalingGroup.IsSet() {
-		return true
+// SetId sets field value
+func (o *LoadBalancer) SetId(v string) {
+	o.Id = v
+}
+
+// GetType returns the Type field value
+func (o *LoadBalancer) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.Type
 }
 
-// SetAutoScalingGroup gets a reference to the given NullableLoadBalancerAutoScalingGroup and assigns it to the AutoScalingGroup field.
-func (o *LoadBalancer) SetAutoScalingGroup(v LoadBalancerAutoScalingGroup) {
-	o.AutoScalingGroup.Set(&v)
-}
-// SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
-func (o *LoadBalancer) SetAutoScalingGroupNil() {
-	o.AutoScalingGroup.Set(nil)
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *LoadBalancer) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
 }
 
-// UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
-func (o *LoadBalancer) UnsetAutoScalingGroup() {
-	o.AutoScalingGroup.Unset()
+// SetType sets field value
+func (o *LoadBalancer) SetType(v string) {
+	o.Type = v
+}
+
+// GetResources returns the Resources field value
+func (o *LoadBalancer) GetResources() InstanceResources {
+	if o == nil {
+		var ret InstanceResources
+		return ret
+	}
+
+	return o.Resources
+}
+
+// GetResourcesOk returns a tuple with the Resources field value
+// and a boolean to check if the value has been set.
+func (o *LoadBalancer) GetResourcesOk() (*InstanceResources, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Resources, true
+}
+
+// SetResources sets field value
+func (o *LoadBalancer) SetResources(v InstanceResources) {
+	o.Resources = v
+}
+
+// GetRegion returns the Region field value
+func (o *LoadBalancer) GetRegion() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Region
+}
+
+// GetRegionOk returns a tuple with the Region field value
+// and a boolean to check if the value has been set.
+func (o *LoadBalancer) GetRegionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Region, true
+}
+
+// SetRegion sets field value
+func (o *LoadBalancer) SetRegion(v string) {
+	o.Region = v
+}
+
+// GetReference returns the Reference field value
+func (o *LoadBalancer) GetReference() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Reference
+}
+
+// GetReferenceOk returns a tuple with the Reference field value
+// and a boolean to check if the value has been set.
+func (o *LoadBalancer) GetReferenceOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Reference, true
+}
+
+// SetReference sets field value
+func (o *LoadBalancer) SetReference(v string) {
+	o.Reference = v
+}
+
+// GetState returns the State field value
+func (o *LoadBalancer) GetState() State {
+	if o == nil {
+		var ret State
+		return ret
+	}
+
+	return o.State
+}
+
+// GetStateOk returns a tuple with the State field value
+// and a boolean to check if the value has been set.
+func (o *LoadBalancer) GetStateOk() (*State, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.State, true
+}
+
+// SetState sets field value
+func (o *LoadBalancer) SetState(v State) {
+	o.State = v
+}
+
+// GetContract returns the Contract field value
+func (o *LoadBalancer) GetContract() Contract {
+	if o == nil {
+		var ret Contract
+		return ret
+	}
+
+	return o.Contract
+}
+
+// GetContractOk returns a tuple with the Contract field value
+// and a boolean to check if the value has been set.
+func (o *LoadBalancer) GetContractOk() (*Contract, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Contract, true
+}
+
+// SetContract sets field value
+func (o *LoadBalancer) SetContract(v Contract) {
+	o.Contract = v
+}
+
+// GetStartedAt returns the StartedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
+func (o *LoadBalancer) GetStartedAt() time.Time {
+	if o == nil || o.StartedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return *o.StartedAt.Get()
+}
+
+// GetStartedAtOk returns a tuple with the StartedAt field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LoadBalancer) GetStartedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StartedAt.Get(), o.StartedAt.IsSet()
+}
+
+// SetStartedAt sets field value
+func (o *LoadBalancer) SetStartedAt(v time.Time) {
+	o.StartedAt.Set(&v)
 }
 
 func (o LoadBalancer) MarshalJSON() ([]byte, error) {
@@ -495,46 +268,59 @@ func (o LoadBalancer) MarshalJSON() ([]byte, error) {
 
 func (o LoadBalancer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CustomerId) {
-		toSerialize["customerId"] = o.CustomerId
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
-	if !IsNil(o.Resources) {
-		toSerialize["resources"] = o.Resources
-	}
-	if !IsNil(o.Region) {
-		toSerialize["region"] = o.Region
-	}
-	if !IsNil(o.Reference) {
-		toSerialize["reference"] = o.Reference
-	}
-	if !IsNil(o.State) {
-		toSerialize["state"] = o.State
-	}
-	if !IsNil(o.RootDiskSize) {
-		toSerialize["rootDiskSize"] = o.RootDiskSize
-	}
-	if !IsNil(o.Ips) {
-		toSerialize["ips"] = o.Ips
-	}
-	if !IsNil(o.StartedAt) {
-		toSerialize["startedAt"] = o.StartedAt
-	}
-	if !IsNil(o.Contract) {
-		toSerialize["contract"] = o.Contract
-	}
-	if !IsNil(o.Configuration) {
-		toSerialize["configuration"] = o.Configuration
-	}
-	if o.AutoScalingGroup.IsSet() {
-		toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["type"] = o.Type
+	toSerialize["resources"] = o.Resources
+	toSerialize["region"] = o.Region
+	toSerialize["reference"] = o.Reference
+	toSerialize["state"] = o.State
+	toSerialize["contract"] = o.Contract
+	toSerialize["startedAt"] = o.StartedAt.Get()
 	return toSerialize, nil
+}
+
+func (o *LoadBalancer) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"type",
+		"resources",
+		"region",
+		"reference",
+		"state",
+		"contract",
+		"startedAt",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varLoadBalancer := _LoadBalancer{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varLoadBalancer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LoadBalancer(varLoadBalancer)
+
+	return err
 }
 
 type NullableLoadBalancer struct {

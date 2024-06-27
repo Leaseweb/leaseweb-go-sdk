@@ -26,7 +26,7 @@ type LaunchInstanceOpts struct {
 	Type InstanceTypeName `json:"type"`
 	OperatingSystemId OperatingSystemId `json:"operatingSystemId"`
 	// Market App ID that must be installed into the instance
-	MarketAppId NullableString `json:"marketAppId,omitempty"`
+	MarketAppId *string `json:"marketAppId,omitempty"`
 	// An identifying name you can refer to the instance
 	Reference *string `json:"reference,omitempty"`
 	ContractType string `json:"contractType"`
@@ -140,46 +140,36 @@ func (o *LaunchInstanceOpts) SetOperatingSystemId(v OperatingSystemId) {
 	o.OperatingSystemId = v
 }
 
-// GetMarketAppId returns the MarketAppId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetMarketAppId returns the MarketAppId field value if set, zero value otherwise.
 func (o *LaunchInstanceOpts) GetMarketAppId() string {
-	if o == nil || IsNil(o.MarketAppId.Get()) {
+	if o == nil || IsNil(o.MarketAppId) {
 		var ret string
 		return ret
 	}
-	return *o.MarketAppId.Get()
+	return *o.MarketAppId
 }
 
 // GetMarketAppIdOk returns a tuple with the MarketAppId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *LaunchInstanceOpts) GetMarketAppIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MarketAppId) {
 		return nil, false
 	}
-	return o.MarketAppId.Get(), o.MarketAppId.IsSet()
+	return o.MarketAppId, true
 }
 
 // HasMarketAppId returns a boolean if a field has been set.
 func (o *LaunchInstanceOpts) HasMarketAppId() bool {
-	if o != nil && o.MarketAppId.IsSet() {
+	if o != nil && !IsNil(o.MarketAppId) {
 		return true
 	}
 
 	return false
 }
 
-// SetMarketAppId gets a reference to the given NullableString and assigns it to the MarketAppId field.
+// SetMarketAppId gets a reference to the given string and assigns it to the MarketAppId field.
 func (o *LaunchInstanceOpts) SetMarketAppId(v string) {
-	o.MarketAppId.Set(&v)
-}
-// SetMarketAppIdNil sets the value for MarketAppId to be an explicit nil
-func (o *LaunchInstanceOpts) SetMarketAppIdNil() {
-	o.MarketAppId.Set(nil)
-}
-
-// UnsetMarketAppId ensures that no value is present for MarketAppId, not even an explicit nil
-func (o *LaunchInstanceOpts) UnsetMarketAppId() {
-	o.MarketAppId.Unset()
+	o.MarketAppId = &v
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
@@ -387,8 +377,8 @@ func (o LaunchInstanceOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize["region"] = o.Region
 	toSerialize["type"] = o.Type
 	toSerialize["operatingSystemId"] = o.OperatingSystemId
-	if o.MarketAppId.IsSet() {
-		toSerialize["marketAppId"] = o.MarketAppId.Get()
+	if !IsNil(o.MarketAppId) {
+		toSerialize["marketAppId"] = o.MarketAppId
 	}
 	if !IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference

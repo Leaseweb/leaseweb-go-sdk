@@ -278,7 +278,7 @@ Name | Type | Description  | Notes
 
 ## CreateAutoScalingGroup
 
-> AutoScalingGroup CreateAutoScalingGroup(ctx).CreateAutoScalingGroupOpts(createAutoScalingGroupOpts).Execute()
+> AutoScalingGroupDetails CreateAutoScalingGroup(ctx).CreateAutoScalingGroupOpts(createAutoScalingGroupOpts).Execute()
 
 Create Auto Scaling Group
 
@@ -306,7 +306,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.CreateAutoScalingGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateAutoScalingGroup`: AutoScalingGroup
+	// response from `CreateAutoScalingGroup`: AutoScalingGroupDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.CreateAutoScalingGroup`: %v\n", resp)
 }
 ```
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AutoScalingGroup**](AutoScalingGroup.md)
+[**AutoScalingGroupDetails**](AutoScalingGroupDetails.md)
 
 ### Authorization
 
@@ -834,7 +834,7 @@ Name | Type | Description  | Notes
 
 ## DeregisterAutoScalingGroupLoadBalancer
 
-> AutoScalingGroup DeregisterAutoScalingGroupLoadBalancer(ctx, autoScalingGroupId).Execute()
+> AutoScalingGroupDetails DeregisterAutoScalingGroupLoadBalancer(ctx, autoScalingGroupId).Execute()
 
 Deregister Load balancer
 
@@ -862,7 +862,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.DeregisterAutoScalingGroupLoadBalancer``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeregisterAutoScalingGroupLoadBalancer`: AutoScalingGroup
+	// response from `DeregisterAutoScalingGroupLoadBalancer`: AutoScalingGroupDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.DeregisterAutoScalingGroupLoadBalancer`: %v\n", resp)
 }
 ```
@@ -886,7 +886,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AutoScalingGroup**](AutoScalingGroup.md)
+[**AutoScalingGroupDetails**](AutoScalingGroupDetails.md)
 
 ### Authorization
 
@@ -1042,7 +1042,7 @@ Name | Type | Description  | Notes
 
 ## GetAutoScalingGroup
 
-> AutoScalingGroup GetAutoScalingGroup(ctx, autoScalingGroupId).Execute()
+> AutoScalingGroupDetails GetAutoScalingGroup(ctx, autoScalingGroupId).Execute()
 
 Get Auto Scaling Group details
 
@@ -1070,7 +1070,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetAutoScalingGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAutoScalingGroup`: AutoScalingGroup
+	// response from `GetAutoScalingGroup`: AutoScalingGroupDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetAutoScalingGroup`: %v\n", resp)
 }
 ```
@@ -1094,7 +1094,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AutoScalingGroup**](AutoScalingGroup.md)
+[**AutoScalingGroupDetails**](AutoScalingGroupDetails.md)
 
 ### Authorization
 
@@ -1780,7 +1780,7 @@ Name | Type | Description  | Notes
 
 ## GetInstance
 
-> Instance GetInstance(ctx, instanceId).Execute()
+> InstanceDetails GetInstance(ctx, instanceId).Execute()
 
 Get instance details
 
@@ -1808,7 +1808,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetInstance``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetInstance`: Instance
+	// response from `GetInstance`: InstanceDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetInstance`: %v\n", resp)
 }
 ```
@@ -1832,7 +1832,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Instance**](Instance.md)
+[**InstanceDetails**](InstanceDetails.md)
 
 ### Authorization
 
@@ -2221,7 +2221,7 @@ Name | Type | Description  | Notes
 
 ## GetLoadBalancer
 
-> LoadBalancer GetLoadBalancer(ctx, loadBalancerId).Execute()
+> LoadBalancerDetails GetLoadBalancer(ctx, loadBalancerId).Execute()
 
 Get load balancer details
 
@@ -2249,7 +2249,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetLoadBalancer``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLoadBalancer`: LoadBalancer
+	// response from `GetLoadBalancer`: LoadBalancerDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetLoadBalancer`: %v\n", resp)
 }
 ```
@@ -2273,7 +2273,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LoadBalancer**](LoadBalancer.md)
+[**LoadBalancerDetails**](LoadBalancerDetails.md)
 
 ### Authorization
 
@@ -2711,7 +2711,7 @@ Name | Type | Description  | Notes
 
 ## GetReinstallOsList
 
-> []OperatingSystem GetReinstallOsList(ctx, instanceId).Execute()
+> []OperatingSystemDetails GetReinstallOsList(ctx, instanceId).Execute()
 
 List OSes available for reinstall
 
@@ -2739,7 +2739,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetReinstallOsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetReinstallOsList`: []OperatingSystem
+	// response from `GetReinstallOsList`: []OperatingSystemDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetReinstallOsList`: %v\n", resp)
 }
 ```
@@ -2763,7 +2763,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OperatingSystem**](OperatingSystem.md)
+[**[]OperatingSystemDetails**](OperatingSystemDetails.md)
 
 ### Authorization
 
@@ -3066,7 +3066,7 @@ Name | Type | Description  | Notes
 
 ## LaunchLoadBalancer
 
-> LoadBalancer LaunchLoadBalancer(ctx).LaunchLoadBalancerOpts(launchLoadBalancerOpts).Execute()
+> LoadBalancerDetails LaunchLoadBalancer(ctx).LaunchLoadBalancerOpts(launchLoadBalancerOpts).Execute()
 
 Launch Load balancer
 
@@ -3094,7 +3094,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.LaunchLoadBalancer``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `LaunchLoadBalancer`: LoadBalancer
+	// response from `LaunchLoadBalancer`: LoadBalancerDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.LaunchLoadBalancer`: %v\n", resp)
 }
 ```
@@ -3114,7 +3114,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LoadBalancer**](LoadBalancer.md)
+[**LoadBalancerDetails**](LoadBalancerDetails.md)
 
 ### Authorization
 
@@ -3275,7 +3275,7 @@ Name | Type | Description  | Notes
 
 ## RegisterAutoScalingGroupLoadBalancer
 
-> AutoScalingGroup RegisterAutoScalingGroupLoadBalancer(ctx, autoScalingGroupId).RegisterAutoScalingGroupLoadBalancerOpts(registerAutoScalingGroupLoadBalancerOpts).Execute()
+> AutoScalingGroupDetails RegisterAutoScalingGroupLoadBalancer(ctx, autoScalingGroupId).RegisterAutoScalingGroupLoadBalancerOpts(registerAutoScalingGroupLoadBalancerOpts).Execute()
 
 Register Load balancer
 
@@ -3304,7 +3304,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.RegisterAutoScalingGroupLoadBalancer``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RegisterAutoScalingGroupLoadBalancer`: AutoScalingGroup
+	// response from `RegisterAutoScalingGroupLoadBalancer`: AutoScalingGroupDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.RegisterAutoScalingGroupLoadBalancer`: %v\n", resp)
 }
 ```
@@ -3329,7 +3329,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AutoScalingGroup**](AutoScalingGroup.md)
+[**AutoScalingGroupDetails**](AutoScalingGroupDetails.md)
 
 ### Authorization
 
@@ -4109,7 +4109,7 @@ Name | Type | Description  | Notes
 
 ## UpdateAutoScalingGroup
 
-> AutoScalingGroup UpdateAutoScalingGroup(ctx, autoScalingGroupId).UpdateAutoScalingGroupOpts(updateAutoScalingGroupOpts).Execute()
+> AutoScalingGroupDetails UpdateAutoScalingGroup(ctx, autoScalingGroupId).UpdateAutoScalingGroupOpts(updateAutoScalingGroupOpts).Execute()
 
 Update Auto Scaling Group
 
@@ -4138,7 +4138,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.UpdateAutoScalingGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateAutoScalingGroup`: AutoScalingGroup
+	// response from `UpdateAutoScalingGroup`: AutoScalingGroupDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.UpdateAutoScalingGroup`: %v\n", resp)
 }
 ```
@@ -4163,7 +4163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AutoScalingGroup**](AutoScalingGroup.md)
+[**AutoScalingGroupDetails**](AutoScalingGroupDetails.md)
 
 ### Authorization
 
@@ -4259,7 +4259,7 @@ Name | Type | Description  | Notes
 
 ## UpdateInstance
 
-> Instance UpdateInstance(ctx, instanceId).UpdateInstanceOpts(updateInstanceOpts).Execute()
+> InstanceDetails UpdateInstance(ctx, instanceId).UpdateInstanceOpts(updateInstanceOpts).Execute()
 
 Update instance
 
@@ -4288,7 +4288,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.UpdateInstance``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateInstance`: Instance
+	// response from `UpdateInstance`: InstanceDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.UpdateInstance`: %v\n", resp)
 }
 ```
@@ -4313,7 +4313,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Instance**](Instance.md)
+[**InstanceDetails**](InstanceDetails.md)
 
 ### Authorization
 
@@ -4406,7 +4406,7 @@ Name | Type | Description  | Notes
 
 ## UpdateLoadBalancer
 
-> LoadBalancer UpdateLoadBalancer(ctx, loadBalancerId).UpdateLoadBalancerOpts(updateLoadBalancerOpts).Execute()
+> LoadBalancerDetails UpdateLoadBalancer(ctx, loadBalancerId).UpdateLoadBalancerOpts(updateLoadBalancerOpts).Execute()
 
 Update load balancer
 
@@ -4435,7 +4435,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.UpdateLoadBalancer``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateLoadBalancer`: LoadBalancer
+	// response from `UpdateLoadBalancer`: LoadBalancerDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.UpdateLoadBalancer`: %v\n", resp)
 }
 ```
@@ -4460,7 +4460,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LoadBalancer**](LoadBalancer.md)
+[**LoadBalancerDetails**](LoadBalancerDetails.md)
 
 ### Authorization
 

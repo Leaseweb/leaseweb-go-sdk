@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Region** | **string** | Region to launch the instance into | 
 **Type** | [**InstanceTypeName**](InstanceTypeName.md) |  | 
 **OperatingSystemId** | [**OperatingSystemId**](OperatingSystemId.md) |  | 
-**MarketAppId** | Pointer to **NullableString** | Market App ID that must be installed into the instance | [optional] 
+**MarketAppId** | Pointer to **string** | Market App ID that must be installed into the instance | [optional] 
 **Reference** | Pointer to **string** | An identifying name you can refer to the instance | [optional] 
 **ContractType** | **string** |  | 
 **ContractTerm** | **int32** | Contract commitment. Used only when contract type is MONTHLY | 
@@ -120,16 +120,6 @@ SetMarketAppId sets MarketAppId field to given value.
 
 HasMarketAppId returns a boolean if a field has been set.
 
-### SetMarketAppIdNil
-
-`func (o *LaunchInstanceOpts) SetMarketAppIdNil(b bool)`
-
- SetMarketAppIdNil sets the value for MarketAppId to be an explicit nil
-
-### UnsetMarketAppId
-`func (o *LaunchInstanceOpts) UnsetMarketAppId()`
-
-UnsetMarketAppId ensures that no value is present for MarketAppId, not even an explicit nil
 ### GetReference
 
 `func (o *LaunchInstanceOpts) GetReference() string`

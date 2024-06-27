@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Resources** | Pointer to [**InstanceResources**](InstanceResources.md) |  | [optional] 
 **Region** | Pointer to **string** | The region in which the instance was launched | [optional] 
 **Reference** | Pointer to **string** | The identifying name set to the instance | [optional] 
-**State** | Pointer to [**InstanceState**](InstanceState.md) |  | [optional] 
+**State** | Pointer to [**State**](State.md) |  | [optional] 
 **ProductType** | Pointer to **string** |  | [optional] 
 **includesPrivateNetwork** | Pointer to **bool** |  | [optional] 
 **Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
@@ -160,20 +160,20 @@ HasReference returns a boolean if a field has been set.
 
 ### GetState
 
-`func (o *AutoScaledInstance) GetState() InstanceState`
+`func (o *AutoScaledInstance) GetState() State`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *AutoScaledInstance) GetStateOk() (*InstanceState, bool)`
+`func (o *AutoScaledInstance) GetStateOk() (*State, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *AutoScaledInstance) SetState(v InstanceState)`
+`func (o *AutoScaledInstance) SetState(v State)`
 
 SetState sets State field to given value.
 

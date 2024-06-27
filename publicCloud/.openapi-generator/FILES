@@ -9,7 +9,7 @@ configuration.go
 docs/AttachIsoOpts.md
 docs/AutoScaledInstance.md
 docs/AutoScalingGroup.md
-docs/AutoScalingLoadBalancer.md
+docs/AutoScalingGroupDetails.md
 docs/Billing.md
 docs/Central.md
 docs/Certificate.md
@@ -53,8 +53,9 @@ docs/GetSnapshotListResult.md
 docs/HealthCheck.md
 docs/HealthCheckStatus.md
 docs/Instance.md
+docs/InstanceBase.md
+docs/InstanceDetails.md
 docs/InstanceResources.md
-docs/InstanceState.md
 docs/InstanceType.md
 docs/InstanceTypeName.md
 docs/InstanceTypes.md
@@ -63,8 +64,8 @@ docs/Iso.md
 docs/LaunchInstanceOpts.md
 docs/LaunchLoadBalancerOpts.md
 docs/LoadBalancer.md
-docs/LoadBalancerAutoScalingGroup.md
 docs/LoadBalancerConfiguration.md
+docs/LoadBalancerDetails.md
 docs/LoadBalancerListener.md
 docs/LoadBalancerListenerOpts.md
 docs/LoadBalancerTargetOpt.md
@@ -78,6 +79,7 @@ docs/NetworkType.md
 docs/NullRouteIpOpts.md
 docs/OperatingSystem.md
 docs/OperatingSystemDetail.md
+docs/OperatingSystemDetails.md
 docs/OperatingSystemId.md
 docs/Peak.md
 docs/Price.md
@@ -87,6 +89,7 @@ docs/Region.md
 docs/RegisterAutoScalingGroupLoadBalancerOpts.md
 docs/ReinstallInstanceOpts.md
 docs/Snapshot.md
+docs/State.md
 docs/StickySession.md
 docs/Storage.md
 docs/StoreCredentialOpts.md
@@ -113,7 +116,7 @@ model__metadata.go
 model_attach_iso_opts.go
 model_auto_scaled_instance.go
 model_auto_scaling_group.go
-model_auto_scaling_load_balancer.go
+model_auto_scaling_group_details.go
 model_billing.go
 model_central.go
 model_certificate.go
@@ -157,8 +160,9 @@ model_get_snapshot_list_result.go
 model_health_check.go
 model_health_check_status.go
 model_instance.go
+model_instance_base.go
+model_instance_details.go
 model_instance_resources.go
-model_instance_state.go
 model_instance_type.go
 model_instance_type_name.go
 model_instance_types.go
@@ -167,8 +171,8 @@ model_iso.go
 model_launch_instance_opts.go
 model_launch_load_balancer_opts.go
 model_load_balancer.go
-model_load_balancer_auto_scaling_group.go
 model_load_balancer_configuration.go
+model_load_balancer_details.go
 model_load_balancer_listener.go
 model_load_balancer_listener_opts.go
 model_load_balancer_target_opt.go
@@ -181,6 +185,7 @@ model_network_type.go
 model_null_route_ip_opts.go
 model_operating_system.go
 model_operating_system_detail.go
+model_operating_system_details.go
 model_operating_system_id.go
 model_peak.go
 model_price.go
@@ -189,6 +194,7 @@ model_region.go
 model_register_auto_scaling_group_load_balancer_opts.go
 model_reinstall_instance_opts.go
 model_snapshot.go
+model_state.go
 model_sticky_session.go
 model_storage.go
 model_store_credential_opts.go

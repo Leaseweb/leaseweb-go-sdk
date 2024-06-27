@@ -401,9 +401,7 @@ paths:
                 instances:
                 - marketAppId: null
                   productType: INSTANCE
-                  privateNetwork: null
                   autoScalingGroup: null
-                  customerId: "11111111"
                   id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                   type: lsw.m3.large
                   resources:
@@ -451,7 +449,6 @@ paths:
                     renewalsAt: 2024-04-09T15:28:28+00:00
                     createdAt: 2024-04-09T15:11:21+00:00
                     state: ACTIVE
-                  iso: null
               schema:
                 $ref: '#/components/schemas/getInstanceListResult'
           description: OK.
@@ -534,7 +531,6 @@ paths:
                   renewalsAt: 2024-04-09T15:28:28+00:00
                   createdAt: 2024-04-09T15:11:21+00:00
                   state: ACTIVE
-                customerId: "11111111"
                 hasPrivateNetwork: false
                 hasPublicIpV4: true
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -549,7 +545,6 @@ paths:
                   ddos:
                     detectionProfile: STANDARD_DEFAULT
                     protectionType: STANDARD
-                iso: null
                 marketAppId: null
                 operatingSystem:
                   id: UBUNTU_22_04_64BIT
@@ -558,7 +553,6 @@ paths:
                   family: linux
                   flavour: ubuntu
                   architecture: x86_64
-                privateNetwork: null
                 productType: INSTANCE
                 reference: my webserver
                 region: eu-west-3
@@ -577,7 +571,7 @@ paths:
                     unit: Mbps
                 rootDiskSize: 5
                 rootDiskStorageType: CENTRAL
-                startedAt: 2024-04-11T12:59:34+00:00
+                startedAt: null
                 state: STOPPED
                 type: lsw.m3.large
               schema:
@@ -749,7 +743,6 @@ paths:
                   renewalsAt: 2024-04-09T15:28:28+00:00
                   createdAt: 2024-04-09T15:11:21+00:00
                   state: ACTIVE
-                customerId: "11111111"
                 hasPrivateNetwork: false
                 hasPublicIpV4: true
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -773,6 +766,11 @@ paths:
                   family: linux
                   flavour: ubuntu
                   architecture: x86_64
+                  marketApps:
+                  - LOADBALANCER
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
                 privateNetwork: null
                 productType: INSTANCE
                 reference: my webserver
@@ -796,7 +794,7 @@ paths:
                 state: STOPPED
                 type: lsw.m3.large
               schema:
-                $ref: '#/components/schemas/instance'
+                $ref: '#/components/schemas/instanceDetails'
           description: OK.
         "401":
           content:
@@ -908,7 +906,6 @@ paths:
                   renewalsAt: 2024-04-09T15:28:28+00:00
                   createdAt: 2024-04-09T15:11:21+00:00
                   state: ACTIVE
-                customerId: "111111111"
                 hasPrivateNetwork: false
                 hasPublicIpV4: true
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -932,6 +929,11 @@ paths:
                   family: linux
                   flavour: ubuntu
                   architecture: x86_64
+                  marketApps:
+                  - LOADBALANCER
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
                 privateNetwork: null
                 productType: INSTANCE
                 reference: my webserver
@@ -951,12 +953,11 @@ paths:
                     unit: Mbps
                 rootDiskSize: 5
                 rootDiskStorageType: CENTRAL
-                salesOrgId: "2000"
                 startedAt: 2024-04-09T15:11:37+00:00
                 state: RUNNING
                 type: lsw.m3.large
               schema:
-                $ref: '#/components/schemas/instance'
+                $ref: '#/components/schemas/instanceDetails'
           description: OK.
         "400":
           content:
@@ -3406,7 +3407,7 @@ paths:
                   limit: 20
                   offset: 0
                 loadBalancers:
-                - customerId: "11111111"
+                - privateNetwork: null
                   id: 5fd135a9-3ff6-4794-8b92-8cd8747a3ea3
                   type: lsw.c3.4xlarge
                   resources:
@@ -3458,21 +3459,21 @@ paths:
                     idleTimeOut: 60
                     targetPort: 442
                   autoScalingGroup:
-                    customerId: "11111111"
-                    id: fb769dab-3daa-47e4-89ed-06a4b6499176
-                    type: SCHEDULED
-                    state: CREATED
-                    desiredAmount: 2
+                    id: 8714e190-8ca1-49cf-8594-0d019deff809
+                    type: MANUAL
+                    state: ACTIVE
+                    desiredAmount: 1
                     region: eu-west-3
-                    reference: ASG Reference
-                    createdAt: 2024-04-26T09:22:25+00:00
-                    updatedAt: 2024-04-26T09:22:25+00:00
-                    startsAt: 2024-06-18T14:00:00+00:00
-                    endsAt: 2024-06-20T15:00:00+00:00
+                    reference: ono
+                    createdAt: 2024-06-14T09:12:08+00:00
+                    updatedAt: 2024-06-14T09:12:08+00:00
+                    startsAt: null
+                    endsAt: null
                     minimumAmount: null
                     maximumAmount: null
                     cpuThreshold: null
                     warmupTime: null
+                    cooldownTime: null
               schema:
                 $ref: '#/components/schemas/getLoadBalancerListResult'
           description: OK.
@@ -3543,7 +3544,7 @@ paths:
           content:
             application/json:
               example:
-                customerId: "11111111"
+                privateNetwork: null
                 id: d930cf34-0fdb-406d-b3d0-75add3eb5efe
                 type: lsw.c3.large
                 resources:
@@ -3559,6 +3560,7 @@ paths:
                   privateNetworkSpeed:
                     value: 100
                     unit: Mbps
+                autoScalingGroup: null
                 region: eu-west-3
                 reference: my-loadbalancer1
                 state: RUNNING
@@ -3590,7 +3592,7 @@ paths:
                   idleTimeOut: 60
                   targetPort: 80
               schema:
-                $ref: '#/components/schemas/loadBalancer'
+                $ref: '#/components/schemas/loadBalancerDetails'
           description: OK
         "400":
           content:
@@ -3749,7 +3751,7 @@ paths:
           content:
             application/json:
               example:
-                customerId: "11111111"
+                privateNetwork: null
                 id: d930cf34-0fdb-406d-b3d0-75add3eb5efe
                 type: lsw.c3.large
                 resources:
@@ -3765,6 +3767,7 @@ paths:
                   privateNetworkSpeed:
                     value: 100
                     unit: Mbps
+                autoScalingGroup: null
                 region: eu-west-3
                 reference: my-loadbalancer1
                 state: RUNNING
@@ -3796,7 +3799,7 @@ paths:
                   idleTimeOut: 60
                   targetPort: 80
               schema:
-                $ref: '#/components/schemas/loadBalancer'
+                $ref: '#/components/schemas/loadBalancerDetails'
           description: OK.
         "401":
           content:
@@ -3884,7 +3887,7 @@ paths:
           content:
             application/json:
               example:
-                customerId: "11111111"
+                privateNetwork: null
                 id: d930cf34-0fdb-406d-b3d0-75add3eb5efe
                 type: lsw.c3.large
                 resources:
@@ -3900,6 +3903,7 @@ paths:
                   privateNetworkSpeed:
                     value: 100
                     unit: Mbps
+                autoScalingGroup: null
                 region: eu-west-3
                 reference: my-loadbalancer1
                 state: RUNNING
@@ -3931,7 +3935,7 @@ paths:
                   idleTimeOut: 60
                   targetPort: 80
               schema:
-                $ref: '#/components/schemas/loadBalancer'
+                $ref: '#/components/schemas/loadBalancerDetails'
           description: OK.
         "400":
           content:
@@ -6248,35 +6252,6 @@ paths:
                   updatedAt: 2024-04-26T09:22:25+00:00
                   startsAt: null
                   endsAt: null
-                  loadBalancer:
-                    id: 32082a93-d1e2-4bc0-8f5e-8fe4312b0844
-                    type: lsw.m3.large
-                    resources:
-                      cpu:
-                        value: 2
-                        unit: vCPU
-                      memory:
-                        value: 7
-                        unit: GiB
-                      publicNetworkSpeed:
-                        value: 1
-                        unit: Gbps
-                      privateNetworkSpeed:
-                        value: 100
-                        unit: Mbps
-                    region: eu-west-3
-                    reference: lb-integrated-with-asg
-                    state: RUNNING
-                    ips: []
-                    contract:
-                      billingFrequency: 1
-                      term: 0
-                      type: HOURLY
-                      endsAt: null
-                      renewalsAt: 2024-05-29T08:15:05+00:00
-                      createdAt: 2024-05-28T08:50:36+00:00
-                      state: ACTIVE
-                    startedAt: 2024-05-28T08:50:51+00:00
                 - id: aa0f2138-3a83-46fe-bdcf-1ad231f94a26
                   type: SCHEDULED
                   state: SCALING
@@ -6292,35 +6267,6 @@ paths:
                   updatedAt: 2024-05-13T15:49:52+00:00
                   startsAt: 2024-05-01T08:00:00+00:00
                   endsAt: 2024-05-01T12:00:00+00:00
-                  loadBalancer:
-                    id: 42082a93-d1e2-4bc0-8f5e-8fe4312b0845
-                    type: lsw.m3.large
-                    resources:
-                      cpu:
-                        value: 2
-                        unit: vCPU
-                      memory:
-                        value: 7
-                        unit: GiB
-                      publicNetworkSpeed:
-                        value: 1
-                        unit: Gbps
-                      privateNetworkSpeed:
-                        value: 100
-                        unit: Mbps
-                    region: eu-west-3
-                    reference: lb-integrated-with-asg
-                    state: RUNNING
-                    ips: []
-                    contract:
-                      billingFrequency: 1
-                      term: 0
-                      type: HOURLY
-                      endsAt: null
-                      renewalsAt: 2024-05-29T08:15:05+00:00
-                      createdAt: 2024-05-28T08:50:36+00:00
-                      state: ACTIVE
-                    startedAt: 2024-05-28T08:50:51+00:00
                 - id: 49e28a6c-3f2a-442e-b3b1-981856d21677
                   type: CPU_BASED
                   state: CREATING
@@ -6336,35 +6282,6 @@ paths:
                   updatedAt: 2024-05-13T15:49:52+00:00
                   startsAt: null
                   endsAt: null
-                  loadBalancer:
-                    id: 52082a93-d1e2-4bc0-8f5e-8fe4312b0846
-                    type: lsw.m3.large
-                    resources:
-                      cpu:
-                        value: 2
-                        unit: vCPU
-                      memory:
-                        value: 7
-                        unit: GiB
-                      publicNetworkSpeed:
-                        value: 1
-                        unit: Gbps
-                      privateNetworkSpeed:
-                        value: 100
-                        unit: Mbps
-                    region: eu-west-3
-                    reference: lb-integrated-with-asg
-                    state: RUNNING
-                    ips: []
-                    contract:
-                      billingFrequency: 1
-                      term: 0
-                      type: HOURLY
-                      endsAt: null
-                      renewalsAt: 2024-05-29T08:15:05+00:00
-                      createdAt: 2024-05-28T08:50:36+00:00
-                      state: ACTIVE
-                    startedAt: 2024-05-28T08:50:51+00:00
               schema:
                 $ref: '#/components/schemas/getAutoScalingGroupListResult'
           description: OK
@@ -6480,7 +6397,7 @@ paths:
                 updatedAt: 2024-05-28T11:03:31+00:00
                 warmupTime: null
               schema:
-                $ref: '#/components/schemas/autoScalingGroup'
+                $ref: '#/components/schemas/autoScalingGroupDetails'
           description: OK
         "400":
           content:
@@ -6652,7 +6569,6 @@ paths:
                   region: eu-west-3
                   reference: lb-integrated-with-asg
                   state: RUNNING
-                  ips: []
                   contract:
                     billingFrequency: 1
                     term: 0
@@ -6672,7 +6588,7 @@ paths:
                 updatedAt: 2024-04-26T09:22:25+00:00
                 warmupTime: null
               schema:
-                $ref: '#/components/schemas/autoScalingGroup'
+                $ref: '#/components/schemas/autoScalingGroupDetails'
           description: OK
         "400":
           content:
@@ -6813,7 +6729,6 @@ paths:
                   region: eu-west-3
                   reference: lb-integrated-with-asg
                   state: RUNNING
-                  ips: []
                   contract:
                     billingFrequency: 1
                     term: 0
@@ -6833,7 +6748,7 @@ paths:
                 updatedAt: 2024-05-13T15:49:52+00:00
                 warmupTime: 400
               schema:
-                $ref: '#/components/schemas/autoScalingGroup'
+                $ref: '#/components/schemas/autoScalingGroupDetails'
           description: OK
         "400":
           content:
@@ -6943,7 +6858,6 @@ paths:
                   region: eu-west-3
                   reference: lb-integrated-with-asg
                   state: RUNNING
-                  ips: []
                   contract:
                     billingFrequency: 1
                     term: 0
@@ -6963,7 +6877,7 @@ paths:
                 updatedAt: 2024-04-26T09:22:25+00:00
                 warmupTime: null
               schema:
-                $ref: '#/components/schemas/autoScalingGroup'
+                $ref: '#/components/schemas/autoScalingGroupDetails'
           description: OK
         "400":
           content:
@@ -7057,7 +6971,7 @@ paths:
                 updatedAt: 2024-04-26T09:22:25+00:00
                 warmupTime: null
               schema:
-                $ref: '#/components/schemas/autoScalingGroup'
+                $ref: '#/components/schemas/autoScalingGroupDetails'
           description: OK
         "400":
           content:
@@ -7708,98 +7622,6 @@ components:
       - ACTIVE
       - DELETE_SCHEDULED
       type: string
-    operatingSystemId:
-      description: Operating System ID
-      enum:
-      - ALMALINUX_8_64BIT
-      - ALMALINUX_9_64BIT
-      - ARCH_LINUX_64BIT
-      - CENTOS_7_64BIT
-      - DEBIAN_10_64BIT
-      - DEBIAN_11_64BIT
-      - DEBIAN_12_64BIT
-      - FREEBSD_13_64BIT
-      - FREEBSD_14_64BIT
-      - ROCKY_LINUX_8_64BIT
-      - ROCKY_LINUX_9_64BIT
-      - UBUNTU_20_04_64BIT
-      - UBUNTU_22_04_64BIT
-      - UBUNTU_24_04_64BIT
-      - WINDOWS_SERVER_2016_STANDARD_64BIT
-      - WINDOWS_SERVER_2019_STANDARD_64BIT
-      - WINDOWS_SERVER_2022_STANDARD_64BIT
-      example: UBUNTU_24_04_64BIT
-      type: string
-    operatingSystem:
-      example:
-        marketApps:
-        - LOADBALANCER
-        - LOADBALANCER
-        flavour: ubuntu
-        name: Ubuntu 20.04 LTS (x86_64)
-        id: UBUNTU_24_04_64BIT
-        storageTypes:
-        - CENTRAL
-        - LOCAL
-        family: linux
-        version: "20.04"
-        architecture: x86_64
-      properties:
-        id:
-          $ref: '#/components/schemas/operatingSystemId'
-        name:
-          example: Ubuntu 20.04 LTS (x86_64)
-          type: string
-        version:
-          example: "20.04"
-          type: string
-        family:
-          example: linux
-          type: string
-        flavour:
-          example: ubuntu
-          type: string
-        architecture:
-          example: x86_64
-          type: string
-        marketApps:
-          items:
-            example: LOADBALANCER
-            type: string
-          type: array
-        storageTypes:
-          description: The supported storage types for the instance type
-          example:
-          - CENTRAL
-          - LOCAL
-          items:
-            type: string
-          type: array
-      required:
-      - architecture
-      - family
-      - flavour
-      - id
-      - name
-      - version
-      title: operatingSystem
-      type: object
-    instanceState:
-      description: The instance's current state
-      enum:
-      - CREATING
-      - DESTROYED
-      - DESTROYING
-      - FAILED
-      - RUNNING
-      - STARTING
-      - STOPPED
-      - STOPPING
-      - UNKNOWN
-      type: string
-    productType:
-      description: The product type
-      type: string
     instanceTypeName:
       description: Instance type
       enum:
@@ -7878,6 +7700,22 @@ components:
       - lsw.r6a.16xlarge
       - lsw.r6a.24xlarge
       title: instanceType
+      type: string
+    state:
+      description: The current state
+      enum:
+      - CREATING
+      - DESTROYED
+      - DESTROYING
+      - FAILED
+      - RUNNING
+      - STARTING
+      - STOPPED
+      - STOPPING
+      - UNKNOWN
+      type: string
+    productType:
+      description: The product type
       type: string
     rootDiskSize:
       description: The root disk's size in GB. Must be at least 5 GB for Linux and
@@ -7992,57 +7830,84 @@ components:
       - type
       title: contract
       type: object
-    iso:
-      example:
-        name: name
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      nullable: true
-      properties:
-        id:
-          format: uuid
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - name
-      title: iso
-      type: object
-    marketAppId:
-      description: Market App ID that must be installed into the instance
-      example: CPANEL
-      nullable: true
-      type: string
-    privateNetwork:
-      example:
-        subnet: 10.0.0.0/16
-        privateNetworkId: privateNetworkId
-        status: CONFIGURED
-      nullable: true
-      properties:
-        privateNetworkId:
-          type: string
-        status:
-          example: CONFIGURED
-          type: string
-        subnet:
-          example: 10.0.0.0/16
-          type: string
-      required:
-      - privateNetworkId
-      - status
-      - subnet
-      title: privateNetwork
-      type: object
     loadBalancerType:
       description: Load balancer type
       example: lsw.m3.large
       type: string
-    autoScalingGroup:
+    loadBalancer:
+      example:
+        reference: reference
+        contract:
+          billingFrequency: 1
+          createdAt: 2023-11-30T16:31:28Z
+          term: 1
+          renewalsAt: 2023-11-30T16:31:28Z
+          state: null
+          type: null
+          endsAt: 2023-11-30T16:31:28Z
+        resources:
+          memory:
+            unit: GiB
+            value: 3.75
+          publicNetworkSpeed:
+            unit: Gbps
+            value: 10
+          cpu:
+            unit: vCPU
+            value: 2
+          privateNetworkSpeed:
+            unit: Gbps
+            value: 10
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: null
+        type: lsw.m3.large
+        region: eu-west-3
+      nullable: true
+      properties:
+        id:
+          description: The load balancer unique identifier
+          format: uuid
+          type: string
+        type:
+          description: Load balancer type
+          example: lsw.m3.large
+          type: string
+        resources:
+          $ref: '#/components/schemas/instanceResources'
+        region:
+          description: The region where the load balancer was launched into
+          example: eu-west-3
+          type: string
+        reference:
+          description: The identifying name set to the load balancer
+          type: string
+        state:
+          $ref: '#/components/schemas/state'
+        contract:
+          $ref: '#/components/schemas/contract'
+        startedAt:
+          description: "Date and time when the instance was started for the first\
+            \ time, right after launching it"
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - contract
+      - id
+      - reference
+      - region
+      - resources
+      - startedAt
+      - state
+      - type
+      title: loadBalancer
+      type: object
+    autoScalingGroupDetails:
       example:
         cpuThreshold: 7
         maximumAmount: 2
-        type: type
+        type: MANUAL
         desiredAmount: 5
         reference: reference
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -8074,27 +7939,6 @@ components:
           state: null
           type: lsw.m3.large
           region: eu-west-3
-          ips:
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: 6
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: 6
         minimumAmount: 5
         startsAt: 2000-01-23T04:56:07.000+00:00
         warmupTime: 9
@@ -8104,6 +7948,7 @@ components:
         region: eu-west-3
         endsAt: 2000-01-23T04:56:07.000+00:00
         updatedAt: 2000-01-23T04:56:07.000+00:00
+      nullable: true
       properties:
         id:
           description: The Auto Scaling Group unique identifier
@@ -8111,6 +7956,10 @@ components:
           type: string
         type:
           description: Auto Scaling Group type
+          enum:
+          - MANUAL
+          - SCHEDULED
+          - CPU_BASED
           type: string
         state:
           description: The Auto Scaling Group's current state.
@@ -8125,30 +7974,6 @@ components:
           type: string
         desiredAmount:
           description: Number of instances that should be running
-          nullable: true
-          type: integer
-        minimumAmount:
-          description: The minimum number of instances that should be running
-          nullable: true
-          type: integer
-        maximumAmount:
-          description: Only for "CPU_BASED" auto scaling group. The maximum number
-            of instances that can be running
-          nullable: true
-          type: integer
-        cpuThreshold:
-          description: Only for "CPU_BASED" auto scaling group. The target average
-            CPU utilization for scaling
-          nullable: true
-          type: integer
-        warmupTime:
-          description: Only for "CPU_BASED" auto scaling group. Warm-up time in seconds
-            for new instances
-          nullable: true
-          type: integer
-        cooldownTime:
-          description: Only for "CPU_BASED" auto scaling group. Cool-down time in
-            seconds for new instances
           nullable: true
           type: integer
         region:
@@ -8179,8 +8004,32 @@ components:
           format: date-time
           nullable: true
           type: string
+        minimumAmount:
+          description: The minimum number of instances that should be running
+          nullable: true
+          type: integer
+        maximumAmount:
+          description: Only for "CPU_BASED" auto scaling group. The maximum number
+            of instances that can be running
+          nullable: true
+          type: integer
+        cpuThreshold:
+          description: Only for "CPU_BASED" auto scaling group. The target average
+            CPU utilization for scaling
+          nullable: true
+          type: integer
+        warmupTime:
+          description: Only for "CPU_BASED" auto scaling group. Warm-up time in seconds
+            for new instances
+          nullable: true
+          type: integer
+        cooldownTime:
+          description: Only for "CPU_BASED" auto scaling group. Cool-down time in
+            seconds for new instances
+          nullable: true
+          type: integer
         loadBalancer:
-          $ref: '#/components/schemas/autoScalingLoadBalancer'
+          $ref: '#/components/schemas/loadBalancer'
       required:
       - cooldownTime
       - cpuThreshold
@@ -8188,31 +8037,165 @@ components:
       - desiredAmount
       - endsAt
       - id
+      - loadBalancer
       - maximumAmount
       - minimumAmount
       - reference
       - region
       - startsAt
-      - state
       - type
       - updatedAt
       - warmupTime
-      title: instanceAutoScalingGroup
+      title: autoScalingGroupDetails
+      type: object
+    instanceBase:
+      properties:
+        id:
+          description: The unique identifier of the instance
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/instanceTypeName'
+        resources:
+          $ref: '#/components/schemas/instanceResources'
+        region:
+          description: The region in which the instance was launched
+          example: eu-west-3
+          type: string
+        reference:
+          description: The identifying name set to the instance
+          type: string
+        startedAt:
+          description: "Date and time when the instance was started for the first\
+            \ time, right after launching it"
+          format: date-time
+          nullable: true
+          type: string
+        marketAppId:
+          description: Market App ID that must be installed into the instance
+          example: CPANEL
+          nullable: true
+          type: string
+        state:
+          $ref: '#/components/schemas/state'
+        productType:
+          description: The product type
+          type: string
+        hasPublicIpV4:
+          type: boolean
+        hasPrivateNetwork:
+          type: boolean
+        rootDiskSize:
+          description: The root disk's size in GB. Must be at least 5 GB for Linux
+            and FreeBSD instances and 50 GB for Windows instances
+          maximum: 1000
+          minimum: 5
+          type: integer
+        rootDiskStorageType:
+          description: The root disk's storage type
+          enum:
+          - LOCAL
+          - CENTRAL
+          type: string
+        ips:
+          items:
+            $ref: '#/components/schemas/ip'
+          type: array
+        contract:
+          $ref: '#/components/schemas/contract'
+        autoScalingGroup:
+          $ref: '#/components/schemas/autoScalingGroupDetails'
+      required:
+      - autoScalingGroup
+      - contract
+      - hasPrivateNetwork
+      - hasPublicIpV4
+      - id
+      - ips
+      - marketAppId
+      - productType
+      - reference
+      - region
+      - resources
+      - rootDiskSize
+      - rootDiskStorageType
+      - startedAt
+      - state
+      - type
+      type: object
+    operatingSystemId:
+      description: Operating System ID
+      enum:
+      - ALMALINUX_8_64BIT
+      - ALMALINUX_9_64BIT
+      - ARCH_LINUX_64BIT
+      - CENTOS_7_64BIT
+      - DEBIAN_10_64BIT
+      - DEBIAN_11_64BIT
+      - DEBIAN_12_64BIT
+      - FREEBSD_13_64BIT
+      - FREEBSD_14_64BIT
+      - ROCKY_LINUX_8_64BIT
+      - ROCKY_LINUX_9_64BIT
+      - UBUNTU_20_04_64BIT
+      - UBUNTU_22_04_64BIT
+      - UBUNTU_24_04_64BIT
+      - WINDOWS_SERVER_2016_STANDARD_64BIT
+      - WINDOWS_SERVER_2019_STANDARD_64BIT
+      - WINDOWS_SERVER_2022_STANDARD_64BIT
+      example: UBUNTU_24_04_64BIT
+      type: string
+    operatingSystem:
+      example:
+        flavour: ubuntu
+        name: Ubuntu 20.04 LTS (x86_64)
+        id: UBUNTU_24_04_64BIT
+        family: linux
+        version: "20.04"
+        architecture: x86_64
+      properties:
+        id:
+          $ref: '#/components/schemas/operatingSystemId'
+        name:
+          example: Ubuntu 20.04 LTS (x86_64)
+          type: string
+        version:
+          example: "20.04"
+          type: string
+        family:
+          example: linux
+          type: string
+        flavour:
+          example: ubuntu
+          type: string
+        architecture:
+          example: x86_64
+          type: string
+      required:
+      - architecture
+      - family
+      - flavour
+      - id
+      - name
+      - version
+      title: operatingSystem
       type: object
     instance:
+      allOf:
+      - $ref: '#/components/schemas/instanceBase'
+      - properties:
+          operatingSystem:
+            $ref: '#/components/schemas/operatingSystem'
+        required:
+        - operatingSystem
+        title: instance
+        type: object
       example:
         rootDiskStorageType: LOCAL
-        iso:
-          name: name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        privateNetwork:
-          subnet: 10.0.0.0/16
-          privateNetworkId: privateNetworkId
-          status: CONFIGURED
         autoScalingGroup:
           cpuThreshold: 7
           maximumAmount: 2
-          type: type
+          type: MANUAL
           desiredAmount: 5
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -8244,27 +8227,6 @@ components:
             state: null
             type: lsw.m3.large
             region: eu-west-3
-            ips:
-            - prefixLength: "28"
-              reverseLookup: reverseLookup
-              ip: 127.0.0.1
-              nullRouted: true
-              mainIp: true
-              ddos:
-                detectionProfile: STANDARD_DEFAULT
-                protectionType: STANDARD
-              networkType: internal
-              version: 6
-            - prefixLength: "28"
-              reverseLookup: reverseLookup
-              ip: 127.0.0.1
-              nullRouted: true
-              mainIp: true
-              ddos:
-                detectionProfile: STANDARD_DEFAULT
-                protectionType: STANDARD
-              networkType: internal
-              version: 6
           minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
           warmupTime: 9
@@ -8299,158 +8261,49 @@ components:
             value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
         type: null
-        equipmentId: equipmentId
+        ips:
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          ddos:
+            detectionProfile: STANDARD_DEFAULT
+            protectionType: STANDARD
+          networkType: internal
+          version: 6
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          ddos:
+            detectionProfile: STANDARD_DEFAULT
+            protectionType: STANDARD
+          networkType: internal
+          version: 6
         operatingSystem:
-          marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_24_04_64BIT
-          storageTypes:
-          - CENTRAL
-          - LOCAL
           family: linux
           version: "20.04"
           architecture: x86_64
-        ips:
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
-          networkType: internal
-          version: 6
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
-          networkType: internal
-          version: 6
         reference: reference
-        customerId: customerId
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
         marketAppId: CPANEL
+        state: null
         region: eu-west-3
         productType: productType
-        salesOrgId: salesOrgId
         hasPublicIpV4: true
-      properties:
-        equipmentId:
-          description: The customer's equipment ID
-          type: string
-        salesOrgId:
-          type: string
-        customerId:
-          description: The customer ID who owns the instance
-          type: string
-        id:
-          description: The unique identifier of the instance
-          format: uuid
-          type: string
-        resources:
-          $ref: '#/components/schemas/instanceResources'
-        region:
-          description: The region in which the instance was launched
-          example: eu-west-3
-          type: string
-        reference:
-          description: The identifying name set to the instance
-          nullable: true
-          type: string
-        operatingSystem:
-          $ref: '#/components/schemas/operatingSystem'
-        state:
-          $ref: '#/components/schemas/instanceState'
-        productType:
-          description: The product type
-          type: string
-        hasPublicIpV4:
-          type: boolean
-        hasPrivateNetwork:
-          type: boolean
-        type:
-          $ref: '#/components/schemas/instanceTypeName'
-        rootDiskSize:
-          description: The root disk's size in GB. Must be at least 5 GB for Linux
-            and FreeBSD instances and 50 GB for Windows instances
-          maximum: 1000
-          minimum: 5
-          type: integer
-        rootDiskStorageType:
-          description: The root disk's storage type
-          enum:
-          - LOCAL
-          - CENTRAL
-          type: string
-        ips:
-          items:
-            $ref: '#/components/schemas/ip'
-          type: array
-        startedAt:
-          description: "Date and time when the instance was started for the first\
-            \ time, right after launching it"
-          format: date-time
-          nullable: true
-          type: string
-        contract:
-          $ref: '#/components/schemas/contract'
-        iso:
-          $ref: '#/components/schemas/iso'
-        marketAppId:
-          description: Market App ID that must be installed into the instance
-          example: CPANEL
-          nullable: true
-          type: string
-        privateNetwork:
-          $ref: '#/components/schemas/privateNetwork'
-        autoScalingGroup:
-          $ref: '#/components/schemas/autoScalingGroup'
-      required:
-      - autoScalingGroup
-      - contract
-      - hasPrivateNetwork
-      - hasPublicIpV4
-      - id
-      - ips
-      - iso
-      - marketAppId
-      - operatingSystem
-      - privateNetwork
-      - productType
-      - reference
-      - region
-      - resources
-      - rootDiskSize
-      - rootDiskStorageType
-      - startedAt
-      - state
-      - type
-      title: instance
-      type: object
     getInstanceListResult:
       example:
         instances:
         - rootDiskStorageType: LOCAL
-          iso:
-            name: name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          privateNetwork:
-            subnet: 10.0.0.0/16
-            privateNetworkId: privateNetworkId
-            status: CONFIGURED
           autoScalingGroup:
             cpuThreshold: 7
             maximumAmount: 2
-            type: type
+            type: MANUAL
             desiredAmount: 5
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
@@ -8482,27 +8335,6 @@ components:
               state: null
               type: lsw.m3.large
               region: eu-west-3
-              ips:
-              - prefixLength: "28"
-                reverseLookup: reverseLookup
-                ip: 127.0.0.1
-                nullRouted: true
-                mainIp: true
-                ddos:
-                  detectionProfile: STANDARD_DEFAULT
-                  protectionType: STANDARD
-                networkType: internal
-                version: 6
-              - prefixLength: "28"
-                reverseLookup: reverseLookup
-                ip: 127.0.0.1
-                nullRouted: true
-                mainIp: true
-                ddos:
-                  detectionProfile: STANDARD_DEFAULT
-                  protectionType: STANDARD
-                networkType: internal
-                version: 6
             minimumAmount: 5
             startsAt: 2000-01-23T04:56:07.000+00:00
             warmupTime: 9
@@ -8537,20 +8369,6 @@ components:
               value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           type: null
-          equipmentId: equipmentId
-          operatingSystem:
-            marketApps:
-            - LOADBALANCER
-            - LOADBALANCER
-            flavour: ubuntu
-            name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_24_04_64BIT
-            storageTypes:
-            - CENTRAL
-            - LOCAL
-            family: linux
-            version: "20.04"
-            architecture: x86_64
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -8572,27 +8390,25 @@ components:
               protectionType: STANDARD
             networkType: internal
             version: 6
+          operatingSystem:
+            flavour: ubuntu
+            name: Ubuntu 20.04 LTS (x86_64)
+            id: UBUNTU_24_04_64BIT
+            family: linux
+            version: "20.04"
+            architecture: x86_64
           reference: reference
-          customerId: customerId
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
           marketAppId: CPANEL
+          state: null
           region: eu-west-3
           productType: productType
-          salesOrgId: salesOrgId
           hasPublicIpV4: true
         - rootDiskStorageType: LOCAL
-          iso:
-            name: name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          privateNetwork:
-            subnet: 10.0.0.0/16
-            privateNetworkId: privateNetworkId
-            status: CONFIGURED
           autoScalingGroup:
             cpuThreshold: 7
             maximumAmount: 2
-            type: type
+            type: MANUAL
             desiredAmount: 5
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
@@ -8624,27 +8440,6 @@ components:
               state: null
               type: lsw.m3.large
               region: eu-west-3
-              ips:
-              - prefixLength: "28"
-                reverseLookup: reverseLookup
-                ip: 127.0.0.1
-                nullRouted: true
-                mainIp: true
-                ddos:
-                  detectionProfile: STANDARD_DEFAULT
-                  protectionType: STANDARD
-                networkType: internal
-                version: 6
-              - prefixLength: "28"
-                reverseLookup: reverseLookup
-                ip: 127.0.0.1
-                nullRouted: true
-                mainIp: true
-                ddos:
-                  detectionProfile: STANDARD_DEFAULT
-                  protectionType: STANDARD
-                networkType: internal
-                version: 6
             minimumAmount: 5
             startsAt: 2000-01-23T04:56:07.000+00:00
             warmupTime: 9
@@ -8679,20 +8474,6 @@ components:
               value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           type: null
-          equipmentId: equipmentId
-          operatingSystem:
-            marketApps:
-            - LOADBALANCER
-            - LOADBALANCER
-            flavour: ubuntu
-            name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_24_04_64BIT
-            storageTypes:
-            - CENTRAL
-            - LOCAL
-            family: linux
-            version: "20.04"
-            architecture: x86_64
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -8714,14 +8495,19 @@ components:
               protectionType: STANDARD
             networkType: internal
             version: 6
+          operatingSystem:
+            flavour: ubuntu
+            name: Ubuntu 20.04 LTS (x86_64)
+            id: UBUNTU_24_04_64BIT
+            family: linux
+            version: "20.04"
+            architecture: x86_64
           reference: reference
-          customerId: customerId
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
           marketAppId: CPANEL
+          state: null
           region: eu-west-3
           productType: productType
-          salesOrgId: salesOrgId
           hasPublicIpV4: true
         _metadata:
           offset: 0
@@ -8748,7 +8534,6 @@ components:
         marketAppId:
           description: Market App ID that must be installed into the instance
           example: CPANEL
-          nullable: true
           type: string
         reference:
           description: An identifying name you can refer to the instance
@@ -8803,6 +8588,218 @@ components:
       - rootDiskStorageType
       - type
       type: object
+    iso:
+      example:
+        name: name
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      nullable: true
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - name
+      title: iso
+      type: object
+    privateNetwork:
+      example:
+        subnet: 10.0.0.0/16
+        privateNetworkId: privateNetworkId
+        status: CONFIGURED
+      nullable: true
+      properties:
+        privateNetworkId:
+          type: string
+        status:
+          example: CONFIGURED
+          type: string
+        subnet:
+          example: 10.0.0.0/16
+          type: string
+      required:
+      - privateNetworkId
+      - status
+      - subnet
+      title: privateNetwork
+      type: object
+    operatingSystemDetails:
+      allOf:
+      - $ref: '#/components/schemas/operatingSystem'
+      - properties:
+          marketApps:
+            items:
+              example: LOADBALANCER
+              type: string
+            type: array
+          storageTypes:
+            description: The supported storage types for the instance type
+            example:
+            - CENTRAL
+            - LOCAL
+            items:
+              type: string
+            type: array
+        required:
+        - marketApps
+        - storageTypes
+        title: operatingSystemDetails
+        type: object
+      example:
+        marketApps:
+        - LOADBALANCER
+        - LOADBALANCER
+        flavour: ubuntu
+        name: Ubuntu 20.04 LTS (x86_64)
+        id: UBUNTU_24_04_64BIT
+        storageTypes:
+        - CENTRAL
+        - LOCAL
+        family: linux
+        version: "20.04"
+        architecture: x86_64
+    instanceDetails:
+      allOf:
+      - $ref: '#/components/schemas/instanceBase'
+      - properties:
+          iso:
+            $ref: '#/components/schemas/iso'
+          privateNetwork:
+            $ref: '#/components/schemas/privateNetwork'
+          operatingSystem:
+            $ref: '#/components/schemas/operatingSystemDetails'
+          startedAt:
+            description: "Date and time when the instance was started for the first\
+              \ time, right after launching it"
+            format: date-time
+            type: string
+        required:
+        - iso
+        - operatingSystem
+        - privateNetwork
+        title: instanceDetails
+        type: object
+      example:
+        rootDiskStorageType: LOCAL
+        iso:
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        privateNetwork:
+          subnet: 10.0.0.0/16
+          privateNetworkId: privateNetworkId
+          status: CONFIGURED
+        autoScalingGroup:
+          cpuThreshold: 7
+          maximumAmount: 2
+          type: MANUAL
+          desiredAmount: 5
+          reference: reference
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          loadBalancer:
+            reference: reference
+            contract:
+              billingFrequency: 1
+              createdAt: 2023-11-30T16:31:28Z
+              term: 1
+              renewalsAt: 2023-11-30T16:31:28Z
+              state: null
+              type: null
+              endsAt: 2023-11-30T16:31:28Z
+            resources:
+              memory:
+                unit: GiB
+                value: 3.75
+              publicNetworkSpeed:
+                unit: Gbps
+                value: 10
+              cpu:
+                unit: vCPU
+                value: 2
+              privateNetworkSpeed:
+                unit: Gbps
+                value: 10
+            startedAt: 2000-01-23T04:56:07.000+00:00
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: null
+            type: lsw.m3.large
+            region: eu-west-3
+          minimumAmount: 5
+          startsAt: 2000-01-23T04:56:07.000+00:00
+          warmupTime: 9
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: ACTIVE
+          cooldownTime: 3
+          region: eu-west-3
+          endsAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        rootDiskSize: 84
+        contract:
+          billingFrequency: 1
+          createdAt: 2023-11-30T16:31:28Z
+          term: 1
+          renewalsAt: 2023-11-30T16:31:28Z
+          state: null
+          type: null
+          endsAt: 2023-11-30T16:31:28Z
+        hasPrivateNetwork: true
+        resources:
+          memory:
+            unit: GiB
+            value: 3.75
+          publicNetworkSpeed:
+            unit: Gbps
+            value: 10
+          cpu:
+            unit: vCPU
+            value: 2
+          privateNetworkSpeed:
+            unit: Gbps
+            value: 10
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        type: null
+        ips:
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          ddos:
+            detectionProfile: STANDARD_DEFAULT
+            protectionType: STANDARD
+          networkType: internal
+          version: 6
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          ddos:
+            detectionProfile: STANDARD_DEFAULT
+            protectionType: STANDARD
+          networkType: internal
+          version: 6
+        operatingSystem:
+          marketApps:
+          - LOADBALANCER
+          - LOADBALANCER
+          flavour: ubuntu
+          name: Ubuntu 20.04 LTS (x86_64)
+          id: UBUNTU_24_04_64BIT
+          storageTypes:
+          - CENTRAL
+          - LOCAL
+          family: linux
+          version: "20.04"
+          architecture: x86_64
+        reference: reference
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        marketAppId: CPANEL
+        state: null
+        region: eu-west-3
+        productType: productType
+        hasPublicIpV4: true
     updateInstanceOpts:
       properties:
         type:
@@ -9147,15 +9144,9 @@ components:
           family: family
           version: version
           operatingSystem:
-            marketApps:
-            - LOADBALANCER
-            - LOADBALANCER
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_24_04_64BIT
-            storageTypes:
-            - CENTRAL
-            - LOCAL
             family: linux
             version: "20.04"
             architecture: x86_64
@@ -9165,15 +9156,9 @@ components:
           family: family
           version: version
           operatingSystem:
-            marketApps:
-            - LOADBALANCER
-            - LOADBALANCER
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_24_04_64BIT
-            storageTypes:
-            - CENTRAL
-            - LOCAL
             family: linux
             version: "20.04"
             architecture: x86_64
@@ -9199,7 +9184,7 @@ components:
       type: object
     getReinstallOsListResult:
       items:
-        $ref: '#/components/schemas/operatingSystem'
+        $ref: '#/components/schemas/operatingSystemDetails'
       type: array
     reinstallInstanceOpts:
       properties:
@@ -9208,13 +9193,14 @@ components:
           type: string
         marketAppId:
           description: The Market App to be installed
+          example: CPANEL
           type: string
       required:
       - operatingSystemId
       type: object
     stickySession:
       example:
-        maxLifeTime: 6
+        maxLifeTime: 0
         enabled: true
       nullable: true
       properties:
@@ -9233,7 +9219,7 @@ components:
     healthCheck:
       example:
         method: GET
-        port: 1
+        port: 6
         host: host
         uri: /
       nullable: true
@@ -9270,15 +9256,16 @@ components:
         balance: ROUNDROBIN
         healthCheck:
           method: GET
-          port: 1
+          port: 6
           host: host
           uri: /
-        idleTimeOut: 5
+        idleTimeOut: 1
         xForwardedFor: true
         stickySession:
-          maxLifeTime: 6
+          maxLifeTime: 0
           enabled: true
         targetPort: 5
+      nullable: true
       properties:
         stickySession:
           $ref: '#/components/schemas/stickySession'
@@ -9310,38 +9297,179 @@ components:
       - xForwardedFor
       title: loadBalancerConfiguration
       type: object
-    loadBalancer:
+    autoScalingGroup:
       example:
+        cpuThreshold: 9
+        maximumAmount: 7
+        type: MANUAL
+        desiredAmount: 5
+        reference: reference
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        minimumAmount: 2
+        startsAt: 2000-01-23T04:56:07.000+00:00
+        warmupTime: 3
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: ACTIVE
+        cooldownTime: 2
+        region: eu-west-3
+        endsAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      nullable: true
+      properties:
+        id:
+          description: The Auto Scaling Group unique identifier
+          format: uuid
+          type: string
+        type:
+          description: Auto Scaling Group type
+          enum:
+          - MANUAL
+          - SCHEDULED
+          - CPU_BASED
+          type: string
+        state:
+          description: The Auto Scaling Group's current state.
+          enum:
+          - ACTIVE
+          - CREATING
+          - CREATED
+          - DESTROYED
+          - DESTROYING
+          - SCALING
+          - UPDATING
+          type: string
+        desiredAmount:
+          description: Number of instances that should be running
+          nullable: true
+          type: integer
+        region:
+          description: The region in which the Auto Scaling Group was launched
+          example: eu-west-3
+          type: string
+        reference:
+          description: The identifying name set to the auto scaling group
+          maxLength: 255
+          type: string
+        createdAt:
+          description: Date and time when the Auto Scaling Group was created
+          format: date-time
+          type: string
+        updatedAt:
+          description: Date and time when the Auto Scaling Group was last updated
+          format: date-time
+          type: string
+        startsAt:
+          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
+            that the instances need to be launched
+          format: date-time
+          nullable: true
+          type: string
+        endsAt:
+          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
+            that the instances need to be terminated
+          format: date-time
+          nullable: true
+          type: string
+        minimumAmount:
+          description: The minimum number of instances that should be running
+          nullable: true
+          type: integer
+        maximumAmount:
+          description: Only for "CPU_BASED" auto scaling group. The maximum number
+            of instances that can be running
+          nullable: true
+          type: integer
+        cpuThreshold:
+          description: Only for "CPU_BASED" auto scaling group. The target average
+            CPU utilization for scaling
+          nullable: true
+          type: integer
+        warmupTime:
+          description: Only for "CPU_BASED" auto scaling group. Warm-up time in seconds
+            for new instances
+          nullable: true
+          type: integer
+        cooldownTime:
+          description: Only for "CPU_BASED" auto scaling group. Cool-down time in
+            seconds for new instances
+          nullable: true
+          type: integer
+      required:
+      - cooldownTime
+      - cpuThreshold
+      - createdAt
+      - desiredAmount
+      - endsAt
+      - id
+      - maximumAmount
+      - minimumAmount
+      - reference
+      - region
+      - startsAt
+      - type
+      - updatedAt
+      - warmupTime
+      title: autoScalingGroup
+      type: object
+    loadBalancerDetails:
+      allOf:
+      - $ref: '#/components/schemas/loadBalancer'
+      - nullable: true
+        properties:
+          rootDiskSize:
+            $ref: '#/components/schemas/rootDiskSize'
+          ips:
+            items:
+              $ref: '#/components/schemas/ip'
+            type: array
+          configuration:
+            $ref: '#/components/schemas/loadBalancerConfiguration'
+          autoScalingGroup:
+            $ref: '#/components/schemas/autoScalingGroup'
+          privateNetwork:
+            $ref: '#/components/schemas/privateNetwork'
+        required:
+        - autoScalingGroup
+        - configuration
+        - ips
+        - privateNetwork
+        title: loadBalancerDetails
+        type: object
+      example:
+        privateNetwork:
+          subnet: 10.0.0.0/16
+          privateNetworkId: privateNetworkId
+          status: CONFIGURED
         configuration:
           balance: ROUNDROBIN
           healthCheck:
             method: GET
-            port: 1
+            port: 6
             host: host
             uri: /
-          idleTimeOut: 5
+          idleTimeOut: 1
           xForwardedFor: true
           stickySession:
-            maxLifeTime: 6
+            maxLifeTime: 0
             enabled: true
           targetPort: 5
         autoScalingGroup:
-          cpuThreshold: 60
-          maximumAmount: 6
+          cpuThreshold: 9
+          maximumAmount: 7
           type: MANUAL
-          desiredAmount: 4
-          reference: Manual Auto Scaling Group
-          createdAt: 2024-05-28T11:03:31Z
-          customerId: "11111111"
+          desiredAmount: 5
+          reference: reference
+          createdAt: 2000-01-23T04:56:07.000+00:00
           minimumAmount: 2
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 400
-          id: fb769dab-3daa-47e4-89ed-06a4b6499176
+          warmupTime: 3
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: ACTIVE
+          cooldownTime: 2
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
-          updatedAt: 2024-05-28T11:33:31Z
-        rootDiskSize: 84
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        rootDiskSize: null
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
@@ -9387,89 +9515,46 @@ components:
           networkType: internal
           version: 6
         reference: reference
-        customerId: customerId
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         region: eu-west-3
-      properties:
-        customerId:
-          description: The customer ID who owns the load balancer
-          type: string
-        id:
-          description: The load balancer unique identifier
-          format: uuid
-          type: string
-        type:
-          description: Load balancer type
-          example: lsw.m3.large
-          type: string
-        resources:
-          $ref: '#/components/schemas/instanceResources'
-        region:
-          description: The region where the load balancer was launched into
-          example: eu-west-3
-          type: string
-        reference:
-          description: The identifying name set to the load balancer
-          type: string
-        state:
-          $ref: '#/components/schemas/instanceState'
-        rootDiskSize:
-          description: The root disk's size in GB. Must be at least 5 GB for Linux
-            and FreeBSD instances and 50 GB for Windows instances
-          maximum: 1000
-          minimum: 5
-          type: integer
-        ips:
-          items:
-            $ref: '#/components/schemas/ip'
-          type: array
-        startedAt:
-          description: "Date and time when the instance was started for the first\
-            \ time, right after launching it"
-          format: date-time
-          type: string
-        contract:
-          $ref: '#/components/schemas/contract'
-        configuration:
-          $ref: '#/components/schemas/loadBalancerConfiguration'
-        autoScalingGroup:
-          $ref: '#/components/schemas/loadBalancerAutoScalingGroup'
-      title: instanceLoadBalancer
-      type: object
     getLoadBalancerListResult:
       example:
         loadBalancers:
-        - configuration:
+        - privateNetwork:
+            subnet: 10.0.0.0/16
+            privateNetworkId: privateNetworkId
+            status: CONFIGURED
+          configuration:
             balance: ROUNDROBIN
             healthCheck:
               method: GET
-              port: 1
+              port: 6
               host: host
               uri: /
-            idleTimeOut: 5
+            idleTimeOut: 1
             xForwardedFor: true
             stickySession:
-              maxLifeTime: 6
+              maxLifeTime: 0
               enabled: true
             targetPort: 5
           autoScalingGroup:
-            cpuThreshold: 60
-            maximumAmount: 6
+            cpuThreshold: 9
+            maximumAmount: 7
             type: MANUAL
-            desiredAmount: 4
-            reference: Manual Auto Scaling Group
-            createdAt: 2024-05-28T11:03:31Z
-            customerId: "11111111"
+            desiredAmount: 5
+            reference: reference
+            createdAt: 2000-01-23T04:56:07.000+00:00
             minimumAmount: 2
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 400
-            id: fb769dab-3daa-47e4-89ed-06a4b6499176
+            warmupTime: 3
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: ACTIVE
+            cooldownTime: 2
             region: eu-west-3
             endsAt: 2000-01-23T04:56:07.000+00:00
-            updatedAt: 2024-05-28T11:33:31Z
-          rootDiskSize: 84
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          rootDiskSize: null
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
@@ -9515,40 +9600,43 @@ components:
             networkType: internal
             version: 6
           reference: reference
-          customerId: customerId
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           region: eu-west-3
-        - configuration:
+        - privateNetwork:
+            subnet: 10.0.0.0/16
+            privateNetworkId: privateNetworkId
+            status: CONFIGURED
+          configuration:
             balance: ROUNDROBIN
             healthCheck:
               method: GET
-              port: 1
+              port: 6
               host: host
               uri: /
-            idleTimeOut: 5
+            idleTimeOut: 1
             xForwardedFor: true
             stickySession:
-              maxLifeTime: 6
+              maxLifeTime: 0
               enabled: true
             targetPort: 5
           autoScalingGroup:
-            cpuThreshold: 60
-            maximumAmount: 6
+            cpuThreshold: 9
+            maximumAmount: 7
             type: MANUAL
-            desiredAmount: 4
-            reference: Manual Auto Scaling Group
-            createdAt: 2024-05-28T11:03:31Z
-            customerId: "11111111"
+            desiredAmount: 5
+            reference: reference
+            createdAt: 2000-01-23T04:56:07.000+00:00
             minimumAmount: 2
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 400
-            id: fb769dab-3daa-47e4-89ed-06a4b6499176
+            warmupTime: 3
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: ACTIVE
+            cooldownTime: 2
             region: eu-west-3
             endsAt: 2000-01-23T04:56:07.000+00:00
-            updatedAt: 2024-05-28T11:33:31Z
-          rootDiskSize: 84
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          rootDiskSize: null
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
@@ -9594,7 +9682,6 @@ components:
             networkType: internal
             version: 6
           reference: reference
-          customerId: customerId
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           region: eu-west-3
@@ -9605,7 +9692,7 @@ components:
       properties:
         loadBalancers:
           items:
-            $ref: '#/components/schemas/loadBalancer'
+            $ref: '#/components/schemas/loadBalancerDetails'
           type: array
         _metadata:
           $ref: '#/components/schemas/_metadata'
@@ -9739,15 +9826,9 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           operatingSystem:
-            marketApps:
-            - LOADBALANCER
-            - LOADBALANCER
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_24_04_64BIT
-            storageTypes:
-            - CENTRAL
-            - LOCAL
             family: linux
             version: "20.04"
             architecture: x86_64
@@ -9779,15 +9860,9 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           operatingSystem:
-            marketApps:
-            - LOADBALANCER
-            - LOADBALANCER
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_24_04_64BIT
-            storageTypes:
-            - CENTRAL
-            - LOCAL
             family: linux
             version: "20.04"
             architecture: x86_64
@@ -10048,131 +10123,33 @@ components:
     getAutoScalingGroupListResult:
       example:
         autoScalingGroups:
-        - cpuThreshold: 7
-          maximumAmount: 2
-          type: type
+        - cpuThreshold: 9
+          maximumAmount: 7
+          type: MANUAL
           desiredAmount: 5
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          loadBalancer:
-            reference: reference
-            contract:
-              billingFrequency: 1
-              createdAt: 2023-11-30T16:31:28Z
-              term: 1
-              renewalsAt: 2023-11-30T16:31:28Z
-              state: null
-              type: null
-              endsAt: 2023-11-30T16:31:28Z
-            resources:
-              memory:
-                unit: GiB
-                value: 3.75
-              publicNetworkSpeed:
-                unit: Gbps
-                value: 10
-              cpu:
-                unit: vCPU
-                value: 2
-              privateNetworkSpeed:
-                unit: Gbps
-                value: 10
-            startedAt: 2000-01-23T04:56:07.000+00:00
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: null
-            type: lsw.m3.large
-            region: eu-west-3
-            ips:
-            - prefixLength: "28"
-              reverseLookup: reverseLookup
-              ip: 127.0.0.1
-              nullRouted: true
-              mainIp: true
-              ddos:
-                detectionProfile: STANDARD_DEFAULT
-                protectionType: STANDARD
-              networkType: internal
-              version: 6
-            - prefixLength: "28"
-              reverseLookup: reverseLookup
-              ip: 127.0.0.1
-              nullRouted: true
-              mainIp: true
-              ddos:
-                detectionProfile: STANDARD_DEFAULT
-                protectionType: STANDARD
-              networkType: internal
-              version: 6
-          minimumAmount: 5
+          minimumAmount: 2
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 9
+          warmupTime: 3
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: ACTIVE
-          cooldownTime: 3
+          cooldownTime: 2
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        - cpuThreshold: 7
-          maximumAmount: 2
-          type: type
+        - cpuThreshold: 9
+          maximumAmount: 7
+          type: MANUAL
           desiredAmount: 5
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          loadBalancer:
-            reference: reference
-            contract:
-              billingFrequency: 1
-              createdAt: 2023-11-30T16:31:28Z
-              term: 1
-              renewalsAt: 2023-11-30T16:31:28Z
-              state: null
-              type: null
-              endsAt: 2023-11-30T16:31:28Z
-            resources:
-              memory:
-                unit: GiB
-                value: 3.75
-              publicNetworkSpeed:
-                unit: Gbps
-                value: 10
-              cpu:
-                unit: vCPU
-                value: 2
-              privateNetworkSpeed:
-                unit: Gbps
-                value: 10
-            startedAt: 2000-01-23T04:56:07.000+00:00
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: null
-            type: lsw.m3.large
-            region: eu-west-3
-            ips:
-            - prefixLength: "28"
-              reverseLookup: reverseLookup
-              ip: 127.0.0.1
-              nullRouted: true
-              mainIp: true
-              ddos:
-                detectionProfile: STANDARD_DEFAULT
-                protectionType: STANDARD
-              networkType: internal
-              version: 6
-            - prefixLength: "28"
-              reverseLookup: reverseLookup
-              ip: 127.0.0.1
-              nullRouted: true
-              mainIp: true
-              ddos:
-                detectionProfile: STANDARD_DEFAULT
-                protectionType: STANDARD
-              networkType: internal
-              version: 6
-          minimumAmount: 5
+          minimumAmount: 2
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 9
+          warmupTime: 3
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: ACTIVE
-          cooldownTime: 3
+          cooldownTime: 2
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -10362,7 +10339,7 @@ components:
           description: The identifying name set to the instance
           type: string
         state:
-          $ref: '#/components/schemas/instanceState'
+          $ref: '#/components/schemas/state'
         productType:
           enum:
           - INSTANCE
@@ -10591,100 +10568,6 @@ components:
       - detectionProfile
       - protectionType
       title: ddos
-      type: object
-    autoScalingLoadBalancer:
-      example:
-        reference: reference
-        contract:
-          billingFrequency: 1
-          createdAt: 2023-11-30T16:31:28Z
-          term: 1
-          renewalsAt: 2023-11-30T16:31:28Z
-          state: null
-          type: null
-          endsAt: 2023-11-30T16:31:28Z
-        resources:
-          memory:
-            unit: GiB
-            value: 3.75
-          publicNetworkSpeed:
-            unit: Gbps
-            value: 10
-          cpu:
-            unit: vCPU
-            value: 2
-          privateNetworkSpeed:
-            unit: Gbps
-            value: 10
-        startedAt: 2000-01-23T04:56:07.000+00:00
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
-        type: lsw.m3.large
-        region: eu-west-3
-        ips:
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
-          networkType: internal
-          version: 6
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
-          networkType: internal
-          version: 6
-      nullable: true
-      properties:
-        id:
-          description: The load balancer unique identifier
-          format: uuid
-          type: string
-        type:
-          description: Load balancer type
-          example: lsw.m3.large
-          type: string
-        resources:
-          $ref: '#/components/schemas/instanceResources'
-        region:
-          description: The region where the load balancer was launched into
-          example: eu-west-3
-          type: string
-        reference:
-          description: The identifying name set to the load balancer
-          type: string
-        state:
-          $ref: '#/components/schemas/instanceState'
-        ips:
-          items:
-            $ref: '#/components/schemas/ip'
-          type: array
-        contract:
-          $ref: '#/components/schemas/contract'
-        startedAt:
-          description: "Date and time when the instance was started for the first\
-            \ time, right after launching it"
-          format: date-time
-          type: string
-      required:
-      - contract
-      - id
-      - ips
-      - reference
-      - region
-      - resources
-      - startedAt
-      - state
-      - type
-      title: autoScalingLoadBalancer
       type: object
     expenseResultInstance:
       example:
@@ -10982,15 +10865,9 @@ components:
         family: family
         version: version
         operatingSystem:
-          marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_24_04_64BIT
-          storageTypes:
-          - CENTRAL
-          - LOCAL
           family: linux
           version: "20.04"
           architecture: x86_64
@@ -11009,111 +10886,6 @@ components:
         operatingSystem:
           $ref: '#/components/schemas/operatingSystem'
       title: marketApp
-      type: object
-    loadBalancerAutoScalingGroup:
-      description: Auto Scaling Group in which the Load Balancer is registered
-      example:
-        cpuThreshold: 60
-        maximumAmount: 6
-        type: MANUAL
-        desiredAmount: 4
-        reference: Manual Auto Scaling Group
-        createdAt: 2024-05-28T11:03:31Z
-        customerId: "11111111"
-        minimumAmount: 2
-        startsAt: 2000-01-23T04:56:07.000+00:00
-        warmupTime: 400
-        id: fb769dab-3daa-47e4-89ed-06a4b6499176
-        state: ACTIVE
-        region: eu-west-3
-        endsAt: 2000-01-23T04:56:07.000+00:00
-        updatedAt: 2024-05-28T11:33:31Z
-      nullable: true
-      properties:
-        customerId:
-          description: The customer ID who owns the auto scaling group
-          example: "11111111"
-          type: string
-        id:
-          description: The Auto Scaling Group unique identifier
-          example: fb769dab-3daa-47e4-89ed-06a4b6499176
-          format: uuid
-          type: string
-        type:
-          description: Auto Scaling Group type
-          example: MANUAL
-          type: string
-        state:
-          description: The Auto Scaling Group's current state.
-          enum:
-          - ACTIVE
-          - CREATING
-          - CREATED
-          - DESTROYED
-          - DESTROYING
-          - SCALING
-          - UPDATING
-          type: string
-        desiredAmount:
-          description: Number of instances that should be running
-          example: 4
-          nullable: true
-          type: integer
-        minimumAmount:
-          description: The minimum number of instances that should be running
-          example: 2
-          nullable: true
-          type: integer
-        maximumAmount:
-          description: Only for "CPU_BASED" auto scaling group. The maximum number
-            of instances that can be running
-          example: 6
-          nullable: true
-          type: integer
-        cpuThreshold:
-          description: Only for "CPU_BASED" auto scaling group. The target average
-            CPU utilization for scaling
-          example: 60
-          nullable: true
-          type: integer
-        warmupTime:
-          description: Only for "CPU_BASED" auto scaling group. Warm-up time in seconds
-            for new instances
-          example: 400
-          nullable: true
-          type: integer
-        region:
-          description: The region in which the Auto Scaling Group was launched
-          example: eu-west-3
-          type: string
-        reference:
-          description: The identifying name set to the auto scaling group
-          example: Manual Auto Scaling Group
-          maxLength: 255
-          type: string
-        createdAt:
-          description: Date and time when the Auto Scaling Group was created
-          example: 2024-05-28T11:03:31Z
-          format: date-time
-          type: string
-        updatedAt:
-          description: Date and time when the Auto Scaling Group was last updated
-          example: 2024-05-28T11:33:31Z
-          format: date-time
-          type: string
-        startsAt:
-          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
-            that the instances need to be launched
-          format: date-time
-          nullable: true
-          type: string
-        endsAt:
-          description: Only for "SCHEDULED" auto scaling group. Date and time (UTC)
-            that the instances need to be terminated
-          format: date-time
-          nullable: true
-          type: string
-      title: loadBalancerAutoScalingGroup
       type: object
     certificate:
       properties:
@@ -11149,15 +10921,9 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         operatingSystem:
-          marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_24_04_64BIT
-          storageTypes:
-          - CENTRAL
-          - LOCAL
           family: linux
           version: "20.04"
           architecture: x86_64
@@ -11193,7 +10959,7 @@ components:
         operatingSystem:
           $ref: '#/components/schemas/operatingSystem'
         state:
-          $ref: '#/components/schemas/instanceState'
+          $ref: '#/components/schemas/state'
         healthCheckStatus:
           $ref: '#/components/schemas/healthCheckStatus'
         ips:

@@ -4,25 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CustomerId** | Pointer to **string** | The customer ID who owns the load balancer | [optional] 
-**Id** | Pointer to **string** | The load balancer unique identifier | [optional] 
-**Type** | Pointer to **string** | Load balancer type | [optional] 
-**Resources** | Pointer to [**InstanceResources**](InstanceResources.md) |  | [optional] 
-**Region** | Pointer to **string** | The region where the load balancer was launched into | [optional] 
-**Reference** | Pointer to **string** | The identifying name set to the load balancer | [optional] 
-**State** | Pointer to [**InstanceState**](InstanceState.md) |  | [optional] 
-**RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
-**Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
-**StartedAt** | Pointer to **time.Time** | Date and time when the instance was started for the first time, right after launching it | [optional] 
-**Contract** | Pointer to [**Contract**](Contract.md) |  | [optional] 
-**Configuration** | Pointer to [**LoadBalancerConfiguration**](LoadBalancerConfiguration.md) |  | [optional] 
-**AutoScalingGroup** | Pointer to [**NullableLoadBalancerAutoScalingGroup**](LoadBalancerAutoScalingGroup.md) |  | [optional] 
+**Id** | **string** | The load balancer unique identifier | 
+**Type** | **string** | Load balancer type | 
+**Resources** | [**InstanceResources**](InstanceResources.md) |  | 
+**Region** | **string** | The region where the load balancer was launched into | 
+**Reference** | **string** | The identifying name set to the load balancer | 
+**State** | [**State**](State.md) |  | 
+**Contract** | [**Contract**](Contract.md) |  | 
+**StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
 
 ## Methods
 
 ### NewLoadBalancer
 
-`func NewLoadBalancer() *LoadBalancer`
+`func NewLoadBalancer(id string, type_ string, resources InstanceResources, region string, reference string, state State, contract Contract, startedAt NullableTime, ) *LoadBalancer`
 
 NewLoadBalancer instantiates a new LoadBalancer object
 This constructor will assign default values to properties that have it defined,
@@ -36,31 +31,6 @@ will change when the set of required properties is changed
 NewLoadBalancerWithDefaults instantiates a new LoadBalancer object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetCustomerId
-
-`func (o *LoadBalancer) GetCustomerId() string`
-
-GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
-
-### GetCustomerIdOk
-
-`func (o *LoadBalancer) GetCustomerIdOk() (*string, bool)`
-
-GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomerId
-
-`func (o *LoadBalancer) SetCustomerId(v string)`
-
-SetCustomerId sets CustomerId field to given value.
-
-### HasCustomerId
-
-`func (o *LoadBalancer) HasCustomerId() bool`
-
-HasCustomerId returns a boolean if a field has been set.
 
 ### GetId
 
@@ -81,11 +51,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *LoadBalancer) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetType
 
@@ -106,11 +71,6 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
-### HasType
-
-`func (o *LoadBalancer) HasType() bool`
-
-HasType returns a boolean if a field has been set.
 
 ### GetResources
 
@@ -131,11 +91,6 @@ and a boolean to check if the value has been set.
 
 SetResources sets Resources field to given value.
 
-### HasResources
-
-`func (o *LoadBalancer) HasResources() bool`
-
-HasResources returns a boolean if a field has been set.
 
 ### GetRegion
 
@@ -156,11 +111,6 @@ and a boolean to check if the value has been set.
 
 SetRegion sets Region field to given value.
 
-### HasRegion
-
-`func (o *LoadBalancer) HasRegion() bool`
-
-HasRegion returns a boolean if a field has been set.
 
 ### GetReference
 
@@ -181,111 +131,26 @@ and a boolean to check if the value has been set.
 
 SetReference sets Reference field to given value.
 
-### HasReference
-
-`func (o *LoadBalancer) HasReference() bool`
-
-HasReference returns a boolean if a field has been set.
 
 ### GetState
 
-`func (o *LoadBalancer) GetState() InstanceState`
+`func (o *LoadBalancer) GetState() State`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *LoadBalancer) GetStateOk() (*InstanceState, bool)`
+`func (o *LoadBalancer) GetStateOk() (*State, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *LoadBalancer) SetState(v InstanceState)`
+`func (o *LoadBalancer) SetState(v State)`
 
 SetState sets State field to given value.
 
-### HasState
-
-`func (o *LoadBalancer) HasState() bool`
-
-HasState returns a boolean if a field has been set.
-
-### GetRootDiskSize
-
-`func (o *LoadBalancer) GetRootDiskSize() int32`
-
-GetRootDiskSize returns the RootDiskSize field if non-nil, zero value otherwise.
-
-### GetRootDiskSizeOk
-
-`func (o *LoadBalancer) GetRootDiskSizeOk() (*int32, bool)`
-
-GetRootDiskSizeOk returns a tuple with the RootDiskSize field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRootDiskSize
-
-`func (o *LoadBalancer) SetRootDiskSize(v int32)`
-
-SetRootDiskSize sets RootDiskSize field to given value.
-
-### HasRootDiskSize
-
-`func (o *LoadBalancer) HasRootDiskSize() bool`
-
-HasRootDiskSize returns a boolean if a field has been set.
-
-### GetIps
-
-`func (o *LoadBalancer) GetIps() []Ip`
-
-GetIps returns the Ips field if non-nil, zero value otherwise.
-
-### GetIpsOk
-
-`func (o *LoadBalancer) GetIpsOk() (*[]Ip, bool)`
-
-GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIps
-
-`func (o *LoadBalancer) SetIps(v []Ip)`
-
-SetIps sets Ips field to given value.
-
-### HasIps
-
-`func (o *LoadBalancer) HasIps() bool`
-
-HasIps returns a boolean if a field has been set.
-
-### GetStartedAt
-
-`func (o *LoadBalancer) GetStartedAt() time.Time`
-
-GetStartedAt returns the StartedAt field if non-nil, zero value otherwise.
-
-### GetStartedAtOk
-
-`func (o *LoadBalancer) GetStartedAtOk() (*time.Time, bool)`
-
-GetStartedAtOk returns a tuple with the StartedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStartedAt
-
-`func (o *LoadBalancer) SetStartedAt(v time.Time)`
-
-SetStartedAt sets StartedAt field to given value.
-
-### HasStartedAt
-
-`func (o *LoadBalancer) HasStartedAt() bool`
-
-HasStartedAt returns a boolean if a field has been set.
 
 ### GetContract
 
@@ -306,72 +171,37 @@ and a boolean to check if the value has been set.
 
 SetContract sets Contract field to given value.
 
-### HasContract
 
-`func (o *LoadBalancer) HasContract() bool`
+### GetStartedAt
 
-HasContract returns a boolean if a field has been set.
+`func (o *LoadBalancer) GetStartedAt() time.Time`
 
-### GetConfiguration
+GetStartedAt returns the StartedAt field if non-nil, zero value otherwise.
 
-`func (o *LoadBalancer) GetConfiguration() LoadBalancerConfiguration`
+### GetStartedAtOk
 
-GetConfiguration returns the Configuration field if non-nil, zero value otherwise.
+`func (o *LoadBalancer) GetStartedAtOk() (*time.Time, bool)`
 
-### GetConfigurationOk
-
-`func (o *LoadBalancer) GetConfigurationOk() (*LoadBalancerConfiguration, bool)`
-
-GetConfigurationOk returns a tuple with the Configuration field if it's non-nil, zero value otherwise
+GetStartedAtOk returns a tuple with the StartedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConfiguration
+### SetStartedAt
 
-`func (o *LoadBalancer) SetConfiguration(v LoadBalancerConfiguration)`
+`func (o *LoadBalancer) SetStartedAt(v time.Time)`
 
-SetConfiguration sets Configuration field to given value.
+SetStartedAt sets StartedAt field to given value.
 
-### HasConfiguration
 
-`func (o *LoadBalancer) HasConfiguration() bool`
+### SetStartedAtNil
 
-HasConfiguration returns a boolean if a field has been set.
+`func (o *LoadBalancer) SetStartedAtNil(b bool)`
 
-### GetAutoScalingGroup
+ SetStartedAtNil sets the value for StartedAt to be an explicit nil
 
-`func (o *LoadBalancer) GetAutoScalingGroup() LoadBalancerAutoScalingGroup`
+### UnsetStartedAt
+`func (o *LoadBalancer) UnsetStartedAt()`
 
-GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
-
-### GetAutoScalingGroupOk
-
-`func (o *LoadBalancer) GetAutoScalingGroupOk() (*LoadBalancerAutoScalingGroup, bool)`
-
-GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAutoScalingGroup
-
-`func (o *LoadBalancer) SetAutoScalingGroup(v LoadBalancerAutoScalingGroup)`
-
-SetAutoScalingGroup sets AutoScalingGroup field to given value.
-
-### HasAutoScalingGroup
-
-`func (o *LoadBalancer) HasAutoScalingGroup() bool`
-
-HasAutoScalingGroup returns a boolean if a field has been set.
-
-### SetAutoScalingGroupNil
-
-`func (o *LoadBalancer) SetAutoScalingGroupNil(b bool)`
-
- SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
-
-### UnsetAutoScalingGroup
-`func (o *LoadBalancer) UnsetAutoScalingGroup()`
-
-UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
+UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

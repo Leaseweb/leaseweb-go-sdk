@@ -562,7 +562,7 @@ func (r ApiCreateAutoScalingGroupRequest) CreateAutoScalingGroupOpts(createAutoS
 	return r
 }
 
-func (r ApiCreateAutoScalingGroupRequest) Execute() (*AutoScalingGroup, *http.Response, error) {
+func (r ApiCreateAutoScalingGroupRequest) Execute() (*AutoScalingGroupDetails, *http.Response, error) {
 	return r.ApiService.CreateAutoScalingGroupExecute(r)
 }
 
@@ -582,13 +582,13 @@ func (a *PublicCloudAPIService) CreateAutoScalingGroup(ctx context.Context) ApiC
 }
 
 // Execute executes the request
-//  @return AutoScalingGroup
-func (a *PublicCloudAPIService) CreateAutoScalingGroupExecute(r ApiCreateAutoScalingGroupRequest) (*AutoScalingGroup, *http.Response, error) {
+//  @return AutoScalingGroupDetails
+func (a *PublicCloudAPIService) CreateAutoScalingGroupExecute(r ApiCreateAutoScalingGroupRequest) (*AutoScalingGroupDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AutoScalingGroup
+		localVarReturnValue  *AutoScalingGroupDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.CreateAutoScalingGroup")
@@ -1928,7 +1928,7 @@ type ApiDeregisterAutoScalingGroupLoadBalancerRequest struct {
 	autoScalingGroupId string
 }
 
-func (r ApiDeregisterAutoScalingGroupLoadBalancerRequest) Execute() (*AutoScalingGroup, *http.Response, error) {
+func (r ApiDeregisterAutoScalingGroupLoadBalancerRequest) Execute() (*AutoScalingGroupDetails, *http.Response, error) {
 	return r.ApiService.DeregisterAutoScalingGroupLoadBalancerExecute(r)
 }
 
@@ -1950,13 +1950,13 @@ func (a *PublicCloudAPIService) DeregisterAutoScalingGroupLoadBalancer(ctx conte
 }
 
 // Execute executes the request
-//  @return AutoScalingGroup
-func (a *PublicCloudAPIService) DeregisterAutoScalingGroupLoadBalancerExecute(r ApiDeregisterAutoScalingGroupLoadBalancerRequest) (*AutoScalingGroup, *http.Response, error) {
+//  @return AutoScalingGroupDetails
+func (a *PublicCloudAPIService) DeregisterAutoScalingGroupLoadBalancerExecute(r ApiDeregisterAutoScalingGroupLoadBalancerRequest) (*AutoScalingGroupDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AutoScalingGroup
+		localVarReturnValue  *AutoScalingGroupDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.DeregisterAutoScalingGroupLoadBalancer")
@@ -2441,7 +2441,7 @@ type ApiGetAutoScalingGroupRequest struct {
 	autoScalingGroupId string
 }
 
-func (r ApiGetAutoScalingGroupRequest) Execute() (*AutoScalingGroup, *http.Response, error) {
+func (r ApiGetAutoScalingGroupRequest) Execute() (*AutoScalingGroupDetails, *http.Response, error) {
 	return r.ApiService.GetAutoScalingGroupExecute(r)
 }
 
@@ -2463,13 +2463,13 @@ func (a *PublicCloudAPIService) GetAutoScalingGroup(ctx context.Context, autoSca
 }
 
 // Execute executes the request
-//  @return AutoScalingGroup
-func (a *PublicCloudAPIService) GetAutoScalingGroupExecute(r ApiGetAutoScalingGroupRequest) (*AutoScalingGroup, *http.Response, error) {
+//  @return AutoScalingGroupDetails
+func (a *PublicCloudAPIService) GetAutoScalingGroupExecute(r ApiGetAutoScalingGroupRequest) (*AutoScalingGroupDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AutoScalingGroup
+		localVarReturnValue  *AutoScalingGroupDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetAutoScalingGroup")
@@ -4386,7 +4386,7 @@ type ApiGetInstanceRequest struct {
 	instanceId string
 }
 
-func (r ApiGetInstanceRequest) Execute() (*Instance, *http.Response, error) {
+func (r ApiGetInstanceRequest) Execute() (*InstanceDetails, *http.Response, error) {
 	return r.ApiService.GetInstanceExecute(r)
 }
 
@@ -4408,13 +4408,13 @@ func (a *PublicCloudAPIService) GetInstance(ctx context.Context, instanceId stri
 }
 
 // Execute executes the request
-//  @return Instance
-func (a *PublicCloudAPIService) GetInstanceExecute(r ApiGetInstanceRequest) (*Instance, *http.Response, error) {
+//  @return InstanceDetails
+func (a *PublicCloudAPIService) GetInstanceExecute(r ApiGetInstanceRequest) (*InstanceDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Instance
+		localVarReturnValue  *InstanceDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetInstance")
@@ -5556,7 +5556,7 @@ type ApiGetLoadBalancerRequest struct {
 	loadBalancerId string
 }
 
-func (r ApiGetLoadBalancerRequest) Execute() (*LoadBalancer, *http.Response, error) {
+func (r ApiGetLoadBalancerRequest) Execute() (*LoadBalancerDetails, *http.Response, error) {
 	return r.ApiService.GetLoadBalancerExecute(r)
 }
 
@@ -5578,13 +5578,13 @@ func (a *PublicCloudAPIService) GetLoadBalancer(ctx context.Context, loadBalance
 }
 
 // Execute executes the request
-//  @return LoadBalancer
-func (a *PublicCloudAPIService) GetLoadBalancerExecute(r ApiGetLoadBalancerRequest) (*LoadBalancer, *http.Response, error) {
+//  @return LoadBalancerDetails
+func (a *PublicCloudAPIService) GetLoadBalancerExecute(r ApiGetLoadBalancerRequest) (*LoadBalancerDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *LoadBalancer
+		localVarReturnValue  *LoadBalancerDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetLoadBalancer")
@@ -6827,7 +6827,7 @@ type ApiGetReinstallOsListRequest struct {
 	instanceId string
 }
 
-func (r ApiGetReinstallOsListRequest) Execute() ([]OperatingSystem, *http.Response, error) {
+func (r ApiGetReinstallOsListRequest) Execute() ([]OperatingSystemDetails, *http.Response, error) {
 	return r.ApiService.GetReinstallOsListExecute(r)
 }
 
@@ -6849,13 +6849,13 @@ func (a *PublicCloudAPIService) GetReinstallOsList(ctx context.Context, instance
 }
 
 // Execute executes the request
-//  @return []OperatingSystem
-func (a *PublicCloudAPIService) GetReinstallOsListExecute(r ApiGetReinstallOsListRequest) ([]OperatingSystem, *http.Response, error) {
+//  @return []OperatingSystemDetails
+func (a *PublicCloudAPIService) GetReinstallOsListExecute(r ApiGetReinstallOsListRequest) ([]OperatingSystemDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []OperatingSystem
+		localVarReturnValue  []OperatingSystemDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetReinstallOsList")
@@ -7757,7 +7757,7 @@ func (r ApiLaunchLoadBalancerRequest) LaunchLoadBalancerOpts(launchLoadBalancerO
 	return r
 }
 
-func (r ApiLaunchLoadBalancerRequest) Execute() (*LoadBalancer, *http.Response, error) {
+func (r ApiLaunchLoadBalancerRequest) Execute() (*LoadBalancerDetails, *http.Response, error) {
 	return r.ApiService.LaunchLoadBalancerExecute(r)
 }
 
@@ -7781,13 +7781,13 @@ func (a *PublicCloudAPIService) LaunchLoadBalancer(ctx context.Context) ApiLaunc
 }
 
 // Execute executes the request
-//  @return LoadBalancer
-func (a *PublicCloudAPIService) LaunchLoadBalancerExecute(r ApiLaunchLoadBalancerRequest) (*LoadBalancer, *http.Response, error) {
+//  @return LoadBalancerDetails
+func (a *PublicCloudAPIService) LaunchLoadBalancerExecute(r ApiLaunchLoadBalancerRequest) (*LoadBalancerDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *LoadBalancer
+		localVarReturnValue  *LoadBalancerDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.LaunchLoadBalancer")
@@ -8307,7 +8307,7 @@ func (r ApiRegisterAutoScalingGroupLoadBalancerRequest) RegisterAutoScalingGroup
 	return r
 }
 
-func (r ApiRegisterAutoScalingGroupLoadBalancerRequest) Execute() (*AutoScalingGroup, *http.Response, error) {
+func (r ApiRegisterAutoScalingGroupLoadBalancerRequest) Execute() (*AutoScalingGroupDetails, *http.Response, error) {
 	return r.ApiService.RegisterAutoScalingGroupLoadBalancerExecute(r)
 }
 
@@ -8329,13 +8329,13 @@ func (a *PublicCloudAPIService) RegisterAutoScalingGroupLoadBalancer(ctx context
 }
 
 // Execute executes the request
-//  @return AutoScalingGroup
-func (a *PublicCloudAPIService) RegisterAutoScalingGroupLoadBalancerExecute(r ApiRegisterAutoScalingGroupLoadBalancerRequest) (*AutoScalingGroup, *http.Response, error) {
+//  @return AutoScalingGroupDetails
+func (a *PublicCloudAPIService) RegisterAutoScalingGroupLoadBalancerExecute(r ApiRegisterAutoScalingGroupLoadBalancerRequest) (*AutoScalingGroupDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AutoScalingGroup
+		localVarReturnValue  *AutoScalingGroupDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.RegisterAutoScalingGroupLoadBalancer")
@@ -10430,7 +10430,7 @@ func (r ApiUpdateAutoScalingGroupRequest) UpdateAutoScalingGroupOpts(updateAutoS
 	return r
 }
 
-func (r ApiUpdateAutoScalingGroupRequest) Execute() (*AutoScalingGroup, *http.Response, error) {
+func (r ApiUpdateAutoScalingGroupRequest) Execute() (*AutoScalingGroupDetails, *http.Response, error) {
 	return r.ApiService.UpdateAutoScalingGroupExecute(r)
 }
 
@@ -10452,13 +10452,13 @@ func (a *PublicCloudAPIService) UpdateAutoScalingGroup(ctx context.Context, auto
 }
 
 // Execute executes the request
-//  @return AutoScalingGroup
-func (a *PublicCloudAPIService) UpdateAutoScalingGroupExecute(r ApiUpdateAutoScalingGroupRequest) (*AutoScalingGroup, *http.Response, error) {
+//  @return AutoScalingGroupDetails
+func (a *PublicCloudAPIService) UpdateAutoScalingGroupExecute(r ApiUpdateAutoScalingGroupRequest) (*AutoScalingGroupDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AutoScalingGroup
+		localVarReturnValue  *AutoScalingGroupDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.UpdateAutoScalingGroup")
@@ -10813,7 +10813,7 @@ func (r ApiUpdateInstanceRequest) UpdateInstanceOpts(updateInstanceOpts UpdateIn
 	return r
 }
 
-func (r ApiUpdateInstanceRequest) Execute() (*Instance, *http.Response, error) {
+func (r ApiUpdateInstanceRequest) Execute() (*InstanceDetails, *http.Response, error) {
 	return r.ApiService.UpdateInstanceExecute(r)
 }
 
@@ -10837,13 +10837,13 @@ func (a *PublicCloudAPIService) UpdateInstance(ctx context.Context, instanceId s
 }
 
 // Execute executes the request
-//  @return Instance
-func (a *PublicCloudAPIService) UpdateInstanceExecute(r ApiUpdateInstanceRequest) (*Instance, *http.Response, error) {
+//  @return InstanceDetails
+func (a *PublicCloudAPIService) UpdateInstanceExecute(r ApiUpdateInstanceRequest) (*InstanceDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Instance
+		localVarReturnValue  *InstanceDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.UpdateInstance")
@@ -11205,7 +11205,7 @@ func (r ApiUpdateLoadBalancerRequest) UpdateLoadBalancerOpts(updateLoadBalancerO
 	return r
 }
 
-func (r ApiUpdateLoadBalancerRequest) Execute() (*LoadBalancer, *http.Response, error) {
+func (r ApiUpdateLoadBalancerRequest) Execute() (*LoadBalancerDetails, *http.Response, error) {
 	return r.ApiService.UpdateLoadBalancerExecute(r)
 }
 
@@ -11227,13 +11227,13 @@ func (a *PublicCloudAPIService) UpdateLoadBalancer(ctx context.Context, loadBala
 }
 
 // Execute executes the request
-//  @return LoadBalancer
-func (a *PublicCloudAPIService) UpdateLoadBalancerExecute(r ApiUpdateLoadBalancerRequest) (*LoadBalancer, *http.Response, error) {
+//  @return LoadBalancerDetails
+func (a *PublicCloudAPIService) UpdateLoadBalancerExecute(r ApiUpdateLoadBalancerRequest) (*LoadBalancerDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *LoadBalancer
+		localVarReturnValue  *LoadBalancerDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.UpdateLoadBalancer")
