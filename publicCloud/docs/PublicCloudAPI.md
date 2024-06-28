@@ -3019,7 +3019,7 @@ import (
 )
 
 func main() {
-	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.instanceTypeName("lsw.m3.large"), openapiclient.operatingSystemId("ALMALINUX_8_64BIT"), "ContractType_example", int32(123), int32(123), "RootDiskStorageType_example") // LaunchInstanceOpts | 
+	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.instanceTypeName("lsw.m3.large"), openapiclient.operatingSystemId("ALMALINUX_8_64BIT"), "ContractType_example", int32(123), int32(123), openapiclient.rootDiskStorageType("LOCAL")) // LaunchInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3085,7 +3085,7 @@ import (
 )
 
 func main() {
-	launchLoadBalancerOpts := *openapiclient.NewLaunchLoadBalancerOpts("eu-west-3", "lsw.m3.large", "ContractType_example", int32(123), "RootDiskStorageType_example", int32(123)) // LaunchLoadBalancerOpts | 
+	launchLoadBalancerOpts := *openapiclient.NewLaunchLoadBalancerOpts("eu-west-3", "lsw.m3.large", "ContractType_example", int32(123), openapiclient.rootDiskStorageType("LOCAL"), int32(123)) // LaunchLoadBalancerOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

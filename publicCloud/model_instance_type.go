@@ -21,7 +21,7 @@ var _ MappedNullable = &InstanceType{}
 type InstanceType struct {
 	// Instance type's name
 	Name *string `json:"name,omitempty"`
-	Resources *InstanceResources `json:"resources,omitempty"`
+	Resources *Resources `json:"resources,omitempty"`
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes,omitempty"`
 	Prices *Price `json:"prices,omitempty"`
@@ -77,9 +77,9 @@ func (o *InstanceType) SetName(v string) {
 }
 
 // GetResources returns the Resources field value if set, zero value otherwise.
-func (o *InstanceType) GetResources() InstanceResources {
+func (o *InstanceType) GetResources() Resources {
 	if o == nil || IsNil(o.Resources) {
-		var ret InstanceResources
+		var ret Resources
 		return ret
 	}
 	return *o.Resources
@@ -87,7 +87,7 @@ func (o *InstanceType) GetResources() InstanceResources {
 
 // GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InstanceType) GetResourcesOk() (*InstanceResources, bool) {
+func (o *InstanceType) GetResourcesOk() (*Resources, bool) {
 	if o == nil || IsNil(o.Resources) {
 		return nil, false
 	}
@@ -103,8 +103,8 @@ func (o *InstanceType) HasResources() bool {
 	return false
 }
 
-// SetResources gets a reference to the given InstanceResources and assigns it to the Resources field.
-func (o *InstanceType) SetResources(v InstanceResources) {
+// SetResources gets a reference to the given Resources and assigns it to the Resources field.
+func (o *InstanceType) SetResources(v Resources) {
 	o.Resources = &v
 }
 

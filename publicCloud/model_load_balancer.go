@@ -26,14 +26,14 @@ type LoadBalancer struct {
 	Id string `json:"id"`
 	// Load balancer type
 	Type string `json:"type"`
-	Resources InstanceResources `json:"resources"`
+	Resources Resources `json:"resources"`
 	// The region where the load balancer was launched into
 	Region string `json:"region"`
 	// The identifying name set to the load balancer
 	Reference NullableString `json:"reference"`
 	State State `json:"state"`
 	Contract Contract `json:"contract"`
-	// Date and time when the instance was started for the first time, right after launching it
+	// Date and time when the load balancer was started for the first time, right after launching it
 	StartedAt NullableTime `json:"startedAt"`
 }
 
@@ -43,7 +43,7 @@ type _LoadBalancer LoadBalancer
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancer(id string, type_ string, resources InstanceResources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime) *LoadBalancer {
+func NewLoadBalancer(id string, type_ string, resources Resources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime) *LoadBalancer {
 	this := LoadBalancer{}
 	this.Id = id
 	this.Type = type_
@@ -113,9 +113,9 @@ func (o *LoadBalancer) SetType(v string) {
 }
 
 // GetResources returns the Resources field value
-func (o *LoadBalancer) GetResources() InstanceResources {
+func (o *LoadBalancer) GetResources() Resources {
 	if o == nil {
-		var ret InstanceResources
+		var ret Resources
 		return ret
 	}
 
@@ -124,7 +124,7 @@ func (o *LoadBalancer) GetResources() InstanceResources {
 
 // GetResourcesOk returns a tuple with the Resources field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetResourcesOk() (*InstanceResources, bool) {
+func (o *LoadBalancer) GetResourcesOk() (*Resources, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,7 +132,7 @@ func (o *LoadBalancer) GetResourcesOk() (*InstanceResources, bool) {
 }
 
 // SetResources sets field value
-func (o *LoadBalancer) SetResources(v InstanceResources) {
+func (o *LoadBalancer) SetResources(v Resources) {
 	o.Resources = v
 }
 

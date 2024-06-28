@@ -23,7 +23,7 @@ type AutoScaledInstance struct {
 	Id *string `json:"id,omitempty"`
 	// The instance type, which determines the amount of resources
 	Type *string `json:"type,omitempty"`
-	Resources *InstanceResources `json:"resources,omitempty"`
+	Resources *Resources `json:"resources,omitempty"`
 	// The region in which the instance was launched
 	Region *string `json:"region,omitempty"`
 	// The identifying name set to the instance
@@ -116,9 +116,9 @@ func (o *AutoScaledInstance) SetType(v string) {
 }
 
 // GetResources returns the Resources field value if set, zero value otherwise.
-func (o *AutoScaledInstance) GetResources() InstanceResources {
+func (o *AutoScaledInstance) GetResources() Resources {
 	if o == nil || IsNil(o.Resources) {
-		var ret InstanceResources
+		var ret Resources
 		return ret
 	}
 	return *o.Resources
@@ -126,7 +126,7 @@ func (o *AutoScaledInstance) GetResources() InstanceResources {
 
 // GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScaledInstance) GetResourcesOk() (*InstanceResources, bool) {
+func (o *AutoScaledInstance) GetResourcesOk() (*Resources, bool) {
 	if o == nil || IsNil(o.Resources) {
 		return nil, false
 	}
@@ -142,8 +142,8 @@ func (o *AutoScaledInstance) HasResources() bool {
 	return false
 }
 
-// SetResources gets a reference to the given InstanceResources and assigns it to the Resources field.
-func (o *AutoScaledInstance) SetResources(v InstanceResources) {
+// SetResources gets a reference to the given Resources and assigns it to the Resources field.
+func (o *AutoScaledInstance) SetResources(v Resources) {
 	o.Resources = &v
 }
 

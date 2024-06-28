@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The unique identifier of the instance | 
 **Type** | [**InstanceTypeName**](InstanceTypeName.md) |  | 
-**Resources** | [**InstanceResources**](InstanceResources.md) |  | 
+**Resources** | [**Resources**](Resources.md) |  | 
 **Region** | **string** | The region in which the instance was launched | 
 **Reference** | **NullableString** | The identifying name set to the instance | 
 **StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **HasPublicIpV4** | **bool** |  | 
 **includesPrivateNetwork** | **bool** |  | 
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
-**RootDiskStorageType** | **string** | The root disk&#39;s storage type | 
+**RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
 **Ips** | [**[]Ip**](Ip.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroupDetails**](AutoScalingGroupDetails.md) |  | 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewInstance
 
-`func NewInstance(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem, ) *Instance`
+`func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem, ) *Instance`
 
 NewInstance instantiates a new Instance object
 This constructor will assign default values to properties that have it defined,
@@ -83,20 +83,20 @@ SetType sets Type field to given value.
 
 ### GetResources
 
-`func (o *Instance) GetResources() InstanceResources`
+`func (o *Instance) GetResources() Resources`
 
 GetResources returns the Resources field if non-nil, zero value otherwise.
 
 ### GetResourcesOk
 
-`func (o *Instance) GetResourcesOk() (*InstanceResources, bool)`
+`func (o *Instance) GetResourcesOk() (*Resources, bool)`
 
 GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResources
 
-`func (o *Instance) SetResources(v InstanceResources)`
+`func (o *Instance) SetResources(v Resources)`
 
 SetResources sets Resources field to given value.
 
@@ -313,20 +313,20 @@ SetRootDiskSize sets RootDiskSize field to given value.
 
 ### GetRootDiskStorageType
 
-`func (o *Instance) GetRootDiskStorageType() string`
+`func (o *Instance) GetRootDiskStorageType() RootDiskStorageType`
 
 GetRootDiskStorageType returns the RootDiskStorageType field if non-nil, zero value otherwise.
 
 ### GetRootDiskStorageTypeOk
 
-`func (o *Instance) GetRootDiskStorageTypeOk() (*string, bool)`
+`func (o *Instance) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool)`
 
 GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRootDiskStorageType
 
-`func (o *Instance) SetRootDiskStorageType(v string)`
+`func (o *Instance) SetRootDiskStorageType(v RootDiskStorageType)`
 
 SetRootDiskStorageType sets RootDiskStorageType field to given value.
 

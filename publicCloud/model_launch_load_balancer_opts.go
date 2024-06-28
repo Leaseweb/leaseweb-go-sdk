@@ -31,8 +31,7 @@ type LaunchLoadBalancerOpts struct {
 	ContractType string `json:"contractType"`
 	// How often you wish to be charged. Used only when contract type is MONTHLY. '1' means every month, '3' every three months and so on.
 	BillingFrequency int32 `json:"billingFrequency"`
-	// The root disk's storage type
-	RootDiskStorageType string `json:"rootDiskStorageType"`
+	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
 	// The port that the registered instances listen to
 	TargetPort int32 `json:"targetPort"`
 }
@@ -43,7 +42,7 @@ type _LaunchLoadBalancerOpts LaunchLoadBalancerOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchLoadBalancerOpts(region string, type_ string, contractType string, billingFrequency int32, rootDiskStorageType string, targetPort int32) *LaunchLoadBalancerOpts {
+func NewLaunchLoadBalancerOpts(region string, type_ string, contractType string, billingFrequency int32, rootDiskStorageType RootDiskStorageType, targetPort int32) *LaunchLoadBalancerOpts {
 	this := LaunchLoadBalancerOpts{}
 	this.Region = region
 	this.Type = type_
@@ -191,9 +190,9 @@ func (o *LaunchLoadBalancerOpts) SetBillingFrequency(v int32) {
 }
 
 // GetRootDiskStorageType returns the RootDiskStorageType field value
-func (o *LaunchLoadBalancerOpts) GetRootDiskStorageType() string {
+func (o *LaunchLoadBalancerOpts) GetRootDiskStorageType() RootDiskStorageType {
 	if o == nil {
-		var ret string
+		var ret RootDiskStorageType
 		return ret
 	}
 
@@ -202,7 +201,7 @@ func (o *LaunchLoadBalancerOpts) GetRootDiskStorageType() string {
 
 // GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field value
 // and a boolean to check if the value has been set.
-func (o *LaunchLoadBalancerOpts) GetRootDiskStorageTypeOk() (*string, bool) {
+func (o *LaunchLoadBalancerOpts) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -210,7 +209,7 @@ func (o *LaunchLoadBalancerOpts) GetRootDiskStorageTypeOk() (*string, bool) {
 }
 
 // SetRootDiskStorageType sets field value
-func (o *LaunchLoadBalancerOpts) SetRootDiskStorageType(v string) {
+func (o *LaunchLoadBalancerOpts) SetRootDiskStorageType(v RootDiskStorageType) {
 	o.RootDiskStorageType = v
 }
 

@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The load balancer unique identifier | 
 **Type** | **string** | Load balancer type | 
-**Resources** | [**InstanceResources**](InstanceResources.md) |  | 
+**Resources** | [**Resources**](Resources.md) |  | 
 **Region** | **string** | The region where the load balancer was launched into | 
 **Reference** | **NullableString** | The identifying name set to the load balancer | 
 **State** | [**State**](State.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
-**StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
+**StartedAt** | **NullableTime** | Date and time when the load balancer was started for the first time, right after launching it | 
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
 **Ips** | [**[]Ip**](Ip.md) |  | 
 **Configuration** | [**NullableLoadBalancerConfiguration**](LoadBalancerConfiguration.md) |  | 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewLoadBalancerDetails
 
-`func NewLoadBalancerDetails(id string, type_ string, resources InstanceResources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ips []Ip, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, ) *LoadBalancerDetails`
+`func NewLoadBalancerDetails(id string, type_ string, resources Resources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ips []Ip, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, ) *LoadBalancerDetails`
 
 NewLoadBalancerDetails instantiates a new LoadBalancerDetails object
 This constructor will assign default values to properties that have it defined,
@@ -79,20 +79,20 @@ SetType sets Type field to given value.
 
 ### GetResources
 
-`func (o *LoadBalancerDetails) GetResources() InstanceResources`
+`func (o *LoadBalancerDetails) GetResources() Resources`
 
 GetResources returns the Resources field if non-nil, zero value otherwise.
 
 ### GetResourcesOk
 
-`func (o *LoadBalancerDetails) GetResourcesOk() (*InstanceResources, bool)`
+`func (o *LoadBalancerDetails) GetResourcesOk() (*Resources, bool)`
 
 GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResources
 
-`func (o *LoadBalancerDetails) SetResources(v InstanceResources)`
+`func (o *LoadBalancerDetails) SetResources(v Resources)`
 
 SetResources sets Resources field to given value.
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | The unique identifier of the instance | [optional] 
 **Type** | Pointer to **string** | The instance type, which determines the amount of resources | [optional] 
-**Resources** | Pointer to [**InstanceResources**](InstanceResources.md) |  | [optional] 
+**Resources** | Pointer to [**Resources**](Resources.md) |  | [optional] 
 **Region** | Pointer to **string** | The region in which the instance was launched | [optional] 
 **Reference** | Pointer to **string** | The identifying name set to the instance | [optional] 
 **State** | Pointer to [**State**](State.md) |  | [optional] 
@@ -85,20 +85,20 @@ HasType returns a boolean if a field has been set.
 
 ### GetResources
 
-`func (o *AutoScaledInstance) GetResources() InstanceResources`
+`func (o *AutoScaledInstance) GetResources() Resources`
 
 GetResources returns the Resources field if non-nil, zero value otherwise.
 
 ### GetResourcesOk
 
-`func (o *AutoScaledInstance) GetResourcesOk() (*InstanceResources, bool)`
+`func (o *AutoScaledInstance) GetResourcesOk() (*Resources, bool)`
 
 GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResources
 
-`func (o *AutoScaledInstance) SetResources(v InstanceResources)`
+`func (o *AutoScaledInstance) SetResources(v Resources)`
 
 SetResources sets Resources field to given value.
 

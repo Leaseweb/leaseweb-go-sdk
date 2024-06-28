@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Instance type&#39;s name | [optional] 
-**Resources** | Pointer to [**InstanceResources**](InstanceResources.md) |  | [optional] 
+**Resources** | Pointer to [**Resources**](Resources.md) |  | [optional] 
 **StorageTypes** | Pointer to **[]string** | The supported storage types for the instance type | [optional] 
 **Prices** | Pointer to [**Price**](Price.md) |  | [optional] 
 
@@ -55,20 +55,20 @@ HasName returns a boolean if a field has been set.
 
 ### GetResources
 
-`func (o *InstanceType) GetResources() InstanceResources`
+`func (o *InstanceType) GetResources() Resources`
 
 GetResources returns the Resources field if non-nil, zero value otherwise.
 
 ### GetResourcesOk
 
-`func (o *InstanceType) GetResourcesOk() (*InstanceResources, bool)`
+`func (o *InstanceType) GetResourcesOk() (*Resources, bool)`
 
 GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResources
 
-`func (o *InstanceType) SetResources(v InstanceResources)`
+`func (o *InstanceType) SetResources(v Resources)`
 
 SetResources sets Resources field to given value.
 

@@ -24,7 +24,7 @@ type ExpenseResultInstance struct {
 	Id *string `json:"id,omitempty"`
 	// The reference of the instance.
 	Reference *string `json:"reference,omitempty"`
-	Resources *InstanceResources `json:"resources,omitempty"`
+	Resources *Resources `json:"resources,omitempty"`
 	Contract *Contract `json:"contract,omitempty"`
 	// Date when the instance was started
 	StartedAt *time.Time `json:"startedAt,omitempty"`
@@ -32,8 +32,7 @@ type ExpenseResultInstance struct {
 	EndedAt *time.Time `json:"endedAt,omitempty"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize *int32 `json:"rootDiskSize,omitempty"`
-	// The root disk type as specified during its launch or update.
-	RootDiskType *string `json:"rootDiskType,omitempty"`
+	RootDiskStorageType *RootDiskStorageType `json:"rootDiskStorageType,omitempty"`
 	// The billing type of the instance. PREPAID is used for monthly commited instances, POSTPAID for hourly instances.
 	BillingType *string `json:"billingType,omitempty"`
 	// The number of hours the instance has been running.
@@ -128,9 +127,9 @@ func (o *ExpenseResultInstance) SetReference(v string) {
 }
 
 // GetResources returns the Resources field value if set, zero value otherwise.
-func (o *ExpenseResultInstance) GetResources() InstanceResources {
+func (o *ExpenseResultInstance) GetResources() Resources {
 	if o == nil || IsNil(o.Resources) {
-		var ret InstanceResources
+		var ret Resources
 		return ret
 	}
 	return *o.Resources
@@ -138,7 +137,7 @@ func (o *ExpenseResultInstance) GetResources() InstanceResources {
 
 // GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExpenseResultInstance) GetResourcesOk() (*InstanceResources, bool) {
+func (o *ExpenseResultInstance) GetResourcesOk() (*Resources, bool) {
 	if o == nil || IsNil(o.Resources) {
 		return nil, false
 	}
@@ -154,8 +153,8 @@ func (o *ExpenseResultInstance) HasResources() bool {
 	return false
 }
 
-// SetResources gets a reference to the given InstanceResources and assigns it to the Resources field.
-func (o *ExpenseResultInstance) SetResources(v InstanceResources) {
+// SetResources gets a reference to the given Resources and assigns it to the Resources field.
+func (o *ExpenseResultInstance) SetResources(v Resources) {
 	o.Resources = &v
 }
 
@@ -287,36 +286,36 @@ func (o *ExpenseResultInstance) SetRootDiskSize(v int32) {
 	o.RootDiskSize = &v
 }
 
-// GetRootDiskType returns the RootDiskType field value if set, zero value otherwise.
-func (o *ExpenseResultInstance) GetRootDiskType() string {
-	if o == nil || IsNil(o.RootDiskType) {
-		var ret string
+// GetRootDiskStorageType returns the RootDiskStorageType field value if set, zero value otherwise.
+func (o *ExpenseResultInstance) GetRootDiskStorageType() RootDiskStorageType {
+	if o == nil || IsNil(o.RootDiskStorageType) {
+		var ret RootDiskStorageType
 		return ret
 	}
-	return *o.RootDiskType
+	return *o.RootDiskStorageType
 }
 
-// GetRootDiskTypeOk returns a tuple with the RootDiskType field value if set, nil otherwise
+// GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExpenseResultInstance) GetRootDiskTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.RootDiskType) {
+func (o *ExpenseResultInstance) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool) {
+	if o == nil || IsNil(o.RootDiskStorageType) {
 		return nil, false
 	}
-	return o.RootDiskType, true
+	return o.RootDiskStorageType, true
 }
 
-// HasRootDiskType returns a boolean if a field has been set.
-func (o *ExpenseResultInstance) HasRootDiskType() bool {
-	if o != nil && !IsNil(o.RootDiskType) {
+// HasRootDiskStorageType returns a boolean if a field has been set.
+func (o *ExpenseResultInstance) HasRootDiskStorageType() bool {
+	if o != nil && !IsNil(o.RootDiskStorageType) {
 		return true
 	}
 
 	return false
 }
 
-// SetRootDiskType gets a reference to the given string and assigns it to the RootDiskType field.
-func (o *ExpenseResultInstance) SetRootDiskType(v string) {
-	o.RootDiskType = &v
+// SetRootDiskStorageType gets a reference to the given RootDiskStorageType and assigns it to the RootDiskStorageType field.
+func (o *ExpenseResultInstance) SetRootDiskStorageType(v RootDiskStorageType) {
+	o.RootDiskStorageType = &v
 }
 
 // GetBillingType returns the BillingType field value if set, zero value otherwise.
@@ -510,8 +509,8 @@ func (o ExpenseResultInstance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RootDiskSize) {
 		toSerialize["rootDiskSize"] = o.RootDiskSize
 	}
-	if !IsNil(o.RootDiskType) {
-		toSerialize["rootDiskType"] = o.RootDiskType
+	if !IsNil(o.RootDiskStorageType) {
+		toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
 	}
 	if !IsNil(o.BillingType) {
 		toSerialize["billingType"] = o.BillingType

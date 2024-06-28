@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | The unique identifier for the instance. | [optional] 
 **Reference** | Pointer to **string** | The reference of the instance. | [optional] 
-**Resources** | Pointer to [**InstanceResources**](InstanceResources.md) |  | [optional] 
+**Resources** | Pointer to [**Resources**](Resources.md) |  | [optional] 
 **Contract** | Pointer to [**Contract**](Contract.md) |  | [optional] 
 **StartedAt** | Pointer to **time.Time** | Date when the instance was started | [optional] 
 **EndedAt** | Pointer to **time.Time** | Date when the instance ended | [optional] 
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
-**RootDiskType** | Pointer to **string** | The root disk type as specified during its launch or update. | [optional] 
+**RootDiskStorageType** | Pointer to [**RootDiskStorageType**](RootDiskStorageType.md) |  | [optional] 
 **BillingType** | Pointer to **string** | The billing type of the instance. PREPAID is used for monthly commited instances, POSTPAID for hourly instances. | [optional] 
 **Hours** | Pointer to **int32** | The number of hours the instance has been running. | [optional] 
 **From** | Pointer to **time.Time** | The start date of the billing period. | [optional] 
@@ -89,20 +89,20 @@ HasReference returns a boolean if a field has been set.
 
 ### GetResources
 
-`func (o *ExpenseResultInstance) GetResources() InstanceResources`
+`func (o *ExpenseResultInstance) GetResources() Resources`
 
 GetResources returns the Resources field if non-nil, zero value otherwise.
 
 ### GetResourcesOk
 
-`func (o *ExpenseResultInstance) GetResourcesOk() (*InstanceResources, bool)`
+`func (o *ExpenseResultInstance) GetResourcesOk() (*Resources, bool)`
 
 GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResources
 
-`func (o *ExpenseResultInstance) SetResources(v InstanceResources)`
+`func (o *ExpenseResultInstance) SetResources(v Resources)`
 
 SetResources sets Resources field to given value.
 
@@ -212,30 +212,30 @@ SetRootDiskSize sets RootDiskSize field to given value.
 
 HasRootDiskSize returns a boolean if a field has been set.
 
-### GetRootDiskType
+### GetRootDiskStorageType
 
-`func (o *ExpenseResultInstance) GetRootDiskType() string`
+`func (o *ExpenseResultInstance) GetRootDiskStorageType() RootDiskStorageType`
 
-GetRootDiskType returns the RootDiskType field if non-nil, zero value otherwise.
+GetRootDiskStorageType returns the RootDiskStorageType field if non-nil, zero value otherwise.
 
-### GetRootDiskTypeOk
+### GetRootDiskStorageTypeOk
 
-`func (o *ExpenseResultInstance) GetRootDiskTypeOk() (*string, bool)`
+`func (o *ExpenseResultInstance) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool)`
 
-GetRootDiskTypeOk returns a tuple with the RootDiskType field if it's non-nil, zero value otherwise
+GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRootDiskType
+### SetRootDiskStorageType
 
-`func (o *ExpenseResultInstance) SetRootDiskType(v string)`
+`func (o *ExpenseResultInstance) SetRootDiskStorageType(v RootDiskStorageType)`
 
-SetRootDiskType sets RootDiskType field to given value.
+SetRootDiskStorageType sets RootDiskStorageType field to given value.
 
-### HasRootDiskType
+### HasRootDiskStorageType
 
-`func (o *ExpenseResultInstance) HasRootDiskType() bool`
+`func (o *ExpenseResultInstance) HasRootDiskStorageType() bool`
 
-HasRootDiskType returns a boolean if a field has been set.
+HasRootDiskStorageType returns a boolean if a field has been set.
 
 ### GetBillingType
 

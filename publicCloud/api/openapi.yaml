@@ -2398,7 +2398,7 @@ paths:
                     hours: 14
                     from: 2023-12-01T00:00:00+00:00
                     to: 2023-12-01T13:18:41+00:00
-                    rootDiskType: CENTRAL
+                    rootDiskStorageType: CENTRAL
                     price: "0.72"
                   traffic:
                     unit: GB
@@ -7419,8 +7419,8 @@ components:
       - value
       title: networkSpeed
       type: object
-    instanceResources:
-      description: Resources available for the load balancer
+    resources:
+      description: Available resources
       example:
         memory:
           unit: GiB
@@ -7448,7 +7448,7 @@ components:
       - memory
       - privateNetworkSpeed
       - publicNetworkSpeed
-      title: instanceResource
+      title: resources
       type: object
     storageTypes:
       description: The supported storage types for the instance type
@@ -7522,7 +7522,7 @@ components:
           description: Instance type's name
           type: string
         resources:
-          $ref: '#/components/schemas/instanceResources'
+          $ref: '#/components/schemas/resources'
         storageTypes:
           description: The supported storage types for the instance type
           example:
@@ -7714,15 +7714,18 @@ components:
       - STOPPING
       - UNKNOWN
       type: string
-    productType:
-      description: The product type
-      type: string
     rootDiskSize:
       description: The root disk's size in GB. Must be at least 5 GB for Linux and
         FreeBSD instances and 50 GB for Windows instances
       maximum: 1000
       minimum: 5
       type: integer
+    rootDiskStorageType:
+      description: The root disk's storage type
+      enum:
+      - LOCAL
+      - CENTRAL
+      type: string
     networkType:
       enum:
       - INTERNAL
@@ -7874,7 +7877,7 @@ components:
           example: lsw.m3.large
           type: string
         resources:
-          $ref: '#/components/schemas/instanceResources'
+          $ref: '#/components/schemas/resources'
         region:
           description: The region where the load balancer was launched into
           example: eu-west-3
@@ -7888,7 +7891,7 @@ components:
         contract:
           $ref: '#/components/schemas/contract'
         startedAt:
-          description: "Date and time when the instance was started for the first\
+          description: "Date and time when the load balancer was started for the first\
             \ time, right after launching it"
           format: date-time
           nullable: true
@@ -8058,7 +8061,7 @@ components:
         type:
           $ref: '#/components/schemas/instanceTypeName'
         resources:
-          $ref: '#/components/schemas/instanceResources'
+          $ref: '#/components/schemas/resources'
         region:
           description: The region in which the instance was launched
           example: eu-west-3
@@ -8094,11 +8097,7 @@ components:
           minimum: 5
           type: integer
         rootDiskStorageType:
-          description: The root disk's storage type
-          enum:
-          - LOCAL
-          - CENTRAL
-          type: string
+          $ref: '#/components/schemas/rootDiskStorageType'
         ips:
           items:
             $ref: '#/components/schemas/ip'
@@ -8193,7 +8192,7 @@ components:
         title: instance
         type: object
       example:
-        rootDiskStorageType: LOCAL
+        rootDiskStorageType: null
         autoScalingGroup:
           cpuThreshold: 7
           maximumAmount: 2
@@ -8301,7 +8300,7 @@ components:
     getInstanceListResult:
       example:
         instances:
-        - rootDiskStorageType: LOCAL
+        - rootDiskStorageType: null
           autoScalingGroup:
             cpuThreshold: 7
             maximumAmount: 2
@@ -8406,7 +8405,7 @@ components:
           region: eu-west-3
           productType: productType
           hasPublicIpV4: true
-        - rootDiskStorageType: LOCAL
+        - rootDiskStorageType: null
           autoScalingGroup:
             cpuThreshold: 7
             maximumAmount: 2
@@ -8571,11 +8570,7 @@ components:
           minimum: 5
           type: integer
         rootDiskStorageType:
-          description: The root disk's storage type
-          enum:
-          - LOCAL
-          - CENTRAL
-          type: string
+          $ref: '#/components/schemas/rootDiskStorageType'
         sshKey:
           description: Public SSH key to be installed into the instance. Must be used
             only on Linux/FreeBSD instances
@@ -8679,7 +8674,7 @@ components:
         title: instanceDetails
         type: object
       example:
-        rootDiskStorageType: LOCAL
+        rootDiskStorageType: null
         iso:
           name: name
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8992,6 +8987,7 @@ components:
         billing:
           instances:
           - hours: 14
+            rootDiskStorageType: null
             rootDiskSize: 84
             contract:
               billingFrequency: 1
@@ -9022,8 +9018,8 @@ components:
             from: 2023-12-01T00:00:00Z
             id: b778824a-a96e-4f6f-9713-7b7196f09c4f
             to: 2023-12-01T13:18:41Z
-            rootDiskType: CENTRAL
           - hours: 14
+            rootDiskStorageType: null
             rootDiskSize: 84
             contract:
               billingFrequency: 1
@@ -9054,7 +9050,6 @@ components:
             from: 2023-12-01T00:00:00Z
             id: b778824a-a96e-4f6f-9713-7b7196f09c4f
             to: 2023-12-01T13:18:41Z
-            rootDiskType: CENTRAL
           traffic:
             unit: GB
             values:
@@ -9724,11 +9719,7 @@ components:
           - 12
           type: integer
         rootDiskStorageType:
-          description: The root disk's storage type
-          enum:
-          - LOCAL
-          - CENTRAL
-          type: string
+          $ref: '#/components/schemas/rootDiskStorageType'
         targetPort:
           description: The port that the registered instances listen to
           type: integer
@@ -10327,7 +10318,7 @@ components:
           description: "The instance type, which determines the amount of resources"
           type: string
         resources:
-          $ref: '#/components/schemas/instanceResources'
+          $ref: '#/components/schemas/resources'
         region:
           description: The region in which the instance was launched
           example: eu-west-3
@@ -10569,6 +10560,7 @@ components:
     expenseResultInstance:
       example:
         hours: 14
+        rootDiskStorageType: null
         rootDiskSize: 84
         contract:
           billingFrequency: 1
@@ -10599,7 +10591,6 @@ components:
         from: 2023-12-01T00:00:00Z
         id: b778824a-a96e-4f6f-9713-7b7196f09c4f
         to: 2023-12-01T13:18:41Z
-        rootDiskType: CENTRAL
       properties:
         id:
           description: The unique identifier for the instance.
@@ -10610,7 +10601,7 @@ components:
           example: test-instance
           type: string
         resources:
-          $ref: '#/components/schemas/instanceResources'
+          $ref: '#/components/schemas/resources'
         contract:
           $ref: '#/components/schemas/contract'
         startedAt:
@@ -10629,13 +10620,8 @@ components:
           maximum: 1000
           minimum: 5
           type: integer
-        rootDiskType:
-          description: The root disk type as specified during its launch or update.
-          enum:
-          - CENTRAL
-          - LOCAL
-          example: CENTRAL
-          type: string
+        rootDiskStorageType:
+          $ref: '#/components/schemas/rootDiskStorageType'
         billingType:
           description: "The billing type of the instance. PREPAID is used for monthly\
             \ commited instances, POSTPAID for hourly instances."
@@ -10718,6 +10704,7 @@ components:
       example:
         instances:
         - hours: 14
+          rootDiskStorageType: null
           rootDiskSize: 84
           contract:
             billingFrequency: 1
@@ -10748,8 +10735,8 @@ components:
           from: 2023-12-01T00:00:00Z
           id: b778824a-a96e-4f6f-9713-7b7196f09c4f
           to: 2023-12-01T13:18:41Z
-          rootDiskType: CENTRAL
         - hours: 14
+          rootDiskStorageType: null
           rootDiskSize: 84
           contract:
             billingFrequency: 1
@@ -10780,7 +10767,6 @@ components:
           from: 2023-12-01T00:00:00Z
           id: b778824a-a96e-4f6f-9713-7b7196f09c4f
           to: 2023-12-01T13:18:41Z
-          rootDiskType: CENTRAL
         traffic:
           unit: GB
           values:

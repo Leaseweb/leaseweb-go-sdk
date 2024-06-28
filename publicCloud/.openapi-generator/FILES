@@ -55,7 +55,6 @@ docs/HealthCheckStatus.md
 docs/Instance.md
 docs/InstanceBase.md
 docs/InstanceDetails.md
-docs/InstanceResources.md
 docs/InstanceType.md
 docs/InstanceTypeName.md
 docs/InstanceTypes.md
@@ -87,6 +86,8 @@ docs/PublicCloudAPI.md
 docs/Region.md
 docs/RegisterAutoScalingGroupLoadBalancerOpts.md
 docs/ReinstallInstanceOpts.md
+docs/Resources.md
+docs/RootDiskStorageType.md
 docs/Snapshot.md
 docs/State.md
 docs/StickySession.md
@@ -161,7 +162,6 @@ model_health_check_status.go
 model_instance.go
 model_instance_base.go
 model_instance_details.go
-model_instance_resources.go
 model_instance_type.go
 model_instance_type_name.go
 model_instance_types.go
@@ -191,6 +191,8 @@ model_private_network.go
 model_region.go
 model_register_auto_scaling_group_load_balancer_opts.go
 model_reinstall_instance_opts.go
+model_resources.go
+model_root_disk_storage_type.go
 model_snapshot.go
 model_state.go
 model_sticky_session.go

@@ -1,4 +1,4 @@
-# InstanceResources
+# Resources
 
 ## Properties
 
@@ -11,99 +11,99 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewInstanceResources
+### NewResources
 
-`func NewInstanceResources(cpu Cpu, memory Memory, publicNetworkSpeed NetworkSpeed, privateNetworkSpeed NetworkSpeed, ) *InstanceResources`
+`func NewResources(cpu Cpu, memory Memory, publicNetworkSpeed NetworkSpeed, privateNetworkSpeed NetworkSpeed, ) *Resources`
 
-NewInstanceResources instantiates a new InstanceResources object
+NewResources instantiates a new Resources object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewInstanceResourcesWithDefaults
+### NewResourcesWithDefaults
 
-`func NewInstanceResourcesWithDefaults() *InstanceResources`
+`func NewResourcesWithDefaults() *Resources`
 
-NewInstanceResourcesWithDefaults instantiates a new InstanceResources object
+NewResourcesWithDefaults instantiates a new Resources object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetCpu
 
-`func (o *InstanceResources) GetCpu() Cpu`
+`func (o *Resources) GetCpu() Cpu`
 
 GetCpu returns the Cpu field if non-nil, zero value otherwise.
 
 ### GetCpuOk
 
-`func (o *InstanceResources) GetCpuOk() (*Cpu, bool)`
+`func (o *Resources) GetCpuOk() (*Cpu, bool)`
 
 GetCpuOk returns a tuple with the Cpu field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCpu
 
-`func (o *InstanceResources) SetCpu(v Cpu)`
+`func (o *Resources) SetCpu(v Cpu)`
 
 SetCpu sets Cpu field to given value.
 
 
 ### GetMemory
 
-`func (o *InstanceResources) GetMemory() Memory`
+`func (o *Resources) GetMemory() Memory`
 
 GetMemory returns the Memory field if non-nil, zero value otherwise.
 
 ### GetMemoryOk
 
-`func (o *InstanceResources) GetMemoryOk() (*Memory, bool)`
+`func (o *Resources) GetMemoryOk() (*Memory, bool)`
 
 GetMemoryOk returns a tuple with the Memory field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMemory
 
-`func (o *InstanceResources) SetMemory(v Memory)`
+`func (o *Resources) SetMemory(v Memory)`
 
 SetMemory sets Memory field to given value.
 
 
 ### GetPublicNetworkSpeed
 
-`func (o *InstanceResources) GetPublicNetworkSpeed() NetworkSpeed`
+`func (o *Resources) GetPublicNetworkSpeed() NetworkSpeed`
 
 GetPublicNetworkSpeed returns the PublicNetworkSpeed field if non-nil, zero value otherwise.
 
 ### GetPublicNetworkSpeedOk
 
-`func (o *InstanceResources) GetPublicNetworkSpeedOk() (*NetworkSpeed, bool)`
+`func (o *Resources) GetPublicNetworkSpeedOk() (*NetworkSpeed, bool)`
 
 GetPublicNetworkSpeedOk returns a tuple with the PublicNetworkSpeed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPublicNetworkSpeed
 
-`func (o *InstanceResources) SetPublicNetworkSpeed(v NetworkSpeed)`
+`func (o *Resources) SetPublicNetworkSpeed(v NetworkSpeed)`
 
 SetPublicNetworkSpeed sets PublicNetworkSpeed field to given value.
 
 
 ### GetPrivateNetworkSpeed
 
-`func (o *InstanceResources) GetPrivateNetworkSpeed() NetworkSpeed`
+`func (o *Resources) GetPrivateNetworkSpeed() NetworkSpeed`
 
 GetPrivateNetworkSpeed returns the PrivateNetworkSpeed field if non-nil, zero value otherwise.
 
 ### GetPrivateNetworkSpeedOk
 
-`func (o *InstanceResources) GetPrivateNetworkSpeedOk() (*NetworkSpeed, bool)`
+`func (o *Resources) GetPrivateNetworkSpeedOk() (*NetworkSpeed, bool)`
 
 GetPrivateNetworkSpeedOk returns a tuple with the PrivateNetworkSpeed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrivateNetworkSpeed
 
-`func (o *InstanceResources) SetPrivateNetworkSpeed(v NetworkSpeed)`
+`func (o *Resources) SetPrivateNetworkSpeed(v NetworkSpeed)`
 
 SetPrivateNetworkSpeed sets PrivateNetworkSpeed field to given value.
 

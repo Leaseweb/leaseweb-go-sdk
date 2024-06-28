@@ -25,7 +25,7 @@ type InstanceBase struct {
 	// The unique identifier of the instance
 	Id string `json:"id"`
 	Type InstanceTypeName `json:"type"`
-	Resources InstanceResources `json:"resources"`
+	Resources Resources `json:"resources"`
 	// The region in which the instance was launched
 	Region string `json:"region"`
 	// The identifying name set to the instance
@@ -41,8 +41,7 @@ type InstanceBase struct {
 	includesPrivateNetwork bool `json:"hasPrivateNetwork"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize int32 `json:"rootDiskSize"`
-	// The root disk's storage type
-	RootDiskStorageType string `json:"rootDiskStorageType"`
+	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
 	Ips []Ip `json:"ips"`
 	Contract Contract `json:"contract"`
 	AutoScalingGroup NullableAutoScalingGroupDetails `json:"autoScalingGroup"`
@@ -54,7 +53,7 @@ type _InstanceBase InstanceBase
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceBase(id string, type_ InstanceTypeName, resources InstanceResources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType string, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails) *InstanceBase {
+func NewInstanceBase(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails) *InstanceBase {
 	this := InstanceBase{}
 	this.Id = id
 	this.Type = type_
@@ -132,9 +131,9 @@ func (o *InstanceBase) SetType(v InstanceTypeName) {
 }
 
 // GetResources returns the Resources field value
-func (o *InstanceBase) GetResources() InstanceResources {
+func (o *InstanceBase) GetResources() Resources {
 	if o == nil {
-		var ret InstanceResources
+		var ret Resources
 		return ret
 	}
 
@@ -143,7 +142,7 @@ func (o *InstanceBase) GetResources() InstanceResources {
 
 // GetResourcesOk returns a tuple with the Resources field value
 // and a boolean to check if the value has been set.
-func (o *InstanceBase) GetResourcesOk() (*InstanceResources, bool) {
+func (o *InstanceBase) GetResourcesOk() (*Resources, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -151,7 +150,7 @@ func (o *InstanceBase) GetResourcesOk() (*InstanceResources, bool) {
 }
 
 // SetResources sets field value
-func (o *InstanceBase) SetResources(v InstanceResources) {
+func (o *InstanceBase) SetResources(v Resources) {
 	o.Resources = v
 }
 
@@ -378,9 +377,9 @@ func (o *InstanceBase) SetRootDiskSize(v int32) {
 }
 
 // GetRootDiskStorageType returns the RootDiskStorageType field value
-func (o *InstanceBase) GetRootDiskStorageType() string {
+func (o *InstanceBase) GetRootDiskStorageType() RootDiskStorageType {
 	if o == nil {
-		var ret string
+		var ret RootDiskStorageType
 		return ret
 	}
 
@@ -389,7 +388,7 @@ func (o *InstanceBase) GetRootDiskStorageType() string {
 
 // GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field value
 // and a boolean to check if the value has been set.
-func (o *InstanceBase) GetRootDiskStorageTypeOk() (*string, bool) {
+func (o *InstanceBase) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -397,7 +396,7 @@ func (o *InstanceBase) GetRootDiskStorageTypeOk() (*string, bool) {
 }
 
 // SetRootDiskStorageType sets field value
-func (o *InstanceBase) SetRootDiskStorageType(v string) {
+func (o *InstanceBase) SetRootDiskStorageType(v RootDiskStorageType) {
 	o.RootDiskStorageType = v
 }
 

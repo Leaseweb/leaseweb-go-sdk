@@ -6,18 +6,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The load balancer unique identifier | 
 **Type** | **string** | Load balancer type | 
-**Resources** | [**InstanceResources**](InstanceResources.md) |  | 
+**Resources** | [**Resources**](Resources.md) |  | 
 **Region** | **string** | The region where the load balancer was launched into | 
 **Reference** | **NullableString** | The identifying name set to the load balancer | 
 **State** | [**State**](State.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
-**StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
+**StartedAt** | **NullableTime** | Date and time when the load balancer was started for the first time, right after launching it | 
 
 ## Methods
 
 ### NewLoadBalancer
 
-`func NewLoadBalancer(id string, type_ string, resources InstanceResources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ) *LoadBalancer`
+`func NewLoadBalancer(id string, type_ string, resources Resources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ) *LoadBalancer`
 
 NewLoadBalancer instantiates a new LoadBalancer object
 This constructor will assign default values to properties that have it defined,
@@ -74,20 +74,20 @@ SetType sets Type field to given value.
 
 ### GetResources
 
-`func (o *LoadBalancer) GetResources() InstanceResources`
+`func (o *LoadBalancer) GetResources() Resources`
 
 GetResources returns the Resources field if non-nil, zero value otherwise.
 
 ### GetResourcesOk
 
-`func (o *LoadBalancer) GetResourcesOk() (*InstanceResources, bool)`
+`func (o *LoadBalancer) GetResourcesOk() (*Resources, bool)`
 
 GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResources
 
-`func (o *LoadBalancer) SetResources(v InstanceResources)`
+`func (o *LoadBalancer) SetResources(v Resources)`
 
 SetResources sets Resources field to given value.
 
