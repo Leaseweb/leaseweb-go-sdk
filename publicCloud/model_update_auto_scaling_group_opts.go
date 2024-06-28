@@ -30,6 +30,8 @@ type UpdateAutoScalingGroupOpts struct {
 	CpuThreshold *int32 `json:"cpuThreshold,omitempty"`
 	// Only for \"CPU_BASED\" auto scaling group. Warm-up time in seconds for new instances
 	WarmupTime *int32 `json:"warmupTime,omitempty"`
+	// Only for \"CPU_BASED\" auto scaling group. Cool-down time in seconds for new instances
+	CooldownTime *int32 `json:"cooldownTime,omitempty"`
 	// The identifying name set to the auto scaling group
 	Reference *string `json:"reference,omitempty"`
 	// Only for \"SCHEDULED\" auto scaling group. Date and time (UTC) that the instances need to be launched. Must be changed along with \"endsAt\"
@@ -215,6 +217,38 @@ func (o *UpdateAutoScalingGroupOpts) SetWarmupTime(v int32) {
 	o.WarmupTime = &v
 }
 
+// GetCooldownTime returns the CooldownTime field value if set, zero value otherwise.
+func (o *UpdateAutoScalingGroupOpts) GetCooldownTime() int32 {
+	if o == nil || IsNil(o.CooldownTime) {
+		var ret int32
+		return ret
+	}
+	return *o.CooldownTime
+}
+
+// GetCooldownTimeOk returns a tuple with the CooldownTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateAutoScalingGroupOpts) GetCooldownTimeOk() (*int32, bool) {
+	if o == nil || IsNil(o.CooldownTime) {
+		return nil, false
+	}
+	return o.CooldownTime, true
+}
+
+// HasCooldownTime returns a boolean if a field has been set.
+func (o *UpdateAutoScalingGroupOpts) HasCooldownTime() bool {
+	if o != nil && !IsNil(o.CooldownTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetCooldownTime gets a reference to the given int32 and assigns it to the CooldownTime field.
+func (o *UpdateAutoScalingGroupOpts) SetCooldownTime(v int32) {
+	o.CooldownTime = &v
+}
+
 // GetReference returns the Reference field value if set, zero value otherwise.
 func (o *UpdateAutoScalingGroupOpts) GetReference() string {
 	if o == nil || IsNil(o.Reference) {
@@ -335,6 +369,9 @@ func (o UpdateAutoScalingGroupOpts) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.WarmupTime) {
 		toSerialize["warmupTime"] = o.WarmupTime
+	}
+	if !IsNil(o.CooldownTime) {
+		toSerialize["cooldownTime"] = o.CooldownTime
 	}
 	if !IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference

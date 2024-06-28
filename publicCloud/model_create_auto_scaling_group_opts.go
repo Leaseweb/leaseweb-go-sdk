@@ -32,6 +32,8 @@ type CreateAutoScalingGroupOpts struct {
 	CpuThreshold *int32 `json:"cpuThreshold,omitempty"`
 	// Required for \"CPU_BASED\" auto scaling group. Warm-up time in seconds for new instances
 	WarmupTime *int32 `json:"warmupTime,omitempty"`
+	// Required for \"CPU_BASED\" auto scaling group. Cool-down time in seconds for new instances
+	CooldownTime *int32 `json:"cooldownTime,omitempty"`
 	// The instance on which instances will be based on. This instance needs to be either Running or Stopped
 	InstanceId string `json:"instanceId"`
 	// The identifying name set to the auto scaling group
@@ -225,6 +227,38 @@ func (o *CreateAutoScalingGroupOpts) SetWarmupTime(v int32) {
 	o.WarmupTime = &v
 }
 
+// GetCooldownTime returns the CooldownTime field value if set, zero value otherwise.
+func (o *CreateAutoScalingGroupOpts) GetCooldownTime() int32 {
+	if o == nil || IsNil(o.CooldownTime) {
+		var ret int32
+		return ret
+	}
+	return *o.CooldownTime
+}
+
+// GetCooldownTimeOk returns a tuple with the CooldownTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAutoScalingGroupOpts) GetCooldownTimeOk() (*int32, bool) {
+	if o == nil || IsNil(o.CooldownTime) {
+		return nil, false
+	}
+	return o.CooldownTime, true
+}
+
+// HasCooldownTime returns a boolean if a field has been set.
+func (o *CreateAutoScalingGroupOpts) HasCooldownTime() bool {
+	if o != nil && !IsNil(o.CooldownTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetCooldownTime gets a reference to the given int32 and assigns it to the CooldownTime field.
+func (o *CreateAutoScalingGroupOpts) SetCooldownTime(v int32) {
+	o.CooldownTime = &v
+}
+
 // GetInstanceId returns the InstanceId field value
 func (o *CreateAutoScalingGroupOpts) GetInstanceId() string {
 	if o == nil {
@@ -385,6 +419,9 @@ func (o CreateAutoScalingGroupOpts) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.WarmupTime) {
 		toSerialize["warmupTime"] = o.WarmupTime
+	}
+	if !IsNil(o.CooldownTime) {
+		toSerialize["cooldownTime"] = o.CooldownTime
 	}
 	toSerialize["instanceId"] = o.InstanceId
 	toSerialize["reference"] = o.Reference

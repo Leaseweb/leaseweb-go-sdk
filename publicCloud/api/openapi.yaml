@@ -4382,7 +4382,7 @@ paths:
       tags:
       - publicCloud
   /loadBalancers/{loadBalancerId}/targets:
-    post:
+    get:
       description: List targets registered in a load balancer.
       operationId: getLoadBalancerTargetList
       parameters:
@@ -6372,6 +6372,7 @@ paths:
                   maximumAmount: 4
                   cpuThreshold: 60
                   warmupTime: 400
+                  cooldownTime: 300
             schema:
               $ref: '#/components/schemas/createAutoScalingGroupOpts'
         required: true
@@ -6691,6 +6692,7 @@ paths:
                   maximumAmount: 4
                   cpuThreshold: 60
                   warmupTime: 400
+                  cooldownTime: 300
               cpu2:
                 summary: CPU Usage - only amount
                 value:
@@ -6704,7 +6706,7 @@ paths:
           content:
             application/json:
               example:
-                cooldownTime: 400
+                cooldownTime: 300
                 cpuThreshold: 60
                 createdAt: 2024-05-13T15:49:52+00:00
                 desiredAmount: 4
@@ -10183,6 +10185,12 @@ components:
           maximum: 900
           minimum: 60
           type: integer
+        cooldownTime:
+          description: Required for "CPU_BASED" auto scaling group. Cool-down time
+            in seconds for new instances
+          maximum: 900
+          minimum: 300
+          type: integer
         instanceId:
           description: The instance on which instances will be based on. This instance
             needs to be either Running or Stopped
@@ -10241,6 +10249,12 @@ components:
             for new instances
           maximum: 900
           minimum: 60
+          type: integer
+        cooldownTime:
+          description: Only for "CPU_BASED" auto scaling group. Cool-down time in
+            seconds for new instances
+          maximum: 900
+          minimum: 300
           type: integer
         reference:
           description: The identifying name set to the auto scaling group

@@ -6177,7 +6177,7 @@ func (a *PublicCloudAPIService) GetLoadBalancerTargetList(ctx context.Context, l
 //  @return GetLoadBalancerTargetListResult
 func (a *PublicCloudAPIService) GetLoadBalancerTargetListExecute(r ApiGetLoadBalancerTargetListRequest) (*GetLoadBalancerTargetListResult, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *GetLoadBalancerTargetListResult

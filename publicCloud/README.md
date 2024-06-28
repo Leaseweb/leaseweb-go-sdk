@@ -115,7 +115,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**GetLoadBalancer**](docs/PublicCloudAPI.md#getloadbalancer) | **Get** /loadBalancers/{loadBalancerId} | Get load balancer details
 *PublicCloudAPI* | [**GetLoadBalancerList**](docs/PublicCloudAPI.md#getloadbalancerlist) | **Get** /loadBalancers | Get load balancer list
 *PublicCloudAPI* | [**GetLoadBalancerListener**](docs/PublicCloudAPI.md#getloadbalancerlistener) | **Get** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Get listener details
-*PublicCloudAPI* | [**GetLoadBalancerTargetList**](docs/PublicCloudAPI.md#getloadbalancertargetlist) | **Post** /loadBalancers/{loadBalancerId}/targets | List registered targets
+*PublicCloudAPI* | [**GetLoadBalancerTargetList**](docs/PublicCloudAPI.md#getloadbalancertargetlist) | **Get** /loadBalancers/{loadBalancerId}/targets | List registered targets
 *PublicCloudAPI* | [**GetMarketAppList**](docs/PublicCloudAPI.md#getmarketapplist) | **Get** /marketApps | Get marketplace apps
 *PublicCloudAPI* | [**GetOperatingSystemList**](docs/PublicCloudAPI.md#getoperatingsystemlist) | **Get** /operatingSystems | List all available Operating Systems
 *PublicCloudAPI* | [**GetRegionList**](docs/PublicCloudAPI.md#getregionlist) | **Get** /regions | List regions

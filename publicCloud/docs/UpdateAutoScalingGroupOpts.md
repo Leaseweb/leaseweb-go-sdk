@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **MaximumAmount** | Pointer to **int32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. The maximum number of instances that can be running | [optional] 
 **CpuThreshold** | Pointer to **int32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. The target average CPU utilization for scaling | [optional] 
 **WarmupTime** | Pointer to **int32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. Warm-up time in seconds for new instances | [optional] 
+**CooldownTime** | Pointer to **int32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. Cool-down time in seconds for new instances | [optional] 
 **Reference** | Pointer to **string** | The identifying name set to the auto scaling group | [optional] 
 **StartsAt** | Pointer to **time.Time** | Only for \&quot;SCHEDULED\&quot; auto scaling group. Date and time (UTC) that the instances need to be launched. Must be changed along with \&quot;endsAt\&quot; | [optional] 
 **EndsAt** | Pointer to **time.Time** | Only for \&quot;SCHEDULED\&quot; auto scaling group. Date and time (UTC) that the instances need to be terminated. Must be changed along with \&quot;startsAt\&quot; | [optional] 
@@ -156,6 +157,31 @@ SetWarmupTime sets WarmupTime field to given value.
 `func (o *UpdateAutoScalingGroupOpts) HasWarmupTime() bool`
 
 HasWarmupTime returns a boolean if a field has been set.
+
+### GetCooldownTime
+
+`func (o *UpdateAutoScalingGroupOpts) GetCooldownTime() int32`
+
+GetCooldownTime returns the CooldownTime field if non-nil, zero value otherwise.
+
+### GetCooldownTimeOk
+
+`func (o *UpdateAutoScalingGroupOpts) GetCooldownTimeOk() (*int32, bool)`
+
+GetCooldownTimeOk returns a tuple with the CooldownTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCooldownTime
+
+`func (o *UpdateAutoScalingGroupOpts) SetCooldownTime(v int32)`
+
+SetCooldownTime sets CooldownTime field to given value.
+
+### HasCooldownTime
+
+`func (o *UpdateAutoScalingGroupOpts) HasCooldownTime() bool`
+
+HasCooldownTime returns a boolean if a field has been set.
 
 ### GetReference
 

@@ -37,7 +37,7 @@ Method | HTTP request | Description
 [**GetLoadBalancer**](PublicCloudAPI.md#GetLoadBalancer) | **Get** /loadBalancers/{loadBalancerId} | Get load balancer details
 [**GetLoadBalancerList**](PublicCloudAPI.md#GetLoadBalancerList) | **Get** /loadBalancers | Get load balancer list
 [**GetLoadBalancerListener**](PublicCloudAPI.md#GetLoadBalancerListener) | **Get** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Get listener details
-[**GetLoadBalancerTargetList**](PublicCloudAPI.md#GetLoadBalancerTargetList) | **Post** /loadBalancers/{loadBalancerId}/targets | List registered targets
+[**GetLoadBalancerTargetList**](PublicCloudAPI.md#GetLoadBalancerTargetList) | **Get** /loadBalancers/{loadBalancerId}/targets | List registered targets
 [**GetMarketAppList**](PublicCloudAPI.md#GetMarketAppList) | **Get** /marketApps | Get marketplace apps
 [**GetOperatingSystemList**](PublicCloudAPI.md#GetOperatingSystemList) | **Get** /operatingSystems | List all available Operating Systems
 [**GetRegionList**](PublicCloudAPI.md#GetRegionList) | **Get** /regions | List regions

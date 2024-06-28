@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **MaximumAmount** | Pointer to **int32** | Required for \&quot;CPU_BASED\&quot; auto scaling group. The maximum number of instances that can be running | [optional] 
 **CpuThreshold** | Pointer to **int32** | Required for \&quot;CPU_BASED\&quot; auto scaling group. The target average CPU utilization for scaling | [optional] 
 **WarmupTime** | Pointer to **int32** | Required for \&quot;CPU_BASED\&quot; auto scaling group. Warm-up time in seconds for new instances | [optional] 
+**CooldownTime** | Pointer to **int32** | Required for \&quot;CPU_BASED\&quot; auto scaling group. Cool-down time in seconds for new instances | [optional] 
 **InstanceId** | **string** | The instance on which instances will be based on. This instance needs to be either Running or Stopped | 
 **Reference** | **string** | The identifying name set to the auto scaling group | 
 **Type** | **string** |  | 
@@ -158,6 +159,31 @@ SetWarmupTime sets WarmupTime field to given value.
 `func (o *CreateAutoScalingGroupOpts) HasWarmupTime() bool`
 
 HasWarmupTime returns a boolean if a field has been set.
+
+### GetCooldownTime
+
+`func (o *CreateAutoScalingGroupOpts) GetCooldownTime() int32`
+
+GetCooldownTime returns the CooldownTime field if non-nil, zero value otherwise.
+
+### GetCooldownTimeOk
+
+`func (o *CreateAutoScalingGroupOpts) GetCooldownTimeOk() (*int32, bool)`
+
+GetCooldownTimeOk returns a tuple with the CooldownTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCooldownTime
+
+`func (o *CreateAutoScalingGroupOpts) SetCooldownTime(v int32)`
+
+SetCooldownTime sets CooldownTime field to given value.
+
+### HasCooldownTime
+
+`func (o *CreateAutoScalingGroupOpts) HasCooldownTime() bool`
+
+HasCooldownTime returns a boolean if a field has been set.
 
 ### GetInstanceId
 
