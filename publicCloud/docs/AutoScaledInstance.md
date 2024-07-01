@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Reference** | Pointer to **string** | The identifying name set to the instance | [optional] 
 **State** | Pointer to [**State**](State.md) |  | [optional] 
 **ProductType** | Pointer to **string** |  | [optional] 
-**includesPrivateNetwork** | Pointer to **bool** |  | [optional] 
+**IncludesPrivateNetwork** | Pointer to **bool** |  | [optional] 
 **Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
 
 ## Methods
@@ -208,30 +208,30 @@ SetProductType sets ProductType field to given value.
 
 HasProductType returns a boolean if a field has been set.
 
-### GetincludesPrivateNetwork
+### GetIncludesPrivateNetwork
 
-`func (o *AutoScaledInstance) GetincludesPrivateNetwork() bool`
+`func (o *AutoScaledInstance) GetIncludesPrivateNetwork() bool`
 
-GetincludesPrivateNetwork returns the includesPrivateNetwork field if non-nil, zero value otherwise.
+GetIncludesPrivateNetwork returns the IncludesPrivateNetwork field if non-nil, zero value otherwise.
 
-### GetincludesPrivateNetworkOk
+### GetIncludesPrivateNetworkOk
 
-`func (o *AutoScaledInstance) GetincludesPrivateNetworkOk() (*bool, bool)`
+`func (o *AutoScaledInstance) GetIncludesPrivateNetworkOk() (*bool, bool)`
 
-GetincludesPrivateNetworkOk returns a tuple with the includesPrivateNetwork field if it's non-nil, zero value otherwise
+GetIncludesPrivateNetworkOk returns a tuple with the IncludesPrivateNetwork field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetincludesPrivateNetwork
+### SetIncludesPrivateNetwork
 
-`func (o *AutoScaledInstance) SetincludesPrivateNetwork(v bool)`
+`func (o *AutoScaledInstance) SetIncludesPrivateNetwork(v bool)`
 
-SetincludesPrivateNetwork sets includesPrivateNetwork field to given value.
+SetIncludesPrivateNetwork sets IncludesPrivateNetwork field to given value.
 
-### HasincludesPrivateNetwork
+### HasIncludesPrivateNetwork
 
-`func (o *AutoScaledInstance) HasincludesPrivateNetwork() bool`
+`func (o *AutoScaledInstance) HasIncludesPrivateNetwork() bool`
 
-HasincludesPrivateNetwork returns a boolean if a field has been set.
+HasIncludesPrivateNetwork returns a boolean if a field has been set.
 
 ### GetIps
 

@@ -38,7 +38,7 @@ type Instance struct {
 	// The product type
 	ProductType string `json:"productType"`
 	HasPublicIpV4 bool `json:"hasPublicIpV4"`
-	includesPrivateNetwork bool `json:"hasPrivateNetwork"`
+	IncludesPrivateNetwork bool `json:"hasPrivateNetwork"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize int32 `json:"rootDiskSize"`
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
@@ -66,7 +66,7 @@ func NewInstance(id string, type_ InstanceTypeName, resources Resources, region 
 	this.State = state
 	this.ProductType = productType
 	this.HasPublicIpV4 = hasPublicIpV4
-	this.includesPrivateNetwork = includesPrivateNetwork
+	this.IncludesPrivateNetwork = includesPrivateNetwork
 	this.RootDiskSize = rootDiskSize
 	this.RootDiskStorageType = rootDiskStorageType
 	this.Ips = ips
@@ -330,28 +330,28 @@ func (o *Instance) SetHasPublicIpV4(v bool) {
 	o.HasPublicIpV4 = v
 }
 
-// GetincludesPrivateNetwork returns the includesPrivateNetwork field value
-func (o *Instance) GetincludesPrivateNetwork() bool {
+// GetIncludesPrivateNetwork returns the IncludesPrivateNetwork field value
+func (o *Instance) GetIncludesPrivateNetwork() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.includesPrivateNetwork
+	return o.IncludesPrivateNetwork
 }
 
-// GetincludesPrivateNetworkOk returns a tuple with the includesPrivateNetwork field value
+// GetIncludesPrivateNetworkOk returns a tuple with the IncludesPrivateNetwork field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetincludesPrivateNetworkOk() (*bool, bool) {
+func (o *Instance) GetIncludesPrivateNetworkOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.includesPrivateNetwork, true
+	return &o.IncludesPrivateNetwork, true
 }
 
-// SetincludesPrivateNetwork sets field value
-func (o *Instance) SetincludesPrivateNetwork(v bool) {
-	o.includesPrivateNetwork = v
+// SetIncludesPrivateNetwork sets field value
+func (o *Instance) SetIncludesPrivateNetwork(v bool) {
+	o.IncludesPrivateNetwork = v
 }
 
 // GetRootDiskSize returns the RootDiskSize field value
@@ -520,7 +520,7 @@ func (o Instance) ToMap() (map[string]interface{}, error) {
 	toSerialize["state"] = o.State
 	toSerialize["productType"] = o.ProductType
 	toSerialize["hasPublicIpV4"] = o.HasPublicIpV4
-	toSerialize["hasPrivateNetwork"] = o.includesPrivateNetwork
+	toSerialize["hasPrivateNetwork"] = o.IncludesPrivateNetwork
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
 	toSerialize["ips"] = o.Ips

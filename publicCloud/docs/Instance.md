@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **State** | [**State**](State.md) |  | 
 **ProductType** | **string** | The product type | 
 **HasPublicIpV4** | **bool** |  | 
-**includesPrivateNetwork** | **bool** |  | 
+**IncludesPrivateNetwork** | **bool** |  | 
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
 **RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
 **Ips** | [**[]Ip**](Ip.md) |  | 
@@ -271,24 +271,24 @@ and a boolean to check if the value has been set.
 SetHasPublicIpV4 sets HasPublicIpV4 field to given value.
 
 
-### GetincludesPrivateNetwork
+### GetIncludesPrivateNetwork
 
-`func (o *Instance) GetincludesPrivateNetwork() bool`
+`func (o *Instance) GetIncludesPrivateNetwork() bool`
 
-GetincludesPrivateNetwork returns the includesPrivateNetwork field if non-nil, zero value otherwise.
+GetIncludesPrivateNetwork returns the IncludesPrivateNetwork field if non-nil, zero value otherwise.
 
-### GetincludesPrivateNetworkOk
+### GetIncludesPrivateNetworkOk
 
-`func (o *Instance) GetincludesPrivateNetworkOk() (*bool, bool)`
+`func (o *Instance) GetIncludesPrivateNetworkOk() (*bool, bool)`
 
-GetincludesPrivateNetworkOk returns a tuple with the includesPrivateNetwork field if it's non-nil, zero value otherwise
+GetIncludesPrivateNetworkOk returns a tuple with the IncludesPrivateNetwork field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetincludesPrivateNetwork
+### SetIncludesPrivateNetwork
 
-`func (o *Instance) SetincludesPrivateNetwork(v bool)`
+`func (o *Instance) SetIncludesPrivateNetwork(v bool)`
 
-SetincludesPrivateNetwork sets includesPrivateNetwork field to given value.
+SetIncludesPrivateNetwork sets IncludesPrivateNetwork field to given value.
 
 
 ### GetRootDiskSize

@@ -30,7 +30,7 @@ type AutoScaledInstance struct {
 	Reference *string `json:"reference,omitempty"`
 	State *State `json:"state,omitempty"`
 	ProductType *string `json:"productType,omitempty"`
-	includesPrivateNetwork *bool `json:"hasPrivateNetwork,omitempty"`
+	IncludesPrivateNetwork *bool `json:"hasPrivateNetwork,omitempty"`
 	Ips []Ip `json:"ips,omitempty"`
 }
 
@@ -275,36 +275,36 @@ func (o *AutoScaledInstance) SetProductType(v string) {
 	o.ProductType = &v
 }
 
-// GetincludesPrivateNetwork returns the includesPrivateNetwork field value if set, zero value otherwise.
-func (o *AutoScaledInstance) GetincludesPrivateNetwork() bool {
-	if o == nil || IsNil(o.includesPrivateNetwork) {
+// GetIncludesPrivateNetwork returns the IncludesPrivateNetwork field value if set, zero value otherwise.
+func (o *AutoScaledInstance) GetIncludesPrivateNetwork() bool {
+	if o == nil || IsNil(o.IncludesPrivateNetwork) {
 		var ret bool
 		return ret
 	}
-	return *o.includesPrivateNetwork
+	return *o.IncludesPrivateNetwork
 }
 
-// GetincludesPrivateNetworkOk returns a tuple with the includesPrivateNetwork field value if set, nil otherwise
+// GetIncludesPrivateNetworkOk returns a tuple with the IncludesPrivateNetwork field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScaledInstance) GetincludesPrivateNetworkOk() (*bool, bool) {
-	if o == nil || IsNil(o.includesPrivateNetwork) {
+func (o *AutoScaledInstance) GetIncludesPrivateNetworkOk() (*bool, bool) {
+	if o == nil || IsNil(o.IncludesPrivateNetwork) {
 		return nil, false
 	}
-	return o.includesPrivateNetwork, true
+	return o.IncludesPrivateNetwork, true
 }
 
-// HasincludesPrivateNetwork returns a boolean if a field has been set.
-func (o *AutoScaledInstance) HasincludesPrivateNetwork() bool {
-	if o != nil && !IsNil(o.includesPrivateNetwork) {
+// HasIncludesPrivateNetwork returns a boolean if a field has been set.
+func (o *AutoScaledInstance) HasIncludesPrivateNetwork() bool {
+	if o != nil && !IsNil(o.IncludesPrivateNetwork) {
 		return true
 	}
 
 	return false
 }
 
-// SetincludesPrivateNetwork gets a reference to the given bool and assigns it to the includesPrivateNetwork field.
-func (o *AutoScaledInstance) SetincludesPrivateNetwork(v bool) {
-	o.includesPrivateNetwork = &v
+// SetIncludesPrivateNetwork gets a reference to the given bool and assigns it to the IncludesPrivateNetwork field.
+func (o *AutoScaledInstance) SetIncludesPrivateNetwork(v bool) {
+	o.IncludesPrivateNetwork = &v
 }
 
 // GetIps returns the Ips field value if set, zero value otherwise.
@@ -370,8 +370,8 @@ func (o AutoScaledInstance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProductType) {
 		toSerialize["productType"] = o.ProductType
 	}
-	if !IsNil(o.includesPrivateNetwork) {
-		toSerialize["hasPrivateNetwork"] = o.includesPrivateNetwork
+	if !IsNil(o.IncludesPrivateNetwork) {
+		toSerialize["hasPrivateNetwork"] = o.IncludesPrivateNetwork
 	}
 	if !IsNil(o.Ips) {
 		toSerialize["ips"] = o.Ips
