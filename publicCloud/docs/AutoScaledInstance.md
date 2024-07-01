@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **State** | Pointer to [**State**](State.md) |  | [optional] 
 **ProductType** | Pointer to **string** |  | [optional] 
 **IncludesPrivateNetwork** | Pointer to **bool** |  | [optional] 
-**Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
+**Ips** | Pointer to [**[]IpDetails**](IpDetails.md) |  | [optional] 
 
 ## Methods
 
@@ -235,20 +235,20 @@ HasIncludesPrivateNetwork returns a boolean if a field has been set.
 
 ### GetIps
 
-`func (o *AutoScaledInstance) GetIps() []Ip`
+`func (o *AutoScaledInstance) GetIps() []IpDetails`
 
 GetIps returns the Ips field if non-nil, zero value otherwise.
 
 ### GetIpsOk
 
-`func (o *AutoScaledInstance) GetIpsOk() (*[]Ip, bool)`
+`func (o *AutoScaledInstance) GetIpsOk() (*[]IpDetails, bool)`
 
 GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIps
 
-`func (o *AutoScaledInstance) SetIps(v []Ip)`
+`func (o *AutoScaledInstance) SetIps(v []IpDetails)`
 
 SetIps sets Ips field to given value.
 

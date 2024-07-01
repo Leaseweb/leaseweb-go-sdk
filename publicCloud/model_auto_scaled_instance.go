@@ -31,7 +31,7 @@ type AutoScaledInstance struct {
 	State *State `json:"state,omitempty"`
 	ProductType *string `json:"productType,omitempty"`
 	IncludesPrivateNetwork *bool `json:"hasPrivateNetwork,omitempty"`
-	Ips []Ip `json:"ips,omitempty"`
+	Ips []IpDetails `json:"ips,omitempty"`
 }
 
 // NewAutoScaledInstance instantiates a new AutoScaledInstance object
@@ -308,9 +308,9 @@ func (o *AutoScaledInstance) SetIncludesPrivateNetwork(v bool) {
 }
 
 // GetIps returns the Ips field value if set, zero value otherwise.
-func (o *AutoScaledInstance) GetIps() []Ip {
+func (o *AutoScaledInstance) GetIps() []IpDetails {
 	if o == nil || IsNil(o.Ips) {
-		var ret []Ip
+		var ret []IpDetails
 		return ret
 	}
 	return o.Ips
@@ -318,7 +318,7 @@ func (o *AutoScaledInstance) GetIps() []Ip {
 
 // GetIpsOk returns a tuple with the Ips field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScaledInstance) GetIpsOk() ([]Ip, bool) {
+func (o *AutoScaledInstance) GetIpsOk() ([]IpDetails, bool) {
 	if o == nil || IsNil(o.Ips) {
 		return nil, false
 	}
@@ -334,8 +334,8 @@ func (o *AutoScaledInstance) HasIps() bool {
 	return false
 }
 
-// SetIps gets a reference to the given []Ip and assigns it to the Ips field.
-func (o *AutoScaledInstance) SetIps(v []Ip) {
+// SetIps gets a reference to the given []IpDetails and assigns it to the Ips field.
+func (o *AutoScaledInstance) SetIps(v []IpDetails) {
 	o.Ips = v
 }
 

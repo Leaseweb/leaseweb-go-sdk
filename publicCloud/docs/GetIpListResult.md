@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
+**Ips** | Pointer to [**[]IpDetails**](IpDetails.md) |  | [optional] 
 **Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetIps
 
-`func (o *GetIpListResult) GetIps() []Ip`
+`func (o *GetIpListResult) GetIps() []IpDetails`
 
 GetIps returns the Ips field if non-nil, zero value otherwise.
 
 ### GetIpsOk
 
-`func (o *GetIpListResult) GetIpsOk() (*[]Ip, bool)`
+`func (o *GetIpListResult) GetIpsOk() (*[]IpDetails, bool)`
 
 GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIps
 
-`func (o *GetIpListResult) SetIps(v []Ip)`
+`func (o *GetIpListResult) SetIps(v []IpDetails)`
 
 SetIps sets Ips field to given value.
 

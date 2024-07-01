@@ -439,7 +439,6 @@ paths:
                     reverseLookup: null
                     mainIp: false
                     networkType: INTERNAL
-                    ddos: null
                   startedAt: 2024-04-09T15:11:37+00:00
                   contract:
                     billingFrequency: 1
@@ -542,9 +541,6 @@ paths:
                   reverseLookup: null
                   mainIp: false
                   networkType: INTERNAL
-                  ddos:
-                    detectionProfile: STANDARD_DEFAULT
-                    protectionType: STANDARD
                 marketAppId: null
                 operatingSystem:
                   id: UBUNTU_22_04_64BIT
@@ -4424,7 +4420,6 @@ paths:
                     reverseLookup: null
                     networkType: INTERNAL
                     mainIp: false
-                    ddos: null
                   healthCheckStatus:
                     checkStatus: Connection timeout
                     status: DOWN
@@ -4446,7 +4441,6 @@ paths:
                     reverseLookup: null
                     networkType: PUBLIC
                     mainIp: true
-                    ddos: null
               schema:
                 $ref: '#/components/schemas/getLoadBalancerTargetListResult'
           description: OK
@@ -4822,7 +4816,7 @@ paths:
                   detectionProfile: STANDARD_DEFAULT
                   protectionType: STANDARD
               schema:
-                $ref: '#/components/schemas/ip'
+                $ref: '#/components/schemas/ipDetails'
           description: OK.
         "401":
           content:
@@ -4924,7 +4918,7 @@ paths:
                   detectionProfile: STANDARD_DEFAULT
                   protectionType: STANDARD
               schema:
-                $ref: '#/components/schemas/ip'
+                $ref: '#/components/schemas/ipDetails'
           description: OK.
         "400":
           content:
@@ -5042,7 +5036,7 @@ paths:
                   detectionProfile: STANDARD_DEFAULT
                   protectionType: STANDARD
               schema:
-                $ref: '#/components/schemas/ip'
+                $ref: '#/components/schemas/ipDetails'
           description: OK.
         "400":
           content:
@@ -5149,7 +5143,7 @@ paths:
                   detectionProfile: STANDARD_DEFAULT
                   protectionType: STANDARD
               schema:
-                $ref: '#/components/schemas/ip'
+                $ref: '#/components/schemas/ipDetails'
           description: OK.
         "400":
           content:
@@ -7728,67 +7722,11 @@ components:
       - LOCAL
       - CENTRAL
       type: string
-    networkType:
-      enum:
-      - INTERNAL
-      - PUBLIC
-      example: internal
-      type: string
-    ip:
-      example:
-        prefixLength: "28"
-        reverseLookup: reverseLookup
-        ip: 127.0.0.1
-        nullRouted: true
-        mainIp: true
-        ddos:
-          detectionProfile: STANDARD_DEFAULT
-          protectionType: STANDARD
-        networkType: internal
-        version: 6
-      properties:
-        ip:
-          description: Ip Address
-          example: 127.0.0.1
-          type: string
-        prefixLength:
-          description: The number of leading bits in the IP address
-          example: "28"
-          type: string
-        version:
-          description: Ip version
-          enum:
-          - 4
-          - 6
-          type: integer
-        nullRouted:
-          description: Whether or not the IP has been nulled
-          type: boolean
-        mainIp:
-          type: boolean
-        networkType:
-          $ref: '#/components/schemas/networkType'
-        reverseLookup:
-          nullable: true
-          type: string
-        ddos:
-          $ref: '#/components/schemas/ddos'
-      required:
-      - ddos
-      - ip
-      - mainIp
-      - networkType
-      - nullRouted
-      - prefixLength
-      - reverseLookup
-      - version
-      title: ip
-      type: object
     contract:
       example:
         billingFrequency: 1
         createdAt: 2023-11-30T16:31:28Z
-        term: 1
+        term: 6
         renewalsAt: 2023-11-30T16:31:28Z
         state: null
         type: null
@@ -7845,7 +7783,7 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: 1
+          term: 6
           renewalsAt: 2023-11-30T16:31:28Z
           state: null
           type: null
@@ -7911,10 +7849,10 @@ components:
       type: object
     autoScalingGroupDetails:
       example:
-        cpuThreshold: 7
-        maximumAmount: 2
+        cpuThreshold: 2
+        maximumAmount: 5
         type: MANUAL
-        desiredAmount: 5
+        desiredAmount: 1
         reference: reference
         createdAt: 2000-01-23T04:56:07.000+00:00
         loadBalancer:
@@ -7922,7 +7860,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 1
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -7947,10 +7885,10 @@ components:
           region: eu-west-3
         minimumAmount: 5
         startsAt: 2000-01-23T04:56:07.000+00:00
-        warmupTime: 9
+        warmupTime: 7
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: ACTIVE
-        cooldownTime: 3
+        cooldownTime: 9
         region: eu-west-3
         endsAt: 2000-01-23T04:56:07.000+00:00
         updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -8100,10 +8038,6 @@ components:
           type: integer
         rootDiskStorageType:
           $ref: '#/components/schemas/rootDiskStorageType'
-        ips:
-          items:
-            $ref: '#/components/schemas/ip'
-          type: array
         contract:
           $ref: '#/components/schemas/contract'
         autoScalingGroup:
@@ -8183,12 +8117,66 @@ components:
       - version
       title: operatingSystem
       type: object
+    networkType:
+      enum:
+      - INTERNAL
+      - PUBLIC
+      example: internal
+      type: string
+    ip:
+      example:
+        prefixLength: "28"
+        reverseLookup: reverseLookup
+        ip: 127.0.0.1
+        nullRouted: true
+        mainIp: true
+        networkType: internal
+        version: 3
+      properties:
+        ip:
+          description: Ip Address
+          example: 127.0.0.1
+          type: string
+        prefixLength:
+          description: The number of leading bits in the IP address
+          example: "28"
+          type: string
+        version:
+          description: Ip version
+          enum:
+          - 4
+          - 6
+          type: integer
+        nullRouted:
+          description: Whether or not the IP has been nulled
+          type: boolean
+        mainIp:
+          type: boolean
+        networkType:
+          $ref: '#/components/schemas/networkType'
+        reverseLookup:
+          nullable: true
+          type: string
+      required:
+      - ip
+      - mainIp
+      - networkType
+      - nullRouted
+      - prefixLength
+      - reverseLookup
+      - version
+      title: ip
+      type: object
     instance:
       allOf:
       - $ref: '#/components/schemas/instanceBase'
       - properties:
           operatingSystem:
             $ref: '#/components/schemas/operatingSystem'
+          ips:
+            items:
+              $ref: '#/components/schemas/ip'
+            type: array
         required:
         - operatingSystem
         title: instance
@@ -8196,10 +8184,10 @@ components:
       example:
         rootDiskStorageType: null
         autoScalingGroup:
-          cpuThreshold: 7
-          maximumAmount: 2
+          cpuThreshold: 2
+          maximumAmount: 5
           type: MANUAL
-          desiredAmount: 5
+          desiredAmount: 1
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
           loadBalancer:
@@ -8207,7 +8195,7 @@ components:
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
-              term: 1
+              term: 6
               renewalsAt: 2023-11-30T16:31:28Z
               state: null
               type: null
@@ -8232,10 +8220,10 @@ components:
             region: eu-west-3
           minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 9
+          warmupTime: 7
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: ACTIVE
-          cooldownTime: 3
+          cooldownTime: 9
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -8243,7 +8231,7 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: 1
+          term: 6
           renewalsAt: 2023-11-30T16:31:28Z
           state: null
           type: null
@@ -8264,27 +8252,6 @@ components:
             value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
         type: null
-        ips:
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
-          networkType: internal
-          version: 6
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
-          networkType: internal
-          version: 6
         operatingSystem:
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
@@ -8292,6 +8259,21 @@ components:
           family: linux
           version: "20.04"
           architecture: x86_64
+        ips:
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          networkType: internal
+          version: 3
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          networkType: internal
+          version: 3
         reference: reference
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         marketAppId: CPANEL
@@ -8304,10 +8286,10 @@ components:
         instances:
         - rootDiskStorageType: null
           autoScalingGroup:
-            cpuThreshold: 7
-            maximumAmount: 2
+            cpuThreshold: 2
+            maximumAmount: 5
             type: MANUAL
-            desiredAmount: 5
+            desiredAmount: 1
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
             loadBalancer:
@@ -8315,7 +8297,7 @@ components:
               contract:
                 billingFrequency: 1
                 createdAt: 2023-11-30T16:31:28Z
-                term: 1
+                term: 6
                 renewalsAt: 2023-11-30T16:31:28Z
                 state: null
                 type: null
@@ -8340,10 +8322,10 @@ components:
               region: eu-west-3
             minimumAmount: 5
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 9
+            warmupTime: 7
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: ACTIVE
-            cooldownTime: 3
+            cooldownTime: 9
             region: eu-west-3
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -8351,7 +8333,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 1
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -8372,27 +8354,6 @@ components:
               value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           type: null
-          ips:
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: 6
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: 6
           operatingSystem:
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
@@ -8400,6 +8361,21 @@ components:
             family: linux
             version: "20.04"
             architecture: x86_64
+          ips:
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: 3
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: 3
           reference: reference
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           marketAppId: CPANEL
@@ -8409,10 +8385,10 @@ components:
           hasPublicIpV4: true
         - rootDiskStorageType: null
           autoScalingGroup:
-            cpuThreshold: 7
-            maximumAmount: 2
+            cpuThreshold: 2
+            maximumAmount: 5
             type: MANUAL
-            desiredAmount: 5
+            desiredAmount: 1
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
             loadBalancer:
@@ -8420,7 +8396,7 @@ components:
               contract:
                 billingFrequency: 1
                 createdAt: 2023-11-30T16:31:28Z
-                term: 1
+                term: 6
                 renewalsAt: 2023-11-30T16:31:28Z
                 state: null
                 type: null
@@ -8445,10 +8421,10 @@ components:
               region: eu-west-3
             minimumAmount: 5
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 9
+            warmupTime: 7
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: ACTIVE
-            cooldownTime: 3
+            cooldownTime: 9
             region: eu-west-3
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -8456,7 +8432,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 1
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -8477,27 +8453,6 @@ components:
               value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           type: null
-          ips:
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: 6
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: 6
           operatingSystem:
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
@@ -8505,6 +8460,21 @@ components:
             family: linux
             version: "20.04"
             architecture: x86_64
+          ips:
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: 3
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: 3
           reference: reference
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           marketAppId: CPANEL
@@ -8659,6 +8629,27 @@ components:
         family: linux
         version: "20.04"
         architecture: x86_64
+    ipDetails:
+      allOf:
+      - $ref: '#/components/schemas/ip'
+      - properties:
+          ddos:
+            $ref: '#/components/schemas/ddos'
+        required:
+        - ddos
+        title: ipDetails
+        type: object
+      example:
+        prefixLength: "28"
+        reverseLookup: reverseLookup
+        ip: 127.0.0.1
+        nullRouted: true
+        mainIp: true
+        ddos:
+          detectionProfile: STANDARD_DEFAULT
+          protectionType: STANDARD
+        networkType: internal
+        version: 6
     instanceDetails:
       allOf:
       - $ref: '#/components/schemas/instanceBase'
@@ -8669,6 +8660,10 @@ components:
             $ref: '#/components/schemas/privateNetwork'
           operatingSystem:
             $ref: '#/components/schemas/operatingSystemDetails'
+          ips:
+            items:
+              $ref: '#/components/schemas/ipDetails'
+            type: array
         required:
         - iso
         - operatingSystem
@@ -8685,10 +8680,10 @@ components:
           privateNetworkId: privateNetworkId
           status: CONFIGURED
         autoScalingGroup:
-          cpuThreshold: 7
-          maximumAmount: 2
+          cpuThreshold: 2
+          maximumAmount: 5
           type: MANUAL
-          desiredAmount: 5
+          desiredAmount: 1
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
           loadBalancer:
@@ -8696,7 +8691,7 @@ components:
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
-              term: 1
+              term: 6
               renewalsAt: 2023-11-30T16:31:28Z
               state: null
               type: null
@@ -8721,10 +8716,10 @@ components:
             region: eu-west-3
           minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 9
+          warmupTime: 7
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: ACTIVE
-          cooldownTime: 3
+          cooldownTime: 9
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -8732,7 +8727,7 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: 1
+          term: 6
           renewalsAt: 2023-11-30T16:31:28Z
           state: null
           type: null
@@ -8753,6 +8748,19 @@ components:
             value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
         type: null
+        operatingSystem:
+          marketApps:
+          - LOADBALANCER
+          - LOADBALANCER
+          flavour: ubuntu
+          name: Ubuntu 20.04 LTS (x86_64)
+          id: UBUNTU_24_04_64BIT
+          storageTypes:
+          - CENTRAL
+          - LOCAL
+          family: linux
+          version: "20.04"
+          architecture: x86_64
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -8774,19 +8782,6 @@ components:
             protectionType: STANDARD
           networkType: internal
           version: 6
-        operatingSystem:
-          marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
-          flavour: ubuntu
-          name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_24_04_64BIT
-          storageTypes:
-          - CENTRAL
-          - LOCAL
-          family: linux
-          version: "20.04"
-          architecture: x86_64
         reference: reference
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         marketAppId: CPANEL
@@ -8994,7 +8989,7 @@ components:
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
-              term: 1
+              term: 6
               renewalsAt: 2023-11-30T16:31:28Z
               state: null
               type: null
@@ -9026,7 +9021,7 @@ components:
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
-              term: 1
+              term: 6
               renewalsAt: 2023-11-30T16:31:28Z
               state: null
               type: null
@@ -9414,7 +9409,7 @@ components:
             $ref: '#/components/schemas/rootDiskSize'
           ips:
             items:
-              $ref: '#/components/schemas/ip'
+              $ref: '#/components/schemas/ipDetails'
             type: array
           configuration:
             $ref: '#/components/schemas/loadBalancerConfiguration'
@@ -9467,7 +9462,7 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: 1
+          term: 6
           renewalsAt: 2023-11-30T16:31:28Z
           state: null
           type: null
@@ -9552,7 +9547,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 1
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -9634,7 +9629,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 1
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -9828,21 +9823,15 @@ components:
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: 3
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: 3
         - reference: reference
           healthCheckStatus:
             checkStatus: checkStatus
@@ -9862,21 +9851,15 @@ components:
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: 3
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: 3
       properties:
         targets:
           items:
@@ -9923,7 +9906,7 @@ components:
       properties:
         ips:
           items:
-            $ref: '#/components/schemas/ip'
+            $ref: '#/components/schemas/ipDetails'
           type: array
         _metadata:
           $ref: '#/components/schemas/_metadata'
@@ -10351,7 +10334,7 @@ components:
           type: boolean
         ips:
           items:
-            $ref: '#/components/schemas/ip'
+            $ref: '#/components/schemas/ipDetails'
           type: array
       type: object
     getAutoScalingGroupInstanceListResult:
@@ -10579,7 +10562,7 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: 1
+          term: 6
           renewalsAt: 2023-11-30T16:31:28Z
           state: null
           type: null
@@ -10723,7 +10706,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 1
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -10755,7 +10738,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 1
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -10882,21 +10865,15 @@ components:
           ip: 127.0.0.1
           nullRouted: true
           mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
           networkType: internal
-          version: 6
+          version: 3
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
           nullRouted: true
           mainIp: true
-          ddos:
-            detectionProfile: STANDARD_DEFAULT
-            protectionType: STANDARD
           networkType: internal
-          version: 6
+          version: 3
       properties:
         id:
           description: The instance unique identifier

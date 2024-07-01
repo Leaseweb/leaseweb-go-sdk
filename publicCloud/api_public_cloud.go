@@ -5009,7 +5009,7 @@ type ApiGetIpRequest struct {
 	ip string
 }
 
-func (r ApiGetIpRequest) Execute() (*Ip, *http.Response, error) {
+func (r ApiGetIpRequest) Execute() (*IpDetails, *http.Response, error) {
 	return r.ApiService.GetIpExecute(r)
 }
 
@@ -5031,13 +5031,13 @@ func (a *PublicCloudAPIService) GetIp(ctx context.Context, instanceId string, ip
 }
 
 // Execute executes the request
-//  @return Ip
-func (a *PublicCloudAPIService) GetIpExecute(r ApiGetIpRequest) (*Ip, *http.Response, error) {
+//  @return IpDetails
+func (a *PublicCloudAPIService) GetIpExecute(r ApiGetIpRequest) (*IpDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Ip
+		localVarReturnValue  *IpDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetIp")
@@ -7941,7 +7941,7 @@ func (r ApiNullRouteIpRequest) NullRouteIpOpts(nullRouteIpOpts NullRouteIpOpts) 
 	return r
 }
 
-func (r ApiNullRouteIpRequest) Execute() (*Ip, *http.Response, error) {
+func (r ApiNullRouteIpRequest) Execute() (*IpDetails, *http.Response, error) {
 	return r.ApiService.NullRouteIpExecute(r)
 }
 
@@ -7967,13 +7967,13 @@ func (a *PublicCloudAPIService) NullRouteIp(ctx context.Context, instanceId stri
 }
 
 // Execute executes the request
-//  @return Ip
-func (a *PublicCloudAPIService) NullRouteIpExecute(r ApiNullRouteIpRequest) (*Ip, *http.Response, error) {
+//  @return IpDetails
+func (a *PublicCloudAPIService) NullRouteIpExecute(r ApiNullRouteIpRequest) (*IpDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Ip
+		localVarReturnValue  *IpDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.NullRouteIp")
@@ -9016,7 +9016,7 @@ type ApiRemoveIpNullRouteRequest struct {
 	ip string
 }
 
-func (r ApiRemoveIpNullRouteRequest) Execute() (*Ip, *http.Response, error) {
+func (r ApiRemoveIpNullRouteRequest) Execute() (*IpDetails, *http.Response, error) {
 	return r.ApiService.RemoveIpNullRouteExecute(r)
 }
 
@@ -9040,13 +9040,13 @@ func (a *PublicCloudAPIService) RemoveIpNullRoute(ctx context.Context, instanceI
 }
 
 // Execute executes the request
-//  @return Ip
-func (a *PublicCloudAPIService) RemoveIpNullRouteExecute(r ApiRemoveIpNullRouteRequest) (*Ip, *http.Response, error) {
+//  @return IpDetails
+func (a *PublicCloudAPIService) RemoveIpNullRouteExecute(r ApiRemoveIpNullRouteRequest) (*IpDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Ip
+		localVarReturnValue  *IpDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.RemoveIpNullRoute")
@@ -11009,7 +11009,7 @@ func (r ApiUpdateIpRequest) UpdateIpOpts(updateIpOpts UpdateIpOpts) ApiUpdateIpR
 	return r
 }
 
-func (r ApiUpdateIpRequest) Execute() (*Ip, *http.Response, error) {
+func (r ApiUpdateIpRequest) Execute() (*IpDetails, *http.Response, error) {
 	return r.ApiService.UpdateIpExecute(r)
 }
 
@@ -11033,13 +11033,13 @@ func (a *PublicCloudAPIService) UpdateIp(ctx context.Context, instanceId string,
 }
 
 // Execute executes the request
-//  @return Ip
-func (a *PublicCloudAPIService) UpdateIpExecute(r ApiUpdateIpRequest) (*Ip, *http.Response, error) {
+//  @return IpDetails
+func (a *PublicCloudAPIService) UpdateIpExecute(r ApiUpdateIpRequest) (*IpDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *Ip
+		localVarReturnValue  *IpDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.UpdateIp")

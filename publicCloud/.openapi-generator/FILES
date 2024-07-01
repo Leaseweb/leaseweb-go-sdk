@@ -59,6 +59,7 @@ docs/InstanceType.md
 docs/InstanceTypeName.md
 docs/InstanceTypes.md
 docs/Ip.md
+docs/IpDetails.md
 docs/Iso.md
 docs/LaunchInstanceOpts.md
 docs/LaunchLoadBalancerOpts.md
@@ -166,6 +167,7 @@ model_instance_type.go
 model_instance_type_name.go
 model_instance_types.go
 model_ip.go
+model_ip_details.go
 model_iso.go
 model_launch_instance_opts.go
 model_launch_load_balancer_opts.go

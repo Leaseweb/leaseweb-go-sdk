@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Contract** | [**Contract**](Contract.md) |  | 
 **StartedAt** | **NullableTime** | Date and time when the load balancer was started for the first time, right after launching it | 
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
-**Ips** | [**[]Ip**](Ip.md) |  | 
+**Ips** | [**[]IpDetails**](IpDetails.md) |  | 
 **Configuration** | [**NullableLoadBalancerConfiguration**](LoadBalancerConfiguration.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 **PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewLoadBalancerDetails
 
-`func NewLoadBalancerDetails(id string, type_ string, resources Resources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ips []Ip, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, ) *LoadBalancerDetails`
+`func NewLoadBalancerDetails(id string, type_ string, resources Resources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ips []IpDetails, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, ) *LoadBalancerDetails`
 
 NewLoadBalancerDetails instantiates a new LoadBalancerDetails object
 This constructor will assign default values to properties that have it defined,
@@ -244,20 +244,20 @@ HasRootDiskSize returns a boolean if a field has been set.
 
 ### GetIps
 
-`func (o *LoadBalancerDetails) GetIps() []Ip`
+`func (o *LoadBalancerDetails) GetIps() []IpDetails`
 
 GetIps returns the Ips field if non-nil, zero value otherwise.
 
 ### GetIpsOk
 
-`func (o *LoadBalancerDetails) GetIpsOk() (*[]Ip, bool)`
+`func (o *LoadBalancerDetails) GetIpsOk() (*[]IpDetails, bool)`
 
 GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIps
 
-`func (o *LoadBalancerDetails) SetIps(v []Ip)`
+`func (o *LoadBalancerDetails) SetIps(v []IpDetails)`
 
 SetIps sets Ips field to given value.
 

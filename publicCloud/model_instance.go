@@ -42,10 +42,10 @@ type Instance struct {
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize int32 `json:"rootDiskSize"`
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
-	Ips []Ip `json:"ips"`
 	Contract Contract `json:"contract"`
 	AutoScalingGroup NullableAutoScalingGroupDetails `json:"autoScalingGroup"`
 	OperatingSystem OperatingSystem `json:"operatingSystem"`
+	Ips []Ip `json:"ips"`
 }
 
 type _Instance Instance
@@ -54,7 +54,7 @@ type _Instance Instance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem) *Instance {
+func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem, ips []Ip) *Instance {
 	this := Instance{}
 	this.Id = id
 	this.Type = type_
@@ -69,10 +69,10 @@ func NewInstance(id string, type_ InstanceTypeName, resources Resources, region 
 	this.IncludesPrivateNetwork = includesPrivateNetwork
 	this.RootDiskSize = rootDiskSize
 	this.RootDiskStorageType = rootDiskStorageType
-	this.Ips = ips
 	this.Contract = contract
 	this.AutoScalingGroup = autoScalingGroup
 	this.OperatingSystem = operatingSystem
+	this.Ips = ips
 	return &this
 }
 
@@ -402,30 +402,6 @@ func (o *Instance) SetRootDiskStorageType(v RootDiskStorageType) {
 	o.RootDiskStorageType = v
 }
 
-// GetIps returns the Ips field value
-func (o *Instance) GetIps() []Ip {
-	if o == nil {
-		var ret []Ip
-		return ret
-	}
-
-	return o.Ips
-}
-
-// GetIpsOk returns a tuple with the Ips field value
-// and a boolean to check if the value has been set.
-func (o *Instance) GetIpsOk() ([]Ip, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Ips, true
-}
-
-// SetIps sets field value
-func (o *Instance) SetIps(v []Ip) {
-	o.Ips = v
-}
-
 // GetContract returns the Contract field value
 func (o *Instance) GetContract() Contract {
 	if o == nil {
@@ -500,6 +476,30 @@ func (o *Instance) SetOperatingSystem(v OperatingSystem) {
 	o.OperatingSystem = v
 }
 
+// GetIps returns the Ips field value
+func (o *Instance) GetIps() []Ip {
+	if o == nil {
+		var ret []Ip
+		return ret
+	}
+
+	return o.Ips
+}
+
+// GetIpsOk returns a tuple with the Ips field value
+// and a boolean to check if the value has been set.
+func (o *Instance) GetIpsOk() ([]Ip, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Ips, true
+}
+
+// SetIps sets field value
+func (o *Instance) SetIps(v []Ip) {
+	o.Ips = v
+}
+
 func (o Instance) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -523,10 +523,10 @@ func (o Instance) ToMap() (map[string]interface{}, error) {
 	toSerialize["hasPrivateNetwork"] = o.IncludesPrivateNetwork
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
-	toSerialize["ips"] = o.Ips
 	toSerialize["contract"] = o.Contract
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	toSerialize["operatingSystem"] = o.OperatingSystem
+	toSerialize["ips"] = o.Ips
 	return toSerialize, nil
 }
 
@@ -548,10 +548,10 @@ func (o *Instance) UnmarshalJSON(data []byte) (err error) {
 		"hasPrivateNetwork",
 		"rootDiskSize",
 		"rootDiskStorageType",
-		"ips",
 		"contract",
 		"autoScalingGroup",
 		"operatingSystem",
+		"ips",
 	}
 
 	allProperties := make(map[string]interface{})

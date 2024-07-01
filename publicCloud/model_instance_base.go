@@ -42,7 +42,6 @@ type InstanceBase struct {
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize int32 `json:"rootDiskSize"`
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
-	Ips []Ip `json:"ips"`
 	Contract Contract `json:"contract"`
 	AutoScalingGroup NullableAutoScalingGroupDetails `json:"autoScalingGroup"`
 }
@@ -53,7 +52,7 @@ type _InstanceBase InstanceBase
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceBase(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails) *InstanceBase {
+func NewInstanceBase(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails) *InstanceBase {
 	this := InstanceBase{}
 	this.Id = id
 	this.Type = type_
@@ -68,7 +67,6 @@ func NewInstanceBase(id string, type_ InstanceTypeName, resources Resources, reg
 	this.IncludesPrivateNetwork = includesPrivateNetwork
 	this.RootDiskSize = rootDiskSize
 	this.RootDiskStorageType = rootDiskStorageType
-	this.Ips = ips
 	this.Contract = contract
 	this.AutoScalingGroup = autoScalingGroup
 	return &this
@@ -400,30 +398,6 @@ func (o *InstanceBase) SetRootDiskStorageType(v RootDiskStorageType) {
 	o.RootDiskStorageType = v
 }
 
-// GetIps returns the Ips field value
-func (o *InstanceBase) GetIps() []Ip {
-	if o == nil {
-		var ret []Ip
-		return ret
-	}
-
-	return o.Ips
-}
-
-// GetIpsOk returns a tuple with the Ips field value
-// and a boolean to check if the value has been set.
-func (o *InstanceBase) GetIpsOk() ([]Ip, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Ips, true
-}
-
-// SetIps sets field value
-func (o *InstanceBase) SetIps(v []Ip) {
-	o.Ips = v
-}
-
 // GetContract returns the Contract field value
 func (o *InstanceBase) GetContract() Contract {
 	if o == nil {
@@ -497,7 +471,6 @@ func (o InstanceBase) ToMap() (map[string]interface{}, error) {
 	toSerialize["hasPrivateNetwork"] = o.IncludesPrivateNetwork
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
-	toSerialize["ips"] = o.Ips
 	toSerialize["contract"] = o.Contract
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	return toSerialize, nil
@@ -521,7 +494,6 @@ func (o *InstanceBase) UnmarshalJSON(data []byte) (err error) {
 		"hasPrivateNetwork",
 		"rootDiskSize",
 		"rootDiskStorageType",
-		"ips",
 		"contract",
 		"autoScalingGroup",
 	}

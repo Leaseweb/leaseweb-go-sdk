@@ -2006,7 +2006,7 @@ Name | Type | Description  | Notes
 
 ## GetIp
 
-> Ip GetIp(ctx, instanceId, ip).Execute()
+> IpDetails GetIp(ctx, instanceId, ip).Execute()
 
 Get details about an instance's IP
 
@@ -2033,7 +2033,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetIp``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetIp`: Ip
+	// response from `GetIp`: IpDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetIp`: %v\n", resp)
 }
 ```
@@ -2059,7 +2059,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Ip**](Ip.md)
+[**IpDetails**](IpDetails.md)
 
 ### Authorization
 
@@ -3132,7 +3132,7 @@ Name | Type | Description  | Notes
 
 ## NullRouteIp
 
-> Ip NullRouteIp(ctx, instanceId, ip).NullRouteIpOpts(nullRouteIpOpts).Execute()
+> IpDetails NullRouteIp(ctx, instanceId, ip).NullRouteIpOpts(nullRouteIpOpts).Execute()
 
 Null route IP
 
@@ -3162,7 +3162,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.NullRouteIp``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `NullRouteIp`: Ip
+	// response from `NullRouteIp`: IpDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.NullRouteIp`: %v\n", resp)
 }
 ```
@@ -3189,7 +3189,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Ip**](Ip.md)
+[**IpDetails**](IpDetails.md)
 
 ### Authorization
 
@@ -3555,7 +3555,7 @@ Name | Type | Description  | Notes
 
 ## RemoveIpNullRoute
 
-> Ip RemoveIpNullRoute(ctx, instanceId, ip).Execute()
+> IpDetails RemoveIpNullRoute(ctx, instanceId, ip).Execute()
 
 Remove an IP null route
 
@@ -3584,7 +3584,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.RemoveIpNullRoute``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `RemoveIpNullRoute`: Ip
+	// response from `RemoveIpNullRoute`: IpDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.RemoveIpNullRoute`: %v\n", resp)
 }
 ```
@@ -3610,7 +3610,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Ip**](Ip.md)
+[**IpDetails**](IpDetails.md)
 
 ### Authorization
 
@@ -4331,7 +4331,7 @@ Name | Type | Description  | Notes
 
 ## UpdateIp
 
-> Ip UpdateIp(ctx, instanceId, ip).UpdateIpOpts(updateIpOpts).Execute()
+> IpDetails UpdateIp(ctx, instanceId, ip).UpdateIpOpts(updateIpOpts).Execute()
 
 Update IP
 
@@ -4361,7 +4361,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.UpdateIp``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateIp`: Ip
+	// response from `UpdateIp`: IpDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.UpdateIp`: %v\n", resp)
 }
 ```
@@ -4388,7 +4388,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Ip**](Ip.md)
+[**IpDetails**](IpDetails.md)
 
 ### Authorization
 

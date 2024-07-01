@@ -19,7 +19,7 @@ var _ MappedNullable = &GetIpListResult{}
 
 // GetIpListResult struct for GetIpListResult
 type GetIpListResult struct {
-	Ips []Ip `json:"ips,omitempty"`
+	Ips []IpDetails `json:"ips,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
 }
 
@@ -41,9 +41,9 @@ func NewGetIpListResultWithDefaults() *GetIpListResult {
 }
 
 // GetIps returns the Ips field value if set, zero value otherwise.
-func (o *GetIpListResult) GetIps() []Ip {
+func (o *GetIpListResult) GetIps() []IpDetails {
 	if o == nil || IsNil(o.Ips) {
-		var ret []Ip
+		var ret []IpDetails
 		return ret
 	}
 	return o.Ips
@@ -51,7 +51,7 @@ func (o *GetIpListResult) GetIps() []Ip {
 
 // GetIpsOk returns a tuple with the Ips field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetIpListResult) GetIpsOk() ([]Ip, bool) {
+func (o *GetIpListResult) GetIpsOk() ([]IpDetails, bool) {
 	if o == nil || IsNil(o.Ips) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *GetIpListResult) HasIps() bool {
 	return false
 }
 
-// SetIps gets a reference to the given []Ip and assigns it to the Ips field.
-func (o *GetIpListResult) SetIps(v []Ip) {
+// SetIps gets a reference to the given []IpDetails and assigns it to the Ips field.
+func (o *GetIpListResult) SetIps(v []IpDetails) {
 	o.Ips = v
 }
 

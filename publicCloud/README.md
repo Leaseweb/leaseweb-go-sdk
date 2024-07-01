@@ -202,6 +202,7 @@ Class | Method | HTTP request | Description
  - [InstanceTypeName](docs/InstanceTypeName.md)
  - [InstanceTypes](docs/InstanceTypes.md)
  - [Ip](docs/Ip.md)
+ - [IpDetails](docs/IpDetails.md)
  - [Iso](docs/Iso.md)
  - [LaunchInstanceOpts](docs/LaunchInstanceOpts.md)
  - [LaunchLoadBalancerOpts](docs/LaunchLoadBalancerOpts.md)

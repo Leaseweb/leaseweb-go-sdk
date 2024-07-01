@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **IncludesPrivateNetwork** | **bool** |  | 
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
 **RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
-**Ips** | [**[]Ip**](Ip.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroupDetails**](AutoScalingGroupDetails.md) |  | 
 
@@ -25,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceBase
 
-`func NewInstanceBase(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, ) *InstanceBase`
+`func NewInstanceBase(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, ) *InstanceBase`
 
 NewInstanceBase instantiates a new InstanceBase object
 This constructor will assign default values to properties that have it defined,
@@ -328,26 +327,6 @@ and a boolean to check if the value has been set.
 `func (o *InstanceBase) SetRootDiskStorageType(v RootDiskStorageType)`
 
 SetRootDiskStorageType sets RootDiskStorageType field to given value.
-
-
-### GetIps
-
-`func (o *InstanceBase) GetIps() []Ip`
-
-GetIps returns the Ips field if non-nil, zero value otherwise.
-
-### GetIpsOk
-
-`func (o *InstanceBase) GetIpsOk() (*[]Ip, bool)`
-
-GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIps
-
-`func (o *InstanceBase) SetIps(v []Ip)`
-
-SetIps sets Ips field to given value.
 
 
 ### GetContract

@@ -37,7 +37,7 @@ type LoadBalancerDetails struct {
 	StartedAt NullableTime `json:"startedAt"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize *int32 `json:"rootDiskSize,omitempty"`
-	Ips []Ip `json:"ips"`
+	Ips []IpDetails `json:"ips"`
 	Configuration NullableLoadBalancerConfiguration `json:"configuration"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork"`
@@ -49,7 +49,7 @@ type _LoadBalancerDetails LoadBalancerDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerDetails(id string, type_ string, resources Resources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ips []Ip, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork) *LoadBalancerDetails {
+func NewLoadBalancerDetails(id string, type_ string, resources Resources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ips []IpDetails, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork) *LoadBalancerDetails {
 	this := LoadBalancerDetails{}
 	this.Id = id
 	this.Type = type_
@@ -303,9 +303,9 @@ func (o *LoadBalancerDetails) SetRootDiskSize(v int32) {
 }
 
 // GetIps returns the Ips field value
-func (o *LoadBalancerDetails) GetIps() []Ip {
+func (o *LoadBalancerDetails) GetIps() []IpDetails {
 	if o == nil {
-		var ret []Ip
+		var ret []IpDetails
 		return ret
 	}
 
@@ -314,7 +314,7 @@ func (o *LoadBalancerDetails) GetIps() []Ip {
 
 // GetIpsOk returns a tuple with the Ips field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetIpsOk() ([]Ip, bool) {
+func (o *LoadBalancerDetails) GetIpsOk() ([]IpDetails, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -322,7 +322,7 @@ func (o *LoadBalancerDetails) GetIpsOk() ([]Ip, bool) {
 }
 
 // SetIps sets field value
-func (o *LoadBalancerDetails) SetIps(v []Ip) {
+func (o *LoadBalancerDetails) SetIps(v []IpDetails) {
 	o.Ips = v
 }
 

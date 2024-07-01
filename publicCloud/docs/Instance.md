@@ -17,16 +17,16 @@ Name | Type | Description | Notes
 **IncludesPrivateNetwork** | **bool** |  | 
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
 **RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
-**Ips** | [**[]Ip**](Ip.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroupDetails**](AutoScalingGroupDetails.md) |  | 
 **OperatingSystem** | [**OperatingSystem**](OperatingSystem.md) |  | 
+**Ips** | [**[]Ip**](Ip.md) |  | 
 
 ## Methods
 
 ### NewInstance
 
-`func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem, ) *Instance`
+`func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem, ips []Ip, ) *Instance`
 
 NewInstance instantiates a new Instance object
 This constructor will assign default values to properties that have it defined,
@@ -331,26 +331,6 @@ and a boolean to check if the value has been set.
 SetRootDiskStorageType sets RootDiskStorageType field to given value.
 
 
-### GetIps
-
-`func (o *Instance) GetIps() []Ip`
-
-GetIps returns the Ips field if non-nil, zero value otherwise.
-
-### GetIpsOk
-
-`func (o *Instance) GetIpsOk() (*[]Ip, bool)`
-
-GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIps
-
-`func (o *Instance) SetIps(v []Ip)`
-
-SetIps sets Ips field to given value.
-
-
 ### GetContract
 
 `func (o *Instance) GetContract() Contract`
@@ -419,6 +399,26 @@ and a boolean to check if the value has been set.
 `func (o *Instance) SetOperatingSystem(v OperatingSystem)`
 
 SetOperatingSystem sets OperatingSystem field to given value.
+
+
+### GetIps
+
+`func (o *Instance) GetIps() []Ip`
+
+GetIps returns the Ips field if non-nil, zero value otherwise.
+
+### GetIpsOk
+
+`func (o *Instance) GetIpsOk() (*[]Ip, bool)`
+
+GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIps
+
+`func (o *Instance) SetIps(v []Ip)`
+
+SetIps sets Ips field to given value.
 
 
 

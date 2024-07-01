@@ -42,12 +42,12 @@ type InstanceDetails struct {
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize int32 `json:"rootDiskSize"`
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
-	Ips []Ip `json:"ips"`
 	Contract Contract `json:"contract"`
 	AutoScalingGroup NullableAutoScalingGroupDetails `json:"autoScalingGroup"`
 	Iso NullableIso `json:"iso"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork"`
 	OperatingSystem OperatingSystemDetails `json:"operatingSystem"`
+	Ips []IpDetails `json:"ips"`
 }
 
 type _InstanceDetails InstanceDetails
@@ -56,7 +56,7 @@ type _InstanceDetails InstanceDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails) *InstanceDetails {
+func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ips []IpDetails) *InstanceDetails {
 	this := InstanceDetails{}
 	this.Id = id
 	this.Type = type_
@@ -71,12 +71,12 @@ func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, 
 	this.IncludesPrivateNetwork = includesPrivateNetwork
 	this.RootDiskSize = rootDiskSize
 	this.RootDiskStorageType = rootDiskStorageType
-	this.Ips = ips
 	this.Contract = contract
 	this.AutoScalingGroup = autoScalingGroup
 	this.Iso = iso
 	this.PrivateNetwork = privateNetwork
 	this.OperatingSystem = operatingSystem
+	this.Ips = ips
 	return &this
 }
 
@@ -406,30 +406,6 @@ func (o *InstanceDetails) SetRootDiskStorageType(v RootDiskStorageType) {
 	o.RootDiskStorageType = v
 }
 
-// GetIps returns the Ips field value
-func (o *InstanceDetails) GetIps() []Ip {
-	if o == nil {
-		var ret []Ip
-		return ret
-	}
-
-	return o.Ips
-}
-
-// GetIpsOk returns a tuple with the Ips field value
-// and a boolean to check if the value has been set.
-func (o *InstanceDetails) GetIpsOk() ([]Ip, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Ips, true
-}
-
-// SetIps sets field value
-func (o *InstanceDetails) SetIps(v []Ip) {
-	o.Ips = v
-}
-
 // GetContract returns the Contract field value
 func (o *InstanceDetails) GetContract() Contract {
 	if o == nil {
@@ -556,6 +532,30 @@ func (o *InstanceDetails) SetOperatingSystem(v OperatingSystemDetails) {
 	o.OperatingSystem = v
 }
 
+// GetIps returns the Ips field value
+func (o *InstanceDetails) GetIps() []IpDetails {
+	if o == nil {
+		var ret []IpDetails
+		return ret
+	}
+
+	return o.Ips
+}
+
+// GetIpsOk returns a tuple with the Ips field value
+// and a boolean to check if the value has been set.
+func (o *InstanceDetails) GetIpsOk() ([]IpDetails, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Ips, true
+}
+
+// SetIps sets field value
+func (o *InstanceDetails) SetIps(v []IpDetails) {
+	o.Ips = v
+}
+
 func (o InstanceDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -579,12 +579,12 @@ func (o InstanceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["hasPrivateNetwork"] = o.IncludesPrivateNetwork
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
-	toSerialize["ips"] = o.Ips
 	toSerialize["contract"] = o.Contract
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	toSerialize["iso"] = o.Iso.Get()
 	toSerialize["privateNetwork"] = o.PrivateNetwork.Get()
 	toSerialize["operatingSystem"] = o.OperatingSystem
+	toSerialize["ips"] = o.Ips
 	return toSerialize, nil
 }
 
@@ -606,12 +606,12 @@ func (o *InstanceDetails) UnmarshalJSON(data []byte) (err error) {
 		"hasPrivateNetwork",
 		"rootDiskSize",
 		"rootDiskStorageType",
-		"ips",
 		"contract",
 		"autoScalingGroup",
 		"iso",
 		"privateNetwork",
 		"operatingSystem",
+		"ips",
 	}
 
 	allProperties := make(map[string]interface{})

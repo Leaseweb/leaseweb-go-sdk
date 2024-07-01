@@ -17,18 +17,18 @@ Name | Type | Description | Notes
 **IncludesPrivateNetwork** | **bool** |  | 
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
 **RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
-**Ips** | [**[]Ip**](Ip.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroupDetails**](AutoScalingGroupDetails.md) |  | 
 **Iso** | [**NullableIso**](Iso.md) |  | 
 **PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
 **OperatingSystem** | [**OperatingSystemDetails**](OperatingSystemDetails.md) |  | 
+**Ips** | [**[]IpDetails**](IpDetails.md) |  | 
 
 ## Methods
 
 ### NewInstanceDetails
 
-`func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, ips []Ip, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ) *InstanceDetails`
+`func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ips []IpDetails, ) *InstanceDetails`
 
 NewInstanceDetails instantiates a new InstanceDetails object
 This constructor will assign default values to properties that have it defined,
@@ -333,26 +333,6 @@ and a boolean to check if the value has been set.
 SetRootDiskStorageType sets RootDiskStorageType field to given value.
 
 
-### GetIps
-
-`func (o *InstanceDetails) GetIps() []Ip`
-
-GetIps returns the Ips field if non-nil, zero value otherwise.
-
-### GetIpsOk
-
-`func (o *InstanceDetails) GetIpsOk() (*[]Ip, bool)`
-
-GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIps
-
-`func (o *InstanceDetails) SetIps(v []Ip)`
-
-SetIps sets Ips field to given value.
-
-
 ### GetContract
 
 `func (o *InstanceDetails) GetContract() Contract`
@@ -481,6 +461,26 @@ and a boolean to check if the value has been set.
 `func (o *InstanceDetails) SetOperatingSystem(v OperatingSystemDetails)`
 
 SetOperatingSystem sets OperatingSystem field to given value.
+
+
+### GetIps
+
+`func (o *InstanceDetails) GetIps() []IpDetails`
+
+GetIps returns the Ips field if non-nil, zero value otherwise.
+
+### GetIpsOk
+
+`func (o *InstanceDetails) GetIpsOk() (*[]IpDetails, bool)`
+
+GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIps
+
+`func (o *InstanceDetails) SetIps(v []IpDetails)`
+
+SetIps sets Ips field to given value.
 
 
 
