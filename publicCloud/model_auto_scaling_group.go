@@ -27,7 +27,7 @@ type AutoScalingGroup struct {
 	// Auto Scaling Group type
 	Type string `json:"type"`
 	// The Auto Scaling Group's current state.
-	State *string `json:"state,omitempty"`
+	State string `json:"state"`
 	// Number of instances that should be running
 	DesiredAmount NullableInt32 `json:"desiredAmount"`
 	// The region in which the Auto Scaling Group was launched
@@ -60,10 +60,11 @@ type _AutoScalingGroup AutoScalingGroup
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAutoScalingGroup(id string, type_ string, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32) *AutoScalingGroup {
+func NewAutoScalingGroup(id string, type_ string, state string, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32) *AutoScalingGroup {
 	this := AutoScalingGroup{}
 	this.Id = id
 	this.Type = type_
+	this.State = state
 	this.DesiredAmount = desiredAmount
 	this.Region = region
 	this.Reference = reference
@@ -135,36 +136,28 @@ func (o *AutoScalingGroup) SetType(v string) {
 	o.Type = v
 }
 
-// GetState returns the State field value if set, zero value otherwise.
+// GetState returns the State field value
 func (o *AutoScalingGroup) GetState() string {
-	if o == nil || IsNil(o.State) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.State
+
+	return o.State
 }
 
-// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
 func (o *AutoScalingGroup) GetStateOk() (*string, bool) {
-	if o == nil || IsNil(o.State) {
+	if o == nil {
 		return nil, false
 	}
-	return o.State, true
+	return &o.State, true
 }
 
-// HasState returns a boolean if a field has been set.
-func (o *AutoScalingGroup) HasState() bool {
-	if o != nil && !IsNil(o.State) {
-		return true
-	}
-
-	return false
-}
-
-// SetState gets a reference to the given string and assigns it to the State field.
+// SetState sets field value
 func (o *AutoScalingGroup) SetState(v string) {
-	o.State = &v
+	o.State = v
 }
 
 // GetDesiredAmount returns the DesiredAmount field value
@@ -483,9 +476,7 @@ func (o AutoScalingGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
-	if !IsNil(o.State) {
-		toSerialize["state"] = o.State
-	}
+	toSerialize["state"] = o.State
 	toSerialize["desiredAmount"] = o.DesiredAmount.Get()
 	toSerialize["region"] = o.Region
 	toSerialize["reference"] = o.Reference
@@ -508,6 +499,7 @@ func (o *AutoScalingGroup) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"type",
+		"state",
 		"desiredAmount",
 		"region",
 		"reference",

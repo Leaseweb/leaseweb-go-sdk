@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The Auto Scaling Group unique identifier | 
 **Type** | **string** | Auto Scaling Group type | 
-**State** | Pointer to **string** | The Auto Scaling Group&#39;s current state. | [optional] 
+**State** | **string** | The Auto Scaling Group&#39;s current state. | 
 **DesiredAmount** | **NullableInt32** | Number of instances that should be running | 
 **Region** | **string** | The region in which the Auto Scaling Group was launched | 
 **Reference** | **string** | The identifying name set to the auto scaling group | 
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewAutoScalingGroupDetails
 
-`func NewAutoScalingGroupDetails(id string, type_ string, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, loadBalancer NullableLoadBalancer, ) *AutoScalingGroupDetails`
+`func NewAutoScalingGroupDetails(id string, type_ string, state string, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, loadBalancer NullableLoadBalancer, ) *AutoScalingGroupDetails`
 
 NewAutoScalingGroupDetails instantiates a new AutoScalingGroupDetails object
 This constructor will assign default values to properties that have it defined,
@@ -99,11 +99,6 @@ and a boolean to check if the value has been set.
 
 SetState sets State field to given value.
 
-### HasState
-
-`func (o *AutoScalingGroupDetails) HasState() bool`
-
-HasState returns a boolean if a field has been set.
 
 ### GetDesiredAmount
 

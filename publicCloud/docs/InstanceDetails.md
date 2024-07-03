@@ -18,17 +18,17 @@ Name | Type | Description | Notes
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
 **RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
-**AutoScalingGroup** | [**NullableAutoScalingGroupDetails**](AutoScalingGroupDetails.md) |  | 
 **Iso** | [**NullableIso**](Iso.md) |  | 
 **PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
 **OperatingSystem** | [**OperatingSystemDetails**](OperatingSystemDetails.md) |  | 
 **Ips** | [**[]IpDetails**](IpDetails.md) |  | 
+**AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 
 ## Methods
 
 ### NewInstanceDetails
 
-`func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ips []IpDetails, ) *InstanceDetails`
+`func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, ) *InstanceDetails`
 
 NewInstanceDetails instantiates a new InstanceDetails object
 This constructor will assign default values to properties that have it defined,
@@ -353,36 +353,6 @@ and a boolean to check if the value has been set.
 SetContract sets Contract field to given value.
 
 
-### GetAutoScalingGroup
-
-`func (o *InstanceDetails) GetAutoScalingGroup() AutoScalingGroupDetails`
-
-GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
-
-### GetAutoScalingGroupOk
-
-`func (o *InstanceDetails) GetAutoScalingGroupOk() (*AutoScalingGroupDetails, bool)`
-
-GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAutoScalingGroup
-
-`func (o *InstanceDetails) SetAutoScalingGroup(v AutoScalingGroupDetails)`
-
-SetAutoScalingGroup sets AutoScalingGroup field to given value.
-
-
-### SetAutoScalingGroupNil
-
-`func (o *InstanceDetails) SetAutoScalingGroupNil(b bool)`
-
- SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
-
-### UnsetAutoScalingGroup
-`func (o *InstanceDetails) UnsetAutoScalingGroup()`
-
-UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
 ### GetIso
 
 `func (o *InstanceDetails) GetIso() Iso`
@@ -483,6 +453,36 @@ and a boolean to check if the value has been set.
 SetIps sets Ips field to given value.
 
 
+### GetAutoScalingGroup
+
+`func (o *InstanceDetails) GetAutoScalingGroup() AutoScalingGroup`
+
+GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
+
+### GetAutoScalingGroupOk
+
+`func (o *InstanceDetails) GetAutoScalingGroupOk() (*AutoScalingGroup, bool)`
+
+GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoScalingGroup
+
+`func (o *InstanceDetails) SetAutoScalingGroup(v AutoScalingGroup)`
+
+SetAutoScalingGroup sets AutoScalingGroup field to given value.
+
+
+### SetAutoScalingGroupNil
+
+`func (o *InstanceDetails) SetAutoScalingGroupNil(b bool)`
+
+ SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
+
+### UnsetAutoScalingGroup
+`func (o *InstanceDetails) UnsetAutoScalingGroup()`
+
+UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

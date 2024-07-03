@@ -43,11 +43,11 @@ type InstanceDetails struct {
 	RootDiskSize int32 `json:"rootDiskSize"`
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
 	Contract Contract `json:"contract"`
-	AutoScalingGroup NullableAutoScalingGroupDetails `json:"autoScalingGroup"`
 	Iso NullableIso `json:"iso"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork"`
 	OperatingSystem OperatingSystemDetails `json:"operatingSystem"`
 	Ips []IpDetails `json:"ips"`
+	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
 }
 
 type _InstanceDetails InstanceDetails
@@ -56,7 +56,7 @@ type _InstanceDetails InstanceDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ips []IpDetails) *InstanceDetails {
+func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup) *InstanceDetails {
 	this := InstanceDetails{}
 	this.Id = id
 	this.Type = type_
@@ -72,11 +72,11 @@ func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, 
 	this.RootDiskSize = rootDiskSize
 	this.RootDiskStorageType = rootDiskStorageType
 	this.Contract = contract
-	this.AutoScalingGroup = autoScalingGroup
 	this.Iso = iso
 	this.PrivateNetwork = privateNetwork
 	this.OperatingSystem = operatingSystem
 	this.Ips = ips
+	this.AutoScalingGroup = autoScalingGroup
 	return &this
 }
 
@@ -430,32 +430,6 @@ func (o *InstanceDetails) SetContract(v Contract) {
 	o.Contract = v
 }
 
-// GetAutoScalingGroup returns the AutoScalingGroup field value
-// If the value is explicit nil, the zero value for AutoScalingGroupDetails will be returned
-func (o *InstanceDetails) GetAutoScalingGroup() AutoScalingGroupDetails {
-	if o == nil || o.AutoScalingGroup.Get() == nil {
-		var ret AutoScalingGroupDetails
-		return ret
-	}
-
-	return *o.AutoScalingGroup.Get()
-}
-
-// GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InstanceDetails) GetAutoScalingGroupOk() (*AutoScalingGroupDetails, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.AutoScalingGroup.Get(), o.AutoScalingGroup.IsSet()
-}
-
-// SetAutoScalingGroup sets field value
-func (o *InstanceDetails) SetAutoScalingGroup(v AutoScalingGroupDetails) {
-	o.AutoScalingGroup.Set(&v)
-}
-
 // GetIso returns the Iso field value
 // If the value is explicit nil, the zero value for Iso will be returned
 func (o *InstanceDetails) GetIso() Iso {
@@ -556,6 +530,32 @@ func (o *InstanceDetails) SetIps(v []IpDetails) {
 	o.Ips = v
 }
 
+// GetAutoScalingGroup returns the AutoScalingGroup field value
+// If the value is explicit nil, the zero value for AutoScalingGroup will be returned
+func (o *InstanceDetails) GetAutoScalingGroup() AutoScalingGroup {
+	if o == nil || o.AutoScalingGroup.Get() == nil {
+		var ret AutoScalingGroup
+		return ret
+	}
+
+	return *o.AutoScalingGroup.Get()
+}
+
+// GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InstanceDetails) GetAutoScalingGroupOk() (*AutoScalingGroup, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AutoScalingGroup.Get(), o.AutoScalingGroup.IsSet()
+}
+
+// SetAutoScalingGroup sets field value
+func (o *InstanceDetails) SetAutoScalingGroup(v AutoScalingGroup) {
+	o.AutoScalingGroup.Set(&v)
+}
+
 func (o InstanceDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -580,11 +580,11 @@ func (o InstanceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
 	toSerialize["contract"] = o.Contract
-	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	toSerialize["iso"] = o.Iso.Get()
 	toSerialize["privateNetwork"] = o.PrivateNetwork.Get()
 	toSerialize["operatingSystem"] = o.OperatingSystem
 	toSerialize["ips"] = o.Ips
+	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	return toSerialize, nil
 }
 
@@ -607,11 +607,11 @@ func (o *InstanceDetails) UnmarshalJSON(data []byte) (err error) {
 		"rootDiskSize",
 		"rootDiskStorageType",
 		"contract",
-		"autoScalingGroup",
 		"iso",
 		"privateNetwork",
 		"operatingSystem",
 		"ips",
+		"autoScalingGroup",
 	}
 
 	allProperties := make(map[string]interface{})

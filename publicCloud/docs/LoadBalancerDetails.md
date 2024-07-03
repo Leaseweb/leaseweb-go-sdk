@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **State** | [**State**](State.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
 **StartedAt** | **NullableTime** | Date and time when the load balancer was started for the first time, right after launching it | 
-**RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
 **Ips** | [**[]IpDetails**](IpDetails.md) |  | 
 **Configuration** | [**NullableLoadBalancerConfiguration**](LoadBalancerConfiguration.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
@@ -217,31 +216,6 @@ SetStartedAt sets StartedAt field to given value.
 `func (o *LoadBalancerDetails) UnsetStartedAt()`
 
 UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
-### GetRootDiskSize
-
-`func (o *LoadBalancerDetails) GetRootDiskSize() int32`
-
-GetRootDiskSize returns the RootDiskSize field if non-nil, zero value otherwise.
-
-### GetRootDiskSizeOk
-
-`func (o *LoadBalancerDetails) GetRootDiskSizeOk() (*int32, bool)`
-
-GetRootDiskSizeOk returns a tuple with the RootDiskSize field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRootDiskSize
-
-`func (o *LoadBalancerDetails) SetRootDiskSize(v int32)`
-
-SetRootDiskSize sets RootDiskSize field to given value.
-
-### HasRootDiskSize
-
-`func (o *LoadBalancerDetails) HasRootDiskSize() bool`
-
-HasRootDiskSize returns a boolean if a field has been set.
-
 ### GetIps
 
 `func (o *LoadBalancerDetails) GetIps() []IpDetails`

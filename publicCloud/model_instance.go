@@ -43,9 +43,9 @@ type Instance struct {
 	RootDiskSize int32 `json:"rootDiskSize"`
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
 	Contract Contract `json:"contract"`
-	AutoScalingGroup NullableAutoScalingGroupDetails `json:"autoScalingGroup"`
 	OperatingSystem OperatingSystem `json:"operatingSystem"`
 	Ips []Ip `json:"ips"`
+	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
 }
 
 type _Instance Instance
@@ -54,7 +54,7 @@ type _Instance Instance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem, ips []Ip) *Instance {
+func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, operatingSystem OperatingSystem, ips []Ip, autoScalingGroup NullableAutoScalingGroup) *Instance {
 	this := Instance{}
 	this.Id = id
 	this.Type = type_
@@ -70,9 +70,9 @@ func NewInstance(id string, type_ InstanceTypeName, resources Resources, region 
 	this.RootDiskSize = rootDiskSize
 	this.RootDiskStorageType = rootDiskStorageType
 	this.Contract = contract
-	this.AutoScalingGroup = autoScalingGroup
 	this.OperatingSystem = operatingSystem
 	this.Ips = ips
+	this.AutoScalingGroup = autoScalingGroup
 	return &this
 }
 
@@ -426,32 +426,6 @@ func (o *Instance) SetContract(v Contract) {
 	o.Contract = v
 }
 
-// GetAutoScalingGroup returns the AutoScalingGroup field value
-// If the value is explicit nil, the zero value for AutoScalingGroupDetails will be returned
-func (o *Instance) GetAutoScalingGroup() AutoScalingGroupDetails {
-	if o == nil || o.AutoScalingGroup.Get() == nil {
-		var ret AutoScalingGroupDetails
-		return ret
-	}
-
-	return *o.AutoScalingGroup.Get()
-}
-
-// GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Instance) GetAutoScalingGroupOk() (*AutoScalingGroupDetails, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.AutoScalingGroup.Get(), o.AutoScalingGroup.IsSet()
-}
-
-// SetAutoScalingGroup sets field value
-func (o *Instance) SetAutoScalingGroup(v AutoScalingGroupDetails) {
-	o.AutoScalingGroup.Set(&v)
-}
-
 // GetOperatingSystem returns the OperatingSystem field value
 func (o *Instance) GetOperatingSystem() OperatingSystem {
 	if o == nil {
@@ -500,6 +474,32 @@ func (o *Instance) SetIps(v []Ip) {
 	o.Ips = v
 }
 
+// GetAutoScalingGroup returns the AutoScalingGroup field value
+// If the value is explicit nil, the zero value for AutoScalingGroup will be returned
+func (o *Instance) GetAutoScalingGroup() AutoScalingGroup {
+	if o == nil || o.AutoScalingGroup.Get() == nil {
+		var ret AutoScalingGroup
+		return ret
+	}
+
+	return *o.AutoScalingGroup.Get()
+}
+
+// GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Instance) GetAutoScalingGroupOk() (*AutoScalingGroup, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AutoScalingGroup.Get(), o.AutoScalingGroup.IsSet()
+}
+
+// SetAutoScalingGroup sets field value
+func (o *Instance) SetAutoScalingGroup(v AutoScalingGroup) {
+	o.AutoScalingGroup.Set(&v)
+}
+
 func (o Instance) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -524,9 +524,9 @@ func (o Instance) ToMap() (map[string]interface{}, error) {
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
 	toSerialize["contract"] = o.Contract
-	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	toSerialize["operatingSystem"] = o.OperatingSystem
 	toSerialize["ips"] = o.Ips
+	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	return toSerialize, nil
 }
 
@@ -549,9 +549,9 @@ func (o *Instance) UnmarshalJSON(data []byte) (err error) {
 		"rootDiskSize",
 		"rootDiskStorageType",
 		"contract",
-		"autoScalingGroup",
 		"operatingSystem",
 		"ips",
+		"autoScalingGroup",
 	}
 
 	allProperties := make(map[string]interface{})

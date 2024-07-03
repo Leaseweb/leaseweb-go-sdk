@@ -92,7 +92,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "lsw-go-sdk/2024-07-01T12:50:51Z",
+		UserAgent:        "lsw-go-sdk/2024-07-03T13:34:46Z",
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{

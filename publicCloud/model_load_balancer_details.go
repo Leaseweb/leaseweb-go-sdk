@@ -35,8 +35,6 @@ type LoadBalancerDetails struct {
 	Contract Contract `json:"contract"`
 	// Date and time when the load balancer was started for the first time, right after launching it
 	StartedAt NullableTime `json:"startedAt"`
-	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
-	RootDiskSize *int32 `json:"rootDiskSize,omitempty"`
 	Ips []IpDetails `json:"ips"`
 	Configuration NullableLoadBalancerConfiguration `json:"configuration"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
@@ -270,38 +268,6 @@ func (o *LoadBalancerDetails) SetStartedAt(v time.Time) {
 	o.StartedAt.Set(&v)
 }
 
-// GetRootDiskSize returns the RootDiskSize field value if set, zero value otherwise.
-func (o *LoadBalancerDetails) GetRootDiskSize() int32 {
-	if o == nil || IsNil(o.RootDiskSize) {
-		var ret int32
-		return ret
-	}
-	return *o.RootDiskSize
-}
-
-// GetRootDiskSizeOk returns a tuple with the RootDiskSize field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetRootDiskSizeOk() (*int32, bool) {
-	if o == nil || IsNil(o.RootDiskSize) {
-		return nil, false
-	}
-	return o.RootDiskSize, true
-}
-
-// HasRootDiskSize returns a boolean if a field has been set.
-func (o *LoadBalancerDetails) HasRootDiskSize() bool {
-	if o != nil && !IsNil(o.RootDiskSize) {
-		return true
-	}
-
-	return false
-}
-
-// SetRootDiskSize gets a reference to the given int32 and assigns it to the RootDiskSize field.
-func (o *LoadBalancerDetails) SetRootDiskSize(v int32) {
-	o.RootDiskSize = &v
-}
-
 // GetIps returns the Ips field value
 func (o *LoadBalancerDetails) GetIps() []IpDetails {
 	if o == nil {
@@ -422,9 +388,6 @@ func (o LoadBalancerDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["state"] = o.State
 	toSerialize["contract"] = o.Contract
 	toSerialize["startedAt"] = o.StartedAt.Get()
-	if !IsNil(o.RootDiskSize) {
-		toSerialize["rootDiskSize"] = o.RootDiskSize
-	}
 	toSerialize["ips"] = o.Ips
 	toSerialize["configuration"] = o.Configuration.Get()
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()

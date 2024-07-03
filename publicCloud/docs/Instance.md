@@ -18,15 +18,15 @@ Name | Type | Description | Notes
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
 **RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
-**AutoScalingGroup** | [**NullableAutoScalingGroupDetails**](AutoScalingGroupDetails.md) |  | 
 **OperatingSystem** | [**OperatingSystem**](OperatingSystem.md) |  | 
 **Ips** | [**[]Ip**](Ip.md) |  | 
+**AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 
 ## Methods
 
 ### NewInstance
 
-`func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroupDetails, operatingSystem OperatingSystem, ips []Ip, ) *Instance`
+`func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, operatingSystem OperatingSystem, ips []Ip, autoScalingGroup NullableAutoScalingGroup, ) *Instance`
 
 NewInstance instantiates a new Instance object
 This constructor will assign default values to properties that have it defined,
@@ -351,36 +351,6 @@ and a boolean to check if the value has been set.
 SetContract sets Contract field to given value.
 
 
-### GetAutoScalingGroup
-
-`func (o *Instance) GetAutoScalingGroup() AutoScalingGroupDetails`
-
-GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
-
-### GetAutoScalingGroupOk
-
-`func (o *Instance) GetAutoScalingGroupOk() (*AutoScalingGroupDetails, bool)`
-
-GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAutoScalingGroup
-
-`func (o *Instance) SetAutoScalingGroup(v AutoScalingGroupDetails)`
-
-SetAutoScalingGroup sets AutoScalingGroup field to given value.
-
-
-### SetAutoScalingGroupNil
-
-`func (o *Instance) SetAutoScalingGroupNil(b bool)`
-
- SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
-
-### UnsetAutoScalingGroup
-`func (o *Instance) UnsetAutoScalingGroup()`
-
-UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
 ### GetOperatingSystem
 
 `func (o *Instance) GetOperatingSystem() OperatingSystem`
@@ -421,6 +391,36 @@ and a boolean to check if the value has been set.
 SetIps sets Ips field to given value.
 
 
+### GetAutoScalingGroup
+
+`func (o *Instance) GetAutoScalingGroup() AutoScalingGroup`
+
+GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
+
+### GetAutoScalingGroupOk
+
+`func (o *Instance) GetAutoScalingGroupOk() (*AutoScalingGroup, bool)`
+
+GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoScalingGroup
+
+`func (o *Instance) SetAutoScalingGroup(v AutoScalingGroup)`
+
+SetAutoScalingGroup sets AutoScalingGroup field to given value.
+
+
+### SetAutoScalingGroupNil
+
+`func (o *Instance) SetAutoScalingGroupNil(b bool)`
+
+ SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
+
+### UnsetAutoScalingGroup
+`func (o *Instance) UnsetAutoScalingGroup()`
+
+UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
