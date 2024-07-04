@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Region type satisfies the MappedNullable interface at compile time
@@ -20,17 +22,21 @@ var _ MappedNullable = &Region{}
 // Region struct for Region
 type Region struct {
 	// The region's name.
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
 	// The city where the region is located.
-	Location *string `json:"location,omitempty"`
+	Location string `json:"location"`
 }
+
+type _Region Region
 
 // NewRegion instantiates a new Region object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegion() *Region {
+func NewRegion(name string, location string) *Region {
 	this := Region{}
+	this.Name = name
+	this.Location = location
 	return &this
 }
 
@@ -42,68 +48,52 @@ func NewRegionWithDefaults() *Region {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *Region) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *Region) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *Region) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *Region) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetLocation returns the Location field value if set, zero value otherwise.
+// GetLocation returns the Location field value
 func (o *Region) GetLocation() string {
-	if o == nil || IsNil(o.Location) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Location
+
+	return o.Location
 }
 
-// GetLocationOk returns a tuple with the Location field value if set, nil otherwise
+// GetLocationOk returns a tuple with the Location field value
 // and a boolean to check if the value has been set.
 func (o *Region) GetLocationOk() (*string, bool) {
-	if o == nil || IsNil(o.Location) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Location, true
+	return &o.Location, true
 }
 
-// HasLocation returns a boolean if a field has been set.
-func (o *Region) HasLocation() bool {
-	if o != nil && !IsNil(o.Location) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocation gets a reference to the given string and assigns it to the Location field.
+// SetLocation sets field value
 func (o *Region) SetLocation(v string) {
-	o.Location = &v
+	o.Location = v
 }
 
 func (o Region) MarshalJSON() ([]byte, error) {
@@ -116,13 +106,47 @@ func (o Region) MarshalJSON() ([]byte, error) {
 
 func (o Region) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Location) {
-		toSerialize["location"] = o.Location
-	}
+	toSerialize["name"] = o.Name
+	toSerialize["location"] = o.Location
 	return toSerialize, nil
+}
+
+func (o *Region) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"location",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRegion := _Region{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRegion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Region(varRegion)
+
+	return err
 }
 
 type NullableRegion struct {

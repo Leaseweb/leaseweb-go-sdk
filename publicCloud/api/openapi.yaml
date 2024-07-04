@@ -10365,6 +10365,9 @@ components:
           description: The city where the region is located.
           example: Amsterdam
           type: string
+      required:
+      - location
+      - name
       title: region
       type: object
     cpu:

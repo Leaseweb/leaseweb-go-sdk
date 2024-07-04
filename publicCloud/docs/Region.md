@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | The region&#39;s name. | [optional] 
-**Location** | Pointer to **string** | The city where the region is located. | [optional] 
+**Name** | **string** | The region&#39;s name. | 
+**Location** | **string** | The city where the region is located. | 
 
 ## Methods
 
 ### NewRegion
 
-`func NewRegion() *Region`
+`func NewRegion(name string, location string, ) *Region`
 
 NewRegion instantiates a new Region object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *Region) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetLocation
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetLocation sets Location field to given value.
 
-### HasLocation
-
-`func (o *Region) HasLocation() bool`
-
-HasLocation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
