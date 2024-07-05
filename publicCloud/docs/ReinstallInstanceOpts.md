@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OperatingSystemId** | **string** | The Operating System ID | 
+**ImageId** | **string** | The Image ID | 
 **MarketAppId** | Pointer to **string** | The Market App to be installed | [optional] 
 
 ## Methods
 
 ### NewReinstallInstanceOpts
 
-`func NewReinstallInstanceOpts(operatingSystemId string, ) *ReinstallInstanceOpts`
+`func NewReinstallInstanceOpts(imageId string, ) *ReinstallInstanceOpts`
 
 NewReinstallInstanceOpts instantiates a new ReinstallInstanceOpts object
 This constructor will assign default values to properties that have it defined,
@@ -26,24 +26,24 @@ NewReinstallInstanceOptsWithDefaults instantiates a new ReinstallInstanceOpts ob
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetOperatingSystemId
+### GetImageId
 
-`func (o *ReinstallInstanceOpts) GetOperatingSystemId() string`
+`func (o *ReinstallInstanceOpts) GetImageId() string`
 
-GetOperatingSystemId returns the OperatingSystemId field if non-nil, zero value otherwise.
+GetImageId returns the ImageId field if non-nil, zero value otherwise.
 
-### GetOperatingSystemIdOk
+### GetImageIdOk
 
-`func (o *ReinstallInstanceOpts) GetOperatingSystemIdOk() (*string, bool)`
+`func (o *ReinstallInstanceOpts) GetImageIdOk() (*string, bool)`
 
-GetOperatingSystemIdOk returns a tuple with the OperatingSystemId field if it's non-nil, zero value otherwise
+GetImageIdOk returns a tuple with the ImageId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOperatingSystemId
+### SetImageId
 
-`func (o *ReinstallInstanceOpts) SetOperatingSystemId(v string)`
+`func (o *ReinstallInstanceOpts) SetImageId(v string)`
 
-SetOperatingSystemId sets OperatingSystemId field to given value.
+SetImageId sets ImageId field to given value.
 
 
 ### GetMarketAppId

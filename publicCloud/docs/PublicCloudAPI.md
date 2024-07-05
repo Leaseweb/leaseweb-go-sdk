@@ -28,6 +28,7 @@ Method | HTTP request | Description
 [**GetCredentialListByType**](PublicCloudAPI.md#GetCredentialListByType) | **Get** /instances/{instanceId}/credentials/{type} | Get credentials by type
 [**GetDataTrafficMetrics**](PublicCloudAPI.md#GetDataTrafficMetrics) | **Get** /instances/{instanceId}/metrics/datatraffic | Get instance data traffic metrics
 [**GetExpenses**](PublicCloudAPI.md#GetExpenses) | **Get** /equipments/{equipmentId}/expenses | Get costs for a given month.
+[**GetImageList**](PublicCloudAPI.md#GetImageList) | **Get** /images | List all available Images
 [**GetInstance**](PublicCloudAPI.md#GetInstance) | **Get** /instances/{instanceId} | Get instance details
 [**GetInstanceList**](PublicCloudAPI.md#GetInstanceList) | **Get** /instances | Get instance list
 [**GetInstanceTypeList**](PublicCloudAPI.md#GetInstanceTypeList) | **Get** /instanceTypes | List instance types
@@ -39,9 +40,8 @@ Method | HTTP request | Description
 [**GetLoadBalancerListener**](PublicCloudAPI.md#GetLoadBalancerListener) | **Get** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Get listener details
 [**GetLoadBalancerTargetList**](PublicCloudAPI.md#GetLoadBalancerTargetList) | **Get** /loadBalancers/{loadBalancerId}/targets | List registered targets
 [**GetMarketAppList**](PublicCloudAPI.md#GetMarketAppList) | **Get** /marketApps | Get marketplace apps
-[**GetOperatingSystemList**](PublicCloudAPI.md#GetOperatingSystemList) | **Get** /operatingSystems | List all available Operating Systems
 [**GetRegionList**](PublicCloudAPI.md#GetRegionList) | **Get** /regions | List regions
-[**GetReinstallOsList**](PublicCloudAPI.md#GetReinstallOsList) | **Get** /instances/{instanceId}/reinstall/operatingSystems | List OSes available for reinstall
+[**GetReinstallOsList**](PublicCloudAPI.md#GetReinstallOsList) | **Get** /instances/{instanceId}/reinstall/images | List OSes available for reinstall
 [**GetSnapshot**](PublicCloudAPI.md#GetSnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
 [**GetSnapshotList**](PublicCloudAPI.md#GetSnapshotList) | **Get** /instances/{instanceId}/snapshots | List snapshots
 [**GetUpdateInstanceTypeList**](PublicCloudAPI.md#GetUpdateInstanceTypeList) | **Get** /instances/{instanceId}/instanceTypesUpdate | List available instance types for update
@@ -1778,6 +1778,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetImageList
+
+> GetImageListResult GetImageList(ctx).Limit(limit).Offset(offset).Execute()
+
+List all available Images
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	limit := int32(20) // int32 | Limit the number of results returned. (optional)
+	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetImageList(context.Background()).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetImageList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetImageList`: GetImageListResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetImageList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetImageListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int32** | Limit the number of results returned. | 
+ **offset** | **int32** | Return results starting from the given offset. | 
+
+### Return type
+
+[**GetImageListResult**](GetImageListResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetInstance
 
 > InstanceDetails GetInstance(ctx, instanceId).Execute()
@@ -1850,7 +1916,7 @@ Name | Type | Description  | Notes
 
 ## GetInstanceList
 
-> GetInstanceListResult GetInstanceList(ctx).Limit(limit).Offset(offset).Ip(ip).Reference(reference).Id(id).ContractType(contractType).ContractState(contractState).OperatingSystemId(operatingSystemId).State(state).Region(region).Type_(type_).Execute()
+> GetInstanceListResult GetInstanceList(ctx).Limit(limit).Offset(offset).Ip(ip).Reference(reference).Id(id).ContractType(contractType).ContractState(contractState).ImageId(imageId).State(state).Region(region).Type_(type_).Execute()
 
 Get instance list
 
@@ -1876,14 +1942,14 @@ func main() {
 	id := "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" // string |  (optional)
 	contractType := openapiclient.contractType("HOURLY") // ContractType |  (optional)
 	contractState := openapiclient.contractState("ACTIVE") // ContractState |  (optional)
-	operatingSystemId := "UBUNTU_22_04_64BIT" // string | Available Operating Systems can be obtained using `/v1/operatingSystems`. (optional)
+	imageId := "UBUNTU_22_04_64BIT" // string | Available Images can be obtained using `/v1/images`. (optional)
 	state := []string{"State_example"} // []string | The instance's current state(s), separated by commas. (optional)
 	region := "eu-west-3" // string | Available regions can be obtained using `/v1/regions` (optional)
 	type_ := "lsw.c3.xlarge" // string | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.GetInstanceList(context.Background()).Limit(limit).Offset(offset).Ip(ip).Reference(reference).Id(id).ContractType(contractType).ContractState(contractState).OperatingSystemId(operatingSystemId).State(state).Region(region).Type_(type_).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.GetInstanceList(context.Background()).Limit(limit).Offset(offset).Ip(ip).Reference(reference).Id(id).ContractType(contractType).ContractState(contractState).ImageId(imageId).State(state).Region(region).Type_(type_).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetInstanceList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1911,7 +1977,7 @@ Name | Type | Description  | Notes
  **id** | **string** |  | 
  **contractType** | [**ContractType**](ContractType.md) |  | 
  **contractState** | [**ContractState**](ContractState.md) |  | 
- **operatingSystemId** | **string** | Available Operating Systems can be obtained using &#x60;/v1/operatingSystems&#x60;. | 
+ **imageId** | **string** | Available Images can be obtained using &#x60;/v1/images&#x60;. | 
  **state** | **[]string** | The instance&#39;s current state(s), separated by commas. | 
  **region** | **string** | Available regions can be obtained using &#x60;/v1/regions&#x60; | 
  **type_** | **string** | Available instance types for your region can be obtained using &#x60;/v1/instanceTypes&#x60;. | 
@@ -2577,72 +2643,6 @@ Other parameters are passed through a pointer to a apiGetMarketAppListRequest st
 [[Back to README]](../README.md)
 
 
-## GetOperatingSystemList
-
-> GetOperatingSystemListResult GetOperatingSystemList(ctx).Limit(limit).Offset(offset).Execute()
-
-List all available Operating Systems
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
-)
-
-func main() {
-	limit := int32(20) // int32 | Limit the number of results returned. (optional)
-	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.GetOperatingSystemList(context.Background()).Limit(limit).Offset(offset).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetOperatingSystemList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetOperatingSystemList`: GetOperatingSystemListResult
-	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetOperatingSystemList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetOperatingSystemListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **int32** | Limit the number of results returned. | 
- **offset** | **int32** | Return results starting from the given offset. | 
-
-### Return type
-
-[**GetOperatingSystemListResult**](GetOperatingSystemListResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetRegionList
 
 > GetRegionListResult GetRegionList(ctx).Limit(limit).Offset(offset).Execute()
@@ -2711,7 +2711,7 @@ Name | Type | Description  | Notes
 
 ## GetReinstallOsList
 
-> []OperatingSystemDetails GetReinstallOsList(ctx, instanceId).Execute()
+> []ImageDetails GetReinstallOsList(ctx, instanceId).Execute()
 
 List OSes available for reinstall
 
@@ -2739,7 +2739,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetReinstallOsList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetReinstallOsList`: []OperatingSystemDetails
+	// response from `GetReinstallOsList`: []ImageDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetReinstallOsList`: %v\n", resp)
 }
 ```
@@ -2763,7 +2763,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]OperatingSystemDetails**](OperatingSystemDetails.md)
+[**[]ImageDetails**](ImageDetails.md)
 
 ### Authorization
 
@@ -3019,7 +3019,7 @@ import (
 )
 
 func main() {
-	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.instanceTypeName("lsw.m3.large"), openapiclient.operatingSystemId("ALMALINUX_8_64BIT"), "ContractType_example", int32(123), int32(123), openapiclient.rootDiskStorageType("LOCAL")) // LaunchInstanceOpts | 
+	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.instanceTypeName("lsw.m3.large"), openapiclient.imageId("ALMALINUX_8_64BIT"), "ContractType_example", int32(123), int32(123), openapiclient.rootDiskStorageType("LOCAL")) // LaunchInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3437,7 +3437,7 @@ import (
 
 func main() {
 	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
-	reinstallInstanceOpts := *openapiclient.NewReinstallInstanceOpts("OperatingSystemId_example") // ReinstallInstanceOpts | 
+	reinstallInstanceOpts := *openapiclient.NewReinstallInstanceOpts("ImageId_example") // ReinstallInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

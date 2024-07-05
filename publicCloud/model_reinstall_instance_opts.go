@@ -21,8 +21,8 @@ var _ MappedNullable = &ReinstallInstanceOpts{}
 
 // ReinstallInstanceOpts struct for ReinstallInstanceOpts
 type ReinstallInstanceOpts struct {
-	// The Operating System ID
-	OperatingSystemId string `json:"operatingSystemId"`
+	// The Image ID
+	ImageId string `json:"imageId"`
 	// The Market App to be installed
 	MarketAppId *string `json:"marketAppId,omitempty"`
 }
@@ -33,9 +33,9 @@ type _ReinstallInstanceOpts ReinstallInstanceOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReinstallInstanceOpts(operatingSystemId string) *ReinstallInstanceOpts {
+func NewReinstallInstanceOpts(imageId string) *ReinstallInstanceOpts {
 	this := ReinstallInstanceOpts{}
-	this.OperatingSystemId = operatingSystemId
+	this.ImageId = imageId
 	return &this
 }
 
@@ -47,28 +47,28 @@ func NewReinstallInstanceOptsWithDefaults() *ReinstallInstanceOpts {
 	return &this
 }
 
-// GetOperatingSystemId returns the OperatingSystemId field value
-func (o *ReinstallInstanceOpts) GetOperatingSystemId() string {
+// GetImageId returns the ImageId field value
+func (o *ReinstallInstanceOpts) GetImageId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.OperatingSystemId
+	return o.ImageId
 }
 
-// GetOperatingSystemIdOk returns a tuple with the OperatingSystemId field value
+// GetImageIdOk returns a tuple with the ImageId field value
 // and a boolean to check if the value has been set.
-func (o *ReinstallInstanceOpts) GetOperatingSystemIdOk() (*string, bool) {
+func (o *ReinstallInstanceOpts) GetImageIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.OperatingSystemId, true
+	return &o.ImageId, true
 }
 
-// SetOperatingSystemId sets field value
-func (o *ReinstallInstanceOpts) SetOperatingSystemId(v string) {
-	o.OperatingSystemId = v
+// SetImageId sets field value
+func (o *ReinstallInstanceOpts) SetImageId(v string) {
+	o.ImageId = v
 }
 
 // GetMarketAppId returns the MarketAppId field value if set, zero value otherwise.
@@ -113,7 +113,7 @@ func (o ReinstallInstanceOpts) MarshalJSON() ([]byte, error) {
 
 func (o ReinstallInstanceOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["operatingSystemId"] = o.OperatingSystemId
+	toSerialize["imageId"] = o.ImageId
 	if !IsNil(o.MarketAppId) {
 		toSerialize["marketAppId"] = o.MarketAppId
 	}
@@ -125,7 +125,7 @@ func (o *ReinstallInstanceOpts) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"operatingSystemId",
+		"imageId",
 	}
 
 	allProperties := make(map[string]interface{})

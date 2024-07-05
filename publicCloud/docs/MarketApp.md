@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Category** | Pointer to **string** |  | [optional] 
 **Version** | Pointer to **NullableString** |  | [optional] 
 **Family** | Pointer to **string** |  | [optional] 
-**OperatingSystem** | Pointer to [**OperatingSystem**](OperatingSystem.md) |  | [optional] 
+**Image** | Pointer to [**Image**](Image.md) |  | [optional] 
 
 ## Methods
 
@@ -165,30 +165,30 @@ SetFamily sets Family field to given value.
 
 HasFamily returns a boolean if a field has been set.
 
-### GetOperatingSystem
+### GetImage
 
-`func (o *MarketApp) GetOperatingSystem() OperatingSystem`
+`func (o *MarketApp) GetImage() Image`
 
-GetOperatingSystem returns the OperatingSystem field if non-nil, zero value otherwise.
+GetImage returns the Image field if non-nil, zero value otherwise.
 
-### GetOperatingSystemOk
+### GetImageOk
 
-`func (o *MarketApp) GetOperatingSystemOk() (*OperatingSystem, bool)`
+`func (o *MarketApp) GetImageOk() (*Image, bool)`
 
-GetOperatingSystemOk returns a tuple with the OperatingSystem field if it's non-nil, zero value otherwise
+GetImageOk returns a tuple with the Image field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOperatingSystem
+### SetImage
 
-`func (o *MarketApp) SetOperatingSystem(v OperatingSystem)`
+`func (o *MarketApp) SetImage(v Image)`
 
-SetOperatingSystem sets OperatingSystem field to given value.
+SetImage sets Image field to given value.
 
-### HasOperatingSystem
+### HasImage
 
-`func (o *MarketApp) HasOperatingSystem() bool`
+`func (o *MarketApp) HasImage() bool`
 
-HasOperatingSystem returns a boolean if a field has been set.
+HasImage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

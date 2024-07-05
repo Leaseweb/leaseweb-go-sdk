@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
 **RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
-**OperatingSystem** | [**OperatingSystem**](OperatingSystem.md) |  | 
+**Image** | [**Image**](Image.md) |  | 
 **Ips** | [**[]Ip**](Ip.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewInstance
 
-`func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, operatingSystem OperatingSystem, ips []Ip, autoScalingGroup NullableAutoScalingGroup, ) *Instance`
+`func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, image Image, ips []Ip, autoScalingGroup NullableAutoScalingGroup, ) *Instance`
 
 NewInstance instantiates a new Instance object
 This constructor will assign default values to properties that have it defined,
@@ -351,24 +351,24 @@ and a boolean to check if the value has been set.
 SetContract sets Contract field to given value.
 
 
-### GetOperatingSystem
+### GetImage
 
-`func (o *Instance) GetOperatingSystem() OperatingSystem`
+`func (o *Instance) GetImage() Image`
 
-GetOperatingSystem returns the OperatingSystem field if non-nil, zero value otherwise.
+GetImage returns the Image field if non-nil, zero value otherwise.
 
-### GetOperatingSystemOk
+### GetImageOk
 
-`func (o *Instance) GetOperatingSystemOk() (*OperatingSystem, bool)`
+`func (o *Instance) GetImageOk() (*Image, bool)`
 
-GetOperatingSystemOk returns a tuple with the OperatingSystem field if it's non-nil, zero value otherwise
+GetImageOk returns a tuple with the Image field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOperatingSystem
+### SetImage
 
-`func (o *Instance) SetOperatingSystem(v OperatingSystem)`
+`func (o *Instance) SetImage(v Image)`
 
-SetOperatingSystem sets OperatingSystem field to given value.
+SetImage sets Image field to given value.
 
 
 ### GetIps

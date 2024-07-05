@@ -350,6 +350,18 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test PublicCloudAPIService GetImageList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.GetImageList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PublicCloudAPIService GetInstance", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -489,18 +501,6 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		resp, httpRes, err := apiClient.PublicCloudAPI.GetMarketAppList(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test PublicCloudAPIService GetOperatingSystemList", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.PublicCloudAPI.GetOperatingSystemList(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

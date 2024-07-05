@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Region** | **string** | Region to launch the instance into | 
 **Type** | [**InstanceTypeName**](InstanceTypeName.md) |  | 
-**OperatingSystemId** | [**OperatingSystemId**](OperatingSystemId.md) |  | 
+**ImageId** | [**ImageId**](ImageId.md) |  | 
 **MarketAppId** | Pointer to **string** | Market App ID that must be installed into the instance | [optional] 
 **Reference** | Pointer to **string** | An identifying name you can refer to the instance | [optional] 
 **ContractType** | **string** |  | 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewLaunchInstanceOpts
 
-`func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, operatingSystemId OperatingSystemId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
+`func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, imageId ImageId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
 
 NewLaunchInstanceOpts instantiates a new LaunchInstanceOpts object
 This constructor will assign default values to properties that have it defined,
@@ -75,24 +75,24 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
-### GetOperatingSystemId
+### GetImageId
 
-`func (o *LaunchInstanceOpts) GetOperatingSystemId() OperatingSystemId`
+`func (o *LaunchInstanceOpts) GetImageId() ImageId`
 
-GetOperatingSystemId returns the OperatingSystemId field if non-nil, zero value otherwise.
+GetImageId returns the ImageId field if non-nil, zero value otherwise.
 
-### GetOperatingSystemIdOk
+### GetImageIdOk
 
-`func (o *LaunchInstanceOpts) GetOperatingSystemIdOk() (*OperatingSystemId, bool)`
+`func (o *LaunchInstanceOpts) GetImageIdOk() (*ImageId, bool)`
 
-GetOperatingSystemIdOk returns a tuple with the OperatingSystemId field if it's non-nil, zero value otherwise
+GetImageIdOk returns a tuple with the ImageId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOperatingSystemId
+### SetImageId
 
-`func (o *LaunchInstanceOpts) SetOperatingSystemId(v OperatingSystemId)`
+`func (o *LaunchInstanceOpts) SetImageId(v ImageId)`
 
-SetOperatingSystemId sets OperatingSystemId field to given value.
+SetImageId sets ImageId field to given value.
 
 
 ### GetMarketAppId

@@ -1,4 +1,4 @@
-# OperatingSystemId
+# ImageId
 
 ## Enum
 

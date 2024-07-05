@@ -43,7 +43,7 @@ type Instance struct {
 	RootDiskSize int32 `json:"rootDiskSize"`
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
 	Contract Contract `json:"contract"`
-	OperatingSystem OperatingSystem `json:"operatingSystem"`
+	Image Image `json:"image"`
 	Ips []Ip `json:"ips"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
 }
@@ -54,7 +54,7 @@ type _Instance Instance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, operatingSystem OperatingSystem, ips []Ip, autoScalingGroup NullableAutoScalingGroup) *Instance {
+func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, image Image, ips []Ip, autoScalingGroup NullableAutoScalingGroup) *Instance {
 	this := Instance{}
 	this.Id = id
 	this.Type = type_
@@ -70,7 +70,7 @@ func NewInstance(id string, type_ InstanceTypeName, resources Resources, region 
 	this.RootDiskSize = rootDiskSize
 	this.RootDiskStorageType = rootDiskStorageType
 	this.Contract = contract
-	this.OperatingSystem = operatingSystem
+	this.Image = image
 	this.Ips = ips
 	this.AutoScalingGroup = autoScalingGroup
 	return &this
@@ -426,28 +426,28 @@ func (o *Instance) SetContract(v Contract) {
 	o.Contract = v
 }
 
-// GetOperatingSystem returns the OperatingSystem field value
-func (o *Instance) GetOperatingSystem() OperatingSystem {
+// GetImage returns the Image field value
+func (o *Instance) GetImage() Image {
 	if o == nil {
-		var ret OperatingSystem
+		var ret Image
 		return ret
 	}
 
-	return o.OperatingSystem
+	return o.Image
 }
 
-// GetOperatingSystemOk returns a tuple with the OperatingSystem field value
+// GetImageOk returns a tuple with the Image field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetOperatingSystemOk() (*OperatingSystem, bool) {
+func (o *Instance) GetImageOk() (*Image, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.OperatingSystem, true
+	return &o.Image, true
 }
 
-// SetOperatingSystem sets field value
-func (o *Instance) SetOperatingSystem(v OperatingSystem) {
-	o.OperatingSystem = v
+// SetImage sets field value
+func (o *Instance) SetImage(v Image) {
+	o.Image = v
 }
 
 // GetIps returns the Ips field value
@@ -524,7 +524,7 @@ func (o Instance) ToMap() (map[string]interface{}, error) {
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
 	toSerialize["contract"] = o.Contract
-	toSerialize["operatingSystem"] = o.OperatingSystem
+	toSerialize["image"] = o.Image
 	toSerialize["ips"] = o.Ips
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	return toSerialize, nil
@@ -549,7 +549,7 @@ func (o *Instance) UnmarshalJSON(data []byte) (err error) {
 		"rootDiskSize",
 		"rootDiskStorageType",
 		"contract",
-		"operatingSystem",
+		"image",
 		"ips",
 		"autoScalingGroup",
 	}

@@ -16,53 +16,48 @@ import (
 	"fmt"
 )
 
-// checks if the OperatingSystemDetails type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &OperatingSystemDetails{}
+// checks if the Image type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Image{}
 
-// OperatingSystemDetails struct for OperatingSystemDetails
-type OperatingSystemDetails struct {
-	Id OperatingSystemId `json:"id"`
+// Image struct for Image
+type Image struct {
+	Id ImageId `json:"id"`
 	Name string `json:"name"`
 	Version string `json:"version"`
 	Family string `json:"family"`
 	Flavour string `json:"flavour"`
 	Architecture string `json:"architecture"`
-	MarketApps []string `json:"marketApps"`
-	// The supported storage types for the instance type
-	StorageTypes []string `json:"storageTypes"`
 }
 
-type _OperatingSystemDetails OperatingSystemDetails
+type _Image Image
 
-// NewOperatingSystemDetails instantiates a new OperatingSystemDetails object
+// NewImage instantiates a new Image object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOperatingSystemDetails(id OperatingSystemId, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string) *OperatingSystemDetails {
-	this := OperatingSystemDetails{}
+func NewImage(id ImageId, name string, version string, family string, flavour string, architecture string) *Image {
+	this := Image{}
 	this.Id = id
 	this.Name = name
 	this.Version = version
 	this.Family = family
 	this.Flavour = flavour
 	this.Architecture = architecture
-	this.MarketApps = marketApps
-	this.StorageTypes = storageTypes
 	return &this
 }
 
-// NewOperatingSystemDetailsWithDefaults instantiates a new OperatingSystemDetails object
+// NewImageWithDefaults instantiates a new Image object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewOperatingSystemDetailsWithDefaults() *OperatingSystemDetails {
-	this := OperatingSystemDetails{}
+func NewImageWithDefaults() *Image {
+	this := Image{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *OperatingSystemDetails) GetId() OperatingSystemId {
+func (o *Image) GetId() ImageId {
 	if o == nil {
-		var ret OperatingSystemId
+		var ret ImageId
 		return ret
 	}
 
@@ -71,7 +66,7 @@ func (o *OperatingSystemDetails) GetId() OperatingSystemId {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *OperatingSystemDetails) GetIdOk() (*OperatingSystemId, bool) {
+func (o *Image) GetIdOk() (*ImageId, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,12 +74,12 @@ func (o *OperatingSystemDetails) GetIdOk() (*OperatingSystemId, bool) {
 }
 
 // SetId sets field value
-func (o *OperatingSystemDetails) SetId(v OperatingSystemId) {
+func (o *Image) SetId(v ImageId) {
 	o.Id = v
 }
 
 // GetName returns the Name field value
-func (o *OperatingSystemDetails) GetName() string {
+func (o *Image) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -95,7 +90,7 @@ func (o *OperatingSystemDetails) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *OperatingSystemDetails) GetNameOk() (*string, bool) {
+func (o *Image) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,12 +98,12 @@ func (o *OperatingSystemDetails) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *OperatingSystemDetails) SetName(v string) {
+func (o *Image) SetName(v string) {
 	o.Name = v
 }
 
 // GetVersion returns the Version field value
-func (o *OperatingSystemDetails) GetVersion() string {
+func (o *Image) GetVersion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -119,7 +114,7 @@ func (o *OperatingSystemDetails) GetVersion() string {
 
 // GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
-func (o *OperatingSystemDetails) GetVersionOk() (*string, bool) {
+func (o *Image) GetVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,12 +122,12 @@ func (o *OperatingSystemDetails) GetVersionOk() (*string, bool) {
 }
 
 // SetVersion sets field value
-func (o *OperatingSystemDetails) SetVersion(v string) {
+func (o *Image) SetVersion(v string) {
 	o.Version = v
 }
 
 // GetFamily returns the Family field value
-func (o *OperatingSystemDetails) GetFamily() string {
+func (o *Image) GetFamily() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -143,7 +138,7 @@ func (o *OperatingSystemDetails) GetFamily() string {
 
 // GetFamilyOk returns a tuple with the Family field value
 // and a boolean to check if the value has been set.
-func (o *OperatingSystemDetails) GetFamilyOk() (*string, bool) {
+func (o *Image) GetFamilyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -151,12 +146,12 @@ func (o *OperatingSystemDetails) GetFamilyOk() (*string, bool) {
 }
 
 // SetFamily sets field value
-func (o *OperatingSystemDetails) SetFamily(v string) {
+func (o *Image) SetFamily(v string) {
 	o.Family = v
 }
 
 // GetFlavour returns the Flavour field value
-func (o *OperatingSystemDetails) GetFlavour() string {
+func (o *Image) GetFlavour() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -167,7 +162,7 @@ func (o *OperatingSystemDetails) GetFlavour() string {
 
 // GetFlavourOk returns a tuple with the Flavour field value
 // and a boolean to check if the value has been set.
-func (o *OperatingSystemDetails) GetFlavourOk() (*string, bool) {
+func (o *Image) GetFlavourOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -175,12 +170,12 @@ func (o *OperatingSystemDetails) GetFlavourOk() (*string, bool) {
 }
 
 // SetFlavour sets field value
-func (o *OperatingSystemDetails) SetFlavour(v string) {
+func (o *Image) SetFlavour(v string) {
 	o.Flavour = v
 }
 
 // GetArchitecture returns the Architecture field value
-func (o *OperatingSystemDetails) GetArchitecture() string {
+func (o *Image) GetArchitecture() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -191,7 +186,7 @@ func (o *OperatingSystemDetails) GetArchitecture() string {
 
 // GetArchitectureOk returns a tuple with the Architecture field value
 // and a boolean to check if the value has been set.
-func (o *OperatingSystemDetails) GetArchitectureOk() (*string, bool) {
+func (o *Image) GetArchitectureOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -199,59 +194,11 @@ func (o *OperatingSystemDetails) GetArchitectureOk() (*string, bool) {
 }
 
 // SetArchitecture sets field value
-func (o *OperatingSystemDetails) SetArchitecture(v string) {
+func (o *Image) SetArchitecture(v string) {
 	o.Architecture = v
 }
 
-// GetMarketApps returns the MarketApps field value
-func (o *OperatingSystemDetails) GetMarketApps() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.MarketApps
-}
-
-// GetMarketAppsOk returns a tuple with the MarketApps field value
-// and a boolean to check if the value has been set.
-func (o *OperatingSystemDetails) GetMarketAppsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.MarketApps, true
-}
-
-// SetMarketApps sets field value
-func (o *OperatingSystemDetails) SetMarketApps(v []string) {
-	o.MarketApps = v
-}
-
-// GetStorageTypes returns the StorageTypes field value
-func (o *OperatingSystemDetails) GetStorageTypes() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.StorageTypes
-}
-
-// GetStorageTypesOk returns a tuple with the StorageTypes field value
-// and a boolean to check if the value has been set.
-func (o *OperatingSystemDetails) GetStorageTypesOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.StorageTypes, true
-}
-
-// SetStorageTypes sets field value
-func (o *OperatingSystemDetails) SetStorageTypes(v []string) {
-	o.StorageTypes = v
-}
-
-func (o OperatingSystemDetails) MarshalJSON() ([]byte, error) {
+func (o Image) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -259,7 +206,7 @@ func (o OperatingSystemDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OperatingSystemDetails) ToMap() (map[string]interface{}, error) {
+func (o Image) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
@@ -267,12 +214,10 @@ func (o OperatingSystemDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["family"] = o.Family
 	toSerialize["flavour"] = o.Flavour
 	toSerialize["architecture"] = o.Architecture
-	toSerialize["marketApps"] = o.MarketApps
-	toSerialize["storageTypes"] = o.StorageTypes
 	return toSerialize, nil
 }
 
-func (o *OperatingSystemDetails) UnmarshalJSON(data []byte) (err error) {
+func (o *Image) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -283,8 +228,6 @@ func (o *OperatingSystemDetails) UnmarshalJSON(data []byte) (err error) {
 		"family",
 		"flavour",
 		"architecture",
-		"marketApps",
-		"storageTypes",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -301,53 +244,53 @@ func (o *OperatingSystemDetails) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varOperatingSystemDetails := _OperatingSystemDetails{}
+	varImage := _Image{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varOperatingSystemDetails)
+	err = decoder.Decode(&varImage)
 
 	if err != nil {
 		return err
 	}
 
-	*o = OperatingSystemDetails(varOperatingSystemDetails)
+	*o = Image(varImage)
 
 	return err
 }
 
-type NullableOperatingSystemDetails struct {
-	value *OperatingSystemDetails
+type NullableImage struct {
+	value *Image
 	isSet bool
 }
 
-func (v NullableOperatingSystemDetails) Get() *OperatingSystemDetails {
+func (v NullableImage) Get() *Image {
 	return v.value
 }
 
-func (v *NullableOperatingSystemDetails) Set(val *OperatingSystemDetails) {
+func (v *NullableImage) Set(val *Image) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableOperatingSystemDetails) IsSet() bool {
+func (v NullableImage) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableOperatingSystemDetails) Unset() {
+func (v *NullableImage) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableOperatingSystemDetails(val *OperatingSystemDetails) *NullableOperatingSystemDetails {
-	return &NullableOperatingSystemDetails{value: val, isSet: true}
+func NewNullableImage(val *Image) *NullableImage {
+	return &NullableImage{value: val, isSet: true}
 }
 
-func (v NullableOperatingSystemDetails) MarshalJSON() ([]byte, error) {
+func (v NullableImage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableOperatingSystemDetails) UnmarshalJSON(src []byte) error {
+func (v *NullableImage) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

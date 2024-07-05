@@ -24,7 +24,7 @@ type LaunchInstanceOpts struct {
 	// Region to launch the instance into
 	Region string `json:"region"`
 	Type InstanceTypeName `json:"type"`
-	OperatingSystemId OperatingSystemId `json:"operatingSystemId"`
+	ImageId ImageId `json:"imageId"`
 	// Market App ID that must be installed into the instance
 	MarketAppId *string `json:"marketAppId,omitempty"`
 	// An identifying name you can refer to the instance
@@ -47,11 +47,11 @@ type _LaunchInstanceOpts LaunchInstanceOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, operatingSystemId OperatingSystemId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType RootDiskStorageType) *LaunchInstanceOpts {
+func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, imageId ImageId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType RootDiskStorageType) *LaunchInstanceOpts {
 	this := LaunchInstanceOpts{}
 	this.Region = region
 	this.Type = type_
-	this.OperatingSystemId = operatingSystemId
+	this.ImageId = imageId
 	this.ContractType = contractType
 	this.ContractTerm = contractTerm
 	this.BillingFrequency = billingFrequency
@@ -115,28 +115,28 @@ func (o *LaunchInstanceOpts) SetType(v InstanceTypeName) {
 	o.Type = v
 }
 
-// GetOperatingSystemId returns the OperatingSystemId field value
-func (o *LaunchInstanceOpts) GetOperatingSystemId() OperatingSystemId {
+// GetImageId returns the ImageId field value
+func (o *LaunchInstanceOpts) GetImageId() ImageId {
 	if o == nil {
-		var ret OperatingSystemId
+		var ret ImageId
 		return ret
 	}
 
-	return o.OperatingSystemId
+	return o.ImageId
 }
 
-// GetOperatingSystemIdOk returns a tuple with the OperatingSystemId field value
+// GetImageIdOk returns a tuple with the ImageId field value
 // and a boolean to check if the value has been set.
-func (o *LaunchInstanceOpts) GetOperatingSystemIdOk() (*OperatingSystemId, bool) {
+func (o *LaunchInstanceOpts) GetImageIdOk() (*ImageId, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.OperatingSystemId, true
+	return &o.ImageId, true
 }
 
-// SetOperatingSystemId sets field value
-func (o *LaunchInstanceOpts) SetOperatingSystemId(v OperatingSystemId) {
-	o.OperatingSystemId = v
+// SetImageId sets field value
+func (o *LaunchInstanceOpts) SetImageId(v ImageId) {
+	o.ImageId = v
 }
 
 // GetMarketAppId returns the MarketAppId field value if set, zero value otherwise.
@@ -375,7 +375,7 @@ func (o LaunchInstanceOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["region"] = o.Region
 	toSerialize["type"] = o.Type
-	toSerialize["operatingSystemId"] = o.OperatingSystemId
+	toSerialize["imageId"] = o.ImageId
 	if !IsNil(o.MarketAppId) {
 		toSerialize["marketAppId"] = o.MarketAppId
 	}
@@ -402,7 +402,7 @@ func (o *LaunchInstanceOpts) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"region",
 		"type",
-		"operatingSystemId",
+		"imageId",
 		"contractType",
 		"contractTerm",
 		"billingFrequency",

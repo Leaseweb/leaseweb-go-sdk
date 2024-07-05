@@ -23,7 +23,7 @@ type Target struct {
 	Id *string `json:"id,omitempty"`
 	// The identifying name set to the instance
 	Reference *string `json:"reference,omitempty"`
-	OperatingSystem *OperatingSystem `json:"operatingSystem,omitempty"`
+	Image *Image `json:"image,omitempty"`
 	State *State `json:"state,omitempty"`
 	HealthCheckStatus *HealthCheckStatus `json:"healthCheckStatus,omitempty"`
 	Ips []Ip `json:"ips,omitempty"`
@@ -110,36 +110,36 @@ func (o *Target) SetReference(v string) {
 	o.Reference = &v
 }
 
-// GetOperatingSystem returns the OperatingSystem field value if set, zero value otherwise.
-func (o *Target) GetOperatingSystem() OperatingSystem {
-	if o == nil || IsNil(o.OperatingSystem) {
-		var ret OperatingSystem
+// GetImage returns the Image field value if set, zero value otherwise.
+func (o *Target) GetImage() Image {
+	if o == nil || IsNil(o.Image) {
+		var ret Image
 		return ret
 	}
-	return *o.OperatingSystem
+	return *o.Image
 }
 
-// GetOperatingSystemOk returns a tuple with the OperatingSystem field value if set, nil otherwise
+// GetImageOk returns a tuple with the Image field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Target) GetOperatingSystemOk() (*OperatingSystem, bool) {
-	if o == nil || IsNil(o.OperatingSystem) {
+func (o *Target) GetImageOk() (*Image, bool) {
+	if o == nil || IsNil(o.Image) {
 		return nil, false
 	}
-	return o.OperatingSystem, true
+	return o.Image, true
 }
 
-// HasOperatingSystem returns a boolean if a field has been set.
-func (o *Target) HasOperatingSystem() bool {
-	if o != nil && !IsNil(o.OperatingSystem) {
+// HasImage returns a boolean if a field has been set.
+func (o *Target) HasImage() bool {
+	if o != nil && !IsNil(o.Image) {
 		return true
 	}
 
 	return false
 }
 
-// SetOperatingSystem gets a reference to the given OperatingSystem and assigns it to the OperatingSystem field.
-func (o *Target) SetOperatingSystem(v OperatingSystem) {
-	o.OperatingSystem = &v
+// SetImage gets a reference to the given Image and assigns it to the Image field.
+func (o *Target) SetImage(v Image) {
+	o.Image = &v
 }
 
 // GetState returns the State field value if set, zero value otherwise.
@@ -254,8 +254,8 @@ func (o Target) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Reference) {
 		toSerialize["reference"] = o.Reference
 	}
-	if !IsNil(o.OperatingSystem) {
-		toSerialize["operatingSystem"] = o.OperatingSystem
+	if !IsNil(o.Image) {
+		toSerialize["image"] = o.Image
 	}
 	if !IsNil(o.State) {
 		toSerialize["state"] = o.State

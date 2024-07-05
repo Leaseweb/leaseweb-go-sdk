@@ -57,7 +57,7 @@ tags:
 - description: ""
   name: ISOs
 - description: ""
-  name: Operating Systems
+  name: Images
 - description: ""
   name: Marketplace Apps
 - description: ""
@@ -345,11 +345,11 @@ paths:
         schema:
           $ref: '#/components/schemas/contractState'
         style: form
-      - description: Available Operating Systems can be obtained using `/v1/operatingSystems`.
+      - description: Available Images can be obtained using `/v1/images`.
         example: UBUNTU_22_04_64BIT
         explode: true
         in: query
-        name: operatingSystemId
+        name: imageId
         required: false
         schema:
           type: string
@@ -434,7 +434,7 @@ paths:
                       unit: Mbps
                   region: eu-west-3
                   reference: my webserver
-                  operatingSystem:
+                  image:
                     id: UBUNTU_22_04_64BIT
                     name: Ubuntu 22.04 LTS (x86_64)
                     version: "22.04"
@@ -511,9 +511,8 @@ paths:
       - publicCloud
     post:
       description: "Launch a Public Cloud instance. \n\nAvailable regions can be obtained\
-        \ using `/v1/regions`.\n\nAvailable Operating Systems can be obtained using\
-        \ `/v1/operatingSystems`.\n\nAvailable instance types for your region can\
-        \ be obtained using `/v1/instanceTypes`."
+        \ using `/v1/regions`.\n\nAvailable Images can be obtained using `/v1/images`.\n\
+        \nAvailable instance types for your region can be obtained using `/v1/instanceTypes`."
       operationId: launchInstance
       requestBody:
         content:
@@ -522,7 +521,7 @@ paths:
               billingFrequency: 1
               contractTerm: 0
               contractType: HOURLY
-              operatingSystemId: UBUNTU_20_04_64BIT
+              imageId: UBUNTU_20_04_64BIT
               reference: my-webserver
               region: eu-west-3
               rootDiskSize: 50
@@ -548,6 +547,13 @@ paths:
                 hasPrivateNetwork: false
                 hasPublicIpV4: true
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
+                image:
+                  id: UBUNTU_22_04_64BIT
+                  name: Ubuntu 22.04 LTS (x86_64)
+                  version: "22.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
                 ips:
                 - ip: 10.32.60.12
                   prefixLength: "27"
@@ -557,13 +563,6 @@ paths:
                   mainIp: false
                   networkType: INTERNAL
                 marketAppId: null
-                operatingSystem:
-                  id: UBUNTU_22_04_64BIT
-                  name: Ubuntu 22.04 LTS (x86_64)
-                  version: "22.04"
-                  family: linux
-                  flavour: ubuntu
-                  architecture: x86_64
                 productType: INSTANCE
                 reference: my webserver
                 region: eu-west-3
@@ -772,6 +771,18 @@ paths:
                 hasPrivateNetwork: false
                 hasPublicIpV4: true
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
+                image:
+                  id: UBUNTU_22_04_64BIT
+                  name: Ubuntu 22.04 LTS (x86_64)
+                  version: "22.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                  marketApps:
+                  - LOADBALANCER
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
                 ips:
                 - ip: 10.32.60.12
                   prefixLength: "27"
@@ -785,18 +796,6 @@ paths:
                     protectionType: STANDARD
                 iso: null
                 marketAppId: null
-                operatingSystem:
-                  id: UBUNTU_22_04_64BIT
-                  name: Ubuntu 22.04 LTS (x86_64)
-                  version: "22.04"
-                  family: linux
-                  flavour: ubuntu
-                  architecture: x86_64
-                  marketApps:
-                  - LOADBALANCER
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
                 privateNetwork: null
                 productType: INSTANCE
                 reference: my webserver
@@ -935,6 +934,18 @@ paths:
                 hasPrivateNetwork: false
                 hasPublicIpV4: true
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
+                image:
+                  id: UBUNTU_20_04_64BIT
+                  name: Ubuntu 20.04 LTS (x86_64)
+                  version: "20.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                  marketApps:
+                  - LOADBALANCER
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
                 ips:
                 - ip: 10.32.60.12
                   prefixLength: "27"
@@ -948,18 +959,6 @@ paths:
                     protectionType: STANDARD
                 iso: null
                 marketAppId: null
-                operatingSystem:
-                  id: UBUNTU_20_04_64BIT
-                  name: Ubuntu 20.04 LTS (x86_64)
-                  version: "20.04"
-                  family: linux
-                  flavour: ubuntu
-                  architecture: x86_64
-                  marketApps:
-                  - LOADBALANCER
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
                 privateNetwork: null
                 productType: INSTANCE
                 reference: my webserver
@@ -2570,9 +2569,9 @@ paths:
       summary: List available ISOs
       tags:
       - publicCloud
-  /operatingSystems:
+  /images:
     get:
-      operationId: getOperatingSystemList
+      operationId: getImageList
       parameters:
       - description: Limit the number of results returned.
         example: 20
@@ -2601,7 +2600,7 @@ paths:
                   totalCount: 12
                   limit: 20
                   offset: 0
-                operatingSystems:
+                images:
                 - id: UBUNTU_22_04_64BIT
                   name: Ubuntu 22.04 LTS (x86_64)
                   version: "22.04"
@@ -2723,7 +2722,7 @@ paths:
                   storageTypes:
                   - CENTRAL
               schema:
-                $ref: '#/components/schemas/getOperatingSystemListResult'
+                $ref: '#/components/schemas/getImageListResult'
           description: OK.
         "401":
           content:
@@ -2765,7 +2764,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: List all available Operating Systems
+      summary: List all available Images
       tags:
       - publicCloud
   /marketApps:
@@ -2787,7 +2786,7 @@ paths:
                   category: LOAD_BALANCER
                   version: null
                   family: loadbalancer
-                  operatingSystem:
+                  image:
                     id: UBUNTU_22_04_64BIT
                     name: Ubuntu 22.04 LTS (x86_64)
                     version: "22.04"
@@ -3016,9 +3015,9 @@ paths:
       summary: Detach ISO from instance
       tags:
       - publicCloud
-  /instances/{instanceId}/reinstall/operatingSystems:
+  /instances/{instanceId}/reinstall/images:
     get:
-      description: List Operating Systems available for reinstall
+      description: List Images available for reinstall
       operationId: getReinstallOsList
       parameters:
       - description: Instance's ID
@@ -3226,13 +3225,13 @@ paths:
   /instances/{instanceId}/reinstall:
     put:
       description: |-
-        Recreates the instance, with optionally different Operating System and Marketplace App.
+        Recreates the instance, with optionally different Image and Marketplace App.
 
         Cannot be performed when the instance has snapshots.
 
-        Available Operating Systems can be obtained using `/v1/instances/{instanceId}/reinstall/operatingSystems`.
+        Available Images can be obtained using `/v1/instances/{instanceId}/reinstall/images`.
 
-        Available Marketplace Apps can be obtained using `/v1/operatingSystems/{operatingSystemId}/marketApps`.
+        Available Marketplace Apps can be obtained using `/v1/images/{imageId}/marketApps`.
       operationId: reinstallInstance
       parameters:
       - description: Instance's ID
@@ -3249,7 +3248,7 @@ paths:
         content:
           application/json:
             example:
-              operatingSystemId: UBUNTU_22_04_64BIT
+              imageId: UBUNTU_22_04_64BIT
             schema:
               $ref: '#/components/schemas/reinstallInstanceOpts'
         required: true
@@ -4434,7 +4433,7 @@ paths:
                 targets:
                 - id: 0af98842-38a4-4fe5-8b6d-687730e8d8c1
                   reference: lb instance 1
-                  operatingSystem:
+                  image:
                     id: UBUNTU_22_04_64BIT
                     name: Ubuntu 22.04 LTS (x86_64)
                     version: "22.04"
@@ -4455,7 +4454,7 @@ paths:
                     status: DOWN
                 - id: 8be7f8c6-e8c0-4321-a01e-ac754e2f6872
                   reference: lb instance 2
-                  operatingSystem:
+                  image:
                     id: UBUNTU_22_04_64BIT
                     name: Ubuntu 22.04 LTS (x86_64)
                     version: "22.04"
@@ -7868,8 +7867,8 @@ components:
       - state
       - type
       type: object
-    operatingSystemId:
-      description: Operating System ID
+    imageId:
+      description: Image ID
       enum:
       - ALMALINUX_8_64BIT
       - ALMALINUX_9_64BIT
@@ -7890,7 +7889,7 @@ components:
       - WINDOWS_SERVER_2022_STANDARD_64BIT
       example: UBUNTU_24_04_64BIT
       type: string
-    operatingSystem:
+    image:
       example:
         flavour: ubuntu
         name: Ubuntu 20.04 LTS (x86_64)
@@ -7900,7 +7899,7 @@ components:
         architecture: x86_64
       properties:
         id:
-          $ref: '#/components/schemas/operatingSystemId'
+          $ref: '#/components/schemas/imageId'
         name:
           example: Ubuntu 20.04 LTS (x86_64)
           type: string
@@ -7923,7 +7922,7 @@ components:
       - id
       - name
       - version
-      title: operatingSystem
+      title: image
       type: object
     networkType:
       enum:
@@ -8094,8 +8093,8 @@ components:
       allOf:
       - $ref: '#/components/schemas/instanceBase'
       - properties:
-          operatingSystem:
-            $ref: '#/components/schemas/operatingSystem'
+          image:
+            $ref: '#/components/schemas/image'
           ips:
             items:
               $ref: '#/components/schemas/ip'
@@ -8104,10 +8103,17 @@ components:
             $ref: '#/components/schemas/autoScalingGroup'
         required:
         - autoScalingGroup
-        - operatingSystem
+        - image
         title: instance
         type: object
       example:
+        image:
+          flavour: ubuntu
+          name: Ubuntu 20.04 LTS (x86_64)
+          id: UBUNTU_24_04_64BIT
+          family: linux
+          version: "20.04"
+          architecture: x86_64
         rootDiskStorageType: null
         autoScalingGroup:
           cpuThreshold: 7
@@ -8150,13 +8156,6 @@ components:
             value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
         type: null
-        operatingSystem:
-          flavour: ubuntu
-          name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_24_04_64BIT
-          family: linux
-          version: "20.04"
-          architecture: x86_64
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -8182,7 +8181,14 @@ components:
     getInstanceListResult:
       example:
         instances:
-        - rootDiskStorageType: null
+        - image:
+            flavour: ubuntu
+            name: Ubuntu 20.04 LTS (x86_64)
+            id: UBUNTU_24_04_64BIT
+            family: linux
+            version: "20.04"
+            architecture: x86_64
+          rootDiskStorageType: null
           autoScalingGroup:
             cpuThreshold: 7
             maximumAmount: 2
@@ -8224,13 +8230,6 @@ components:
               value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           type: null
-          operatingSystem:
-            flavour: ubuntu
-            name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_24_04_64BIT
-            family: linux
-            version: "20.04"
-            architecture: x86_64
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -8253,7 +8252,14 @@ components:
           region: eu-west-3
           productType: productType
           hasPublicIpV4: true
-        - rootDiskStorageType: null
+        - image:
+            flavour: ubuntu
+            name: Ubuntu 20.04 LTS (x86_64)
+            id: UBUNTU_24_04_64BIT
+            family: linux
+            version: "20.04"
+            architecture: x86_64
+          rootDiskStorageType: null
           autoScalingGroup:
             cpuThreshold: 7
             maximumAmount: 2
@@ -8295,13 +8301,6 @@ components:
               value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           type: null
-          operatingSystem:
-            flavour: ubuntu
-            name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_24_04_64BIT
-            family: linux
-            version: "20.04"
-            architecture: x86_64
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -8344,8 +8343,8 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/instanceTypeName'
-        operatingSystemId:
-          $ref: '#/components/schemas/operatingSystemId'
+        imageId:
+          $ref: '#/components/schemas/imageId'
         marketAppId:
           description: Market App ID that must be installed into the instance
           example: CPANEL
@@ -8394,7 +8393,7 @@ components:
       - billingFrequency
       - contractTerm
       - contractType
-      - operatingSystemId
+      - imageId
       - region
       - rootDiskStorageType
       - type
@@ -8436,9 +8435,9 @@ components:
       - subnet
       title: privateNetwork
       type: object
-    operatingSystemDetails:
+    imageDetails:
       allOf:
-      - $ref: '#/components/schemas/operatingSystem'
+      - $ref: '#/components/schemas/image'
       - properties:
           marketApps:
             items:
@@ -8456,7 +8455,7 @@ components:
         required:
         - marketApps
         - storageTypes
-        title: operatingSystemDetail
+        title: imageDetail
         type: object
       example:
         marketApps:
@@ -8500,8 +8499,8 @@ components:
             $ref: '#/components/schemas/iso'
           privateNetwork:
             $ref: '#/components/schemas/privateNetwork'
-          operatingSystem:
-            $ref: '#/components/schemas/operatingSystemDetails'
+          image:
+            $ref: '#/components/schemas/imageDetails'
           ips:
             items:
               $ref: '#/components/schemas/ipDetails'
@@ -8510,12 +8509,25 @@ components:
             $ref: '#/components/schemas/autoScalingGroup'
         required:
         - autoScalingGroup
+        - image
         - iso
-        - operatingSystem
         - privateNetwork
         title: instanceDetails
         type: object
       example:
+        image:
+          marketApps:
+          - LOADBALANCER
+          - LOADBALANCER
+          flavour: ubuntu
+          name: Ubuntu 20.04 LTS (x86_64)
+          id: UBUNTU_24_04_64BIT
+          storageTypes:
+          - CENTRAL
+          - LOCAL
+          family: linux
+          version: "20.04"
+          architecture: x86_64
         rootDiskStorageType: null
         iso:
           name: name
@@ -8565,19 +8577,6 @@ components:
             value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
         type: null
-        operatingSystem:
-          marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
-          flavour: ubuntu
-          name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_24_04_64BIT
-          storageTypes:
-          - CENTRAL
-          - LOCAL
-          family: linux
-          version: "20.04"
-          architecture: x86_64
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -8902,9 +8901,9 @@ components:
         _metadata:
           $ref: '#/components/schemas/_metadata'
       type: object
-    getOperatingSystemListResult:
+    getImageListResult:
       example:
-        operatingSystems:
+        images:
         - marketApps:
           - LOADBALANCER
           - LOADBALANCER
@@ -8934,9 +8933,9 @@ components:
           limit: 5
           totalCount: 2
       properties:
-        operatingSystems:
+        images:
           items:
-            $ref: '#/components/schemas/operatingSystemDetails'
+            $ref: '#/components/schemas/imageDetails'
           type: array
         _metadata:
           $ref: '#/components/schemas/_metadata'
@@ -8944,30 +8943,30 @@ components:
     getMarketAppListResult:
       example:
         marketApps:
-        - name: name
-          id: id
-          category: category
-          family: family
-          version: version
-          operatingSystem:
+        - image:
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_24_04_64BIT
             family: linux
             version: "20.04"
             architecture: x86_64
-        - name: name
+          name: name
           id: id
           category: category
           family: family
           version: version
-          operatingSystem:
+        - image:
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_24_04_64BIT
             family: linux
             version: "20.04"
             architecture: x86_64
+          name: name
+          id: id
+          category: category
+          family: family
+          version: version
         _metadata:
           offset: 0
           limit: 5
@@ -8990,19 +8989,19 @@ components:
       type: object
     getReinstallOsListResult:
       items:
-        $ref: '#/components/schemas/operatingSystemDetails'
+        $ref: '#/components/schemas/imageDetails'
       type: array
     reinstallInstanceOpts:
       properties:
-        operatingSystemId:
-          description: The Operating System ID
+        imageId:
+          description: The Image ID
           type: string
         marketAppId:
           description: The Market App to be installed
           example: CPANEL
           type: string
       required:
-      - operatingSystemId
+      - imageId
       type: object
     loadBalancerType:
       description: Load balancer type
@@ -9577,18 +9576,18 @@ components:
           totalCount: 2
         targets:
         - reference: reference
-          healthCheckStatus:
-            checkStatus: checkStatus
-            status: status
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          operatingSystem:
+          image:
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_24_04_64BIT
             family: linux
             version: "20.04"
             architecture: x86_64
+          healthCheckStatus:
+            checkStatus: checkStatus
+            status: status
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -9605,18 +9604,18 @@ components:
             networkType: internal
             version: 1
         - reference: reference
-          healthCheckStatus:
-            checkStatus: checkStatus
-            status: status
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          operatingSystem:
+          image:
             flavour: ubuntu
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_24_04_64BIT
             family: linux
             version: "20.04"
             architecture: x86_64
+          healthCheckStatus:
+            checkStatus: checkStatus
+            status: status
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -10712,18 +10711,18 @@ components:
       type: object
     marketApp:
       example:
-        name: name
-        id: id
-        category: category
-        family: family
-        version: version
-        operatingSystem:
+        image:
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_24_04_64BIT
           family: linux
           version: "20.04"
           architecture: x86_64
+        name: name
+        id: id
+        category: category
+        family: family
+        version: version
       properties:
         id:
           type: string
@@ -10736,8 +10735,8 @@ components:
           type: string
         family:
           type: string
-        operatingSystem:
-          $ref: '#/components/schemas/operatingSystem'
+        image:
+          $ref: '#/components/schemas/image'
       title: marketApp
       type: object
     certificate:
@@ -10768,18 +10767,18 @@ components:
     target:
       example:
         reference: reference
-        healthCheckStatus:
-          checkStatus: checkStatus
-          status: status
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
-        operatingSystem:
+        image:
           flavour: ubuntu
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_24_04_64BIT
           family: linux
           version: "20.04"
           architecture: x86_64
+        healthCheckStatus:
+          checkStatus: checkStatus
+          status: status
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: null
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -10803,8 +10802,8 @@ components:
         reference:
           description: The identifying name set to the instance
           type: string
-        operatingSystem:
-          $ref: '#/components/schemas/operatingSystem'
+        image:
+          $ref: '#/components/schemas/image'
         state:
           $ref: '#/components/schemas/state'
         healthCheckStatus:

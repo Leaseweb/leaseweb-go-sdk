@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | The instance unique identifier | [optional] 
 **Reference** | Pointer to **string** | The identifying name set to the instance | [optional] 
-**OperatingSystem** | Pointer to [**OperatingSystem**](OperatingSystem.md) |  | [optional] 
+**Image** | Pointer to [**Image**](Image.md) |  | [optional] 
 **State** | Pointer to [**State**](State.md) |  | [optional] 
 **HealthCheckStatus** | Pointer to [**HealthCheckStatus**](HealthCheckStatus.md) |  | [optional] 
 **Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
@@ -80,30 +80,30 @@ SetReference sets Reference field to given value.
 
 HasReference returns a boolean if a field has been set.
 
-### GetOperatingSystem
+### GetImage
 
-`func (o *Target) GetOperatingSystem() OperatingSystem`
+`func (o *Target) GetImage() Image`
 
-GetOperatingSystem returns the OperatingSystem field if non-nil, zero value otherwise.
+GetImage returns the Image field if non-nil, zero value otherwise.
 
-### GetOperatingSystemOk
+### GetImageOk
 
-`func (o *Target) GetOperatingSystemOk() (*OperatingSystem, bool)`
+`func (o *Target) GetImageOk() (*Image, bool)`
 
-GetOperatingSystemOk returns a tuple with the OperatingSystem field if it's non-nil, zero value otherwise
+GetImageOk returns a tuple with the Image field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOperatingSystem
+### SetImage
 
-`func (o *Target) SetOperatingSystem(v OperatingSystem)`
+`func (o *Target) SetImage(v Image)`
 
-SetOperatingSystem sets OperatingSystem field to given value.
+SetImage sets Image field to given value.
 
-### HasOperatingSystem
+### HasImage
 
-`func (o *Target) HasOperatingSystem() bool`
+`func (o *Target) HasImage() bool`
 
-HasOperatingSystem returns a boolean if a field has been set.
+HasImage returns a boolean if a field has been set.
 
 ### GetState
 

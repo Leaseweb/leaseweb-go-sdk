@@ -106,6 +106,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**GetCredentialListByType**](docs/PublicCloudAPI.md#getcredentiallistbytype) | **Get** /instances/{instanceId}/credentials/{type} | Get credentials by type
 *PublicCloudAPI* | [**GetDataTrafficMetrics**](docs/PublicCloudAPI.md#getdatatrafficmetrics) | **Get** /instances/{instanceId}/metrics/datatraffic | Get instance data traffic metrics
 *PublicCloudAPI* | [**GetExpenses**](docs/PublicCloudAPI.md#getexpenses) | **Get** /equipments/{equipmentId}/expenses | Get costs for a given month.
+*PublicCloudAPI* | [**GetImageList**](docs/PublicCloudAPI.md#getimagelist) | **Get** /images | List all available Images
 *PublicCloudAPI* | [**GetInstance**](docs/PublicCloudAPI.md#getinstance) | **Get** /instances/{instanceId} | Get instance details
 *PublicCloudAPI* | [**GetInstanceList**](docs/PublicCloudAPI.md#getinstancelist) | **Get** /instances | Get instance list
 *PublicCloudAPI* | [**GetInstanceTypeList**](docs/PublicCloudAPI.md#getinstancetypelist) | **Get** /instanceTypes | List instance types
@@ -117,9 +118,8 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**GetLoadBalancerListener**](docs/PublicCloudAPI.md#getloadbalancerlistener) | **Get** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Get listener details
 *PublicCloudAPI* | [**GetLoadBalancerTargetList**](docs/PublicCloudAPI.md#getloadbalancertargetlist) | **Get** /loadBalancers/{loadBalancerId}/targets | List registered targets
 *PublicCloudAPI* | [**GetMarketAppList**](docs/PublicCloudAPI.md#getmarketapplist) | **Get** /marketApps | Get marketplace apps
-*PublicCloudAPI* | [**GetOperatingSystemList**](docs/PublicCloudAPI.md#getoperatingsystemlist) | **Get** /operatingSystems | List all available Operating Systems
 *PublicCloudAPI* | [**GetRegionList**](docs/PublicCloudAPI.md#getregionlist) | **Get** /regions | List regions
-*PublicCloudAPI* | [**GetReinstallOsList**](docs/PublicCloudAPI.md#getreinstalloslist) | **Get** /instances/{instanceId}/reinstall/operatingSystems | List OSes available for reinstall
+*PublicCloudAPI* | [**GetReinstallOsList**](docs/PublicCloudAPI.md#getreinstalloslist) | **Get** /instances/{instanceId}/reinstall/images | List OSes available for reinstall
 *PublicCloudAPI* | [**GetSnapshot**](docs/PublicCloudAPI.md#getsnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
 *PublicCloudAPI* | [**GetSnapshotList**](docs/PublicCloudAPI.md#getsnapshotlist) | **Get** /instances/{instanceId}/snapshots | List snapshots
 *PublicCloudAPI* | [**GetUpdateInstanceTypeList**](docs/PublicCloudAPI.md#getupdateinstancetypelist) | **Get** /instances/{instanceId}/instanceTypesUpdate | List available instance types for update
@@ -184,17 +184,20 @@ Class | Method | HTTP request | Description
  - [GetCredentialResult](docs/GetCredentialResult.md)
  - [GetDataTrafficMetricsResult](docs/GetDataTrafficMetricsResult.md)
  - [GetExpensesResult](docs/GetExpensesResult.md)
+ - [GetImageListResult](docs/GetImageListResult.md)
  - [GetInstanceListResult](docs/GetInstanceListResult.md)
  - [GetIpListResult](docs/GetIpListResult.md)
  - [GetIsoListResult](docs/GetIsoListResult.md)
  - [GetLoadBalancerListResult](docs/GetLoadBalancerListResult.md)
  - [GetLoadBalancerTargetListResult](docs/GetLoadBalancerTargetListResult.md)
  - [GetMarketAppListResult](docs/GetMarketAppListResult.md)
- - [GetOperatingSystemListResult](docs/GetOperatingSystemListResult.md)
  - [GetRegionListResult](docs/GetRegionListResult.md)
  - [GetSnapshotListResult](docs/GetSnapshotListResult.md)
  - [HealthCheck](docs/HealthCheck.md)
  - [HealthCheckStatus](docs/HealthCheckStatus.md)
+ - [Image](docs/Image.md)
+ - [ImageDetails](docs/ImageDetails.md)
+ - [ImageId](docs/ImageId.md)
  - [Instance](docs/Instance.md)
  - [InstanceBase](docs/InstanceBase.md)
  - [InstanceDetails](docs/InstanceDetails.md)
@@ -220,9 +223,6 @@ Class | Method | HTTP request | Description
  - [NetworkSpeed](docs/NetworkSpeed.md)
  - [NetworkType](docs/NetworkType.md)
  - [NullRouteIpOpts](docs/NullRouteIpOpts.md)
- - [OperatingSystem](docs/OperatingSystem.md)
- - [OperatingSystemDetails](docs/OperatingSystemDetails.md)
- - [OperatingSystemId](docs/OperatingSystemId.md)
  - [Peak](docs/Peak.md)
  - [Price](docs/Price.md)
  - [PrivateNetwork](docs/PrivateNetwork.md)

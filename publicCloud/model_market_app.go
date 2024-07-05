@@ -24,7 +24,7 @@ type MarketApp struct {
 	Category *string `json:"category,omitempty"`
 	Version NullableString `json:"version,omitempty"`
 	Family *string `json:"family,omitempty"`
-	OperatingSystem *OperatingSystem `json:"operatingSystem,omitempty"`
+	Image *Image `json:"image,omitempty"`
 }
 
 // NewMarketApp instantiates a new MarketApp object
@@ -214,36 +214,36 @@ func (o *MarketApp) SetFamily(v string) {
 	o.Family = &v
 }
 
-// GetOperatingSystem returns the OperatingSystem field value if set, zero value otherwise.
-func (o *MarketApp) GetOperatingSystem() OperatingSystem {
-	if o == nil || IsNil(o.OperatingSystem) {
-		var ret OperatingSystem
+// GetImage returns the Image field value if set, zero value otherwise.
+func (o *MarketApp) GetImage() Image {
+	if o == nil || IsNil(o.Image) {
+		var ret Image
 		return ret
 	}
-	return *o.OperatingSystem
+	return *o.Image
 }
 
-// GetOperatingSystemOk returns a tuple with the OperatingSystem field value if set, nil otherwise
+// GetImageOk returns a tuple with the Image field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MarketApp) GetOperatingSystemOk() (*OperatingSystem, bool) {
-	if o == nil || IsNil(o.OperatingSystem) {
+func (o *MarketApp) GetImageOk() (*Image, bool) {
+	if o == nil || IsNil(o.Image) {
 		return nil, false
 	}
-	return o.OperatingSystem, true
+	return o.Image, true
 }
 
-// HasOperatingSystem returns a boolean if a field has been set.
-func (o *MarketApp) HasOperatingSystem() bool {
-	if o != nil && !IsNil(o.OperatingSystem) {
+// HasImage returns a boolean if a field has been set.
+func (o *MarketApp) HasImage() bool {
+	if o != nil && !IsNil(o.Image) {
 		return true
 	}
 
 	return false
 }
 
-// SetOperatingSystem gets a reference to the given OperatingSystem and assigns it to the OperatingSystem field.
-func (o *MarketApp) SetOperatingSystem(v OperatingSystem) {
-	o.OperatingSystem = &v
+// SetImage gets a reference to the given Image and assigns it to the Image field.
+func (o *MarketApp) SetImage(v Image) {
+	o.Image = &v
 }
 
 func (o MarketApp) MarshalJSON() ([]byte, error) {
@@ -271,8 +271,8 @@ func (o MarketApp) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Family) {
 		toSerialize["family"] = o.Family
 	}
-	if !IsNil(o.OperatingSystem) {
-		toSerialize["operatingSystem"] = o.OperatingSystem
+	if !IsNil(o.Image) {
+		toSerialize["image"] = o.Image
 	}
 	return toSerialize, nil
 }

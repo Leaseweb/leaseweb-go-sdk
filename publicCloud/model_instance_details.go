@@ -45,7 +45,7 @@ type InstanceDetails struct {
 	Contract Contract `json:"contract"`
 	Iso NullableIso `json:"iso"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork"`
-	OperatingSystem OperatingSystemDetails `json:"operatingSystem"`
+	Image ImageDetails `json:"image"`
 	Ips []IpDetails `json:"ips"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
 }
@@ -56,7 +56,7 @@ type _InstanceDetails InstanceDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup) *InstanceDetails {
+func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image ImageDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup) *InstanceDetails {
 	this := InstanceDetails{}
 	this.Id = id
 	this.Type = type_
@@ -74,7 +74,7 @@ func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, 
 	this.Contract = contract
 	this.Iso = iso
 	this.PrivateNetwork = privateNetwork
-	this.OperatingSystem = operatingSystem
+	this.Image = image
 	this.Ips = ips
 	this.AutoScalingGroup = autoScalingGroup
 	return &this
@@ -482,28 +482,28 @@ func (o *InstanceDetails) SetPrivateNetwork(v PrivateNetwork) {
 	o.PrivateNetwork.Set(&v)
 }
 
-// GetOperatingSystem returns the OperatingSystem field value
-func (o *InstanceDetails) GetOperatingSystem() OperatingSystemDetails {
+// GetImage returns the Image field value
+func (o *InstanceDetails) GetImage() ImageDetails {
 	if o == nil {
-		var ret OperatingSystemDetails
+		var ret ImageDetails
 		return ret
 	}
 
-	return o.OperatingSystem
+	return o.Image
 }
 
-// GetOperatingSystemOk returns a tuple with the OperatingSystem field value
+// GetImageOk returns a tuple with the Image field value
 // and a boolean to check if the value has been set.
-func (o *InstanceDetails) GetOperatingSystemOk() (*OperatingSystemDetails, bool) {
+func (o *InstanceDetails) GetImageOk() (*ImageDetails, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.OperatingSystem, true
+	return &o.Image, true
 }
 
-// SetOperatingSystem sets field value
-func (o *InstanceDetails) SetOperatingSystem(v OperatingSystemDetails) {
-	o.OperatingSystem = v
+// SetImage sets field value
+func (o *InstanceDetails) SetImage(v ImageDetails) {
+	o.Image = v
 }
 
 // GetIps returns the Ips field value
@@ -582,7 +582,7 @@ func (o InstanceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["contract"] = o.Contract
 	toSerialize["iso"] = o.Iso.Get()
 	toSerialize["privateNetwork"] = o.PrivateNetwork.Get()
-	toSerialize["operatingSystem"] = o.OperatingSystem
+	toSerialize["image"] = o.Image
 	toSerialize["ips"] = o.Ips
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	return toSerialize, nil
@@ -609,7 +609,7 @@ func (o *InstanceDetails) UnmarshalJSON(data []byte) (err error) {
 		"contract",
 		"iso",
 		"privateNetwork",
-		"operatingSystem",
+		"image",
 		"ips",
 		"autoScalingGroup",
 	}

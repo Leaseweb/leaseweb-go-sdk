@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **Contract** | [**Contract**](Contract.md) |  | 
 **Iso** | [**NullableIso**](Iso.md) |  | 
 **PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
-**OperatingSystem** | [**OperatingSystemDetails**](OperatingSystemDetails.md) |  | 
+**Image** | [**ImageDetails**](ImageDetails.md) |  | 
 **Ips** | [**[]IpDetails**](IpDetails.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceDetails
 
-`func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, operatingSystem OperatingSystemDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, ) *InstanceDetails`
+`func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image ImageDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, ) *InstanceDetails`
 
 NewInstanceDetails instantiates a new InstanceDetails object
 This constructor will assign default values to properties that have it defined,
@@ -413,24 +413,24 @@ SetPrivateNetwork sets PrivateNetwork field to given value.
 `func (o *InstanceDetails) UnsetPrivateNetwork()`
 
 UnsetPrivateNetwork ensures that no value is present for PrivateNetwork, not even an explicit nil
-### GetOperatingSystem
+### GetImage
 
-`func (o *InstanceDetails) GetOperatingSystem() OperatingSystemDetails`
+`func (o *InstanceDetails) GetImage() ImageDetails`
 
-GetOperatingSystem returns the OperatingSystem field if non-nil, zero value otherwise.
+GetImage returns the Image field if non-nil, zero value otherwise.
 
-### GetOperatingSystemOk
+### GetImageOk
 
-`func (o *InstanceDetails) GetOperatingSystemOk() (*OperatingSystemDetails, bool)`
+`func (o *InstanceDetails) GetImageOk() (*ImageDetails, bool)`
 
-GetOperatingSystemOk returns a tuple with the OperatingSystem field if it's non-nil, zero value otherwise
+GetImageOk returns a tuple with the Image field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOperatingSystem
+### SetImage
 
-`func (o *InstanceDetails) SetOperatingSystem(v OperatingSystemDetails)`
+`func (o *InstanceDetails) SetImage(v ImageDetails)`
 
-SetOperatingSystem sets OperatingSystem field to given value.
+SetImage sets Image field to given value.
 
 
 ### GetIps
