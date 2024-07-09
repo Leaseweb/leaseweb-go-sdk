@@ -21,12 +21,1432 @@ import (
 )
 
 
+type DedicatedServerAPI interface {
+
+	/*
+	AddServerToPrivateNetwork Add a server to private network
+
+	It takes a few minutes before the server has access to the private network.
+
+To get the current status of the server you can call
+`/bareMetals/v2/servers/{serverId}`.
+
+Once the server is added to the private network the status changes from
+`CONFIGURING` to `CONFIGURED`.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param privateNetworkId The ID of a Private Network
+	@return ApiAddServerToPrivateNetworkRequest
+	*/
+	AddServerToPrivateNetwork(ctx context.Context, serverId string, privateNetworkId string) ApiAddServerToPrivateNetworkRequest
+
+	// AddServerToPrivateNetworkExecute executes the request
+	AddServerToPrivateNetworkExecute(r ApiAddServerToPrivateNetworkRequest) (*http.Response, error)
+
+	/*
+	CancelActiveJob Cancel active job
+
+	Canceling an active job will trigger the `onfail` flow of the current job
+often resulting in a server reboot. If you do not want the server state to
+change `expire` the active job instead.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiCancelActiveJobRequest
+	*/
+	CancelActiveJob(ctx context.Context, serverId string) ApiCancelActiveJobRequest
+
+	// CancelActiveJobExecute executes the request
+	//  @return ServerJob
+	CancelActiveJobExecute(r ApiCancelActiveJobRequest) (*ServerJob, *http.Response, error)
+
+	/*
+	CloseNetworkInterface Close network interface
+
+	Close the network interface of this type of this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param networkType The network type
+	@return ApiCloseNetworkInterfaceRequest
+	*/
+	CloseNetworkInterface(ctx context.Context, serverId string, networkType NetworkType) ApiCloseNetworkInterfaceRequest
+
+	// CloseNetworkInterfaceExecute executes the request
+	CloseNetworkInterfaceExecute(r ApiCloseNetworkInterfaceRequest) (*http.Response, error)
+
+	/*
+	CloseNetworkInterfaces Close all network interfaces
+
+	Close all network interfaces for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiCloseNetworkInterfacesRequest
+	*/
+	CloseNetworkInterfaces(ctx context.Context, serverId string) ApiCloseNetworkInterfacesRequest
+
+	// CloseNetworkInterfacesExecute executes the request
+	CloseNetworkInterfacesExecute(r ApiCloseNetworkInterfacesRequest) (*http.Response, error)
+
+	/*
+	CreateNetworkEquipmentCredential Create new network equipment credentials
+
+	Password will NOT be updated on the network equipment. The ability to update
+credentials is for convenience only. It provides a secure way to communicate
+passwords with Leaseweb engineers in case support is required.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@return ApiCreateNetworkEquipmentCredentialRequest
+	*/
+	CreateNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string) ApiCreateNetworkEquipmentCredentialRequest
+
+	// CreateNetworkEquipmentCredentialExecute executes the request
+	//  @return Credential
+	CreateNetworkEquipmentCredentialExecute(r ApiCreateNetworkEquipmentCredentialRequest) (*Credential, *http.Response, error)
+
+	/*
+	CreateServerBandwidthNotificationSetting Create a bandwidth notification setting
+
+	Create a new bandwidth notification setting for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiCreateServerBandwidthNotificationSettingRequest
+	*/
+	CreateServerBandwidthNotificationSetting(ctx context.Context, serverId string) ApiCreateServerBandwidthNotificationSettingRequest
+
+	// CreateServerBandwidthNotificationSettingExecute executes the request
+	//  @return BandwidthNotificationSetting
+	CreateServerBandwidthNotificationSettingExecute(r ApiCreateServerBandwidthNotificationSettingRequest) (*BandwidthNotificationSetting, *http.Response, error)
+
+	/*
+	CreateServerCredential Create new server credentials
+
+	Password will NOT be updated on the server. The ability to update credentials
+is for convenience only. It provides a secure way to communicate passwords
+with Leaseweb engineers in case support is required.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiCreateServerCredentialRequest
+	*/
+	CreateServerCredential(ctx context.Context, serverId string) ApiCreateServerCredentialRequest
+
+	// CreateServerCredentialExecute executes the request
+	//  @return Credential
+	CreateServerCredentialExecute(r ApiCreateServerCredentialRequest) (*Credential, *http.Response, error)
+
+	/*
+	CreateServerDataTrafficNotificationSetting Create a data traffic notification setting
+
+	Create a new data traffic notification setting for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiCreateServerDataTrafficNotificationSettingRequest
+	*/
+	CreateServerDataTrafficNotificationSetting(ctx context.Context, serverId string) ApiCreateServerDataTrafficNotificationSettingRequest
+
+	// CreateServerDataTrafficNotificationSettingExecute executes the request
+	//  @return DataTrafficNotificationSetting
+	CreateServerDataTrafficNotificationSettingExecute(r ApiCreateServerDataTrafficNotificationSettingRequest) (*DataTrafficNotificationSetting, *http.Response, error)
+
+	/*
+	CreateServerDhcpReservation Create a DHCP reservation
+
+	After rebooting your server it will acquire this DHCP reservation and boot
+from the specified `bootfile` url.
+
+Please note that this API call will not reboot or power cycle your server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiCreateServerDhcpReservationRequest
+	*/
+	CreateServerDhcpReservation(ctx context.Context, serverId string) ApiCreateServerDhcpReservationRequest
+
+	// CreateServerDhcpReservationExecute executes the request
+	CreateServerDhcpReservationExecute(r ApiCreateServerDhcpReservationRequest) (*http.Response, error)
+
+	/*
+	DeleteNetworkEquipmentCredential Delete network equipment credentials
+
+	This action is purely administrative and will only remove the username and
+password associated with this resource from our database.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@param type_ Credential type
+	@param username Username
+	@return ApiDeleteNetworkEquipmentCredentialRequest
+	*/
+	DeleteNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ string, username string) ApiDeleteNetworkEquipmentCredentialRequest
+
+	// DeleteNetworkEquipmentCredentialExecute executes the request
+	DeleteNetworkEquipmentCredentialExecute(r ApiDeleteNetworkEquipmentCredentialRequest) (*http.Response, error)
+
+	/*
+	DeleteServerBandwidthNotificationSetting Delete a bandwidth notification setting
+
+	Remove a Bandwidth Notification setting for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param notificationSettingId The ID of a notification setting
+	@return ApiDeleteServerBandwidthNotificationSettingRequest
+	*/
+	DeleteServerBandwidthNotificationSetting(ctx context.Context, serverId string, notificationSettingId string) ApiDeleteServerBandwidthNotificationSettingRequest
+
+	// DeleteServerBandwidthNotificationSettingExecute executes the request
+	DeleteServerBandwidthNotificationSettingExecute(r ApiDeleteServerBandwidthNotificationSettingRequest) (*http.Response, error)
+
+	/*
+	DeleteServerCredential Delete server credentials
+
+	This action is purely administrative and will only remove the username and
+password associated with this resource from our database.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param type_ Credential type
+	@param username Username
+	@return ApiDeleteServerCredentialRequest
+	*/
+	DeleteServerCredential(ctx context.Context, serverId string, type_ string, username string) ApiDeleteServerCredentialRequest
+
+	// DeleteServerCredentialExecute executes the request
+	DeleteServerCredentialExecute(r ApiDeleteServerCredentialRequest) (*http.Response, error)
+
+	/*
+	DeleteServerDataTrafficNotificationSetting Delete a data traffic notification setting
+
+	Delete the given data traffic notification setting for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param notificationSettingId The ID of a notification setting
+	@return ApiDeleteServerDataTrafficNotificationSettingRequest
+	*/
+	DeleteServerDataTrafficNotificationSetting(ctx context.Context, serverId string, notificationSettingId string) ApiDeleteServerDataTrafficNotificationSettingRequest
+
+	// DeleteServerDataTrafficNotificationSettingExecute executes the request
+	DeleteServerDataTrafficNotificationSettingExecute(r ApiDeleteServerDataTrafficNotificationSettingRequest) (*http.Response, error)
+
+	/*
+	DeleteServerDhcpReservation Delete a DHCP reservation
+
+	Delete a DHCP reservation for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiDeleteServerDhcpReservationRequest
+	*/
+	DeleteServerDhcpReservation(ctx context.Context, serverId string) ApiDeleteServerDhcpReservationRequest
+
+	// DeleteServerDhcpReservationExecute executes the request
+	DeleteServerDhcpReservationExecute(r ApiDeleteServerDhcpReservationRequest) (*http.Response, error)
+
+	/*
+	DeleteServerFromPrivateNetwork Delete a server from a private network
+
+	This API call will remove the dedicated server from the private network.
+
+It takes a few minutes before the server has been removed from the private
+network.
+
+To get the current status of the server you can call
+`/bareMetals/v2/servers/{serverId}`.
+
+While the server is being removed the status changes to `REMOVING`.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param privateNetworkId The ID of a Private Network
+	@return ApiDeleteServerFromPrivateNetworkRequest
+	*/
+	DeleteServerFromPrivateNetwork(ctx context.Context, serverId string, privateNetworkId string) ApiDeleteServerFromPrivateNetworkRequest
+
+	// DeleteServerFromPrivateNetworkExecute executes the request
+	DeleteServerFromPrivateNetworkExecute(r ApiDeleteServerFromPrivateNetworkRequest) (*http.Response, error)
+
+	/*
+	EnableServerRescueMode Launch rescue mode
+
+	Rescue mode allows you to trouble shoot your server in case your installed
+operating system is no longer reachable.
+
+You can supply a `postInstallScript` key in the body of the request which
+should contain a base64 encoded string with a valid script. This script will
+be executed as soon as rescue mode is launched and can be used to further
+automate the process. A requirement for the post install script is that it
+starts with a shebang line like `#!/usr/bin/env bash`.
+
+After a rescue mode is launched you can manually reboot the server. After this
+reboot the server will boot into the existing operating system.
+
+To get a list of available rescue images, you could do so by sending a `GET`
+request to `/bareMetals/v2/rescueImages`.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiEnableServerRescueModeRequest
+	*/
+	EnableServerRescueMode(ctx context.Context, serverId string) ApiEnableServerRescueModeRequest
+
+	// EnableServerRescueModeExecute executes the request
+	//  @return ServerJob
+	EnableServerRescueModeExecute(r ApiEnableServerRescueModeRequest) (*ServerJob, *http.Response, error)
+
+	/*
+	ExpireActiveJob Expire active job
+
+	Expiring an active job will not have any influence on the current state of the
+server and is merely an administrative action.
+
+Often you want to `cancel` the job, resulting in a server reboot. In that
+case\nuse the `/cancelActiveJob` API call instead.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiExpireActiveJobRequest
+	*/
+	ExpireActiveJob(ctx context.Context, serverId string) ApiExpireActiveJobRequest
+
+	// ExpireActiveJobExecute executes the request
+	//  @return ServerJob
+	ExpireActiveJobExecute(r ApiExpireActiveJobRequest) (*ServerJob, *http.Response, error)
+
+	/*
+	GetControlPanelList List control panels
+
+	An `id` of a control panel can be supplied when (re)installing a dedicated
+server (for more information on how to install dedicated servers via the API
+refer to the API documentation).
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetControlPanelListRequest
+	*/
+	GetControlPanelList(ctx context.Context) ApiGetControlPanelListRequest
+
+	// GetControlPanelListExecute executes the request
+	//  @return ControlPanelList
+	GetControlPanelListExecute(r ApiGetControlPanelListRequest) (*ControlPanelList, *http.Response, error)
+
+	/*
+	GetControlPanelListByOperatingSystemId List control panels by Operating System
+
+	An `id` of a control panel can be supplied when (re)installing a dedicated
+server (for more information on how to install dedicated servers via the API
+refer to the API documentation).
+
+Not all operating systems support all control panels. Some operating systems
+do not allow for installation of a control panel. To filter the list of
+control panels which are supported for an operating system use the
+`operatingSystemId` query string parameter to filter this list.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param operatingSystemId Operating system ID
+	@return ApiGetControlPanelListByOperatingSystemIdRequest
+	*/
+	GetControlPanelListByOperatingSystemId(ctx context.Context, operatingSystemId string) ApiGetControlPanelListByOperatingSystemIdRequest
+
+	// GetControlPanelListByOperatingSystemIdExecute executes the request
+	//  @return ControlPanelList
+	GetControlPanelListByOperatingSystemIdExecute(r ApiGetControlPanelListByOperatingSystemIdRequest) (*ControlPanelList, *http.Response, error)
+
+	/*
+	GetDdosNotificationSetting Inspect DDoS notification settings
+
+	Show all DDoS Protection related notification settings for this server. These
+settings control if you want to be notified via email in case a DDoS was
+mitigated.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetDdosNotificationSettingRequest
+	*/
+	GetDdosNotificationSetting(ctx context.Context, serverId string) ApiGetDdosNotificationSettingRequest
+
+	// GetDdosNotificationSettingExecute executes the request
+	//  @return GetDdosNotificationSettingResult
+	GetDdosNotificationSettingExecute(r ApiGetDdosNotificationSettingRequest) (*GetDdosNotificationSettingResult, *http.Response, error)
+
+	/*
+	GetNetworkEquipment Get network equipment
+
+	Use this API to get information about a single network equipment.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@return ApiGetNetworkEquipmentRequest
+	*/
+	GetNetworkEquipment(ctx context.Context, networkEquipmentId string) ApiGetNetworkEquipmentRequest
+
+	// GetNetworkEquipmentExecute executes the request
+	//  @return NetworkEquipment
+	GetNetworkEquipmentExecute(r ApiGetNetworkEquipmentRequest) (*NetworkEquipment, *http.Response, error)
+
+	/*
+	GetNetworkEquipmentCredential Show network equipment credentials
+
+	View the password for the given credential, identified by `type` and
+`username`.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@param type_ Credential type
+	@param username Username
+	@return ApiGetNetworkEquipmentCredentialRequest
+	*/
+	GetNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ string, username string) ApiGetNetworkEquipmentCredentialRequest
+
+	// GetNetworkEquipmentCredentialExecute executes the request
+	//  @return Credential
+	GetNetworkEquipmentCredentialExecute(r ApiGetNetworkEquipmentCredentialRequest) (*Credential, *http.Response, error)
+
+	/*
+	GetNetworkEquipmentCredentialList List network equipment credentials
+
+	The credentials API allows you to store usernames and passwords securely.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@return ApiGetNetworkEquipmentCredentialListRequest
+	*/
+	GetNetworkEquipmentCredentialList(ctx context.Context, networkEquipmentId string) ApiGetNetworkEquipmentCredentialListRequest
+
+	// GetNetworkEquipmentCredentialListExecute executes the request
+	//  @return CredentialList
+	GetNetworkEquipmentCredentialListExecute(r ApiGetNetworkEquipmentCredentialListRequest) (*CredentialList, *http.Response, error)
+
+	/*
+	GetNetworkEquipmentCredentialListByType List network equipment credentials by type
+
+	List all the credentials filtered by the specified type that are associated
+with this network equipment.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@param type_ Credential type
+	@return ApiGetNetworkEquipmentCredentialListByTypeRequest
+	*/
+	GetNetworkEquipmentCredentialListByType(ctx context.Context, networkEquipmentId string, type_ string) ApiGetNetworkEquipmentCredentialListByTypeRequest
+
+	// GetNetworkEquipmentCredentialListByTypeExecute executes the request
+	//  @return CredentialList
+	GetNetworkEquipmentCredentialListByTypeExecute(r ApiGetNetworkEquipmentCredentialListByTypeRequest) (*CredentialList, *http.Response, error)
+
+	/*
+	GetNetworkEquipmentIp Show a network equipment IP
+
+	Get a single IP address associated with this network equipment.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@param ip The IP Address
+	@return ApiGetNetworkEquipmentIpRequest
+	*/
+	GetNetworkEquipmentIp(ctx context.Context, networkEquipmentId string, ip string) ApiGetNetworkEquipmentIpRequest
+
+	// GetNetworkEquipmentIpExecute executes the request
+	//  @return Ip
+	GetNetworkEquipmentIpExecute(r ApiGetNetworkEquipmentIpRequest) (*Ip, *http.Response, error)
+
+	/*
+	GetNetworkEquipmentIpList List IPs
+
+	List all IP Addresses associated with this network equipment. Optionally
+filtered.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@return ApiGetNetworkEquipmentIpListRequest
+	*/
+	GetNetworkEquipmentIpList(ctx context.Context, networkEquipmentId string) ApiGetNetworkEquipmentIpListRequest
+
+	// GetNetworkEquipmentIpListExecute executes the request
+	//  @return GetNetworkEquipmentIpListResult
+	GetNetworkEquipmentIpListExecute(r ApiGetNetworkEquipmentIpListRequest) (*GetNetworkEquipmentIpListResult, *http.Response, error)
+
+	/*
+	GetNetworkEquipmentList List network equipment
+
+	List your Dedicated Network Equipment. This api call supports pagination. Use
+the `limit` and `offset` query string parameters to paginate through all your
+dedicated network equipment.
+
+Every `network equipment` object in the json response lists a few properties
+of a network equipment. Use the single resource api call to get more details
+for a single network equipment.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetNetworkEquipmentListRequest
+	*/
+	GetNetworkEquipmentList(ctx context.Context) ApiGetNetworkEquipmentListRequest
+
+	// GetNetworkEquipmentListExecute executes the request
+	//  @return GetNetworkEquipmentListResult
+	GetNetworkEquipmentListExecute(r ApiGetNetworkEquipmentListRequest) (*GetNetworkEquipmentListResult, *http.Response, error)
+
+	/*
+	GetNetworkEquipmentNullRouteHistory Show null route history
+
+	Show all null route history for any ips associated with this a network
+equipment.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@return ApiGetNetworkEquipmentNullRouteHistoryRequest
+	*/
+	GetNetworkEquipmentNullRouteHistory(ctx context.Context, networkEquipmentId string) ApiGetNetworkEquipmentNullRouteHistoryRequest
+
+	// GetNetworkEquipmentNullRouteHistoryExecute executes the request
+	//  @return GetNetworkEquipmentNullRouteHistoryResult
+	GetNetworkEquipmentNullRouteHistoryExecute(r ApiGetNetworkEquipmentNullRouteHistoryRequest) (*GetNetworkEquipmentNullRouteHistoryResult, *http.Response, error)
+
+	/*
+	GetNetworkEquipmentPowerStatus Show power status
+
+	The network equipment can either be `ON` or `OFF`. Network Equipment can be
+powered on or off by using the respective `/powerOn` and `/powerOff` API
+calls. In addition network equipment can also be rebooted using the
+`/powerCycle` API call.
+
+The `pdu` object describes the power status from the power distribution unit
+(PDU) point of view. If your network equipment is connected to multiple PDU
+ports the `status` property will report `on` if at least one PDU port has
+power.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@return ApiGetNetworkEquipmentPowerStatusRequest
+	*/
+	GetNetworkEquipmentPowerStatus(ctx context.Context, networkEquipmentId string) ApiGetNetworkEquipmentPowerStatusRequest
+
+	// GetNetworkEquipmentPowerStatusExecute executes the request
+	//  @return GetNetworkEquipmentPowerStatusResult
+	GetNetworkEquipmentPowerStatusExecute(r ApiGetNetworkEquipmentPowerStatusRequest) (*GetNetworkEquipmentPowerStatusResult, *http.Response, error)
+
+	/*
+	GetNetworkInterface Show a network interface
+
+	Show the network interface of the given type of this server, including its
+status.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param networkType The network type
+	@return ApiGetNetworkInterfaceRequest
+	*/
+	GetNetworkInterface(ctx context.Context, serverId string, networkType NetworkType) ApiGetNetworkInterfaceRequest
+
+	// GetNetworkInterfaceExecute executes the request
+	//  @return OperationNetworkInterface
+	GetNetworkInterfaceExecute(r ApiGetNetworkInterfaceRequest) (*OperationNetworkInterface, *http.Response, error)
+
+	/*
+	GetNetworkInterfaceList List network interfaces
+
+	List all network interfaces for this server, including their current status.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetNetworkInterfaceListRequest
+	*/
+	GetNetworkInterfaceList(ctx context.Context, serverId string) ApiGetNetworkInterfaceListRequest
+
+	// GetNetworkInterfaceListExecute executes the request
+	//  @return GetNetworkInterfaceListResult
+	GetNetworkInterfaceListExecute(r ApiGetNetworkInterfaceListRequest) (*GetNetworkInterfaceListResult, *http.Response, error)
+
+	/*
+	GetOperatingSystem Show an operating system
+
+	This detailed information shows default options when installing the given
+operating system on a dedicated server.
+
+For some operating systems these defaults can be adjusted when making the
+`POST` request to `/install`. If the `configurable` parameter is `true` these
+defaults can be adjusted by the client.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param operatingSystemId Operating system ID
+	@return ApiGetOperatingSystemRequest
+	*/
+	GetOperatingSystem(ctx context.Context, operatingSystemId string) ApiGetOperatingSystemRequest
+
+	// GetOperatingSystemExecute executes the request
+	//  @return GetOperatingSystemResult
+	GetOperatingSystemExecute(r ApiGetOperatingSystemRequest) (*GetOperatingSystemResult, *http.Response, error)
+
+	/*
+	GetOperatingSystemList List Operating Systems
+
+	An `id` of a operating system can be supplied when (re)installing a dedicated
+server (for more information on how to install dedicated servers via the API
+refer to the API documentation).
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetOperatingSystemListRequest
+	*/
+	GetOperatingSystemList(ctx context.Context) ApiGetOperatingSystemListRequest
+
+	// GetOperatingSystemListExecute executes the request
+	//  @return GetOperatingSystemListResult
+	GetOperatingSystemListExecute(r ApiGetOperatingSystemListRequest) (*GetOperatingSystemListResult, *http.Response, error)
+
+	/*
+	GetRescueImageList Rescue Images
+
+	Lists all Rescue Images which are available for launching a dedicated server
+into rescue mode.
+
+A `rescueImageId` can be supplied to the `POST /rescueMode` API call and will
+reboot your server into rescue mode.
+
+Launching rescue mode for a server is often used to troubleshoot an existing
+installation.
+
+Note that launching rescue mode does not modify any data on the disks of your
+server. It will require your server to be rebooted.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRescueImageListRequest
+	*/
+	GetRescueImageList(ctx context.Context) ApiGetRescueImageListRequest
+
+	// GetRescueImageListExecute executes the request
+	//  @return GetRescueImageListResult
+	GetRescueImageListExecute(r ApiGetRescueImageListRequest) (*GetRescueImageListResult, *http.Response, error)
+
+	/*
+	GetServer Get server
+
+	Use this API to get information about a single server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerRequest
+	*/
+	GetServer(ctx context.Context, serverId string) ApiGetServerRequest
+
+	// GetServerExecute executes the request
+	//  @return Server
+	GetServerExecute(r ApiGetServerRequest) (*Server, *http.Response, error)
+
+	/*
+	GetServerBandwidthMetrics Show bandwidth metrics
+
+	At this moment only bandwidth information for the public interface is supported.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerBandwidthMetricsRequest
+	*/
+	GetServerBandwidthMetrics(ctx context.Context, serverId string) ApiGetServerBandwidthMetricsRequest
+
+	// GetServerBandwidthMetricsExecute executes the request
+	//  @return Metrics
+	GetServerBandwidthMetricsExecute(r ApiGetServerBandwidthMetricsRequest) (*Metrics, *http.Response, error)
+
+	/*
+	GetServerBandwidthNotificationSetting Show a bandwidth notification setting
+
+	Get a bandwidth notification setting for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param notificationSettingId The ID of a notification setting
+	@return ApiGetServerBandwidthNotificationSettingRequest
+	*/
+	GetServerBandwidthNotificationSetting(ctx context.Context, serverId string, notificationSettingId string) ApiGetServerBandwidthNotificationSettingRequest
+
+	// GetServerBandwidthNotificationSettingExecute executes the request
+	//  @return BandwidthNotificationSetting
+	GetServerBandwidthNotificationSettingExecute(r ApiGetServerBandwidthNotificationSettingRequest) (*BandwidthNotificationSetting, *http.Response, error)
+
+	/*
+	GetServerBandwidthNotificationSettingList List bandwidth notification settings
+
+	List all bandwidth notification settings for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerBandwidthNotificationSettingListRequest
+	*/
+	GetServerBandwidthNotificationSettingList(ctx context.Context, serverId string) ApiGetServerBandwidthNotificationSettingListRequest
+
+	// GetServerBandwidthNotificationSettingListExecute executes the request
+	//  @return GetServerBandwidthNotificationSettingListResult
+	GetServerBandwidthNotificationSettingListExecute(r ApiGetServerBandwidthNotificationSettingListRequest) (*GetServerBandwidthNotificationSettingListResult, *http.Response, error)
+
+	/*
+	GetServerCredential Show server credentials
+
+	View the password for the given credential, identified by `type` and
+`username`. Auto generated credentials (during a re-install, rescue mode or
+ipmi reset can be found here).
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param type_ Credential type
+	@param username Username
+	@return ApiGetServerCredentialRequest
+	*/
+	GetServerCredential(ctx context.Context, serverId string, type_ string, username string) ApiGetServerCredentialRequest
+
+	// GetServerCredentialExecute executes the request
+	//  @return Credential
+	GetServerCredentialExecute(r ApiGetServerCredentialRequest) (*Credential, *http.Response, error)
+
+	/*
+	GetServerCredentialList List server credentials
+
+	The credentials API allows you to store usernames and passwords securely.
+
+During (re)installations, rescue modes and ipmi resets the newly generated
+passwords are stored and can be retrieved using this API.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerCredentialListRequest
+	*/
+	GetServerCredentialList(ctx context.Context, serverId string) ApiGetServerCredentialListRequest
+
+	// GetServerCredentialListExecute executes the request
+	//  @return CredentialList
+	GetServerCredentialListExecute(r ApiGetServerCredentialListRequest) (*CredentialList, *http.Response, error)
+
+	/*
+	GetServerCredentialListByType List server credentials by type
+
+	List all the credentials filtered by the specified type that are associated
+with this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param type_ Credential type
+	@return ApiGetServerCredentialListByTypeRequest
+	*/
+	GetServerCredentialListByType(ctx context.Context, serverId string, type_ string) ApiGetServerCredentialListByTypeRequest
+
+	// GetServerCredentialListByTypeExecute executes the request
+	//  @return CredentialList
+	GetServerCredentialListByTypeExecute(r ApiGetServerCredentialListByTypeRequest) (*CredentialList, *http.Response, error)
+
+	/*
+	GetServerDataTrafficMetrics Show datatraffic metrics
+
+	At this moment only bandwidth information for the public interface is supported.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerDataTrafficMetricsRequest
+	*/
+	GetServerDataTrafficMetrics(ctx context.Context, serverId string) ApiGetServerDataTrafficMetricsRequest
+
+	// GetServerDataTrafficMetricsExecute executes the request
+	//  @return Metrics
+	GetServerDataTrafficMetricsExecute(r ApiGetServerDataTrafficMetricsRequest) (*Metrics, *http.Response, error)
+
+	/*
+	GetServerDataTrafficNotificationSetting Show a data traffic notification setting
+
+	Get a datatraffic notification setting for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param notificationSettingId The ID of a notification setting
+	@return ApiGetServerDataTrafficNotificationSettingRequest
+	*/
+	GetServerDataTrafficNotificationSetting(ctx context.Context, serverId string, notificationSettingId string) ApiGetServerDataTrafficNotificationSettingRequest
+
+	// GetServerDataTrafficNotificationSettingExecute executes the request
+	//  @return DataTrafficNotificationSetting
+	GetServerDataTrafficNotificationSettingExecute(r ApiGetServerDataTrafficNotificationSettingRequest) (*DataTrafficNotificationSetting, *http.Response, error)
+
+	/*
+	GetServerDataTrafficNotificationSettingList List data traffic notification settings
+
+	List all datatraffic notification settings for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerDataTrafficNotificationSettingListRequest
+	*/
+	GetServerDataTrafficNotificationSettingList(ctx context.Context, serverId string) ApiGetServerDataTrafficNotificationSettingListRequest
+
+	// GetServerDataTrafficNotificationSettingListExecute executes the request
+	//  @return GetServerDataTrafficNotificationSettingListResult
+	GetServerDataTrafficNotificationSettingListExecute(r ApiGetServerDataTrafficNotificationSettingListRequest) (*GetServerDataTrafficNotificationSettingListResult, *http.Response, error)
+
+	/*
+	GetServerDhcpReservationList List DHCP reservations
+
+	Please note that this will only show reservations for the public network
+interface.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerDhcpReservationListRequest
+	*/
+	GetServerDhcpReservationList(ctx context.Context, serverId string) ApiGetServerDhcpReservationListRequest
+
+	// GetServerDhcpReservationListExecute executes the request
+	//  @return GetServerDhcpReservationListResult
+	GetServerDhcpReservationListExecute(r ApiGetServerDhcpReservationListRequest) (*GetServerDhcpReservationListResult, *http.Response, error)
+
+	/*
+	GetServerHardware Show hardware information
+
+	This information is generated when running a hardware scan for your server. A
+hardware scan collects hardware information about your system.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerHardwareRequest
+	*/
+	GetServerHardware(ctx context.Context, serverId string) ApiGetServerHardwareRequest
+
+	// GetServerHardwareExecute executes the request
+	//  @return GetServerHardwareResult
+	GetServerHardwareExecute(r ApiGetServerHardwareRequest) (*GetServerHardwareResult, *http.Response, error)
+
+	/*
+	GetServerIp Show a server IP
+
+	Get a single IP address associated with this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param ip The IP Address
+	@return ApiGetServerIpRequest
+	*/
+	GetServerIp(ctx context.Context, serverId string, ip string) ApiGetServerIpRequest
+
+	// GetServerIpExecute executes the request
+	//  @return Ip
+	GetServerIpExecute(r ApiGetServerIpRequest) (*Ip, *http.Response, error)
+
+	/*
+	GetServerIpList List IPs
+
+	List all IP Addresses associated with this server. Optionally filtered.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerIpListRequest
+	*/
+	GetServerIpList(ctx context.Context, serverId string) ApiGetServerIpListRequest
+
+	// GetServerIpListExecute executes the request
+	//  @return Ip
+	GetServerIpListExecute(r ApiGetServerIpListRequest) (*Ip, *http.Response, error)
+
+	/*
+	GetServerJob Show a job
+
+	Get a single job for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param jobId The ID of a Job
+	@return ApiGetServerJobRequest
+	*/
+	GetServerJob(ctx context.Context, serverId string, jobId string) ApiGetServerJobRequest
+
+	// GetServerJobExecute executes the request
+	//  @return CurrentServerJob
+	GetServerJobExecute(r ApiGetServerJobRequest) (*CurrentServerJob, *http.Response, error)
+
+	/*
+	GetServerJobList List jobs
+
+	List all jobs for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerJobListRequest
+	*/
+	GetServerJobList(ctx context.Context, serverId string) ApiGetServerJobListRequest
+
+	// GetServerJobListExecute executes the request
+	//  @return ServerJobList
+	GetServerJobListExecute(r ApiGetServerJobListRequest) (*ServerJobList, *http.Response, error)
+
+	/*
+	GetServerList List servers
+
+	List your Dedicated Servers. This api call supports pagination. Use the
+`limit` and `offset` query string parameters to paginate through all your
+dedicated servers.
+
+Every `server` object in the json response lists a few properties of a server.
+Use the single resource api call to get more details for a single server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetServerListRequest
+	*/
+	GetServerList(ctx context.Context) ApiGetServerListRequest
+
+	// GetServerListExecute executes the request
+	//  @return GetServerListResult
+	GetServerListExecute(r ApiGetServerListRequest) (*GetServerListResult, *http.Response, error)
+
+	/*
+	GetServerNullRouteHistory Show null route history
+
+	Show all null route history for any ips associated with this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerNullRouteHistoryRequest
+	*/
+	GetServerNullRouteHistory(ctx context.Context, serverId string) ApiGetServerNullRouteHistoryRequest
+
+	// GetServerNullRouteHistoryExecute executes the request
+	//  @return GetServerNullRouteHistoryResult
+	GetServerNullRouteHistoryExecute(r ApiGetServerNullRouteHistoryRequest) (*GetServerNullRouteHistoryResult, *http.Response, error)
+
+	/*
+	GetServerPowerStatus Show power status
+
+	The server can either be `ON` or `OFF`. Servers can be powered on or off by
+using the respective `/powerOn` and `/powerOff` API calls. In addition servers
+can also be rebooted using the `/powerCycle` API call.
+
+The `pdu` object describes the power status from the power distribution unit
+(PDU) point of view. If your server is connected to multiple PDU ports the
+`status` property will report `on` if at least one PDU port has power.
+
+The `ipmi` object describes the power status by quering the remote management
+interface of your server.
+
+Note that `pdu.status` can report `on` but your server can still be powered
+off if it was shutdown via `IPMI` for example.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiGetServerPowerStatusRequest
+	*/
+	GetServerPowerStatus(ctx context.Context, serverId string) ApiGetServerPowerStatusRequest
+
+	// GetServerPowerStatusExecute executes the request
+	//  @return GetServerPowerStatusResult
+	GetServerPowerStatusExecute(r ApiGetServerPowerStatusRequest) (*GetServerPowerStatusResult, *http.Response, error)
+
+	/*
+	InstallOperatingSystem Launch installation
+
+	Install your server with an Operating System and optional Control Panel.
+
+To retrieve a list of available operating systems use the
+`/v2/operatingSystems` endpoint.
+
+To retrieve a list of available control panels use the `/v2/controlPanels`
+endpoint.
+
+The default device / partitions to be used are operating system depended and
+can be retrieved via the `/v2/operatingSystems/{operatingSystemId}` endpoint.
+
+You are now able to target a specific diskset, like SATA1TB, SATA2TB, SSD256GB,
+etc. To see which disksets are available in your server check the `/v2/servers/{serverId}`
+endpoint and look for the corresponding diskset id from the hdd array.
+
+For more information about Dedicated Server installation, [click here](https://kb.leaseweb.com/products/dedicated-server/reinstalling-your-dedicated-server) for our related Knowledge Base article.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiInstallOperatingSystemRequest
+	*/
+	InstallOperatingSystem(ctx context.Context, serverId string) ApiInstallOperatingSystemRequest
+
+	// InstallOperatingSystemExecute executes the request
+	//  @return ServerJob
+	InstallOperatingSystemExecute(r ApiInstallOperatingSystemRequest) (*ServerJob, *http.Response, error)
+
+	/*
+	IpmiResetServer Launch IPMI reset
+
+	A reset makes sure that your IPMI interface of your server is compatible with
+Leaseweb automation.
+
+An IPMI reset will require a reboot of your server. The contents of your hard
+drive won't be altered in any way. After a successful IPMI reset your server
+is booted back into the original operating system.",
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiIpmiResetServerRequest
+	*/
+	IpmiResetServer(ctx context.Context, serverId string) ApiIpmiResetServerRequest
+
+	// IpmiResetServerExecute executes the request
+	//  @return ServerJob
+	IpmiResetServerExecute(r ApiIpmiResetServerRequest) (*ServerJob, *http.Response, error)
+
+	/*
+	NullIpRoute Null route an IP
+
+	Null the given IP address. It might take a few minutes before the change is
+propagated across the network.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param ip The IP Address
+	@return ApiNullIpRouteRequest
+	*/
+	NullIpRoute(ctx context.Context, serverId string, ip string) ApiNullIpRouteRequest
+
+	// NullIpRouteExecute executes the request
+	//  @return Ip
+	NullIpRouteExecute(r ApiNullIpRouteRequest) (*Ip, *http.Response, error)
+
+	/*
+	NullNetworkEquipmentIpRoute Null route an IP
+
+	Null the given IP address. It might take a few minutes before the change is
+propagated across the network.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@param ip The IP Address
+	@return ApiNullNetworkEquipmentIpRouteRequest
+	*/
+	NullNetworkEquipmentIpRoute(ctx context.Context, networkEquipmentId string, ip string) ApiNullNetworkEquipmentIpRouteRequest
+
+	// NullNetworkEquipmentIpRouteExecute executes the request
+	//  @return Ip
+	NullNetworkEquipmentIpRouteExecute(r ApiNullNetworkEquipmentIpRouteRequest) (*Ip, *http.Response, error)
+
+	/*
+	OpenNetworkInterface Open network interface
+
+	Open all network interfaces of the given type for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param networkType The network type
+	@return ApiOpenNetworkInterfaceRequest
+	*/
+	OpenNetworkInterface(ctx context.Context, serverId string, networkType NetworkType) ApiOpenNetworkInterfaceRequest
+
+	// OpenNetworkInterfaceExecute executes the request
+	OpenNetworkInterfaceExecute(r ApiOpenNetworkInterfaceRequest) (*http.Response, error)
+
+	/*
+	OpenNetworkInterfaces Open all network interfaces
+
+	Open all network interfaces of this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiOpenNetworkInterfacesRequest
+	*/
+	OpenNetworkInterfaces(ctx context.Context, serverId string) ApiOpenNetworkInterfacesRequest
+
+	// OpenNetworkInterfacesExecute executes the request
+	OpenNetworkInterfacesExecute(r ApiOpenNetworkInterfacesRequest) (*http.Response, error)
+
+	/*
+	PowerCycleNetworkEquipment Power cycle a network equipment
+
+	Powercyle the network equipment.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@return ApiPowerCycleNetworkEquipmentRequest
+	*/
+	PowerCycleNetworkEquipment(ctx context.Context, networkEquipmentId string) ApiPowerCycleNetworkEquipmentRequest
+
+	// PowerCycleNetworkEquipmentExecute executes the request
+	PowerCycleNetworkEquipmentExecute(r ApiPowerCycleNetworkEquipmentRequest) (*http.Response, error)
+
+	/*
+	PowerCycleServer Power cycle a server
+
+	Powercyle the server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiPowerCycleServerRequest
+	*/
+	PowerCycleServer(ctx context.Context, serverId string) ApiPowerCycleServerRequest
+
+	// PowerCycleServerExecute executes the request
+	PowerCycleServerExecute(r ApiPowerCycleServerRequest) (*http.Response, error)
+
+	/*
+	PowerNetworkEquipmentOff Power off network equipment
+
+	Power off the given network equipment.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@return ApiPowerNetworkEquipmentOffRequest
+	*/
+	PowerNetworkEquipmentOff(ctx context.Context, networkEquipmentId string) ApiPowerNetworkEquipmentOffRequest
+
+	// PowerNetworkEquipmentOffExecute executes the request
+	PowerNetworkEquipmentOffExecute(r ApiPowerNetworkEquipmentOffRequest) (*http.Response, error)
+
+	/*
+	PowerNetworkEquipmentOn Power on network equipment
+
+	Power on the given network equipment.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@return ApiPowerNetworkEquipmentOnRequest
+	*/
+	PowerNetworkEquipmentOn(ctx context.Context, networkEquipmentId string) ApiPowerNetworkEquipmentOnRequest
+
+	// PowerNetworkEquipmentOnExecute executes the request
+	PowerNetworkEquipmentOnExecute(r ApiPowerNetworkEquipmentOnRequest) (*http.Response, error)
+
+	/*
+	PowerServerOff Power off server
+
+	Power off the given server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiPowerServerOffRequest
+	*/
+	PowerServerOff(ctx context.Context, serverId string) ApiPowerServerOffRequest
+
+	// PowerServerOffExecute executes the request
+	PowerServerOffExecute(r ApiPowerServerOffRequest) (*http.Response, error)
+
+	/*
+	PowerServerOn Power on server
+
+	Power on the given server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiPowerServerOnRequest
+	*/
+	PowerServerOn(ctx context.Context, serverId string) ApiPowerServerOnRequest
+
+	// PowerServerOnExecute executes the request
+	PowerServerOnExecute(r ApiPowerServerOnRequest) (*http.Response, error)
+
+	/*
+	RemoveNullIpRoute Remove a null route
+
+	Remove an existing null route for the given IP address. It might take a few
+minutes before the change is propagated across the network.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param ip The IP Address
+	@return ApiRemoveNullIpRouteRequest
+	*/
+	RemoveNullIpRoute(ctx context.Context, serverId string, ip string) ApiRemoveNullIpRouteRequest
+
+	// RemoveNullIpRouteExecute executes the request
+	//  @return Ip
+	RemoveNullIpRouteExecute(r ApiRemoveNullIpRouteRequest) (*Ip, *http.Response, error)
+
+	/*
+	RetryServerJob Retry a job
+
+	Retry a job for a specific server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param jobId The ID of a Job
+	@return ApiRetryServerJobRequest
+	*/
+	RetryServerJob(ctx context.Context, serverId string, jobId string) ApiRetryServerJobRequest
+
+	// RetryServerJobExecute executes the request
+	//  @return CurrentServerJob
+	RetryServerJobExecute(r ApiRetryServerJobRequest) (*CurrentServerJob, *http.Response, error)
+
+	/*
+	ScanHardware Launch hardware scan
+
+	A hardware scan collects hardware related information from your server.
+
+A hardware scan will require a reboot of your server. The contents of your
+hard drive won't be altered in any way. After a successful hardware scan your
+server is booted back into the original operating system.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiScanHardwareRequest
+	*/
+	ScanHardware(ctx context.Context, serverId string) ApiScanHardwareRequest
+
+	// ScanHardwareExecute executes the request
+	//  @return ServerJob
+	ScanHardwareExecute(r ApiScanHardwareRequest) (*ServerJob, *http.Response, error)
+
+	/*
+	UnNullNetworkEquipmentIpRoute Remove a null route
+
+	Remove an existing null route for the given IP address. It might take a few
+minutes before the change is propagated across the network.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@param ip The IP Address
+	@return ApiUnNullNetworkEquipmentIpRouteRequest
+	*/
+	UnNullNetworkEquipmentIpRoute(ctx context.Context, networkEquipmentId string, ip string) ApiUnNullNetworkEquipmentIpRouteRequest
+
+	// UnNullNetworkEquipmentIpRouteExecute executes the request
+	//  @return Ip
+	UnNullNetworkEquipmentIpRouteExecute(r ApiUnNullNetworkEquipmentIpRouteRequest) (*Ip, *http.Response, error)
+
+	/*
+	UpdateDdosNotificationSetting Update DDoS notification settings
+
+	Update your DDoS notification settings for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiUpdateDdosNotificationSettingRequest
+	*/
+	UpdateDdosNotificationSetting(ctx context.Context, serverId string) ApiUpdateDdosNotificationSettingRequest
+
+	// UpdateDdosNotificationSettingExecute executes the request
+	UpdateDdosNotificationSettingExecute(r ApiUpdateDdosNotificationSettingRequest) (*http.Response, error)
+
+	/*
+	UpdateIpProfile Update an IP
+
+	Update the reverse lookup or DDoS detection profile for the ip address.
+
+DDoS detection profiles can only be changed if the IP address is protected
+using Advanced DDoS protection.
+
+For more information about DDoS detection profiles [click here](https://kb.leaseweb.com/products/cyber-security/ddos-ip-protection#DDOSIPProtection-DDoSIPProtectionAdvancedDetectionprofiles) for our KB related article.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param ip The IP Address
+	@return ApiUpdateIpProfileRequest
+	*/
+	UpdateIpProfile(ctx context.Context, serverId string, ip string) ApiUpdateIpProfileRequest
+
+	// UpdateIpProfileExecute executes the request
+	//  @return Ip
+	UpdateIpProfileExecute(r ApiUpdateIpProfileRequest) (*Ip, *http.Response, error)
+
+	/*
+	UpdateNetworkEquipmentCredential Update network equipment credentials
+
+	The usernames or types cannot be changed. In order to change those remove this
+credentials and create a new one.
+
+This action is purely administrative and will only update the password
+associated with this resource in our database.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@param type_ Credential type
+	@param username Username
+	@return ApiUpdateNetworkEquipmentCredentialRequest
+	*/
+	UpdateNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ string, username string) ApiUpdateNetworkEquipmentCredentialRequest
+
+	// UpdateNetworkEquipmentCredentialExecute executes the request
+	//  @return Credential
+	UpdateNetworkEquipmentCredentialExecute(r ApiUpdateNetworkEquipmentCredentialRequest) (*Credential, *http.Response, error)
+
+	/*
+	UpdateNetworkEquipmentIp Update an IP
+
+	Update the reverse lookup or DDoS detection profile for the ip address.
+
+DDoS detection profiles can only be changed if the IP address is protected
+using Advanced DDoS protection.
+
+For more information about DDoS detection profiles [click here](https://kb.leaseweb.com/products/cyber-security/ddos-ip-protection#DDOSIPProtection-DDoSIPProtectionAdvancedDetectionprofiles) for our KB related article.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@param ip The IP Address
+	@return ApiUpdateNetworkEquipmentIpRequest
+	*/
+	UpdateNetworkEquipmentIp(ctx context.Context, networkEquipmentId string, ip string) ApiUpdateNetworkEquipmentIpRequest
+
+	// UpdateNetworkEquipmentIpExecute executes the request
+	//  @return Ip
+	UpdateNetworkEquipmentIpExecute(r ApiUpdateNetworkEquipmentIpRequest) (*Ip, *http.Response, error)
+
+	/*
+	UpdateNetworkEquipmentReference Update network equipment
+
+	Update the reference for a network equipment.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param networkEquipmentId The ID of a dedicated network equipment
+	@return ApiUpdateNetworkEquipmentReferenceRequest
+	*/
+	UpdateNetworkEquipmentReference(ctx context.Context, networkEquipmentId string) ApiUpdateNetworkEquipmentReferenceRequest
+
+	// UpdateNetworkEquipmentReferenceExecute executes the request
+	UpdateNetworkEquipmentReferenceExecute(r ApiUpdateNetworkEquipmentReferenceRequest) (*http.Response, error)
+
+	/*
+	UpdateServerBandwidthNotificationSetting Update a bandwidth notification setting
+
+	Update an existing bandwidth notification setting for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param notificationSettingId The ID of a notification setting
+	@return ApiUpdateServerBandwidthNotificationSettingRequest
+	*/
+	UpdateServerBandwidthNotificationSetting(ctx context.Context, serverId string, notificationSettingId string) ApiUpdateServerBandwidthNotificationSettingRequest
+
+	// UpdateServerBandwidthNotificationSettingExecute executes the request
+	//  @return BandwidthNotificationSetting
+	UpdateServerBandwidthNotificationSettingExecute(r ApiUpdateServerBandwidthNotificationSettingRequest) (*BandwidthNotificationSetting, *http.Response, error)
+
+	/*
+	UpdateServerCredential Update server credentials
+
+	The usernames or types cannot be changed. In order to change those remove this
+credentials and create a new one.
+
+This action is purely administrative and will only update the password
+associated with this resource in our database.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param type_ Credential type
+	@param username Username
+	@return ApiUpdateServerCredentialRequest
+	*/
+	UpdateServerCredential(ctx context.Context, serverId string, type_ string, username string) ApiUpdateServerCredentialRequest
+
+	// UpdateServerCredentialExecute executes the request
+	//  @return Credential
+	UpdateServerCredentialExecute(r ApiUpdateServerCredentialRequest) (*Credential, *http.Response, error)
+
+	/*
+	UpdateServerDataTrafficNotificationSetting Update a data traffic notification setting
+
+	Update an existing data traffic notification setting for this server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@param notificationSettingId The ID of a notification setting
+	@return ApiUpdateServerDataTrafficNotificationSettingRequest
+	*/
+	UpdateServerDataTrafficNotificationSetting(ctx context.Context, serverId string, notificationSettingId string) ApiUpdateServerDataTrafficNotificationSettingRequest
+
+	// UpdateServerDataTrafficNotificationSettingExecute executes the request
+	//  @return DataTrafficNotificationSettingOpts
+	UpdateServerDataTrafficNotificationSettingExecute(r ApiUpdateServerDataTrafficNotificationSettingRequest) (*DataTrafficNotificationSettingOpts, *http.Response, error)
+
+	/*
+	UpdateServerReference Update server
+
+	Update the reference for a server.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param serverId The ID of a server
+	@return ApiUpdateServerReferenceRequest
+	*/
+	UpdateServerReference(ctx context.Context, serverId string) ApiUpdateServerReferenceRequest
+
+	// UpdateServerReferenceExecute executes the request
+	UpdateServerReferenceExecute(r ApiUpdateServerReferenceRequest) (*http.Response, error)
+}
+
 // DedicatedServerAPIService DedicatedServerAPI service
 type DedicatedServerAPIService service
 
 type ApiAddServerToPrivateNetworkRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	privateNetworkId string
 	addServerToPrivateNetworkOpts *AddServerToPrivateNetworkOpts
@@ -216,7 +1636,7 @@ func (a *DedicatedServerAPIService) AddServerToPrivateNetworkExecute(r ApiAddSer
 
 type ApiCancelActiveJobRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -379,7 +1799,7 @@ func (a *DedicatedServerAPIService) CancelActiveJobExecute(r ApiCancelActiveJobR
 
 type ApiCloseNetworkInterfaceRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	networkType NetworkType
 }
@@ -533,7 +1953,7 @@ func (a *DedicatedServerAPIService) CloseNetworkInterfaceExecute(r ApiCloseNetwo
 
 type ApiCloseNetworkInterfacesRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -683,7 +2103,7 @@ func (a *DedicatedServerAPIService) CloseNetworkInterfacesExecute(r ApiCloseNetw
 
 type ApiCreateNetworkEquipmentCredentialRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	createNetworkEquipmentCredentialOpts *CreateNetworkEquipmentCredentialOpts
 }
@@ -854,7 +2274,7 @@ func (a *DedicatedServerAPIService) CreateNetworkEquipmentCredentialExecute(r Ap
 
 type ApiCreateServerBandwidthNotificationSettingRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	bandwidthNotificationSettingOpts *BandwidthNotificationSettingOpts
 }
@@ -1034,7 +2454,7 @@ func (a *DedicatedServerAPIService) CreateServerBandwidthNotificationSettingExec
 
 type ApiCreateServerCredentialRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	createServerCredentialOpts *CreateServerCredentialOpts
 }
@@ -1205,7 +2625,7 @@ func (a *DedicatedServerAPIService) CreateServerCredentialExecute(r ApiCreateSer
 
 type ApiCreateServerDataTrafficNotificationSettingRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	dataTrafficNotificationSettingOpts *DataTrafficNotificationSettingOpts
 }
@@ -1385,7 +2805,7 @@ func (a *DedicatedServerAPIService) CreateServerDataTrafficNotificationSettingEx
 
 type ApiCreateServerDhcpReservationRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	createServerDhcpReservationOpts *CreateServerDhcpReservationOpts
 }
@@ -1557,7 +2977,7 @@ func (a *DedicatedServerAPIService) CreateServerDhcpReservationExecute(r ApiCrea
 
 type ApiDeleteNetworkEquipmentCredentialRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	type_ string
 	username string
@@ -1716,7 +3136,7 @@ func (a *DedicatedServerAPIService) DeleteNetworkEquipmentCredentialExecute(r Ap
 
 type ApiDeleteServerBandwidthNotificationSettingRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	notificationSettingId string
 }
@@ -1870,7 +3290,7 @@ func (a *DedicatedServerAPIService) DeleteServerBandwidthNotificationSettingExec
 
 type ApiDeleteServerCredentialRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	type_ string
 	username string
@@ -2029,7 +3449,7 @@ func (a *DedicatedServerAPIService) DeleteServerCredentialExecute(r ApiDeleteSer
 
 type ApiDeleteServerDataTrafficNotificationSettingRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	notificationSettingId string
 }
@@ -2183,7 +3603,7 @@ func (a *DedicatedServerAPIService) DeleteServerDataTrafficNotificationSettingEx
 
 type ApiDeleteServerDhcpReservationRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -2333,7 +3753,7 @@ func (a *DedicatedServerAPIService) DeleteServerDhcpReservationExecute(r ApiDele
 
 type ApiDeleteServerFromPrivateNetworkRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	privateNetworkId string
 }
@@ -2517,7 +3937,7 @@ func (a *DedicatedServerAPIService) DeleteServerFromPrivateNetworkExecute(r ApiD
 
 type ApiEnableServerRescueModeRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	enableServerRescueModeOpts *EnableServerRescueModeOpts
 }
@@ -2710,7 +4130,7 @@ func (a *DedicatedServerAPIService) EnableServerRescueModeExecute(r ApiEnableSer
 
 type ApiExpireActiveJobRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -2875,7 +4295,7 @@ func (a *DedicatedServerAPIService) ExpireActiveJobExecute(r ApiExpireActiveJobR
 
 type ApiGetControlPanelListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	limit *int32
 	offset *int32
 }
@@ -3054,7 +4474,7 @@ func (a *DedicatedServerAPIService) GetControlPanelListExecute(r ApiGetControlPa
 
 type ApiGetControlPanelListByOperatingSystemIdRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	operatingSystemId string
 	limit *int32
 	offset *int32
@@ -3242,7 +4662,7 @@ func (a *DedicatedServerAPIService) GetControlPanelListByOperatingSystemIdExecut
 
 type ApiGetDdosNotificationSettingRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -3416,7 +4836,7 @@ func (a *DedicatedServerAPIService) GetDdosNotificationSettingExecute(r ApiGetDd
 
 type ApiGetNetworkEquipmentRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 }
 
@@ -3588,7 +5008,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentExecute(r ApiGetNetworkEq
 
 type ApiGetNetworkEquipmentCredentialRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	type_ string
 	username string
@@ -3758,7 +5178,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentCredentialExecute(r ApiGe
 
 type ApiGetNetworkEquipmentCredentialListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	limit *int32
 	offset *int32
@@ -3939,7 +5359,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentCredentialListExecute(r A
 
 type ApiGetNetworkEquipmentCredentialListByTypeRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	type_ string
 	limit *int32
@@ -4125,7 +5545,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentCredentialListByTypeExecu
 
 type ApiGetNetworkEquipmentIpRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	ip string
 }
@@ -4301,7 +5721,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentIpExecute(r ApiGetNetwork
 
 type ApiGetNetworkEquipmentIpListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	networkType *NetworkType
 	version *string
@@ -4523,7 +5943,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentIpListExecute(r ApiGetNet
 
 type ApiGetNetworkEquipmentListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	limit *int32
 	offset *int32
 	reference *string
@@ -4776,7 +6196,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentListExecute(r ApiGetNetwo
 
 type ApiGetNetworkEquipmentNullRouteHistoryRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	limit *int32
 	offset *int32
@@ -4958,7 +6378,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentNullRouteHistoryExecute(r
 
 type ApiGetNetworkEquipmentPowerStatusRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 }
 
@@ -5138,7 +6558,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentPowerStatusExecute(r ApiG
 
 type ApiGetNetworkInterfaceRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	networkType NetworkType
 }
@@ -5304,7 +6724,7 @@ func (a *DedicatedServerAPIService) GetNetworkInterfaceExecute(r ApiGetNetworkIn
 
 type ApiGetNetworkInterfaceListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -5465,7 +6885,7 @@ func (a *DedicatedServerAPIService) GetNetworkInterfaceListExecute(r ApiGetNetwo
 
 type ApiGetOperatingSystemRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	operatingSystemId string
 	controlPanelId *string
 }
@@ -5642,7 +7062,7 @@ func (a *DedicatedServerAPIService) GetOperatingSystemExecute(r ApiGetOperatingS
 
 type ApiGetOperatingSystemListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	limit *int32
 	offset *int32
 	controlPanelId *string
@@ -5831,7 +7251,7 @@ func (a *DedicatedServerAPIService) GetOperatingSystemListExecute(r ApiGetOperat
 
 type ApiGetRescueImageListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	limit *int32
 	offset *int32
 }
@@ -6018,7 +7438,7 @@ func (a *DedicatedServerAPIService) GetRescueImageListExecute(r ApiGetRescueImag
 
 type ApiGetServerRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -6190,7 +7610,7 @@ func (a *DedicatedServerAPIService) GetServerExecute(r ApiGetServerRequest) (*Se
 
 type ApiGetServerBandwidthMetricsRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	from *time.Time
 	to *time.Time
@@ -6405,7 +7825,7 @@ func (a *DedicatedServerAPIService) GetServerBandwidthMetricsExecute(r ApiGetSer
 
 type ApiGetServerBandwidthNotificationSettingRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	notificationSettingId string
 }
@@ -6570,7 +7990,7 @@ func (a *DedicatedServerAPIService) GetServerBandwidthNotificationSettingExecute
 
 type ApiGetServerBandwidthNotificationSettingListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	limit *int32
 	offset *int32
@@ -6751,7 +8171,7 @@ func (a *DedicatedServerAPIService) GetServerBandwidthNotificationSettingListExe
 
 type ApiGetServerCredentialRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	type_ string
 	username string
@@ -6922,7 +8342,7 @@ func (a *DedicatedServerAPIService) GetServerCredentialExecute(r ApiGetServerCre
 
 type ApiGetServerCredentialListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	limit *int32
 	offset *int32
@@ -7106,7 +8526,7 @@ func (a *DedicatedServerAPIService) GetServerCredentialListExecute(r ApiGetServe
 
 type ApiGetServerCredentialListByTypeRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	type_ string
 	limit *int32
@@ -7292,7 +8712,7 @@ func (a *DedicatedServerAPIService) GetServerCredentialListByTypeExecute(r ApiGe
 
 type ApiGetServerDataTrafficMetricsRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	from *time.Time
 	to *time.Time
@@ -7507,7 +8927,7 @@ func (a *DedicatedServerAPIService) GetServerDataTrafficMetricsExecute(r ApiGetS
 
 type ApiGetServerDataTrafficNotificationSettingRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	notificationSettingId string
 }
@@ -7672,7 +9092,7 @@ func (a *DedicatedServerAPIService) GetServerDataTrafficNotificationSettingExecu
 
 type ApiGetServerDataTrafficNotificationSettingListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	limit *int32
 	offset *int32
@@ -7853,7 +9273,7 @@ func (a *DedicatedServerAPIService) GetServerDataTrafficNotificationSettingListE
 
 type ApiGetServerDhcpReservationListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -8015,7 +9435,7 @@ func (a *DedicatedServerAPIService) GetServerDhcpReservationListExecute(r ApiGet
 
 type ApiGetServerHardwareRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -8188,7 +9608,7 @@ func (a *DedicatedServerAPIService) GetServerHardwareExecute(r ApiGetServerHardw
 
 type ApiGetServerIpRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	ip string
 }
@@ -8364,7 +9784,7 @@ func (a *DedicatedServerAPIService) GetServerIpExecute(r ApiGetServerIpRequest) 
 
 type ApiGetServerIpListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	networkType *NetworkType
 	version *string
@@ -8585,7 +10005,7 @@ func (a *DedicatedServerAPIService) GetServerIpListExecute(r ApiGetServerIpListR
 
 type ApiGetServerJobRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	jobId string
 }
@@ -8750,7 +10170,7 @@ func (a *DedicatedServerAPIService) GetServerJobExecute(r ApiGetServerJobRequest
 
 type ApiGetServerJobListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	limit *int32
 	offset *int32
@@ -8961,7 +10381,7 @@ func (a *DedicatedServerAPIService) GetServerJobListExecute(r ApiGetServerJobLis
 
 type ApiGetServerListRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	limit *int32
 	offset *int32
 	reference *string
@@ -9213,7 +10633,7 @@ func (a *DedicatedServerAPIService) GetServerListExecute(r ApiGetServerListReque
 
 type ApiGetServerNullRouteHistoryRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	limit *int32
 	offset *int32
@@ -9394,7 +10814,7 @@ func (a *DedicatedServerAPIService) GetServerNullRouteHistoryExecute(r ApiGetSer
 
 type ApiGetServerPowerStatusRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -9578,7 +10998,7 @@ func (a *DedicatedServerAPIService) GetServerPowerStatusExecute(r ApiGetServerPo
 
 type ApiInstallOperatingSystemRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	installOperatingSystemOpts *InstallOperatingSystemOpts
 }
@@ -9773,7 +11193,7 @@ func (a *DedicatedServerAPIService) InstallOperatingSystemExecute(r ApiInstallOp
 
 type ApiIpmiResetServerRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	ipmiResetServerOpts *IpmiResetServerOpts
 }
@@ -9958,7 +11378,7 @@ func (a *DedicatedServerAPIService) IpmiResetServerExecute(r ApiIpmiResetServerR
 
 type ApiNullIpRouteRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	ip string
 }
@@ -10135,7 +11555,7 @@ func (a *DedicatedServerAPIService) NullIpRouteExecute(r ApiNullIpRouteRequest) 
 
 type ApiNullNetworkEquipmentIpRouteRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	ip string
 }
@@ -10312,7 +11732,7 @@ func (a *DedicatedServerAPIService) NullNetworkEquipmentIpRouteExecute(r ApiNull
 
 type ApiOpenNetworkInterfaceRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	networkType NetworkType
 }
@@ -10466,7 +11886,7 @@ func (a *DedicatedServerAPIService) OpenNetworkInterfaceExecute(r ApiOpenNetwork
 
 type ApiOpenNetworkInterfacesRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -10616,7 +12036,7 @@ func (a *DedicatedServerAPIService) OpenNetworkInterfacesExecute(r ApiOpenNetwor
 
 type ApiPowerCycleNetworkEquipmentRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 }
 
@@ -10777,7 +12197,7 @@ func (a *DedicatedServerAPIService) PowerCycleNetworkEquipmentExecute(r ApiPower
 
 type ApiPowerCycleServerRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -10938,7 +12358,7 @@ func (a *DedicatedServerAPIService) PowerCycleServerExecute(r ApiPowerCycleServe
 
 type ApiPowerNetworkEquipmentOffRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 }
 
@@ -11099,7 +12519,7 @@ func (a *DedicatedServerAPIService) PowerNetworkEquipmentOffExecute(r ApiPowerNe
 
 type ApiPowerNetworkEquipmentOnRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 }
 
@@ -11260,7 +12680,7 @@ func (a *DedicatedServerAPIService) PowerNetworkEquipmentOnExecute(r ApiPowerNet
 
 type ApiPowerServerOffRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -11421,7 +12841,7 @@ func (a *DedicatedServerAPIService) PowerServerOffExecute(r ApiPowerServerOffReq
 
 type ApiPowerServerOnRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 }
 
@@ -11582,7 +13002,7 @@ func (a *DedicatedServerAPIService) PowerServerOnExecute(r ApiPowerServerOnReque
 
 type ApiRemoveNullIpRouteRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	ip string
 }
@@ -11759,7 +13179,7 @@ func (a *DedicatedServerAPIService) RemoveNullIpRouteExecute(r ApiRemoveNullIpRo
 
 type ApiRetryServerJobRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	jobId string
 }
@@ -11946,7 +13366,7 @@ func (a *DedicatedServerAPIService) RetryServerJobExecute(r ApiRetryServerJobReq
 
 type ApiScanHardwareRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	scanHardwareOpts *ScanHardwareOpts
 }
@@ -12130,7 +13550,7 @@ func (a *DedicatedServerAPIService) ScanHardwareExecute(r ApiScanHardwareRequest
 
 type ApiUnNullNetworkEquipmentIpRouteRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	ip string
 }
@@ -12307,7 +13727,7 @@ func (a *DedicatedServerAPIService) UnNullNetworkEquipmentIpRouteExecute(r ApiUn
 
 type ApiUpdateDdosNotificationSettingRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	updateDdosNotificationSettingOpts *UpdateDdosNotificationSettingOpts
 }
@@ -12476,7 +13896,7 @@ func (a *DedicatedServerAPIService) UpdateDdosNotificationSettingExecute(r ApiUp
 
 type ApiUpdateIpProfileRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	ip string
 	updateIpProfileOpts *UpdateIpProfileOpts
@@ -12665,7 +14085,7 @@ func (a *DedicatedServerAPIService) UpdateIpProfileExecute(r ApiUpdateIpProfileR
 
 type ApiUpdateNetworkEquipmentCredentialRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	type_ string
 	username string
@@ -12857,7 +14277,7 @@ func (a *DedicatedServerAPIService) UpdateNetworkEquipmentCredentialExecute(r Ap
 
 type ApiUpdateNetworkEquipmentIpRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	ip string
 	updateNetworkEquipmentIpOpts *UpdateNetworkEquipmentIpOpts
@@ -13046,7 +14466,7 @@ func (a *DedicatedServerAPIService) UpdateNetworkEquipmentIpExecute(r ApiUpdateN
 
 type ApiUpdateNetworkEquipmentReferenceRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	networkEquipmentId string
 	updateNetworkEquipmentReferenceOpts *UpdateNetworkEquipmentReferenceOpts
 }
@@ -13207,7 +14627,7 @@ func (a *DedicatedServerAPIService) UpdateNetworkEquipmentReferenceExecute(r Api
 
 type ApiUpdateServerBandwidthNotificationSettingRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	notificationSettingId string
 	bandwidthNotificationSettingOpts *BandwidthNotificationSettingOpts
@@ -13380,7 +14800,7 @@ func (a *DedicatedServerAPIService) UpdateServerBandwidthNotificationSettingExec
 
 type ApiUpdateServerCredentialRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	type_ string
 	username string
@@ -13572,7 +14992,7 @@ func (a *DedicatedServerAPIService) UpdateServerCredentialExecute(r ApiUpdateSer
 
 type ApiUpdateServerDataTrafficNotificationSettingRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	notificationSettingId string
 	dataTrafficNotificationSettingOpts *DataTrafficNotificationSettingOpts
@@ -13745,7 +15165,7 @@ func (a *DedicatedServerAPIService) UpdateServerDataTrafficNotificationSettingEx
 
 type ApiUpdateServerReferenceRequest struct {
 	ctx context.Context
-	ApiService *DedicatedServerAPIService
+	ApiService DedicatedServerAPI
 	serverId string
 	updateServerReferenceOpts *UpdateServerReferenceOpts
 }

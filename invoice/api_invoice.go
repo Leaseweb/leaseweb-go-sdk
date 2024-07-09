@@ -20,12 +20,72 @@ import (
 )
 
 
+type InvoiceAPI interface {
+
+	/*
+	GetInvoice Inspect an invoice
+
+	This endpoint will return a single invoice for the customer.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param invoiceId Invoice Id
+	@return ApiGetInvoiceRequest
+	*/
+	GetInvoice(ctx context.Context, invoiceId string) ApiGetInvoiceRequest
+
+	// GetInvoiceExecute executes the request
+	//  @return GetInvoiceResult
+	GetInvoiceExecute(r ApiGetInvoiceRequest) (*GetInvoiceResult, *http.Response, error)
+
+	/*
+	GetInvoiceList List invoices
+
+	This endpoint will return an overview of all the invoices for the customer.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetInvoiceListRequest
+	*/
+	GetInvoiceList(ctx context.Context) ApiGetInvoiceListRequest
+
+	// GetInvoiceListExecute executes the request
+	//  @return GetInvoiceListResult
+	GetInvoiceListExecute(r ApiGetInvoiceListRequest) (*GetInvoiceListResult, *http.Response, error)
+
+	/*
+	GetInvoicePdf Get invoice PDF
+
+	This endpoint will return a PDf of a single invoice for the customer.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param invoiceId Invoice Id
+	@return ApiGetInvoicePdfRequest
+	*/
+	GetInvoicePdf(ctx context.Context, invoiceId string) ApiGetInvoicePdfRequest
+
+	// GetInvoicePdfExecute executes the request
+	GetInvoicePdfExecute(r ApiGetInvoicePdfRequest) (*http.Response, error)
+
+	/*
+	GetProforma Pro Forma
+
+	This endpoint will return an overview of contract items that will be invoiced as of the 1st of the upcoming month.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetProformaRequest
+	*/
+	GetProforma(ctx context.Context) ApiGetProformaRequest
+
+	// GetProformaExecute executes the request
+	//  @return GetProformaResult
+	GetProformaExecute(r ApiGetProformaRequest) (*GetProformaResult, *http.Response, error)
+}
+
 // InvoiceAPIService InvoiceAPI service
 type InvoiceAPIService service
 
 type ApiGetInvoiceRequest struct {
 	ctx context.Context
-	ApiService *InvoiceAPIService
+	ApiService InvoiceAPI
 	invoiceId string
 }
 
@@ -185,7 +245,7 @@ func (a *InvoiceAPIService) GetInvoiceExecute(r ApiGetInvoiceRequest) (*GetInvoi
 
 type ApiGetInvoiceListRequest struct {
 	ctx context.Context
-	ApiService *InvoiceAPIService
+	ApiService InvoiceAPI
 	limit *int32
 	offset *int32
 }
@@ -361,7 +421,7 @@ func (a *InvoiceAPIService) GetInvoiceListExecute(r ApiGetInvoiceListRequest) (*
 
 type ApiGetInvoicePdfRequest struct {
 	ctx context.Context
-	ApiService *InvoiceAPIService
+	ApiService InvoiceAPI
 	invoiceId string
 }
 
@@ -510,7 +570,7 @@ func (a *InvoiceAPIService) GetInvoicePdfExecute(r ApiGetInvoicePdfRequest) (*ht
 
 type ApiGetProformaRequest struct {
 	ctx context.Context
-	ApiService *InvoiceAPIService
+	ApiService InvoiceAPI
 	limit *int32
 	offset *int32
 }

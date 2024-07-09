@@ -49,7 +49,7 @@ type APIClient struct {
 
 	// API Services
 
-	AbuseAPI *AbuseAPIService
+	AbuseAPI AbuseAPI
 }
 
 type service struct {

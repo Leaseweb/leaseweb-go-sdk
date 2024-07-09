@@ -20,12 +20,957 @@ import (
 )
 
 
+type PublicCloudAPI interface {
+
+	/*
+	AddToPrivateNetwork Add instance to Private Network
+
+	Add instance to Private Network.
+
+Cannot be performed when the instance has snapshots.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiAddToPrivateNetworkRequest
+	*/
+	AddToPrivateNetwork(ctx context.Context, instanceId string) ApiAddToPrivateNetworkRequest
+
+	// AddToPrivateNetworkExecute executes the request
+	AddToPrivateNetworkExecute(r ApiAddToPrivateNetworkRequest) (*http.Response, error)
+
+	/*
+	AttachIso Attach ISO to instance
+
+	Instance must not have ISO attached, otherwise, it will return a validation error.
+
+Available ISOs can be obtained using `/v1/isos`.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiAttachIsoRequest
+	*/
+	AttachIso(ctx context.Context, instanceId string) ApiAttachIsoRequest
+
+	// AttachIsoExecute executes the request
+	AttachIsoExecute(r ApiAttachIsoRequest) (*http.Response, error)
+
+	/*
+	CancelInstanceTermination Cancel instance termination
+
+	Cancel the termination process of monthly instances. Must be executed prior to the instance's `contractEndsAt`.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiCancelInstanceTerminationRequest
+	*/
+	CancelInstanceTermination(ctx context.Context, instanceId string) ApiCancelInstanceTerminationRequest
+
+	// CancelInstanceTerminationExecute executes the request
+	CancelInstanceTerminationExecute(r ApiCancelInstanceTerminationRequest) (*http.Response, error)
+
+	/*
+	CreateAutoScalingGroup Create Auto Scaling Group
+
+	Create an Auto Scaling Group.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateAutoScalingGroupRequest
+	*/
+	CreateAutoScalingGroup(ctx context.Context) ApiCreateAutoScalingGroupRequest
+
+	// CreateAutoScalingGroupExecute executes the request
+	//  @return AutoScalingGroupDetails
+	CreateAutoScalingGroupExecute(r ApiCreateAutoScalingGroupRequest) (*AutoScalingGroupDetails, *http.Response, error)
+
+	/*
+	CreateLoadBalancerListener Create listener
+
+	Create listener
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param loadBalancerId Load balancer ID
+	@return ApiCreateLoadBalancerListenerRequest
+	*/
+	CreateLoadBalancerListener(ctx context.Context, loadBalancerId string) ApiCreateLoadBalancerListenerRequest
+
+	// CreateLoadBalancerListenerExecute executes the request
+	//  @return LoadBalancerListener
+	CreateLoadBalancerListenerExecute(r ApiCreateLoadBalancerListenerRequest) (*LoadBalancerListener, *http.Response, error)
+
+	/*
+	CreateSnapshot Create instance snapshot
+
+	The instance must be running before the execution.
+
+The time taken to create the snapshot depends on several factors, including memory size and usage.
+
+Allowed only one snapshot per instance.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiCreateSnapshotRequest
+	*/
+	CreateSnapshot(ctx context.Context, instanceId string) ApiCreateSnapshotRequest
+
+	// CreateSnapshotExecute executes the request
+	CreateSnapshotExecute(r ApiCreateSnapshotRequest) (*http.Response, error)
+
+	/*
+	DeleteAutoScalingGroup Delete Auto Scaling Group
+
+	Delete an Auto Scaling Group.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param autoScalingGroupId Auto Scaling Group ID
+	@return ApiDeleteAutoScalingGroupRequest
+	*/
+	DeleteAutoScalingGroup(ctx context.Context, autoScalingGroupId string) ApiDeleteAutoScalingGroupRequest
+
+	// DeleteAutoScalingGroupExecute executes the request
+	DeleteAutoScalingGroupExecute(r ApiDeleteAutoScalingGroupRequest) (*http.Response, error)
+
+	/*
+	DeleteCredential Delete credentials
+
+	Delete credential for a given type and username
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param type_ Credential type
+	@param username Username
+	@return ApiDeleteCredentialRequest
+	*/
+	DeleteCredential(ctx context.Context, instanceId string, type_ string, username string) ApiDeleteCredentialRequest
+
+	// DeleteCredentialExecute executes the request
+	DeleteCredentialExecute(r ApiDeleteCredentialRequest) (*http.Response, error)
+
+	/*
+	DeleteCredentials Delete all instance credentials
+
+	Delete all credentials stored for a given instance
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiDeleteCredentialsRequest
+	*/
+	DeleteCredentials(ctx context.Context, instanceId string) ApiDeleteCredentialsRequest
+
+	// DeleteCredentialsExecute executes the request
+	DeleteCredentialsExecute(r ApiDeleteCredentialsRequest) (*http.Response, error)
+
+	/*
+	DeleteLoadBalancerListener Delete load balancer listener
+
+	Delete a listener
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param loadBalancerId Load balancer ID
+	@param listenerId Listener ID
+	@return ApiDeleteLoadBalancerListenerRequest
+	*/
+	DeleteLoadBalancerListener(ctx context.Context, loadBalancerId string, listenerId string) ApiDeleteLoadBalancerListenerRequest
+
+	// DeleteLoadBalancerListenerExecute executes the request
+	DeleteLoadBalancerListenerExecute(r ApiDeleteLoadBalancerListenerRequest) (*http.Response, error)
+
+	/*
+	DeleteSnapshot Delete instance snapshot
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param snapshotId
+	@return ApiDeleteSnapshotRequest
+	*/
+	DeleteSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiDeleteSnapshotRequest
+
+	// DeleteSnapshotExecute executes the request
+	DeleteSnapshotExecute(r ApiDeleteSnapshotRequest) (*http.Response, error)
+
+	/*
+	DeregisterAutoScalingGroupLoadBalancer Deregister Load balancer
+
+	Disassociates a Load Balancer from an Auto Scaling Group, stopping the distribution of incoming traffic to the instances within the group.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param autoScalingGroupId Auto Scaling Group ID
+	@return ApiDeregisterAutoScalingGroupLoadBalancerRequest
+	*/
+	DeregisterAutoScalingGroupLoadBalancer(ctx context.Context, autoScalingGroupId string) ApiDeregisterAutoScalingGroupLoadBalancerRequest
+
+	// DeregisterAutoScalingGroupLoadBalancerExecute executes the request
+	//  @return AutoScalingGroupDetails
+	DeregisterAutoScalingGroupLoadBalancerExecute(r ApiDeregisterAutoScalingGroupLoadBalancerRequest) (*AutoScalingGroupDetails, *http.Response, error)
+
+	/*
+	DeregisterLoadBalancerTargets Deregister targets
+
+	Deregister targets registered in a load balancer.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param loadBalancerId Load balancer ID
+	@return ApiDeregisterLoadBalancerTargetsRequest
+	*/
+	DeregisterLoadBalancerTargets(ctx context.Context, loadBalancerId string) ApiDeregisterLoadBalancerTargetsRequest
+
+	// DeregisterLoadBalancerTargetsExecute executes the request
+	DeregisterLoadBalancerTargetsExecute(r ApiDeregisterLoadBalancerTargetsRequest) (*http.Response, error)
+
+	/*
+	DetachIso Detach ISO from instance
+
+	Instance must have ISO attached, otherwise, it will return a validation error
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiDetachIsoRequest
+	*/
+	DetachIso(ctx context.Context, instanceId string) ApiDetachIsoRequest
+
+	// DetachIsoExecute executes the request
+	DetachIsoExecute(r ApiDetachIsoRequest) (*http.Response, error)
+
+	/*
+	GetAutoScalingGroup Get Auto Scaling Group details
+
+	Get details about Auto Scaling Group.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param autoScalingGroupId Auto Scaling Group ID
+	@return ApiGetAutoScalingGroupRequest
+	*/
+	GetAutoScalingGroup(ctx context.Context, autoScalingGroupId string) ApiGetAutoScalingGroupRequest
+
+	// GetAutoScalingGroupExecute executes the request
+	//  @return AutoScalingGroupDetails
+	GetAutoScalingGroupExecute(r ApiGetAutoScalingGroupRequest) (*AutoScalingGroupDetails, *http.Response, error)
+
+	/*
+	GetAutoScalingGroupInstanceList Get list of instances belonging to an Auto Scaling Group
+
+	List instances belonging to an Auto Scaling Group
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param autoScalingGroupId Auto Scaling Group ID
+	@return ApiGetAutoScalingGroupInstanceListRequest
+	*/
+	GetAutoScalingGroupInstanceList(ctx context.Context, autoScalingGroupId string) ApiGetAutoScalingGroupInstanceListRequest
+
+	// GetAutoScalingGroupInstanceListExecute executes the request
+	//  @return GetAutoScalingGroupInstanceListResult
+	GetAutoScalingGroupInstanceListExecute(r ApiGetAutoScalingGroupInstanceListRequest) (*GetAutoScalingGroupInstanceListResult, *http.Response, error)
+
+	/*
+	GetAutoScalingGroupList Get Auto Scaling Group list
+
+	List and filter Auto Scaling Groups
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetAutoScalingGroupListRequest
+	*/
+	GetAutoScalingGroupList(ctx context.Context) ApiGetAutoScalingGroupListRequest
+
+	// GetAutoScalingGroupListExecute executes the request
+	//  @return GetAutoScalingGroupListResult
+	GetAutoScalingGroupListExecute(r ApiGetAutoScalingGroupListRequest) (*GetAutoScalingGroupListResult, *http.Response, error)
+
+	/*
+	GetConsoleAccessToInstance Get console access
+
+	Get console access to the instance
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetConsoleAccessToInstanceRequest
+	*/
+	GetConsoleAccessToInstance(ctx context.Context, instanceId string) ApiGetConsoleAccessToInstanceRequest
+
+	// GetConsoleAccessToInstanceExecute executes the request
+	//  @return GetConsoleAccessToInstanceResult
+	GetConsoleAccessToInstanceExecute(r ApiGetConsoleAccessToInstanceRequest) (*GetConsoleAccessToInstanceResult, *http.Response, error)
+
+	/*
+	GetCpuMetrics Get instance CPU metrics
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetCpuMetricsRequest
+	*/
+	GetCpuMetrics(ctx context.Context, instanceId string) ApiGetCpuMetricsRequest
+
+	// GetCpuMetricsExecute executes the request
+	//  @return GetCpuMetricsResult
+	GetCpuMetricsExecute(r ApiGetCpuMetricsRequest) (*GetCpuMetricsResult, *http.Response, error)
+
+	/*
+	GetCredential Get credentials by type and username
+
+	Get credentials by type and username
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param type_ Credential type
+	@param username Username
+	@return ApiGetCredentialRequest
+	*/
+	GetCredential(ctx context.Context, instanceId string, type_ string, username string) ApiGetCredentialRequest
+
+	// GetCredentialExecute executes the request
+	//  @return GetCredentialResult
+	GetCredentialExecute(r ApiGetCredentialRequest) (*GetCredentialResult, *http.Response, error)
+
+	/*
+	GetCredentialList List credentials stored for instance
+
+	Get all credentials stored for the instance
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetCredentialListRequest
+	*/
+	GetCredentialList(ctx context.Context, instanceId string) ApiGetCredentialListRequest
+
+	// GetCredentialListExecute executes the request
+	//  @return GetCredentialListResult
+	GetCredentialListExecute(r ApiGetCredentialListRequest) (*GetCredentialListResult, *http.Response, error)
+
+	/*
+	GetCredentialListByType Get credentials by type
+
+	Get credentials stored for the instance by their types
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param type_
+	@return ApiGetCredentialListByTypeRequest
+	*/
+	GetCredentialListByType(ctx context.Context, instanceId string, type_ string) ApiGetCredentialListByTypeRequest
+
+	// GetCredentialListByTypeExecute executes the request
+	//  @return GetCredentialListByTypeResult
+	GetCredentialListByTypeExecute(r ApiGetCredentialListByTypeRequest) (*GetCredentialListByTypeResult, *http.Response, error)
+
+	/*
+	GetDataTrafficMetrics Get instance data traffic metrics
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetDataTrafficMetricsRequest
+	*/
+	GetDataTrafficMetrics(ctx context.Context, instanceId string) ApiGetDataTrafficMetricsRequest
+
+	// GetDataTrafficMetricsExecute executes the request
+	//  @return GetDataTrafficMetricsResult
+	GetDataTrafficMetricsExecute(r ApiGetDataTrafficMetricsRequest) (*GetDataTrafficMetricsResult, *http.Response, error)
+
+	/*
+	GetExpenses Get costs for a given month.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param equipmentId Equipment's UUID
+	@return ApiGetExpensesRequest
+	*/
+	GetExpenses(ctx context.Context, equipmentId string) ApiGetExpensesRequest
+
+	// GetExpensesExecute executes the request
+	//  @return GetExpensesResult
+	GetExpensesExecute(r ApiGetExpensesRequest) (*GetExpensesResult, *http.Response, error)
+
+	/*
+	GetImageList List all available Images
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetImageListRequest
+	*/
+	GetImageList(ctx context.Context) ApiGetImageListRequest
+
+	// GetImageListExecute executes the request
+	//  @return GetImageListResult
+	GetImageListExecute(r ApiGetImageListRequest) (*GetImageListResult, *http.Response, error)
+
+	/*
+	GetInstance Get instance details
+
+	Get details about the instance
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetInstanceRequest
+	*/
+	GetInstance(ctx context.Context, instanceId string) ApiGetInstanceRequest
+
+	// GetInstanceExecute executes the request
+	//  @return InstanceDetails
+	GetInstanceExecute(r ApiGetInstanceRequest) (*InstanceDetails, *http.Response, error)
+
+	/*
+	GetInstanceList Get instance list
+
+	List and filter instances
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetInstanceListRequest
+	*/
+	GetInstanceList(ctx context.Context) ApiGetInstanceListRequest
+
+	// GetInstanceListExecute executes the request
+	//  @return GetInstanceListResult
+	GetInstanceListExecute(r ApiGetInstanceListRequest) (*GetInstanceListResult, *http.Response, error)
+
+	/*
+	GetInstanceTypeList List instance types
+
+	Get instance types
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetInstanceTypeListRequest
+	*/
+	GetInstanceTypeList(ctx context.Context) ApiGetInstanceTypeListRequest
+
+	// GetInstanceTypeListExecute executes the request
+	//  @return InstanceTypes
+	GetInstanceTypeListExecute(r ApiGetInstanceTypeListRequest) (*InstanceTypes, *http.Response, error)
+
+	/*
+	GetIp Get details about an instance's IP
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param ip
+	@return ApiGetIpRequest
+	*/
+	GetIp(ctx context.Context, instanceId string, ip string) ApiGetIpRequest
+
+	// GetIpExecute executes the request
+	//  @return IpDetails
+	GetIpExecute(r ApiGetIpRequest) (*IpDetails, *http.Response, error)
+
+	/*
+	GetIpList List instance's IPs
+
+	List the instance's IPs
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetIpListRequest
+	*/
+	GetIpList(ctx context.Context, instanceId string) ApiGetIpListRequest
+
+	// GetIpListExecute executes the request
+	//  @return GetIpListResult
+	GetIpListExecute(r ApiGetIpListRequest) (*GetIpListResult, *http.Response, error)
+
+	/*
+	GetIsoList List available ISOs
+
+	List all available ISO images
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetIsoListRequest
+	*/
+	GetIsoList(ctx context.Context) ApiGetIsoListRequest
+
+	// GetIsoListExecute executes the request
+	//  @return GetIsoListResult
+	GetIsoListExecute(r ApiGetIsoListRequest) (*GetIsoListResult, *http.Response, error)
+
+	/*
+	GetLoadBalancer Get load balancer details
+
+	Get details about the load balancer
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param loadBalancerId Load balancer ID
+	@return ApiGetLoadBalancerRequest
+	*/
+	GetLoadBalancer(ctx context.Context, loadBalancerId string) ApiGetLoadBalancerRequest
+
+	// GetLoadBalancerExecute executes the request
+	//  @return LoadBalancerDetails
+	GetLoadBalancerExecute(r ApiGetLoadBalancerRequest) (*LoadBalancerDetails, *http.Response, error)
+
+	/*
+	GetLoadBalancerList Get load balancer list
+
+	List and filter load balancers
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLoadBalancerListRequest
+	*/
+	GetLoadBalancerList(ctx context.Context) ApiGetLoadBalancerListRequest
+
+	// GetLoadBalancerListExecute executes the request
+	//  @return GetLoadBalancerListResult
+	GetLoadBalancerListExecute(r ApiGetLoadBalancerListRequest) (*GetLoadBalancerListResult, *http.Response, error)
+
+	/*
+	GetLoadBalancerListener Get listener details
+
+	Get details about a listener
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param loadBalancerId Load balancer ID
+	@param listenerId Listener ID
+	@return ApiGetLoadBalancerListenerRequest
+	*/
+	GetLoadBalancerListener(ctx context.Context, loadBalancerId string, listenerId string) ApiGetLoadBalancerListenerRequest
+
+	// GetLoadBalancerListenerExecute executes the request
+	//  @return LoadBalancerListener
+	GetLoadBalancerListenerExecute(r ApiGetLoadBalancerListenerRequest) (*LoadBalancerListener, *http.Response, error)
+
+	/*
+	GetLoadBalancerTargetList List registered targets
+
+	List targets registered in a load balancer.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param loadBalancerId Load balancer ID
+	@return ApiGetLoadBalancerTargetListRequest
+	*/
+	GetLoadBalancerTargetList(ctx context.Context, loadBalancerId string) ApiGetLoadBalancerTargetListRequest
+
+	// GetLoadBalancerTargetListExecute executes the request
+	//  @return GetLoadBalancerTargetListResult
+	GetLoadBalancerTargetListExecute(r ApiGetLoadBalancerTargetListRequest) (*GetLoadBalancerTargetListResult, *http.Response, error)
+
+	/*
+	GetMarketAppList Get marketplace apps
+
+	Get all available marketplace apps.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetMarketAppListRequest
+	*/
+	GetMarketAppList(ctx context.Context) ApiGetMarketAppListRequest
+
+	// GetMarketAppListExecute executes the request
+	//  @return GetMarketAppListResult
+	GetMarketAppListExecute(r ApiGetMarketAppListRequest) (*GetMarketAppListResult, *http.Response, error)
+
+	/*
+	GetRegionList List regions
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetRegionListRequest
+	*/
+	GetRegionList(ctx context.Context) ApiGetRegionListRequest
+
+	// GetRegionListExecute executes the request
+	//  @return GetRegionListResult
+	GetRegionListExecute(r ApiGetRegionListRequest) (*GetRegionListResult, *http.Response, error)
+
+	/*
+	GetReinstallOsList List OSes available for reinstall
+
+	List Images available for reinstall
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetReinstallOsListRequest
+	*/
+	GetReinstallOsList(ctx context.Context, instanceId string) ApiGetReinstallOsListRequest
+
+	// GetReinstallOsListExecute executes the request
+	//  @return []ImageDetails
+	GetReinstallOsListExecute(r ApiGetReinstallOsListRequest) ([]ImageDetails, *http.Response, error)
+
+	/*
+	GetSnapshot Get snapshot detail
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param snapshotId
+	@return ApiGetSnapshotRequest
+	*/
+	GetSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiGetSnapshotRequest
+
+	// GetSnapshotExecute executes the request
+	//  @return Snapshot
+	GetSnapshotExecute(r ApiGetSnapshotRequest) (*Snapshot, *http.Response, error)
+
+	/*
+	GetSnapshotList List snapshots
+
+	List instance snapshots
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetSnapshotListRequest
+	*/
+	GetSnapshotList(ctx context.Context, instanceId string) ApiGetSnapshotListRequest
+
+	// GetSnapshotListExecute executes the request
+	//  @return GetSnapshotListResult
+	GetSnapshotListExecute(r ApiGetSnapshotListRequest) (*GetSnapshotListResult, *http.Response, error)
+
+	/*
+	GetUpdateInstanceTypeList List available instance types for update
+
+	Get available instance types for update
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetUpdateInstanceTypeListRequest
+	*/
+	GetUpdateInstanceTypeList(ctx context.Context, instanceId string) ApiGetUpdateInstanceTypeListRequest
+
+	// GetUpdateInstanceTypeListExecute executes the request
+	//  @return InstanceTypes
+	GetUpdateInstanceTypeListExecute(r ApiGetUpdateInstanceTypeListRequest) (*InstanceTypes, *http.Response, error)
+
+	/*
+	LaunchInstance Launch instance
+
+	Launch a Public Cloud instance. 
+
+Available regions can be obtained using `/v1/regions`.
+
+Available Images can be obtained using `/v1/images`.
+
+Available instance types for your region can be obtained using `/v1/instanceTypes`.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiLaunchInstanceRequest
+	*/
+	LaunchInstance(ctx context.Context) ApiLaunchInstanceRequest
+
+	// LaunchInstanceExecute executes the request
+	//  @return Instance
+	LaunchInstanceExecute(r ApiLaunchInstanceRequest) (*Instance, *http.Response, error)
+
+	/*
+	LaunchLoadBalancer Launch Load balancer
+
+	Launch a Load balancer. 
+
+Available regions can be obtained using `/v1/regions`.
+
+Available load balancer types for your region can be obtained using `/v1/loadBalancerTypes`.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiLaunchLoadBalancerRequest
+	*/
+	LaunchLoadBalancer(ctx context.Context) ApiLaunchLoadBalancerRequest
+
+	// LaunchLoadBalancerExecute executes the request
+	//  @return LoadBalancerDetails
+	LaunchLoadBalancerExecute(r ApiLaunchLoadBalancerRequest) (*LoadBalancerDetails, *http.Response, error)
+
+	/*
+	NullRouteIp Null route IP
+
+	Null route an IP. It may take a few minutes before the change is propagated across the network.
+
+Only works for IPv4.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param ip
+	@return ApiNullRouteIpRequest
+	*/
+	NullRouteIp(ctx context.Context, instanceId string, ip string) ApiNullRouteIpRequest
+
+	// NullRouteIpExecute executes the request
+	//  @return IpDetails
+	NullRouteIpExecute(r ApiNullRouteIpRequest) (*IpDetails, *http.Response, error)
+
+	/*
+	RebootInstance Reboot instance
+
+	The instance must be running before the execution
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiRebootInstanceRequest
+	*/
+	RebootInstance(ctx context.Context, instanceId string) ApiRebootInstanceRequest
+
+	// RebootInstanceExecute executes the request
+	RebootInstanceExecute(r ApiRebootInstanceRequest) (*http.Response, error)
+
+	/*
+	RegisterAutoScalingGroupLoadBalancer Register Load balancer
+
+	Associates a Load Balancer with an Auto Scaling Group to distribute incoming traffic across the instances within the group.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param autoScalingGroupId Auto Scaling Group ID
+	@return ApiRegisterAutoScalingGroupLoadBalancerRequest
+	*/
+	RegisterAutoScalingGroupLoadBalancer(ctx context.Context, autoScalingGroupId string) ApiRegisterAutoScalingGroupLoadBalancerRequest
+
+	// RegisterAutoScalingGroupLoadBalancerExecute executes the request
+	//  @return AutoScalingGroupDetails
+	RegisterAutoScalingGroupLoadBalancerExecute(r ApiRegisterAutoScalingGroupLoadBalancerRequest) (*AutoScalingGroupDetails, *http.Response, error)
+
+	/*
+	RegisterLoadBalancerTargets Register targets
+
+	Register targets in a load balancer. Instances must be running and have private network enabled so they can be registered.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param loadBalancerId Load balancer ID
+	@return ApiRegisterLoadBalancerTargetsRequest
+	*/
+	RegisterLoadBalancerTargets(ctx context.Context, loadBalancerId string) ApiRegisterLoadBalancerTargetsRequest
+
+	// RegisterLoadBalancerTargetsExecute executes the request
+	RegisterLoadBalancerTargetsExecute(r ApiRegisterLoadBalancerTargetsRequest) (*http.Response, error)
+
+	/*
+	ReinstallInstance Reinstall instance
+
+	Recreates the instance, with optionally different Image and Marketplace App.
+
+Cannot be performed when the instance has snapshots.
+
+Available Images can be obtained using `/v1/instances/{instanceId}/reinstall/images`.
+
+Available Marketplace Apps can be obtained using `/v1/images/{imageId}/marketApps`.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiReinstallInstanceRequest
+	*/
+	ReinstallInstance(ctx context.Context, instanceId string) ApiReinstallInstanceRequest
+
+	// ReinstallInstanceExecute executes the request
+	ReinstallInstanceExecute(r ApiReinstallInstanceRequest) (*http.Response, error)
+
+	/*
+	RemoveFromPrivateNetwork Remove instance from Private Network
+
+	Remove instance from Private Network.
+
+Cannot be performed when the instance has snapshots.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiRemoveFromPrivateNetworkRequest
+	*/
+	RemoveFromPrivateNetwork(ctx context.Context, instanceId string) ApiRemoveFromPrivateNetworkRequest
+
+	// RemoveFromPrivateNetworkExecute executes the request
+	RemoveFromPrivateNetworkExecute(r ApiRemoveFromPrivateNetworkRequest) (*http.Response, error)
+
+	/*
+	RemoveIpNullRoute Remove an IP null route
+
+	Remove an IP null route. It may take a few minutes before the change is propagated across the network
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param ip
+	@return ApiRemoveIpNullRouteRequest
+	*/
+	RemoveIpNullRoute(ctx context.Context, instanceId string, ip string) ApiRemoveIpNullRouteRequest
+
+	// RemoveIpNullRouteExecute executes the request
+	//  @return IpDetails
+	RemoveIpNullRouteExecute(r ApiRemoveIpNullRouteRequest) (*IpDetails, *http.Response, error)
+
+	/*
+	ResetPassword Reset instance password
+
+	The operation may take a few moments to complete.
+
+You can obtain the new credential using the credentials endpoints
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiResetPasswordRequest
+	*/
+	ResetPassword(ctx context.Context, instanceId string) ApiResetPasswordRequest
+
+	// ResetPasswordExecute executes the request
+	ResetPasswordExecute(r ApiResetPasswordRequest) (*http.Response, error)
+
+	/*
+	RestoreSnapshot Restore instance snapshot
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param snapshotId
+	@return ApiRestoreSnapshotRequest
+	*/
+	RestoreSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiRestoreSnapshotRequest
+
+	// RestoreSnapshotExecute executes the request
+	RestoreSnapshotExecute(r ApiRestoreSnapshotRequest) (*http.Response, error)
+
+	/*
+	StartInstance Start instance
+
+	The instance must be stopped before the execution
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiStartInstanceRequest
+	*/
+	StartInstance(ctx context.Context, instanceId string) ApiStartInstanceRequest
+
+	// StartInstanceExecute executes the request
+	StartInstanceExecute(r ApiStartInstanceRequest) (*http.Response, error)
+
+	/*
+	StopInstance Stop instance
+
+	The instance must be running before the execution
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiStopInstanceRequest
+	*/
+	StopInstance(ctx context.Context, instanceId string) ApiStopInstanceRequest
+
+	// StopInstanceExecute executes the request
+	StopInstanceExecute(r ApiStopInstanceRequest) (*http.Response, error)
+
+	/*
+	StoreCredential Store credentials
+
+	Store credential used for the instance
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiStoreCredentialRequest
+	*/
+	StoreCredential(ctx context.Context, instanceId string) ApiStoreCredentialRequest
+
+	// StoreCredentialExecute executes the request
+	//  @return StoreCredentialResult
+	StoreCredentialExecute(r ApiStoreCredentialRequest) (*StoreCredentialResult, *http.Response, error)
+
+	/*
+	TerminateInstance Terminate instance
+
+	Terminate Public Cloud instance
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiTerminateInstanceRequest
+	*/
+	TerminateInstance(ctx context.Context, instanceId string) ApiTerminateInstanceRequest
+
+	// TerminateInstanceExecute executes the request
+	TerminateInstanceExecute(r ApiTerminateInstanceRequest) (*http.Response, error)
+
+	/*
+	TerminateLoadBalancer Delete load balancer
+
+	Terminate a Load balancer
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param loadBalancerId Load balancer ID
+	@return ApiTerminateLoadBalancerRequest
+	*/
+	TerminateLoadBalancer(ctx context.Context, loadBalancerId string) ApiTerminateLoadBalancerRequest
+
+	// TerminateLoadBalancerExecute executes the request
+	TerminateLoadBalancerExecute(r ApiTerminateLoadBalancerRequest) (*http.Response, error)
+
+	/*
+	UpdateAutoScalingGroup Update Auto Scaling Group
+
+	Update an Auto Scaling Group.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param autoScalingGroupId Auto Scaling Group ID
+	@return ApiUpdateAutoScalingGroupRequest
+	*/
+	UpdateAutoScalingGroup(ctx context.Context, autoScalingGroupId string) ApiUpdateAutoScalingGroupRequest
+
+	// UpdateAutoScalingGroupExecute executes the request
+	//  @return AutoScalingGroupDetails
+	UpdateAutoScalingGroupExecute(r ApiUpdateAutoScalingGroupRequest) (*AutoScalingGroupDetails, *http.Response, error)
+
+	/*
+	UpdateCredential Update credentials
+
+	Update credentials for a given type and username
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param type_ Credential type
+	@param username Username
+	@return ApiUpdateCredentialRequest
+	*/
+	UpdateCredential(ctx context.Context, instanceId string, type_ string, username string) ApiUpdateCredentialRequest
+
+	// UpdateCredentialExecute executes the request
+	//  @return UpdateCredentialResult
+	UpdateCredentialExecute(r ApiUpdateCredentialRequest) (*UpdateCredentialResult, *http.Response, error)
+
+	/*
+	UpdateInstance Update instance
+
+	Update the instance's reference, type, storage or contract type.
+
+Eligible instance types for update can be obtained using `/v1/instances/{instanceId}/instanceTypesUpdate`.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiUpdateInstanceRequest
+	*/
+	UpdateInstance(ctx context.Context, instanceId string) ApiUpdateInstanceRequest
+
+	// UpdateInstanceExecute executes the request
+	//  @return InstanceDetails
+	UpdateInstanceExecute(r ApiUpdateInstanceRequest) (*InstanceDetails, *http.Response, error)
+
+	/*
+	UpdateIp Update IP
+
+	Allows you to set the reverse lookup for the IP
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param ip
+	@return ApiUpdateIpRequest
+	*/
+	UpdateIp(ctx context.Context, instanceId string, ip string) ApiUpdateIpRequest
+
+	// UpdateIpExecute executes the request
+	//  @return IpDetails
+	UpdateIpExecute(r ApiUpdateIpRequest) (*IpDetails, *http.Response, error)
+
+	/*
+	UpdateLoadBalancer Update load balancer
+
+	Update load balancer configurations
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param loadBalancerId Load balancer ID
+	@return ApiUpdateLoadBalancerRequest
+	*/
+	UpdateLoadBalancer(ctx context.Context, loadBalancerId string) ApiUpdateLoadBalancerRequest
+
+	// UpdateLoadBalancerExecute executes the request
+	//  @return LoadBalancerDetails
+	UpdateLoadBalancerExecute(r ApiUpdateLoadBalancerRequest) (*LoadBalancerDetails, *http.Response, error)
+
+	/*
+	UpdateLoadBalancerListener Update a listener
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param loadBalancerId Load balancer ID
+	@param listenerId Listener ID
+	@return ApiUpdateLoadBalancerListenerRequest
+	*/
+	UpdateLoadBalancerListener(ctx context.Context, loadBalancerId string, listenerId string) ApiUpdateLoadBalancerListenerRequest
+
+	// UpdateLoadBalancerListenerExecute executes the request
+	//  @return LoadBalancerListener
+	UpdateLoadBalancerListenerExecute(r ApiUpdateLoadBalancerListenerRequest) (*LoadBalancerListener, *http.Response, error)
+}
+
 // PublicCloudAPIService PublicCloudAPI service
 type PublicCloudAPIService service
 
 type ApiAddToPrivateNetworkRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -198,7 +1143,7 @@ func (a *PublicCloudAPIService) AddToPrivateNetworkExecute(r ApiAddToPrivateNetw
 
 type ApiAttachIsoRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	attachIsoOpts *AttachIsoOpts
 }
@@ -382,7 +1327,7 @@ func (a *PublicCloudAPIService) AttachIsoExecute(r ApiAttachIsoRequest) (*http.R
 
 type ApiCancelInstanceTerminationRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -553,7 +1498,7 @@ func (a *PublicCloudAPIService) CancelInstanceTerminationExecute(r ApiCancelInst
 
 type ApiCreateAutoScalingGroupRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	createAutoScalingGroupOpts *CreateAutoScalingGroupOpts
 }
 
@@ -731,7 +1676,7 @@ func (a *PublicCloudAPIService) CreateAutoScalingGroupExecute(r ApiCreateAutoSca
 
 type ApiCreateLoadBalancerListenerRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	loadBalancerId string
 	loadBalancerListenerOpts *LoadBalancerListenerOpts
 }
@@ -913,7 +1858,7 @@ func (a *PublicCloudAPIService) CreateLoadBalancerListenerExecute(r ApiCreateLoa
 
 type ApiCreateSnapshotRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -1088,7 +2033,7 @@ func (a *PublicCloudAPIService) CreateSnapshotExecute(r ApiCreateSnapshotRequest
 
 type ApiDeleteAutoScalingGroupRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	autoScalingGroupId string
 }
 
@@ -1248,7 +2193,7 @@ func (a *PublicCloudAPIService) DeleteAutoScalingGroupExecute(r ApiDeleteAutoSca
 
 type ApiDeleteCredentialRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	type_ string
 	username string
@@ -1416,7 +2361,7 @@ func (a *PublicCloudAPIService) DeleteCredentialExecute(r ApiDeleteCredentialReq
 
 type ApiDeleteCredentialsRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -1576,7 +2521,7 @@ func (a *PublicCloudAPIService) DeleteCredentialsExecute(r ApiDeleteCredentialsR
 
 type ApiDeleteLoadBalancerListenerRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	loadBalancerId string
 	listenerId string
 }
@@ -1751,7 +2696,7 @@ func (a *PublicCloudAPIService) DeleteLoadBalancerListenerExecute(r ApiDeleteLoa
 
 type ApiDeleteSnapshotRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	snapshotId string
 }
@@ -1924,7 +2869,7 @@ func (a *PublicCloudAPIService) DeleteSnapshotExecute(r ApiDeleteSnapshotRequest
 
 type ApiDeregisterAutoScalingGroupLoadBalancerRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	autoScalingGroupId string
 }
 
@@ -2095,7 +3040,7 @@ func (a *PublicCloudAPIService) DeregisterAutoScalingGroupLoadBalancerExecute(r 
 
 type ApiDeregisterLoadBalancerTargetsRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	loadBalancerId string
 	loadBalancerTargetOpts *LoadBalancerTargetOpts
 }
@@ -2266,7 +3211,7 @@ func (a *PublicCloudAPIService) DeregisterLoadBalancerTargetsExecute(r ApiDeregi
 
 type ApiDetachIsoRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -2437,7 +3382,7 @@ func (a *PublicCloudAPIService) DetachIsoExecute(r ApiDetachIsoRequest) (*http.R
 
 type ApiGetAutoScalingGroupRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	autoScalingGroupId string
 }
 
@@ -2608,7 +3553,7 @@ func (a *PublicCloudAPIService) GetAutoScalingGroupExecute(r ApiGetAutoScalingGr
 
 type ApiGetAutoScalingGroupInstanceListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	autoScalingGroupId string
 	limit *int32
 	offset *int32
@@ -2799,7 +3744,7 @@ func (a *PublicCloudAPIService) GetAutoScalingGroupInstanceListExecute(r ApiGetA
 
 type ApiGetAutoScalingGroupListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	limit *int32
 	offset *int32
 	id *string
@@ -3044,7 +3989,7 @@ func (a *PublicCloudAPIService) GetAutoScalingGroupListExecute(r ApiGetAutoScali
 
 type ApiGetConsoleAccessToInstanceRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -3226,7 +4171,7 @@ func (a *PublicCloudAPIService) GetConsoleAccessToInstanceExecute(r ApiGetConsol
 
 type ApiGetCpuMetricsRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	from *string
 	to *string
@@ -3436,7 +4381,7 @@ func (a *PublicCloudAPIService) GetCpuMetricsExecute(r ApiGetCpuMetricsRequest) 
 
 type ApiGetCredentialRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	type_ string
 	username string
@@ -3626,7 +4571,7 @@ func (a *PublicCloudAPIService) GetCredentialExecute(r ApiGetCredentialRequest) 
 
 type ApiGetCredentialListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -3797,7 +4742,7 @@ func (a *PublicCloudAPIService) GetCredentialListExecute(r ApiGetCredentialListR
 
 type ApiGetCredentialListByTypeRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	type_ string
 }
@@ -3983,7 +4928,7 @@ func (a *PublicCloudAPIService) GetCredentialListByTypeExecute(r ApiGetCredentia
 
 type ApiGetDataTrafficMetricsRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	from *string
 	to *string
@@ -4203,7 +5148,7 @@ func (a *PublicCloudAPIService) GetDataTrafficMetricsExecute(r ApiGetDataTraffic
 
 type ApiGetExpensesRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	equipmentId string
 	from *string
 	to *string
@@ -4382,7 +5327,7 @@ func (a *PublicCloudAPIService) GetExpensesExecute(r ApiGetExpensesRequest) (*Ge
 
 type ApiGetImageListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	limit *int32
 	offset *int32
 }
@@ -4556,7 +5501,7 @@ func (a *PublicCloudAPIService) GetImageListExecute(r ApiGetImageListRequest) (*
 
 type ApiGetInstanceRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -4727,7 +5672,7 @@ func (a *PublicCloudAPIService) GetInstanceExecute(r ApiGetInstanceRequest) (*In
 
 type ApiGetInstanceListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	limit *int32
 	offset *int32
 	ip *string
@@ -4988,7 +5933,7 @@ func (a *PublicCloudAPIService) GetInstanceListExecute(r ApiGetInstanceListReque
 
 type ApiGetInstanceTypeListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	region *string
 	limit *int32
 	offset *int32
@@ -5178,7 +6123,7 @@ func (a *PublicCloudAPIService) GetInstanceTypeListExecute(r ApiGetInstanceTypeL
 
 type ApiGetIpRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	ip string
 }
@@ -5351,7 +6296,7 @@ func (a *PublicCloudAPIService) GetIpExecute(r ApiGetIpRequest) (*IpDetails, *ht
 
 type ApiGetIpListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	version *int32
 	nullRouted *bool
@@ -5550,7 +6495,7 @@ func (a *PublicCloudAPIService) GetIpListExecute(r ApiGetIpListRequest) (*GetIpL
 
 type ApiGetIsoListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	limit *int32
 	offset *int32
 }
@@ -5726,7 +6671,7 @@ func (a *PublicCloudAPIService) GetIsoListExecute(r ApiGetIsoListRequest) (*GetI
 
 type ApiGetLoadBalancerRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	loadBalancerId string
 }
 
@@ -5897,7 +6842,7 @@ func (a *PublicCloudAPIService) GetLoadBalancerExecute(r ApiGetLoadBalancerReque
 
 type ApiGetLoadBalancerListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	limit *int32
 	offset *int32
 	ip *string
@@ -6147,7 +7092,7 @@ func (a *PublicCloudAPIService) GetLoadBalancerListExecute(r ApiGetLoadBalancerL
 
 type ApiGetLoadBalancerListenerRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	loadBalancerId string
 	listenerId string
 }
@@ -6322,7 +7267,7 @@ func (a *PublicCloudAPIService) GetLoadBalancerListenerExecute(r ApiGetLoadBalan
 
 type ApiGetLoadBalancerTargetListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	loadBalancerId string
 }
 
@@ -6493,7 +7438,7 @@ func (a *PublicCloudAPIService) GetLoadBalancerTargetListExecute(r ApiGetLoadBal
 
 type ApiGetMarketAppListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 }
 
 func (r ApiGetMarketAppListRequest) Execute() (*GetMarketAppListResult, *http.Response, error) {
@@ -6649,7 +7594,7 @@ func (a *PublicCloudAPIService) GetMarketAppListExecute(r ApiGetMarketAppListReq
 
 type ApiGetRegionListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	limit *int32
 	offset *int32
 }
@@ -6823,7 +7768,7 @@ func (a *PublicCloudAPIService) GetRegionListExecute(r ApiGetRegionListRequest) 
 
 type ApiGetReinstallOsListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -7005,7 +7950,7 @@ func (a *PublicCloudAPIService) GetReinstallOsListExecute(r ApiGetReinstallOsLis
 
 type ApiGetSnapshotRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	snapshotId string
 }
@@ -7178,7 +8123,7 @@ func (a *PublicCloudAPIService) GetSnapshotExecute(r ApiGetSnapshotRequest) (*Sn
 
 type ApiGetSnapshotListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	limit *int32
 	offset *int32
@@ -7369,7 +8314,7 @@ func (a *PublicCloudAPIService) GetSnapshotListExecute(r ApiGetSnapshotListReque
 
 type ApiGetUpdateInstanceTypeListRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	limit *int32
 	offset *int32
@@ -7564,7 +8509,7 @@ func (a *PublicCloudAPIService) GetUpdateInstanceTypeListExecute(r ApiGetUpdateI
 
 type ApiLaunchInstanceRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	launchInstanceOpts *LaunchInstanceOpts
 }
 
@@ -7748,7 +8693,7 @@ func (a *PublicCloudAPIService) LaunchInstanceExecute(r ApiLaunchInstanceRequest
 
 type ApiLaunchLoadBalancerRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	launchLoadBalancerOpts *LaunchLoadBalancerOpts
 }
 
@@ -7930,7 +8875,7 @@ func (a *PublicCloudAPIService) LaunchLoadBalancerExecute(r ApiLaunchLoadBalance
 
 type ApiNullRouteIpRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	ip string
 	nullRouteIpOpts *NullRouteIpOpts
@@ -8126,7 +9071,7 @@ func (a *PublicCloudAPIService) NullRouteIpExecute(r ApiNullRouteIpRequest) (*Ip
 
 type ApiRebootInstanceRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -8297,7 +9242,7 @@ func (a *PublicCloudAPIService) RebootInstanceExecute(r ApiRebootInstanceRequest
 
 type ApiRegisterAutoScalingGroupLoadBalancerRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	autoScalingGroupId string
 	registerAutoScalingGroupLoadBalancerOpts *RegisterAutoScalingGroupLoadBalancerOpts
 }
@@ -8479,7 +9424,7 @@ func (a *PublicCloudAPIService) RegisterAutoScalingGroupLoadBalancerExecute(r Ap
 
 type ApiRegisterLoadBalancerTargetsRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	loadBalancerId string
 	loadBalancerTargetOpts *LoadBalancerTargetOpts
 }
@@ -8650,7 +9595,7 @@ func (a *PublicCloudAPIService) RegisterLoadBalancerTargetsExecute(r ApiRegister
 
 type ApiReinstallInstanceRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	reinstallInstanceOpts *ReinstallInstanceOpts
 }
@@ -8838,7 +9783,7 @@ func (a *PublicCloudAPIService) ReinstallInstanceExecute(r ApiReinstallInstanceR
 
 type ApiRemoveFromPrivateNetworkRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -9011,7 +9956,7 @@ func (a *PublicCloudAPIService) RemoveFromPrivateNetworkExecute(r ApiRemoveFromP
 
 type ApiRemoveIpNullRouteRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	ip string
 }
@@ -9197,7 +10142,7 @@ func (a *PublicCloudAPIService) RemoveIpNullRouteExecute(r ApiRemoveIpNullRouteR
 
 type ApiResetPasswordRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -9370,7 +10315,7 @@ func (a *PublicCloudAPIService) ResetPasswordExecute(r ApiResetPasswordRequest) 
 
 type ApiRestoreSnapshotRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	snapshotId string
 }
@@ -9543,7 +10488,7 @@ func (a *PublicCloudAPIService) RestoreSnapshotExecute(r ApiRestoreSnapshotReque
 
 type ApiStartInstanceRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -9714,7 +10659,7 @@ func (a *PublicCloudAPIService) StartInstanceExecute(r ApiStartInstanceRequest) 
 
 type ApiStopInstanceRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -9885,7 +10830,7 @@ func (a *PublicCloudAPIService) StopInstanceExecute(r ApiStopInstanceRequest) (*
 
 type ApiStoreCredentialRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	storeCredentialOpts *StoreCredentialOpts
 }
@@ -10078,7 +11023,7 @@ func (a *PublicCloudAPIService) StoreCredentialExecute(r ApiStoreCredentialReque
 
 type ApiTerminateInstanceRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 }
 
@@ -10249,7 +11194,7 @@ func (a *PublicCloudAPIService) TerminateInstanceExecute(r ApiTerminateInstanceR
 
 type ApiTerminateLoadBalancerRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	loadBalancerId string
 }
 
@@ -10420,7 +11365,7 @@ func (a *PublicCloudAPIService) TerminateLoadBalancerExecute(r ApiTerminateLoadB
 
 type ApiUpdateAutoScalingGroupRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	autoScalingGroupId string
 	updateAutoScalingGroupOpts *UpdateAutoScalingGroupOpts
 }
@@ -10602,7 +11547,7 @@ func (a *PublicCloudAPIService) UpdateAutoScalingGroupExecute(r ApiUpdateAutoSca
 
 type ApiUpdateCredentialRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	type_ string
 	username string
@@ -10803,7 +11748,7 @@ func (a *PublicCloudAPIService) UpdateCredentialExecute(r ApiUpdateCredentialReq
 
 type ApiUpdateInstanceRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	updateInstanceOpts *UpdateInstanceOpts
 }
@@ -10998,7 +11943,7 @@ func (a *PublicCloudAPIService) UpdateInstanceExecute(r ApiUpdateInstanceRequest
 
 type ApiUpdateIpRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	instanceId string
 	ip string
 	updateIpOpts *UpdateIpOpts
@@ -11195,7 +12140,7 @@ func (a *PublicCloudAPIService) UpdateIpExecute(r ApiUpdateIpRequest) (*IpDetail
 
 type ApiUpdateLoadBalancerRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	loadBalancerId string
 	updateLoadBalancerOpts *UpdateLoadBalancerOpts
 }
@@ -11388,7 +12333,7 @@ func (a *PublicCloudAPIService) UpdateLoadBalancerExecute(r ApiUpdateLoadBalance
 
 type ApiUpdateLoadBalancerListenerRequest struct {
 	ctx context.Context
-	ApiService *PublicCloudAPIService
+	ApiService PublicCloudAPI
 	loadBalancerId string
 	listenerId string
 	loadBalancerListenerOpts *LoadBalancerListenerOpts

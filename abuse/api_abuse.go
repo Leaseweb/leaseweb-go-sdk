@@ -20,12 +20,133 @@ import (
 )
 
 
+type AbuseAPI interface {
+
+	/*
+	CreateReportMessage Create new message
+
+	Sent a new message to the Leaseweb compliance team related to an abuse report.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reportId Report Id
+	@return ApiCreateReportMessageRequest
+	*/
+	CreateReportMessage(ctx context.Context, reportId string) ApiCreateReportMessageRequest
+
+	// CreateReportMessageExecute executes the request
+	//  @return []string
+	CreateReportMessageExecute(r ApiCreateReportMessageRequest) ([]string, *http.Response, error)
+
+	/*
+	GetReport Inspect a report
+
+	
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reportId Report Id
+	@return ApiGetReportRequest
+	*/
+	GetReport(ctx context.Context, reportId string) ApiGetReportRequest
+
+	// GetReportExecute executes the request
+	//  @return GetReportResult
+	GetReportExecute(r ApiGetReportRequest) (*GetReportResult, *http.Response, error)
+
+	/*
+	GetReportAttachmentList Inspect a report attachment
+
+	Use this endpoint to get an attachment which was created with the abuse report. The content-type of the response depends on the content of the attachment.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reportId Report Id
+	@param fileId File Id
+	@return ApiGetReportAttachmentListRequest
+	*/
+	GetReportAttachmentList(ctx context.Context, reportId string, fileId string) ApiGetReportAttachmentListRequest
+
+	// GetReportAttachmentListExecute executes the request
+	GetReportAttachmentListExecute(r ApiGetReportAttachmentListRequest) (*http.Response, error)
+
+	/*
+	GetReportList List reports
+
+	List reports
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetReportListRequest
+	*/
+	GetReportList(ctx context.Context) ApiGetReportListRequest
+
+	// GetReportListExecute executes the request
+	//  @return GetReportListResult
+	GetReportListExecute(r ApiGetReportListRequest) (*GetReportListResult, *http.Response, error)
+
+	/*
+	GetReportMessageAttachmentList Inspect a message attachment
+
+	The compliance team sometimes add an attachment to a message. You can use this endpoint to get the attachment. The content-type of the response depends on the content of the attachment.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reportId Report Id
+	@param fileId File Id
+	@return ApiGetReportMessageAttachmentListRequest
+	*/
+	GetReportMessageAttachmentList(ctx context.Context, reportId string, fileId string) ApiGetReportMessageAttachmentListRequest
+
+	// GetReportMessageAttachmentListExecute executes the request
+	GetReportMessageAttachmentListExecute(r ApiGetReportMessageAttachmentListRequest) (*http.Response, error)
+
+	/*
+	GetReportMessageList List report messages
+
+	
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reportId Report Id
+	@return ApiGetReportMessageListRequest
+	*/
+	GetReportMessageList(ctx context.Context, reportId string) ApiGetReportMessageListRequest
+
+	// GetReportMessageListExecute executes the request
+	//  @return GetReportMessageListResult
+	GetReportMessageListExecute(r ApiGetReportMessageListRequest) (*GetReportMessageListResult, *http.Response, error)
+
+	/*
+	GetReportResolutionList List resolution options
+
+	In order to resolve a report, you need to specify a resolution. Use this endpoint to retrieve a list of all possible resolution options for this report.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reportId Report Id
+	@return ApiGetReportResolutionListRequest
+	*/
+	GetReportResolutionList(ctx context.Context, reportId string) ApiGetReportResolutionListRequest
+
+	// GetReportResolutionListExecute executes the request
+	//  @return GetReportResolutionListResult
+	GetReportResolutionListExecute(r ApiGetReportResolutionListRequest) (*GetReportResolutionListResult, *http.Response, error)
+
+	/*
+	ResolveReport Resolve a report
+
+	Resolve a report
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reportId Report Id
+	@return ApiResolveReportRequest
+	*/
+	ResolveReport(ctx context.Context, reportId string) ApiResolveReportRequest
+
+	// ResolveReportExecute executes the request
+	ResolveReportExecute(r ApiResolveReportRequest) (*http.Response, error)
+}
+
 // AbuseAPIService AbuseAPI service
 type AbuseAPIService service
 
 type ApiCreateReportMessageRequest struct {
 	ctx context.Context
-	ApiService *AbuseAPIService
+	ApiService AbuseAPI
 	reportId string
 	createReportMessageOpts *CreateReportMessageOpts
 }
@@ -204,7 +325,7 @@ func (a *AbuseAPIService) CreateReportMessageExecute(r ApiCreateReportMessageReq
 
 type ApiGetReportRequest struct {
 	ctx context.Context
-	ApiService *AbuseAPIService
+	ApiService AbuseAPI
 	reportId string
 }
 
@@ -364,7 +485,7 @@ func (a *AbuseAPIService) GetReportExecute(r ApiGetReportRequest) (*GetReportRes
 
 type ApiGetReportAttachmentListRequest struct {
 	ctx context.Context
-	ApiService *AbuseAPIService
+	ApiService AbuseAPI
 	reportId string
 	fileId string
 }
@@ -528,7 +649,7 @@ func (a *AbuseAPIService) GetReportAttachmentListExecute(r ApiGetReportAttachmen
 
 type ApiGetReportListRequest struct {
 	ctx context.Context
-	ApiService *AbuseAPIService
+	ApiService AbuseAPI
 	limit *int32
 	offset *int32
 	status *string
@@ -717,7 +838,7 @@ func (a *AbuseAPIService) GetReportListExecute(r ApiGetReportListRequest) (*GetR
 
 type ApiGetReportMessageAttachmentListRequest struct {
 	ctx context.Context
-	ApiService *AbuseAPIService
+	ApiService AbuseAPI
 	reportId string
 	fileId string
 }
@@ -881,7 +1002,7 @@ func (a *AbuseAPIService) GetReportMessageAttachmentListExecute(r ApiGetReportMe
 
 type ApiGetReportMessageListRequest struct {
 	ctx context.Context
-	ApiService *AbuseAPIService
+	ApiService AbuseAPI
 	reportId string
 	limit *int32
 	offset *int32
@@ -1072,7 +1193,7 @@ func (a *AbuseAPIService) GetReportMessageListExecute(r ApiGetReportMessageListR
 
 type ApiGetReportResolutionListRequest struct {
 	ctx context.Context
-	ApiService *AbuseAPIService
+	ApiService AbuseAPI
 	reportId string
 }
 
@@ -1243,7 +1364,7 @@ func (a *AbuseAPIService) GetReportResolutionListExecute(r ApiGetReportResolutio
 
 type ApiResolveReportRequest struct {
 	ctx context.Context
-	ApiService *AbuseAPIService
+	ApiService AbuseAPI
 	reportId string
 	resolveReportResult *ResolveReportResult
 }

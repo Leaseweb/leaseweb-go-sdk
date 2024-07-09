@@ -49,7 +49,7 @@ type APIClient struct {
 
 	// API Services
 
-	PublicCloudAPI *PublicCloudAPIService
+	PublicCloudAPI PublicCloudAPI
 }
 
 type service struct {

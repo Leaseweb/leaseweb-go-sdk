@@ -49,7 +49,7 @@ type APIClient struct {
 
 	// API Services
 
-	InvoiceAPI *InvoiceAPIService
+	InvoiceAPI InvoiceAPI
 }
 
 type service struct {

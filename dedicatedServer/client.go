@@ -49,7 +49,7 @@ type APIClient struct {
 
 	// API Services
 
-	DedicatedServerAPI *DedicatedServerAPIService
+	DedicatedServerAPI DedicatedServerAPI
 }
 
 type service struct {
