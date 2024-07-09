@@ -4735,10 +4735,10 @@ type ApiGetInstanceListRequest struct {
 	id *string
 	contractType *ContractType
 	contractState *ContractState
-	imageId *string
-	state *[]string
+	imageId *ImageId
+	state *State
 	region *string
-	type_ *string
+	type_ *InstanceType
 }
 
 // Limit the number of results returned.
@@ -4779,13 +4779,13 @@ func (r ApiGetInstanceListRequest) ContractState(contractState ContractState) Ap
 }
 
 // Available Images can be obtained using &#x60;/v1/images&#x60;.
-func (r ApiGetInstanceListRequest) ImageId(imageId string) ApiGetInstanceListRequest {
+func (r ApiGetInstanceListRequest) ImageId(imageId ImageId) ApiGetInstanceListRequest {
 	r.imageId = &imageId
 	return r
 }
 
 // The instance&#39;s current state(s), separated by commas.
-func (r ApiGetInstanceListRequest) State(state []string) ApiGetInstanceListRequest {
+func (r ApiGetInstanceListRequest) State(state State) ApiGetInstanceListRequest {
 	r.state = &state
 	return r
 }
@@ -4797,7 +4797,7 @@ func (r ApiGetInstanceListRequest) Region(region string) ApiGetInstanceListReque
 }
 
 // Available instance types for your region can be obtained using &#x60;/v1/instanceTypes&#x60;.
-func (r ApiGetInstanceListRequest) Type_(type_ string) ApiGetInstanceListRequest {
+func (r ApiGetInstanceListRequest) Type_(type_ InstanceType) ApiGetInstanceListRequest {
 	r.type_ = &type_
 	return r
 }
@@ -4867,7 +4867,7 @@ func (a *PublicCloudAPIService) GetInstanceListExecute(r ApiGetInstanceListReque
 		parameterAddToHeaderOrQuery(localVarQueryParams, "imageId", r.imageId, "")
 	}
 	if r.state != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "csv")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "")
 	}
 	if r.region != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "")

@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The Auto Scaling Group unique identifier | 
-**Type** | **string** | Auto Scaling Group type | 
-**State** | **string** | The Auto Scaling Group&#39;s current state. | 
+**Type** | [**AutoScalingGroupType**](AutoScalingGroupType.md) |  | 
+**State** | [**AutoScalingGroupState**](AutoScalingGroupState.md) |  | 
 **DesiredAmount** | **NullableInt32** | Number of instances that should be running | 
 **Region** | **string** | The region in which the Auto Scaling Group was launched | 
 **Reference** | **string** | The identifying name set to the auto scaling group | 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewAutoScalingGroup
 
-`func NewAutoScalingGroup(id string, type_ string, state string, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, ) *AutoScalingGroup`
+`func NewAutoScalingGroup(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, ) *AutoScalingGroup`
 
 NewAutoScalingGroup instantiates a new AutoScalingGroup object
 This constructor will assign default values to properties that have it defined,
@@ -61,40 +61,40 @@ SetId sets Id field to given value.
 
 ### GetType
 
-`func (o *AutoScalingGroup) GetType() string`
+`func (o *AutoScalingGroup) GetType() AutoScalingGroupType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *AutoScalingGroup) GetTypeOk() (*string, bool)`
+`func (o *AutoScalingGroup) GetTypeOk() (*AutoScalingGroupType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *AutoScalingGroup) SetType(v string)`
+`func (o *AutoScalingGroup) SetType(v AutoScalingGroupType)`
 
 SetType sets Type field to given value.
 
 
 ### GetState
 
-`func (o *AutoScalingGroup) GetState() string`
+`func (o *AutoScalingGroup) GetState() AutoScalingGroupState`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *AutoScalingGroup) GetStateOk() (*string, bool)`
+`func (o *AutoScalingGroup) GetStateOk() (*AutoScalingGroupState, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *AutoScalingGroup) SetState(v string)`
+`func (o *AutoScalingGroup) SetState(v AutoScalingGroupState)`
 
 SetState sets State field to given value.
 

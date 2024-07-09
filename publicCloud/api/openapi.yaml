@@ -352,7 +352,7 @@ paths:
         name: imageId
         required: false
         schema:
-          type: string
+          $ref: '#/components/schemas/imageId'
         style: form
       - description: "The instance's current state(s), separated by commas."
         explode: false
@@ -360,15 +360,7 @@ paths:
         name: state
         required: false
         schema:
-          items:
-            enum:
-            - RUNNING
-            - STOPPED
-            - CREATING
-            - DESTROYING
-            - DESTROYED
-            type: string
-          type: array
+          $ref: '#/components/schemas/state'
         style: form
       - description: Available regions can be obtained using `/v1/regions`
         example: eu-west-3
@@ -387,7 +379,7 @@ paths:
         name: type
         required: false
         schema:
-          type: string
+          $ref: '#/components/schemas/instanceType'
         style: form
       responses:
         "200":
@@ -7647,6 +7639,41 @@ components:
       - ACTIVE
       - DELETE_SCHEDULED
       type: string
+    imageId:
+      description: Image ID
+      enum:
+      - ALMALINUX_8_64BIT
+      - ALMALINUX_9_64BIT
+      - ARCH_LINUX_64BIT
+      - CENTOS_7_64BIT
+      - DEBIAN_10_64BIT
+      - DEBIAN_11_64BIT
+      - DEBIAN_12_64BIT
+      - FREEBSD_13_64BIT
+      - FREEBSD_14_64BIT
+      - ROCKY_LINUX_8_64BIT
+      - ROCKY_LINUX_9_64BIT
+      - UBUNTU_20_04_64BIT
+      - UBUNTU_22_04_64BIT
+      - UBUNTU_24_04_64BIT
+      - WINDOWS_SERVER_2016_STANDARD_64BIT
+      - WINDOWS_SERVER_2019_STANDARD_64BIT
+      - WINDOWS_SERVER_2022_STANDARD_64BIT
+      example: UBUNTU_24_04_64BIT
+      type: string
+    state:
+      description: The current state
+      enum:
+      - CREATING
+      - DESTROYED
+      - DESTROYING
+      - FAILED
+      - RUNNING
+      - STARTING
+      - STOPPED
+      - STOPPING
+      - UNKNOWN
+      type: string
     instanceTypeName:
       description: Instance type
       enum:
@@ -7726,19 +7753,6 @@ components:
       - lsw.r6a.24xlarge
       title: instanceType
       type: string
-    state:
-      description: The current state
-      enum:
-      - CREATING
-      - DESTROYED
-      - DESTROYING
-      - FAILED
-      - RUNNING
-      - STARTING
-      - STOPPED
-      - STOPPING
-      - UNKNOWN
-      type: string
     rootDiskSize:
       description: The root disk's size in GB. Must be at least 5 GB for Linux and
         FreeBSD instances and 50 GB for Windows instances
@@ -7751,28 +7765,38 @@ components:
       - LOCAL
       - CENTRAL
       type: string
+    billingFrequency:
+      description: The billing frequency (in months) of the instance.
+      enum:
+      - 1
+      - 3
+      - 6
+      - 12
+      example: 1
+      type: integer
+    contractTerm:
+      description: Contract commitment. Used only when contract type is MONTHLY
+      enum:
+      - 0
+      - 1
+      - 3
+      - 6
+      - 12
+      type: integer
     contract:
       example:
         billingFrequency: 1
         createdAt: 2023-11-30T16:31:28Z
-        term: 6
+        term: null
         renewalsAt: 2023-11-30T16:31:28Z
         state: null
         type: null
         endsAt: 2023-11-30T16:31:28Z
       properties:
         billingFrequency:
-          description: The billing frequency (in months) of the instance.
-          enum:
-          - 1
-          - 3
-          - 6
-          - 12
-          example: 1
-          type: integer
+          $ref: '#/components/schemas/billingFrequency'
         term:
-          description: The contract commitment (in months)
-          type: integer
+          $ref: '#/components/schemas/contractTerm'
         type:
           $ref: '#/components/schemas/contractType'
         endsAt:
@@ -7867,28 +7891,6 @@ components:
       - state
       - type
       type: object
-    imageId:
-      description: Image ID
-      enum:
-      - ALMALINUX_8_64BIT
-      - ALMALINUX_9_64BIT
-      - ARCH_LINUX_64BIT
-      - CENTOS_7_64BIT
-      - DEBIAN_10_64BIT
-      - DEBIAN_11_64BIT
-      - DEBIAN_12_64BIT
-      - FREEBSD_13_64BIT
-      - FREEBSD_14_64BIT
-      - ROCKY_LINUX_8_64BIT
-      - ROCKY_LINUX_9_64BIT
-      - UBUNTU_20_04_64BIT
-      - UBUNTU_22_04_64BIT
-      - UBUNTU_24_04_64BIT
-      - WINDOWS_SERVER_2016_STANDARD_64BIT
-      - WINDOWS_SERVER_2019_STANDARD_64BIT
-      - WINDOWS_SERVER_2022_STANDARD_64BIT
-      example: UBUNTU_24_04_64BIT
-      type: string
     image:
       example:
         flavour: ubuntu
@@ -7924,6 +7926,12 @@ components:
       - version
       title: image
       type: object
+    ipVersion:
+      description: Ip version
+      enum:
+      - 4
+      - 6
+      type: integer
     networkType:
       enum:
       - INTERNAL
@@ -7938,7 +7946,7 @@ components:
         nullRouted: true
         mainIp: true
         networkType: internal
-        version: 1
+        version: null
       properties:
         ip:
           description: Ip Address
@@ -7949,11 +7957,7 @@ components:
           example: "28"
           type: string
         version:
-          description: Ip version
-          enum:
-          - 4
-          - 6
-          type: integer
+          $ref: '#/components/schemas/ipVersion'
         nullRouted:
           description: Whether or not the IP has been nulled
           type: boolean
@@ -7974,20 +7978,39 @@ components:
       - version
       title: ip
       type: object
+    autoScalingGroupType:
+      description: Auto Scaling Group type
+      enum:
+      - MANUAL
+      - SCHEDULED
+      - CPU_BASED
+      title: autoScalingGroupType
+      type: string
+    autoScalingGroupState:
+      description: The Auto Scaling Group's current state.
+      enum:
+      - ACTIVE
+      - CREATING
+      - CREATED
+      - DESTROYED
+      - DESTROYING
+      - SCALING
+      - UPDATING
+      type: string
     autoScalingGroup:
       example:
-        cpuThreshold: 7
-        maximumAmount: 2
-        type: MANUAL
-        desiredAmount: 5
+        cpuThreshold: 5
+        maximumAmount: 5
+        type: null
+        desiredAmount: 6
         reference: reference
         createdAt: 2000-01-23T04:56:07.000+00:00
-        minimumAmount: 5
+        minimumAmount: 1
         startsAt: 2000-01-23T04:56:07.000+00:00
-        warmupTime: 9
+        warmupTime: 2
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: ACTIVE
-        cooldownTime: 3
+        state: null
+        cooldownTime: 7
         region: eu-west-3
         endsAt: 2000-01-23T04:56:07.000+00:00
         updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -7998,23 +8021,9 @@ components:
           format: uuid
           type: string
         type:
-          description: Auto Scaling Group type
-          enum:
-          - MANUAL
-          - SCHEDULED
-          - CPU_BASED
-          type: string
+          $ref: '#/components/schemas/autoScalingGroupType'
         state:
-          description: The Auto Scaling Group's current state.
-          enum:
-          - ACTIVE
-          - CREATING
-          - CREATED
-          - DESTROYED
-          - DESTROYING
-          - SCALING
-          - UPDATING
-          type: string
+          $ref: '#/components/schemas/autoScalingGroupState'
         desiredAmount:
           description: Number of instances that should be running
           nullable: true
@@ -8116,18 +8125,18 @@ components:
           architecture: x86_64
         rootDiskStorageType: null
         autoScalingGroup:
-          cpuThreshold: 7
-          maximumAmount: 2
-          type: MANUAL
-          desiredAmount: 5
+          cpuThreshold: 5
+          maximumAmount: 5
+          type: null
+          desiredAmount: 6
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 5
+          minimumAmount: 1
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 9
+          warmupTime: 2
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: ACTIVE
-          cooldownTime: 3
+          state: null
+          cooldownTime: 7
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -8135,7 +8144,7 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: 6
+          term: null
           renewalsAt: 2023-11-30T16:31:28Z
           state: null
           type: null
@@ -8163,14 +8172,14 @@ components:
           nullRouted: true
           mainIp: true
           networkType: internal
-          version: 1
+          version: null
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
           nullRouted: true
           mainIp: true
           networkType: internal
-          version: 1
+          version: null
         reference: reference
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         marketAppId: CPANEL
@@ -8190,18 +8199,18 @@ components:
             architecture: x86_64
           rootDiskStorageType: null
           autoScalingGroup:
-            cpuThreshold: 7
-            maximumAmount: 2
-            type: MANUAL
-            desiredAmount: 5
+            cpuThreshold: 5
+            maximumAmount: 5
+            type: null
+            desiredAmount: 6
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
-            minimumAmount: 5
+            minimumAmount: 1
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 9
+            warmupTime: 2
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: ACTIVE
-            cooldownTime: 3
+            state: null
+            cooldownTime: 7
             region: eu-west-3
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -8209,7 +8218,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 6
+            term: null
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -8237,14 +8246,14 @@ components:
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: 1
+            version: null
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: 1
+            version: null
           reference: reference
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           marketAppId: CPANEL
@@ -8261,18 +8270,18 @@ components:
             architecture: x86_64
           rootDiskStorageType: null
           autoScalingGroup:
-            cpuThreshold: 7
-            maximumAmount: 2
-            type: MANUAL
-            desiredAmount: 5
+            cpuThreshold: 5
+            maximumAmount: 5
+            type: null
+            desiredAmount: 6
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
-            minimumAmount: 5
+            minimumAmount: 1
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 9
+            warmupTime: 2
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: ACTIVE
-            cooldownTime: 3
+            state: null
+            cooldownTime: 7
             region: eu-west-3
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -8280,7 +8289,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 6
+            term: null
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -8308,14 +8317,14 @@ components:
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: 1
+            version: null
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: 1
+            version: null
           reference: reference
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           marketAppId: CPANEL
@@ -8358,14 +8367,7 @@ components:
           - MONTHLY
           type: string
         contractTerm:
-          description: Contract commitment. Used only when contract type is MONTHLY
-          enum:
-          - 0
-          - 1
-          - 3
-          - 6
-          - 12
-          type: integer
+          $ref: '#/components/schemas/contractTerm'
         billingFrequency:
           description: "How often you wish to be charged. Used only when contract\
             \ type is MONTHLY. '1' means every month, '3' every three months and so\
@@ -8490,7 +8492,7 @@ components:
           detectionProfile: STANDARD_DEFAULT
           protectionType: STANDARD
         networkType: internal
-        version: 6
+        version: null
     instanceDetails:
       allOf:
       - $ref: '#/components/schemas/instanceBase'
@@ -8537,18 +8539,18 @@ components:
           privateNetworkId: privateNetworkId
           status: CONFIGURED
         autoScalingGroup:
-          cpuThreshold: 7
-          maximumAmount: 2
-          type: MANUAL
-          desiredAmount: 5
+          cpuThreshold: 5
+          maximumAmount: 5
+          type: null
+          desiredAmount: 6
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 5
+          minimumAmount: 1
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 9
+          warmupTime: 2
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: ACTIVE
-          cooldownTime: 3
+          state: null
+          cooldownTime: 7
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -8556,7 +8558,7 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: 6
+          term: null
           renewalsAt: 2023-11-30T16:31:28Z
           state: null
           type: null
@@ -8587,7 +8589,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: 6
+          version: null
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
@@ -8597,7 +8599,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: 6
+          version: null
         reference: reference
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         marketAppId: CPANEL
@@ -8805,7 +8807,7 @@ components:
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
-              term: 6
+              term: null
               renewalsAt: 2023-11-30T16:31:28Z
               state: null
               type: null
@@ -8837,7 +8839,7 @@ components:
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
-              term: 6
+              term: null
               renewalsAt: 2023-11-30T16:31:28Z
               state: null
               type: null
@@ -9013,7 +9015,7 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: 6
+          term: null
           renewalsAt: 2023-11-30T16:31:28Z
           state: null
           type: null
@@ -9218,25 +9220,25 @@ components:
             enabled: true
           targetPort: 5
         autoScalingGroup:
-          cpuThreshold: 7
-          maximumAmount: 2
-          type: MANUAL
-          desiredAmount: 5
+          cpuThreshold: 5
+          maximumAmount: 5
+          type: null
+          desiredAmount: 6
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 5
+          minimumAmount: 1
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 9
+          warmupTime: 2
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: ACTIVE
-          cooldownTime: 3
+          state: null
+          cooldownTime: 7
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: 6
+          term: null
           renewalsAt: 2023-11-30T16:31:28Z
           state: null
           type: null
@@ -9269,7 +9271,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: 6
+          version: null
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
@@ -9279,7 +9281,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: 6
+          version: null
     getLoadBalancerListResult:
       example:
         loadBalancers:
@@ -9302,25 +9304,25 @@ components:
               enabled: true
             targetPort: 5
           autoScalingGroup:
-            cpuThreshold: 7
-            maximumAmount: 2
-            type: MANUAL
-            desiredAmount: 5
+            cpuThreshold: 5
+            maximumAmount: 5
+            type: null
+            desiredAmount: 6
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
-            minimumAmount: 5
+            minimumAmount: 1
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 9
+            warmupTime: 2
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: ACTIVE
-            cooldownTime: 3
+            state: null
+            cooldownTime: 7
             region: eu-west-3
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 6
+            term: null
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -9353,7 +9355,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: null
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
@@ -9363,7 +9365,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: null
         - reference: reference
           privateNetwork:
             subnet: 10.0.0.0/16
@@ -9383,25 +9385,25 @@ components:
               enabled: true
             targetPort: 5
           autoScalingGroup:
-            cpuThreshold: 7
-            maximumAmount: 2
-            type: MANUAL
-            desiredAmount: 5
+            cpuThreshold: 5
+            maximumAmount: 5
+            type: null
+            desiredAmount: 6
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
-            minimumAmount: 5
+            minimumAmount: 1
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 9
+            warmupTime: 2
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: ACTIVE
-            cooldownTime: 3
+            state: null
+            cooldownTime: 7
             region: eu-west-3
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 6
+            term: null
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -9434,7 +9436,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: null
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
@@ -9444,7 +9446,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: null
         _metadata:
           offset: 0
           limit: 5
@@ -9595,14 +9597,14 @@ components:
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: 1
+            version: null
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: 1
+            version: null
         - reference: reference
           image:
             flavour: ubuntu
@@ -9623,14 +9625,14 @@ components:
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: 1
+            version: null
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: 1
+            version: null
       properties:
         targets:
           items:
@@ -9663,7 +9665,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: 6
+          version: null
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
@@ -9673,7 +9675,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: 6
+          version: null
       properties:
         ips:
           items:
@@ -9867,33 +9869,33 @@ components:
     getAutoScalingGroupListResult:
       example:
         autoScalingGroups:
-        - cpuThreshold: 7
-          maximumAmount: 2
-          type: MANUAL
-          desiredAmount: 5
+        - cpuThreshold: 5
+          maximumAmount: 5
+          type: null
+          desiredAmount: 6
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 5
+          minimumAmount: 1
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 9
+          warmupTime: 2
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: ACTIVE
-          cooldownTime: 3
+          state: null
+          cooldownTime: 7
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        - cpuThreshold: 7
-          maximumAmount: 2
-          type: MANUAL
-          desiredAmount: 5
+        - cpuThreshold: 5
+          maximumAmount: 5
+          type: null
+          desiredAmount: 6
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 5
+          minimumAmount: 1
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 9
+          warmupTime: 2
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: ACTIVE
-          cooldownTime: 3
+          state: null
+          cooldownTime: 7
           region: eu-west-3
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -9979,7 +9981,7 @@ components:
       example:
         cpuThreshold: 5
         maximumAmount: 1
-        type: MANUAL
+        type: null
         desiredAmount: 0
         reference: reference
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -9988,7 +9990,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 6
+            term: null
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -10015,7 +10017,7 @@ components:
         startsAt: 2000-01-23T04:56:07.000+00:00
         warmupTime: 5
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: ACTIVE
+        state: null
         cooldownTime: 2
         region: eu-west-3
         endsAt: 2000-01-23T04:56:07.000+00:00
@@ -10027,23 +10029,9 @@ components:
           format: uuid
           type: string
         type:
-          description: Auto Scaling Group type
-          enum:
-          - MANUAL
-          - SCHEDULED
-          - CPU_BASED
-          type: string
+          $ref: '#/components/schemas/autoScalingGroupType'
         state:
-          description: The Auto Scaling Group's current state.
-          enum:
-          - ACTIVE
-          - CREATING
-          - CREATED
-          - DESTROYED
-          - DESTROYING
-          - SCALING
-          - UPDATING
-          type: string
+          $ref: '#/components/schemas/autoScalingGroupState'
         desiredAmount:
           description: Number of instances that should be running
           nullable: true
@@ -10211,7 +10199,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: 6
+          version: null
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
@@ -10221,7 +10209,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: 6
+          version: null
         productType: INSTANCE
       properties:
         id:
@@ -10286,7 +10274,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: null
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
@@ -10296,7 +10284,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: null
           productType: INSTANCE
         - reference: reference
           hasPrivateNetwork: true
@@ -10327,7 +10315,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: null
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
@@ -10337,7 +10325,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: 6
+            version: null
           productType: INSTANCE
         _metadata:
           offset: 0
@@ -10482,7 +10470,7 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: 6
+          term: null
           renewalsAt: 2023-11-30T16:31:28Z
           state: null
           type: null
@@ -10626,7 +10614,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 6
+            term: null
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -10658,7 +10646,7 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: 6
+            term: null
             renewalsAt: 2023-11-30T16:31:28Z
             state: null
             type: null
@@ -10786,14 +10774,14 @@ components:
           nullRouted: true
           mainIp: true
           networkType: internal
-          version: 1
+          version: null
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
           nullRouted: true
           mainIp: true
           networkType: internal
-          version: 1
+          version: null
       properties:
         id:
           description: The instance unique identifier

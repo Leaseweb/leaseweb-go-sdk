@@ -20,8 +20,8 @@ type ContractType string
 
 // List of contractType
 const (
-	HOURLY ContractType = "HOURLY"
-	MONTHLY ContractType = "MONTHLY"
+	CONTRACTTYPE_HOURLY ContractType = "HOURLY"
+	CONTRACTTYPE_MONTHLY ContractType = "MONTHLY"
 )
 
 // All allowed values of ContractType enum

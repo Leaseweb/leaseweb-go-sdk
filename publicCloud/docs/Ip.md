@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Ip** | **string** | Ip Address | 
 **PrefixLength** | **string** | The number of leading bits in the IP address | 
-**Version** | **int32** | Ip version | 
+**Version** | [**IpVersion**](IpVersion.md) |  | 
 **NullRouted** | **bool** | Whether or not the IP has been nulled | 
 **MainIp** | **bool** |  | 
 **NetworkType** | [**NetworkType**](NetworkType.md) |  | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewIp
 
-`func NewIp(ip string, prefixLength string, version int32, nullRouted bool, mainIp bool, networkType NetworkType, reverseLookup NullableString, ) *Ip`
+`func NewIp(ip string, prefixLength string, version IpVersion, nullRouted bool, mainIp bool, networkType NetworkType, reverseLookup NullableString, ) *Ip`
 
 NewIp instantiates a new Ip object
 This constructor will assign default values to properties that have it defined,
@@ -73,20 +73,20 @@ SetPrefixLength sets PrefixLength field to given value.
 
 ### GetVersion
 
-`func (o *Ip) GetVersion() int32`
+`func (o *Ip) GetVersion() IpVersion`
 
 GetVersion returns the Version field if non-nil, zero value otherwise.
 
 ### GetVersionOk
 
-`func (o *Ip) GetVersionOk() (*int32, bool)`
+`func (o *Ip) GetVersionOk() (*IpVersion, bool)`
 
 GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVersion
 
-`func (o *Ip) SetVersion(v int32)`
+`func (o *Ip) SetVersion(v IpVersion)`
 
 SetVersion sets Version field to given value.
 

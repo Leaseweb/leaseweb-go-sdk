@@ -25,8 +25,7 @@ type IpDetails struct {
 	Ip string `json:"ip"`
 	// The number of leading bits in the IP address
 	PrefixLength string `json:"prefixLength"`
-	// Ip version
-	Version int32 `json:"version"`
+	Version IpVersion `json:"version"`
 	// Whether or not the IP has been nulled
 	NullRouted bool `json:"nullRouted"`
 	MainIp bool `json:"mainIp"`
@@ -41,7 +40,7 @@ type _IpDetails IpDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIpDetails(ip string, prefixLength string, version int32, nullRouted bool, mainIp bool, networkType NetworkType, reverseLookup NullableString, ddos NullableDdos) *IpDetails {
+func NewIpDetails(ip string, prefixLength string, version IpVersion, nullRouted bool, mainIp bool, networkType NetworkType, reverseLookup NullableString, ddos NullableDdos) *IpDetails {
 	this := IpDetails{}
 	this.Ip = ip
 	this.PrefixLength = prefixLength
@@ -111,9 +110,9 @@ func (o *IpDetails) SetPrefixLength(v string) {
 }
 
 // GetVersion returns the Version field value
-func (o *IpDetails) GetVersion() int32 {
+func (o *IpDetails) GetVersion() IpVersion {
 	if o == nil {
-		var ret int32
+		var ret IpVersion
 		return ret
 	}
 
@@ -122,7 +121,7 @@ func (o *IpDetails) GetVersion() int32 {
 
 // GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
-func (o *IpDetails) GetVersionOk() (*int32, bool) {
+func (o *IpDetails) GetVersionOk() (*IpVersion, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -130,7 +129,7 @@ func (o *IpDetails) GetVersionOk() (*int32, bool) {
 }
 
 // SetVersion sets field value
-func (o *IpDetails) SetVersion(v int32) {
+func (o *IpDetails) SetVersion(v IpVersion) {
 	o.Version = v
 }
 

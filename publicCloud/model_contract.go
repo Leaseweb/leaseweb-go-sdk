@@ -22,10 +22,8 @@ var _ MappedNullable = &Contract{}
 
 // Contract struct for Contract
 type Contract struct {
-	// The billing frequency (in months) of the instance.
-	BillingFrequency int32 `json:"billingFrequency"`
-	// The contract commitment (in months)
-	Term int32 `json:"term"`
+	BillingFrequency BillingFrequency `json:"billingFrequency"`
+	Term ContractTerm `json:"term"`
 	Type ContractType `json:"type"`
 	EndsAt NullableTime `json:"endsAt"`
 	// Date when the contract will be automatically renewed
@@ -41,7 +39,7 @@ type _Contract Contract
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContract(billingFrequency int32, term int32, type_ ContractType, endsAt NullableTime, renewalsAt time.Time, createdAt time.Time, state ContractState) *Contract {
+func NewContract(billingFrequency BillingFrequency, term ContractTerm, type_ ContractType, endsAt NullableTime, renewalsAt time.Time, createdAt time.Time, state ContractState) *Contract {
 	this := Contract{}
 	this.BillingFrequency = billingFrequency
 	this.Term = term
@@ -62,9 +60,9 @@ func NewContractWithDefaults() *Contract {
 }
 
 // GetBillingFrequency returns the BillingFrequency field value
-func (o *Contract) GetBillingFrequency() int32 {
+func (o *Contract) GetBillingFrequency() BillingFrequency {
 	if o == nil {
-		var ret int32
+		var ret BillingFrequency
 		return ret
 	}
 
@@ -73,7 +71,7 @@ func (o *Contract) GetBillingFrequency() int32 {
 
 // GetBillingFrequencyOk returns a tuple with the BillingFrequency field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetBillingFrequencyOk() (*int32, bool) {
+func (o *Contract) GetBillingFrequencyOk() (*BillingFrequency, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -81,14 +79,14 @@ func (o *Contract) GetBillingFrequencyOk() (*int32, bool) {
 }
 
 // SetBillingFrequency sets field value
-func (o *Contract) SetBillingFrequency(v int32) {
+func (o *Contract) SetBillingFrequency(v BillingFrequency) {
 	o.BillingFrequency = v
 }
 
 // GetTerm returns the Term field value
-func (o *Contract) GetTerm() int32 {
+func (o *Contract) GetTerm() ContractTerm {
 	if o == nil {
-		var ret int32
+		var ret ContractTerm
 		return ret
 	}
 
@@ -97,7 +95,7 @@ func (o *Contract) GetTerm() int32 {
 
 // GetTermOk returns a tuple with the Term field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetTermOk() (*int32, bool) {
+func (o *Contract) GetTermOk() (*ContractTerm, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -105,7 +103,7 @@ func (o *Contract) GetTermOk() (*int32, bool) {
 }
 
 // SetTerm sets field value
-func (o *Contract) SetTerm(v int32) {
+func (o *Contract) SetTerm(v ContractTerm) {
 	o.Term = v
 }
 

@@ -20,8 +20,8 @@ type RootDiskStorageType string
 
 // List of rootDiskStorageType
 const (
-	LOCAL RootDiskStorageType = "LOCAL"
-	CENTRAL RootDiskStorageType = "CENTRAL"
+	ROOTDISKSTORAGETYPE_LOCAL RootDiskStorageType = "LOCAL"
+	ROOTDISKSTORAGETYPE_CENTRAL RootDiskStorageType = "CENTRAL"
 )
 
 // All allowed values of RootDiskStorageType enum

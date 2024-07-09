@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **MarketAppId** | Pointer to **string** | Market App ID that must be installed into the instance | [optional] 
 **Reference** | Pointer to **string** | An identifying name you can refer to the instance | [optional] 
 **ContractType** | **string** |  | 
-**ContractTerm** | **int32** | Contract commitment. Used only when contract type is MONTHLY | 
+**ContractTerm** | [**ContractTerm**](ContractTerm.md) |  | 
 **BillingFrequency** | **int32** | How often you wish to be charged. Used only when contract type is MONTHLY. &#39;1&#39; means every month, &#39;3&#39; every three months and so on. | 
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
 **RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewLaunchInstanceOpts
 
-`func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, imageId ImageId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
+`func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, imageId ImageId, contractType string, contractTerm ContractTerm, billingFrequency int32, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
 
 NewLaunchInstanceOpts instantiates a new LaunchInstanceOpts object
 This constructor will assign default values to properties that have it defined,
@@ -167,20 +167,20 @@ SetContractType sets ContractType field to given value.
 
 ### GetContractTerm
 
-`func (o *LaunchInstanceOpts) GetContractTerm() int32`
+`func (o *LaunchInstanceOpts) GetContractTerm() ContractTerm`
 
 GetContractTerm returns the ContractTerm field if non-nil, zero value otherwise.
 
 ### GetContractTermOk
 
-`func (o *LaunchInstanceOpts) GetContractTermOk() (*int32, bool)`
+`func (o *LaunchInstanceOpts) GetContractTermOk() (*ContractTerm, bool)`
 
 GetContractTermOk returns a tuple with the ContractTerm field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContractTerm
 
-`func (o *LaunchInstanceOpts) SetContractTerm(v int32)`
+`func (o *LaunchInstanceOpts) SetContractTerm(v ContractTerm)`
 
 SetContractTerm sets ContractTerm field to given value.
 

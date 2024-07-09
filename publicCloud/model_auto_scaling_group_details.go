@@ -24,10 +24,8 @@ var _ MappedNullable = &AutoScalingGroupDetails{}
 type AutoScalingGroupDetails struct {
 	// The Auto Scaling Group unique identifier
 	Id string `json:"id"`
-	// Auto Scaling Group type
-	Type string `json:"type"`
-	// The Auto Scaling Group's current state.
-	State string `json:"state"`
+	Type AutoScalingGroupType `json:"type"`
+	State AutoScalingGroupState `json:"state"`
 	// Number of instances that should be running
 	DesiredAmount NullableInt32 `json:"desiredAmount"`
 	// The region in which the Auto Scaling Group was launched
@@ -61,7 +59,7 @@ type _AutoScalingGroupDetails AutoScalingGroupDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAutoScalingGroupDetails(id string, type_ string, state string, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, loadBalancer NullableLoadBalancer) *AutoScalingGroupDetails {
+func NewAutoScalingGroupDetails(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, loadBalancer NullableLoadBalancer) *AutoScalingGroupDetails {
 	this := AutoScalingGroupDetails{}
 	this.Id = id
 	this.Type = type_
@@ -115,9 +113,9 @@ func (o *AutoScalingGroupDetails) SetId(v string) {
 }
 
 // GetType returns the Type field value
-func (o *AutoScalingGroupDetails) GetType() string {
+func (o *AutoScalingGroupDetails) GetType() AutoScalingGroupType {
 	if o == nil {
-		var ret string
+		var ret AutoScalingGroupType
 		return ret
 	}
 
@@ -126,7 +124,7 @@ func (o *AutoScalingGroupDetails) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroupDetails) GetTypeOk() (*string, bool) {
+func (o *AutoScalingGroupDetails) GetTypeOk() (*AutoScalingGroupType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -134,14 +132,14 @@ func (o *AutoScalingGroupDetails) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *AutoScalingGroupDetails) SetType(v string) {
+func (o *AutoScalingGroupDetails) SetType(v AutoScalingGroupType) {
 	o.Type = v
 }
 
 // GetState returns the State field value
-func (o *AutoScalingGroupDetails) GetState() string {
+func (o *AutoScalingGroupDetails) GetState() AutoScalingGroupState {
 	if o == nil {
-		var ret string
+		var ret AutoScalingGroupState
 		return ret
 	}
 
@@ -150,7 +148,7 @@ func (o *AutoScalingGroupDetails) GetState() string {
 
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroupDetails) GetStateOk() (*string, bool) {
+func (o *AutoScalingGroupDetails) GetStateOk() (*AutoScalingGroupState, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -158,7 +156,7 @@ func (o *AutoScalingGroupDetails) GetStateOk() (*string, bool) {
 }
 
 // SetState sets field value
-func (o *AutoScalingGroupDetails) SetState(v string) {
+func (o *AutoScalingGroupDetails) SetState(v AutoScalingGroupState) {
 	o.State = v
 }
 

@@ -20,9 +20,9 @@ type RaidType string
 
 // List of raidType
 const (
-	HW RaidType = "HW"
-	SW RaidType = "SW"
-	NONE RaidType = "NONE"
+	RAIDTYPE_HW RaidType = "HW"
+	RAIDTYPE_SW RaidType = "SW"
+	RAIDTYPE_NONE RaidType = "NONE"
 )
 
 // All allowed values of RaidType enum

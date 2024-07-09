@@ -20,9 +20,9 @@ type LinkSpeed int32
 
 // List of linkSpeed
 const (
-	_100 LinkSpeed = 100
-	_1000 LinkSpeed = 1000
-	_10000 LinkSpeed = 10000
+	LINKSPEED__100 LinkSpeed = 100
+	LINKSPEED__1000 LinkSpeed = 1000
+	LINKSPEED__10000 LinkSpeed = 10000
 )
 
 // All allowed values of LinkSpeed enum

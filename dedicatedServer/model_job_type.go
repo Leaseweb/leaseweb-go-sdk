@@ -20,10 +20,10 @@ type JobType string
 
 // List of jobType
 const (
-	INSTALL JobType = "install"
-	RESCUE_MODE JobType = "rescueMode"
-	HARDWARE_SCAN JobType = "hardwareScan"
-	IPMI_RESET JobType = "ipmiReset"
+	JOBTYPE_INSTALL JobType = "install"
+	JOBTYPE_RESCUE_MODE JobType = "rescueMode"
+	JOBTYPE_HARDWARE_SCAN JobType = "hardwareScan"
+	JOBTYPE_IPMI_RESET JobType = "ipmiReset"
 )
 
 // All allowed values of JobType enum

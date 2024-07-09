@@ -20,8 +20,8 @@ type NetworkType string
 
 // List of networkType
 const (
-	INTERNAL NetworkType = "INTERNAL"
-	PUBLIC NetworkType = "PUBLIC"
+	NETWORKTYPE_INTERNAL NetworkType = "INTERNAL"
+	NETWORKTYPE_PUBLIC NetworkType = "PUBLIC"
 )
 
 // All allowed values of NetworkType enum

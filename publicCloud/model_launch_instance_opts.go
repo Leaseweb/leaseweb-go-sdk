@@ -30,8 +30,7 @@ type LaunchInstanceOpts struct {
 	// An identifying name you can refer to the instance
 	Reference *string `json:"reference,omitempty"`
 	ContractType string `json:"contractType"`
-	// Contract commitment. Used only when contract type is MONTHLY
-	ContractTerm int32 `json:"contractTerm"`
+	ContractTerm ContractTerm `json:"contractTerm"`
 	// How often you wish to be charged. Used only when contract type is MONTHLY. '1' means every month, '3' every three months and so on.
 	BillingFrequency int32 `json:"billingFrequency"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
@@ -47,7 +46,7 @@ type _LaunchInstanceOpts LaunchInstanceOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, imageId ImageId, contractType string, contractTerm int32, billingFrequency int32, rootDiskStorageType RootDiskStorageType) *LaunchInstanceOpts {
+func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, imageId ImageId, contractType string, contractTerm ContractTerm, billingFrequency int32, rootDiskStorageType RootDiskStorageType) *LaunchInstanceOpts {
 	this := LaunchInstanceOpts{}
 	this.Region = region
 	this.Type = type_
@@ -228,9 +227,9 @@ func (o *LaunchInstanceOpts) SetContractType(v string) {
 }
 
 // GetContractTerm returns the ContractTerm field value
-func (o *LaunchInstanceOpts) GetContractTerm() int32 {
+func (o *LaunchInstanceOpts) GetContractTerm() ContractTerm {
 	if o == nil {
-		var ret int32
+		var ret ContractTerm
 		return ret
 	}
 
@@ -239,7 +238,7 @@ func (o *LaunchInstanceOpts) GetContractTerm() int32 {
 
 // GetContractTermOk returns a tuple with the ContractTerm field value
 // and a boolean to check if the value has been set.
-func (o *LaunchInstanceOpts) GetContractTermOk() (*int32, bool) {
+func (o *LaunchInstanceOpts) GetContractTermOk() (*ContractTerm, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -247,7 +246,7 @@ func (o *LaunchInstanceOpts) GetContractTermOk() (*int32, bool) {
 }
 
 // SetContractTerm sets field value
-func (o *LaunchInstanceOpts) SetContractTerm(v int32) {
+func (o *LaunchInstanceOpts) SetContractTerm(v ContractTerm) {
 	o.ContractTerm = v
 }
 

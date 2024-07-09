@@ -20,8 +20,8 @@ type CredentialType string
 
 // List of credentialType
 const (
-	OPERATING_SYSTEM CredentialType = "OPERATING_SYSTEM"
-	CONTROL_PANEL CredentialType = "CONTROL_PANEL"
+	CREDENTIALTYPE_OPERATING_SYSTEM CredentialType = "OPERATING_SYSTEM"
+	CREDENTIALTYPE_CONTROL_PANEL CredentialType = "CONTROL_PANEL"
 )
 
 // All allowed values of CredentialType enum

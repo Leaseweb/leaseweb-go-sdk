@@ -20,8 +20,8 @@ type ContractState string
 
 // List of contractState
 const (
-	ACTIVE ContractState = "ACTIVE"
-	DELETE_SCHEDULED ContractState = "DELETE_SCHEDULED"
+	CONTRACTSTATE_ACTIVE ContractState = "ACTIVE"
+	CONTRACTSTATE_DELETE_SCHEDULED ContractState = "DELETE_SCHEDULED"
 )
 
 // All allowed values of ContractState enum

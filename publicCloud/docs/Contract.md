@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BillingFrequency** | **int32** | The billing frequency (in months) of the instance. | 
-**Term** | **int32** | The contract commitment (in months) | 
+**BillingFrequency** | [**BillingFrequency**](BillingFrequency.md) |  | 
+**Term** | [**ContractTerm**](ContractTerm.md) |  | 
 **Type** | [**ContractType**](ContractType.md) |  | 
 **EndsAt** | **NullableTime** |  | 
 **RenewalsAt** | **time.Time** | Date when the contract will be automatically renewed | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewContract
 
-`func NewContract(billingFrequency int32, term int32, type_ ContractType, endsAt NullableTime, renewalsAt time.Time, createdAt time.Time, state ContractState, ) *Contract`
+`func NewContract(billingFrequency BillingFrequency, term ContractTerm, type_ ContractType, endsAt NullableTime, renewalsAt time.Time, createdAt time.Time, state ContractState, ) *Contract`
 
 NewContract instantiates a new Contract object
 This constructor will assign default values to properties that have it defined,
@@ -33,40 +33,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetBillingFrequency
 
-`func (o *Contract) GetBillingFrequency() int32`
+`func (o *Contract) GetBillingFrequency() BillingFrequency`
 
 GetBillingFrequency returns the BillingFrequency field if non-nil, zero value otherwise.
 
 ### GetBillingFrequencyOk
 
-`func (o *Contract) GetBillingFrequencyOk() (*int32, bool)`
+`func (o *Contract) GetBillingFrequencyOk() (*BillingFrequency, bool)`
 
 GetBillingFrequencyOk returns a tuple with the BillingFrequency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBillingFrequency
 
-`func (o *Contract) SetBillingFrequency(v int32)`
+`func (o *Contract) SetBillingFrequency(v BillingFrequency)`
 
 SetBillingFrequency sets BillingFrequency field to given value.
 
 
 ### GetTerm
 
-`func (o *Contract) GetTerm() int32`
+`func (o *Contract) GetTerm() ContractTerm`
 
 GetTerm returns the Term field if non-nil, zero value otherwise.
 
 ### GetTermOk
 
-`func (o *Contract) GetTermOk() (*int32, bool)`
+`func (o *Contract) GetTermOk() (*ContractTerm, bool)`
 
 GetTermOk returns a tuple with the Term field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTerm
 
-`func (o *Contract) SetTerm(v int32)`
+`func (o *Contract) SetTerm(v ContractTerm)`
 
 SetTerm sets Term field to given value.
 
