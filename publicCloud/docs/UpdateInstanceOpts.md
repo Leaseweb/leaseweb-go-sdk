@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to [**InstanceTypeName**](InstanceTypeName.md) |  | [optional] 
 **Reference** | Pointer to **string** | An identifying name you can refer to the instance | [optional] 
-**ContractType** | Pointer to **string** |  | [optional] 
-**ContractTerm** | Pointer to **int32** | Contract commitment. Can only be used when updating the contract type from HOURLY and MONTHLY. | [optional] 
-**BillingFrequency** | Pointer to **int32** | How often you wish to be charged. Can only be used when updating the contract type from HOURLY to MONTHLY. &#39;1&#39; means every month, &#39;3&#39; every three months and so on. | [optional] 
+**ContractType** | Pointer to [**ContractType**](ContractType.md) |  | [optional] 
+**ContractTerm** | Pointer to [**ContractTerm**](ContractTerm.md) |  | [optional] 
+**BillingFrequency** | Pointer to [**BillingFrequency**](BillingFrequency.md) |  | [optional] 
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
 
 ## Methods
@@ -82,20 +82,20 @@ HasReference returns a boolean if a field has been set.
 
 ### GetContractType
 
-`func (o *UpdateInstanceOpts) GetContractType() string`
+`func (o *UpdateInstanceOpts) GetContractType() ContractType`
 
 GetContractType returns the ContractType field if non-nil, zero value otherwise.
 
 ### GetContractTypeOk
 
-`func (o *UpdateInstanceOpts) GetContractTypeOk() (*string, bool)`
+`func (o *UpdateInstanceOpts) GetContractTypeOk() (*ContractType, bool)`
 
 GetContractTypeOk returns a tuple with the ContractType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContractType
 
-`func (o *UpdateInstanceOpts) SetContractType(v string)`
+`func (o *UpdateInstanceOpts) SetContractType(v ContractType)`
 
 SetContractType sets ContractType field to given value.
 
@@ -107,20 +107,20 @@ HasContractType returns a boolean if a field has been set.
 
 ### GetContractTerm
 
-`func (o *UpdateInstanceOpts) GetContractTerm() int32`
+`func (o *UpdateInstanceOpts) GetContractTerm() ContractTerm`
 
 GetContractTerm returns the ContractTerm field if non-nil, zero value otherwise.
 
 ### GetContractTermOk
 
-`func (o *UpdateInstanceOpts) GetContractTermOk() (*int32, bool)`
+`func (o *UpdateInstanceOpts) GetContractTermOk() (*ContractTerm, bool)`
 
 GetContractTermOk returns a tuple with the ContractTerm field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContractTerm
 
-`func (o *UpdateInstanceOpts) SetContractTerm(v int32)`
+`func (o *UpdateInstanceOpts) SetContractTerm(v ContractTerm)`
 
 SetContractTerm sets ContractTerm field to given value.
 
@@ -132,20 +132,20 @@ HasContractTerm returns a boolean if a field has been set.
 
 ### GetBillingFrequency
 
-`func (o *UpdateInstanceOpts) GetBillingFrequency() int32`
+`func (o *UpdateInstanceOpts) GetBillingFrequency() BillingFrequency`
 
 GetBillingFrequency returns the BillingFrequency field if non-nil, zero value otherwise.
 
 ### GetBillingFrequencyOk
 
-`func (o *UpdateInstanceOpts) GetBillingFrequencyOk() (*int32, bool)`
+`func (o *UpdateInstanceOpts) GetBillingFrequencyOk() (*BillingFrequency, bool)`
 
 GetBillingFrequencyOk returns a tuple with the BillingFrequency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBillingFrequency
 
-`func (o *UpdateInstanceOpts) SetBillingFrequency(v int32)`
+`func (o *UpdateInstanceOpts) SetBillingFrequency(v BillingFrequency)`
 
 SetBillingFrequency sets BillingFrequency field to given value.
 

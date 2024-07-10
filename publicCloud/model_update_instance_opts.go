@@ -22,11 +22,9 @@ type UpdateInstanceOpts struct {
 	Type *InstanceTypeName `json:"type,omitempty"`
 	// An identifying name you can refer to the instance
 	Reference *string `json:"reference,omitempty"`
-	ContractType *string `json:"contractType,omitempty"`
-	// Contract commitment. Can only be used when updating the contract type from HOURLY and MONTHLY.
-	ContractTerm *int32 `json:"contractTerm,omitempty"`
-	// How often you wish to be charged. Can only be used when updating the contract type from HOURLY to MONTHLY. '1' means every month, '3' every three months and so on.
-	BillingFrequency *int32 `json:"billingFrequency,omitempty"`
+	ContractType *ContractType `json:"contractType,omitempty"`
+	ContractTerm *ContractTerm `json:"contractTerm,omitempty"`
+	BillingFrequency *BillingFrequency `json:"billingFrequency,omitempty"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize *int32 `json:"rootDiskSize,omitempty"`
 }
@@ -113,9 +111,9 @@ func (o *UpdateInstanceOpts) SetReference(v string) {
 }
 
 // GetContractType returns the ContractType field value if set, zero value otherwise.
-func (o *UpdateInstanceOpts) GetContractType() string {
+func (o *UpdateInstanceOpts) GetContractType() ContractType {
 	if o == nil || IsNil(o.ContractType) {
-		var ret string
+		var ret ContractType
 		return ret
 	}
 	return *o.ContractType
@@ -123,7 +121,7 @@ func (o *UpdateInstanceOpts) GetContractType() string {
 
 // GetContractTypeOk returns a tuple with the ContractType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateInstanceOpts) GetContractTypeOk() (*string, bool) {
+func (o *UpdateInstanceOpts) GetContractTypeOk() (*ContractType, bool) {
 	if o == nil || IsNil(o.ContractType) {
 		return nil, false
 	}
@@ -139,15 +137,15 @@ func (o *UpdateInstanceOpts) HasContractType() bool {
 	return false
 }
 
-// SetContractType gets a reference to the given string and assigns it to the ContractType field.
-func (o *UpdateInstanceOpts) SetContractType(v string) {
+// SetContractType gets a reference to the given ContractType and assigns it to the ContractType field.
+func (o *UpdateInstanceOpts) SetContractType(v ContractType) {
 	o.ContractType = &v
 }
 
 // GetContractTerm returns the ContractTerm field value if set, zero value otherwise.
-func (o *UpdateInstanceOpts) GetContractTerm() int32 {
+func (o *UpdateInstanceOpts) GetContractTerm() ContractTerm {
 	if o == nil || IsNil(o.ContractTerm) {
-		var ret int32
+		var ret ContractTerm
 		return ret
 	}
 	return *o.ContractTerm
@@ -155,7 +153,7 @@ func (o *UpdateInstanceOpts) GetContractTerm() int32 {
 
 // GetContractTermOk returns a tuple with the ContractTerm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateInstanceOpts) GetContractTermOk() (*int32, bool) {
+func (o *UpdateInstanceOpts) GetContractTermOk() (*ContractTerm, bool) {
 	if o == nil || IsNil(o.ContractTerm) {
 		return nil, false
 	}
@@ -171,15 +169,15 @@ func (o *UpdateInstanceOpts) HasContractTerm() bool {
 	return false
 }
 
-// SetContractTerm gets a reference to the given int32 and assigns it to the ContractTerm field.
-func (o *UpdateInstanceOpts) SetContractTerm(v int32) {
+// SetContractTerm gets a reference to the given ContractTerm and assigns it to the ContractTerm field.
+func (o *UpdateInstanceOpts) SetContractTerm(v ContractTerm) {
 	o.ContractTerm = &v
 }
 
 // GetBillingFrequency returns the BillingFrequency field value if set, zero value otherwise.
-func (o *UpdateInstanceOpts) GetBillingFrequency() int32 {
+func (o *UpdateInstanceOpts) GetBillingFrequency() BillingFrequency {
 	if o == nil || IsNil(o.BillingFrequency) {
-		var ret int32
+		var ret BillingFrequency
 		return ret
 	}
 	return *o.BillingFrequency
@@ -187,7 +185,7 @@ func (o *UpdateInstanceOpts) GetBillingFrequency() int32 {
 
 // GetBillingFrequencyOk returns a tuple with the BillingFrequency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateInstanceOpts) GetBillingFrequencyOk() (*int32, bool) {
+func (o *UpdateInstanceOpts) GetBillingFrequencyOk() (*BillingFrequency, bool) {
 	if o == nil || IsNil(o.BillingFrequency) {
 		return nil, false
 	}
@@ -203,8 +201,8 @@ func (o *UpdateInstanceOpts) HasBillingFrequency() bool {
 	return false
 }
 
-// SetBillingFrequency gets a reference to the given int32 and assigns it to the BillingFrequency field.
-func (o *UpdateInstanceOpts) SetBillingFrequency(v int32) {
+// SetBillingFrequency gets a reference to the given BillingFrequency and assigns it to the BillingFrequency field.
+func (o *UpdateInstanceOpts) SetBillingFrequency(v BillingFrequency) {
 	o.BillingFrequency = &v
 }
 
