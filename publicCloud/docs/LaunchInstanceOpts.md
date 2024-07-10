@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **ImageId** | [**ImageId**](ImageId.md) |  | 
 **MarketAppId** | Pointer to **string** | Market App ID that must be installed into the instance | [optional] 
 **Reference** | Pointer to **string** | An identifying name you can refer to the instance | [optional] 
-**ContractType** | **string** |  | 
+**ContractType** | [**ContractType**](ContractType.md) |  | 
 **ContractTerm** | [**ContractTerm**](ContractTerm.md) |  | 
-**BillingFrequency** | **int32** | How often you wish to be charged. Used only when contract type is MONTHLY. &#39;1&#39; means every month, &#39;3&#39; every three months and so on. | 
+**BillingFrequency** | [**BillingFrequency**](BillingFrequency.md) |  | 
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
 **RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
 **SshKey** | Pointer to **string** | Public SSH key to be installed into the instance. Must be used only on Linux/FreeBSD instances | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewLaunchInstanceOpts
 
-`func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, imageId ImageId, contractType string, contractTerm ContractTerm, billingFrequency int32, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
+`func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, imageId ImageId, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
 
 NewLaunchInstanceOpts instantiates a new LaunchInstanceOpts object
 This constructor will assign default values to properties that have it defined,
@@ -147,20 +147,20 @@ HasReference returns a boolean if a field has been set.
 
 ### GetContractType
 
-`func (o *LaunchInstanceOpts) GetContractType() string`
+`func (o *LaunchInstanceOpts) GetContractType() ContractType`
 
 GetContractType returns the ContractType field if non-nil, zero value otherwise.
 
 ### GetContractTypeOk
 
-`func (o *LaunchInstanceOpts) GetContractTypeOk() (*string, bool)`
+`func (o *LaunchInstanceOpts) GetContractTypeOk() (*ContractType, bool)`
 
 GetContractTypeOk returns a tuple with the ContractType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContractType
 
-`func (o *LaunchInstanceOpts) SetContractType(v string)`
+`func (o *LaunchInstanceOpts) SetContractType(v ContractType)`
 
 SetContractType sets ContractType field to given value.
 
@@ -187,20 +187,20 @@ SetContractTerm sets ContractTerm field to given value.
 
 ### GetBillingFrequency
 
-`func (o *LaunchInstanceOpts) GetBillingFrequency() int32`
+`func (o *LaunchInstanceOpts) GetBillingFrequency() BillingFrequency`
 
 GetBillingFrequency returns the BillingFrequency field if non-nil, zero value otherwise.
 
 ### GetBillingFrequencyOk
 
-`func (o *LaunchInstanceOpts) GetBillingFrequencyOk() (*int32, bool)`
+`func (o *LaunchInstanceOpts) GetBillingFrequencyOk() (*BillingFrequency, bool)`
 
 GetBillingFrequencyOk returns a tuple with the BillingFrequency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBillingFrequency
 
-`func (o *LaunchInstanceOpts) SetBillingFrequency(v int32)`
+`func (o *LaunchInstanceOpts) SetBillingFrequency(v BillingFrequency)`
 
 SetBillingFrequency sets BillingFrequency field to given value.
 

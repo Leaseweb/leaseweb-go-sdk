@@ -8362,22 +8362,11 @@ components:
           description: An identifying name you can refer to the instance
           type: string
         contractType:
-          enum:
-          - HOURLY
-          - MONTHLY
-          type: string
+          $ref: '#/components/schemas/contractType'
         contractTerm:
           $ref: '#/components/schemas/contractTerm'
         billingFrequency:
-          description: "How often you wish to be charged. Used only when contract\
-            \ type is MONTHLY. '1' means every month, '3' every three months and so\
-            \ on."
-          enum:
-          - 1
-          - 3
-          - 6
-          - 12
-          type: integer
+          $ref: '#/components/schemas/billingFrequency'
         rootDiskSize:
           description: The root disk's size in GB. Must be at least 5 GB for Linux
             and FreeBSD instances and 50 GB for Windows instances

@@ -3019,7 +3019,7 @@ import (
 )
 
 func main() {
-	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.instanceTypeName("lsw.m3.large"), openapiclient.imageId("ALMALINUX_8_64BIT"), "ContractType_example", openapiclient.contractTerm(0), int32(123), openapiclient.rootDiskStorageType("LOCAL")) // LaunchInstanceOpts | 
+	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.instanceTypeName("lsw.m3.large"), openapiclient.imageId("ALMALINUX_8_64BIT"), openapiclient.contractType("HOURLY"), openapiclient.contractTerm(0), openapiclient.billingFrequency(1), openapiclient.rootDiskStorageType("LOCAL")) // LaunchInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
