@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | Instance type&#39;s name | [optional] 
-**Resources** | Pointer to [**Resources**](Resources.md) |  | [optional] 
-**StorageTypes** | Pointer to **[]string** | The supported storage types for the instance type | [optional] 
-**Prices** | Pointer to [**Price**](Price.md) |  | [optional] 
+**Name** | **string** | Instance type&#39;s name | 
+**Resources** | [**Resources**](Resources.md) |  | 
+**StorageTypes** | **[]string** | The supported storage types for the instance type | 
+**Prices** | [**Price**](Price.md) |  | 
 
 ## Methods
 
 ### NewInstanceType
 
-`func NewInstanceType() *InstanceType`
+`func NewInstanceType(name string, resources Resources, storageTypes []string, prices Price, ) *InstanceType`
 
 NewInstanceType instantiates a new InstanceType object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *InstanceType) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetResources
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetResources sets Resources field to given value.
 
-### HasResources
-
-`func (o *InstanceType) HasResources() bool`
-
-HasResources returns a boolean if a field has been set.
 
 ### GetStorageTypes
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetStorageTypes sets StorageTypes field to given value.
 
-### HasStorageTypes
-
-`func (o *InstanceType) HasStorageTypes() bool`
-
-HasStorageTypes returns a boolean if a field has been set.
 
 ### SetStorageTypesNil
 
@@ -132,11 +117,6 @@ and a boolean to check if the value has been set.
 
 SetPrices sets Prices field to given value.
 
-### HasPrices
-
-`func (o *InstanceType) HasPrices() bool`
-
-HasPrices returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

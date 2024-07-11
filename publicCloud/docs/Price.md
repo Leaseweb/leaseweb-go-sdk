@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Currency** | Pointer to **string** |  | [optional] 
-**CurrencySymbol** | Pointer to **string** |  | [optional] 
-**Compute** | Pointer to [**Compute**](Compute.md) |  | [optional] 
-**Storage** | Pointer to [**Storage**](Storage.md) |  | [optional] 
+**Currency** | **string** |  | 
+**CurrencySymbol** | **string** |  | 
+**Compute** | [**Compute**](Compute.md) |  | 
+**Storage** | [**Storage**](Storage.md) |  | 
 
 ## Methods
 
 ### NewPrice
 
-`func NewPrice() *Price`
+`func NewPrice(currency string, currencySymbol string, compute Compute, storage Storage, ) *Price`
 
 NewPrice instantiates a new Price object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetCurrency sets Currency field to given value.
 
-### HasCurrency
-
-`func (o *Price) HasCurrency() bool`
-
-HasCurrency returns a boolean if a field has been set.
 
 ### GetCurrencySymbol
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetCurrencySymbol sets CurrencySymbol field to given value.
 
-### HasCurrencySymbol
-
-`func (o *Price) HasCurrencySymbol() bool`
-
-HasCurrencySymbol returns a boolean if a field has been set.
 
 ### GetCompute
 
@@ -97,11 +87,6 @@ and a boolean to check if the value has been set.
 
 SetCompute sets Compute field to given value.
 
-### HasCompute
-
-`func (o *Price) HasCompute() bool`
-
-HasCompute returns a boolean if a field has been set.
 
 ### GetStorage
 
@@ -122,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetStorage sets Storage field to given value.
 
-### HasStorage
-
-`func (o *Price) HasStorage() bool`
-
-HasStorage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

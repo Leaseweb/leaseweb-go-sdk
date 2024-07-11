@@ -7501,6 +7501,11 @@ components:
           $ref: '#/components/schemas/compute'
         storage:
           $ref: '#/components/schemas/storage'
+      required:
+      - compute
+      - currency
+      - currencySymbol
+      - storage
       type: object
     instanceType:
       example:
@@ -7551,6 +7556,11 @@ components:
           type: array
         prices:
           $ref: '#/components/schemas/price'
+      required:
+      - name
+      - prices
+      - resources
+      - storageTypes
       title: instanceType
     instanceTypes:
       example:

@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the InstanceType type satisfies the MappedNullable interface at compile time
@@ -20,19 +22,25 @@ var _ MappedNullable = &InstanceType{}
 // InstanceType struct for InstanceType
 type InstanceType struct {
 	// Instance type's name
-	Name *string `json:"name,omitempty"`
-	Resources *Resources `json:"resources,omitempty"`
+	Name string `json:"name"`
+	Resources Resources `json:"resources"`
 	// The supported storage types for the instance type
-	StorageTypes []string `json:"storageTypes,omitempty"`
-	Prices *Price `json:"prices,omitempty"`
+	StorageTypes []string `json:"storageTypes"`
+	Prices Price `json:"prices"`
 }
+
+type _InstanceType InstanceType
 
 // NewInstanceType instantiates a new InstanceType object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceType() *InstanceType {
+func NewInstanceType(name string, resources Resources, storageTypes []string, prices Price) *InstanceType {
 	this := InstanceType{}
+	this.Name = name
+	this.Resources = resources
+	this.StorageTypes = storageTypes
+	this.Prices = prices
 	return &this
 }
 
@@ -44,80 +52,66 @@ func NewInstanceTypeWithDefaults() *InstanceType {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *InstanceType) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *InstanceType) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *InstanceType) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *InstanceType) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetResources returns the Resources field value if set, zero value otherwise.
+// GetResources returns the Resources field value
 func (o *InstanceType) GetResources() Resources {
-	if o == nil || IsNil(o.Resources) {
+	if o == nil {
 		var ret Resources
 		return ret
 	}
-	return *o.Resources
+
+	return o.Resources
 }
 
-// GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
+// GetResourcesOk returns a tuple with the Resources field value
 // and a boolean to check if the value has been set.
 func (o *InstanceType) GetResourcesOk() (*Resources, bool) {
-	if o == nil || IsNil(o.Resources) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Resources, true
+	return &o.Resources, true
 }
 
-// HasResources returns a boolean if a field has been set.
-func (o *InstanceType) HasResources() bool {
-	if o != nil && !IsNil(o.Resources) {
-		return true
-	}
-
-	return false
-}
-
-// SetResources gets a reference to the given Resources and assigns it to the Resources field.
+// SetResources sets field value
 func (o *InstanceType) SetResources(v Resources) {
-	o.Resources = &v
+	o.Resources = v
 }
 
-// GetStorageTypes returns the StorageTypes field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStorageTypes returns the StorageTypes field value
+// If the value is explicit nil, the zero value for []string will be returned
 func (o *InstanceType) GetStorageTypes() []string {
 	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.StorageTypes
 }
 
-// GetStorageTypesOk returns a tuple with the StorageTypes field value if set, nil otherwise
+// GetStorageTypesOk returns a tuple with the StorageTypes field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InstanceType) GetStorageTypesOk() ([]string, bool) {
@@ -127,50 +121,33 @@ func (o *InstanceType) GetStorageTypesOk() ([]string, bool) {
 	return o.StorageTypes, true
 }
 
-// HasStorageTypes returns a boolean if a field has been set.
-func (o *InstanceType) HasStorageTypes() bool {
-	if o != nil && !IsNil(o.StorageTypes) {
-		return true
-	}
-
-	return false
-}
-
-// SetStorageTypes gets a reference to the given []string and assigns it to the StorageTypes field.
+// SetStorageTypes sets field value
 func (o *InstanceType) SetStorageTypes(v []string) {
 	o.StorageTypes = v
 }
 
-// GetPrices returns the Prices field value if set, zero value otherwise.
+// GetPrices returns the Prices field value
 func (o *InstanceType) GetPrices() Price {
-	if o == nil || IsNil(o.Prices) {
+	if o == nil {
 		var ret Price
 		return ret
 	}
-	return *o.Prices
+
+	return o.Prices
 }
 
-// GetPricesOk returns a tuple with the Prices field value if set, nil otherwise
+// GetPricesOk returns a tuple with the Prices field value
 // and a boolean to check if the value has been set.
 func (o *InstanceType) GetPricesOk() (*Price, bool) {
-	if o == nil || IsNil(o.Prices) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Prices, true
+	return &o.Prices, true
 }
 
-// HasPrices returns a boolean if a field has been set.
-func (o *InstanceType) HasPrices() bool {
-	if o != nil && !IsNil(o.Prices) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrices gets a reference to the given Price and assigns it to the Prices field.
+// SetPrices sets field value
 func (o *InstanceType) SetPrices(v Price) {
-	o.Prices = &v
+	o.Prices = v
 }
 
 func (o InstanceType) MarshalJSON() ([]byte, error) {
@@ -183,19 +160,53 @@ func (o InstanceType) MarshalJSON() ([]byte, error) {
 
 func (o InstanceType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Resources) {
-		toSerialize["resources"] = o.Resources
-	}
+	toSerialize["name"] = o.Name
+	toSerialize["resources"] = o.Resources
 	if o.StorageTypes != nil {
 		toSerialize["storageTypes"] = o.StorageTypes
 	}
-	if !IsNil(o.Prices) {
-		toSerialize["prices"] = o.Prices
-	}
+	toSerialize["prices"] = o.Prices
 	return toSerialize, nil
+}
+
+func (o *InstanceType) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"resources",
+		"storageTypes",
+		"prices",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varInstanceType := _InstanceType{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInstanceType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InstanceType(varInstanceType)
+
+	return err
 }
 
 type NullableInstanceType struct {

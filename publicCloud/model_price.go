@@ -12,6 +12,8 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Price type satisfies the MappedNullable interface at compile time
@@ -19,18 +21,24 @@ var _ MappedNullable = &Price{}
 
 // Price struct for Price
 type Price struct {
-	Currency *string `json:"currency,omitempty"`
-	CurrencySymbol *string `json:"currencySymbol,omitempty"`
-	Compute *Compute `json:"compute,omitempty"`
-	Storage *Storage `json:"storage,omitempty"`
+	Currency string `json:"currency"`
+	CurrencySymbol string `json:"currencySymbol"`
+	Compute Compute `json:"compute"`
+	Storage Storage `json:"storage"`
 }
+
+type _Price Price
 
 // NewPrice instantiates a new Price object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrice() *Price {
+func NewPrice(currency string, currencySymbol string, compute Compute, storage Storage) *Price {
 	this := Price{}
+	this.Currency = currency
+	this.CurrencySymbol = currencySymbol
+	this.Compute = compute
+	this.Storage = storage
 	return &this
 }
 
@@ -42,132 +50,100 @@ func NewPriceWithDefaults() *Price {
 	return &this
 }
 
-// GetCurrency returns the Currency field value if set, zero value otherwise.
+// GetCurrency returns the Currency field value
 func (o *Price) GetCurrency() string {
-	if o == nil || IsNil(o.Currency) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Currency
+
+	return o.Currency
 }
 
-// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
+// GetCurrencyOk returns a tuple with the Currency field value
 // and a boolean to check if the value has been set.
 func (o *Price) GetCurrencyOk() (*string, bool) {
-	if o == nil || IsNil(o.Currency) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Currency, true
+	return &o.Currency, true
 }
 
-// HasCurrency returns a boolean if a field has been set.
-func (o *Price) HasCurrency() bool {
-	if o != nil && !IsNil(o.Currency) {
-		return true
-	}
-
-	return false
-}
-
-// SetCurrency gets a reference to the given string and assigns it to the Currency field.
+// SetCurrency sets field value
 func (o *Price) SetCurrency(v string) {
-	o.Currency = &v
+	o.Currency = v
 }
 
-// GetCurrencySymbol returns the CurrencySymbol field value if set, zero value otherwise.
+// GetCurrencySymbol returns the CurrencySymbol field value
 func (o *Price) GetCurrencySymbol() string {
-	if o == nil || IsNil(o.CurrencySymbol) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.CurrencySymbol
+
+	return o.CurrencySymbol
 }
 
-// GetCurrencySymbolOk returns a tuple with the CurrencySymbol field value if set, nil otherwise
+// GetCurrencySymbolOk returns a tuple with the CurrencySymbol field value
 // and a boolean to check if the value has been set.
 func (o *Price) GetCurrencySymbolOk() (*string, bool) {
-	if o == nil || IsNil(o.CurrencySymbol) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CurrencySymbol, true
+	return &o.CurrencySymbol, true
 }
 
-// HasCurrencySymbol returns a boolean if a field has been set.
-func (o *Price) HasCurrencySymbol() bool {
-	if o != nil && !IsNil(o.CurrencySymbol) {
-		return true
-	}
-
-	return false
-}
-
-// SetCurrencySymbol gets a reference to the given string and assigns it to the CurrencySymbol field.
+// SetCurrencySymbol sets field value
 func (o *Price) SetCurrencySymbol(v string) {
-	o.CurrencySymbol = &v
+	o.CurrencySymbol = v
 }
 
-// GetCompute returns the Compute field value if set, zero value otherwise.
+// GetCompute returns the Compute field value
 func (o *Price) GetCompute() Compute {
-	if o == nil || IsNil(o.Compute) {
+	if o == nil {
 		var ret Compute
 		return ret
 	}
-	return *o.Compute
+
+	return o.Compute
 }
 
-// GetComputeOk returns a tuple with the Compute field value if set, nil otherwise
+// GetComputeOk returns a tuple with the Compute field value
 // and a boolean to check if the value has been set.
 func (o *Price) GetComputeOk() (*Compute, bool) {
-	if o == nil || IsNil(o.Compute) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Compute, true
+	return &o.Compute, true
 }
 
-// HasCompute returns a boolean if a field has been set.
-func (o *Price) HasCompute() bool {
-	if o != nil && !IsNil(o.Compute) {
-		return true
-	}
-
-	return false
-}
-
-// SetCompute gets a reference to the given Compute and assigns it to the Compute field.
+// SetCompute sets field value
 func (o *Price) SetCompute(v Compute) {
-	o.Compute = &v
+	o.Compute = v
 }
 
-// GetStorage returns the Storage field value if set, zero value otherwise.
+// GetStorage returns the Storage field value
 func (o *Price) GetStorage() Storage {
-	if o == nil || IsNil(o.Storage) {
+	if o == nil {
 		var ret Storage
 		return ret
 	}
-	return *o.Storage
+
+	return o.Storage
 }
 
-// GetStorageOk returns a tuple with the Storage field value if set, nil otherwise
+// GetStorageOk returns a tuple with the Storage field value
 // and a boolean to check if the value has been set.
 func (o *Price) GetStorageOk() (*Storage, bool) {
-	if o == nil || IsNil(o.Storage) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Storage, true
+	return &o.Storage, true
 }
 
-// HasStorage returns a boolean if a field has been set.
-func (o *Price) HasStorage() bool {
-	if o != nil && !IsNil(o.Storage) {
-		return true
-	}
-
-	return false
-}
-
-// SetStorage gets a reference to the given Storage and assigns it to the Storage field.
+// SetStorage sets field value
 func (o *Price) SetStorage(v Storage) {
-	o.Storage = &v
+	o.Storage = v
 }
 
 func (o Price) MarshalJSON() ([]byte, error) {
@@ -180,19 +156,51 @@ func (o Price) MarshalJSON() ([]byte, error) {
 
 func (o Price) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Currency) {
-		toSerialize["currency"] = o.Currency
-	}
-	if !IsNil(o.CurrencySymbol) {
-		toSerialize["currencySymbol"] = o.CurrencySymbol
-	}
-	if !IsNil(o.Compute) {
-		toSerialize["compute"] = o.Compute
-	}
-	if !IsNil(o.Storage) {
-		toSerialize["storage"] = o.Storage
-	}
+	toSerialize["currency"] = o.Currency
+	toSerialize["currencySymbol"] = o.CurrencySymbol
+	toSerialize["compute"] = o.Compute
+	toSerialize["storage"] = o.Storage
 	return toSerialize, nil
+}
+
+func (o *Price) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"currency",
+		"currencySymbol",
+		"compute",
+		"storage",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPrice := _Price{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Price(varPrice)
+
+	return err
 }
 
 type NullablePrice struct {
