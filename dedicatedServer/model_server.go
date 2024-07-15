@@ -35,7 +35,10 @@ type Server struct {
 	// Serial number of server
 	SerialNumber *string `json:"serialNumber,omitempty"`
 	Specs *ServerSpecs `json:"specs,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Server Server
 
 // NewServer instantiates a new Server object
 // This constructor will assign default values to properties that have it defined,
@@ -449,7 +452,43 @@ func (o Server) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Specs) {
 		toSerialize["specs"] = o.Specs
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Server) UnmarshalJSON(data []byte) (err error) {
+	varServer := _Server{}
+
+	err = json.Unmarshal(data, &varServer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Server(varServer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "assetId")
+		delete(additionalProperties, "contract")
+		delete(additionalProperties, "featureAvailability")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "networkInterfaces")
+		delete(additionalProperties, "powerPorts")
+		delete(additionalProperties, "privateNetworks")
+		delete(additionalProperties, "rack")
+		delete(additionalProperties, "serialNumber")
+		delete(additionalProperties, "specs")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServer struct {

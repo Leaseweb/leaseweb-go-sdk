@@ -21,7 +21,10 @@ var _ MappedNullable = &CpuMetricsMetrics{}
 type CpuMetricsMetrics struct {
 	Values []CpuMetricsValue `json:"values,omitempty"`
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CpuMetricsMetrics CpuMetricsMetrics
 
 // NewCpuMetricsMetrics instantiates a new CpuMetricsMetrics object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o CpuMetricsMetrics) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CpuMetricsMetrics) UnmarshalJSON(data []byte) (err error) {
+	varCpuMetricsMetrics := _CpuMetricsMetrics{}
+
+	err = json.Unmarshal(data, &varCpuMetricsMetrics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CpuMetricsMetrics(varCpuMetricsMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "values")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCpuMetricsMetrics struct {

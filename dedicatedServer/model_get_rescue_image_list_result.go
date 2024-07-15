@@ -22,7 +22,10 @@ type GetRescueImageListResult struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// A list of operating systems
 	RescueImages []RescueImage `json:"rescueImages,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetRescueImageListResult GetRescueImageListResult
 
 // NewGetRescueImageListResult instantiates a new GetRescueImageListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetRescueImageListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RescueImages) {
 		toSerialize["rescueImages"] = o.RescueImages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetRescueImageListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetRescueImageListResult := _GetRescueImageListResult{}
+
+	err = json.Unmarshal(data, &varGetRescueImageListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetRescueImageListResult(varGetRescueImageListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "rescueImages")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetRescueImageListResult struct {

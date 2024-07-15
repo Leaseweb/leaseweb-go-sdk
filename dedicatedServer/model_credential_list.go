@@ -22,7 +22,10 @@ type CredentialList struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of credentials
 	Credentials []Credential `json:"credentials,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CredentialList CredentialList
 
 // NewCredentialList instantiates a new CredentialList object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o CredentialList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Credentials) {
 		toSerialize["credentials"] = o.Credentials
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CredentialList) UnmarshalJSON(data []byte) (err error) {
+	varCredentialList := _CredentialList{}
+
+	err = json.Unmarshal(data, &varCredentialList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CredentialList(varCredentialList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "credentials")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCredentialList struct {

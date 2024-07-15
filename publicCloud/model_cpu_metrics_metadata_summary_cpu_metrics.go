@@ -24,7 +24,10 @@ type CpuMetricsMetadataSummaryCpuMetrics struct {
 	// Expected CPU given the average times the amount of days between the `from` and `to` dates, in percentage
 	Expected *string `json:"expected,omitempty"`
 	Peak *CpuMetricsMetadataSummaryPeak `json:"peak,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CpuMetricsMetadataSummaryCpuMetrics CpuMetricsMetadataSummaryCpuMetrics
 
 // NewCpuMetricsMetadataSummaryCpuMetrics instantiates a new CpuMetricsMetadataSummaryCpuMetrics object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +161,35 @@ func (o CpuMetricsMetadataSummaryCpuMetrics) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Peak) {
 		toSerialize["peak"] = o.Peak
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CpuMetricsMetadataSummaryCpuMetrics) UnmarshalJSON(data []byte) (err error) {
+	varCpuMetricsMetadataSummaryCpuMetrics := _CpuMetricsMetadataSummaryCpuMetrics{}
+
+	err = json.Unmarshal(data, &varCpuMetricsMetadataSummaryCpuMetrics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CpuMetricsMetadataSummaryCpuMetrics(varCpuMetricsMetadataSummaryCpuMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "average")
+		delete(additionalProperties, "expected")
+		delete(additionalProperties, "peak")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCpuMetricsMetadataSummaryCpuMetrics struct {

@@ -24,7 +24,10 @@ type MetricValue struct {
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	// The value of the current metric
 	Value *int32 `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricValue MetricValue
 
 // NewMetricValue instantiates a new MetricValue object
 // This constructor will assign default values to properties that have it defined,
@@ -123,7 +126,34 @@ func (o MetricValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricValue) UnmarshalJSON(data []byte) (err error) {
+	varMetricValue := _MetricValue{}
+
+	err = json.Unmarshal(data, &varMetricValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricValue(varMetricValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricValue struct {

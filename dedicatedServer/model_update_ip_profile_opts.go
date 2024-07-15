@@ -23,7 +23,10 @@ type UpdateIpProfileOpts struct {
 	DetectionProfile *string `json:"detectionProfile,omitempty"`
 	// The reverse lookup value
 	ReverseLookup *string `json:"reverseLookup,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateIpProfileOpts UpdateIpProfileOpts
 
 // NewUpdateIpProfileOpts instantiates a new UpdateIpProfileOpts object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UpdateIpProfileOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReverseLookup) {
 		toSerialize["reverseLookup"] = o.ReverseLookup
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateIpProfileOpts) UnmarshalJSON(data []byte) (err error) {
+	varUpdateIpProfileOpts := _UpdateIpProfileOpts{}
+
+	err = json.Unmarshal(data, &varUpdateIpProfileOpts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateIpProfileOpts(varUpdateIpProfileOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "detectionProfile")
+		delete(additionalProperties, "reverseLookup")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateIpProfileOpts struct {

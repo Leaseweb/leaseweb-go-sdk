@@ -22,7 +22,10 @@ type GetServerDataTrafficNotificationSettingListResult struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of Data traffic Notification Settings
 	DatatrafficNotificationSettings []DataTrafficNotificationSetting `json:"datatrafficNotificationSettings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetServerDataTrafficNotificationSettingListResult GetServerDataTrafficNotificationSettingListResult
 
 // NewGetServerDataTrafficNotificationSettingListResult instantiates a new GetServerDataTrafficNotificationSettingListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetServerDataTrafficNotificationSettingListResult) ToMap() (map[string]i
 	if !IsNil(o.DatatrafficNotificationSettings) {
 		toSerialize["datatrafficNotificationSettings"] = o.DatatrafficNotificationSettings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetServerDataTrafficNotificationSettingListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetServerDataTrafficNotificationSettingListResult := _GetServerDataTrafficNotificationSettingListResult{}
+
+	err = json.Unmarshal(data, &varGetServerDataTrafficNotificationSettingListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetServerDataTrafficNotificationSettingListResult(varGetServerDataTrafficNotificationSettingListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "datatrafficNotificationSettings")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetServerDataTrafficNotificationSettingListResult struct {

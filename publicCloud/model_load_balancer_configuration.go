@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type LoadBalancerConfiguration struct {
 	IdleTimeOut int32 `json:"idleTimeOut"`
 	// Port on which the backend (target) servers are listening to handle incoming requests
 	TargetPort int32 `json:"targetPort"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LoadBalancerConfiguration LoadBalancerConfiguration
@@ -222,6 +222,11 @@ func (o LoadBalancerConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize["xForwardedFor"] = o.XForwardedFor
 	toSerialize["idleTimeOut"] = o.IdleTimeOut
 	toSerialize["targetPort"] = o.TargetPort
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,25 @@ func (o *LoadBalancerConfiguration) UnmarshalJSON(data []byte) (err error) {
 
 	varLoadBalancerConfiguration := _LoadBalancerConfiguration{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLoadBalancerConfiguration)
+	err = json.Unmarshal(data, &varLoadBalancerConfiguration)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LoadBalancerConfiguration(varLoadBalancerConfiguration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "stickySession")
+		delete(additionalProperties, "balance")
+		delete(additionalProperties, "healthCheck")
+		delete(additionalProperties, "xForwardedFor")
+		delete(additionalProperties, "idleTimeOut")
+		delete(additionalProperties, "targetPort")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

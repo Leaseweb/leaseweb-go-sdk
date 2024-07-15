@@ -13,7 +13,6 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -51,6 +50,7 @@ type AutoScalingGroupDetails struct {
 	// Only for \"CPU_BASED\" auto scaling group. Cool-down time in seconds for new instances
 	CooldownTime NullableInt32 `json:"cooldownTime"`
 	LoadBalancer NullableLoadBalancer `json:"loadBalancer"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AutoScalingGroupDetails AutoScalingGroupDetails
@@ -516,6 +516,11 @@ func (o AutoScalingGroupDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["warmupTime"] = o.WarmupTime.Get()
 	toSerialize["cooldownTime"] = o.CooldownTime.Get()
 	toSerialize["loadBalancer"] = o.LoadBalancer.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -558,15 +563,35 @@ func (o *AutoScalingGroupDetails) UnmarshalJSON(data []byte) (err error) {
 
 	varAutoScalingGroupDetails := _AutoScalingGroupDetails{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAutoScalingGroupDetails)
+	err = json.Unmarshal(data, &varAutoScalingGroupDetails)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AutoScalingGroupDetails(varAutoScalingGroupDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "desiredAmount")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "startsAt")
+		delete(additionalProperties, "endsAt")
+		delete(additionalProperties, "minimumAmount")
+		delete(additionalProperties, "maximumAmount")
+		delete(additionalProperties, "cpuThreshold")
+		delete(additionalProperties, "warmupTime")
+		delete(additionalProperties, "cooldownTime")
+		delete(additionalProperties, "loadBalancer")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

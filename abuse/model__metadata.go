@@ -25,7 +25,10 @@ type Metadata struct {
 	Offset *float32 `json:"offset,omitempty"`
 	// The limit used to generate this response
 	Limit *float32 `json:"limit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Metadata Metadata
 
 // NewMetadata instantiates a new Metadata object
 // This constructor will assign default values to properties that have it defined,
@@ -167,7 +170,35 @@ func (o Metadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Metadata) UnmarshalJSON(data []byte) (err error) {
+	varMetadata := _Metadata{}
+
+	err = json.Unmarshal(data, &varMetadata)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Metadata(varMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "totalCount")
+		delete(additionalProperties, "offset")
+		delete(additionalProperties, "limit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetadata struct {

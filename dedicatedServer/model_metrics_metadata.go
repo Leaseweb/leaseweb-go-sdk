@@ -28,7 +28,10 @@ type MetricsMetadata struct {
 	Granularity *string `json:"granularity,omitempty"`
 	// End of date interval in ISO-8601 format
 	To *time.Time `json:"to,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricsMetadata MetricsMetadata
 
 // NewMetricsMetadata instantiates a new MetricsMetadata object
 // This constructor will assign default values to properties that have it defined,
@@ -197,7 +200,36 @@ func (o MetricsMetadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.To) {
 		toSerialize["to"] = o.To
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricsMetadata) UnmarshalJSON(data []byte) (err error) {
+	varMetricsMetadata := _MetricsMetadata{}
+
+	err = json.Unmarshal(data, &varMetricsMetadata)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricsMetadata(varMetricsMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "from")
+		delete(additionalProperties, "granularity")
+		delete(additionalProperties, "to")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricsMetadata struct {

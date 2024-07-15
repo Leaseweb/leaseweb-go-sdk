@@ -24,7 +24,10 @@ type StoreCredentialResult struct {
 	Username *string `json:"username,omitempty"`
 	// The provided password
 	Password *string `json:"password,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StoreCredentialResult StoreCredentialResult
 
 // NewStoreCredentialResult instantiates a new StoreCredentialResult object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +161,35 @@ func (o StoreCredentialResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Password) {
 		toSerialize["password"] = o.Password
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StoreCredentialResult) UnmarshalJSON(data []byte) (err error) {
+	varStoreCredentialResult := _StoreCredentialResult{}
+
+	err = json.Unmarshal(data, &varStoreCredentialResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StoreCredentialResult(varStoreCredentialResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStoreCredentialResult struct {

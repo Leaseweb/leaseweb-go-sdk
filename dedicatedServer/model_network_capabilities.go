@@ -30,7 +30,10 @@ type NetworkCapabilities struct {
 	Physical *string `json:"physical,omitempty"`
 	Pm *string `json:"pm,omitempty"`
 	Tp *string `json:"tp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NetworkCapabilities NetworkCapabilities
 
 // NewNetworkCapabilities instantiates a new NetworkCapabilities object
 // This constructor will assign default values to properties that have it defined,
@@ -444,7 +447,43 @@ func (o NetworkCapabilities) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tp) {
 		toSerialize["tp"] = o.Tp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NetworkCapabilities) UnmarshalJSON(data []byte) (err error) {
+	varNetworkCapabilities := _NetworkCapabilities{}
+
+	err = json.Unmarshal(data, &varNetworkCapabilities)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NetworkCapabilities(varNetworkCapabilities)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "autonegotiation")
+		delete(additionalProperties, "bus_master")
+		delete(additionalProperties, "cap_list")
+		delete(additionalProperties, "ethernet")
+		delete(additionalProperties, "link_speeds")
+		delete(additionalProperties, "msi")
+		delete(additionalProperties, "msix")
+		delete(additionalProperties, "pciexpress")
+		delete(additionalProperties, "physical")
+		delete(additionalProperties, "pm")
+		delete(additionalProperties, "tp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNetworkCapabilities struct {

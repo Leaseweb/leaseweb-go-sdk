@@ -25,7 +25,10 @@ type MarketApp struct {
 	Version NullableString `json:"version,omitempty"`
 	Family *string `json:"family,omitempty"`
 	Image *Image `json:"image,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MarketApp MarketApp
 
 // NewMarketApp instantiates a new MarketApp object
 // This constructor will assign default values to properties that have it defined,
@@ -274,7 +277,38 @@ func (o MarketApp) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Image) {
 		toSerialize["image"] = o.Image
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MarketApp) UnmarshalJSON(data []byte) (err error) {
+	varMarketApp := _MarketApp{}
+
+	err = json.Unmarshal(data, &varMarketApp)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MarketApp(varMarketApp)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "family")
+		delete(additionalProperties, "image")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMarketApp struct {

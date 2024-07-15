@@ -23,7 +23,10 @@ type ScanHardwareOpts struct {
 	CallbackUrl *string `json:"callbackUrl,omitempty"`
 	// If set to `true`, server will be power cycled in order to complete the operation
 	PowerCycle *bool `json:"powerCycle,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ScanHardwareOpts ScanHardwareOpts
 
 // NewScanHardwareOpts instantiates a new ScanHardwareOpts object
 // This constructor will assign default values to properties that have it defined,
@@ -126,7 +129,34 @@ func (o ScanHardwareOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PowerCycle) {
 		toSerialize["powerCycle"] = o.PowerCycle
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ScanHardwareOpts) UnmarshalJSON(data []byte) (err error) {
+	varScanHardwareOpts := _ScanHardwareOpts{}
+
+	err = json.Unmarshal(data, &varScanHardwareOpts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ScanHardwareOpts(varScanHardwareOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "callbackUrl")
+		delete(additionalProperties, "powerCycle")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableScanHardwareOpts struct {

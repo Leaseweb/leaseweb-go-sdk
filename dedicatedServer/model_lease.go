@@ -38,7 +38,10 @@ type Lease struct {
 	Site *string `json:"site,omitempty"`
 	// The time when the DHCP reservation was last updated or used by a client
 	UpdatedAt *string `json:"updatedAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Lease Lease
 
 // NewLease instantiates a new Lease object
 // This constructor will assign default values to properties that have it defined,
@@ -417,7 +420,42 @@ func (o Lease) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Lease) UnmarshalJSON(data []byte) (err error) {
+	varLease := _Lease{}
+
+	err = json.Unmarshal(data, &varLease)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Lease(varLease)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bootfile")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "gateway")
+		delete(additionalProperties, "hostname")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "lastClientRequest")
+		delete(additionalProperties, "mac")
+		delete(additionalProperties, "netmask")
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "updatedAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLease struct {

@@ -25,7 +25,10 @@ type Partition struct {
 	Mountpoint *string `json:"mountpoint,omitempty"`
 	// Size of the partition (Normally in MB, but this is OS-specific)
 	Size *string `json:"size,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Partition Partition
 
 // NewPartition instantiates a new Partition object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o Partition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Partition) UnmarshalJSON(data []byte) (err error) {
+	varPartition := _Partition{}
+
+	err = json.Unmarshal(data, &varPartition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Partition(varPartition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "filesystem")
+		delete(additionalProperties, "mountpoint")
+		delete(additionalProperties, "size")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartition struct {

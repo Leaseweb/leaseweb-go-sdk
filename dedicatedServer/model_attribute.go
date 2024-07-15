@@ -28,7 +28,10 @@ type Attribute struct {
 	Value *string `json:"value,omitempty"`
 	WhenFailed *string `json:"when_failed,omitempty"`
 	Worst *string `json:"worst,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Attribute Attribute
 
 // NewAttribute instantiates a new Attribute object
 // This constructor will assign default values to properties that have it defined,
@@ -372,7 +375,41 @@ func (o Attribute) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Worst) {
 		toSerialize["worst"] = o.Worst
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Attribute) UnmarshalJSON(data []byte) (err error) {
+	varAttribute := _Attribute{}
+
+	err = json.Unmarshal(data, &varAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Attribute(varAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "flag")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "raw_value")
+		delete(additionalProperties, "thresh")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updated")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "when_failed")
+		delete(additionalProperties, "worst")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAttribute struct {

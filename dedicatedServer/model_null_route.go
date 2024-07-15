@@ -32,7 +32,10 @@ type NullRoute struct {
 	NulledAt *time.Time `json:"nulledAt,omitempty"`
 	// A ticket number if available
 	TicketId *string `json:"ticketId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NullRoute NullRoute
 
 // NewNullRoute instantiates a new NullRoute object
 // This constructor will assign default values to properties that have it defined,
@@ -271,7 +274,38 @@ func (o NullRoute) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TicketId) {
 		toSerialize["ticketId"] = o.TicketId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NullRoute) UnmarshalJSON(data []byte) (err error) {
+	varNullRoute := _NullRoute{}
+
+	err = json.Unmarshal(data, &varNullRoute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NullRoute(varNullRoute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "automatedUnnullingAt")
+		delete(additionalProperties, "comment")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "nullLevel")
+		delete(additionalProperties, "nulledAt")
+		delete(additionalProperties, "ticketId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNullRoute struct {

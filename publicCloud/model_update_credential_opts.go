@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdateCredentialOpts{}
 type UpdateCredentialOpts struct {
 	// The new password
 	Password string `json:"password"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateCredentialOpts UpdateCredentialOpts
@@ -80,6 +80,11 @@ func (o UpdateCredentialOpts) MarshalJSON() ([]byte, error) {
 func (o UpdateCredentialOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["password"] = o.Password
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdateCredentialOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateCredentialOpts := _UpdateCredentialOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateCredentialOpts)
+	err = json.Unmarshal(data, &varUpdateCredentialOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateCredentialOpts(varUpdateCredentialOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "password")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

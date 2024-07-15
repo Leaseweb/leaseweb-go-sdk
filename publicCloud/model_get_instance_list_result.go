@@ -21,7 +21,10 @@ var _ MappedNullable = &GetInstanceListResult{}
 type GetInstanceListResult struct {
 	Instances []Instance `json:"instances,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInstanceListResult GetInstanceListResult
 
 // NewGetInstanceListResult instantiates a new GetInstanceListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetInstanceListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInstanceListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetInstanceListResult := _GetInstanceListResult{}
+
+	err = json.Unmarshal(data, &varGetInstanceListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInstanceListResult(varGetInstanceListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "instances")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInstanceListResult struct {

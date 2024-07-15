@@ -23,7 +23,10 @@ type ControlPanel struct {
 	Id *string `json:"id,omitempty"`
 	// A human readable name describing the control panel
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ControlPanel ControlPanel
 
 // NewControlPanel instantiates a new ControlPanel object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ControlPanel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ControlPanel) UnmarshalJSON(data []byte) (err error) {
+	varControlPanel := _ControlPanel{}
+
+	err = json.Unmarshal(data, &varControlPanel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ControlPanel(varControlPanel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableControlPanel struct {

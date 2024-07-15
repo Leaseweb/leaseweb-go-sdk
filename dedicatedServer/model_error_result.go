@@ -26,7 +26,10 @@ type ErrorResult struct {
 	// A human friendly description of the error.
 	ErrorMessage *string `json:"errorMessage,omitempty"`
 	ErrorDetails *map[string][]string `json:"errorDetails,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ErrorResult ErrorResult
 
 // NewErrorResult instantiates a new ErrorResult object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o ErrorResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ErrorDetails) {
 		toSerialize["errorDetails"] = o.ErrorDetails
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ErrorResult) UnmarshalJSON(data []byte) (err error) {
+	varErrorResult := _ErrorResult{}
+
+	err = json.Unmarshal(data, &varErrorResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ErrorResult(varErrorResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "correlationId")
+		delete(additionalProperties, "errorCode")
+		delete(additionalProperties, "errorMessage")
+		delete(additionalProperties, "errorDetails")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableErrorResult struct {

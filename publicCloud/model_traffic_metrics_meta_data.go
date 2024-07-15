@@ -27,7 +27,10 @@ type TrafficMetricsMetaData struct {
 	// The provided aggregation
 	Aggregation *string `json:"aggregation,omitempty"`
 	Summary *Summary `json:"summary,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TrafficMetricsMetaData TrafficMetricsMetaData
 
 // NewTrafficMetricsMetaData instantiates a new TrafficMetricsMetaData object
 // This constructor will assign default values to properties that have it defined,
@@ -231,7 +234,37 @@ func (o TrafficMetricsMetaData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Summary) {
 		toSerialize["summary"] = o.Summary
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TrafficMetricsMetaData) UnmarshalJSON(data []byte) (err error) {
+	varTrafficMetricsMetaData := _TrafficMetricsMetaData{}
+
+	err = json.Unmarshal(data, &varTrafficMetricsMetaData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TrafficMetricsMetaData(varTrafficMetricsMetaData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "from")
+		delete(additionalProperties, "to")
+		delete(additionalProperties, "granularity")
+		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "summary")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTrafficMetricsMetaData struct {

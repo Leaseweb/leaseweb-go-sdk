@@ -21,7 +21,10 @@ var _ MappedNullable = &Metrics{}
 type Metrics struct {
 	Metadata *MetricsMetadata `json:"_metadata,omitempty"`
 	Metrics *MetricValues `json:"metrics,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Metrics Metrics
 
 // NewMetrics instantiates a new Metrics object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o Metrics) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metrics) {
 		toSerialize["metrics"] = o.Metrics
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Metrics) UnmarshalJSON(data []byte) (err error) {
+	varMetrics := _Metrics{}
+
+	err = json.Unmarshal(data, &varMetrics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Metrics(varMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "metrics")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetrics struct {

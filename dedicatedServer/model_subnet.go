@@ -22,7 +22,10 @@ type Subnet struct {
 	Quantity *int32 `json:"quantity,omitempty"`
 	SubnetSize *string `json:"subnetSize,omitempty"`
 	NetworkType *NetworkType `json:"networkType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Subnet Subnet
 
 // NewSubnet instantiates a new Subnet object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o Subnet) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NetworkType) {
 		toSerialize["networkType"] = o.NetworkType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Subnet) UnmarshalJSON(data []byte) (err error) {
+	varSubnet := _Subnet{}
+
+	err = json.Unmarshal(data, &varSubnet)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Subnet(varSubnet)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "subnetSize")
+		delete(additionalProperties, "networkType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSubnet struct {

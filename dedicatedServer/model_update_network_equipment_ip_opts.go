@@ -23,7 +23,10 @@ type UpdateNetworkEquipmentIpOpts struct {
 	DetectionProfile *string `json:"detectionProfile,omitempty"`
 	// The reverse lookup value
 	ReverseLookup *string `json:"reverseLookup,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateNetworkEquipmentIpOpts UpdateNetworkEquipmentIpOpts
 
 // NewUpdateNetworkEquipmentIpOpts instantiates a new UpdateNetworkEquipmentIpOpts object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UpdateNetworkEquipmentIpOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReverseLookup) {
 		toSerialize["reverseLookup"] = o.ReverseLookup
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateNetworkEquipmentIpOpts) UnmarshalJSON(data []byte) (err error) {
+	varUpdateNetworkEquipmentIpOpts := _UpdateNetworkEquipmentIpOpts{}
+
+	err = json.Unmarshal(data, &varUpdateNetworkEquipmentIpOpts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateNetworkEquipmentIpOpts(varUpdateNetworkEquipmentIpOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "detectionProfile")
+		delete(additionalProperties, "reverseLookup")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateNetworkEquipmentIpOpts struct {

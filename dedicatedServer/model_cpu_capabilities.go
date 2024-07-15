@@ -23,7 +23,10 @@ type CpuCapabilities struct {
 	Ht *string `json:"ht,omitempty"`
 	Vmx *bool `json:"vmx,omitempty"`
 	X8664 *string `json:"x86-64,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CpuCapabilities CpuCapabilities
 
 // NewCpuCapabilities instantiates a new CpuCapabilities object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o CpuCapabilities) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.X8664) {
 		toSerialize["x86-64"] = o.X8664
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CpuCapabilities) UnmarshalJSON(data []byte) (err error) {
+	varCpuCapabilities := _CpuCapabilities{}
+
+	err = json.Unmarshal(data, &varCpuCapabilities)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CpuCapabilities(varCpuCapabilities)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cpufreq")
+		delete(additionalProperties, "ht")
+		delete(additionalProperties, "vmx")
+		delete(additionalProperties, "x86-64")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCpuCapabilities struct {

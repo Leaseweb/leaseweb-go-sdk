@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ReinstallInstanceOpts struct {
 	ImageId string `json:"imageId"`
 	// The Market App to be installed
 	MarketAppId *string `json:"marketAppId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReinstallInstanceOpts ReinstallInstanceOpts
@@ -117,6 +117,11 @@ func (o ReinstallInstanceOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MarketAppId) {
 		toSerialize["marketAppId"] = o.MarketAppId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *ReinstallInstanceOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varReinstallInstanceOpts := _ReinstallInstanceOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReinstallInstanceOpts)
+	err = json.Unmarshal(data, &varReinstallInstanceOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReinstallInstanceOpts(varReinstallInstanceOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "imageId")
+		delete(additionalProperties, "marketAppId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type Location struct {
 	Suite *string `json:"suite,omitempty"`
 	Rack *string `json:"rack,omitempty"`
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Location Location
 
 // NewLocation instantiates a new Location object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o Location) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Location) UnmarshalJSON(data []byte) (err error) {
+	varLocation := _Location{}
+
+	err = json.Unmarshal(data, &varLocation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Location(varLocation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "site")
+		delete(additionalProperties, "suite")
+		delete(additionalProperties, "rack")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLocation struct {

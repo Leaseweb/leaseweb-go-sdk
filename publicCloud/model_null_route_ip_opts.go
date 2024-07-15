@@ -23,7 +23,10 @@ type NullRouteIpOpts struct {
 	Comment *string `json:"comment,omitempty"`
 	// If provided, reverts the operation automatically in the specified value, in hours
 	AutomatedUnnulingAt *int32 `json:"automatedUnnulingAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NullRouteIpOpts NullRouteIpOpts
 
 // NewNullRouteIpOpts instantiates a new NullRouteIpOpts object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o NullRouteIpOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AutomatedUnnulingAt) {
 		toSerialize["automatedUnnulingAt"] = o.AutomatedUnnulingAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NullRouteIpOpts) UnmarshalJSON(data []byte) (err error) {
+	varNullRouteIpOpts := _NullRouteIpOpts{}
+
+	err = json.Unmarshal(data, &varNullRouteIpOpts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NullRouteIpOpts(varNullRouteIpOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "comment")
+		delete(additionalProperties, "automatedUnnulingAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNullRouteIpOpts struct {

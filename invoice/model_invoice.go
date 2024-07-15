@@ -37,7 +37,10 @@ type Invoice struct {
 	TaxAmount *float32 `json:"taxAmount,omitempty"`
 	// The total amount of the invoice
 	Total *float32 `json:"total,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Invoice Invoice
 
 // NewInvoice instantiates a new Invoice object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o Invoice) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Total) {
 		toSerialize["total"] = o.Total
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Invoice) UnmarshalJSON(data []byte) (err error) {
+	varInvoice := _Invoice{}
+
+	err = json.Unmarshal(data, &varInvoice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Invoice(varInvoice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "dueDate")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "isPartialPaymentAllowed")
+		delete(additionalProperties, "openAmount")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "taxAmount")
+		delete(additionalProperties, "total")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvoice struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &Powerport{}
 type Powerport struct {
 	Name *string `json:"name,omitempty"`
 	Port *string `json:"port,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Powerport Powerport
 
 // NewPowerport instantiates a new Powerport object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o Powerport) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Port) {
 		toSerialize["port"] = o.Port
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Powerport) UnmarshalJSON(data []byte) (err error) {
+	varPowerport := _Powerport{}
+
+	err = json.Unmarshal(data, &varPowerport)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Powerport(varPowerport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "port")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePowerport struct {

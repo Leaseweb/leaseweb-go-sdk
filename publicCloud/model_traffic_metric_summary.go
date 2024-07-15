@@ -26,7 +26,10 @@ type TrafficMetricSummary struct {
 	// Total incoming traffic, in human-readable format (KB, MB, GB)
 	Total *string `json:"total,omitempty"`
 	Peak *Peak `json:"peak,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TrafficMetricSummary TrafficMetricSummary
 
 // NewTrafficMetricSummary instantiates a new TrafficMetricSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o TrafficMetricSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Peak) {
 		toSerialize["peak"] = o.Peak
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TrafficMetricSummary) UnmarshalJSON(data []byte) (err error) {
+	varTrafficMetricSummary := _TrafficMetricSummary{}
+
+	err = json.Unmarshal(data, &varTrafficMetricSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TrafficMetricSummary(varTrafficMetricSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "average")
+		delete(additionalProperties, "expected")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "peak")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTrafficMetricSummary struct {

@@ -26,7 +26,10 @@ type Cpu1 struct {
 	Settings *CpuSettings `json:"settings,omitempty"`
 	Slot *string `json:"slot,omitempty"`
 	Vendor *string `json:"vendor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Cpu1 Cpu1
 
 // NewCpu1 instantiates a new Cpu1 object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +303,39 @@ func (o Cpu1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Vendor) {
 		toSerialize["vendor"] = o.Vendor
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Cpu1) UnmarshalJSON(data []byte) (err error) {
+	varCpu1 := _Cpu1{}
+
+	err = json.Unmarshal(data, &varCpu1)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Cpu1(varCpu1)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "capabilities")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "hz")
+		delete(additionalProperties, "serial_number")
+		delete(additionalProperties, "settings")
+		delete(additionalProperties, "slot")
+		delete(additionalProperties, "vendor")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCpu1 struct {

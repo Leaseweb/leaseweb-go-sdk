@@ -21,7 +21,10 @@ var _ MappedNullable = &GetMarketAppListResult{}
 type GetMarketAppListResult struct {
 	MarketApps []MarketApp `json:"marketApps,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketAppListResult GetMarketAppListResult
 
 // NewGetMarketAppListResult instantiates a new GetMarketAppListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetMarketAppListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketAppListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketAppListResult := _GetMarketAppListResult{}
+
+	err = json.Unmarshal(data, &varGetMarketAppListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketAppListResult(varGetMarketAppListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "marketApps")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketAppListResult struct {

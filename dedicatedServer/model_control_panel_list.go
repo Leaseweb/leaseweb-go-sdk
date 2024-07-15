@@ -22,7 +22,10 @@ type ControlPanelList struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// A list of control panels
 	ControlPanels []ControlPanel `json:"controlPanels,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ControlPanelList ControlPanelList
 
 // NewControlPanelList instantiates a new ControlPanelList object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o ControlPanelList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ControlPanels) {
 		toSerialize["controlPanels"] = o.ControlPanels
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ControlPanelList) UnmarshalJSON(data []byte) (err error) {
+	varControlPanelList := _ControlPanelList{}
+
+	err = json.Unmarshal(data, &varControlPanelList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ControlPanelList(varControlPanelList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "controlPanels")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableControlPanelList struct {

@@ -13,7 +13,6 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type LoadBalancer struct {
 	Contract Contract `json:"contract"`
 	// Date and time when the load balancer was started for the first time, right after launching it
 	StartedAt NullableTime `json:"startedAt"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LoadBalancer LoadBalancer
@@ -278,6 +278,11 @@ func (o LoadBalancer) ToMap() (map[string]interface{}, error) {
 	toSerialize["state"] = o.State
 	toSerialize["contract"] = o.Contract
 	toSerialize["startedAt"] = o.StartedAt.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -312,15 +317,27 @@ func (o *LoadBalancer) UnmarshalJSON(data []byte) (err error) {
 
 	varLoadBalancer := _LoadBalancer{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLoadBalancer)
+	err = json.Unmarshal(data, &varLoadBalancer)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LoadBalancer(varLoadBalancer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "contract")
+		delete(additionalProperties, "startedAt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

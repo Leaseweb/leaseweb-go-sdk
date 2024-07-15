@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -32,6 +31,7 @@ type IpDetails struct {
 	NetworkType NetworkType `json:"networkType"`
 	ReverseLookup NullableString `json:"reverseLookup"`
 	Ddos NullableDdos `json:"ddos"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _IpDetails IpDetails
@@ -275,6 +275,11 @@ func (o IpDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["networkType"] = o.NetworkType
 	toSerialize["reverseLookup"] = o.ReverseLookup.Get()
 	toSerialize["ddos"] = o.Ddos.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -309,15 +314,27 @@ func (o *IpDetails) UnmarshalJSON(data []byte) (err error) {
 
 	varIpDetails := _IpDetails{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIpDetails)
+	err = json.Unmarshal(data, &varIpDetails)
 
 	if err != nil {
 		return err
 	}
 
 	*o = IpDetails(varIpDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "prefixLength")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "nullRouted")
+		delete(additionalProperties, "mainIp")
+		delete(additionalProperties, "networkType")
+		delete(additionalProperties, "reverseLookup")
+		delete(additionalProperties, "ddos")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

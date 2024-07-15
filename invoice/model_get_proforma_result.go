@@ -31,7 +31,10 @@ type GetProformaResult struct {
 	Total *float32 `json:"total,omitempty"`
 	// The total amount of vat.
 	VatAmount *float32 `json:"vatAmount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProformaResult GetProformaResult
 
 // NewGetProformaResult instantiates a new GetProformaResult object
 // This constructor will assign default values to properties that have it defined,
@@ -305,7 +308,39 @@ func (o GetProformaResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VatAmount) {
 		toSerialize["vatAmount"] = o.VatAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProformaResult) UnmarshalJSON(data []byte) (err error) {
+	varGetProformaResult := _GetProformaResult{}
+
+	err = json.Unmarshal(data, &varGetProformaResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProformaResult(varGetProformaResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "contractItems")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "proformaDate")
+		delete(additionalProperties, "subTotal")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "vatAmount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProformaResult struct {

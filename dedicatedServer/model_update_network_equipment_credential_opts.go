@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdateNetworkEquipmentCredentialOpts{}
 type UpdateNetworkEquipmentCredentialOpts struct {
 	// The password for the credentials
 	Password string `json:"password"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateNetworkEquipmentCredentialOpts UpdateNetworkEquipmentCredentialOpts
@@ -80,6 +80,11 @@ func (o UpdateNetworkEquipmentCredentialOpts) MarshalJSON() ([]byte, error) {
 func (o UpdateNetworkEquipmentCredentialOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["password"] = o.Password
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdateNetworkEquipmentCredentialOpts) UnmarshalJSON(data []byte) (err e
 
 	varUpdateNetworkEquipmentCredentialOpts := _UpdateNetworkEquipmentCredentialOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateNetworkEquipmentCredentialOpts)
+	err = json.Unmarshal(data, &varUpdateNetworkEquipmentCredentialOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateNetworkEquipmentCredentialOpts(varUpdateNetworkEquipmentCredentialOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "password")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

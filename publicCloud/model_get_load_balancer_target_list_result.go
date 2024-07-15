@@ -21,7 +21,10 @@ var _ MappedNullable = &GetLoadBalancerTargetListResult{}
 type GetLoadBalancerTargetListResult struct {
 	Targets []Target `json:"targets,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLoadBalancerTargetListResult GetLoadBalancerTargetListResult
 
 // NewGetLoadBalancerTargetListResult instantiates a new GetLoadBalancerTargetListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetLoadBalancerTargetListResult) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLoadBalancerTargetListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetLoadBalancerTargetListResult := _GetLoadBalancerTargetListResult{}
+
+	err = json.Unmarshal(data, &varGetLoadBalancerTargetListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLoadBalancerTargetListResult(varGetLoadBalancerTargetListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "targets")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLoadBalancerTargetListResult struct {

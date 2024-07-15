@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type StickySession struct {
 	Enabled bool `json:"enabled"`
 	// Time that the Load Balancer routes the requests from one requester to the same target instance
 	MaxLifeTime int32 `json:"maxLifeTime"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StickySession StickySession
@@ -108,6 +108,11 @@ func (o StickySession) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["maxLifeTime"] = o.MaxLifeTime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *StickySession) UnmarshalJSON(data []byte) (err error) {
 
 	varStickySession := _StickySession{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStickySession)
+	err = json.Unmarshal(data, &varStickySession)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StickySession(varStickySession)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "maxLifeTime")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

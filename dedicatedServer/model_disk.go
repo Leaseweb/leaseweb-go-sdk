@@ -26,7 +26,10 @@ type Disk struct {
 	Size *string `json:"size,omitempty"`
 	Smartctl *Smartctl `json:"smartctl,omitempty"`
 	Vendor *string `json:"vendor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Disk Disk
 
 // NewDisk instantiates a new Disk object
 // This constructor will assign default values to properties that have it defined,
@@ -300,7 +303,39 @@ func (o Disk) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Vendor) {
 		toSerialize["vendor"] = o.Vendor
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Disk) UnmarshalJSON(data []byte) (err error) {
+	varDisk := _Disk{}
+
+	err = json.Unmarshal(data, &varDisk)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Disk(varDisk)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "serial_number")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "smartctl")
+		delete(additionalProperties, "vendor")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDisk struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &PciCard{}
 type PciCard struct {
 	// The description of the PCI card of the server
 	Description *string `json:"description,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PciCard PciCard
 
 // NewPciCard instantiates a new PciCard object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o PciCard) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PciCard) UnmarshalJSON(data []byte) (err error) {
+	varPciCard := _PciCard{}
+
+	err = json.Unmarshal(data, &varPciCard)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PciCard(varPciCard)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePciCard struct {

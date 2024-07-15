@@ -24,7 +24,10 @@ type Rack struct {
 	// Rack capacity
 	Capacity *string `json:"capacity,omitempty"`
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Rack Rack
 
 // NewRack instantiates a new Rack object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +161,35 @@ func (o Rack) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Rack) UnmarshalJSON(data []byte) (err error) {
+	varRack := _Rack{}
+
+	err = json.Unmarshal(data, &varRack)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Rack(varRack)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "capacity")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRack struct {

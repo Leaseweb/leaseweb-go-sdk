@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateServerDhcpReservationOpts struct {
 	Bootfile string `json:"bootfile"`
 	// The hostname for the server
 	Hostname *string `json:"hostname,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateServerDhcpReservationOpts CreateServerDhcpReservationOpts
@@ -117,6 +117,11 @@ func (o CreateServerDhcpReservationOpts) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Hostname) {
 		toSerialize["hostname"] = o.Hostname
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *CreateServerDhcpReservationOpts) UnmarshalJSON(data []byte) (err error)
 
 	varCreateServerDhcpReservationOpts := _CreateServerDhcpReservationOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateServerDhcpReservationOpts)
+	err = json.Unmarshal(data, &varCreateServerDhcpReservationOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateServerDhcpReservationOpts(varCreateServerDhcpReservationOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bootfile")
+		delete(additionalProperties, "hostname")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

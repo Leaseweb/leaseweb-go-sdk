@@ -40,7 +40,10 @@ type GetOperatingSystemResult struct {
 	SupportedFileSystems []string `json:"supportedFileSystems,omitempty"`
 	// Operating system supported boot devices
 	SupportedBootDevices []string `json:"supportedBootDevices,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOperatingSystemResult GetOperatingSystemResult
 
 // NewGetOperatingSystemResult instantiates a new GetOperatingSystemResult object
 // This constructor will assign default values to properties that have it defined,
@@ -454,7 +457,43 @@ func (o GetOperatingSystemResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SupportedBootDevices) {
 		toSerialize["supportedBootDevices"] = o.SupportedBootDevices
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOperatingSystemResult) UnmarshalJSON(data []byte) (err error) {
+	varGetOperatingSystemResult := _GetOperatingSystemResult{}
+
+	err = json.Unmarshal(data, &varGetOperatingSystemResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOperatingSystemResult(varGetOperatingSystemResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "configurable")
+		delete(additionalProperties, "defaults")
+		delete(additionalProperties, "family")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "features")
+		delete(additionalProperties, "supportedFileSystems")
+		delete(additionalProperties, "supportedBootDevices")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOperatingSystemResult struct {

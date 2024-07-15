@@ -22,7 +22,10 @@ type CpuSettings struct {
 	Cores *string `json:"cores,omitempty"`
 	Enabledcores *string `json:"enabledcores,omitempty"`
 	Threads *string `json:"threads,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CpuSettings CpuSettings
 
 // NewCpuSettings instantiates a new CpuSettings object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o CpuSettings) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Threads) {
 		toSerialize["threads"] = o.Threads
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CpuSettings) UnmarshalJSON(data []byte) (err error) {
+	varCpuSettings := _CpuSettings{}
+
+	err = json.Unmarshal(data, &varCpuSettings)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CpuSettings(varCpuSettings)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cores")
+		delete(additionalProperties, "enabledcores")
+		delete(additionalProperties, "threads")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCpuSettings struct {

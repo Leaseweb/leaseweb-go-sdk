@@ -23,7 +23,10 @@ type ResolutionList struct {
 	Id *string `json:"id,omitempty"`
 	// The actual text the report will be resolved with when resolving with this resolution.
 	Description *string `json:"description,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ResolutionList ResolutionList
 
 // NewResolutionList instantiates a new ResolutionList object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ResolutionList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ResolutionList) UnmarshalJSON(data []byte) (err error) {
+	varResolutionList := _ResolutionList{}
+
+	err = json.Unmarshal(data, &varResolutionList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResolutionList(varResolutionList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableResolutionList struct {

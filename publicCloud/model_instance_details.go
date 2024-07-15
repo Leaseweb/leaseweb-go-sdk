@@ -13,7 +13,6 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -48,6 +47,7 @@ type InstanceDetails struct {
 	Image ImageDetails `json:"image"`
 	Ips []IpDetails `json:"ips"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InstanceDetails InstanceDetails
@@ -585,6 +585,11 @@ func (o InstanceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["image"] = o.Image
 	toSerialize["ips"] = o.Ips
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -630,15 +635,38 @@ func (o *InstanceDetails) UnmarshalJSON(data []byte) (err error) {
 
 	varInstanceDetails := _InstanceDetails{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInstanceDetails)
+	err = json.Unmarshal(data, &varInstanceDetails)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InstanceDetails(varInstanceDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "startedAt")
+		delete(additionalProperties, "marketAppId")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "productType")
+		delete(additionalProperties, "hasPublicIpV4")
+		delete(additionalProperties, "hasPrivateNetwork")
+		delete(additionalProperties, "rootDiskSize")
+		delete(additionalProperties, "rootDiskStorageType")
+		delete(additionalProperties, "contract")
+		delete(additionalProperties, "iso")
+		delete(additionalProperties, "privateNetwork")
+		delete(additionalProperties, "image")
+		delete(additionalProperties, "ips")
+		delete(additionalProperties, "autoScalingGroup")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

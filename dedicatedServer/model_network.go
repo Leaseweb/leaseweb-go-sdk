@@ -27,7 +27,10 @@ type Network struct {
 	Product *string `json:"product,omitempty"`
 	Settings *NetworkSettings `json:"settings,omitempty"`
 	Vendor *string `json:"vendor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Network Network
 
 // NewNetwork instantiates a new Network object
 // This constructor will assign default values to properties that have it defined,
@@ -301,7 +304,39 @@ func (o Network) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Vendor) {
 		toSerialize["vendor"] = o.Vendor
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Network) UnmarshalJSON(data []byte) (err error) {
+	varNetwork := _Network{}
+
+	err = json.Unmarshal(data, &varNetwork)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Network(varNetwork)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "capabilities")
+		delete(additionalProperties, "lldp")
+		delete(additionalProperties, "logical_name")
+		delete(additionalProperties, "mac_address")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "settings")
+		delete(additionalProperties, "vendor")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNetwork struct {

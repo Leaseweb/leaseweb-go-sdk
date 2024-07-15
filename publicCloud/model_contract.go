@@ -13,7 +13,6 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type Contract struct {
 	// Date when the contract was created
 	CreatedAt time.Time `json:"createdAt"`
 	State ContractState `json:"state"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Contract Contract
@@ -246,6 +246,11 @@ func (o Contract) ToMap() (map[string]interface{}, error) {
 	toSerialize["renewalsAt"] = o.RenewalsAt
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["state"] = o.State
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -279,15 +284,26 @@ func (o *Contract) UnmarshalJSON(data []byte) (err error) {
 
 	varContract := _Contract{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varContract)
+	err = json.Unmarshal(data, &varContract)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Contract(varContract)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "billingFrequency")
+		delete(additionalProperties, "term")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "endsAt")
+		delete(additionalProperties, "renewalsAt")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "state")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

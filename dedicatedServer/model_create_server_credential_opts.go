@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type CreateServerCredentialOpts struct {
 	Type string `json:"type"`
 	// The username for the credentials
 	Username string `json:"username"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateServerCredentialOpts CreateServerCredentialOpts
@@ -136,6 +136,11 @@ func (o CreateServerCredentialOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize["password"] = o.Password
 	toSerialize["type"] = o.Type
 	toSerialize["username"] = o.Username
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *CreateServerCredentialOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateServerCredentialOpts := _CreateServerCredentialOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateServerCredentialOpts)
+	err = json.Unmarshal(data, &varCreateServerCredentialOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateServerCredentialOpts(varCreateServerCredentialOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "username")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

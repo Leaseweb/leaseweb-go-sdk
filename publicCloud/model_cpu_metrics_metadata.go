@@ -25,7 +25,10 @@ type CpuMetricsMetadata struct {
 	// The provided granularity
 	Granularity *string `json:"granularity,omitempty"`
 	Summary *CpuMetricsMetadataSummary `json:"summary,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CpuMetricsMetadata CpuMetricsMetadata
 
 // NewCpuMetricsMetadata instantiates a new CpuMetricsMetadata object
 // This constructor will assign default values to properties that have it defined,
@@ -194,7 +197,36 @@ func (o CpuMetricsMetadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Summary) {
 		toSerialize["summary"] = o.Summary
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CpuMetricsMetadata) UnmarshalJSON(data []byte) (err error) {
+	varCpuMetricsMetadata := _CpuMetricsMetadata{}
+
+	err = json.Unmarshal(data, &varCpuMetricsMetadata)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CpuMetricsMetadata(varCpuMetricsMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "from")
+		delete(additionalProperties, "to")
+		delete(additionalProperties, "granularity")
+		delete(additionalProperties, "summary")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCpuMetricsMetadata struct {

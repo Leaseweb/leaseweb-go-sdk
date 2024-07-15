@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCredentialListByTypeResult{}
 type GetCredentialListByTypeResult struct {
 	Credentials []Credential `json:"credentials,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCredentialListByTypeResult GetCredentialListByTypeResult
 
 // NewGetCredentialListByTypeResult instantiates a new GetCredentialListByTypeResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetCredentialListByTypeResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCredentialListByTypeResult) UnmarshalJSON(data []byte) (err error) {
+	varGetCredentialListByTypeResult := _GetCredentialListByTypeResult{}
+
+	err = json.Unmarshal(data, &varGetCredentialListByTypeResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCredentialListByTypeResult(varGetCredentialListByTypeResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "credentials")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCredentialListByTypeResult struct {

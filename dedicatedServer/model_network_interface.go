@@ -26,7 +26,10 @@ type NetworkInterface struct {
 	Gateway NullableString `json:"gateway,omitempty"`
 	Ports []Port `json:"ports,omitempty"`
 	LocationId NullableString `json:"locationId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NetworkInterface NetworkInterface
 
 // NewNetworkInterface instantiates a new NetworkInterface object
 // This constructor will assign default values to properties that have it defined,
@@ -315,7 +318,38 @@ func (o NetworkInterface) ToMap() (map[string]interface{}, error) {
 	if o.LocationId.IsSet() {
 		toSerialize["locationId"] = o.LocationId.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NetworkInterface) UnmarshalJSON(data []byte) (err error) {
+	varNetworkInterface := _NetworkInterface{}
+
+	err = json.Unmarshal(data, &varNetworkInterface)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NetworkInterface(varNetworkInterface)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mac")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "nullRouted")
+		delete(additionalProperties, "gateway")
+		delete(additionalProperties, "ports")
+		delete(additionalProperties, "locationId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNetworkInterface struct {

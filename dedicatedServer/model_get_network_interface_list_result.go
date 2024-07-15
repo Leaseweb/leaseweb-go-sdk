@@ -22,7 +22,10 @@ type GetNetworkInterfaceListResult struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of network interfaces
 	NetworkInterfaces []OperationNetworkInterface `json:"networkInterfaces,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetNetworkInterfaceListResult GetNetworkInterfaceListResult
 
 // NewGetNetworkInterfaceListResult instantiates a new GetNetworkInterfaceListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetNetworkInterfaceListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NetworkInterfaces) {
 		toSerialize["networkInterfaces"] = o.NetworkInterfaces
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetNetworkInterfaceListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetNetworkInterfaceListResult := _GetNetworkInterfaceListResult{}
+
+	err = json.Unmarshal(data, &varGetNetworkInterfaceListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetNetworkInterfaceListResult(varGetNetworkInterfaceListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "networkInterfaces")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetNetworkInterfaceListResult struct {

@@ -38,7 +38,10 @@ type LineItem struct {
 	FromDate NullableTime `json:"fromDate,omitempty"`
 	// The product end date (UTC)
 	ToDate NullableTime `json:"toDate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LineItem LineItem
 
 // NewLineItem instantiates a new LineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -402,7 +405,41 @@ func (o LineItem) ToMap() (map[string]interface{}, error) {
 	if o.ToDate.IsSet() {
 		toSerialize["toDate"] = o.ToDate.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LineItem) UnmarshalJSON(data []byte) (err error) {
+	varLineItem := _LineItem{}
+
+	err = json.Unmarshal(data, &varLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LineItem(varLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "contractId")
+		delete(additionalProperties, "equipmentId")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "unitAmount")
+		delete(additionalProperties, "fromDate")
+		delete(additionalProperties, "toDate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLineItem struct {

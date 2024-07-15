@@ -13,7 +13,6 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -43,6 +42,7 @@ type CreateAutoScalingGroupOpts struct {
 	StartsAt *time.Time `json:"startsAt,omitempty"`
 	// Required for \"SCHEDULED\" auto scaling group. Date and time (UTC) that the instances need to be terminated
 	EndsAt *time.Time `json:"endsAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateAutoScalingGroupOpts CreateAutoScalingGroupOpts
@@ -432,6 +432,11 @@ func (o CreateAutoScalingGroupOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EndsAt) {
 		toSerialize["endsAt"] = o.EndsAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -461,15 +466,30 @@ func (o *CreateAutoScalingGroupOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateAutoScalingGroupOpts := _CreateAutoScalingGroupOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateAutoScalingGroupOpts)
+	err = json.Unmarshal(data, &varCreateAutoScalingGroupOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateAutoScalingGroupOpts(varCreateAutoScalingGroupOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "desiredAmount")
+		delete(additionalProperties, "minimumAmount")
+		delete(additionalProperties, "maximumAmount")
+		delete(additionalProperties, "cpuThreshold")
+		delete(additionalProperties, "warmupTime")
+		delete(additionalProperties, "cooldownTime")
+		delete(additionalProperties, "instanceId")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "startsAt")
+		delete(additionalProperties, "endsAt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

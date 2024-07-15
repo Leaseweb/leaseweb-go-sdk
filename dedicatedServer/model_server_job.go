@@ -44,7 +44,10 @@ type ServerJob struct {
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// Unique identifier of the job
 	Uuid *string `json:"uuid,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServerJob ServerJob
 
 // NewServerJob instantiates a new ServerJob object
 // This constructor will assign default values to properties that have it defined,
@@ -531,7 +534,45 @@ func (o ServerJob) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServerJob) UnmarshalJSON(data []byte) (err error) {
+	varServerJob := _ServerJob{}
+
+	err = json.Unmarshal(data, &varServerJob)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServerJob(varServerJob)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "bareMetalId")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "flow")
+		delete(additionalProperties, "isRunning")
+		delete(additionalProperties, "node")
+		delete(additionalProperties, "payload")
+		delete(additionalProperties, "progress")
+		delete(additionalProperties, "serverId")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "tasks")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "uuid")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServerJob struct {

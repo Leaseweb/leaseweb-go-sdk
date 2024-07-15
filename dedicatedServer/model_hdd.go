@@ -31,7 +31,10 @@ type Hdd struct {
 	Unit *string `json:"unit,omitempty"`
 	// Hard disk drive performance type
 	PerformanceType NullableString `json:"performanceType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Hdd Hdd
 
 // NewHdd instantiates a new Hdd object
 // This constructor will assign default values to properties that have it defined,
@@ -280,7 +283,38 @@ func (o Hdd) ToMap() (map[string]interface{}, error) {
 	if o.PerformanceType.IsSet() {
 		toSerialize["performanceType"] = o.PerformanceType.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Hdd) UnmarshalJSON(data []byte) (err error) {
+	varHdd := _Hdd{}
+
+	err = json.Unmarshal(data, &varHdd)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Hdd(varHdd)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "performanceType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHdd struct {

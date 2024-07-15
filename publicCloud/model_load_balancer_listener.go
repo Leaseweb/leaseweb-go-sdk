@@ -25,7 +25,10 @@ type LoadBalancerListener struct {
 	Port *int32 `json:"port,omitempty"`
 	// The listener unique identifier
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LoadBalancerListener LoadBalancerListener
 
 // NewLoadBalancerListener instantiates a new LoadBalancerListener object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o LoadBalancerListener) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LoadBalancerListener) UnmarshalJSON(data []byte) (err error) {
+	varLoadBalancerListener := _LoadBalancerListener{}
+
+	err = json.Unmarshal(data, &varLoadBalancerListener)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LoadBalancerListener(varLoadBalancerListener)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "protocol")
+		delete(additionalProperties, "port")
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLoadBalancerListener struct {

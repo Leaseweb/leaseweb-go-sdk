@@ -13,7 +13,6 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type LoadBalancerDetails struct {
 	Configuration NullableLoadBalancerConfiguration `json:"configuration"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LoadBalancerDetails LoadBalancerDetails
@@ -392,6 +392,11 @@ func (o LoadBalancerDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["configuration"] = o.Configuration.Get()
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
 	toSerialize["privateNetwork"] = o.PrivateNetwork.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -430,15 +435,31 @@ func (o *LoadBalancerDetails) UnmarshalJSON(data []byte) (err error) {
 
 	varLoadBalancerDetails := _LoadBalancerDetails{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLoadBalancerDetails)
+	err = json.Unmarshal(data, &varLoadBalancerDetails)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LoadBalancerDetails(varLoadBalancerDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "contract")
+		delete(additionalProperties, "startedAt")
+		delete(additionalProperties, "ips")
+		delete(additionalProperties, "configuration")
+		delete(additionalProperties, "autoScalingGroup")
+		delete(additionalProperties, "privateNetwork")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

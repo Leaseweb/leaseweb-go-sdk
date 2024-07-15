@@ -21,7 +21,10 @@ var _ MappedNullable = &Ipmi{}
 type Ipmi struct {
 	// The current power status of the server.
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Ipmi Ipmi
 
 // NewIpmi instantiates a new Ipmi object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o Ipmi) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Ipmi) UnmarshalJSON(data []byte) (err error) {
+	varIpmi := _Ipmi{}
+
+	err = json.Unmarshal(data, &varIpmi)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Ipmi(varIpmi)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIpmi struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &Summary{}
 type Summary struct {
 	DOWN_PUBLIC *TrafficMetricSummary `json:"DOWN_PUBLIC,omitempty"`
 	UP_PUBLIC *TrafficMetricSummary `json:"UP_PUBLIC,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Summary Summary
 
 // NewSummary instantiates a new Summary object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o Summary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UP_PUBLIC) {
 		toSerialize["UP_PUBLIC"] = o.UP_PUBLIC
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Summary) UnmarshalJSON(data []byte) (err error) {
+	varSummary := _Summary{}
+
+	err = json.Unmarshal(data, &varSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Summary(varSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "DOWN_PUBLIC")
+		delete(additionalProperties, "UP_PUBLIC")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSummary struct {

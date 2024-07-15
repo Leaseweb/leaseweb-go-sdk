@@ -25,7 +25,10 @@ type Chassis struct {
 	Product *string `json:"product,omitempty"`
 	Serial *string `json:"serial,omitempty"`
 	Vendor *string `json:"vendor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Chassis Chassis
 
 // NewChassis instantiates a new Chassis object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o Chassis) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Vendor) {
 		toSerialize["vendor"] = o.Vendor
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Chassis) UnmarshalJSON(data []byte) (err error) {
+	varChassis := _Chassis{}
+
+	err = json.Unmarshal(data, &varChassis)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Chassis(varChassis)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "firmware")
+		delete(additionalProperties, "motherboard")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "serial")
+		delete(additionalProperties, "vendor")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableChassis struct {

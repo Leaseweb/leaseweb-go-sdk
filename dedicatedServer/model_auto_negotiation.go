@@ -21,7 +21,10 @@ var _ MappedNullable = &AutoNegotiation{}
 type AutoNegotiation struct {
 	Enabled *string `json:"enabled,omitempty"`
 	Supported *string `json:"supported,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AutoNegotiation AutoNegotiation
 
 // NewAutoNegotiation instantiates a new AutoNegotiation object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o AutoNegotiation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Supported) {
 		toSerialize["supported"] = o.Supported
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AutoNegotiation) UnmarshalJSON(data []byte) (err error) {
+	varAutoNegotiation := _AutoNegotiation{}
+
+	err = json.Unmarshal(data, &varAutoNegotiation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AutoNegotiation(varAutoNegotiation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enabled")
+		delete(additionalProperties, "supported")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAutoNegotiation struct {

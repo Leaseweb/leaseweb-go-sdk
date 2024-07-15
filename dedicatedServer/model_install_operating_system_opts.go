@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -44,6 +43,7 @@ type InstallOperatingSystemOpts struct {
 	SshKeys *string `json:"sshKeys,omitempty"`
 	// Timezone represented as Geographical_Area/City
 	Timezone *string `json:"timezone,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InstallOperatingSystemOpts InstallOperatingSystemOpts
@@ -486,6 +486,11 @@ func (o InstallOperatingSystemOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -513,15 +518,31 @@ func (o *InstallOperatingSystemOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varInstallOperatingSystemOpts := _InstallOperatingSystemOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInstallOperatingSystemOpts)
+	err = json.Unmarshal(data, &varInstallOperatingSystemOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InstallOperatingSystemOpts(varInstallOperatingSystemOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "callbackUrl")
+		delete(additionalProperties, "controlPanelId")
+		delete(additionalProperties, "device")
+		delete(additionalProperties, "hostname")
+		delete(additionalProperties, "operatingSystemId")
+		delete(additionalProperties, "partitions")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "postInstallScript")
+		delete(additionalProperties, "powerCycle")
+		delete(additionalProperties, "raid")
+		delete(additionalProperties, "sshKeys")
+		delete(additionalProperties, "timezone")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

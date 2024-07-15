@@ -23,7 +23,10 @@ type CpuMetricsMetadataSummaryPeak struct {
 	// The highest CPU usage given the provided aggregation and granularity
 	Value *string `json:"value,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CpuMetricsMetadataSummaryPeak CpuMetricsMetadataSummaryPeak
 
 // NewCpuMetricsMetadataSummaryPeak instantiates a new CpuMetricsMetadataSummaryPeak object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CpuMetricsMetadataSummaryPeak) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CpuMetricsMetadataSummaryPeak) UnmarshalJSON(data []byte) (err error) {
+	varCpuMetricsMetadataSummaryPeak := _CpuMetricsMetadataSummaryPeak{}
+
+	err = json.Unmarshal(data, &varCpuMetricsMetadataSummaryPeak)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CpuMetricsMetadataSummaryPeak(varCpuMetricsMetadataSummaryPeak)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCpuMetricsMetadataSummaryPeak struct {

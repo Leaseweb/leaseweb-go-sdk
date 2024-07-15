@@ -22,7 +22,10 @@ type GetReportListResult struct {
 	// An array of abuse reports.
 	Reports []Report `json:"reports,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetReportListResult GetReportListResult
 
 // NewGetReportListResult instantiates a new GetReportListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetReportListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetReportListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetReportListResult := _GetReportListResult{}
+
+	err = json.Unmarshal(data, &varGetReportListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetReportListResult(varGetReportListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "reports")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetReportListResult struct {

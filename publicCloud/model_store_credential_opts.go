@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type StoreCredentialOpts struct {
 	Username string `json:"username"`
 	// The password you'd like to store
 	Password string `json:"password"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _StoreCredentialOpts StoreCredentialOpts
@@ -135,6 +135,11 @@ func (o StoreCredentialOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	toSerialize["username"] = o.Username
 	toSerialize["password"] = o.Password
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -164,15 +169,22 @@ func (o *StoreCredentialOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varStoreCredentialOpts := _StoreCredentialOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varStoreCredentialOpts)
+	err = json.Unmarshal(data, &varStoreCredentialOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = StoreCredentialOpts(varStoreCredentialOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

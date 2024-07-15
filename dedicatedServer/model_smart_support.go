@@ -21,7 +21,10 @@ var _ MappedNullable = &SmartSupport{}
 type SmartSupport struct {
 	Available *bool `json:"available,omitempty"`
 	Enabled *bool `json:"enabled,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SmartSupport SmartSupport
 
 // NewSmartSupport instantiates a new SmartSupport object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o SmartSupport) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SmartSupport) UnmarshalJSON(data []byte) (err error) {
+	varSmartSupport := _SmartSupport{}
+
+	err = json.Unmarshal(data, &varSmartSupport)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SmartSupport(varSmartSupport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "available")
+		delete(additionalProperties, "enabled")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSmartSupport struct {

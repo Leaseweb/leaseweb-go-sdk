@@ -22,7 +22,10 @@ type GetServerNullRouteHistoryResult struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of server null route events
 	NullRoutes []NullRoute `json:"nullRoutes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetServerNullRouteHistoryResult GetServerNullRouteHistoryResult
 
 // NewGetServerNullRouteHistoryResult instantiates a new GetServerNullRouteHistoryResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetServerNullRouteHistoryResult) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.NullRoutes) {
 		toSerialize["nullRoutes"] = o.NullRoutes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetServerNullRouteHistoryResult) UnmarshalJSON(data []byte) (err error) {
+	varGetServerNullRouteHistoryResult := _GetServerNullRouteHistoryResult{}
+
+	err = json.Unmarshal(data, &varGetServerNullRouteHistoryResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetServerNullRouteHistoryResult(varGetServerNullRouteHistoryResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "nullRoutes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetServerNullRouteHistoryResult struct {

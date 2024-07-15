@@ -21,7 +21,10 @@ var _ MappedNullable = &GetReportResolutionListResult{}
 type GetReportResolutionListResult struct {
 	// Possible resolutions to resolve this report with.
 	Resolutions []ResolutionList `json:"resolutions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetReportResolutionListResult GetReportResolutionListResult
 
 // NewGetReportResolutionListResult instantiates a new GetReportResolutionListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetReportResolutionListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Resolutions) {
 		toSerialize["resolutions"] = o.Resolutions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetReportResolutionListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetReportResolutionListResult := _GetReportResolutionListResult{}
+
+	err = json.Unmarshal(data, &varGetReportResolutionListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetReportResolutionListResult(varGetReportResolutionListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resolutions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetReportResolutionListResult struct {

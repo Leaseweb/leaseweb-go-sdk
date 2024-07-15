@@ -20,7 +20,10 @@ var _ MappedNullable = &GetNetworkEquipmentPowerStatusResult{}
 // GetNetworkEquipmentPowerStatusResult struct for GetNetworkEquipmentPowerStatusResult
 type GetNetworkEquipmentPowerStatusResult struct {
 	Pdu *Pdu `json:"pdu,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetNetworkEquipmentPowerStatusResult GetNetworkEquipmentPowerStatusResult
 
 // NewGetNetworkEquipmentPowerStatusResult instantiates a new GetNetworkEquipmentPowerStatusResult object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o GetNetworkEquipmentPowerStatusResult) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Pdu) {
 		toSerialize["pdu"] = o.Pdu
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetNetworkEquipmentPowerStatusResult) UnmarshalJSON(data []byte) (err error) {
+	varGetNetworkEquipmentPowerStatusResult := _GetNetworkEquipmentPowerStatusResult{}
+
+	err = json.Unmarshal(data, &varGetNetworkEquipmentPowerStatusResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetNetworkEquipmentPowerStatusResult(varGetNetworkEquipmentPowerStatusResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pdu")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetNetworkEquipmentPowerStatusResult struct {

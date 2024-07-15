@@ -25,7 +25,10 @@ type Result struct {
 	Ipmi *Ipmi1 `json:"ipmi,omitempty"`
 	Memory []MemoryBank `json:"memory,omitempty"`
 	Network []Network `json:"network,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Result Result
 
 // NewResult instantiates a new Result object
 // This constructor will assign default values to properties that have it defined,
@@ -264,7 +267,38 @@ func (o Result) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Network) {
 		toSerialize["network"] = o.Network
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Result) UnmarshalJSON(data []byte) (err error) {
+	varResult := _Result{}
+
+	err = json.Unmarshal(data, &varResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Result(varResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "chassis")
+		delete(additionalProperties, "cpu")
+		delete(additionalProperties, "disks")
+		delete(additionalProperties, "ipmi")
+		delete(additionalProperties, "memory")
+		delete(additionalProperties, "network")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableResult struct {

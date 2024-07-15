@@ -20,7 +20,10 @@ var _ MappedNullable = &LoadBalancerTargetOpt{}
 // LoadBalancerTargetOpt struct for LoadBalancerTargetOpt
 type LoadBalancerTargetOpt struct {
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LoadBalancerTargetOpt LoadBalancerTargetOpt
 
 // NewLoadBalancerTargetOpt instantiates a new LoadBalancerTargetOpt object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o LoadBalancerTargetOpt) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LoadBalancerTargetOpt) UnmarshalJSON(data []byte) (err error) {
+	varLoadBalancerTargetOpt := _LoadBalancerTargetOpt{}
+
+	err = json.Unmarshal(data, &varLoadBalancerTargetOpt)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LoadBalancerTargetOpt(varLoadBalancerTargetOpt)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLoadBalancerTargetOpt struct {

@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type ImageDetails struct {
 	MarketApps []string `json:"marketApps"`
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ImageDetails ImageDetails
@@ -269,6 +269,11 @@ func (o ImageDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["architecture"] = o.Architecture
 	toSerialize["marketApps"] = o.MarketApps
 	toSerialize["storageTypes"] = o.StorageTypes
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -303,15 +308,27 @@ func (o *ImageDetails) UnmarshalJSON(data []byte) (err error) {
 
 	varImageDetails := _ImageDetails{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varImageDetails)
+	err = json.Unmarshal(data, &varImageDetails)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ImageDetails(varImageDetails)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "family")
+		delete(additionalProperties, "flavour")
+		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "marketApps")
+		delete(additionalProperties, "storageTypes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

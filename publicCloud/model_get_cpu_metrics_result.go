@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCpuMetricsResult{}
 type GetCpuMetricsResult struct {
 	Metrics *CpuMetrics `json:"metrics,omitempty"`
 	Metadata *CpuMetricsMetadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCpuMetricsResult GetCpuMetricsResult
 
 // NewGetCpuMetricsResult instantiates a new GetCpuMetricsResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetCpuMetricsResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCpuMetricsResult) UnmarshalJSON(data []byte) (err error) {
+	varGetCpuMetricsResult := _GetCpuMetricsResult{}
+
+	err = json.Unmarshal(data, &varGetCpuMetricsResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCpuMetricsResult(varGetCpuMetricsResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCpuMetricsResult struct {

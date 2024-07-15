@@ -43,7 +43,10 @@ type ExpenseResultInstance struct {
 	To *time.Time `json:"to,omitempty"`
 	// The price of the instance for the billing period.
 	Price *string `json:"price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExpenseResultInstance ExpenseResultInstance
 
 // NewExpenseResultInstance instantiates a new ExpenseResultInstance object
 // This constructor will assign default values to properties that have it defined,
@@ -527,7 +530,45 @@ func (o ExpenseResultInstance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Price) {
 		toSerialize["price"] = o.Price
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExpenseResultInstance) UnmarshalJSON(data []byte) (err error) {
+	varExpenseResultInstance := _ExpenseResultInstance{}
+
+	err = json.Unmarshal(data, &varExpenseResultInstance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExpenseResultInstance(varExpenseResultInstance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "contract")
+		delete(additionalProperties, "startedAt")
+		delete(additionalProperties, "endedAt")
+		delete(additionalProperties, "rootDiskSize")
+		delete(additionalProperties, "rootDiskStorageType")
+		delete(additionalProperties, "billingType")
+		delete(additionalProperties, "hours")
+		delete(additionalProperties, "from")
+		delete(additionalProperties, "to")
+		delete(additionalProperties, "price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExpenseResultInstance struct {

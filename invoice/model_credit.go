@@ -27,7 +27,10 @@ type Credit struct {
 	TaxAmount *float32 `json:"taxAmount,omitempty"`
 	// The total amount of the credit connected to the invoice
 	Total *float32 `json:"total,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Credit Credit
 
 // NewCredit instantiates a new Credit object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o Credit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Total) {
 		toSerialize["total"] = o.Total
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Credit) UnmarshalJSON(data []byte) (err error) {
+	varCredit := _Credit{}
+
+	err = json.Unmarshal(data, &varCredit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Credit(varCredit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "taxAmount")
+		delete(additionalProperties, "total")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCredit struct {

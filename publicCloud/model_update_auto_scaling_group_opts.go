@@ -38,7 +38,10 @@ type UpdateAutoScalingGroupOpts struct {
 	StartsAt *time.Time `json:"startsAt,omitempty"`
 	// Only for \"SCHEDULED\" auto scaling group. Date and time (UTC) that the instances need to be terminated. Must be changed along with \"startsAt\"
 	EndsAt *time.Time `json:"endsAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateAutoScalingGroupOpts UpdateAutoScalingGroupOpts
 
 // NewUpdateAutoScalingGroupOpts instantiates a new UpdateAutoScalingGroupOpts object
 // This constructor will assign default values to properties that have it defined,
@@ -382,7 +385,41 @@ func (o UpdateAutoScalingGroupOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EndsAt) {
 		toSerialize["endsAt"] = o.EndsAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateAutoScalingGroupOpts) UnmarshalJSON(data []byte) (err error) {
+	varUpdateAutoScalingGroupOpts := _UpdateAutoScalingGroupOpts{}
+
+	err = json.Unmarshal(data, &varUpdateAutoScalingGroupOpts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateAutoScalingGroupOpts(varUpdateAutoScalingGroupOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "desiredAmount")
+		delete(additionalProperties, "minimumAmount")
+		delete(additionalProperties, "maximumAmount")
+		delete(additionalProperties, "cpuThreshold")
+		delete(additionalProperties, "warmupTime")
+		delete(additionalProperties, "cooldownTime")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "startsAt")
+		delete(additionalProperties, "endsAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateAutoScalingGroupOpts struct {

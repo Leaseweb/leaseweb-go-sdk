@@ -24,7 +24,10 @@ type Snapshot struct {
 	DisplayName *string `json:"displayName,omitempty"`
 	State *string `json:"state,omitempty"`
 	Created *time.Time `json:"created,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Snapshot Snapshot
 
 // NewSnapshot instantiates a new Snapshot object
 // This constructor will assign default values to properties that have it defined,
@@ -193,7 +196,36 @@ func (o Snapshot) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Created) {
 		toSerialize["created"] = o.Created
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Snapshot) UnmarshalJSON(data []byte) (err error) {
+	varSnapshot := _Snapshot{}
+
+	err = json.Unmarshal(data, &varSnapshot)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Snapshot(varSnapshot)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "displayName")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "created")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSnapshot struct {

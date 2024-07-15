@@ -25,7 +25,10 @@ type Attachment struct {
 	MimeType *string `json:"mimeType,omitempty"`
 	// The filename of the attachment.
 	Filename *string `json:"filename,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Attachment Attachment
 
 // NewAttachment instantiates a new Attachment object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o Attachment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Filename) {
 		toSerialize["filename"] = o.Filename
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Attachment) UnmarshalJSON(data []byte) (err error) {
+	varAttachment := _Attachment{}
+
+	err = json.Unmarshal(data, &varAttachment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Attachment(varAttachment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "mimeType")
+		delete(additionalProperties, "filename")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAttachment struct {

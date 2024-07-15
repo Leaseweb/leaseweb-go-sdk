@@ -23,7 +23,10 @@ type GetDdosNotificationSettingResult struct {
 	Nulling *string `json:"nulling,omitempty"`
 	// Email notifications for scrubbing events
 	Scrubbing *string `json:"scrubbing,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDdosNotificationSettingResult GetDdosNotificationSettingResult
 
 // NewGetDdosNotificationSettingResult instantiates a new GetDdosNotificationSettingResult object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetDdosNotificationSettingResult) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Scrubbing) {
 		toSerialize["scrubbing"] = o.Scrubbing
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDdosNotificationSettingResult) UnmarshalJSON(data []byte) (err error) {
+	varGetDdosNotificationSettingResult := _GetDdosNotificationSettingResult{}
+
+	err = json.Unmarshal(data, &varGetDdosNotificationSettingResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDdosNotificationSettingResult(varGetDdosNotificationSettingResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "nulling")
+		delete(additionalProperties, "scrubbing")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDdosNotificationSettingResult struct {

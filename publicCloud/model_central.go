@@ -21,7 +21,10 @@ var _ MappedNullable = &Central{}
 type Central struct {
 	HourlyPrice *string `json:"hourlyPrice,omitempty"`
 	MonthlyPrice *string `json:"monthlyPrice,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Central Central
 
 // NewCentral instantiates a new Central object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o Central) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MonthlyPrice) {
 		toSerialize["monthlyPrice"] = o.MonthlyPrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Central) UnmarshalJSON(data []byte) (err error) {
+	varCentral := _Central{}
+
+	err = json.Unmarshal(data, &varCentral)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Central(varCentral)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hourlyPrice")
+		delete(additionalProperties, "monthlyPrice")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCentral struct {

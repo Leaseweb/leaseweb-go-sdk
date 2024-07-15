@@ -23,7 +23,10 @@ type NetworkEquipmentSpecs struct {
 	Brand *string `json:"brand,omitempty"`
 	// The model of the network equipment
 	Model *string `json:"model,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NetworkEquipmentSpecs NetworkEquipmentSpecs
 
 // NewNetworkEquipmentSpecs instantiates a new NetworkEquipmentSpecs object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o NetworkEquipmentSpecs) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Model) {
 		toSerialize["model"] = o.Model
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NetworkEquipmentSpecs) UnmarshalJSON(data []byte) (err error) {
+	varNetworkEquipmentSpecs := _NetworkEquipmentSpecs{}
+
+	err = json.Unmarshal(data, &varNetworkEquipmentSpecs)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NetworkEquipmentSpecs(varNetworkEquipmentSpecs)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "brand")
+		delete(additionalProperties, "model")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNetworkEquipmentSpecs struct {

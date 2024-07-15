@@ -33,7 +33,10 @@ type BandwidthNotificationSetting struct {
 	ThresholdExceededAt NullableString `json:"thresholdExceededAt,omitempty"`
 	// Unit
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BandwidthNotificationSetting BandwidthNotificationSetting
 
 // NewBandwidthNotificationSetting instantiates a new BandwidthNotificationSetting object
 // This constructor will assign default values to properties that have it defined,
@@ -327,7 +330,39 @@ func (o BandwidthNotificationSetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BandwidthNotificationSetting) UnmarshalJSON(data []byte) (err error) {
+	varBandwidthNotificationSetting := _BandwidthNotificationSetting{}
+
+	err = json.Unmarshal(data, &varBandwidthNotificationSetting)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BandwidthNotificationSetting(varBandwidthNotificationSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "frequency")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "lastCheckedAt")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "thresholdExceededAt")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBandwidthNotificationSetting struct {

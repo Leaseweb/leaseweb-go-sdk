@@ -29,7 +29,10 @@ type ServerSpecs struct {
 	// List of PCI cards of the server
 	PciCards []PciCard `json:"pciCards,omitempty"`
 	Ram *Ram `json:"ram,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServerSpecs ServerSpecs
 
 // NewServerSpecs instantiates a new ServerSpecs object
 // This constructor will assign default values to properties that have it defined,
@@ -268,7 +271,38 @@ func (o ServerSpecs) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Ram) {
 		toSerialize["ram"] = o.Ram
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServerSpecs) UnmarshalJSON(data []byte) (err error) {
+	varServerSpecs := _ServerSpecs{}
+
+	err = json.Unmarshal(data, &varServerSpecs)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServerSpecs(varServerSpecs)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "chassis")
+		delete(additionalProperties, "cpu")
+		delete(additionalProperties, "hardwareRaidCapable")
+		delete(additionalProperties, "hdd")
+		delete(additionalProperties, "pciCards")
+		delete(additionalProperties, "ram")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServerSpecs struct {

@@ -35,7 +35,10 @@ type Ip struct {
 	ReverseLookup *string `json:"reverseLookup,omitempty"`
 	// IP version
 	Version *int32 `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Ip Ip
 
 // NewIp instantiates a new Ip object
 // This constructor will assign default values to properties that have it defined,
@@ -379,7 +382,41 @@ func (o Ip) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Ip) UnmarshalJSON(data []byte) (err error) {
+	varIp := _Ip{}
+
+	err = json.Unmarshal(data, &varIp)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Ip(varIp)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ddos")
+		delete(additionalProperties, "floatingIp")
+		delete(additionalProperties, "gateway")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "mainIp")
+		delete(additionalProperties, "networkType")
+		delete(additionalProperties, "nullRouted")
+		delete(additionalProperties, "reverseLookup")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIp struct {

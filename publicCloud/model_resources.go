@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type Resources struct {
 	Memory Memory `json:"memory"`
 	PublicNetworkSpeed NetworkSpeed `json:"publicNetworkSpeed"`
 	PrivateNetworkSpeed NetworkSpeed `json:"privateNetworkSpeed"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Resources Resources
@@ -160,6 +160,11 @@ func (o Resources) ToMap() (map[string]interface{}, error) {
 	toSerialize["memory"] = o.Memory
 	toSerialize["publicNetworkSpeed"] = o.PublicNetworkSpeed
 	toSerialize["privateNetworkSpeed"] = o.PrivateNetworkSpeed
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -190,15 +195,23 @@ func (o *Resources) UnmarshalJSON(data []byte) (err error) {
 
 	varResources := _Resources{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResources)
+	err = json.Unmarshal(data, &varResources)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Resources(varResources)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cpu")
+		delete(additionalProperties, "memory")
+		delete(additionalProperties, "publicNetworkSpeed")
+		delete(additionalProperties, "privateNetworkSpeed")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

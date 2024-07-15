@@ -22,7 +22,10 @@ type Billing struct {
 	// List of instances to be billed in the period
 	Instances []ExpenseResultInstance `json:"instances,omitempty"`
 	Traffic *Traffic `json:"traffic,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Billing Billing
 
 // NewBilling instantiates a new Billing object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o Billing) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Traffic) {
 		toSerialize["traffic"] = o.Traffic
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Billing) UnmarshalJSON(data []byte) (err error) {
+	varBilling := _Billing{}
+
+	err = json.Unmarshal(data, &varBilling)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Billing(varBilling)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "instances")
+		delete(additionalProperties, "traffic")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBilling struct {

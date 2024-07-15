@@ -25,7 +25,10 @@ type LastClientRequest struct {
 	Type *string `json:"type,omitempty"`
 	// The user agent of the client making the DHCP request
 	UserAgent *string `json:"userAgent,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LastClientRequest LastClientRequest
 
 // NewLastClientRequest instantiates a new LastClientRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -169,7 +172,35 @@ func (o LastClientRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserAgent) {
 		toSerialize["userAgent"] = o.UserAgent
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LastClientRequest) UnmarshalJSON(data []byte) (err error) {
+	varLastClientRequest := _LastClientRequest{}
+
+	err = json.Unmarshal(data, &varLastClientRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LastClientRequest(varLastClientRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "relayAgent")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "userAgent")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLastClientRequest struct {

@@ -23,7 +23,10 @@ type TrafficMetricValue struct {
 	// Bytes consumed
 	Value *int32 `json:"value,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TrafficMetricValue TrafficMetricValue
 
 // NewTrafficMetricValue instantiates a new TrafficMetricValue object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o TrafficMetricValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TrafficMetricValue) UnmarshalJSON(data []byte) (err error) {
+	varTrafficMetricValue := _TrafficMetricValue{}
+
+	err = json.Unmarshal(data, &varTrafficMetricValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TrafficMetricValue(varTrafficMetricValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTrafficMetricValue struct {

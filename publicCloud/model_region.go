@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type Region struct {
 	Name string `json:"name"`
 	// The city where the region is located.
 	Location string `json:"location"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Region Region
@@ -108,6 +108,11 @@ func (o Region) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["location"] = o.Location
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *Region) UnmarshalJSON(data []byte) (err error) {
 
 	varRegion := _Region{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRegion)
+	err = json.Unmarshal(data, &varRegion)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Region(varRegion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "location")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

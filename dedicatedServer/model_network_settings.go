@@ -31,7 +31,10 @@ type NetworkSettings struct {
 	Multicast *string `json:"multicast,omitempty"`
 	Port *string `json:"port,omitempty"`
 	Speed *string `json:"speed,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NetworkSettings NetworkSettings
 
 // NewNetworkSettings instantiates a new NetworkSettings object
 // This constructor will assign default values to properties that have it defined,
@@ -480,7 +483,44 @@ func (o NetworkSettings) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Speed) {
 		toSerialize["speed"] = o.Speed
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NetworkSettings) UnmarshalJSON(data []byte) (err error) {
+	varNetworkSettings := _NetworkSettings{}
+
+	err = json.Unmarshal(data, &varNetworkSettings)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NetworkSettings(varNetworkSettings)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "autonegotiation")
+		delete(additionalProperties, "broadcast")
+		delete(additionalProperties, "driver")
+		delete(additionalProperties, "driverversion")
+		delete(additionalProperties, "duplex")
+		delete(additionalProperties, "firmware")
+		delete(additionalProperties, "ip")
+		delete(additionalProperties, "latency")
+		delete(additionalProperties, "link")
+		delete(additionalProperties, "multicast")
+		delete(additionalProperties, "port")
+		delete(additionalProperties, "speed")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNetworkSettings struct {

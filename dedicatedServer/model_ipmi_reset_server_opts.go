@@ -23,7 +23,10 @@ type IpmiResetServerOpts struct {
 	CallbackUrl *string `json:"callbackUrl,omitempty"`
 	// If set to `true`, server will be power cycled in order to complete the operation
 	PowerCycle *bool `json:"powerCycle,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IpmiResetServerOpts IpmiResetServerOpts
 
 // NewIpmiResetServerOpts instantiates a new IpmiResetServerOpts object
 // This constructor will assign default values to properties that have it defined,
@@ -126,7 +129,34 @@ func (o IpmiResetServerOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PowerCycle) {
 		toSerialize["powerCycle"] = o.PowerCycle
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IpmiResetServerOpts) UnmarshalJSON(data []byte) (err error) {
+	varIpmiResetServerOpts := _IpmiResetServerOpts{}
+
+	err = json.Unmarshal(data, &varIpmiResetServerOpts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IpmiResetServerOpts(varIpmiResetServerOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "callbackUrl")
+		delete(additionalProperties, "powerCycle")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIpmiResetServerOpts struct {

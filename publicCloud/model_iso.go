@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &Iso{}
 type Iso struct {
 	Id string `json:"id"`
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Iso Iso
@@ -106,6 +106,11 @@ func (o Iso) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *Iso) UnmarshalJSON(data []byte) (err error) {
 
 	varIso := _Iso{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varIso)
+	err = json.Unmarshal(data, &varIso)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Iso(varIso)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

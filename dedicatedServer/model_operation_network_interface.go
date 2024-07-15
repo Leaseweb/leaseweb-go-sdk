@@ -31,7 +31,10 @@ type OperationNetworkInterface struct {
 	SwitchName *string `json:"switchName,omitempty"`
 	// The network type
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OperationNetworkInterface OperationNetworkInterface
 
 // NewOperationNetworkInterface instantiates a new OperationNetworkInterface object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o OperationNetworkInterface) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OperationNetworkInterface) UnmarshalJSON(data []byte) (err error) {
+	varOperationNetworkInterface := _OperationNetworkInterface{}
+
+	err = json.Unmarshal(data, &varOperationNetworkInterface)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OperationNetworkInterface(varOperationNetworkInterface)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "linkSpeed")
+		delete(additionalProperties, "operStatus")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "switchInterface")
+		delete(additionalProperties, "switchName")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOperationNetworkInterface struct {

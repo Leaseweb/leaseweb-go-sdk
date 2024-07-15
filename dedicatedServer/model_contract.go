@@ -46,7 +46,10 @@ type Contract struct {
 	ManagedServices []string `json:"managedServices,omitempty"`
 	AggregationPackId NullableString `json:"aggregationPackId,omitempty"`
 	Ipv4Quantity NullableString `json:"ipv4Quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Contract Contract
 
 // NewContract instantiates a new Contract object
 // This constructor will assign default values to properties that have it defined,
@@ -895,7 +898,54 @@ func (o Contract) ToMap() (map[string]interface{}, error) {
 	if o.Ipv4Quantity.IsSet() {
 		toSerialize["ipv4Quantity"] = o.Ipv4Quantity.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Contract) UnmarshalJSON(data []byte) (err error) {
+	varContract := _Contract{}
+
+	err = json.Unmarshal(data, &varContract)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Contract(varContract)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "customerId")
+		delete(additionalProperties, "salesOrgId")
+		delete(additionalProperties, "deliveryStatus")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "privateNetworkPortSpeed")
+		delete(additionalProperties, "subnets")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "startsAt")
+		delete(additionalProperties, "endsAt")
+		delete(additionalProperties, "sla")
+		delete(additionalProperties, "contractTerm")
+		delete(additionalProperties, "contractType")
+		delete(additionalProperties, "billingCycle")
+		delete(additionalProperties, "billingFrequency")
+		delete(additionalProperties, "pricePerFrequency")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "networkTraffic")
+		delete(additionalProperties, "softwareLicenses")
+		delete(additionalProperties, "managedServices")
+		delete(additionalProperties, "aggregationPackId")
+		delete(additionalProperties, "ipv4Quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableContract struct {

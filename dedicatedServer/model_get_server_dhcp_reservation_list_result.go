@@ -22,7 +22,10 @@ type GetServerDhcpReservationListResult struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of active DHCP reservations
 	Leases []Lease `json:"leases,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetServerDhcpReservationListResult GetServerDhcpReservationListResult
 
 // NewGetServerDhcpReservationListResult instantiates a new GetServerDhcpReservationListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetServerDhcpReservationListResult) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Leases) {
 		toSerialize["leases"] = o.Leases
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetServerDhcpReservationListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetServerDhcpReservationListResult := _GetServerDhcpReservationListResult{}
+
+	err = json.Unmarshal(data, &varGetServerDhcpReservationListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetServerDhcpReservationListResult(varGetServerDhcpReservationListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "leases")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetServerDhcpReservationListResult struct {

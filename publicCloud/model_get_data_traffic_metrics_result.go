@@ -21,7 +21,10 @@ var _ MappedNullable = &GetDataTrafficMetricsResult{}
 type GetDataTrafficMetricsResult struct {
 	Metrics *DataTrafficMetrics `json:"metrics,omitempty"`
 	Metadata *TrafficMetricsMetaData `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDataTrafficMetricsResult GetDataTrafficMetricsResult
 
 // NewGetDataTrafficMetricsResult instantiates a new GetDataTrafficMetricsResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetDataTrafficMetricsResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDataTrafficMetricsResult) UnmarshalJSON(data []byte) (err error) {
+	varGetDataTrafficMetricsResult := _GetDataTrafficMetricsResult{}
+
+	err = json.Unmarshal(data, &varGetDataTrafficMetricsResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDataTrafficMetricsResult(varGetDataTrafficMetricsResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metrics")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDataTrafficMetricsResult struct {

@@ -27,7 +27,10 @@ type Ipmi1 struct {
 	Macaddress *string `json:"macaddress,omitempty"`
 	Subnetmask *string `json:"subnetmask,omitempty"`
 	Vendor *string `json:"vendor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Ipmi1 Ipmi1
 
 // NewIpmi1 instantiates a new Ipmi1 object
 // This constructor will assign default values to properties that have it defined,
@@ -301,7 +304,39 @@ func (o Ipmi1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Vendor) {
 		toSerialize["vendor"] = o.Vendor
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Ipmi1) UnmarshalJSON(data []byte) (err error) {
+	varIpmi1 := _Ipmi1{}
+
+	err = json.Unmarshal(data, &varIpmi1)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Ipmi1(varIpmi1)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "defgateway")
+		delete(additionalProperties, "firmware")
+		delete(additionalProperties, "ipaddress")
+		delete(additionalProperties, "ipsource")
+		delete(additionalProperties, "macaddress")
+		delete(additionalProperties, "subnetmask")
+		delete(additionalProperties, "vendor")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIpmi1 struct {

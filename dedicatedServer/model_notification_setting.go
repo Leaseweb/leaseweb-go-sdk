@@ -31,7 +31,10 @@ type NotificationSetting struct {
 	Threshold *string `json:"threshold,omitempty"`
 	// Date timestamp when the threshold exceeded the limit
 	ThresholdExceededAt NullableString `json:"thresholdExceededAt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NotificationSetting NotificationSetting
 
 // NewNotificationSetting instantiates a new NotificationSetting object
 // This constructor will assign default values to properties that have it defined,
@@ -290,7 +293,38 @@ func (o NotificationSetting) ToMap() (map[string]interface{}, error) {
 	if o.ThresholdExceededAt.IsSet() {
 		toSerialize["thresholdExceededAt"] = o.ThresholdExceededAt.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NotificationSetting) UnmarshalJSON(data []byte) (err error) {
+	varNotificationSetting := _NotificationSetting{}
+
+	err = json.Unmarshal(data, &varNotificationSetting)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NotificationSetting(varNotificationSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "frequency")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "lastCheckedAt")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "thresholdExceededAt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNotificationSetting struct {

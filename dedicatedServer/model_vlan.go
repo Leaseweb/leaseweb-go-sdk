@@ -22,7 +22,10 @@ type Vlan struct {
 	Id *string `json:"id,omitempty"`
 	Label *string `json:"label,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Vlan Vlan
 
 // NewVlan instantiates a new Vlan object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o Vlan) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Vlan) UnmarshalJSON(data []byte) (err error) {
+	varVlan := _Vlan{}
+
+	err = json.Unmarshal(data, &varVlan)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Vlan(varVlan)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "label")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVlan struct {

@@ -29,7 +29,10 @@ type Os struct {
 	Type *string `json:"type,omitempty"`
 	// The version of the operating system
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Os Os
 
 // NewOs instantiates a new Os object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o Os) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Os) UnmarshalJSON(data []byte) (err error) {
+	varOs := _Os{}
+
+	err = json.Unmarshal(data, &varOs)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Os(varOs)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "family")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOs struct {

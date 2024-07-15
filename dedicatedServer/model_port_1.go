@@ -21,7 +21,10 @@ var _ MappedNullable = &Port1{}
 type Port1 struct {
 	AutoNegotiation *AutoNegotiation `json:"auto_negotiation,omitempty"`
 	Description *string `json:"description,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Port1 Port1
 
 // NewPort1 instantiates a new Port1 object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o Port1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Port1) UnmarshalJSON(data []byte) (err error) {
+	varPort1 := _Port1{}
+
+	err = json.Unmarshal(data, &varPort1)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Port1(varPort1)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "auto_negotiation")
+		delete(additionalProperties, "description")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePort1 struct {

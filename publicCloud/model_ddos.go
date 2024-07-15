@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &Ddos{}
 type Ddos struct {
 	DetectionProfile string `json:"detectionProfile"`
 	ProtectionType string `json:"protectionType"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Ddos Ddos
@@ -106,6 +106,11 @@ func (o Ddos) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["detectionProfile"] = o.DetectionProfile
 	toSerialize["protectionType"] = o.ProtectionType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *Ddos) UnmarshalJSON(data []byte) (err error) {
 
 	varDdos := _Ddos{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDdos)
+	err = json.Unmarshal(data, &varDdos)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Ddos(varDdos)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "detectionProfile")
+		delete(additionalProperties, "protectionType")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

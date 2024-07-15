@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type Image struct {
 	Family string `json:"family"`
 	Flavour string `json:"flavour"`
 	Architecture string `json:"architecture"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Image Image
@@ -214,6 +214,11 @@ func (o Image) ToMap() (map[string]interface{}, error) {
 	toSerialize["family"] = o.Family
 	toSerialize["flavour"] = o.Flavour
 	toSerialize["architecture"] = o.Architecture
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -246,15 +251,25 @@ func (o *Image) UnmarshalJSON(data []byte) (err error) {
 
 	varImage := _Image{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varImage)
+	err = json.Unmarshal(data, &varImage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Image(varImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "family")
+		delete(additionalProperties, "flavour")
+		delete(additionalProperties, "architecture")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

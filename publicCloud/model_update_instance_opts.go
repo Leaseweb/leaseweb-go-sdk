@@ -27,7 +27,10 @@ type UpdateInstanceOpts struct {
 	BillingFrequency *BillingFrequency `json:"billingFrequency,omitempty"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize *int32 `json:"rootDiskSize,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateInstanceOpts UpdateInstanceOpts
 
 // NewUpdateInstanceOpts instantiates a new UpdateInstanceOpts object
 // This constructor will assign default values to properties that have it defined,
@@ -266,7 +269,38 @@ func (o UpdateInstanceOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RootDiskSize) {
 		toSerialize["rootDiskSize"] = o.RootDiskSize
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateInstanceOpts) UnmarshalJSON(data []byte) (err error) {
+	varUpdateInstanceOpts := _UpdateInstanceOpts{}
+
+	err = json.Unmarshal(data, &varUpdateInstanceOpts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateInstanceOpts(varUpdateInstanceOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "contractType")
+		delete(additionalProperties, "contractTerm")
+		delete(additionalProperties, "billingFrequency")
+		delete(additionalProperties, "rootDiskSize")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateInstanceOpts struct {

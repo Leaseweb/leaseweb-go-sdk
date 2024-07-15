@@ -28,7 +28,10 @@ type Progress struct {
 	Percentage *int32 `json:"percentage,omitempty"`
 	Total *int32 `json:"total,omitempty"`
 	Waiting *int32 `json:"waiting,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Progress Progress
 
 // NewProgress instantiates a new Progress object
 // This constructor will assign default values to properties that have it defined,
@@ -372,7 +375,41 @@ func (o Progress) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Waiting) {
 		toSerialize["waiting"] = o.Waiting
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Progress) UnmarshalJSON(data []byte) (err error) {
+	varProgress := _Progress{}
+
+	err = json.Unmarshal(data, &varProgress)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Progress(varProgress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "canceled")
+		delete(additionalProperties, "expired")
+		delete(additionalProperties, "failed")
+		delete(additionalProperties, "finished")
+		delete(additionalProperties, "inprogress")
+		delete(additionalProperties, "pending")
+		delete(additionalProperties, "percentage")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "waiting")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProgress struct {

@@ -22,7 +22,10 @@ type GetReportMessageListResult struct {
 	// An array of the posted messages.
 	Messages []Message `json:"messages,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetReportMessageListResult GetReportMessageListResult
 
 // NewGetReportMessageListResult instantiates a new GetReportMessageListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetReportMessageListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetReportMessageListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetReportMessageListResult := _GetReportMessageListResult{}
+
+	err = json.Unmarshal(data, &varGetReportMessageListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetReportMessageListResult(varGetReportMessageListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "messages")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetReportMessageListResult struct {

@@ -23,7 +23,10 @@ type Tier struct {
 	Usage *float32 `json:"usage,omitempty"`
 	// Total price of the tier, based on the usage. The first tier is free, so this will be 0 for the first tier. From tier 1 onwards, the usage has costs. Each tier has it own price.
 	Price *float32 `json:"price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Tier Tier
 
 // NewTier instantiates a new Tier object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o Tier) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Price) {
 		toSerialize["price"] = o.Price
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Tier) UnmarshalJSON(data []byte) (err error) {
+	varTier := _Tier{}
+
+	err = json.Unmarshal(data, &varTier)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Tier(varTier)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "usage")
+		delete(additionalProperties, "price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTier struct {

@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdateNetworkEquipmentReferenceOpts{}
 type UpdateNetworkEquipmentReferenceOpts struct {
 	// The reference for this network equipment
 	Reference string `json:"reference"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateNetworkEquipmentReferenceOpts UpdateNetworkEquipmentReferenceOpts
@@ -80,6 +80,11 @@ func (o UpdateNetworkEquipmentReferenceOpts) MarshalJSON() ([]byte, error) {
 func (o UpdateNetworkEquipmentReferenceOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["reference"] = o.Reference
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdateNetworkEquipmentReferenceOpts) UnmarshalJSON(data []byte) (err er
 
 	varUpdateNetworkEquipmentReferenceOpts := _UpdateNetworkEquipmentReferenceOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateNetworkEquipmentReferenceOpts)
+	err = json.Unmarshal(data, &varUpdateNetworkEquipmentReferenceOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateNetworkEquipmentReferenceOpts(varUpdateNetworkEquipmentReferenceOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "reference")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

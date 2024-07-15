@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -37,6 +36,7 @@ type LaunchInstanceOpts struct {
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
 	// Public SSH key to be installed into the instance. Must be used only on Linux/FreeBSD instances
 	SshKey *string `json:"sshKey,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LaunchInstanceOpts LaunchInstanceOpts
@@ -390,6 +390,11 @@ func (o LaunchInstanceOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SshKey) {
 		toSerialize["sshKey"] = o.SshKey
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -423,15 +428,30 @@ func (o *LaunchInstanceOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varLaunchInstanceOpts := _LaunchInstanceOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLaunchInstanceOpts)
+	err = json.Unmarshal(data, &varLaunchInstanceOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LaunchInstanceOpts(varLaunchInstanceOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "imageId")
+		delete(additionalProperties, "marketAppId")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "contractType")
+		delete(additionalProperties, "contractTerm")
+		delete(additionalProperties, "billingFrequency")
+		delete(additionalProperties, "rootDiskSize")
+		delete(additionalProperties, "rootDiskStorageType")
+		delete(additionalProperties, "sshKey")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

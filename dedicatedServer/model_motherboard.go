@@ -22,7 +22,10 @@ type Motherboard struct {
 	Product *string `json:"product,omitempty"`
 	Serial *string `json:"serial,omitempty"`
 	Vendor *string `json:"vendor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Motherboard Motherboard
 
 // NewMotherboard instantiates a new Motherboard object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o Motherboard) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Vendor) {
 		toSerialize["vendor"] = o.Vendor
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Motherboard) UnmarshalJSON(data []byte) (err error) {
+	varMotherboard := _Motherboard{}
+
+	err = json.Unmarshal(data, &varMotherboard)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Motherboard(varMotherboard)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "serial")
+		delete(additionalProperties, "vendor")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMotherboard struct {

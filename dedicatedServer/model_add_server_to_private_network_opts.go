@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &AddServerToPrivateNetworkOpts{}
 // AddServerToPrivateNetworkOpts struct for AddServerToPrivateNetworkOpts
 type AddServerToPrivateNetworkOpts struct {
 	LinkSpeed LinkSpeed `json:"linkSpeed"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddServerToPrivateNetworkOpts AddServerToPrivateNetworkOpts
@@ -79,6 +79,11 @@ func (o AddServerToPrivateNetworkOpts) MarshalJSON() ([]byte, error) {
 func (o AddServerToPrivateNetworkOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["linkSpeed"] = o.LinkSpeed
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *AddServerToPrivateNetworkOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varAddServerToPrivateNetworkOpts := _AddServerToPrivateNetworkOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddServerToPrivateNetworkOpts)
+	err = json.Unmarshal(data, &varAddServerToPrivateNetworkOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddServerToPrivateNetworkOpts(varAddServerToPrivateNetworkOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "linkSpeed")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

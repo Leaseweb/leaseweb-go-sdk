@@ -21,7 +21,10 @@ var _ MappedNullable = &GetAutoScalingGroupInstanceListResult{}
 type GetAutoScalingGroupInstanceListResult struct {
 	Instances []AutoScaledInstance `json:"instances,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAutoScalingGroupInstanceListResult GetAutoScalingGroupInstanceListResult
 
 // NewGetAutoScalingGroupInstanceListResult instantiates a new GetAutoScalingGroupInstanceListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetAutoScalingGroupInstanceListResult) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAutoScalingGroupInstanceListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetAutoScalingGroupInstanceListResult := _GetAutoScalingGroupInstanceListResult{}
+
+	err = json.Unmarshal(data, &varGetAutoScalingGroupInstanceListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAutoScalingGroupInstanceListResult(varGetAutoScalingGroupInstanceListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "instances")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAutoScalingGroupInstanceListResult struct {

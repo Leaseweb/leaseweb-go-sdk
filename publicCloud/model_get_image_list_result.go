@@ -21,7 +21,10 @@ var _ MappedNullable = &GetImageListResult{}
 type GetImageListResult struct {
 	Images []ImageDetails `json:"images,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetImageListResult GetImageListResult
 
 // NewGetImageListResult instantiates a new GetImageListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetImageListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetImageListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetImageListResult := _GetImageListResult{}
+
+	err = json.Unmarshal(data, &varGetImageListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetImageListResult(varGetImageListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "images")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetImageListResult struct {

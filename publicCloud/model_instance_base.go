@@ -13,7 +13,6 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -43,6 +42,7 @@ type InstanceBase struct {
 	RootDiskSize int32 `json:"rootDiskSize"`
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
 	Contract Contract `json:"contract"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InstanceBase InstanceBase
@@ -444,6 +444,11 @@ func (o InstanceBase) ToMap() (map[string]interface{}, error) {
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
 	toSerialize["contract"] = o.Contract
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -484,15 +489,33 @@ func (o *InstanceBase) UnmarshalJSON(data []byte) (err error) {
 
 	varInstanceBase := _InstanceBase{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInstanceBase)
+	err = json.Unmarshal(data, &varInstanceBase)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InstanceBase(varInstanceBase)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "startedAt")
+		delete(additionalProperties, "marketAppId")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "productType")
+		delete(additionalProperties, "hasPublicIpV4")
+		delete(additionalProperties, "hasPrivateNetwork")
+		delete(additionalProperties, "rootDiskSize")
+		delete(additionalProperties, "rootDiskStorageType")
+		delete(additionalProperties, "contract")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

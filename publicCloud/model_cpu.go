@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &Cpu{}
 type Cpu struct {
 	Value int32 `json:"value"`
 	Unit string `json:"unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Cpu Cpu
@@ -106,6 +106,11 @@ func (o Cpu) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
 	toSerialize["unit"] = o.Unit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *Cpu) UnmarshalJSON(data []byte) (err error) {
 
 	varCpu := _Cpu{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCpu)
+	err = json.Unmarshal(data, &varCpu)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Cpu(varCpu)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

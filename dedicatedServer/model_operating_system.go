@@ -23,7 +23,10 @@ type OperatingSystem struct {
 	Id *string `json:"id,omitempty"`
 	// A human readable name describing the operating system
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OperatingSystem OperatingSystem
 
 // NewOperatingSystem instantiates a new OperatingSystem object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o OperatingSystem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OperatingSystem) UnmarshalJSON(data []byte) (err error) {
+	varOperatingSystem := _OperatingSystem{}
+
+	err = json.Unmarshal(data, &varOperatingSystem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OperatingSystem(varOperatingSystem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOperatingSystem struct {

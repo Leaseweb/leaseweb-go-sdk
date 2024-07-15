@@ -24,7 +24,10 @@ type MemoryBank struct {
 	ClockHz *string `json:"clock_hz,omitempty"`
 	SerialNumber *string `json:"serial_number,omitempty"`
 	SizeBytes *string `json:"size_bytes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MemoryBank MemoryBank
 
 // NewMemoryBank instantiates a new MemoryBank object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o MemoryBank) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SizeBytes) {
 		toSerialize["size_bytes"] = o.SizeBytes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MemoryBank) UnmarshalJSON(data []byte) (err error) {
+	varMemoryBank := _MemoryBank{}
+
+	err = json.Unmarshal(data, &varMemoryBank)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemoryBank(varMemoryBank)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "clock_hz")
+		delete(additionalProperties, "serial_number")
+		delete(additionalProperties, "size_bytes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMemoryBank struct {

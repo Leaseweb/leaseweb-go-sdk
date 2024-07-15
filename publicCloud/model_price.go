@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type Price struct {
 	CurrencySymbol string `json:"currencySymbol"`
 	Compute Compute `json:"compute"`
 	Storage Storage `json:"storage"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Price Price
@@ -160,6 +160,11 @@ func (o Price) ToMap() (map[string]interface{}, error) {
 	toSerialize["currencySymbol"] = o.CurrencySymbol
 	toSerialize["compute"] = o.Compute
 	toSerialize["storage"] = o.Storage
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -190,15 +195,23 @@ func (o *Price) UnmarshalJSON(data []byte) (err error) {
 
 	varPrice := _Price{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPrice)
+	err = json.Unmarshal(data, &varPrice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Price(varPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "currencySymbol")
+		delete(additionalProperties, "compute")
+		delete(additionalProperties, "storage")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

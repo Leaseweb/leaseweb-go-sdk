@@ -13,7 +13,6 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -46,6 +45,7 @@ type Instance struct {
 	Image Image `json:"image"`
 	Ips []Ip `json:"ips"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Instance Instance
@@ -527,6 +527,11 @@ func (o Instance) ToMap() (map[string]interface{}, error) {
 	toSerialize["image"] = o.Image
 	toSerialize["ips"] = o.Ips
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -570,15 +575,36 @@ func (o *Instance) UnmarshalJSON(data []byte) (err error) {
 
 	varInstance := _Instance{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInstance)
+	err = json.Unmarshal(data, &varInstance)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Instance(varInstance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "startedAt")
+		delete(additionalProperties, "marketAppId")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "productType")
+		delete(additionalProperties, "hasPublicIpV4")
+		delete(additionalProperties, "hasPrivateNetwork")
+		delete(additionalProperties, "rootDiskSize")
+		delete(additionalProperties, "rootDiskStorageType")
+		delete(additionalProperties, "contract")
+		delete(additionalProperties, "image")
+		delete(additionalProperties, "ips")
+		delete(additionalProperties, "autoScalingGroup")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

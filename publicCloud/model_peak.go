@@ -23,7 +23,10 @@ type Peak struct {
 	// The highest amount of incoming traffic given the provided aggregation and granularity
 	Value *string `json:"value,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Peak Peak
 
 // NewPeak instantiates a new Peak object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o Peak) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Peak) UnmarshalJSON(data []byte) (err error) {
+	varPeak := _Peak{}
+
+	err = json.Unmarshal(data, &varPeak)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Peak(varPeak)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePeak struct {

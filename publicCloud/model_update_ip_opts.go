@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,7 @@ var _ MappedNullable = &UpdateIpOpts{}
 // UpdateIpOpts struct for UpdateIpOpts
 type UpdateIpOpts struct {
 	ReverseLookup string `json:"reverseLookup"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateIpOpts UpdateIpOpts
@@ -79,6 +79,11 @@ func (o UpdateIpOpts) MarshalJSON() ([]byte, error) {
 func (o UpdateIpOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["reverseLookup"] = o.ReverseLookup
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -106,15 +111,20 @@ func (o *UpdateIpOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateIpOpts := _UpdateIpOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateIpOpts)
+	err = json.Unmarshal(data, &varUpdateIpOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateIpOpts(varUpdateIpOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "reverseLookup")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

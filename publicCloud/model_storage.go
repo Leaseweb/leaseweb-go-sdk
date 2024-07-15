@@ -21,7 +21,10 @@ var _ MappedNullable = &Storage{}
 type Storage struct {
 	Local *Local `json:"local,omitempty"`
 	Central *Central `json:"central,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Storage Storage
 
 // NewStorage instantiates a new Storage object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o Storage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Central) {
 		toSerialize["central"] = o.Central
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Storage) UnmarshalJSON(data []byte) (err error) {
+	varStorage := _Storage{}
+
+	err = json.Unmarshal(data, &varStorage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Storage(varStorage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "local")
+		delete(additionalProperties, "central")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStorage struct {

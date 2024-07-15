@@ -35,7 +35,10 @@ type NetworkEquipment struct {
 	// Serial number of network equipment
 	SerialNumber *string `json:"serialNumber,omitempty"`
 	Specs *NetworkEquipmentSpecs `json:"specs,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NetworkEquipment NetworkEquipment
 
 // NewNetworkEquipment instantiates a new NetworkEquipment object
 // This constructor will assign default values to properties that have it defined,
@@ -449,7 +452,43 @@ func (o NetworkEquipment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Specs) {
 		toSerialize["specs"] = o.Specs
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NetworkEquipment) UnmarshalJSON(data []byte) (err error) {
+	varNetworkEquipment := _NetworkEquipment{}
+
+	err = json.Unmarshal(data, &varNetworkEquipment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NetworkEquipment(varNetworkEquipment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "contract")
+		delete(additionalProperties, "featureAvailability")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "networkInterfaces")
+		delete(additionalProperties, "powerPorts")
+		delete(additionalProperties, "rack")
+		delete(additionalProperties, "serialNumber")
+		delete(additionalProperties, "specs")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNetworkEquipment struct {

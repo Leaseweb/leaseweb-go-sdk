@@ -27,7 +27,10 @@ type PrivateNetwork struct {
 	Subnet *string `json:"subnet,omitempty"`
 	// VLAN id
 	VlanId *string `json:"vlanId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PrivateNetwork PrivateNetwork
 
 // NewPrivateNetwork instantiates a new PrivateNetwork object
 // This constructor will assign default values to properties that have it defined,
@@ -231,7 +234,37 @@ func (o PrivateNetwork) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VlanId) {
 		toSerialize["vlanId"] = o.VlanId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PrivateNetwork) UnmarshalJSON(data []byte) (err error) {
+	varPrivateNetwork := _PrivateNetwork{}
+
+	err = json.Unmarshal(data, &varPrivateNetwork)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PrivateNetwork(varPrivateNetwork)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "linkSpeed")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "subnet")
+		delete(additionalProperties, "vlanId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePrivateNetwork struct {

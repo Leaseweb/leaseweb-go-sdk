@@ -22,7 +22,10 @@ type NetworkInterfaces struct {
 	Public *NetworkInterface `json:"public,omitempty"`
 	Internal *NetworkInterface `json:"internal,omitempty"`
 	RemoteManagement *NetworkInterface `json:"remoteManagement,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NetworkInterfaces NetworkInterfaces
 
 // NewNetworkInterfaces instantiates a new NetworkInterfaces object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o NetworkInterfaces) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RemoteManagement) {
 		toSerialize["remoteManagement"] = o.RemoteManagement
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NetworkInterfaces) UnmarshalJSON(data []byte) (err error) {
+	varNetworkInterfaces := _NetworkInterfaces{}
+
+	err = json.Unmarshal(data, &varNetworkInterfaces)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NetworkInterfaces(varNetworkInterfaces)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "public")
+		delete(additionalProperties, "internal")
+		delete(additionalProperties, "remoteManagement")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNetworkInterfaces struct {

@@ -22,7 +22,10 @@ type GetServerListResult struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of servers
 	Servers []Server `json:"servers,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetServerListResult GetServerListResult
 
 // NewGetServerListResult instantiates a new GetServerListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetServerListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Servers) {
 		toSerialize["servers"] = o.Servers
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetServerListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetServerListResult := _GetServerListResult{}
+
+	err = json.Unmarshal(data, &varGetServerListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetServerListResult(varGetServerListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "servers")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetServerListResult struct {

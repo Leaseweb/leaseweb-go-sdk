@@ -22,7 +22,10 @@ type GetOperatingSystemListResult struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// A list of operating systems
 	OperatingSystems []OperatingSystem `json:"operatingSystems,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOperatingSystemListResult GetOperatingSystemListResult
 
 // NewGetOperatingSystemListResult instantiates a new GetOperatingSystemListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetOperatingSystemListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OperatingSystems) {
 		toSerialize["operatingSystems"] = o.OperatingSystems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOperatingSystemListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetOperatingSystemListResult := _GetOperatingSystemListResult{}
+
+	err = json.Unmarshal(data, &varGetOperatingSystemListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOperatingSystemListResult(varGetOperatingSystemListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "operatingSystems")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOperatingSystemListResult struct {

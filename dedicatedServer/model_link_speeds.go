@@ -24,7 +24,10 @@ type LinkSpeeds struct {
 	Var100btFd *string `json:"100bt-fd,omitempty"`
 	Var10bt *string `json:"10bt,omitempty"`
 	Var10btFd *string `json:"10bt-fd,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LinkSpeeds LinkSpeeds
 
 // NewLinkSpeeds instantiates a new LinkSpeeds object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o LinkSpeeds) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Var10btFd) {
 		toSerialize["10bt-fd"] = o.Var10btFd
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LinkSpeeds) UnmarshalJSON(data []byte) (err error) {
+	varLinkSpeeds := _LinkSpeeds{}
+
+	err = json.Unmarshal(data, &varLinkSpeeds)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LinkSpeeds(varLinkSpeeds)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "1000bt-fd")
+		delete(additionalProperties, "100bt")
+		delete(additionalProperties, "100bt-fd")
+		delete(additionalProperties, "10bt")
+		delete(additionalProperties, "10bt-fd")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLinkSpeeds struct {

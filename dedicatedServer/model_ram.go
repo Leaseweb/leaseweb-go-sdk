@@ -23,7 +23,10 @@ type Ram struct {
 	Size *int32 `json:"size,omitempty"`
 	// RAM type of the server
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Ram Ram
 
 // NewRam instantiates a new Ram object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o Ram) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Ram) UnmarshalJSON(data []byte) (err error) {
+	varRam := _Ram{}
+
+	err = json.Unmarshal(data, &varRam)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Ram(varRam)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRam struct {

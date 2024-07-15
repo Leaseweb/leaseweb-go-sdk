@@ -21,7 +21,10 @@ var _ MappedNullable = &InstanceTypes{}
 type InstanceTypes struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	InstanceTypes []InstanceType `json:"instanceTypes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InstanceTypes InstanceTypes
 
 // NewInstanceTypes instantiates a new InstanceTypes object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o InstanceTypes) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InstanceTypes) {
 		toSerialize["instanceTypes"] = o.InstanceTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InstanceTypes) UnmarshalJSON(data []byte) (err error) {
+	varInstanceTypes := _InstanceTypes{}
+
+	err = json.Unmarshal(data, &varInstanceTypes)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InstanceTypes(varInstanceTypes)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "instanceTypes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInstanceTypes struct {

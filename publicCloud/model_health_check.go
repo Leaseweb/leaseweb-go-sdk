@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type HealthCheck struct {
 	Host NullableString `json:"host"`
 	// Port number
 	Port int32 `json:"port"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HealthCheck HealthCheck
@@ -166,6 +166,11 @@ func (o HealthCheck) ToMap() (map[string]interface{}, error) {
 	toSerialize["uri"] = o.Uri
 	toSerialize["host"] = o.Host.Get()
 	toSerialize["port"] = o.Port
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -196,15 +201,23 @@ func (o *HealthCheck) UnmarshalJSON(data []byte) (err error) {
 
 	varHealthCheck := _HealthCheck{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHealthCheck)
+	err = json.Unmarshal(data, &varHealthCheck)
 
 	if err != nil {
 		return err
 	}
 
 	*o = HealthCheck(varHealthCheck)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "method")
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "host")
+		delete(additionalProperties, "port")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

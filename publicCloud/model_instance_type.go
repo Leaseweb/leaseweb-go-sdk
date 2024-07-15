@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type InstanceType struct {
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes"`
 	Prices Price `json:"prices"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InstanceType InstanceType
@@ -166,6 +166,11 @@ func (o InstanceType) ToMap() (map[string]interface{}, error) {
 		toSerialize["storageTypes"] = o.StorageTypes
 	}
 	toSerialize["prices"] = o.Prices
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -196,15 +201,23 @@ func (o *InstanceType) UnmarshalJSON(data []byte) (err error) {
 
 	varInstanceType := _InstanceType{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInstanceType)
+	err = json.Unmarshal(data, &varInstanceType)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InstanceType(varInstanceType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "storageTypes")
+		delete(additionalProperties, "prices")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

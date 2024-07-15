@@ -22,7 +22,10 @@ type GetServerBandwidthNotificationSettingListResult struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of Bandwidth Notification Settings
 	BandwidthNotificationSettings []BandwidthNotificationSetting `json:"bandwidthNotificationSettings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetServerBandwidthNotificationSettingListResult GetServerBandwidthNotificationSettingListResult
 
 // NewGetServerBandwidthNotificationSettingListResult instantiates a new GetServerBandwidthNotificationSettingListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetServerBandwidthNotificationSettingListResult) ToMap() (map[string]int
 	if !IsNil(o.BandwidthNotificationSettings) {
 		toSerialize["bandwidthNotificationSettings"] = o.BandwidthNotificationSettings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetServerBandwidthNotificationSettingListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetServerBandwidthNotificationSettingListResult := _GetServerBandwidthNotificationSettingListResult{}
+
+	err = json.Unmarshal(data, &varGetServerBandwidthNotificationSettingListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetServerBandwidthNotificationSettingListResult(varGetServerBandwidthNotificationSettingListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "bandwidthNotificationSettings")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetServerBandwidthNotificationSettingListResult struct {

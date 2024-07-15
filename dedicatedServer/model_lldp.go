@@ -22,7 +22,10 @@ type Lldp struct {
 	Chassis *LldpChassis `json:"chassis,omitempty"`
 	Port *Port1 `json:"port,omitempty"`
 	Vlan *Vlan `json:"vlan,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Lldp Lldp
 
 // NewLldp instantiates a new Lldp object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o Lldp) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Vlan) {
 		toSerialize["vlan"] = o.Vlan
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Lldp) UnmarshalJSON(data []byte) (err error) {
+	varLldp := _Lldp{}
+
+	err = json.Unmarshal(data, &varLldp)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Lldp(varLldp)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "chassis")
+		delete(additionalProperties, "port")
+		delete(additionalProperties, "vlan")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLldp struct {

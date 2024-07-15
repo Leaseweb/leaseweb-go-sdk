@@ -22,7 +22,10 @@ type Defaults struct {
 	// Device name
 	Device *string `json:"device,omitempty"`
 	Partitions []Partition `json:"partitions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Defaults Defaults
 
 // NewDefaults instantiates a new Defaults object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o Defaults) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Partitions) {
 		toSerialize["partitions"] = o.Partitions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Defaults) UnmarshalJSON(data []byte) (err error) {
+	varDefaults := _Defaults{}
+
+	err = json.Unmarshal(data, &varDefaults)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Defaults(varDefaults)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "device")
+		delete(additionalProperties, "partitions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDefaults struct {

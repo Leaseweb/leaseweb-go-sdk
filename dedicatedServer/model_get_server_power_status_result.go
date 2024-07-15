@@ -21,7 +21,10 @@ var _ MappedNullable = &GetServerPowerStatusResult{}
 type GetServerPowerStatusResult struct {
 	Ipmi *Ipmi `json:"ipmi,omitempty"`
 	Pdu *Pdu `json:"pdu,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetServerPowerStatusResult GetServerPowerStatusResult
 
 // NewGetServerPowerStatusResult instantiates a new GetServerPowerStatusResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetServerPowerStatusResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Pdu) {
 		toSerialize["pdu"] = o.Pdu
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetServerPowerStatusResult) UnmarshalJSON(data []byte) (err error) {
+	varGetServerPowerStatusResult := _GetServerPowerStatusResult{}
+
+	err = json.Unmarshal(data, &varGetServerPowerStatusResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetServerPowerStatusResult(varGetServerPowerStatusResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ipmi")
+		delete(additionalProperties, "pdu")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetServerPowerStatusResult struct {

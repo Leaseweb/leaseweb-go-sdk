@@ -27,7 +27,10 @@ type Target struct {
 	State *State `json:"state,omitempty"`
 	HealthCheckStatus *HealthCheckStatus `json:"healthCheckStatus,omitempty"`
 	Ips []Ip `json:"ips,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Target Target
 
 // NewTarget instantiates a new Target object
 // This constructor will assign default values to properties that have it defined,
@@ -266,7 +269,38 @@ func (o Target) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Ips) {
 		toSerialize["ips"] = o.Ips
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Target) UnmarshalJSON(data []byte) (err error) {
+	varTarget := _Target{}
+
+	err = json.Unmarshal(data, &varTarget)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Target(varTarget)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "image")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "healthCheckStatus")
+		delete(additionalProperties, "ips")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTarget struct {

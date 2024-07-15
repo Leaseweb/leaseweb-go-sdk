@@ -21,7 +21,10 @@ var _ MappedNullable = &Local{}
 type Local struct {
 	HourlyPrice *string `json:"hourlyPrice,omitempty"`
 	MonthlyPrice *string `json:"monthlyPrice,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Local Local
 
 // NewLocal instantiates a new Local object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o Local) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MonthlyPrice) {
 		toSerialize["monthlyPrice"] = o.MonthlyPrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Local) UnmarshalJSON(data []byte) (err error) {
+	varLocal := _Local{}
+
+	err = json.Unmarshal(data, &varLocal)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Local(varLocal)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hourlyPrice")
+		delete(additionalProperties, "monthlyPrice")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLocal struct {

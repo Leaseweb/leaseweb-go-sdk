@@ -20,7 +20,10 @@ var _ MappedNullable = &CpuMetricsMetadataSummary{}
 // CpuMetricsMetadataSummary struct for CpuMetricsMetadataSummary
 type CpuMetricsMetadataSummary struct {
 	CpuMetrics *CpuMetricsMetadataSummaryCpuMetrics `json:"cpuMetrics,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CpuMetricsMetadataSummary CpuMetricsMetadataSummary
 
 // NewCpuMetricsMetadataSummary instantiates a new CpuMetricsMetadataSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o CpuMetricsMetadataSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CpuMetrics) {
 		toSerialize["cpuMetrics"] = o.CpuMetrics
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CpuMetricsMetadataSummary) UnmarshalJSON(data []byte) (err error) {
+	varCpuMetricsMetadataSummary := _CpuMetricsMetadataSummary{}
+
+	err = json.Unmarshal(data, &varCpuMetricsMetadataSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CpuMetricsMetadataSummary(varCpuMetricsMetadataSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cpuMetrics")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCpuMetricsMetadataSummary struct {

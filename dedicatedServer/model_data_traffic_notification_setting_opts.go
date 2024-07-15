@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type DataTrafficNotificationSettingOpts struct {
 	Threshold string `json:"threshold"`
 	// Unit for the Data Traffic Notification
 	Unit string `json:"unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DataTrafficNotificationSettingOpts DataTrafficNotificationSettingOpts
@@ -136,6 +136,11 @@ func (o DataTrafficNotificationSettingOpts) ToMap() (map[string]interface{}, err
 	toSerialize["frequency"] = o.Frequency
 	toSerialize["threshold"] = o.Threshold
 	toSerialize["unit"] = o.Unit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *DataTrafficNotificationSettingOpts) UnmarshalJSON(data []byte) (err err
 
 	varDataTrafficNotificationSettingOpts := _DataTrafficNotificationSettingOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDataTrafficNotificationSettingOpts)
+	err = json.Unmarshal(data, &varDataTrafficNotificationSettingOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DataTrafficNotificationSettingOpts(varDataTrafficNotificationSettingOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "frequency")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

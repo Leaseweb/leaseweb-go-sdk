@@ -23,7 +23,10 @@ type DDos struct {
 	DetectionProfile *string `json:"detectionProfile,omitempty"`
 	// The type of DDoS protection
 	ProtectionType *string `json:"protectionType,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DDos DDos
 
 // NewDDos instantiates a new DDos object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o DDos) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProtectionType) {
 		toSerialize["protectionType"] = o.ProtectionType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DDos) UnmarshalJSON(data []byte) (err error) {
+	varDDos := _DDos{}
+
+	err = json.Unmarshal(data, &varDDos)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DDos(varDDos)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "detectionProfile")
+		delete(additionalProperties, "protectionType")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDDos struct {

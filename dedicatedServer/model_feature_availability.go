@@ -24,7 +24,10 @@ type FeatureAvailability struct {
 	IpmiReboot *bool `json:"ipmiReboot,omitempty"`
 	PrivateNetwork *bool `json:"privateNetwork,omitempty"`
 	RemoteManagement *bool `json:"remoteManagement,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FeatureAvailability FeatureAvailability
 
 // NewFeatureAvailability instantiates a new FeatureAvailability object
 // This constructor will assign default values to properties that have it defined,
@@ -228,7 +231,37 @@ func (o FeatureAvailability) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RemoteManagement) {
 		toSerialize["remoteManagement"] = o.RemoteManagement
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FeatureAvailability) UnmarshalJSON(data []byte) (err error) {
+	varFeatureAvailability := _FeatureAvailability{}
+
+	err = json.Unmarshal(data, &varFeatureAvailability)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FeatureAvailability(varFeatureAvailability)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "automation")
+		delete(additionalProperties, "powerCycle")
+		delete(additionalProperties, "ipmiReboot")
+		delete(additionalProperties, "privateNetwork")
+		delete(additionalProperties, "remoteManagement")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFeatureAvailability struct {

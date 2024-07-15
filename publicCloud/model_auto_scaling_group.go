@@ -13,7 +13,6 @@ package publicCloud
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -50,6 +49,7 @@ type AutoScalingGroup struct {
 	WarmupTime NullableInt32 `json:"warmupTime"`
 	// Only for \"CPU_BASED\" auto scaling group. Cool-down time in seconds for new instances
 	CooldownTime NullableInt32 `json:"cooldownTime"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AutoScalingGroup AutoScalingGroup
@@ -487,6 +487,11 @@ func (o AutoScalingGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize["cpuThreshold"] = o.CpuThreshold.Get()
 	toSerialize["warmupTime"] = o.WarmupTime.Get()
 	toSerialize["cooldownTime"] = o.CooldownTime.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -528,15 +533,34 @@ func (o *AutoScalingGroup) UnmarshalJSON(data []byte) (err error) {
 
 	varAutoScalingGroup := _AutoScalingGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAutoScalingGroup)
+	err = json.Unmarshal(data, &varAutoScalingGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AutoScalingGroup(varAutoScalingGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "desiredAmount")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "startsAt")
+		delete(additionalProperties, "endsAt")
+		delete(additionalProperties, "minimumAmount")
+		delete(additionalProperties, "maximumAmount")
+		delete(additionalProperties, "cpuThreshold")
+		delete(additionalProperties, "warmupTime")
+		delete(additionalProperties, "cooldownTime")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

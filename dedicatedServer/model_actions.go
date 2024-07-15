@@ -23,7 +23,10 @@ type Actions struct {
 	LastTriggeredAt NullableString `json:"lastTriggeredAt,omitempty"`
 	// Type of action
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Actions Actions
 
 // NewActions instantiates a new Actions object
 // This constructor will assign default values to properties that have it defined,
@@ -132,7 +135,34 @@ func (o Actions) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Actions) UnmarshalJSON(data []byte) (err error) {
+	varActions := _Actions{}
+
+	err = json.Unmarshal(data, &varActions)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Actions(varActions)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "lastTriggeredAt")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActions struct {

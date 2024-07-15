@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type EnableServerRescueModeOpts struct {
 	RescueImageId string `json:"rescueImageId"`
 	// User ssh keys
 	SshKeys *string `json:"sshKeys,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EnableServerRescueModeOpts EnableServerRescueModeOpts
@@ -271,6 +271,11 @@ func (o EnableServerRescueModeOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SshKeys) {
 		toSerialize["sshKeys"] = o.SshKeys
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -298,15 +303,25 @@ func (o *EnableServerRescueModeOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varEnableServerRescueModeOpts := _EnableServerRescueModeOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEnableServerRescueModeOpts)
+	err = json.Unmarshal(data, &varEnableServerRescueModeOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EnableServerRescueModeOpts(varEnableServerRescueModeOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "callbackUrl")
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "postInstallScript")
+		delete(additionalProperties, "powerCycle")
+		delete(additionalProperties, "rescueImageId")
+		delete(additionalProperties, "sshKeys")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

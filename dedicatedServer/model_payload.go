@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type Payload struct {
 	IsUnassignedServer *bool `json:"isUnassignedServer,omitempty"`
 	// Id of the server
 	ServerId *string `json:"serverId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Payload Payload
@@ -260,6 +260,11 @@ func (o Payload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ServerId) {
 		toSerialize["serverId"] = o.ServerId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -287,15 +292,25 @@ func (o *Payload) UnmarshalJSON(data []byte) (err error) {
 
 	varPayload := _Payload{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPayload)
+	err = json.Unmarshal(data, &varPayload)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Payload(varPayload)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fileserverBaseUrl")
+		delete(additionalProperties, "jobType")
+		delete(additionalProperties, "pop")
+		delete(additionalProperties, "powerCycle")
+		delete(additionalProperties, "isUnassignedServer")
+		delete(additionalProperties, "serverId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

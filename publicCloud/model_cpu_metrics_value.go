@@ -23,7 +23,10 @@ type CpuMetricsValue struct {
 	// CPU usage
 	Value *float32 `json:"value,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CpuMetricsValue CpuMetricsValue
 
 // NewCpuMetricsValue instantiates a new CpuMetricsValue object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CpuMetricsValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CpuMetricsValue) UnmarshalJSON(data []byte) (err error) {
+	varCpuMetricsValue := _CpuMetricsValue{}
+
+	err = json.Unmarshal(data, &varCpuMetricsValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CpuMetricsValue(varCpuMetricsValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCpuMetricsValue struct {

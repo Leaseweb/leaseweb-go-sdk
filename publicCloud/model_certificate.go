@@ -25,7 +25,10 @@ type Certificate struct {
 	Certificate *string `json:"certificate,omitempty"`
 	// CA certificate. Not required, but can be added if protocol is HTTPS
 	Chain *string `json:"chain,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Certificate Certificate
 
 // NewCertificate instantiates a new Certificate object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o Certificate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Chain) {
 		toSerialize["chain"] = o.Chain
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Certificate) UnmarshalJSON(data []byte) (err error) {
+	varCertificate := _Certificate{}
+
+	err = json.Unmarshal(data, &varCertificate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Certificate(varCertificate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "privateKey")
+		delete(additionalProperties, "certificate")
+		delete(additionalProperties, "chain")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCertificate struct {

@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type LaunchLoadBalancerOpts struct {
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
 	// The port that the registered instances listen to
 	TargetPort int32 `json:"targetPort"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LaunchLoadBalancerOpts LaunchLoadBalancerOpts
@@ -256,6 +256,11 @@ func (o LaunchLoadBalancerOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize["billingFrequency"] = o.BillingFrequency
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
 	toSerialize["targetPort"] = o.TargetPort
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -288,15 +293,26 @@ func (o *LaunchLoadBalancerOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varLaunchLoadBalancerOpts := _LaunchLoadBalancerOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLaunchLoadBalancerOpts)
+	err = json.Unmarshal(data, &varLaunchLoadBalancerOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LaunchLoadBalancerOpts(varLaunchLoadBalancerOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "contractType")
+		delete(additionalProperties, "billingFrequency")
+		delete(additionalProperties, "rootDiskStorageType")
+		delete(additionalProperties, "targetPort")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type Credential struct {
 	Type *string `json:"type,omitempty"`
 	// The username
 	Username *string `json:"username,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Credential Credential
 
 // NewCredential instantiates a new Credential object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o Credential) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Username) {
 		toSerialize["username"] = o.Username
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Credential) UnmarshalJSON(data []byte) (err error) {
+	varCredential := _Credential{}
+
+	err = json.Unmarshal(data, &varCredential)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Credential(varCredential)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "password")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "username")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCredential struct {

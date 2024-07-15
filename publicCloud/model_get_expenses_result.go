@@ -20,7 +20,10 @@ var _ MappedNullable = &GetExpensesResult{}
 // GetExpensesResult struct for GetExpensesResult
 type GetExpensesResult struct {
 	Billing *Billing `json:"billing,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetExpensesResult GetExpensesResult
 
 // NewGetExpensesResult instantiates a new GetExpensesResult object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o GetExpensesResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Billing) {
 		toSerialize["billing"] = o.Billing
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetExpensesResult) UnmarshalJSON(data []byte) (err error) {
+	varGetExpensesResult := _GetExpensesResult{}
+
+	err = json.Unmarshal(data, &varGetExpensesResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetExpensesResult(varGetExpensesResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "billing")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetExpensesResult struct {

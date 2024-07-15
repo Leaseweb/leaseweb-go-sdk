@@ -53,7 +53,10 @@ type GetReportResult struct {
 	TotalMessagesCount *int32 `json:"totalMessagesCount,omitempty"`
 	// Array of the last 5 messages in the report.
 	LatestMessages []Message `json:"latestMessages,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetReportResult GetReportResult
 
 // NewGetReportResult instantiates a new GetReportResult object
 // This constructor will assign default values to properties that have it defined,
@@ -677,7 +680,49 @@ func (o GetReportResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LatestMessages) {
 		toSerialize["latestMessages"] = o.LatestMessages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetReportResult) UnmarshalJSON(data []byte) (err error) {
+	varGetReportResult := _GetReportResult{}
+
+	err = json.Unmarshal(data, &varGetReportResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetReportResult(varGetReportResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "subject")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "abuseType")
+		delete(additionalProperties, "reopened")
+		delete(additionalProperties, "reportedAt")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "notifier")
+		delete(additionalProperties, "customerId")
+		delete(additionalProperties, "legalEntityId")
+		delete(additionalProperties, "body")
+		delete(additionalProperties, "deadline")
+		delete(additionalProperties, "detectedIpAddresses")
+		delete(additionalProperties, "detectedDomainNames")
+		delete(additionalProperties, "attachments")
+		delete(additionalProperties, "totalMessagesCount")
+		delete(additionalProperties, "latestMessages")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetReportResult struct {

@@ -34,7 +34,10 @@ type Task struct {
 	StatusTimestamps *map[string]time.Time `json:"statusTimestamps,omitempty"`
 	// Unique ID for this task
 	Uuid *string `json:"uuid,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Task Task
 
 // NewTask instantiates a new Task object
 // This constructor will assign default values to properties that have it defined,
@@ -318,7 +321,39 @@ func (o Task) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Task) UnmarshalJSON(data []byte) (err error) {
+	varTask := _Task{}
+
+	err = json.Unmarshal(data, &varTask)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Task(varTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "errorMessage")
+		delete(additionalProperties, "flow")
+		delete(additionalProperties, "onError")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "statusTimestamps")
+		delete(additionalProperties, "uuid")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTask struct {

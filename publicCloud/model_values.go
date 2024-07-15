@@ -23,7 +23,10 @@ type Values struct {
 	Tier1 *Tier `json:"tier_1,omitempty"`
 	Tier2 *Tier `json:"tier_2,omitempty"`
 	Tier3 *Tier `json:"tier_3,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Values Values
 
 // NewValues instantiates a new Values object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o Values) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Tier3) {
 		toSerialize["tier_3"] = o.Tier3
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Values) UnmarshalJSON(data []byte) (err error) {
+	varValues := _Values{}
+
+	err = json.Unmarshal(data, &varValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Values(varValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tier_0")
+		delete(additionalProperties, "tier_1")
+		delete(additionalProperties, "tier_2")
+		delete(additionalProperties, "tier_3")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableValues struct {

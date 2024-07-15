@@ -21,7 +21,10 @@ var _ MappedNullable = &Pdu{}
 type Pdu struct {
 	// The current power status of the network equipment.
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Pdu Pdu
 
 // NewPdu instantiates a new Pdu object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o Pdu) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Pdu) UnmarshalJSON(data []byte) (err error) {
+	varPdu := _Pdu{}
+
+	err = json.Unmarshal(data, &varPdu)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Pdu(varPdu)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePdu struct {

@@ -22,7 +22,10 @@ type ServerJobList struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of jobs
 	Jobs []ServerJob `json:"jobs,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ServerJobList ServerJobList
 
 // NewServerJobList instantiates a new ServerJobList object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o ServerJobList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Jobs) {
 		toSerialize["jobs"] = o.Jobs
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ServerJobList) UnmarshalJSON(data []byte) (err error) {
+	varServerJobList := _ServerJobList{}
+
+	err = json.Unmarshal(data, &varServerJobList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ServerJobList(varServerJobList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "jobs")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableServerJobList struct {

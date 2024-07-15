@@ -22,7 +22,10 @@ type GetInvoiceListResult struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of invoices.
 	Invoices []Invoice `json:"invoices,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInvoiceListResult GetInvoiceListResult
 
 // NewGetInvoiceListResult instantiates a new GetInvoiceListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetInvoiceListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Invoices) {
 		toSerialize["invoices"] = o.Invoices
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInvoiceListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetInvoiceListResult := _GetInvoiceListResult{}
+
+	err = json.Unmarshal(data, &varGetInvoiceListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInvoiceListResult(varGetInvoiceListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "invoices")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInvoiceListResult struct {

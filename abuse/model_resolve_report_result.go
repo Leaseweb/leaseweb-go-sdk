@@ -12,7 +12,6 @@ package abuse
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &ResolveReportResult{}
 type ResolveReportResult struct {
 	// List of selected resolution ID's to explain how the report is resolved.
 	Resolutions []string `json:"resolutions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResolveReportResult ResolveReportResult
@@ -80,6 +80,11 @@ func (o ResolveReportResult) MarshalJSON() ([]byte, error) {
 func (o ResolveReportResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["resolutions"] = o.Resolutions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *ResolveReportResult) UnmarshalJSON(data []byte) (err error) {
 
 	varResolveReportResult := _ResolveReportResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResolveReportResult)
+	err = json.Unmarshal(data, &varResolveReportResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResolveReportResult(varResolveReportResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "resolutions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

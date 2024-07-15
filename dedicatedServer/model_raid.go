@@ -24,7 +24,10 @@ type Raid struct {
 	// The number of disks you want to apply RAID on. If not specified all disks are used
 	NumberOfDisks *int32 `json:"numberOfDisks,omitempty"`
 	Type *RaidType `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Raid Raid
 
 // NewRaid instantiates a new Raid object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +161,35 @@ func (o Raid) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Raid) UnmarshalJSON(data []byte) (err error) {
+	varRaid := _Raid{}
+
+	err = json.Unmarshal(data, &varRaid)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Raid(varRaid)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "numberOfDisks")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRaid struct {

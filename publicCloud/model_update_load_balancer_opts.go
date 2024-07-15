@@ -34,7 +34,10 @@ type UpdateLoadBalancerOpts struct {
 	IdleTimeOut *int32 `json:"idleTimeOut,omitempty"`
 	// Port on which the backend (target) servers are listening to handle incoming requests
 	TargetPort *int32 `json:"targetPort,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateLoadBalancerOpts UpdateLoadBalancerOpts
 
 // NewUpdateLoadBalancerOpts instantiates a new UpdateLoadBalancerOpts object
 // This constructor will assign default values to properties that have it defined,
@@ -398,7 +401,41 @@ func (o UpdateLoadBalancerOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TargetPort) {
 		toSerialize["targetPort"] = o.TargetPort
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateLoadBalancerOpts) UnmarshalJSON(data []byte) (err error) {
+	varUpdateLoadBalancerOpts := _UpdateLoadBalancerOpts{}
+
+	err = json.Unmarshal(data, &varUpdateLoadBalancerOpts)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateLoadBalancerOpts(varUpdateLoadBalancerOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "contractType")
+		delete(additionalProperties, "stickySession")
+		delete(additionalProperties, "balance")
+		delete(additionalProperties, "healthCheck")
+		delete(additionalProperties, "xForwardedFor")
+		delete(additionalProperties, "idleTimeOut")
+		delete(additionalProperties, "targetPort")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateLoadBalancerOpts struct {

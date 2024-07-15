@@ -32,7 +32,10 @@ type AutoScaledInstance struct {
 	ProductType *string `json:"productType,omitempty"`
 	IncludesPrivateNetwork *bool `json:"hasPrivateNetwork,omitempty"`
 	Ips []IpDetails `json:"ips,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AutoScaledInstance AutoScaledInstance
 
 // NewAutoScaledInstance instantiates a new AutoScaledInstance object
 // This constructor will assign default values to properties that have it defined,
@@ -376,7 +379,41 @@ func (o AutoScaledInstance) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Ips) {
 		toSerialize["ips"] = o.Ips
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AutoScaledInstance) UnmarshalJSON(data []byte) (err error) {
+	varAutoScaledInstance := _AutoScaledInstance{}
+
+	err = json.Unmarshal(data, &varAutoScaledInstance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AutoScaledInstance(varAutoScaledInstance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "productType")
+		delete(additionalProperties, "hasPrivateNetwork")
+		delete(additionalProperties, "ips")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAutoScaledInstance struct {

@@ -23,7 +23,10 @@ type LldpChassis struct {
 	// Represents a MAC Address in the standard colon delimited format. Eg. `01:23:45:67:89:0A`
 	MacAddress *string `json:"mac_address,omitempty"`
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LldpChassis LldpChassis
 
 // NewLldpChassis instantiates a new LldpChassis object
 // This constructor will assign default values to properties that have it defined,
@@ -157,7 +160,35 @@ func (o LldpChassis) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LldpChassis) UnmarshalJSON(data []byte) (err error) {
+	varLldpChassis := _LldpChassis{}
+
+	err = json.Unmarshal(data, &varLldpChassis)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LldpChassis(varLldpChassis)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "mac_address")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLldpChassis struct {

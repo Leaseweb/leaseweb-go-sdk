@@ -22,7 +22,10 @@ type GetNetworkEquipmentNullRouteHistoryResult struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of network equipment null route events
 	NullRoutes []NullRoute `json:"nullRoutes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetNetworkEquipmentNullRouteHistoryResult GetNetworkEquipmentNullRouteHistoryResult
 
 // NewGetNetworkEquipmentNullRouteHistoryResult instantiates a new GetNetworkEquipmentNullRouteHistoryResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o GetNetworkEquipmentNullRouteHistoryResult) ToMap() (map[string]interface
 	if !IsNil(o.NullRoutes) {
 		toSerialize["nullRoutes"] = o.NullRoutes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetNetworkEquipmentNullRouteHistoryResult) UnmarshalJSON(data []byte) (err error) {
+	varGetNetworkEquipmentNullRouteHistoryResult := _GetNetworkEquipmentNullRouteHistoryResult{}
+
+	err = json.Unmarshal(data, &varGetNetworkEquipmentNullRouteHistoryResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetNetworkEquipmentNullRouteHistoryResult(varGetNetworkEquipmentNullRouteHistoryResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "_metadata")
+		delete(additionalProperties, "nullRoutes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetNetworkEquipmentNullRouteHistoryResult struct {

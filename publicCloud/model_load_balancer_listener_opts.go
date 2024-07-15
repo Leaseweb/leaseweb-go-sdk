@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type LoadBalancerListenerOpts struct {
 	// Port that the listener listens to
 	Port int32 `json:"port"`
 	Certificate *Certificate `json:"certificate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _LoadBalancerListenerOpts LoadBalancerListenerOpts
@@ -143,6 +143,11 @@ func (o LoadBalancerListenerOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Certificate) {
 		toSerialize["certificate"] = o.Certificate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -171,15 +176,22 @@ func (o *LoadBalancerListenerOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varLoadBalancerListenerOpts := _LoadBalancerListenerOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varLoadBalancerListenerOpts)
+	err = json.Unmarshal(data, &varLoadBalancerListenerOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = LoadBalancerListenerOpts(varLoadBalancerListenerOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "protocol")
+		delete(additionalProperties, "port")
+		delete(additionalProperties, "certificate")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

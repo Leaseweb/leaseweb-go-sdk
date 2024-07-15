@@ -21,7 +21,10 @@ var _ MappedNullable = &GetSnapshotListResult{}
 type GetSnapshotListResult struct {
 	Snapshots []Snapshot `json:"snapshots,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSnapshotListResult GetSnapshotListResult
 
 // NewGetSnapshotListResult instantiates a new GetSnapshotListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetSnapshotListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSnapshotListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetSnapshotListResult := _GetSnapshotListResult{}
+
+	err = json.Unmarshal(data, &varGetSnapshotListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSnapshotListResult(varGetSnapshotListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "snapshots")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSnapshotListResult struct {

@@ -28,7 +28,10 @@ type GetServerHardwareResult struct {
 	// Timestamp of hardware scan, the ISO-8601 format
 	ScannedAt *time.Time `json:"scannedAt,omitempty"`
 	ServerId *string `json:"serverId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetServerHardwareResult GetServerHardwareResult
 
 // NewGetServerHardwareResult instantiates a new GetServerHardwareResult object
 // This constructor will assign default values to properties that have it defined,
@@ -232,7 +235,37 @@ func (o GetServerHardwareResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ServerId) {
 		toSerialize["serverId"] = o.ServerId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetServerHardwareResult) UnmarshalJSON(data []byte) (err error) {
+	varGetServerHardwareResult := _GetServerHardwareResult{}
+
+	err = json.Unmarshal(data, &varGetServerHardwareResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetServerHardwareResult(varGetServerHardwareResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "parserVersion")
+		delete(additionalProperties, "result")
+		delete(additionalProperties, "scannedAt")
+		delete(additionalProperties, "serverId")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetServerHardwareResult struct {

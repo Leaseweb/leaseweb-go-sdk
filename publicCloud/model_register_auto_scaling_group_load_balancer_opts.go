@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &RegisterAutoScalingGroupLoadBalancerOpts{}
 type RegisterAutoScalingGroupLoadBalancerOpts struct {
 	// Load balancer ID
 	LoadBalancerId string `json:"loadBalancerId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RegisterAutoScalingGroupLoadBalancerOpts RegisterAutoScalingGroupLoadBalancerOpts
@@ -80,6 +80,11 @@ func (o RegisterAutoScalingGroupLoadBalancerOpts) MarshalJSON() ([]byte, error) 
 func (o RegisterAutoScalingGroupLoadBalancerOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["loadBalancerId"] = o.LoadBalancerId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *RegisterAutoScalingGroupLoadBalancerOpts) UnmarshalJSON(data []byte) (e
 
 	varRegisterAutoScalingGroupLoadBalancerOpts := _RegisterAutoScalingGroupLoadBalancerOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRegisterAutoScalingGroupLoadBalancerOpts)
+	err = json.Unmarshal(data, &varRegisterAutoScalingGroupLoadBalancerOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RegisterAutoScalingGroupLoadBalancerOpts(varRegisterAutoScalingGroupLoadBalancerOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "loadBalancerId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -21,7 +21,10 @@ var _ MappedNullable = &DataTrafficMetrics{}
 type DataTrafficMetrics struct {
 	DOWN_PUBLIC *TrafficMetric `json:"DOWN_PUBLIC,omitempty"`
 	UP_PUBLIC *TrafficMetric `json:"UP_PUBLIC,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataTrafficMetrics DataTrafficMetrics
 
 // NewDataTrafficMetrics instantiates a new DataTrafficMetrics object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o DataTrafficMetrics) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UP_PUBLIC) {
 		toSerialize["UP_PUBLIC"] = o.UP_PUBLIC
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataTrafficMetrics) UnmarshalJSON(data []byte) (err error) {
+	varDataTrafficMetrics := _DataTrafficMetrics{}
+
+	err = json.Unmarshal(data, &varDataTrafficMetrics)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataTrafficMetrics(varDataTrafficMetrics)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "DOWN_PUBLIC")
+		delete(additionalProperties, "UP_PUBLIC")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataTrafficMetrics struct {

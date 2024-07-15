@@ -34,7 +34,10 @@ type Smartctl struct {
 	SmartSupport *SmartSupport `json:"smart_support,omitempty"`
 	SmartctlVersion *string `json:"smartctl_version,omitempty"`
 	UserCapacity *string `json:"user_capacity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Smartctl Smartctl
 
 // NewSmartctl instantiates a new Smartctl object
 // This constructor will assign default values to properties that have it defined,
@@ -588,7 +591,47 @@ func (o Smartctl) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserCapacity) {
 		toSerialize["user_capacity"] = o.UserCapacity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Smartctl) UnmarshalJSON(data []byte) (err error) {
+	varSmartctl := _Smartctl{}
+
+	err = json.Unmarshal(data, &varSmartctl)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Smartctl(varSmartctl)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ata_version")
+		delete(additionalProperties, "attributes")
+		delete(additionalProperties, "device_model")
+		delete(additionalProperties, "execution_status")
+		delete(additionalProperties, "firmware_version")
+		delete(additionalProperties, "is_sas")
+		delete(additionalProperties, "overall_health")
+		delete(additionalProperties, "rpm")
+		delete(additionalProperties, "sata_version")
+		delete(additionalProperties, "sector_size")
+		delete(additionalProperties, "serial_number")
+		delete(additionalProperties, "smart_error_log")
+		delete(additionalProperties, "smart_support")
+		delete(additionalProperties, "smartctl_version")
+		delete(additionalProperties, "user_capacity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSmartctl struct {

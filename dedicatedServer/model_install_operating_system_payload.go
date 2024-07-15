@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -37,6 +36,7 @@ type InstallOperatingSystemPayload struct {
 	RaidLevel NullableInt32 `json:"raidLevel,omitempty"`
 	// Timezone represented as Geographical_Area/City
 	Timezone *string `json:"timezone,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InstallOperatingSystemPayload InstallOperatingSystemPayload
@@ -569,6 +569,11 @@ func (o InstallOperatingSystemPayload) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -596,15 +601,33 @@ func (o *InstallOperatingSystemPayload) UnmarshalJSON(data []byte) (err error) {
 
 	varInstallOperatingSystemPayload := _InstallOperatingSystemPayload{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInstallOperatingSystemPayload)
+	err = json.Unmarshal(data, &varInstallOperatingSystemPayload)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InstallOperatingSystemPayload(varInstallOperatingSystemPayload)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fileserverBaseUrl")
+		delete(additionalProperties, "pop")
+		delete(additionalProperties, "powerCycle")
+		delete(additionalProperties, "isUnassignedServer")
+		delete(additionalProperties, "serverId")
+		delete(additionalProperties, "jobType")
+		delete(additionalProperties, "configurable")
+		delete(additionalProperties, "device")
+		delete(additionalProperties, "numberOfDisks")
+		delete(additionalProperties, "operatingSystemId")
+		delete(additionalProperties, "os")
+		delete(additionalProperties, "partitions")
+		delete(additionalProperties, "raidLevel")
+		delete(additionalProperties, "timezone")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &AttachIsoOpts{}
 type AttachIsoOpts struct {
 	// The ISO ID, obtained using the ISO endpoints
 	IsoId string `json:"isoId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AttachIsoOpts AttachIsoOpts
@@ -80,6 +80,11 @@ func (o AttachIsoOpts) MarshalJSON() ([]byte, error) {
 func (o AttachIsoOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["isoId"] = o.IsoId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *AttachIsoOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varAttachIsoOpts := _AttachIsoOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAttachIsoOpts)
+	err = json.Unmarshal(data, &varAttachIsoOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AttachIsoOpts(varAttachIsoOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "isoId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

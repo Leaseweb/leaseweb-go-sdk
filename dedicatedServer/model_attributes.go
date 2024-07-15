@@ -21,7 +21,10 @@ var _ MappedNullable = &Attributes{}
 type Attributes struct {
 	PowerOnHours *Attribute `json:"Power_On_Hours,omitempty"`
 	ReallocatedSectorCt *Attribute `json:"Reallocated_Sector_Ct,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Attributes Attributes
 
 // NewAttributes instantiates a new Attributes object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o Attributes) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReallocatedSectorCt) {
 		toSerialize["Reallocated_Sector_Ct"] = o.ReallocatedSectorCt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Attributes) UnmarshalJSON(data []byte) (err error) {
+	varAttributes := _Attributes{}
+
+	err = json.Unmarshal(data, &varAttributes)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Attributes(varAttributes)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "Power_On_Hours")
+		delete(additionalProperties, "Reallocated_Sector_Ct")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAttributes struct {

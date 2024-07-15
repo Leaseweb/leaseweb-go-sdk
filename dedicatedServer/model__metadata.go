@@ -21,7 +21,10 @@ var _ MappedNullable = &Metadata{}
 type Metadata struct {
 	// Batch ID for batch jobs
 	BATCH_ID *string `json:"BATCH_ID,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Metadata Metadata
 
 // NewMetadata instantiates a new Metadata object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o Metadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BATCH_ID) {
 		toSerialize["BATCH_ID"] = o.BATCH_ID
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Metadata) UnmarshalJSON(data []byte) (err error) {
+	varMetadata := _Metadata{}
+
+	err = json.Unmarshal(data, &varMetadata)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Metadata(varMetadata)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "BATCH_ID")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetadata struct {

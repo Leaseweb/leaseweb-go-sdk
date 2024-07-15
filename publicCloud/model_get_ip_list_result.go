@@ -21,7 +21,10 @@ var _ MappedNullable = &GetIpListResult{}
 type GetIpListResult struct {
 	Ips []IpDetails `json:"ips,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetIpListResult GetIpListResult
 
 // NewGetIpListResult instantiates a new GetIpListResult object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o GetIpListResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetIpListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetIpListResult := _GetIpListResult{}
+
+	err = json.Unmarshal(data, &varGetIpListResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetIpListResult(varGetIpListResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ips")
+		delete(additionalProperties, "_metadata")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetIpListResult struct {

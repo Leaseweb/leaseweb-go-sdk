@@ -12,7 +12,6 @@ package abuse
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateReportMessageOpts{}
 type CreateReportMessageOpts struct {
 	// Plain text body of the message, for newlines use ' '.
 	Body string `json:"body"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateReportMessageOpts CreateReportMessageOpts
@@ -80,6 +80,11 @@ func (o CreateReportMessageOpts) MarshalJSON() ([]byte, error) {
 func (o CreateReportMessageOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["body"] = o.Body
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CreateReportMessageOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateReportMessageOpts := _CreateReportMessageOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateReportMessageOpts)
+	err = json.Unmarshal(data, &varCreateReportMessageOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateReportMessageOpts(varCreateReportMessageOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "body")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

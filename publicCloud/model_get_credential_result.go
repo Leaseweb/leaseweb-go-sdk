@@ -22,7 +22,10 @@ type GetCredentialResult struct {
 	Type *CredentialType `json:"type,omitempty"`
 	Username *string `json:"username,omitempty"`
 	Password *string `json:"password,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCredentialResult GetCredentialResult
 
 // NewGetCredentialResult instantiates a new GetCredentialResult object
 // This constructor will assign default values to properties that have it defined,
@@ -156,7 +159,35 @@ func (o GetCredentialResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Password) {
 		toSerialize["password"] = o.Password
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCredentialResult) UnmarshalJSON(data []byte) (err error) {
+	varGetCredentialResult := _GetCredentialResult{}
+
+	err = json.Unmarshal(data, &varGetCredentialResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCredentialResult(varGetCredentialResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "password")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCredentialResult struct {

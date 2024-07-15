@@ -23,7 +23,10 @@ type DetectedDomainNameList struct {
 	Name *string `json:"name,omitempty"`
 	// The IP-addresses the domainname resolves to.
 	IpAddresses []string `json:"ipAddresses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DetectedDomainNameList DetectedDomainNameList
 
 // NewDetectedDomainNameList instantiates a new DetectedDomainNameList object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o DetectedDomainNameList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IpAddresses) {
 		toSerialize["ipAddresses"] = o.IpAddresses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DetectedDomainNameList) UnmarshalJSON(data []byte) (err error) {
+	varDetectedDomainNameList := _DetectedDomainNameList{}
+
+	err = json.Unmarshal(data, &varDetectedDomainNameList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DetectedDomainNameList(varDetectedDomainNameList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "ipAddresses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDetectedDomainNameList struct {

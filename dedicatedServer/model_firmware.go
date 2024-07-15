@@ -23,7 +23,10 @@ type Firmware struct {
 	Description *string `json:"description,omitempty"`
 	Vendor *string `json:"vendor,omitempty"`
 	Version *string `json:"version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Firmware Firmware
 
 // NewFirmware instantiates a new Firmware object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o Firmware) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Version) {
 		toSerialize["version"] = o.Version
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Firmware) UnmarshalJSON(data []byte) (err error) {
+	varFirmware := _Firmware{}
+
+	err = json.Unmarshal(data, &varFirmware)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Firmware(varFirmware)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "vendor")
+		delete(additionalProperties, "version")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFirmware struct {

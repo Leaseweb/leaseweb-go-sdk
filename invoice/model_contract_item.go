@@ -37,7 +37,10 @@ type ContractItem struct {
 	Reference *string `json:"reference,omitempty"`
 	// The start date of the contract
 	StartDate *string `json:"startDate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ContractItem ContractItem
 
 // NewContractItem instantiates a new ContractItem object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o ContractItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StartDate) {
 		toSerialize["startDate"] = o.StartDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ContractItem) UnmarshalJSON(data []byte) (err error) {
+	varContractItem := _ContractItem{}
+
+	err = json.Unmarshal(data, &varContractItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ContractItem(varContractItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "contractId")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "endDate")
+		delete(additionalProperties, "equipmentId")
+		delete(additionalProperties, "poNumber")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "reference")
+		delete(additionalProperties, "startDate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableContractItem struct {

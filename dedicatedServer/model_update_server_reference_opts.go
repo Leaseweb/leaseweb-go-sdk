@@ -12,7 +12,6 @@ package dedicatedServer
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdateServerReferenceOpts{}
 type UpdateServerReferenceOpts struct {
 	// The reference for this server
 	Reference string `json:"reference"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateServerReferenceOpts UpdateServerReferenceOpts
@@ -80,6 +80,11 @@ func (o UpdateServerReferenceOpts) MarshalJSON() ([]byte, error) {
 func (o UpdateServerReferenceOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["reference"] = o.Reference
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdateServerReferenceOpts) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateServerReferenceOpts := _UpdateServerReferenceOpts{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateServerReferenceOpts)
+	err = json.Unmarshal(data, &varUpdateServerReferenceOpts)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateServerReferenceOpts(varUpdateServerReferenceOpts)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "reference")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type SoftwareLicense struct {
 	Price *float32 `json:"price,omitempty"`
 	Currency *string `json:"currency,omitempty"`
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SoftwareLicense SoftwareLicense
 
 // NewSoftwareLicense instantiates a new SoftwareLicense object
 // This constructor will assign default values to properties that have it defined,
@@ -192,7 +195,36 @@ func (o SoftwareLicense) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SoftwareLicense) UnmarshalJSON(data []byte) (err error) {
+	varSoftwareLicense := _SoftwareLicense{}
+
+	err = json.Unmarshal(data, &varSoftwareLicense)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SoftwareLicense(varSoftwareLicense)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSoftwareLicense struct {

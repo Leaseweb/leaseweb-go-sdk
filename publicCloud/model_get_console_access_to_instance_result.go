@@ -21,7 +21,10 @@ var _ MappedNullable = &GetConsoleAccessToInstanceResult{}
 type GetConsoleAccessToInstanceResult struct {
 	// The URL to the console
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConsoleAccessToInstanceResult GetConsoleAccessToInstanceResult
 
 // NewGetConsoleAccessToInstanceResult instantiates a new GetConsoleAccessToInstanceResult object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetConsoleAccessToInstanceResult) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConsoleAccessToInstanceResult) UnmarshalJSON(data []byte) (err error) {
+	varGetConsoleAccessToInstanceResult := _GetConsoleAccessToInstanceResult{}
+
+	err = json.Unmarshal(data, &varGetConsoleAccessToInstanceResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConsoleAccessToInstanceResult(varGetConsoleAccessToInstanceResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConsoleAccessToInstanceResult struct {

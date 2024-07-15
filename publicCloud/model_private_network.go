@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type PrivateNetwork struct {
 	PrivateNetworkId string `json:"privateNetworkId"`
 	Status string `json:"status"`
 	Subnet string `json:"subnet"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PrivateNetwork PrivateNetwork
@@ -133,6 +133,11 @@ func (o PrivateNetwork) ToMap() (map[string]interface{}, error) {
 	toSerialize["privateNetworkId"] = o.PrivateNetworkId
 	toSerialize["status"] = o.Status
 	toSerialize["subnet"] = o.Subnet
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -162,15 +167,22 @@ func (o *PrivateNetwork) UnmarshalJSON(data []byte) (err error) {
 
 	varPrivateNetwork := _PrivateNetwork{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPrivateNetwork)
+	err = json.Unmarshal(data, &varPrivateNetwork)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PrivateNetwork(varPrivateNetwork)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "privateNetworkId")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "subnet")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

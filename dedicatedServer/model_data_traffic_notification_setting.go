@@ -33,7 +33,10 @@ type DataTrafficNotificationSetting struct {
 	ThresholdExceededAt NullableString `json:"thresholdExceededAt,omitempty"`
 	// Unit
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataTrafficNotificationSetting DataTrafficNotificationSetting
 
 // NewDataTrafficNotificationSetting instantiates a new DataTrafficNotificationSetting object
 // This constructor will assign default values to properties that have it defined,
@@ -327,7 +330,39 @@ func (o DataTrafficNotificationSetting) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataTrafficNotificationSetting) UnmarshalJSON(data []byte) (err error) {
+	varDataTrafficNotificationSetting := _DataTrafficNotificationSetting{}
+
+	err = json.Unmarshal(data, &varDataTrafficNotificationSetting)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataTrafficNotificationSetting(varDataTrafficNotificationSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actions")
+		delete(additionalProperties, "frequency")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "lastCheckedAt")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "thresholdExceededAt")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataTrafficNotificationSetting struct {
