@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Reference** | Pointer to **string** | An identifying name you can refer to the load balancer | [optional] 
 **ContractType** | Pointer to [**ContractType**](ContractType.md) |  | [optional] 
 **StickySession** | Pointer to [**NullableStickySession**](StickySession.md) |  | [optional] 
-**Balance** | Pointer to **string** | Algorithm to be used for load balancer | [optional] 
+**Balance** | Pointer to [**Balance**](Balance.md) |  | [optional] 
 **HealthCheck** | Pointer to [**NullableHealthCheck**](HealthCheck.md) |  | [optional] 
 **XForwardedFor** | Pointer to **bool** | Is xForwardedFor enabled or not | [optional] 
 **IdleTimeOut** | Pointer to **int32** | Time to close the connection if load balancer is idle | [optional] 
@@ -145,20 +145,20 @@ HasStickySession returns a boolean if a field has been set.
 UnsetStickySession ensures that no value is present for StickySession, not even an explicit nil
 ### GetBalance
 
-`func (o *UpdateLoadBalancerOpts) GetBalance() string`
+`func (o *UpdateLoadBalancerOpts) GetBalance() Balance`
 
 GetBalance returns the Balance field if non-nil, zero value otherwise.
 
 ### GetBalanceOk
 
-`func (o *UpdateLoadBalancerOpts) GetBalanceOk() (*string, bool)`
+`func (o *UpdateLoadBalancerOpts) GetBalanceOk() (*Balance, bool)`
 
 GetBalanceOk returns a tuple with the Balance field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBalance
 
-`func (o *UpdateLoadBalancerOpts) SetBalance(v string)`
+`func (o *UpdateLoadBalancerOpts) SetBalance(v Balance)`
 
 SetBalance sets Balance field to given value.
 

@@ -12,6 +12,7 @@ docs/AutoScalingGroup.md
 docs/AutoScalingGroupDetails.md
 docs/AutoScalingGroupState.md
 docs/AutoScalingGroupType.md
+docs/Balance.md
 docs/Billing.md
 docs/BillingFrequency.md
 docs/Central.md
@@ -125,6 +126,7 @@ model_auto_scaling_group.go
 model_auto_scaling_group_details.go
 model_auto_scaling_group_state.go
 model_auto_scaling_group_type.go
+model_balance.go
 model_billing.go
 model_billing_frequency.go
 model_central.go

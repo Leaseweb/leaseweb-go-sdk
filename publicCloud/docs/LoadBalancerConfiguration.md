@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StickySession** | [**NullableStickySession**](StickySession.md) |  | 
-**Balance** | **string** | Algorithm to be used for load balancer | 
+**Balance** | [**Balance**](Balance.md) |  | 
 **HealthCheck** | [**NullableHealthCheck**](HealthCheck.md) |  | 
 **XForwardedFor** | **bool** | Is xForwardedFor header enabled or not | 
 **IdleTimeOut** | **int32** | Time to close the connection if load balancer is idle | 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewLoadBalancerConfiguration
 
-`func NewLoadBalancerConfiguration(stickySession NullableStickySession, balance string, healthCheck NullableHealthCheck, xForwardedFor bool, idleTimeOut int32, targetPort int32, ) *LoadBalancerConfiguration`
+`func NewLoadBalancerConfiguration(stickySession NullableStickySession, balance Balance, healthCheck NullableHealthCheck, xForwardedFor bool, idleTimeOut int32, targetPort int32, ) *LoadBalancerConfiguration`
 
 NewLoadBalancerConfiguration instantiates a new LoadBalancerConfiguration object
 This constructor will assign default values to properties that have it defined,
@@ -62,20 +62,20 @@ SetStickySession sets StickySession field to given value.
 UnsetStickySession ensures that no value is present for StickySession, not even an explicit nil
 ### GetBalance
 
-`func (o *LoadBalancerConfiguration) GetBalance() string`
+`func (o *LoadBalancerConfiguration) GetBalance() Balance`
 
 GetBalance returns the Balance field if non-nil, zero value otherwise.
 
 ### GetBalanceOk
 
-`func (o *LoadBalancerConfiguration) GetBalanceOk() (*string, bool)`
+`func (o *LoadBalancerConfiguration) GetBalanceOk() (*Balance, bool)`
 
 GetBalanceOk returns a tuple with the Balance field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBalance
 
-`func (o *LoadBalancerConfiguration) SetBalance(v string)`
+`func (o *LoadBalancerConfiguration) SetBalance(v Balance)`
 
 SetBalance sets Balance field to given value.
 

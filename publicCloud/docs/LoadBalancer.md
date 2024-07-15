@@ -7,17 +7,15 @@ Name | Type | Description | Notes
 **Id** | **string** | The load balancer unique identifier | 
 **Type** | **string** | Load balancer type | 
 **Resources** | [**Resources**](Resources.md) |  | 
-**Region** | **string** | The region where the load balancer was launched into | 
 **Reference** | **NullableString** | The identifying name set to the load balancer | 
 **State** | [**State**](State.md) |  | 
-**Contract** | [**Contract**](Contract.md) |  | 
 **StartedAt** | **NullableTime** | Date and time when the load balancer was started for the first time, right after launching it | 
 
 ## Methods
 
 ### NewLoadBalancer
 
-`func NewLoadBalancer(id string, type_ string, resources Resources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime, ) *LoadBalancer`
+`func NewLoadBalancer(id string, type_ string, resources Resources, reference NullableString, state State, startedAt NullableTime, ) *LoadBalancer`
 
 NewLoadBalancer instantiates a new LoadBalancer object
 This constructor will assign default values to properties that have it defined,
@@ -92,26 +90,6 @@ and a boolean to check if the value has been set.
 SetResources sets Resources field to given value.
 
 
-### GetRegion
-
-`func (o *LoadBalancer) GetRegion() string`
-
-GetRegion returns the Region field if non-nil, zero value otherwise.
-
-### GetRegionOk
-
-`func (o *LoadBalancer) GetRegionOk() (*string, bool)`
-
-GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRegion
-
-`func (o *LoadBalancer) SetRegion(v string)`
-
-SetRegion sets Region field to given value.
-
-
 ### GetReference
 
 `func (o *LoadBalancer) GetReference() string`
@@ -160,26 +138,6 @@ and a boolean to check if the value has been set.
 `func (o *LoadBalancer) SetState(v State)`
 
 SetState sets State field to given value.
-
-
-### GetContract
-
-`func (o *LoadBalancer) GetContract() Contract`
-
-GetContract returns the Contract field if non-nil, zero value otherwise.
-
-### GetContractOk
-
-`func (o *LoadBalancer) GetContractOk() (*Contract, bool)`
-
-GetContractOk returns a tuple with the Contract field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetContract
-
-`func (o *LoadBalancer) SetContract(v Contract)`
-
-SetContract sets Contract field to given value.
 
 
 ### GetStartedAt

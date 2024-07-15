@@ -25,8 +25,7 @@ type UpdateLoadBalancerOpts struct {
 	Reference *string `json:"reference,omitempty"`
 	ContractType *ContractType `json:"contractType,omitempty"`
 	StickySession NullableStickySession `json:"stickySession,omitempty"`
-	// Algorithm to be used for load balancer
-	Balance *string `json:"balance,omitempty"`
+	Balance *Balance `json:"balance,omitempty"`
 	HealthCheck NullableHealthCheck `json:"healthCheck,omitempty"`
 	// Is xForwardedFor enabled or not
 	XForwardedFor *bool `json:"xForwardedFor,omitempty"`
@@ -195,9 +194,9 @@ func (o *UpdateLoadBalancerOpts) UnsetStickySession() {
 }
 
 // GetBalance returns the Balance field value if set, zero value otherwise.
-func (o *UpdateLoadBalancerOpts) GetBalance() string {
+func (o *UpdateLoadBalancerOpts) GetBalance() Balance {
 	if o == nil || IsNil(o.Balance) {
-		var ret string
+		var ret Balance
 		return ret
 	}
 	return *o.Balance
@@ -205,7 +204,7 @@ func (o *UpdateLoadBalancerOpts) GetBalance() string {
 
 // GetBalanceOk returns a tuple with the Balance field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateLoadBalancerOpts) GetBalanceOk() (*string, bool) {
+func (o *UpdateLoadBalancerOpts) GetBalanceOk() (*Balance, bool) {
 	if o == nil || IsNil(o.Balance) {
 		return nil, false
 	}
@@ -221,8 +220,8 @@ func (o *UpdateLoadBalancerOpts) HasBalance() bool {
 	return false
 }
 
-// SetBalance gets a reference to the given string and assigns it to the Balance field.
-func (o *UpdateLoadBalancerOpts) SetBalance(v string) {
+// SetBalance gets a reference to the given Balance and assigns it to the Balance field.
+func (o *UpdateLoadBalancerOpts) SetBalance(v Balance) {
 	o.Balance = &v
 }
 

@@ -155,6 +155,7 @@ Class | Method | HTTP request | Description
  - [AutoScalingGroupDetails](docs/AutoScalingGroupDetails.md)
  - [AutoScalingGroupState](docs/AutoScalingGroupState.md)
  - [AutoScalingGroupType](docs/AutoScalingGroupType.md)
+ - [Balance](docs/Balance.md)
  - [Billing](docs/Billing.md)
  - [BillingFrequency](docs/BillingFrequency.md)
  - [Central](docs/Central.md)

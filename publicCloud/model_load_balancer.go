@@ -26,12 +26,9 @@ type LoadBalancer struct {
 	// Load balancer type
 	Type string `json:"type"`
 	Resources Resources `json:"resources"`
-	// The region where the load balancer was launched into
-	Region string `json:"region"`
 	// The identifying name set to the load balancer
 	Reference NullableString `json:"reference"`
 	State State `json:"state"`
-	Contract Contract `json:"contract"`
 	// Date and time when the load balancer was started for the first time, right after launching it
 	StartedAt NullableTime `json:"startedAt"`
 	AdditionalProperties map[string]interface{}
@@ -43,15 +40,13 @@ type _LoadBalancer LoadBalancer
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancer(id string, type_ string, resources Resources, region string, reference NullableString, state State, contract Contract, startedAt NullableTime) *LoadBalancer {
+func NewLoadBalancer(id string, type_ string, resources Resources, reference NullableString, state State, startedAt NullableTime) *LoadBalancer {
 	this := LoadBalancer{}
 	this.Id = id
 	this.Type = type_
 	this.Resources = resources
-	this.Region = region
 	this.Reference = reference
 	this.State = state
-	this.Contract = contract
 	this.StartedAt = startedAt
 	return &this
 }
@@ -136,30 +131,6 @@ func (o *LoadBalancer) SetResources(v Resources) {
 	o.Resources = v
 }
 
-// GetRegion returns the Region field value
-func (o *LoadBalancer) GetRegion() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Region
-}
-
-// GetRegionOk returns a tuple with the Region field value
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetRegionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Region, true
-}
-
-// SetRegion sets field value
-func (o *LoadBalancer) SetRegion(v string) {
-	o.Region = v
-}
-
 // GetReference returns the Reference field value
 // If the value is explicit nil, the zero value for string will be returned
 func (o *LoadBalancer) GetReference() string {
@@ -210,30 +181,6 @@ func (o *LoadBalancer) SetState(v State) {
 	o.State = v
 }
 
-// GetContract returns the Contract field value
-func (o *LoadBalancer) GetContract() Contract {
-	if o == nil {
-		var ret Contract
-		return ret
-	}
-
-	return o.Contract
-}
-
-// GetContractOk returns a tuple with the Contract field value
-// and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetContractOk() (*Contract, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Contract, true
-}
-
-// SetContract sets field value
-func (o *LoadBalancer) SetContract(v Contract) {
-	o.Contract = v
-}
-
 // GetStartedAt returns the StartedAt field value
 // If the value is explicit nil, the zero value for time.Time will be returned
 func (o *LoadBalancer) GetStartedAt() time.Time {
@@ -273,10 +220,8 @@ func (o LoadBalancer) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
 	toSerialize["resources"] = o.Resources
-	toSerialize["region"] = o.Region
 	toSerialize["reference"] = o.Reference.Get()
 	toSerialize["state"] = o.State
-	toSerialize["contract"] = o.Contract
 	toSerialize["startedAt"] = o.StartedAt.Get()
 
 	for key, value := range o.AdditionalProperties {
@@ -294,10 +239,8 @@ func (o *LoadBalancer) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"type",
 		"resources",
-		"region",
 		"reference",
 		"state",
-		"contract",
 		"startedAt",
 	}
 
@@ -331,10 +274,8 @@ func (o *LoadBalancer) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "resources")
-		delete(additionalProperties, "region")
 		delete(additionalProperties, "reference")
 		delete(additionalProperties, "state")
-		delete(additionalProperties, "contract")
 		delete(additionalProperties, "startedAt")
 		o.AdditionalProperties = additionalProperties
 	}

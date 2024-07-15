@@ -21,8 +21,7 @@ var _ MappedNullable = &LoadBalancerConfiguration{}
 // LoadBalancerConfiguration Different configuration assigned for the load balancer
 type LoadBalancerConfiguration struct {
 	StickySession NullableStickySession `json:"stickySession"`
-	// Algorithm to be used for load balancer
-	Balance string `json:"balance"`
+	Balance Balance `json:"balance"`
 	HealthCheck NullableHealthCheck `json:"healthCheck"`
 	// Is xForwardedFor header enabled or not
 	XForwardedFor bool `json:"xForwardedFor"`
@@ -39,7 +38,7 @@ type _LoadBalancerConfiguration LoadBalancerConfiguration
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerConfiguration(stickySession NullableStickySession, balance string, healthCheck NullableHealthCheck, xForwardedFor bool, idleTimeOut int32, targetPort int32) *LoadBalancerConfiguration {
+func NewLoadBalancerConfiguration(stickySession NullableStickySession, balance Balance, healthCheck NullableHealthCheck, xForwardedFor bool, idleTimeOut int32, targetPort int32) *LoadBalancerConfiguration {
 	this := LoadBalancerConfiguration{}
 	this.StickySession = stickySession
 	this.Balance = balance
@@ -85,9 +84,9 @@ func (o *LoadBalancerConfiguration) SetStickySession(v StickySession) {
 }
 
 // GetBalance returns the Balance field value
-func (o *LoadBalancerConfiguration) GetBalance() string {
+func (o *LoadBalancerConfiguration) GetBalance() Balance {
 	if o == nil {
-		var ret string
+		var ret Balance
 		return ret
 	}
 
@@ -96,7 +95,7 @@ func (o *LoadBalancerConfiguration) GetBalance() string {
 
 // GetBalanceOk returns a tuple with the Balance field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerConfiguration) GetBalanceOk() (*string, bool) {
+func (o *LoadBalancerConfiguration) GetBalanceOk() (*Balance, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -104,7 +103,7 @@ func (o *LoadBalancerConfiguration) GetBalanceOk() (*string, bool) {
 }
 
 // SetBalance sets field value
-func (o *LoadBalancerConfiguration) SetBalance(v string) {
+func (o *LoadBalancerConfiguration) SetBalance(v Balance) {
 	o.Balance = v
 }
 
