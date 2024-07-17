@@ -2593,6 +2593,16 @@ paths:
                   limit: 20
                   offset: 0
                 images:
+                - id: UBUNTU_24_04_64BIT
+                  name: Ubuntu 24.04 LTS (x86_64)
+                  version: "24.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                  marketApps: []
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
                 - id: UBUNTU_22_04_64BIT
                   name: Ubuntu 22.04 LTS (x86_64)
                   version: "22.04"
@@ -2634,31 +2644,11 @@ paths:
                   storageTypes:
                   - LOCAL
                   - CENTRAL
-                - id: DEBIAN_10_64BIT
-                  name: Debian 10 (x86_64)
-                  version: "10"
-                  family: linux
-                  flavour: debian
-                  architecture: x86_64
-                  marketApps: []
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
                 - id: FREEBSD_13_64BIT
                   name: FreeBSD 13.2 (x86_64)
                   version: "13.2"
                   family: bsd
                   flavour: freebsd
-                  architecture: x86_64
-                  marketApps: []
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
-                - id: CENTOS_7_64BIT
-                  name: CentOS 7 (x86_64)
-                  version: "7"
-                  family: linux
-                  flavour: centos
                   architecture: x86_64
                   marketApps: []
                   storageTypes:
