@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The unique identifier of the instance | 
-**Type** | [**InstanceTypeName**](InstanceTypeName.md) |  | 
+**Type** | [**TypeName**](TypeName.md) |  | 
 **Resources** | [**Resources**](Resources.md) |  | 
 **Region** | **string** | The region in which the instance was launched | 
 **Reference** | **NullableString** | The identifying name set to the instance | 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceBase
 
-`func NewInstanceBase(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, ) *InstanceBase`
+`func NewInstanceBase(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, ) *InstanceBase`
 
 NewInstanceBase instantiates a new InstanceBase object
 This constructor will assign default values to properties that have it defined,
@@ -60,20 +60,20 @@ SetId sets Id field to given value.
 
 ### GetType
 
-`func (o *InstanceBase) GetType() InstanceTypeName`
+`func (o *InstanceBase) GetType() TypeName`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *InstanceBase) GetTypeOk() (*InstanceTypeName, bool)`
+`func (o *InstanceBase) GetTypeOk() (*TypeName, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *InstanceBase) SetType(v InstanceTypeName)`
+`func (o *InstanceBase) SetType(v TypeName)`
 
 SetType sets Type field to given value.
 

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The unique identifier of the instance | 
-**Type** | [**InstanceTypeName**](InstanceTypeName.md) |  | 
+**Type** | [**TypeName**](TypeName.md) |  | 
 **Resources** | [**Resources**](Resources.md) |  | 
 **Region** | **string** | The region in which the instance was launched | 
 **Reference** | **NullableString** | The identifying name set to the instance | 
@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewInstance
 
-`func NewInstance(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, image Image, ips []Ip, autoScalingGroup NullableAutoScalingGroup, ) *Instance`
+`func NewInstance(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, image Image, ips []Ip, autoScalingGroup NullableAutoScalingGroup, ) *Instance`
 
 NewInstance instantiates a new Instance object
 This constructor will assign default values to properties that have it defined,
@@ -63,20 +63,20 @@ SetId sets Id field to given value.
 
 ### GetType
 
-`func (o *Instance) GetType() InstanceTypeName`
+`func (o *Instance) GetType() TypeName`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *Instance) GetTypeOk() (*InstanceTypeName, bool)`
+`func (o *Instance) GetTypeOk() (*TypeName, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *Instance) SetType(v InstanceTypeName)`
+`func (o *Instance) SetType(v TypeName)`
 
 SetType sets Type field to given value.
 

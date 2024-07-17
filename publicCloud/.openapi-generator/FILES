@@ -64,7 +64,6 @@ docs/Instance.md
 docs/InstanceBase.md
 docs/InstanceDetails.md
 docs/InstanceType.md
-docs/InstanceTypeName.md
 docs/InstanceTypes.md
 docs/Ip.md
 docs/IpDetails.md
@@ -109,6 +108,7 @@ docs/TrafficMetric.md
 docs/TrafficMetricSummary.md
 docs/TrafficMetricValue.md
 docs/TrafficMetricsMetaData.md
+docs/TypeName.md
 docs/UpdateAutoScalingGroupOpts.md
 docs/UpdateCredentialOpts.md
 docs/UpdateCredentialResult.md
@@ -178,7 +178,6 @@ model_instance.go
 model_instance_base.go
 model_instance_details.go
 model_instance_type.go
-model_instance_type_name.go
 model_instance_types.go
 model_ip.go
 model_ip_details.go
@@ -221,6 +220,7 @@ model_traffic_metric.go
 model_traffic_metric_summary.go
 model_traffic_metric_value.go
 model_traffic_metrics_meta_data.go
+model_type_name.go
 model_update_auto_scaling_group_opts.go
 model_update_credential_opts.go
 model_update_credential_result.go

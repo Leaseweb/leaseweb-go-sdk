@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The load balancer unique identifier | 
-**Type** | **string** | Load balancer type | 
+**Type** | [**TypeName**](TypeName.md) |  | 
 **Resources** | [**Resources**](Resources.md) |  | 
 **Reference** | **NullableString** | The identifying name set to the load balancer | 
 **State** | [**State**](State.md) |  | 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewLoadBalancer
 
-`func NewLoadBalancer(id string, type_ string, resources Resources, reference NullableString, state State, startedAt NullableTime, ) *LoadBalancer`
+`func NewLoadBalancer(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, ) *LoadBalancer`
 
 NewLoadBalancer instantiates a new LoadBalancer object
 This constructor will assign default values to properties that have it defined,
@@ -52,20 +52,20 @@ SetId sets Id field to given value.
 
 ### GetType
 
-`func (o *LoadBalancer) GetType() string`
+`func (o *LoadBalancer) GetType() TypeName`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *LoadBalancer) GetTypeOk() (*string, bool)`
+`func (o *LoadBalancer) GetTypeOk() (*TypeName, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *LoadBalancer) SetType(v string)`
+`func (o *LoadBalancer) SetType(v TypeName)`
 
 SetType sets Type field to given value.
 

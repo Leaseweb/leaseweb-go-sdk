@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The load balancer unique identifier | 
-**Type** | **string** | Load balancer type | 
+**Type** | [**TypeName**](TypeName.md) |  | 
 **Resources** | [**Resources**](Resources.md) |  | 
 **Reference** | **NullableString** | The identifying name set to the load balancer | 
 **State** | [**State**](State.md) |  | 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewLoadBalancerDetails
 
-`func NewLoadBalancerDetails(id string, type_ string, resources Resources, reference NullableString, state State, startedAt NullableTime, ips []IpDetails, region string, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract, ) *LoadBalancerDetails`
+`func NewLoadBalancerDetails(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, ips []IpDetails, region string, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract, ) *LoadBalancerDetails`
 
 NewLoadBalancerDetails instantiates a new LoadBalancerDetails object
 This constructor will assign default values to properties that have it defined,
@@ -58,20 +58,20 @@ SetId sets Id field to given value.
 
 ### GetType
 
-`func (o *LoadBalancerDetails) GetType() string`
+`func (o *LoadBalancerDetails) GetType() TypeName`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *LoadBalancerDetails) GetTypeOk() (*string, bool)`
+`func (o *LoadBalancerDetails) GetTypeOk() (*TypeName, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *LoadBalancerDetails) SetType(v string)`
+`func (o *LoadBalancerDetails) SetType(v TypeName)`
 
 SetType sets Type field to given value.
 

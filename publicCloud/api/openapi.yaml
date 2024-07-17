@@ -7657,8 +7657,8 @@ components:
       - STOPPING
       - UNKNOWN
       type: string
-    instanceTypeName:
-      description: Instance type
+    typeName:
+      description: Instance/Load balancer type
       enum:
       - lsw.m3.large
       - lsw.m3.xlarge
@@ -7734,7 +7734,7 @@ components:
       - lsw.r6a.12xlarge
       - lsw.r6a.16xlarge
       - lsw.r6a.24xlarge
-      title: instanceType
+      title: typeName
       type: string
     rootDiskSize:
       description: The root disk's size in GB. Must be at least 5 GB for Linux and
@@ -7816,7 +7816,7 @@ components:
           format: uuid
           type: string
         type:
-          $ref: '#/components/schemas/instanceTypeName'
+          $ref: '#/components/schemas/typeName'
         resources:
           $ref: '#/components/schemas/resources'
         region:
@@ -8334,7 +8334,7 @@ components:
           example: eu-west-3
           type: string
         type:
-          $ref: '#/components/schemas/instanceTypeName'
+          $ref: '#/components/schemas/typeName'
         imageId:
           $ref: '#/components/schemas/imageId'
         marketAppId:
@@ -8582,7 +8582,7 @@ components:
     updateInstanceOpts:
       properties:
         type:
-          $ref: '#/components/schemas/instanceTypeName'
+          $ref: '#/components/schemas/typeName'
         reference:
           description: An identifying name you can refer to the instance
           type: string
@@ -8958,10 +8958,6 @@ components:
       required:
       - imageId
       type: object
-    loadBalancerType:
-      description: Load balancer type
-      example: lsw.m3.large
-      type: string
     loadBalancer:
       example:
         reference: reference
@@ -8981,7 +8977,7 @@ components:
         startedAt: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
-        type: lsw.m3.large
+        type: null
       nullable: true
       properties:
         id:
@@ -8989,9 +8985,7 @@ components:
           format: uuid
           type: string
         type:
-          description: Load balancer type
-          example: lsw.m3.large
-          type: string
+          $ref: '#/components/schemas/typeName'
         resources:
           $ref: '#/components/schemas/resources'
         reference:
@@ -9205,7 +9199,7 @@ components:
         startedAt: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
-        type: lsw.m3.large
+        type: null
         region: eu-west-3
         ips:
         - prefixLength: "28"
@@ -9289,7 +9283,7 @@ components:
           startedAt: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
-          type: lsw.m3.large
+          type: null
           region: eu-west-3
           ips:
           - prefixLength: "28"
@@ -9370,7 +9364,7 @@ components:
           startedAt: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
-          type: lsw.m3.large
+          type: null
           region: eu-west-3
           ips:
           - prefixLength: "28"
@@ -9412,9 +9406,7 @@ components:
           example: eu-west-3
           type: string
         type:
-          description: Load balancer type
-          example: lsw.m3.large
-          type: string
+          $ref: '#/components/schemas/typeName'
         reference:
           description: An identifying name you can refer to the load balancer
           type: string
@@ -9450,9 +9442,7 @@ components:
     updateLoadBalancerOpts:
       properties:
         type:
-          description: Load balancer type
-          example: lsw.m3.large
-          type: string
+          $ref: '#/components/schemas/typeName'
         reference:
           description: An identifying name you can refer to the load balancer
           type: string
@@ -9944,7 +9934,7 @@ components:
           startedAt: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
-          type: lsw.m3.large
+          type: null
         minimumAmount: 6
         startsAt: 2000-01-23T04:56:07.000+00:00
         warmupTime: 5

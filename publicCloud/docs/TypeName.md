@@ -1,4 +1,4 @@
-# InstanceTypeName
+# TypeName
 
 ## Enum
 

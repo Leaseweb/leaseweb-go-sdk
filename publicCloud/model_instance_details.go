@@ -23,7 +23,7 @@ var _ MappedNullable = &InstanceDetails{}
 type InstanceDetails struct {
 	// The unique identifier of the instance
 	Id string `json:"id"`
-	Type InstanceTypeName `json:"type"`
+	Type TypeName `json:"type"`
 	Resources Resources `json:"resources"`
 	// The region in which the instance was launched
 	Region string `json:"region"`
@@ -56,7 +56,7 @@ type _InstanceDetails InstanceDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image ImageDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup) *InstanceDetails {
+func NewInstanceDetails(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image ImageDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup) *InstanceDetails {
 	this := InstanceDetails{}
 	this.Id = id
 	this.Type = type_
@@ -113,9 +113,9 @@ func (o *InstanceDetails) SetId(v string) {
 }
 
 // GetType returns the Type field value
-func (o *InstanceDetails) GetType() InstanceTypeName {
+func (o *InstanceDetails) GetType() TypeName {
 	if o == nil {
-		var ret InstanceTypeName
+		var ret TypeName
 		return ret
 	}
 
@@ -124,7 +124,7 @@ func (o *InstanceDetails) GetType() InstanceTypeName {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *InstanceDetails) GetTypeOk() (*InstanceTypeName, bool) {
+func (o *InstanceDetails) GetTypeOk() (*TypeName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -132,7 +132,7 @@ func (o *InstanceDetails) GetTypeOk() (*InstanceTypeName, bool) {
 }
 
 // SetType sets field value
-func (o *InstanceDetails) SetType(v InstanceTypeName) {
+func (o *InstanceDetails) SetType(v TypeName) {
 	o.Type = v
 }
 

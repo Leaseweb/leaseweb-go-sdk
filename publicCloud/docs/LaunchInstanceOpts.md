@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Region** | **string** | Region to launch the instance into | 
-**Type** | [**InstanceTypeName**](InstanceTypeName.md) |  | 
+**Type** | [**TypeName**](TypeName.md) |  | 
 **ImageId** | [**ImageId**](ImageId.md) |  | 
 **MarketAppId** | Pointer to **string** | Market App ID that must be installed into the instance | [optional] 
 **Reference** | Pointer to **string** | An identifying name you can refer to the instance | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewLaunchInstanceOpts
 
-`func NewLaunchInstanceOpts(region string, type_ InstanceTypeName, imageId ImageId, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
+`func NewLaunchInstanceOpts(region string, type_ TypeName, imageId ImageId, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
 
 NewLaunchInstanceOpts instantiates a new LaunchInstanceOpts object
 This constructor will assign default values to properties that have it defined,
@@ -57,20 +57,20 @@ SetRegion sets Region field to given value.
 
 ### GetType
 
-`func (o *LaunchInstanceOpts) GetType() InstanceTypeName`
+`func (o *LaunchInstanceOpts) GetType() TypeName`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *LaunchInstanceOpts) GetTypeOk() (*InstanceTypeName, bool)`
+`func (o *LaunchInstanceOpts) GetTypeOk() (*TypeName, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *LaunchInstanceOpts) SetType(v InstanceTypeName)`
+`func (o *LaunchInstanceOpts) SetType(v TypeName)`
 
 SetType sets Type field to given value.
 

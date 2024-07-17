@@ -22,8 +22,7 @@ var _ MappedNullable = &LaunchLoadBalancerOpts{}
 type LaunchLoadBalancerOpts struct {
 	// Region to launch the load balancer into
 	Region string `json:"region"`
-	// Load balancer type
-	Type string `json:"type"`
+	Type TypeName `json:"type"`
 	// An identifying name you can refer to the load balancer
 	Reference *string `json:"reference,omitempty"`
 	// The contract applicable for the load balancer
@@ -42,7 +41,7 @@ type _LaunchLoadBalancerOpts LaunchLoadBalancerOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchLoadBalancerOpts(region string, type_ string, contractType string, billingFrequency int32, rootDiskStorageType RootDiskStorageType, targetPort int32) *LaunchLoadBalancerOpts {
+func NewLaunchLoadBalancerOpts(region string, type_ TypeName, contractType string, billingFrequency int32, rootDiskStorageType RootDiskStorageType, targetPort int32) *LaunchLoadBalancerOpts {
 	this := LaunchLoadBalancerOpts{}
 	this.Region = region
 	this.Type = type_
@@ -86,9 +85,9 @@ func (o *LaunchLoadBalancerOpts) SetRegion(v string) {
 }
 
 // GetType returns the Type field value
-func (o *LaunchLoadBalancerOpts) GetType() string {
+func (o *LaunchLoadBalancerOpts) GetType() TypeName {
 	if o == nil {
-		var ret string
+		var ret TypeName
 		return ret
 	}
 
@@ -97,7 +96,7 @@ func (o *LaunchLoadBalancerOpts) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *LaunchLoadBalancerOpts) GetTypeOk() (*string, bool) {
+func (o *LaunchLoadBalancerOpts) GetTypeOk() (*TypeName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -105,7 +104,7 @@ func (o *LaunchLoadBalancerOpts) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *LaunchLoadBalancerOpts) SetType(v string) {
+func (o *LaunchLoadBalancerOpts) SetType(v TypeName) {
 	o.Type = v
 }
 

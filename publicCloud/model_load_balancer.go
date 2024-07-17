@@ -23,8 +23,7 @@ var _ MappedNullable = &LoadBalancer{}
 type LoadBalancer struct {
 	// The load balancer unique identifier
 	Id string `json:"id"`
-	// Load balancer type
-	Type string `json:"type"`
+	Type TypeName `json:"type"`
 	Resources Resources `json:"resources"`
 	// The identifying name set to the load balancer
 	Reference NullableString `json:"reference"`
@@ -40,7 +39,7 @@ type _LoadBalancer LoadBalancer
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancer(id string, type_ string, resources Resources, reference NullableString, state State, startedAt NullableTime) *LoadBalancer {
+func NewLoadBalancer(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime) *LoadBalancer {
 	this := LoadBalancer{}
 	this.Id = id
 	this.Type = type_
@@ -84,9 +83,9 @@ func (o *LoadBalancer) SetId(v string) {
 }
 
 // GetType returns the Type field value
-func (o *LoadBalancer) GetType() string {
+func (o *LoadBalancer) GetType() TypeName {
 	if o == nil {
-		var ret string
+		var ret TypeName
 		return ret
 	}
 
@@ -95,7 +94,7 @@ func (o *LoadBalancer) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancer) GetTypeOk() (*string, bool) {
+func (o *LoadBalancer) GetTypeOk() (*TypeName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,7 +102,7 @@ func (o *LoadBalancer) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *LoadBalancer) SetType(v string) {
+func (o *LoadBalancer) SetType(v TypeName) {
 	o.Type = v
 }
 

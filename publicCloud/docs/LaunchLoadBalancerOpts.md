@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Region** | **string** | Region to launch the load balancer into | 
-**Type** | **string** | Load balancer type | 
+**Type** | [**TypeName**](TypeName.md) |  | 
 **Reference** | Pointer to **string** | An identifying name you can refer to the load balancer | [optional] 
 **ContractType** | **string** | The contract applicable for the load balancer | 
 **BillingFrequency** | **int32** | How often you wish to be charged. Used only when contract type is MONTHLY. &#39;1&#39; means every month, &#39;3&#39; every three months and so on. | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewLaunchLoadBalancerOpts
 
-`func NewLaunchLoadBalancerOpts(region string, type_ string, contractType string, billingFrequency int32, rootDiskStorageType RootDiskStorageType, targetPort int32, ) *LaunchLoadBalancerOpts`
+`func NewLaunchLoadBalancerOpts(region string, type_ TypeName, contractType string, billingFrequency int32, rootDiskStorageType RootDiskStorageType, targetPort int32, ) *LaunchLoadBalancerOpts`
 
 NewLaunchLoadBalancerOpts instantiates a new LaunchLoadBalancerOpts object
 This constructor will assign default values to properties that have it defined,
@@ -53,20 +53,20 @@ SetRegion sets Region field to given value.
 
 ### GetType
 
-`func (o *LaunchLoadBalancerOpts) GetType() string`
+`func (o *LaunchLoadBalancerOpts) GetType() TypeName`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *LaunchLoadBalancerOpts) GetTypeOk() (*string, bool)`
+`func (o *LaunchLoadBalancerOpts) GetTypeOk() (*TypeName, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *LaunchLoadBalancerOpts) SetType(v string)`
+`func (o *LaunchLoadBalancerOpts) SetType(v TypeName)`
 
 SetType sets Type field to given value.
 

@@ -23,8 +23,7 @@ var _ MappedNullable = &LoadBalancerDetails{}
 type LoadBalancerDetails struct {
 	// The load balancer unique identifier
 	Id string `json:"id"`
-	// Load balancer type
-	Type string `json:"type"`
+	Type TypeName `json:"type"`
 	Resources Resources `json:"resources"`
 	// The identifying name set to the load balancer
 	Reference NullableString `json:"reference"`
@@ -47,7 +46,7 @@ type _LoadBalancerDetails LoadBalancerDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerDetails(id string, type_ string, resources Resources, reference NullableString, state State, startedAt NullableTime, ips []IpDetails, region string, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract) *LoadBalancerDetails {
+func NewLoadBalancerDetails(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, ips []IpDetails, region string, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract) *LoadBalancerDetails {
 	this := LoadBalancerDetails{}
 	this.Id = id
 	this.Type = type_
@@ -97,9 +96,9 @@ func (o *LoadBalancerDetails) SetId(v string) {
 }
 
 // GetType returns the Type field value
-func (o *LoadBalancerDetails) GetType() string {
+func (o *LoadBalancerDetails) GetType() TypeName {
 	if o == nil {
-		var ret string
+		var ret TypeName
 		return ret
 	}
 
@@ -108,7 +107,7 @@ func (o *LoadBalancerDetails) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetTypeOk() (*string, bool) {
+func (o *LoadBalancerDetails) GetTypeOk() (*TypeName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -116,7 +115,7 @@ func (o *LoadBalancerDetails) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *LoadBalancerDetails) SetType(v string) {
+func (o *LoadBalancerDetails) SetType(v TypeName) {
 	o.Type = v
 }
 

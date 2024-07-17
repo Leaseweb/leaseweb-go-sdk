@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | The unique identifier of the instance | 
-**Type** | [**InstanceTypeName**](InstanceTypeName.md) |  | 
+**Type** | [**TypeName**](TypeName.md) |  | 
 **Resources** | [**Resources**](Resources.md) |  | 
 **Region** | **string** | The region in which the instance was launched | 
 **Reference** | **NullableString** | The identifying name set to the instance | 
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceDetails
 
-`func NewInstanceDetails(id string, type_ InstanceTypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image ImageDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, ) *InstanceDetails`
+`func NewInstanceDetails(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image ImageDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, ) *InstanceDetails`
 
 NewInstanceDetails instantiates a new InstanceDetails object
 This constructor will assign default values to properties that have it defined,
@@ -65,20 +65,20 @@ SetId sets Id field to given value.
 
 ### GetType
 
-`func (o *InstanceDetails) GetType() InstanceTypeName`
+`func (o *InstanceDetails) GetType() TypeName`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *InstanceDetails) GetTypeOk() (*InstanceTypeName, bool)`
+`func (o *InstanceDetails) GetTypeOk() (*TypeName, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *InstanceDetails) SetType(v InstanceTypeName)`
+`func (o *InstanceDetails) SetType(v TypeName)`
 
 SetType sets Type field to given value.
 
