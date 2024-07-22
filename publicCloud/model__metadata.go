@@ -19,7 +19,7 @@ var _ MappedNullable = &Metadata{}
 
 // Metadata Metadata about the collection
 type Metadata struct {
-	// Total amount of orders in this collection
+	// Total amount of elements in this collection
 	TotalCount *float32 `json:"totalCount,omitempty"`
 	// The offset used to generate this response
 	Offset *float32 `json:"offset,omitempty"`

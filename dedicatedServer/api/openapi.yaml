@@ -8532,7 +8532,7 @@ components:
         totalCount: 2
       properties:
         totalCount:
-          description: Total amount of orders in this collection
+          description: Total amount of elements in this collection
           example: 2
           type: number
         offset:

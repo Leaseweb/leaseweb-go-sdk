@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TotalCount** | Pointer to **float32** | Total amount of orders in this collection | [optional] 
+**TotalCount** | Pointer to **float32** | Total amount of elements in this collection | [optional] 
 **Offset** | Pointer to **float32** | The offset used to generate this response | [optional] [default to 0]
 **Limit** | Pointer to **float32** | The limit used to generate this response | [optional] [default to 5]
 
