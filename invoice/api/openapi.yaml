@@ -487,23 +487,24 @@ components:
         totalCount:
           description: Total amount of elements in this collection
           example: 2
-          format: int32
           minimum: 0
-          type: number
+          type: integer
         offset:
           default: 0
           description: The offset used to generate this response
           example: 0
-          format: int32
           minimum: 0
-          type: number
+          type: integer
         limit:
           default: 5
           description: The limit used to generate this response
           example: 5
-          format: int32
           minimum: 0
-          type: number
+          type: integer
+      required:
+      - limit
+      - offset
+      - totalCount
       title: metadata
       type: object
     getInvoiceListResult:

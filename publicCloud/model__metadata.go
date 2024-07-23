@@ -12,6 +12,7 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the Metadata type satisfies the MappedNullable interface at compile time
@@ -20,11 +21,11 @@ var _ MappedNullable = &Metadata{}
 // Metadata Metadata about the collection
 type Metadata struct {
 	// Total amount of elements in this collection
-	TotalCount *float32 `json:"totalCount,omitempty"`
+	TotalCount int32 `json:"totalCount"`
 	// The offset used to generate this response
-	Offset *float32 `json:"offset,omitempty"`
+	Offset int32 `json:"offset"`
 	// The limit used to generate this response
-	Limit *float32 `json:"limit,omitempty"`
+	Limit int32 `json:"limit"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,12 +35,11 @@ type _Metadata Metadata
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetadata() *Metadata {
+func NewMetadata(totalCount int32, offset int32, limit int32) *Metadata {
 	this := Metadata{}
-	var offset float32 = 0
-	this.Offset = &offset
-	var limit float32 = 5
-	this.Limit = &limit
+	this.TotalCount = totalCount
+	this.Offset = offset
+	this.Limit = limit
 	return &this
 }
 
@@ -48,107 +48,83 @@ func NewMetadata() *Metadata {
 // but it doesn't guarantee that properties required by API are set
 func NewMetadataWithDefaults() *Metadata {
 	this := Metadata{}
-	var offset float32 = 0
-	this.Offset = &offset
-	var limit float32 = 5
-	this.Limit = &limit
+	var offset int32 = 0
+	this.Offset = offset
+	var limit int32 = 5
+	this.Limit = limit
 	return &this
 }
 
-// GetTotalCount returns the TotalCount field value if set, zero value otherwise.
-func (o *Metadata) GetTotalCount() float32 {
-	if o == nil || IsNil(o.TotalCount) {
-		var ret float32
+// GetTotalCount returns the TotalCount field value
+func (o *Metadata) GetTotalCount() int32 {
+	if o == nil {
+		var ret int32
 		return ret
 	}
-	return *o.TotalCount
+
+	return o.TotalCount
 }
 
-// GetTotalCountOk returns a tuple with the TotalCount field value if set, nil otherwise
+// GetTotalCountOk returns a tuple with the TotalCount field value
 // and a boolean to check if the value has been set.
-func (o *Metadata) GetTotalCountOk() (*float32, bool) {
-	if o == nil || IsNil(o.TotalCount) {
+func (o *Metadata) GetTotalCountOk() (*int32, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TotalCount, true
+	return &o.TotalCount, true
 }
 
-// HasTotalCount returns a boolean if a field has been set.
-func (o *Metadata) HasTotalCount() bool {
-	if o != nil && !IsNil(o.TotalCount) {
-		return true
-	}
-
-	return false
+// SetTotalCount sets field value
+func (o *Metadata) SetTotalCount(v int32) {
+	o.TotalCount = v
 }
 
-// SetTotalCount gets a reference to the given float32 and assigns it to the TotalCount field.
-func (o *Metadata) SetTotalCount(v float32) {
-	o.TotalCount = &v
-}
-
-// GetOffset returns the Offset field value if set, zero value otherwise.
-func (o *Metadata) GetOffset() float32 {
-	if o == nil || IsNil(o.Offset) {
-		var ret float32
+// GetOffset returns the Offset field value
+func (o *Metadata) GetOffset() int32 {
+	if o == nil {
+		var ret int32
 		return ret
 	}
-	return *o.Offset
+
+	return o.Offset
 }
 
-// GetOffsetOk returns a tuple with the Offset field value if set, nil otherwise
+// GetOffsetOk returns a tuple with the Offset field value
 // and a boolean to check if the value has been set.
-func (o *Metadata) GetOffsetOk() (*float32, bool) {
-	if o == nil || IsNil(o.Offset) {
+func (o *Metadata) GetOffsetOk() (*int32, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Offset, true
+	return &o.Offset, true
 }
 
-// HasOffset returns a boolean if a field has been set.
-func (o *Metadata) HasOffset() bool {
-	if o != nil && !IsNil(o.Offset) {
-		return true
-	}
-
-	return false
+// SetOffset sets field value
+func (o *Metadata) SetOffset(v int32) {
+	o.Offset = v
 }
 
-// SetOffset gets a reference to the given float32 and assigns it to the Offset field.
-func (o *Metadata) SetOffset(v float32) {
-	o.Offset = &v
-}
-
-// GetLimit returns the Limit field value if set, zero value otherwise.
-func (o *Metadata) GetLimit() float32 {
-	if o == nil || IsNil(o.Limit) {
-		var ret float32
+// GetLimit returns the Limit field value
+func (o *Metadata) GetLimit() int32 {
+	if o == nil {
+		var ret int32
 		return ret
 	}
-	return *o.Limit
+
+	return o.Limit
 }
 
-// GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
+// GetLimitOk returns a tuple with the Limit field value
 // and a boolean to check if the value has been set.
-func (o *Metadata) GetLimitOk() (*float32, bool) {
-	if o == nil || IsNil(o.Limit) {
+func (o *Metadata) GetLimitOk() (*int32, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Limit, true
+	return &o.Limit, true
 }
 
-// HasLimit returns a boolean if a field has been set.
-func (o *Metadata) HasLimit() bool {
-	if o != nil && !IsNil(o.Limit) {
-		return true
-	}
-
-	return false
-}
-
-// SetLimit gets a reference to the given float32 and assigns it to the Limit field.
-func (o *Metadata) SetLimit(v float32) {
-	o.Limit = &v
+// SetLimit sets field value
+func (o *Metadata) SetLimit(v int32) {
+	o.Limit = v
 }
 
 func (o Metadata) MarshalJSON() ([]byte, error) {
@@ -161,15 +137,9 @@ func (o Metadata) MarshalJSON() ([]byte, error) {
 
 func (o Metadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.TotalCount) {
-		toSerialize["totalCount"] = o.TotalCount
-	}
-	if !IsNil(o.Offset) {
-		toSerialize["offset"] = o.Offset
-	}
-	if !IsNil(o.Limit) {
-		toSerialize["limit"] = o.Limit
-	}
+	toSerialize["totalCount"] = o.TotalCount
+	toSerialize["offset"] = o.Offset
+	toSerialize["limit"] = o.Limit
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -179,6 +149,29 @@ func (o Metadata) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Metadata) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"totalCount",
+		"offset",
+		"limit",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varMetadata := _Metadata{}
 
 	err = json.Unmarshal(data, &varMetadata)
