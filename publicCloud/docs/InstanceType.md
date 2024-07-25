@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Instance type&#39;s name | 
 **Resources** | [**Resources**](Resources.md) |  | 
-**StorageTypes** | **[]string** | The supported storage types for the instance type | 
+**StorageTypes** | [**[]RootDiskStorageType**](RootDiskStorageType.md) | The supported storage types for the instance type | 
 **Prices** | [**Prices**](Prices.md) |  | 
 
 ## Methods
 
 ### NewInstanceType
 
-`func NewInstanceType(name string, resources Resources, storageTypes []string, prices Prices, ) *InstanceType`
+`func NewInstanceType(name string, resources Resources, storageTypes []RootDiskStorageType, prices Prices, ) *InstanceType`
 
 NewInstanceType instantiates a new InstanceType object
 This constructor will assign default values to properties that have it defined,
@@ -70,20 +70,20 @@ SetResources sets Resources field to given value.
 
 ### GetStorageTypes
 
-`func (o *InstanceType) GetStorageTypes() []string`
+`func (o *InstanceType) GetStorageTypes() []RootDiskStorageType`
 
 GetStorageTypes returns the StorageTypes field if non-nil, zero value otherwise.
 
 ### GetStorageTypesOk
 
-`func (o *InstanceType) GetStorageTypesOk() (*[]string, bool)`
+`func (o *InstanceType) GetStorageTypesOk() (*[]RootDiskStorageType, bool)`
 
 GetStorageTypesOk returns a tuple with the StorageTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStorageTypes
 
-`func (o *InstanceType) SetStorageTypes(v []string)`
+`func (o *InstanceType) SetStorageTypes(v []RootDiskStorageType)`
 
 SetStorageTypes sets StorageTypes field to given value.
 

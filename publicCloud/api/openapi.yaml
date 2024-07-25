@@ -7437,13 +7437,16 @@ components:
       - publicNetworkSpeed
       title: resources
       type: object
+    rootDiskStorageType:
+      description: The root disk's storage type
+      enum:
+      - LOCAL
+      - CENTRAL
+      type: string
     storageTypes:
       description: The supported storage types for the instance type
-      example:
-      - CENTRAL
-      - LOCAL
       items:
-        type: string
+        $ref: '#/components/schemas/rootDiskStorageType'
       nullable: true
       type: array
     price:
@@ -7510,8 +7513,8 @@ components:
             unit: Gbps
             value: 10
         storageTypes:
-        - CENTRAL
-        - LOCAL
+        - null
+        - null
         prices:
           compute:
             monthlyPrice: "0.03000"
@@ -7533,11 +7536,8 @@ components:
           $ref: '#/components/schemas/resources'
         storageTypes:
           description: The supported storage types for the instance type
-          example:
-          - CENTRAL
-          - LOCAL
           items:
-            type: string
+            $ref: '#/components/schemas/rootDiskStorageType'
           nullable: true
           type: array
         prices:
@@ -7566,8 +7566,8 @@ components:
               unit: Gbps
               value: 10
           storageTypes:
-          - CENTRAL
-          - LOCAL
+          - null
+          - null
           prices:
             compute:
               monthlyPrice: "0.03000"
@@ -7596,8 +7596,8 @@ components:
               unit: Gbps
               value: 10
           storageTypes:
-          - CENTRAL
-          - LOCAL
+          - null
+          - null
           prices:
             compute:
               monthlyPrice: "0.03000"
@@ -7755,12 +7755,6 @@ components:
       maximum: 1000
       minimum: 5
       type: integer
-    rootDiskStorageType:
-      description: The root disk's storage type
-      enum:
-      - LOCAL
-      - CENTRAL
-      type: string
     billingFrequency:
       description: The billing frequency (in months) of the instance.
       enum:

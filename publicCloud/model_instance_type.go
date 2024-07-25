@@ -24,7 +24,7 @@ type InstanceType struct {
 	Name string `json:"name"`
 	Resources Resources `json:"resources"`
 	// The supported storage types for the instance type
-	StorageTypes []string `json:"storageTypes"`
+	StorageTypes []RootDiskStorageType `json:"storageTypes"`
 	Prices Prices `json:"prices"`
 	AdditionalProperties map[string]interface{}
 }
@@ -35,7 +35,7 @@ type _InstanceType InstanceType
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceType(name string, resources Resources, storageTypes []string, prices Prices) *InstanceType {
+func NewInstanceType(name string, resources Resources, storageTypes []RootDiskStorageType, prices Prices) *InstanceType {
 	this := InstanceType{}
 	this.Name = name
 	this.Resources = resources
@@ -101,10 +101,10 @@ func (o *InstanceType) SetResources(v Resources) {
 }
 
 // GetStorageTypes returns the StorageTypes field value
-// If the value is explicit nil, the zero value for []string will be returned
-func (o *InstanceType) GetStorageTypes() []string {
+// If the value is explicit nil, the zero value for []RootDiskStorageType will be returned
+func (o *InstanceType) GetStorageTypes() []RootDiskStorageType {
 	if o == nil {
-		var ret []string
+		var ret []RootDiskStorageType
 		return ret
 	}
 
@@ -114,7 +114,7 @@ func (o *InstanceType) GetStorageTypes() []string {
 // GetStorageTypesOk returns a tuple with the StorageTypes field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InstanceType) GetStorageTypesOk() ([]string, bool) {
+func (o *InstanceType) GetStorageTypesOk() ([]RootDiskStorageType, bool) {
 	if o == nil || IsNil(o.StorageTypes) {
 		return nil, false
 	}
@@ -122,7 +122,7 @@ func (o *InstanceType) GetStorageTypesOk() ([]string, bool) {
 }
 
 // SetStorageTypes sets field value
-func (o *InstanceType) SetStorageTypes(v []string) {
+func (o *InstanceType) SetStorageTypes(v []RootDiskStorageType) {
 	o.StorageTypes = v
 }
 
