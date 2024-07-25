@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **Name** | **string** | Instance type&#39;s name | 
 **Resources** | [**Resources**](Resources.md) |  | 
 **StorageTypes** | **[]string** | The supported storage types for the instance type | 
-**Prices** | [**Price**](Price.md) |  | 
+**Prices** | [**Prices**](Prices.md) |  | 
 
 ## Methods
 
 ### NewInstanceType
 
-`func NewInstanceType(name string, resources Resources, storageTypes []string, prices Price, ) *InstanceType`
+`func NewInstanceType(name string, resources Resources, storageTypes []string, prices Prices, ) *InstanceType`
 
 NewInstanceType instantiates a new InstanceType object
 This constructor will assign default values to properties that have it defined,
@@ -100,20 +100,20 @@ SetStorageTypes sets StorageTypes field to given value.
 UnsetStorageTypes ensures that no value is present for StorageTypes, not even an explicit nil
 ### GetPrices
 
-`func (o *InstanceType) GetPrices() Price`
+`func (o *InstanceType) GetPrices() Prices`
 
 GetPrices returns the Prices field if non-nil, zero value otherwise.
 
 ### GetPricesOk
 
-`func (o *InstanceType) GetPricesOk() (*Price, bool)`
+`func (o *InstanceType) GetPricesOk() (*Prices, bool)`
 
 GetPricesOk returns a tuple with the Prices field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrices
 
-`func (o *InstanceType) SetPrices(v Price)`
+`func (o *InstanceType) SetPrices(v Prices)`
 
 SetPrices sets Prices field to given value.
 

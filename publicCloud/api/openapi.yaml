@@ -7448,6 +7448,22 @@ components:
       type: array
     price:
       example:
+        monthlyPrice: "0.03000"
+        hourlyPrice: "0.00004"
+      properties:
+        hourlyPrice:
+          example: "0.00004"
+          type: string
+        monthlyPrice:
+          example: "0.03000"
+          type: string
+      required:
+      - hourlyPrice
+      - monthlyPrice
+      title: price
+      type: object
+    prices:
+      example:
         compute:
           monthlyPrice: "0.03000"
           hourlyPrice: "0.00004"
@@ -7468,7 +7484,7 @@ components:
           example: $
           type: string
         compute:
-          $ref: '#/components/schemas/compute'
+          $ref: '#/components/schemas/price'
         storage:
           $ref: '#/components/schemas/storage'
       required:
@@ -7525,7 +7541,7 @@ components:
           nullable: true
           type: array
         prices:
-          $ref: '#/components/schemas/price'
+          $ref: '#/components/schemas/prices'
       required:
       - name
       - prices
@@ -10310,45 +10326,6 @@ components:
       - value
       title: memory
       type: object
-    compute:
-      example:
-        monthlyPrice: "0.03000"
-        hourlyPrice: "0.00004"
-      properties:
-        hourlyPrice:
-          example: "0.00004"
-          type: string
-        monthlyPrice:
-          example: "0.03000"
-          type: string
-      title: compute
-      type: object
-    local:
-      example:
-        monthlyPrice: "0.03000"
-        hourlyPrice: "0.00004"
-      properties:
-        hourlyPrice:
-          example: "0.00004"
-          type: string
-        monthlyPrice:
-          example: "0.03000"
-          type: string
-      title: local
-      type: object
-    central:
-      example:
-        monthlyPrice: "0.03000"
-        hourlyPrice: "0.00004"
-      properties:
-        hourlyPrice:
-          example: "0.00004"
-          type: string
-        monthlyPrice:
-          example: "0.03000"
-          type: string
-      title: central
-      type: object
     storage:
       example:
         central:
@@ -10359,9 +10336,12 @@ components:
           hourlyPrice: "0.00004"
       properties:
         local:
-          $ref: '#/components/schemas/local'
+          $ref: '#/components/schemas/price'
         central:
-          $ref: '#/components/schemas/central'
+          $ref: '#/components/schemas/price'
+      required:
+      - central
+      - local
       title: storage
       type: object
     ddos:

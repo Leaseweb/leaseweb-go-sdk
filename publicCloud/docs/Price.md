@@ -4,16 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Currency** | **string** |  | 
-**CurrencySymbol** | **string** |  | 
-**Compute** | [**Compute**](Compute.md) |  | 
-**Storage** | [**Storage**](Storage.md) |  | 
+**HourlyPrice** | **string** |  | 
+**MonthlyPrice** | **string** |  | 
 
 ## Methods
 
 ### NewPrice
 
-`func NewPrice(currency string, currencySymbol string, compute Compute, storage Storage, ) *Price`
+`func NewPrice(hourlyPrice string, monthlyPrice string, ) *Price`
 
 NewPrice instantiates a new Price object
 This constructor will assign default values to properties that have it defined,
@@ -28,84 +26,44 @@ NewPriceWithDefaults instantiates a new Price object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetCurrency
+### GetHourlyPrice
 
-`func (o *Price) GetCurrency() string`
+`func (o *Price) GetHourlyPrice() string`
 
-GetCurrency returns the Currency field if non-nil, zero value otherwise.
+GetHourlyPrice returns the HourlyPrice field if non-nil, zero value otherwise.
 
-### GetCurrencyOk
+### GetHourlyPriceOk
 
-`func (o *Price) GetCurrencyOk() (*string, bool)`
+`func (o *Price) GetHourlyPriceOk() (*string, bool)`
 
-GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+GetHourlyPriceOk returns a tuple with the HourlyPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCurrency
+### SetHourlyPrice
 
-`func (o *Price) SetCurrency(v string)`
+`func (o *Price) SetHourlyPrice(v string)`
 
-SetCurrency sets Currency field to given value.
+SetHourlyPrice sets HourlyPrice field to given value.
 
 
-### GetCurrencySymbol
+### GetMonthlyPrice
 
-`func (o *Price) GetCurrencySymbol() string`
+`func (o *Price) GetMonthlyPrice() string`
 
-GetCurrencySymbol returns the CurrencySymbol field if non-nil, zero value otherwise.
+GetMonthlyPrice returns the MonthlyPrice field if non-nil, zero value otherwise.
 
-### GetCurrencySymbolOk
+### GetMonthlyPriceOk
 
-`func (o *Price) GetCurrencySymbolOk() (*string, bool)`
+`func (o *Price) GetMonthlyPriceOk() (*string, bool)`
 
-GetCurrencySymbolOk returns a tuple with the CurrencySymbol field if it's non-nil, zero value otherwise
+GetMonthlyPriceOk returns a tuple with the MonthlyPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCurrencySymbol
+### SetMonthlyPrice
 
-`func (o *Price) SetCurrencySymbol(v string)`
+`func (o *Price) SetMonthlyPrice(v string)`
 
-SetCurrencySymbol sets CurrencySymbol field to given value.
-
-
-### GetCompute
-
-`func (o *Price) GetCompute() Compute`
-
-GetCompute returns the Compute field if non-nil, zero value otherwise.
-
-### GetComputeOk
-
-`func (o *Price) GetComputeOk() (*Compute, bool)`
-
-GetComputeOk returns a tuple with the Compute field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCompute
-
-`func (o *Price) SetCompute(v Compute)`
-
-SetCompute sets Compute field to given value.
-
-
-### GetStorage
-
-`func (o *Price) GetStorage() Storage`
-
-GetStorage returns the Storage field if non-nil, zero value otherwise.
-
-### GetStorageOk
-
-`func (o *Price) GetStorageOk() (*Storage, bool)`
-
-GetStorageOk returns a tuple with the Storage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStorage
-
-`func (o *Price) SetStorage(v Storage)`
-
-SetStorage sets Storage field to given value.
+SetMonthlyPrice sets MonthlyPrice field to given value.
 
 
 

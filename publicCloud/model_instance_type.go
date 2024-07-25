@@ -25,7 +25,7 @@ type InstanceType struct {
 	Resources Resources `json:"resources"`
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes"`
-	Prices Price `json:"prices"`
+	Prices Prices `json:"prices"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,7 +35,7 @@ type _InstanceType InstanceType
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceType(name string, resources Resources, storageTypes []string, prices Price) *InstanceType {
+func NewInstanceType(name string, resources Resources, storageTypes []string, prices Prices) *InstanceType {
 	this := InstanceType{}
 	this.Name = name
 	this.Resources = resources
@@ -127,9 +127,9 @@ func (o *InstanceType) SetStorageTypes(v []string) {
 }
 
 // GetPrices returns the Prices field value
-func (o *InstanceType) GetPrices() Price {
+func (o *InstanceType) GetPrices() Prices {
 	if o == nil {
-		var ret Price
+		var ret Prices
 		return ret
 	}
 
@@ -138,7 +138,7 @@ func (o *InstanceType) GetPrices() Price {
 
 // GetPricesOk returns a tuple with the Prices field value
 // and a boolean to check if the value has been set.
-func (o *InstanceType) GetPricesOk() (*Price, bool) {
+func (o *InstanceType) GetPricesOk() (*Prices, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -146,7 +146,7 @@ func (o *InstanceType) GetPricesOk() (*Price, bool) {
 }
 
 // SetPrices sets field value
-func (o *InstanceType) SetPrices(v Price) {
+func (o *InstanceType) SetPrices(v Prices) {
 	o.Prices = v
 }
 

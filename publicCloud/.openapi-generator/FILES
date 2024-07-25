@@ -15,9 +15,7 @@ docs/AutoScalingGroupType.md
 docs/Balance.md
 docs/Billing.md
 docs/BillingFrequency.md
-docs/Central.md
 docs/Certificate.md
-docs/Compute.md
 docs/Contract.md
 docs/ContractState.md
 docs/ContractTerm.md
@@ -78,7 +76,6 @@ docs/LoadBalancerListener.md
 docs/LoadBalancerListenerOpts.md
 docs/LoadBalancerTargetOpt.md
 docs/LoadBalancerTargetOpts.md
-docs/Local.md
 docs/MarketApp.md
 docs/Memory.md
 docs/Metadata.md
@@ -87,6 +84,7 @@ docs/NetworkType.md
 docs/NullRouteIpOpts.md
 docs/Peak.md
 docs/Price.md
+docs/Prices.md
 docs/PrivateNetwork.md
 docs/PublicCloudAPI.md
 docs/Region.md
@@ -129,9 +127,7 @@ model_auto_scaling_group_type.go
 model_balance.go
 model_billing.go
 model_billing_frequency.go
-model_central.go
 model_certificate.go
-model_compute.go
 model_contract.go
 model_contract_state.go
 model_contract_term.go
@@ -192,7 +188,6 @@ model_load_balancer_listener.go
 model_load_balancer_listener_opts.go
 model_load_balancer_target_opt.go
 model_load_balancer_target_opts.go
-model_local.go
 model_market_app.go
 model_memory.go
 model_network_speed.go
@@ -200,6 +195,7 @@ model_network_type.go
 model_null_route_ip_opts.go
 model_peak.go
 model_price.go
+model_prices.go
 model_private_network.go
 model_region.go
 model_register_auto_scaling_group_load_balancer_opts.go

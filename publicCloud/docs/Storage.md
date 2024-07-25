@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Local** | Pointer to [**Local**](Local.md) |  | [optional] 
-**Central** | Pointer to [**Central**](Central.md) |  | [optional] 
+**Local** | [**Price**](Price.md) |  | 
+**Central** | [**Price**](Price.md) |  | 
 
 ## Methods
 
 ### NewStorage
 
-`func NewStorage() *Storage`
+`func NewStorage(local Price, central Price, ) *Storage`
 
 NewStorage instantiates a new Storage object
 This constructor will assign default values to properties that have it defined,
@@ -28,53 +28,43 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetLocal
 
-`func (o *Storage) GetLocal() Local`
+`func (o *Storage) GetLocal() Price`
 
 GetLocal returns the Local field if non-nil, zero value otherwise.
 
 ### GetLocalOk
 
-`func (o *Storage) GetLocalOk() (*Local, bool)`
+`func (o *Storage) GetLocalOk() (*Price, bool)`
 
 GetLocalOk returns a tuple with the Local field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLocal
 
-`func (o *Storage) SetLocal(v Local)`
+`func (o *Storage) SetLocal(v Price)`
 
 SetLocal sets Local field to given value.
 
-### HasLocal
-
-`func (o *Storage) HasLocal() bool`
-
-HasLocal returns a boolean if a field has been set.
 
 ### GetCentral
 
-`func (o *Storage) GetCentral() Central`
+`func (o *Storage) GetCentral() Price`
 
 GetCentral returns the Central field if non-nil, zero value otherwise.
 
 ### GetCentralOk
 
-`func (o *Storage) GetCentralOk() (*Central, bool)`
+`func (o *Storage) GetCentralOk() (*Price, bool)`
 
 GetCentralOk returns a tuple with the Central field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCentral
 
-`func (o *Storage) SetCentral(v Central)`
+`func (o *Storage) SetCentral(v Price)`
 
 SetCentral sets Central field to given value.
 
-### HasCentral
-
-`func (o *Storage) HasCentral() bool`
-
-HasCentral returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

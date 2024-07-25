@@ -20,10 +20,8 @@ var _ MappedNullable = &Price{}
 
 // Price struct for Price
 type Price struct {
-	Currency string `json:"currency"`
-	CurrencySymbol string `json:"currencySymbol"`
-	Compute Compute `json:"compute"`
-	Storage Storage `json:"storage"`
+	HourlyPrice string `json:"hourlyPrice"`
+	MonthlyPrice string `json:"monthlyPrice"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,12 +31,10 @@ type _Price Price
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrice(currency string, currencySymbol string, compute Compute, storage Storage) *Price {
+func NewPrice(hourlyPrice string, monthlyPrice string) *Price {
 	this := Price{}
-	this.Currency = currency
-	this.CurrencySymbol = currencySymbol
-	this.Compute = compute
-	this.Storage = storage
+	this.HourlyPrice = hourlyPrice
+	this.MonthlyPrice = monthlyPrice
 	return &this
 }
 
@@ -50,100 +46,52 @@ func NewPriceWithDefaults() *Price {
 	return &this
 }
 
-// GetCurrency returns the Currency field value
-func (o *Price) GetCurrency() string {
+// GetHourlyPrice returns the HourlyPrice field value
+func (o *Price) GetHourlyPrice() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Currency
+	return o.HourlyPrice
 }
 
-// GetCurrencyOk returns a tuple with the Currency field value
+// GetHourlyPriceOk returns a tuple with the HourlyPrice field value
 // and a boolean to check if the value has been set.
-func (o *Price) GetCurrencyOk() (*string, bool) {
+func (o *Price) GetHourlyPriceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Currency, true
+	return &o.HourlyPrice, true
 }
 
-// SetCurrency sets field value
-func (o *Price) SetCurrency(v string) {
-	o.Currency = v
+// SetHourlyPrice sets field value
+func (o *Price) SetHourlyPrice(v string) {
+	o.HourlyPrice = v
 }
 
-// GetCurrencySymbol returns the CurrencySymbol field value
-func (o *Price) GetCurrencySymbol() string {
+// GetMonthlyPrice returns the MonthlyPrice field value
+func (o *Price) GetMonthlyPrice() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.CurrencySymbol
+	return o.MonthlyPrice
 }
 
-// GetCurrencySymbolOk returns a tuple with the CurrencySymbol field value
+// GetMonthlyPriceOk returns a tuple with the MonthlyPrice field value
 // and a boolean to check if the value has been set.
-func (o *Price) GetCurrencySymbolOk() (*string, bool) {
+func (o *Price) GetMonthlyPriceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.CurrencySymbol, true
+	return &o.MonthlyPrice, true
 }
 
-// SetCurrencySymbol sets field value
-func (o *Price) SetCurrencySymbol(v string) {
-	o.CurrencySymbol = v
-}
-
-// GetCompute returns the Compute field value
-func (o *Price) GetCompute() Compute {
-	if o == nil {
-		var ret Compute
-		return ret
-	}
-
-	return o.Compute
-}
-
-// GetComputeOk returns a tuple with the Compute field value
-// and a boolean to check if the value has been set.
-func (o *Price) GetComputeOk() (*Compute, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Compute, true
-}
-
-// SetCompute sets field value
-func (o *Price) SetCompute(v Compute) {
-	o.Compute = v
-}
-
-// GetStorage returns the Storage field value
-func (o *Price) GetStorage() Storage {
-	if o == nil {
-		var ret Storage
-		return ret
-	}
-
-	return o.Storage
-}
-
-// GetStorageOk returns a tuple with the Storage field value
-// and a boolean to check if the value has been set.
-func (o *Price) GetStorageOk() (*Storage, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Storage, true
-}
-
-// SetStorage sets field value
-func (o *Price) SetStorage(v Storage) {
-	o.Storage = v
+// SetMonthlyPrice sets field value
+func (o *Price) SetMonthlyPrice(v string) {
+	o.MonthlyPrice = v
 }
 
 func (o Price) MarshalJSON() ([]byte, error) {
@@ -156,10 +104,8 @@ func (o Price) MarshalJSON() ([]byte, error) {
 
 func (o Price) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["currency"] = o.Currency
-	toSerialize["currencySymbol"] = o.CurrencySymbol
-	toSerialize["compute"] = o.Compute
-	toSerialize["storage"] = o.Storage
+	toSerialize["hourlyPrice"] = o.HourlyPrice
+	toSerialize["monthlyPrice"] = o.MonthlyPrice
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -173,10 +119,8 @@ func (o *Price) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"currency",
-		"currencySymbol",
-		"compute",
-		"storage",
+		"hourlyPrice",
+		"monthlyPrice",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -206,10 +150,8 @@ func (o *Price) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "currencySymbol")
-		delete(additionalProperties, "compute")
-		delete(additionalProperties, "storage")
+		delete(additionalProperties, "hourlyPrice")
+		delete(additionalProperties, "monthlyPrice")
 		o.AdditionalProperties = additionalProperties
 	}
 

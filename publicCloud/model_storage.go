@@ -12,6 +12,7 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the Storage type satisfies the MappedNullable interface at compile time
@@ -19,8 +20,8 @@ var _ MappedNullable = &Storage{}
 
 // Storage struct for Storage
 type Storage struct {
-	Local *Local `json:"local,omitempty"`
-	Central *Central `json:"central,omitempty"`
+	Local Price `json:"local"`
+	Central Price `json:"central"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,8 +31,10 @@ type _Storage Storage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStorage() *Storage {
+func NewStorage(local Price, central Price) *Storage {
 	this := Storage{}
+	this.Local = local
+	this.Central = central
 	return &this
 }
 
@@ -43,68 +46,52 @@ func NewStorageWithDefaults() *Storage {
 	return &this
 }
 
-// GetLocal returns the Local field value if set, zero value otherwise.
-func (o *Storage) GetLocal() Local {
-	if o == nil || IsNil(o.Local) {
-		var ret Local
+// GetLocal returns the Local field value
+func (o *Storage) GetLocal() Price {
+	if o == nil {
+		var ret Price
 		return ret
 	}
-	return *o.Local
+
+	return o.Local
 }
 
-// GetLocalOk returns a tuple with the Local field value if set, nil otherwise
+// GetLocalOk returns a tuple with the Local field value
 // and a boolean to check if the value has been set.
-func (o *Storage) GetLocalOk() (*Local, bool) {
-	if o == nil || IsNil(o.Local) {
+func (o *Storage) GetLocalOk() (*Price, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Local, true
+	return &o.Local, true
 }
 
-// HasLocal returns a boolean if a field has been set.
-func (o *Storage) HasLocal() bool {
-	if o != nil && !IsNil(o.Local) {
-		return true
-	}
-
-	return false
+// SetLocal sets field value
+func (o *Storage) SetLocal(v Price) {
+	o.Local = v
 }
 
-// SetLocal gets a reference to the given Local and assigns it to the Local field.
-func (o *Storage) SetLocal(v Local) {
-	o.Local = &v
-}
-
-// GetCentral returns the Central field value if set, zero value otherwise.
-func (o *Storage) GetCentral() Central {
-	if o == nil || IsNil(o.Central) {
-		var ret Central
+// GetCentral returns the Central field value
+func (o *Storage) GetCentral() Price {
+	if o == nil {
+		var ret Price
 		return ret
 	}
-	return *o.Central
+
+	return o.Central
 }
 
-// GetCentralOk returns a tuple with the Central field value if set, nil otherwise
+// GetCentralOk returns a tuple with the Central field value
 // and a boolean to check if the value has been set.
-func (o *Storage) GetCentralOk() (*Central, bool) {
-	if o == nil || IsNil(o.Central) {
+func (o *Storage) GetCentralOk() (*Price, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Central, true
+	return &o.Central, true
 }
 
-// HasCentral returns a boolean if a field has been set.
-func (o *Storage) HasCentral() bool {
-	if o != nil && !IsNil(o.Central) {
-		return true
-	}
-
-	return false
-}
-
-// SetCentral gets a reference to the given Central and assigns it to the Central field.
-func (o *Storage) SetCentral(v Central) {
-	o.Central = &v
+// SetCentral sets field value
+func (o *Storage) SetCentral(v Price) {
+	o.Central = v
 }
 
 func (o Storage) MarshalJSON() ([]byte, error) {
@@ -117,12 +104,8 @@ func (o Storage) MarshalJSON() ([]byte, error) {
 
 func (o Storage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Local) {
-		toSerialize["local"] = o.Local
-	}
-	if !IsNil(o.Central) {
-		toSerialize["central"] = o.Central
-	}
+	toSerialize["local"] = o.Local
+	toSerialize["central"] = o.Central
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -132,6 +115,28 @@ func (o Storage) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Storage) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"local",
+		"central",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varStorage := _Storage{}
 
 	err = json.Unmarshal(data, &varStorage)

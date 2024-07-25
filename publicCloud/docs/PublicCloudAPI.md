@@ -1945,7 +1945,7 @@ func main() {
 	imageId := openapiclient.imageId("ALMALINUX_8_64BIT") // ImageId | Available Images can be obtained using `/v1/images`. (optional)
 	state := openapiclient.state("CREATING") // State | The instance's current state(s), separated by commas. (optional)
 	region := "eu-west-3" // string | Available regions can be obtained using `/v1/regions` (optional)
-	type_ := *openapiclient.NewInstanceType("Name_example", *openapiclient.NewResources(*openapiclient.NewCpu(int32(2), "vCPU"), *openapiclient.NewMemory(float32(3.75), "GiB"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps")), []string{"StorageTypes_example"}, *openapiclient.NewPrice("USD", "$", *openapiclient.NewCompute(), *openapiclient.NewStorage())) // InstanceType | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
+	type_ := *openapiclient.NewInstanceType("Name_example", *openapiclient.NewResources(*openapiclient.NewCpu(int32(2), "vCPU"), *openapiclient.NewMemory(float32(3.75), "GiB"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps")), []string{"StorageTypes_example"}, *openapiclient.NewPrices("USD", "$", *openapiclient.NewPrice("0.00004", "0.03000"), *openapiclient.NewStorage(*openapiclient.NewPrice("0.00004", "0.03000"), ))) // InstanceType | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
