@@ -1942,7 +1942,7 @@ func main() {
 	id := "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" // string |  (optional)
 	contractType := openapiclient.contractType("HOURLY") // ContractType |  (optional)
 	contractState := openapiclient.contractState("ACTIVE") // ContractState |  (optional)
-	imageId := openapiclient.imageId("ALMALINUX_8_64BIT") // ImageId | Available Images can be obtained using `/v1/images`. (optional)
+	imageId := "UBUNTU_22_04_64BIT" // string | Available Images can be obtained using `/v1/images`. (optional)
 	state := openapiclient.state("CREATING") // State | The instance's current state(s), separated by commas. (optional)
 	region := "eu-west-3" // string | Available regions can be obtained using `/v1/regions` (optional)
 	type_ := *openapiclient.NewInstanceType("Name_example", *openapiclient.NewResources(*openapiclient.NewCpu(int32(2), "vCPU"), *openapiclient.NewMemory(float32(3.75), "GiB"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps")), []openapiclient.RootDiskStorageType{openapiclient.rootDiskStorageType("LOCAL")}, *openapiclient.NewPrices("USD", "$", *openapiclient.NewPrice("0.00004", "0.03000"), *openapiclient.NewStorage(*openapiclient.NewPrice("0.00004", "0.03000"), ))) // InstanceType | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
@@ -1977,7 +1977,7 @@ Name | Type | Description  | Notes
  **id** | **string** |  | 
  **contractType** | [**ContractType**](ContractType.md) |  | 
  **contractState** | [**ContractState**](ContractState.md) |  | 
- **imageId** | [**ImageId**](ImageId.md) | Available Images can be obtained using &#x60;/v1/images&#x60;. | 
+ **imageId** | **string** | Available Images can be obtained using &#x60;/v1/images&#x60;. | 
  **state** | [**State**](State.md) | The instance&#39;s current state(s), separated by commas. | 
  **region** | **string** | Available regions can be obtained using &#x60;/v1/regions&#x60; | 
  **type_** | [**InstanceType**](InstanceType.md) | Available instance types for your region can be obtained using &#x60;/v1/instanceTypes&#x60;. | 
@@ -3019,7 +3019,7 @@ import (
 )
 
 func main() {
-	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.typeName("lsw.m3.large"), openapiclient.imageId("ALMALINUX_8_64BIT"), openapiclient.contractType("HOURLY"), openapiclient.contractTerm(0), openapiclient.billingFrequency(1), openapiclient.rootDiskStorageType("LOCAL")) // LaunchInstanceOpts | 
+	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.typeName("lsw.m3.large"), "UBUNTU_22_04_64BIT", openapiclient.contractType("HOURLY"), openapiclient.contractTerm(0), openapiclient.billingFrequency(1), openapiclient.rootDiskStorageType("LOCAL")) // LaunchInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

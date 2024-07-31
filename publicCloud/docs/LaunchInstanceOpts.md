@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Region** | **string** | Region to launch the instance into | 
 **Type** | [**TypeName**](TypeName.md) |  | 
-**ImageId** | [**ImageId**](ImageId.md) |  | 
+**ImageId** | **string** | imageId can be either an Operating System or a UUID in case of a Custom Image | 
 **MarketAppId** | Pointer to **string** | Market App ID that must be installed into the instance | [optional] 
 **Reference** | Pointer to **string** | An identifying name you can refer to the instance | [optional] 
 **ContractType** | [**ContractType**](ContractType.md) |  | 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewLaunchInstanceOpts
 
-`func NewLaunchInstanceOpts(region string, type_ TypeName, imageId ImageId, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
+`func NewLaunchInstanceOpts(region string, type_ TypeName, imageId string, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
 
 NewLaunchInstanceOpts instantiates a new LaunchInstanceOpts object
 This constructor will assign default values to properties that have it defined,
@@ -77,20 +77,20 @@ SetType sets Type field to given value.
 
 ### GetImageId
 
-`func (o *LaunchInstanceOpts) GetImageId() ImageId`
+`func (o *LaunchInstanceOpts) GetImageId() string`
 
 GetImageId returns the ImageId field if non-nil, zero value otherwise.
 
 ### GetImageIdOk
 
-`func (o *LaunchInstanceOpts) GetImageIdOk() (*ImageId, bool)`
+`func (o *LaunchInstanceOpts) GetImageIdOk() (*string, bool)`
 
 GetImageIdOk returns a tuple with the ImageId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetImageId
 
-`func (o *LaunchInstanceOpts) SetImageId(v ImageId)`
+`func (o *LaunchInstanceOpts) SetImageId(v string)`
 
 SetImageId sets ImageId field to given value.
 

@@ -23,7 +23,8 @@ type LaunchInstanceOpts struct {
 	// Region to launch the instance into
 	Region string `json:"region"`
 	Type TypeName `json:"type"`
-	ImageId ImageId `json:"imageId"`
+	// imageId can be either an Operating System or a UUID in case of a Custom Image
+	ImageId string `json:"imageId"`
 	// Market App ID that must be installed into the instance
 	MarketAppId *string `json:"marketAppId,omitempty"`
 	// An identifying name you can refer to the instance
@@ -45,7 +46,7 @@ type _LaunchInstanceOpts LaunchInstanceOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchInstanceOpts(region string, type_ TypeName, imageId ImageId, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType) *LaunchInstanceOpts {
+func NewLaunchInstanceOpts(region string, type_ TypeName, imageId string, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType) *LaunchInstanceOpts {
 	this := LaunchInstanceOpts{}
 	this.Region = region
 	this.Type = type_
@@ -114,9 +115,9 @@ func (o *LaunchInstanceOpts) SetType(v TypeName) {
 }
 
 // GetImageId returns the ImageId field value
-func (o *LaunchInstanceOpts) GetImageId() ImageId {
+func (o *LaunchInstanceOpts) GetImageId() string {
 	if o == nil {
-		var ret ImageId
+		var ret string
 		return ret
 	}
 
@@ -125,7 +126,7 @@ func (o *LaunchInstanceOpts) GetImageId() ImageId {
 
 // GetImageIdOk returns a tuple with the ImageId field value
 // and a boolean to check if the value has been set.
-func (o *LaunchInstanceOpts) GetImageIdOk() (*ImageId, bool) {
+func (o *LaunchInstanceOpts) GetImageIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,7 +134,7 @@ func (o *LaunchInstanceOpts) GetImageIdOk() (*ImageId, bool) {
 }
 
 // SetImageId sets field value
-func (o *LaunchInstanceOpts) SetImageId(v ImageId) {
+func (o *LaunchInstanceOpts) SetImageId(v string) {
 	o.ImageId = v
 }
 

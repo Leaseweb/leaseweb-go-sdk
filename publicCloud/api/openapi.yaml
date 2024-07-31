@@ -8156,26 +8156,10 @@ components:
       - DELETE_SCHEDULED
       type: string
     imageId:
-      description: Image ID
-      enum:
-      - ALMALINUX_8_64BIT
-      - ALMALINUX_9_64BIT
-      - ARCH_LINUX_64BIT
-      - CENTOS_7_64BIT
-      - DEBIAN_10_64BIT
-      - DEBIAN_11_64BIT
-      - DEBIAN_12_64BIT
-      - FREEBSD_13_64BIT
-      - FREEBSD_14_64BIT
-      - ROCKY_LINUX_8_64BIT
-      - ROCKY_LINUX_9_64BIT
-      - UBUNTU_20_04_64BIT
-      - UBUNTU_22_04_64BIT
-      - UBUNTU_24_04_64BIT
-      - WINDOWS_SERVER_2016_STANDARD_64BIT
-      - WINDOWS_SERVER_2019_STANDARD_64BIT
-      - WINDOWS_SERVER_2022_STANDARD_64BIT
-      example: UBUNTU_24_04_64BIT
+      description: imageId can be either an Operating System or a UUID in case of
+        a Custom Image
+      example: UBUNTU_22_04_64BIT
+      title: imageId
       type: string
     state:
       description: The current state
@@ -8403,15 +8387,25 @@ components:
       type: object
     image:
       example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
         flavour: ubuntu
+        custom: true
         name: Ubuntu 20.04 LTS (x86_64)
-        id: UBUNTU_24_04_64BIT
+        id: UBUNTU_22_04_64BIT
+        state: READY
         family: linux
+        stateReason: Could not find configured bucket
+        region: eu-west-3
         version: "20.04"
         architecture: x86_64
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
-          $ref: '#/components/schemas/imageId'
+          description: imageId can be either an Operating System or a UUID in case
+            of a Custom Image
+          example: UBUNTU_22_04_64BIT
+          title: imageId
+          type: string
         name:
           example: Ubuntu 20.04 LTS (x86_64)
           type: string
@@ -8426,9 +8420,37 @@ components:
           type: string
         architecture:
           example: x86_64
+          nullable: true
           type: string
+        state:
+          example: READY
+          nullable: true
+          type: string
+        stateReason:
+          description: The reason in case of failure
+          example: Could not find configured bucket
+          nullable: true
+          type: string
+        region:
+          description: The region where the image was uploaded
+          example: eu-west-3
+          nullable: true
+          type: string
+        createdAt:
+          description: Date when the image was created
+          format: date-time
+          nullable: true
+          type: string
+        updatedAt:
+          description: Date when the image was updated
+          format: date-time
+          nullable: true
+          type: string
+        custom:
+          description: Standard or Custom image
+          nullable: true
+          type: boolean
       required:
-      - architecture
       - family
       - flavour
       - id
@@ -8627,12 +8649,18 @@ components:
         type: object
       example:
         image:
+          createdAt: 2000-01-23T04:56:07.000+00:00
           flavour: ubuntu
+          custom: true
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_24_04_64BIT
+          id: UBUNTU_22_04_64BIT
+          state: READY
           family: linux
+          stateReason: Could not find configured bucket
+          region: eu-west-3
           version: "20.04"
           architecture: x86_64
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         rootDiskStorageType: null
         autoScalingGroup:
           cpuThreshold: 5
@@ -8701,12 +8729,18 @@ components:
       example:
         instances:
         - image:
+            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
+            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_24_04_64BIT
+            id: UBUNTU_22_04_64BIT
+            state: READY
             family: linux
+            stateReason: Could not find configured bucket
+            region: eu-west-3
             version: "20.04"
             architecture: x86_64
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           rootDiskStorageType: null
           autoScalingGroup:
             cpuThreshold: 5
@@ -8772,12 +8806,18 @@ components:
           productType: productType
           hasPublicIpV4: true
         - image:
+            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
+            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_24_04_64BIT
+            id: UBUNTU_22_04_64BIT
+            state: READY
             family: linux
+            stateReason: Could not find configured bucket
+            region: eu-west-3
             version: "20.04"
             architecture: x86_64
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           rootDiskStorageType: null
           autoScalingGroup:
             cpuThreshold: 5
@@ -8863,7 +8903,11 @@ components:
         type:
           $ref: '#/components/schemas/typeName'
         imageId:
-          $ref: '#/components/schemas/imageId'
+          description: imageId can be either an Operating System or a UUID in case
+            of a Custom Image
+          example: UBUNTU_22_04_64BIT
+          title: imageId
+          type: string
         marketAppId:
           description: Market App ID that must be installed into the instance
           example: CPANEL
@@ -8963,14 +9007,20 @@ components:
         - LOADBALANCER
         - LOADBALANCER
         flavour: ubuntu
+        custom: true
+        stateReason: Could not find configured bucket
+        version: "20.04"
+        createdAt: 2000-01-23T04:56:07.000+00:00
         name: Ubuntu 20.04 LTS (x86_64)
-        id: UBUNTU_24_04_64BIT
+        id: UBUNTU_22_04_64BIT
+        state: READY
         storageTypes:
         - CENTRAL
         - LOCAL
         family: linux
-        version: "20.04"
+        region: eu-west-3
         architecture: x86_64
+        updatedAt: 2000-01-23T04:56:07.000+00:00
     ipDetails:
       allOf:
       - $ref: '#/components/schemas/ip'
@@ -9021,14 +9071,20 @@ components:
           - LOADBALANCER
           - LOADBALANCER
           flavour: ubuntu
+          custom: true
+          stateReason: Could not find configured bucket
+          version: "20.04"
+          createdAt: 2000-01-23T04:56:07.000+00:00
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_24_04_64BIT
+          id: UBUNTU_22_04_64BIT
+          state: READY
           storageTypes:
           - CENTRAL
           - LOCAL
           family: linux
-          version: "20.04"
+          region: eu-west-3
           architecture: x86_64
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         rootDiskStorageType: null
         iso:
           name: name
@@ -9390,26 +9446,38 @@ components:
           - LOADBALANCER
           - LOADBALANCER
           flavour: ubuntu
+          custom: true
+          stateReason: Could not find configured bucket
+          version: "20.04"
+          createdAt: 2000-01-23T04:56:07.000+00:00
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_24_04_64BIT
+          id: UBUNTU_22_04_64BIT
+          state: READY
           storageTypes:
           - CENTRAL
           - LOCAL
           family: linux
-          version: "20.04"
+          region: eu-west-3
           architecture: x86_64
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         - marketApps:
           - LOADBALANCER
           - LOADBALANCER
           flavour: ubuntu
+          custom: true
+          stateReason: Could not find configured bucket
+          version: "20.04"
+          createdAt: 2000-01-23T04:56:07.000+00:00
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_24_04_64BIT
+          id: UBUNTU_22_04_64BIT
+          state: READY
           storageTypes:
           - CENTRAL
           - LOCAL
           family: linux
-          version: "20.04"
+          region: eu-west-3
           architecture: x86_64
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         _metadata:
           offset: 0
           limit: 5
@@ -9426,24 +9494,36 @@ components:
       example:
         marketApps:
         - image:
+            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
+            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_24_04_64BIT
+            id: UBUNTU_22_04_64BIT
+            state: READY
             family: linux
+            stateReason: Could not find configured bucket
+            region: eu-west-3
             version: "20.04"
             architecture: x86_64
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
           id: id
           category: category
           family: family
           version: version
         - image:
+            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
+            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_24_04_64BIT
+            id: UBUNTU_22_04_64BIT
+            state: READY
             family: linux
+            stateReason: Could not find configured bucket
+            region: eu-west-3
             version: "20.04"
             architecture: x86_64
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
           id: id
           category: category
@@ -10037,12 +10117,18 @@ components:
         targets:
         - reference: reference
           image:
+            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
+            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_24_04_64BIT
+            id: UBUNTU_22_04_64BIT
+            state: READY
             family: linux
+            stateReason: Could not find configured bucket
+            region: eu-west-3
             version: "20.04"
             architecture: x86_64
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           healthCheckStatus:
             checkStatus: checkStatus
             status: status
@@ -10065,12 +10151,18 @@ components:
             version: null
         - reference: reference
           image:
+            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
+            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_24_04_64BIT
+            id: UBUNTU_22_04_64BIT
+            state: READY
             family: linux
+            stateReason: Could not find configured bucket
+            region: eu-west-3
             version: "20.04"
             architecture: x86_64
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           healthCheckStatus:
             checkStatus: checkStatus
             status: status
@@ -11113,12 +11205,18 @@ components:
     marketApp:
       example:
         image:
+          createdAt: 2000-01-23T04:56:07.000+00:00
           flavour: ubuntu
+          custom: true
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_24_04_64BIT
+          id: UBUNTU_22_04_64BIT
+          state: READY
           family: linux
+          stateReason: Could not find configured bucket
+          region: eu-west-3
           version: "20.04"
           architecture: x86_64
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         name: name
         id: id
         category: category
@@ -11169,12 +11267,18 @@ components:
       example:
         reference: reference
         image:
+          createdAt: 2000-01-23T04:56:07.000+00:00
           flavour: ubuntu
+          custom: true
           name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_24_04_64BIT
+          id: UBUNTU_22_04_64BIT
+          state: READY
           family: linux
+          stateReason: Could not find configured bucket
+          region: eu-west-3
           version: "20.04"
           architecture: x86_64
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         healthCheckStatus:
           checkStatus: checkStatus
           status: status

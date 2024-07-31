@@ -200,7 +200,6 @@ Class | Method | HTTP request | Description
  - [HealthCheckStatus](docs/HealthCheckStatus.md)
  - [Image](docs/Image.md)
  - [ImageDetails](docs/ImageDetails.md)
- - [ImageId](docs/ImageId.md)
  - [Instance](docs/Instance.md)
  - [InstanceBase](docs/InstanceBase.md)
  - [InstanceDetails](docs/InstanceDetails.md)

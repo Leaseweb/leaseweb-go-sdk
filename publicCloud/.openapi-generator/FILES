@@ -57,7 +57,6 @@ docs/HealthCheck.md
 docs/HealthCheckStatus.md
 docs/Image.md
 docs/ImageDetails.md
-docs/ImageId.md
 docs/Instance.md
 docs/InstanceBase.md
 docs/InstanceDetails.md
@@ -169,7 +168,6 @@ model_health_check.go
 model_health_check_status.go
 model_image.go
 model_image_details.go
-model_image_id.go
 model_instance.go
 model_instance_base.go
 model_instance_details.go

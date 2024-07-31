@@ -5680,7 +5680,7 @@ type ApiGetInstanceListRequest struct {
 	id *string
 	contractType *ContractType
 	contractState *ContractState
-	imageId *ImageId
+	imageId *string
 	state *State
 	region *string
 	type_ *InstanceType
@@ -5724,7 +5724,7 @@ func (r ApiGetInstanceListRequest) ContractState(contractState ContractState) Ap
 }
 
 // Available Images can be obtained using &#x60;/v1/images&#x60;.
-func (r ApiGetInstanceListRequest) ImageId(imageId ImageId) ApiGetInstanceListRequest {
+func (r ApiGetInstanceListRequest) ImageId(imageId string) ApiGetInstanceListRequest {
 	r.imageId = &imageId
 	return r
 }
