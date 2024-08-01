@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the Image type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Image{}
+// checks if the InstanceDetailsImage type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &InstanceDetailsImage{}
 
-// Image struct for Image
-type Image struct {
+// InstanceDetailsImage struct for InstanceDetailsImage
+type InstanceDetailsImage struct {
 	// imageId can be either an Operating System or a UUID in case of a Custom Image
 	Id string `json:"id"`
 	Name string `json:"name"`
@@ -27,36 +27,41 @@ type Image struct {
 	Family string `json:"family"`
 	Flavour string `json:"flavour"`
 	Architecture NullableString `json:"architecture"`
+	MarketApps []string `json:"marketApps"`
+	// The supported storage types for the instance type
+	StorageTypes []string `json:"storageTypes"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _Image Image
+type _InstanceDetailsImage InstanceDetailsImage
 
-// NewImage instantiates a new Image object
+// NewInstanceDetailsImage instantiates a new InstanceDetailsImage object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImage(id string, name string, version string, family string, flavour string, architecture NullableString) *Image {
-	this := Image{}
+func NewInstanceDetailsImage(id string, name string, version string, family string, flavour string, architecture NullableString, marketApps []string, storageTypes []string) *InstanceDetailsImage {
+	this := InstanceDetailsImage{}
 	this.Id = id
 	this.Name = name
 	this.Version = version
 	this.Family = family
 	this.Flavour = flavour
 	this.Architecture = architecture
+	this.MarketApps = marketApps
+	this.StorageTypes = storageTypes
 	return &this
 }
 
-// NewImageWithDefaults instantiates a new Image object
+// NewInstanceDetailsImageWithDefaults instantiates a new InstanceDetailsImage object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewImageWithDefaults() *Image {
-	this := Image{}
+func NewInstanceDetailsImageWithDefaults() *InstanceDetailsImage {
+	this := InstanceDetailsImage{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *Image) GetId() string {
+func (o *InstanceDetailsImage) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -67,7 +72,7 @@ func (o *Image) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *Image) GetIdOk() (*string, bool) {
+func (o *InstanceDetailsImage) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,12 +80,12 @@ func (o *Image) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *Image) SetId(v string) {
+func (o *InstanceDetailsImage) SetId(v string) {
 	o.Id = v
 }
 
 // GetName returns the Name field value
-func (o *Image) GetName() string {
+func (o *InstanceDetailsImage) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -91,7 +96,7 @@ func (o *Image) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *Image) GetNameOk() (*string, bool) {
+func (o *InstanceDetailsImage) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -99,12 +104,12 @@ func (o *Image) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *Image) SetName(v string) {
+func (o *InstanceDetailsImage) SetName(v string) {
 	o.Name = v
 }
 
 // GetVersion returns the Version field value
-func (o *Image) GetVersion() string {
+func (o *InstanceDetailsImage) GetVersion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -115,7 +120,7 @@ func (o *Image) GetVersion() string {
 
 // GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
-func (o *Image) GetVersionOk() (*string, bool) {
+func (o *InstanceDetailsImage) GetVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -123,12 +128,12 @@ func (o *Image) GetVersionOk() (*string, bool) {
 }
 
 // SetVersion sets field value
-func (o *Image) SetVersion(v string) {
+func (o *InstanceDetailsImage) SetVersion(v string) {
 	o.Version = v
 }
 
 // GetFamily returns the Family field value
-func (o *Image) GetFamily() string {
+func (o *InstanceDetailsImage) GetFamily() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -139,7 +144,7 @@ func (o *Image) GetFamily() string {
 
 // GetFamilyOk returns a tuple with the Family field value
 // and a boolean to check if the value has been set.
-func (o *Image) GetFamilyOk() (*string, bool) {
+func (o *InstanceDetailsImage) GetFamilyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -147,12 +152,12 @@ func (o *Image) GetFamilyOk() (*string, bool) {
 }
 
 // SetFamily sets field value
-func (o *Image) SetFamily(v string) {
+func (o *InstanceDetailsImage) SetFamily(v string) {
 	o.Family = v
 }
 
 // GetFlavour returns the Flavour field value
-func (o *Image) GetFlavour() string {
+func (o *InstanceDetailsImage) GetFlavour() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -163,7 +168,7 @@ func (o *Image) GetFlavour() string {
 
 // GetFlavourOk returns a tuple with the Flavour field value
 // and a boolean to check if the value has been set.
-func (o *Image) GetFlavourOk() (*string, bool) {
+func (o *InstanceDetailsImage) GetFlavourOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -171,13 +176,13 @@ func (o *Image) GetFlavourOk() (*string, bool) {
 }
 
 // SetFlavour sets field value
-func (o *Image) SetFlavour(v string) {
+func (o *InstanceDetailsImage) SetFlavour(v string) {
 	o.Flavour = v
 }
 
 // GetArchitecture returns the Architecture field value
 // If the value is explicit nil, the zero value for string will be returned
-func (o *Image) GetArchitecture() string {
+func (o *InstanceDetailsImage) GetArchitecture() string {
 	if o == nil || o.Architecture.Get() == nil {
 		var ret string
 		return ret
@@ -189,7 +194,7 @@ func (o *Image) GetArchitecture() string {
 // GetArchitectureOk returns a tuple with the Architecture field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Image) GetArchitectureOk() (*string, bool) {
+func (o *InstanceDetailsImage) GetArchitectureOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -197,11 +202,59 @@ func (o *Image) GetArchitectureOk() (*string, bool) {
 }
 
 // SetArchitecture sets field value
-func (o *Image) SetArchitecture(v string) {
+func (o *InstanceDetailsImage) SetArchitecture(v string) {
 	o.Architecture.Set(&v)
 }
 
-func (o Image) MarshalJSON() ([]byte, error) {
+// GetMarketApps returns the MarketApps field value
+func (o *InstanceDetailsImage) GetMarketApps() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.MarketApps
+}
+
+// GetMarketAppsOk returns a tuple with the MarketApps field value
+// and a boolean to check if the value has been set.
+func (o *InstanceDetailsImage) GetMarketAppsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MarketApps, true
+}
+
+// SetMarketApps sets field value
+func (o *InstanceDetailsImage) SetMarketApps(v []string) {
+	o.MarketApps = v
+}
+
+// GetStorageTypes returns the StorageTypes field value
+func (o *InstanceDetailsImage) GetStorageTypes() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.StorageTypes
+}
+
+// GetStorageTypesOk returns a tuple with the StorageTypes field value
+// and a boolean to check if the value has been set.
+func (o *InstanceDetailsImage) GetStorageTypesOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StorageTypes, true
+}
+
+// SetStorageTypes sets field value
+func (o *InstanceDetailsImage) SetStorageTypes(v []string) {
+	o.StorageTypes = v
+}
+
+func (o InstanceDetailsImage) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -209,7 +262,7 @@ func (o Image) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Image) ToMap() (map[string]interface{}, error) {
+func (o InstanceDetailsImage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
@@ -217,6 +270,8 @@ func (o Image) ToMap() (map[string]interface{}, error) {
 	toSerialize["family"] = o.Family
 	toSerialize["flavour"] = o.Flavour
 	toSerialize["architecture"] = o.Architecture.Get()
+	toSerialize["marketApps"] = o.MarketApps
+	toSerialize["storageTypes"] = o.StorageTypes
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -225,7 +280,7 @@ func (o Image) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Image) UnmarshalJSON(data []byte) (err error) {
+func (o *InstanceDetailsImage) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -236,6 +291,8 @@ func (o *Image) UnmarshalJSON(data []byte) (err error) {
 		"family",
 		"flavour",
 		"architecture",
+		"marketApps",
+		"storageTypes",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -252,15 +309,15 @@ func (o *Image) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varImage := _Image{}
+	varInstanceDetailsImage := _InstanceDetailsImage{}
 
-	err = json.Unmarshal(data, &varImage)
+	err = json.Unmarshal(data, &varInstanceDetailsImage)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Image(varImage)
+	*o = InstanceDetailsImage(varInstanceDetailsImage)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -271,44 +328,46 @@ func (o *Image) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "family")
 		delete(additionalProperties, "flavour")
 		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "marketApps")
+		delete(additionalProperties, "storageTypes")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableImage struct {
-	value *Image
+type NullableInstanceDetailsImage struct {
+	value *InstanceDetailsImage
 	isSet bool
 }
 
-func (v NullableImage) Get() *Image {
+func (v NullableInstanceDetailsImage) Get() *InstanceDetailsImage {
 	return v.value
 }
 
-func (v *NullableImage) Set(val *Image) {
+func (v *NullableInstanceDetailsImage) Set(val *InstanceDetailsImage) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableImage) IsSet() bool {
+func (v NullableInstanceDetailsImage) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableImage) Unset() {
+func (v *NullableInstanceDetailsImage) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableImage(val *Image) *NullableImage {
-	return &NullableImage{value: val, isSet: true}
+func NewNullableInstanceDetailsImage(val *InstanceDetailsImage) *NullableInstanceDetailsImage {
+	return &NullableInstanceDetailsImage{value: val, isSet: true}
 }
 
-func (v NullableImage) MarshalJSON() ([]byte, error) {
+func (v NullableInstanceDetailsImage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableImage) UnmarshalJSON(src []byte) error {
+func (v *NullableInstanceDetailsImage) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

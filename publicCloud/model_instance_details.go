@@ -44,9 +44,10 @@ type InstanceDetails struct {
 	Contract Contract `json:"contract"`
 	Iso NullableIso `json:"iso"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork"`
-	Image ImageDetails `json:"image"`
+	Image InstanceDetailsImage `json:"image"`
 	Ips []IpDetails `json:"ips"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
+	Volume Volume `json:"volume"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -56,7 +57,7 @@ type _InstanceDetails InstanceDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceDetails(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image ImageDetails, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup) *InstanceDetails {
+func NewInstanceDetails(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image InstanceDetailsImage, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, volume Volume) *InstanceDetails {
 	this := InstanceDetails{}
 	this.Id = id
 	this.Type = type_
@@ -77,6 +78,7 @@ func NewInstanceDetails(id string, type_ TypeName, resources Resources, region s
 	this.Image = image
 	this.Ips = ips
 	this.AutoScalingGroup = autoScalingGroup
+	this.Volume = volume
 	return &this
 }
 
@@ -483,9 +485,9 @@ func (o *InstanceDetails) SetPrivateNetwork(v PrivateNetwork) {
 }
 
 // GetImage returns the Image field value
-func (o *InstanceDetails) GetImage() ImageDetails {
+func (o *InstanceDetails) GetImage() InstanceDetailsImage {
 	if o == nil {
-		var ret ImageDetails
+		var ret InstanceDetailsImage
 		return ret
 	}
 
@@ -494,7 +496,7 @@ func (o *InstanceDetails) GetImage() ImageDetails {
 
 // GetImageOk returns a tuple with the Image field value
 // and a boolean to check if the value has been set.
-func (o *InstanceDetails) GetImageOk() (*ImageDetails, bool) {
+func (o *InstanceDetails) GetImageOk() (*InstanceDetailsImage, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -502,7 +504,7 @@ func (o *InstanceDetails) GetImageOk() (*ImageDetails, bool) {
 }
 
 // SetImage sets field value
-func (o *InstanceDetails) SetImage(v ImageDetails) {
+func (o *InstanceDetails) SetImage(v InstanceDetailsImage) {
 	o.Image = v
 }
 
@@ -556,6 +558,30 @@ func (o *InstanceDetails) SetAutoScalingGroup(v AutoScalingGroup) {
 	o.AutoScalingGroup.Set(&v)
 }
 
+// GetVolume returns the Volume field value
+func (o *InstanceDetails) GetVolume() Volume {
+	if o == nil {
+		var ret Volume
+		return ret
+	}
+
+	return o.Volume
+}
+
+// GetVolumeOk returns a tuple with the Volume field value
+// and a boolean to check if the value has been set.
+func (o *InstanceDetails) GetVolumeOk() (*Volume, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Volume, true
+}
+
+// SetVolume sets field value
+func (o *InstanceDetails) SetVolume(v Volume) {
+	o.Volume = v
+}
+
 func (o InstanceDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -585,6 +611,7 @@ func (o InstanceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["image"] = o.Image
 	toSerialize["ips"] = o.Ips
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
+	toSerialize["volume"] = o.Volume
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -617,6 +644,7 @@ func (o *InstanceDetails) UnmarshalJSON(data []byte) (err error) {
 		"image",
 		"ips",
 		"autoScalingGroup",
+		"volume",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -665,6 +693,7 @@ func (o *InstanceDetails) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "image")
 		delete(additionalProperties, "ips")
 		delete(additionalProperties, "autoScalingGroup")
+		delete(additionalProperties, "volume")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -60,6 +60,7 @@ docs/ImageDetails.md
 docs/Instance.md
 docs/InstanceBase.md
 docs/InstanceDetails.md
+docs/InstanceDetailsImage.md
 docs/InstanceType.md
 docs/InstanceTypes.md
 docs/Ip.md
@@ -95,6 +96,7 @@ docs/Snapshot.md
 docs/State.md
 docs/StickySession.md
 docs/Storage.md
+docs/StorageSize.md
 docs/StoreCredentialOpts.md
 docs/StoreCredentialResult.md
 docs/Summary.md
@@ -113,6 +115,7 @@ docs/UpdateInstanceOpts.md
 docs/UpdateIpOpts.md
 docs/UpdateLoadBalancerOpts.md
 docs/Values.md
+docs/Volume.md
 git_push.sh
 go.mod
 go.sum
@@ -171,6 +174,7 @@ model_image_details.go
 model_instance.go
 model_instance_base.go
 model_instance_details.go
+model_instance_details_image.go
 model_instance_type.go
 model_instance_types.go
 model_ip.go
@@ -204,6 +208,7 @@ model_snapshot.go
 model_state.go
 model_sticky_session.go
 model_storage.go
+model_storage_size.go
 model_store_credential_opts.go
 model_store_credential_result.go
 model_summary.go
@@ -222,6 +227,7 @@ model_update_instance_opts.go
 model_update_ip_opts.go
 model_update_load_balancer_opts.go
 model_values.go
+model_volume.go
 response.go
 test/api_public_cloud_test.go
 utils.go

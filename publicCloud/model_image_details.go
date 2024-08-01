@@ -27,21 +27,22 @@ type ImageDetails struct {
 	Version string `json:"version"`
 	Family string `json:"family"`
 	Flavour string `json:"flavour"`
-	Architecture NullableString `json:"architecture,omitempty"`
-	State NullableString `json:"state,omitempty"`
-	// The reason in case of failure
-	StateReason NullableString `json:"stateReason,omitempty"`
-	// The region where the image was uploaded
-	Region NullableString `json:"region,omitempty"`
-	// Date when the image was created
-	CreatedAt NullableTime `json:"createdAt,omitempty"`
-	// Date when the image was updated
-	UpdatedAt NullableTime `json:"updatedAt,omitempty"`
-	// Standard or Custom image
-	Custom NullableBool `json:"custom,omitempty"`
+	Architecture NullableString `json:"architecture"`
 	MarketApps []string `json:"marketApps"`
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes"`
+	StorageSize NullableStorageSize `json:"storageSize,omitempty"`
+	State NullableString `json:"state"`
+	// The reason in case of failure
+	StateReason NullableString `json:"stateReason"`
+	// The region where the image was uploaded
+	Region NullableString `json:"region"`
+	// Date when the image was created
+	CreatedAt NullableTime `json:"createdAt"`
+	// Date when the image was updated
+	UpdatedAt NullableTime `json:"updatedAt"`
+	// Standard or Custom image
+	Custom NullableBool `json:"custom"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -51,15 +52,22 @@ type _ImageDetails ImageDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDetails(id string, name string, version string, family string, flavour string, marketApps []string, storageTypes []string) *ImageDetails {
+func NewImageDetails(id string, name string, version string, family string, flavour string, architecture NullableString, marketApps []string, storageTypes []string, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool) *ImageDetails {
 	this := ImageDetails{}
 	this.Id = id
 	this.Name = name
 	this.Version = version
 	this.Family = family
 	this.Flavour = flavour
+	this.Architecture = architecture
 	this.MarketApps = marketApps
 	this.StorageTypes = storageTypes
+	this.State = state
+	this.StateReason = stateReason
+	this.Region = region
+	this.CreatedAt = createdAt
+	this.UpdatedAt = updatedAt
+	this.Custom = custom
 	return &this
 }
 
@@ -191,16 +199,18 @@ func (o *ImageDetails) SetFlavour(v string) {
 	o.Flavour = v
 }
 
-// GetArchitecture returns the Architecture field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetArchitecture returns the Architecture field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ImageDetails) GetArchitecture() string {
-	if o == nil || IsNil(o.Architecture.Get()) {
+	if o == nil || o.Architecture.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Architecture.Get()
 }
 
-// GetArchitectureOk returns a tuple with the Architecture field value if set, nil otherwise
+// GetArchitectureOk returns a tuple with the Architecture field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ImageDetails) GetArchitectureOk() (*string, bool) {
@@ -210,279 +220,9 @@ func (o *ImageDetails) GetArchitectureOk() (*string, bool) {
 	return o.Architecture.Get(), o.Architecture.IsSet()
 }
 
-// HasArchitecture returns a boolean if a field has been set.
-func (o *ImageDetails) HasArchitecture() bool {
-	if o != nil && o.Architecture.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetArchitecture gets a reference to the given NullableString and assigns it to the Architecture field.
+// SetArchitecture sets field value
 func (o *ImageDetails) SetArchitecture(v string) {
 	o.Architecture.Set(&v)
-}
-// SetArchitectureNil sets the value for Architecture to be an explicit nil
-func (o *ImageDetails) SetArchitectureNil() {
-	o.Architecture.Set(nil)
-}
-
-// UnsetArchitecture ensures that no value is present for Architecture, not even an explicit nil
-func (o *ImageDetails) UnsetArchitecture() {
-	o.Architecture.Unset()
-}
-
-// GetState returns the State field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ImageDetails) GetState() string {
-	if o == nil || IsNil(o.State.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.State.Get()
-}
-
-// GetStateOk returns a tuple with the State field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ImageDetails) GetStateOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.State.Get(), o.State.IsSet()
-}
-
-// HasState returns a boolean if a field has been set.
-func (o *ImageDetails) HasState() bool {
-	if o != nil && o.State.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetState gets a reference to the given NullableString and assigns it to the State field.
-func (o *ImageDetails) SetState(v string) {
-	o.State.Set(&v)
-}
-// SetStateNil sets the value for State to be an explicit nil
-func (o *ImageDetails) SetStateNil() {
-	o.State.Set(nil)
-}
-
-// UnsetState ensures that no value is present for State, not even an explicit nil
-func (o *ImageDetails) UnsetState() {
-	o.State.Unset()
-}
-
-// GetStateReason returns the StateReason field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ImageDetails) GetStateReason() string {
-	if o == nil || IsNil(o.StateReason.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.StateReason.Get()
-}
-
-// GetStateReasonOk returns a tuple with the StateReason field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ImageDetails) GetStateReasonOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.StateReason.Get(), o.StateReason.IsSet()
-}
-
-// HasStateReason returns a boolean if a field has been set.
-func (o *ImageDetails) HasStateReason() bool {
-	if o != nil && o.StateReason.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStateReason gets a reference to the given NullableString and assigns it to the StateReason field.
-func (o *ImageDetails) SetStateReason(v string) {
-	o.StateReason.Set(&v)
-}
-// SetStateReasonNil sets the value for StateReason to be an explicit nil
-func (o *ImageDetails) SetStateReasonNil() {
-	o.StateReason.Set(nil)
-}
-
-// UnsetStateReason ensures that no value is present for StateReason, not even an explicit nil
-func (o *ImageDetails) UnsetStateReason() {
-	o.StateReason.Unset()
-}
-
-// GetRegion returns the Region field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ImageDetails) GetRegion() string {
-	if o == nil || IsNil(o.Region.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Region.Get()
-}
-
-// GetRegionOk returns a tuple with the Region field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ImageDetails) GetRegionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Region.Get(), o.Region.IsSet()
-}
-
-// HasRegion returns a boolean if a field has been set.
-func (o *ImageDetails) HasRegion() bool {
-	if o != nil && o.Region.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetRegion gets a reference to the given NullableString and assigns it to the Region field.
-func (o *ImageDetails) SetRegion(v string) {
-	o.Region.Set(&v)
-}
-// SetRegionNil sets the value for Region to be an explicit nil
-func (o *ImageDetails) SetRegionNil() {
-	o.Region.Set(nil)
-}
-
-// UnsetRegion ensures that no value is present for Region, not even an explicit nil
-func (o *ImageDetails) UnsetRegion() {
-	o.Region.Unset()
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ImageDetails) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt.Get()) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt.Get()
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ImageDetails) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.CreatedAt.Get(), o.CreatedAt.IsSet()
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *ImageDetails) HasCreatedAt() bool {
-	if o != nil && o.CreatedAt.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given NullableTime and assigns it to the CreatedAt field.
-func (o *ImageDetails) SetCreatedAt(v time.Time) {
-	o.CreatedAt.Set(&v)
-}
-// SetCreatedAtNil sets the value for CreatedAt to be an explicit nil
-func (o *ImageDetails) SetCreatedAtNil() {
-	o.CreatedAt.Set(nil)
-}
-
-// UnsetCreatedAt ensures that no value is present for CreatedAt, not even an explicit nil
-func (o *ImageDetails) UnsetCreatedAt() {
-	o.CreatedAt.Unset()
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ImageDetails) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt.Get()) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt.Get()
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ImageDetails) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.UpdatedAt.Get(), o.UpdatedAt.IsSet()
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *ImageDetails) HasUpdatedAt() bool {
-	if o != nil && o.UpdatedAt.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given NullableTime and assigns it to the UpdatedAt field.
-func (o *ImageDetails) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt.Set(&v)
-}
-// SetUpdatedAtNil sets the value for UpdatedAt to be an explicit nil
-func (o *ImageDetails) SetUpdatedAtNil() {
-	o.UpdatedAt.Set(nil)
-}
-
-// UnsetUpdatedAt ensures that no value is present for UpdatedAt, not even an explicit nil
-func (o *ImageDetails) UnsetUpdatedAt() {
-	o.UpdatedAt.Unset()
-}
-
-// GetCustom returns the Custom field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ImageDetails) GetCustom() bool {
-	if o == nil || IsNil(o.Custom.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.Custom.Get()
-}
-
-// GetCustomOk returns a tuple with the Custom field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ImageDetails) GetCustomOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Custom.Get(), o.Custom.IsSet()
-}
-
-// HasCustom returns a boolean if a field has been set.
-func (o *ImageDetails) HasCustom() bool {
-	if o != nil && o.Custom.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCustom gets a reference to the given NullableBool and assigns it to the Custom field.
-func (o *ImageDetails) SetCustom(v bool) {
-	o.Custom.Set(&v)
-}
-// SetCustomNil sets the value for Custom to be an explicit nil
-func (o *ImageDetails) SetCustomNil() {
-	o.Custom.Set(nil)
-}
-
-// UnsetCustom ensures that no value is present for Custom, not even an explicit nil
-func (o *ImageDetails) UnsetCustom() {
-	o.Custom.Unset()
 }
 
 // GetMarketApps returns the MarketApps field value
@@ -533,6 +273,204 @@ func (o *ImageDetails) SetStorageTypes(v []string) {
 	o.StorageTypes = v
 }
 
+// GetStorageSize returns the StorageSize field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ImageDetails) GetStorageSize() StorageSize {
+	if o == nil || IsNil(o.StorageSize.Get()) {
+		var ret StorageSize
+		return ret
+	}
+	return *o.StorageSize.Get()
+}
+
+// GetStorageSizeOk returns a tuple with the StorageSize field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ImageDetails) GetStorageSizeOk() (*StorageSize, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StorageSize.Get(), o.StorageSize.IsSet()
+}
+
+// HasStorageSize returns a boolean if a field has been set.
+func (o *ImageDetails) HasStorageSize() bool {
+	if o != nil && o.StorageSize.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStorageSize gets a reference to the given NullableStorageSize and assigns it to the StorageSize field.
+func (o *ImageDetails) SetStorageSize(v StorageSize) {
+	o.StorageSize.Set(&v)
+}
+// SetStorageSizeNil sets the value for StorageSize to be an explicit nil
+func (o *ImageDetails) SetStorageSizeNil() {
+	o.StorageSize.Set(nil)
+}
+
+// UnsetStorageSize ensures that no value is present for StorageSize, not even an explicit nil
+func (o *ImageDetails) UnsetStorageSize() {
+	o.StorageSize.Unset()
+}
+
+// GetState returns the State field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *ImageDetails) GetState() string {
+	if o == nil || o.State.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.State.Get()
+}
+
+// GetStateOk returns a tuple with the State field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ImageDetails) GetStateOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.State.Get(), o.State.IsSet()
+}
+
+// SetState sets field value
+func (o *ImageDetails) SetState(v string) {
+	o.State.Set(&v)
+}
+
+// GetStateReason returns the StateReason field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *ImageDetails) GetStateReason() string {
+	if o == nil || o.StateReason.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.StateReason.Get()
+}
+
+// GetStateReasonOk returns a tuple with the StateReason field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ImageDetails) GetStateReasonOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StateReason.Get(), o.StateReason.IsSet()
+}
+
+// SetStateReason sets field value
+func (o *ImageDetails) SetStateReason(v string) {
+	o.StateReason.Set(&v)
+}
+
+// GetRegion returns the Region field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *ImageDetails) GetRegion() string {
+	if o == nil || o.Region.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.Region.Get()
+}
+
+// GetRegionOk returns a tuple with the Region field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ImageDetails) GetRegionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Region.Get(), o.Region.IsSet()
+}
+
+// SetRegion sets field value
+func (o *ImageDetails) SetRegion(v string) {
+	o.Region.Set(&v)
+}
+
+// GetCreatedAt returns the CreatedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
+func (o *ImageDetails) GetCreatedAt() time.Time {
+	if o == nil || o.CreatedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return *o.CreatedAt.Get()
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ImageDetails) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CreatedAt.Get(), o.CreatedAt.IsSet()
+}
+
+// SetCreatedAt sets field value
+func (o *ImageDetails) SetCreatedAt(v time.Time) {
+	o.CreatedAt.Set(&v)
+}
+
+// GetUpdatedAt returns the UpdatedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
+func (o *ImageDetails) GetUpdatedAt() time.Time {
+	if o == nil || o.UpdatedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return *o.UpdatedAt.Get()
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ImageDetails) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.UpdatedAt.Get(), o.UpdatedAt.IsSet()
+}
+
+// SetUpdatedAt sets field value
+func (o *ImageDetails) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt.Set(&v)
+}
+
+// GetCustom returns the Custom field value
+// If the value is explicit nil, the zero value for bool will be returned
+func (o *ImageDetails) GetCustom() bool {
+	if o == nil || o.Custom.Get() == nil {
+		var ret bool
+		return ret
+	}
+
+	return *o.Custom.Get()
+}
+
+// GetCustomOk returns a tuple with the Custom field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ImageDetails) GetCustomOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Custom.Get(), o.Custom.IsSet()
+}
+
+// SetCustom sets field value
+func (o *ImageDetails) SetCustom(v bool) {
+	o.Custom.Set(&v)
+}
+
 func (o ImageDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -548,29 +486,18 @@ func (o ImageDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["version"] = o.Version
 	toSerialize["family"] = o.Family
 	toSerialize["flavour"] = o.Flavour
-	if o.Architecture.IsSet() {
-		toSerialize["architecture"] = o.Architecture.Get()
-	}
-	if o.State.IsSet() {
-		toSerialize["state"] = o.State.Get()
-	}
-	if o.StateReason.IsSet() {
-		toSerialize["stateReason"] = o.StateReason.Get()
-	}
-	if o.Region.IsSet() {
-		toSerialize["region"] = o.Region.Get()
-	}
-	if o.CreatedAt.IsSet() {
-		toSerialize["createdAt"] = o.CreatedAt.Get()
-	}
-	if o.UpdatedAt.IsSet() {
-		toSerialize["updatedAt"] = o.UpdatedAt.Get()
-	}
-	if o.Custom.IsSet() {
-		toSerialize["custom"] = o.Custom.Get()
-	}
+	toSerialize["architecture"] = o.Architecture.Get()
 	toSerialize["marketApps"] = o.MarketApps
 	toSerialize["storageTypes"] = o.StorageTypes
+	if o.StorageSize.IsSet() {
+		toSerialize["storageSize"] = o.StorageSize.Get()
+	}
+	toSerialize["state"] = o.State.Get()
+	toSerialize["stateReason"] = o.StateReason.Get()
+	toSerialize["region"] = o.Region.Get()
+	toSerialize["createdAt"] = o.CreatedAt.Get()
+	toSerialize["updatedAt"] = o.UpdatedAt.Get()
+	toSerialize["custom"] = o.Custom.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -589,8 +516,15 @@ func (o *ImageDetails) UnmarshalJSON(data []byte) (err error) {
 		"version",
 		"family",
 		"flavour",
+		"architecture",
 		"marketApps",
 		"storageTypes",
+		"state",
+		"stateReason",
+		"region",
+		"createdAt",
+		"updatedAt",
+		"custom",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -626,14 +560,15 @@ func (o *ImageDetails) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "family")
 		delete(additionalProperties, "flavour")
 		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "marketApps")
+		delete(additionalProperties, "storageTypes")
+		delete(additionalProperties, "storageSize")
 		delete(additionalProperties, "state")
 		delete(additionalProperties, "stateReason")
 		delete(additionalProperties, "region")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "updatedAt")
 		delete(additionalProperties, "custom")
-		delete(additionalProperties, "marketApps")
-		delete(additionalProperties, "storageTypes")
 		o.AdditionalProperties = additionalProperties
 	}
 

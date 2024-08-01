@@ -1070,6 +1070,9 @@ paths:
                 startedAt: 2024-04-11T12:59:34+00:00
                 state: STOPPED
                 type: lsw.m3.large
+                volume:
+                  size: 5.37
+                  unit: GB
               schema:
                 $ref: '#/components/schemas/instanceDetails'
           description: OK.
@@ -1233,6 +1236,9 @@ paths:
                 startedAt: 2024-04-09T15:11:37+00:00
                 state: RUNNING
                 type: lsw.m3.large
+                volume:
+                  size: 5.37
+                  unit: GB
               schema:
                 $ref: '#/components/schemas/instanceDetails'
           description: OK.
@@ -3109,7 +3115,7 @@ paths:
             application/json:
               example:
                 _metadata:
-                  totalCount: 12
+                  totalCount: 3
                   limit: 20
                   offset: 0
                 images:
@@ -3123,6 +3129,13 @@ paths:
                   storageTypes:
                   - LOCAL
                   - CENTRAL
+                  storageSize: null
+                  state: READY
+                  stateReason: null
+                  region: null
+                  createdAt: null
+                  updatedAt: null
+                  custom: false
                 - id: UBUNTU_22_04_64BIT
                   name: Ubuntu 22.04 LTS (x86_64)
                   version: "22.04"
@@ -3134,6 +3147,13 @@ paths:
                   storageTypes:
                   - LOCAL
                   - CENTRAL
+                  storageSize: null
+                  state: READY
+                  stateReason: null
+                  region: null
+                  createdAt: null
+                  updatedAt: null
+                  custom: false
                 - id: UBUNTU_20_04_64BIT
                   name: Ubuntu 20.04 LTS (x86_64)
                   version: "20.04"
@@ -3144,85 +3164,13 @@ paths:
                   storageTypes:
                   - LOCAL
                   - CENTRAL
-                - id: DEBIAN_12_64BIT
-                  name: Debian 12 (x86_64)
-                  version: "12"
-                  family: linux
-                  flavour: debian
-                  architecture: x86_64
-                  marketApps: []
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
-                - id: DEBIAN_11_64BIT
-                  name: Debian 11 (x86_64)
-                  version: "11"
-                  family: linux
-                  flavour: debian
-                  architecture: x86_64
-                  marketApps: []
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
-                - id: FREEBSD_13_64BIT
-                  name: FreeBSD 13.2 (x86_64)
-                  version: "13.2"
-                  family: bsd
-                  flavour: freebsd
-                  architecture: x86_64
-                  marketApps: []
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
-                - id: ALMALINUX_9_64BIT
-                  name: AlmaLinux 9 (x86_64)
-                  version: "9"
-                  family: linux
-                  flavour: almalinux
-                  architecture: x86_64
-                  marketApps: []
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
-                - id: ALMALINUX_8_64BIT
-                  name: AlmaLinux 8 (x86_64)
-                  version: "8"
-                  family: linux
-                  flavour: almalinux
-                  architecture: x86_64
-                  marketApps: []
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
-                - id: ROCKY_LINUX_9_64BIT
-                  name: Rocky Linux 9 (x86_64)
-                  version: "9"
-                  family: linux
-                  flavour: rockylinux
-                  architecture: x86_64
-                  marketApps: []
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
-                - id: ROCKY_LINUX_8_64BIT
-                  name: Rocky Linux 8 (x86_64)
-                  version: "8"
-                  family: linux
-                  flavour: rockylinux
-                  architecture: x86_64
-                  marketApps: []
-                  storageTypes:
-                  - LOCAL
-                  - CENTRAL
-                - id: WINDOWS_SERVER_2022_STANDARD_64BIT
-                  name: Windows Server 2022 Standard (x64)
-                  version: "2022"
-                  family: windows
-                  flavour: windows
-                  architecture: x86_64
-                  marketApps: []
-                  storageTypes:
-                  - CENTRAL
+                  storageSize: null
+                  state: READY
+                  stateReason: null
+                  region: null
+                  createdAt: null
+                  updatedAt: null
+                  custom: false
               schema:
                 $ref: '#/components/schemas/getImageListResult'
           description: OK.
@@ -3547,6 +3495,13 @@ paths:
                 storageTypes:
                 - LOCAL
                 - CENTRAL
+                storageSize: null
+                state: READY
+                stateReason: null
+                region: null
+                createdAt: null
+                updatedAt: null
+                custom: false
               - id: UBUNTU_20_04_64BIT
                 name: Ubuntu 20.04 LTS (x86_64)
                 version: "20.04"
@@ -3557,6 +3512,13 @@ paths:
                 storageTypes:
                 - LOCAL
                 - CENTRAL
+                storageSize: null
+                state: READY
+                stateReason: null
+                region: null
+                createdAt: null
+                updatedAt: null
+                custom: false
               - id: DEBIAN_12_64BIT
                 name: Debian 12 (x86_64)
                 version: "12"
@@ -3567,96 +3529,13 @@ paths:
                 storageTypes:
                 - LOCAL
                 - CENTRAL
-              - id: DEBIAN_11_64BIT
-                name: Debian 11 (x86_64)
-                version: "11"
-                family: linux
-                flavour: debian
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-              - id: DEBIAN_10_64BIT
-                name: Debian 10 (x86_64)
-                version: "10"
-                family: linux
-                flavour: debian
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-              - id: CENTOS_7_64BIT
-                name: CentOS 7 (x86_64)
-                version: "7"
-                family: linux
-                flavour: centos
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-              - id: ALMALINUX_9_64BIT
-                name: AlmaLinux 9 (x86_64)
-                version: "9"
-                family: linux
-                flavour: almalinux
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-              - id: ALMALINUX_8_64BIT
-                name: AlmaLinux 8 (x86_64)
-                version: "8"
-                family: linux
-                flavour: almalinux
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-              - id: ROCKY_LINUX_9_64BIT
-                name: Rocky Linux 9 (x86_64)
-                version: "9"
-                family: linux
-                flavour: rockylinux
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-              - id: ROCKY_LINUX_8_64BIT
-                name: Rocky Linux 8 (x86_64)
-                version: "8"
-                family: linux
-                flavour: rockylinux
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-              - id: FREEBSD_13_64BIT
-                name: FreeBSD 13.2 (x86_64)
-                version: "13.2"
-                family: bsd
-                flavour: freebsd
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-              - id: FREEBSD_14_64BIT
-                name: FreeBSD 14.0 (x86_64)
-                version: "14.0"
-                family: bsd
-                flavour: freebsd
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
+                storageSize: null
+                state: READY
+                stateReason: null
+                region: null
+                createdAt: null
+                updatedAt: null
+                custom: false
               schema:
                 $ref: '#/components/schemas/getReinstallOsListResult'
           description: OK.
@@ -8387,18 +8266,12 @@ components:
       type: object
     image:
       example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
         flavour: ubuntu
-        custom: true
         name: Ubuntu 20.04 LTS (x86_64)
         id: UBUNTU_22_04_64BIT
-        state: READY
         family: linux
-        stateReason: Could not find configured bucket
-        region: eu-west-3
         version: "20.04"
         architecture: x86_64
-        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           description: imageId can be either an Operating System or a UUID in case
@@ -8422,35 +8295,8 @@ components:
           example: x86_64
           nullable: true
           type: string
-        state:
-          example: READY
-          nullable: true
-          type: string
-        stateReason:
-          description: The reason in case of failure
-          example: Could not find configured bucket
-          nullable: true
-          type: string
-        region:
-          description: The region where the image was uploaded
-          example: eu-west-3
-          nullable: true
-          type: string
-        createdAt:
-          description: Date when the image was created
-          format: date-time
-          nullable: true
-          type: string
-        updatedAt:
-          description: Date when the image was updated
-          format: date-time
-          nullable: true
-          type: string
-        custom:
-          description: Standard or Custom image
-          nullable: true
-          type: boolean
       required:
+      - architecture
       - family
       - flavour
       - id
@@ -8649,18 +8495,12 @@ components:
         type: object
       example:
         image:
-          createdAt: 2000-01-23T04:56:07.000+00:00
           flavour: ubuntu
-          custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: READY
           family: linux
-          stateReason: Could not find configured bucket
-          region: eu-west-3
           version: "20.04"
           architecture: x86_64
-          updatedAt: 2000-01-23T04:56:07.000+00:00
         rootDiskStorageType: null
         autoScalingGroup:
           cpuThreshold: 5
@@ -8729,18 +8569,12 @@ components:
       example:
         instances:
         - image:
-            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
-            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
-            state: READY
             family: linux
-            stateReason: Could not find configured bucket
-            region: eu-west-3
             version: "20.04"
             architecture: x86_64
-            updatedAt: 2000-01-23T04:56:07.000+00:00
           rootDiskStorageType: null
           autoScalingGroup:
             cpuThreshold: 5
@@ -8806,18 +8640,12 @@ components:
           productType: productType
           hasPublicIpV4: true
         - image:
-            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
-            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
-            state: READY
             family: linux
-            stateReason: Could not find configured bucket
-            region: eu-west-3
             version: "20.04"
             architecture: x86_64
-            updatedAt: 2000-01-23T04:56:07.000+00:00
           rootDiskStorageType: null
           autoScalingGroup:
             cpuThreshold: 5
@@ -8980,7 +8808,7 @@ components:
       - subnet
       title: privateNetwork
       type: object
-    imageDetails:
+    instanceDetailsImage:
       allOf:
       - $ref: '#/components/schemas/image'
       - properties:
@@ -9000,27 +8828,21 @@ components:
         required:
         - marketApps
         - storageTypes
-        title: imageDetail
+        title: instanceDetailsImage
         type: object
       example:
         marketApps:
         - LOADBALANCER
         - LOADBALANCER
         flavour: ubuntu
-        custom: true
-        stateReason: Could not find configured bucket
-        version: "20.04"
-        createdAt: 2000-01-23T04:56:07.000+00:00
         name: Ubuntu 20.04 LTS (x86_64)
         id: UBUNTU_22_04_64BIT
-        state: READY
         storageTypes:
         - CENTRAL
         - LOCAL
         family: linux
-        region: eu-west-3
+        version: "20.04"
         architecture: x86_64
-        updatedAt: 2000-01-23T04:56:07.000+00:00
     ipDetails:
       allOf:
       - $ref: '#/components/schemas/ip'
@@ -9042,6 +8864,25 @@ components:
           protectionType: STANDARD
         networkType: internal
         version: null
+    volume:
+      example:
+        unit: MB
+        size: 6.027456183070403
+      properties:
+        size:
+          description: The Volume Size
+          type: number
+        unit:
+          description: Unit
+          enum:
+          - MB
+          - GB
+          type: string
+      required:
+      - size
+      - unit
+      title: volume
+      type: object
     instanceDetails:
       allOf:
       - $ref: '#/components/schemas/instanceBase'
@@ -9051,18 +8892,21 @@ components:
           privateNetwork:
             $ref: '#/components/schemas/privateNetwork'
           image:
-            $ref: '#/components/schemas/imageDetails'
+            $ref: '#/components/schemas/instanceDetailsImage'
           ips:
             items:
               $ref: '#/components/schemas/ipDetails'
             type: array
           autoScalingGroup:
             $ref: '#/components/schemas/autoScalingGroup'
+          volume:
+            $ref: '#/components/schemas/volume'
         required:
         - autoScalingGroup
         - image
         - iso
         - privateNetwork
+        - volume
         title: instanceDetails
         type: object
       example:
@@ -9071,20 +8915,14 @@ components:
           - LOADBALANCER
           - LOADBALANCER
           flavour: ubuntu
-          custom: true
-          stateReason: Could not find configured bucket
-          version: "20.04"
-          createdAt: 2000-01-23T04:56:07.000+00:00
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: READY
           storageTypes:
           - CENTRAL
           - LOCAL
           family: linux
-          region: eu-west-3
+          version: "20.04"
           architecture: x86_64
-          updatedAt: 2000-01-23T04:56:07.000+00:00
         rootDiskStorageType: null
         iso:
           name: name
@@ -9156,6 +8994,9 @@ components:
           networkType: internal
           version: null
         reference: reference
+        volume:
+          unit: MB
+          size: 6.027456183070403
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         marketAppId: CPANEL
         state: null
@@ -9439,44 +9280,79 @@ components:
         _metadata:
           $ref: '#/components/schemas/_metadata'
       type: object
+    imageDetails:
+      allOf:
+      - $ref: '#/components/schemas/instanceDetailsImage'
+      - properties:
+          storageSize:
+            $ref: '#/components/schemas/storageSize'
+          state:
+            example: READY
+            nullable: true
+            type: string
+          stateReason:
+            description: The reason in case of failure
+            example: Could not find configured bucket
+            nullable: true
+            type: string
+          region:
+            description: The region where the image was uploaded
+            example: eu-west-3
+            nullable: true
+            type: string
+          createdAt:
+            description: Date when the image was created
+            format: date-time
+            nullable: true
+            type: string
+          updatedAt:
+            description: Date when the image was updated
+            format: date-time
+            nullable: true
+            type: string
+          custom:
+            description: Standard or Custom image
+            nullable: true
+            type: boolean
+        required:
+        - createdAt
+        - custom
+        - region
+        - state
+        - stateReason
+        - updatedAt
+        title: imageDetails
+        type: object
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        storageSize:
+          unit: GB
+          size: 0.8008281904610115
+        custom: true
+        state: READY
+        stateReason: Could not find configured bucket
+        region: eu-west-3
+        updatedAt: 2000-01-23T04:56:07.000+00:00
     getImageListResult:
       example:
         images:
-        - marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
-          flavour: ubuntu
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          storageSize:
+            unit: GB
+            size: 0.8008281904610115
           custom: true
-          stateReason: Could not find configured bucket
-          version: "20.04"
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_22_04_64BIT
           state: READY
-          storageTypes:
-          - CENTRAL
-          - LOCAL
-          family: linux
+          stateReason: Could not find configured bucket
           region: eu-west-3
-          architecture: x86_64
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        - marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
-          flavour: ubuntu
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          storageSize:
+            unit: GB
+            size: 0.8008281904610115
           custom: true
-          stateReason: Could not find configured bucket
-          version: "20.04"
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_22_04_64BIT
           state: READY
-          storageTypes:
-          - CENTRAL
-          - LOCAL
-          family: linux
+          stateReason: Could not find configured bucket
           region: eu-west-3
-          architecture: x86_64
           updatedAt: 2000-01-23T04:56:07.000+00:00
         _metadata:
           offset: 0
@@ -9494,36 +9370,24 @@ components:
       example:
         marketApps:
         - image:
-            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
-            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
-            state: READY
             family: linux
-            stateReason: Could not find configured bucket
-            region: eu-west-3
             version: "20.04"
             architecture: x86_64
-            updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
           id: id
           category: category
           family: family
           version: version
         - image:
-            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
-            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
-            state: READY
             family: linux
-            stateReason: Could not find configured bucket
-            region: eu-west-3
             version: "20.04"
             architecture: x86_64
-            updatedAt: 2000-01-23T04:56:07.000+00:00
           name: name
           id: id
           category: category
@@ -10117,18 +9981,12 @@ components:
         targets:
         - reference: reference
           image:
-            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
-            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
-            state: READY
             family: linux
-            stateReason: Could not find configured bucket
-            region: eu-west-3
             version: "20.04"
             architecture: x86_64
-            updatedAt: 2000-01-23T04:56:07.000+00:00
           healthCheckStatus:
             checkStatus: checkStatus
             status: status
@@ -10151,18 +10009,12 @@ components:
             version: null
         - reference: reference
           image:
-            createdAt: 2000-01-23T04:56:07.000+00:00
             flavour: ubuntu
-            custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
-            state: READY
             family: linux
-            stateReason: Could not find configured bucket
-            region: eu-west-3
             version: "20.04"
             architecture: x86_64
-            updatedAt: 2000-01-23T04:56:07.000+00:00
           healthCheckStatus:
             checkStatus: checkStatus
             status: status
@@ -11202,21 +11054,33 @@ components:
           $ref: '#/components/schemas/traffic'
       title: billing
       type: object
+    storageSize:
+      example:
+        unit: GB
+        size: 0.8008281904610115
+      nullable: true
+      properties:
+        size:
+          description: The storage size
+          type: number
+        unit:
+          description: The storage size unit
+          example: GB
+          type: string
+      required:
+      - size
+      - unit
+      title: storageSize
+      type: object
     marketApp:
       example:
         image:
-          createdAt: 2000-01-23T04:56:07.000+00:00
           flavour: ubuntu
-          custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: READY
           family: linux
-          stateReason: Could not find configured bucket
-          region: eu-west-3
           version: "20.04"
           architecture: x86_64
-          updatedAt: 2000-01-23T04:56:07.000+00:00
         name: name
         id: id
         category: category
@@ -11267,18 +11131,12 @@ components:
       example:
         reference: reference
         image:
-          createdAt: 2000-01-23T04:56:07.000+00:00
           flavour: ubuntu
-          custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: READY
           family: linux
-          stateReason: Could not find configured bucket
-          region: eu-west-3
           version: "20.04"
           architecture: x86_64
-          updatedAt: 2000-01-23T04:56:07.000+00:00
         healthCheckStatus:
           checkStatus: checkStatus
           status: status

@@ -203,6 +203,7 @@ Class | Method | HTTP request | Description
  - [Instance](docs/Instance.md)
  - [InstanceBase](docs/InstanceBase.md)
  - [InstanceDetails](docs/InstanceDetails.md)
+ - [InstanceDetailsImage](docs/InstanceDetailsImage.md)
  - [InstanceType](docs/InstanceType.md)
  - [InstanceTypes](docs/InstanceTypes.md)
  - [Ip](docs/Ip.md)
@@ -237,6 +238,7 @@ Class | Method | HTTP request | Description
  - [State](docs/State.md)
  - [StickySession](docs/StickySession.md)
  - [Storage](docs/Storage.md)
+ - [StorageSize](docs/StorageSize.md)
  - [StoreCredentialOpts](docs/StoreCredentialOpts.md)
  - [StoreCredentialResult](docs/StoreCredentialResult.md)
  - [Summary](docs/Summary.md)
@@ -255,6 +257,7 @@ Class | Method | HTTP request | Description
  - [UpdateIpOpts](docs/UpdateIpOpts.md)
  - [UpdateLoadBalancerOpts](docs/UpdateLoadBalancerOpts.md)
  - [Values](docs/Values.md)
+ - [Volume](docs/Volume.md)
 
 
 ## Documentation For Authorization
