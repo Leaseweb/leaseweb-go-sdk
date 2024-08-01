@@ -23,13 +23,13 @@ Name | Type | Description | Notes
 **Image** | [**InstanceDetailsImage**](InstanceDetailsImage.md) |  | 
 **Ips** | [**[]IpDetails**](IpDetails.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
-**Volume** | [**Volume**](Volume.md) |  | 
+**Volume** | [**NullableVolume**](Volume.md) |  | 
 
 ## Methods
 
 ### NewInstanceDetails
 
-`func NewInstanceDetails(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image InstanceDetailsImage, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, volume Volume, ) *InstanceDetails`
+`func NewInstanceDetails(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image InstanceDetailsImage, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, volume NullableVolume, ) *InstanceDetails`
 
 NewInstanceDetails instantiates a new InstanceDetails object
 This constructor will assign default values to properties that have it defined,
@@ -504,6 +504,16 @@ and a boolean to check if the value has been set.
 SetVolume sets Volume field to given value.
 
 
+### SetVolumeNil
+
+`func (o *InstanceDetails) SetVolumeNil(b bool)`
+
+ SetVolumeNil sets the value for Volume to be an explicit nil
+
+### UnsetVolume
+`func (o *InstanceDetails) UnsetVolume()`
+
+UnsetVolume ensures that no value is present for Volume, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

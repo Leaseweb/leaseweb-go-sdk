@@ -8867,6 +8867,7 @@ components:
       example:
         unit: MB
         size: 6.027456183070403
+      nullable: true
       properties:
         size:
           description: The Volume Size

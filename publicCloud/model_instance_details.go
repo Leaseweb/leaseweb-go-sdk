@@ -47,7 +47,7 @@ type InstanceDetails struct {
 	Image InstanceDetailsImage `json:"image"`
 	Ips []IpDetails `json:"ips"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
-	Volume Volume `json:"volume"`
+	Volume NullableVolume `json:"volume"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -57,7 +57,7 @@ type _InstanceDetails InstanceDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceDetails(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image InstanceDetailsImage, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, volume Volume) *InstanceDetails {
+func NewInstanceDetails(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image InstanceDetailsImage, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, volume NullableVolume) *InstanceDetails {
 	this := InstanceDetails{}
 	this.Id = id
 	this.Type = type_
@@ -559,27 +559,29 @@ func (o *InstanceDetails) SetAutoScalingGroup(v AutoScalingGroup) {
 }
 
 // GetVolume returns the Volume field value
+// If the value is explicit nil, the zero value for Volume will be returned
 func (o *InstanceDetails) GetVolume() Volume {
-	if o == nil {
+	if o == nil || o.Volume.Get() == nil {
 		var ret Volume
 		return ret
 	}
 
-	return o.Volume
+	return *o.Volume.Get()
 }
 
 // GetVolumeOk returns a tuple with the Volume field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InstanceDetails) GetVolumeOk() (*Volume, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Volume, true
+	return o.Volume.Get(), o.Volume.IsSet()
 }
 
 // SetVolume sets field value
 func (o *InstanceDetails) SetVolume(v Volume) {
-	o.Volume = v
+	o.Volume.Set(&v)
 }
 
 func (o InstanceDetails) MarshalJSON() ([]byte, error) {
@@ -611,7 +613,7 @@ func (o InstanceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["image"] = o.Image
 	toSerialize["ips"] = o.Ips
 	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
-	toSerialize["volume"] = o.Volume
+	toSerialize["volume"] = o.Volume.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
