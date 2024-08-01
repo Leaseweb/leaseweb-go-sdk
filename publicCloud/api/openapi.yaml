@@ -8293,7 +8293,6 @@ components:
           type: string
         architecture:
           example: x86_64
-          nullable: true
           type: string
       required:
       - architecture

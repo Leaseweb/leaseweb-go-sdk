@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Version** | **string** |  | 
 **Family** | **string** |  | 
 **Flavour** | **string** |  | 
-**Architecture** | **NullableString** |  | 
+**Architecture** | **string** |  | 
 **MarketApps** | **[]string** |  | 
 **StorageTypes** | **[]string** | The supported storage types for the instance type | 
 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceDetailsImage
 
-`func NewInstanceDetailsImage(id string, name string, version string, family string, flavour string, architecture NullableString, marketApps []string, storageTypes []string, ) *InstanceDetailsImage`
+`func NewInstanceDetailsImage(id string, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, ) *InstanceDetailsImage`
 
 NewInstanceDetailsImage instantiates a new InstanceDetailsImage object
 This constructor will assign default values to properties that have it defined,
@@ -152,16 +152,6 @@ and a boolean to check if the value has been set.
 SetArchitecture sets Architecture field to given value.
 
 
-### SetArchitectureNil
-
-`func (o *InstanceDetailsImage) SetArchitectureNil(b bool)`
-
- SetArchitectureNil sets the value for Architecture to be an explicit nil
-
-### UnsetArchitecture
-`func (o *InstanceDetailsImage) UnsetArchitecture()`
-
-UnsetArchitecture ensures that no value is present for Architecture, not even an explicit nil
 ### GetMarketApps
 
 `func (o *InstanceDetailsImage) GetMarketApps() []string`

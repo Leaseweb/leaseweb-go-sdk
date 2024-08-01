@@ -26,7 +26,7 @@ type Image struct {
 	Version string `json:"version"`
 	Family string `json:"family"`
 	Flavour string `json:"flavour"`
-	Architecture NullableString `json:"architecture"`
+	Architecture string `json:"architecture"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,7 +36,7 @@ type _Image Image
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImage(id string, name string, version string, family string, flavour string, architecture NullableString) *Image {
+func NewImage(id string, name string, version string, family string, flavour string, architecture string) *Image {
 	this := Image{}
 	this.Id = id
 	this.Name = name
@@ -176,29 +176,27 @@ func (o *Image) SetFlavour(v string) {
 }
 
 // GetArchitecture returns the Architecture field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *Image) GetArchitecture() string {
-	if o == nil || o.Architecture.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Architecture.Get()
+	return o.Architecture
 }
 
 // GetArchitectureOk returns a tuple with the Architecture field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Image) GetArchitectureOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Architecture.Get(), o.Architecture.IsSet()
+	return &o.Architecture, true
 }
 
 // SetArchitecture sets field value
 func (o *Image) SetArchitecture(v string) {
-	o.Architecture.Set(&v)
+	o.Architecture = v
 }
 
 func (o Image) MarshalJSON() ([]byte, error) {
@@ -216,7 +214,7 @@ func (o Image) ToMap() (map[string]interface{}, error) {
 	toSerialize["version"] = o.Version
 	toSerialize["family"] = o.Family
 	toSerialize["flavour"] = o.Flavour
-	toSerialize["architecture"] = o.Architecture.Get()
+	toSerialize["architecture"] = o.Architecture
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value

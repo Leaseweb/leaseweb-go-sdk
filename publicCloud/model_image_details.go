@@ -27,7 +27,7 @@ type ImageDetails struct {
 	Version string `json:"version"`
 	Family string `json:"family"`
 	Flavour string `json:"flavour"`
-	Architecture NullableString `json:"architecture"`
+	Architecture string `json:"architecture"`
 	MarketApps []string `json:"marketApps"`
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes"`
@@ -52,7 +52,7 @@ type _ImageDetails ImageDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDetails(id string, name string, version string, family string, flavour string, architecture NullableString, marketApps []string, storageTypes []string, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool) *ImageDetails {
+func NewImageDetails(id string, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool) *ImageDetails {
 	this := ImageDetails{}
 	this.Id = id
 	this.Name = name
@@ -200,29 +200,27 @@ func (o *ImageDetails) SetFlavour(v string) {
 }
 
 // GetArchitecture returns the Architecture field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *ImageDetails) GetArchitecture() string {
-	if o == nil || o.Architecture.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Architecture.Get()
+	return o.Architecture
 }
 
 // GetArchitectureOk returns a tuple with the Architecture field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ImageDetails) GetArchitectureOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Architecture.Get(), o.Architecture.IsSet()
+	return &o.Architecture, true
 }
 
 // SetArchitecture sets field value
 func (o *ImageDetails) SetArchitecture(v string) {
-	o.Architecture.Set(&v)
+	o.Architecture = v
 }
 
 // GetMarketApps returns the MarketApps field value
@@ -486,7 +484,7 @@ func (o ImageDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["version"] = o.Version
 	toSerialize["family"] = o.Family
 	toSerialize["flavour"] = o.Flavour
-	toSerialize["architecture"] = o.Architecture.Get()
+	toSerialize["architecture"] = o.Architecture
 	toSerialize["marketApps"] = o.MarketApps
 	toSerialize["storageTypes"] = o.StorageTypes
 	if o.StorageSize.IsSet() {

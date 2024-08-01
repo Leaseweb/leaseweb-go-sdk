@@ -9,13 +9,13 @@ Name | Type | Description | Notes
 **Version** | **string** |  | 
 **Family** | **string** |  | 
 **Flavour** | **string** |  | 
-**Architecture** | **NullableString** |  | 
+**Architecture** | **string** |  | 
 
 ## Methods
 
 ### NewImage
 
-`func NewImage(id string, name string, version string, family string, flavour string, architecture NullableString, ) *Image`
+`func NewImage(id string, name string, version string, family string, flavour string, architecture string, ) *Image`
 
 NewImage instantiates a new Image object
 This constructor will assign default values to properties that have it defined,
@@ -150,16 +150,6 @@ and a boolean to check if the value has been set.
 SetArchitecture sets Architecture field to given value.
 
 
-### SetArchitectureNil
-
-`func (o *Image) SetArchitectureNil(b bool)`
-
- SetArchitectureNil sets the value for Architecture to be an explicit nil
-
-### UnsetArchitecture
-`func (o *Image) UnsetArchitecture()`
-
-UnsetArchitecture ensures that no value is present for Architecture, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
