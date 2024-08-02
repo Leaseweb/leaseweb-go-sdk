@@ -31,7 +31,7 @@ type ImageDetails struct {
 	MarketApps []string `json:"marketApps"`
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes"`
-	StorageSize NullableStorageSize `json:"storageSize,omitempty"`
+	StorageSize NullableStorageSize `json:"storageSize"`
 	State NullableString `json:"state"`
 	// The reason in case of failure
 	StateReason NullableString `json:"stateReason"`
@@ -52,7 +52,7 @@ type _ImageDetails ImageDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDetails(id string, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool) *ImageDetails {
+func NewImageDetails(id string, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool) *ImageDetails {
 	this := ImageDetails{}
 	this.Id = id
 	this.Name = name
@@ -62,6 +62,7 @@ func NewImageDetails(id string, name string, version string, family string, flav
 	this.Architecture = architecture
 	this.MarketApps = marketApps
 	this.StorageTypes = storageTypes
+	this.StorageSize = storageSize
 	this.State = state
 	this.StateReason = stateReason
 	this.Region = region
@@ -271,16 +272,18 @@ func (o *ImageDetails) SetStorageTypes(v []string) {
 	o.StorageTypes = v
 }
 
-// GetStorageSize returns the StorageSize field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStorageSize returns the StorageSize field value
+// If the value is explicit nil, the zero value for StorageSize will be returned
 func (o *ImageDetails) GetStorageSize() StorageSize {
-	if o == nil || IsNil(o.StorageSize.Get()) {
+	if o == nil || o.StorageSize.Get() == nil {
 		var ret StorageSize
 		return ret
 	}
+
 	return *o.StorageSize.Get()
 }
 
-// GetStorageSizeOk returns a tuple with the StorageSize field value if set, nil otherwise
+// GetStorageSizeOk returns a tuple with the StorageSize field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ImageDetails) GetStorageSizeOk() (*StorageSize, bool) {
@@ -290,27 +293,9 @@ func (o *ImageDetails) GetStorageSizeOk() (*StorageSize, bool) {
 	return o.StorageSize.Get(), o.StorageSize.IsSet()
 }
 
-// HasStorageSize returns a boolean if a field has been set.
-func (o *ImageDetails) HasStorageSize() bool {
-	if o != nil && o.StorageSize.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStorageSize gets a reference to the given NullableStorageSize and assigns it to the StorageSize field.
+// SetStorageSize sets field value
 func (o *ImageDetails) SetStorageSize(v StorageSize) {
 	o.StorageSize.Set(&v)
-}
-// SetStorageSizeNil sets the value for StorageSize to be an explicit nil
-func (o *ImageDetails) SetStorageSizeNil() {
-	o.StorageSize.Set(nil)
-}
-
-// UnsetStorageSize ensures that no value is present for StorageSize, not even an explicit nil
-func (o *ImageDetails) UnsetStorageSize() {
-	o.StorageSize.Unset()
 }
 
 // GetState returns the State field value
@@ -487,9 +472,7 @@ func (o ImageDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["architecture"] = o.Architecture
 	toSerialize["marketApps"] = o.MarketApps
 	toSerialize["storageTypes"] = o.StorageTypes
-	if o.StorageSize.IsSet() {
-		toSerialize["storageSize"] = o.StorageSize.Get()
-	}
+	toSerialize["storageSize"] = o.StorageSize.Get()
 	toSerialize["state"] = o.State.Get()
 	toSerialize["stateReason"] = o.StateReason.Get()
 	toSerialize["region"] = o.Region.Get()
@@ -517,6 +500,7 @@ func (o *ImageDetails) UnmarshalJSON(data []byte) (err error) {
 		"architecture",
 		"marketApps",
 		"storageTypes",
+		"storageSize",
 		"state",
 		"stateReason",
 		"region",

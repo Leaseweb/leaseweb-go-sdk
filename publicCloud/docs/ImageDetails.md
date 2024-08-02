@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Architecture** | **string** |  | 
 **MarketApps** | **[]string** |  | 
 **StorageTypes** | **[]string** | The supported storage types for the instance type | 
-**StorageSize** | Pointer to [**NullableStorageSize**](StorageSize.md) |  | [optional] 
+**StorageSize** | [**NullableStorageSize**](StorageSize.md) |  | 
 **State** | **NullableString** |  | 
 **StateReason** | **NullableString** | The reason in case of failure | 
 **Region** | **NullableString** | The region where the image was uploaded | 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewImageDetails
 
-`func NewImageDetails(id string, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool, ) *ImageDetails`
+`func NewImageDetails(id string, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool, ) *ImageDetails`
 
 NewImageDetails instantiates a new ImageDetails object
 This constructor will assign default values to properties that have it defined,
@@ -218,11 +218,6 @@ and a boolean to check if the value has been set.
 
 SetStorageSize sets StorageSize field to given value.
 
-### HasStorageSize
-
-`func (o *ImageDetails) HasStorageSize() bool`
-
-HasStorageSize returns a boolean if a field has been set.
 
 ### SetStorageSizeNil
 
