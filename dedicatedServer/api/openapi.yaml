@@ -9396,13 +9396,13 @@ components:
           hdd:
           - amount: 6
             unit: unit
-            size: 1
+            size: 1.4658129805029452
             id: id
             type: type
             performanceType: performanceType
           - amount: 6
             unit: unit
-            size: 1
+            size: 1.4658129805029452
             id: id
             type: type
             performanceType: performanceType
@@ -9569,13 +9569,13 @@ components:
             hdd:
             - amount: 6
               unit: unit
-              size: 1
+              size: 1.4658129805029452
               id: id
               type: type
               performanceType: performanceType
             - amount: 6
               unit: unit
-              size: 1
+              size: 1.4658129805029452
               id: id
               type: type
               performanceType: performanceType
@@ -9706,13 +9706,13 @@ components:
             hdd:
             - amount: 6
               unit: unit
-              size: 1
+              size: 1.4658129805029452
               id: id
               type: type
               performanceType: performanceType
             - amount: 6
               unit: unit
-              size: 1
+              size: 1.4658129805029452
               id: id
               type: type
               performanceType: performanceType
@@ -10601,7 +10601,7 @@ components:
       - $ref: '#/components/schemas/serverJob'
       - properties:
           metadata:
-            $ref: '#/components/schemas/metadata'
+            $ref: '#/components/schemas/jobMetadata'
       example:
         metadata:
           BATCH_ID: BATCH_ID
@@ -11577,7 +11577,7 @@ components:
       example:
         amount: 6
         unit: unit
-        size: 1
+        size: 1.4658129805029452
         id: id
         type: type
         performanceType: performanceType
@@ -11590,7 +11590,7 @@ components:
           type: integer
         size:
           description: The size number of the hard disk drive
-          type: integer
+          type: number
         type:
           description: The type of the hard disk drive
           type: string
@@ -11636,13 +11636,13 @@ components:
         hdd:
         - amount: 6
           unit: unit
-          size: 1
+          size: 1.4658129805029452
           id: id
           type: type
           performanceType: performanceType
         - amount: 6
           unit: unit
-          size: 1
+          size: 1.4658129805029452
           id: id
           type: type
           performanceType: performanceType
@@ -11865,7 +11865,7 @@ components:
           $ref: '#/components/schemas/raidType'
       title: raid
       type: object
-    metadata:
+    jobMetadata:
       description: The Job Metadata schema
       example:
         BATCH_ID: BATCH_ID
@@ -11873,7 +11873,7 @@ components:
         BATCH_ID:
           description: Batch ID for batch jobs
           type: string
-      title: metadata
+      title: jobMetadata
       type: object
     lastClientRequest:
       description: "If the server acquired this DHCP reservation, this object shows\

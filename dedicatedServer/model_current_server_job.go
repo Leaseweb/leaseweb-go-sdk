@@ -44,7 +44,7 @@ type CurrentServerJob struct {
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// Unique identifier of the job
 	Uuid *string `json:"uuid,omitempty"`
-	Metadata *Metadata `json:"metadata,omitempty"`
+	Metadata *JobMetadata `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -487,9 +487,9 @@ func (o *CurrentServerJob) SetUuid(v string) {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *CurrentServerJob) GetMetadata() Metadata {
+func (o *CurrentServerJob) GetMetadata() JobMetadata {
 	if o == nil || IsNil(o.Metadata) {
-		var ret Metadata
+		var ret JobMetadata
 		return ret
 	}
 	return *o.Metadata
@@ -497,7 +497,7 @@ func (o *CurrentServerJob) GetMetadata() Metadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CurrentServerJob) GetMetadataOk() (*Metadata, bool) {
+func (o *CurrentServerJob) GetMetadataOk() (*JobMetadata, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
@@ -513,8 +513,8 @@ func (o *CurrentServerJob) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
-func (o *CurrentServerJob) SetMetadata(v Metadata) {
+// SetMetadata gets a reference to the given JobMetadata and assigns it to the Metadata field.
+func (o *CurrentServerJob) SetMetadata(v JobMetadata) {
 	o.Metadata = &v
 }
 

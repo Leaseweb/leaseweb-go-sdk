@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to [**JobType**](JobType.md) |  | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Update timestamp | [optional] 
 **Uuid** | Pointer to **string** | Unique identifier of the job | [optional] 
-**Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
+**Metadata** | Pointer to [**JobMetadata**](JobMetadata.md) |  | [optional] 
 
 ## Methods
 
@@ -365,20 +365,20 @@ HasUuid returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *CurrentServerJob) GetMetadata() Metadata`
+`func (o *CurrentServerJob) GetMetadata() JobMetadata`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *CurrentServerJob) GetMetadataOk() (*Metadata, bool)`
+`func (o *CurrentServerJob) GetMetadataOk() (*JobMetadata, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *CurrentServerJob) SetMetadata(v Metadata)`
+`func (o *CurrentServerJob) SetMetadata(v JobMetadata)`
 
 SetMetadata sets Metadata field to given value.
 

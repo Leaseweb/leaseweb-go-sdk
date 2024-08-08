@@ -24,7 +24,7 @@ type Hdd struct {
 	// The total amount of hard disk drives
 	Amount *int32 `json:"amount,omitempty"`
 	// The size number of the hard disk drive
-	Size *int32 `json:"size,omitempty"`
+	Size *float32 `json:"size,omitempty"`
 	// The type of the hard disk drive
 	Type *string `json:"type,omitempty"`
 	// The unit of the hard disk drive
@@ -118,9 +118,9 @@ func (o *Hdd) SetAmount(v int32) {
 }
 
 // GetSize returns the Size field value if set, zero value otherwise.
-func (o *Hdd) GetSize() int32 {
+func (o *Hdd) GetSize() float32 {
 	if o == nil || IsNil(o.Size) {
-		var ret int32
+		var ret float32
 		return ret
 	}
 	return *o.Size
@@ -128,7 +128,7 @@ func (o *Hdd) GetSize() int32 {
 
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Hdd) GetSizeOk() (*int32, bool) {
+func (o *Hdd) GetSizeOk() (*float32, bool) {
 	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
@@ -144,8 +144,8 @@ func (o *Hdd) HasSize() bool {
 	return false
 }
 
-// SetSize gets a reference to the given int32 and assigns it to the Size field.
-func (o *Hdd) SetSize(v int32) {
+// SetSize gets a reference to the given float32 and assigns it to the Size field.
+func (o *Hdd) SetSize(v float32) {
 	o.Size = &v
 }
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Id of the hard disk drive | [optional] 
 **Amount** | Pointer to **int32** | The total amount of hard disk drives | [optional] 
-**Size** | Pointer to **int32** | The size number of the hard disk drive | [optional] 
+**Size** | Pointer to **float32** | The size number of the hard disk drive | [optional] 
 **Type** | Pointer to **string** | The type of the hard disk drive | [optional] 
 **Unit** | Pointer to **string** | The unit of the hard disk drive | [optional] 
 **PerformanceType** | Pointer to **NullableString** | Hard disk drive performance type | [optional] 
@@ -82,20 +82,20 @@ HasAmount returns a boolean if a field has been set.
 
 ### GetSize
 
-`func (o *Hdd) GetSize() int32`
+`func (o *Hdd) GetSize() float32`
 
 GetSize returns the Size field if non-nil, zero value otherwise.
 
 ### GetSizeOk
 
-`func (o *Hdd) GetSizeOk() (*int32, bool)`
+`func (o *Hdd) GetSizeOk() (*float32, bool)`
 
 GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSize
 
-`func (o *Hdd) SetSize(v int32)`
+`func (o *Hdd) SetSize(v float32)`
 
 SetSize sets Size field to given value.
 

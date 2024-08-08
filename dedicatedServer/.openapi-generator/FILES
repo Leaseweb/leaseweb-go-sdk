@@ -60,6 +60,7 @@ docs/Ip.md
 docs/Ipmi.md
 docs/Ipmi1.md
 docs/IpmiResetServerOpts.md
+docs/JobMetadata.md
 docs/JobType.md
 docs/LastClientRequest.md
 docs/Lease.md
@@ -181,6 +182,7 @@ model_ip.go
 model_ipmi.go
 model_ipmi_1.go
 model_ipmi_reset_server_opts.go
+model_job_metadata.go
 model_job_type.go
 model_last_client_request.go
 model_lease.go

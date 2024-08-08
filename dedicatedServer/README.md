@@ -213,6 +213,7 @@ Class | Method | HTTP request | Description
  - [Ipmi](docs/Ipmi.md)
  - [Ipmi1](docs/Ipmi1.md)
  - [IpmiResetServerOpts](docs/IpmiResetServerOpts.md)
+ - [JobMetadata](docs/JobMetadata.md)
  - [JobType](docs/JobType.md)
  - [LastClientRequest](docs/LastClientRequest.md)
  - [Lease](docs/Lease.md)
