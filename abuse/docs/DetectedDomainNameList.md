@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **string** | The domainname. | [optional] 
-**IpAddresses** | Pointer to **[]string** | The IP-addresses the domainname resolves to. | [optional] 
+**Name** | Pointer to **string** | The domain. | [optional] 
+**IpAddresses** | Pointer to **[]string** | The IP-addresses the domain resolves to. | [optional] 
 
 ## Methods
 

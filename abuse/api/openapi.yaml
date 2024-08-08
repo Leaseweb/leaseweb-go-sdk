@@ -1145,7 +1145,7 @@ components:
           example: 2015-01-01T00:00:00+00:00
           type: string
         notifier:
-          description: The emailaddress of the notifier who reported the abuse.
+          description: The email address of the notifier who reported the abuse.
           example: notifier@email.com
           type: string
         customerId:
@@ -1171,7 +1171,7 @@ components:
             type: string
           type: array
         detectedDomainNames:
-          description: The domainnames detected in the report body.
+          description: The domains detected in the report body.
           items:
             $ref: '#/components/schemas/detectedDomainNameList'
           type: array
@@ -1329,11 +1329,11 @@ components:
         - "[\"93.184.216.34\"]"
       properties:
         name:
-          description: The domainname.
+          description: The domain.
           example: "[\"example.com\"]"
           type: string
         ipAddresses:
-          description: The IP-addresses the domainname resolves to.
+          description: The IP-addresses the domain resolves to.
           items:
             example: "[\"93.184.216.34\"]"
             type: string

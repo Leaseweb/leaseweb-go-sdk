@@ -33,7 +33,7 @@ type GetReportResult struct {
 	ReportedAt *string `json:"reportedAt,omitempty"`
 	// When the report was updated last.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
-	// The emailaddress of the notifier who reported the abuse.
+	// The email address of the notifier who reported the abuse.
 	Notifier *string `json:"notifier,omitempty"`
 	// The customer ID of your account.
 	CustomerId *string `json:"customerId,omitempty"`
@@ -45,7 +45,7 @@ type GetReportResult struct {
 	Deadline *string `json:"deadline,omitempty"`
 	// The IP-addresses detected in the report body.
 	DetectedIpAddresses []string `json:"detectedIpAddresses,omitempty"`
-	// The domainnames detected in the report body.
+	// The domains detected in the report body.
 	DetectedDomainNames []DetectedDomainNameList `json:"detectedDomainNames,omitempty"`
 	// All the files attached to the report.
 	Attachments []Attachment `json:"attachments,omitempty"`

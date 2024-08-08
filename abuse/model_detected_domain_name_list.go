@@ -19,9 +19,9 @@ var _ MappedNullable = &DetectedDomainNameList{}
 
 // DetectedDomainNameList struct for DetectedDomainNameList
 type DetectedDomainNameList struct {
-	// The domainname.
+	// The domain.
 	Name *string `json:"name,omitempty"`
-	// The IP-addresses the domainname resolves to.
+	// The IP-addresses the domain resolves to.
 	IpAddresses []string `json:"ipAddresses,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
