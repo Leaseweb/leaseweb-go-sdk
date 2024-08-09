@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **Family** | **string** |  | 
 **Flavour** | **string** |  | 
-**Architecture** | **string** |  | 
+**Custom** | **bool** | Standard or Custom image | 
 
 ## Methods
 
 ### NewImage
 
-`func NewImage(id string, name string, family string, flavour string, architecture string, ) *Image`
+`func NewImage(id string, name string, family string, flavour string, custom bool, ) *Image`
 
 NewImage instantiates a new Image object
 This constructor will assign default values to properties that have it defined,
@@ -109,24 +109,24 @@ and a boolean to check if the value has been set.
 SetFlavour sets Flavour field to given value.
 
 
-### GetArchitecture
+### GetCustom
 
-`func (o *Image) GetArchitecture() string`
+`func (o *Image) GetCustom() bool`
 
-GetArchitecture returns the Architecture field if non-nil, zero value otherwise.
+GetCustom returns the Custom field if non-nil, zero value otherwise.
 
-### GetArchitectureOk
+### GetCustomOk
 
-`func (o *Image) GetArchitectureOk() (*string, bool)`
+`func (o *Image) GetCustomOk() (*bool, bool)`
 
-GetArchitectureOk returns a tuple with the Architecture field if it's non-nil, zero value otherwise
+GetCustomOk returns a tuple with the Custom field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetArchitecture
+### SetCustom
 
-`func (o *Image) SetArchitecture(v string)`
+`func (o *Image) SetCustom(v bool)`
 
-SetArchitecture sets Architecture field to given value.
+SetCustom sets Custom field to given value.
 
 
 

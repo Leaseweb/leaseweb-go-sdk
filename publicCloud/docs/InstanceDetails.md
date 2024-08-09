@@ -18,18 +18,18 @@ Name | Type | Description | Notes
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
 **RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
+**AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
+**Image** | [**Image**](Image.md) |  | 
 **Iso** | [**NullableIso**](Iso.md) |  | 
 **PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
-**Image** | [**InstanceDetailsImage**](InstanceDetailsImage.md) |  | 
 **Ips** | [**[]IpDetails**](IpDetails.md) |  | 
-**AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 **Volume** | [**NullableVolume**](Volume.md) |  | 
 
 ## Methods
 
 ### NewInstanceDetails
 
-`func NewInstanceDetails(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, iso NullableIso, privateNetwork NullablePrivateNetwork, image InstanceDetailsImage, ips []IpDetails, autoScalingGroup NullableAutoScalingGroup, volume NullableVolume, ) *InstanceDetails`
+`func NewInstanceDetails(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, iso NullableIso, privateNetwork NullablePrivateNetwork, ips []IpDetails, volume NullableVolume, ) *InstanceDetails`
 
 NewInstanceDetails instantiates a new InstanceDetails object
 This constructor will assign default values to properties that have it defined,
@@ -354,6 +354,56 @@ and a boolean to check if the value has been set.
 SetContract sets Contract field to given value.
 
 
+### GetAutoScalingGroup
+
+`func (o *InstanceDetails) GetAutoScalingGroup() AutoScalingGroup`
+
+GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
+
+### GetAutoScalingGroupOk
+
+`func (o *InstanceDetails) GetAutoScalingGroupOk() (*AutoScalingGroup, bool)`
+
+GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoScalingGroup
+
+`func (o *InstanceDetails) SetAutoScalingGroup(v AutoScalingGroup)`
+
+SetAutoScalingGroup sets AutoScalingGroup field to given value.
+
+
+### SetAutoScalingGroupNil
+
+`func (o *InstanceDetails) SetAutoScalingGroupNil(b bool)`
+
+ SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
+
+### UnsetAutoScalingGroup
+`func (o *InstanceDetails) UnsetAutoScalingGroup()`
+
+UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
+### GetImage
+
+`func (o *InstanceDetails) GetImage() Image`
+
+GetImage returns the Image field if non-nil, zero value otherwise.
+
+### GetImageOk
+
+`func (o *InstanceDetails) GetImageOk() (*Image, bool)`
+
+GetImageOk returns a tuple with the Image field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImage
+
+`func (o *InstanceDetails) SetImage(v Image)`
+
+SetImage sets Image field to given value.
+
+
 ### GetIso
 
 `func (o *InstanceDetails) GetIso() Iso`
@@ -414,26 +464,6 @@ SetPrivateNetwork sets PrivateNetwork field to given value.
 `func (o *InstanceDetails) UnsetPrivateNetwork()`
 
 UnsetPrivateNetwork ensures that no value is present for PrivateNetwork, not even an explicit nil
-### GetImage
-
-`func (o *InstanceDetails) GetImage() InstanceDetailsImage`
-
-GetImage returns the Image field if non-nil, zero value otherwise.
-
-### GetImageOk
-
-`func (o *InstanceDetails) GetImageOk() (*InstanceDetailsImage, bool)`
-
-GetImageOk returns a tuple with the Image field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetImage
-
-`func (o *InstanceDetails) SetImage(v InstanceDetailsImage)`
-
-SetImage sets Image field to given value.
-
-
 ### GetIps
 
 `func (o *InstanceDetails) GetIps() []IpDetails`
@@ -454,36 +484,6 @@ and a boolean to check if the value has been set.
 SetIps sets Ips field to given value.
 
 
-### GetAutoScalingGroup
-
-`func (o *InstanceDetails) GetAutoScalingGroup() AutoScalingGroup`
-
-GetAutoScalingGroup returns the AutoScalingGroup field if non-nil, zero value otherwise.
-
-### GetAutoScalingGroupOk
-
-`func (o *InstanceDetails) GetAutoScalingGroupOk() (*AutoScalingGroup, bool)`
-
-GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAutoScalingGroup
-
-`func (o *InstanceDetails) SetAutoScalingGroup(v AutoScalingGroup)`
-
-SetAutoScalingGroup sets AutoScalingGroup field to given value.
-
-
-### SetAutoScalingGroupNil
-
-`func (o *InstanceDetails) SetAutoScalingGroupNil(b bool)`
-
- SetAutoScalingGroupNil sets the value for AutoScalingGroup to be an explicit nil
-
-### UnsetAutoScalingGroup
-`func (o *InstanceDetails) UnsetAutoScalingGroup()`
-
-UnsetAutoScalingGroup ensures that no value is present for AutoScalingGroup, not even an explicit nil
 ### GetVolume
 
 `func (o *InstanceDetails) GetVolume() Volume`

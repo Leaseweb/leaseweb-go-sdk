@@ -42,6 +42,8 @@ type InstanceBase struct {
 	RootDiskSize int32 `json:"rootDiskSize"`
 	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
 	Contract Contract `json:"contract"`
+	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
+	Image Image `json:"image"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -51,7 +53,7 @@ type _InstanceBase InstanceBase
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceBase(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract) *InstanceBase {
+func NewInstanceBase(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image) *InstanceBase {
 	this := InstanceBase{}
 	this.Id = id
 	this.Type = type_
@@ -67,6 +69,8 @@ func NewInstanceBase(id string, type_ TypeName, resources Resources, region stri
 	this.RootDiskSize = rootDiskSize
 	this.RootDiskStorageType = rootDiskStorageType
 	this.Contract = contract
+	this.AutoScalingGroup = autoScalingGroup
+	this.Image = image
 	return &this
 }
 
@@ -420,6 +424,56 @@ func (o *InstanceBase) SetContract(v Contract) {
 	o.Contract = v
 }
 
+// GetAutoScalingGroup returns the AutoScalingGroup field value
+// If the value is explicit nil, the zero value for AutoScalingGroup will be returned
+func (o *InstanceBase) GetAutoScalingGroup() AutoScalingGroup {
+	if o == nil || o.AutoScalingGroup.Get() == nil {
+		var ret AutoScalingGroup
+		return ret
+	}
+
+	return *o.AutoScalingGroup.Get()
+}
+
+// GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InstanceBase) GetAutoScalingGroupOk() (*AutoScalingGroup, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AutoScalingGroup.Get(), o.AutoScalingGroup.IsSet()
+}
+
+// SetAutoScalingGroup sets field value
+func (o *InstanceBase) SetAutoScalingGroup(v AutoScalingGroup) {
+	o.AutoScalingGroup.Set(&v)
+}
+
+// GetImage returns the Image field value
+func (o *InstanceBase) GetImage() Image {
+	if o == nil {
+		var ret Image
+		return ret
+	}
+
+	return o.Image
+}
+
+// GetImageOk returns a tuple with the Image field value
+// and a boolean to check if the value has been set.
+func (o *InstanceBase) GetImageOk() (*Image, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Image, true
+}
+
+// SetImage sets field value
+func (o *InstanceBase) SetImage(v Image) {
+	o.Image = v
+}
+
 func (o InstanceBase) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -444,6 +498,8 @@ func (o InstanceBase) ToMap() (map[string]interface{}, error) {
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
 	toSerialize["contract"] = o.Contract
+	toSerialize["autoScalingGroup"] = o.AutoScalingGroup.Get()
+	toSerialize["image"] = o.Image
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -471,6 +527,8 @@ func (o *InstanceBase) UnmarshalJSON(data []byte) (err error) {
 		"rootDiskSize",
 		"rootDiskStorageType",
 		"contract",
+		"autoScalingGroup",
+		"image",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -514,6 +572,8 @@ func (o *InstanceBase) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "rootDiskSize")
 		delete(additionalProperties, "rootDiskStorageType")
 		delete(additionalProperties, "contract")
+		delete(additionalProperties, "autoScalingGroup")
+		delete(additionalProperties, "image")
 		o.AdditionalProperties = additionalProperties
 	}
 

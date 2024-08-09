@@ -60,7 +60,6 @@ docs/ImageDetails.md
 docs/Instance.md
 docs/InstanceBase.md
 docs/InstanceDetails.md
-docs/InstanceDetailsImage.md
 docs/InstanceType.md
 docs/InstanceTypes.md
 docs/Ip.md
@@ -174,7 +173,6 @@ model_image_details.go
 model_instance.go
 model_instance_base.go
 model_instance_details.go
-model_instance_details_image.go
 model_instance_type.go
 model_instance_types.go
 model_ip.go

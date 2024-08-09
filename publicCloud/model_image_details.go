@@ -26,10 +26,8 @@ type ImageDetails struct {
 	Name string `json:"name"`
 	Family string `json:"family"`
 	Flavour string `json:"flavour"`
-	Architecture string `json:"architecture"`
-	MarketApps []string `json:"marketApps"`
-	// The supported storage types for the instance type
-	StorageTypes []string `json:"storageTypes"`
+	// Standard or Custom image
+	Custom bool `json:"custom"`
 	StorageSize NullableStorageSize `json:"storageSize"`
 	State NullableString `json:"state"`
 	// The reason in case of failure
@@ -40,8 +38,11 @@ type ImageDetails struct {
 	CreatedAt NullableTime `json:"createdAt"`
 	// Date when the image was updated
 	UpdatedAt NullableTime `json:"updatedAt"`
-	// Standard or Custom image
-	Custom NullableBool `json:"custom"`
+	Version string `json:"version"`
+	Architecture string `json:"architecture"`
+	MarketApps []string `json:"marketApps"`
+	// The supported storage types for the instance type
+	StorageTypes []string `json:"storageTypes"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -51,22 +52,23 @@ type _ImageDetails ImageDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDetails(id string, name string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool) *ImageDetails {
+func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string) *ImageDetails {
 	this := ImageDetails{}
 	this.Id = id
 	this.Name = name
 	this.Family = family
 	this.Flavour = flavour
-	this.Architecture = architecture
-	this.MarketApps = marketApps
-	this.StorageTypes = storageTypes
+	this.Custom = custom
 	this.StorageSize = storageSize
 	this.State = state
 	this.StateReason = stateReason
 	this.Region = region
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
-	this.Custom = custom
+	this.Version = version
+	this.Architecture = architecture
+	this.MarketApps = marketApps
+	this.StorageTypes = storageTypes
 	return &this
 }
 
@@ -174,76 +176,28 @@ func (o *ImageDetails) SetFlavour(v string) {
 	o.Flavour = v
 }
 
-// GetArchitecture returns the Architecture field value
-func (o *ImageDetails) GetArchitecture() string {
+// GetCustom returns the Custom field value
+func (o *ImageDetails) GetCustom() bool {
 	if o == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 
-	return o.Architecture
+	return o.Custom
 }
 
-// GetArchitectureOk returns a tuple with the Architecture field value
+// GetCustomOk returns a tuple with the Custom field value
 // and a boolean to check if the value has been set.
-func (o *ImageDetails) GetArchitectureOk() (*string, bool) {
+func (o *ImageDetails) GetCustomOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Architecture, true
+	return &o.Custom, true
 }
 
-// SetArchitecture sets field value
-func (o *ImageDetails) SetArchitecture(v string) {
-	o.Architecture = v
-}
-
-// GetMarketApps returns the MarketApps field value
-func (o *ImageDetails) GetMarketApps() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.MarketApps
-}
-
-// GetMarketAppsOk returns a tuple with the MarketApps field value
-// and a boolean to check if the value has been set.
-func (o *ImageDetails) GetMarketAppsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.MarketApps, true
-}
-
-// SetMarketApps sets field value
-func (o *ImageDetails) SetMarketApps(v []string) {
-	o.MarketApps = v
-}
-
-// GetStorageTypes returns the StorageTypes field value
-func (o *ImageDetails) GetStorageTypes() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.StorageTypes
-}
-
-// GetStorageTypesOk returns a tuple with the StorageTypes field value
-// and a boolean to check if the value has been set.
-func (o *ImageDetails) GetStorageTypesOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.StorageTypes, true
-}
-
-// SetStorageTypes sets field value
-func (o *ImageDetails) SetStorageTypes(v []string) {
-	o.StorageTypes = v
+// SetCustom sets field value
+func (o *ImageDetails) SetCustom(v bool) {
+	o.Custom = v
 }
 
 // GetStorageSize returns the StorageSize field value
@@ -402,30 +356,100 @@ func (o *ImageDetails) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt.Set(&v)
 }
 
-// GetCustom returns the Custom field value
-// If the value is explicit nil, the zero value for bool will be returned
-func (o *ImageDetails) GetCustom() bool {
-	if o == nil || o.Custom.Get() == nil {
-		var ret bool
+// GetVersion returns the Version field value
+func (o *ImageDetails) GetVersion() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
 
-	return *o.Custom.Get()
+	return o.Version
 }
 
-// GetCustomOk returns a tuple with the Custom field value
+// GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ImageDetails) GetCustomOk() (*bool, bool) {
+func (o *ImageDetails) GetVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Custom.Get(), o.Custom.IsSet()
+	return &o.Version, true
 }
 
-// SetCustom sets field value
-func (o *ImageDetails) SetCustom(v bool) {
-	o.Custom.Set(&v)
+// SetVersion sets field value
+func (o *ImageDetails) SetVersion(v string) {
+	o.Version = v
+}
+
+// GetArchitecture returns the Architecture field value
+func (o *ImageDetails) GetArchitecture() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Architecture
+}
+
+// GetArchitectureOk returns a tuple with the Architecture field value
+// and a boolean to check if the value has been set.
+func (o *ImageDetails) GetArchitectureOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Architecture, true
+}
+
+// SetArchitecture sets field value
+func (o *ImageDetails) SetArchitecture(v string) {
+	o.Architecture = v
+}
+
+// GetMarketApps returns the MarketApps field value
+func (o *ImageDetails) GetMarketApps() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.MarketApps
+}
+
+// GetMarketAppsOk returns a tuple with the MarketApps field value
+// and a boolean to check if the value has been set.
+func (o *ImageDetails) GetMarketAppsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MarketApps, true
+}
+
+// SetMarketApps sets field value
+func (o *ImageDetails) SetMarketApps(v []string) {
+	o.MarketApps = v
+}
+
+// GetStorageTypes returns the StorageTypes field value
+func (o *ImageDetails) GetStorageTypes() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.StorageTypes
+}
+
+// GetStorageTypesOk returns a tuple with the StorageTypes field value
+// and a boolean to check if the value has been set.
+func (o *ImageDetails) GetStorageTypesOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.StorageTypes, true
+}
+
+// SetStorageTypes sets field value
+func (o *ImageDetails) SetStorageTypes(v []string) {
+	o.StorageTypes = v
 }
 
 func (o ImageDetails) MarshalJSON() ([]byte, error) {
@@ -442,16 +466,17 @@ func (o ImageDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["family"] = o.Family
 	toSerialize["flavour"] = o.Flavour
-	toSerialize["architecture"] = o.Architecture
-	toSerialize["marketApps"] = o.MarketApps
-	toSerialize["storageTypes"] = o.StorageTypes
+	toSerialize["custom"] = o.Custom
 	toSerialize["storageSize"] = o.StorageSize.Get()
 	toSerialize["state"] = o.State.Get()
 	toSerialize["stateReason"] = o.StateReason.Get()
 	toSerialize["region"] = o.Region.Get()
 	toSerialize["createdAt"] = o.CreatedAt.Get()
 	toSerialize["updatedAt"] = o.UpdatedAt.Get()
-	toSerialize["custom"] = o.Custom.Get()
+	toSerialize["version"] = o.Version
+	toSerialize["architecture"] = o.Architecture
+	toSerialize["marketApps"] = o.MarketApps
+	toSerialize["storageTypes"] = o.StorageTypes
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -469,16 +494,17 @@ func (o *ImageDetails) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"family",
 		"flavour",
-		"architecture",
-		"marketApps",
-		"storageTypes",
+		"custom",
 		"storageSize",
 		"state",
 		"stateReason",
 		"region",
 		"createdAt",
 		"updatedAt",
-		"custom",
+		"version",
+		"architecture",
+		"marketApps",
+		"storageTypes",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -512,16 +538,17 @@ func (o *ImageDetails) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "family")
 		delete(additionalProperties, "flavour")
-		delete(additionalProperties, "architecture")
-		delete(additionalProperties, "marketApps")
-		delete(additionalProperties, "storageTypes")
+		delete(additionalProperties, "custom")
 		delete(additionalProperties, "storageSize")
 		delete(additionalProperties, "state")
 		delete(additionalProperties, "stateReason")
 		delete(additionalProperties, "region")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "updatedAt")
-		delete(additionalProperties, "custom")
+		delete(additionalProperties, "version")
+		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "marketApps")
+		delete(additionalProperties, "storageTypes")
 		o.AdditionalProperties = additionalProperties
 	}
 

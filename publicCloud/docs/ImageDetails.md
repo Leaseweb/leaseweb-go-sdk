@@ -8,22 +8,23 @@ Name | Type | Description | Notes
 **Name** | **string** |  | 
 **Family** | **string** |  | 
 **Flavour** | **string** |  | 
-**Architecture** | **string** |  | 
-**MarketApps** | **[]string** |  | 
-**StorageTypes** | **[]string** | The supported storage types for the instance type | 
+**Custom** | **bool** | Standard or Custom image | 
 **StorageSize** | [**NullableStorageSize**](StorageSize.md) |  | 
 **State** | **NullableString** |  | 
 **StateReason** | **NullableString** | The reason in case of failure | 
 **Region** | **NullableString** | The region where the image was uploaded | 
 **CreatedAt** | **NullableTime** | Date when the image was created | 
 **UpdatedAt** | **NullableTime** | Date when the image was updated | 
-**Custom** | **NullableBool** | Standard or Custom image | 
+**Version** | **string** |  | 
+**Architecture** | **string** |  | 
+**MarketApps** | **[]string** |  | 
+**StorageTypes** | **[]string** | The supported storage types for the instance type | 
 
 ## Methods
 
 ### NewImageDetails
 
-`func NewImageDetails(id string, name string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool, ) *ImageDetails`
+`func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string, ) *ImageDetails`
 
 NewImageDetails instantiates a new ImageDetails object
 This constructor will assign default values to properties that have it defined,
@@ -118,64 +119,24 @@ and a boolean to check if the value has been set.
 SetFlavour sets Flavour field to given value.
 
 
-### GetArchitecture
+### GetCustom
 
-`func (o *ImageDetails) GetArchitecture() string`
+`func (o *ImageDetails) GetCustom() bool`
 
-GetArchitecture returns the Architecture field if non-nil, zero value otherwise.
+GetCustom returns the Custom field if non-nil, zero value otherwise.
 
-### GetArchitectureOk
+### GetCustomOk
 
-`func (o *ImageDetails) GetArchitectureOk() (*string, bool)`
+`func (o *ImageDetails) GetCustomOk() (*bool, bool)`
 
-GetArchitectureOk returns a tuple with the Architecture field if it's non-nil, zero value otherwise
+GetCustomOk returns a tuple with the Custom field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetArchitecture
+### SetCustom
 
-`func (o *ImageDetails) SetArchitecture(v string)`
+`func (o *ImageDetails) SetCustom(v bool)`
 
-SetArchitecture sets Architecture field to given value.
-
-
-### GetMarketApps
-
-`func (o *ImageDetails) GetMarketApps() []string`
-
-GetMarketApps returns the MarketApps field if non-nil, zero value otherwise.
-
-### GetMarketAppsOk
-
-`func (o *ImageDetails) GetMarketAppsOk() (*[]string, bool)`
-
-GetMarketAppsOk returns a tuple with the MarketApps field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMarketApps
-
-`func (o *ImageDetails) SetMarketApps(v []string)`
-
-SetMarketApps sets MarketApps field to given value.
-
-
-### GetStorageTypes
-
-`func (o *ImageDetails) GetStorageTypes() []string`
-
-GetStorageTypes returns the StorageTypes field if non-nil, zero value otherwise.
-
-### GetStorageTypesOk
-
-`func (o *ImageDetails) GetStorageTypesOk() (*[]string, bool)`
-
-GetStorageTypesOk returns a tuple with the StorageTypes field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStorageTypes
-
-`func (o *ImageDetails) SetStorageTypes(v []string)`
-
-SetStorageTypes sets StorageTypes field to given value.
+SetCustom sets Custom field to given value.
 
 
 ### GetStorageSize
@@ -358,36 +319,86 @@ SetUpdatedAt sets UpdatedAt field to given value.
 `func (o *ImageDetails) UnsetUpdatedAt()`
 
 UnsetUpdatedAt ensures that no value is present for UpdatedAt, not even an explicit nil
-### GetCustom
+### GetVersion
 
-`func (o *ImageDetails) GetCustom() bool`
+`func (o *ImageDetails) GetVersion() string`
 
-GetCustom returns the Custom field if non-nil, zero value otherwise.
+GetVersion returns the Version field if non-nil, zero value otherwise.
 
-### GetCustomOk
+### GetVersionOk
 
-`func (o *ImageDetails) GetCustomOk() (*bool, bool)`
+`func (o *ImageDetails) GetVersionOk() (*string, bool)`
 
-GetCustomOk returns a tuple with the Custom field if it's non-nil, zero value otherwise
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCustom
+### SetVersion
 
-`func (o *ImageDetails) SetCustom(v bool)`
+`func (o *ImageDetails) SetVersion(v string)`
 
-SetCustom sets Custom field to given value.
+SetVersion sets Version field to given value.
 
 
-### SetCustomNil
+### GetArchitecture
 
-`func (o *ImageDetails) SetCustomNil(b bool)`
+`func (o *ImageDetails) GetArchitecture() string`
 
- SetCustomNil sets the value for Custom to be an explicit nil
+GetArchitecture returns the Architecture field if non-nil, zero value otherwise.
 
-### UnsetCustom
-`func (o *ImageDetails) UnsetCustom()`
+### GetArchitectureOk
 
-UnsetCustom ensures that no value is present for Custom, not even an explicit nil
+`func (o *ImageDetails) GetArchitectureOk() (*string, bool)`
+
+GetArchitectureOk returns a tuple with the Architecture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArchitecture
+
+`func (o *ImageDetails) SetArchitecture(v string)`
+
+SetArchitecture sets Architecture field to given value.
+
+
+### GetMarketApps
+
+`func (o *ImageDetails) GetMarketApps() []string`
+
+GetMarketApps returns the MarketApps field if non-nil, zero value otherwise.
+
+### GetMarketAppsOk
+
+`func (o *ImageDetails) GetMarketAppsOk() (*[]string, bool)`
+
+GetMarketAppsOk returns a tuple with the MarketApps field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMarketApps
+
+`func (o *ImageDetails) SetMarketApps(v []string)`
+
+SetMarketApps sets MarketApps field to given value.
+
+
+### GetStorageTypes
+
+`func (o *ImageDetails) GetStorageTypes() []string`
+
+GetStorageTypes returns the StorageTypes field if non-nil, zero value otherwise.
+
+### GetStorageTypesOk
+
+`func (o *ImageDetails) GetStorageTypesOk() (*[]string, bool)`
+
+GetStorageTypesOk returns a tuple with the StorageTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageTypes
+
+`func (o *ImageDetails) SetStorageTypes(v []string)`
+
+SetStorageTypes sets StorageTypes field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

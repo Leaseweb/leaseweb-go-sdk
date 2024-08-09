@@ -25,7 +25,8 @@ type Image struct {
 	Name string `json:"name"`
 	Family string `json:"family"`
 	Flavour string `json:"flavour"`
-	Architecture string `json:"architecture"`
+	// Standard or Custom image
+	Custom bool `json:"custom"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,13 +36,13 @@ type _Image Image
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImage(id string, name string, family string, flavour string, architecture string) *Image {
+func NewImage(id string, name string, family string, flavour string, custom bool) *Image {
 	this := Image{}
 	this.Id = id
 	this.Name = name
 	this.Family = family
 	this.Flavour = flavour
-	this.Architecture = architecture
+	this.Custom = custom
 	return &this
 }
 
@@ -149,28 +150,28 @@ func (o *Image) SetFlavour(v string) {
 	o.Flavour = v
 }
 
-// GetArchitecture returns the Architecture field value
-func (o *Image) GetArchitecture() string {
+// GetCustom returns the Custom field value
+func (o *Image) GetCustom() bool {
 	if o == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 
-	return o.Architecture
+	return o.Custom
 }
 
-// GetArchitectureOk returns a tuple with the Architecture field value
+// GetCustomOk returns a tuple with the Custom field value
 // and a boolean to check if the value has been set.
-func (o *Image) GetArchitectureOk() (*string, bool) {
+func (o *Image) GetCustomOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Architecture, true
+	return &o.Custom, true
 }
 
-// SetArchitecture sets field value
-func (o *Image) SetArchitecture(v string) {
-	o.Architecture = v
+// SetCustom sets field value
+func (o *Image) SetCustom(v bool) {
+	o.Custom = v
 }
 
 func (o Image) MarshalJSON() ([]byte, error) {
@@ -187,7 +188,7 @@ func (o Image) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["family"] = o.Family
 	toSerialize["flavour"] = o.Flavour
-	toSerialize["architecture"] = o.Architecture
+	toSerialize["custom"] = o.Custom
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -205,7 +206,7 @@ func (o *Image) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"family",
 		"flavour",
-		"architecture",
+		"custom",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -239,7 +240,7 @@ func (o *Image) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "family")
 		delete(additionalProperties, "flavour")
-		delete(additionalProperties, "architecture")
+		delete(additionalProperties, "custom")
 		o.AdditionalProperties = additionalProperties
 	}
 

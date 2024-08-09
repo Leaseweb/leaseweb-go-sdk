@@ -203,7 +203,6 @@ Class | Method | HTTP request | Description
  - [Instance](docs/Instance.md)
  - [InstanceBase](docs/InstanceBase.md)
  - [InstanceDetails](docs/InstanceDetails.md)
- - [InstanceDetailsImage](docs/InstanceDetailsImage.md)
  - [InstanceType](docs/InstanceType.md)
  - [InstanceTypes](docs/InstanceTypes.md)
  - [Ip](docs/Ip.md)
