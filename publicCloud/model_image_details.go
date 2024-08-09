@@ -24,7 +24,6 @@ type ImageDetails struct {
 	// imageId can be either an Operating System or a UUID in case of a Custom Image
 	Id string `json:"id"`
 	Name string `json:"name"`
-	Version string `json:"version"`
 	Family string `json:"family"`
 	Flavour string `json:"flavour"`
 	Architecture string `json:"architecture"`
@@ -52,11 +51,10 @@ type _ImageDetails ImageDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDetails(id string, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool) *ImageDetails {
+func NewImageDetails(id string, name string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool) *ImageDetails {
 	this := ImageDetails{}
 	this.Id = id
 	this.Name = name
-	this.Version = version
 	this.Family = family
 	this.Flavour = flavour
 	this.Architecture = architecture
@@ -126,30 +124,6 @@ func (o *ImageDetails) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *ImageDetails) SetName(v string) {
 	o.Name = v
-}
-
-// GetVersion returns the Version field value
-func (o *ImageDetails) GetVersion() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Version
-}
-
-// GetVersionOk returns a tuple with the Version field value
-// and a boolean to check if the value has been set.
-func (o *ImageDetails) GetVersionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Version, true
-}
-
-// SetVersion sets field value
-func (o *ImageDetails) SetVersion(v string) {
-	o.Version = v
 }
 
 // GetFamily returns the Family field value
@@ -466,7 +440,6 @@ func (o ImageDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	toSerialize["version"] = o.Version
 	toSerialize["family"] = o.Family
 	toSerialize["flavour"] = o.Flavour
 	toSerialize["architecture"] = o.Architecture
@@ -494,7 +467,6 @@ func (o *ImageDetails) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
-		"version",
 		"family",
 		"flavour",
 		"architecture",
@@ -538,7 +510,6 @@ func (o *ImageDetails) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "version")
 		delete(additionalProperties, "family")
 		delete(additionalProperties, "flavour")
 		delete(additionalProperties, "architecture")

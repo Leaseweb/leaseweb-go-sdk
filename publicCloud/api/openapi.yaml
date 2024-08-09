@@ -689,7 +689,6 @@ paths:
                   image:
                     id: UBUNTU_22_04_64BIT
                     name: Ubuntu 22.04 LTS (x86_64)
-                    version: "22.04"
                     family: linux
                     flavour: ubuntu
                     architecture: x86_64
@@ -802,7 +801,6 @@ paths:
                 image:
                   id: UBUNTU_22_04_64BIT
                   name: Ubuntu 22.04 LTS (x86_64)
-                  version: "22.04"
                   family: linux
                   flavour: ubuntu
                   architecture: x86_64
@@ -3239,7 +3237,6 @@ paths:
                   image:
                     id: UBUNTU_22_04_64BIT
                     name: Ubuntu 22.04 LTS (x86_64)
-                    version: "22.04"
                     family: linux
                     flavour: ubuntu
                     architecture: x86_64
@@ -4817,7 +4814,6 @@ paths:
                   image:
                     id: UBUNTU_22_04_64BIT
                     name: Ubuntu 22.04 LTS (x86_64)
-                    version: "22.04"
                     family: linux
                     flavour: ubuntu
                     architecture: x86_64
@@ -4838,7 +4834,6 @@ paths:
                   image:
                     id: UBUNTU_22_04_64BIT
                     name: Ubuntu 22.04 LTS (x86_64)
-                    version: "22.04"
                     family: linux
                     flavour: ubuntu
                     architecture: x86_64
@@ -8270,7 +8265,6 @@ components:
         name: Ubuntu 20.04 LTS (x86_64)
         id: UBUNTU_22_04_64BIT
         family: linux
-        version: "20.04"
         architecture: x86_64
       properties:
         id:
@@ -8281,9 +8275,6 @@ components:
           type: string
         name:
           example: Ubuntu 20.04 LTS (x86_64)
-          type: string
-        version:
-          example: "20.04"
           type: string
         family:
           example: linux
@@ -8300,7 +8291,6 @@ components:
       - flavour
       - id
       - name
-      - version
       title: image
       type: object
     ipVersion:
@@ -8498,7 +8488,6 @@ components:
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
           family: linux
-          version: "20.04"
           architecture: x86_64
         rootDiskStorageType: null
         autoScalingGroup:
@@ -8572,7 +8561,6 @@ components:
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
-            version: "20.04"
             architecture: x86_64
           rootDiskStorageType: null
           autoScalingGroup:
@@ -8643,7 +8631,6 @@ components:
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
-            version: "20.04"
             architecture: x86_64
           rootDiskStorageType: null
           autoScalingGroup:
@@ -8840,7 +8827,6 @@ components:
         - CENTRAL
         - LOCAL
         family: linux
-        version: "20.04"
         architecture: x86_64
     ipDetails:
       allOf:
@@ -8921,7 +8907,6 @@ components:
           - CENTRAL
           - LOCAL
           family: linux
-          version: "20.04"
           architecture: x86_64
         rootDiskStorageType: null
         iso:
@@ -9375,7 +9360,6 @@ components:
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
-            version: "20.04"
             architecture: x86_64
           name: name
           id: id
@@ -9387,7 +9371,6 @@ components:
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
-            version: "20.04"
             architecture: x86_64
           name: name
           id: id
@@ -9986,7 +9969,6 @@ components:
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
-            version: "20.04"
             architecture: x86_64
           healthCheckStatus:
             checkStatus: checkStatus
@@ -10014,7 +9996,6 @@ components:
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
-            version: "20.04"
             architecture: x86_64
           healthCheckStatus:
             checkStatus: checkStatus
@@ -11080,7 +11061,6 @@ components:
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
           family: linux
-          version: "20.04"
           architecture: x86_64
         name: name
         id: id
@@ -11136,7 +11116,6 @@ components:
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
           family: linux
-          version: "20.04"
           architecture: x86_64
         healthCheckStatus:
           checkStatus: checkStatus

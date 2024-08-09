@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | imageId can be either an Operating System or a UUID in case of a Custom Image | 
 **Name** | **string** |  | 
-**Version** | **string** |  | 
 **Family** | **string** |  | 
 **Flavour** | **string** |  | 
 **Architecture** | **string** |  | 
@@ -24,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewImageDetails
 
-`func NewImageDetails(id string, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool, ) *ImageDetails`
+`func NewImageDetails(id string, name string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, custom NullableBool, ) *ImageDetails`
 
 NewImageDetails instantiates a new ImageDetails object
 This constructor will assign default values to properties that have it defined,
@@ -77,26 +76,6 @@ and a boolean to check if the value has been set.
 `func (o *ImageDetails) SetName(v string)`
 
 SetName sets Name field to given value.
-
-
-### GetVersion
-
-`func (o *ImageDetails) GetVersion() string`
-
-GetVersion returns the Version field if non-nil, zero value otherwise.
-
-### GetVersionOk
-
-`func (o *ImageDetails) GetVersionOk() (*string, bool)`
-
-GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVersion
-
-`func (o *ImageDetails) SetVersion(v string)`
-
-SetVersion sets Version field to given value.
 
 
 ### GetFamily

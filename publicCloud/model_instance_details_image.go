@@ -23,7 +23,6 @@ type InstanceDetailsImage struct {
 	// imageId can be either an Operating System or a UUID in case of a Custom Image
 	Id string `json:"id"`
 	Name string `json:"name"`
-	Version string `json:"version"`
 	Family string `json:"family"`
 	Flavour string `json:"flavour"`
 	Architecture string `json:"architecture"`
@@ -39,11 +38,10 @@ type _InstanceDetailsImage InstanceDetailsImage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceDetailsImage(id string, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string) *InstanceDetailsImage {
+func NewInstanceDetailsImage(id string, name string, family string, flavour string, architecture string, marketApps []string, storageTypes []string) *InstanceDetailsImage {
 	this := InstanceDetailsImage{}
 	this.Id = id
 	this.Name = name
-	this.Version = version
 	this.Family = family
 	this.Flavour = flavour
 	this.Architecture = architecture
@@ -106,30 +104,6 @@ func (o *InstanceDetailsImage) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *InstanceDetailsImage) SetName(v string) {
 	o.Name = v
-}
-
-// GetVersion returns the Version field value
-func (o *InstanceDetailsImage) GetVersion() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Version
-}
-
-// GetVersionOk returns a tuple with the Version field value
-// and a boolean to check if the value has been set.
-func (o *InstanceDetailsImage) GetVersionOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Version, true
-}
-
-// SetVersion sets field value
-func (o *InstanceDetailsImage) SetVersion(v string) {
-	o.Version = v
 }
 
 // GetFamily returns the Family field value
@@ -264,7 +238,6 @@ func (o InstanceDetailsImage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	toSerialize["version"] = o.Version
 	toSerialize["family"] = o.Family
 	toSerialize["flavour"] = o.Flavour
 	toSerialize["architecture"] = o.Architecture
@@ -285,7 +258,6 @@ func (o *InstanceDetailsImage) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"name",
-		"version",
 		"family",
 		"flavour",
 		"architecture",
@@ -322,7 +294,6 @@ func (o *InstanceDetailsImage) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "version")
 		delete(additionalProperties, "family")
 		delete(additionalProperties, "flavour")
 		delete(additionalProperties, "architecture")

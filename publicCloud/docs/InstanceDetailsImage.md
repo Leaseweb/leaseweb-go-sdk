@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | imageId can be either an Operating System or a UUID in case of a Custom Image | 
 **Name** | **string** |  | 
-**Version** | **string** |  | 
 **Family** | **string** |  | 
 **Flavour** | **string** |  | 
 **Architecture** | **string** |  | 
@@ -17,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceDetailsImage
 
-`func NewInstanceDetailsImage(id string, name string, version string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, ) *InstanceDetailsImage`
+`func NewInstanceDetailsImage(id string, name string, family string, flavour string, architecture string, marketApps []string, storageTypes []string, ) *InstanceDetailsImage`
 
 NewInstanceDetailsImage instantiates a new InstanceDetailsImage object
 This constructor will assign default values to properties that have it defined,
@@ -70,26 +69,6 @@ and a boolean to check if the value has been set.
 `func (o *InstanceDetailsImage) SetName(v string)`
 
 SetName sets Name field to given value.
-
-
-### GetVersion
-
-`func (o *InstanceDetailsImage) GetVersion() string`
-
-GetVersion returns the Version field if non-nil, zero value otherwise.
-
-### GetVersionOk
-
-`func (o *InstanceDetailsImage) GetVersionOk() (*string, bool)`
-
-GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVersion
-
-`func (o *InstanceDetailsImage) SetVersion(v string)`
-
-SetVersion sets Version field to given value.
 
 
 ### GetFamily
