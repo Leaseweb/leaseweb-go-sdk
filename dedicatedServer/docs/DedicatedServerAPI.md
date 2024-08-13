@@ -1,6 +1,6 @@
 # \DedicatedServerAPI
 
-All URIs are relative to *https://api.leaseweb.com/internal/dedicatedserverapi/v2*
+All URIs are relative to *https://api.leaseweb.com/bareMetals/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

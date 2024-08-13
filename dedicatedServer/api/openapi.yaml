@@ -13,11 +13,7 @@ info:
     href: https://developer.leaseweb.com
     url: https://developer.leaseweb.com/images/logo.png
 servers:
-- url: https://api.leaseweb.com/internal/dedicatedserverapi/v2
-- url: https://api.leaseweb.com/internal/bmpapi/v2
-- url: https://api.leaseweb.com/internal/bmsdb/v2
-- url: https://api.leaseweb.com/internal/bmusageapi/v2
-- url: https://api.leaseweb.com/internal/nseapi/v2
+- url: https://api.leaseweb.com/bareMetals/v2
 tags:
 - description: |
     The API uses standard HTTP status codes to indicate the success or failure of the API call. The response will be JSON. Most APIs use the following format:

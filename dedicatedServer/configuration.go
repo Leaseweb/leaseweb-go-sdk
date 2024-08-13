@@ -92,27 +92,11 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "lsw-go-sdk/2024-08-09T09:25:19Z",
+		UserAgent:        "lsw-go-sdk/2024-08-13T10:44:11Z",
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "https://api.leaseweb.com/internal/dedicatedserverapi/v2",
-				Description: "No description provided",
-			},
-			{
-				URL: "https://api.leaseweb.com/internal/bmpapi/v2",
-				Description: "No description provided",
-			},
-			{
-				URL: "https://api.leaseweb.com/internal/bmsdb/v2",
-				Description: "No description provided",
-			},
-			{
-				URL: "https://api.leaseweb.com/internal/bmusageapi/v2",
-				Description: "No description provided",
-			},
-			{
-				URL: "https://api.leaseweb.com/internal/nseapi/v2",
+				URL: "https://api.leaseweb.com/bareMetals/v2",
 				Description: "No description provided",
 			},
 		},

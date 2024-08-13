@@ -74,7 +74,7 @@ ctx = context.WithValue(context.Background(), dedicatedServer.ContextOperationSe
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.leaseweb.com/internal/dedicatedserverapi/v2*
+All URIs are relative to *https://api.leaseweb.com/bareMetals/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
