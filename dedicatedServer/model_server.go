@@ -28,7 +28,7 @@ type Server struct {
 	Location *Location `json:"location,omitempty"`
 	NetworkInterfaces *NetworkInterfaces `json:"networkInterfaces,omitempty"`
 	// List of ports that can be used to manage power of the server
-	PowerPorts []Powerport `json:"powerPorts,omitempty"`
+	PowerPorts []Port `json:"powerPorts,omitempty"`
 	// An array of private networks
 	PrivateNetworks []PrivateNetwork `json:"privateNetworks,omitempty"`
 	Rack *Rack `json:"rack,omitempty"`
@@ -250,9 +250,9 @@ func (o *Server) SetNetworkInterfaces(v NetworkInterfaces) {
 }
 
 // GetPowerPorts returns the PowerPorts field value if set, zero value otherwise.
-func (o *Server) GetPowerPorts() []Powerport {
+func (o *Server) GetPowerPorts() []Port {
 	if o == nil || IsNil(o.PowerPorts) {
-		var ret []Powerport
+		var ret []Port
 		return ret
 	}
 	return o.PowerPorts
@@ -260,7 +260,7 @@ func (o *Server) GetPowerPorts() []Powerport {
 
 // GetPowerPortsOk returns a tuple with the PowerPorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Server) GetPowerPortsOk() ([]Powerport, bool) {
+func (o *Server) GetPowerPortsOk() ([]Port, bool) {
 	if o == nil || IsNil(o.PowerPorts) {
 		return nil, false
 	}
@@ -276,8 +276,8 @@ func (o *Server) HasPowerPorts() bool {
 	return false
 }
 
-// SetPowerPorts gets a reference to the given []Powerport and assigns it to the PowerPorts field.
-func (o *Server) SetPowerPorts(v []Powerport) {
+// SetPowerPorts gets a reference to the given []Port and assigns it to the PowerPorts field.
+func (o *Server) SetPowerPorts(v []Port) {
 	o.PowerPorts = v
 }
 

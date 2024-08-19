@@ -250,7 +250,6 @@ Class | Method | HTTP request | Description
  - [Pdu](docs/Pdu.md)
  - [Port](docs/Port.md)
  - [Port1](docs/Port1.md)
- - [Powerport](docs/Powerport.md)
  - [PrivateNetwork](docs/PrivateNetwork.md)
  - [Progress](docs/Progress.md)
  - [Rack](docs/Rack.md)

@@ -30,7 +30,7 @@ type NetworkEquipment struct {
 	Type *string `json:"type,omitempty"`
 	NetworkInterfaces *NetworkInterfaces `json:"networkInterfaces,omitempty"`
 	// List of ports that can be used to manage power of the network equipment
-	PowerPorts []Powerport `json:"powerPorts,omitempty"`
+	PowerPorts []Port `json:"powerPorts,omitempty"`
 	Rack *Rack `json:"rack,omitempty"`
 	// Serial number of network equipment
 	SerialNumber *string `json:"serialNumber,omitempty"`
@@ -282,9 +282,9 @@ func (o *NetworkEquipment) SetNetworkInterfaces(v NetworkInterfaces) {
 }
 
 // GetPowerPorts returns the PowerPorts field value if set, zero value otherwise.
-func (o *NetworkEquipment) GetPowerPorts() []Powerport {
+func (o *NetworkEquipment) GetPowerPorts() []Port {
 	if o == nil || IsNil(o.PowerPorts) {
-		var ret []Powerport
+		var ret []Port
 		return ret
 	}
 	return o.PowerPorts
@@ -292,7 +292,7 @@ func (o *NetworkEquipment) GetPowerPorts() []Powerport {
 
 // GetPowerPortsOk returns a tuple with the PowerPorts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NetworkEquipment) GetPowerPortsOk() ([]Powerport, bool) {
+func (o *NetworkEquipment) GetPowerPortsOk() ([]Port, bool) {
 	if o == nil || IsNil(o.PowerPorts) {
 		return nil, false
 	}
@@ -308,8 +308,8 @@ func (o *NetworkEquipment) HasPowerPorts() bool {
 	return false
 }
 
-// SetPowerPorts gets a reference to the given []Powerport and assigns it to the PowerPorts field.
-func (o *NetworkEquipment) SetPowerPorts(v []Powerport) {
+// SetPowerPorts gets a reference to the given []Port and assigns it to the PowerPorts field.
+func (o *NetworkEquipment) SetPowerPorts(v []Port) {
 	o.PowerPorts = v
 }
 

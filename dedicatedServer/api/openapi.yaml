@@ -8712,16 +8712,26 @@ components:
           type: string
       title: location
       type: object
+    port:
+      example:
+        port: port
+        name: name
+      properties:
+        name:
+          type: string
+        port:
+          type: string
+      type: object
     networkInterface:
       example:
         locationId: locationId
         ip: ip
         nullRouted: true
         ports:
-        - port: 0-0-0-0
-          name: AMS-01-HALL3-MI22-SW03
-        - port: 0-0-0-0
-          name: AMS-01-HALL3-MI22-SW03
+        - port: port
+          name: name
+        - port: port
+          name: name
         mac: mac
         gateway: gateway
       properties:
@@ -8759,10 +8769,10 @@ components:
           ip: ip
           nullRouted: true
           ports:
-          - port: 0-0-0-0
-            name: AMS-01-HALL3-MI22-SW03
-          - port: 0-0-0-0
-            name: AMS-01-HALL3-MI22-SW03
+          - port: port
+            name: name
+          - port: port
+            name: name
           mac: mac
           gateway: gateway
         public:
@@ -8770,10 +8780,10 @@ components:
           ip: ip
           nullRouted: true
           ports:
-          - port: 0-0-0-0
-            name: AMS-01-HALL3-MI22-SW03
-          - port: 0-0-0-0
-            name: AMS-01-HALL3-MI22-SW03
+          - port: port
+            name: name
+          - port: port
+            name: name
           mac: mac
           gateway: gateway
         remoteManagement:
@@ -8781,10 +8791,10 @@ components:
           ip: ip
           nullRouted: true
           ports:
-          - port: 0-0-0-0
-            name: AMS-01-HALL3-MI22-SW03
-          - port: 0-0-0-0
-            name: AMS-01-HALL3-MI22-SW03
+          - port: port
+            name: name
+          - port: port
+            name: name
           mac: mac
           gateway: gateway
       properties:
@@ -8795,16 +8805,6 @@ components:
         remoteManagement:
           $ref: '#/components/schemas/networkInterface'
       title: networkInterfaces
-      type: object
-    powerport:
-      example:
-        port: port
-        name: name
-      properties:
-        name:
-          type: string
-        port:
-          type: string
       type: object
     rack:
       description: Rack details where this network equipment is located at
@@ -8841,10 +8841,10 @@ components:
             ip: ip
             nullRouted: true
             ports:
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
+            - port: port
+              name: name
+            - port: port
+              name: name
             mac: mac
             gateway: gateway
           public:
@@ -8852,10 +8852,10 @@ components:
             ip: ip
             nullRouted: true
             ports:
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
+            - port: port
+              name: name
+            - port: port
+              name: name
             mac: mac
             gateway: gateway
           remoteManagement:
@@ -8863,10 +8863,10 @@ components:
             ip: ip
             nullRouted: true
             ports:
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
+            - port: port
+              name: name
+            - port: port
+              name: name
             mac: mac
             gateway: gateway
         serialNumber: serialNumber
@@ -8955,7 +8955,7 @@ components:
           description: List of ports that can be used to manage power of the network
             equipment
           items:
-            $ref: '#/components/schemas/powerport'
+            $ref: '#/components/schemas/port'
           type: array
         rack:
           $ref: '#/components/schemas/rack'
@@ -8981,10 +8981,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
             public:
@@ -8992,10 +8992,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
             remoteManagement:
@@ -9003,10 +9003,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
           serialNumber: serialNumber
@@ -9086,10 +9086,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
             public:
@@ -9097,10 +9097,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
             remoteManagement:
@@ -9108,10 +9108,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
           serialNumber: serialNumber
@@ -9420,10 +9420,10 @@ components:
             ip: ip
             nullRouted: true
             ports:
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
+            - port: port
+              name: name
+            - port: port
+              name: name
             mac: mac
             gateway: gateway
           public:
@@ -9431,10 +9431,10 @@ components:
             ip: ip
             nullRouted: true
             ports:
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
+            - port: port
+              name: name
+            - port: port
+              name: name
             mac: mac
             gateway: gateway
           remoteManagement:
@@ -9442,10 +9442,10 @@ components:
             ip: ip
             nullRouted: true
             ports:
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
-            - port: 0-0-0-0
-              name: AMS-01-HALL3-MI22-SW03
+            - port: port
+              name: name
+            - port: port
+              name: name
             mac: mac
             gateway: gateway
         serialNumber: serialNumber
@@ -9540,7 +9540,7 @@ components:
         powerPorts:
           description: List of ports that can be used to manage power of the server
           items:
-            $ref: '#/components/schemas/powerport'
+            $ref: '#/components/schemas/port'
           type: array
         privateNetworks:
           description: An array of private networks
@@ -9593,10 +9593,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
             public:
@@ -9604,10 +9604,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
             remoteManagement:
@@ -9615,10 +9615,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
           serialNumber: serialNumber
@@ -9730,10 +9730,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
             public:
@@ -9741,10 +9741,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
             remoteManagement:
@@ -9752,10 +9752,10 @@ components:
               ip: ip
               nullRouted: true
               ports:
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
-              - port: 0-0-0-0
-                name: AMS-01-HALL3-MI22-SW03
+              - port: port
+                name: name
+              - port: port
+                name: name
               mac: mac
               gateway: gateway
           serialNumber: serialNumber
@@ -11478,19 +11478,6 @@ components:
           example: CONTROL_PANEL
           type: string
       title: softwareLicense
-      type: object
-    port:
-      example:
-        port: 0-0-0-0
-        name: AMS-01-HALL3-MI22-SW03
-      properties:
-        name:
-          example: AMS-01-HALL3-MI22-SW03
-          type: string
-        port:
-          example: 0-0-0-0
-          type: string
-      title: port
       type: object
     networkEquipmentSpecs:
       description: Hardware information of the network equipment

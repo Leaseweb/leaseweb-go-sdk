@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the network equipment | [optional] 
 **Type** | Pointer to **string** | The network equipment type | [optional] 
 **NetworkInterfaces** | Pointer to [**NetworkInterfaces**](NetworkInterfaces.md) |  | [optional] 
-**PowerPorts** | Pointer to [**[]Powerport**](Powerport.md) | List of ports that can be used to manage power of the network equipment | [optional] 
+**PowerPorts** | Pointer to [**[]Port**](Port.md) | List of ports that can be used to manage power of the network equipment | [optional] 
 **Rack** | Pointer to [**Rack**](Rack.md) |  | [optional] 
 **SerialNumber** | Pointer to **string** | Serial number of network equipment | [optional] 
 **Specs** | Pointer to [**NetworkEquipmentSpecs**](NetworkEquipmentSpecs.md) |  | [optional] 
@@ -212,20 +212,20 @@ HasNetworkInterfaces returns a boolean if a field has been set.
 
 ### GetPowerPorts
 
-`func (o *NetworkEquipment) GetPowerPorts() []Powerport`
+`func (o *NetworkEquipment) GetPowerPorts() []Port`
 
 GetPowerPorts returns the PowerPorts field if non-nil, zero value otherwise.
 
 ### GetPowerPortsOk
 
-`func (o *NetworkEquipment) GetPowerPortsOk() (*[]Powerport, bool)`
+`func (o *NetworkEquipment) GetPowerPortsOk() (*[]Port, bool)`
 
 GetPowerPortsOk returns a tuple with the PowerPorts field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPowerPorts
 
-`func (o *NetworkEquipment) SetPowerPorts(v []Powerport)`
+`func (o *NetworkEquipment) SetPowerPorts(v []Port)`
 
 SetPowerPorts sets PowerPorts field to given value.
 

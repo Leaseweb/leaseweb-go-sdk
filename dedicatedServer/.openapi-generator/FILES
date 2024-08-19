@@ -97,7 +97,6 @@ docs/PciCard.md
 docs/Pdu.md
 docs/Port.md
 docs/Port1.md
-docs/Powerport.md
 docs/PrivateNetwork.md
 docs/Progress.md
 docs/Rack.md
@@ -218,7 +217,6 @@ model_pci_card.go
 model_pdu.go
 model_port.go
 model_port_1.go
-model_powerport.go
 model_private_network.go
 model_progress.go
 model_rack.go

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Id of the server | [optional] 
 **Location** | Pointer to [**Location**](Location.md) |  | [optional] 
 **NetworkInterfaces** | Pointer to [**NetworkInterfaces**](NetworkInterfaces.md) |  | [optional] 
-**PowerPorts** | Pointer to [**[]Powerport**](Powerport.md) | List of ports that can be used to manage power of the server | [optional] 
+**PowerPorts** | Pointer to [**[]Port**](Port.md) | List of ports that can be used to manage power of the server | [optional] 
 **PrivateNetworks** | Pointer to [**[]PrivateNetwork**](PrivateNetwork.md) | An array of private networks | [optional] 
 **Rack** | Pointer to [**Rack**](Rack.md) |  | [optional] 
 **SerialNumber** | Pointer to **string** | Serial number of server | [optional] 
@@ -187,20 +187,20 @@ HasNetworkInterfaces returns a boolean if a field has been set.
 
 ### GetPowerPorts
 
-`func (o *Server) GetPowerPorts() []Powerport`
+`func (o *Server) GetPowerPorts() []Port`
 
 GetPowerPorts returns the PowerPorts field if non-nil, zero value otherwise.
 
 ### GetPowerPortsOk
 
-`func (o *Server) GetPowerPortsOk() (*[]Powerport, bool)`
+`func (o *Server) GetPowerPortsOk() (*[]Port, bool)`
 
 GetPowerPortsOk returns a tuple with the PowerPorts field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPowerPorts
 
-`func (o *Server) SetPowerPorts(v []Powerport)`
+`func (o *Server) SetPowerPorts(v []Port)`
 
 SetPowerPorts sets PowerPorts field to given value.
 
