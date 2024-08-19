@@ -20,8 +20,7 @@ var _ MappedNullable = &InstanceType{}
 
 // InstanceType struct for InstanceType
 type InstanceType struct {
-	// Instance type's name
-	Name string `json:"name"`
+	Name TypeName `json:"name"`
 	Resources Resources `json:"resources"`
 	// The supported storage types for the instance type
 	StorageTypes []RootDiskStorageType `json:"storageTypes"`
@@ -35,7 +34,7 @@ type _InstanceType InstanceType
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceType(name string, resources Resources, storageTypes []RootDiskStorageType, prices Prices) *InstanceType {
+func NewInstanceType(name TypeName, resources Resources, storageTypes []RootDiskStorageType, prices Prices) *InstanceType {
 	this := InstanceType{}
 	this.Name = name
 	this.Resources = resources
@@ -53,9 +52,9 @@ func NewInstanceTypeWithDefaults() *InstanceType {
 }
 
 // GetName returns the Name field value
-func (o *InstanceType) GetName() string {
+func (o *InstanceType) GetName() TypeName {
 	if o == nil {
-		var ret string
+		var ret TypeName
 		return ret
 	}
 
@@ -64,7 +63,7 @@ func (o *InstanceType) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *InstanceType) GetNameOk() (*string, bool) {
+func (o *InstanceType) GetNameOk() (*TypeName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,7 +71,7 @@ func (o *InstanceType) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *InstanceType) SetName(v string) {
+func (o *InstanceType) SetName(v TypeName) {
 	o.Name = v
 }
 

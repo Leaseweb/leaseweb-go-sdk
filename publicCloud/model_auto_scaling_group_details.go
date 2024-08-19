@@ -27,8 +27,7 @@ type AutoScalingGroupDetails struct {
 	State AutoScalingGroupState `json:"state"`
 	// Number of instances that should be running
 	DesiredAmount NullableInt32 `json:"desiredAmount"`
-	// The region in which the Auto Scaling Group was launched
-	Region string `json:"region"`
+	Region RegionName `json:"region"`
 	// The identifying name set to the auto scaling group
 	Reference string `json:"reference"`
 	// Date and time when the Auto Scaling Group was created
@@ -59,7 +58,7 @@ type _AutoScalingGroupDetails AutoScalingGroupDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAutoScalingGroupDetails(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, loadBalancer NullableLoadBalancer) *AutoScalingGroupDetails {
+func NewAutoScalingGroupDetails(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region RegionName, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, loadBalancer NullableLoadBalancer) *AutoScalingGroupDetails {
 	this := AutoScalingGroupDetails{}
 	this.Id = id
 	this.Type = type_
@@ -187,9 +186,9 @@ func (o *AutoScalingGroupDetails) SetDesiredAmount(v int32) {
 }
 
 // GetRegion returns the Region field value
-func (o *AutoScalingGroupDetails) GetRegion() string {
+func (o *AutoScalingGroupDetails) GetRegion() RegionName {
 	if o == nil {
-		var ret string
+		var ret RegionName
 		return ret
 	}
 
@@ -198,7 +197,7 @@ func (o *AutoScalingGroupDetails) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *AutoScalingGroupDetails) GetRegionOk() (*string, bool) {
+func (o *AutoScalingGroupDetails) GetRegionOk() (*RegionName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -206,7 +205,7 @@ func (o *AutoScalingGroupDetails) GetRegionOk() (*string, bool) {
 }
 
 // SetRegion sets field value
-func (o *AutoScalingGroupDetails) SetRegion(v string) {
+func (o *AutoScalingGroupDetails) SetRegion(v RegionName) {
 	o.Region = v
 }
 

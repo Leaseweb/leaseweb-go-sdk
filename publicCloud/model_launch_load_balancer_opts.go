@@ -20,8 +20,7 @@ var _ MappedNullable = &LaunchLoadBalancerOpts{}
 
 // LaunchLoadBalancerOpts struct for LaunchLoadBalancerOpts
 type LaunchLoadBalancerOpts struct {
-	// Region to launch the load balancer into
-	Region string `json:"region"`
+	Region RegionName `json:"region"`
 	Type TypeName `json:"type"`
 	// An identifying name you can refer to the load balancer
 	Reference *string `json:"reference,omitempty"`
@@ -41,7 +40,7 @@ type _LaunchLoadBalancerOpts LaunchLoadBalancerOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchLoadBalancerOpts(region string, type_ TypeName, contractType string, billingFrequency int32, rootDiskStorageType RootDiskStorageType, targetPort int32) *LaunchLoadBalancerOpts {
+func NewLaunchLoadBalancerOpts(region RegionName, type_ TypeName, contractType string, billingFrequency int32, rootDiskStorageType RootDiskStorageType, targetPort int32) *LaunchLoadBalancerOpts {
 	this := LaunchLoadBalancerOpts{}
 	this.Region = region
 	this.Type = type_
@@ -61,9 +60,9 @@ func NewLaunchLoadBalancerOptsWithDefaults() *LaunchLoadBalancerOpts {
 }
 
 // GetRegion returns the Region field value
-func (o *LaunchLoadBalancerOpts) GetRegion() string {
+func (o *LaunchLoadBalancerOpts) GetRegion() RegionName {
 	if o == nil {
-		var ret string
+		var ret RegionName
 		return ret
 	}
 
@@ -72,7 +71,7 @@ func (o *LaunchLoadBalancerOpts) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *LaunchLoadBalancerOpts) GetRegionOk() (*string, bool) {
+func (o *LaunchLoadBalancerOpts) GetRegionOk() (*RegionName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -80,7 +79,7 @@ func (o *LaunchLoadBalancerOpts) GetRegionOk() (*string, bool) {
 }
 
 // SetRegion sets field value
-func (o *LaunchLoadBalancerOpts) SetRegion(v string) {
+func (o *LaunchLoadBalancerOpts) SetRegion(v RegionName) {
 	o.Region = v
 }
 

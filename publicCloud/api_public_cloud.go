@@ -3750,7 +3750,7 @@ type ApiGetAutoScalingGroupListRequest struct {
 	id *string
 	instanceId *string
 	type_ *string
-	region *string
+	region *RegionName
 	reference *string
 	state *string
 }
@@ -3784,7 +3784,7 @@ func (r ApiGetAutoScalingGroupListRequest) Type_(type_ string) ApiGetAutoScaling
 }
 
 // The region in which the Auto Scaling Group was created
-func (r ApiGetAutoScalingGroupListRequest) Region(region string) ApiGetAutoScalingGroupListRequest {
+func (r ApiGetAutoScalingGroupListRequest) Region(region RegionName) ApiGetAutoScalingGroupListRequest {
 	r.region = &region
 	return r
 }
@@ -5682,7 +5682,7 @@ type ApiGetInstanceListRequest struct {
 	contractState *ContractState
 	imageId *string
 	state *State
-	region *string
+	region *RegionName
 	type_ *InstanceType
 }
 
@@ -5736,7 +5736,7 @@ func (r ApiGetInstanceListRequest) State(state State) ApiGetInstanceListRequest 
 }
 
 // Available regions can be obtained using &#x60;/v1/regions&#x60;
-func (r ApiGetInstanceListRequest) Region(region string) ApiGetInstanceListRequest {
+func (r ApiGetInstanceListRequest) Region(region RegionName) ApiGetInstanceListRequest {
 	r.region = &region
 	return r
 }
@@ -5934,12 +5934,12 @@ func (a *PublicCloudAPIService) GetInstanceListExecute(r ApiGetInstanceListReque
 type ApiGetInstanceTypeListRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
-	region *string
+	region *RegionName
 	limit *int32
 	offset *int32
 }
 
-func (r ApiGetInstanceTypeListRequest) Region(region string) ApiGetInstanceTypeListRequest {
+func (r ApiGetInstanceTypeListRequest) Region(region RegionName) ApiGetInstanceTypeListRequest {
 	r.region = &region
 	return r
 }
@@ -6851,7 +6851,7 @@ type ApiGetLoadBalancerListRequest struct {
 	contractState *ContractState
 	contractType *string
 	state *string
-	region *string
+	region *RegionName
 	type_ *string
 }
 
@@ -6898,7 +6898,7 @@ func (r ApiGetLoadBalancerListRequest) State(state string) ApiGetLoadBalancerLis
 }
 
 // Available regions can be found using the List Regions endpoint.
-func (r ApiGetLoadBalancerListRequest) Region(region string) ApiGetLoadBalancerListRequest {
+func (r ApiGetLoadBalancerListRequest) Region(region RegionName) ApiGetLoadBalancerListRequest {
 	r.region = &region
 	return r
 }

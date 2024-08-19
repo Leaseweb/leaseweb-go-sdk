@@ -25,8 +25,7 @@ type InstanceBase struct {
 	Id string `json:"id"`
 	Type TypeName `json:"type"`
 	Resources Resources `json:"resources"`
-	// The region in which the instance was launched
-	Region string `json:"region"`
+	Region RegionName `json:"region"`
 	// The identifying name set to the instance
 	Reference NullableString `json:"reference"`
 	// Date and time when the instance was started for the first time, right after launching it
@@ -53,7 +52,7 @@ type _InstanceBase InstanceBase
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceBase(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image) *InstanceBase {
+func NewInstanceBase(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image) *InstanceBase {
 	this := InstanceBase{}
 	this.Id = id
 	this.Type = type_
@@ -155,9 +154,9 @@ func (o *InstanceBase) SetResources(v Resources) {
 }
 
 // GetRegion returns the Region field value
-func (o *InstanceBase) GetRegion() string {
+func (o *InstanceBase) GetRegion() RegionName {
 	if o == nil {
-		var ret string
+		var ret RegionName
 		return ret
 	}
 
@@ -166,7 +165,7 @@ func (o *InstanceBase) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *InstanceBase) GetRegionOk() (*string, bool) {
+func (o *InstanceBase) GetRegionOk() (*RegionName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -174,7 +173,7 @@ func (o *InstanceBase) GetRegionOk() (*string, bool) {
 }
 
 // SetRegion sets field value
-func (o *InstanceBase) SetRegion(v string) {
+func (o *InstanceBase) SetRegion(v RegionName) {
 	o.Region = v
 }
 

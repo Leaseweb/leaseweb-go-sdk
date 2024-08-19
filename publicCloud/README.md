@@ -229,6 +229,7 @@ Class | Method | HTTP request | Description
  - [Prices](docs/Prices.md)
  - [PrivateNetwork](docs/PrivateNetwork.md)
  - [Region](docs/Region.md)
+ - [RegionName](docs/RegionName.md)
  - [RegisterAutoScalingGroupLoadBalancerOpts](docs/RegisterAutoScalingGroupLoadBalancerOpts.md)
  - [ReinstallInstanceOpts](docs/ReinstallInstanceOpts.md)
  - [Resources](docs/Resources.md)

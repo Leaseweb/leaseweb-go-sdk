@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Type** | [**AutoScalingGroupType**](AutoScalingGroupType.md) |  | 
 **State** | [**AutoScalingGroupState**](AutoScalingGroupState.md) |  | 
 **DesiredAmount** | **NullableInt32** | Number of instances that should be running | 
-**Region** | **string** | The region in which the Auto Scaling Group was launched | 
+**Region** | [**RegionName**](RegionName.md) |  | 
 **Reference** | **string** | The identifying name set to the auto scaling group | 
 **CreatedAt** | **time.Time** | Date and time when the Auto Scaling Group was created | 
 **UpdatedAt** | **time.Time** | Date and time when the Auto Scaling Group was last updated | 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewAutoScalingGroup
 
-`func NewAutoScalingGroup(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region string, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, ) *AutoScalingGroup`
+`func NewAutoScalingGroup(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region RegionName, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, ) *AutoScalingGroup`
 
 NewAutoScalingGroup instantiates a new AutoScalingGroup object
 This constructor will assign default values to properties that have it defined,
@@ -131,20 +131,20 @@ SetDesiredAmount sets DesiredAmount field to given value.
 UnsetDesiredAmount ensures that no value is present for DesiredAmount, not even an explicit nil
 ### GetRegion
 
-`func (o *AutoScalingGroup) GetRegion() string`
+`func (o *AutoScalingGroup) GetRegion() RegionName`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *AutoScalingGroup) GetRegionOk() (*string, bool)`
+`func (o *AutoScalingGroup) GetRegionOk() (*RegionName, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *AutoScalingGroup) SetRegion(v string)`
+`func (o *AutoScalingGroup) SetRegion(v RegionName)`
 
 SetRegion sets Region field to given value.
 

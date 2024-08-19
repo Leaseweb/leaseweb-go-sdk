@@ -31,8 +31,7 @@ type LoadBalancerDetails struct {
 	// Date and time when the load balancer was started for the first time, right after launching it
 	StartedAt NullableTime `json:"startedAt"`
 	Ips []IpDetails `json:"ips"`
-	// The region where the load balancer was launched into
-	Region string `json:"region"`
+	Region RegionName `json:"region"`
 	Configuration NullableLoadBalancerConfiguration `json:"configuration"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork"`
@@ -46,7 +45,7 @@ type _LoadBalancerDetails LoadBalancerDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerDetails(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, ips []IpDetails, region string, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract) *LoadBalancerDetails {
+func NewLoadBalancerDetails(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, ips []IpDetails, region RegionName, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract) *LoadBalancerDetails {
 	this := LoadBalancerDetails{}
 	this.Id = id
 	this.Type = type_
@@ -244,9 +243,9 @@ func (o *LoadBalancerDetails) SetIps(v []IpDetails) {
 }
 
 // GetRegion returns the Region field value
-func (o *LoadBalancerDetails) GetRegion() string {
+func (o *LoadBalancerDetails) GetRegion() RegionName {
 	if o == nil {
-		var ret string
+		var ret RegionName
 		return ret
 	}
 
@@ -255,7 +254,7 @@ func (o *LoadBalancerDetails) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetRegionOk() (*string, bool) {
+func (o *LoadBalancerDetails) GetRegionOk() (*RegionName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -263,7 +262,7 @@ func (o *LoadBalancerDetails) GetRegionOk() (*string, bool) {
 }
 
 // SetRegion sets field value
-func (o *LoadBalancerDetails) SetRegion(v string) {
+func (o *LoadBalancerDetails) SetRegion(v RegionName) {
 	o.Region = v
 }
 

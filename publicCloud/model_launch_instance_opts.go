@@ -20,8 +20,7 @@ var _ MappedNullable = &LaunchInstanceOpts{}
 
 // LaunchInstanceOpts struct for LaunchInstanceOpts
 type LaunchInstanceOpts struct {
-	// Region to launch the instance into
-	Region string `json:"region"`
+	Region RegionName `json:"region"`
 	Type TypeName `json:"type"`
 	// imageId can be either an Operating System or a UUID in case of a Custom Image
 	ImageId string `json:"imageId"`
@@ -46,7 +45,7 @@ type _LaunchInstanceOpts LaunchInstanceOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchInstanceOpts(region string, type_ TypeName, imageId string, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType) *LaunchInstanceOpts {
+func NewLaunchInstanceOpts(region RegionName, type_ TypeName, imageId string, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType) *LaunchInstanceOpts {
 	this := LaunchInstanceOpts{}
 	this.Region = region
 	this.Type = type_
@@ -67,9 +66,9 @@ func NewLaunchInstanceOptsWithDefaults() *LaunchInstanceOpts {
 }
 
 // GetRegion returns the Region field value
-func (o *LaunchInstanceOpts) GetRegion() string {
+func (o *LaunchInstanceOpts) GetRegion() RegionName {
 	if o == nil {
-		var ret string
+		var ret RegionName
 		return ret
 	}
 
@@ -78,7 +77,7 @@ func (o *LaunchInstanceOpts) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *LaunchInstanceOpts) GetRegionOk() (*string, bool) {
+func (o *LaunchInstanceOpts) GetRegionOk() (*RegionName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -86,7 +85,7 @@ func (o *LaunchInstanceOpts) GetRegionOk() (*string, bool) {
 }
 
 // SetRegion sets field value
-func (o *LaunchInstanceOpts) SetRegion(v string) {
+func (o *LaunchInstanceOpts) SetRegion(v RegionName) {
 	o.Region = v
 }
 

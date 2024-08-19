@@ -20,8 +20,7 @@ var _ MappedNullable = &Region{}
 
 // Region struct for Region
 type Region struct {
-	// The region's name.
-	Name string `json:"name"`
+	Name RegionName `json:"name"`
 	// The city where the region is located.
 	Location string `json:"location"`
 	AdditionalProperties map[string]interface{}
@@ -33,7 +32,7 @@ type _Region Region
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRegion(name string, location string) *Region {
+func NewRegion(name RegionName, location string) *Region {
 	this := Region{}
 	this.Name = name
 	this.Location = location
@@ -49,9 +48,9 @@ func NewRegionWithDefaults() *Region {
 }
 
 // GetName returns the Name field value
-func (o *Region) GetName() string {
+func (o *Region) GetName() RegionName {
 	if o == nil {
-		var ret string
+		var ret RegionName
 		return ret
 	}
 
@@ -60,7 +59,7 @@ func (o *Region) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *Region) GetNameOk() (*string, bool) {
+func (o *Region) GetNameOk() (*RegionName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +67,7 @@ func (o *Region) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *Region) SetName(v string) {
+func (o *Region) SetName(v RegionName) {
 	o.Name = v
 }
 

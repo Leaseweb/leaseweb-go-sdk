@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | **string** | The unique identifier of the instance | 
 **Type** | [**TypeName**](TypeName.md) |  | 
 **Resources** | [**Resources**](Resources.md) |  | 
-**Region** | **string** | The region in which the instance was launched | 
+**Region** | [**RegionName**](RegionName.md) |  | 
 **Reference** | **NullableString** | The identifying name set to the instance | 
 **StartedAt** | **NullableTime** | Date and time when the instance was started for the first time, right after launching it | 
 **MarketAppId** | **NullableString** | Market App ID that must be installed into the instance | 
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceBase
 
-`func NewInstanceBase(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, ) *InstanceBase`
+`func NewInstanceBase(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, ) *InstanceBase`
 
 NewInstanceBase instantiates a new InstanceBase object
 This constructor will assign default values to properties that have it defined,
@@ -102,20 +102,20 @@ SetResources sets Resources field to given value.
 
 ### GetRegion
 
-`func (o *InstanceBase) GetRegion() string`
+`func (o *InstanceBase) GetRegion() RegionName`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *InstanceBase) GetRegionOk() (*string, bool)`
+`func (o *InstanceBase) GetRegionOk() (*RegionName, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *InstanceBase) SetRegion(v string)`
+`func (o *InstanceBase) SetRegion(v RegionName)`
 
 SetRegion sets Region field to given value.
 

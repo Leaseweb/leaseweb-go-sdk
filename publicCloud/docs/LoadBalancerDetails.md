@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **State** | [**State**](State.md) |  | 
 **StartedAt** | **NullableTime** | Date and time when the load balancer was started for the first time, right after launching it | 
 **Ips** | [**[]IpDetails**](IpDetails.md) |  | 
-**Region** | **string** | The region where the load balancer was launched into | 
+**Region** | [**RegionName**](RegionName.md) |  | 
 **Configuration** | [**NullableLoadBalancerConfiguration**](LoadBalancerConfiguration.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 **PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewLoadBalancerDetails
 
-`func NewLoadBalancerDetails(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, ips []IpDetails, region string, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract, ) *LoadBalancerDetails`
+`func NewLoadBalancerDetails(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, ips []IpDetails, region RegionName, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract, ) *LoadBalancerDetails`
 
 NewLoadBalancerDetails instantiates a new LoadBalancerDetails object
 This constructor will assign default values to properties that have it defined,
@@ -198,20 +198,20 @@ SetIps sets Ips field to given value.
 
 ### GetRegion
 
-`func (o *LoadBalancerDetails) GetRegion() string`
+`func (o *LoadBalancerDetails) GetRegion() RegionName`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *LoadBalancerDetails) GetRegionOk() (*string, bool)`
+`func (o *LoadBalancerDetails) GetRegionOk() (*RegionName, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *LoadBalancerDetails) SetRegion(v string)`
+`func (o *LoadBalancerDetails) SetRegion(v RegionName)`
 
 SetRegion sets Region field to given value.
 

@@ -87,6 +87,7 @@ docs/Prices.md
 docs/PrivateNetwork.md
 docs/PublicCloudAPI.md
 docs/Region.md
+docs/RegionName.md
 docs/RegisterAutoScalingGroupLoadBalancerOpts.md
 docs/ReinstallInstanceOpts.md
 docs/Resources.md
@@ -198,6 +199,7 @@ model_price.go
 model_prices.go
 model_private_network.go
 model_region.go
+model_region_name.go
 model_register_auto_scaling_group_load_balancer_opts.go
 model_reinstall_instance_opts.go
 model_resources.go

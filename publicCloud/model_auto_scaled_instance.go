@@ -24,8 +24,7 @@ type AutoScaledInstance struct {
 	// The instance type, which determines the amount of resources
 	Type *string `json:"type,omitempty"`
 	Resources *Resources `json:"resources,omitempty"`
-	// The region in which the instance was launched
-	Region *string `json:"region,omitempty"`
+	Region *RegionName `json:"region,omitempty"`
 	// The identifying name set to the instance
 	Reference *string `json:"reference,omitempty"`
 	State *State `json:"state,omitempty"`
@@ -151,9 +150,9 @@ func (o *AutoScaledInstance) SetResources(v Resources) {
 }
 
 // GetRegion returns the Region field value if set, zero value otherwise.
-func (o *AutoScaledInstance) GetRegion() string {
+func (o *AutoScaledInstance) GetRegion() RegionName {
 	if o == nil || IsNil(o.Region) {
-		var ret string
+		var ret RegionName
 		return ret
 	}
 	return *o.Region
@@ -161,7 +160,7 @@ func (o *AutoScaledInstance) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AutoScaledInstance) GetRegionOk() (*string, bool) {
+func (o *AutoScaledInstance) GetRegionOk() (*RegionName, bool) {
 	if o == nil || IsNil(o.Region) {
 		return nil, false
 	}
@@ -177,8 +176,8 @@ func (o *AutoScaledInstance) HasRegion() bool {
 	return false
 }
 
-// SetRegion gets a reference to the given string and assigns it to the Region field.
-func (o *AutoScaledInstance) SetRegion(v string) {
+// SetRegion gets a reference to the given RegionName and assigns it to the Region field.
+func (o *AutoScaledInstance) SetRegion(v RegionName) {
 	o.Region = &v
 }
 

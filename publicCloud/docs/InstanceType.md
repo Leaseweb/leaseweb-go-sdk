@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Instance type&#39;s name | 
+**Name** | [**TypeName**](TypeName.md) |  | 
 **Resources** | [**Resources**](Resources.md) |  | 
 **StorageTypes** | [**[]RootDiskStorageType**](RootDiskStorageType.md) | The supported storage types for the instance type | 
 **Prices** | [**Prices**](Prices.md) |  | 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceType
 
-`func NewInstanceType(name string, resources Resources, storageTypes []RootDiskStorageType, prices Prices, ) *InstanceType`
+`func NewInstanceType(name TypeName, resources Resources, storageTypes []RootDiskStorageType, prices Prices, ) *InstanceType`
 
 NewInstanceType instantiates a new InstanceType object
 This constructor will assign default values to properties that have it defined,
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetName
 
-`func (o *InstanceType) GetName() string`
+`func (o *InstanceType) GetName() TypeName`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *InstanceType) GetNameOk() (*string, bool)`
+`func (o *InstanceType) GetNameOk() (*TypeName, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *InstanceType) SetName(v string)`
+`func (o *InstanceType) SetName(v TypeName)`
 
 SetName sets Name field to given value.
 

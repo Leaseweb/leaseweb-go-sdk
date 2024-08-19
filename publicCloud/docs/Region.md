@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | The region&#39;s name. | 
+**Name** | [**RegionName**](RegionName.md) |  | 
 **Location** | **string** | The city where the region is located. | 
 
 ## Methods
 
 ### NewRegion
 
-`func NewRegion(name string, location string, ) *Region`
+`func NewRegion(name RegionName, location string, ) *Region`
 
 NewRegion instantiates a new Region object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetName
 
-`func (o *Region) GetName() string`
+`func (o *Region) GetName() RegionName`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *Region) GetNameOk() (*string, bool)`
+`func (o *Region) GetNameOk() (*RegionName, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *Region) SetName(v string)`
+`func (o *Region) SetName(v RegionName)`
 
 SetName sets Name field to given value.
 

@@ -1210,7 +1210,7 @@ func main() {
 	id := "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" // string |  (optional)
 	instanceId := "6762182e-7ae9-4d0b-b3b7-bea5a49b3f94" // string |  (optional)
 	type_ := "type__example" // string | The Auto Scaling Group's type (optional)
-	region := "eu-west-3" // string | The region in which the Auto Scaling Group was created (optional)
+	region := openapiclient.regionName("eu-west-3") // RegionName | The region in which the Auto Scaling Group was created (optional)
 	reference := "reference_example" // string | The reference used to identify identifies the Auto Scaling Group (optional)
 	state := "state_example" // string | The Auto Scaling Group's current state (optional)
 
@@ -1242,7 +1242,7 @@ Name | Type | Description  | Notes
  **id** | **string** |  | 
  **instanceId** | **string** |  | 
  **type_** | **string** | The Auto Scaling Group&#39;s type | 
- **region** | **string** | The region in which the Auto Scaling Group was created | 
+ **region** | [**RegionName**](RegionName.md) | The region in which the Auto Scaling Group was created | 
  **reference** | **string** | The reference used to identify identifies the Auto Scaling Group | 
  **state** | **string** | The Auto Scaling Group&#39;s current state | 
 
@@ -1944,8 +1944,8 @@ func main() {
 	contractState := openapiclient.contractState("ACTIVE") // ContractState |  (optional)
 	imageId := "UBUNTU_22_04_64BIT" // string | Available Images can be obtained using `/v1/images`. (optional)
 	state := openapiclient.state("CREATING") // State | The instance's current state(s), separated by commas. (optional)
-	region := "eu-west-3" // string | Available regions can be obtained using `/v1/regions` (optional)
-	type_ := *openapiclient.NewInstanceType("Name_example", *openapiclient.NewResources(*openapiclient.NewCpu(int32(2), "vCPU"), *openapiclient.NewMemory(float32(3.75), "GiB"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps")), []openapiclient.RootDiskStorageType{openapiclient.rootDiskStorageType("LOCAL")}, *openapiclient.NewPrices("USD", "$", *openapiclient.NewPrice("0.00004", "0.03000"), *openapiclient.NewStorage(*openapiclient.NewPrice("0.00004", "0.03000"), ))) // InstanceType | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
+	region := openapiclient.regionName("eu-west-3") // RegionName | Available regions can be obtained using `/v1/regions` (optional)
+	type_ := *openapiclient.NewInstanceType(openapiclient.typeName("lsw.m3.large"), *openapiclient.NewResources(*openapiclient.NewCpu(int32(2), "vCPU"), *openapiclient.NewMemory(float32(3.75), "GiB"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps")), []openapiclient.RootDiskStorageType{openapiclient.rootDiskStorageType("LOCAL")}, *openapiclient.NewPrices("USD", "$", *openapiclient.NewPrice("0.00004", "0.03000"), *openapiclient.NewStorage(*openapiclient.NewPrice("0.00004", "0.03000"), ))) // InstanceType | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1979,7 +1979,7 @@ Name | Type | Description  | Notes
  **contractState** | [**ContractState**](ContractState.md) |  | 
  **imageId** | **string** | Available Images can be obtained using &#x60;/v1/images&#x60;. | 
  **state** | [**State**](State.md) | The instance&#39;s current state(s), separated by commas. | 
- **region** | **string** | Available regions can be obtained using &#x60;/v1/regions&#x60; | 
+ **region** | [**RegionName**](RegionName.md) | Available regions can be obtained using &#x60;/v1/regions&#x60; | 
  **type_** | [**InstanceType**](InstanceType.md) | Available instance types for your region can be obtained using &#x60;/v1/instanceTypes&#x60;. | 
 
 ### Return type
@@ -2021,7 +2021,7 @@ import (
 )
 
 func main() {
-	region := "eu-west-3" // string | 
+	region := openapiclient.regionName("eu-west-3") // RegionName | 
 	limit := int32(56) // int32 |  (optional) (default to 50)
 	offset := int32(56) // int32 |  (optional) (default to 0)
 
@@ -2048,7 +2048,7 @@ Other parameters are passed through a pointer to a apiGetInstanceTypeListRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **region** | **string** |  | 
+ **region** | [**RegionName**](RegionName.md) |  | 
  **limit** | **int32** |  | [default to 50]
  **offset** | **int32** |  | [default to 0]
 
@@ -2384,7 +2384,7 @@ func main() {
 	contractState := openapiclient.contractState("ACTIVE") // ContractState |  (optional)
 	contractType := "HOURLY" // string |  (optional)
 	state := "RUNNING" // string |  (optional)
-	region := "eu-west-3" // string | Available regions can be found using the List Regions endpoint. (optional)
+	region := openapiclient.regionName("eu-west-3") // RegionName | Available regions can be found using the List Regions endpoint. (optional)
 	type_ := "lsw.c3.xlarge" // string | Available load balancer types can be found using the List Load Balancer Types endpoint. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -2418,7 +2418,7 @@ Name | Type | Description  | Notes
  **contractState** | [**ContractState**](ContractState.md) |  | 
  **contractType** | **string** |  | 
  **state** | **string** |  | 
- **region** | **string** | Available regions can be found using the List Regions endpoint. | 
+ **region** | [**RegionName**](RegionName.md) | Available regions can be found using the List Regions endpoint. | 
  **type_** | **string** | Available load balancer types can be found using the List Load Balancer Types endpoint. | 
 
 ### Return type
@@ -3019,7 +3019,7 @@ import (
 )
 
 func main() {
-	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts("eu-west-3", openapiclient.typeName("lsw.m3.large"), "UBUNTU_22_04_64BIT", openapiclient.contractType("HOURLY"), openapiclient.contractTerm(0), openapiclient.billingFrequency(1), openapiclient.rootDiskStorageType("LOCAL")) // LaunchInstanceOpts | 
+	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts(openapiclient.regionName("eu-west-3"), openapiclient.typeName("lsw.m3.large"), "UBUNTU_22_04_64BIT", openapiclient.contractType("HOURLY"), openapiclient.contractTerm(0), openapiclient.billingFrequency(1), openapiclient.rootDiskStorageType("LOCAL")) // LaunchInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3085,7 +3085,7 @@ import (
 )
 
 func main() {
-	launchLoadBalancerOpts := *openapiclient.NewLaunchLoadBalancerOpts("eu-west-3", openapiclient.typeName("lsw.m3.large"), "ContractType_example", int32(123), openapiclient.rootDiskStorageType("LOCAL"), int32(123)) // LaunchLoadBalancerOpts | 
+	launchLoadBalancerOpts := *openapiclient.NewLaunchLoadBalancerOpts(openapiclient.regionName("eu-west-3"), openapiclient.typeName("lsw.m3.large"), "ContractType_example", int32(123), openapiclient.rootDiskStorageType("LOCAL"), int32(123)) // LaunchLoadBalancerOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

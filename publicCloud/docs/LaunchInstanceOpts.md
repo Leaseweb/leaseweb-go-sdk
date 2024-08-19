@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Region** | **string** | Region to launch the instance into | 
+**Region** | [**RegionName**](RegionName.md) |  | 
 **Type** | [**TypeName**](TypeName.md) |  | 
 **ImageId** | **string** | imageId can be either an Operating System or a UUID in case of a Custom Image | 
 **MarketAppId** | Pointer to **string** | Market App ID that must be installed into the instance | [optional] 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewLaunchInstanceOpts
 
-`func NewLaunchInstanceOpts(region string, type_ TypeName, imageId string, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
+`func NewLaunchInstanceOpts(region RegionName, type_ TypeName, imageId string, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
 
 NewLaunchInstanceOpts instantiates a new LaunchInstanceOpts object
 This constructor will assign default values to properties that have it defined,
@@ -37,20 +37,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetRegion
 
-`func (o *LaunchInstanceOpts) GetRegion() string`
+`func (o *LaunchInstanceOpts) GetRegion() RegionName`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *LaunchInstanceOpts) GetRegionOk() (*string, bool)`
+`func (o *LaunchInstanceOpts) GetRegionOk() (*RegionName, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *LaunchInstanceOpts) SetRegion(v string)`
+`func (o *LaunchInstanceOpts) SetRegion(v RegionName)`
 
 SetRegion sets Region field to given value.
 

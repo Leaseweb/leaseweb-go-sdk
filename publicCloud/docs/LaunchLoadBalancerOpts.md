@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Region** | **string** | Region to launch the load balancer into | 
+**Region** | [**RegionName**](RegionName.md) |  | 
 **Type** | [**TypeName**](TypeName.md) |  | 
 **Reference** | Pointer to **string** | An identifying name you can refer to the load balancer | [optional] 
 **ContractType** | **string** | The contract applicable for the load balancer | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewLaunchLoadBalancerOpts
 
-`func NewLaunchLoadBalancerOpts(region string, type_ TypeName, contractType string, billingFrequency int32, rootDiskStorageType RootDiskStorageType, targetPort int32, ) *LaunchLoadBalancerOpts`
+`func NewLaunchLoadBalancerOpts(region RegionName, type_ TypeName, contractType string, billingFrequency int32, rootDiskStorageType RootDiskStorageType, targetPort int32, ) *LaunchLoadBalancerOpts`
 
 NewLaunchLoadBalancerOpts instantiates a new LaunchLoadBalancerOpts object
 This constructor will assign default values to properties that have it defined,
@@ -33,20 +33,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetRegion
 
-`func (o *LaunchLoadBalancerOpts) GetRegion() string`
+`func (o *LaunchLoadBalancerOpts) GetRegion() RegionName`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *LaunchLoadBalancerOpts) GetRegionOk() (*string, bool)`
+`func (o *LaunchLoadBalancerOpts) GetRegionOk() (*RegionName, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *LaunchLoadBalancerOpts) SetRegion(v string)`
+`func (o *LaunchLoadBalancerOpts) SetRegion(v RegionName)`
 
 SetRegion sets Region field to given value.
 

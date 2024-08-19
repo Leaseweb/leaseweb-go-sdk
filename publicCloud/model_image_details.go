@@ -32,8 +32,7 @@ type ImageDetails struct {
 	State NullableString `json:"state"`
 	// The reason in case of failure
 	StateReason NullableString `json:"stateReason"`
-	// The region where the image was uploaded
-	Region NullableString `json:"region"`
+	Region NullableRegionName `json:"region"`
 	// Date when the image was created
 	CreatedAt NullableTime `json:"createdAt"`
 	// Date when the image was updated
@@ -52,7 +51,7 @@ type _ImageDetails ImageDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string) *ImageDetails {
+func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string) *ImageDetails {
 	this := ImageDetails{}
 	this.Id = id
 	this.Name = name
@@ -279,10 +278,10 @@ func (o *ImageDetails) SetStateReason(v string) {
 }
 
 // GetRegion returns the Region field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *ImageDetails) GetRegion() string {
+// If the value is explicit nil, the zero value for RegionName will be returned
+func (o *ImageDetails) GetRegion() RegionName {
 	if o == nil || o.Region.Get() == nil {
-		var ret string
+		var ret RegionName
 		return ret
 	}
 
@@ -292,7 +291,7 @@ func (o *ImageDetails) GetRegion() string {
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ImageDetails) GetRegionOk() (*string, bool) {
+func (o *ImageDetails) GetRegionOk() (*RegionName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -300,7 +299,7 @@ func (o *ImageDetails) GetRegionOk() (*string, bool) {
 }
 
 // SetRegion sets field value
-func (o *ImageDetails) SetRegion(v string) {
+func (o *ImageDetails) SetRegion(v RegionName) {
 	o.Region.Set(&v)
 }
 

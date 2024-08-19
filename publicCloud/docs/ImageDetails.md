@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **StorageSize** | [**NullableStorageSize**](StorageSize.md) |  | 
 **State** | **NullableString** |  | 
 **StateReason** | **NullableString** | The reason in case of failure | 
-**Region** | **NullableString** | The region where the image was uploaded | 
+**Region** | [**NullableRegionName**](RegionName.md) |  | 
 **CreatedAt** | **NullableTime** | Date when the image was created | 
 **UpdatedAt** | **NullableTime** | Date when the image was updated | 
 **Version** | **string** |  | 
@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewImageDetails
 
-`func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableString, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string, ) *ImageDetails`
+`func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string, ) *ImageDetails`
 
 NewImageDetails instantiates a new ImageDetails object
 This constructor will assign default values to properties that have it defined,
@@ -231,20 +231,20 @@ SetStateReason sets StateReason field to given value.
 UnsetStateReason ensures that no value is present for StateReason, not even an explicit nil
 ### GetRegion
 
-`func (o *ImageDetails) GetRegion() string`
+`func (o *ImageDetails) GetRegion() RegionName`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *ImageDetails) GetRegionOk() (*string, bool)`
+`func (o *ImageDetails) GetRegionOk() (*RegionName, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *ImageDetails) SetRegion(v string)`
+`func (o *ImageDetails) SetRegion(v RegionName)`
 
 SetRegion sets Region field to given value.
 

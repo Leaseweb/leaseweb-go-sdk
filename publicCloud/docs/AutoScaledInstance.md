@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The unique identifier of the instance | [optional] 
 **Type** | Pointer to **string** | The instance type, which determines the amount of resources | [optional] 
 **Resources** | Pointer to [**Resources**](Resources.md) |  | [optional] 
-**Region** | Pointer to **string** | The region in which the instance was launched | [optional] 
+**Region** | Pointer to [**RegionName**](RegionName.md) |  | [optional] 
 **Reference** | Pointer to **string** | The identifying name set to the instance | [optional] 
 **State** | Pointer to [**State**](State.md) |  | [optional] 
 **ProductType** | Pointer to **string** |  | [optional] 
@@ -110,20 +110,20 @@ HasResources returns a boolean if a field has been set.
 
 ### GetRegion
 
-`func (o *AutoScaledInstance) GetRegion() string`
+`func (o *AutoScaledInstance) GetRegion() RegionName`
 
 GetRegion returns the Region field if non-nil, zero value otherwise.
 
 ### GetRegionOk
 
-`func (o *AutoScaledInstance) GetRegionOk() (*string, bool)`
+`func (o *AutoScaledInstance) GetRegionOk() (*RegionName, bool)`
 
 GetRegionOk returns a tuple with the Region field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegion
 
-`func (o *AutoScaledInstance) SetRegion(v string)`
+`func (o *AutoScaledInstance) SetRegion(v RegionName)`
 
 SetRegion sets Region field to given value.
 

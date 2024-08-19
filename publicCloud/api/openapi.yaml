@@ -176,7 +176,7 @@ paths:
         name: region
         required: true
         schema:
-          type: string
+          $ref: '#/components/schemas/regionName'
         style: form
       - explode: true
         in: query
@@ -629,7 +629,7 @@ paths:
         name: region
         required: false
         schema:
-          type: string
+          $ref: '#/components/schemas/regionName'
         style: form
       - description: Available instance types for your region can be obtained using
           `/v1/instanceTypes`.
@@ -3761,7 +3761,7 @@ paths:
         name: region
         required: false
         schema:
-          type: string
+          $ref: '#/components/schemas/regionName'
         style: form
       - description: Available load balancer types can be found using the List Load
           Balancer Types endpoint.
@@ -6573,7 +6573,7 @@ paths:
         name: region
         required: false
         schema:
-          type: string
+          $ref: '#/components/schemas/regionName'
         style: form
       - description: The reference used to identify identifies the Auto Scaling Group
         explode: true
@@ -7680,6 +7680,18 @@ components:
             $ref: '#/components/schemas/errorResult'
       description: Service Unavailable.
   schemas:
+    regionName:
+      description: region name
+      enum:
+      - eu-west-3
+      - us-east-1
+      - eu-central-1
+      - ap-southeast-1
+      - us-west-1
+      - eu-west-2
+      - ca-central-1
+      title: regionName
+      type: string
     _metadata:
       description: Metadata about the collection
       example:
@@ -7713,9 +7725,9 @@ components:
     getRegionListResult:
       example:
         regions:
-        - name: eu-west-3
+        - name: null
           location: Amsterdam
-        - name: eu-west-3
+        - name: null
           location: Amsterdam
         _metadata:
           offset: 0
@@ -7756,6 +7768,85 @@ components:
           title: errorDetails
           type: object
       type: object
+    typeName:
+      description: Instance/Load balancer type
+      enum:
+      - lsw.m3.large
+      - lsw.m3.xlarge
+      - lsw.m3.2xlarge
+      - lsw.m4.large
+      - lsw.m4.xlarge
+      - lsw.m4.2xlarge
+      - lsw.m4.4xlarge
+      - lsw.m5.large
+      - lsw.m5.xlarge
+      - lsw.m5.2xlarge
+      - lsw.m5.4xlarge
+      - lsw.m5a.large
+      - lsw.m5a.xlarge
+      - lsw.m5a.2xlarge
+      - lsw.m5a.4xlarge
+      - lsw.m5a.8xlarge
+      - lsw.m5a.12xlarge
+      - lsw.m6a.large
+      - lsw.m6a.xlarge
+      - lsw.m6a.2xlarge
+      - lsw.m6a.4xlarge
+      - lsw.m6a.8xlarge
+      - lsw.m6a.12xlarge
+      - lsw.m6a.16xlarge
+      - lsw.m6a.24xlarge
+      - lsw.c3.large
+      - lsw.c3.xlarge
+      - lsw.c3.2xlarge
+      - lsw.c3.4xlarge
+      - lsw.c4.large
+      - lsw.c4.xlarge
+      - lsw.c4.2xlarge
+      - lsw.c4.4xlarge
+      - lsw.c5.large
+      - lsw.c5.xlarge
+      - lsw.c5.2xlarge
+      - lsw.c5.4xlarge
+      - lsw.c5a.large
+      - lsw.c5a.xlarge
+      - lsw.c5a.2xlarge
+      - lsw.c5a.4xlarge
+      - lsw.c5a.9xlarge
+      - lsw.c5a.12xlarge
+      - lsw.c6a.large
+      - lsw.c6a.xlarge
+      - lsw.c6a.2xlarge
+      - lsw.c6a.4xlarge
+      - lsw.c6a.8xlarge
+      - lsw.c6a.12xlarge
+      - lsw.c6a.16xlarge
+      - lsw.c6a.24xlarge
+      - lsw.r3.large
+      - lsw.r3.xlarge
+      - lsw.r3.2xlarge
+      - lsw.r4.large
+      - lsw.r4.xlarge
+      - lsw.r4.2xlarge
+      - lsw.r5.large
+      - lsw.r5.xlarge
+      - lsw.r5.2xlarge
+      - lsw.r5a.large
+      - lsw.r5a.xlarge
+      - lsw.r5a.2xlarge
+      - lsw.r5a.4xlarge
+      - lsw.r5a.8xlarge
+      - lsw.r5a.12xlarge
+      - lsw.r6a.large
+      - lsw.r6a.xlarge
+      - lsw.r6a.2xlarge
+      - lsw.r6a.4xlarge
+      - lsw.r6a.8xlarge
+      - lsw.r6a.12xlarge
+      - lsw.r6a.16xlarge
+      - lsw.r6a.24xlarge
+      title: typeName
+      type: string
     networkSpeed:
       description: Network speed in Gbps
       example:
@@ -7865,7 +7956,7 @@ components:
       type: object
     instanceType:
       example:
-        name: name
+        name: null
         resources:
           memory:
             unit: GiB
@@ -7897,8 +7988,7 @@ components:
               hourlyPrice: "0.00004"
       properties:
         name:
-          description: Instance type's name
-          type: string
+          $ref: '#/components/schemas/typeName'
         resources:
           $ref: '#/components/schemas/resources'
         storageTypes:
@@ -7918,7 +8008,7 @@ components:
     instanceTypes:
       example:
         instanceTypes:
-        - name: name
+        - name: null
           resources:
             memory:
               unit: GiB
@@ -7948,7 +8038,7 @@ components:
               local:
                 monthlyPrice: "0.03000"
                 hourlyPrice: "0.00004"
-        - name: name
+        - name: null
           resources:
             memory:
               unit: GiB
@@ -8020,85 +8110,6 @@ components:
       - STOPPED
       - STOPPING
       - UNKNOWN
-      type: string
-    typeName:
-      description: Instance/Load balancer type
-      enum:
-      - lsw.m3.large
-      - lsw.m3.xlarge
-      - lsw.m3.2xlarge
-      - lsw.m4.large
-      - lsw.m4.xlarge
-      - lsw.m4.2xlarge
-      - lsw.m4.4xlarge
-      - lsw.m5.large
-      - lsw.m5.xlarge
-      - lsw.m5.2xlarge
-      - lsw.m5.4xlarge
-      - lsw.m5a.large
-      - lsw.m5a.xlarge
-      - lsw.m5a.2xlarge
-      - lsw.m5a.4xlarge
-      - lsw.m5a.8xlarge
-      - lsw.m5a.12xlarge
-      - lsw.m6a.large
-      - lsw.m6a.xlarge
-      - lsw.m6a.2xlarge
-      - lsw.m6a.4xlarge
-      - lsw.m6a.8xlarge
-      - lsw.m6a.12xlarge
-      - lsw.m6a.16xlarge
-      - lsw.m6a.24xlarge
-      - lsw.c3.large
-      - lsw.c3.xlarge
-      - lsw.c3.2xlarge
-      - lsw.c3.4xlarge
-      - lsw.c4.large
-      - lsw.c4.xlarge
-      - lsw.c4.2xlarge
-      - lsw.c4.4xlarge
-      - lsw.c5.large
-      - lsw.c5.xlarge
-      - lsw.c5.2xlarge
-      - lsw.c5.4xlarge
-      - lsw.c5a.large
-      - lsw.c5a.xlarge
-      - lsw.c5a.2xlarge
-      - lsw.c5a.4xlarge
-      - lsw.c5a.9xlarge
-      - lsw.c5a.12xlarge
-      - lsw.c6a.large
-      - lsw.c6a.xlarge
-      - lsw.c6a.2xlarge
-      - lsw.c6a.4xlarge
-      - lsw.c6a.8xlarge
-      - lsw.c6a.12xlarge
-      - lsw.c6a.16xlarge
-      - lsw.c6a.24xlarge
-      - lsw.r3.large
-      - lsw.r3.xlarge
-      - lsw.r3.2xlarge
-      - lsw.r4.large
-      - lsw.r4.xlarge
-      - lsw.r4.2xlarge
-      - lsw.r5.large
-      - lsw.r5.xlarge
-      - lsw.r5.2xlarge
-      - lsw.r5a.large
-      - lsw.r5a.xlarge
-      - lsw.r5a.2xlarge
-      - lsw.r5a.4xlarge
-      - lsw.r5a.8xlarge
-      - lsw.r5a.12xlarge
-      - lsw.r6a.large
-      - lsw.r6a.xlarge
-      - lsw.r6a.2xlarge
-      - lsw.r6a.4xlarge
-      - lsw.r6a.8xlarge
-      - lsw.r6a.12xlarge
-      - lsw.r6a.16xlarge
-      - lsw.r6a.24xlarge
-      title: typeName
       type: string
     rootDiskSize:
       description: The root disk's size in GB. Must be at least 5 GB for Linux and
@@ -8200,7 +8211,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         cooldownTime: 7
-        region: eu-west-3
+        region: null
         endsAt: 2000-01-23T04:56:07.000+00:00
         updatedAt: 2000-01-23T04:56:07.000+00:00
       nullable: true
@@ -8218,9 +8229,7 @@ components:
           nullable: true
           type: integer
         region:
-          description: The region in which the Auto Scaling Group was launched
-          example: eu-west-3
-          type: string
+          $ref: '#/components/schemas/regionName'
         reference:
           description: The identifying name set to the auto scaling group
           maxLength: 255
@@ -8332,9 +8341,7 @@ components:
         resources:
           $ref: '#/components/schemas/resources'
         region:
-          description: The region in which the instance was launched
-          example: eu-west-3
-          type: string
+          $ref: '#/components/schemas/regionName'
         reference:
           description: The identifying name set to the instance
           nullable: true
@@ -8475,7 +8482,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           cooldownTime: 7
-          region: eu-west-3
+          region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
         rootDiskSize: 84
@@ -8522,7 +8529,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         marketAppId: CPANEL
         state: null
-        region: eu-west-3
+        region: null
         productType: productType
         hasPublicIpV4: true
     getInstanceListResult:
@@ -8548,7 +8555,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: null
             cooldownTime: 7
-            region: eu-west-3
+            region: null
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
           rootDiskSize: 84
@@ -8595,7 +8602,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           marketAppId: CPANEL
           state: null
-          region: eu-west-3
+          region: null
           productType: productType
           hasPublicIpV4: true
         - image:
@@ -8618,7 +8625,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: null
             cooldownTime: 7
-            region: eu-west-3
+            region: null
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
           rootDiskSize: 84
@@ -8665,7 +8672,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           marketAppId: CPANEL
           state: null
-          region: eu-west-3
+          region: null
           productType: productType
           hasPublicIpV4: true
         _metadata:
@@ -8683,9 +8690,7 @@ components:
     launchInstanceOpts:
       properties:
         region:
-          description: Region to launch the instance into
-          example: eu-west-3
-          type: string
+          $ref: '#/components/schemas/regionName'
         type:
           $ref: '#/components/schemas/typeName'
         imageId:
@@ -8855,7 +8860,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           cooldownTime: 7
-          region: eu-west-3
+          region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
         rootDiskSize: 84
@@ -8911,7 +8916,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         marketAppId: CPANEL
         state: null
-        region: eu-west-3
+        region: null
         productType: productType
         hasPublicIpV4: true
     updateInstanceOpts:
@@ -9207,10 +9212,7 @@ components:
             nullable: true
             type: string
           region:
-            description: The region where the image was uploaded
-            example: eu-west-3
-            nullable: true
-            type: string
+            $ref: '#/components/schemas/regionName'
           createdAt:
             description: Date when the image was created
             format: date-time
@@ -9272,7 +9274,7 @@ components:
         - CENTRAL
         - LOCAL
         family: linux
-        region: eu-west-3
+        region: null
         updatedAt: 2000-01-23T04:56:07.000+00:00
         architecture: x86_64
     getImageListResult:
@@ -9296,7 +9298,7 @@ components:
           - CENTRAL
           - LOCAL
           family: linux
-          region: eu-west-3
+          region: null
           updatedAt: 2000-01-23T04:56:07.000+00:00
           architecture: x86_64
         - marketApps:
@@ -9317,7 +9319,7 @@ components:
           - CENTRAL
           - LOCAL
           family: linux
-          region: eu-west-3
+          region: null
           updatedAt: 2000-01-23T04:56:07.000+00:00
           architecture: x86_64
         _metadata:
@@ -9555,9 +9557,7 @@ components:
               $ref: '#/components/schemas/ipDetails'
             type: array
           region:
-            description: The region where the load balancer was launched into
-            example: eu-west-3
-            type: string
+            $ref: '#/components/schemas/regionName'
           configuration:
             $ref: '#/components/schemas/loadBalancerConfiguration'
           autoScalingGroup:
@@ -9607,7 +9607,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           cooldownTime: 7
-          region: eu-west-3
+          region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
         contract:
@@ -9635,7 +9635,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         type: null
-        region: eu-west-3
+        region: null
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -9691,7 +9691,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: null
             cooldownTime: 7
-            region: eu-west-3
+            region: null
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
           contract:
@@ -9719,7 +9719,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: null
-          region: eu-west-3
+          region: null
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -9772,7 +9772,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             state: null
             cooldownTime: 7
-            region: eu-west-3
+            region: null
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
           contract:
@@ -9800,7 +9800,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: null
-          region: eu-west-3
+          region: null
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -9837,9 +9837,7 @@ components:
     launchLoadBalancerOpts:
       properties:
         region:
-          description: Region to launch the load balancer into
-          example: eu-west-3
-          type: string
+          $ref: '#/components/schemas/regionName'
         type:
           $ref: '#/components/schemas/typeName'
         reference:
@@ -10245,7 +10243,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           cooldownTime: 7
-          region: eu-west-3
+          region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - cpuThreshold: 5
@@ -10260,7 +10258,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           cooldownTime: 7
-          region: eu-west-3
+          region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
         _metadata:
@@ -10374,7 +10372,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         cooldownTime: 2
-        region: eu-west-3
+        region: null
         endsAt: 2000-01-23T04:56:07.000+00:00
         updatedAt: 2000-01-23T04:56:07.000+00:00
       nullable: true
@@ -10392,9 +10390,7 @@ components:
           nullable: true
           type: integer
         region:
-          description: The region in which the Auto Scaling Group was launched
-          example: eu-west-3
-          type: string
+          $ref: '#/components/schemas/regionName'
         reference:
           description: The identifying name set to the auto scaling group
           maxLength: 255
@@ -10543,7 +10539,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         state: null
         type: type
-        region: eu-west-3
+        region: null
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -10577,9 +10573,7 @@ components:
         resources:
           $ref: '#/components/schemas/resources'
         region:
-          description: The region in which the instance was launched
-          example: eu-west-3
-          type: string
+          $ref: '#/components/schemas/regionName'
         reference:
           description: The identifying name set to the instance
           type: string
@@ -10618,7 +10612,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: type
-          region: eu-west-3
+          region: null
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -10659,7 +10653,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           state: null
           type: type
-          region: eu-west-3
+          region: null
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -10696,13 +10690,11 @@ components:
       type: object
     region:
       example:
-        name: eu-west-3
+        name: null
         location: Amsterdam
       properties:
         name:
-          description: The region's name.
-          example: eu-west-3
-          type: string
+          $ref: '#/components/schemas/regionName'
         location:
           description: The city where the region is located.
           example: Amsterdam

@@ -25,8 +25,7 @@ type Instance struct {
 	Id string `json:"id"`
 	Type TypeName `json:"type"`
 	Resources Resources `json:"resources"`
-	// The region in which the instance was launched
-	Region string `json:"region"`
+	Region RegionName `json:"region"`
 	// The identifying name set to the instance
 	Reference NullableString `json:"reference"`
 	// Date and time when the instance was started for the first time, right after launching it
@@ -54,7 +53,7 @@ type _Instance Instance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstance(id string, type_ TypeName, resources Resources, region string, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, ips []Ip) *Instance {
+func NewInstance(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, ips []Ip) *Instance {
 	this := Instance{}
 	this.Id = id
 	this.Type = type_
@@ -157,9 +156,9 @@ func (o *Instance) SetResources(v Resources) {
 }
 
 // GetRegion returns the Region field value
-func (o *Instance) GetRegion() string {
+func (o *Instance) GetRegion() RegionName {
 	if o == nil {
-		var ret string
+		var ret RegionName
 		return ret
 	}
 
@@ -168,7 +167,7 @@ func (o *Instance) GetRegion() string {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetRegionOk() (*string, bool) {
+func (o *Instance) GetRegionOk() (*RegionName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -176,7 +175,7 @@ func (o *Instance) GetRegionOk() (*string, bool) {
 }
 
 // SetRegion sets field value
-func (o *Instance) SetRegion(v string) {
+func (o *Instance) SetRegion(v RegionName) {
 	o.Region = v
 }
 
