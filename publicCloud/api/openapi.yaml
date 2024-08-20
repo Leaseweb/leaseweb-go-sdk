@@ -3107,6 +3107,7 @@ paths:
                   createdAt: null
                   updatedAt: null
                   custom: false
+                  minDiskSize: null
                 - id: UBUNTU_22_04_64BIT
                   name: Ubuntu 22.04 LTS (x86_64)
                   version: "22.04"
@@ -3125,6 +3126,7 @@ paths:
                   createdAt: null
                   updatedAt: null
                   custom: false
+                  minDiskSize: null
                 - id: UBUNTU_20_04_64BIT
                   name: Ubuntu 20.04 LTS (x86_64)
                   version: "20.04"
@@ -3142,6 +3144,7 @@ paths:
                   createdAt: null
                   updatedAt: null
                   custom: false
+                  minDiskSize: null
               schema:
                 $ref: '#/components/schemas/getImageListResult'
           description: OK.
@@ -3472,6 +3475,7 @@ paths:
                 createdAt: null
                 updatedAt: null
                 custom: false
+                minDiskSize: null
               - id: UBUNTU_20_04_64BIT
                 name: Ubuntu 20.04 LTS (x86_64)
                 version: "20.04"
@@ -3489,6 +3493,7 @@ paths:
                 createdAt: null
                 updatedAt: null
                 custom: false
+                minDiskSize: null
               - id: DEBIAN_12_64BIT
                 name: Debian 12 (x86_64)
                 version: "12"
@@ -3506,6 +3511,7 @@ paths:
                 createdAt: null
                 updatedAt: null
                 custom: false
+                minDiskSize: null
               schema:
                 $ref: '#/components/schemas/getReinstallOsListResult'
           description: OK.
@@ -9242,10 +9248,17 @@ components:
             items:
               type: string
             type: array
+          minDiskSize:
+            description: The image size in GB.
+            maximum: 1000
+            minimum: 5
+            nullable: true
+            type: integer
         required:
         - architecture
         - createdAt
         - marketApps
+        - minDiskSize
         - region
         - state
         - stateReason
@@ -9275,6 +9288,7 @@ components:
         - LOCAL
         family: linux
         region: null
+        minDiskSize: 604
         updatedAt: 2000-01-23T04:56:07.000+00:00
         architecture: x86_64
     getImageListResult:
@@ -9299,6 +9313,7 @@ components:
           - LOCAL
           family: linux
           region: null
+          minDiskSize: 604
           updatedAt: 2000-01-23T04:56:07.000+00:00
           architecture: x86_64
         - marketApps:
@@ -9320,6 +9335,7 @@ components:
           - LOCAL
           family: linux
           region: null
+          minDiskSize: 604
           updatedAt: 2000-01-23T04:56:07.000+00:00
           architecture: x86_64
         _metadata:

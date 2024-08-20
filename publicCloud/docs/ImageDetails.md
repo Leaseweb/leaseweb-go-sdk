@@ -19,12 +19,13 @@ Name | Type | Description | Notes
 **Architecture** | **string** |  | 
 **MarketApps** | **[]string** |  | 
 **StorageTypes** | **[]string** | The supported storage types for the instance type | 
+**MinDiskSize** | **NullableInt32** | The image size in GB. | 
 
 ## Methods
 
 ### NewImageDetails
 
-`func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string, ) *ImageDetails`
+`func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string, minDiskSize NullableInt32, ) *ImageDetails`
 
 NewImageDetails instantiates a new ImageDetails object
 This constructor will assign default values to properties that have it defined,
@@ -399,6 +400,36 @@ and a boolean to check if the value has been set.
 SetStorageTypes sets StorageTypes field to given value.
 
 
+### GetMinDiskSize
+
+`func (o *ImageDetails) GetMinDiskSize() int32`
+
+GetMinDiskSize returns the MinDiskSize field if non-nil, zero value otherwise.
+
+### GetMinDiskSizeOk
+
+`func (o *ImageDetails) GetMinDiskSizeOk() (*int32, bool)`
+
+GetMinDiskSizeOk returns a tuple with the MinDiskSize field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinDiskSize
+
+`func (o *ImageDetails) SetMinDiskSize(v int32)`
+
+SetMinDiskSize sets MinDiskSize field to given value.
+
+
+### SetMinDiskSizeNil
+
+`func (o *ImageDetails) SetMinDiskSizeNil(b bool)`
+
+ SetMinDiskSizeNil sets the value for MinDiskSize to be an explicit nil
+
+### UnsetMinDiskSize
+`func (o *ImageDetails) UnsetMinDiskSize()`
+
+UnsetMinDiskSize ensures that no value is present for MinDiskSize, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

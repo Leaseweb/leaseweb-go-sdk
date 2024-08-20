@@ -42,6 +42,8 @@ type ImageDetails struct {
 	MarketApps []string `json:"marketApps"`
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes"`
+	// The image size in GB.
+	MinDiskSize NullableInt32 `json:"minDiskSize"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -51,7 +53,7 @@ type _ImageDetails ImageDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string) *ImageDetails {
+func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string, minDiskSize NullableInt32) *ImageDetails {
 	this := ImageDetails{}
 	this.Id = id
 	this.Name = name
@@ -68,6 +70,7 @@ func NewImageDetails(id string, name string, family string, flavour string, cust
 	this.Architecture = architecture
 	this.MarketApps = marketApps
 	this.StorageTypes = storageTypes
+	this.MinDiskSize = minDiskSize
 	return &this
 }
 
@@ -451,6 +454,32 @@ func (o *ImageDetails) SetStorageTypes(v []string) {
 	o.StorageTypes = v
 }
 
+// GetMinDiskSize returns the MinDiskSize field value
+// If the value is explicit nil, the zero value for int32 will be returned
+func (o *ImageDetails) GetMinDiskSize() int32 {
+	if o == nil || o.MinDiskSize.Get() == nil {
+		var ret int32
+		return ret
+	}
+
+	return *o.MinDiskSize.Get()
+}
+
+// GetMinDiskSizeOk returns a tuple with the MinDiskSize field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ImageDetails) GetMinDiskSizeOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.MinDiskSize.Get(), o.MinDiskSize.IsSet()
+}
+
+// SetMinDiskSize sets field value
+func (o *ImageDetails) SetMinDiskSize(v int32) {
+	o.MinDiskSize.Set(&v)
+}
+
 func (o ImageDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -476,6 +505,7 @@ func (o ImageDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["architecture"] = o.Architecture
 	toSerialize["marketApps"] = o.MarketApps
 	toSerialize["storageTypes"] = o.StorageTypes
+	toSerialize["minDiskSize"] = o.MinDiskSize.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -504,6 +534,7 @@ func (o *ImageDetails) UnmarshalJSON(data []byte) (err error) {
 		"architecture",
 		"marketApps",
 		"storageTypes",
+		"minDiskSize",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -548,6 +579,7 @@ func (o *ImageDetails) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "architecture")
 		delete(additionalProperties, "marketApps")
 		delete(additionalProperties, "storageTypes")
+		delete(additionalProperties, "minDiskSize")
 		o.AdditionalProperties = additionalProperties
 	}
 
