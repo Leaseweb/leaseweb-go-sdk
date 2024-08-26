@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The unique ID of this control panel | [optional] 
-**Name** | Pointer to **string** | A human readable name describing the control panel | [optional] 
+**Id** | **string** | The unique ID of this control panel | 
+**Name** | **string** | A human readable name describing the control panel | 
 
 ## Methods
 
 ### NewControlPanel
 
-`func NewControlPanel() *ControlPanel`
+`func NewControlPanel(id string, name string, ) *ControlPanel`
 
 NewControlPanel instantiates a new ControlPanel object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *ControlPanel) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *ControlPanel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

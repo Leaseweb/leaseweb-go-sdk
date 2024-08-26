@@ -11672,6 +11672,9 @@ components:
         name:
           description: A human readable name describing the control panel
           type: string
+      required:
+      - id
+      - name
       title: controlPanel
       type: object
     operatingSystem:
