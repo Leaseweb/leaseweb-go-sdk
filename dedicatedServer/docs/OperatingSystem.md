@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The unique ID of this operating system | [optional] 
-**Name** | Pointer to **string** | A human readable name describing the operating system | [optional] 
+**Id** | **string** | The unique ID of this operating system | 
+**Name** | **string** | A human readable name describing the operating system | 
 
 ## Methods
 
 ### NewOperatingSystem
 
-`func NewOperatingSystem() *OperatingSystem`
+`func NewOperatingSystem(id string, name string, ) *OperatingSystem`
 
 NewOperatingSystem instantiates a new OperatingSystem object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *OperatingSystem) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *OperatingSystem) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

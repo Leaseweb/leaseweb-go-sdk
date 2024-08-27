@@ -11689,6 +11689,9 @@ components:
         name:
           description: A human readable name describing the operating system
           type: string
+      required:
+      - id
+      - name
       title: operatingSystem
       type: object
     defaults:
