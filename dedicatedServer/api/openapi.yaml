@@ -2649,17 +2649,35 @@ paths:
             application/json:
               example:
                 _metadata:
-                  limit: 10
+                  limit: 20
                   offset: 0
-                  totalCount: 4
+                  totalCount: 13
                 credentials:
                 - type: REMOTE_MANAGEMENT
                   username: admin
-                - type: REMOTE_MANAGEMENT
+                - type: RESCUE_MODE
                   username: root
                 - type: OPERATING_SYSTEM
                   username: root
-                - type: OPERATING_SYSTEM
+                - type: CONTROL_PANEL
+                  username: user
+                - type: SWITCH
+                  username: admin
+                - type: PDU
+                  username: root
+                - type: FIREWALL
+                  username: root
+                - type: LOAD_BALANCER
+                  username: user
+                - type: VNC
+                  username: admin
+                - type: TEMPORARY_OPERATING_SYSTEM
+                  username: root
+                - type: VPN_USER
+                  username: root
+                - type: COMBINATION_LOCK
+                  username: user
+                - type: DATABASE
                   username: user
               schema:
                 $ref: '#/components/schemas/credentialList'
@@ -2806,14 +2824,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Credential type
+      - description: The type of the credential.
         explode: false
         in: path
         name: type
         required: true
         schema:
-          example: OPERATING_SYSTEM
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Limit the number of results returned.
         example: 20
@@ -2839,12 +2856,14 @@ paths:
             application/json:
               example:
                 _metadata:
-                  limit: 10
+                  limit: 20
                   offset: 0
-                  totalCount: 1
+                  totalCount: 2
                 credentials:
                 - type: OPERATING_SYSTEM
                   username: root
+                - type: OPERATING_SYSTEM
+                  username: user
               schema:
                 $ref: '#/components/schemas/credentialList'
           description: Ok.
@@ -2909,14 +2928,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Credential type
+      - description: The type of the credential.
         explode: false
         in: path
         name: type
         required: true
         schema:
-          example: OPERATING_SYSTEM
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Username
         explode: false
@@ -2990,14 +3008,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Credential type
+      - description: The type of the credential.
         explode: false
         in: path
         name: type
         required: true
         schema:
-          example: OPERATING_SYSTEM
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Username
         explode: false
@@ -3082,14 +3099,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Credential type
+      - description: The type of the credential.
         explode: false
         in: path
         name: type
         required: true
         schema:
-          example: OPERATING_SYSTEM
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Username
         explode: false
@@ -4126,17 +4142,35 @@ paths:
             application/json:
               example:
                 _metadata:
-                  limit: 10
+                  limit: 20
                   offset: 0
-                  totalCount: 4
+                  totalCount: 13
                 credentials:
                 - type: REMOTE_MANAGEMENT
                   username: admin
-                - type: REMOTE_MANAGEMENT
+                - type: RESCUE_MODE
                   username: root
                 - type: OPERATING_SYSTEM
                   username: root
-                - type: OPERATING_SYSTEM
+                - type: CONTROL_PANEL
+                  username: user
+                - type: SWITCH
+                  username: admin
+                - type: PDU
+                  username: root
+                - type: FIREWALL
+                  username: root
+                - type: LOAD_BALANCER
+                  username: user
+                - type: VNC
+                  username: admin
+                - type: TEMPORARY_OPERATING_SYSTEM
+                  username: root
+                - type: VPN_USER
+                  username: root
+                - type: COMBINATION_LOCK
+                  username: user
+                - type: DATABASE
                   username: user
               schema:
                 $ref: '#/components/schemas/credentialList'
@@ -4283,14 +4317,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Credential type
+      - description: The type of the credential.
         explode: false
         in: path
         name: type
         required: true
         schema:
-          example: OPERATING_SYSTEM
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Limit the number of results returned.
         example: 20
@@ -4316,12 +4349,14 @@ paths:
             application/json:
               example:
                 _metadata:
-                  limit: 10
+                  limit: 20
                   offset: 0
-                  totalCount: 1
+                  totalCount: 2
                 credentials:
                 - type: OPERATING_SYSTEM
                   username: root
+                - type: OPERATING_SYSTEM
+                  username: user
               schema:
                 $ref: '#/components/schemas/credentialList'
           description: Ok.
@@ -4386,14 +4421,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Credential type
+      - description: The type of the credential.
         explode: false
         in: path
         name: type
         required: true
         schema:
-          example: OPERATING_SYSTEM
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Username
         explode: false
@@ -4468,14 +4502,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Credential type
+      - description: The type of the credential.
         explode: false
         in: path
         name: type
         required: true
         schema:
-          example: OPERATING_SYSTEM
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Username
         explode: false
@@ -4560,14 +4593,13 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Credential type
+      - description: The type of the credential.
         explode: false
         in: path
         name: type
         required: true
         schema:
-          example: OPERATING_SYSTEM
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Username
         explode: false
@@ -8400,14 +8432,13 @@ components:
         type: string
       style: simple
     credentialsType:
-      description: Credential type
+      description: The type of the credential.
       explode: false
       in: path
       name: type
       required: true
       schema:
-        example: OPERATING_SYSTEM
-        type: string
+        $ref: '#/components/schemas/credentialType'
       style: simple
     credentialsUsername:
       description: Username
@@ -9921,31 +9952,44 @@ components:
             $ref: '#/components/schemas/controlPanel'
           type: array
       type: object
-    credential:
+    credentialType:
+      description: The type of the credential.
+      enum:
+      - OPERATING_SYSTEM
+      - RESCUE_MODE
+      - REMOTE_MANAGEMENT
+      - CONTROL_PANEL
+      - SWITCH
+      - PDU
+      - FIREWALL
+      - LOAD_BALANCER
+      - VNC
+      - TEMPORARY_OPERATING_SYSTEM
+      - VPN_USER
+      - COMBINATION_LOCK
+      - DATABASE
+      type: string
+    credentialWithoutPassword:
       example:
-        password: password
-        type: type
+        type: null
         username: username
       properties:
-        password:
-          description: The password
-          type: string
         type:
-          description: The type of the credential
-          type: string
+          $ref: '#/components/schemas/credentialType'
         username:
           description: The username
           type: string
-      title: credential
+      required:
+      - type
+      - username
+      title: credentialWithoutPassword
       type: object
     credentialList:
       example:
         credentials:
-        - password: password
-          type: type
+        - type: null
           username: username
-        - password: password
-          type: type
+        - type: null
           username: username
         _metadata:
           offset: 0
@@ -9957,7 +10001,7 @@ components:
         credentials:
           description: An array of credentials
           items:
-            $ref: '#/components/schemas/credential'
+            $ref: '#/components/schemas/credentialWithoutPassword'
           type: array
       type: object
     createNetworkEquipmentCredentialOpts:
@@ -9966,12 +10010,7 @@ components:
           description: The password for the credentials
           type: string
         type:
-          description: |
-            Enum: `OPERATING_SYSTEM`, `CONTROL_PANEL`, `REMOTE_MANAGEMENT`, `RESCUE_MODE`, `SWITCH`, `PDU`, `FIREWALL`, `LOAD_BALANCER`
-
-            The type of the credential.
-          title: credentialType
-          type: string
+          $ref: '#/components/schemas/credentialType'
         username:
           description: The username for the credentials
           type: string
@@ -9979,6 +10018,26 @@ components:
       - password
       - type
       - username
+      type: object
+    credential:
+      example:
+        password: password
+        type: null
+        username: username
+      properties:
+        password:
+          description: The password
+          type: string
+        type:
+          $ref: '#/components/schemas/credentialType'
+        username:
+          description: The username
+          type: string
+      required:
+      - password
+      - type
+      - username
+      title: credential
       type: object
     updateNetworkEquipmentCredentialOpts:
       properties:
@@ -10346,12 +10405,7 @@ components:
           description: The password for the credentials
           type: string
         type:
-          description: |
-            Enum: `OPERATING_SYSTEM`, `CONTROL_PANEL`, `REMOTE_MANAGEMENT`, `RESCUE_MODE`, `SWITCH`, `PDU`, `FIREWALL`, `LOAD_BALANCER`
-
-            The type of the credential.
-          title: credentialType
-          type: string
+          $ref: '#/components/schemas/credentialType'
         username:
           description: The username for the credentials
           type: string

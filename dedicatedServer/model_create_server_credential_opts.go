@@ -22,8 +22,7 @@ var _ MappedNullable = &CreateServerCredentialOpts{}
 type CreateServerCredentialOpts struct {
 	// The password for the credentials
 	Password string `json:"password"`
-	// Enum: `OPERATING_SYSTEM`, `CONTROL_PANEL`, `REMOTE_MANAGEMENT`, `RESCUE_MODE`, `SWITCH`, `PDU`, `FIREWALL`, `LOAD_BALANCER`  The type of the credential. 
-	Type string `json:"type"`
+	Type CredentialType `json:"type"`
 	// The username for the credentials
 	Username string `json:"username"`
 	AdditionalProperties map[string]interface{}
@@ -35,7 +34,7 @@ type _CreateServerCredentialOpts CreateServerCredentialOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateServerCredentialOpts(password string, type_ string, username string) *CreateServerCredentialOpts {
+func NewCreateServerCredentialOpts(password string, type_ CredentialType, username string) *CreateServerCredentialOpts {
 	this := CreateServerCredentialOpts{}
 	this.Password = password
 	this.Type = type_
@@ -76,9 +75,9 @@ func (o *CreateServerCredentialOpts) SetPassword(v string) {
 }
 
 // GetType returns the Type field value
-func (o *CreateServerCredentialOpts) GetType() string {
+func (o *CreateServerCredentialOpts) GetType() CredentialType {
 	if o == nil {
-		var ret string
+		var ret CredentialType
 		return ret
 	}
 
@@ -87,7 +86,7 @@ func (o *CreateServerCredentialOpts) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *CreateServerCredentialOpts) GetTypeOk() (*string, bool) {
+func (o *CreateServerCredentialOpts) GetTypeOk() (*CredentialType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,7 +94,7 @@ func (o *CreateServerCredentialOpts) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *CreateServerCredentialOpts) SetType(v string) {
+func (o *CreateServerCredentialOpts) SetType(v CredentialType) {
 	o.Type = v
 }
 

@@ -389,7 +389,7 @@ import (
 
 func main() {
 	networkEquipmentId := "12345" // string | The ID of a dedicated network equipment
-	createNetworkEquipmentCredentialOpts := *openapiclient.NewCreateNetworkEquipmentCredentialOpts("Password_example", "Type_example", "Username_example") // CreateNetworkEquipmentCredentialOpts |  (optional)
+	createNetworkEquipmentCredentialOpts := *openapiclient.NewCreateNetworkEquipmentCredentialOpts("Password_example", openapiclient.credentialType("OPERATING_SYSTEM"), "Username_example") // CreateNetworkEquipmentCredentialOpts |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -533,7 +533,7 @@ import (
 
 func main() {
 	serverId := "12345" // string | The ID of a server
-	createServerCredentialOpts := *openapiclient.NewCreateServerCredentialOpts("Password_example", "Type_example", "Username_example") // CreateServerCredentialOpts |  (optional)
+	createServerCredentialOpts := *openapiclient.NewCreateServerCredentialOpts("Password_example", openapiclient.credentialType("OPERATING_SYSTEM"), "Username_example") // CreateServerCredentialOpts |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -747,7 +747,7 @@ import (
 
 func main() {
 	networkEquipmentId := "12345" // string | The ID of a dedicated network equipment
-	type_ := "OPERATING_SYSTEM" // string | Credential type
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | The type of the credential.
 	username := "root" // string | Username
 
 	configuration := openapiclient.NewConfiguration()
@@ -767,7 +767,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **networkEquipmentId** | **string** | The ID of a dedicated network equipment | 
-**type_** | **string** | Credential type | 
+**type_** | [**CredentialType**](.md) | The type of the credential. | 
 **username** | **string** | Username | 
 
 ### Other Parameters
@@ -892,7 +892,7 @@ import (
 
 func main() {
 	serverId := "12345" // string | The ID of a server
-	type_ := "OPERATING_SYSTEM" // string | Credential type
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | The type of the credential.
 	username := "root" // string | Username
 
 	configuration := openapiclient.NewConfiguration()
@@ -912,7 +912,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **serverId** | **string** | The ID of a server | 
-**type_** | **string** | Credential type | 
+**type_** | [**CredentialType**](.md) | The type of the credential. | 
 **username** | **string** | Username | 
 
 ### Other Parameters
@@ -1600,7 +1600,7 @@ import (
 
 func main() {
 	networkEquipmentId := "12345" // string | The ID of a dedicated network equipment
-	type_ := "OPERATING_SYSTEM" // string | Credential type
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | The type of the credential.
 	username := "root" // string | Username
 
 	configuration := openapiclient.NewConfiguration()
@@ -1622,7 +1622,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **networkEquipmentId** | **string** | The ID of a dedicated network equipment | 
-**type_** | **string** | Credential type | 
+**type_** | [**CredentialType**](.md) | The type of the credential. | 
 **username** | **string** | Username | 
 
 ### Other Parameters
@@ -1750,7 +1750,7 @@ import (
 
 func main() {
 	networkEquipmentId := "12345" // string | The ID of a dedicated network equipment
-	type_ := "OPERATING_SYSTEM" // string | Credential type
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | The type of the credential.
 	limit := int32(20) // int32 | Limit the number of results returned. (optional)
 	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
 
@@ -1773,7 +1773,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **networkEquipmentId** | **string** | The ID of a dedicated network equipment | 
-**type_** | **string** | Credential type | 
+**type_** | [**CredentialType**](.md) | The type of the credential. | 
 
 ### Other Parameters
 
@@ -2857,7 +2857,7 @@ import (
 
 func main() {
 	serverId := "12345" // string | The ID of a server
-	type_ := "OPERATING_SYSTEM" // string | Credential type
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | The type of the credential.
 	username := "root" // string | Username
 
 	configuration := openapiclient.NewConfiguration()
@@ -2879,7 +2879,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **serverId** | **string** | The ID of a server | 
-**type_** | **string** | Credential type | 
+**type_** | [**CredentialType**](.md) | The type of the credential. | 
 **username** | **string** | Username | 
 
 ### Other Parameters
@@ -3007,7 +3007,7 @@ import (
 
 func main() {
 	serverId := "12345" // string | The ID of a server
-	type_ := "OPERATING_SYSTEM" // string | Credential type
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | The type of the credential.
 	limit := int32(20) // int32 | Limit the number of results returned. (optional)
 	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
 
@@ -3030,7 +3030,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **serverId** | **string** | The ID of a server | 
-**type_** | **string** | Credential type | 
+**type_** | [**CredentialType**](.md) | The type of the credential. | 
 
 ### Other Parameters
 
@@ -5257,7 +5257,7 @@ import (
 
 func main() {
 	networkEquipmentId := "12345" // string | The ID of a dedicated network equipment
-	type_ := "OPERATING_SYSTEM" // string | Credential type
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | The type of the credential.
 	username := "root" // string | Username
 	updateNetworkEquipmentCredentialOpts := *openapiclient.NewUpdateNetworkEquipmentCredentialOpts("Password_example") // UpdateNetworkEquipmentCredentialOpts |  (optional)
 
@@ -5280,7 +5280,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **networkEquipmentId** | **string** | The ID of a dedicated network equipment | 
-**type_** | **string** | Credential type | 
+**type_** | [**CredentialType**](.md) | The type of the credential. | 
 **username** | **string** | Username | 
 
 ### Other Parameters
@@ -5555,7 +5555,7 @@ import (
 
 func main() {
 	serverId := "12345" // string | The ID of a server
-	type_ := "OPERATING_SYSTEM" // string | Credential type
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | The type of the credential.
 	username := "root" // string | Username
 	updateServerCredentialOpts := *openapiclient.NewUpdateServerCredentialOpts("Password_example") // UpdateServerCredentialOpts |  (optional)
 
@@ -5578,7 +5578,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **serverId** | **string** | The ID of a server | 
-**type_** | **string** | Credential type | 
+**type_** | [**CredentialType**](.md) | The type of the credential. | 
 **username** | **string** | Username | 
 
 ### Other Parameters

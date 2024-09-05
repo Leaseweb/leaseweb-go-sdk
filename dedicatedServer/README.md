@@ -180,6 +180,8 @@ Class | Method | HTTP request | Description
  - [CreateServerDhcpReservationOpts](docs/CreateServerDhcpReservationOpts.md)
  - [Credential](docs/Credential.md)
  - [CredentialList](docs/CredentialList.md)
+ - [CredentialType](docs/CredentialType.md)
+ - [CredentialWithoutPassword](docs/CredentialWithoutPassword.md)
  - [CurrentServerJob](docs/CurrentServerJob.md)
  - [DDos](docs/DDos.md)
  - [DataTrafficNotificationSetting](docs/DataTrafficNotificationSetting.md)

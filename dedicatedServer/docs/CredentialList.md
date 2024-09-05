@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
-**Credentials** | Pointer to [**[]Credential**](Credential.md) | An array of credentials | [optional] 
+**Credentials** | Pointer to [**[]CredentialWithoutPassword**](CredentialWithoutPassword.md) | An array of credentials | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasMetadata returns a boolean if a field has been set.
 
 ### GetCredentials
 
-`func (o *CredentialList) GetCredentials() []Credential`
+`func (o *CredentialList) GetCredentials() []CredentialWithoutPassword`
 
 GetCredentials returns the Credentials field if non-nil, zero value otherwise.
 
 ### GetCredentialsOk
 
-`func (o *CredentialList) GetCredentialsOk() (*[]Credential, bool)`
+`func (o *CredentialList) GetCredentialsOk() (*[]CredentialWithoutPassword, bool)`
 
 GetCredentialsOk returns a tuple with the Credentials field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCredentials
 
-`func (o *CredentialList) SetCredentials(v []Credential)`
+`func (o *CredentialList) SetCredentials(v []CredentialWithoutPassword)`
 
 SetCredentials sets Credentials field to given value.
 

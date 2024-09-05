@@ -15,67 +15,40 @@ import (
 	"fmt"
 )
 
-// checks if the Credential type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Credential{}
+// checks if the CredentialWithoutPassword type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CredentialWithoutPassword{}
 
-// Credential struct for Credential
-type Credential struct {
-	// The password
-	Password string `json:"password"`
+// CredentialWithoutPassword struct for CredentialWithoutPassword
+type CredentialWithoutPassword struct {
 	Type CredentialType `json:"type"`
 	// The username
 	Username string `json:"username"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _Credential Credential
+type _CredentialWithoutPassword CredentialWithoutPassword
 
-// NewCredential instantiates a new Credential object
+// NewCredentialWithoutPassword instantiates a new CredentialWithoutPassword object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCredential(password string, type_ CredentialType, username string) *Credential {
-	this := Credential{}
-	this.Password = password
+func NewCredentialWithoutPassword(type_ CredentialType, username string) *CredentialWithoutPassword {
+	this := CredentialWithoutPassword{}
 	this.Type = type_
 	this.Username = username
 	return &this
 }
 
-// NewCredentialWithDefaults instantiates a new Credential object
+// NewCredentialWithoutPasswordWithDefaults instantiates a new CredentialWithoutPassword object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCredentialWithDefaults() *Credential {
-	this := Credential{}
+func NewCredentialWithoutPasswordWithDefaults() *CredentialWithoutPassword {
+	this := CredentialWithoutPassword{}
 	return &this
 }
 
-// GetPassword returns the Password field value
-func (o *Credential) GetPassword() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Password
-}
-
-// GetPasswordOk returns a tuple with the Password field value
-// and a boolean to check if the value has been set.
-func (o *Credential) GetPasswordOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Password, true
-}
-
-// SetPassword sets field value
-func (o *Credential) SetPassword(v string) {
-	o.Password = v
-}
-
 // GetType returns the Type field value
-func (o *Credential) GetType() CredentialType {
+func (o *CredentialWithoutPassword) GetType() CredentialType {
 	if o == nil {
 		var ret CredentialType
 		return ret
@@ -86,7 +59,7 @@ func (o *Credential) GetType() CredentialType {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *Credential) GetTypeOk() (*CredentialType, bool) {
+func (o *CredentialWithoutPassword) GetTypeOk() (*CredentialType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,12 +67,12 @@ func (o *Credential) GetTypeOk() (*CredentialType, bool) {
 }
 
 // SetType sets field value
-func (o *Credential) SetType(v CredentialType) {
+func (o *CredentialWithoutPassword) SetType(v CredentialType) {
 	o.Type = v
 }
 
 // GetUsername returns the Username field value
-func (o *Credential) GetUsername() string {
+func (o *CredentialWithoutPassword) GetUsername() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -110,7 +83,7 @@ func (o *Credential) GetUsername() string {
 
 // GetUsernameOk returns a tuple with the Username field value
 // and a boolean to check if the value has been set.
-func (o *Credential) GetUsernameOk() (*string, bool) {
+func (o *CredentialWithoutPassword) GetUsernameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -118,11 +91,11 @@ func (o *Credential) GetUsernameOk() (*string, bool) {
 }
 
 // SetUsername sets field value
-func (o *Credential) SetUsername(v string) {
+func (o *CredentialWithoutPassword) SetUsername(v string) {
 	o.Username = v
 }
 
-func (o Credential) MarshalJSON() ([]byte, error) {
+func (o CredentialWithoutPassword) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -130,9 +103,8 @@ func (o Credential) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Credential) ToMap() (map[string]interface{}, error) {
+func (o CredentialWithoutPassword) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["password"] = o.Password
 	toSerialize["type"] = o.Type
 	toSerialize["username"] = o.Username
 
@@ -143,12 +115,11 @@ func (o Credential) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Credential) UnmarshalJSON(data []byte) (err error) {
+func (o *CredentialWithoutPassword) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"password",
 		"type",
 		"username",
 	}
@@ -167,20 +138,19 @@ func (o *Credential) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varCredential := _Credential{}
+	varCredentialWithoutPassword := _CredentialWithoutPassword{}
 
-	err = json.Unmarshal(data, &varCredential)
+	err = json.Unmarshal(data, &varCredentialWithoutPassword)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Credential(varCredential)
+	*o = CredentialWithoutPassword(varCredentialWithoutPassword)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "password")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "username")
 		o.AdditionalProperties = additionalProperties
@@ -189,38 +159,38 @@ func (o *Credential) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCredential struct {
-	value *Credential
+type NullableCredentialWithoutPassword struct {
+	value *CredentialWithoutPassword
 	isSet bool
 }
 
-func (v NullableCredential) Get() *Credential {
+func (v NullableCredentialWithoutPassword) Get() *CredentialWithoutPassword {
 	return v.value
 }
 
-func (v *NullableCredential) Set(val *Credential) {
+func (v *NullableCredentialWithoutPassword) Set(val *CredentialWithoutPassword) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCredential) IsSet() bool {
+func (v NullableCredentialWithoutPassword) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCredential) Unset() {
+func (v *NullableCredentialWithoutPassword) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCredential(val *Credential) *NullableCredential {
-	return &NullableCredential{value: val, isSet: true}
+func NewNullableCredentialWithoutPassword(val *CredentialWithoutPassword) *NullableCredentialWithoutPassword {
+	return &NullableCredentialWithoutPassword{value: val, isSet: true}
 }
 
-func (v NullableCredential) MarshalJSON() ([]byte, error) {
+func (v NullableCredentialWithoutPassword) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCredential) UnmarshalJSON(src []byte) error {
+func (v *NullableCredentialWithoutPassword) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

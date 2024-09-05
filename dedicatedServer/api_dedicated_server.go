@@ -189,11 +189,11 @@ password associated with this resource from our database.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param networkEquipmentId The ID of a dedicated network equipment
-	@param type_ Credential type
+	@param type_ The type of the credential.
 	@param username Username
 	@return ApiDeleteNetworkEquipmentCredentialRequest
 	*/
-	DeleteNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ string, username string) ApiDeleteNetworkEquipmentCredentialRequest
+	DeleteNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ CredentialType, username string) ApiDeleteNetworkEquipmentCredentialRequest
 
 	// DeleteNetworkEquipmentCredentialExecute executes the request
 	DeleteNetworkEquipmentCredentialExecute(r ApiDeleteNetworkEquipmentCredentialRequest) (*http.Response, error)
@@ -223,11 +223,11 @@ password associated with this resource from our database.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param serverId The ID of a server
-	@param type_ Credential type
+	@param type_ The type of the credential.
 	@param username Username
 	@return ApiDeleteServerCredentialRequest
 	*/
-	DeleteServerCredential(ctx context.Context, serverId string, type_ string, username string) ApiDeleteServerCredentialRequest
+	DeleteServerCredential(ctx context.Context, serverId string, type_ CredentialType, username string) ApiDeleteServerCredentialRequest
 
 	// DeleteServerCredentialExecute executes the request
 	DeleteServerCredentialExecute(r ApiDeleteServerCredentialRequest) (*http.Response, error)
@@ -419,11 +419,11 @@ mitigated.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param networkEquipmentId The ID of a dedicated network equipment
-	@param type_ Credential type
+	@param type_ The type of the credential.
 	@param username Username
 	@return ApiGetNetworkEquipmentCredentialRequest
 	*/
-	GetNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ string, username string) ApiGetNetworkEquipmentCredentialRequest
+	GetNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ CredentialType, username string) ApiGetNetworkEquipmentCredentialRequest
 
 	// GetNetworkEquipmentCredentialExecute executes the request
 	//  @return Credential
@@ -454,10 +454,10 @@ with this network equipment.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param networkEquipmentId The ID of a dedicated network equipment
-	@param type_ Credential type
+	@param type_ The type of the credential.
 	@return ApiGetNetworkEquipmentCredentialListByTypeRequest
 	*/
-	GetNetworkEquipmentCredentialListByType(ctx context.Context, networkEquipmentId string, type_ string) ApiGetNetworkEquipmentCredentialListByTypeRequest
+	GetNetworkEquipmentCredentialListByType(ctx context.Context, networkEquipmentId string, type_ CredentialType) ApiGetNetworkEquipmentCredentialListByTypeRequest
 
 	// GetNetworkEquipmentCredentialListByTypeExecute executes the request
 	//  @return CredentialList
@@ -731,11 +731,11 @@ ipmi reset can be found here).
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param serverId The ID of a server
-	@param type_ Credential type
+	@param type_ The type of the credential.
 	@param username Username
 	@return ApiGetServerCredentialRequest
 	*/
-	GetServerCredential(ctx context.Context, serverId string, type_ string, username string) ApiGetServerCredentialRequest
+	GetServerCredential(ctx context.Context, serverId string, type_ CredentialType, username string) ApiGetServerCredentialRequest
 
 	// GetServerCredentialExecute executes the request
 	//  @return Credential
@@ -769,10 +769,10 @@ with this server.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param serverId The ID of a server
-	@param type_ Credential type
+	@param type_ The type of the credential.
 	@return ApiGetServerCredentialListByTypeRequest
 	*/
-	GetServerCredentialListByType(ctx context.Context, serverId string, type_ string) ApiGetServerCredentialListByTypeRequest
+	GetServerCredentialListByType(ctx context.Context, serverId string, type_ CredentialType) ApiGetServerCredentialListByTypeRequest
 
 	// GetServerCredentialListByTypeExecute executes the request
 	//  @return CredentialList
@@ -1322,11 +1322,11 @@ associated with this resource in our database.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param networkEquipmentId The ID of a dedicated network equipment
-	@param type_ Credential type
+	@param type_ The type of the credential.
 	@param username Username
 	@return ApiUpdateNetworkEquipmentCredentialRequest
 	*/
-	UpdateNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ string, username string) ApiUpdateNetworkEquipmentCredentialRequest
+	UpdateNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ CredentialType, username string) ApiUpdateNetworkEquipmentCredentialRequest
 
 	// UpdateNetworkEquipmentCredentialExecute executes the request
 	//  @return Credential
@@ -1398,11 +1398,11 @@ associated with this resource in our database.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param serverId The ID of a server
-	@param type_ Credential type
+	@param type_ The type of the credential.
 	@param username Username
 	@return ApiUpdateServerCredentialRequest
 	*/
-	UpdateServerCredential(ctx context.Context, serverId string, type_ string, username string) ApiUpdateServerCredentialRequest
+	UpdateServerCredential(ctx context.Context, serverId string, type_ CredentialType, username string) ApiUpdateServerCredentialRequest
 
 	// UpdateServerCredentialExecute executes the request
 	//  @return Credential
@@ -2979,7 +2979,7 @@ type ApiDeleteNetworkEquipmentCredentialRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	networkEquipmentId string
-	type_ string
+	type_ CredentialType
 	username string
 }
 
@@ -2996,11 +2996,11 @@ password associated with this resource from our database.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param networkEquipmentId The ID of a dedicated network equipment
- @param type_ Credential type
+ @param type_ The type of the credential.
  @param username Username
  @return ApiDeleteNetworkEquipmentCredentialRequest
 */
-func (a *DedicatedServerAPIService) DeleteNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ string, username string) ApiDeleteNetworkEquipmentCredentialRequest {
+func (a *DedicatedServerAPIService) DeleteNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ CredentialType, username string) ApiDeleteNetworkEquipmentCredentialRequest {
 	return ApiDeleteNetworkEquipmentCredentialRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3292,7 +3292,7 @@ type ApiDeleteServerCredentialRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	serverId string
-	type_ string
+	type_ CredentialType
 	username string
 }
 
@@ -3309,11 +3309,11 @@ password associated with this resource from our database.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverId The ID of a server
- @param type_ Credential type
+ @param type_ The type of the credential.
  @param username Username
  @return ApiDeleteServerCredentialRequest
 */
-func (a *DedicatedServerAPIService) DeleteServerCredential(ctx context.Context, serverId string, type_ string, username string) ApiDeleteServerCredentialRequest {
+func (a *DedicatedServerAPIService) DeleteServerCredential(ctx context.Context, serverId string, type_ CredentialType, username string) ApiDeleteServerCredentialRequest {
 	return ApiDeleteServerCredentialRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -5010,7 +5010,7 @@ type ApiGetNetworkEquipmentCredentialRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	networkEquipmentId string
-	type_ string
+	type_ CredentialType
 	username string
 }
 
@@ -5027,11 +5027,11 @@ View the password for the given credential, identified by `type` and
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param networkEquipmentId The ID of a dedicated network equipment
- @param type_ Credential type
+ @param type_ The type of the credential.
  @param username Username
  @return ApiGetNetworkEquipmentCredentialRequest
 */
-func (a *DedicatedServerAPIService) GetNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ string, username string) ApiGetNetworkEquipmentCredentialRequest {
+func (a *DedicatedServerAPIService) GetNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ CredentialType, username string) ApiGetNetworkEquipmentCredentialRequest {
 	return ApiGetNetworkEquipmentCredentialRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -5361,7 +5361,7 @@ type ApiGetNetworkEquipmentCredentialListByTypeRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	networkEquipmentId string
-	type_ string
+	type_ CredentialType
 	limit *int32
 	offset *int32
 }
@@ -5391,10 +5391,10 @@ with this network equipment.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param networkEquipmentId The ID of a dedicated network equipment
- @param type_ Credential type
+ @param type_ The type of the credential.
  @return ApiGetNetworkEquipmentCredentialListByTypeRequest
 */
-func (a *DedicatedServerAPIService) GetNetworkEquipmentCredentialListByType(ctx context.Context, networkEquipmentId string, type_ string) ApiGetNetworkEquipmentCredentialListByTypeRequest {
+func (a *DedicatedServerAPIService) GetNetworkEquipmentCredentialListByType(ctx context.Context, networkEquipmentId string, type_ CredentialType) ApiGetNetworkEquipmentCredentialListByTypeRequest {
 	return ApiGetNetworkEquipmentCredentialListByTypeRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -8173,7 +8173,7 @@ type ApiGetServerCredentialRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	serverId string
-	type_ string
+	type_ CredentialType
 	username string
 }
 
@@ -8191,11 +8191,11 @@ ipmi reset can be found here).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverId The ID of a server
- @param type_ Credential type
+ @param type_ The type of the credential.
  @param username Username
  @return ApiGetServerCredentialRequest
 */
-func (a *DedicatedServerAPIService) GetServerCredential(ctx context.Context, serverId string, type_ string, username string) ApiGetServerCredentialRequest {
+func (a *DedicatedServerAPIService) GetServerCredential(ctx context.Context, serverId string, type_ CredentialType, username string) ApiGetServerCredentialRequest {
 	return ApiGetServerCredentialRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -8528,7 +8528,7 @@ type ApiGetServerCredentialListByTypeRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	serverId string
-	type_ string
+	type_ CredentialType
 	limit *int32
 	offset *int32
 }
@@ -8558,10 +8558,10 @@ with this server.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverId The ID of a server
- @param type_ Credential type
+ @param type_ The type of the credential.
  @return ApiGetServerCredentialListByTypeRequest
 */
-func (a *DedicatedServerAPIService) GetServerCredentialListByType(ctx context.Context, serverId string, type_ string) ApiGetServerCredentialListByTypeRequest {
+func (a *DedicatedServerAPIService) GetServerCredentialListByType(ctx context.Context, serverId string, type_ CredentialType) ApiGetServerCredentialListByTypeRequest {
 	return ApiGetServerCredentialListByTypeRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -14087,7 +14087,7 @@ type ApiUpdateNetworkEquipmentCredentialRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	networkEquipmentId string
-	type_ string
+	type_ CredentialType
 	username string
 	updateNetworkEquipmentCredentialOpts *UpdateNetworkEquipmentCredentialOpts
 }
@@ -14113,11 +14113,11 @@ associated with this resource in our database.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param networkEquipmentId The ID of a dedicated network equipment
- @param type_ Credential type
+ @param type_ The type of the credential.
  @param username Username
  @return ApiUpdateNetworkEquipmentCredentialRequest
 */
-func (a *DedicatedServerAPIService) UpdateNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ string, username string) ApiUpdateNetworkEquipmentCredentialRequest {
+func (a *DedicatedServerAPIService) UpdateNetworkEquipmentCredential(ctx context.Context, networkEquipmentId string, type_ CredentialType, username string) ApiUpdateNetworkEquipmentCredentialRequest {
 	return ApiUpdateNetworkEquipmentCredentialRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -14802,7 +14802,7 @@ type ApiUpdateServerCredentialRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	serverId string
-	type_ string
+	type_ CredentialType
 	username string
 	updateServerCredentialOpts *UpdateServerCredentialOpts
 }
@@ -14828,11 +14828,11 @@ associated with this resource in our database.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverId The ID of a server
- @param type_ Credential type
+ @param type_ The type of the credential.
  @param username Username
  @return ApiUpdateServerCredentialRequest
 */
-func (a *DedicatedServerAPIService) UpdateServerCredential(ctx context.Context, serverId string, type_ string, username string) ApiUpdateServerCredentialRequest {
+func (a *DedicatedServerAPIService) UpdateServerCredential(ctx context.Context, serverId string, type_ CredentialType, username string) ApiUpdateServerCredentialRequest {
 	return ApiUpdateServerCredentialRequest{
 		ApiService: a,
 		ctx: ctx,

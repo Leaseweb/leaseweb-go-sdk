@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Password** | **string** | The password for the credentials | 
-**Type** | **string** | Enum: &#x60;OPERATING_SYSTEM&#x60;, &#x60;CONTROL_PANEL&#x60;, &#x60;REMOTE_MANAGEMENT&#x60;, &#x60;RESCUE_MODE&#x60;, &#x60;SWITCH&#x60;, &#x60;PDU&#x60;, &#x60;FIREWALL&#x60;, &#x60;LOAD_BALANCER&#x60;  The type of the credential.  | 
+**Type** | [**CredentialType**](CredentialType.md) |  | 
 **Username** | **string** | The username for the credentials | 
 
 ## Methods
 
 ### NewCreateNetworkEquipmentCredentialOpts
 
-`func NewCreateNetworkEquipmentCredentialOpts(password string, type_ string, username string, ) *CreateNetworkEquipmentCredentialOpts`
+`func NewCreateNetworkEquipmentCredentialOpts(password string, type_ CredentialType, username string, ) *CreateNetworkEquipmentCredentialOpts`
 
 NewCreateNetworkEquipmentCredentialOpts instantiates a new CreateNetworkEquipmentCredentialOpts object
 This constructor will assign default values to properties that have it defined,
@@ -49,20 +49,20 @@ SetPassword sets Password field to given value.
 
 ### GetType
 
-`func (o *CreateNetworkEquipmentCredentialOpts) GetType() string`
+`func (o *CreateNetworkEquipmentCredentialOpts) GetType() CredentialType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *CreateNetworkEquipmentCredentialOpts) GetTypeOk() (*string, bool)`
+`func (o *CreateNetworkEquipmentCredentialOpts) GetTypeOk() (*CredentialType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *CreateNetworkEquipmentCredentialOpts) SetType(v string)`
+`func (o *CreateNetworkEquipmentCredentialOpts) SetType(v CredentialType)`
 
 SetType sets Type field to given value.
 

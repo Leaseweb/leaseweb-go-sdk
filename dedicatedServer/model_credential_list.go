@@ -21,7 +21,7 @@ var _ MappedNullable = &CredentialList{}
 type CredentialList struct {
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	// An array of credentials
-	Credentials []Credential `json:"credentials,omitempty"`
+	Credentials []CredentialWithoutPassword `json:"credentials,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -77,9 +77,9 @@ func (o *CredentialList) SetMetadata(v Metadata) {
 }
 
 // GetCredentials returns the Credentials field value if set, zero value otherwise.
-func (o *CredentialList) GetCredentials() []Credential {
+func (o *CredentialList) GetCredentials() []CredentialWithoutPassword {
 	if o == nil || IsNil(o.Credentials) {
-		var ret []Credential
+		var ret []CredentialWithoutPassword
 		return ret
 	}
 	return o.Credentials
@@ -87,7 +87,7 @@ func (o *CredentialList) GetCredentials() []Credential {
 
 // GetCredentialsOk returns a tuple with the Credentials field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CredentialList) GetCredentialsOk() ([]Credential, bool) {
+func (o *CredentialList) GetCredentialsOk() ([]CredentialWithoutPassword, bool) {
 	if o == nil || IsNil(o.Credentials) {
 		return nil, false
 	}
@@ -103,8 +103,8 @@ func (o *CredentialList) HasCredentials() bool {
 	return false
 }
 
-// SetCredentials gets a reference to the given []Credential and assigns it to the Credentials field.
-func (o *CredentialList) SetCredentials(v []Credential) {
+// SetCredentials gets a reference to the given []CredentialWithoutPassword and assigns it to the Credentials field.
+func (o *CredentialList) SetCredentials(v []CredentialWithoutPassword) {
 	o.Credentials = v
 }
 

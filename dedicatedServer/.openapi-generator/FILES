@@ -26,6 +26,8 @@ docs/CreateServerCredentialOpts.md
 docs/CreateServerDhcpReservationOpts.md
 docs/Credential.md
 docs/CredentialList.md
+docs/CredentialType.md
+docs/CredentialWithoutPassword.md
 docs/CurrentServerJob.md
 docs/DDos.md
 docs/DataTrafficNotificationSetting.md
@@ -148,6 +150,8 @@ model_create_server_credential_opts.go
 model_create_server_dhcp_reservation_opts.go
 model_credential.go
 model_credential_list.go
+model_credential_type.go
+model_credential_without_password.go
 model_current_server_job.go
 model_d_dos.go
 model_data_traffic_notification_setting.go

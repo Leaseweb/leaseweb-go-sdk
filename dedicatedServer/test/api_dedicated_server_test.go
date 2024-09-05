@@ -151,7 +151,7 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var networkEquipmentId string
-		var type_ string
+		var type_ CredentialType
 		var username string
 
 		httpRes, err := apiClient.DedicatedServerAPI.DeleteNetworkEquipmentCredential(context.Background(), networkEquipmentId, type_, username).Execute()
@@ -180,7 +180,7 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var serverId string
-		var type_ string
+		var type_ CredentialType
 		var username string
 
 		httpRes, err := apiClient.DedicatedServerAPI.DeleteServerCredential(context.Background(), serverId, type_, username).Execute()
@@ -318,7 +318,7 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var networkEquipmentId string
-		var type_ string
+		var type_ CredentialType
 		var username string
 
 		resp, httpRes, err := apiClient.DedicatedServerAPI.GetNetworkEquipmentCredential(context.Background(), networkEquipmentId, type_, username).Execute()
@@ -348,7 +348,7 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var networkEquipmentId string
-		var type_ string
+		var type_ CredentialType
 
 		resp, httpRes, err := apiClient.DedicatedServerAPI.GetNetworkEquipmentCredentialListByType(context.Background(), networkEquipmentId, type_).Execute()
 
@@ -556,7 +556,7 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var serverId string
-		var type_ string
+		var type_ CredentialType
 		var username string
 
 		resp, httpRes, err := apiClient.DedicatedServerAPI.GetServerCredential(context.Background(), serverId, type_, username).Execute()
@@ -586,7 +586,7 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var serverId string
-		var type_ string
+		var type_ CredentialType
 
 		resp, httpRes, err := apiClient.DedicatedServerAPI.GetServerCredentialListByType(context.Background(), serverId, type_).Execute()
 
@@ -1020,7 +1020,7 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var networkEquipmentId string
-		var type_ string
+		var type_ CredentialType
 		var username string
 
 		resp, httpRes, err := apiClient.DedicatedServerAPI.UpdateNetworkEquipmentCredential(context.Background(), networkEquipmentId, type_, username).Execute()
@@ -1079,7 +1079,7 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var serverId string
-		var type_ string
+		var type_ CredentialType
 		var username string
 
 		resp, httpRes, err := apiClient.DedicatedServerAPI.UpdateServerCredential(context.Background(), serverId, type_, username).Execute()
