@@ -11212,6 +11212,11 @@ components:
           description: Date timestamp when the threshold exceeded the limit
           nullable: true
           type: string
+      required:
+      - frequency
+      - id
+      - threshold
+      - unit
       type: object
     bandwidthNotificationSetting:
       allOf:

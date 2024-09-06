@@ -5,17 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Actions** | Pointer to [**[]Actions**](Actions.md) | An array of notification setting actions | [optional] 
-**Frequency** | Pointer to **string** | Frequency | [optional] 
-**Id** | Pointer to **string** | Identifier of the notification setting | [optional] 
+**Frequency** | **string** | Frequency | 
+**Id** | **string** | Identifier of the notification setting | 
 **LastCheckedAt** | Pointer to **NullableString** | Date timestamp when the system last checked the server for threshold limit | [optional] 
-**Threshold** | Pointer to **string** | Threshold Value | [optional] 
+**Threshold** | **string** | Threshold Value | 
 **ThresholdExceededAt** | Pointer to **NullableString** | Date timestamp when the threshold exceeded the limit | [optional] 
 
 ## Methods
 
 ### NewNotificationSetting
 
-`func NewNotificationSetting() *NotificationSetting`
+`func NewNotificationSetting(frequency string, id string, threshold string, ) *NotificationSetting`
 
 NewNotificationSetting instantiates a new NotificationSetting object
 This constructor will assign default values to properties that have it defined,
@@ -74,11 +74,6 @@ and a boolean to check if the value has been set.
 
 SetFrequency sets Frequency field to given value.
 
-### HasFrequency
-
-`func (o *NotificationSetting) HasFrequency() bool`
-
-HasFrequency returns a boolean if a field has been set.
 
 ### GetId
 
@@ -99,11 +94,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *NotificationSetting) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetLastCheckedAt
 
@@ -159,11 +149,6 @@ and a boolean to check if the value has been set.
 
 SetThreshold sets Threshold field to given value.
 
-### HasThreshold
-
-`func (o *NotificationSetting) HasThreshold() bool`
-
-HasThreshold returns a boolean if a field has been set.
 
 ### GetThresholdExceededAt
 

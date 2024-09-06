@@ -12,6 +12,7 @@ package dedicatedServer
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the NotificationSetting type satisfies the MappedNullable interface at compile time
@@ -22,13 +23,13 @@ type NotificationSetting struct {
 	// An array of notification setting actions
 	Actions []Actions `json:"actions,omitempty"`
 	// Frequency
-	Frequency *string `json:"frequency,omitempty"`
+	Frequency string `json:"frequency"`
 	// Identifier of the notification setting
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	// Date timestamp when the system last checked the server for threshold limit
 	LastCheckedAt NullableString `json:"lastCheckedAt,omitempty"`
 	// Threshold Value
-	Threshold *string `json:"threshold,omitempty"`
+	Threshold string `json:"threshold"`
 	// Date timestamp when the threshold exceeded the limit
 	ThresholdExceededAt NullableString `json:"thresholdExceededAt,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -40,8 +41,11 @@ type _NotificationSetting NotificationSetting
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNotificationSetting() *NotificationSetting {
+func NewNotificationSetting(frequency string, id string, threshold string) *NotificationSetting {
 	this := NotificationSetting{}
+	this.Frequency = frequency
+	this.Id = id
+	this.Threshold = threshold
 	return &this
 }
 
@@ -85,68 +89,52 @@ func (o *NotificationSetting) SetActions(v []Actions) {
 	o.Actions = v
 }
 
-// GetFrequency returns the Frequency field value if set, zero value otherwise.
+// GetFrequency returns the Frequency field value
 func (o *NotificationSetting) GetFrequency() string {
-	if o == nil || IsNil(o.Frequency) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Frequency
+
+	return o.Frequency
 }
 
-// GetFrequencyOk returns a tuple with the Frequency field value if set, nil otherwise
+// GetFrequencyOk returns a tuple with the Frequency field value
 // and a boolean to check if the value has been set.
 func (o *NotificationSetting) GetFrequencyOk() (*string, bool) {
-	if o == nil || IsNil(o.Frequency) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Frequency, true
+	return &o.Frequency, true
 }
 
-// HasFrequency returns a boolean if a field has been set.
-func (o *NotificationSetting) HasFrequency() bool {
-	if o != nil && !IsNil(o.Frequency) {
-		return true
-	}
-
-	return false
-}
-
-// SetFrequency gets a reference to the given string and assigns it to the Frequency field.
+// SetFrequency sets field value
 func (o *NotificationSetting) SetFrequency(v string) {
-	o.Frequency = &v
+	o.Frequency = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *NotificationSetting) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *NotificationSetting) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *NotificationSetting) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *NotificationSetting) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetLastCheckedAt returns the LastCheckedAt field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -191,36 +179,28 @@ func (o *NotificationSetting) UnsetLastCheckedAt() {
 	o.LastCheckedAt.Unset()
 }
 
-// GetThreshold returns the Threshold field value if set, zero value otherwise.
+// GetThreshold returns the Threshold field value
 func (o *NotificationSetting) GetThreshold() string {
-	if o == nil || IsNil(o.Threshold) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Threshold
+
+	return o.Threshold
 }
 
-// GetThresholdOk returns a tuple with the Threshold field value if set, nil otherwise
+// GetThresholdOk returns a tuple with the Threshold field value
 // and a boolean to check if the value has been set.
 func (o *NotificationSetting) GetThresholdOk() (*string, bool) {
-	if o == nil || IsNil(o.Threshold) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Threshold, true
+	return &o.Threshold, true
 }
 
-// HasThreshold returns a boolean if a field has been set.
-func (o *NotificationSetting) HasThreshold() bool {
-	if o != nil && !IsNil(o.Threshold) {
-		return true
-	}
-
-	return false
-}
-
-// SetThreshold gets a reference to the given string and assigns it to the Threshold field.
+// SetThreshold sets field value
 func (o *NotificationSetting) SetThreshold(v string) {
-	o.Threshold = &v
+	o.Threshold = v
 }
 
 // GetThresholdExceededAt returns the ThresholdExceededAt field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -278,18 +258,12 @@ func (o NotificationSetting) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Actions) {
 		toSerialize["actions"] = o.Actions
 	}
-	if !IsNil(o.Frequency) {
-		toSerialize["frequency"] = o.Frequency
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["frequency"] = o.Frequency
+	toSerialize["id"] = o.Id
 	if o.LastCheckedAt.IsSet() {
 		toSerialize["lastCheckedAt"] = o.LastCheckedAt.Get()
 	}
-	if !IsNil(o.Threshold) {
-		toSerialize["threshold"] = o.Threshold
-	}
+	toSerialize["threshold"] = o.Threshold
 	if o.ThresholdExceededAt.IsSet() {
 		toSerialize["thresholdExceededAt"] = o.ThresholdExceededAt.Get()
 	}
@@ -302,6 +276,29 @@ func (o NotificationSetting) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *NotificationSetting) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"frequency",
+		"id",
+		"threshold",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varNotificationSetting := _NotificationSetting{}
 
 	err = json.Unmarshal(data, &varNotificationSetting)

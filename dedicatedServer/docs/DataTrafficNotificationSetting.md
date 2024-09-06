@@ -5,18 +5,18 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Actions** | Pointer to [**[]Actions**](Actions.md) | An array of notification setting actions | [optional] 
-**Frequency** | Pointer to **string** | Frequency | [optional] 
-**Id** | Pointer to **string** | Identifier of the notification setting | [optional] 
+**Frequency** | **string** | Frequency | 
+**Id** | **string** | Identifier of the notification setting | 
 **LastCheckedAt** | Pointer to **NullableString** | Date timestamp when the system last checked the server for threshold limit | [optional] 
-**Threshold** | Pointer to **string** | Threshold Value | [optional] 
+**Threshold** | **string** | Threshold Value | 
 **ThresholdExceededAt** | Pointer to **NullableString** | Date timestamp when the threshold exceeded the limit | [optional] 
-**Unit** | Pointer to **string** | Unit | [optional] 
+**Unit** | **string** | Unit | 
 
 ## Methods
 
 ### NewDataTrafficNotificationSetting
 
-`func NewDataTrafficNotificationSetting() *DataTrafficNotificationSetting`
+`func NewDataTrafficNotificationSetting(frequency string, id string, threshold string, unit string, ) *DataTrafficNotificationSetting`
 
 NewDataTrafficNotificationSetting instantiates a new DataTrafficNotificationSetting object
 This constructor will assign default values to properties that have it defined,
@@ -75,11 +75,6 @@ and a boolean to check if the value has been set.
 
 SetFrequency sets Frequency field to given value.
 
-### HasFrequency
-
-`func (o *DataTrafficNotificationSetting) HasFrequency() bool`
-
-HasFrequency returns a boolean if a field has been set.
 
 ### GetId
 
@@ -100,11 +95,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *DataTrafficNotificationSetting) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetLastCheckedAt
 
@@ -160,11 +150,6 @@ and a boolean to check if the value has been set.
 
 SetThreshold sets Threshold field to given value.
 
-### HasThreshold
-
-`func (o *DataTrafficNotificationSetting) HasThreshold() bool`
-
-HasThreshold returns a boolean if a field has been set.
 
 ### GetThresholdExceededAt
 
@@ -220,11 +205,6 @@ and a boolean to check if the value has been set.
 
 SetUnit sets Unit field to given value.
 
-### HasUnit
-
-`func (o *DataTrafficNotificationSetting) HasUnit() bool`
-
-HasUnit returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
