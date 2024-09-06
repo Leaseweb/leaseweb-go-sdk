@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Rack id | [optional] 
 **Capacity** | Pointer to **string** | Rack capacity | [optional] 
-**Type** | Pointer to **string** |  | [optional] 
+**Type** | Pointer to [**RackType**](RackType.md) |  | [optional] 
 
 ## Methods
 
@@ -79,20 +79,20 @@ HasCapacity returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *Rack) GetType() string`
+`func (o *Rack) GetType() RackType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *Rack) GetTypeOk() (*string, bool)`
+`func (o *Rack) GetTypeOk() (*RackType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *Rack) SetType(v string)`
+`func (o *Rack) SetType(v RackType)`
 
 SetType sets Type field to given value.
 

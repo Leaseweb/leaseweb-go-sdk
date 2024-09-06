@@ -8837,11 +8837,18 @@ components:
           $ref: '#/components/schemas/networkInterface'
       title: networkInterfaces
       type: object
+    rackType:
+      description: rack type
+      enum:
+      - PRIVATE
+      - SHARED
+      title: rackType
+      type: string
     rack:
       description: Rack details where this network equipment is located at
       example:
         id: id
-        type: PRIVATE
+        type: null
         capacity: capacity
       properties:
         id:
@@ -8851,10 +8858,7 @@ components:
           description: Rack capacity
           type: string
         type:
-          enum:
-          - PRIVATE
-          - SHARED
-          type: string
+          $ref: '#/components/schemas/rackType'
       title: rack
       type: object
     networkEquipment:
@@ -8864,7 +8868,7 @@ components:
           brand: brand
         rack:
           id: id
-          type: PRIVATE
+          type: null
           capacity: capacity
         networkInterfaces:
           internal:
@@ -9004,7 +9008,7 @@ components:
             brand: brand
           rack:
             id: id
-            type: PRIVATE
+            type: null
             capacity: capacity
           networkInterfaces:
             internal:
@@ -9109,7 +9113,7 @@ components:
             brand: brand
           rack:
             id: id
-            type: PRIVATE
+            type: null
             capacity: capacity
           networkInterfaces:
             internal:
@@ -9443,7 +9447,7 @@ components:
             size: 5
         rack:
           id: id
-          type: PRIVATE
+          type: null
           capacity: capacity
         networkInterfaces:
           internal:
@@ -9616,7 +9620,7 @@ components:
               size: 5
           rack:
             id: id
-            type: PRIVATE
+            type: null
             capacity: capacity
           networkInterfaces:
             internal:
@@ -9753,7 +9757,7 @@ components:
               size: 5
           rack:
             id: id
-            type: PRIVATE
+            type: null
             capacity: capacity
           networkInterfaces:
             internal:

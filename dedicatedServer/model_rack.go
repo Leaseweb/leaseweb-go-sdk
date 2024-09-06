@@ -23,7 +23,7 @@ type Rack struct {
 	Id *string `json:"id,omitempty"`
 	// Rack capacity
 	Capacity *string `json:"capacity,omitempty"`
-	Type *string `json:"type,omitempty"`
+	Type *RackType `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,9 +111,9 @@ func (o *Rack) SetCapacity(v string) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *Rack) GetType() string {
+func (o *Rack) GetType() RackType {
 	if o == nil || IsNil(o.Type) {
-		var ret string
+		var ret RackType
 		return ret
 	}
 	return *o.Type
@@ -121,7 +121,7 @@ func (o *Rack) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Rack) GetTypeOk() (*string, bool) {
+func (o *Rack) GetTypeOk() (*RackType, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -137,8 +137,8 @@ func (o *Rack) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *Rack) SetType(v string) {
+// SetType gets a reference to the given RackType and assigns it to the Type field.
+func (o *Rack) SetType(v RackType) {
 	o.Type = &v
 }
 

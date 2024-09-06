@@ -255,6 +255,7 @@ Class | Method | HTTP request | Description
  - [PrivateNetwork](docs/PrivateNetwork.md)
  - [Progress](docs/Progress.md)
  - [Rack](docs/Rack.md)
+ - [RackType](docs/RackType.md)
  - [Raid](docs/Raid.md)
  - [RaidType](docs/RaidType.md)
  - [Ram](docs/Ram.md)

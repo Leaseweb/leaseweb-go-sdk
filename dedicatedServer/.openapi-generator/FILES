@@ -102,6 +102,7 @@ docs/Port1.md
 docs/PrivateNetwork.md
 docs/Progress.md
 docs/Rack.md
+docs/RackType.md
 docs/Raid.md
 docs/RaidType.md
 docs/Ram.md
@@ -224,6 +225,7 @@ model_port_1.go
 model_private_network.go
 model_progress.go
 model_rack.go
+model_rack_type.go
 model_raid.go
 model_raid_type.go
 model_ram.go
