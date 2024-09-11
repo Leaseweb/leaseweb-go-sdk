@@ -15,88 +15,61 @@ import (
 	"fmt"
 )
 
-// checks if the Volume type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Volume{}
+// checks if the UpdateImageOpts type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateImageOpts{}
 
-// Volume struct for Volume
-type Volume struct {
-	// The Volume Size
-	Size float32 `json:"size"`
-	// Unit
-	Unit string `json:"unit"`
+// UpdateImageOpts struct for UpdateImageOpts
+type UpdateImageOpts struct {
+	// The name of the custom image to be updated.
+	Name string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _Volume Volume
+type _UpdateImageOpts UpdateImageOpts
 
-// NewVolume instantiates a new Volume object
+// NewUpdateImageOpts instantiates a new UpdateImageOpts object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVolume(size float32, unit string) *Volume {
-	this := Volume{}
-	this.Size = size
-	this.Unit = unit
+func NewUpdateImageOpts(name string) *UpdateImageOpts {
+	this := UpdateImageOpts{}
+	this.Name = name
 	return &this
 }
 
-// NewVolumeWithDefaults instantiates a new Volume object
+// NewUpdateImageOptsWithDefaults instantiates a new UpdateImageOpts object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewVolumeWithDefaults() *Volume {
-	this := Volume{}
+func NewUpdateImageOptsWithDefaults() *UpdateImageOpts {
+	this := UpdateImageOpts{}
 	return &this
 }
 
-// GetSize returns the Size field value
-func (o *Volume) GetSize() float32 {
-	if o == nil {
-		var ret float32
-		return ret
-	}
-
-	return o.Size
-}
-
-// GetSizeOk returns a tuple with the Size field value
-// and a boolean to check if the value has been set.
-func (o *Volume) GetSizeOk() (*float32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Size, true
-}
-
-// SetSize sets field value
-func (o *Volume) SetSize(v float32) {
-	o.Size = v
-}
-
-// GetUnit returns the Unit field value
-func (o *Volume) GetUnit() string {
+// GetName returns the Name field value
+func (o *UpdateImageOpts) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Unit
+	return o.Name
 }
 
-// GetUnitOk returns a tuple with the Unit field value
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *Volume) GetUnitOk() (*string, bool) {
+func (o *UpdateImageOpts) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Unit, true
+	return &o.Name, true
 }
 
-// SetUnit sets field value
-func (o *Volume) SetUnit(v string) {
-	o.Unit = v
+// SetName sets field value
+func (o *UpdateImageOpts) SetName(v string) {
+	o.Name = v
 }
 
-func (o Volume) MarshalJSON() ([]byte, error) {
+func (o UpdateImageOpts) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -104,10 +77,9 @@ func (o Volume) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Volume) ToMap() (map[string]interface{}, error) {
+func (o UpdateImageOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["size"] = o.Size
-	toSerialize["unit"] = o.Unit
+	toSerialize["name"] = o.Name
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -116,13 +88,12 @@ func (o Volume) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Volume) UnmarshalJSON(data []byte) (err error) {
+func (o *UpdateImageOpts) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"size",
-		"unit",
+		"name",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -139,59 +110,58 @@ func (o *Volume) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varVolume := _Volume{}
+	varUpdateImageOpts := _UpdateImageOpts{}
 
-	err = json.Unmarshal(data, &varVolume)
+	err = json.Unmarshal(data, &varUpdateImageOpts)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Volume(varVolume)
+	*o = UpdateImageOpts(varUpdateImageOpts)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "size")
-		delete(additionalProperties, "unit")
+		delete(additionalProperties, "name")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableVolume struct {
-	value *Volume
+type NullableUpdateImageOpts struct {
+	value *UpdateImageOpts
 	isSet bool
 }
 
-func (v NullableVolume) Get() *Volume {
+func (v NullableUpdateImageOpts) Get() *UpdateImageOpts {
 	return v.value
 }
 
-func (v *NullableVolume) Set(val *Volume) {
+func (v *NullableUpdateImageOpts) Set(val *UpdateImageOpts) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableVolume) IsSet() bool {
+func (v NullableUpdateImageOpts) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableVolume) Unset() {
+func (v *NullableUpdateImageOpts) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableVolume(val *Volume) *NullableVolume {
-	return &NullableVolume{value: val, isSet: true}
+func NewNullableUpdateImageOpts(val *UpdateImageOpts) *NullableUpdateImageOpts {
+	return &NullableUpdateImageOpts{value: val, isSet: true}
 }
 
-func (v NullableVolume) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateImageOpts) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableVolume) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateImageOpts) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

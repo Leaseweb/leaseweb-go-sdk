@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **StartedAt** | Pointer to **time.Time** | Date when the instance was started | [optional] 
 **EndedAt** | Pointer to **time.Time** | Date when the instance ended | [optional] 
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
-**RootDiskStorageType** | Pointer to [**RootDiskStorageType**](RootDiskStorageType.md) |  | [optional] 
+**RootDiskStorageType** | Pointer to [**StorageType**](StorageType.md) |  | [optional] 
 **BillingType** | Pointer to **string** | The billing type of the instance. PREPAID is used for monthly commited instances, POSTPAID for hourly instances. | [optional] 
 **Hours** | Pointer to **int32** | The number of hours the instance has been running. | [optional] 
 **From** | Pointer to **time.Time** | The start date of the billing period. | [optional] 
@@ -214,20 +214,20 @@ HasRootDiskSize returns a boolean if a field has been set.
 
 ### GetRootDiskStorageType
 
-`func (o *ExpenseResultInstance) GetRootDiskStorageType() RootDiskStorageType`
+`func (o *ExpenseResultInstance) GetRootDiskStorageType() StorageType`
 
 GetRootDiskStorageType returns the RootDiskStorageType field if non-nil, zero value otherwise.
 
 ### GetRootDiskStorageTypeOk
 
-`func (o *ExpenseResultInstance) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool)`
+`func (o *ExpenseResultInstance) GetRootDiskStorageTypeOk() (*StorageType, bool)`
 
 GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRootDiskStorageType
 
-`func (o *ExpenseResultInstance) SetRootDiskStorageType(v RootDiskStorageType)`
+`func (o *ExpenseResultInstance) SetRootDiskStorageType(v StorageType)`
 
 SetRootDiskStorageType sets RootDiskStorageType field to given value.
 

@@ -1047,9 +1047,6 @@ paths:
                 startedAt: 2024-04-09T15:11:37+00:00
                 state: RUNNING
                 type: lsw.m3.large
-                volume:
-                  size: 5.37
-                  unit: GB
               schema:
                 $ref: '#/components/schemas/instanceDetails'
           description: OK.
@@ -1207,9 +1204,6 @@ paths:
                 startedAt: 2024-04-09T15:11:37+00:00
                 state: RUNNING
                 type: lsw.m3.large
-                volume:
-                  size: 5.37
-                  unit: GB
               schema:
                 $ref: '#/components/schemas/instanceDetails'
           description: OK.
@@ -3080,15 +3074,78 @@ paths:
         schema:
           type: integer
         style: form
+      - description: Filters the list to include only custom images.
+        explode: true
+        in: query
+        name: custom
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Filters the list to include only standard images.
+        example: "true"
+        explode: true
+        in: query
+        name: standard
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Filters the list by the state of custom images.
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          $ref: '#/components/schemas/imageState'
+        style: form
+      - description: Filters the list by the market app of standard images.
+        explode: true
+        in: query
+        name: marketAppId
+        required: false
+        schema:
+          $ref: '#/components/schemas/marketAppId'
+        style: form
+      - description: Filters the list by the market app of standard images.
+        explode: true
+        in: query
+        name: storageType
+        required: false
+        schema:
+          $ref: '#/components/schemas/storageType'
+        style: form
+      - description: Filters the list by the name of images.
+        example: Ubuntu 20.04 LTS (x86_64)
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filters the list by the flavour of standard images.
+        explode: true
+        in: query
+        name: flavour
+        required: false
+        schema:
+          $ref: '#/components/schemas/flavour'
+        style: form
+      - description: Available regions can be found using the List Regions endpoint.
+        example: eu-west-3
+        explode: true
+        in: query
+        name: region
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
             application/json:
               example:
-                _metadata:
-                  totalCount: 3
-                  limit: 20
-                  offset: 0
                 images:
                 - id: UBUNTU_24_04_64BIT
                   name: Ubuntu 24.04 LTS (x86_64)
@@ -3145,6 +3202,64 @@ paths:
                   updatedAt: null
                   custom: false
                   minDiskSize: null
+                - id: abcc1630-362f-48ba-832f-c496aff24121
+                  name: Custom image - 01
+                  flavour: ubuntu
+                  family: linux
+                  version: null
+                  architecture: null
+                  marketApps: []
+                  storageTypes: []
+                  storageSize:
+                    size: 2.03
+                    unit: GB
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: 2024-07-05T10:44:08+00:00
+                  updatedAt: 2024-07-18T08:52:08+00:00
+                  custom: true
+                  minDiskSize: null
+                - id: 8600b94b-45b4-4887-86e1-2792b06dbb32
+                  name: Custom image - 02
+                  flavour: ubuntu
+                  family: linux
+                  version: null
+                  architecture: null
+                  marketApps: []
+                  storageTypes: []
+                  storageSize:
+                    size: 2.03
+                    unit: GB
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: 2024-07-05T10:47:01+00:00
+                  updatedAt: 2024-07-17T13:14:01+00:00
+                  custom: true
+                  minDiskSize: null
+                - id: 396a3299-1795-464b-aa10-e1f179db1926
+                  name: Custom image - 03
+                  flavour: ubuntu
+                  family: linux
+                  version: null
+                  architecture: null
+                  marketApps: []
+                  storageTypes: []
+                  storageSize:
+                    size: 2.03
+                    unit: GB
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: 2024-07-05T10:54:27+00:00
+                  updatedAt: 2024-07-17T13:14:01+00:00
+                  custom: true
+                  minDiskSize: null
+                _metadata:
+                  totalCount: 12
+                  limit: 6
+                  offset: 0
               schema:
                 $ref: '#/components/schemas/getImageListResult'
           description: OK.
@@ -3189,6 +3304,201 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: List all available Images
+      tags:
+      - publicCloud
+    post:
+      description: Create a Custom Image
+      operationId: createImage
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: New custom image
+              instanceId: 695ddd91-051f-4dd6-9120-938a927a47d0
+            schema:
+              $ref: '#/components/schemas/createImageOpts'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                architecture: null
+                createdAt: 2024-07-05T10:54:27+00:00
+                custom: true
+                family: linux
+                flavour: ubuntu
+                id: 396a3299-1795-464b-aa10-e1f179db1926
+                marketApps: []
+                minDiskSize: null
+                name: Custom image
+                region: eu-west-3
+                state: READY
+                stateReason: null
+                storageSize:
+                  size: 2.03
+                  unit: GB
+                storageTypes: []
+                updatedAt: 2024-07-17T13:14:01+00:00
+                version: null
+              schema:
+                $ref: '#/components/schemas/imageDetails'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Create Custom Image
+      tags:
+      - publicCloud
+  /images/{imageId}:
+    put:
+      description: Update a Custom Image
+      operationId: updateImage
+      parameters:
+      - description: Image's ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: imageId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Custom image
+            schema:
+              $ref: '#/components/schemas/updateImageOpts'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                architecture: null
+                createdAt: 2024-07-05T10:54:27+00:00
+                custom: true
+                family: linux
+                flavour: ubuntu
+                id: 396a3299-1795-464b-aa10-e1f179db1926
+                marketApps: []
+                minDiskSize: null
+                name: Custom image
+                region: eu-west-3
+                state: READY
+                stateReason: null
+                storageSize:
+                  size: 2.03
+                  unit: GB
+                storageTypes: []
+                updatedAt: 2024-07-17T13:14:01+00:00
+                version: null
+              schema:
+                $ref: '#/components/schemas/imageDetails'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Update Custom Image
       tags:
       - publicCloud
   /marketApps:
@@ -3441,7 +3751,7 @@ paths:
   /instances/{instanceId}/reinstall/images:
     get:
       description: List Images available for reinstall
-      operationId: getReinstallOsList
+      operationId: getReinstallImageList
       parameters:
       - description: Instance's ID
         example: 695ddd91-051f-4dd6-9120-938a927a47d0
@@ -3453,67 +3763,162 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Filters the list to include only custom images.
+        explode: true
+        in: query
+        name: custom
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Filters the list to include only standard images.
+        example: "true"
+        explode: true
+        in: query
+        name: standard
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "200":
           content:
             application/json:
               example:
-              - id: UBUNTU_22_04_64BIT
-                name: Ubuntu 22.04 LTS (x86_64)
-                version: "22.04"
-                family: linux
-                flavour: ubuntu
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-                storageSize: null
-                state: READY
-                stateReason: null
-                region: null
-                createdAt: null
-                updatedAt: null
-                custom: false
-                minDiskSize: null
-              - id: UBUNTU_20_04_64BIT
-                name: Ubuntu 20.04 LTS (x86_64)
-                version: "20.04"
-                family: linux
-                flavour: ubuntu
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-                storageSize: null
-                state: READY
-                stateReason: null
-                region: null
-                createdAt: null
-                updatedAt: null
-                custom: false
-                minDiskSize: null
-              - id: DEBIAN_12_64BIT
-                name: Debian 12 (x86_64)
-                version: "12"
-                family: linux
-                flavour: debian
-                architecture: x86_64
-                marketApps: []
-                storageTypes:
-                - LOCAL
-                - CENTRAL
-                storageSize: null
-                state: READY
-                stateReason: null
-                region: null
-                createdAt: null
-                updatedAt: null
-                custom: false
-                minDiskSize: null
+                images:
+                - id: UBUNTU_24_04_64BIT
+                  name: Ubuntu 24.04 LTS (x86_64)
+                  version: "24.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                  marketApps: []
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
+                  storageSize: null
+                  state: READY
+                  stateReason: null
+                  region: null
+                  createdAt: null
+                  updatedAt: null
+                  custom: false
+                  minDiskSize: null
+                - id: UBUNTU_22_04_64BIT
+                  name: Ubuntu 22.04 LTS (x86_64)
+                  version: "22.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                  marketApps:
+                  - LOADBALANCER
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
+                  storageSize: null
+                  state: READY
+                  stateReason: null
+                  region: null
+                  createdAt: null
+                  updatedAt: null
+                  custom: false
+                  minDiskSize: null
+                - id: UBUNTU_20_04_64BIT
+                  name: Ubuntu 20.04 LTS (x86_64)
+                  version: "20.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                  marketApps: []
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
+                  storageSize: null
+                  state: READY
+                  stateReason: null
+                  region: null
+                  createdAt: null
+                  updatedAt: null
+                  custom: false
+                  minDiskSize: null
+                - id: abcc1630-362f-48ba-832f-c496aff24121
+                  name: Custom image - 01
+                  flavour: ubuntu
+                  family: linux
+                  version: null
+                  architecture: null
+                  marketApps: []
+                  storageTypes: []
+                  storageSize:
+                    size: 2.03
+                    unit: GB
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: 2024-07-05T10:44:08+00:00
+                  updatedAt: 2024-07-18T08:52:08+00:00
+                  custom: true
+                  minDiskSize: null
+                - id: 8600b94b-45b4-4887-86e1-2792b06dbb32
+                  name: Custom image - 02
+                  flavour: ubuntu
+                  family: linux
+                  version: null
+                  architecture: null
+                  marketApps: []
+                  storageTypes: []
+                  storageSize:
+                    size: 2.03
+                    unit: GB
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: 2024-07-05T10:47:01+00:00
+                  updatedAt: 2024-07-17T13:14:01+00:00
+                  custom: true
+                  minDiskSize: null
+                - id: 396a3299-1795-464b-aa10-e1f179db1926
+                  name: Custom image - 03
+                  flavour: ubuntu
+                  family: linux
+                  version: null
+                  architecture: null
+                  marketApps: []
+                  storageTypes: []
+                  storageSize:
+                    size: 2.03
+                    unit: GB
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: 2024-07-05T10:54:27+00:00
+                  updatedAt: 2024-07-17T13:14:01+00:00
+                  custom: true
+                  minDiskSize: null
+                _metadata:
+                  totalCount: 12
+                  limit: 6
+                  offset: 0
               schema:
-                $ref: '#/components/schemas/getReinstallOsListResult'
+                $ref: '#/components/schemas/getReinstallImageListResult'
           description: OK.
         "400":
           content:
@@ -3576,7 +3981,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: List OSes available for reinstall
+      summary: List images available for reinstall
       tags:
       - publicCloud
   /instances/{instanceId}/reinstall:
@@ -7553,6 +7958,36 @@ components:
         format: uuid
         type: string
       style: simple
+    custom:
+      description: Filters the list to include only custom images.
+      explode: true
+      in: query
+      name: custom
+      required: false
+      schema:
+        type: boolean
+      style: form
+    standard:
+      description: Filters the list to include only standard images.
+      example: "true"
+      explode: true
+      in: query
+      name: standard
+      required: false
+      schema:
+        type: boolean
+      style: form
+    imageId:
+      description: Image's ID
+      example: 695ddd91-051f-4dd6-9120-938a927a47d0
+      explode: false
+      in: path
+      name: imageId
+      required: true
+      schema:
+        format: uuid
+        type: string
+      style: simple
     loadBalancerId:
       description: Load balancer ID
       example: 695ddd91-051f-4dd6-9120-938a927a47d0
@@ -7901,8 +8336,8 @@ components:
       - publicNetworkSpeed
       title: resources
       type: object
-    rootDiskStorageType:
-      description: The root disk's storage type
+    storageType:
+      description: Storage type
       enum:
       - LOCAL
       - CENTRAL
@@ -7910,7 +8345,7 @@ components:
     storageTypes:
       description: The supported storage types for the instance type
       items:
-        $ref: '#/components/schemas/rootDiskStorageType'
+        $ref: '#/components/schemas/storageType'
       nullable: true
       type: array
     price:
@@ -8000,7 +8435,7 @@ components:
         storageTypes:
           description: The supported storage types for the instance type
           items:
-            $ref: '#/components/schemas/rootDiskStorageType'
+            $ref: '#/components/schemas/storageType'
           nullable: true
           type: array
         prices:
@@ -8379,7 +8814,7 @@ components:
           minimum: 5
           type: integer
         rootDiskStorageType:
-          $ref: '#/components/schemas/rootDiskStorageType'
+          $ref: '#/components/schemas/storageType'
         contract:
           $ref: '#/components/schemas/contract'
         autoScalingGroup:
@@ -8725,7 +9160,7 @@ components:
           minimum: 5
           type: integer
         rootDiskStorageType:
-          $ref: '#/components/schemas/rootDiskStorageType'
+          $ref: '#/components/schemas/storageType'
         sshKey:
           description: Public SSH key to be installed into the instance. Must be used
             only on Linux/FreeBSD instances
@@ -8798,26 +9233,6 @@ components:
           protectionType: STANDARD
         networkType: internal
         version: null
-    volume:
-      example:
-        unit: MB
-        size: 6.027456183070403
-      nullable: true
-      properties:
-        size:
-          description: The Volume Size
-          type: number
-        unit:
-          description: Unit
-          enum:
-          - MB
-          - GB
-          type: string
-      required:
-      - size
-      - unit
-      title: volume
-      type: object
     instanceDetails:
       allOf:
       - $ref: '#/components/schemas/instanceBase'
@@ -8830,12 +9245,9 @@ components:
             items:
               $ref: '#/components/schemas/ipDetails'
             type: array
-          volume:
-            $ref: '#/components/schemas/volume'
         required:
         - iso
         - privateNetwork
-        - volume
         title: instanceDetails
         type: object
       example:
@@ -8916,9 +9328,6 @@ components:
           networkType: internal
           version: null
         reference: reference
-        volume:
-          unit: MB
-          size: 6.027456183070403
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         marketAppId: CPANEL
         state: null
@@ -9202,6 +9611,38 @@ components:
         _metadata:
           $ref: '#/components/schemas/_metadata'
       type: object
+    imageState:
+      description: Images state
+      enum:
+      - CREATING
+      - READY
+      - DESTROYED
+      - DESTROYING
+      - FAILED
+      title: imageState
+      type: string
+    marketAppId:
+      description: Standard images market apps
+      enum:
+      - CPANEL_30
+      - CPANEL_100
+      - PLESK_WEB_PRO
+      - PLESK_WEB_ADMIN
+      title: marketAppId
+      type: string
+    flavour:
+      description: Standard images flavours
+      enum:
+      - ubuntu
+      - debian
+      - freebsd
+      - centos
+      - almalinux
+      - rockylinux
+      - archlinux
+      - windows
+      title: flavour
+      type: string
     imageDetails:
       allOf:
       - $ref: '#/components/schemas/image'
@@ -9231,9 +9672,11 @@ components:
             type: string
           version:
             example: "20.04"
+            nullable: true
             type: string
           architecture:
             example: x86_64
+            nullable: true
             type: string
           marketApps:
             items:
@@ -9350,6 +9793,27 @@ components:
         _metadata:
           $ref: '#/components/schemas/_metadata'
       type: object
+    createImageOpts:
+      properties:
+        name:
+          description: The name of the custom image to be created.
+          type: string
+        instanceId:
+          description: The id of the instance from which the custom image will be
+            created.
+          type: string
+      required:
+      - instanceId
+      - name
+      type: object
+    updateImageOpts:
+      properties:
+        name:
+          description: The name of the custom image to be updated.
+          type: string
+      required:
+      - name
+      type: object
     getMarketAppListResult:
       example:
         marketApps:
@@ -9395,10 +9859,65 @@ components:
       required:
       - isoId
       type: object
-    getReinstallOsListResult:
-      items:
-        $ref: '#/components/schemas/imageDetails'
-      type: array
+    getReinstallImageListResult:
+      example:
+        images:
+        - marketApps:
+          - LOADBALANCER
+          - LOADBALANCER
+          flavour: ubuntu
+          custom: true
+          stateReason: Could not find configured bucket
+          version: "20.04"
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          storageSize:
+            unit: GB
+            size: 0.8008281904610115
+          name: Ubuntu 20.04 LTS (x86_64)
+          id: UBUNTU_22_04_64BIT
+          state: READY
+          storageTypes:
+          - CENTRAL
+          - LOCAL
+          family: linux
+          region: null
+          minDiskSize: 604
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          architecture: x86_64
+        - marketApps:
+          - LOADBALANCER
+          - LOADBALANCER
+          flavour: ubuntu
+          custom: true
+          stateReason: Could not find configured bucket
+          version: "20.04"
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          storageSize:
+            unit: GB
+            size: 0.8008281904610115
+          name: Ubuntu 20.04 LTS (x86_64)
+          id: UBUNTU_22_04_64BIT
+          state: READY
+          storageTypes:
+          - CENTRAL
+          - LOCAL
+          family: linux
+          region: null
+          minDiskSize: 604
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          architecture: x86_64
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        images:
+          items:
+            $ref: '#/components/schemas/imageDetails'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      type: object
     reinstallInstanceOpts:
       properties:
         imageId:
@@ -9876,7 +10395,7 @@ components:
           - 12
           type: integer
         rootDiskStorageType:
-          $ref: '#/components/schemas/rootDiskStorageType'
+          $ref: '#/components/schemas/storageType'
         targetPort:
           description: The port that the registered instances listen to
           type: integer
@@ -10853,7 +11372,7 @@ components:
           minimum: 5
           type: integer
         rootDiskStorageType:
-          $ref: '#/components/schemas/rootDiskStorageType'
+          $ref: '#/components/schemas/storageType'
         billingType:
           description: "The billing type of the instance. PREPAID is used for monthly\
             \ commited instances, POSTPAID for hourly instances."

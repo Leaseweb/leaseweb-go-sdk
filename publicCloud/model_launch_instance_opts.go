@@ -33,7 +33,7 @@ type LaunchInstanceOpts struct {
 	BillingFrequency BillingFrequency `json:"billingFrequency"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize *int32 `json:"rootDiskSize,omitempty"`
-	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
+	RootDiskStorageType StorageType `json:"rootDiskStorageType"`
 	// Public SSH key to be installed into the instance. Must be used only on Linux/FreeBSD instances
 	SshKey *string `json:"sshKey,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -45,7 +45,7 @@ type _LaunchInstanceOpts LaunchInstanceOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchInstanceOpts(region RegionName, type_ TypeName, imageId string, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType) *LaunchInstanceOpts {
+func NewLaunchInstanceOpts(region RegionName, type_ TypeName, imageId string, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType StorageType) *LaunchInstanceOpts {
 	this := LaunchInstanceOpts{}
 	this.Region = region
 	this.Type = type_
@@ -306,9 +306,9 @@ func (o *LaunchInstanceOpts) SetRootDiskSize(v int32) {
 }
 
 // GetRootDiskStorageType returns the RootDiskStorageType field value
-func (o *LaunchInstanceOpts) GetRootDiskStorageType() RootDiskStorageType {
+func (o *LaunchInstanceOpts) GetRootDiskStorageType() StorageType {
 	if o == nil {
-		var ret RootDiskStorageType
+		var ret StorageType
 		return ret
 	}
 
@@ -317,7 +317,7 @@ func (o *LaunchInstanceOpts) GetRootDiskStorageType() RootDiskStorageType {
 
 // GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field value
 // and a boolean to check if the value has been set.
-func (o *LaunchInstanceOpts) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool) {
+func (o *LaunchInstanceOpts) GetRootDiskStorageTypeOk() (*StorageType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -325,7 +325,7 @@ func (o *LaunchInstanceOpts) GetRootDiskStorageTypeOk() (*RootDiskStorageType, b
 }
 
 // SetRootDiskStorageType sets field value
-func (o *LaunchInstanceOpts) SetRootDiskStorageType(v RootDiskStorageType) {
+func (o *LaunchInstanceOpts) SetRootDiskStorageType(v StorageType) {
 	o.RootDiskStorageType = v
 }
 

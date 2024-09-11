@@ -83,6 +83,20 @@ Available ISOs can be obtained using `/v1/isos`.
 	CreateAutoScalingGroupExecute(r ApiCreateAutoScalingGroupRequest) (*AutoScalingGroupDetails, *http.Response, error)
 
 	/*
+	CreateImage Create Custom Image
+
+	Create a Custom Image
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateImageRequest
+	*/
+	CreateImage(ctx context.Context) ApiCreateImageRequest
+
+	// CreateImageExecute executes the request
+	//  @return ImageDetails
+	CreateImageExecute(r ApiCreateImageRequest) (*ImageDetails, *http.Response, error)
+
+	/*
 	CreateLoadBalancerListener Create listener
 
 	Create listener
@@ -561,19 +575,19 @@ Allowed only one snapshot per instance.
 	GetRegionListExecute(r ApiGetRegionListRequest) (*GetRegionListResult, *http.Response, error)
 
 	/*
-	GetReinstallOsList List OSes available for reinstall
+	GetReinstallImageList List images available for reinstall
 
 	List Images available for reinstall
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param instanceId Instance's ID
-	@return ApiGetReinstallOsListRequest
+	@return ApiGetReinstallImageListRequest
 	*/
-	GetReinstallOsList(ctx context.Context, instanceId string) ApiGetReinstallOsListRequest
+	GetReinstallImageList(ctx context.Context, instanceId string) ApiGetReinstallImageListRequest
 
-	// GetReinstallOsListExecute executes the request
-	//  @return []ImageDetails
-	GetReinstallOsListExecute(r ApiGetReinstallOsListRequest) ([]ImageDetails, *http.Response, error)
+	// GetReinstallImageListExecute executes the request
+	//  @return GetReinstallImageListResult
+	GetReinstallImageListExecute(r ApiGetReinstallImageListRequest) (*GetReinstallImageListResult, *http.Response, error)
 
 	/*
 	GetSnapshot Get snapshot detail
@@ -901,6 +915,21 @@ You can obtain the new credential using the credentials endpoints
 	// UpdateCredentialExecute executes the request
 	//  @return UpdateCredentialResult
 	UpdateCredentialExecute(r ApiUpdateCredentialRequest) (*UpdateCredentialResult, *http.Response, error)
+
+	/*
+	UpdateImage Update Custom Image
+
+	Update a Custom Image
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param imageId Image's ID
+	@return ApiUpdateImageRequest
+	*/
+	UpdateImage(ctx context.Context, imageId string) ApiUpdateImageRequest
+
+	// UpdateImageExecute executes the request
+	//  @return ImageDetails
+	UpdateImageExecute(r ApiUpdateImageRequest) (*ImageDetails, *http.Response, error)
 
 	/*
 	UpdateInstance Update instance
@@ -1569,6 +1598,184 @@ func (a *PublicCloudAPIService) CreateAutoScalingGroupExecute(r ApiCreateAutoSca
 	}
 	// body params
 	localVarPostBody = r.createAutoScalingGroupOpts
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateImageRequest struct {
+	ctx context.Context
+	ApiService PublicCloudAPI
+	createImageOpts *CreateImageOpts
+}
+
+func (r ApiCreateImageRequest) CreateImageOpts(createImageOpts CreateImageOpts) ApiCreateImageRequest {
+	r.createImageOpts = &createImageOpts
+	return r
+}
+
+func (r ApiCreateImageRequest) Execute() (*ImageDetails, *http.Response, error) {
+	return r.ApiService.CreateImageExecute(r)
+}
+
+/*
+CreateImage Create Custom Image
+
+Create a Custom Image
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateImageRequest
+*/
+func (a *PublicCloudAPIService) CreateImage(ctx context.Context) ApiCreateImageRequest {
+	return ApiCreateImageRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ImageDetails
+func (a *PublicCloudAPIService) CreateImageExecute(r ApiCreateImageRequest) (*ImageDetails, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ImageDetails
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.CreateImage")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/images"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createImageOpts == nil {
+		return localVarReturnValue, nil, reportError("createImageOpts is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createImageOpts
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -5330,6 +5537,14 @@ type ApiGetImageListRequest struct {
 	ApiService PublicCloudAPI
 	limit *int32
 	offset *int32
+	custom *bool
+	standard *bool
+	state *ImageState
+	marketAppId *MarketAppId
+	storageType *StorageType
+	name *string
+	flavour *Flavour
+	region *string
 }
 
 // Limit the number of results returned.
@@ -5341,6 +5556,54 @@ func (r ApiGetImageListRequest) Limit(limit int32) ApiGetImageListRequest {
 // Return results starting from the given offset.
 func (r ApiGetImageListRequest) Offset(offset int32) ApiGetImageListRequest {
 	r.offset = &offset
+	return r
+}
+
+// Filters the list to include only custom images.
+func (r ApiGetImageListRequest) Custom(custom bool) ApiGetImageListRequest {
+	r.custom = &custom
+	return r
+}
+
+// Filters the list to include only standard images.
+func (r ApiGetImageListRequest) Standard(standard bool) ApiGetImageListRequest {
+	r.standard = &standard
+	return r
+}
+
+// Filters the list by the state of custom images.
+func (r ApiGetImageListRequest) State(state ImageState) ApiGetImageListRequest {
+	r.state = &state
+	return r
+}
+
+// Filters the list by the market app of standard images.
+func (r ApiGetImageListRequest) MarketAppId(marketAppId MarketAppId) ApiGetImageListRequest {
+	r.marketAppId = &marketAppId
+	return r
+}
+
+// Filters the list by the market app of standard images.
+func (r ApiGetImageListRequest) StorageType(storageType StorageType) ApiGetImageListRequest {
+	r.storageType = &storageType
+	return r
+}
+
+// Filters the list by the name of images.
+func (r ApiGetImageListRequest) Name(name string) ApiGetImageListRequest {
+	r.name = &name
+	return r
+}
+
+// Filters the list by the flavour of standard images.
+func (r ApiGetImageListRequest) Flavour(flavour Flavour) ApiGetImageListRequest {
+	r.flavour = &flavour
+	return r
+}
+
+// Available regions can be found using the List Regions endpoint.
+func (r ApiGetImageListRequest) Region(region string) ApiGetImageListRequest {
+	r.region = &region
 	return r
 }
 
@@ -5387,6 +5650,30 @@ func (a *PublicCloudAPIService) GetImageListExecute(r ApiGetImageListRequest) (*
 	}
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+	}
+	if r.custom != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "custom", r.custom, "")
+	}
+	if r.standard != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "standard", r.standard, "")
+	}
+	if r.state != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "")
+	}
+	if r.marketAppId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "marketAppId", r.marketAppId, "")
+	}
+	if r.storageType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "storageType", r.storageType, "")
+	}
+	if r.name != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
+	}
+	if r.flavour != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "flavour", r.flavour, "")
+	}
+	if r.region != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7766,27 +8053,55 @@ func (a *PublicCloudAPIService) GetRegionListExecute(r ApiGetRegionListRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReinstallOsListRequest struct {
+type ApiGetReinstallImageListRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
 	instanceId string
+	limit *int32
+	offset *int32
+	custom *bool
+	standard *bool
 }
 
-func (r ApiGetReinstallOsListRequest) Execute() ([]ImageDetails, *http.Response, error) {
-	return r.ApiService.GetReinstallOsListExecute(r)
+// Limit the number of results returned.
+func (r ApiGetReinstallImageListRequest) Limit(limit int32) ApiGetReinstallImageListRequest {
+	r.limit = &limit
+	return r
+}
+
+// Return results starting from the given offset.
+func (r ApiGetReinstallImageListRequest) Offset(offset int32) ApiGetReinstallImageListRequest {
+	r.offset = &offset
+	return r
+}
+
+// Filters the list to include only custom images.
+func (r ApiGetReinstallImageListRequest) Custom(custom bool) ApiGetReinstallImageListRequest {
+	r.custom = &custom
+	return r
+}
+
+// Filters the list to include only standard images.
+func (r ApiGetReinstallImageListRequest) Standard(standard bool) ApiGetReinstallImageListRequest {
+	r.standard = &standard
+	return r
+}
+
+func (r ApiGetReinstallImageListRequest) Execute() (*GetReinstallImageListResult, *http.Response, error) {
+	return r.ApiService.GetReinstallImageListExecute(r)
 }
 
 /*
-GetReinstallOsList List OSes available for reinstall
+GetReinstallImageList List images available for reinstall
 
 List Images available for reinstall
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param instanceId Instance's ID
- @return ApiGetReinstallOsListRequest
+ @return ApiGetReinstallImageListRequest
 */
-func (a *PublicCloudAPIService) GetReinstallOsList(ctx context.Context, instanceId string) ApiGetReinstallOsListRequest {
-	return ApiGetReinstallOsListRequest{
+func (a *PublicCloudAPIService) GetReinstallImageList(ctx context.Context, instanceId string) ApiGetReinstallImageListRequest {
+	return ApiGetReinstallImageListRequest{
 		ApiService: a,
 		ctx: ctx,
 		instanceId: instanceId,
@@ -7794,16 +8109,16 @@ func (a *PublicCloudAPIService) GetReinstallOsList(ctx context.Context, instance
 }
 
 // Execute executes the request
-//  @return []ImageDetails
-func (a *PublicCloudAPIService) GetReinstallOsListExecute(r ApiGetReinstallOsListRequest) ([]ImageDetails, *http.Response, error) {
+//  @return GetReinstallImageListResult
+func (a *PublicCloudAPIService) GetReinstallImageListExecute(r ApiGetReinstallImageListRequest) (*GetReinstallImageListResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []ImageDetails
+		localVarReturnValue  *GetReinstallImageListResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetReinstallOsList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetReinstallImageList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -7815,6 +8130,18 @@ func (a *PublicCloudAPIService) GetReinstallOsListExecute(r ApiGetReinstallOsLis
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+	}
+	if r.custom != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "custom", r.custom, "")
+	}
+	if r.standard != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "standard", r.standard, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11700,6 +12027,188 @@ func (a *PublicCloudAPIService) UpdateCredentialExecute(r ApiUpdateCredentialReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateImageRequest struct {
+	ctx context.Context
+	ApiService PublicCloudAPI
+	imageId string
+	updateImageOpts *UpdateImageOpts
+}
+
+func (r ApiUpdateImageRequest) UpdateImageOpts(updateImageOpts UpdateImageOpts) ApiUpdateImageRequest {
+	r.updateImageOpts = &updateImageOpts
+	return r
+}
+
+func (r ApiUpdateImageRequest) Execute() (*ImageDetails, *http.Response, error) {
+	return r.ApiService.UpdateImageExecute(r)
+}
+
+/*
+UpdateImage Update Custom Image
+
+Update a Custom Image
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param imageId Image's ID
+ @return ApiUpdateImageRequest
+*/
+func (a *PublicCloudAPIService) UpdateImage(ctx context.Context, imageId string) ApiUpdateImageRequest {
+	return ApiUpdateImageRequest{
+		ApiService: a,
+		ctx: ctx,
+		imageId: imageId,
+	}
+}
+
+// Execute executes the request
+//  @return ImageDetails
+func (a *PublicCloudAPIService) UpdateImageExecute(r ApiUpdateImageRequest) (*ImageDetails, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ImageDetails
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.UpdateImage")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/images/{imageId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"imageId"+"}", url.PathEscape(parameterValueToString(r.imageId, "imageId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateImageOpts == nil {
+		return localVarReturnValue, nil, reportError("updateImageOpts is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateImageOpts
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

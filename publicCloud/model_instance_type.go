@@ -23,7 +23,7 @@ type InstanceType struct {
 	Name TypeName `json:"name"`
 	Resources Resources `json:"resources"`
 	// The supported storage types for the instance type
-	StorageTypes []RootDiskStorageType `json:"storageTypes"`
+	StorageTypes []StorageType `json:"storageTypes"`
 	Prices Prices `json:"prices"`
 	AdditionalProperties map[string]interface{}
 }
@@ -34,7 +34,7 @@ type _InstanceType InstanceType
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceType(name TypeName, resources Resources, storageTypes []RootDiskStorageType, prices Prices) *InstanceType {
+func NewInstanceType(name TypeName, resources Resources, storageTypes []StorageType, prices Prices) *InstanceType {
 	this := InstanceType{}
 	this.Name = name
 	this.Resources = resources
@@ -100,10 +100,10 @@ func (o *InstanceType) SetResources(v Resources) {
 }
 
 // GetStorageTypes returns the StorageTypes field value
-// If the value is explicit nil, the zero value for []RootDiskStorageType will be returned
-func (o *InstanceType) GetStorageTypes() []RootDiskStorageType {
+// If the value is explicit nil, the zero value for []StorageType will be returned
+func (o *InstanceType) GetStorageTypes() []StorageType {
 	if o == nil {
-		var ret []RootDiskStorageType
+		var ret []StorageType
 		return ret
 	}
 
@@ -113,7 +113,7 @@ func (o *InstanceType) GetStorageTypes() []RootDiskStorageType {
 // GetStorageTypesOk returns a tuple with the StorageTypes field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InstanceType) GetStorageTypesOk() ([]RootDiskStorageType, bool) {
+func (o *InstanceType) GetStorageTypesOk() ([]StorageType, bool) {
 	if o == nil || IsNil(o.StorageTypes) {
 		return nil, false
 	}
@@ -121,7 +121,7 @@ func (o *InstanceType) GetStorageTypesOk() ([]RootDiskStorageType, bool) {
 }
 
 // SetStorageTypes sets field value
-func (o *InstanceType) SetStorageTypes(v []RootDiskStorageType) {
+func (o *InstanceType) SetStorageTypes(v []StorageType) {
 	o.StorageTypes = v
 }
 

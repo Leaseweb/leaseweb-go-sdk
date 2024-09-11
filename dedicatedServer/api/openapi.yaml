@@ -1452,7 +1452,7 @@ paths:
                   currency: EUR
                   customerId: "32923828192"
                   deliveryStatus: ACTIVE
-                  endsAt: 2017-10-01T01:00:00+0100
+                  endsAt: 2023-01-01T00:00:00Z
                   id: "674382"
                   networkTraffic:
                     datatrafficLimit: 100
@@ -1467,7 +1467,7 @@ paths:
                   - currency: EUR
                     name: WINDOWS_2012_R2_SERVER
                     price: 12.12
-                  startsAt: 2014-01-01T01:00:00+0100
+                  startsAt: 2010-01-01T00:00:00Z
                 featureAvailability:
                   automation: true
                   ipmiReboot: false

@@ -37,8 +37,8 @@ type ImageDetails struct {
 	CreatedAt NullableTime `json:"createdAt"`
 	// Date when the image was updated
 	UpdatedAt NullableTime `json:"updatedAt"`
-	Version string `json:"version"`
-	Architecture string `json:"architecture"`
+	Version NullableString `json:"version"`
+	Architecture NullableString `json:"architecture"`
 	MarketApps []string `json:"marketApps"`
 	// The supported storage types for the instance type
 	StorageTypes []string `json:"storageTypes"`
@@ -53,7 +53,7 @@ type _ImageDetails ImageDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string, minDiskSize NullableInt32) *ImageDetails {
+func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version NullableString, architecture NullableString, marketApps []string, storageTypes []string, minDiskSize NullableInt32) *ImageDetails {
 	this := ImageDetails{}
 	this.Id = id
 	this.Name = name
@@ -359,51 +359,55 @@ func (o *ImageDetails) SetUpdatedAt(v time.Time) {
 }
 
 // GetVersion returns the Version field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ImageDetails) GetVersion() string {
-	if o == nil {
+	if o == nil || o.Version.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Version
+	return *o.Version.Get()
 }
 
 // GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ImageDetails) GetVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Version, true
+	return o.Version.Get(), o.Version.IsSet()
 }
 
 // SetVersion sets field value
 func (o *ImageDetails) SetVersion(v string) {
-	o.Version = v
+	o.Version.Set(&v)
 }
 
 // GetArchitecture returns the Architecture field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ImageDetails) GetArchitecture() string {
-	if o == nil {
+	if o == nil || o.Architecture.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Architecture
+	return *o.Architecture.Get()
 }
 
 // GetArchitectureOk returns a tuple with the Architecture field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ImageDetails) GetArchitectureOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Architecture, true
+	return o.Architecture.Get(), o.Architecture.IsSet()
 }
 
 // SetArchitecture sets field value
 func (o *ImageDetails) SetArchitecture(v string) {
-	o.Architecture = v
+	o.Architecture.Set(&v)
 }
 
 // GetMarketApps returns the MarketApps field value
@@ -501,8 +505,8 @@ func (o ImageDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["region"] = o.Region.Get()
 	toSerialize["createdAt"] = o.CreatedAt.Get()
 	toSerialize["updatedAt"] = o.UpdatedAt.Get()
-	toSerialize["version"] = o.Version
-	toSerialize["architecture"] = o.Architecture
+	toSerialize["version"] = o.Version.Get()
+	toSerialize["architecture"] = o.Architecture.Get()
 	toSerialize["marketApps"] = o.MarketApps
 	toSerialize["storageTypes"] = o.StorageTypes
 	toSerialize["minDiskSize"] = o.MinDiskSize.Get()

@@ -32,7 +32,7 @@ type ExpenseResultInstance struct {
 	EndedAt *time.Time `json:"endedAt,omitempty"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize *int32 `json:"rootDiskSize,omitempty"`
-	RootDiskStorageType *RootDiskStorageType `json:"rootDiskStorageType,omitempty"`
+	RootDiskStorageType *StorageType `json:"rootDiskStorageType,omitempty"`
 	// The billing type of the instance. PREPAID is used for monthly commited instances, POSTPAID for hourly instances.
 	BillingType *string `json:"billingType,omitempty"`
 	// The number of hours the instance has been running.
@@ -290,9 +290,9 @@ func (o *ExpenseResultInstance) SetRootDiskSize(v int32) {
 }
 
 // GetRootDiskStorageType returns the RootDiskStorageType field value if set, zero value otherwise.
-func (o *ExpenseResultInstance) GetRootDiskStorageType() RootDiskStorageType {
+func (o *ExpenseResultInstance) GetRootDiskStorageType() StorageType {
 	if o == nil || IsNil(o.RootDiskStorageType) {
-		var ret RootDiskStorageType
+		var ret StorageType
 		return ret
 	}
 	return *o.RootDiskStorageType
@@ -300,7 +300,7 @@ func (o *ExpenseResultInstance) GetRootDiskStorageType() RootDiskStorageType {
 
 // GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExpenseResultInstance) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool) {
+func (o *ExpenseResultInstance) GetRootDiskStorageTypeOk() (*StorageType, bool) {
 	if o == nil || IsNil(o.RootDiskStorageType) {
 		return nil, false
 	}
@@ -316,8 +316,8 @@ func (o *ExpenseResultInstance) HasRootDiskStorageType() bool {
 	return false
 }
 
-// SetRootDiskStorageType gets a reference to the given RootDiskStorageType and assigns it to the RootDiskStorageType field.
-func (o *ExpenseResultInstance) SetRootDiskStorageType(v RootDiskStorageType) {
+// SetRootDiskStorageType gets a reference to the given StorageType and assigns it to the RootDiskStorageType field.
+func (o *ExpenseResultInstance) SetRootDiskStorageType(v StorageType) {
 	o.RootDiskStorageType = &v
 }
 

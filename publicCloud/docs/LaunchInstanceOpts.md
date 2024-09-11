@@ -13,14 +13,14 @@ Name | Type | Description | Notes
 **ContractTerm** | [**ContractTerm**](ContractTerm.md) |  | 
 **BillingFrequency** | [**BillingFrequency**](BillingFrequency.md) |  | 
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
-**RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
+**RootDiskStorageType** | [**StorageType**](StorageType.md) |  | 
 **SshKey** | Pointer to **string** | Public SSH key to be installed into the instance. Must be used only on Linux/FreeBSD instances | [optional] 
 
 ## Methods
 
 ### NewLaunchInstanceOpts
 
-`func NewLaunchInstanceOpts(region RegionName, type_ TypeName, imageId string, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType RootDiskStorageType, ) *LaunchInstanceOpts`
+`func NewLaunchInstanceOpts(region RegionName, type_ TypeName, imageId string, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, rootDiskStorageType StorageType, ) *LaunchInstanceOpts`
 
 NewLaunchInstanceOpts instantiates a new LaunchInstanceOpts object
 This constructor will assign default values to properties that have it defined,
@@ -232,20 +232,20 @@ HasRootDiskSize returns a boolean if a field has been set.
 
 ### GetRootDiskStorageType
 
-`func (o *LaunchInstanceOpts) GetRootDiskStorageType() RootDiskStorageType`
+`func (o *LaunchInstanceOpts) GetRootDiskStorageType() StorageType`
 
 GetRootDiskStorageType returns the RootDiskStorageType field if non-nil, zero value otherwise.
 
 ### GetRootDiskStorageTypeOk
 
-`func (o *LaunchInstanceOpts) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool)`
+`func (o *LaunchInstanceOpts) GetRootDiskStorageTypeOk() (*StorageType, bool)`
 
 GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRootDiskStorageType
 
-`func (o *LaunchInstanceOpts) SetRootDiskStorageType(v RootDiskStorageType)`
+`func (o *LaunchInstanceOpts) SetRootDiskStorageType(v StorageType)`
 
 SetRootDiskStorageType sets RootDiskStorageType field to given value.
 

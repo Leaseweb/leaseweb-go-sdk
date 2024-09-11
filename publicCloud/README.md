@@ -86,6 +86,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**AttachIso**](docs/PublicCloudAPI.md#attachiso) | **Post** /instances/{instanceId}/attachIso | Attach ISO to instance
 *PublicCloudAPI* | [**CancelInstanceTermination**](docs/PublicCloudAPI.md#cancelinstancetermination) | **Post** /instances/{instanceId}/cancelTermination | Cancel instance termination
 *PublicCloudAPI* | [**CreateAutoScalingGroup**](docs/PublicCloudAPI.md#createautoscalinggroup) | **Post** /autoScalingGroups | Create Auto Scaling Group
+*PublicCloudAPI* | [**CreateImage**](docs/PublicCloudAPI.md#createimage) | **Post** /images | Create Custom Image
 *PublicCloudAPI* | [**CreateLoadBalancerListener**](docs/PublicCloudAPI.md#createloadbalancerlistener) | **Post** /loadBalancers/{loadBalancerId}/listeners | Create listener
 *PublicCloudAPI* | [**CreateSnapshot**](docs/PublicCloudAPI.md#createsnapshot) | **Post** /instances/{instanceId}/snapshots | Create instance snapshot
 *PublicCloudAPI* | [**DeleteAutoScalingGroup**](docs/PublicCloudAPI.md#deleteautoscalinggroup) | **Delete** /autoScalingGroups/{autoScalingGroupId} | Delete Auto Scaling Group
@@ -119,7 +120,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**GetLoadBalancerTargetList**](docs/PublicCloudAPI.md#getloadbalancertargetlist) | **Get** /loadBalancers/{loadBalancerId}/targets | List registered targets
 *PublicCloudAPI* | [**GetMarketAppList**](docs/PublicCloudAPI.md#getmarketapplist) | **Get** /marketApps | Get marketplace apps
 *PublicCloudAPI* | [**GetRegionList**](docs/PublicCloudAPI.md#getregionlist) | **Get** /regions | List regions
-*PublicCloudAPI* | [**GetReinstallOsList**](docs/PublicCloudAPI.md#getreinstalloslist) | **Get** /instances/{instanceId}/reinstall/images | List OSes available for reinstall
+*PublicCloudAPI* | [**GetReinstallImageList**](docs/PublicCloudAPI.md#getreinstallimagelist) | **Get** /instances/{instanceId}/reinstall/images | List images available for reinstall
 *PublicCloudAPI* | [**GetSnapshot**](docs/PublicCloudAPI.md#getsnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
 *PublicCloudAPI* | [**GetSnapshotList**](docs/PublicCloudAPI.md#getsnapshotlist) | **Get** /instances/{instanceId}/snapshots | List snapshots
 *PublicCloudAPI* | [**GetUpdateInstanceTypeList**](docs/PublicCloudAPI.md#getupdateinstancetypelist) | **Get** /instances/{instanceId}/instanceTypesUpdate | List available instance types for update
@@ -141,6 +142,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**TerminateLoadBalancer**](docs/PublicCloudAPI.md#terminateloadbalancer) | **Delete** /loadBalancers/{loadBalancerId} | Delete load balancer
 *PublicCloudAPI* | [**UpdateAutoScalingGroup**](docs/PublicCloudAPI.md#updateautoscalinggroup) | **Put** /autoScalingGroups/{autoScalingGroupId} | Update Auto Scaling Group
 *PublicCloudAPI* | [**UpdateCredential**](docs/PublicCloudAPI.md#updatecredential) | **Put** /instances/{instanceId}/credentials/{type}/{username} | Update credentials
+*PublicCloudAPI* | [**UpdateImage**](docs/PublicCloudAPI.md#updateimage) | **Put** /images/{imageId} | Update Custom Image
 *PublicCloudAPI* | [**UpdateInstance**](docs/PublicCloudAPI.md#updateinstance) | **Put** /instances/{instanceId} | Update instance
 *PublicCloudAPI* | [**UpdateIp**](docs/PublicCloudAPI.md#updateip) | **Put** /instances/{instanceId}/ips/{ip} | Update IP
 *PublicCloudAPI* | [**UpdateLoadBalancer**](docs/PublicCloudAPI.md#updateloadbalancer) | **Put** /loadBalancers/{loadBalancerId} | Update load balancer
@@ -172,12 +174,14 @@ Class | Method | HTTP request | Description
  - [CpuMetricsMetrics](docs/CpuMetricsMetrics.md)
  - [CpuMetricsValue](docs/CpuMetricsValue.md)
  - [CreateAutoScalingGroupOpts](docs/CreateAutoScalingGroupOpts.md)
+ - [CreateImageOpts](docs/CreateImageOpts.md)
  - [Credential](docs/Credential.md)
  - [CredentialType](docs/CredentialType.md)
  - [DataTrafficMetrics](docs/DataTrafficMetrics.md)
  - [Ddos](docs/Ddos.md)
  - [ErrorResult](docs/ErrorResult.md)
  - [ExpenseResultInstance](docs/ExpenseResultInstance.md)
+ - [Flavour](docs/Flavour.md)
  - [GetAutoScalingGroupInstanceListResult](docs/GetAutoScalingGroupInstanceListResult.md)
  - [GetAutoScalingGroupListResult](docs/GetAutoScalingGroupListResult.md)
  - [GetConsoleAccessToInstanceResult](docs/GetConsoleAccessToInstanceResult.md)
@@ -195,11 +199,13 @@ Class | Method | HTTP request | Description
  - [GetLoadBalancerTargetListResult](docs/GetLoadBalancerTargetListResult.md)
  - [GetMarketAppListResult](docs/GetMarketAppListResult.md)
  - [GetRegionListResult](docs/GetRegionListResult.md)
+ - [GetReinstallImageListResult](docs/GetReinstallImageListResult.md)
  - [GetSnapshotListResult](docs/GetSnapshotListResult.md)
  - [HealthCheck](docs/HealthCheck.md)
  - [HealthCheckStatus](docs/HealthCheckStatus.md)
  - [Image](docs/Image.md)
  - [ImageDetails](docs/ImageDetails.md)
+ - [ImageState](docs/ImageState.md)
  - [Instance](docs/Instance.md)
  - [InstanceBase](docs/InstanceBase.md)
  - [InstanceDetails](docs/InstanceDetails.md)
@@ -219,6 +225,7 @@ Class | Method | HTTP request | Description
  - [LoadBalancerTargetOpt](docs/LoadBalancerTargetOpt.md)
  - [LoadBalancerTargetOpts](docs/LoadBalancerTargetOpts.md)
  - [MarketApp](docs/MarketApp.md)
+ - [MarketAppId](docs/MarketAppId.md)
  - [Memory](docs/Memory.md)
  - [Metadata](docs/Metadata.md)
  - [NetworkSpeed](docs/NetworkSpeed.md)
@@ -233,12 +240,12 @@ Class | Method | HTTP request | Description
  - [RegisterAutoScalingGroupLoadBalancerOpts](docs/RegisterAutoScalingGroupLoadBalancerOpts.md)
  - [ReinstallInstanceOpts](docs/ReinstallInstanceOpts.md)
  - [Resources](docs/Resources.md)
- - [RootDiskStorageType](docs/RootDiskStorageType.md)
  - [Snapshot](docs/Snapshot.md)
  - [State](docs/State.md)
  - [StickySession](docs/StickySession.md)
  - [Storage](docs/Storage.md)
  - [StorageSize](docs/StorageSize.md)
+ - [StorageType](docs/StorageType.md)
  - [StoreCredentialOpts](docs/StoreCredentialOpts.md)
  - [StoreCredentialResult](docs/StoreCredentialResult.md)
  - [Summary](docs/Summary.md)
@@ -253,11 +260,11 @@ Class | Method | HTTP request | Description
  - [UpdateAutoScalingGroupOpts](docs/UpdateAutoScalingGroupOpts.md)
  - [UpdateCredentialOpts](docs/UpdateCredentialOpts.md)
  - [UpdateCredentialResult](docs/UpdateCredentialResult.md)
+ - [UpdateImageOpts](docs/UpdateImageOpts.md)
  - [UpdateInstanceOpts](docs/UpdateInstanceOpts.md)
  - [UpdateIpOpts](docs/UpdateIpOpts.md)
  - [UpdateLoadBalancerOpts](docs/UpdateLoadBalancerOpts.md)
  - [Values](docs/Values.md)
- - [Volume](docs/Volume.md)
 
 
 ## Documentation For Authorization

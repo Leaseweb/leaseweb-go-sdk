@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **HasPublicIpV4** | **bool** |  | 
 **IncludesPrivateNetwork** | **bool** |  | 
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
-**RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
+**RootDiskStorageType** | [**StorageType**](StorageType.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 **Image** | [**Image**](Image.md) |  | 
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceBase
 
-`func NewInstanceBase(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, ) *InstanceBase`
+`func NewInstanceBase(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType StorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, ) *InstanceBase`
 
 NewInstanceBase instantiates a new InstanceBase object
 This constructor will assign default values to properties that have it defined,
@@ -312,20 +312,20 @@ SetRootDiskSize sets RootDiskSize field to given value.
 
 ### GetRootDiskStorageType
 
-`func (o *InstanceBase) GetRootDiskStorageType() RootDiskStorageType`
+`func (o *InstanceBase) GetRootDiskStorageType() StorageType`
 
 GetRootDiskStorageType returns the RootDiskStorageType field if non-nil, zero value otherwise.
 
 ### GetRootDiskStorageTypeOk
 
-`func (o *InstanceBase) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool)`
+`func (o *InstanceBase) GetRootDiskStorageTypeOk() (*StorageType, bool)`
 
 GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRootDiskStorageType
 
-`func (o *InstanceBase) SetRootDiskStorageType(v RootDiskStorageType)`
+`func (o *InstanceBase) SetRootDiskStorageType(v StorageType)`
 
 SetRootDiskStorageType sets RootDiskStorageType field to given value.
 

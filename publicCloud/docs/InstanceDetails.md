@@ -16,20 +16,19 @@ Name | Type | Description | Notes
 **HasPublicIpV4** | **bool** |  | 
 **IncludesPrivateNetwork** | **bool** |  | 
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
-**RootDiskStorageType** | [**RootDiskStorageType**](RootDiskStorageType.md) |  | 
+**RootDiskStorageType** | [**StorageType**](StorageType.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 **Image** | [**Image**](Image.md) |  | 
 **Iso** | [**NullableIso**](Iso.md) |  | 
 **PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
 **Ips** | [**[]IpDetails**](IpDetails.md) |  | 
-**Volume** | [**NullableVolume**](Volume.md) |  | 
 
 ## Methods
 
 ### NewInstanceDetails
 
-`func NewInstanceDetails(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, iso NullableIso, privateNetwork NullablePrivateNetwork, ips []IpDetails, volume NullableVolume, ) *InstanceDetails`
+`func NewInstanceDetails(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType StorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, iso NullableIso, privateNetwork NullablePrivateNetwork, ips []IpDetails, ) *InstanceDetails`
 
 NewInstanceDetails instantiates a new InstanceDetails object
 This constructor will assign default values to properties that have it defined,
@@ -316,20 +315,20 @@ SetRootDiskSize sets RootDiskSize field to given value.
 
 ### GetRootDiskStorageType
 
-`func (o *InstanceDetails) GetRootDiskStorageType() RootDiskStorageType`
+`func (o *InstanceDetails) GetRootDiskStorageType() StorageType`
 
 GetRootDiskStorageType returns the RootDiskStorageType field if non-nil, zero value otherwise.
 
 ### GetRootDiskStorageTypeOk
 
-`func (o *InstanceDetails) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool)`
+`func (o *InstanceDetails) GetRootDiskStorageTypeOk() (*StorageType, bool)`
 
 GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRootDiskStorageType
 
-`func (o *InstanceDetails) SetRootDiskStorageType(v RootDiskStorageType)`
+`func (o *InstanceDetails) SetRootDiskStorageType(v StorageType)`
 
 SetRootDiskStorageType sets RootDiskStorageType field to given value.
 
@@ -484,36 +483,6 @@ and a boolean to check if the value has been set.
 SetIps sets Ips field to given value.
 
 
-### GetVolume
-
-`func (o *InstanceDetails) GetVolume() Volume`
-
-GetVolume returns the Volume field if non-nil, zero value otherwise.
-
-### GetVolumeOk
-
-`func (o *InstanceDetails) GetVolumeOk() (*Volume, bool)`
-
-GetVolumeOk returns a tuple with the Volume field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVolume
-
-`func (o *InstanceDetails) SetVolume(v Volume)`
-
-SetVolume sets Volume field to given value.
-
-
-### SetVolumeNil
-
-`func (o *InstanceDetails) SetVolumeNil(b bool)`
-
- SetVolumeNil sets the value for Volume to be an explicit nil
-
-### UnsetVolume
-`func (o *InstanceDetails) UnsetVolume()`
-
-UnsetVolume ensures that no value is present for Volume, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

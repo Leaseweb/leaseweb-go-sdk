@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**AttachIso**](PublicCloudAPI.md#AttachIso) | **Post** /instances/{instanceId}/attachIso | Attach ISO to instance
 [**CancelInstanceTermination**](PublicCloudAPI.md#CancelInstanceTermination) | **Post** /instances/{instanceId}/cancelTermination | Cancel instance termination
 [**CreateAutoScalingGroup**](PublicCloudAPI.md#CreateAutoScalingGroup) | **Post** /autoScalingGroups | Create Auto Scaling Group
+[**CreateImage**](PublicCloudAPI.md#CreateImage) | **Post** /images | Create Custom Image
 [**CreateLoadBalancerListener**](PublicCloudAPI.md#CreateLoadBalancerListener) | **Post** /loadBalancers/{loadBalancerId}/listeners | Create listener
 [**CreateSnapshot**](PublicCloudAPI.md#CreateSnapshot) | **Post** /instances/{instanceId}/snapshots | Create instance snapshot
 [**DeleteAutoScalingGroup**](PublicCloudAPI.md#DeleteAutoScalingGroup) | **Delete** /autoScalingGroups/{autoScalingGroupId} | Delete Auto Scaling Group
@@ -41,7 +42,7 @@ Method | HTTP request | Description
 [**GetLoadBalancerTargetList**](PublicCloudAPI.md#GetLoadBalancerTargetList) | **Get** /loadBalancers/{loadBalancerId}/targets | List registered targets
 [**GetMarketAppList**](PublicCloudAPI.md#GetMarketAppList) | **Get** /marketApps | Get marketplace apps
 [**GetRegionList**](PublicCloudAPI.md#GetRegionList) | **Get** /regions | List regions
-[**GetReinstallOsList**](PublicCloudAPI.md#GetReinstallOsList) | **Get** /instances/{instanceId}/reinstall/images | List OSes available for reinstall
+[**GetReinstallImageList**](PublicCloudAPI.md#GetReinstallImageList) | **Get** /instances/{instanceId}/reinstall/images | List images available for reinstall
 [**GetSnapshot**](PublicCloudAPI.md#GetSnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
 [**GetSnapshotList**](PublicCloudAPI.md#GetSnapshotList) | **Get** /instances/{instanceId}/snapshots | List snapshots
 [**GetUpdateInstanceTypeList**](PublicCloudAPI.md#GetUpdateInstanceTypeList) | **Get** /instances/{instanceId}/instanceTypesUpdate | List available instance types for update
@@ -63,6 +64,7 @@ Method | HTTP request | Description
 [**TerminateLoadBalancer**](PublicCloudAPI.md#TerminateLoadBalancer) | **Delete** /loadBalancers/{loadBalancerId} | Delete load balancer
 [**UpdateAutoScalingGroup**](PublicCloudAPI.md#UpdateAutoScalingGroup) | **Put** /autoScalingGroups/{autoScalingGroupId} | Update Auto Scaling Group
 [**UpdateCredential**](PublicCloudAPI.md#UpdateCredential) | **Put** /instances/{instanceId}/credentials/{type}/{username} | Update credentials
+[**UpdateImage**](PublicCloudAPI.md#UpdateImage) | **Put** /images/{imageId} | Update Custom Image
 [**UpdateInstance**](PublicCloudAPI.md#UpdateInstance) | **Put** /instances/{instanceId} | Update instance
 [**UpdateIp**](PublicCloudAPI.md#UpdateIp) | **Put** /instances/{instanceId}/ips/{ip} | Update IP
 [**UpdateLoadBalancer**](PublicCloudAPI.md#UpdateLoadBalancer) | **Put** /loadBalancers/{loadBalancerId} | Update load balancer
@@ -327,6 +329,72 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AutoScalingGroupDetails**](AutoScalingGroupDetails.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateImage
+
+> ImageDetails CreateImage(ctx).CreateImageOpts(createImageOpts).Execute()
+
+Create Custom Image
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	createImageOpts := *openapiclient.NewCreateImageOpts("Name_example", "InstanceId_example") // CreateImageOpts | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.CreateImage(context.Background()).CreateImageOpts(createImageOpts).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.CreateImage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateImage`: ImageDetails
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.CreateImage`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateImageRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createImageOpts** | [**CreateImageOpts**](CreateImageOpts.md) |  | 
+
+### Return type
+
+[**ImageDetails**](ImageDetails.md)
 
 ### Authorization
 
@@ -1780,7 +1848,7 @@ Name | Type | Description  | Notes
 
 ## GetImageList
 
-> GetImageListResult GetImageList(ctx).Limit(limit).Offset(offset).Execute()
+> GetImageListResult GetImageList(ctx).Limit(limit).Offset(offset).Custom(custom).Standard(standard).State(state).MarketAppId(marketAppId).StorageType(storageType).Name(name).Flavour(flavour).Region(region).Execute()
 
 List all available Images
 
@@ -1799,10 +1867,18 @@ import (
 func main() {
 	limit := int32(20) // int32 | Limit the number of results returned. (optional)
 	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
+	custom := true // bool | Filters the list to include only custom images. (optional)
+	standard := true // bool | Filters the list to include only standard images. (optional)
+	state := openapiclient.imageState("CREATING") // ImageState | Filters the list by the state of custom images. (optional)
+	marketAppId := openapiclient.marketAppId("CPANEL_30") // MarketAppId | Filters the list by the market app of standard images. (optional)
+	storageType := openapiclient.storageType("LOCAL") // StorageType | Filters the list by the market app of standard images. (optional)
+	name := "Ubuntu 20.04 LTS (x86_64)" // string | Filters the list by the name of images. (optional)
+	flavour := openapiclient.flavour("ubuntu") // Flavour | Filters the list by the flavour of standard images. (optional)
+	region := "eu-west-3" // string | Available regions can be found using the List Regions endpoint. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.GetImageList(context.Background()).Limit(limit).Offset(offset).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.GetImageList(context.Background()).Limit(limit).Offset(offset).Custom(custom).Standard(standard).State(state).MarketAppId(marketAppId).StorageType(storageType).Name(name).Flavour(flavour).Region(region).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetImageList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1825,6 +1901,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int32** | Limit the number of results returned. | 
  **offset** | **int32** | Return results starting from the given offset. | 
+ **custom** | **bool** | Filters the list to include only custom images. | 
+ **standard** | **bool** | Filters the list to include only standard images. | 
+ **state** | [**ImageState**](ImageState.md) | Filters the list by the state of custom images. | 
+ **marketAppId** | [**MarketAppId**](MarketAppId.md) | Filters the list by the market app of standard images. | 
+ **storageType** | [**StorageType**](StorageType.md) | Filters the list by the market app of standard images. | 
+ **name** | **string** | Filters the list by the name of images. | 
+ **flavour** | [**Flavour**](Flavour.md) | Filters the list by the flavour of standard images. | 
+ **region** | **string** | Available regions can be found using the List Regions endpoint. | 
 
 ### Return type
 
@@ -1945,7 +2029,7 @@ func main() {
 	imageId := "UBUNTU_22_04_64BIT" // string | Available Images can be obtained using `/v1/images`. (optional)
 	state := openapiclient.state("CREATING") // State | The instance's current state(s), separated by commas. (optional)
 	region := openapiclient.regionName("eu-west-3") // RegionName | Available regions can be obtained using `/v1/regions` (optional)
-	type_ := *openapiclient.NewInstanceType(openapiclient.typeName("lsw.m3.large"), *openapiclient.NewResources(*openapiclient.NewCpu(int32(2), "vCPU"), *openapiclient.NewMemory(float32(3.75), "GiB"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps")), []openapiclient.RootDiskStorageType{openapiclient.rootDiskStorageType("LOCAL")}, *openapiclient.NewPrices("USD", "$", *openapiclient.NewPrice("0.00004", "0.03000"), *openapiclient.NewStorage(*openapiclient.NewPrice("0.00004", "0.03000"), ))) // InstanceType | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
+	type_ := *openapiclient.NewInstanceType(openapiclient.typeName("lsw.m3.large"), *openapiclient.NewResources(*openapiclient.NewCpu(int32(2), "vCPU"), *openapiclient.NewMemory(float32(3.75), "GiB"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps")), []openapiclient.StorageType{openapiclient.storageType("LOCAL")}, *openapiclient.NewPrices("USD", "$", *openapiclient.NewPrice("0.00004", "0.03000"), *openapiclient.NewStorage(*openapiclient.NewPrice("0.00004", "0.03000"), ))) // InstanceType | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2709,11 +2793,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetReinstallOsList
+## GetReinstallImageList
 
-> []ImageDetails GetReinstallOsList(ctx, instanceId).Execute()
+> GetReinstallImageListResult GetReinstallImageList(ctx, instanceId).Limit(limit).Offset(offset).Custom(custom).Standard(standard).Execute()
 
-List OSes available for reinstall
+List images available for reinstall
 
 
 
@@ -2731,16 +2815,20 @@ import (
 
 func main() {
 	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	limit := int32(20) // int32 | Limit the number of results returned. (optional)
+	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
+	custom := true // bool | Filters the list to include only custom images. (optional)
+	standard := true // bool | Filters the list to include only standard images. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.GetReinstallOsList(context.Background(), instanceId).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.GetReinstallImageList(context.Background(), instanceId).Limit(limit).Offset(offset).Custom(custom).Standard(standard).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetReinstallOsList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetReinstallImageList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetReinstallOsList`: []ImageDetails
-	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetReinstallOsList`: %v\n", resp)
+	// response from `GetReinstallImageList`: GetReinstallImageListResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetReinstallImageList`: %v\n", resp)
 }
 ```
 
@@ -2754,16 +2842,20 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetReinstallOsListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetReinstallImageListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **limit** | **int32** | Limit the number of results returned. | 
+ **offset** | **int32** | Return results starting from the given offset. | 
+ **custom** | **bool** | Filters the list to include only custom images. | 
+ **standard** | **bool** | Filters the list to include only standard images. | 
 
 ### Return type
 
-[**[]ImageDetails**](ImageDetails.md)
+[**GetReinstallImageListResult**](GetReinstallImageListResult.md)
 
 ### Authorization
 
@@ -3019,7 +3111,7 @@ import (
 )
 
 func main() {
-	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts(openapiclient.regionName("eu-west-3"), openapiclient.typeName("lsw.m3.large"), "UBUNTU_22_04_64BIT", openapiclient.contractType("HOURLY"), openapiclient.contractTerm(0), openapiclient.billingFrequency(1), openapiclient.rootDiskStorageType("LOCAL")) // LaunchInstanceOpts | 
+	launchInstanceOpts := *openapiclient.NewLaunchInstanceOpts(openapiclient.regionName("eu-west-3"), openapiclient.typeName("lsw.m3.large"), "UBUNTU_22_04_64BIT", openapiclient.contractType("HOURLY"), openapiclient.contractTerm(0), openapiclient.billingFrequency(1), openapiclient.storageType("LOCAL")) // LaunchInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3085,7 +3177,7 @@ import (
 )
 
 func main() {
-	launchLoadBalancerOpts := *openapiclient.NewLaunchLoadBalancerOpts(openapiclient.regionName("eu-west-3"), openapiclient.typeName("lsw.m3.large"), "ContractType_example", int32(123), openapiclient.rootDiskStorageType("LOCAL"), int32(123)) // LaunchLoadBalancerOpts | 
+	launchLoadBalancerOpts := *openapiclient.NewLaunchLoadBalancerOpts(openapiclient.regionName("eu-west-3"), openapiclient.typeName("lsw.m3.large"), "ContractType_example", int32(123), openapiclient.storageType("LOCAL"), int32(123)) // LaunchLoadBalancerOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -4242,6 +4334,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UpdateCredentialResult**](UpdateCredentialResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateImage
+
+> ImageDetails UpdateImage(ctx, imageId).UpdateImageOpts(updateImageOpts).Execute()
+
+Update Custom Image
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	imageId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Image's ID
+	updateImageOpts := *openapiclient.NewUpdateImageOpts("Name_example") // UpdateImageOpts | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.UpdateImage(context.Background(), imageId).UpdateImageOpts(updateImageOpts).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.UpdateImage``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateImage`: ImageDetails
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.UpdateImage`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**imageId** | **string** | Image&#39;s ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateImageRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateImageOpts** | [**UpdateImageOpts**](UpdateImageOpts.md) |  | 
+
+### Return type
+
+[**ImageDetails**](ImageDetails.md)
 
 ### Authorization
 

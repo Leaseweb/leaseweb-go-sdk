@@ -39,7 +39,7 @@ type Instance struct {
 	IncludesPrivateNetwork bool `json:"hasPrivateNetwork"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize int32 `json:"rootDiskSize"`
-	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
+	RootDiskStorageType StorageType `json:"rootDiskStorageType"`
 	Contract Contract `json:"contract"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
 	Image Image `json:"image"`
@@ -53,7 +53,7 @@ type _Instance Instance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstance(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, ips []Ip) *Instance {
+func NewInstance(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType StorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, ips []Ip) *Instance {
 	this := Instance{}
 	this.Id = id
 	this.Type = type_
@@ -378,9 +378,9 @@ func (o *Instance) SetRootDiskSize(v int32) {
 }
 
 // GetRootDiskStorageType returns the RootDiskStorageType field value
-func (o *Instance) GetRootDiskStorageType() RootDiskStorageType {
+func (o *Instance) GetRootDiskStorageType() StorageType {
 	if o == nil {
-		var ret RootDiskStorageType
+		var ret StorageType
 		return ret
 	}
 
@@ -389,7 +389,7 @@ func (o *Instance) GetRootDiskStorageType() RootDiskStorageType {
 
 // GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field value
 // and a boolean to check if the value has been set.
-func (o *Instance) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool) {
+func (o *Instance) GetRootDiskStorageTypeOk() (*StorageType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -397,7 +397,7 @@ func (o *Instance) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool) {
 }
 
 // SetRootDiskStorageType sets field value
-func (o *Instance) SetRootDiskStorageType(v RootDiskStorageType) {
+func (o *Instance) SetRootDiskStorageType(v StorageType) {
 	o.RootDiskStorageType = v
 }
 

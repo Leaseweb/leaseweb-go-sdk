@@ -1,4 +1,4 @@
-# RootDiskStorageType
+# StorageType
 
 ## Enum
 

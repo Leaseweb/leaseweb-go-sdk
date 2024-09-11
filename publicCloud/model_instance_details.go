@@ -39,14 +39,13 @@ type InstanceDetails struct {
 	IncludesPrivateNetwork bool `json:"hasPrivateNetwork"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize int32 `json:"rootDiskSize"`
-	RootDiskStorageType RootDiskStorageType `json:"rootDiskStorageType"`
+	RootDiskStorageType StorageType `json:"rootDiskStorageType"`
 	Contract Contract `json:"contract"`
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
 	Image Image `json:"image"`
 	Iso NullableIso `json:"iso"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork"`
 	Ips []IpDetails `json:"ips"`
-	Volume NullableVolume `json:"volume"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -56,7 +55,7 @@ type _InstanceDetails InstanceDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstanceDetails(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType RootDiskStorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, iso NullableIso, privateNetwork NullablePrivateNetwork, ips []IpDetails, volume NullableVolume) *InstanceDetails {
+func NewInstanceDetails(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType StorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, iso NullableIso, privateNetwork NullablePrivateNetwork, ips []IpDetails) *InstanceDetails {
 	this := InstanceDetails{}
 	this.Id = id
 	this.Type = type_
@@ -77,7 +76,6 @@ func NewInstanceDetails(id string, type_ TypeName, resources Resources, region R
 	this.Iso = iso
 	this.PrivateNetwork = privateNetwork
 	this.Ips = ips
-	this.Volume = volume
 	return &this
 }
 
@@ -384,9 +382,9 @@ func (o *InstanceDetails) SetRootDiskSize(v int32) {
 }
 
 // GetRootDiskStorageType returns the RootDiskStorageType field value
-func (o *InstanceDetails) GetRootDiskStorageType() RootDiskStorageType {
+func (o *InstanceDetails) GetRootDiskStorageType() StorageType {
 	if o == nil {
-		var ret RootDiskStorageType
+		var ret StorageType
 		return ret
 	}
 
@@ -395,7 +393,7 @@ func (o *InstanceDetails) GetRootDiskStorageType() RootDiskStorageType {
 
 // GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field value
 // and a boolean to check if the value has been set.
-func (o *InstanceDetails) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool) {
+func (o *InstanceDetails) GetRootDiskStorageTypeOk() (*StorageType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -403,7 +401,7 @@ func (o *InstanceDetails) GetRootDiskStorageTypeOk() (*RootDiskStorageType, bool
 }
 
 // SetRootDiskStorageType sets field value
-func (o *InstanceDetails) SetRootDiskStorageType(v RootDiskStorageType) {
+func (o *InstanceDetails) SetRootDiskStorageType(v StorageType) {
 	o.RootDiskStorageType = v
 }
 
@@ -557,32 +555,6 @@ func (o *InstanceDetails) SetIps(v []IpDetails) {
 	o.Ips = v
 }
 
-// GetVolume returns the Volume field value
-// If the value is explicit nil, the zero value for Volume will be returned
-func (o *InstanceDetails) GetVolume() Volume {
-	if o == nil || o.Volume.Get() == nil {
-		var ret Volume
-		return ret
-	}
-
-	return *o.Volume.Get()
-}
-
-// GetVolumeOk returns a tuple with the Volume field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InstanceDetails) GetVolumeOk() (*Volume, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Volume.Get(), o.Volume.IsSet()
-}
-
-// SetVolume sets field value
-func (o *InstanceDetails) SetVolume(v Volume) {
-	o.Volume.Set(&v)
-}
-
 func (o InstanceDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -612,7 +584,6 @@ func (o InstanceDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["iso"] = o.Iso.Get()
 	toSerialize["privateNetwork"] = o.PrivateNetwork.Get()
 	toSerialize["ips"] = o.Ips
-	toSerialize["volume"] = o.Volume.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -645,7 +616,6 @@ func (o *InstanceDetails) UnmarshalJSON(data []byte) (err error) {
 		"iso",
 		"privateNetwork",
 		"ips",
-		"volume",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -694,7 +664,6 @@ func (o *InstanceDetails) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "iso")
 		delete(additionalProperties, "privateNetwork")
 		delete(additionalProperties, "ips")
-		delete(additionalProperties, "volume")
 		o.AdditionalProperties = additionalProperties
 	}
 

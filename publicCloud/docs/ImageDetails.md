@@ -15,8 +15,8 @@ Name | Type | Description | Notes
 **Region** | [**NullableRegionName**](RegionName.md) |  | 
 **CreatedAt** | **NullableTime** | Date when the image was created | 
 **UpdatedAt** | **NullableTime** | Date when the image was updated | 
-**Version** | **string** |  | 
-**Architecture** | **string** |  | 
+**Version** | **NullableString** |  | 
+**Architecture** | **NullableString** |  | 
 **MarketApps** | **[]string** |  | 
 **StorageTypes** | **[]string** | The supported storage types for the instance type | 
 **MinDiskSize** | **NullableInt32** | The image size in GB. | 
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewImageDetails
 
-`func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version string, architecture string, marketApps []string, storageTypes []string, minDiskSize NullableInt32, ) *ImageDetails`
+`func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version NullableString, architecture NullableString, marketApps []string, storageTypes []string, minDiskSize NullableInt32, ) *ImageDetails`
 
 NewImageDetails instantiates a new ImageDetails object
 This constructor will assign default values to properties that have it defined,
@@ -340,6 +340,16 @@ and a boolean to check if the value has been set.
 SetVersion sets Version field to given value.
 
 
+### SetVersionNil
+
+`func (o *ImageDetails) SetVersionNil(b bool)`
+
+ SetVersionNil sets the value for Version to be an explicit nil
+
+### UnsetVersion
+`func (o *ImageDetails) UnsetVersion()`
+
+UnsetVersion ensures that no value is present for Version, not even an explicit nil
 ### GetArchitecture
 
 `func (o *ImageDetails) GetArchitecture() string`
@@ -360,6 +370,16 @@ and a boolean to check if the value has been set.
 SetArchitecture sets Architecture field to given value.
 
 
+### SetArchitectureNil
+
+`func (o *ImageDetails) SetArchitectureNil(b bool)`
+
+ SetArchitectureNil sets the value for Architecture to be an explicit nil
+
+### UnsetArchitecture
+`func (o *ImageDetails) UnsetArchitecture()`
+
+UnsetArchitecture ensures that no value is present for Architecture, not even an explicit nil
 ### GetMarketApps
 
 `func (o *ImageDetails) GetMarketApps() []string`
