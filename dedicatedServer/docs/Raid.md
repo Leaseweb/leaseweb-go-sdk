@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Level** | Pointer to **int32** | RAID level to apply to your installation, this value is only required if you specify a type HW or SW | [optional] 
+**Level** | Pointer to [**RaidLevel**](RaidLevel.md) |  | [optional] 
 **NumberOfDisks** | Pointer to **int32** | The number of disks you want to apply RAID on. If not specified all disks are used | [optional] 
 **Type** | Pointer to [**RaidType**](RaidType.md) |  | [optional] 
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetLevel
 
-`func (o *Raid) GetLevel() int32`
+`func (o *Raid) GetLevel() RaidLevel`
 
 GetLevel returns the Level field if non-nil, zero value otherwise.
 
 ### GetLevelOk
 
-`func (o *Raid) GetLevelOk() (*int32, bool)`
+`func (o *Raid) GetLevelOk() (*RaidLevel, bool)`
 
 GetLevelOk returns a tuple with the Level field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLevel
 
-`func (o *Raid) SetLevel(v int32)`
+`func (o *Raid) SetLevel(v RaidLevel)`
 
 SetLevel sets Level field to given value.
 

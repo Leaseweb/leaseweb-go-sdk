@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// RaidType RAID type to apply to your installation. NONE is the equivalent of pass-through mode on HW RAID equipped servers
+// RaidType RAID type to apply. NONE is the equivalent of pass-through mode on HW RAID equipped servers
 type RaidType string
 
 // List of raidType

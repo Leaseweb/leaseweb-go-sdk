@@ -3964,7 +3964,7 @@ Name | Type | Description  | Notes
 
 ## InstallOperatingSystem
 
-> ServerJob InstallOperatingSystem(ctx, serverId).InstallOperatingSystemOpts(installOperatingSystemOpts).Execute()
+> InstallationJob InstallOperatingSystem(ctx, serverId).InstallOperatingSystemOpts(installOperatingSystemOpts).Execute()
 
 Launch installation
 
@@ -3993,7 +3993,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedServerAPI.InstallOperatingSystem``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `InstallOperatingSystem`: ServerJob
+	// response from `InstallOperatingSystem`: InstallationJob
 	fmt.Fprintf(os.Stdout, "Response from `DedicatedServerAPI.InstallOperatingSystem`: %v\n", resp)
 }
 ```
@@ -4018,7 +4018,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ServerJob**](ServerJob.md)
+[**InstallationJob**](InstallationJob.md)
 
 ### Authorization
 

@@ -19,8 +19,7 @@ var _ MappedNullable = &Raid{}
 
 // Raid Contains RAID related information about the installation request
 type Raid struct {
-	// RAID level to apply to your installation, this value is only required if you specify a type HW or SW
-	Level *int32 `json:"level,omitempty"`
+	Level *RaidLevel `json:"level,omitempty"`
 	// The number of disks you want to apply RAID on. If not specified all disks are used
 	NumberOfDisks *int32 `json:"numberOfDisks,omitempty"`
 	Type *RaidType `json:"type,omitempty"`
@@ -47,9 +46,9 @@ func NewRaidWithDefaults() *Raid {
 }
 
 // GetLevel returns the Level field value if set, zero value otherwise.
-func (o *Raid) GetLevel() int32 {
+func (o *Raid) GetLevel() RaidLevel {
 	if o == nil || IsNil(o.Level) {
-		var ret int32
+		var ret RaidLevel
 		return ret
 	}
 	return *o.Level
@@ -57,7 +56,7 @@ func (o *Raid) GetLevel() int32 {
 
 // GetLevelOk returns a tuple with the Level field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Raid) GetLevelOk() (*int32, bool) {
+func (o *Raid) GetLevelOk() (*RaidLevel, bool) {
 	if o == nil || IsNil(o.Level) {
 		return nil, false
 	}
@@ -73,8 +72,8 @@ func (o *Raid) HasLevel() bool {
 	return false
 }
 
-// SetLevel gets a reference to the given int32 and assigns it to the Level field.
-func (o *Raid) SetLevel(v int32) {
+// SetLevel gets a reference to the given RaidLevel and assigns it to the Level field.
+func (o *Raid) SetLevel(v RaidLevel) {
 	o.Level = &v
 }
 

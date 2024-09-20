@@ -4991,7 +4991,7 @@ paths:
           content:
             application/json:
               example:
-                createdAt: 2021-03-06T21:55:32+0000
+                createdAt: 2021-03-06T21:55:32Z
                 flow: tasks
                 isRunning: true
                 node: AA:BB:CC:DD:EE:FF!DKFJKD8989
@@ -5012,12 +5012,12 @@ paths:
                   partitions:
                   - filesystem: ext2
                     mountpoint: /boot
-                    size: 1024
+                    size: "1024"
                   - filesystem: swap
-                    size: 4096
+                    size: "4096"
                   - filesystem: ext4
                     mountpoint: /tmp
-                    size: 4096
+                    size: "4096"
                   - filesystem: ext4
                     mountpoint: /
                     size: '*'
@@ -5045,14 +5045,14 @@ paths:
                   onError: break
                   status: PENDING
                   statusTimestamps:
-                    PENDING: 2021-01-09T09:18:06+00:00
-                    WAITING: 2021-01-09T09:18:06+00:00
+                    PENDING: 2021-01-09T09:18:06Z
+                    WAITING: 2021-01-09T09:18:06Z
                   uuid: c1a56a5a-ae38-4b12-acb6-0cba9ceb1016
                 type: install
-                updatedAt: 2021-03-06T21:55:32+0000
+                updatedAt: 2021-03-06T21:55:32Z
                 uuid: bcf2bedf-8450-4b22-86a8-f30aeb3a38f9
               schema:
-                $ref: '#/components/schemas/serverJob'
+                $ref: '#/components/schemas/installationJob'
           description: Accepted.
         "400":
           content:
@@ -10438,14 +10438,22 @@ components:
             \ complete the operation"
           type: boolean
       type: object
+    raidLevel:
+      description: "RAID level to apply, this value is only required if you specify\
+        \ a type HW or SW"
+      enum:
+      - 0
+      - 1
+      - 5
+      - 10
+      type: integer
     raidType:
-      description: RAID type to apply to your installation. NONE is the equivalent
-        of pass-through mode on HW RAID equipped servers
+      description: RAID type to apply. NONE is the equivalent of pass-through mode
+        on HW RAID equipped servers
       enum:
       - HW
       - SW
       - NONE
-      title: raidType
       type: string
     installOperatingSystemOpts:
       properties:
@@ -10495,6 +10503,114 @@ components:
           type: string
       required:
       - operatingSystemId
+      type: object
+    installationJob:
+      example:
+        bareMetalId: bareMetalId
+        type: null
+        serverId: serverId
+        uuid: uuid
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        node: node
+        isRunning: true
+        payload:
+          partitions:
+          - size: size
+            filesystem: filesystem
+            mountpoint: mountpoint
+          - size: size
+            filesystem: filesystem
+            mountpoint: mountpoint
+          os:
+            name: name
+            family: family
+            type: type
+            version: version
+            architecture: architecture
+          timezone: UTC
+          raidLevel: 6
+          serverId: serverId
+          isUnassignedServer: true
+          pop: pop
+          operatingSystemId: operatingSystemId
+          jobType: jobType
+          numberOfDisks: 0
+          fileserverBaseUrl: fileserverBaseUrl
+          device: device
+          powerCycle: true
+          configurable: true
+        progress:
+          canceled: 1
+          total: 2
+          expired: 5
+          waiting: 4
+          pending: 9
+          percentage: 3
+          inprogress: 7
+          finished: 2
+          failed: 5
+        flow: flow
+        tasks:
+        - onError: onError
+          errorMessage: errorMessage
+          description: description
+          statusTimestamps:
+            key: 2000-01-23T04:56:07.000+00:00
+          uuid: uuid
+          flow: flow
+          status: status
+        - onError: onError
+          errorMessage: errorMessage
+          description: description
+          statusTimestamps:
+            key: 2000-01-23T04:56:07.000+00:00
+          uuid: uuid
+          flow: flow
+          status: status
+        status: status
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        bareMetalId:
+          deprecated: true
+          description: "Id of the server (deprecated, use serverId instead)"
+          type: string
+        createdAt:
+          description: Creation timestamp
+          format: date-time
+          type: string
+        flow:
+          description: Job flow
+          type: string
+        isRunning:
+          description: Describes whether the job is running
+          type: boolean
+        node:
+          description: Node ID for this server
+          type: string
+        payload:
+          $ref: '#/components/schemas/installationJobPayload'
+        progress:
+          $ref: '#/components/schemas/progress'
+        serverId:
+          description: Id of the server
+          type: string
+        status:
+          description: Status of the job
+          type: string
+        tasks:
+          description: List of tasks in the job
+          items:
+            $ref: '#/components/schemas/task'
+          type: array
+        type:
+          $ref: '#/components/schemas/jobType'
+        updatedAt:
+          description: Update timestamp
+          format: date-time
+          type: string
+        uuid:
+          description: Unique identifier of the job
+          type: string
       type: object
     ipmiResetServerOpts:
       properties:
@@ -11901,14 +12017,7 @@ components:
       description: Contains RAID related information about the installation request
       properties:
         level:
-          description: "RAID level to apply to your installation, this value is only\
-            \ required if you specify a type HW or SW"
-          enum:
-          - 0
-          - 1
-          - 5
-          - 10
-          type: integer
+          $ref: '#/components/schemas/raidLevel'
         numberOfDisks:
           description: The number of disks you want to apply RAID on. If not specified
             all disks are used
@@ -11916,6 +12025,71 @@ components:
         type:
           $ref: '#/components/schemas/raidType'
       title: raid
+      type: object
+    installationJobPayload:
+      example:
+        partitions:
+        - size: size
+          filesystem: filesystem
+          mountpoint: mountpoint
+        - size: size
+          filesystem: filesystem
+          mountpoint: mountpoint
+        os:
+          name: name
+          family: family
+          type: type
+          version: version
+          architecture: architecture
+        timezone: UTC
+        raidLevel: 6
+        serverId: serverId
+        isUnassignedServer: true
+        pop: pop
+        operatingSystemId: operatingSystemId
+        jobType: jobType
+        numberOfDisks: 0
+        fileserverBaseUrl: fileserverBaseUrl
+        device: device
+        powerCycle: true
+        configurable: true
+      properties:
+        fileserverBaseUrl:
+          type: string
+        pop:
+          type: string
+        powerCycle:
+          type: boolean
+        isUnassignedServer:
+          type: boolean
+        serverId:
+          description: Id of the server
+          type: string
+        jobType:
+          type: string
+        configurable:
+          type: boolean
+        device:
+          type: string
+        numberOfDisks:
+          nullable: true
+          type: integer
+        operatingSystemId:
+          type: string
+        os:
+          $ref: '#/components/schemas/os'
+        partitions:
+          items:
+            $ref: '#/components/schemas/partition'
+          type: array
+        raidLevel:
+          nullable: true
+          type: integer
+        timezone:
+          description: Timezone represented as Geographical_Area/City
+          example: UTC
+          type: string
+      title: installationJobPayload
       type: object
     jobMetadata:
       description: The Job Metadata schema

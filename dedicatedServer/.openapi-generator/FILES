@@ -58,6 +58,8 @@ docs/GetServerPowerStatusResult.md
 docs/Hdd.md
 docs/InstallOperatingSystemOpts.md
 docs/InstallOperatingSystemPayload.md
+docs/InstallationJob.md
+docs/InstallationJobPayload.md
 docs/Ip.md
 docs/Ipmi.md
 docs/Ipmi1.md
@@ -104,6 +106,7 @@ docs/Progress.md
 docs/Rack.md
 docs/RackType.md
 docs/Raid.md
+docs/RaidLevel.md
 docs/RaidType.md
 docs/Ram.md
 docs/RescueImage.md
@@ -182,6 +185,8 @@ model_get_server_power_status_result.go
 model_hdd.go
 model_install_operating_system_opts.go
 model_install_operating_system_payload.go
+model_installation_job.go
+model_installation_job_payload.go
 model_ip.go
 model_ipmi.go
 model_ipmi_1.go
@@ -227,6 +232,7 @@ model_progress.go
 model_rack.go
 model_rack_type.go
 model_raid.go
+model_raid_level.go
 model_raid_type.go
 model_ram.go
 model_rescue_image.go
