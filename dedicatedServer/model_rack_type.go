@@ -20,14 +20,14 @@ type RackType string
 
 // List of rackType
 const (
-	RACKTYPE_PRIVATE RackType = "PRIVATE"
 	RACKTYPE_SHARED RackType = "SHARED"
+	RACKTYPE_DEDICATED RackType = "DEDICATED"
 )
 
 // All allowed values of RackType enum
 var AllowedRackTypeEnumValues = []RackType{
-	"PRIVATE",
 	"SHARED",
+	"DEDICATED",
 }
 
 func (v *RackType) UnmarshalJSON(src []byte) error {

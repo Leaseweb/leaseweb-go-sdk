@@ -1510,7 +1510,7 @@ paths:
                   subnet: 127.0.0.80/24
                   vlanId: "2120"
                 rack:
-                  type: PRIVATE
+                  type: DEDICATED
                 serialNumber: JDK18291JK
                 specs:
                   chassis: Dell R210 II
@@ -8840,8 +8840,8 @@ components:
     rackType:
       description: rack type
       enum:
-      - PRIVATE
       - SHARED
+      - DEDICATED
       title: rackType
       type: string
     rack:
