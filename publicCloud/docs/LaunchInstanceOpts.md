@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **RootDiskSize** | Pointer to **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | [optional] 
 **RootDiskStorageType** | [**StorageType**](StorageType.md) |  | 
 **SshKey** | Pointer to **string** | Public SSH key to be installed into the instance. Must be used only on Linux/FreeBSD instances | [optional] 
+**UserData** | Pointer to **string** | User data to be installed into the instance. Please note that this setting cannot be used in combination with the &#39;sshKey&#39; setting. Send the user data as plain text, not encoded as base64. | [optional] 
 
 ## Methods
 
@@ -274,6 +275,31 @@ SetSshKey sets SshKey field to given value.
 `func (o *LaunchInstanceOpts) HasSshKey() bool`
 
 HasSshKey returns a boolean if a field has been set.
+
+### GetUserData
+
+`func (o *LaunchInstanceOpts) GetUserData() string`
+
+GetUserData returns the UserData field if non-nil, zero value otherwise.
+
+### GetUserDataOk
+
+`func (o *LaunchInstanceOpts) GetUserDataOk() (*string, bool)`
+
+GetUserDataOk returns a tuple with the UserData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUserData
+
+`func (o *LaunchInstanceOpts) SetUserData(v string)`
+
+SetUserData sets UserData field to given value.
+
+### HasUserData
+
+`func (o *LaunchInstanceOpts) HasUserData() bool`
+
+HasUserData returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

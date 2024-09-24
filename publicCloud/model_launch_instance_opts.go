@@ -36,6 +36,8 @@ type LaunchInstanceOpts struct {
 	RootDiskStorageType StorageType `json:"rootDiskStorageType"`
 	// Public SSH key to be installed into the instance. Must be used only on Linux/FreeBSD instances
 	SshKey *string `json:"sshKey,omitempty"`
+	// User data to be installed into the instance. Please note that this setting cannot be used in combination with the 'sshKey' setting. Send the user data as plain text, not encoded as base64.
+	UserData *string `json:"userData,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -361,6 +363,38 @@ func (o *LaunchInstanceOpts) SetSshKey(v string) {
 	o.SshKey = &v
 }
 
+// GetUserData returns the UserData field value if set, zero value otherwise.
+func (o *LaunchInstanceOpts) GetUserData() string {
+	if o == nil || IsNil(o.UserData) {
+		var ret string
+		return ret
+	}
+	return *o.UserData
+}
+
+// GetUserDataOk returns a tuple with the UserData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LaunchInstanceOpts) GetUserDataOk() (*string, bool) {
+	if o == nil || IsNil(o.UserData) {
+		return nil, false
+	}
+	return o.UserData, true
+}
+
+// HasUserData returns a boolean if a field has been set.
+func (o *LaunchInstanceOpts) HasUserData() bool {
+	if o != nil && !IsNil(o.UserData) {
+		return true
+	}
+
+	return false
+}
+
+// SetUserData gets a reference to the given string and assigns it to the UserData field.
+func (o *LaunchInstanceOpts) SetUserData(v string) {
+	o.UserData = &v
+}
+
 func (o LaunchInstanceOpts) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -389,6 +423,9 @@ func (o LaunchInstanceOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
 	if !IsNil(o.SshKey) {
 		toSerialize["sshKey"] = o.SshKey
+	}
+	if !IsNil(o.UserData) {
+		toSerialize["userData"] = o.UserData
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -450,6 +487,7 @@ func (o *LaunchInstanceOpts) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "rootDiskSize")
 		delete(additionalProperties, "rootDiskStorageType")
 		delete(additionalProperties, "sshKey")
+		delete(additionalProperties, "userData")
 		o.AdditionalProperties = additionalProperties
 	}
 

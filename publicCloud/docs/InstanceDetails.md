@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **ProductType** | **string** | The product type | 
 **HasPublicIpV4** | **bool** |  | 
 **IncludesPrivateNetwork** | **bool** |  | 
+**HasUserData** | **bool** |  | 
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
 **RootDiskStorageType** | [**StorageType**](StorageType.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
@@ -28,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewInstanceDetails
 
-`func NewInstanceDetails(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType StorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, iso NullableIso, privateNetwork NullablePrivateNetwork, ips []IpDetails, ) *InstanceDetails`
+`func NewInstanceDetails(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, hasUserData bool, rootDiskSize int32, rootDiskStorageType StorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, iso NullableIso, privateNetwork NullablePrivateNetwork, ips []IpDetails, ) *InstanceDetails`
 
 NewInstanceDetails instantiates a new InstanceDetails object
 This constructor will assign default values to properties that have it defined,
@@ -291,6 +292,26 @@ and a boolean to check if the value has been set.
 `func (o *InstanceDetails) SetIncludesPrivateNetwork(v bool)`
 
 SetIncludesPrivateNetwork sets IncludesPrivateNetwork field to given value.
+
+
+### GetHasUserData
+
+`func (o *InstanceDetails) GetHasUserData() bool`
+
+GetHasUserData returns the HasUserData field if non-nil, zero value otherwise.
+
+### GetHasUserDataOk
+
+`func (o *InstanceDetails) GetHasUserDataOk() (*bool, bool)`
+
+GetHasUserDataOk returns a tuple with the HasUserData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasUserData
+
+`func (o *InstanceDetails) SetHasUserData(v bool)`
+
+SetHasUserData sets HasUserData field to given value.
 
 
 ### GetRootDiskSize

@@ -695,6 +695,7 @@ paths:
                   state: RUNNING
                   hasPublicIpV4: true
                   hasPrivateNetwork: false
+                  hasUserData: false
                   rootDiskStorageType: CENTRAL
                   rootDiskSize: 10
                   ips:
@@ -778,6 +779,13 @@ paths:
               rootDiskSize: 50
               rootDiskStorageType: CENTRAL
               type: lsw.m3.large
+              userData: "#cloud-config\n# vim: syntax=yaml\n#\n# This is the configuration\
+                \ syntax that the write_files module\n# will know how to understand.\
+                \ Encoding can be given b64 or gzip or (gz+b64).\n# The content will\
+                \ be decoded accordingly and then written to the path that is\n# provided.\
+                \ \n#\n# Note: Content strings here are truncated for example purposes.\n\
+                write_files:\n- encoding: b64\n  content: TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3Rll1cyBtYXhpbXVzLg==\n\
+                \  owner: root:root\n  path: /tmp/3.txt\n  permissions: '0644'\n"
             schema:
               $ref: '#/components/schemas/launchInstanceOpts'
         required: true
@@ -797,6 +805,7 @@ paths:
                   state: ACTIVE
                 hasPrivateNetwork: false
                 hasPublicIpV4: true
+                hasUserData: true
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                 image:
                   id: UBUNTU_22_04_64BIT
@@ -1005,6 +1014,7 @@ paths:
                   state: ACTIVE
                 hasPrivateNetwork: false
                 hasPublicIpV4: true
+                hasUserData: false
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                 image:
                   id: UBUNTU_20_04_64BIT
@@ -1162,6 +1172,7 @@ paths:
                   state: ACTIVE
                 hasPrivateNetwork: false
                 hasPublicIpV4: true
+                hasUserData: false
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                 image:
                   id: UBUNTU_20_04_64BIT
@@ -8807,6 +8818,8 @@ components:
           type: boolean
         hasPrivateNetwork:
           type: boolean
+        hasUserData:
+          type: boolean
         rootDiskSize:
           description: The root disk's size in GB. Must be at least 5 GB for Linux
             and FreeBSD instances and 50 GB for Windows instances
@@ -8826,6 +8839,7 @@ components:
       - contract
       - hasPrivateNetwork
       - hasPublicIpV4
+      - hasUserData
       - id
       - image
       - ips
@@ -8909,6 +8923,7 @@ components:
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
           family: linux
+        hasUserData: true
         rootDiskStorageType: null
         autoScalingGroup:
           cpuThreshold: 5
@@ -8982,6 +8997,7 @@ components:
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
+          hasUserData: true
           rootDiskStorageType: null
           autoScalingGroup:
             cpuThreshold: 5
@@ -9052,6 +9068,7 @@ components:
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
+          hasUserData: true
           rootDiskStorageType: null
           autoScalingGroup:
             cpuThreshold: 5
@@ -9166,6 +9183,18 @@ components:
             only on Linux/FreeBSD instances
           example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCyXsJHPbU4eQaXJMwxkZrk51w/3km1xJYLGjza45Nf1whpyg4j15kjOk3UVTNi/OatPgx/Re16XPxwA1d0RS2uwtmehYjN3lvmNfJJcvvz+CGZe8HQG1FzE1nNy3arSGdHhjvJlXg1ooS7TNBgo8FO37Awv6YDd2JO1TinAS/wkw==
           type: string
+        userData:
+          description: "User data to be installed into the instance. Please note that\
+            \ this setting cannot be used in combination with the 'sshKey' setting.\
+            \ Send the user data as plain text, not encoded as base64."
+          example: "#cloud-config\n# vim: syntax=yaml\n#\n# This is the configuration\
+            \ syntax that the write_files module\n# will know how to understand. Encoding\
+            \ can be given b64 or gzip or (gz+b64).\n# The content will be decoded\
+            \ accordingly and then written to the path that is\n# provided. \n#\n\
+            # Note: Content strings here are truncated for example purposes.\nwrite_files:\n\
+            - encoding: b64\n  content: TG9yZW0gaXBzdW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3Rll1cyBtYXhpbXVzLg==\n\
+            \  owner: root:root\n  path: /tmp/3.txt\n  permissions: '0644'\n"
+          type: string
       required:
       - billingFrequency
       - contractTerm
@@ -9257,6 +9286,7 @@ components:
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
           family: linux
+        hasUserData: true
         rootDiskStorageType: null
         iso:
           name: name

@@ -37,6 +37,7 @@ type Instance struct {
 	ProductType string `json:"productType"`
 	HasPublicIpV4 bool `json:"hasPublicIpV4"`
 	IncludesPrivateNetwork bool `json:"hasPrivateNetwork"`
+	HasUserData bool `json:"hasUserData"`
 	// The root disk's size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances
 	RootDiskSize int32 `json:"rootDiskSize"`
 	RootDiskStorageType StorageType `json:"rootDiskStorageType"`
@@ -53,7 +54,7 @@ type _Instance Instance
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInstance(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, rootDiskSize int32, rootDiskStorageType StorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, ips []Ip) *Instance {
+func NewInstance(id string, type_ TypeName, resources Resources, region RegionName, reference NullableString, startedAt NullableTime, marketAppId NullableString, state State, productType string, hasPublicIpV4 bool, includesPrivateNetwork bool, hasUserData bool, rootDiskSize int32, rootDiskStorageType StorageType, contract Contract, autoScalingGroup NullableAutoScalingGroup, image Image, ips []Ip) *Instance {
 	this := Instance{}
 	this.Id = id
 	this.Type = type_
@@ -66,6 +67,7 @@ func NewInstance(id string, type_ TypeName, resources Resources, region RegionNa
 	this.ProductType = productType
 	this.HasPublicIpV4 = hasPublicIpV4
 	this.IncludesPrivateNetwork = includesPrivateNetwork
+	this.HasUserData = hasUserData
 	this.RootDiskSize = rootDiskSize
 	this.RootDiskStorageType = rootDiskStorageType
 	this.Contract = contract
@@ -353,6 +355,30 @@ func (o *Instance) SetIncludesPrivateNetwork(v bool) {
 	o.IncludesPrivateNetwork = v
 }
 
+// GetHasUserData returns the HasUserData field value
+func (o *Instance) GetHasUserData() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.HasUserData
+}
+
+// GetHasUserDataOk returns a tuple with the HasUserData field value
+// and a boolean to check if the value has been set.
+func (o *Instance) GetHasUserDataOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.HasUserData, true
+}
+
+// SetHasUserData sets field value
+func (o *Instance) SetHasUserData(v bool) {
+	o.HasUserData = v
+}
+
 // GetRootDiskSize returns the RootDiskSize field value
 func (o *Instance) GetRootDiskSize() int32 {
 	if o == nil {
@@ -520,6 +546,7 @@ func (o Instance) ToMap() (map[string]interface{}, error) {
 	toSerialize["productType"] = o.ProductType
 	toSerialize["hasPublicIpV4"] = o.HasPublicIpV4
 	toSerialize["hasPrivateNetwork"] = o.IncludesPrivateNetwork
+	toSerialize["hasUserData"] = o.HasUserData
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
 	toSerialize["contract"] = o.Contract
@@ -550,6 +577,7 @@ func (o *Instance) UnmarshalJSON(data []byte) (err error) {
 		"productType",
 		"hasPublicIpV4",
 		"hasPrivateNetwork",
+		"hasUserData",
 		"rootDiskSize",
 		"rootDiskStorageType",
 		"contract",
@@ -596,6 +624,7 @@ func (o *Instance) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "productType")
 		delete(additionalProperties, "hasPublicIpV4")
 		delete(additionalProperties, "hasPrivateNetwork")
+		delete(additionalProperties, "hasUserData")
 		delete(additionalProperties, "rootDiskSize")
 		delete(additionalProperties, "rootDiskStorageType")
 		delete(additionalProperties, "contract")
