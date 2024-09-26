@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **SoftwareLicenses** | Pointer to [**[]SoftwareLicense**](SoftwareLicense.md) |  | [optional] 
 **ManagedServices** | Pointer to **[]string** |  | [optional] 
 **AggregationPackId** | Pointer to **NullableString** |  | [optional] 
-**Ipv4Quantity** | Pointer to **NullableString** |  | [optional] 
+**Ipv4Quantity** | Pointer to **NullableInt32** |  | [optional] 
 
 ## Methods
 
@@ -613,20 +613,20 @@ HasAggregationPackId returns a boolean if a field has been set.
 UnsetAggregationPackId ensures that no value is present for AggregationPackId, not even an explicit nil
 ### GetIpv4Quantity
 
-`func (o *Contract) GetIpv4Quantity() string`
+`func (o *Contract) GetIpv4Quantity() int32`
 
 GetIpv4Quantity returns the Ipv4Quantity field if non-nil, zero value otherwise.
 
 ### GetIpv4QuantityOk
 
-`func (o *Contract) GetIpv4QuantityOk() (*string, bool)`
+`func (o *Contract) GetIpv4QuantityOk() (*int32, bool)`
 
 GetIpv4QuantityOk returns a tuple with the Ipv4Quantity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIpv4Quantity
 
-`func (o *Contract) SetIpv4Quantity(v string)`
+`func (o *Contract) SetIpv4Quantity(v int32)`
 
 SetIpv4Quantity sets Ipv4Quantity field to given value.
 

@@ -8635,7 +8635,7 @@ components:
         pricePerFrequency: pricePerFrequency
         endsAt: 2000-01-23T04:56:07.000+00:00
         deliveryStatus: deliveryStatus
-        ipv4Quantity: ipv4Quantity
+        ipv4Quantity: 2
         salesOrgId: salesOrgId
         status: status
       properties:
@@ -8702,7 +8702,7 @@ components:
           type: string
         ipv4Quantity:
           nullable: true
-          type: string
+          type: integer
       type: object
     featureAvailability:
       description: List of features that are available for this device
@@ -8946,7 +8946,7 @@ components:
           pricePerFrequency: pricePerFrequency
           endsAt: 2000-01-23T04:56:07.000+00:00
           deliveryStatus: deliveryStatus
-          ipv4Quantity: ipv4Quantity
+          ipv4Quantity: 2
           salesOrgId: salesOrgId
           status: status
         name: name
@@ -9086,7 +9086,7 @@ components:
             pricePerFrequency: pricePerFrequency
             endsAt: 2000-01-23T04:56:07.000+00:00
             deliveryStatus: deliveryStatus
-            ipv4Quantity: ipv4Quantity
+            ipv4Quantity: 2
             salesOrgId: salesOrgId
             status: status
           name: name
@@ -9191,7 +9191,7 @@ components:
             pricePerFrequency: pricePerFrequency
             endsAt: 2000-01-23T04:56:07.000+00:00
             deliveryStatus: deliveryStatus
-            ipv4Quantity: ipv4Quantity
+            ipv4Quantity: 2
             salesOrgId: salesOrgId
             status: status
           name: name
@@ -9526,7 +9526,7 @@ components:
           pricePerFrequency: pricePerFrequency
           endsAt: 2000-01-23T04:56:07.000+00:00
           deliveryStatus: deliveryStatus
-          ipv4Quantity: ipv4Quantity
+          ipv4Quantity: 2
           salesOrgId: salesOrgId
           status: status
         location:
@@ -9699,7 +9699,7 @@ components:
             pricePerFrequency: pricePerFrequency
             endsAt: 2000-01-23T04:56:07.000+00:00
             deliveryStatus: deliveryStatus
-            ipv4Quantity: ipv4Quantity
+            ipv4Quantity: 2
             salesOrgId: salesOrgId
             status: status
           location:
@@ -9836,7 +9836,7 @@ components:
             pricePerFrequency: pricePerFrequency
             endsAt: 2000-01-23T04:56:07.000+00:00
             deliveryStatus: deliveryStatus
-            ipv4Quantity: ipv4Quantity
+            ipv4Quantity: 2
             salesOrgId: salesOrgId
             status: status
           location:

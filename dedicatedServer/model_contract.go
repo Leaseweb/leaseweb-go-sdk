@@ -45,7 +45,7 @@ type Contract struct {
 	SoftwareLicenses []SoftwareLicense `json:"softwareLicenses,omitempty"`
 	ManagedServices []string `json:"managedServices,omitempty"`
 	AggregationPackId NullableString `json:"aggregationPackId,omitempty"`
-	Ipv4Quantity NullableString `json:"ipv4Quantity,omitempty"`
+	Ipv4Quantity NullableInt32 `json:"ipv4Quantity,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -781,9 +781,9 @@ func (o *Contract) UnsetAggregationPackId() {
 }
 
 // GetIpv4Quantity returns the Ipv4Quantity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Contract) GetIpv4Quantity() string {
+func (o *Contract) GetIpv4Quantity() int32 {
 	if o == nil || IsNil(o.Ipv4Quantity.Get()) {
-		var ret string
+		var ret int32
 		return ret
 	}
 	return *o.Ipv4Quantity.Get()
@@ -792,7 +792,7 @@ func (o *Contract) GetIpv4Quantity() string {
 // GetIpv4QuantityOk returns a tuple with the Ipv4Quantity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Contract) GetIpv4QuantityOk() (*string, bool) {
+func (o *Contract) GetIpv4QuantityOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -808,8 +808,8 @@ func (o *Contract) HasIpv4Quantity() bool {
 	return false
 }
 
-// SetIpv4Quantity gets a reference to the given NullableString and assigns it to the Ipv4Quantity field.
-func (o *Contract) SetIpv4Quantity(v string) {
+// SetIpv4Quantity gets a reference to the given NullableInt32 and assigns it to the Ipv4Quantity field.
+func (o *Contract) SetIpv4Quantity(v int32) {
 	o.Ipv4Quantity.Set(&v)
 }
 // SetIpv4QuantityNil sets the value for Ipv4Quantity to be an explicit nil
