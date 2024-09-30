@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the LoadBalancerListener type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &LoadBalancerListener{}
+// checks if the LoadBalancerListenerDetails type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LoadBalancerListenerDetails{}
 
-// LoadBalancerListener struct for LoadBalancerListener
-type LoadBalancerListener struct {
+// LoadBalancerListenerDetails struct for LoadBalancerListenerDetails
+type LoadBalancerListenerDetails struct {
 	// Protocol of the listener.
 	Protocol string `json:"protocol"`
 	// Port for the listener
@@ -27,34 +27,36 @@ type LoadBalancerListener struct {
 	// The listener unique identifier
 	Id string `json:"id"`
 	Rules []LoadBalancerListenerRule `json:"rules"`
+	SslCertificates []SslCertificate `json:"sslCertificates"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _LoadBalancerListener LoadBalancerListener
+type _LoadBalancerListenerDetails LoadBalancerListenerDetails
 
-// NewLoadBalancerListener instantiates a new LoadBalancerListener object
+// NewLoadBalancerListenerDetails instantiates a new LoadBalancerListenerDetails object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerListener(protocol string, port int32, id string, rules []LoadBalancerListenerRule) *LoadBalancerListener {
-	this := LoadBalancerListener{}
+func NewLoadBalancerListenerDetails(protocol string, port int32, id string, rules []LoadBalancerListenerRule, sslCertificates []SslCertificate) *LoadBalancerListenerDetails {
+	this := LoadBalancerListenerDetails{}
 	this.Protocol = protocol
 	this.Port = port
 	this.Id = id
 	this.Rules = rules
+	this.SslCertificates = sslCertificates
 	return &this
 }
 
-// NewLoadBalancerListenerWithDefaults instantiates a new LoadBalancerListener object
+// NewLoadBalancerListenerDetailsWithDefaults instantiates a new LoadBalancerListenerDetails object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewLoadBalancerListenerWithDefaults() *LoadBalancerListener {
-	this := LoadBalancerListener{}
+func NewLoadBalancerListenerDetailsWithDefaults() *LoadBalancerListenerDetails {
+	this := LoadBalancerListenerDetails{}
 	return &this
 }
 
 // GetProtocol returns the Protocol field value
-func (o *LoadBalancerListener) GetProtocol() string {
+func (o *LoadBalancerListenerDetails) GetProtocol() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -65,7 +67,7 @@ func (o *LoadBalancerListener) GetProtocol() string {
 
 // GetProtocolOk returns a tuple with the Protocol field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerListener) GetProtocolOk() (*string, bool) {
+func (o *LoadBalancerListenerDetails) GetProtocolOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,12 +75,12 @@ func (o *LoadBalancerListener) GetProtocolOk() (*string, bool) {
 }
 
 // SetProtocol sets field value
-func (o *LoadBalancerListener) SetProtocol(v string) {
+func (o *LoadBalancerListenerDetails) SetProtocol(v string) {
 	o.Protocol = v
 }
 
 // GetPort returns the Port field value
-func (o *LoadBalancerListener) GetPort() int32 {
+func (o *LoadBalancerListenerDetails) GetPort() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -89,7 +91,7 @@ func (o *LoadBalancerListener) GetPort() int32 {
 
 // GetPortOk returns a tuple with the Port field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerListener) GetPortOk() (*int32, bool) {
+func (o *LoadBalancerListenerDetails) GetPortOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,12 +99,12 @@ func (o *LoadBalancerListener) GetPortOk() (*int32, bool) {
 }
 
 // SetPort sets field value
-func (o *LoadBalancerListener) SetPort(v int32) {
+func (o *LoadBalancerListenerDetails) SetPort(v int32) {
 	o.Port = v
 }
 
 // GetId returns the Id field value
-func (o *LoadBalancerListener) GetId() string {
+func (o *LoadBalancerListenerDetails) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -113,7 +115,7 @@ func (o *LoadBalancerListener) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerListener) GetIdOk() (*string, bool) {
+func (o *LoadBalancerListenerDetails) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -121,12 +123,12 @@ func (o *LoadBalancerListener) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *LoadBalancerListener) SetId(v string) {
+func (o *LoadBalancerListenerDetails) SetId(v string) {
 	o.Id = v
 }
 
 // GetRules returns the Rules field value
-func (o *LoadBalancerListener) GetRules() []LoadBalancerListenerRule {
+func (o *LoadBalancerListenerDetails) GetRules() []LoadBalancerListenerRule {
 	if o == nil {
 		var ret []LoadBalancerListenerRule
 		return ret
@@ -137,7 +139,7 @@ func (o *LoadBalancerListener) GetRules() []LoadBalancerListenerRule {
 
 // GetRulesOk returns a tuple with the Rules field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerListener) GetRulesOk() ([]LoadBalancerListenerRule, bool) {
+func (o *LoadBalancerListenerDetails) GetRulesOk() ([]LoadBalancerListenerRule, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -145,11 +147,35 @@ func (o *LoadBalancerListener) GetRulesOk() ([]LoadBalancerListenerRule, bool) {
 }
 
 // SetRules sets field value
-func (o *LoadBalancerListener) SetRules(v []LoadBalancerListenerRule) {
+func (o *LoadBalancerListenerDetails) SetRules(v []LoadBalancerListenerRule) {
 	o.Rules = v
 }
 
-func (o LoadBalancerListener) MarshalJSON() ([]byte, error) {
+// GetSslCertificates returns the SslCertificates field value
+func (o *LoadBalancerListenerDetails) GetSslCertificates() []SslCertificate {
+	if o == nil {
+		var ret []SslCertificate
+		return ret
+	}
+
+	return o.SslCertificates
+}
+
+// GetSslCertificatesOk returns a tuple with the SslCertificates field value
+// and a boolean to check if the value has been set.
+func (o *LoadBalancerListenerDetails) GetSslCertificatesOk() ([]SslCertificate, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SslCertificates, true
+}
+
+// SetSslCertificates sets field value
+func (o *LoadBalancerListenerDetails) SetSslCertificates(v []SslCertificate) {
+	o.SslCertificates = v
+}
+
+func (o LoadBalancerListenerDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -157,12 +183,13 @@ func (o LoadBalancerListener) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LoadBalancerListener) ToMap() (map[string]interface{}, error) {
+func (o LoadBalancerListenerDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["protocol"] = o.Protocol
 	toSerialize["port"] = o.Port
 	toSerialize["id"] = o.Id
 	toSerialize["rules"] = o.Rules
+	toSerialize["sslCertificates"] = o.SslCertificates
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -171,7 +198,7 @@ func (o LoadBalancerListener) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *LoadBalancerListener) UnmarshalJSON(data []byte) (err error) {
+func (o *LoadBalancerListenerDetails) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -180,6 +207,7 @@ func (o *LoadBalancerListener) UnmarshalJSON(data []byte) (err error) {
 		"port",
 		"id",
 		"rules",
+		"sslCertificates",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -196,15 +224,15 @@ func (o *LoadBalancerListener) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varLoadBalancerListener := _LoadBalancerListener{}
+	varLoadBalancerListenerDetails := _LoadBalancerListenerDetails{}
 
-	err = json.Unmarshal(data, &varLoadBalancerListener)
+	err = json.Unmarshal(data, &varLoadBalancerListenerDetails)
 
 	if err != nil {
 		return err
 	}
 
-	*o = LoadBalancerListener(varLoadBalancerListener)
+	*o = LoadBalancerListenerDetails(varLoadBalancerListenerDetails)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -213,44 +241,45 @@ func (o *LoadBalancerListener) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "port")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "rules")
+		delete(additionalProperties, "sslCertificates")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableLoadBalancerListener struct {
-	value *LoadBalancerListener
+type NullableLoadBalancerListenerDetails struct {
+	value *LoadBalancerListenerDetails
 	isSet bool
 }
 
-func (v NullableLoadBalancerListener) Get() *LoadBalancerListener {
+func (v NullableLoadBalancerListenerDetails) Get() *LoadBalancerListenerDetails {
 	return v.value
 }
 
-func (v *NullableLoadBalancerListener) Set(val *LoadBalancerListener) {
+func (v *NullableLoadBalancerListenerDetails) Set(val *LoadBalancerListenerDetails) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableLoadBalancerListener) IsSet() bool {
+func (v NullableLoadBalancerListenerDetails) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableLoadBalancerListener) Unset() {
+func (v *NullableLoadBalancerListenerDetails) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableLoadBalancerListener(val *LoadBalancerListener) *NullableLoadBalancerListener {
-	return &NullableLoadBalancerListener{value: val, isSet: true}
+func NewNullableLoadBalancerListenerDetails(val *LoadBalancerListenerDetails) *NullableLoadBalancerListenerDetails {
+	return &NullableLoadBalancerListenerDetails{value: val, isSet: true}
 }
 
-func (v NullableLoadBalancerListener) MarshalJSON() ([]byte, error) {
+func (v NullableLoadBalancerListenerDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableLoadBalancerListener) UnmarshalJSON(src []byte) error {
+func (v *NullableLoadBalancerListenerDetails) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

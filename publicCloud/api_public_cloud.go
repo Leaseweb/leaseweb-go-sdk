@@ -130,6 +130,20 @@ Allowed only one snapshot per instance.
 	CreateSnapshotExecute(r ApiCreateSnapshotRequest) (*http.Response, error)
 
 	/*
+	CreateTargetGroup Create Target Group
+
+	Create a Target Group
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTargetGroupRequest
+	*/
+	CreateTargetGroup(ctx context.Context) ApiCreateTargetGroupRequest
+
+	// CreateTargetGroupExecute executes the request
+	//  @return TargetGroup
+	CreateTargetGroupExecute(r ApiCreateTargetGroupRequest) (*TargetGroup, *http.Response, error)
+
+	/*
 	DeleteAutoScalingGroup Delete Auto Scaling Group
 
 	Delete an Auto Scaling Group.
@@ -202,33 +216,32 @@ Allowed only one snapshot per instance.
 	DeleteSnapshotExecute(r ApiDeleteSnapshotRequest) (*http.Response, error)
 
 	/*
-	DeregisterAutoScalingGroupLoadBalancer Deregister Load balancer
+	DeleteTargetGroup Delete Target Group
 
-	Disassociates a Load Balancer from an Auto Scaling Group, stopping the distribution of incoming traffic to the instances within the group.
+	Delete a Target Group.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param autoScalingGroupId Auto Scaling Group ID
-	@return ApiDeregisterAutoScalingGroupLoadBalancerRequest
+	@param targetGroupId Target Group ID
+	@return ApiDeleteTargetGroupRequest
 	*/
-	DeregisterAutoScalingGroupLoadBalancer(ctx context.Context, autoScalingGroupId string) ApiDeregisterAutoScalingGroupLoadBalancerRequest
+	DeleteTargetGroup(ctx context.Context, targetGroupId string) ApiDeleteTargetGroupRequest
 
-	// DeregisterAutoScalingGroupLoadBalancerExecute executes the request
-	//  @return AutoScalingGroupDetails
-	DeregisterAutoScalingGroupLoadBalancerExecute(r ApiDeregisterAutoScalingGroupLoadBalancerRequest) (*AutoScalingGroupDetails, *http.Response, error)
+	// DeleteTargetGroupExecute executes the request
+	DeleteTargetGroupExecute(r ApiDeleteTargetGroupRequest) (*http.Response, error)
 
 	/*
-	DeregisterLoadBalancerTargets Deregister targets
+	DeregisterTargets Deregister Targets
 
-	Deregister targets registered in a load balancer.
+	Deregister Targets in a Target Group
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param loadBalancerId Load balancer ID
-	@return ApiDeregisterLoadBalancerTargetsRequest
+	@param targetGroupId Target Group ID
+	@return ApiDeregisterTargetsRequest
 	*/
-	DeregisterLoadBalancerTargets(ctx context.Context, loadBalancerId string) ApiDeregisterLoadBalancerTargetsRequest
+	DeregisterTargets(ctx context.Context, targetGroupId string) ApiDeregisterTargetsRequest
 
-	// DeregisterLoadBalancerTargetsExecute executes the request
-	DeregisterLoadBalancerTargetsExecute(r ApiDeregisterLoadBalancerTargetsRequest) (*http.Response, error)
+	// DeregisterTargetsExecute executes the request
+	DeregisterTargetsExecute(r ApiDeregisterTargetsRequest) (*http.Response, error)
 
 	/*
 	DetachIso Detach ISO from instance
@@ -530,23 +543,23 @@ Allowed only one snapshot per instance.
 	GetLoadBalancerListener(ctx context.Context, loadBalancerId string, listenerId string) ApiGetLoadBalancerListenerRequest
 
 	// GetLoadBalancerListenerExecute executes the request
-	//  @return LoadBalancerListener
-	GetLoadBalancerListenerExecute(r ApiGetLoadBalancerListenerRequest) (*LoadBalancerListener, *http.Response, error)
+	//  @return LoadBalancerListenerDetails
+	GetLoadBalancerListenerExecute(r ApiGetLoadBalancerListenerRequest) (*LoadBalancerListenerDetails, *http.Response, error)
 
 	/*
-	GetLoadBalancerTargetList List registered targets
+	GetLoadBalancerListenerList Get listener list
 
-	List targets registered in a load balancer.
+	List listeners
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param loadBalancerId Load balancer ID
-	@return ApiGetLoadBalancerTargetListRequest
+	@return ApiGetLoadBalancerListenerListRequest
 	*/
-	GetLoadBalancerTargetList(ctx context.Context, loadBalancerId string) ApiGetLoadBalancerTargetListRequest
+	GetLoadBalancerListenerList(ctx context.Context, loadBalancerId string) ApiGetLoadBalancerListenerListRequest
 
-	// GetLoadBalancerTargetListExecute executes the request
-	//  @return GetLoadBalancerTargetListResult
-	GetLoadBalancerTargetListExecute(r ApiGetLoadBalancerTargetListRequest) (*GetLoadBalancerTargetListResult, *http.Response, error)
+	// GetLoadBalancerListenerListExecute executes the request
+	//  @return GetLoadBalancerListenerListResult
+	GetLoadBalancerListenerListExecute(r ApiGetLoadBalancerListenerListRequest) (*GetLoadBalancerListenerListResult, *http.Response, error)
 
 	/*
 	GetMarketAppList Get marketplace apps
@@ -617,6 +630,50 @@ Allowed only one snapshot per instance.
 	// GetSnapshotListExecute executes the request
 	//  @return GetSnapshotListResult
 	GetSnapshotListExecute(r ApiGetSnapshotListRequest) (*GetSnapshotListResult, *http.Response, error)
+
+	/*
+	GetTargetGroup Get Target Group details
+
+	Get Target Group details.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param targetGroupId Target Group ID
+	@return ApiGetTargetGroupRequest
+	*/
+	GetTargetGroup(ctx context.Context, targetGroupId string) ApiGetTargetGroupRequest
+
+	// GetTargetGroupExecute executes the request
+	//  @return TargetGroup
+	GetTargetGroupExecute(r ApiGetTargetGroupRequest) (*TargetGroup, *http.Response, error)
+
+	/*
+	GetTargetGroupList Get Target Group list
+
+	List and filter Target Groups
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTargetGroupListRequest
+	*/
+	GetTargetGroupList(ctx context.Context) ApiGetTargetGroupListRequest
+
+	// GetTargetGroupListExecute executes the request
+	//  @return GetTargetGroupListResult
+	GetTargetGroupListExecute(r ApiGetTargetGroupListRequest) (*GetTargetGroupListResult, *http.Response, error)
+
+	/*
+	GetTargetList Get Targets
+
+	Get targets in a Target Group
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param targetGroupId Target Group ID
+	@return ApiGetTargetListRequest
+	*/
+	GetTargetList(ctx context.Context, targetGroupId string) ApiGetTargetListRequest
+
+	// GetTargetListExecute executes the request
+	//  @return GetTargetListResult
+	GetTargetListExecute(r ApiGetTargetListRequest) (*GetTargetListResult, *http.Response, error)
 
 	/*
 	GetUpdateInstanceTypeList List available instance types for update
@@ -704,33 +761,18 @@ Only works for IPv4.
 	RebootInstanceExecute(r ApiRebootInstanceRequest) (*http.Response, error)
 
 	/*
-	RegisterAutoScalingGroupLoadBalancer Register Load balancer
+	RegisterTargets Register Targets
 
-	Associates a Load Balancer with an Auto Scaling Group to distribute incoming traffic across the instances within the group.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param autoScalingGroupId Auto Scaling Group ID
-	@return ApiRegisterAutoScalingGroupLoadBalancerRequest
-	*/
-	RegisterAutoScalingGroupLoadBalancer(ctx context.Context, autoScalingGroupId string) ApiRegisterAutoScalingGroupLoadBalancerRequest
-
-	// RegisterAutoScalingGroupLoadBalancerExecute executes the request
-	//  @return AutoScalingGroupDetails
-	RegisterAutoScalingGroupLoadBalancerExecute(r ApiRegisterAutoScalingGroupLoadBalancerRequest) (*AutoScalingGroupDetails, *http.Response, error)
-
-	/*
-	RegisterLoadBalancerTargets Register targets
-
-	Register targets in a load balancer. Instances must be running and have private network enabled so they can be registered.
+	Register Targets in a Target Group
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param loadBalancerId Load balancer ID
-	@return ApiRegisterLoadBalancerTargetsRequest
+	@param targetGroupId Target Group ID
+	@return ApiRegisterTargetsRequest
 	*/
-	RegisterLoadBalancerTargets(ctx context.Context, loadBalancerId string) ApiRegisterLoadBalancerTargetsRequest
+	RegisterTargets(ctx context.Context, targetGroupId string) ApiRegisterTargetsRequest
 
-	// RegisterLoadBalancerTargetsExecute executes the request
-	RegisterLoadBalancerTargetsExecute(r ApiRegisterLoadBalancerTargetsRequest) (*http.Response, error)
+	// RegisterTargetsExecute executes the request
+	RegisterTargetsExecute(r ApiRegisterTargetsRequest) (*http.Response, error)
 
 	/*
 	ReinstallInstance Reinstall instance
@@ -992,6 +1034,21 @@ Eligible instance types for update can be obtained using `/v1/instances/{instanc
 	// UpdateLoadBalancerListenerExecute executes the request
 	//  @return LoadBalancerListener
 	UpdateLoadBalancerListenerExecute(r ApiUpdateLoadBalancerListenerRequest) (*LoadBalancerListener, *http.Response, error)
+
+	/*
+	UpdateTargetGroup Update Target Group
+
+	Update a Target Group
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param targetGroupId Target Group ID
+	@return ApiUpdateTargetGroupRequest
+	*/
+	UpdateTargetGroup(ctx context.Context, targetGroupId string) ApiUpdateTargetGroupRequest
+
+	// UpdateTargetGroupExecute executes the request
+	//  @return TargetGroup
+	UpdateTargetGroupExecute(r ApiUpdateTargetGroupRequest) (*TargetGroup, *http.Response, error)
 }
 
 // PublicCloudAPIService PublicCloudAPI service
@@ -2238,6 +2295,184 @@ func (a *PublicCloudAPIService) CreateSnapshotExecute(r ApiCreateSnapshotRequest
 	return localVarHTTPResponse, nil
 }
 
+type ApiCreateTargetGroupRequest struct {
+	ctx context.Context
+	ApiService PublicCloudAPI
+	targetGroup *TargetGroup
+}
+
+func (r ApiCreateTargetGroupRequest) TargetGroup(targetGroup TargetGroup) ApiCreateTargetGroupRequest {
+	r.targetGroup = &targetGroup
+	return r
+}
+
+func (r ApiCreateTargetGroupRequest) Execute() (*TargetGroup, *http.Response, error) {
+	return r.ApiService.CreateTargetGroupExecute(r)
+}
+
+/*
+CreateTargetGroup Create Target Group
+
+Create a Target Group
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateTargetGroupRequest
+*/
+func (a *PublicCloudAPIService) CreateTargetGroup(ctx context.Context) ApiCreateTargetGroupRequest {
+	return ApiCreateTargetGroupRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return TargetGroup
+func (a *PublicCloudAPIService) CreateTargetGroupExecute(r ApiCreateTargetGroupRequest) (*TargetGroup, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TargetGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.CreateTargetGroup")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/targetGroups"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.targetGroup == nil {
+		return localVarReturnValue, nil, reportError("targetGroup is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.targetGroup
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiDeleteAutoScalingGroupRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
@@ -3074,50 +3309,48 @@ func (a *PublicCloudAPIService) DeleteSnapshotExecute(r ApiDeleteSnapshotRequest
 	return localVarHTTPResponse, nil
 }
 
-type ApiDeregisterAutoScalingGroupLoadBalancerRequest struct {
+type ApiDeleteTargetGroupRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
-	autoScalingGroupId string
+	targetGroupId string
 }
 
-func (r ApiDeregisterAutoScalingGroupLoadBalancerRequest) Execute() (*AutoScalingGroupDetails, *http.Response, error) {
-	return r.ApiService.DeregisterAutoScalingGroupLoadBalancerExecute(r)
+func (r ApiDeleteTargetGroupRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteTargetGroupExecute(r)
 }
 
 /*
-DeregisterAutoScalingGroupLoadBalancer Deregister Load balancer
+DeleteTargetGroup Delete Target Group
 
-Disassociates a Load Balancer from an Auto Scaling Group, stopping the distribution of incoming traffic to the instances within the group.
+Delete a Target Group.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param autoScalingGroupId Auto Scaling Group ID
- @return ApiDeregisterAutoScalingGroupLoadBalancerRequest
+ @param targetGroupId Target Group ID
+ @return ApiDeleteTargetGroupRequest
 */
-func (a *PublicCloudAPIService) DeregisterAutoScalingGroupLoadBalancer(ctx context.Context, autoScalingGroupId string) ApiDeregisterAutoScalingGroupLoadBalancerRequest {
-	return ApiDeregisterAutoScalingGroupLoadBalancerRequest{
+func (a *PublicCloudAPIService) DeleteTargetGroup(ctx context.Context, targetGroupId string) ApiDeleteTargetGroupRequest {
+	return ApiDeleteTargetGroupRequest{
 		ApiService: a,
 		ctx: ctx,
-		autoScalingGroupId: autoScalingGroupId,
+		targetGroupId: targetGroupId,
 	}
 }
 
 // Execute executes the request
-//  @return AutoScalingGroupDetails
-func (a *PublicCloudAPIService) DeregisterAutoScalingGroupLoadBalancerExecute(r ApiDeregisterAutoScalingGroupLoadBalancerRequest) (*AutoScalingGroupDetails, *http.Response, error) {
+func (a *PublicCloudAPIService) DeleteTargetGroupExecute(r ApiDeleteTargetGroupRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AutoScalingGroupDetails
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.DeregisterAutoScalingGroupLoadBalancer")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.DeleteTargetGroup")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/autoScalingGroups/{autoScalingGroupId}/deregisterLoadBalancer"
-	localVarPath = strings.Replace(localVarPath, "{"+"autoScalingGroupId"+"}", url.PathEscape(parameterValueToString(r.autoScalingGroupId, "autoScalingGroupId")), -1)
+	localVarPath := localBasePath + "/targetGroups/{targetGroupId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"targetGroupId"+"}", url.PathEscape(parameterValueToString(r.targetGroupId, "targetGroupId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -3156,19 +3389,19 @@ func (a *PublicCloudAPIService) DeregisterAutoScalingGroupLoadBalancerExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3181,124 +3414,115 @@ func (a *PublicCloudAPIService) DeregisterAutoScalingGroupLoadBalancerExecute(r 
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 503 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
-type ApiDeregisterLoadBalancerTargetsRequest struct {
+type ApiDeregisterTargetsRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
-	loadBalancerId string
-	loadBalancerTargetOpts *LoadBalancerTargetOpts
+	targetGroupId string
+	requestBody *[]string
 }
 
-func (r ApiDeregisterLoadBalancerTargetsRequest) LoadBalancerTargetOpts(loadBalancerTargetOpts LoadBalancerTargetOpts) ApiDeregisterLoadBalancerTargetsRequest {
-	r.loadBalancerTargetOpts = &loadBalancerTargetOpts
+func (r ApiDeregisterTargetsRequest) RequestBody(requestBody []string) ApiDeregisterTargetsRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
-func (r ApiDeregisterLoadBalancerTargetsRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeregisterLoadBalancerTargetsExecute(r)
+func (r ApiDeregisterTargetsRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeregisterTargetsExecute(r)
 }
 
 /*
-DeregisterLoadBalancerTargets Deregister targets
+DeregisterTargets Deregister Targets
 
-Deregister targets registered in a load balancer.
+Deregister Targets in a Target Group
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param loadBalancerId Load balancer ID
- @return ApiDeregisterLoadBalancerTargetsRequest
+ @param targetGroupId Target Group ID
+ @return ApiDeregisterTargetsRequest
 */
-func (a *PublicCloudAPIService) DeregisterLoadBalancerTargets(ctx context.Context, loadBalancerId string) ApiDeregisterLoadBalancerTargetsRequest {
-	return ApiDeregisterLoadBalancerTargetsRequest{
+func (a *PublicCloudAPIService) DeregisterTargets(ctx context.Context, targetGroupId string) ApiDeregisterTargetsRequest {
+	return ApiDeregisterTargetsRequest{
 		ApiService: a,
 		ctx: ctx,
-		loadBalancerId: loadBalancerId,
+		targetGroupId: targetGroupId,
 	}
 }
 
 // Execute executes the request
-func (a *PublicCloudAPIService) DeregisterLoadBalancerTargetsExecute(r ApiDeregisterLoadBalancerTargetsRequest) (*http.Response, error) {
+func (a *PublicCloudAPIService) DeregisterTargetsExecute(r ApiDeregisterTargetsRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.DeregisterLoadBalancerTargets")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.DeregisterTargets")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/loadBalancers/{loadBalancerId}/deregisterTargets"
-	localVarPath = strings.Replace(localVarPath, "{"+"loadBalancerId"+"}", url.PathEscape(parameterValueToString(r.loadBalancerId, "loadBalancerId")), -1)
+	localVarPath := localBasePath + "/targetGroups/{targetGroupId}/deregisterTargets"
+	localVarPath = strings.Replace(localVarPath, "{"+"targetGroupId"+"}", url.PathEscape(parameterValueToString(r.targetGroupId, "targetGroupId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.loadBalancerTargetOpts == nil {
-		return nil, reportError("loadBalancerTargetOpts is required and must be specified")
+	if r.requestBody == nil {
+		return nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3319,7 +3543,7 @@ func (a *PublicCloudAPIService) DeregisterLoadBalancerTargetsExecute(r ApiDeregi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.loadBalancerTargetOpts
+	localVarPostBody = r.requestBody
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -7384,7 +7608,7 @@ type ApiGetLoadBalancerListenerRequest struct {
 	listenerId string
 }
 
-func (r ApiGetLoadBalancerListenerRequest) Execute() (*LoadBalancerListener, *http.Response, error) {
+func (r ApiGetLoadBalancerListenerRequest) Execute() (*LoadBalancerListenerDetails, *http.Response, error) {
 	return r.ApiService.GetLoadBalancerListenerExecute(r)
 }
 
@@ -7408,13 +7632,13 @@ func (a *PublicCloudAPIService) GetLoadBalancerListener(ctx context.Context, loa
 }
 
 // Execute executes the request
-//  @return LoadBalancerListener
-func (a *PublicCloudAPIService) GetLoadBalancerListenerExecute(r ApiGetLoadBalancerListenerRequest) (*LoadBalancerListener, *http.Response, error) {
+//  @return LoadBalancerListenerDetails
+func (a *PublicCloudAPIService) GetLoadBalancerListenerExecute(r ApiGetLoadBalancerListenerRequest) (*LoadBalancerListenerDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *LoadBalancerListener
+		localVarReturnValue  *LoadBalancerListenerDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetLoadBalancerListener")
@@ -7552,27 +7776,41 @@ func (a *PublicCloudAPIService) GetLoadBalancerListenerExecute(r ApiGetLoadBalan
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetLoadBalancerTargetListRequest struct {
+type ApiGetLoadBalancerListenerListRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
 	loadBalancerId string
+	limit *int32
+	offset *int32
 }
 
-func (r ApiGetLoadBalancerTargetListRequest) Execute() (*GetLoadBalancerTargetListResult, *http.Response, error) {
-	return r.ApiService.GetLoadBalancerTargetListExecute(r)
+// Limit the number of results returned.
+func (r ApiGetLoadBalancerListenerListRequest) Limit(limit int32) ApiGetLoadBalancerListenerListRequest {
+	r.limit = &limit
+	return r
+}
+
+// Return results starting from the given offset.
+func (r ApiGetLoadBalancerListenerListRequest) Offset(offset int32) ApiGetLoadBalancerListenerListRequest {
+	r.offset = &offset
+	return r
+}
+
+func (r ApiGetLoadBalancerListenerListRequest) Execute() (*GetLoadBalancerListenerListResult, *http.Response, error) {
+	return r.ApiService.GetLoadBalancerListenerListExecute(r)
 }
 
 /*
-GetLoadBalancerTargetList List registered targets
+GetLoadBalancerListenerList Get listener list
 
-List targets registered in a load balancer.
+List listeners
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param loadBalancerId Load balancer ID
- @return ApiGetLoadBalancerTargetListRequest
+ @return ApiGetLoadBalancerListenerListRequest
 */
-func (a *PublicCloudAPIService) GetLoadBalancerTargetList(ctx context.Context, loadBalancerId string) ApiGetLoadBalancerTargetListRequest {
-	return ApiGetLoadBalancerTargetListRequest{
+func (a *PublicCloudAPIService) GetLoadBalancerListenerList(ctx context.Context, loadBalancerId string) ApiGetLoadBalancerListenerListRequest {
+	return ApiGetLoadBalancerListenerListRequest{
 		ApiService: a,
 		ctx: ctx,
 		loadBalancerId: loadBalancerId,
@@ -7580,27 +7818,33 @@ func (a *PublicCloudAPIService) GetLoadBalancerTargetList(ctx context.Context, l
 }
 
 // Execute executes the request
-//  @return GetLoadBalancerTargetListResult
-func (a *PublicCloudAPIService) GetLoadBalancerTargetListExecute(r ApiGetLoadBalancerTargetListRequest) (*GetLoadBalancerTargetListResult, *http.Response, error) {
+//  @return GetLoadBalancerListenerListResult
+func (a *PublicCloudAPIService) GetLoadBalancerListenerListExecute(r ApiGetLoadBalancerListenerListRequest) (*GetLoadBalancerListenerListResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetLoadBalancerTargetListResult
+		localVarReturnValue  *GetLoadBalancerListenerListResult
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetLoadBalancerTargetList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetLoadBalancerListenerList")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/loadBalancers/{loadBalancerId}/targets"
+	localVarPath := localBasePath + "/loadBalancers/{loadBalancerId}/listeners"
 	localVarPath = strings.Replace(localVarPath, "{"+"loadBalancerId"+"}", url.PathEscape(parameterValueToString(r.loadBalancerId, "loadBalancerId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7654,17 +7898,6 @@ func (a *PublicCloudAPIService) GetLoadBalancerTargetListExecute(r ApiGetLoadBal
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -7677,6 +7910,17 @@ func (a *PublicCloudAPIService) GetLoadBalancerTargetListExecute(r ApiGetLoadBal
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -8593,6 +8837,600 @@ func (a *PublicCloudAPIService) GetSnapshotListExecute(r ApiGetSnapshotListReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetTargetGroupRequest struct {
+	ctx context.Context
+	ApiService PublicCloudAPI
+	targetGroupId string
+}
+
+func (r ApiGetTargetGroupRequest) Execute() (*TargetGroup, *http.Response, error) {
+	return r.ApiService.GetTargetGroupExecute(r)
+}
+
+/*
+GetTargetGroup Get Target Group details
+
+Get Target Group details.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param targetGroupId Target Group ID
+ @return ApiGetTargetGroupRequest
+*/
+func (a *PublicCloudAPIService) GetTargetGroup(ctx context.Context, targetGroupId string) ApiGetTargetGroupRequest {
+	return ApiGetTargetGroupRequest{
+		ApiService: a,
+		ctx: ctx,
+		targetGroupId: targetGroupId,
+	}
+}
+
+// Execute executes the request
+//  @return TargetGroup
+func (a *PublicCloudAPIService) GetTargetGroupExecute(r ApiGetTargetGroupRequest) (*TargetGroup, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TargetGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetTargetGroup")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/targetGroups/{targetGroupId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"targetGroupId"+"}", url.PathEscape(parameterValueToString(r.targetGroupId, "targetGroupId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetTargetGroupListRequest struct {
+	ctx context.Context
+	ApiService PublicCloudAPI
+	limit *int32
+	offset *int32
+	id *string
+	name *string
+	protocol *Protocol
+	port *int32
+	region *RegionName
+}
+
+// Limit the number of results returned.
+func (r ApiGetTargetGroupListRequest) Limit(limit int32) ApiGetTargetGroupListRequest {
+	r.limit = &limit
+	return r
+}
+
+// Return results starting from the given offset.
+func (r ApiGetTargetGroupListRequest) Offset(offset int32) ApiGetTargetGroupListRequest {
+	r.offset = &offset
+	return r
+}
+
+func (r ApiGetTargetGroupListRequest) Id(id string) ApiGetTargetGroupListRequest {
+	r.id = &id
+	return r
+}
+
+func (r ApiGetTargetGroupListRequest) Name(name string) ApiGetTargetGroupListRequest {
+	r.name = &name
+	return r
+}
+
+func (r ApiGetTargetGroupListRequest) Protocol(protocol Protocol) ApiGetTargetGroupListRequest {
+	r.protocol = &protocol
+	return r
+}
+
+func (r ApiGetTargetGroupListRequest) Port(port int32) ApiGetTargetGroupListRequest {
+	r.port = &port
+	return r
+}
+
+func (r ApiGetTargetGroupListRequest) Region(region RegionName) ApiGetTargetGroupListRequest {
+	r.region = &region
+	return r
+}
+
+func (r ApiGetTargetGroupListRequest) Execute() (*GetTargetGroupListResult, *http.Response, error) {
+	return r.ApiService.GetTargetGroupListExecute(r)
+}
+
+/*
+GetTargetGroupList Get Target Group list
+
+List and filter Target Groups
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTargetGroupListRequest
+*/
+func (a *PublicCloudAPIService) GetTargetGroupList(ctx context.Context) ApiGetTargetGroupListRequest {
+	return ApiGetTargetGroupListRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return GetTargetGroupListResult
+func (a *PublicCloudAPIService) GetTargetGroupListExecute(r ApiGetTargetGroupListRequest) (*GetTargetGroupListResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetTargetGroupListResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetTargetGroupList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/targetGroups"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+	}
+	if r.id != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "")
+	}
+	if r.name != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
+	}
+	if r.protocol != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "protocol", r.protocol, "")
+	}
+	if r.port != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "port", r.port, "")
+	}
+	if r.region != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetTargetListRequest struct {
+	ctx context.Context
+	ApiService PublicCloudAPI
+	targetGroupId string
+	limit *int32
+	offset *int32
+}
+
+// Limit the number of results returned.
+func (r ApiGetTargetListRequest) Limit(limit int32) ApiGetTargetListRequest {
+	r.limit = &limit
+	return r
+}
+
+// Return results starting from the given offset.
+func (r ApiGetTargetListRequest) Offset(offset int32) ApiGetTargetListRequest {
+	r.offset = &offset
+	return r
+}
+
+func (r ApiGetTargetListRequest) Execute() (*GetTargetListResult, *http.Response, error) {
+	return r.ApiService.GetTargetListExecute(r)
+}
+
+/*
+GetTargetList Get Targets
+
+Get targets in a Target Group
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param targetGroupId Target Group ID
+ @return ApiGetTargetListRequest
+*/
+func (a *PublicCloudAPIService) GetTargetList(ctx context.Context, targetGroupId string) ApiGetTargetListRequest {
+	return ApiGetTargetListRequest{
+		ApiService: a,
+		ctx: ctx,
+		targetGroupId: targetGroupId,
+	}
+}
+
+// Execute executes the request
+//  @return GetTargetListResult
+func (a *PublicCloudAPIService) GetTargetListExecute(r ApiGetTargetListRequest) (*GetTargetListResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetTargetListResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.GetTargetList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/targetGroups/{targetGroupId}/targets"
+	localVarPath = strings.Replace(localVarPath, "{"+"targetGroupId"+"}", url.PathEscape(parameterValueToString(r.targetGroupId, "targetGroupId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -9567,242 +10405,60 @@ func (a *PublicCloudAPIService) RebootInstanceExecute(r ApiRebootInstanceRequest
 	return localVarHTTPResponse, nil
 }
 
-type ApiRegisterAutoScalingGroupLoadBalancerRequest struct {
+type ApiRegisterTargetsRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
-	autoScalingGroupId string
-	registerAutoScalingGroupLoadBalancerOpts *RegisterAutoScalingGroupLoadBalancerOpts
+	targetGroupId string
+	requestBody *[]string
 }
 
-func (r ApiRegisterAutoScalingGroupLoadBalancerRequest) RegisterAutoScalingGroupLoadBalancerOpts(registerAutoScalingGroupLoadBalancerOpts RegisterAutoScalingGroupLoadBalancerOpts) ApiRegisterAutoScalingGroupLoadBalancerRequest {
-	r.registerAutoScalingGroupLoadBalancerOpts = &registerAutoScalingGroupLoadBalancerOpts
+func (r ApiRegisterTargetsRequest) RequestBody(requestBody []string) ApiRegisterTargetsRequest {
+	r.requestBody = &requestBody
 	return r
 }
 
-func (r ApiRegisterAutoScalingGroupLoadBalancerRequest) Execute() (*AutoScalingGroupDetails, *http.Response, error) {
-	return r.ApiService.RegisterAutoScalingGroupLoadBalancerExecute(r)
+func (r ApiRegisterTargetsRequest) Execute() (*http.Response, error) {
+	return r.ApiService.RegisterTargetsExecute(r)
 }
 
 /*
-RegisterAutoScalingGroupLoadBalancer Register Load balancer
+RegisterTargets Register Targets
 
-Associates a Load Balancer with an Auto Scaling Group to distribute incoming traffic across the instances within the group.
+Register Targets in a Target Group
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param autoScalingGroupId Auto Scaling Group ID
- @return ApiRegisterAutoScalingGroupLoadBalancerRequest
+ @param targetGroupId Target Group ID
+ @return ApiRegisterTargetsRequest
 */
-func (a *PublicCloudAPIService) RegisterAutoScalingGroupLoadBalancer(ctx context.Context, autoScalingGroupId string) ApiRegisterAutoScalingGroupLoadBalancerRequest {
-	return ApiRegisterAutoScalingGroupLoadBalancerRequest{
+func (a *PublicCloudAPIService) RegisterTargets(ctx context.Context, targetGroupId string) ApiRegisterTargetsRequest {
+	return ApiRegisterTargetsRequest{
 		ApiService: a,
 		ctx: ctx,
-		autoScalingGroupId: autoScalingGroupId,
+		targetGroupId: targetGroupId,
 	}
 }
 
 // Execute executes the request
-//  @return AutoScalingGroupDetails
-func (a *PublicCloudAPIService) RegisterAutoScalingGroupLoadBalancerExecute(r ApiRegisterAutoScalingGroupLoadBalancerRequest) (*AutoScalingGroupDetails, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AutoScalingGroupDetails
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.RegisterAutoScalingGroupLoadBalancer")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/autoScalingGroups/{autoScalingGroupId}/registerLoadBalancer"
-	localVarPath = strings.Replace(localVarPath, "{"+"autoScalingGroupId"+"}", url.PathEscape(parameterValueToString(r.autoScalingGroupId, "autoScalingGroupId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.registerAutoScalingGroupLoadBalancerOpts == nil {
-		return localVarReturnValue, nil, reportError("registerAutoScalingGroupLoadBalancerOpts is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.registerAutoScalingGroupLoadBalancerOpts
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["X-LSW-Auth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-LSW-Auth"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 503 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiRegisterLoadBalancerTargetsRequest struct {
-	ctx context.Context
-	ApiService PublicCloudAPI
-	loadBalancerId string
-	loadBalancerTargetOpts *LoadBalancerTargetOpts
-}
-
-func (r ApiRegisterLoadBalancerTargetsRequest) LoadBalancerTargetOpts(loadBalancerTargetOpts LoadBalancerTargetOpts) ApiRegisterLoadBalancerTargetsRequest {
-	r.loadBalancerTargetOpts = &loadBalancerTargetOpts
-	return r
-}
-
-func (r ApiRegisterLoadBalancerTargetsRequest) Execute() (*http.Response, error) {
-	return r.ApiService.RegisterLoadBalancerTargetsExecute(r)
-}
-
-/*
-RegisterLoadBalancerTargets Register targets
-
-Register targets in a load balancer. Instances must be running and have private network enabled so they can be registered.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param loadBalancerId Load balancer ID
- @return ApiRegisterLoadBalancerTargetsRequest
-*/
-func (a *PublicCloudAPIService) RegisterLoadBalancerTargets(ctx context.Context, loadBalancerId string) ApiRegisterLoadBalancerTargetsRequest {
-	return ApiRegisterLoadBalancerTargetsRequest{
-		ApiService: a,
-		ctx: ctx,
-		loadBalancerId: loadBalancerId,
-	}
-}
-
-// Execute executes the request
-func (a *PublicCloudAPIService) RegisterLoadBalancerTargetsExecute(r ApiRegisterLoadBalancerTargetsRequest) (*http.Response, error) {
+func (a *PublicCloudAPIService) RegisterTargetsExecute(r ApiRegisterTargetsRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.RegisterLoadBalancerTargets")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.RegisterTargets")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/loadBalancers/{loadBalancerId}/registerTargets"
-	localVarPath = strings.Replace(localVarPath, "{"+"loadBalancerId"+"}", url.PathEscape(parameterValueToString(r.loadBalancerId, "loadBalancerId")), -1)
+	localVarPath := localBasePath + "/targetGroups/{targetGroupId}/registerTargets"
+	localVarPath = strings.Replace(localVarPath, "{"+"targetGroupId"+"}", url.PathEscape(parameterValueToString(r.targetGroupId, "targetGroupId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.loadBalancerTargetOpts == nil {
-		return nil, reportError("loadBalancerTargetOpts is required and must be specified")
+	if r.requestBody == nil {
+		return nil, reportError("requestBody is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9823,7 +10479,7 @@ func (a *PublicCloudAPIService) RegisterLoadBalancerTargetsExecute(r ApiRegister
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.loadBalancerTargetOpts
+	localVarPostBody = r.requestBody
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -12845,11 +13501,11 @@ type ApiUpdateLoadBalancerListenerRequest struct {
 	ApiService PublicCloudAPI
 	loadBalancerId string
 	listenerId string
-	loadBalancerListenerOpts *LoadBalancerListenerOpts
+	loadBalancerListenerUpdateOpts *LoadBalancerListenerUpdateOpts
 }
 
-func (r ApiUpdateLoadBalancerListenerRequest) LoadBalancerListenerOpts(loadBalancerListenerOpts LoadBalancerListenerOpts) ApiUpdateLoadBalancerListenerRequest {
-	r.loadBalancerListenerOpts = &loadBalancerListenerOpts
+func (r ApiUpdateLoadBalancerListenerRequest) LoadBalancerListenerUpdateOpts(loadBalancerListenerUpdateOpts LoadBalancerListenerUpdateOpts) ApiUpdateLoadBalancerListenerRequest {
+	r.loadBalancerListenerUpdateOpts = &loadBalancerListenerUpdateOpts
 	return r
 }
 
@@ -12896,8 +13552,8 @@ func (a *PublicCloudAPIService) UpdateLoadBalancerListenerExecute(r ApiUpdateLoa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.loadBalancerListenerOpts == nil {
-		return localVarReturnValue, nil, reportError("loadBalancerListenerOpts is required and must be specified")
+	if r.loadBalancerListenerUpdateOpts == nil {
+		return localVarReturnValue, nil, reportError("loadBalancerListenerUpdateOpts is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -12918,7 +13574,189 @@ func (a *PublicCloudAPIService) UpdateLoadBalancerListenerExecute(r ApiUpdateLoa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.loadBalancerListenerOpts
+	localVarPostBody = r.loadBalancerListenerUpdateOpts
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateTargetGroupRequest struct {
+	ctx context.Context
+	ApiService PublicCloudAPI
+	targetGroupId string
+	targetGroup *TargetGroup
+}
+
+func (r ApiUpdateTargetGroupRequest) TargetGroup(targetGroup TargetGroup) ApiUpdateTargetGroupRequest {
+	r.targetGroup = &targetGroup
+	return r
+}
+
+func (r ApiUpdateTargetGroupRequest) Execute() (*TargetGroup, *http.Response, error) {
+	return r.ApiService.UpdateTargetGroupExecute(r)
+}
+
+/*
+UpdateTargetGroup Update Target Group
+
+Update a Target Group
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param targetGroupId Target Group ID
+ @return ApiUpdateTargetGroupRequest
+*/
+func (a *PublicCloudAPIService) UpdateTargetGroup(ctx context.Context, targetGroupId string) ApiUpdateTargetGroupRequest {
+	return ApiUpdateTargetGroupRequest{
+		ApiService: a,
+		ctx: ctx,
+		targetGroupId: targetGroupId,
+	}
+}
+
+// Execute executes the request
+//  @return TargetGroup
+func (a *PublicCloudAPIService) UpdateTargetGroupExecute(r ApiUpdateTargetGroupRequest) (*TargetGroup, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TargetGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.UpdateTargetGroup")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/targetGroups/{targetGroupId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"targetGroupId"+"}", url.PathEscape(parameterValueToString(r.targetGroupId, "targetGroupId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.targetGroup == nil {
+		return localVarReturnValue, nil, reportError("targetGroup is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.targetGroup
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

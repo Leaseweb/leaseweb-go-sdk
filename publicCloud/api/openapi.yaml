@@ -59,6 +59,8 @@ tags:
 - description: ""
   name: Images
 - description: ""
+  name: Target Groups
+- description: ""
   name: Marketplace Apps
 - description: ""
   name: Metrics
@@ -4248,14 +4250,8 @@ paths:
                       enabled: true
                       maxLifeTime: 1000
                     balance: roundrobin
-                    healthCheck:
-                      method: GET
-                      uri: /
-                      host: null
-                      port: 80
                     xForwardedFor: false
                     idleTimeOut: 60
-                    targetPort: 442
                   autoScalingGroup:
                     id: 8714e190-8ca1-49cf-8594-0d019deff809
                     type: MANUAL
@@ -4385,10 +4381,8 @@ paths:
                 configuration:
                   stickySession: null
                   balance: roundrobin
-                  healthCheck: null
                   xForwardedFor: false
                   idleTimeOut: 60
-                  targetPort: 80
               schema:
                 $ref: '#/components/schemas/loadBalancerDetails'
           description: OK
@@ -4592,10 +4586,8 @@ paths:
                 configuration:
                   stickySession: null
                   balance: roundrobin
-                  healthCheck: null
                   xForwardedFor: false
                   idleTimeOut: 60
-                  targetPort: 80
               schema:
                 $ref: '#/components/schemas/loadBalancerDetails'
           description: OK.
@@ -4728,10 +4720,8 @@ paths:
                 configuration:
                   stickySession: null
                   balance: roundrobin
-                  healthCheck: null
                   xForwardedFor: false
                   idleTimeOut: 60
-                  targetPort: 80
               schema:
                 $ref: '#/components/schemas/loadBalancerDetails'
           description: OK.
@@ -4800,6 +4790,111 @@ paths:
       tags:
       - publicCloud
   /loadBalancers/{loadBalancerId}/listeners:
+    get:
+      description: List listeners
+      operationId: getLoadBalancerListenerList
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 1
+                  limit: 10
+                  offset: 0
+                listeners:
+                - protocol: HTTPS
+                  port: 443
+                  id: fac06878-6655-4956-8ea7-124a97f133ab
+                  rules:
+                  - id: b05917e1-96a4-442a-900c-c41f273d95c9
+                    default: true
+                    targetGroupId: b05917e1-96a4-442a-900c-c41f273d95c9
+              schema:
+                $ref: '#/components/schemas/getLoadBalancerListenerListResult'
+          description: OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get listener list
+      tags:
+      - publicCloud
     post:
       description: Create listener
       operationId: createLoadBalancerListener
@@ -4820,6 +4915,8 @@ paths:
             example:
               protocol: HTTPS
               port: 443
+              defaultRule:
+                targetGroupId: b05917e1-96a4-442a-900c-c41f273d95c9
               certificate:
                 chain: '-----BEGIN CERTIFICATE-----MIICNDCCAZ2gAwIBAgIUEby6nzM+o7vkKfzcMS/DGA8tgwQwDQYJKoZIhvcNAQELBQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoMGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yNDA0MjUwODE3MjZaFw0yNTA0MjUwODE3MjZaMEUxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMMiux2r1AFLVpIhdZ0bvgIvhiT9XCnfHJlGE7OarGKDKJDQ6XAquCfosLws2XAugGcMJWrsqVWtJEYSu6OMsDLYCJhh39AKqZIW0pktkr8LGlo4VLvzGPqwpHnzWthyCEFsE6p+JJQumDA/izJm2zjZL+xHDocOlNqDTB87AIdrAgMBAAGjITAfMB0GA1UdDgQWBBT3sXUrIR2vcwak0QCXoIsxHa4dDDANBgkqhkiG9w0BAQsFAAOBgQCh/l+5s713J02b8sWicUK2KjTPfyKmZFkoS+Mlo+//B/aM612ZJpGL2tAKGF3v0NDOrRYLZj0t/tlZI55pUNJI9cNj/RExvnfTSSNJIbV+8kQt5AHo50wGxj/apkuEtQre2Fpf4pyovcfIoF6HJvvp1jy96yL14UoEehZypR8FlA==-----END
                   CERTIFICATE-----'
@@ -4838,6 +4935,10 @@ paths:
                 protocol: HTTPS
                 port: 443
                 id: fac06878-6655-4956-8ea7-124a97f133ab
+                rules:
+                - id: b05917e1-96a4-442a-900c-c41f273d95c9
+                  default: true
+                  targetGroupId: b05917e1-96a4-442a-900c-c41f273d95c9
               schema:
                 $ref: '#/components/schemas/loadBalancerListener'
           description: OK
@@ -5019,8 +5120,19 @@ paths:
                 protocol: HTTPS
                 port: 443
                 id: fac06878-6655-4956-8ea7-124a97f133ab
+                rules:
+                - id: b05917e1-96a4-442a-900c-c41f273d95c9
+                  default: true
+                  targetGroupId: b05917e1-96a4-442a-900c-c41f273d95c9
+                sslCertificates:
+                - chain: '-----BEGIN CERTIFICATE-----MIICNDCCAZ2gAwIBAgIUEby6nzM+o7vkKfzcMS/DGA8tgwQwDQYJKoZIhvcNAQELBQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoMGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yNDA0MjUwODE3MjZaFw0yNTA0MjUwODE3MjZaMEUxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMMiux2r1AFLVpIhdZ0bvgIvhiT9XCnfHJlGE7OarGKDKJDQ6XAquCfosLws2XAugGcMJWrsqVWtJEYSu6OMsDLYCJhh39AKqZIW0pktkr8LGlo4VLvzGPqwpHnzWthyCEFsE6p+JJQumDA/izJm2zjZL+xHDocOlNqDTB87AIdrAgMBAAGjITAfMB0GA1UdDgQWBBT3sXUrIR2vcwak0QCXoIsxHa4dDDANBgkqhkiG9w0BAQsFAAOBgQCh/l+5s713J02b8sWicUK2KjTPfyKmZFkoS+Mlo+//B/aM612ZJpGL2tAKGF3v0NDOrRYLZj0t/tlZI55pUNJI9cNj/RExvnfTSSNJIbV+8kQt5AHo50wGxj/apkuEtQre2Fpf4pyovcfIoF6HJvvp1jy96yL14UoEehZypR8FlA==-----END
+                    CERTIFICATE-----'
+                  certificate: '-----BEGIN CERTIFICATE-----MIIBhDCB7gIBADBFMQswCQYDVQQGEwJBVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtWdKNbZxvkXKAADjJMJ7VTJz6uFoMD403C+gMIF8hwqIsHggzCao6iXrW9sZoyZtUBVBiiq5RumHbbpwvOdMmXrShEB4sTJkWRMDy7yD4D91WCU1fc10E/zBJMwssAvmHZo5kGW1Pj1N9ktb+O/TMsEc6yd5suvdQj6aaJbQlTQIDAQABoAAwDQYJKoZIhvcNAQELBQADgYEAWOQ2CJLRo8MQgJgvhdoSIkHITnrbjB5hS3f/dx0lIcnyI6Q9nOyuQHXkCgkdBaV8lz7l+IbqcGc3CaIRP2ZIVFvo2252n630tOOSsqoqJS1tYIoIKsohi3T3d8T1i/s0BWbTJi8Xgd186wyUn/jHwXROKx2rq6yYsAO6fISDKw8=-----END
+                    CERTIFICATE-----'
+                  privateKey: '-----BEGIN EC PRIVATE KEY-----MIHcAgEBBEIBVlC0IObonfQZIQ81l/WILKfWT5Fv96eNnYmQZ7uleu73igfiVESVuPfNlbW9oNEK1XcXli4YNZMxWMkKuzC3w8CgBwYFK4EEACOhgYkDgYYABAHvOqz9d2xeSpm1FNdw0NR5j/q6PMd6whZFsTPNYNj0/PsTpsHk78ZB4MYnJUXwHJjpj+gnKkLNc02f4w/vSF8VXADX4l40XU/w82TAOCftQwoxO5o0jZcwEUIYzl02Zd7uNxhjtKJQnYFi9x8WI8L8zQ6GZB/fJKYwoHaUr0I1h/5LzQ==-----END
+                    EC PRIVATE KEY-----'
               schema:
-                $ref: '#/components/schemas/loadBalancerListener'
+                $ref: '#/components/schemas/loadBalancerListenerDetails'
           description: OK.
         "401":
           content:
@@ -5104,6 +5216,8 @@ paths:
             example:
               protocol: HTTPS
               port: 443
+              defaultRule:
+                targetGroupId: b05917e1-96a4-442a-900c-c41f273d95c9
               certificate:
                 chain: '-----BEGIN CERTIFICATE-----MIICNDCCAZ2gAwIBAgIUEby6nzM+o7vkKfzcMS/DGA8tgwQwDQYJKoZIhvcNAQELBQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoMGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yNDA0MjUwODE3MjZaFw0yNTA0MjUwODE3MjZaMEUxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMMiux2r1AFLVpIhdZ0bvgIvhiT9XCnfHJlGE7OarGKDKJDQ6XAquCfosLws2XAugGcMJWrsqVWtJEYSu6OMsDLYCJhh39AKqZIW0pktkr8LGlo4VLvzGPqwpHnzWthyCEFsE6p+JJQumDA/izJm2zjZL+xHDocOlNqDTB87AIdrAgMBAAGjITAfMB0GA1UdDgQWBBT3sXUrIR2vcwak0QCXoIsxHa4dDDANBgkqhkiG9w0BAQsFAAOBgQCh/l+5s713J02b8sWicUK2KjTPfyKmZFkoS+Mlo+//B/aM612ZJpGL2tAKGF3v0NDOrRYLZj0t/tlZI55pUNJI9cNj/RExvnfTSSNJIbV+8kQt5AHo50wGxj/apkuEtQre2Fpf4pyovcfIoF6HJvvp1jy96yL14UoEehZypR8FlA==-----END
                   CERTIFICATE-----'
@@ -5112,7 +5226,7 @@ paths:
                 privateKey: '-----BEGIN EC PRIVATE KEY-----MIHcAgEBBEIBVlC0IObonfQZIQ81l/WILKfWT5Fv96eNnYmQZ7uleu73igfiVESVuPfNlbW9oNEK1XcXli4YNZMxWMkKuzC3w8CgBwYFK4EEACOhgYkDgYYABAHvOqz9d2xeSpm1FNdw0NR5j/q6PMd6whZFsTPNYNj0/PsTpsHk78ZB4MYnJUXwHJjpj+gnKkLNc02f4w/vSF8VXADX4l40XU/w82TAOCftQwoxO5o0jZcwEUIYzl02Zd7uNxhjtKJQnYFi9x8WI8L8zQ6GZB/fJKYwoHaUr0I1h/5LzQ==-----END
                   EC PRIVATE KEY-----'
             schema:
-              $ref: '#/components/schemas/loadBalancerListenerOpts'
+              $ref: '#/components/schemas/loadBalancerListenerUpdateOpts'
         required: true
       responses:
         "200":
@@ -5122,6 +5236,10 @@ paths:
                 protocol: HTTPS
                 port: 443
                 id: fac06878-6655-4956-8ea7-124a97f133ab
+                rules:
+                - id: b05917e1-96a4-442a-900c-c41f273d95c9
+                  default: true
+                  targetGroupId: b05917e1-96a4-442a-900c-c41f273d95c9
               schema:
                 $ref: '#/components/schemas/loadBalancerListener'
           description: OK
@@ -5177,290 +5295,6 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: Update a listener
-      tags:
-      - publicCloud
-  /loadBalancers/{loadBalancerId}/targets:
-    get:
-      description: List targets registered in a load balancer.
-      operationId: getLoadBalancerTargetList
-      parameters:
-      - description: Load balancer ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
-        explode: false
-        in: path
-        name: loadBalancerId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                _metadata:
-                  totalCount: 2
-                  limit: 20
-                  offset: 0
-                targets:
-                - id: 0af98842-38a4-4fe5-8b6d-687730e8d8c1
-                  reference: lb instance 1
-                  image:
-                    id: UBUNTU_22_04_64BIT
-                    name: Ubuntu 22.04 LTS (x86_64)
-                    family: linux
-                    flavour: ubuntu
-                    custom: false
-                  state: RUNNING
-                  ips:
-                  - ip: 10.32.60.2
-                    prefixLength: "32"
-                    version: 4
-                    nullRouted: false
-                    reverseLookup: null
-                    networkType: INTERNAL
-                    mainIp: false
-                  healthCheckStatus:
-                    checkStatus: Connection timeout
-                    status: DOWN
-                - id: 8be7f8c6-e8c0-4321-a01e-ac754e2f6872
-                  reference: lb instance 2
-                  image:
-                    id: UBUNTU_22_04_64BIT
-                    name: Ubuntu 22.04 LTS (x86_64)
-                    family: linux
-                    flavour: ubuntu
-                    custom: false
-                  state: RUNNING
-                  ips:
-                  - ip: 85.17.17.71
-                    prefixLength: "32"
-                    version: 4
-                    nullRouted: false
-                    reverseLookup: null
-                    networkType: PUBLIC
-                    mainIp: true
-              schema:
-                $ref: '#/components/schemas/getLoadBalancerTargetListResult'
-          description: OK
-        "400":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "400"
-                errorDetails: {}
-                errorMessage: The API could not interpret your request correctly.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Bad Request.
-        "401":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "401"
-                errorMessage: You are not authorized to view this resource.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Not Authorized.
-        "403":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-        "500":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "500"
-                errorMessage: '''The API could not handle your request at this time.'
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Internal Server Error.
-        "503":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "503"
-                errorMessage: The API is not available at the moment.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Service Unavailable.
-      summary: List registered targets
-      tags:
-      - publicCloud
-  /loadBalancers/{loadBalancerId}/registerTargets:
-    post:
-      description: Register targets in a load balancer. Instances must be running
-        and have private network enabled so they can be registered.
-      operationId: registerLoadBalancerTargets
-      parameters:
-      - description: Load balancer ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
-        explode: false
-        in: path
-        name: loadBalancerId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            example:
-              targets:
-              - id: 8be7f8c6-e8c0-4321-a01e-ac754e2f6872
-              - id: b05917e1-96a4-442a-900c-c41f273d95c9
-            schema:
-              $ref: '#/components/schemas/loadBalancerTargetOpts'
-        required: true
-      responses:
-        "204":
-          description: No Content.
-        "400":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "400"
-                errorDetails: {}
-                errorMessage: The API could not interpret your request correctly.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Bad Request.
-        "401":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "401"
-                errorMessage: You are not authorized to view this resource.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Not Authorized.
-        "403":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-        "500":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "500"
-                errorMessage: '''The API could not handle your request at this time.'
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Internal Server Error.
-        "503":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "503"
-                errorMessage: The API is not available at the moment.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Service Unavailable.
-      summary: Register targets
-      tags:
-      - publicCloud
-  /loadBalancers/{loadBalancerId}/deregisterTargets:
-    post:
-      description: Deregister targets registered in a load balancer.
-      operationId: deregisterLoadBalancerTargets
-      parameters:
-      - description: Load balancer ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
-        explode: false
-        in: path
-        name: loadBalancerId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            example:
-              targets:
-              - id: 8be7f8c6-e8c0-4321-a01e-ac754e2f6872
-              - id: b05917e1-96a4-442a-900c-c41f273d95c9
-            schema:
-              $ref: '#/components/schemas/loadBalancerTargetOpts'
-        required: true
-      responses:
-        "204":
-          description: No Content.
-        "400":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "400"
-                errorDetails: {}
-                errorMessage: The API could not interpret your request correctly.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Bad Request.
-        "401":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "401"
-                errorMessage: You are not authorized to view this resource.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Not Authorized.
-        "403":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-        "500":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "500"
-                errorMessage: '''The API could not handle your request at this time.'
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Internal Server Error.
-        "503":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "503"
-                errorMessage: The API is not available at the moment.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Service Unavailable.
-      summary: Deregister targets
       tags:
       - publicCloud
   /instances/{instanceId}/ips:
@@ -7181,7 +7015,6 @@ paths:
                 desiredAmount: 2
                 endsAt: null
                 id: 4c3e9d29-9232-48af-93a7-7ec42b8c0f6d
-                loadBalancer: null
                 maximumAmount: null
                 minimumAmount: null
                 reference: Manual Auto Scaling Group
@@ -7345,25 +7178,6 @@ paths:
                 desiredAmount: 2
                 endsAt: null
                 id: fb769dab-3daa-47e4-89ed-06a4b6499176
-                loadBalancer:
-                  id: 32082a93-d1e2-4bc0-8f5e-8fe4312b0844
-                  type: lsw.m3.large
-                  resources:
-                    cpu:
-                      value: 2
-                      unit: vCPU
-                    memory:
-                      value: 7
-                      unit: GiB
-                    publicNetworkSpeed:
-                      value: 1
-                      unit: Gbps
-                    privateNetworkSpeed:
-                      value: 100
-                      unit: Mbps
-                  reference: lb-integrated-with-asg
-                  state: RUNNING
-                  startedAt: 2024-05-28T08:50:51+00:00
                 maximumAmount: null
                 minimumAmount: null
                 reference: Manual Auto Scaling Group
@@ -7497,25 +7311,6 @@ paths:
                 desiredAmount: 4
                 endsAt: null
                 id: fb769dab-3daa-47e4-89ed-06a4b6499176
-                loadBalancer:
-                  id: 52082a93-d1e2-4bc0-8f5e-8fe4312b0846
-                  type: lsw.m3.large
-                  resources:
-                    cpu:
-                      value: 2
-                      unit: vCPU
-                    memory:
-                      value: 7
-                      unit: GiB
-                    publicNetworkSpeed:
-                      value: 1
-                      unit: Gbps
-                    privateNetworkSpeed:
-                      value: 1
-                      unit: Gbps
-                  reference: lb-integrated-with-asg
-                  state: RUNNING
-                  startedAt: 2024-05-28T08:50:51+00:00
                 maximumAmount: 8
                 minimumAmount: 4
                 reference: CPU Based Auto Scaling
@@ -7580,220 +7375,6 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: Update Auto Scaling Group
-      tags:
-      - publicCloud
-  /autoScalingGroups/{autoScalingGroupId}/registerLoadBalancer:
-    post:
-      description: Associates a Load Balancer with an Auto Scaling Group to distribute
-        incoming traffic across the instances within the group.
-      operationId: registerAutoScalingGroupLoadBalancer
-      parameters:
-      - description: Auto Scaling Group ID
-        example: fb769dab-3daa-47e4-89ed-06a4b6499176
-        explode: false
-        in: path
-        name: autoScalingGroupId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            example:
-              loadBalancerId: 2b52cc0a-2de9-47c2-8ce2-eb1bb468cfcd
-            schema:
-              $ref: '#/components/schemas/registerAutoScalingGroupLoadBalancerOpts'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                cooldownTime: null
-                cpuThreshold: null
-                createdAt: 2024-04-26T09:22:25+00:00
-                desiredAmount: 2
-                endsAt: null
-                id: fb769dab-3daa-47e4-89ed-06a4b6499176
-                loadBalancer:
-                  id: 32082a93-d1e2-4bc0-8f5e-8fe4312b0844
-                  type: lsw.m3.large
-                  resources:
-                    cpu:
-                      value: 2
-                      unit: vCPU
-                    memory:
-                      value: 7
-                      unit: GiB
-                    publicNetworkSpeed:
-                      value: 1
-                      unit: Gbps
-                    privateNetworkSpeed:
-                      value: 100
-                      unit: Mbps
-                  reference: lb-integrated-with-asg
-                  state: RUNNING
-                  startedAt: 2024-05-28T08:50:51+00:00
-                maximumAmount: null
-                minimumAmount: null
-                reference: Manual Auto Scaling Group
-                region: eu-west-3
-                startsAt: null
-                state: ACTIVE
-                type: MANUAL
-                updatedAt: 2024-04-26T09:22:25+00:00
-                warmupTime: null
-              schema:
-                $ref: '#/components/schemas/autoScalingGroupDetails'
-          description: OK
-        "400":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "400"
-                errorDetails: {}
-                errorMessage: The API could not interpret your request correctly.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Bad Request.
-        "401":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "401"
-                errorMessage: You are not authorized to view this resource.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Not Authorized.
-        "403":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-        "500":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "500"
-                errorMessage: '''The API could not handle your request at this time.'
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Internal Server Error.
-        "503":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "503"
-                errorMessage: The API is not available at the moment.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Service Unavailable.
-      summary: Register Load balancer
-      tags:
-      - publicCloud
-  /autoScalingGroups/{autoScalingGroupId}/deregisterLoadBalancer:
-    post:
-      description: "Disassociates a Load Balancer from an Auto Scaling Group, stopping\
-        \ the distribution of incoming traffic to the instances within the group."
-      operationId: deregisterAutoScalingGroupLoadBalancer
-      parameters:
-      - description: Auto Scaling Group ID
-        example: fb769dab-3daa-47e4-89ed-06a4b6499176
-        explode: false
-        in: path
-        name: autoScalingGroupId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                cooldownTime: null
-                cpuThreshold: null
-                createdAt: 2024-04-26T09:22:25+00:00
-                desiredAmount: 2
-                endsAt: null
-                id: fb769dab-3daa-47e4-89ed-06a4b6499176
-                loadBalancer: null
-                maximumAmount: null
-                minimumAmount: null
-                reference: Manual Auto Scaling Group
-                region: eu-west-3
-                startsAt: null
-                state: ACTIVE
-                type: MANUAL
-                updatedAt: 2024-04-26T09:22:25+00:00
-                warmupTime: null
-              schema:
-                $ref: '#/components/schemas/autoScalingGroupDetails'
-          description: OK
-        "400":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "400"
-                errorDetails: {}
-                errorMessage: The API could not interpret your request correctly.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Bad Request.
-        "401":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "401"
-                errorMessage: You are not authorized to view this resource.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Not Authorized.
-        "403":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "403"
-                errorMessage: Access to the requested resource is forbidden.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Forbidden.
-        "500":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "500"
-                errorMessage: '''The API could not handle your request at this time.'
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Internal Server Error.
-        "503":
-          content:
-            application/json:
-              example:
-                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
-                errorCode: "503"
-                errorMessage: The API is not available at the moment.
-              schema:
-                $ref: '#/components/schemas/errorResult'
-          description: Service Unavailable.
-      summary: Deregister Load balancer
       tags:
       - publicCloud
   /autoScalingGroups/{autoScalingGroupId}/instances:
@@ -7923,6 +7504,778 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: Get list of instances belonging to an Auto Scaling Group
+      tags:
+      - publicCloud
+  /targetGroups:
+    get:
+      description: List and filter Target Groups
+      operationId: getTargetGroupList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - example: a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - example: Foo bar
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: protocol
+        required: false
+        schema:
+          $ref: '#/components/schemas/protocol'
+        style: form
+      - example: "80"
+        explode: true
+        in: query
+        name: port
+        required: false
+        schema:
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: region
+        required: false
+        schema:
+          $ref: '#/components/schemas/regionName'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 1
+                  limit: 10
+                  offset: 0
+                targetGroups:
+                - name: Target group name
+                  protocol: HTTP
+                  port: 80
+                  region: eu-west-2
+                  healthCheck:
+                    protocol: HTTP
+                    method: GET
+                    uri: /
+                    host: my-host
+                    port: 80
+              schema:
+                $ref: '#/components/schemas/getTargetGroupListResult'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get Target Group list
+      tags:
+      - publicCloud
+    post:
+      description: Create a Target Group
+      operationId: createTargetGroup
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Target group name
+              protocol: HTTP
+              port: 80
+              region: eu-west-2
+              healthCheck:
+                protocol: HTTP
+                method: GET
+                uri: /
+                host: my-host
+                port: 80
+            schema:
+              $ref: '#/components/schemas/targetGroup'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                name: Target group name
+                protocol: HTTP
+                port: 80
+                region: eu-west-2
+                healthCheck:
+                  protocol: HTTP
+                  method: GET
+                  uri: /
+                  host: my-host
+                  port: 80
+              schema:
+                $ref: '#/components/schemas/targetGroup'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Create Target Group
+      tags:
+      - publicCloud
+  /targetGroups/{targetGroupId}:
+    delete:
+      description: Delete a Target Group.
+      operationId: deleteTargetGroup
+      parameters:
+      - description: Target Group ID
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
+        explode: false
+        in: path
+        name: targetGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Delete Target Group
+      tags:
+      - publicCloud
+    get:
+      description: Get Target Group details.
+      operationId: getTargetGroup
+      parameters:
+      - description: Target Group ID
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
+        explode: false
+        in: path
+        name: targetGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                name: Target group name
+                protocol: HTTP
+                port: 80
+                region: eu-west-2
+                healthCheck:
+                  protocol: HTTP
+                  method: GET
+                  uri: /
+                  host: my-host
+                  port: 80
+              schema:
+                $ref: '#/components/schemas/targetGroup'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get Target Group details
+      tags:
+      - publicCloud
+    put:
+      description: Update a Target Group
+      operationId: updateTargetGroup
+      parameters:
+      - description: Target Group ID
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
+        explode: false
+        in: path
+        name: targetGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Target group name
+              protocol: HTTP
+              port: 80
+              region: eu-west-2
+              healthCheck:
+                protocol: HTTP
+                method: GET
+                uri: /
+                host: my-host
+                port: 80
+            schema:
+              $ref: '#/components/schemas/targetGroup'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                name: Target group name
+                protocol: HTTP
+                port: 80
+                region: eu-west-2
+                healthCheck:
+                  protocol: HTTP
+                  method: GET
+                  uri: /
+                  host: my-host
+                  port: 80
+              schema:
+                $ref: '#/components/schemas/targetGroup'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Update Target Group
+      tags:
+      - publicCloud
+  /targetGroups/{targetGroupId}/targets:
+    get:
+      description: Get targets in a Target Group
+      operationId: getTargetList
+      parameters:
+      - description: Target Group ID
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
+        explode: false
+        in: path
+        name: targetGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 1
+                  limit: 10
+                  offset: 0
+                targets:
+                - id: 8be7f8c6-e8c0-4321-a01e-ac754e2f6872
+                  reference: Target reference
+                  image:
+                    id: 9be7f8c6-e8c0-4321-a01e-ac754e2f6873
+                    name: Custom image
+                    family: linux
+                    flavour: ubuntu
+                    custom: true
+                  state: RUNNING
+                  ips:
+                  - ip: 10.0.0.1
+                    prefixLength: "28"
+                    version: 4
+                    reverseLookup: a-valid-domain.xpto
+                    mainIp: false
+                    networkType: INTERNAL
+                    nullRouted: true
+                  healthCheck:
+                    state: HEALTHY
+                    description: HTTP check passed
+              schema:
+                $ref: '#/components/schemas/getTargetListResult'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get Targets
+      tags:
+      - publicCloud
+  /targetGroups/{targetGroupId}/registerTargets:
+    post:
+      description: Register Targets in a Target Group
+      operationId: registerTargets
+      parameters:
+      - description: Target Group ID
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
+        explode: false
+        in: path
+        name: targetGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+            - 695ddd91-051f-4dd6-9120-938a927a47d0
+            schema:
+              $ref: '#/components/schemas/ids'
+        required: true
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Register Targets
+      tags:
+      - publicCloud
+  /targetGroups/{targetGroupId}/deregisterTargets:
+    post:
+      description: Deregister Targets in a Target Group
+      operationId: deregisterTargets
+      parameters:
+      - description: Target Group ID
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
+        explode: false
+        in: path
+        name: targetGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+            - 695ddd91-051f-4dd6-9120-938a927a47d0
+            schema:
+              $ref: '#/components/schemas/ids'
+        required: true
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Deregister Targets
       tags:
       - publicCloud
 components:
@@ -8062,6 +8415,61 @@ components:
       explode: false
       in: path
       name: autoScalingGroupId
+      required: true
+      schema:
+        format: uuid
+        type: string
+      style: simple
+    id:
+      example: a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+      explode: true
+      in: query
+      name: id
+      required: false
+      schema:
+        format: uuid
+        type: string
+      style: form
+    name:
+      example: Foo bar
+      explode: true
+      in: query
+      name: name
+      required: false
+      schema:
+        type: string
+      style: form
+    protocol:
+      explode: true
+      in: query
+      name: protocol
+      required: false
+      schema:
+        $ref: '#/components/schemas/protocol'
+      style: form
+    port:
+      example: "80"
+      explode: true
+      in: query
+      name: port
+      required: false
+      schema:
+        type: integer
+      style: form
+    region:
+      explode: true
+      in: query
+      name: region
+      required: false
+      schema:
+        $ref: '#/components/schemas/regionName'
+      style: form
+    targetGroupId:
+      description: Target Group ID
+      example: fb769dab-3daa-47e4-89ed-06a4b6499176
+      explode: false
+      in: path
+      name: targetGroupId
       required: true
       schema:
         format: uuid
@@ -9961,25 +10369,6 @@ components:
       - imageId
       type: object
     loadBalancer:
-      example:
-        reference: reference
-        resources:
-          memory:
-            unit: GiB
-            value: 3.75
-          publicNetworkSpeed:
-            unit: Gbps
-            value: 10
-          cpu:
-            unit: vCPU
-            value: 2
-          privateNetworkSpeed:
-            unit: Gbps
-            value: 10
-        startedAt: 2000-01-23T04:56:07.000+00:00
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
-        type: null
       nullable: true
       properties:
         id:
@@ -10036,79 +10425,31 @@ components:
       - leastconn
       - source
       type: string
-    healthCheck:
-      example:
-        method: GET
-        port: 6
-        host: host
-        uri: /
-      nullable: true
-      properties:
-        method:
-          description: HTTP method to be used for health check
-          enum:
-          - GET
-          - HEAD
-          - POST
-          - OPTIONS
-          type: string
-        uri:
-          description: URI to check in the target instances
-          example: /
-          type: string
-        host:
-          description: Host for the health check if any
-          nullable: true
-          type: string
-        port:
-          description: Port number
-          type: integer
-      required:
-      - host
-      - method
-      - port
-      - uri
-      title: healthCheck
-      type: object
     loadBalancerConfiguration:
       description: Different configuration assigned for the load balancer
       example:
         balance: null
-        healthCheck:
-          method: GET
-          port: 6
-          host: host
-          uri: /
-        idleTimeOut: 1
+        idleTimeOut: 6
         xForwardedFor: true
         stickySession:
           maxLifeTime: 0
           enabled: true
-        targetPort: 5
       nullable: true
       properties:
         stickySession:
           $ref: '#/components/schemas/stickySession'
         balance:
           $ref: '#/components/schemas/balance'
-        healthCheck:
-          $ref: '#/components/schemas/healthCheck'
         xForwardedFor:
           description: Is xForwardedFor header enabled or not
           type: boolean
         idleTimeOut:
           description: Time to close the connection if load balancer is idle
           type: integer
-        targetPort:
-          description: Port on which the backend (target) servers are listening to
-            handle incoming requests
-          type: integer
       required:
       - balance
-      - healthCheck
       - idleTimeOut
       - stickySession
-      - targetPort
       - xForwardedFor
       title: loadBalancerConfiguration
       type: object
@@ -10148,17 +10489,11 @@ components:
           status: CONFIGURED
         configuration:
           balance: null
-          healthCheck:
-            method: GET
-            port: 6
-            host: host
-            uri: /
-          idleTimeOut: 1
+          idleTimeOut: 6
           xForwardedFor: true
           stickySession:
             maxLifeTime: 0
             enabled: true
-          targetPort: 5
         autoScalingGroup:
           cpuThreshold: 5
           maximumAmount: 5
@@ -10232,17 +10567,11 @@ components:
             status: CONFIGURED
           configuration:
             balance: null
-            healthCheck:
-              method: GET
-              port: 6
-              host: host
-              uri: /
-            idleTimeOut: 1
+            idleTimeOut: 6
             xForwardedFor: true
             stickySession:
               maxLifeTime: 0
               enabled: true
-            targetPort: 5
           autoScalingGroup:
             cpuThreshold: 5
             maximumAmount: 5
@@ -10313,17 +10642,11 @@ components:
             status: CONFIGURED
           configuration:
             balance: null
-            healthCheck:
-              method: GET
-              port: 6
-              host: host
-              uri: /
-            idleTimeOut: 1
+            idleTimeOut: 6
             xForwardedFor: true
             stickySession:
               maxLifeTime: 0
               enabled: true
-            targetPort: 5
           autoScalingGroup:
             cpuThreshold: 5
             maximumAmount: 5
@@ -10437,6 +10760,52 @@ components:
       - targetPort
       - type
       type: object
+    protocol:
+      enum:
+      - HTTP
+      - HTTPS
+      - TCP
+      example: HTTP
+      type: string
+    httpMethod:
+      enum:
+      - GET
+      - HEAD
+      - POST
+      - OPTIONS
+      type: string
+    healthCheck:
+      example:
+        protocol: HTTP
+        method: method
+        port: 6
+        host: host
+        uri: /
+      nullable: true
+      properties:
+        protocol:
+          $ref: '#/components/schemas/protocol'
+        method:
+          $ref: '#/components/schemas/httpMethod'
+        uri:
+          description: URI to check in the target instances
+          example: /
+          type: string
+        host:
+          description: Host for the health check if any
+          nullable: true
+          type: string
+        port:
+          description: Port number
+          type: integer
+      required:
+      - host
+      - method
+      - port
+      - protocol
+      - uri
+      title: healthCheck
+      type: object
     updateLoadBalancerOpts:
       properties:
         type:
@@ -10463,6 +10832,98 @@ components:
             handle incoming requests
           type: integer
       type: object
+    loadBalancerListenerRule:
+      example:
+        default: true
+        targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          description: The listener unique identifier
+          format: uuid
+          type: string
+        default:
+          description: Condition of the rule
+          type: boolean
+        targetGroupId:
+          description: The target group unique identifier
+          format: uuid
+          type: string
+      required:
+      - default
+      - id
+      - targetGroupId
+      title: loadBalancerListenerRule
+      type: object
+    loadBalancerListener:
+      example:
+        protocol: protocol
+        port: 0
+        rules:
+        - default: true
+          targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - default: true
+          targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        protocol:
+          description: Protocol of the listener.
+          type: string
+        port:
+          description: Port for the listener
+          type: integer
+        id:
+          description: The listener unique identifier
+          format: uuid
+          type: string
+        rules:
+          items:
+            $ref: '#/components/schemas/loadBalancerListenerRule'
+          type: array
+      required:
+      - id
+      - port
+      - protocol
+      - rules
+      title: loadBalancerListener
+      type: object
+    getLoadBalancerListenerListResult:
+      example:
+        listeners:
+        - protocol: protocol
+          port: 0
+          rules:
+          - default: true
+            targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - default: true
+            targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - protocol: protocol
+          port: 0
+          rules:
+          - default: true
+            targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - default: true
+            targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        listeners:
+          items:
+            $ref: '#/components/schemas/loadBalancerListener'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      type: object
     loadBalancerListenerOpts:
       properties:
         protocol:
@@ -10476,105 +10937,90 @@ components:
           type: integer
         certificate:
           $ref: '#/components/schemas/certificate'
+        defaultRule:
+          $ref: '#/components/schemas/listenerDefaultRule'
       required:
+      - certificate
+      - defaultRule
       - port
       - protocol
       title: loadBalancerListenerOpts
       type: object
-    loadBalancerListener:
+    sslCertificate:
+      example:
+        privateKey: privateKey
+        chain: chain
+        certificate: certificate
+      properties:
+        privateKey:
+          description: Client Private Key. Required only if protocol is HTTPS
+          type: string
+        certificate:
+          description: Client Certificate. Required only if protocol is HTTPS
+          type: string
+        chain:
+          description: "CA certificate. Not required, but can be added if protocol\
+            \ is HTTPS"
+          type: string
+      required:
+      - certificate
+      - chain
+      - privateKey
+      title: sslCertificate
+      type: object
+    loadBalancerListenerDetails:
+      allOf:
+      - $ref: '#/components/schemas/loadBalancerListener'
+      - properties:
+          sslCertificates:
+            items:
+              $ref: '#/components/schemas/sslCertificate'
+            type: array
+        required:
+        - sslCertificates
+        title: loadBalancerListener
+        type: object
       example:
         protocol: protocol
         port: 0
+        sslCertificates:
+        - privateKey: privateKey
+          chain: chain
+          certificate: certificate
+        - privateKey: privateKey
+          chain: chain
+          certificate: certificate
+        rules:
+        - default: true
+          targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - default: true
+          targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+    loadBalancerListenerUpdateOpts:
       properties:
         protocol:
-          description: Protocol of the listener.
+          enum:
+          - HTTPS
+          - HTTP
+          - TCP
+          nullable: true
           type: string
         port:
-          description: Port for the listener
+          description: Port that the listener listens to
+          nullable: true
           type: integer
-        id:
-          description: The listener unique identifier
-          format: uuid
-          type: string
-      title: loadBalancerListener
-      type: object
-    getLoadBalancerTargetListResult:
-      example:
-        _metadata:
-          offset: 0
-          limit: 5
-          totalCount: 2
-        targets:
-        - reference: reference
-          image:
-            flavour: ubuntu
-            custom: true
-            name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_22_04_64BIT
-            family: linux
-          healthCheckStatus:
-            checkStatus: checkStatus
-            status: status
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          ips:
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            networkType: internal
-            version: null
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            networkType: internal
-            version: null
-        - reference: reference
-          image:
-            flavour: ubuntu
-            custom: true
-            name: Ubuntu 20.04 LTS (x86_64)
-            id: UBUNTU_22_04_64BIT
-            family: linux
-          healthCheckStatus:
-            checkStatus: checkStatus
-            status: status
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          ips:
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            networkType: internal
-            version: null
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            networkType: internal
-            version: null
-      properties:
-        targets:
-          items:
-            $ref: '#/components/schemas/target'
-          type: array
-        _metadata:
-          $ref: '#/components/schemas/_metadata'
-      type: object
-    loadBalancerTargetOpts:
-      properties:
-        targets:
-          items:
-            $ref: '#/components/schemas/loadBalancerTargetOpt'
-          type: array
-      title: loadBalancerTargetOpts
+        certificate:
+          $ref: '#/components/schemas/certificate_1'
+        defaultRule:
+          $ref: '#/components/schemas/listenerDefaultRule'
+      required:
+      - certificate
+      - defaultRule
+      - port
+      - protocol
+      title: loadBalancerListenerUpdateOpts
       type: object
     getIpListResult:
       example:
@@ -10912,25 +11358,6 @@ components:
         desiredAmount: 0
         reference: reference
         createdAt: 2000-01-23T04:56:07.000+00:00
-        loadBalancer:
-          reference: reference
-          resources:
-            memory:
-              unit: GiB
-              value: 3.75
-            publicNetworkSpeed:
-              unit: Gbps
-              value: 10
-            cpu:
-              unit: vCPU
-              value: 2
-            privateNetworkSpeed:
-              unit: Gbps
-              value: 10
-          startedAt: 2000-01-23T04:56:07.000+00:00
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          type: null
         minimumAmount: 6
         startsAt: 2000-01-23T04:56:07.000+00:00
         warmupTime: 5
@@ -11004,8 +11431,6 @@ components:
             seconds for new instances
           nullable: true
           type: integer
-        loadBalancer:
-          $ref: '#/components/schemas/loadBalancer'
       required:
       - cooldownTime
       - cpuThreshold
@@ -11013,7 +11438,6 @@ components:
       - desiredAmount
       - endsAt
       - id
-      - loadBalancer
       - maximumAmount
       - minimumAmount
       - reference
@@ -11074,15 +11498,6 @@ components:
             that the instances need to be terminated. Must be changed along with "startsAt"
           format: date-time
           type: string
-      type: object
-    registerAutoScalingGroupLoadBalancerOpts:
-      properties:
-        loadBalancerId:
-          description: Load balancer ID
-          example: 32082a93-d1e2-4bc0-8f5e-8fe4312b0844
-          type: string
-      required:
-      - loadBalancerId
       type: object
     autoScaledInstance:
       example:
@@ -11253,6 +11668,231 @@ components:
         _metadata:
           $ref: '#/components/schemas/_metadata'
       type: object
+    targetGroup:
+      example:
+        protocol: protocol
+        port: 0
+        healthCheck:
+          protocol: HTTP
+          method: method
+          port: 6
+          host: host
+          uri: /
+        name: name
+        region: region
+      properties:
+        name:
+          description: The name of the target group
+          type: string
+        protocol:
+          $ref: '#/components/schemas/protocol'
+        port:
+          description: The port of the target group
+          type: integer
+        region:
+          $ref: '#/components/schemas/regionName'
+        healthCheck:
+          $ref: '#/components/schemas/healthCheck'
+      required:
+      - healthCheck
+      - name
+      - port
+      - protocol
+      - region
+      title: targetGroup
+      type: object
+    getTargetGroupListResult:
+      example:
+        targetGroups:
+        - protocol: protocol
+          port: 0
+          healthCheck:
+            protocol: HTTP
+            method: method
+            port: 6
+            host: host
+            uri: /
+          name: name
+          region: region
+        - protocol: protocol
+          port: 0
+          healthCheck:
+            protocol: HTTP
+            method: method
+            port: 6
+            host: host
+            uri: /
+          name: name
+          region: region
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        targetGroups:
+          items:
+            $ref: '#/components/schemas/targetGroup'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      title: targetGroups
+      type: object
+    healthCheckStatus:
+      description: Health check status
+      enum:
+      - HEALTHY
+      - UNHEALTHY
+      - MAINTENANCE
+      - UNKNOWN
+      type: string
+    _schemas_healthCheckStatus:
+      example:
+        description: description
+        state: null
+      nullable: true
+      properties:
+        state:
+          $ref: '#/components/schemas/healthCheckStatus'
+        description:
+          description: Description of the health check status
+          type: string
+      required:
+      - description
+      - state
+      title: healthCheckStatus
+      type: object
+    target:
+      example:
+        reference: reference
+        image:
+          flavour: ubuntu
+          custom: true
+          name: Ubuntu 20.04 LTS (x86_64)
+          id: UBUNTU_22_04_64BIT
+          family: linux
+        healthCheck:
+          description: description
+          state: null
+        id: id
+        state: state
+        ips:
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          networkType: internal
+          version: null
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          networkType: internal
+          version: null
+      properties:
+        id:
+          description: The ID of the target
+          type: string
+        reference:
+          description: The reference of the target
+          type: string
+        image:
+          $ref: '#/components/schemas/image'
+        state:
+          description: The state of the target
+          type: string
+        ips:
+          description: The IP addresses of the target
+          items:
+            $ref: '#/components/schemas/ip'
+          type: array
+        healthCheck:
+          $ref: '#/components/schemas/_schemas_healthCheckStatus'
+      required:
+      - healthCheck
+      - id
+      - image
+      - ips
+      - reference
+      - state
+      title: target
+      type: object
+    getTargetListResult:
+      example:
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+        targets:
+        - reference: reference
+          image:
+            flavour: ubuntu
+            custom: true
+            name: Ubuntu 20.04 LTS (x86_64)
+            id: UBUNTU_22_04_64BIT
+            family: linux
+          healthCheck:
+            description: description
+            state: null
+          id: id
+          state: state
+          ips:
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: null
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: null
+        - reference: reference
+          image:
+            flavour: ubuntu
+            custom: true
+            name: Ubuntu 20.04 LTS (x86_64)
+            id: UBUNTU_22_04_64BIT
+            family: linux
+          healthCheck:
+            description: description
+            state: null
+          id: id
+          state: state
+          ips:
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: null
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: null
+      properties:
+        targets:
+          items:
+            $ref: '#/components/schemas/target'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      title: targets
+      type: object
+    ids:
+      items:
+        format: uuid
+        type: string
+      type: array
     region:
       example:
         name: null
@@ -11631,74 +12271,34 @@ components:
         chain:
           description: "CA certificate. Not required, but can be added if protocol\
             \ is HTTPS"
+          nullable: true
           type: string
       title: certificate
       type: object
-    healthCheckStatus:
-      example:
-        checkStatus: checkStatus
-        status: status
+    listenerDefaultRule:
+      nullable: true
       properties:
-        checkStatus:
-          type: string
-        status:
-          type: string
-      title: healthCheckStatus
-      type: object
-    target:
-      example:
-        reference: reference
-        image:
-          flavour: ubuntu
-          custom: true
-          name: Ubuntu 20.04 LTS (x86_64)
-          id: UBUNTU_22_04_64BIT
-          family: linux
-        healthCheckStatus:
-          checkStatus: checkStatus
-          status: status
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
-        ips:
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          networkType: internal
-          version: null
-        - prefixLength: "28"
-          reverseLookup: reverseLookup
-          ip: 127.0.0.1
-          nullRouted: true
-          mainIp: true
-          networkType: internal
-          version: null
-      properties:
-        id:
-          description: The instance unique identifier
+        targetGroupId:
+          description: The target group unique identifier
           format: uuid
           type: string
-        reference:
-          description: The identifying name set to the instance
-          type: string
-        image:
-          $ref: '#/components/schemas/image'
-        state:
-          $ref: '#/components/schemas/state'
-        healthCheckStatus:
-          $ref: '#/components/schemas/healthCheckStatus'
-        ips:
-          items:
-            $ref: '#/components/schemas/ip'
-          type: array
-      title: target
+      title: listenerDefaultRule
       type: object
-    loadBalancerTargetOpt:
+    certificate_1:
+      nullable: true
       properties:
-        id:
+        privateKey:
+          description: Client Private Key. Required only if protocol is HTTPS
           type: string
-      title: loadBalancerTargetOpt
+        certificate:
+          description: Client Certificate. Required only if protocol is HTTPS
+          type: string
+        chain:
+          description: "CA certificate. Not required, but can be added if protocol\
+            \ is HTTPS"
+          nullable: true
+          type: string
+      title: certificate
       type: object
     trafficMetricValue:
       example:

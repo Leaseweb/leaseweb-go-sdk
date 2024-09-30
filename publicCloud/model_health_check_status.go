@@ -12,145 +12,69 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
-// checks if the HealthCheckStatus type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &HealthCheckStatus{}
+// HealthCheckStatus Health check status
+type HealthCheckStatus string
 
-// HealthCheckStatus struct for HealthCheckStatus
-type HealthCheckStatus struct {
-	CheckStatus *string `json:"checkStatus,omitempty"`
-	Status *string `json:"status,omitempty"`
-	AdditionalProperties map[string]interface{}
+// List of healthCheckStatus
+const (
+	HEALTHCHECKSTATUS_HEALTHY HealthCheckStatus = "HEALTHY"
+	HEALTHCHECKSTATUS_UNHEALTHY HealthCheckStatus = "UNHEALTHY"
+	HEALTHCHECKSTATUS_MAINTENANCE HealthCheckStatus = "MAINTENANCE"
+	HEALTHCHECKSTATUS_UNKNOWN HealthCheckStatus = "UNKNOWN"
+)
+
+// All allowed values of HealthCheckStatus enum
+var AllowedHealthCheckStatusEnumValues = []HealthCheckStatus{
+	"HEALTHY",
+	"UNHEALTHY",
+	"MAINTENANCE",
+	"UNKNOWN",
 }
 
-type _HealthCheckStatus HealthCheckStatus
-
-// NewHealthCheckStatus instantiates a new HealthCheckStatus object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewHealthCheckStatus() *HealthCheckStatus {
-	this := HealthCheckStatus{}
-	return &this
-}
-
-// NewHealthCheckStatusWithDefaults instantiates a new HealthCheckStatus object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewHealthCheckStatusWithDefaults() *HealthCheckStatus {
-	this := HealthCheckStatus{}
-	return &this
-}
-
-// GetCheckStatus returns the CheckStatus field value if set, zero value otherwise.
-func (o *HealthCheckStatus) GetCheckStatus() string {
-	if o == nil || IsNil(o.CheckStatus) {
-		var ret string
-		return ret
-	}
-	return *o.CheckStatus
-}
-
-// GetCheckStatusOk returns a tuple with the CheckStatus field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HealthCheckStatus) GetCheckStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.CheckStatus) {
-		return nil, false
-	}
-	return o.CheckStatus, true
-}
-
-// HasCheckStatus returns a boolean if a field has been set.
-func (o *HealthCheckStatus) HasCheckStatus() bool {
-	if o != nil && !IsNil(o.CheckStatus) {
-		return true
-	}
-
-	return false
-}
-
-// SetCheckStatus gets a reference to the given string and assigns it to the CheckStatus field.
-func (o *HealthCheckStatus) SetCheckStatus(v string) {
-	o.CheckStatus = &v
-}
-
-// GetStatus returns the Status field value if set, zero value otherwise.
-func (o *HealthCheckStatus) GetStatus() string {
-	if o == nil || IsNil(o.Status) {
-		var ret string
-		return ret
-	}
-	return *o.Status
-}
-
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *HealthCheckStatus) GetStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.Status) {
-		return nil, false
-	}
-	return o.Status, true
-}
-
-// HasStatus returns a boolean if a field has been set.
-func (o *HealthCheckStatus) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *HealthCheckStatus) SetStatus(v string) {
-	o.Status = &v
-}
-
-func (o HealthCheckStatus) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o HealthCheckStatus) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CheckStatus) {
-		toSerialize["checkStatus"] = o.CheckStatus
-	}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
-
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
-	}
-
-	return toSerialize, nil
-}
-
-func (o *HealthCheckStatus) UnmarshalJSON(data []byte) (err error) {
-	varHealthCheckStatus := _HealthCheckStatus{}
-
-	err = json.Unmarshal(data, &varHealthCheckStatus)
-
+func (v *HealthCheckStatus) UnmarshalJSON(src []byte) error {
+	var value string
+	err := json.Unmarshal(src, &value)
 	if err != nil {
 		return err
 	}
-
-	*o = HealthCheckStatus(varHealthCheckStatus)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "checkStatus")
-		delete(additionalProperties, "status")
-		o.AdditionalProperties = additionalProperties
+	enumTypeValue := HealthCheckStatus(value)
+	for _, existing := range AllowedHealthCheckStatusEnumValues {
+		if existing == enumTypeValue {
+			*v = enumTypeValue
+			return nil
+		}
 	}
 
-	return err
+	return fmt.Errorf("%+v is not a valid HealthCheckStatus", value)
+}
+
+// NewHealthCheckStatusFromValue returns a pointer to a valid HealthCheckStatus
+// for the value passed as argument, or an error if the value passed is not allowed by the enum
+func NewHealthCheckStatusFromValue(v string) (*HealthCheckStatus, error) {
+	ev := HealthCheckStatus(v)
+	if ev.IsValid() {
+		return &ev, nil
+	} else {
+		return nil, fmt.Errorf("invalid value '%v' for HealthCheckStatus: valid values are %v", v, AllowedHealthCheckStatusEnumValues)
+	}
+}
+
+// IsValid return true if the value is valid for the enum, false otherwise
+func (v HealthCheckStatus) IsValid() bool {
+	for _, existing := range AllowedHealthCheckStatusEnumValues {
+		if existing == v {
+			return true
+		}
+	}
+	return false
+}
+
+// Ptr returns reference to healthCheckStatus value
+func (v HealthCheckStatus) Ptr() *HealthCheckStatus {
+	return &v
 }
 
 type NullableHealthCheckStatus struct {
@@ -188,5 +112,4 @@ func (v *NullableHealthCheckStatus) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
 

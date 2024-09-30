@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Method** | **string** | HTTP method to be used for health check | 
+**Protocol** | [**Protocol**](Protocol.md) |  | 
+**Method** | [**HttpMethod**](HttpMethod.md) |  | 
 **Uri** | **string** | URI to check in the target instances | 
 **Host** | **NullableString** | Host for the health check if any | 
 **Port** | **int32** | Port number | 
@@ -13,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewHealthCheck
 
-`func NewHealthCheck(method string, uri string, host NullableString, port int32, ) *HealthCheck`
+`func NewHealthCheck(protocol Protocol, method HttpMethod, uri string, host NullableString, port int32, ) *HealthCheck`
 
 NewHealthCheck instantiates a new HealthCheck object
 This constructor will assign default values to properties that have it defined,
@@ -28,22 +29,42 @@ NewHealthCheckWithDefaults instantiates a new HealthCheck object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetProtocol
+
+`func (o *HealthCheck) GetProtocol() Protocol`
+
+GetProtocol returns the Protocol field if non-nil, zero value otherwise.
+
+### GetProtocolOk
+
+`func (o *HealthCheck) GetProtocolOk() (*Protocol, bool)`
+
+GetProtocolOk returns a tuple with the Protocol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProtocol
+
+`func (o *HealthCheck) SetProtocol(v Protocol)`
+
+SetProtocol sets Protocol field to given value.
+
+
 ### GetMethod
 
-`func (o *HealthCheck) GetMethod() string`
+`func (o *HealthCheck) GetMethod() HttpMethod`
 
 GetMethod returns the Method field if non-nil, zero value otherwise.
 
 ### GetMethodOk
 
-`func (o *HealthCheck) GetMethodOk() (*string, bool)`
+`func (o *HealthCheck) GetMethodOk() (*HttpMethod, bool)`
 
 GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMethod
 
-`func (o *HealthCheck) SetMethod(v string)`
+`func (o *HealthCheck) SetMethod(v HttpMethod)`
 
 SetMethod sets Method field to given value.
 

@@ -14,37 +14,37 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetLoadBalancerTargetListResult type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetLoadBalancerTargetListResult{}
+// checks if the GetTargetListResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetTargetListResult{}
 
-// GetLoadBalancerTargetListResult struct for GetLoadBalancerTargetListResult
-type GetLoadBalancerTargetListResult struct {
+// GetTargetListResult struct for GetTargetListResult
+type GetTargetListResult struct {
 	Targets []Target `json:"targets,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _GetLoadBalancerTargetListResult GetLoadBalancerTargetListResult
+type _GetTargetListResult GetTargetListResult
 
-// NewGetLoadBalancerTargetListResult instantiates a new GetLoadBalancerTargetListResult object
+// NewGetTargetListResult instantiates a new GetTargetListResult object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetLoadBalancerTargetListResult() *GetLoadBalancerTargetListResult {
-	this := GetLoadBalancerTargetListResult{}
+func NewGetTargetListResult() *GetTargetListResult {
+	this := GetTargetListResult{}
 	return &this
 }
 
-// NewGetLoadBalancerTargetListResultWithDefaults instantiates a new GetLoadBalancerTargetListResult object
+// NewGetTargetListResultWithDefaults instantiates a new GetTargetListResult object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetLoadBalancerTargetListResultWithDefaults() *GetLoadBalancerTargetListResult {
-	this := GetLoadBalancerTargetListResult{}
+func NewGetTargetListResultWithDefaults() *GetTargetListResult {
+	this := GetTargetListResult{}
 	return &this
 }
 
 // GetTargets returns the Targets field value if set, zero value otherwise.
-func (o *GetLoadBalancerTargetListResult) GetTargets() []Target {
+func (o *GetTargetListResult) GetTargets() []Target {
 	if o == nil || IsNil(o.Targets) {
 		var ret []Target
 		return ret
@@ -54,7 +54,7 @@ func (o *GetLoadBalancerTargetListResult) GetTargets() []Target {
 
 // GetTargetsOk returns a tuple with the Targets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetLoadBalancerTargetListResult) GetTargetsOk() ([]Target, bool) {
+func (o *GetTargetListResult) GetTargetsOk() ([]Target, bool) {
 	if o == nil || IsNil(o.Targets) {
 		return nil, false
 	}
@@ -62,7 +62,7 @@ func (o *GetLoadBalancerTargetListResult) GetTargetsOk() ([]Target, bool) {
 }
 
 // HasTargets returns a boolean if a field has been set.
-func (o *GetLoadBalancerTargetListResult) HasTargets() bool {
+func (o *GetTargetListResult) HasTargets() bool {
 	if o != nil && !IsNil(o.Targets) {
 		return true
 	}
@@ -71,12 +71,12 @@ func (o *GetLoadBalancerTargetListResult) HasTargets() bool {
 }
 
 // SetTargets gets a reference to the given []Target and assigns it to the Targets field.
-func (o *GetLoadBalancerTargetListResult) SetTargets(v []Target) {
+func (o *GetTargetListResult) SetTargets(v []Target) {
 	o.Targets = v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *GetLoadBalancerTargetListResult) GetMetadata() Metadata {
+func (o *GetTargetListResult) GetMetadata() Metadata {
 	if o == nil || IsNil(o.Metadata) {
 		var ret Metadata
 		return ret
@@ -86,7 +86,7 @@ func (o *GetLoadBalancerTargetListResult) GetMetadata() Metadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetLoadBalancerTargetListResult) GetMetadataOk() (*Metadata, bool) {
+func (o *GetTargetListResult) GetMetadataOk() (*Metadata, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *GetLoadBalancerTargetListResult) GetMetadataOk() (*Metadata, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *GetLoadBalancerTargetListResult) HasMetadata() bool {
+func (o *GetTargetListResult) HasMetadata() bool {
 	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
@@ -103,11 +103,11 @@ func (o *GetLoadBalancerTargetListResult) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
-func (o *GetLoadBalancerTargetListResult) SetMetadata(v Metadata) {
+func (o *GetTargetListResult) SetMetadata(v Metadata) {
 	o.Metadata = &v
 }
 
-func (o GetLoadBalancerTargetListResult) MarshalJSON() ([]byte, error) {
+func (o GetTargetListResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -115,7 +115,7 @@ func (o GetLoadBalancerTargetListResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetLoadBalancerTargetListResult) ToMap() (map[string]interface{}, error) {
+func (o GetTargetListResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Targets) {
 		toSerialize["targets"] = o.Targets
@@ -131,16 +131,16 @@ func (o GetLoadBalancerTargetListResult) ToMap() (map[string]interface{}, error)
 	return toSerialize, nil
 }
 
-func (o *GetLoadBalancerTargetListResult) UnmarshalJSON(data []byte) (err error) {
-	varGetLoadBalancerTargetListResult := _GetLoadBalancerTargetListResult{}
+func (o *GetTargetListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetTargetListResult := _GetTargetListResult{}
 
-	err = json.Unmarshal(data, &varGetLoadBalancerTargetListResult)
+	err = json.Unmarshal(data, &varGetTargetListResult)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetLoadBalancerTargetListResult(varGetLoadBalancerTargetListResult)
+	*o = GetTargetListResult(varGetTargetListResult)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -153,38 +153,38 @@ func (o *GetLoadBalancerTargetListResult) UnmarshalJSON(data []byte) (err error)
 	return err
 }
 
-type NullableGetLoadBalancerTargetListResult struct {
-	value *GetLoadBalancerTargetListResult
+type NullableGetTargetListResult struct {
+	value *GetTargetListResult
 	isSet bool
 }
 
-func (v NullableGetLoadBalancerTargetListResult) Get() *GetLoadBalancerTargetListResult {
+func (v NullableGetTargetListResult) Get() *GetTargetListResult {
 	return v.value
 }
 
-func (v *NullableGetLoadBalancerTargetListResult) Set(val *GetLoadBalancerTargetListResult) {
+func (v *NullableGetTargetListResult) Set(val *GetTargetListResult) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetLoadBalancerTargetListResult) IsSet() bool {
+func (v NullableGetTargetListResult) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetLoadBalancerTargetListResult) Unset() {
+func (v *NullableGetTargetListResult) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetLoadBalancerTargetListResult(val *GetLoadBalancerTargetListResult) *NullableGetLoadBalancerTargetListResult {
-	return &NullableGetLoadBalancerTargetListResult{value: val, isSet: true}
+func NewNullableGetTargetListResult(val *GetTargetListResult) *NullableGetTargetListResult {
+	return &NullableGetTargetListResult{value: val, isSet: true}
 }
 
-func (v NullableGetLoadBalancerTargetListResult) MarshalJSON() ([]byte, error) {
+func (v NullableGetTargetListResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetLoadBalancerTargetListResult) UnmarshalJSON(src []byte) error {
+func (v *NullableGetTargetListResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

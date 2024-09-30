@@ -22,13 +22,10 @@ var _ MappedNullable = &LoadBalancerConfiguration{}
 type LoadBalancerConfiguration struct {
 	StickySession NullableStickySession `json:"stickySession"`
 	Balance Balance `json:"balance"`
-	HealthCheck NullableHealthCheck `json:"healthCheck"`
 	// Is xForwardedFor header enabled or not
 	XForwardedFor bool `json:"xForwardedFor"`
 	// Time to close the connection if load balancer is idle
 	IdleTimeOut int32 `json:"idleTimeOut"`
-	// Port on which the backend (target) servers are listening to handle incoming requests
-	TargetPort int32 `json:"targetPort"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -38,14 +35,12 @@ type _LoadBalancerConfiguration LoadBalancerConfiguration
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerConfiguration(stickySession NullableStickySession, balance Balance, healthCheck NullableHealthCheck, xForwardedFor bool, idleTimeOut int32, targetPort int32) *LoadBalancerConfiguration {
+func NewLoadBalancerConfiguration(stickySession NullableStickySession, balance Balance, xForwardedFor bool, idleTimeOut int32) *LoadBalancerConfiguration {
 	this := LoadBalancerConfiguration{}
 	this.StickySession = stickySession
 	this.Balance = balance
-	this.HealthCheck = healthCheck
 	this.XForwardedFor = xForwardedFor
 	this.IdleTimeOut = idleTimeOut
-	this.TargetPort = targetPort
 	return &this
 }
 
@@ -107,32 +102,6 @@ func (o *LoadBalancerConfiguration) SetBalance(v Balance) {
 	o.Balance = v
 }
 
-// GetHealthCheck returns the HealthCheck field value
-// If the value is explicit nil, the zero value for HealthCheck will be returned
-func (o *LoadBalancerConfiguration) GetHealthCheck() HealthCheck {
-	if o == nil || o.HealthCheck.Get() == nil {
-		var ret HealthCheck
-		return ret
-	}
-
-	return *o.HealthCheck.Get()
-}
-
-// GetHealthCheckOk returns a tuple with the HealthCheck field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoadBalancerConfiguration) GetHealthCheckOk() (*HealthCheck, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.HealthCheck.Get(), o.HealthCheck.IsSet()
-}
-
-// SetHealthCheck sets field value
-func (o *LoadBalancerConfiguration) SetHealthCheck(v HealthCheck) {
-	o.HealthCheck.Set(&v)
-}
-
 // GetXForwardedFor returns the XForwardedFor field value
 func (o *LoadBalancerConfiguration) GetXForwardedFor() bool {
 	if o == nil {
@@ -181,30 +150,6 @@ func (o *LoadBalancerConfiguration) SetIdleTimeOut(v int32) {
 	o.IdleTimeOut = v
 }
 
-// GetTargetPort returns the TargetPort field value
-func (o *LoadBalancerConfiguration) GetTargetPort() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.TargetPort
-}
-
-// GetTargetPortOk returns a tuple with the TargetPort field value
-// and a boolean to check if the value has been set.
-func (o *LoadBalancerConfiguration) GetTargetPortOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TargetPort, true
-}
-
-// SetTargetPort sets field value
-func (o *LoadBalancerConfiguration) SetTargetPort(v int32) {
-	o.TargetPort = v
-}
-
 func (o LoadBalancerConfiguration) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -217,10 +162,8 @@ func (o LoadBalancerConfiguration) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["stickySession"] = o.StickySession.Get()
 	toSerialize["balance"] = o.Balance
-	toSerialize["healthCheck"] = o.HealthCheck.Get()
 	toSerialize["xForwardedFor"] = o.XForwardedFor
 	toSerialize["idleTimeOut"] = o.IdleTimeOut
-	toSerialize["targetPort"] = o.TargetPort
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -236,10 +179,8 @@ func (o *LoadBalancerConfiguration) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"stickySession",
 		"balance",
-		"healthCheck",
 		"xForwardedFor",
 		"idleTimeOut",
-		"targetPort",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -271,10 +212,8 @@ func (o *LoadBalancerConfiguration) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "stickySession")
 		delete(additionalProperties, "balance")
-		delete(additionalProperties, "healthCheck")
 		delete(additionalProperties, "xForwardedFor")
 		delete(additionalProperties, "idleTimeOut")
-		delete(additionalProperties, "targetPort")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -637,6 +637,7 @@ paths:
           content:
             application/json:
               example:
+                isMessageRequired: false
                 resolutions:
                 - id: CONTENT_REMOVED
                   description: The mentioned content has been removed.
@@ -1241,6 +1242,7 @@ components:
       type: array
     getReportResolutionListResult:
       example:
+        isMessageRequired: true
         resolutions:
         - description: The mentioned content has been removed.
           id: CONTENT_REMOVED
@@ -1252,6 +1254,13 @@ components:
           items:
             $ref: '#/components/schemas/resolutionList'
           type: array
+        isMessageRequired:
+          description: "`true`, if any of the IP(s) related to this report are null\
+            \ routed"
+          type: boolean
+      required:
+      - isMessageRequired
+      - resolutions
       type: object
     resolveReportResult:
       properties:
@@ -1354,6 +1363,9 @@ components:
             with this resolution.
           example: The mentioned content has been removed.
           type: string
+      required:
+      - description
+      - id
       title: resolutionList
       type: object
   securitySchemes:

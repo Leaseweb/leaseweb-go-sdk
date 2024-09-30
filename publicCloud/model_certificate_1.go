@@ -14,11 +14,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the Certificate type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Certificate{}
+// checks if the Certificate1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Certificate1{}
 
-// Certificate struct for Certificate
-type Certificate struct {
+// Certificate1 struct for Certificate1
+type Certificate1 struct {
 	// Client Private Key. Required only if protocol is HTTPS
 	PrivateKey *string `json:"privateKey,omitempty"`
 	// Client Certificate. Required only if protocol is HTTPS
@@ -28,27 +28,27 @@ type Certificate struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _Certificate Certificate
+type _Certificate1 Certificate1
 
-// NewCertificate instantiates a new Certificate object
+// NewCertificate1 instantiates a new Certificate1 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCertificate() *Certificate {
-	this := Certificate{}
+func NewCertificate1() *Certificate1 {
+	this := Certificate1{}
 	return &this
 }
 
-// NewCertificateWithDefaults instantiates a new Certificate object
+// NewCertificate1WithDefaults instantiates a new Certificate1 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCertificateWithDefaults() *Certificate {
-	this := Certificate{}
+func NewCertificate1WithDefaults() *Certificate1 {
+	this := Certificate1{}
 	return &this
 }
 
 // GetPrivateKey returns the PrivateKey field value if set, zero value otherwise.
-func (o *Certificate) GetPrivateKey() string {
+func (o *Certificate1) GetPrivateKey() string {
 	if o == nil || IsNil(o.PrivateKey) {
 		var ret string
 		return ret
@@ -58,7 +58,7 @@ func (o *Certificate) GetPrivateKey() string {
 
 // GetPrivateKeyOk returns a tuple with the PrivateKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Certificate) GetPrivateKeyOk() (*string, bool) {
+func (o *Certificate1) GetPrivateKeyOk() (*string, bool) {
 	if o == nil || IsNil(o.PrivateKey) {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *Certificate) GetPrivateKeyOk() (*string, bool) {
 }
 
 // HasPrivateKey returns a boolean if a field has been set.
-func (o *Certificate) HasPrivateKey() bool {
+func (o *Certificate1) HasPrivateKey() bool {
 	if o != nil && !IsNil(o.PrivateKey) {
 		return true
 	}
@@ -75,12 +75,12 @@ func (o *Certificate) HasPrivateKey() bool {
 }
 
 // SetPrivateKey gets a reference to the given string and assigns it to the PrivateKey field.
-func (o *Certificate) SetPrivateKey(v string) {
+func (o *Certificate1) SetPrivateKey(v string) {
 	o.PrivateKey = &v
 }
 
 // GetCertificate returns the Certificate field value if set, zero value otherwise.
-func (o *Certificate) GetCertificate() string {
+func (o *Certificate1) GetCertificate() string {
 	if o == nil || IsNil(o.Certificate) {
 		var ret string
 		return ret
@@ -90,7 +90,7 @@ func (o *Certificate) GetCertificate() string {
 
 // GetCertificateOk returns a tuple with the Certificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Certificate) GetCertificateOk() (*string, bool) {
+func (o *Certificate1) GetCertificateOk() (*string, bool) {
 	if o == nil || IsNil(o.Certificate) {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *Certificate) GetCertificateOk() (*string, bool) {
 }
 
 // HasCertificate returns a boolean if a field has been set.
-func (o *Certificate) HasCertificate() bool {
+func (o *Certificate1) HasCertificate() bool {
 	if o != nil && !IsNil(o.Certificate) {
 		return true
 	}
@@ -107,12 +107,12 @@ func (o *Certificate) HasCertificate() bool {
 }
 
 // SetCertificate gets a reference to the given string and assigns it to the Certificate field.
-func (o *Certificate) SetCertificate(v string) {
+func (o *Certificate1) SetCertificate(v string) {
 	o.Certificate = &v
 }
 
 // GetChain returns the Chain field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Certificate) GetChain() string {
+func (o *Certificate1) GetChain() string {
 	if o == nil || IsNil(o.Chain.Get()) {
 		var ret string
 		return ret
@@ -123,7 +123,7 @@ func (o *Certificate) GetChain() string {
 // GetChainOk returns a tuple with the Chain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Certificate) GetChainOk() (*string, bool) {
+func (o *Certificate1) GetChainOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -131,7 +131,7 @@ func (o *Certificate) GetChainOk() (*string, bool) {
 }
 
 // HasChain returns a boolean if a field has been set.
-func (o *Certificate) HasChain() bool {
+func (o *Certificate1) HasChain() bool {
 	if o != nil && o.Chain.IsSet() {
 		return true
 	}
@@ -140,20 +140,20 @@ func (o *Certificate) HasChain() bool {
 }
 
 // SetChain gets a reference to the given NullableString and assigns it to the Chain field.
-func (o *Certificate) SetChain(v string) {
+func (o *Certificate1) SetChain(v string) {
 	o.Chain.Set(&v)
 }
 // SetChainNil sets the value for Chain to be an explicit nil
-func (o *Certificate) SetChainNil() {
+func (o *Certificate1) SetChainNil() {
 	o.Chain.Set(nil)
 }
 
 // UnsetChain ensures that no value is present for Chain, not even an explicit nil
-func (o *Certificate) UnsetChain() {
+func (o *Certificate1) UnsetChain() {
 	o.Chain.Unset()
 }
 
-func (o Certificate) MarshalJSON() ([]byte, error) {
+func (o Certificate1) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -161,7 +161,7 @@ func (o Certificate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Certificate) ToMap() (map[string]interface{}, error) {
+func (o Certificate1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.PrivateKey) {
 		toSerialize["privateKey"] = o.PrivateKey
@@ -180,16 +180,16 @@ func (o Certificate) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Certificate) UnmarshalJSON(data []byte) (err error) {
-	varCertificate := _Certificate{}
+func (o *Certificate1) UnmarshalJSON(data []byte) (err error) {
+	varCertificate1 := _Certificate1{}
 
-	err = json.Unmarshal(data, &varCertificate)
+	err = json.Unmarshal(data, &varCertificate1)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Certificate(varCertificate)
+	*o = Certificate1(varCertificate1)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -203,38 +203,38 @@ func (o *Certificate) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCertificate struct {
-	value *Certificate
+type NullableCertificate1 struct {
+	value *Certificate1
 	isSet bool
 }
 
-func (v NullableCertificate) Get() *Certificate {
+func (v NullableCertificate1) Get() *Certificate1 {
 	return v.value
 }
 
-func (v *NullableCertificate) Set(val *Certificate) {
+func (v *NullableCertificate1) Set(val *Certificate1) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCertificate) IsSet() bool {
+func (v NullableCertificate1) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCertificate) Unset() {
+func (v *NullableCertificate1) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCertificate(val *Certificate) *NullableCertificate {
-	return &NullableCertificate{value: val, isSet: true}
+func NewNullableCertificate1(val *Certificate1) *NullableCertificate1 {
+	return &NullableCertificate1{value: val, isSet: true}
 }
 
-func (v NullableCertificate) MarshalJSON() ([]byte, error) {
+func (v NullableCertificate1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCertificate) UnmarshalJSON(src []byte) error {
+func (v *NullableCertificate1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

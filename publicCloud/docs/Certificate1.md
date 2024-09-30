@@ -1,4 +1,4 @@
-# Certificate
+# Certificate1
 
 ## Properties
 
@@ -10,106 +10,106 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewCertificate
+### NewCertificate1
 
-`func NewCertificate() *Certificate`
+`func NewCertificate1() *Certificate1`
 
-NewCertificate instantiates a new Certificate object
+NewCertificate1 instantiates a new Certificate1 object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewCertificateWithDefaults
+### NewCertificate1WithDefaults
 
-`func NewCertificateWithDefaults() *Certificate`
+`func NewCertificate1WithDefaults() *Certificate1`
 
-NewCertificateWithDefaults instantiates a new Certificate object
+NewCertificate1WithDefaults instantiates a new Certificate1 object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetPrivateKey
 
-`func (o *Certificate) GetPrivateKey() string`
+`func (o *Certificate1) GetPrivateKey() string`
 
 GetPrivateKey returns the PrivateKey field if non-nil, zero value otherwise.
 
 ### GetPrivateKeyOk
 
-`func (o *Certificate) GetPrivateKeyOk() (*string, bool)`
+`func (o *Certificate1) GetPrivateKeyOk() (*string, bool)`
 
 GetPrivateKeyOk returns a tuple with the PrivateKey field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrivateKey
 
-`func (o *Certificate) SetPrivateKey(v string)`
+`func (o *Certificate1) SetPrivateKey(v string)`
 
 SetPrivateKey sets PrivateKey field to given value.
 
 ### HasPrivateKey
 
-`func (o *Certificate) HasPrivateKey() bool`
+`func (o *Certificate1) HasPrivateKey() bool`
 
 HasPrivateKey returns a boolean if a field has been set.
 
 ### GetCertificate
 
-`func (o *Certificate) GetCertificate() string`
+`func (o *Certificate1) GetCertificate() string`
 
 GetCertificate returns the Certificate field if non-nil, zero value otherwise.
 
 ### GetCertificateOk
 
-`func (o *Certificate) GetCertificateOk() (*string, bool)`
+`func (o *Certificate1) GetCertificateOk() (*string, bool)`
 
 GetCertificateOk returns a tuple with the Certificate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCertificate
 
-`func (o *Certificate) SetCertificate(v string)`
+`func (o *Certificate1) SetCertificate(v string)`
 
 SetCertificate sets Certificate field to given value.
 
 ### HasCertificate
 
-`func (o *Certificate) HasCertificate() bool`
+`func (o *Certificate1) HasCertificate() bool`
 
 HasCertificate returns a boolean if a field has been set.
 
 ### GetChain
 
-`func (o *Certificate) GetChain() string`
+`func (o *Certificate1) GetChain() string`
 
 GetChain returns the Chain field if non-nil, zero value otherwise.
 
 ### GetChainOk
 
-`func (o *Certificate) GetChainOk() (*string, bool)`
+`func (o *Certificate1) GetChainOk() (*string, bool)`
 
 GetChainOk returns a tuple with the Chain field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetChain
 
-`func (o *Certificate) SetChain(v string)`
+`func (o *Certificate1) SetChain(v string)`
 
 SetChain sets Chain field to given value.
 
 ### HasChain
 
-`func (o *Certificate) HasChain() bool`
+`func (o *Certificate1) HasChain() bool`
 
 HasChain returns a boolean if a field has been set.
 
 ### SetChainNil
 
-`func (o *Certificate) SetChainNil(b bool)`
+`func (o *Certificate1) SetChainNil(b bool)`
 
  SetChainNil sets the value for Chain to be an explicit nil
 
 ### UnsetChain
-`func (o *Certificate) UnsetChain()`
+`func (o *Certificate1) UnsetChain()`
 
 UnsetChain ensures that no value is present for Chain, not even an explicit nil
 

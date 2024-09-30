@@ -19,13 +19,12 @@ Name | Type | Description | Notes
 **CpuThreshold** | **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. The target average CPU utilization for scaling | 
 **WarmupTime** | **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. Warm-up time in seconds for new instances | 
 **CooldownTime** | **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. Cool-down time in seconds for new instances | 
-**LoadBalancer** | [**NullableLoadBalancer**](LoadBalancer.md) |  | 
 
 ## Methods
 
 ### NewAutoScalingGroupDetails
 
-`func NewAutoScalingGroupDetails(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region RegionName, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, loadBalancer NullableLoadBalancer, ) *AutoScalingGroupDetails`
+`func NewAutoScalingGroupDetails(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region RegionName, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, ) *AutoScalingGroupDetails`
 
 NewAutoScalingGroupDetails instantiates a new AutoScalingGroupDetails object
 This constructor will assign default values to properties that have it defined,
@@ -420,36 +419,6 @@ SetCooldownTime sets CooldownTime field to given value.
 `func (o *AutoScalingGroupDetails) UnsetCooldownTime()`
 
 UnsetCooldownTime ensures that no value is present for CooldownTime, not even an explicit nil
-### GetLoadBalancer
-
-`func (o *AutoScalingGroupDetails) GetLoadBalancer() LoadBalancer`
-
-GetLoadBalancer returns the LoadBalancer field if non-nil, zero value otherwise.
-
-### GetLoadBalancerOk
-
-`func (o *AutoScalingGroupDetails) GetLoadBalancerOk() (*LoadBalancer, bool)`
-
-GetLoadBalancerOk returns a tuple with the LoadBalancer field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLoadBalancer
-
-`func (o *AutoScalingGroupDetails) SetLoadBalancer(v LoadBalancer)`
-
-SetLoadBalancer sets LoadBalancer field to given value.
-
-
-### SetLoadBalancerNil
-
-`func (o *AutoScalingGroupDetails) SetLoadBalancerNil(b bool)`
-
- SetLoadBalancerNil sets the value for LoadBalancer to be an explicit nil
-
-### UnsetLoadBalancer
-`func (o *AutoScalingGroupDetails) UnsetLoadBalancer()`
-
-UnsetLoadBalancer ensures that no value is present for LoadBalancer, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

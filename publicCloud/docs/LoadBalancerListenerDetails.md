@@ -1,4 +1,4 @@
-# LoadBalancerListener
+# LoadBalancerListenerDetails
 
 ## Properties
 
@@ -8,104 +8,125 @@ Name | Type | Description | Notes
 **Port** | **int32** | Port for the listener | 
 **Id** | **string** | The listener unique identifier | 
 **Rules** | [**[]LoadBalancerListenerRule**](LoadBalancerListenerRule.md) |  | 
+**SslCertificates** | [**[]SslCertificate**](SslCertificate.md) |  | 
 
 ## Methods
 
-### NewLoadBalancerListener
+### NewLoadBalancerListenerDetails
 
-`func NewLoadBalancerListener(protocol string, port int32, id string, rules []LoadBalancerListenerRule, ) *LoadBalancerListener`
+`func NewLoadBalancerListenerDetails(protocol string, port int32, id string, rules []LoadBalancerListenerRule, sslCertificates []SslCertificate, ) *LoadBalancerListenerDetails`
 
-NewLoadBalancerListener instantiates a new LoadBalancerListener object
+NewLoadBalancerListenerDetails instantiates a new LoadBalancerListenerDetails object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewLoadBalancerListenerWithDefaults
+### NewLoadBalancerListenerDetailsWithDefaults
 
-`func NewLoadBalancerListenerWithDefaults() *LoadBalancerListener`
+`func NewLoadBalancerListenerDetailsWithDefaults() *LoadBalancerListenerDetails`
 
-NewLoadBalancerListenerWithDefaults instantiates a new LoadBalancerListener object
+NewLoadBalancerListenerDetailsWithDefaults instantiates a new LoadBalancerListenerDetails object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetProtocol
 
-`func (o *LoadBalancerListener) GetProtocol() string`
+`func (o *LoadBalancerListenerDetails) GetProtocol() string`
 
 GetProtocol returns the Protocol field if non-nil, zero value otherwise.
 
 ### GetProtocolOk
 
-`func (o *LoadBalancerListener) GetProtocolOk() (*string, bool)`
+`func (o *LoadBalancerListenerDetails) GetProtocolOk() (*string, bool)`
 
 GetProtocolOk returns a tuple with the Protocol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProtocol
 
-`func (o *LoadBalancerListener) SetProtocol(v string)`
+`func (o *LoadBalancerListenerDetails) SetProtocol(v string)`
 
 SetProtocol sets Protocol field to given value.
 
 
 ### GetPort
 
-`func (o *LoadBalancerListener) GetPort() int32`
+`func (o *LoadBalancerListenerDetails) GetPort() int32`
 
 GetPort returns the Port field if non-nil, zero value otherwise.
 
 ### GetPortOk
 
-`func (o *LoadBalancerListener) GetPortOk() (*int32, bool)`
+`func (o *LoadBalancerListenerDetails) GetPortOk() (*int32, bool)`
 
 GetPortOk returns a tuple with the Port field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPort
 
-`func (o *LoadBalancerListener) SetPort(v int32)`
+`func (o *LoadBalancerListenerDetails) SetPort(v int32)`
 
 SetPort sets Port field to given value.
 
 
 ### GetId
 
-`func (o *LoadBalancerListener) GetId() string`
+`func (o *LoadBalancerListenerDetails) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *LoadBalancerListener) GetIdOk() (*string, bool)`
+`func (o *LoadBalancerListenerDetails) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *LoadBalancerListener) SetId(v string)`
+`func (o *LoadBalancerListenerDetails) SetId(v string)`
 
 SetId sets Id field to given value.
 
 
 ### GetRules
 
-`func (o *LoadBalancerListener) GetRules() []LoadBalancerListenerRule`
+`func (o *LoadBalancerListenerDetails) GetRules() []LoadBalancerListenerRule`
 
 GetRules returns the Rules field if non-nil, zero value otherwise.
 
 ### GetRulesOk
 
-`func (o *LoadBalancerListener) GetRulesOk() (*[]LoadBalancerListenerRule, bool)`
+`func (o *LoadBalancerListenerDetails) GetRulesOk() (*[]LoadBalancerListenerRule, bool)`
 
 GetRulesOk returns a tuple with the Rules field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRules
 
-`func (o *LoadBalancerListener) SetRules(v []LoadBalancerListenerRule)`
+`func (o *LoadBalancerListenerDetails) SetRules(v []LoadBalancerListenerRule)`
 
 SetRules sets Rules field to given value.
+
+
+### GetSslCertificates
+
+`func (o *LoadBalancerListenerDetails) GetSslCertificates() []SslCertificate`
+
+GetSslCertificates returns the SslCertificates field if non-nil, zero value otherwise.
+
+### GetSslCertificatesOk
+
+`func (o *LoadBalancerListenerDetails) GetSslCertificatesOk() (*[]SslCertificate, bool)`
+
+GetSslCertificatesOk returns a tuple with the SslCertificates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSslCertificates
+
+`func (o *LoadBalancerListenerDetails) SetSslCertificates(v []SslCertificate)`
+
+SetSslCertificates sets SslCertificates field to given value.
 
 
 

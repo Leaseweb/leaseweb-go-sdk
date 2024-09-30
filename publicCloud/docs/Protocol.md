@@ -1,15 +1,13 @@
-# HealthCheckStatus
+# Protocol
 
 ## Enum
 
 
-* `HEALTHY` (value: `"HEALTHY"`)
+* `HTTP` (value: `"HTTP"`)
 
-* `UNHEALTHY` (value: `"UNHEALTHY"`)
+* `HTTPS` (value: `"HTTPS"`)
 
-* `MAINTENANCE` (value: `"MAINTENANCE"`)
-
-* `UNKNOWN` (value: `"UNKNOWN"`)
+* `TCP` (value: `"TCP"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

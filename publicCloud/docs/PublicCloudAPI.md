@@ -11,13 +11,14 @@ Method | HTTP request | Description
 [**CreateImage**](PublicCloudAPI.md#CreateImage) | **Post** /images | Create Custom Image
 [**CreateLoadBalancerListener**](PublicCloudAPI.md#CreateLoadBalancerListener) | **Post** /loadBalancers/{loadBalancerId}/listeners | Create listener
 [**CreateSnapshot**](PublicCloudAPI.md#CreateSnapshot) | **Post** /instances/{instanceId}/snapshots | Create instance snapshot
+[**CreateTargetGroup**](PublicCloudAPI.md#CreateTargetGroup) | **Post** /targetGroups | Create Target Group
 [**DeleteAutoScalingGroup**](PublicCloudAPI.md#DeleteAutoScalingGroup) | **Delete** /autoScalingGroups/{autoScalingGroupId} | Delete Auto Scaling Group
 [**DeleteCredential**](PublicCloudAPI.md#DeleteCredential) | **Delete** /instances/{instanceId}/credentials/{type}/{username} | Delete credentials
 [**DeleteCredentials**](PublicCloudAPI.md#DeleteCredentials) | **Delete** /instances/{instanceId}/credentials | Delete all instance credentials
 [**DeleteLoadBalancerListener**](PublicCloudAPI.md#DeleteLoadBalancerListener) | **Delete** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Delete load balancer listener
 [**DeleteSnapshot**](PublicCloudAPI.md#DeleteSnapshot) | **Delete** /instances/{instanceId}/snapshots/{snapshotId} | Delete instance snapshot
-[**DeregisterAutoScalingGroupLoadBalancer**](PublicCloudAPI.md#DeregisterAutoScalingGroupLoadBalancer) | **Post** /autoScalingGroups/{autoScalingGroupId}/deregisterLoadBalancer | Deregister Load balancer
-[**DeregisterLoadBalancerTargets**](PublicCloudAPI.md#DeregisterLoadBalancerTargets) | **Post** /loadBalancers/{loadBalancerId}/deregisterTargets | Deregister targets
+[**DeleteTargetGroup**](PublicCloudAPI.md#DeleteTargetGroup) | **Delete** /targetGroups/{targetGroupId} | Delete Target Group
+[**DeregisterTargets**](PublicCloudAPI.md#DeregisterTargets) | **Post** /targetGroups/{targetGroupId}/deregisterTargets | Deregister Targets
 [**DetachIso**](PublicCloudAPI.md#DetachIso) | **Post** /instances/{instanceId}/detachIso | Detach ISO from instance
 [**GetAutoScalingGroup**](PublicCloudAPI.md#GetAutoScalingGroup) | **Get** /autoScalingGroups/{autoScalingGroupId} | Get Auto Scaling Group details
 [**GetAutoScalingGroupInstanceList**](PublicCloudAPI.md#GetAutoScalingGroupInstanceList) | **Get** /autoScalingGroups/{autoScalingGroupId}/instances | Get list of instances belonging to an Auto Scaling Group
@@ -39,19 +40,21 @@ Method | HTTP request | Description
 [**GetLoadBalancer**](PublicCloudAPI.md#GetLoadBalancer) | **Get** /loadBalancers/{loadBalancerId} | Get load balancer details
 [**GetLoadBalancerList**](PublicCloudAPI.md#GetLoadBalancerList) | **Get** /loadBalancers | Get load balancer list
 [**GetLoadBalancerListener**](PublicCloudAPI.md#GetLoadBalancerListener) | **Get** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Get listener details
-[**GetLoadBalancerTargetList**](PublicCloudAPI.md#GetLoadBalancerTargetList) | **Get** /loadBalancers/{loadBalancerId}/targets | List registered targets
+[**GetLoadBalancerListenerList**](PublicCloudAPI.md#GetLoadBalancerListenerList) | **Get** /loadBalancers/{loadBalancerId}/listeners | Get listener list
 [**GetMarketAppList**](PublicCloudAPI.md#GetMarketAppList) | **Get** /marketApps | Get marketplace apps
 [**GetRegionList**](PublicCloudAPI.md#GetRegionList) | **Get** /regions | List regions
 [**GetReinstallImageList**](PublicCloudAPI.md#GetReinstallImageList) | **Get** /instances/{instanceId}/reinstall/images | List images available for reinstall
 [**GetSnapshot**](PublicCloudAPI.md#GetSnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
 [**GetSnapshotList**](PublicCloudAPI.md#GetSnapshotList) | **Get** /instances/{instanceId}/snapshots | List snapshots
+[**GetTargetGroup**](PublicCloudAPI.md#GetTargetGroup) | **Get** /targetGroups/{targetGroupId} | Get Target Group details
+[**GetTargetGroupList**](PublicCloudAPI.md#GetTargetGroupList) | **Get** /targetGroups | Get Target Group list
+[**GetTargetList**](PublicCloudAPI.md#GetTargetList) | **Get** /targetGroups/{targetGroupId}/targets | Get Targets
 [**GetUpdateInstanceTypeList**](PublicCloudAPI.md#GetUpdateInstanceTypeList) | **Get** /instances/{instanceId}/instanceTypesUpdate | List available instance types for update
 [**LaunchInstance**](PublicCloudAPI.md#LaunchInstance) | **Post** /instances | Launch instance
 [**LaunchLoadBalancer**](PublicCloudAPI.md#LaunchLoadBalancer) | **Post** /loadBalancers | Launch Load balancer
 [**NullRouteIp**](PublicCloudAPI.md#NullRouteIp) | **Post** /instances/{instanceId}/ips/{ip}/null | Null route IP
 [**RebootInstance**](PublicCloudAPI.md#RebootInstance) | **Post** /instances/{instanceId}/reboot | Reboot instance
-[**RegisterAutoScalingGroupLoadBalancer**](PublicCloudAPI.md#RegisterAutoScalingGroupLoadBalancer) | **Post** /autoScalingGroups/{autoScalingGroupId}/registerLoadBalancer | Register Load balancer
-[**RegisterLoadBalancerTargets**](PublicCloudAPI.md#RegisterLoadBalancerTargets) | **Post** /loadBalancers/{loadBalancerId}/registerTargets | Register targets
+[**RegisterTargets**](PublicCloudAPI.md#RegisterTargets) | **Post** /targetGroups/{targetGroupId}/registerTargets | Register Targets
 [**ReinstallInstance**](PublicCloudAPI.md#ReinstallInstance) | **Put** /instances/{instanceId}/reinstall | Reinstall instance
 [**RemoveFromPrivateNetwork**](PublicCloudAPI.md#RemoveFromPrivateNetwork) | **Delete** /instances/{instanceId}/removeFromPrivateNetwork | Remove instance from Private Network
 [**RemoveIpNullRoute**](PublicCloudAPI.md#RemoveIpNullRoute) | **Post** /instances/{instanceId}/ips/{ip}/unnull | Remove an IP null route
@@ -69,6 +72,7 @@ Method | HTTP request | Description
 [**UpdateIp**](PublicCloudAPI.md#UpdateIp) | **Put** /instances/{instanceId}/ips/{ip} | Update IP
 [**UpdateLoadBalancer**](PublicCloudAPI.md#UpdateLoadBalancer) | **Put** /loadBalancers/{loadBalancerId} | Update load balancer
 [**UpdateLoadBalancerListener**](PublicCloudAPI.md#UpdateLoadBalancerListener) | **Put** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Update a listener
+[**UpdateTargetGroup**](PublicCloudAPI.md#UpdateTargetGroup) | **Put** /targetGroups/{targetGroupId} | Update Target Group
 
 
 
@@ -432,7 +436,7 @@ import (
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	loadBalancerListenerOpts := *openapiclient.NewLoadBalancerListenerOpts("Protocol_example", int32(123)) // LoadBalancerListenerOpts | 
+	loadBalancerListenerOpts := *openapiclient.NewLoadBalancerListenerOpts("Protocol_example", int32(123), *openapiclient.NewCertificate(), "TODO") // LoadBalancerListenerOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -543,6 +547,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateTargetGroup
+
+> TargetGroup CreateTargetGroup(ctx).TargetGroup(targetGroup).Execute()
+
+Create Target Group
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	targetGroup := *openapiclient.NewTargetGroup("Name_example", openapiclient.protocol("HTTP"), int32(123), openapiclient.regionName("eu-west-3"), "TODO") // TargetGroup | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.CreateTargetGroup(context.Background()).TargetGroup(targetGroup).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.CreateTargetGroup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateTargetGroup`: TargetGroup
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.CreateTargetGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateTargetGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **targetGroup** | [**TargetGroup**](TargetGroup.md) |  | 
+
+### Return type
+
+[**TargetGroup**](TargetGroup.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -900,11 +970,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeregisterAutoScalingGroupLoadBalancer
+## DeleteTargetGroup
 
-> AutoScalingGroupDetails DeregisterAutoScalingGroupLoadBalancer(ctx, autoScalingGroupId).Execute()
+> DeleteTargetGroup(ctx, targetGroupId).Execute()
 
-Deregister Load balancer
+Delete Target Group
 
 
 
@@ -921,17 +991,15 @@ import (
 )
 
 func main() {
-	autoScalingGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Auto Scaling Group ID
+	targetGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Target Group ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.DeregisterAutoScalingGroupLoadBalancer(context.Background(), autoScalingGroupId).Execute()
+	r, err := apiClient.PublicCloudAPI.DeleteTargetGroup(context.Background(), targetGroupId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.DeregisterAutoScalingGroupLoadBalancer``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.DeleteTargetGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `DeregisterAutoScalingGroupLoadBalancer`: AutoScalingGroupDetails
-	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.DeregisterAutoScalingGroupLoadBalancer`: %v\n", resp)
 }
 ```
 
@@ -941,11 +1009,11 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**autoScalingGroupId** | **string** | Auto Scaling Group ID | 
+**targetGroupId** | **string** | Target Group ID | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeregisterAutoScalingGroupLoadBalancerRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteTargetGroupRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -954,7 +1022,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AutoScalingGroupDetails**](AutoScalingGroupDetails.md)
+ (empty response body)
 
 ### Authorization
 
@@ -970,11 +1038,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeregisterLoadBalancerTargets
+## DeregisterTargets
 
-> DeregisterLoadBalancerTargets(ctx, loadBalancerId).LoadBalancerTargetOpts(loadBalancerTargetOpts).Execute()
+> DeregisterTargets(ctx, targetGroupId).RequestBody(requestBody).Execute()
 
-Deregister targets
+Deregister Targets
 
 
 
@@ -991,14 +1059,14 @@ import (
 )
 
 func main() {
-	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	loadBalancerTargetOpts := *openapiclient.NewLoadBalancerTargetOpts() // LoadBalancerTargetOpts | 
+	targetGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Target Group ID
+	requestBody := []string{"Property_example"} // []string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PublicCloudAPI.DeregisterLoadBalancerTargets(context.Background(), loadBalancerId).LoadBalancerTargetOpts(loadBalancerTargetOpts).Execute()
+	r, err := apiClient.PublicCloudAPI.DeregisterTargets(context.Background(), targetGroupId).RequestBody(requestBody).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.DeregisterLoadBalancerTargets``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.DeregisterTargets``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -1010,17 +1078,17 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**loadBalancerId** | **string** | Load balancer ID | 
+**targetGroupId** | **string** | Target Group ID | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeregisterLoadBalancerTargetsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeregisterTargetsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **loadBalancerTargetOpts** | [**LoadBalancerTargetOpts**](LoadBalancerTargetOpts.md) |  | 
+ **requestBody** | **[]string** |  | 
 
 ### Return type
 
@@ -2525,7 +2593,7 @@ Name | Type | Description  | Notes
 
 ## GetLoadBalancerListener
 
-> LoadBalancerListener GetLoadBalancerListener(ctx, loadBalancerId, listenerId).Execute()
+> LoadBalancerListenerDetails GetLoadBalancerListener(ctx, loadBalancerId, listenerId).Execute()
 
 Get listener details
 
@@ -2554,7 +2622,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetLoadBalancerListener``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLoadBalancerListener`: LoadBalancerListener
+	// response from `GetLoadBalancerListener`: LoadBalancerListenerDetails
 	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetLoadBalancerListener`: %v\n", resp)
 }
 ```
@@ -2580,7 +2648,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LoadBalancerListener**](LoadBalancerListener.md)
+[**LoadBalancerListenerDetails**](LoadBalancerListenerDetails.md)
 
 ### Authorization
 
@@ -2596,11 +2664,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetLoadBalancerTargetList
+## GetLoadBalancerListenerList
 
-> GetLoadBalancerTargetListResult GetLoadBalancerTargetList(ctx, loadBalancerId).Execute()
+> GetLoadBalancerListenerListResult GetLoadBalancerListenerList(ctx, loadBalancerId).Limit(limit).Offset(offset).Execute()
 
-List registered targets
+Get listener list
 
 
 
@@ -2618,16 +2686,18 @@ import (
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
+	limit := int32(20) // int32 | Limit the number of results returned. (optional)
+	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.GetLoadBalancerTargetList(context.Background(), loadBalancerId).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.GetLoadBalancerListenerList(context.Background(), loadBalancerId).Limit(limit).Offset(offset).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetLoadBalancerTargetList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetLoadBalancerListenerList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetLoadBalancerTargetList`: GetLoadBalancerTargetListResult
-	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetLoadBalancerTargetList`: %v\n", resp)
+	// response from `GetLoadBalancerListenerList`: GetLoadBalancerListenerListResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetLoadBalancerListenerList`: %v\n", resp)
 }
 ```
 
@@ -2641,16 +2711,18 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetLoadBalancerTargetListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetLoadBalancerListenerListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **limit** | **int32** | Limit the number of results returned. | 
+ **offset** | **int32** | Return results starting from the given offset. | 
 
 ### Return type
 
-[**GetLoadBalancerTargetListResult**](GetLoadBalancerTargetListResult.md)
+[**GetLoadBalancerListenerListResult**](GetLoadBalancerListenerListResult.md)
 
 ### Authorization
 
@@ -3016,6 +3088,228 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetTargetGroup
+
+> TargetGroup GetTargetGroup(ctx, targetGroupId).Execute()
+
+Get Target Group details
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	targetGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Target Group ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetTargetGroup(context.Background(), targetGroupId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetTargetGroup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTargetGroup`: TargetGroup
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetTargetGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**targetGroupId** | **string** | Target Group ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTargetGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**TargetGroup**](TargetGroup.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTargetGroupList
+
+> GetTargetGroupListResult GetTargetGroupList(ctx).Limit(limit).Offset(offset).Id(id).Name(name).Protocol(protocol).Port(port).Region(region).Execute()
+
+Get Target Group list
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	limit := int32(20) // int32 | Limit the number of results returned. (optional)
+	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
+	id := "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11" // string |  (optional)
+	name := "Foo bar" // string |  (optional)
+	protocol := openapiclient.protocol("HTTP") // Protocol |  (optional)
+	port := int32(80) // int32 |  (optional)
+	region := openapiclient.regionName("eu-west-3") // RegionName |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetTargetGroupList(context.Background()).Limit(limit).Offset(offset).Id(id).Name(name).Protocol(protocol).Port(port).Region(region).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetTargetGroupList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTargetGroupList`: GetTargetGroupListResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetTargetGroupList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTargetGroupListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int32** | Limit the number of results returned. | 
+ **offset** | **int32** | Return results starting from the given offset. | 
+ **id** | **string** |  | 
+ **name** | **string** |  | 
+ **protocol** | [**Protocol**](Protocol.md) |  | 
+ **port** | **int32** |  | 
+ **region** | [**RegionName**](RegionName.md) |  | 
+
+### Return type
+
+[**GetTargetGroupListResult**](GetTargetGroupListResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTargetList
+
+> GetTargetListResult GetTargetList(ctx, targetGroupId).Limit(limit).Offset(offset).Execute()
+
+Get Targets
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	targetGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Target Group ID
+	limit := int32(20) // int32 | Limit the number of results returned. (optional)
+	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetTargetList(context.Background(), targetGroupId).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetTargetList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTargetList`: GetTargetListResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetTargetList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**targetGroupId** | **string** | Target Group ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTargetListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **limit** | **int32** | Limit the number of results returned. | 
+ **offset** | **int32** | Return results starting from the given offset. | 
+
+### Return type
+
+[**GetTargetListResult**](GetTargetListResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetUpdateInstanceTypeList
 
 > InstanceTypes GetUpdateInstanceTypeList(ctx, instanceId).Limit(limit).Offset(offset).Execute()
@@ -3365,83 +3659,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## RegisterAutoScalingGroupLoadBalancer
+## RegisterTargets
 
-> AutoScalingGroupDetails RegisterAutoScalingGroupLoadBalancer(ctx, autoScalingGroupId).RegisterAutoScalingGroupLoadBalancerOpts(registerAutoScalingGroupLoadBalancerOpts).Execute()
+> RegisterTargets(ctx, targetGroupId).RequestBody(requestBody).Execute()
 
-Register Load balancer
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
-)
-
-func main() {
-	autoScalingGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Auto Scaling Group ID
-	registerAutoScalingGroupLoadBalancerOpts := *openapiclient.NewRegisterAutoScalingGroupLoadBalancerOpts("32082a93-d1e2-4bc0-8f5e-8fe4312b0844") // RegisterAutoScalingGroupLoadBalancerOpts | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.RegisterAutoScalingGroupLoadBalancer(context.Background(), autoScalingGroupId).RegisterAutoScalingGroupLoadBalancerOpts(registerAutoScalingGroupLoadBalancerOpts).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.RegisterAutoScalingGroupLoadBalancer``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `RegisterAutoScalingGroupLoadBalancer`: AutoScalingGroupDetails
-	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.RegisterAutoScalingGroupLoadBalancer`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**autoScalingGroupId** | **string** | Auto Scaling Group ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRegisterAutoScalingGroupLoadBalancerRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **registerAutoScalingGroupLoadBalancerOpts** | [**RegisterAutoScalingGroupLoadBalancerOpts**](RegisterAutoScalingGroupLoadBalancerOpts.md) |  | 
-
-### Return type
-
-[**AutoScalingGroupDetails**](AutoScalingGroupDetails.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RegisterLoadBalancerTargets
-
-> RegisterLoadBalancerTargets(ctx, loadBalancerId).LoadBalancerTargetOpts(loadBalancerTargetOpts).Execute()
-
-Register targets
+Register Targets
 
 
 
@@ -3458,14 +3680,14 @@ import (
 )
 
 func main() {
-	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	loadBalancerTargetOpts := *openapiclient.NewLoadBalancerTargetOpts() // LoadBalancerTargetOpts | 
+	targetGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Target Group ID
+	requestBody := []string{"Property_example"} // []string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PublicCloudAPI.RegisterLoadBalancerTargets(context.Background(), loadBalancerId).LoadBalancerTargetOpts(loadBalancerTargetOpts).Execute()
+	r, err := apiClient.PublicCloudAPI.RegisterTargets(context.Background(), targetGroupId).RequestBody(requestBody).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.RegisterLoadBalancerTargets``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.RegisterTargets``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -3477,17 +3699,17 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**loadBalancerId** | **string** | Load balancer ID | 
+**targetGroupId** | **string** | Target Group ID | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiRegisterLoadBalancerTargetsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRegisterTargetsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **loadBalancerTargetOpts** | [**LoadBalancerTargetOpts**](LoadBalancerTargetOpts.md) |  | 
+ **requestBody** | **[]string** |  | 
 
 ### Return type
 
@@ -4642,7 +4864,7 @@ Name | Type | Description  | Notes
 
 ## UpdateLoadBalancerListener
 
-> LoadBalancerListener UpdateLoadBalancerListener(ctx, loadBalancerId, listenerId).LoadBalancerListenerOpts(loadBalancerListenerOpts).Execute()
+> LoadBalancerListener UpdateLoadBalancerListener(ctx, loadBalancerId, listenerId).LoadBalancerListenerUpdateOpts(loadBalancerListenerUpdateOpts).Execute()
 
 Update a listener
 
@@ -4661,11 +4883,11 @@ import (
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
 	listenerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Listener ID
-	loadBalancerListenerOpts := *openapiclient.NewLoadBalancerListenerOpts("Protocol_example", int32(123)) // LoadBalancerListenerOpts | 
+	loadBalancerListenerUpdateOpts := *openapiclient.NewLoadBalancerListenerUpdateOpts("Protocol_example", NullableInt32(123), "TODO", "TODO") // LoadBalancerListenerUpdateOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.UpdateLoadBalancerListener(context.Background(), loadBalancerId, listenerId).LoadBalancerListenerOpts(loadBalancerListenerOpts).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.UpdateLoadBalancerListener(context.Background(), loadBalancerId, listenerId).LoadBalancerListenerUpdateOpts(loadBalancerListenerUpdateOpts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.UpdateLoadBalancerListener``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4693,11 +4915,83 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **loadBalancerListenerOpts** | [**LoadBalancerListenerOpts**](LoadBalancerListenerOpts.md) |  | 
+ **loadBalancerListenerUpdateOpts** | [**LoadBalancerListenerUpdateOpts**](LoadBalancerListenerUpdateOpts.md) |  | 
 
 ### Return type
 
 [**LoadBalancerListener**](LoadBalancerListener.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateTargetGroup
+
+> TargetGroup UpdateTargetGroup(ctx, targetGroupId).TargetGroup(targetGroup).Execute()
+
+Update Target Group
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	targetGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Target Group ID
+	targetGroup := *openapiclient.NewTargetGroup("Name_example", openapiclient.protocol("HTTP"), int32(123), openapiclient.regionName("eu-west-3"), "TODO") // TargetGroup | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.UpdateTargetGroup(context.Background(), targetGroupId).TargetGroup(targetGroup).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.UpdateTargetGroup``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateTargetGroup`: TargetGroup
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.UpdateTargetGroup`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**targetGroupId** | **string** | Target Group ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateTargetGroupRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **targetGroup** | [**TargetGroup**](TargetGroup.md) |  | 
+
+### Return type
+
+[**TargetGroup**](TargetGroup.md)
 
 ### Authorization
 

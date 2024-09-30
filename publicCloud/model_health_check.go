@@ -20,8 +20,8 @@ var _ MappedNullable = &HealthCheck{}
 
 // HealthCheck struct for HealthCheck
 type HealthCheck struct {
-	// HTTP method to be used for health check
-	Method string `json:"method"`
+	Protocol Protocol `json:"protocol"`
+	Method HttpMethod `json:"method"`
 	// URI to check in the target instances
 	Uri string `json:"uri"`
 	// Host for the health check if any
@@ -37,8 +37,9 @@ type _HealthCheck HealthCheck
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHealthCheck(method string, uri string, host NullableString, port int32) *HealthCheck {
+func NewHealthCheck(protocol Protocol, method HttpMethod, uri string, host NullableString, port int32) *HealthCheck {
 	this := HealthCheck{}
+	this.Protocol = protocol
 	this.Method = method
 	this.Uri = uri
 	this.Host = host
@@ -54,10 +55,34 @@ func NewHealthCheckWithDefaults() *HealthCheck {
 	return &this
 }
 
-// GetMethod returns the Method field value
-func (o *HealthCheck) GetMethod() string {
+// GetProtocol returns the Protocol field value
+func (o *HealthCheck) GetProtocol() Protocol {
 	if o == nil {
-		var ret string
+		var ret Protocol
+		return ret
+	}
+
+	return o.Protocol
+}
+
+// GetProtocolOk returns a tuple with the Protocol field value
+// and a boolean to check if the value has been set.
+func (o *HealthCheck) GetProtocolOk() (*Protocol, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Protocol, true
+}
+
+// SetProtocol sets field value
+func (o *HealthCheck) SetProtocol(v Protocol) {
+	o.Protocol = v
+}
+
+// GetMethod returns the Method field value
+func (o *HealthCheck) GetMethod() HttpMethod {
+	if o == nil {
+		var ret HttpMethod
 		return ret
 	}
 
@@ -66,7 +91,7 @@ func (o *HealthCheck) GetMethod() string {
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
-func (o *HealthCheck) GetMethodOk() (*string, bool) {
+func (o *HealthCheck) GetMethodOk() (*HttpMethod, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -74,7 +99,7 @@ func (o *HealthCheck) GetMethodOk() (*string, bool) {
 }
 
 // SetMethod sets field value
-func (o *HealthCheck) SetMethod(v string) {
+func (o *HealthCheck) SetMethod(v HttpMethod) {
 	o.Method = v
 }
 
@@ -162,6 +187,7 @@ func (o HealthCheck) MarshalJSON() ([]byte, error) {
 
 func (o HealthCheck) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["protocol"] = o.Protocol
 	toSerialize["method"] = o.Method
 	toSerialize["uri"] = o.Uri
 	toSerialize["host"] = o.Host.Get()
@@ -179,6 +205,7 @@ func (o *HealthCheck) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"protocol",
 		"method",
 		"uri",
 		"host",
@@ -212,6 +239,7 @@ func (o *HealthCheck) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "protocol")
 		delete(additionalProperties, "method")
 		delete(additionalProperties, "uri")
 		delete(additionalProperties, "host")

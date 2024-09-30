@@ -112,6 +112,18 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test PublicCloudAPIService CreateTargetGroup", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.CreateTargetGroup(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PublicCloudAPIService DeleteAutoScalingGroup", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -181,27 +193,26 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test PublicCloudAPIService DeregisterAutoScalingGroupLoadBalancer", func(t *testing.T) {
+	t.Run("Test PublicCloudAPIService DeleteTargetGroup", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var autoScalingGroupId string
+		var targetGroupId string
 
-		resp, httpRes, err := apiClient.PublicCloudAPI.DeregisterAutoScalingGroupLoadBalancer(context.Background(), autoScalingGroupId).Execute()
+		httpRes, err := apiClient.PublicCloudAPI.DeleteTargetGroup(context.Background(), targetGroupId).Execute()
 
 		require.Nil(t, err)
-		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test PublicCloudAPIService DeregisterLoadBalancerTargets", func(t *testing.T) {
+	t.Run("Test PublicCloudAPIService DeregisterTargets", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var loadBalancerId string
+		var targetGroupId string
 
-		httpRes, err := apiClient.PublicCloudAPI.DeregisterLoadBalancerTargets(context.Background(), loadBalancerId).Execute()
+		httpRes, err := apiClient.PublicCloudAPI.DeregisterTargets(context.Background(), targetGroupId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -494,13 +505,13 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test PublicCloudAPIService GetLoadBalancerTargetList", func(t *testing.T) {
+	t.Run("Test PublicCloudAPIService GetLoadBalancerListenerList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var loadBalancerId string
 
-		resp, httpRes, err := apiClient.PublicCloudAPI.GetLoadBalancerTargetList(context.Background(), loadBalancerId).Execute()
+		resp, httpRes, err := apiClient.PublicCloudAPI.GetLoadBalancerListenerList(context.Background(), loadBalancerId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -575,6 +586,46 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test PublicCloudAPIService GetTargetGroup", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var targetGroupId string
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.GetTargetGroup(context.Background(), targetGroupId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PublicCloudAPIService GetTargetGroupList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.GetTargetGroupList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PublicCloudAPIService GetTargetList", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var targetGroupId string
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.GetTargetList(context.Background(), targetGroupId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test PublicCloudAPIService GetUpdateInstanceTypeList", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -641,27 +692,13 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test PublicCloudAPIService RegisterAutoScalingGroupLoadBalancer", func(t *testing.T) {
+	t.Run("Test PublicCloudAPIService RegisterTargets", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var autoScalingGroupId string
+		var targetGroupId string
 
-		resp, httpRes, err := apiClient.PublicCloudAPI.RegisterAutoScalingGroupLoadBalancer(context.Background(), autoScalingGroupId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test PublicCloudAPIService RegisterLoadBalancerTargets", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var loadBalancerId string
-
-		httpRes, err := apiClient.PublicCloudAPI.RegisterLoadBalancerTargets(context.Background(), loadBalancerId).Execute()
+		httpRes, err := apiClient.PublicCloudAPI.RegisterTargets(context.Background(), targetGroupId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -897,6 +934,20 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 		var listenerId string
 
 		resp, httpRes, err := apiClient.PublicCloudAPI.UpdateLoadBalancerListener(context.Background(), loadBalancerId, listenerId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test PublicCloudAPIService UpdateTargetGroup", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var targetGroupId string
+
+		resp, httpRes, err := apiClient.PublicCloudAPI.UpdateTargetGroup(context.Background(), targetGroupId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

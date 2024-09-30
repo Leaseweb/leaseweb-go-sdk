@@ -89,13 +89,14 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**CreateImage**](docs/PublicCloudAPI.md#createimage) | **Post** /images | Create Custom Image
 *PublicCloudAPI* | [**CreateLoadBalancerListener**](docs/PublicCloudAPI.md#createloadbalancerlistener) | **Post** /loadBalancers/{loadBalancerId}/listeners | Create listener
 *PublicCloudAPI* | [**CreateSnapshot**](docs/PublicCloudAPI.md#createsnapshot) | **Post** /instances/{instanceId}/snapshots | Create instance snapshot
+*PublicCloudAPI* | [**CreateTargetGroup**](docs/PublicCloudAPI.md#createtargetgroup) | **Post** /targetGroups | Create Target Group
 *PublicCloudAPI* | [**DeleteAutoScalingGroup**](docs/PublicCloudAPI.md#deleteautoscalinggroup) | **Delete** /autoScalingGroups/{autoScalingGroupId} | Delete Auto Scaling Group
 *PublicCloudAPI* | [**DeleteCredential**](docs/PublicCloudAPI.md#deletecredential) | **Delete** /instances/{instanceId}/credentials/{type}/{username} | Delete credentials
 *PublicCloudAPI* | [**DeleteCredentials**](docs/PublicCloudAPI.md#deletecredentials) | **Delete** /instances/{instanceId}/credentials | Delete all instance credentials
 *PublicCloudAPI* | [**DeleteLoadBalancerListener**](docs/PublicCloudAPI.md#deleteloadbalancerlistener) | **Delete** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Delete load balancer listener
 *PublicCloudAPI* | [**DeleteSnapshot**](docs/PublicCloudAPI.md#deletesnapshot) | **Delete** /instances/{instanceId}/snapshots/{snapshotId} | Delete instance snapshot
-*PublicCloudAPI* | [**DeregisterAutoScalingGroupLoadBalancer**](docs/PublicCloudAPI.md#deregisterautoscalinggrouploadbalancer) | **Post** /autoScalingGroups/{autoScalingGroupId}/deregisterLoadBalancer | Deregister Load balancer
-*PublicCloudAPI* | [**DeregisterLoadBalancerTargets**](docs/PublicCloudAPI.md#deregisterloadbalancertargets) | **Post** /loadBalancers/{loadBalancerId}/deregisterTargets | Deregister targets
+*PublicCloudAPI* | [**DeleteTargetGroup**](docs/PublicCloudAPI.md#deletetargetgroup) | **Delete** /targetGroups/{targetGroupId} | Delete Target Group
+*PublicCloudAPI* | [**DeregisterTargets**](docs/PublicCloudAPI.md#deregistertargets) | **Post** /targetGroups/{targetGroupId}/deregisterTargets | Deregister Targets
 *PublicCloudAPI* | [**DetachIso**](docs/PublicCloudAPI.md#detachiso) | **Post** /instances/{instanceId}/detachIso | Detach ISO from instance
 *PublicCloudAPI* | [**GetAutoScalingGroup**](docs/PublicCloudAPI.md#getautoscalinggroup) | **Get** /autoScalingGroups/{autoScalingGroupId} | Get Auto Scaling Group details
 *PublicCloudAPI* | [**GetAutoScalingGroupInstanceList**](docs/PublicCloudAPI.md#getautoscalinggroupinstancelist) | **Get** /autoScalingGroups/{autoScalingGroupId}/instances | Get list of instances belonging to an Auto Scaling Group
@@ -117,19 +118,21 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**GetLoadBalancer**](docs/PublicCloudAPI.md#getloadbalancer) | **Get** /loadBalancers/{loadBalancerId} | Get load balancer details
 *PublicCloudAPI* | [**GetLoadBalancerList**](docs/PublicCloudAPI.md#getloadbalancerlist) | **Get** /loadBalancers | Get load balancer list
 *PublicCloudAPI* | [**GetLoadBalancerListener**](docs/PublicCloudAPI.md#getloadbalancerlistener) | **Get** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Get listener details
-*PublicCloudAPI* | [**GetLoadBalancerTargetList**](docs/PublicCloudAPI.md#getloadbalancertargetlist) | **Get** /loadBalancers/{loadBalancerId}/targets | List registered targets
+*PublicCloudAPI* | [**GetLoadBalancerListenerList**](docs/PublicCloudAPI.md#getloadbalancerlistenerlist) | **Get** /loadBalancers/{loadBalancerId}/listeners | Get listener list
 *PublicCloudAPI* | [**GetMarketAppList**](docs/PublicCloudAPI.md#getmarketapplist) | **Get** /marketApps | Get marketplace apps
 *PublicCloudAPI* | [**GetRegionList**](docs/PublicCloudAPI.md#getregionlist) | **Get** /regions | List regions
 *PublicCloudAPI* | [**GetReinstallImageList**](docs/PublicCloudAPI.md#getreinstallimagelist) | **Get** /instances/{instanceId}/reinstall/images | List images available for reinstall
 *PublicCloudAPI* | [**GetSnapshot**](docs/PublicCloudAPI.md#getsnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
 *PublicCloudAPI* | [**GetSnapshotList**](docs/PublicCloudAPI.md#getsnapshotlist) | **Get** /instances/{instanceId}/snapshots | List snapshots
+*PublicCloudAPI* | [**GetTargetGroup**](docs/PublicCloudAPI.md#gettargetgroup) | **Get** /targetGroups/{targetGroupId} | Get Target Group details
+*PublicCloudAPI* | [**GetTargetGroupList**](docs/PublicCloudAPI.md#gettargetgrouplist) | **Get** /targetGroups | Get Target Group list
+*PublicCloudAPI* | [**GetTargetList**](docs/PublicCloudAPI.md#gettargetlist) | **Get** /targetGroups/{targetGroupId}/targets | Get Targets
 *PublicCloudAPI* | [**GetUpdateInstanceTypeList**](docs/PublicCloudAPI.md#getupdateinstancetypelist) | **Get** /instances/{instanceId}/instanceTypesUpdate | List available instance types for update
 *PublicCloudAPI* | [**LaunchInstance**](docs/PublicCloudAPI.md#launchinstance) | **Post** /instances | Launch instance
 *PublicCloudAPI* | [**LaunchLoadBalancer**](docs/PublicCloudAPI.md#launchloadbalancer) | **Post** /loadBalancers | Launch Load balancer
 *PublicCloudAPI* | [**NullRouteIp**](docs/PublicCloudAPI.md#nullrouteip) | **Post** /instances/{instanceId}/ips/{ip}/null | Null route IP
 *PublicCloudAPI* | [**RebootInstance**](docs/PublicCloudAPI.md#rebootinstance) | **Post** /instances/{instanceId}/reboot | Reboot instance
-*PublicCloudAPI* | [**RegisterAutoScalingGroupLoadBalancer**](docs/PublicCloudAPI.md#registerautoscalinggrouploadbalancer) | **Post** /autoScalingGroups/{autoScalingGroupId}/registerLoadBalancer | Register Load balancer
-*PublicCloudAPI* | [**RegisterLoadBalancerTargets**](docs/PublicCloudAPI.md#registerloadbalancertargets) | **Post** /loadBalancers/{loadBalancerId}/registerTargets | Register targets
+*PublicCloudAPI* | [**RegisterTargets**](docs/PublicCloudAPI.md#registertargets) | **Post** /targetGroups/{targetGroupId}/registerTargets | Register Targets
 *PublicCloudAPI* | [**ReinstallInstance**](docs/PublicCloudAPI.md#reinstallinstance) | **Put** /instances/{instanceId}/reinstall | Reinstall instance
 *PublicCloudAPI* | [**RemoveFromPrivateNetwork**](docs/PublicCloudAPI.md#removefromprivatenetwork) | **Delete** /instances/{instanceId}/removeFromPrivateNetwork | Remove instance from Private Network
 *PublicCloudAPI* | [**RemoveIpNullRoute**](docs/PublicCloudAPI.md#removeipnullroute) | **Post** /instances/{instanceId}/ips/{ip}/unnull | Remove an IP null route
@@ -147,6 +150,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**UpdateIp**](docs/PublicCloudAPI.md#updateip) | **Put** /instances/{instanceId}/ips/{ip} | Update IP
 *PublicCloudAPI* | [**UpdateLoadBalancer**](docs/PublicCloudAPI.md#updateloadbalancer) | **Put** /loadBalancers/{loadBalancerId} | Update load balancer
 *PublicCloudAPI* | [**UpdateLoadBalancerListener**](docs/PublicCloudAPI.md#updateloadbalancerlistener) | **Put** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Update a listener
+*PublicCloudAPI* | [**UpdateTargetGroup**](docs/PublicCloudAPI.md#updatetargetgroup) | **Put** /targetGroups/{targetGroupId} | Update Target Group
 
 
 ## Documentation For Models
@@ -161,6 +165,7 @@ Class | Method | HTTP request | Description
  - [Billing](docs/Billing.md)
  - [BillingFrequency](docs/BillingFrequency.md)
  - [Certificate](docs/Certificate.md)
+ - [Certificate1](docs/Certificate1.md)
  - [Contract](docs/Contract.md)
  - [ContractState](docs/ContractState.md)
  - [ContractTerm](docs/ContractTerm.md)
@@ -196,13 +201,16 @@ Class | Method | HTTP request | Description
  - [GetIpListResult](docs/GetIpListResult.md)
  - [GetIsoListResult](docs/GetIsoListResult.md)
  - [GetLoadBalancerListResult](docs/GetLoadBalancerListResult.md)
- - [GetLoadBalancerTargetListResult](docs/GetLoadBalancerTargetListResult.md)
+ - [GetLoadBalancerListenerListResult](docs/GetLoadBalancerListenerListResult.md)
  - [GetMarketAppListResult](docs/GetMarketAppListResult.md)
  - [GetRegionListResult](docs/GetRegionListResult.md)
  - [GetReinstallImageListResult](docs/GetReinstallImageListResult.md)
  - [GetSnapshotListResult](docs/GetSnapshotListResult.md)
+ - [GetTargetGroupListResult](docs/GetTargetGroupListResult.md)
+ - [GetTargetListResult](docs/GetTargetListResult.md)
  - [HealthCheck](docs/HealthCheck.md)
  - [HealthCheckStatus](docs/HealthCheckStatus.md)
+ - [HttpMethod](docs/HttpMethod.md)
  - [Image](docs/Image.md)
  - [ImageDetails](docs/ImageDetails.md)
  - [ImageState](docs/ImageState.md)
@@ -217,13 +225,15 @@ Class | Method | HTTP request | Description
  - [Iso](docs/Iso.md)
  - [LaunchInstanceOpts](docs/LaunchInstanceOpts.md)
  - [LaunchLoadBalancerOpts](docs/LaunchLoadBalancerOpts.md)
+ - [ListenerDefaultRule](docs/ListenerDefaultRule.md)
  - [LoadBalancer](docs/LoadBalancer.md)
  - [LoadBalancerConfiguration](docs/LoadBalancerConfiguration.md)
  - [LoadBalancerDetails](docs/LoadBalancerDetails.md)
  - [LoadBalancerListener](docs/LoadBalancerListener.md)
+ - [LoadBalancerListenerDetails](docs/LoadBalancerListenerDetails.md)
  - [LoadBalancerListenerOpts](docs/LoadBalancerListenerOpts.md)
- - [LoadBalancerTargetOpt](docs/LoadBalancerTargetOpt.md)
- - [LoadBalancerTargetOpts](docs/LoadBalancerTargetOpts.md)
+ - [LoadBalancerListenerRule](docs/LoadBalancerListenerRule.md)
+ - [LoadBalancerListenerUpdateOpts](docs/LoadBalancerListenerUpdateOpts.md)
  - [MarketApp](docs/MarketApp.md)
  - [MarketAppId](docs/MarketAppId.md)
  - [Memory](docs/Memory.md)
@@ -235,12 +245,14 @@ Class | Method | HTTP request | Description
  - [Price](docs/Price.md)
  - [Prices](docs/Prices.md)
  - [PrivateNetwork](docs/PrivateNetwork.md)
+ - [Protocol](docs/Protocol.md)
  - [Region](docs/Region.md)
  - [RegionName](docs/RegionName.md)
- - [RegisterAutoScalingGroupLoadBalancerOpts](docs/RegisterAutoScalingGroupLoadBalancerOpts.md)
  - [ReinstallInstanceOpts](docs/ReinstallInstanceOpts.md)
  - [Resources](docs/Resources.md)
+ - [SchemasHealthCheckStatus](docs/SchemasHealthCheckStatus.md)
  - [Snapshot](docs/Snapshot.md)
+ - [SslCertificate](docs/SslCertificate.md)
  - [State](docs/State.md)
  - [StickySession](docs/StickySession.md)
  - [Storage](docs/Storage.md)
@@ -250,6 +262,7 @@ Class | Method | HTTP request | Description
  - [StoreCredentialResult](docs/StoreCredentialResult.md)
  - [Summary](docs/Summary.md)
  - [Target](docs/Target.md)
+ - [TargetGroup](docs/TargetGroup.md)
  - [Tier](docs/Tier.md)
  - [Traffic](docs/Traffic.md)
  - [TrafficMetric](docs/TrafficMetric.md)

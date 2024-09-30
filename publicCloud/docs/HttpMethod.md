@@ -1,15 +1,15 @@
-# HealthCheckStatus
+# HttpMethod
 
 ## Enum
 
 
-* `HEALTHY` (value: `"HEALTHY"`)
+* `GET` (value: `"GET"`)
 
-* `UNHEALTHY` (value: `"UNHEALTHY"`)
+* `HEAD` (value: `"HEAD"`)
 
-* `MAINTENANCE` (value: `"MAINTENANCE"`)
+* `POST` (value: `"POST"`)
 
-* `UNKNOWN` (value: `"UNKNOWN"`)
+* `OPTIONS` (value: `"OPTIONS"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

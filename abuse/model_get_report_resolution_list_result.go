@@ -12,6 +12,7 @@ package abuse
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the GetReportResolutionListResult type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,9 @@ var _ MappedNullable = &GetReportResolutionListResult{}
 // GetReportResolutionListResult struct for GetReportResolutionListResult
 type GetReportResolutionListResult struct {
 	// Possible resolutions to resolve this report with.
-	Resolutions []ResolutionList `json:"resolutions,omitempty"`
+	Resolutions []ResolutionList `json:"resolutions"`
+	// `true`, if any of the IP(s) related to this report are null routed
+	IsMessageRequired bool `json:"isMessageRequired"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,8 +33,10 @@ type _GetReportResolutionListResult GetReportResolutionListResult
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetReportResolutionListResult() *GetReportResolutionListResult {
+func NewGetReportResolutionListResult(resolutions []ResolutionList, isMessageRequired bool) *GetReportResolutionListResult {
 	this := GetReportResolutionListResult{}
+	this.Resolutions = resolutions
+	this.IsMessageRequired = isMessageRequired
 	return &this
 }
 
@@ -43,36 +48,52 @@ func NewGetReportResolutionListResultWithDefaults() *GetReportResolutionListResu
 	return &this
 }
 
-// GetResolutions returns the Resolutions field value if set, zero value otherwise.
+// GetResolutions returns the Resolutions field value
 func (o *GetReportResolutionListResult) GetResolutions() []ResolutionList {
-	if o == nil || IsNil(o.Resolutions) {
+	if o == nil {
 		var ret []ResolutionList
 		return ret
 	}
+
 	return o.Resolutions
 }
 
-// GetResolutionsOk returns a tuple with the Resolutions field value if set, nil otherwise
+// GetResolutionsOk returns a tuple with the Resolutions field value
 // and a boolean to check if the value has been set.
 func (o *GetReportResolutionListResult) GetResolutionsOk() ([]ResolutionList, bool) {
-	if o == nil || IsNil(o.Resolutions) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Resolutions, true
 }
 
-// HasResolutions returns a boolean if a field has been set.
-func (o *GetReportResolutionListResult) HasResolutions() bool {
-	if o != nil && !IsNil(o.Resolutions) {
-		return true
-	}
-
-	return false
-}
-
-// SetResolutions gets a reference to the given []ResolutionList and assigns it to the Resolutions field.
+// SetResolutions sets field value
 func (o *GetReportResolutionListResult) SetResolutions(v []ResolutionList) {
 	o.Resolutions = v
+}
+
+// GetIsMessageRequired returns the IsMessageRequired field value
+func (o *GetReportResolutionListResult) GetIsMessageRequired() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsMessageRequired
+}
+
+// GetIsMessageRequiredOk returns a tuple with the IsMessageRequired field value
+// and a boolean to check if the value has been set.
+func (o *GetReportResolutionListResult) GetIsMessageRequiredOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsMessageRequired, true
+}
+
+// SetIsMessageRequired sets field value
+func (o *GetReportResolutionListResult) SetIsMessageRequired(v bool) {
+	o.IsMessageRequired = v
 }
 
 func (o GetReportResolutionListResult) MarshalJSON() ([]byte, error) {
@@ -85,9 +106,8 @@ func (o GetReportResolutionListResult) MarshalJSON() ([]byte, error) {
 
 func (o GetReportResolutionListResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Resolutions) {
-		toSerialize["resolutions"] = o.Resolutions
-	}
+	toSerialize["resolutions"] = o.Resolutions
+	toSerialize["isMessageRequired"] = o.IsMessageRequired
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -97,6 +117,28 @@ func (o GetReportResolutionListResult) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetReportResolutionListResult) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"resolutions",
+		"isMessageRequired",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varGetReportResolutionListResult := _GetReportResolutionListResult{}
 
 	err = json.Unmarshal(data, &varGetReportResolutionListResult)
@@ -111,6 +153,7 @@ func (o *GetReportResolutionListResult) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "resolutions")
+		delete(additionalProperties, "isMessageRequired")
 		o.AdditionalProperties = additionalProperties
 	}
 

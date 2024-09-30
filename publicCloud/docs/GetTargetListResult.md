@@ -1,4 +1,4 @@
-# GetLoadBalancerTargetListResult
+# GetTargetListResult
 
 ## Properties
 
@@ -9,70 +9,70 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewGetLoadBalancerTargetListResult
+### NewGetTargetListResult
 
-`func NewGetLoadBalancerTargetListResult() *GetLoadBalancerTargetListResult`
+`func NewGetTargetListResult() *GetTargetListResult`
 
-NewGetLoadBalancerTargetListResult instantiates a new GetLoadBalancerTargetListResult object
+NewGetTargetListResult instantiates a new GetTargetListResult object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewGetLoadBalancerTargetListResultWithDefaults
+### NewGetTargetListResultWithDefaults
 
-`func NewGetLoadBalancerTargetListResultWithDefaults() *GetLoadBalancerTargetListResult`
+`func NewGetTargetListResultWithDefaults() *GetTargetListResult`
 
-NewGetLoadBalancerTargetListResultWithDefaults instantiates a new GetLoadBalancerTargetListResult object
+NewGetTargetListResultWithDefaults instantiates a new GetTargetListResult object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetTargets
 
-`func (o *GetLoadBalancerTargetListResult) GetTargets() []Target`
+`func (o *GetTargetListResult) GetTargets() []Target`
 
 GetTargets returns the Targets field if non-nil, zero value otherwise.
 
 ### GetTargetsOk
 
-`func (o *GetLoadBalancerTargetListResult) GetTargetsOk() (*[]Target, bool)`
+`func (o *GetTargetListResult) GetTargetsOk() (*[]Target, bool)`
 
 GetTargetsOk returns a tuple with the Targets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTargets
 
-`func (o *GetLoadBalancerTargetListResult) SetTargets(v []Target)`
+`func (o *GetTargetListResult) SetTargets(v []Target)`
 
 SetTargets sets Targets field to given value.
 
 ### HasTargets
 
-`func (o *GetLoadBalancerTargetListResult) HasTargets() bool`
+`func (o *GetTargetListResult) HasTargets() bool`
 
 HasTargets returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *GetLoadBalancerTargetListResult) GetMetadata() Metadata`
+`func (o *GetTargetListResult) GetMetadata() Metadata`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *GetLoadBalancerTargetListResult) GetMetadataOk() (*Metadata, bool)`
+`func (o *GetTargetListResult) GetMetadataOk() (*Metadata, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *GetLoadBalancerTargetListResult) SetMetadata(v Metadata)`
+`func (o *GetTargetListResult) SetMetadata(v Metadata)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *GetLoadBalancerTargetListResult) HasMetadata() bool`
+`func (o *GetTargetListResult) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The resolution ID to be used when calling /resolve. | [optional] 
-**Description** | Pointer to **string** | The actual text the report will be resolved with when resolving with this resolution. | [optional] 
+**Id** | **string** | The resolution ID to be used when calling /resolve. | 
+**Description** | **string** | The actual text the report will be resolved with when resolving with this resolution. | 
 
 ## Methods
 
 ### NewResolutionList
 
-`func NewResolutionList() *ResolutionList`
+`func NewResolutionList(id string, description string, ) *ResolutionList`
 
 NewResolutionList instantiates a new ResolutionList object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *ResolutionList) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *ResolutionList) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

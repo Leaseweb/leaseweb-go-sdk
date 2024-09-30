@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The instance unique identifier | [optional] 
-**Reference** | Pointer to **string** | The identifying name set to the instance | [optional] 
-**Image** | Pointer to [**Image**](Image.md) |  | [optional] 
-**State** | Pointer to [**State**](State.md) |  | [optional] 
-**HealthCheckStatus** | Pointer to [**HealthCheckStatus**](HealthCheckStatus.md) |  | [optional] 
-**Ips** | Pointer to [**[]Ip**](Ip.md) |  | [optional] 
+**Id** | **string** | The ID of the target | 
+**Reference** | **string** | The reference of the target | 
+**Image** | [**Image**](Image.md) |  | 
+**State** | **string** | The state of the target | 
+**Ips** | [**[]Ip**](Ip.md) | The IP addresses of the target | 
+**HealthCheck** | [**NullableSchemasHealthCheckStatus**](SchemasHealthCheckStatus.md) |  | 
 
 ## Methods
 
 ### NewTarget
 
-`func NewTarget() *Target`
+`func NewTarget(id string, reference string, image Image, state string, ips []Ip, healthCheck NullableSchemasHealthCheckStatus, ) *Target`
 
 NewTarget instantiates a new Target object
 This constructor will assign default values to properties that have it defined,
@@ -49,11 +49,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *Target) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetReference
 
@@ -74,11 +69,6 @@ and a boolean to check if the value has been set.
 
 SetReference sets Reference field to given value.
 
-### HasReference
-
-`func (o *Target) HasReference() bool`
-
-HasReference returns a boolean if a field has been set.
 
 ### GetImage
 
@@ -99,61 +89,26 @@ and a boolean to check if the value has been set.
 
 SetImage sets Image field to given value.
 
-### HasImage
-
-`func (o *Target) HasImage() bool`
-
-HasImage returns a boolean if a field has been set.
 
 ### GetState
 
-`func (o *Target) GetState() State`
+`func (o *Target) GetState() string`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *Target) GetStateOk() (*State, bool)`
+`func (o *Target) GetStateOk() (*string, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *Target) SetState(v State)`
+`func (o *Target) SetState(v string)`
 
 SetState sets State field to given value.
 
-### HasState
-
-`func (o *Target) HasState() bool`
-
-HasState returns a boolean if a field has been set.
-
-### GetHealthCheckStatus
-
-`func (o *Target) GetHealthCheckStatus() HealthCheckStatus`
-
-GetHealthCheckStatus returns the HealthCheckStatus field if non-nil, zero value otherwise.
-
-### GetHealthCheckStatusOk
-
-`func (o *Target) GetHealthCheckStatusOk() (*HealthCheckStatus, bool)`
-
-GetHealthCheckStatusOk returns a tuple with the HealthCheckStatus field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHealthCheckStatus
-
-`func (o *Target) SetHealthCheckStatus(v HealthCheckStatus)`
-
-SetHealthCheckStatus sets HealthCheckStatus field to given value.
-
-### HasHealthCheckStatus
-
-`func (o *Target) HasHealthCheckStatus() bool`
-
-HasHealthCheckStatus returns a boolean if a field has been set.
 
 ### GetIps
 
@@ -174,12 +129,37 @@ and a boolean to check if the value has been set.
 
 SetIps sets Ips field to given value.
 
-### HasIps
 
-`func (o *Target) HasIps() bool`
+### GetHealthCheck
 
-HasIps returns a boolean if a field has been set.
+`func (o *Target) GetHealthCheck() SchemasHealthCheckStatus`
 
+GetHealthCheck returns the HealthCheck field if non-nil, zero value otherwise.
+
+### GetHealthCheckOk
+
+`func (o *Target) GetHealthCheckOk() (*SchemasHealthCheckStatus, bool)`
+
+GetHealthCheckOk returns a tuple with the HealthCheck field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHealthCheck
+
+`func (o *Target) SetHealthCheck(v SchemasHealthCheckStatus)`
+
+SetHealthCheck sets HealthCheck field to given value.
+
+
+### SetHealthCheckNil
+
+`func (o *Target) SetHealthCheckNil(b bool)`
+
+ SetHealthCheckNil sets the value for HealthCheck to be an explicit nil
+
+### UnsetHealthCheck
+`func (o *Target) UnsetHealthCheck()`
+
+UnsetHealthCheck ensures that no value is present for HealthCheck, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

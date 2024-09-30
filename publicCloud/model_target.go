@@ -12,6 +12,7 @@ package publicCloud
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the Target type satisfies the MappedNullable interface at compile time
@@ -19,14 +20,16 @@ var _ MappedNullable = &Target{}
 
 // Target struct for Target
 type Target struct {
-	// The instance unique identifier
-	Id *string `json:"id,omitempty"`
-	// The identifying name set to the instance
-	Reference *string `json:"reference,omitempty"`
-	Image *Image `json:"image,omitempty"`
-	State *State `json:"state,omitempty"`
-	HealthCheckStatus *HealthCheckStatus `json:"healthCheckStatus,omitempty"`
-	Ips []Ip `json:"ips,omitempty"`
+	// The ID of the target
+	Id string `json:"id"`
+	// The reference of the target
+	Reference string `json:"reference"`
+	Image Image `json:"image"`
+	// The state of the target
+	State string `json:"state"`
+	// The IP addresses of the target
+	Ips []Ip `json:"ips"`
+	HealthCheck NullableSchemasHealthCheckStatus `json:"healthCheck"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,8 +39,14 @@ type _Target Target
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTarget() *Target {
+func NewTarget(id string, reference string, image Image, state string, ips []Ip, healthCheck NullableSchemasHealthCheckStatus) *Target {
 	this := Target{}
+	this.Id = id
+	this.Reference = reference
+	this.Image = image
+	this.State = state
+	this.Ips = ips
+	this.HealthCheck = healthCheck
 	return &this
 }
 
@@ -49,196 +58,150 @@ func NewTargetWithDefaults() *Target {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *Target) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *Target) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Target) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *Target) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetReference returns the Reference field value if set, zero value otherwise.
+// GetReference returns the Reference field value
 func (o *Target) GetReference() string {
-	if o == nil || IsNil(o.Reference) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Reference
+
+	return o.Reference
 }
 
-// GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
+// GetReferenceOk returns a tuple with the Reference field value
 // and a boolean to check if the value has been set.
 func (o *Target) GetReferenceOk() (*string, bool) {
-	if o == nil || IsNil(o.Reference) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Reference, true
+	return &o.Reference, true
 }
 
-// HasReference returns a boolean if a field has been set.
-func (o *Target) HasReference() bool {
-	if o != nil && !IsNil(o.Reference) {
-		return true
-	}
-
-	return false
-}
-
-// SetReference gets a reference to the given string and assigns it to the Reference field.
+// SetReference sets field value
 func (o *Target) SetReference(v string) {
-	o.Reference = &v
+	o.Reference = v
 }
 
-// GetImage returns the Image field value if set, zero value otherwise.
+// GetImage returns the Image field value
 func (o *Target) GetImage() Image {
-	if o == nil || IsNil(o.Image) {
+	if o == nil {
 		var ret Image
 		return ret
 	}
-	return *o.Image
+
+	return o.Image
 }
 
-// GetImageOk returns a tuple with the Image field value if set, nil otherwise
+// GetImageOk returns a tuple with the Image field value
 // and a boolean to check if the value has been set.
 func (o *Target) GetImageOk() (*Image, bool) {
-	if o == nil || IsNil(o.Image) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Image, true
+	return &o.Image, true
 }
 
-// HasImage returns a boolean if a field has been set.
-func (o *Target) HasImage() bool {
-	if o != nil && !IsNil(o.Image) {
-		return true
-	}
-
-	return false
-}
-
-// SetImage gets a reference to the given Image and assigns it to the Image field.
+// SetImage sets field value
 func (o *Target) SetImage(v Image) {
-	o.Image = &v
+	o.Image = v
 }
 
-// GetState returns the State field value if set, zero value otherwise.
-func (o *Target) GetState() State {
-	if o == nil || IsNil(o.State) {
-		var ret State
+// GetState returns the State field value
+func (o *Target) GetState() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.State
+
+	return o.State
 }
 
-// GetStateOk returns a tuple with the State field value if set, nil otherwise
+// GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *Target) GetStateOk() (*State, bool) {
-	if o == nil || IsNil(o.State) {
+func (o *Target) GetStateOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.State, true
+	return &o.State, true
 }
 
-// HasState returns a boolean if a field has been set.
-func (o *Target) HasState() bool {
-	if o != nil && !IsNil(o.State) {
-		return true
-	}
-
-	return false
+// SetState sets field value
+func (o *Target) SetState(v string) {
+	o.State = v
 }
 
-// SetState gets a reference to the given State and assigns it to the State field.
-func (o *Target) SetState(v State) {
-	o.State = &v
-}
-
-// GetHealthCheckStatus returns the HealthCheckStatus field value if set, zero value otherwise.
-func (o *Target) GetHealthCheckStatus() HealthCheckStatus {
-	if o == nil || IsNil(o.HealthCheckStatus) {
-		var ret HealthCheckStatus
-		return ret
-	}
-	return *o.HealthCheckStatus
-}
-
-// GetHealthCheckStatusOk returns a tuple with the HealthCheckStatus field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Target) GetHealthCheckStatusOk() (*HealthCheckStatus, bool) {
-	if o == nil || IsNil(o.HealthCheckStatus) {
-		return nil, false
-	}
-	return o.HealthCheckStatus, true
-}
-
-// HasHealthCheckStatus returns a boolean if a field has been set.
-func (o *Target) HasHealthCheckStatus() bool {
-	if o != nil && !IsNil(o.HealthCheckStatus) {
-		return true
-	}
-
-	return false
-}
-
-// SetHealthCheckStatus gets a reference to the given HealthCheckStatus and assigns it to the HealthCheckStatus field.
-func (o *Target) SetHealthCheckStatus(v HealthCheckStatus) {
-	o.HealthCheckStatus = &v
-}
-
-// GetIps returns the Ips field value if set, zero value otherwise.
+// GetIps returns the Ips field value
 func (o *Target) GetIps() []Ip {
-	if o == nil || IsNil(o.Ips) {
+	if o == nil {
 		var ret []Ip
 		return ret
 	}
+
 	return o.Ips
 }
 
-// GetIpsOk returns a tuple with the Ips field value if set, nil otherwise
+// GetIpsOk returns a tuple with the Ips field value
 // and a boolean to check if the value has been set.
 func (o *Target) GetIpsOk() ([]Ip, bool) {
-	if o == nil || IsNil(o.Ips) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Ips, true
 }
 
-// HasIps returns a boolean if a field has been set.
-func (o *Target) HasIps() bool {
-	if o != nil && !IsNil(o.Ips) {
-		return true
-	}
-
-	return false
-}
-
-// SetIps gets a reference to the given []Ip and assigns it to the Ips field.
+// SetIps sets field value
 func (o *Target) SetIps(v []Ip) {
 	o.Ips = v
+}
+
+// GetHealthCheck returns the HealthCheck field value
+// If the value is explicit nil, the zero value for SchemasHealthCheckStatus will be returned
+func (o *Target) GetHealthCheck() SchemasHealthCheckStatus {
+	if o == nil || o.HealthCheck.Get() == nil {
+		var ret SchemasHealthCheckStatus
+		return ret
+	}
+
+	return *o.HealthCheck.Get()
+}
+
+// GetHealthCheckOk returns a tuple with the HealthCheck field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Target) GetHealthCheckOk() (*SchemasHealthCheckStatus, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HealthCheck.Get(), o.HealthCheck.IsSet()
+}
+
+// SetHealthCheck sets field value
+func (o *Target) SetHealthCheck(v SchemasHealthCheckStatus) {
+	o.HealthCheck.Set(&v)
 }
 
 func (o Target) MarshalJSON() ([]byte, error) {
@@ -251,24 +214,12 @@ func (o Target) MarshalJSON() ([]byte, error) {
 
 func (o Target) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Reference) {
-		toSerialize["reference"] = o.Reference
-	}
-	if !IsNil(o.Image) {
-		toSerialize["image"] = o.Image
-	}
-	if !IsNil(o.State) {
-		toSerialize["state"] = o.State
-	}
-	if !IsNil(o.HealthCheckStatus) {
-		toSerialize["healthCheckStatus"] = o.HealthCheckStatus
-	}
-	if !IsNil(o.Ips) {
-		toSerialize["ips"] = o.Ips
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["reference"] = o.Reference
+	toSerialize["image"] = o.Image
+	toSerialize["state"] = o.State
+	toSerialize["ips"] = o.Ips
+	toSerialize["healthCheck"] = o.HealthCheck.Get()
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -278,6 +229,32 @@ func (o Target) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Target) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"reference",
+		"image",
+		"state",
+		"ips",
+		"healthCheck",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTarget := _Target{}
 
 	err = json.Unmarshal(data, &varTarget)
@@ -295,8 +272,8 @@ func (o *Target) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "reference")
 		delete(additionalProperties, "image")
 		delete(additionalProperties, "state")
-		delete(additionalProperties, "healthCheckStatus")
 		delete(additionalProperties, "ips")
+		delete(additionalProperties, "healthCheck")
 		o.AdditionalProperties = additionalProperties
 	}
 

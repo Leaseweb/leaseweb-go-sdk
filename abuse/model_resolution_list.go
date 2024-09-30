@@ -12,6 +12,7 @@ package abuse
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the ResolutionList type satisfies the MappedNullable interface at compile time
@@ -20,9 +21,9 @@ var _ MappedNullable = &ResolutionList{}
 // ResolutionList struct for ResolutionList
 type ResolutionList struct {
 	// The resolution ID to be used when calling /resolve.
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	// The actual text the report will be resolved with when resolving with this resolution.
-	Description *string `json:"description,omitempty"`
+	Description string `json:"description"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -32,8 +33,10 @@ type _ResolutionList ResolutionList
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResolutionList() *ResolutionList {
+func NewResolutionList(id string, description string) *ResolutionList {
 	this := ResolutionList{}
+	this.Id = id
+	this.Description = description
 	return &this
 }
 
@@ -45,68 +48,52 @@ func NewResolutionListWithDefaults() *ResolutionList {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *ResolutionList) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ResolutionList) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *ResolutionList) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *ResolutionList) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value
 func (o *ResolutionList) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 func (o *ResolutionList) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.Description, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *ResolutionList) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription sets field value
 func (o *ResolutionList) SetDescription(v string) {
-	o.Description = &v
+	o.Description = v
 }
 
 func (o ResolutionList) MarshalJSON() ([]byte, error) {
@@ -119,12 +106,8 @@ func (o ResolutionList) MarshalJSON() ([]byte, error) {
 
 func (o ResolutionList) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["description"] = o.Description
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -134,6 +117,28 @@ func (o ResolutionList) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ResolutionList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"description",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varResolutionList := _ResolutionList{}
 
 	err = json.Unmarshal(data, &varResolutionList)

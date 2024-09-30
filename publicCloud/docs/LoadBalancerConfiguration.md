@@ -6,16 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StickySession** | [**NullableStickySession**](StickySession.md) |  | 
 **Balance** | [**Balance**](Balance.md) |  | 
-**HealthCheck** | [**NullableHealthCheck**](HealthCheck.md) |  | 
 **XForwardedFor** | **bool** | Is xForwardedFor header enabled or not | 
 **IdleTimeOut** | **int32** | Time to close the connection if load balancer is idle | 
-**TargetPort** | **int32** | Port on which the backend (target) servers are listening to handle incoming requests | 
 
 ## Methods
 
 ### NewLoadBalancerConfiguration
 
-`func NewLoadBalancerConfiguration(stickySession NullableStickySession, balance Balance, healthCheck NullableHealthCheck, xForwardedFor bool, idleTimeOut int32, targetPort int32, ) *LoadBalancerConfiguration`
+`func NewLoadBalancerConfiguration(stickySession NullableStickySession, balance Balance, xForwardedFor bool, idleTimeOut int32, ) *LoadBalancerConfiguration`
 
 NewLoadBalancerConfiguration instantiates a new LoadBalancerConfiguration object
 This constructor will assign default values to properties that have it defined,
@@ -80,36 +78,6 @@ and a boolean to check if the value has been set.
 SetBalance sets Balance field to given value.
 
 
-### GetHealthCheck
-
-`func (o *LoadBalancerConfiguration) GetHealthCheck() HealthCheck`
-
-GetHealthCheck returns the HealthCheck field if non-nil, zero value otherwise.
-
-### GetHealthCheckOk
-
-`func (o *LoadBalancerConfiguration) GetHealthCheckOk() (*HealthCheck, bool)`
-
-GetHealthCheckOk returns a tuple with the HealthCheck field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHealthCheck
-
-`func (o *LoadBalancerConfiguration) SetHealthCheck(v HealthCheck)`
-
-SetHealthCheck sets HealthCheck field to given value.
-
-
-### SetHealthCheckNil
-
-`func (o *LoadBalancerConfiguration) SetHealthCheckNil(b bool)`
-
- SetHealthCheckNil sets the value for HealthCheck to be an explicit nil
-
-### UnsetHealthCheck
-`func (o *LoadBalancerConfiguration) UnsetHealthCheck()`
-
-UnsetHealthCheck ensures that no value is present for HealthCheck, not even an explicit nil
 ### GetXForwardedFor
 
 `func (o *LoadBalancerConfiguration) GetXForwardedFor() bool`
@@ -148,26 +116,6 @@ and a boolean to check if the value has been set.
 `func (o *LoadBalancerConfiguration) SetIdleTimeOut(v int32)`
 
 SetIdleTimeOut sets IdleTimeOut field to given value.
-
-
-### GetTargetPort
-
-`func (o *LoadBalancerConfiguration) GetTargetPort() int32`
-
-GetTargetPort returns the TargetPort field if non-nil, zero value otherwise.
-
-### GetTargetPortOk
-
-`func (o *LoadBalancerConfiguration) GetTargetPortOk() (*int32, bool)`
-
-GetTargetPortOk returns a tuple with the TargetPort field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTargetPort
-
-`func (o *LoadBalancerConfiguration) SetTargetPort(v int32)`
-
-SetTargetPort sets TargetPort field to given value.
 
 
 
