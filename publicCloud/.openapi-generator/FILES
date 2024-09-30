@@ -115,6 +115,7 @@ docs/StoreCredentialResult.md
 docs/Summary.md
 docs/Target.md
 docs/TargetGroup.md
+docs/TargetGroupIdOpts.md
 docs/Tier.md
 docs/Traffic.md
 docs/TrafficMetric.md
@@ -241,6 +242,7 @@ model_store_credential_result.go
 model_summary.go
 model_target.go
 model_target_group.go
+model_target_group_id_opts.go
 model_tier.go
 model_traffic.go
 model_traffic_metric.go

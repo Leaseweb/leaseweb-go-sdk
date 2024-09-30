@@ -96,6 +96,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**DeleteLoadBalancerListener**](docs/PublicCloudAPI.md#deleteloadbalancerlistener) | **Delete** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Delete load balancer listener
 *PublicCloudAPI* | [**DeleteSnapshot**](docs/PublicCloudAPI.md#deletesnapshot) | **Delete** /instances/{instanceId}/snapshots/{snapshotId} | Delete instance snapshot
 *PublicCloudAPI* | [**DeleteTargetGroup**](docs/PublicCloudAPI.md#deletetargetgroup) | **Delete** /targetGroups/{targetGroupId} | Delete Target Group
+*PublicCloudAPI* | [**DeregisterAutoScalingGroupTargetGroup**](docs/PublicCloudAPI.md#deregisterautoscalinggrouptargetgroup) | **Post** /autoScalingGroups/{autoScalingGroupId}/deregisterTargetGroup | Deregister Target Group
 *PublicCloudAPI* | [**DeregisterTargets**](docs/PublicCloudAPI.md#deregistertargets) | **Post** /targetGroups/{targetGroupId}/deregisterTargets | Deregister Targets
 *PublicCloudAPI* | [**DetachIso**](docs/PublicCloudAPI.md#detachiso) | **Post** /instances/{instanceId}/detachIso | Detach ISO from instance
 *PublicCloudAPI* | [**GetAutoScalingGroup**](docs/PublicCloudAPI.md#getautoscalinggroup) | **Get** /autoScalingGroups/{autoScalingGroupId} | Get Auto Scaling Group details
@@ -132,6 +133,7 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**LaunchLoadBalancer**](docs/PublicCloudAPI.md#launchloadbalancer) | **Post** /loadBalancers | Launch Load balancer
 *PublicCloudAPI* | [**NullRouteIp**](docs/PublicCloudAPI.md#nullrouteip) | **Post** /instances/{instanceId}/ips/{ip}/null | Null route IP
 *PublicCloudAPI* | [**RebootInstance**](docs/PublicCloudAPI.md#rebootinstance) | **Post** /instances/{instanceId}/reboot | Reboot instance
+*PublicCloudAPI* | [**RegisterAutoScalingGroupTargetGroup**](docs/PublicCloudAPI.md#registerautoscalinggrouptargetgroup) | **Post** /autoScalingGroups/{autoScalingGroupId}/registerTargetGroup | Register Target Group
 *PublicCloudAPI* | [**RegisterTargets**](docs/PublicCloudAPI.md#registertargets) | **Post** /targetGroups/{targetGroupId}/registerTargets | Register Targets
 *PublicCloudAPI* | [**ReinstallInstance**](docs/PublicCloudAPI.md#reinstallinstance) | **Put** /instances/{instanceId}/reinstall | Reinstall instance
 *PublicCloudAPI* | [**RemoveFromPrivateNetwork**](docs/PublicCloudAPI.md#removefromprivatenetwork) | **Delete** /instances/{instanceId}/removeFromPrivateNetwork | Remove instance from Private Network
@@ -263,6 +265,7 @@ Class | Method | HTTP request | Description
  - [Summary](docs/Summary.md)
  - [Target](docs/Target.md)
  - [TargetGroup](docs/TargetGroup.md)
+ - [TargetGroupIdOpts](docs/TargetGroupIdOpts.md)
  - [Tier](docs/Tier.md)
  - [Traffic](docs/Traffic.md)
  - [TrafficMetric](docs/TrafficMetric.md)

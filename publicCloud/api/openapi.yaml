@@ -7506,6 +7506,166 @@ paths:
       summary: Get list of instances belonging to an Auto Scaling Group
       tags:
       - publicCloud
+  /autoScalingGroups/{autoScalingGroupId}/registerTargetGroup:
+    post:
+      description: Associates an auto scaling group with a target group.
+      operationId: registerAutoScalingGroupTargetGroup
+      parameters:
+      - description: Auto Scaling Group ID
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
+        explode: false
+        in: path
+        name: autoScalingGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              targetGroupId: b05917e1-96a4-442a-900c-c41f273d95c9
+            schema:
+              $ref: '#/components/schemas/targetGroupIdOpts'
+        required: true
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Register Target Group
+      tags:
+      - publicCloud
+  /autoScalingGroups/{autoScalingGroupId}/deregisterTargetGroup:
+    post:
+      description: Disassociate a target group from an Auto Scaling Group
+      operationId: deregisterAutoScalingGroupTargetGroup
+      parameters:
+      - description: Auto Scaling Group ID
+        example: fb769dab-3daa-47e4-89ed-06a4b6499176
+        explode: false
+        in: path
+        name: autoScalingGroupId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              targetGroupId: b05917e1-96a4-442a-900c-c41f273d95c9
+            schema:
+              $ref: '#/components/schemas/targetGroupIdOpts'
+        required: true
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Deregister Target Group
+      tags:
+      - publicCloud
   /targetGroups:
     get:
       description: List and filter Target Groups
@@ -8175,6 +8335,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "423":
+          content:
+            application/json:
+              example:
+                errorCode: "423"
+                errorMessage: Resource is locked by other process
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Locked.
         "500":
           content:
             application/json:
@@ -8255,6 +8424,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "423":
+          content:
+            application/json:
+              example:
+                errorCode: "423"
+                errorMessage: Resource is locked by other process
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Locked.
         "500":
           content:
             application/json:
@@ -8519,6 +8697,15 @@ components:
           schema:
             $ref: '#/components/schemas/errorResult'
       description: Not Found.
+    "423":
+      content:
+        application/json:
+          example:
+            errorCode: "423"
+            errorMessage: Resource is locked by other process
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Locked.
     "500":
       content:
         application/json:
@@ -11667,6 +11854,16 @@ components:
           type: array
         _metadata:
           $ref: '#/components/schemas/_metadata'
+      type: object
+    targetGroupIdOpts:
+      properties:
+        targetGroupId:
+          description: The target group unique identifier
+          format: uuid
+          type: string
+      required:
+      - targetGroupId
+      title: targetGroupIdOpts
       type: object
     targetGroup:
       example:

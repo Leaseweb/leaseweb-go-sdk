@@ -230,6 +230,20 @@ Allowed only one snapshot per instance.
 	DeleteTargetGroupExecute(r ApiDeleteTargetGroupRequest) (*http.Response, error)
 
 	/*
+	DeregisterAutoScalingGroupTargetGroup Deregister Target Group
+
+	Disassociate a target group from an Auto Scaling Group
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param autoScalingGroupId Auto Scaling Group ID
+	@return ApiDeregisterAutoScalingGroupTargetGroupRequest
+	*/
+	DeregisterAutoScalingGroupTargetGroup(ctx context.Context, autoScalingGroupId string) ApiDeregisterAutoScalingGroupTargetGroupRequest
+
+	// DeregisterAutoScalingGroupTargetGroupExecute executes the request
+	DeregisterAutoScalingGroupTargetGroupExecute(r ApiDeregisterAutoScalingGroupTargetGroupRequest) (*http.Response, error)
+
+	/*
 	DeregisterTargets Deregister Targets
 
 	Deregister Targets in a Target Group
@@ -759,6 +773,20 @@ Only works for IPv4.
 
 	// RebootInstanceExecute executes the request
 	RebootInstanceExecute(r ApiRebootInstanceRequest) (*http.Response, error)
+
+	/*
+	RegisterAutoScalingGroupTargetGroup Register Target Group
+
+	Associates an auto scaling group with a target group.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param autoScalingGroupId Auto Scaling Group ID
+	@return ApiRegisterAutoScalingGroupTargetGroupRequest
+	*/
+	RegisterAutoScalingGroupTargetGroup(ctx context.Context, autoScalingGroupId string) ApiRegisterAutoScalingGroupTargetGroupRequest
+
+	// RegisterAutoScalingGroupTargetGroupExecute executes the request
+	RegisterAutoScalingGroupTargetGroupExecute(r ApiRegisterAutoScalingGroupTargetGroupRequest) (*http.Response, error)
 
 	/*
 	RegisterTargets Register Targets
@@ -3469,6 +3497,177 @@ func (a *PublicCloudAPIService) DeleteTargetGroupExecute(r ApiDeleteTargetGroupR
 	return localVarHTTPResponse, nil
 }
 
+type ApiDeregisterAutoScalingGroupTargetGroupRequest struct {
+	ctx context.Context
+	ApiService PublicCloudAPI
+	autoScalingGroupId string
+	targetGroupIdOpts *TargetGroupIdOpts
+}
+
+func (r ApiDeregisterAutoScalingGroupTargetGroupRequest) TargetGroupIdOpts(targetGroupIdOpts TargetGroupIdOpts) ApiDeregisterAutoScalingGroupTargetGroupRequest {
+	r.targetGroupIdOpts = &targetGroupIdOpts
+	return r
+}
+
+func (r ApiDeregisterAutoScalingGroupTargetGroupRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeregisterAutoScalingGroupTargetGroupExecute(r)
+}
+
+/*
+DeregisterAutoScalingGroupTargetGroup Deregister Target Group
+
+Disassociate a target group from an Auto Scaling Group
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param autoScalingGroupId Auto Scaling Group ID
+ @return ApiDeregisterAutoScalingGroupTargetGroupRequest
+*/
+func (a *PublicCloudAPIService) DeregisterAutoScalingGroupTargetGroup(ctx context.Context, autoScalingGroupId string) ApiDeregisterAutoScalingGroupTargetGroupRequest {
+	return ApiDeregisterAutoScalingGroupTargetGroupRequest{
+		ApiService: a,
+		ctx: ctx,
+		autoScalingGroupId: autoScalingGroupId,
+	}
+}
+
+// Execute executes the request
+func (a *PublicCloudAPIService) DeregisterAutoScalingGroupTargetGroupExecute(r ApiDeregisterAutoScalingGroupTargetGroupRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.DeregisterAutoScalingGroupTargetGroup")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/autoScalingGroups/{autoScalingGroupId}/deregisterTargetGroup"
+	localVarPath = strings.Replace(localVarPath, "{"+"autoScalingGroupId"+"}", url.PathEscape(parameterValueToString(r.autoScalingGroupId, "autoScalingGroupId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.targetGroupIdOpts == nil {
+		return nil, reportError("targetGroupIdOpts is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.targetGroupIdOpts
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiDeregisterTargetsRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
@@ -3603,6 +3802,17 @@ func (a *PublicCloudAPIService) DeregisterTargetsExecute(r ApiDeregisterTargetsR
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 423 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -10405,6 +10615,177 @@ func (a *PublicCloudAPIService) RebootInstanceExecute(r ApiRebootInstanceRequest
 	return localVarHTTPResponse, nil
 }
 
+type ApiRegisterAutoScalingGroupTargetGroupRequest struct {
+	ctx context.Context
+	ApiService PublicCloudAPI
+	autoScalingGroupId string
+	targetGroupIdOpts *TargetGroupIdOpts
+}
+
+func (r ApiRegisterAutoScalingGroupTargetGroupRequest) TargetGroupIdOpts(targetGroupIdOpts TargetGroupIdOpts) ApiRegisterAutoScalingGroupTargetGroupRequest {
+	r.targetGroupIdOpts = &targetGroupIdOpts
+	return r
+}
+
+func (r ApiRegisterAutoScalingGroupTargetGroupRequest) Execute() (*http.Response, error) {
+	return r.ApiService.RegisterAutoScalingGroupTargetGroupExecute(r)
+}
+
+/*
+RegisterAutoScalingGroupTargetGroup Register Target Group
+
+Associates an auto scaling group with a target group.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param autoScalingGroupId Auto Scaling Group ID
+ @return ApiRegisterAutoScalingGroupTargetGroupRequest
+*/
+func (a *PublicCloudAPIService) RegisterAutoScalingGroupTargetGroup(ctx context.Context, autoScalingGroupId string) ApiRegisterAutoScalingGroupTargetGroupRequest {
+	return ApiRegisterAutoScalingGroupTargetGroupRequest{
+		ApiService: a,
+		ctx: ctx,
+		autoScalingGroupId: autoScalingGroupId,
+	}
+}
+
+// Execute executes the request
+func (a *PublicCloudAPIService) RegisterAutoScalingGroupTargetGroupExecute(r ApiRegisterAutoScalingGroupTargetGroupRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.RegisterAutoScalingGroupTargetGroup")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/autoScalingGroups/{autoScalingGroupId}/registerTargetGroup"
+	localVarPath = strings.Replace(localVarPath, "{"+"autoScalingGroupId"+"}", url.PathEscape(parameterValueToString(r.autoScalingGroupId, "autoScalingGroupId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.targetGroupIdOpts == nil {
+		return nil, reportError("targetGroupIdOpts is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.targetGroupIdOpts
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiRegisterTargetsRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
@@ -10539,6 +10920,17 @@ func (a *PublicCloudAPIService) RegisterTargetsExecute(r ApiRegisterTargetsReque
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 423 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
