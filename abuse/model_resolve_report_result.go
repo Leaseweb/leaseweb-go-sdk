@@ -22,6 +22,8 @@ var _ MappedNullable = &ResolveReportResult{}
 type ResolveReportResult struct {
 	// List of selected resolution ID's to explain how the report is resolved.
 	Resolutions []string `json:"resolutions"`
+	// Message is required and only allowed if any of the IP(s) related to this report are null routed.
+	Message *string `json:"message,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -69,6 +71,38 @@ func (o *ResolveReportResult) SetResolutions(v []string) {
 	o.Resolutions = v
 }
 
+// GetMessage returns the Message field value if set, zero value otherwise.
+func (o *ResolveReportResult) GetMessage() string {
+	if o == nil || IsNil(o.Message) {
+		var ret string
+		return ret
+	}
+	return *o.Message
+}
+
+// GetMessageOk returns a tuple with the Message field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ResolveReportResult) GetMessageOk() (*string, bool) {
+	if o == nil || IsNil(o.Message) {
+		return nil, false
+	}
+	return o.Message, true
+}
+
+// HasMessage returns a boolean if a field has been set.
+func (o *ResolveReportResult) HasMessage() bool {
+	if o != nil && !IsNil(o.Message) {
+		return true
+	}
+
+	return false
+}
+
+// SetMessage gets a reference to the given string and assigns it to the Message field.
+func (o *ResolveReportResult) SetMessage(v string) {
+	o.Message = &v
+}
+
 func (o ResolveReportResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -80,6 +114,9 @@ func (o ResolveReportResult) MarshalJSON() ([]byte, error) {
 func (o ResolveReportResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["resolutions"] = o.Resolutions
+	if !IsNil(o.Message) {
+		toSerialize["message"] = o.Message
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -124,6 +161,7 @@ func (o *ResolveReportResult) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "resolutions")
+		delete(additionalProperties, "message")
 		o.AdditionalProperties = additionalProperties
 	}
 

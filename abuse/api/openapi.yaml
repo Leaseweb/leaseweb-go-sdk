@@ -726,6 +726,9 @@ paths:
         content:
           application/json:
             example:
+              message: The IP address associated with this report has been null routed
+                due to policy violations. Further access will be restricted until
+                the issue is resolved.
               resolutions:
               - CONTENT_REMOVED
               - SUSPENDED
@@ -1273,6 +1276,10 @@ components:
             title: resolutionList
             type: string
           type: array
+        message:
+          description: Message is required and only allowed if any of the IP(s) related
+            to this report are null routed.
+          type: string
       required:
       - resolutions
       type: object
