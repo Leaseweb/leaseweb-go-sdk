@@ -48,6 +48,7 @@ type AutoScalingGroupDetails struct {
 	WarmupTime NullableInt32 `json:"warmupTime"`
 	// Only for \"CPU_BASED\" auto scaling group. Cool-down time in seconds for new instances
 	CooldownTime NullableInt32 `json:"cooldownTime"`
+	TargetGroups []TargetGroup `json:"targetGroups"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -57,7 +58,7 @@ type _AutoScalingGroupDetails AutoScalingGroupDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAutoScalingGroupDetails(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region RegionName, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32) *AutoScalingGroupDetails {
+func NewAutoScalingGroupDetails(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region RegionName, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, targetGroups []TargetGroup) *AutoScalingGroupDetails {
 	this := AutoScalingGroupDetails{}
 	this.Id = id
 	this.Type = type_
@@ -74,6 +75,7 @@ func NewAutoScalingGroupDetails(id string, type_ AutoScalingGroupType, state Aut
 	this.CpuThreshold = cpuThreshold
 	this.WarmupTime = warmupTime
 	this.CooldownTime = cooldownTime
+	this.TargetGroups = targetGroups
 	return &this
 }
 
@@ -461,6 +463,30 @@ func (o *AutoScalingGroupDetails) SetCooldownTime(v int32) {
 	o.CooldownTime.Set(&v)
 }
 
+// GetTargetGroups returns the TargetGroups field value
+func (o *AutoScalingGroupDetails) GetTargetGroups() []TargetGroup {
+	if o == nil {
+		var ret []TargetGroup
+		return ret
+	}
+
+	return o.TargetGroups
+}
+
+// GetTargetGroupsOk returns a tuple with the TargetGroups field value
+// and a boolean to check if the value has been set.
+func (o *AutoScalingGroupDetails) GetTargetGroupsOk() ([]TargetGroup, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TargetGroups, true
+}
+
+// SetTargetGroups sets field value
+func (o *AutoScalingGroupDetails) SetTargetGroups(v []TargetGroup) {
+	o.TargetGroups = v
+}
+
 func (o AutoScalingGroupDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -486,6 +512,7 @@ func (o AutoScalingGroupDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["cpuThreshold"] = o.CpuThreshold.Get()
 	toSerialize["warmupTime"] = o.WarmupTime.Get()
 	toSerialize["cooldownTime"] = o.CooldownTime.Get()
+	toSerialize["targetGroups"] = o.TargetGroups
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -514,6 +541,7 @@ func (o *AutoScalingGroupDetails) UnmarshalJSON(data []byte) (err error) {
 		"cpuThreshold",
 		"warmupTime",
 		"cooldownTime",
+		"targetGroups",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -558,6 +586,7 @@ func (o *AutoScalingGroupDetails) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "cpuThreshold")
 		delete(additionalProperties, "warmupTime")
 		delete(additionalProperties, "cooldownTime")
+		delete(additionalProperties, "targetGroups")
 		o.AdditionalProperties = additionalProperties
 	}
 

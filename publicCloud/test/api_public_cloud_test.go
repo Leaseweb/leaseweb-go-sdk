@@ -212,9 +212,10 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 		var autoScalingGroupId string
 
-		httpRes, err := apiClient.PublicCloudAPI.DeregisterAutoScalingGroupTargetGroup(context.Background(), autoScalingGroupId).Execute()
+		resp, httpRes, err := apiClient.PublicCloudAPI.DeregisterAutoScalingGroupTargetGroup(context.Background(), autoScalingGroupId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
@@ -711,9 +712,10 @@ func Test_publicCloud_PublicCloudAPIService(t *testing.T) {
 
 		var autoScalingGroupId string
 
-		httpRes, err := apiClient.PublicCloudAPI.RegisterAutoScalingGroupTargetGroup(context.Background(), autoScalingGroupId).Execute()
+		resp, httpRes, err := apiClient.PublicCloudAPI.RegisterAutoScalingGroupTargetGroup(context.Background(), autoScalingGroupId).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

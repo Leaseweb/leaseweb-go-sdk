@@ -7021,6 +7021,7 @@ paths:
                 region: eu-west-3
                 startsAt: null
                 state: CREATING
+                targetGroups: []
                 type: MANUAL
                 updatedAt: 2024-05-28T11:03:31+00:00
                 warmupTime: null
@@ -7184,6 +7185,13 @@ paths:
                 region: eu-west-3
                 startsAt: null
                 state: ACTIVE
+                targetGroups:
+                - id: c737e9e2-a1b7-4f06-af77-92fc62c0e4bd
+                  name: foo
+                  protocol: HTTP
+                  port: 80
+                  healthCheck: null
+                  region: eu-west-3
                 type: MANUAL
                 updatedAt: 2024-04-26T09:22:25+00:00
                 warmupTime: null
@@ -7305,21 +7313,28 @@ paths:
           content:
             application/json:
               example:
-                cooldownTime: 300
-                cpuThreshold: 60
-                createdAt: 2024-05-13T15:49:52+00:00
-                desiredAmount: 4
+                cooldownTime: null
+                cpuThreshold: null
+                createdAt: 2024-04-26T09:22:25+00:00
+                desiredAmount: 2
                 endsAt: null
                 id: fb769dab-3daa-47e4-89ed-06a4b6499176
-                maximumAmount: 8
-                minimumAmount: 4
-                reference: CPU Based Auto Scaling
+                maximumAmount: null
+                minimumAmount: null
+                reference: Manual Auto Scaling Group
                 region: eu-west-3
                 startsAt: null
-                state: SCALING
-                type: CPU_BASED
-                updatedAt: 2024-05-13T15:49:52+00:00
-                warmupTime: 400
+                state: ACTIVE
+                targetGroups:
+                - id: c737e9e2-a1b7-4f06-af77-92fc62c0e4bd
+                  name: foo
+                  protocol: HTTP
+                  port: 80
+                  healthCheck: null
+                  region: eu-west-3
+                type: MANUAL
+                updatedAt: 2024-04-26T09:22:25+00:00
+                warmupTime: null
               schema:
                 $ref: '#/components/schemas/autoScalingGroupDetails'
           description: OK
@@ -7530,8 +7545,35 @@ paths:
               $ref: '#/components/schemas/targetGroupIdOpts'
         required: true
       responses:
-        "204":
-          description: No Content.
+        "200":
+          content:
+            application/json:
+              example:
+                cooldownTime: null
+                cpuThreshold: null
+                createdAt: 2024-04-26T09:22:25+00:00
+                desiredAmount: 2
+                endsAt: null
+                id: fb769dab-3daa-47e4-89ed-06a4b6499176
+                maximumAmount: null
+                minimumAmount: null
+                reference: Manual Auto Scaling Group
+                region: eu-west-3
+                startsAt: null
+                state: ACTIVE
+                targetGroups:
+                - id: c737e9e2-a1b7-4f06-af77-92fc62c0e4bd
+                  name: foo
+                  protocol: HTTP
+                  port: 80
+                  healthCheck: null
+                  region: eu-west-3
+                type: MANUAL
+                updatedAt: 2024-04-26T09:22:25+00:00
+                warmupTime: null
+              schema:
+                $ref: '#/components/schemas/autoScalingGroupDetails'
+          description: OK
         "400":
           content:
             application/json:
@@ -7610,8 +7652,35 @@ paths:
               $ref: '#/components/schemas/targetGroupIdOpts'
         required: true
       responses:
-        "204":
-          description: No Content.
+        "200":
+          content:
+            application/json:
+              example:
+                cooldownTime: null
+                cpuThreshold: null
+                createdAt: 2024-04-26T09:22:25+00:00
+                desiredAmount: 2
+                endsAt: null
+                id: fb769dab-3daa-47e4-89ed-06a4b6499176
+                maximumAmount: null
+                minimumAmount: null
+                reference: Manual Auto Scaling Group
+                region: eu-west-3
+                startsAt: null
+                state: ACTIVE
+                targetGroups:
+                - id: c737e9e2-a1b7-4f06-af77-92fc62c0e4bd
+                  name: foo
+                  protocol: HTTP
+                  port: 80
+                  healthCheck: null
+                  region: eu-west-3
+                type: MANUAL
+                updatedAt: 2024-04-26T09:22:25+00:00
+                warmupTime: null
+              schema:
+                $ref: '#/components/schemas/autoScalingGroupDetails'
+          description: OK
         "400":
           content:
             application/json:
@@ -7738,7 +7807,8 @@ paths:
                   limit: 10
                   offset: 0
                 targetGroups:
-                - name: Target group name
+                - id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
+                  name: Target group name
                   protocol: HTTP
                   port: 80
                   region: eu-west-2
@@ -7812,6 +7882,7 @@ paths:
         content:
           application/json:
             example:
+              id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
               name: Target group name
               protocol: HTTP
               port: 80
@@ -7830,6 +7901,7 @@ paths:
           content:
             application/json:
               example:
+                id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
                 name: Target group name
                 protocol: HTTP
                 port: 80
@@ -7988,6 +8060,7 @@ paths:
           content:
             application/json:
               example:
+                id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
                 name: Target group name
                 protocol: HTTP
                 port: 80
@@ -8073,6 +8146,7 @@ paths:
         content:
           application/json:
             example:
+              id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
               name: Target group name
               protocol: HTTP
               port: 80
@@ -8091,6 +8165,7 @@ paths:
           content:
             application/json:
               example:
+                id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
                 name: Target group name
                 protocol: HTTP
                 port: 80
@@ -11489,6 +11564,91 @@ components:
       - reference
       - type
       type: object
+    protocol:
+      enum:
+      - HTTP
+      - HTTPS
+      - TCP
+      example: HTTP
+      type: string
+    httpMethod:
+      enum:
+      - GET
+      - HEAD
+      - POST
+      - OPTIONS
+      type: string
+    healthCheck:
+      example:
+        protocol: HTTP
+        method: method
+        port: 9
+        host: host
+        uri: /
+      nullable: true
+      properties:
+        protocol:
+          $ref: '#/components/schemas/protocol'
+        method:
+          $ref: '#/components/schemas/httpMethod'
+        uri:
+          description: URI to check in the target instances
+          example: /
+          type: string
+        host:
+          description: Host for the health check if any
+          nullable: true
+          type: string
+        port:
+          description: Port number
+          type: integer
+      required:
+      - host
+      - method
+      - port
+      - protocol
+      - uri
+      title: healthCheck
+      type: object
+    targetGroup:
+      example:
+        protocol: protocol
+        port: 7
+        healthCheck:
+          protocol: HTTP
+          method: method
+          port: 9
+          host: host
+          uri: /
+        name: name
+        id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
+        region: region
+      properties:
+        id:
+          example: 7e59b33d-05f3-4078-b251-c7831ae8fe14
+          format: uuid
+          type: string
+        name:
+          description: The name of the target group
+          type: string
+        protocol:
+          $ref: '#/components/schemas/protocol'
+        port:
+          description: The port of the target group
+          type: integer
+        region:
+          $ref: '#/components/schemas/regionName'
+        healthCheck:
+          $ref: '#/components/schemas/healthCheck'
+      required:
+      - healthCheck
+      - id
+      - name
+      - port
+      - protocol
+      - region
+      title: targetGroup
+      type: object
     autoScalingGroupDetails:
       example:
         cpuThreshold: 5
@@ -11497,6 +11657,29 @@ components:
         desiredAmount: 0
         reference: reference
         createdAt: 2000-01-23T04:56:07.000+00:00
+        targetGroups:
+        - protocol: protocol
+          port: 7
+          healthCheck:
+            protocol: HTTP
+            method: method
+            port: 9
+            host: host
+            uri: /
+          name: name
+          id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
+          region: region
+        - protocol: protocol
+          port: 7
+          healthCheck:
+            protocol: HTTP
+            method: method
+            port: 9
+            host: host
+            uri: /
+          name: name
+          id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
+          region: region
         minimumAmount: 6
         startsAt: 2000-01-23T04:56:07.000+00:00
         warmupTime: 5
@@ -11570,6 +11753,10 @@ components:
             seconds for new instances
           nullable: true
           type: integer
+        targetGroups:
+          items:
+            $ref: '#/components/schemas/targetGroup'
+          type: array
       required:
       - cooldownTime
       - cpuThreshold
@@ -11583,6 +11770,7 @@ components:
       - region
       - startsAt
       - state
+      - targetGroups
       - type
       - updatedAt
       - warmupTime
@@ -11817,107 +12005,30 @@ components:
       - targetGroupId
       title: targetGroupIdOpts
       type: object
-    protocol:
-      enum:
-      - HTTP
-      - HTTPS
-      - TCP
-      example: HTTP
-      type: string
-    httpMethod:
-      enum:
-      - GET
-      - HEAD
-      - POST
-      - OPTIONS
-      type: string
-    healthCheck:
-      example:
-        protocol: HTTP
-        method: method
-        port: 6
-        host: host
-        uri: /
-      nullable: true
-      properties:
-        protocol:
-          $ref: '#/components/schemas/protocol'
-        method:
-          $ref: '#/components/schemas/httpMethod'
-        uri:
-          description: URI to check in the target instances
-          example: /
-          type: string
-        host:
-          description: Host for the health check if any
-          nullable: true
-          type: string
-        port:
-          description: Port number
-          type: integer
-      required:
-      - host
-      - method
-      - port
-      - protocol
-      - uri
-      title: healthCheck
-      type: object
-    targetGroup:
-      example:
-        protocol: protocol
-        port: 0
-        healthCheck:
-          protocol: HTTP
-          method: method
-          port: 6
-          host: host
-          uri: /
-        name: name
-        region: region
-      properties:
-        name:
-          description: The name of the target group
-          type: string
-        protocol:
-          $ref: '#/components/schemas/protocol'
-        port:
-          description: The port of the target group
-          type: integer
-        region:
-          $ref: '#/components/schemas/regionName'
-        healthCheck:
-          $ref: '#/components/schemas/healthCheck'
-      required:
-      - healthCheck
-      - name
-      - port
-      - protocol
-      - region
-      title: targetGroup
-      type: object
     getTargetGroupListResult:
       example:
         targetGroups:
         - protocol: protocol
-          port: 0
+          port: 7
           healthCheck:
             protocol: HTTP
             method: method
-            port: 6
+            port: 9
             host: host
             uri: /
           name: name
+          id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
           region: region
         - protocol: protocol
-          port: 0
+          port: 7
           healthCheck:
             protocol: HTTP
             method: method
-            port: 6
+            port: 9
             host: host
             uri: /
           name: name
+          id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
           region: region
         _metadata:
           offset: 0

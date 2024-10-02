@@ -20,6 +20,7 @@ var _ MappedNullable = &TargetGroup{}
 
 // TargetGroup struct for TargetGroup
 type TargetGroup struct {
+	Id string `json:"id"`
 	// The name of the target group
 	Name string `json:"name"`
 	Protocol Protocol `json:"protocol"`
@@ -36,8 +37,9 @@ type _TargetGroup TargetGroup
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTargetGroup(name string, protocol Protocol, port int32, region RegionName, healthCheck NullableHealthCheck) *TargetGroup {
+func NewTargetGroup(id string, name string, protocol Protocol, port int32, region RegionName, healthCheck NullableHealthCheck) *TargetGroup {
 	this := TargetGroup{}
+	this.Id = id
 	this.Name = name
 	this.Protocol = protocol
 	this.Port = port
@@ -52,6 +54,30 @@ func NewTargetGroup(name string, protocol Protocol, port int32, region RegionNam
 func NewTargetGroupWithDefaults() *TargetGroup {
 	this := TargetGroup{}
 	return &this
+}
+
+// GetId returns the Id field value
+func (o *TargetGroup) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *TargetGroup) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *TargetGroup) SetId(v string) {
+	o.Id = v
 }
 
 // GetName returns the Name field value
@@ -186,6 +212,7 @@ func (o TargetGroup) MarshalJSON() ([]byte, error) {
 
 func (o TargetGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
 	toSerialize["protocol"] = o.Protocol
 	toSerialize["port"] = o.Port
@@ -204,6 +231,7 @@ func (o *TargetGroup) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"id",
 		"name",
 		"protocol",
 		"port",
@@ -238,6 +266,7 @@ func (o *TargetGroup) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "protocol")
 		delete(additionalProperties, "port")

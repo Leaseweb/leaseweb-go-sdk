@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Id** | **string** |  | 
 **Name** | **string** | The name of the target group | 
 **Protocol** | [**Protocol**](Protocol.md) |  | 
 **Port** | **int32** | The port of the target group | 
@@ -14,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewTargetGroup
 
-`func NewTargetGroup(name string, protocol Protocol, port int32, region RegionName, healthCheck NullableHealthCheck, ) *TargetGroup`
+`func NewTargetGroup(id string, name string, protocol Protocol, port int32, region RegionName, healthCheck NullableHealthCheck, ) *TargetGroup`
 
 NewTargetGroup instantiates a new TargetGroup object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +29,26 @@ will change when the set of required properties is changed
 NewTargetGroupWithDefaults instantiates a new TargetGroup object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetId
+
+`func (o *TargetGroup) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *TargetGroup) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *TargetGroup) SetId(v string)`
+
+SetId sets Id field to given value.
+
 
 ### GetName
 

@@ -19,12 +19,13 @@ Name | Type | Description | Notes
 **CpuThreshold** | **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. The target average CPU utilization for scaling | 
 **WarmupTime** | **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. Warm-up time in seconds for new instances | 
 **CooldownTime** | **NullableInt32** | Only for \&quot;CPU_BASED\&quot; auto scaling group. Cool-down time in seconds for new instances | 
+**TargetGroups** | [**[]TargetGroup**](TargetGroup.md) |  | 
 
 ## Methods
 
 ### NewAutoScalingGroupDetails
 
-`func NewAutoScalingGroupDetails(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region RegionName, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, ) *AutoScalingGroupDetails`
+`func NewAutoScalingGroupDetails(id string, type_ AutoScalingGroupType, state AutoScalingGroupState, desiredAmount NullableInt32, region RegionName, reference string, createdAt time.Time, updatedAt time.Time, startsAt NullableTime, endsAt NullableTime, minimumAmount NullableInt32, maximumAmount NullableInt32, cpuThreshold NullableInt32, warmupTime NullableInt32, cooldownTime NullableInt32, targetGroups []TargetGroup, ) *AutoScalingGroupDetails`
 
 NewAutoScalingGroupDetails instantiates a new AutoScalingGroupDetails object
 This constructor will assign default values to properties that have it defined,
@@ -419,6 +420,26 @@ SetCooldownTime sets CooldownTime field to given value.
 `func (o *AutoScalingGroupDetails) UnsetCooldownTime()`
 
 UnsetCooldownTime ensures that no value is present for CooldownTime, not even an explicit nil
+### GetTargetGroups
+
+`func (o *AutoScalingGroupDetails) GetTargetGroups() []TargetGroup`
+
+GetTargetGroups returns the TargetGroups field if non-nil, zero value otherwise.
+
+### GetTargetGroupsOk
+
+`func (o *AutoScalingGroupDetails) GetTargetGroupsOk() (*[]TargetGroup, bool)`
+
+GetTargetGroupsOk returns a tuple with the TargetGroups field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetGroups
+
+`func (o *AutoScalingGroupDetails) SetTargetGroups(v []TargetGroup)`
+
+SetTargetGroups sets TargetGroups field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

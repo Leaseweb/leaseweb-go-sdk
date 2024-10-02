@@ -241,7 +241,8 @@ Allowed only one snapshot per instance.
 	DeregisterAutoScalingGroupTargetGroup(ctx context.Context, autoScalingGroupId string) ApiDeregisterAutoScalingGroupTargetGroupRequest
 
 	// DeregisterAutoScalingGroupTargetGroupExecute executes the request
-	DeregisterAutoScalingGroupTargetGroupExecute(r ApiDeregisterAutoScalingGroupTargetGroupRequest) (*http.Response, error)
+	//  @return AutoScalingGroupDetails
+	DeregisterAutoScalingGroupTargetGroupExecute(r ApiDeregisterAutoScalingGroupTargetGroupRequest) (*AutoScalingGroupDetails, *http.Response, error)
 
 	/*
 	DeregisterTargets Deregister Targets
@@ -786,7 +787,8 @@ Only works for IPv4.
 	RegisterAutoScalingGroupTargetGroup(ctx context.Context, autoScalingGroupId string) ApiRegisterAutoScalingGroupTargetGroupRequest
 
 	// RegisterAutoScalingGroupTargetGroupExecute executes the request
-	RegisterAutoScalingGroupTargetGroupExecute(r ApiRegisterAutoScalingGroupTargetGroupRequest) (*http.Response, error)
+	//  @return AutoScalingGroupDetails
+	RegisterAutoScalingGroupTargetGroupExecute(r ApiRegisterAutoScalingGroupTargetGroupRequest) (*AutoScalingGroupDetails, *http.Response, error)
 
 	/*
 	RegisterTargets Register Targets
@@ -3509,7 +3511,7 @@ func (r ApiDeregisterAutoScalingGroupTargetGroupRequest) TargetGroupIdOpts(targe
 	return r
 }
 
-func (r ApiDeregisterAutoScalingGroupTargetGroupRequest) Execute() (*http.Response, error) {
+func (r ApiDeregisterAutoScalingGroupTargetGroupRequest) Execute() (*AutoScalingGroupDetails, *http.Response, error) {
 	return r.ApiService.DeregisterAutoScalingGroupTargetGroupExecute(r)
 }
 
@@ -3531,16 +3533,18 @@ func (a *PublicCloudAPIService) DeregisterAutoScalingGroupTargetGroup(ctx contex
 }
 
 // Execute executes the request
-func (a *PublicCloudAPIService) DeregisterAutoScalingGroupTargetGroupExecute(r ApiDeregisterAutoScalingGroupTargetGroupRequest) (*http.Response, error) {
+//  @return AutoScalingGroupDetails
+func (a *PublicCloudAPIService) DeregisterAutoScalingGroupTargetGroupExecute(r ApiDeregisterAutoScalingGroupTargetGroupRequest) (*AutoScalingGroupDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *AutoScalingGroupDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.DeregisterAutoScalingGroupTargetGroup")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/autoScalingGroups/{autoScalingGroupId}/deregisterTargetGroup"
@@ -3550,7 +3554,7 @@ func (a *PublicCloudAPIService) DeregisterAutoScalingGroupTargetGroupExecute(r A
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.targetGroupIdOpts == nil {
-		return nil, reportError("targetGroupIdOpts is required and must be specified")
+		return localVarReturnValue, nil, reportError("targetGroupIdOpts is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3588,19 +3592,19 @@ func (a *PublicCloudAPIService) DeregisterAutoScalingGroupTargetGroupExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3613,59 +3617,68 @@ func (a *PublicCloudAPIService) DeregisterAutoScalingGroupTargetGroupExecute(r A
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 503 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeregisterTargetsRequest struct {
@@ -10627,7 +10640,7 @@ func (r ApiRegisterAutoScalingGroupTargetGroupRequest) TargetGroupIdOpts(targetG
 	return r
 }
 
-func (r ApiRegisterAutoScalingGroupTargetGroupRequest) Execute() (*http.Response, error) {
+func (r ApiRegisterAutoScalingGroupTargetGroupRequest) Execute() (*AutoScalingGroupDetails, *http.Response, error) {
 	return r.ApiService.RegisterAutoScalingGroupTargetGroupExecute(r)
 }
 
@@ -10649,16 +10662,18 @@ func (a *PublicCloudAPIService) RegisterAutoScalingGroupTargetGroup(ctx context.
 }
 
 // Execute executes the request
-func (a *PublicCloudAPIService) RegisterAutoScalingGroupTargetGroupExecute(r ApiRegisterAutoScalingGroupTargetGroupRequest) (*http.Response, error) {
+//  @return AutoScalingGroupDetails
+func (a *PublicCloudAPIService) RegisterAutoScalingGroupTargetGroupExecute(r ApiRegisterAutoScalingGroupTargetGroupRequest) (*AutoScalingGroupDetails, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
+		localVarReturnValue  *AutoScalingGroupDetails
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PublicCloudAPIService.RegisterAutoScalingGroupTargetGroup")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/autoScalingGroups/{autoScalingGroupId}/registerTargetGroup"
@@ -10668,7 +10683,7 @@ func (a *PublicCloudAPIService) RegisterAutoScalingGroupTargetGroupExecute(r Api
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.targetGroupIdOpts == nil {
-		return nil, reportError("targetGroupIdOpts is required and must be specified")
+		return localVarReturnValue, nil, reportError("targetGroupIdOpts is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10706,19 +10721,19 @@ func (a *PublicCloudAPIService) RegisterAutoScalingGroupTargetGroupExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10731,59 +10746,68 @@ func (a *PublicCloudAPIService) RegisterAutoScalingGroupTargetGroupExecute(r Api
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 503 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 					newErr.model = v
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiRegisterTargetsRequest struct {

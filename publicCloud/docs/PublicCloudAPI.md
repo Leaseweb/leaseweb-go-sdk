@@ -577,7 +577,7 @@ import (
 )
 
 func main() {
-	targetGroup := *openapiclient.NewTargetGroup("Name_example", openapiclient.protocol("HTTP"), int32(123), openapiclient.regionName("eu-west-3"), "TODO") // TargetGroup | 
+	targetGroup := *openapiclient.NewTargetGroup("7e59b33d-05f3-4078-b251-c7831ae8fe14", "Name_example", openapiclient.protocol("HTTP"), int32(123), openapiclient.regionName("eu-west-3"), "TODO") // TargetGroup | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1042,7 +1042,7 @@ Name | Type | Description  | Notes
 
 ## DeregisterAutoScalingGroupTargetGroup
 
-> DeregisterAutoScalingGroupTargetGroup(ctx, autoScalingGroupId).TargetGroupIdOpts(targetGroupIdOpts).Execute()
+> AutoScalingGroupDetails DeregisterAutoScalingGroupTargetGroup(ctx, autoScalingGroupId).TargetGroupIdOpts(targetGroupIdOpts).Execute()
 
 Deregister Target Group
 
@@ -1066,11 +1066,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PublicCloudAPI.DeregisterAutoScalingGroupTargetGroup(context.Background(), autoScalingGroupId).TargetGroupIdOpts(targetGroupIdOpts).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.DeregisterAutoScalingGroupTargetGroup(context.Background(), autoScalingGroupId).TargetGroupIdOpts(targetGroupIdOpts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.DeregisterAutoScalingGroupTargetGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `DeregisterAutoScalingGroupTargetGroup`: AutoScalingGroupDetails
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.DeregisterAutoScalingGroupTargetGroup`: %v\n", resp)
 }
 ```
 
@@ -1094,7 +1096,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**AutoScalingGroupDetails**](AutoScalingGroupDetails.md)
 
 ### Authorization
 
@@ -3733,7 +3735,7 @@ Name | Type | Description  | Notes
 
 ## RegisterAutoScalingGroupTargetGroup
 
-> RegisterAutoScalingGroupTargetGroup(ctx, autoScalingGroupId).TargetGroupIdOpts(targetGroupIdOpts).Execute()
+> AutoScalingGroupDetails RegisterAutoScalingGroupTargetGroup(ctx, autoScalingGroupId).TargetGroupIdOpts(targetGroupIdOpts).Execute()
 
 Register Target Group
 
@@ -3757,11 +3759,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PublicCloudAPI.RegisterAutoScalingGroupTargetGroup(context.Background(), autoScalingGroupId).TargetGroupIdOpts(targetGroupIdOpts).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.RegisterAutoScalingGroupTargetGroup(context.Background(), autoScalingGroupId).TargetGroupIdOpts(targetGroupIdOpts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.RegisterAutoScalingGroupTargetGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
+	// response from `RegisterAutoScalingGroupTargetGroup`: AutoScalingGroupDetails
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.RegisterAutoScalingGroupTargetGroup`: %v\n", resp)
 }
 ```
 
@@ -3785,7 +3789,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**AutoScalingGroupDetails**](AutoScalingGroupDetails.md)
 
 ### Authorization
 
@@ -5099,7 +5103,7 @@ import (
 
 func main() {
 	targetGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Target Group ID
-	targetGroup := *openapiclient.NewTargetGroup("Name_example", openapiclient.protocol("HTTP"), int32(123), openapiclient.regionName("eu-west-3"), "TODO") // TargetGroup | 
+	targetGroup := *openapiclient.NewTargetGroup("7e59b33d-05f3-4078-b251-c7831ae8fe14", "Name_example", openapiclient.protocol("HTTP"), int32(123), openapiclient.regionName("eu-west-3"), "TODO") // TargetGroup | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
