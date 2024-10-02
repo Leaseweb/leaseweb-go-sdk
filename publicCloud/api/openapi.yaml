@@ -10947,52 +10947,6 @@ components:
       - targetPort
       - type
       type: object
-    protocol:
-      enum:
-      - HTTP
-      - HTTPS
-      - TCP
-      example: HTTP
-      type: string
-    httpMethod:
-      enum:
-      - GET
-      - HEAD
-      - POST
-      - OPTIONS
-      type: string
-    healthCheck:
-      example:
-        protocol: HTTP
-        method: method
-        port: 6
-        host: host
-        uri: /
-      nullable: true
-      properties:
-        protocol:
-          $ref: '#/components/schemas/protocol'
-        method:
-          $ref: '#/components/schemas/httpMethod'
-        uri:
-          description: URI to check in the target instances
-          example: /
-          type: string
-        host:
-          description: Host for the health check if any
-          nullable: true
-          type: string
-        port:
-          description: Port number
-          type: integer
-      required:
-      - host
-      - method
-      - port
-      - protocol
-      - uri
-      title: healthCheck
-      type: object
     updateLoadBalancerOpts:
       properties:
         type:
@@ -11006,8 +10960,6 @@ components:
           $ref: '#/components/schemas/stickySession'
         balance:
           $ref: '#/components/schemas/balance'
-        healthCheck:
-          $ref: '#/components/schemas/healthCheck'
         xForwardedFor:
           description: Is xForwardedFor enabled or not
           type: boolean
@@ -11864,6 +11816,52 @@ components:
       required:
       - targetGroupId
       title: targetGroupIdOpts
+      type: object
+    protocol:
+      enum:
+      - HTTP
+      - HTTPS
+      - TCP
+      example: HTTP
+      type: string
+    httpMethod:
+      enum:
+      - GET
+      - HEAD
+      - POST
+      - OPTIONS
+      type: string
+    healthCheck:
+      example:
+        protocol: HTTP
+        method: method
+        port: 6
+        host: host
+        uri: /
+      nullable: true
+      properties:
+        protocol:
+          $ref: '#/components/schemas/protocol'
+        method:
+          $ref: '#/components/schemas/httpMethod'
+        uri:
+          description: URI to check in the target instances
+          example: /
+          type: string
+        host:
+          description: Host for the health check if any
+          nullable: true
+          type: string
+        port:
+          description: Port number
+          type: integer
+      required:
+      - host
+      - method
+      - port
+      - protocol
+      - uri
+      title: healthCheck
       type: object
     targetGroup:
       example:

@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **ContractType** | Pointer to [**ContractType**](ContractType.md) |  | [optional] 
 **StickySession** | Pointer to [**NullableStickySession**](StickySession.md) |  | [optional] 
 **Balance** | Pointer to [**Balance**](Balance.md) |  | [optional] 
-**HealthCheck** | Pointer to [**NullableHealthCheck**](HealthCheck.md) |  | [optional] 
 **XForwardedFor** | Pointer to **bool** | Is xForwardedFor enabled or not | [optional] 
 **IdleTimeOut** | Pointer to **int32** | Time to close the connection if load balancer is idle | [optional] 
 **TargetPort** | Pointer to **int32** | Port on which the backend (target) servers are listening to handle incoming requests | [optional] 
@@ -168,41 +167,6 @@ SetBalance sets Balance field to given value.
 
 HasBalance returns a boolean if a field has been set.
 
-### GetHealthCheck
-
-`func (o *UpdateLoadBalancerOpts) GetHealthCheck() HealthCheck`
-
-GetHealthCheck returns the HealthCheck field if non-nil, zero value otherwise.
-
-### GetHealthCheckOk
-
-`func (o *UpdateLoadBalancerOpts) GetHealthCheckOk() (*HealthCheck, bool)`
-
-GetHealthCheckOk returns a tuple with the HealthCheck field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHealthCheck
-
-`func (o *UpdateLoadBalancerOpts) SetHealthCheck(v HealthCheck)`
-
-SetHealthCheck sets HealthCheck field to given value.
-
-### HasHealthCheck
-
-`func (o *UpdateLoadBalancerOpts) HasHealthCheck() bool`
-
-HasHealthCheck returns a boolean if a field has been set.
-
-### SetHealthCheckNil
-
-`func (o *UpdateLoadBalancerOpts) SetHealthCheckNil(b bool)`
-
- SetHealthCheckNil sets the value for HealthCheck to be an explicit nil
-
-### UnsetHealthCheck
-`func (o *UpdateLoadBalancerOpts) UnsetHealthCheck()`
-
-UnsetHealthCheck ensures that no value is present for HealthCheck, not even an explicit nil
 ### GetXForwardedFor
 
 `func (o *UpdateLoadBalancerOpts) GetXForwardedFor() bool`

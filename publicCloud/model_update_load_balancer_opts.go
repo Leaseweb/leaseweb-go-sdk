@@ -25,7 +25,6 @@ type UpdateLoadBalancerOpts struct {
 	ContractType *ContractType `json:"contractType,omitempty"`
 	StickySession NullableStickySession `json:"stickySession,omitempty"`
 	Balance *Balance `json:"balance,omitempty"`
-	HealthCheck NullableHealthCheck `json:"healthCheck,omitempty"`
 	// Is xForwardedFor enabled or not
 	XForwardedFor *bool `json:"xForwardedFor,omitempty"`
 	// Time to close the connection if load balancer is idle
@@ -224,48 +223,6 @@ func (o *UpdateLoadBalancerOpts) SetBalance(v Balance) {
 	o.Balance = &v
 }
 
-// GetHealthCheck returns the HealthCheck field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateLoadBalancerOpts) GetHealthCheck() HealthCheck {
-	if o == nil || IsNil(o.HealthCheck.Get()) {
-		var ret HealthCheck
-		return ret
-	}
-	return *o.HealthCheck.Get()
-}
-
-// GetHealthCheckOk returns a tuple with the HealthCheck field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateLoadBalancerOpts) GetHealthCheckOk() (*HealthCheck, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.HealthCheck.Get(), o.HealthCheck.IsSet()
-}
-
-// HasHealthCheck returns a boolean if a field has been set.
-func (o *UpdateLoadBalancerOpts) HasHealthCheck() bool {
-	if o != nil && o.HealthCheck.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetHealthCheck gets a reference to the given NullableHealthCheck and assigns it to the HealthCheck field.
-func (o *UpdateLoadBalancerOpts) SetHealthCheck(v HealthCheck) {
-	o.HealthCheck.Set(&v)
-}
-// SetHealthCheckNil sets the value for HealthCheck to be an explicit nil
-func (o *UpdateLoadBalancerOpts) SetHealthCheckNil() {
-	o.HealthCheck.Set(nil)
-}
-
-// UnsetHealthCheck ensures that no value is present for HealthCheck, not even an explicit nil
-func (o *UpdateLoadBalancerOpts) UnsetHealthCheck() {
-	o.HealthCheck.Unset()
-}
-
 // GetXForwardedFor returns the XForwardedFor field value if set, zero value otherwise.
 func (o *UpdateLoadBalancerOpts) GetXForwardedFor() bool {
 	if o == nil || IsNil(o.XForwardedFor) {
@@ -387,9 +344,6 @@ func (o UpdateLoadBalancerOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Balance) {
 		toSerialize["balance"] = o.Balance
 	}
-	if o.HealthCheck.IsSet() {
-		toSerialize["healthCheck"] = o.HealthCheck.Get()
-	}
 	if !IsNil(o.XForwardedFor) {
 		toSerialize["xForwardedFor"] = o.XForwardedFor
 	}
@@ -426,7 +380,6 @@ func (o *UpdateLoadBalancerOpts) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "contractType")
 		delete(additionalProperties, "stickySession")
 		delete(additionalProperties, "balance")
-		delete(additionalProperties, "healthCheck")
 		delete(additionalProperties, "xForwardedFor")
 		delete(additionalProperties, "idleTimeOut")
 		delete(additionalProperties, "targetPort")
