@@ -102,12 +102,16 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**GetAutoScalingGroup**](docs/PublicCloudAPI.md#getautoscalinggroup) | **Get** /autoScalingGroups/{autoScalingGroupId} | Get Auto Scaling Group details
 *PublicCloudAPI* | [**GetAutoScalingGroupInstanceList**](docs/PublicCloudAPI.md#getautoscalinggroupinstancelist) | **Get** /autoScalingGroups/{autoScalingGroupId}/instances | Get list of instances belonging to an Auto Scaling Group
 *PublicCloudAPI* | [**GetAutoScalingGroupList**](docs/PublicCloudAPI.md#getautoscalinggrouplist) | **Get** /autoScalingGroups | Get Auto Scaling Group list
+*PublicCloudAPI* | [**GetConnectionsMetrics**](docs/PublicCloudAPI.md#getconnectionsmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/connections | Get connections metrics
+*PublicCloudAPI* | [**GetConnectionsPerSecondMetrics**](docs/PublicCloudAPI.md#getconnectionspersecondmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/connectionsPerSecond | Get connections per second metrics
 *PublicCloudAPI* | [**GetConsoleAccessToInstance**](docs/PublicCloudAPI.md#getconsoleaccesstoinstance) | **Get** /instances/{instanceId}/console | Get console access
 *PublicCloudAPI* | [**GetCpuMetrics**](docs/PublicCloudAPI.md#getcpumetrics) | **Get** /instances/{instanceId}/metrics/cpu | Get instance CPU metrics
 *PublicCloudAPI* | [**GetCredential**](docs/PublicCloudAPI.md#getcredential) | **Get** /instances/{instanceId}/credentials/{type}/{username} | Get credentials by type and username
 *PublicCloudAPI* | [**GetCredentialList**](docs/PublicCloudAPI.md#getcredentiallist) | **Get** /instances/{instanceId}/credentials | List credentials stored for instance
 *PublicCloudAPI* | [**GetCredentialListByType**](docs/PublicCloudAPI.md#getcredentiallistbytype) | **Get** /instances/{instanceId}/credentials/{type} | Get credentials by type
 *PublicCloudAPI* | [**GetDataTrafficMetrics**](docs/PublicCloudAPI.md#getdatatrafficmetrics) | **Get** /instances/{instanceId}/metrics/datatraffic | Get instance data traffic metrics
+*PublicCloudAPI* | [**GetDataTransferredMetrics**](docs/PublicCloudAPI.md#getdatatransferredmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/dataTransferred | Get load balancer data transferred metrics
+*PublicCloudAPI* | [**GetDataTransferredPerSecondMetrics**](docs/PublicCloudAPI.md#getdatatransferredpersecondmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/dataTransferredPerSecond | Get load balancer data transferred per second metrics
 *PublicCloudAPI* | [**GetExpenses**](docs/PublicCloudAPI.md#getexpenses) | **Get** /equipments/{equipmentId}/expenses | Get costs for a given month.
 *PublicCloudAPI* | [**GetImageList**](docs/PublicCloudAPI.md#getimagelist) | **Get** /images | List all available Images
 *PublicCloudAPI* | [**GetInstance**](docs/PublicCloudAPI.md#getinstance) | **Get** /instances/{instanceId} | Get instance details
@@ -123,6 +127,10 @@ Class | Method | HTTP request | Description
 *PublicCloudAPI* | [**GetMarketAppList**](docs/PublicCloudAPI.md#getmarketapplist) | **Get** /marketApps | Get marketplace apps
 *PublicCloudAPI* | [**GetRegionList**](docs/PublicCloudAPI.md#getregionlist) | **Get** /regions | List regions
 *PublicCloudAPI* | [**GetReinstallImageList**](docs/PublicCloudAPI.md#getreinstallimagelist) | **Get** /instances/{instanceId}/reinstall/images | List images available for reinstall
+*PublicCloudAPI* | [**GetRequestsMetrics**](docs/PublicCloudAPI.md#getrequestsmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/requests | Get load balancer requests metrics
+*PublicCloudAPI* | [**GetRequestsPerSecondMetrics**](docs/PublicCloudAPI.md#getrequestspersecondmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/requestsPerSecond | Get load balancer requests per second metrics
+*PublicCloudAPI* | [**GetResponseCodesMetrics**](docs/PublicCloudAPI.md#getresponsecodesmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/responseCodes | Get response codes metrics
+*PublicCloudAPI* | [**GetResponseCodesPerSecondMetrics**](docs/PublicCloudAPI.md#getresponsecodespersecondmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/responseCodesPerSecond | Get response codes per second metrics
 *PublicCloudAPI* | [**GetSnapshot**](docs/PublicCloudAPI.md#getsnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
 *PublicCloudAPI* | [**GetSnapshotList**](docs/PublicCloudAPI.md#getsnapshotlist) | **Get** /instances/{instanceId}/snapshots | List snapshots
 *PublicCloudAPI* | [**GetTargetGroup**](docs/PublicCloudAPI.md#gettargetgroup) | **Get** /targetGroups/{targetGroupId} | Get Target Group details
@@ -173,30 +181,34 @@ Class | Method | HTTP request | Description
  - [ContractTerm](docs/ContractTerm.md)
  - [ContractType](docs/ContractType.md)
  - [Cpu](docs/Cpu.md)
+ - [CpuGranularity](docs/CpuGranularity.md)
  - [CpuMetrics](docs/CpuMetrics.md)
  - [CpuMetricsMetadata](docs/CpuMetricsMetadata.md)
  - [CpuMetricsMetadataSummary](docs/CpuMetricsMetadataSummary.md)
  - [CpuMetricsMetadataSummaryCpuMetrics](docs/CpuMetricsMetadataSummaryCpuMetrics.md)
  - [CpuMetricsMetadataSummaryPeak](docs/CpuMetricsMetadataSummaryPeak.md)
- - [CpuMetricsMetrics](docs/CpuMetricsMetrics.md)
- - [CpuMetricsValue](docs/CpuMetricsValue.md)
  - [CreateAutoScalingGroupOpts](docs/CreateAutoScalingGroupOpts.md)
  - [CreateImageOpts](docs/CreateImageOpts.md)
  - [Credential](docs/Credential.md)
  - [CredentialType](docs/CredentialType.md)
  - [DataTrafficMetrics](docs/DataTrafficMetrics.md)
+ - [DataTransferredMetrics](docs/DataTransferredMetrics.md)
  - [Ddos](docs/Ddos.md)
  - [ErrorResult](docs/ErrorResult.md)
  - [ExpenseResultInstance](docs/ExpenseResultInstance.md)
  - [Flavour](docs/Flavour.md)
  - [GetAutoScalingGroupInstanceListResult](docs/GetAutoScalingGroupInstanceListResult.md)
  - [GetAutoScalingGroupListResult](docs/GetAutoScalingGroupListResult.md)
+ - [GetConnectionsMetricsResult](docs/GetConnectionsMetricsResult.md)
+ - [GetConnectionsPerSecondMetricsResult](docs/GetConnectionsPerSecondMetricsResult.md)
  - [GetConsoleAccessToInstanceResult](docs/GetConsoleAccessToInstanceResult.md)
  - [GetCpuMetricsResult](docs/GetCpuMetricsResult.md)
  - [GetCredentialListByTypeResult](docs/GetCredentialListByTypeResult.md)
  - [GetCredentialListResult](docs/GetCredentialListResult.md)
  - [GetCredentialResult](docs/GetCredentialResult.md)
  - [GetDataTrafficMetricsResult](docs/GetDataTrafficMetricsResult.md)
+ - [GetDataTransferredMetricsResult](docs/GetDataTransferredMetricsResult.md)
+ - [GetDataTransferredPerSecondMetricsResult](docs/GetDataTransferredPerSecondMetricsResult.md)
  - [GetExpensesResult](docs/GetExpensesResult.md)
  - [GetImageListResult](docs/GetImageListResult.md)
  - [GetInstanceListResult](docs/GetInstanceListResult.md)
@@ -207,6 +219,10 @@ Class | Method | HTTP request | Description
  - [GetMarketAppListResult](docs/GetMarketAppListResult.md)
  - [GetRegionListResult](docs/GetRegionListResult.md)
  - [GetReinstallImageListResult](docs/GetReinstallImageListResult.md)
+ - [GetRequestsMetricsResult](docs/GetRequestsMetricsResult.md)
+ - [GetRequestsPerSecondMetricsResult](docs/GetRequestsPerSecondMetricsResult.md)
+ - [GetResponseCodesMetricsResult](docs/GetResponseCodesMetricsResult.md)
+ - [GetResponseCodesPerSecondMetricsResult](docs/GetResponseCodesPerSecondMetricsResult.md)
  - [GetSnapshotListResult](docs/GetSnapshotListResult.md)
  - [GetTargetGroupListResult](docs/GetTargetGroupListResult.md)
  - [GetTargetListResult](docs/GetTargetListResult.md)
@@ -231,6 +247,7 @@ Class | Method | HTTP request | Description
  - [LoadBalancer](docs/LoadBalancer.md)
  - [LoadBalancerConfiguration](docs/LoadBalancerConfiguration.md)
  - [LoadBalancerDetails](docs/LoadBalancerDetails.md)
+ - [LoadBalancerGranularity](docs/LoadBalancerGranularity.md)
  - [LoadBalancerListener](docs/LoadBalancerListener.md)
  - [LoadBalancerListenerDetails](docs/LoadBalancerListenerDetails.md)
  - [LoadBalancerListenerOpts](docs/LoadBalancerListenerOpts.md)
@@ -240,6 +257,12 @@ Class | Method | HTTP request | Description
  - [MarketAppId](docs/MarketAppId.md)
  - [Memory](docs/Memory.md)
  - [Metadata](docs/Metadata.md)
+ - [MetricsGranularity](docs/MetricsGranularity.md)
+ - [MetricsMetadataProperties](docs/MetricsMetadataProperties.md)
+ - [MetricsMetadataPropertiesGranularity](docs/MetricsMetadataPropertiesGranularity.md)
+ - [MetricsProperties](docs/MetricsProperties.md)
+ - [MetricsUnit](docs/MetricsUnit.md)
+ - [MetricsValues](docs/MetricsValues.md)
  - [NetworkSpeed](docs/NetworkSpeed.md)
  - [NetworkType](docs/NetworkType.md)
  - [NullRouteIpOpts](docs/NullRouteIpOpts.md)
@@ -252,6 +275,7 @@ Class | Method | HTTP request | Description
  - [RegionName](docs/RegionName.md)
  - [ReinstallInstanceOpts](docs/ReinstallInstanceOpts.md)
  - [Resources](docs/Resources.md)
+ - [ResponseCodesMetrics](docs/ResponseCodesMetrics.md)
  - [SchemasHealthCheckStatus](docs/SchemasHealthCheckStatus.md)
  - [Snapshot](docs/Snapshot.md)
  - [SslCertificate](docs/SslCertificate.md)

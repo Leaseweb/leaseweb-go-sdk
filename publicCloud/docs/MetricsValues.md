@@ -1,78 +1,78 @@
-# CpuMetricsValue
+# MetricsValues
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | Pointer to **float32** | CPU usage | [optional] 
+**Value** | Pointer to **float32** | Metric value | [optional] 
 **Timestamp** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
 
-### NewCpuMetricsValue
+### NewMetricsValues
 
-`func NewCpuMetricsValue() *CpuMetricsValue`
+`func NewMetricsValues() *MetricsValues`
 
-NewCpuMetricsValue instantiates a new CpuMetricsValue object
+NewMetricsValues instantiates a new MetricsValues object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewCpuMetricsValueWithDefaults
+### NewMetricsValuesWithDefaults
 
-`func NewCpuMetricsValueWithDefaults() *CpuMetricsValue`
+`func NewMetricsValuesWithDefaults() *MetricsValues`
 
-NewCpuMetricsValueWithDefaults instantiates a new CpuMetricsValue object
+NewMetricsValuesWithDefaults instantiates a new MetricsValues object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetValue
 
-`func (o *CpuMetricsValue) GetValue() float32`
+`func (o *MetricsValues) GetValue() float32`
 
 GetValue returns the Value field if non-nil, zero value otherwise.
 
 ### GetValueOk
 
-`func (o *CpuMetricsValue) GetValueOk() (*float32, bool)`
+`func (o *MetricsValues) GetValueOk() (*float32, bool)`
 
 GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetValue
 
-`func (o *CpuMetricsValue) SetValue(v float32)`
+`func (o *MetricsValues) SetValue(v float32)`
 
 SetValue sets Value field to given value.
 
 ### HasValue
 
-`func (o *CpuMetricsValue) HasValue() bool`
+`func (o *MetricsValues) HasValue() bool`
 
 HasValue returns a boolean if a field has been set.
 
 ### GetTimestamp
 
-`func (o *CpuMetricsValue) GetTimestamp() time.Time`
+`func (o *MetricsValues) GetTimestamp() time.Time`
 
 GetTimestamp returns the Timestamp field if non-nil, zero value otherwise.
 
 ### GetTimestampOk
 
-`func (o *CpuMetricsValue) GetTimestampOk() (*time.Time, bool)`
+`func (o *MetricsValues) GetTimestampOk() (*time.Time, bool)`
 
 GetTimestampOk returns a tuple with the Timestamp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimestamp
 
-`func (o *CpuMetricsValue) SetTimestamp(v time.Time)`
+`func (o *MetricsValues) SetTimestamp(v time.Time)`
 
 SetTimestamp sets Timestamp field to given value.
 
 ### HasTimestamp
 
-`func (o *CpuMetricsValue) HasTimestamp() bool`
+`func (o *MetricsValues) HasTimestamp() bool`
 
 HasTimestamp returns a boolean if a field has been set.
 

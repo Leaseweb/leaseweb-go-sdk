@@ -24,12 +24,16 @@ Method | HTTP request | Description
 [**GetAutoScalingGroup**](PublicCloudAPI.md#GetAutoScalingGroup) | **Get** /autoScalingGroups/{autoScalingGroupId} | Get Auto Scaling Group details
 [**GetAutoScalingGroupInstanceList**](PublicCloudAPI.md#GetAutoScalingGroupInstanceList) | **Get** /autoScalingGroups/{autoScalingGroupId}/instances | Get list of instances belonging to an Auto Scaling Group
 [**GetAutoScalingGroupList**](PublicCloudAPI.md#GetAutoScalingGroupList) | **Get** /autoScalingGroups | Get Auto Scaling Group list
+[**GetConnectionsMetrics**](PublicCloudAPI.md#GetConnectionsMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/connections | Get connections metrics
+[**GetConnectionsPerSecondMetrics**](PublicCloudAPI.md#GetConnectionsPerSecondMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/connectionsPerSecond | Get connections per second metrics
 [**GetConsoleAccessToInstance**](PublicCloudAPI.md#GetConsoleAccessToInstance) | **Get** /instances/{instanceId}/console | Get console access
 [**GetCpuMetrics**](PublicCloudAPI.md#GetCpuMetrics) | **Get** /instances/{instanceId}/metrics/cpu | Get instance CPU metrics
 [**GetCredential**](PublicCloudAPI.md#GetCredential) | **Get** /instances/{instanceId}/credentials/{type}/{username} | Get credentials by type and username
 [**GetCredentialList**](PublicCloudAPI.md#GetCredentialList) | **Get** /instances/{instanceId}/credentials | List credentials stored for instance
 [**GetCredentialListByType**](PublicCloudAPI.md#GetCredentialListByType) | **Get** /instances/{instanceId}/credentials/{type} | Get credentials by type
 [**GetDataTrafficMetrics**](PublicCloudAPI.md#GetDataTrafficMetrics) | **Get** /instances/{instanceId}/metrics/datatraffic | Get instance data traffic metrics
+[**GetDataTransferredMetrics**](PublicCloudAPI.md#GetDataTransferredMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/dataTransferred | Get load balancer data transferred metrics
+[**GetDataTransferredPerSecondMetrics**](PublicCloudAPI.md#GetDataTransferredPerSecondMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/dataTransferredPerSecond | Get load balancer data transferred per second metrics
 [**GetExpenses**](PublicCloudAPI.md#GetExpenses) | **Get** /equipments/{equipmentId}/expenses | Get costs for a given month.
 [**GetImageList**](PublicCloudAPI.md#GetImageList) | **Get** /images | List all available Images
 [**GetInstance**](PublicCloudAPI.md#GetInstance) | **Get** /instances/{instanceId} | Get instance details
@@ -45,6 +49,10 @@ Method | HTTP request | Description
 [**GetMarketAppList**](PublicCloudAPI.md#GetMarketAppList) | **Get** /marketApps | Get marketplace apps
 [**GetRegionList**](PublicCloudAPI.md#GetRegionList) | **Get** /regions | List regions
 [**GetReinstallImageList**](PublicCloudAPI.md#GetReinstallImageList) | **Get** /instances/{instanceId}/reinstall/images | List images available for reinstall
+[**GetRequestsMetrics**](PublicCloudAPI.md#GetRequestsMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/requests | Get load balancer requests metrics
+[**GetRequestsPerSecondMetrics**](PublicCloudAPI.md#GetRequestsPerSecondMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/requestsPerSecond | Get load balancer requests per second metrics
+[**GetResponseCodesMetrics**](PublicCloudAPI.md#GetResponseCodesMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/responseCodes | Get response codes metrics
+[**GetResponseCodesPerSecondMetrics**](PublicCloudAPI.md#GetResponseCodesPerSecondMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/responseCodesPerSecond | Get response codes per second metrics
 [**GetSnapshot**](PublicCloudAPI.md#GetSnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
 [**GetSnapshotList**](PublicCloudAPI.md#GetSnapshotList) | **Get** /instances/{instanceId}/snapshots | List snapshots
 [**GetTargetGroup**](PublicCloudAPI.md#GetTargetGroup) | **Get** /targetGroups/{targetGroupId} | Get Target Group details
@@ -1474,6 +1482,156 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetConnectionsMetrics
+
+> GetConnectionsMetricsResult GetConnectionsMetrics(ctx, loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+
+Get connections metrics
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
+	from := time.Now() // string | The start of the interval to get the metric (optional)
+	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	granularity := "granularity_example" // string | The interval for each metric (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetConnectionsMetrics(context.Background(), loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetConnectionsMetrics``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetConnectionsMetrics`: GetConnectionsMetricsResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetConnectionsMetrics`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**loadBalancerId** | **string** | Load balancer ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetConnectionsMetricsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **from** | **string** | The start of the interval to get the metric | 
+ **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **granularity** | **string** | The interval for each metric | 
+
+### Return type
+
+[**GetConnectionsMetricsResult**](GetConnectionsMetricsResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetConnectionsPerSecondMetrics
+
+> GetConnectionsPerSecondMetricsResult GetConnectionsPerSecondMetrics(ctx, loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+
+Get connections per second metrics
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
+	from := time.Now() // string | The start of the interval to get the metric (optional)
+	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	granularity := "granularity_example" // string | The interval for each metric (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetConnectionsPerSecondMetrics(context.Background(), loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetConnectionsPerSecondMetrics``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetConnectionsPerSecondMetrics`: GetConnectionsPerSecondMetricsResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetConnectionsPerSecondMetrics`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**loadBalancerId** | **string** | Load balancer ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetConnectionsPerSecondMetricsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **from** | **string** | The start of the interval to get the metric | 
+ **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **granularity** | **string** | The interval for each metric | 
+
+### Return type
+
+[**GetConnectionsPerSecondMetricsResult**](GetConnectionsPerSecondMetricsResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetConsoleAccessToInstance
 
 > GetConsoleAccessToInstanceResult GetConsoleAccessToInstance(ctx, instanceId).Execute()
@@ -1567,7 +1725,7 @@ func main() {
 	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
 	from := time.Now() // string | The start of the interval to get the metric (optional)
 	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
-	granularity := "granularity_example" // string | How the metrics are grouped by (optional)
+	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1599,7 +1757,7 @@ Name | Type | Description  | Notes
 
  **from** | **string** | The start of the interval to get the metric | 
  **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
- **granularity** | **string** | How the metrics are grouped by | 
+ **granularity** | [**MetricsGranularity**](MetricsGranularity.md) | The interval for each metric | 
 
 ### Return type
 
@@ -1900,6 +2058,156 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetDataTrafficMetricsResult**](GetDataTrafficMetricsResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDataTransferredMetrics
+
+> GetDataTransferredMetricsResult GetDataTransferredMetrics(ctx, loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+
+Get load balancer data transferred metrics
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
+	from := time.Now() // string | The start of the interval to get the metric (optional)
+	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetDataTransferredMetrics(context.Background(), loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetDataTransferredMetrics``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDataTransferredMetrics`: GetDataTransferredMetricsResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetDataTransferredMetrics`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**loadBalancerId** | **string** | Load balancer ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDataTransferredMetricsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **from** | **string** | The start of the interval to get the metric | 
+ **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **granularity** | [**MetricsGranularity**](MetricsGranularity.md) | The interval for each metric | 
+
+### Return type
+
+[**GetDataTransferredMetricsResult**](GetDataTransferredMetricsResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDataTransferredPerSecondMetrics
+
+> GetDataTransferredPerSecondMetricsResult GetDataTransferredPerSecondMetrics(ctx, loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+
+Get load balancer data transferred per second metrics
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
+	from := time.Now() // string | The start of the interval to get the metric (optional)
+	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetDataTransferredPerSecondMetrics(context.Background(), loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetDataTransferredPerSecondMetrics``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDataTransferredPerSecondMetrics`: GetDataTransferredPerSecondMetricsResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetDataTransferredPerSecondMetrics`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**loadBalancerId** | **string** | Load balancer ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDataTransferredPerSecondMetricsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **from** | **string** | The start of the interval to get the metric | 
+ **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **granularity** | [**MetricsGranularity**](MetricsGranularity.md) | The interval for each metric | 
+
+### Return type
+
+[**GetDataTransferredPerSecondMetricsResult**](GetDataTransferredPerSecondMetricsResult.md)
 
 ### Authorization
 
@@ -3002,6 +3310,306 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetReinstallImageListResult**](GetReinstallImageListResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRequestsMetrics
+
+> GetRequestsMetricsResult GetRequestsMetrics(ctx, loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+
+Get load balancer requests metrics
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
+	from := time.Now() // string | The start of the interval to get the metric (optional)
+	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetRequestsMetrics(context.Background(), loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetRequestsMetrics``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRequestsMetrics`: GetRequestsMetricsResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetRequestsMetrics`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**loadBalancerId** | **string** | Load balancer ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRequestsMetricsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **from** | **string** | The start of the interval to get the metric | 
+ **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **granularity** | [**MetricsGranularity**](MetricsGranularity.md) | The interval for each metric | 
+
+### Return type
+
+[**GetRequestsMetricsResult**](GetRequestsMetricsResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetRequestsPerSecondMetrics
+
+> GetRequestsPerSecondMetricsResult GetRequestsPerSecondMetrics(ctx, loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+
+Get load balancer requests per second metrics
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
+	from := time.Now() // string | The start of the interval to get the metric (optional)
+	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetRequestsPerSecondMetrics(context.Background(), loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetRequestsPerSecondMetrics``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetRequestsPerSecondMetrics`: GetRequestsPerSecondMetricsResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetRequestsPerSecondMetrics`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**loadBalancerId** | **string** | Load balancer ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetRequestsPerSecondMetricsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **from** | **string** | The start of the interval to get the metric | 
+ **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **granularity** | [**MetricsGranularity**](MetricsGranularity.md) | The interval for each metric | 
+
+### Return type
+
+[**GetRequestsPerSecondMetricsResult**](GetRequestsPerSecondMetricsResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResponseCodesMetrics
+
+> GetResponseCodesMetricsResult GetResponseCodesMetrics(ctx, loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+
+Get response codes metrics
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
+	from := time.Now() // string | The start of the interval to get the metric (optional)
+	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	granularity := "granularity_example" // string | The interval for each metric (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetResponseCodesMetrics(context.Background(), loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetResponseCodesMetrics``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResponseCodesMetrics`: GetResponseCodesMetricsResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetResponseCodesMetrics`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**loadBalancerId** | **string** | Load balancer ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResponseCodesMetricsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **from** | **string** | The start of the interval to get the metric | 
+ **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **granularity** | **string** | The interval for each metric | 
+
+### Return type
+
+[**GetResponseCodesMetricsResult**](GetResponseCodesMetricsResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetResponseCodesPerSecondMetrics
+
+> GetResponseCodesPerSecondMetricsResult GetResponseCodesPerSecondMetrics(ctx, loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+
+Get response codes per second metrics
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+    "time"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+)
+
+func main() {
+	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
+	from := time.Now() // string | The start of the interval to get the metric (optional)
+	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	granularity := "granularity_example" // string | The interval for each metric (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PublicCloudAPI.GetResponseCodesPerSecondMetrics(context.Background(), loadBalancerId).From(from).To(to).Granularity(granularity).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetResponseCodesPerSecondMetrics``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetResponseCodesPerSecondMetrics`: GetResponseCodesPerSecondMetricsResult
+	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetResponseCodesPerSecondMetrics`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**loadBalancerId** | **string** | Load balancer ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetResponseCodesPerSecondMetricsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **from** | **string** | The start of the interval to get the metric | 
+ **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **granularity** | **string** | The interval for each metric | 
+
+### Return type
+
+[**GetResponseCodesPerSecondMetricsResult**](GetResponseCodesPerSecondMetricsResult.md)
 
 ### Authorization
 

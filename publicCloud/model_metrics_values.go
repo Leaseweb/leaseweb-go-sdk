@@ -15,38 +15,38 @@ import (
 	"time"
 )
 
-// checks if the CpuMetricsValue type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CpuMetricsValue{}
+// checks if the MetricsValues type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MetricsValues{}
 
-// CpuMetricsValue struct for CpuMetricsValue
-type CpuMetricsValue struct {
-	// CPU usage
+// MetricsValues struct for MetricsValues
+type MetricsValues struct {
+	// Metric value
 	Value *float32 `json:"value,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CpuMetricsValue CpuMetricsValue
+type _MetricsValues MetricsValues
 
-// NewCpuMetricsValue instantiates a new CpuMetricsValue object
+// NewMetricsValues instantiates a new MetricsValues object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCpuMetricsValue() *CpuMetricsValue {
-	this := CpuMetricsValue{}
+func NewMetricsValues() *MetricsValues {
+	this := MetricsValues{}
 	return &this
 }
 
-// NewCpuMetricsValueWithDefaults instantiates a new CpuMetricsValue object
+// NewMetricsValuesWithDefaults instantiates a new MetricsValues object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCpuMetricsValueWithDefaults() *CpuMetricsValue {
-	this := CpuMetricsValue{}
+func NewMetricsValuesWithDefaults() *MetricsValues {
+	this := MetricsValues{}
 	return &this
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *CpuMetricsValue) GetValue() float32 {
+func (o *MetricsValues) GetValue() float32 {
 	if o == nil || IsNil(o.Value) {
 		var ret float32
 		return ret
@@ -56,7 +56,7 @@ func (o *CpuMetricsValue) GetValue() float32 {
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetricsValue) GetValueOk() (*float32, bool) {
+func (o *MetricsValues) GetValueOk() (*float32, bool) {
 	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *CpuMetricsValue) GetValueOk() (*float32, bool) {
 }
 
 // HasValue returns a boolean if a field has been set.
-func (o *CpuMetricsValue) HasValue() bool {
+func (o *MetricsValues) HasValue() bool {
 	if o != nil && !IsNil(o.Value) {
 		return true
 	}
@@ -73,12 +73,12 @@ func (o *CpuMetricsValue) HasValue() bool {
 }
 
 // SetValue gets a reference to the given float32 and assigns it to the Value field.
-func (o *CpuMetricsValue) SetValue(v float32) {
+func (o *MetricsValues) SetValue(v float32) {
 	o.Value = &v
 }
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
-func (o *CpuMetricsValue) GetTimestamp() time.Time {
+func (o *MetricsValues) GetTimestamp() time.Time {
 	if o == nil || IsNil(o.Timestamp) {
 		var ret time.Time
 		return ret
@@ -88,7 +88,7 @@ func (o *CpuMetricsValue) GetTimestamp() time.Time {
 
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetricsValue) GetTimestampOk() (*time.Time, bool) {
+func (o *MetricsValues) GetTimestampOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
@@ -96,7 +96,7 @@ func (o *CpuMetricsValue) GetTimestampOk() (*time.Time, bool) {
 }
 
 // HasTimestamp returns a boolean if a field has been set.
-func (o *CpuMetricsValue) HasTimestamp() bool {
+func (o *MetricsValues) HasTimestamp() bool {
 	if o != nil && !IsNil(o.Timestamp) {
 		return true
 	}
@@ -105,11 +105,11 @@ func (o *CpuMetricsValue) HasTimestamp() bool {
 }
 
 // SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
-func (o *CpuMetricsValue) SetTimestamp(v time.Time) {
+func (o *MetricsValues) SetTimestamp(v time.Time) {
 	o.Timestamp = &v
 }
 
-func (o CpuMetricsValue) MarshalJSON() ([]byte, error) {
+func (o MetricsValues) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -117,7 +117,7 @@ func (o CpuMetricsValue) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CpuMetricsValue) ToMap() (map[string]interface{}, error) {
+func (o MetricsValues) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
@@ -133,16 +133,16 @@ func (o CpuMetricsValue) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CpuMetricsValue) UnmarshalJSON(data []byte) (err error) {
-	varCpuMetricsValue := _CpuMetricsValue{}
+func (o *MetricsValues) UnmarshalJSON(data []byte) (err error) {
+	varMetricsValues := _MetricsValues{}
 
-	err = json.Unmarshal(data, &varCpuMetricsValue)
+	err = json.Unmarshal(data, &varMetricsValues)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CpuMetricsValue(varCpuMetricsValue)
+	*o = MetricsValues(varMetricsValues)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -155,38 +155,38 @@ func (o *CpuMetricsValue) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableCpuMetricsValue struct {
-	value *CpuMetricsValue
+type NullableMetricsValues struct {
+	value *MetricsValues
 	isSet bool
 }
 
-func (v NullableCpuMetricsValue) Get() *CpuMetricsValue {
+func (v NullableMetricsValues) Get() *MetricsValues {
 	return v.value
 }
 
-func (v *NullableCpuMetricsValue) Set(val *CpuMetricsValue) {
+func (v *NullableMetricsValues) Set(val *MetricsValues) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCpuMetricsValue) IsSet() bool {
+func (v NullableMetricsValues) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCpuMetricsValue) Unset() {
+func (v *NullableMetricsValues) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCpuMetricsValue(val *CpuMetricsValue) *NullableCpuMetricsValue {
-	return &NullableCpuMetricsValue{value: val, isSet: true}
+func NewNullableMetricsValues(val *MetricsValues) *NullableMetricsValues {
+	return &NullableMetricsValues{value: val, isSet: true}
 }
 
-func (v NullableCpuMetricsValue) MarshalJSON() ([]byte, error) {
+func (v NullableMetricsValues) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCpuMetricsValue) UnmarshalJSON(src []byte) error {
+func (v *NullableMetricsValues) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

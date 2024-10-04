@@ -6036,18 +6036,13 @@ paths:
           format: date
           type: string
         style: form
-      - description: How the metrics are grouped by
+      - description: The interval for each metric
         explode: true
         in: query
         name: granularity
         required: false
         schema:
-          enum:
-          - 5m
-          - 10m
-          - 30m
-          - 60m
-          type: string
+          $ref: '#/components/schemas/metricsGranularity'
         style: form
       responses:
         "200":
@@ -6140,6 +6135,1580 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: Get instance CPU metrics
+      tags:
+      - publicCloud
+  /loadBalancers/{loadBalancerId}/metrics/requests:
+    get:
+      operationId: getRequestsMetrics
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The interval for each metric
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          $ref: '#/components/schemas/metricsGranularity'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 2024-09-14T00:00:00+00:00
+                  to: 2024-09-15T00:00:00+00:00
+                  granularity: 1h
+                  aggregation: SUM
+                metrics:
+                  values:
+                  - value: 0
+                    timestamp: 2024-09-20T14:25:00+00:00
+                  - value: 1
+                    timestamp: 2024-09-20T14:30:00+00:00
+                  - value: 0
+                    timestamp: 2024-09-20T14:35:00+00:00
+                  - value: 0
+                    timestamp: 2024-09-22T14:20:00+00:00
+                  - value: 1
+                    timestamp: 2024-09-22T14:25:00+00:00
+                  unit: requests
+              schema:
+                $ref: '#/components/schemas/getRequestsMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get load balancer requests metrics
+      tags:
+      - publicCloud
+  /loadBalancers/{loadBalancerId}/metrics/requestsPerSecond:
+    get:
+      operationId: getRequestsPerSecondMetrics
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The interval for each metric
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          $ref: '#/components/schemas/metricsGranularity'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 2024-08-20T00:00:00+00:00
+                  to: 2024-09-24T12:10:00+00:00
+                  granularity: 60m
+                  aggregation: SUM
+                metrics:
+                  values:
+                  - value: 0.0038027332144979203
+                    timestamp: 2024-09-18T00:00:00+00:00
+                  - value: 0.005555555555555556
+                    timestamp: 2024-09-19T00:00:00+00:00
+                  - value: 0.0021064814814814813
+                    timestamp: 2024-09-23T00:00:00+00:00
+                  - value: 0.003321759259259259
+                    timestamp: 2024-09-24T00:00:00+00:00
+                  unit: requests/sec
+              schema:
+                $ref: '#/components/schemas/getRequestsPerSecondMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get load balancer requests per second metrics
+      tags:
+      - publicCloud
+  /loadBalancers/{loadBalancerId}/metrics/dataTransferred:
+    get:
+      operationId: getDataTransferredMetrics
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The interval for each metric
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          $ref: '#/components/schemas/metricsGranularity'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 2024-09-14T00:00:00+00:00
+                  to: 2024-09-17T23:59:59+00:00
+                  granularity: 60m
+                  aggregation: SUM
+                metrics:
+                  dataIn:
+                    values:
+                    - value: 1491
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 1566
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 2643
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 2047
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    unit: B
+                  dataOut:
+                    values:
+                    - value: 3255
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 3472
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 2170
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 2821
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    unit: B
+              schema:
+                $ref: '#/components/schemas/getDataTransferredMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get load balancer data transferred metrics
+      tags:
+      - publicCloud
+  /loadBalancers/{loadBalancerId}/metrics/dataTransferredPerSecond:
+    get:
+      operationId: getDataTransferredPerSecondMetrics
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The interval for each metric
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          $ref: '#/components/schemas/metricsGranularity'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 2024-09-14T00:00:00+00:00
+                  to: 2024-09-15T09:00:00+00:00
+                  granularity: 60m
+                  aggregation: SUM
+                metrics:
+                  dataIn:
+                    values:
+                    - value: 3.3133333333333335
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 3.48
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 5.873333333333333
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 4.5488888888888885
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    unit: b/s
+                  dataOut:
+                    values:
+                    - value: 7.2333333333333325
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 7.7155555555555555
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 4.822222222222222
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 6.268888888888888
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    unit: b/s
+              schema:
+                $ref: '#/components/schemas/getDataTransferredPerSecondMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get load balancer data transferred per second metrics
+      tags:
+      - publicCloud
+  /loadBalancers/{loadBalancerId}/metrics/connections:
+    get:
+      operationId: getConnectionsMetrics
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The interval for each metric
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          enum:
+          - 5m
+          - 10m
+          - 30m
+          - 1h
+          - 1d
+          - 1w
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 2024-09-14T00:00:00+00:00
+                  to: 2024-09-15T00:00:00+00:00
+                  granularity: 1h
+                  aggregation: SUM
+                metrics:
+                  values:
+                  - value: 17
+                    timestamp: 2024-09-14T00:00:00+00:00
+                  - value: 18
+                    timestamp: 2024-09-14T01:00:00+00:00
+                  - value: 8
+                    timestamp: 2024-09-14T02:00:00+00:00
+                  - value: 13
+                    timestamp: 2024-09-14T03:00:00+00:00
+                  - value: 4
+                    timestamp: 2024-09-14T04:00:00+00:00
+                  - value: 6
+                    timestamp: 2024-09-14T05:00:00+00:00
+                  - value: 20
+                    timestamp: 2024-09-14T06:00:00+00:00
+                  - value: 16
+                    timestamp: 2024-09-14T07:00:00+00:00
+                  - value: 16
+                    timestamp: 2024-09-14T08:00:00+00:00
+                  - value: 27
+                    timestamp: 2024-09-14T09:00:00+00:00
+                  - value: 13
+                    timestamp: 2024-09-14T10:00:00+00:00
+                  - value: 20
+                    timestamp: 2024-09-14T11:00:00+00:00
+                  - value: 6
+                    timestamp: 2024-09-14T12:00:00+00:00
+                  - value: 21
+                    timestamp: 2024-09-14T13:00:00+00:00
+                  - value: 11
+                    timestamp: 2024-09-14T14:00:00+00:00
+                  - value: 7
+                    timestamp: 2024-09-14T15:00:00+00:00
+                  - value: 15
+                    timestamp: 2024-09-14T16:00:00+00:00
+                  - value: 6
+                    timestamp: 2024-09-14T17:00:00+00:00
+                  - value: 18
+                    timestamp: 2024-09-14T18:00:00+00:00
+                  - value: 7
+                    timestamp: 2024-09-14T19:00:00+00:00
+                  - value: 39
+                    timestamp: 2024-09-14T20:00:00+00:00
+                  - value: 12
+                    timestamp: 2024-09-14T21:00:00+00:00
+                  - value: 19
+                    timestamp: 2024-09-14T22:00:00+00:00
+                  - value: 3
+                    timestamp: 2024-09-14T23:00:00+00:00
+                  - value: 57
+                    timestamp: 2024-09-15T00:00:00+00:00
+                  unit: connections
+              schema:
+                $ref: '#/components/schemas/getConnectionsMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get connections metrics
+      tags:
+      - publicCloud
+  /loadBalancers/{loadBalancerId}/metrics/connectionsPerSecond:
+    get:
+      operationId: getConnectionsPerSecondMetrics
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The interval for each metric
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          enum:
+          - 5m
+          - 10m
+          - 30m
+          - 1h
+          - 1d
+          - 1w
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 2024-09-14T00:00:00+00:00
+                  to: 2024-09-15T00:00:00+00:00
+                  granularity: 1h
+                  aggregation: SUM
+                metrics:
+                  values:
+                  - value: 0.004722222222222222
+                    timestamp: 2024-09-14T00:00:00+00:00
+                  - value: 0.005
+                    timestamp: 2024-09-14T01:00:00+00:00
+                  - value: 0.0022222222222222222
+                    timestamp: 2024-09-14T02:00:00+00:00
+                  - value: 0.003611111111111111
+                    timestamp: 2024-09-14T03:00:00+00:00
+                  - value: 0.0011111111111111111
+                    timestamp: 2024-09-14T04:00:00+00:00
+                  - value: 0.0016666666666666668
+                    timestamp: 2024-09-14T05:00:00+00:00
+                  - value: 0.005555555555555556
+                    timestamp: 2024-09-14T06:00:00+00:00
+                  - value: 0.0044444444444444444
+                    timestamp: 2024-09-14T07:00:00+00:00
+                  - value: 0.0044444444444444444
+                    timestamp: 2024-09-14T08:00:00+00:00
+                  - value: 0.0075
+                    timestamp: 2024-09-14T09:00:00+00:00
+                  - value: 0.003611111111111111
+                    timestamp: 2024-09-14T10:00:00+00:00
+                  - value: 0.005555555555555556
+                    timestamp: 2024-09-14T11:00:00+00:00
+                  - value: 0.0016666666666666668
+                    timestamp: 2024-09-14T12:00:00+00:00
+                  - value: 0.005833333333333334
+                    timestamp: 2024-09-14T13:00:00+00:00
+                  - value: 0.0030555555555555557
+                    timestamp: 2024-09-14T14:00:00+00:00
+                  - value: 0.0019444444444444444
+                    timestamp: 2024-09-14T15:00:00+00:00
+                  - value: 0.004166666666666667
+                    timestamp: 2024-09-14T16:00:00+00:00
+                  - value: 0.0016666666666666666
+                    timestamp: 2024-09-14T17:00:00+00:00
+                  - value: 0.005
+                    timestamp: 2024-09-14T18:00:00+00:00
+                  - value: 0.0019444444444444444
+                    timestamp: 2024-09-14T19:00:00+00:00
+                  - value: 0.010833333333333334
+                    timestamp: 2024-09-14T20:00:00+00:00
+                  - value: 0.003333333333333333
+                    timestamp: 2024-09-14T21:00:00+00:00
+                  - value: 0.005277777777777778
+                    timestamp: 2024-09-14T22:00:00+00:00
+                  - value: 8.333333333333334E-4
+                    timestamp: 2024-09-14T23:00:00+00:00
+                  - value: 0.01583333333333333
+                    timestamp: 2024-09-15T00:00:00+00:00
+                  unit: connections/s
+              schema:
+                $ref: '#/components/schemas/getConnectionsPerSecondMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get connections per second metrics
+      tags:
+      - publicCloud
+  /loadBalancers/{loadBalancerId}/metrics/responseCodes:
+    get:
+      operationId: getResponseCodesMetrics
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The interval for each metric
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          enum:
+          - 5m
+          - 10m
+          - 30m
+          - 1h
+          - 1d
+          - 1w
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 2024-09-14T00:00:00+00:00
+                  to: 2024-09-15T00:00:00+00:00
+                  granularity: 1h
+                  aggregation: SUM
+                metrics:
+                  "2xx":
+                    values:
+                    - value: 0
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T04:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T05:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T06:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T07:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T08:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T09:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T10:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T11:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T12:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T13:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T14:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T15:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T16:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T17:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T18:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T19:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T20:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T21:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T22:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T23:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-15T00:00:00+00:00
+                    unit: responses
+                  "3xx":
+                    values:
+                    - value: 0
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T04:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T05:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T06:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T07:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T08:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T09:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T10:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T11:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T12:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T13:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T14:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T15:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T16:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T17:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T18:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T19:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T20:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T21:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T22:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T23:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-15T00:00:00+00:00
+                    unit: responses
+                  "4xx":
+                    values:
+                    - value: 2
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 2
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T04:00:00+00:00
+                    - value: 1
+                      timestamp: 2024-09-14T05:00:00+00:00
+                    - value: 1
+                      timestamp: 2024-09-14T06:00:00+00:00
+                    - value: 5
+                      timestamp: 2024-09-14T07:00:00+00:00
+                    - value: 1
+                      timestamp: 2024-09-14T08:00:00+00:00
+                    - value: 12
+                      timestamp: 2024-09-14T09:00:00+00:00
+                    - value: 1
+                      timestamp: 2024-09-14T10:00:00+00:00
+                    - value: 2
+                      timestamp: 2024-09-14T11:00:00+00:00
+                    - value: 1
+                      timestamp: 2024-09-14T12:00:00+00:00
+                    - value: 4
+                      timestamp: 2024-09-14T13:00:00+00:00
+                    - value: 1
+                      timestamp: 2024-09-14T14:00:00+00:00
+                    - value: 3
+                      timestamp: 2024-09-14T15:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T16:00:00+00:00
+                    - value: 1
+                      timestamp: 2024-09-14T17:00:00+00:00
+                    - value: 4
+                      timestamp: 2024-09-14T18:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T19:00:00+00:00
+                    - value: 18
+                      timestamp: 2024-09-14T20:00:00+00:00
+                    - value: 1
+                      timestamp: 2024-09-14T21:00:00+00:00
+                    - value: 2
+                      timestamp: 2024-09-14T22:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T23:00:00+00:00
+                    - value: 5
+                      timestamp: 2024-09-15T00:00:00+00:00
+                    unit: responses
+                  "5xx":
+                    values:
+                    - value: 15
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 16
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 10
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 13
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    - value: 4
+                      timestamp: 2024-09-14T04:00:00+00:00
+                    - value: 5
+                      timestamp: 2024-09-14T05:00:00+00:00
+                    - value: 19
+                      timestamp: 2024-09-14T06:00:00+00:00
+                    - value: 11
+                      timestamp: 2024-09-14T07:00:00+00:00
+                    - value: 15
+                      timestamp: 2024-09-14T08:00:00+00:00
+                    - value: 15
+                      timestamp: 2024-09-14T09:00:00+00:00
+                    - value: 12
+                      timestamp: 2024-09-14T10:00:00+00:00
+                    - value: 18
+                      timestamp: 2024-09-14T11:00:00+00:00
+                    - value: 5
+                      timestamp: 2024-09-14T12:00:00+00:00
+                    - value: 17
+                      timestamp: 2024-09-14T13:00:00+00:00
+                    - value: 10
+                      timestamp: 2024-09-14T14:00:00+00:00
+                    - value: 4
+                      timestamp: 2024-09-14T15:00:00+00:00
+                    - value: 15
+                      timestamp: 2024-09-14T16:00:00+00:00
+                    - value: 5
+                      timestamp: 2024-09-14T17:00:00+00:00
+                    - value: 14
+                      timestamp: 2024-09-14T18:00:00+00:00
+                    - value: 7
+                      timestamp: 2024-09-14T19:00:00+00:00
+                    - value: 20
+                      timestamp: 2024-09-14T20:00:00+00:00
+                    - value: 12
+                      timestamp: 2024-09-14T21:00:00+00:00
+                    - value: 17
+                      timestamp: 2024-09-14T22:00:00+00:00
+                    - value: 3
+                      timestamp: 2024-09-14T23:00:00+00:00
+                    - value: 52
+                      timestamp: 2024-09-15T00:00:00+00:00
+                    unit: responses
+              schema:
+                $ref: '#/components/schemas/getResponseCodesMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get response codes metrics
+      tags:
+      - publicCloud
+  /loadBalancers/{loadBalancerId}/metrics/responseCodesPerSecond:
+    get:
+      operationId: getResponseCodesPerSecondMetrics
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The interval for each metric
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          enum:
+          - 5m
+          - 10m
+          - 30m
+          - 1h
+          - 1d
+          - 1w
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 2024-09-14T00:00:00+00:00
+                  to: 2024-09-15T00:00:00+00:00
+                  granularity: 1h
+                  aggregation: SUM
+                metrics:
+                  "2xx":
+                    values:
+                    - value: 0
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T04:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T05:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T06:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T07:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T08:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T09:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T10:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T11:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T12:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T13:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T14:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T15:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T16:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T17:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T18:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T19:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T20:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T21:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T22:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T23:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-15T00:00:00+00:00
+                    unit: responses/s
+                  "3xx":
+                    values:
+                    - value: 0
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T04:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T05:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T06:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T07:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T08:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T09:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T10:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T11:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T12:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T13:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T14:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T15:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T16:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T17:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T18:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T19:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T20:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T21:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T22:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T23:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-15T00:00:00+00:00
+                    unit: responses/s
+                  "4xx":
+                    values:
+                    - value: 5.555555555555556E-4
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 5.555555555555556E-4
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T04:00:00+00:00
+                    - value: 2.777777777777778E-4
+                      timestamp: 2024-09-14T05:00:00+00:00
+                    - value: 2.777777777777778E-4
+                      timestamp: 2024-09-14T06:00:00+00:00
+                    - value: 0.001388888888888889
+                      timestamp: 2024-09-14T07:00:00+00:00
+                    - value: 2.777777777777778E-4
+                      timestamp: 2024-09-14T08:00:00+00:00
+                    - value: 0.0033333333333333335
+                      timestamp: 2024-09-14T09:00:00+00:00
+                    - value: 2.777777777777778E-4
+                      timestamp: 2024-09-14T10:00:00+00:00
+                    - value: 5.555555555555556E-4
+                      timestamp: 2024-09-14T11:00:00+00:00
+                    - value: 2.777777777777778E-4
+                      timestamp: 2024-09-14T12:00:00+00:00
+                    - value: 0.0011111111111111111
+                      timestamp: 2024-09-14T13:00:00+00:00
+                    - value: 2.777777777777778E-4
+                      timestamp: 2024-09-14T14:00:00+00:00
+                    - value: 8.333333333333334E-4
+                      timestamp: 2024-09-14T15:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T16:00:00+00:00
+                    - value: 2.777777777777778E-4
+                      timestamp: 2024-09-14T17:00:00+00:00
+                    - value: 0.0011111111111111111
+                      timestamp: 2024-09-14T18:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T19:00:00+00:00
+                    - value: 0.005
+                      timestamp: 2024-09-14T20:00:00+00:00
+                    - value: 2.777777777777778E-4
+                      timestamp: 2024-09-14T21:00:00+00:00
+                    - value: 5.555555555555556E-4
+                      timestamp: 2024-09-14T22:00:00+00:00
+                    - value: 0
+                      timestamp: 2024-09-14T23:00:00+00:00
+                    - value: 0.001388888888888889
+                      timestamp: 2024-09-15T00:00:00+00:00
+                    unit: responses/s
+                  "5xx":
+                    values:
+                    - value: 0.004166666666666667
+                      timestamp: 2024-09-14T00:00:00+00:00
+                    - value: 0.0044444444444444444
+                      timestamp: 2024-09-14T01:00:00+00:00
+                    - value: 0.002777777777777778
+                      timestamp: 2024-09-14T02:00:00+00:00
+                    - value: 0.003611111111111111
+                      timestamp: 2024-09-14T03:00:00+00:00
+                    - value: 0.0011111111111111111
+                      timestamp: 2024-09-14T04:00:00+00:00
+                    - value: 0.001388888888888889
+                      timestamp: 2024-09-14T05:00:00+00:00
+                    - value: 0.005277777777777778
+                      timestamp: 2024-09-14T06:00:00+00:00
+                    - value: 0.0030555555555555557
+                      timestamp: 2024-09-14T07:00:00+00:00
+                    - value: 0.004166666666666667
+                      timestamp: 2024-09-14T08:00:00+00:00
+                    - value: 0.004166666666666667
+                      timestamp: 2024-09-14T09:00:00+00:00
+                    - value: 0.003333333333333333
+                      timestamp: 2024-09-14T10:00:00+00:00
+                    - value: 0.005
+                      timestamp: 2024-09-14T11:00:00+00:00
+                    - value: 0.001388888888888889
+                      timestamp: 2024-09-14T12:00:00+00:00
+                    - value: 0.004722222222222222
+                      timestamp: 2024-09-14T13:00:00+00:00
+                    - value: 0.002777777777777778
+                      timestamp: 2024-09-14T14:00:00+00:00
+                    - value: 0.0011111111111111111
+                      timestamp: 2024-09-14T15:00:00+00:00
+                    - value: 0.004166666666666667
+                      timestamp: 2024-09-14T16:00:00+00:00
+                    - value: 0.001388888888888889
+                      timestamp: 2024-09-14T17:00:00+00:00
+                    - value: 0.0038888888888888888
+                      timestamp: 2024-09-14T18:00:00+00:00
+                    - value: 0.0019444444444444444
+                      timestamp: 2024-09-14T19:00:00+00:00
+                    - value: 0.005555555555555556
+                      timestamp: 2024-09-14T20:00:00+00:00
+                    - value: 0.003333333333333333
+                      timestamp: 2024-09-14T21:00:00+00:00
+                    - value: 0.004722222222222222
+                      timestamp: 2024-09-14T22:00:00+00:00
+                    - value: 8.333333333333334E-4
+                      timestamp: 2024-09-14T23:00:00+00:00
+                    - value: 0.014444444444444444
+                      timestamp: 2024-09-15T00:00:00+00:00
+                    unit: responses/s
+              schema:
+                $ref: '#/components/schemas/getResponseCodesPerSecondMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get response codes per second metrics
       tags:
       - publicCloud
   /instances/{instanceId}/addToPrivateNetwork:
@@ -8648,8 +10217,17 @@ components:
         format: date
         type: string
       style: form
-    cpuGranularity:
-      description: How the metrics are grouped by
+    metricsGranularity:
+      description: The interval for each metric
+      explode: true
+      in: query
+      name: granularity
+      required: false
+      schema:
+        $ref: '#/components/schemas/metricsGranularity'
+      style: form
+    loadBalancerGranularity:
+      description: The interval for each metric
       explode: true
       in: query
       name: granularity
@@ -8659,7 +10237,9 @@ components:
         - 5m
         - 10m
         - 30m
-        - 60m
+        - 1h
+        - 1d
+        - 1w
         type: string
       style: form
     autoScalingGroupId:
@@ -11290,9 +12870,22 @@ components:
           minimum: 1
           type: integer
       type: object
+    metricsUnit:
+      description: The unit of the metric
+      enum:
+      - '%'
+      - B
+      - b/s
+      - requests
+      - requests/sec
+      - responses
+      - responses/s
+      - connections
+      - connections/s
+      type: string
     trafficMetric:
       example:
-        unit: B
+        unit: null
         values:
         - value: 0
           timestamp: 2000-01-23T04:56:07.000+00:00
@@ -11304,10 +12897,49 @@ components:
             $ref: '#/components/schemas/trafficMetricValue'
           type: array
         unit:
-          enum:
-          - B
-          type: string
+          $ref: '#/components/schemas/metricsUnit'
       title: trafficMetric
+      type: object
+    cpuGranularity:
+      description: Defines the time interval for data aggregation
+      enum:
+      - 5m
+      - 10m
+      - 30m
+      - 60m
+      - DAY
+      type: string
+    loadBalancerGranularity:
+      description: Defines the time interval for data aggregation
+      enum:
+      - 5m
+      - 10m
+      - 30m
+      - 1h
+      - 1d
+      - 1w
+      type: string
+    metricsMetadataProperties:
+      example:
+        granularity: null
+        from: 2000-01-23T04:56:07.000+00:00
+        aggregation: SUM
+        to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        from:
+          format: date-time
+          type: string
+        to:
+          format: date-time
+          type: string
+        granularity:
+          $ref: '#/components/schemas/metricsMetadataProperties_granularity'
+        aggregation:
+          description: Defined by the query
+          enum:
+          - SUM
+          type: string
+      title: metricsMetadataProperties
       type: object
     trafficMetricSummary:
       example:
@@ -11342,14 +12974,14 @@ components:
       example:
         metrics:
           DOWN_PUBLIC:
-            unit: B
+            unit: null
             values:
             - value: 0
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0
               timestamp: 2000-01-23T04:56:07.000+00:00
           UP_PUBLIC:
-            unit: B
+            unit: null
             values:
             - value: 0
               timestamp: 2000-01-23T04:56:07.000+00:00
@@ -11371,7 +13003,7 @@ components:
               peak:
                 value: value
                 timestamp: 2000-01-23T04:56:07.000+00:00
-          granularity: DAY
+          granularity: null
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
           to: 2000-01-23T04:56:07.000+00:00
@@ -11381,11 +13013,37 @@ components:
         _metadata:
           $ref: '#/components/schemas/trafficMetricsMetaData'
       type: object
+    metricsGranularity:
+      description: Define the time interval for data aggregation
+      enum:
+      - 5m
+      - 10m
+      - 30m
+      - 60m
+      - DAY
+      type: string
+    metricsProperties:
+      example:
+        unit: null
+        values:
+        - value: 0.8008281904610115
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - value: 0.8008281904610115
+          timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        values:
+          items:
+            $ref: '#/components/schemas/metricsValues'
+          type: array
+        unit:
+          $ref: '#/components/schemas/metricsUnit'
+      title: metricsProperties
+      type: object
     getCpuMetricsResult:
       example:
         metrics:
           cpuMetrics:
-            unit: '%'
+            unit: null
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
@@ -11399,7 +13057,7 @@ components:
               peak:
                 value: 90 %
                 timestamp: 2000-01-23T04:56:07.000+00:00
-          granularity: 5m
+          granularity: null
           from: 2000-01-23T04:56:07.000+00:00
           to: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -11407,6 +13065,226 @@ components:
           $ref: '#/components/schemas/cpuMetrics'
         _metadata:
           $ref: '#/components/schemas/cpuMetricsMetadata'
+      type: object
+    getRequestsMetricsResult:
+      example:
+        metrics:
+          unit: null
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          granularity: null
+          from: 2000-01-23T04:56:07.000+00:00
+          aggregation: SUM
+          to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        metrics:
+          $ref: '#/components/schemas/metricsProperties'
+        _metadata:
+          $ref: '#/components/schemas/metricsMetadataProperties'
+      type: object
+    getRequestsPerSecondMetricsResult:
+      example:
+        metrics:
+          unit: null
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          granularity: null
+          from: 2000-01-23T04:56:07.000+00:00
+          aggregation: SUM
+          to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        metrics:
+          $ref: '#/components/schemas/metricsProperties'
+        _metadata:
+          $ref: '#/components/schemas/metricsMetadataProperties'
+      type: object
+    getDataTransferredMetricsResult:
+      example:
+        metrics:
+          dataOut:
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+          dataIn:
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          granularity: null
+          from: 2000-01-23T04:56:07.000+00:00
+          aggregation: SUM
+          to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        metrics:
+          $ref: '#/components/schemas/dataTransferredMetrics'
+        _metadata:
+          $ref: '#/components/schemas/metricsMetadataProperties'
+      type: object
+    getDataTransferredPerSecondMetricsResult:
+      example:
+        metrics:
+          dataOut:
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+          dataIn:
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          granularity: null
+          from: 2000-01-23T04:56:07.000+00:00
+          aggregation: SUM
+          to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        metrics:
+          $ref: '#/components/schemas/dataTransferredMetrics'
+        _metadata:
+          $ref: '#/components/schemas/metricsMetadataProperties'
+      type: object
+    getConnectionsMetricsResult:
+      example:
+        metrics:
+          unit: null
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          granularity: null
+          from: 2000-01-23T04:56:07.000+00:00
+          aggregation: SUM
+          to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        metrics:
+          $ref: '#/components/schemas/metricsProperties'
+        _metadata:
+          $ref: '#/components/schemas/metricsMetadataProperties'
+      type: object
+    getConnectionsPerSecondMetricsResult:
+      example:
+        metrics:
+          unit: null
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          granularity: null
+          from: 2000-01-23T04:56:07.000+00:00
+          aggregation: SUM
+          to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        metrics:
+          $ref: '#/components/schemas/metricsProperties'
+        _metadata:
+          $ref: '#/components/schemas/metricsMetadataProperties'
+      type: object
+    getResponseCodesMetricsResult:
+      example:
+        metrics:
+          "2xx":
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+          "3xx":
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+          "4xx":
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+          "5xx":
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          granularity: null
+          from: 2000-01-23T04:56:07.000+00:00
+          aggregation: SUM
+          to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        metrics:
+          $ref: '#/components/schemas/responseCodesMetrics'
+        _metadata:
+          $ref: '#/components/schemas/metricsMetadataProperties'
+      type: object
+    getResponseCodesPerSecondMetricsResult:
+      example:
+        metrics:
+          "2xx":
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+          "3xx":
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+          "4xx":
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+          "5xx":
+            unit: null
+            values:
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+            - value: 0.8008281904610115
+              timestamp: 2000-01-23T04:56:07.000+00:00
+        _metadata:
+          granularity: null
+          from: 2000-01-23T04:56:07.000+00:00
+          aggregation: SUM
+          to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        metrics:
+          $ref: '#/components/schemas/responseCodesMetrics'
+        _metadata:
+          $ref: '#/components/schemas/metricsMetadataProperties'
       type: object
     snapshot:
       example:
@@ -12619,6 +14497,10 @@ components:
           type: string
       title: trafficMetricValue
       type: object
+    metricsMetadataProperties_granularity:
+      oneOf:
+      - $ref: '#/components/schemas/cpuGranularity'
+      - $ref: '#/components/schemas/loadBalancerGranularity'
     peak:
       example:
         value: value
@@ -12636,14 +14518,14 @@ components:
     dataTrafficMetrics:
       example:
         DOWN_PUBLIC:
-          unit: B
+          unit: null
           values:
           - value: 0
             timestamp: 2000-01-23T04:56:07.000+00:00
           - value: 0
             timestamp: 2000-01-23T04:56:07.000+00:00
         UP_PUBLIC:
-          unit: B
+          unit: null
           values:
           - value: 0
             timestamp: 2000-01-23T04:56:07.000+00:00
@@ -12680,6 +14562,11 @@ components:
       title: summary
       type: object
     trafficMetricsMetaData:
+      allOf:
+      - $ref: '#/components/schemas/metricsMetadataProperties'
+      - properties:
+          summary:
+            $ref: '#/components/schemas/summary'
       example:
         summary:
           DOWN_PUBLIC:
@@ -12696,68 +14583,29 @@ components:
             peak:
               value: value
               timestamp: 2000-01-23T04:56:07.000+00:00
-        granularity: DAY
+        granularity: null
         from: 2000-01-23T04:56:07.000+00:00
         aggregation: SUM
         to: 2000-01-23T04:56:07.000+00:00
-      properties:
-        from:
-          format: date-time
-          type: string
-        to:
-          format: date-time
-          type: string
-        granularity:
-          description: The provided granularity
-          enum:
-          - DAY
-          type: string
-        aggregation:
-          description: The provided aggregation
-          enum:
-          - SUM
-          type: string
-        summary:
-          $ref: '#/components/schemas/summary'
       title: trafficMetricsMetaData
       type: object
-    cpuMetricsValue:
+    metricsValues:
       example:
         value: 0.8008281904610115
         timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         value:
-          description: CPU usage
+          description: Metric value
           type: number
         timestamp:
           format: date-time
           type: string
-      title: cpuMetricsValue
-      type: object
-    cpuMetricsMetrics:
-      description: "CPU usage metrics, in percentage"
-      example:
-        unit: '%'
-        values:
-        - value: 0.8008281904610115
-          timestamp: 2000-01-23T04:56:07.000+00:00
-        - value: 0.8008281904610115
-          timestamp: 2000-01-23T04:56:07.000+00:00
-      properties:
-        values:
-          items:
-            $ref: '#/components/schemas/cpuMetricsValue'
-          type: array
-        unit:
-          enum:
-          - '%'
-          type: string
-      title: cpuMetricsMetrics
+      title: metricsValues
       type: object
     cpuMetrics:
       example:
         cpuMetrics:
-          unit: '%'
+          unit: null
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
@@ -12765,7 +14613,7 @@ components:
             timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         cpuMetrics:
-          $ref: '#/components/schemas/cpuMetricsMetrics'
+          $ref: '#/components/schemas/metricsProperties'
       title: cpuMetrics
       type: object
     cpuMetricsMetadataSummaryPeak:
@@ -12826,7 +14674,7 @@ components:
             peak:
               value: 90 %
               timestamp: 2000-01-23T04:56:07.000+00:00
-        granularity: 5m
+        granularity: null
         from: 2000-01-23T04:56:07.000+00:00
         to: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -12837,16 +14685,74 @@ components:
           format: date-time
           type: string
         granularity:
-          description: The provided granularity
-          enum:
-          - 5m
-          - 10m
-          - 30m
-          - 60m
-          type: string
+          $ref: '#/components/schemas/metricsGranularity'
         summary:
           $ref: '#/components/schemas/cpuMetricsMetadataSummary'
       title: cpuMetricsMetadata
+      type: object
+    dataTransferredMetrics:
+      example:
+        dataOut:
+          unit: null
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        dataIn:
+          unit: null
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        dataIn:
+          $ref: '#/components/schemas/metricsProperties'
+        dataOut:
+          $ref: '#/components/schemas/metricsProperties'
+      title: dataTransferredMetrics
+      type: object
+    responseCodesMetrics:
+      example:
+        "2xx":
+          unit: null
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        "3xx":
+          unit: null
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        "4xx":
+          unit: null
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+        "5xx":
+          unit: null
+          values:
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          - value: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        "2xx":
+          $ref: '#/components/schemas/metricsProperties'
+        "3xx":
+          $ref: '#/components/schemas/metricsProperties'
+        "4xx":
+          $ref: '#/components/schemas/metricsProperties'
+        "5xx":
+          $ref: '#/components/schemas/metricsProperties'
+      title: responseCodesMetrics
       type: object
   securitySchemes:
     BearerAuth:

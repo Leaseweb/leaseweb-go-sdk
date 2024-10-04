@@ -22,9 +22,8 @@ var _ MappedNullable = &TrafficMetricsMetaData{}
 type TrafficMetricsMetaData struct {
 	From *time.Time `json:"from,omitempty"`
 	To *time.Time `json:"to,omitempty"`
-	// The provided granularity
-	Granularity *string `json:"granularity,omitempty"`
-	// The provided aggregation
+	Granularity *MetricsMetadataPropertiesGranularity `json:"granularity,omitempty"`
+	// Defined by the query
 	Aggregation *string `json:"aggregation,omitempty"`
 	Summary *Summary `json:"summary,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -114,9 +113,9 @@ func (o *TrafficMetricsMetaData) SetTo(v time.Time) {
 }
 
 // GetGranularity returns the Granularity field value if set, zero value otherwise.
-func (o *TrafficMetricsMetaData) GetGranularity() string {
+func (o *TrafficMetricsMetaData) GetGranularity() MetricsMetadataPropertiesGranularity {
 	if o == nil || IsNil(o.Granularity) {
-		var ret string
+		var ret MetricsMetadataPropertiesGranularity
 		return ret
 	}
 	return *o.Granularity
@@ -124,7 +123,7 @@ func (o *TrafficMetricsMetaData) GetGranularity() string {
 
 // GetGranularityOk returns a tuple with the Granularity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TrafficMetricsMetaData) GetGranularityOk() (*string, bool) {
+func (o *TrafficMetricsMetaData) GetGranularityOk() (*MetricsMetadataPropertiesGranularity, bool) {
 	if o == nil || IsNil(o.Granularity) {
 		return nil, false
 	}
@@ -140,8 +139,8 @@ func (o *TrafficMetricsMetaData) HasGranularity() bool {
 	return false
 }
 
-// SetGranularity gets a reference to the given string and assigns it to the Granularity field.
-func (o *TrafficMetricsMetaData) SetGranularity(v string) {
+// SetGranularity gets a reference to the given MetricsMetadataPropertiesGranularity and assigns it to the Granularity field.
+func (o *TrafficMetricsMetaData) SetGranularity(v MetricsMetadataPropertiesGranularity) {
 	o.Granularity = &v
 }
 

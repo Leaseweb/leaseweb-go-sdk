@@ -1,78 +1,78 @@
-# CpuMetricsMetrics
+# MetricsProperties
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Values** | Pointer to [**[]CpuMetricsValue**](CpuMetricsValue.md) |  | [optional] 
-**Unit** | Pointer to **string** |  | [optional] 
+**Values** | Pointer to [**[]MetricsValues**](MetricsValues.md) |  | [optional] 
+**Unit** | Pointer to [**MetricsUnit**](MetricsUnit.md) |  | [optional] 
 
 ## Methods
 
-### NewCpuMetricsMetrics
+### NewMetricsProperties
 
-`func NewCpuMetricsMetrics() *CpuMetricsMetrics`
+`func NewMetricsProperties() *MetricsProperties`
 
-NewCpuMetricsMetrics instantiates a new CpuMetricsMetrics object
+NewMetricsProperties instantiates a new MetricsProperties object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewCpuMetricsMetricsWithDefaults
+### NewMetricsPropertiesWithDefaults
 
-`func NewCpuMetricsMetricsWithDefaults() *CpuMetricsMetrics`
+`func NewMetricsPropertiesWithDefaults() *MetricsProperties`
 
-NewCpuMetricsMetricsWithDefaults instantiates a new CpuMetricsMetrics object
+NewMetricsPropertiesWithDefaults instantiates a new MetricsProperties object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetValues
 
-`func (o *CpuMetricsMetrics) GetValues() []CpuMetricsValue`
+`func (o *MetricsProperties) GetValues() []MetricsValues`
 
 GetValues returns the Values field if non-nil, zero value otherwise.
 
 ### GetValuesOk
 
-`func (o *CpuMetricsMetrics) GetValuesOk() (*[]CpuMetricsValue, bool)`
+`func (o *MetricsProperties) GetValuesOk() (*[]MetricsValues, bool)`
 
 GetValuesOk returns a tuple with the Values field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetValues
 
-`func (o *CpuMetricsMetrics) SetValues(v []CpuMetricsValue)`
+`func (o *MetricsProperties) SetValues(v []MetricsValues)`
 
 SetValues sets Values field to given value.
 
 ### HasValues
 
-`func (o *CpuMetricsMetrics) HasValues() bool`
+`func (o *MetricsProperties) HasValues() bool`
 
 HasValues returns a boolean if a field has been set.
 
 ### GetUnit
 
-`func (o *CpuMetricsMetrics) GetUnit() string`
+`func (o *MetricsProperties) GetUnit() MetricsUnit`
 
 GetUnit returns the Unit field if non-nil, zero value otherwise.
 
 ### GetUnitOk
 
-`func (o *CpuMetricsMetrics) GetUnitOk() (*string, bool)`
+`func (o *MetricsProperties) GetUnitOk() (*MetricsUnit, bool)`
 
 GetUnitOk returns a tuple with the Unit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnit
 
-`func (o *CpuMetricsMetrics) SetUnit(v string)`
+`func (o *MetricsProperties) SetUnit(v MetricsUnit)`
 
 SetUnit sets Unit field to given value.
 
 ### HasUnit
 
-`func (o *CpuMetricsMetrics) HasUnit() bool`
+`func (o *MetricsProperties) HasUnit() bool`
 
 HasUnit returns a boolean if a field has been set.
 

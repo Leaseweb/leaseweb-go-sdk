@@ -20,7 +20,7 @@ var _ MappedNullable = &TrafficMetric{}
 // TrafficMetric struct for TrafficMetric
 type TrafficMetric struct {
 	Values []TrafficMetricValue `json:"values,omitempty"`
-	Unit *string `json:"unit,omitempty"`
+	Unit *MetricsUnit `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -76,9 +76,9 @@ func (o *TrafficMetric) SetValues(v []TrafficMetricValue) {
 }
 
 // GetUnit returns the Unit field value if set, zero value otherwise.
-func (o *TrafficMetric) GetUnit() string {
+func (o *TrafficMetric) GetUnit() MetricsUnit {
 	if o == nil || IsNil(o.Unit) {
-		var ret string
+		var ret MetricsUnit
 		return ret
 	}
 	return *o.Unit
@@ -86,7 +86,7 @@ func (o *TrafficMetric) GetUnit() string {
 
 // GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TrafficMetric) GetUnitOk() (*string, bool) {
+func (o *TrafficMetric) GetUnitOk() (*MetricsUnit, bool) {
 	if o == nil || IsNil(o.Unit) {
 		return nil, false
 	}
@@ -102,8 +102,8 @@ func (o *TrafficMetric) HasUnit() bool {
 	return false
 }
 
-// SetUnit gets a reference to the given string and assigns it to the Unit field.
-func (o *TrafficMetric) SetUnit(v string) {
+// SetUnit gets a reference to the given MetricsUnit and assigns it to the Unit field.
+func (o *TrafficMetric) SetUnit(v MetricsUnit) {
 	o.Unit = &v
 }
 

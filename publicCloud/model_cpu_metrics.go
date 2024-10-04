@@ -19,7 +19,7 @@ var _ MappedNullable = &CpuMetrics{}
 
 // CpuMetrics struct for CpuMetrics
 type CpuMetrics struct {
-	CpuMetrics *CpuMetricsMetrics `json:"cpuMetrics,omitempty"`
+	CpuMetrics MetricsProperties `json:"cpuMetrics,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,19 +43,19 @@ func NewCpuMetricsWithDefaults() *CpuMetrics {
 }
 
 // GetCpuMetrics returns the CpuMetrics field value if set, zero value otherwise.
-func (o *CpuMetrics) GetCpuMetrics() CpuMetricsMetrics {
+func (o *CpuMetrics) GetCpuMetrics() MetricsProperties {
 	if o == nil || IsNil(o.CpuMetrics) {
-		var ret CpuMetricsMetrics
+		var ret MetricsProperties
 		return ret
 	}
-	return *o.CpuMetrics
+	return o.CpuMetrics
 }
 
 // GetCpuMetricsOk returns a tuple with the CpuMetrics field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetrics) GetCpuMetricsOk() (*CpuMetricsMetrics, bool) {
+func (o *CpuMetrics) GetCpuMetricsOk() (MetricsProperties, bool) {
 	if o == nil || IsNil(o.CpuMetrics) {
-		return nil, false
+		return MetricsProperties{}, false
 	}
 	return o.CpuMetrics, true
 }
@@ -69,9 +69,9 @@ func (o *CpuMetrics) HasCpuMetrics() bool {
 	return false
 }
 
-// SetCpuMetrics gets a reference to the given CpuMetricsMetrics and assigns it to the CpuMetrics field.
-func (o *CpuMetrics) SetCpuMetrics(v CpuMetricsMetrics) {
-	o.CpuMetrics = &v
+// SetCpuMetrics gets a reference to the given MetricsProperties and assigns it to the CpuMetrics field.
+func (o *CpuMetrics) SetCpuMetrics(v MetricsProperties) {
+	o.CpuMetrics = v
 }
 
 func (o CpuMetrics) MarshalJSON() ([]byte, error) {

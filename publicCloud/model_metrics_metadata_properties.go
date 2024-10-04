@@ -15,39 +15,40 @@ import (
 	"time"
 )
 
-// checks if the CpuMetricsMetadata type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CpuMetricsMetadata{}
+// checks if the MetricsMetadataProperties type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MetricsMetadataProperties{}
 
-// CpuMetricsMetadata struct for CpuMetricsMetadata
-type CpuMetricsMetadata struct {
+// MetricsMetadataProperties struct for MetricsMetadataProperties
+type MetricsMetadataProperties struct {
 	From *time.Time `json:"from,omitempty"`
 	To *time.Time `json:"to,omitempty"`
-	Granularity *MetricsGranularity `json:"granularity,omitempty"`
-	Summary *CpuMetricsMetadataSummary `json:"summary,omitempty"`
+	Granularity *MetricsMetadataPropertiesGranularity `json:"granularity,omitempty"`
+	// Defined by the query
+	Aggregation *string `json:"aggregation,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _CpuMetricsMetadata CpuMetricsMetadata
+type _MetricsMetadataProperties MetricsMetadataProperties
 
-// NewCpuMetricsMetadata instantiates a new CpuMetricsMetadata object
+// NewMetricsMetadataProperties instantiates a new MetricsMetadataProperties object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCpuMetricsMetadata() *CpuMetricsMetadata {
-	this := CpuMetricsMetadata{}
+func NewMetricsMetadataProperties() *MetricsMetadataProperties {
+	this := MetricsMetadataProperties{}
 	return &this
 }
 
-// NewCpuMetricsMetadataWithDefaults instantiates a new CpuMetricsMetadata object
+// NewMetricsMetadataPropertiesWithDefaults instantiates a new MetricsMetadataProperties object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCpuMetricsMetadataWithDefaults() *CpuMetricsMetadata {
-	this := CpuMetricsMetadata{}
+func NewMetricsMetadataPropertiesWithDefaults() *MetricsMetadataProperties {
+	this := MetricsMetadataProperties{}
 	return &this
 }
 
 // GetFrom returns the From field value if set, zero value otherwise.
-func (o *CpuMetricsMetadata) GetFrom() time.Time {
+func (o *MetricsMetadataProperties) GetFrom() time.Time {
 	if o == nil || IsNil(o.From) {
 		var ret time.Time
 		return ret
@@ -57,7 +58,7 @@ func (o *CpuMetricsMetadata) GetFrom() time.Time {
 
 // GetFromOk returns a tuple with the From field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetricsMetadata) GetFromOk() (*time.Time, bool) {
+func (o *MetricsMetadataProperties) GetFromOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.From) {
 		return nil, false
 	}
@@ -65,7 +66,7 @@ func (o *CpuMetricsMetadata) GetFromOk() (*time.Time, bool) {
 }
 
 // HasFrom returns a boolean if a field has been set.
-func (o *CpuMetricsMetadata) HasFrom() bool {
+func (o *MetricsMetadataProperties) HasFrom() bool {
 	if o != nil && !IsNil(o.From) {
 		return true
 	}
@@ -74,12 +75,12 @@ func (o *CpuMetricsMetadata) HasFrom() bool {
 }
 
 // SetFrom gets a reference to the given time.Time and assigns it to the From field.
-func (o *CpuMetricsMetadata) SetFrom(v time.Time) {
+func (o *MetricsMetadataProperties) SetFrom(v time.Time) {
 	o.From = &v
 }
 
 // GetTo returns the To field value if set, zero value otherwise.
-func (o *CpuMetricsMetadata) GetTo() time.Time {
+func (o *MetricsMetadataProperties) GetTo() time.Time {
 	if o == nil || IsNil(o.To) {
 		var ret time.Time
 		return ret
@@ -89,7 +90,7 @@ func (o *CpuMetricsMetadata) GetTo() time.Time {
 
 // GetToOk returns a tuple with the To field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetricsMetadata) GetToOk() (*time.Time, bool) {
+func (o *MetricsMetadataProperties) GetToOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.To) {
 		return nil, false
 	}
@@ -97,7 +98,7 @@ func (o *CpuMetricsMetadata) GetToOk() (*time.Time, bool) {
 }
 
 // HasTo returns a boolean if a field has been set.
-func (o *CpuMetricsMetadata) HasTo() bool {
+func (o *MetricsMetadataProperties) HasTo() bool {
 	if o != nil && !IsNil(o.To) {
 		return true
 	}
@@ -106,14 +107,14 @@ func (o *CpuMetricsMetadata) HasTo() bool {
 }
 
 // SetTo gets a reference to the given time.Time and assigns it to the To field.
-func (o *CpuMetricsMetadata) SetTo(v time.Time) {
+func (o *MetricsMetadataProperties) SetTo(v time.Time) {
 	o.To = &v
 }
 
 // GetGranularity returns the Granularity field value if set, zero value otherwise.
-func (o *CpuMetricsMetadata) GetGranularity() MetricsGranularity {
+func (o *MetricsMetadataProperties) GetGranularity() MetricsMetadataPropertiesGranularity {
 	if o == nil || IsNil(o.Granularity) {
-		var ret MetricsGranularity
+		var ret MetricsMetadataPropertiesGranularity
 		return ret
 	}
 	return *o.Granularity
@@ -121,7 +122,7 @@ func (o *CpuMetricsMetadata) GetGranularity() MetricsGranularity {
 
 // GetGranularityOk returns a tuple with the Granularity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetricsMetadata) GetGranularityOk() (*MetricsGranularity, bool) {
+func (o *MetricsMetadataProperties) GetGranularityOk() (*MetricsMetadataPropertiesGranularity, bool) {
 	if o == nil || IsNil(o.Granularity) {
 		return nil, false
 	}
@@ -129,7 +130,7 @@ func (o *CpuMetricsMetadata) GetGranularityOk() (*MetricsGranularity, bool) {
 }
 
 // HasGranularity returns a boolean if a field has been set.
-func (o *CpuMetricsMetadata) HasGranularity() bool {
+func (o *MetricsMetadataProperties) HasGranularity() bool {
 	if o != nil && !IsNil(o.Granularity) {
 		return true
 	}
@@ -137,44 +138,44 @@ func (o *CpuMetricsMetadata) HasGranularity() bool {
 	return false
 }
 
-// SetGranularity gets a reference to the given MetricsGranularity and assigns it to the Granularity field.
-func (o *CpuMetricsMetadata) SetGranularity(v MetricsGranularity) {
+// SetGranularity gets a reference to the given MetricsMetadataPropertiesGranularity and assigns it to the Granularity field.
+func (o *MetricsMetadataProperties) SetGranularity(v MetricsMetadataPropertiesGranularity) {
 	o.Granularity = &v
 }
 
-// GetSummary returns the Summary field value if set, zero value otherwise.
-func (o *CpuMetricsMetadata) GetSummary() CpuMetricsMetadataSummary {
-	if o == nil || IsNil(o.Summary) {
-		var ret CpuMetricsMetadataSummary
+// GetAggregation returns the Aggregation field value if set, zero value otherwise.
+func (o *MetricsMetadataProperties) GetAggregation() string {
+	if o == nil || IsNil(o.Aggregation) {
+		var ret string
 		return ret
 	}
-	return *o.Summary
+	return *o.Aggregation
 }
 
-// GetSummaryOk returns a tuple with the Summary field value if set, nil otherwise
+// GetAggregationOk returns a tuple with the Aggregation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetricsMetadata) GetSummaryOk() (*CpuMetricsMetadataSummary, bool) {
-	if o == nil || IsNil(o.Summary) {
+func (o *MetricsMetadataProperties) GetAggregationOk() (*string, bool) {
+	if o == nil || IsNil(o.Aggregation) {
 		return nil, false
 	}
-	return o.Summary, true
+	return o.Aggregation, true
 }
 
-// HasSummary returns a boolean if a field has been set.
-func (o *CpuMetricsMetadata) HasSummary() bool {
-	if o != nil && !IsNil(o.Summary) {
+// HasAggregation returns a boolean if a field has been set.
+func (o *MetricsMetadataProperties) HasAggregation() bool {
+	if o != nil && !IsNil(o.Aggregation) {
 		return true
 	}
 
 	return false
 }
 
-// SetSummary gets a reference to the given CpuMetricsMetadataSummary and assigns it to the Summary field.
-func (o *CpuMetricsMetadata) SetSummary(v CpuMetricsMetadataSummary) {
-	o.Summary = &v
+// SetAggregation gets a reference to the given string and assigns it to the Aggregation field.
+func (o *MetricsMetadataProperties) SetAggregation(v string) {
+	o.Aggregation = &v
 }
 
-func (o CpuMetricsMetadata) MarshalJSON() ([]byte, error) {
+func (o MetricsMetadataProperties) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -182,7 +183,7 @@ func (o CpuMetricsMetadata) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CpuMetricsMetadata) ToMap() (map[string]interface{}, error) {
+func (o MetricsMetadataProperties) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.From) {
 		toSerialize["from"] = o.From
@@ -193,8 +194,8 @@ func (o CpuMetricsMetadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Granularity) {
 		toSerialize["granularity"] = o.Granularity
 	}
-	if !IsNil(o.Summary) {
-		toSerialize["summary"] = o.Summary
+	if !IsNil(o.Aggregation) {
+		toSerialize["aggregation"] = o.Aggregation
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -204,16 +205,16 @@ func (o CpuMetricsMetadata) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *CpuMetricsMetadata) UnmarshalJSON(data []byte) (err error) {
-	varCpuMetricsMetadata := _CpuMetricsMetadata{}
+func (o *MetricsMetadataProperties) UnmarshalJSON(data []byte) (err error) {
+	varMetricsMetadataProperties := _MetricsMetadataProperties{}
 
-	err = json.Unmarshal(data, &varCpuMetricsMetadata)
+	err = json.Unmarshal(data, &varMetricsMetadataProperties)
 
 	if err != nil {
 		return err
 	}
 
-	*o = CpuMetricsMetadata(varCpuMetricsMetadata)
+	*o = MetricsMetadataProperties(varMetricsMetadataProperties)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -221,45 +222,45 @@ func (o *CpuMetricsMetadata) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "from")
 		delete(additionalProperties, "to")
 		delete(additionalProperties, "granularity")
-		delete(additionalProperties, "summary")
+		delete(additionalProperties, "aggregation")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableCpuMetricsMetadata struct {
-	value *CpuMetricsMetadata
+type NullableMetricsMetadataProperties struct {
+	value *MetricsMetadataProperties
 	isSet bool
 }
 
-func (v NullableCpuMetricsMetadata) Get() *CpuMetricsMetadata {
+func (v NullableMetricsMetadataProperties) Get() *MetricsMetadataProperties {
 	return v.value
 }
 
-func (v *NullableCpuMetricsMetadata) Set(val *CpuMetricsMetadata) {
+func (v *NullableMetricsMetadataProperties) Set(val *MetricsMetadataProperties) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCpuMetricsMetadata) IsSet() bool {
+func (v NullableMetricsMetadataProperties) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCpuMetricsMetadata) Unset() {
+func (v *NullableMetricsMetadataProperties) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCpuMetricsMetadata(val *CpuMetricsMetadata) *NullableCpuMetricsMetadata {
-	return &NullableCpuMetricsMetadata{value: val, isSet: true}
+func NewNullableMetricsMetadataProperties(val *MetricsMetadataProperties) *NullableMetricsMetadataProperties {
+	return &NullableMetricsMetadataProperties{value: val, isSet: true}
 }
 
-func (v NullableCpuMetricsMetadata) MarshalJSON() ([]byte, error) {
+func (v NullableMetricsMetadataProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCpuMetricsMetadata) UnmarshalJSON(src []byte) error {
+func (v *NullableMetricsMetadataProperties) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

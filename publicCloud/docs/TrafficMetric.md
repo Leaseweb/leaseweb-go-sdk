@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Values** | Pointer to [**[]TrafficMetricValue**](TrafficMetricValue.md) |  | [optional] 
-**Unit** | Pointer to **string** |  | [optional] 
+**Unit** | Pointer to [**MetricsUnit**](MetricsUnit.md) |  | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasValues returns a boolean if a field has been set.
 
 ### GetUnit
 
-`func (o *TrafficMetric) GetUnit() string`
+`func (o *TrafficMetric) GetUnit() MetricsUnit`
 
 GetUnit returns the Unit field if non-nil, zero value otherwise.
 
 ### GetUnitOk
 
-`func (o *TrafficMetric) GetUnitOk() (*string, bool)`
+`func (o *TrafficMetric) GetUnitOk() (*MetricsUnit, bool)`
 
 GetUnitOk returns a tuple with the Unit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnit
 
-`func (o *TrafficMetric) SetUnit(v string)`
+`func (o *TrafficMetric) SetUnit(v MetricsUnit)`
 
 SetUnit sets Unit field to given value.
 
