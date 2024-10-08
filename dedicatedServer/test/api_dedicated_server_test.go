@@ -55,9 +55,9 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var serverId string
-		var networkType NetworkType
+		var networkTypeURL NetworkTypeURL
 
-		httpRes, err := apiClient.DedicatedServerAPI.CloseNetworkInterface(context.Background(), serverId, networkType).Execute()
+		httpRes, err := apiClient.DedicatedServerAPI.CloseNetworkInterface(context.Background(), serverId, networkTypeURL).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
@@ -432,9 +432,9 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var serverId string
-		var networkType NetworkType
+		var networkTypeURL NetworkTypeURL
 
-		resp, httpRes, err := apiClient.DedicatedServerAPI.GetNetworkInterface(context.Background(), serverId, networkType).Execute()
+		resp, httpRes, err := apiClient.DedicatedServerAPI.GetNetworkInterface(context.Background(), serverId, networkTypeURL).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -828,9 +828,9 @@ func Test_dedicatedServer_DedicatedServerAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		var serverId string
-		var networkType NetworkType
+		var networkTypeURL NetworkTypeURL
 
-		httpRes, err := apiClient.DedicatedServerAPI.OpenNetworkInterface(context.Background(), serverId, networkType).Execute()
+		httpRes, err := apiClient.DedicatedServerAPI.OpenNetworkInterface(context.Background(), serverId, networkTypeURL).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

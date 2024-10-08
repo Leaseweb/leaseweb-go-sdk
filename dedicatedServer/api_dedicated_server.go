@@ -71,10 +71,10 @@ change `expire` the active job instead.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param serverId The ID of a server
-	@param networkType The network type
+	@param networkTypeURL
 	@return ApiCloseNetworkInterfaceRequest
 	*/
-	CloseNetworkInterface(ctx context.Context, serverId string, networkType NetworkType) ApiCloseNetworkInterfaceRequest
+	CloseNetworkInterface(ctx context.Context, serverId string, networkTypeURL NetworkTypeURL) ApiCloseNetworkInterfaceRequest
 
 	// CloseNetworkInterfaceExecute executes the request
 	CloseNetworkInterfaceExecute(r ApiCloseNetworkInterfaceRequest) (*http.Response, error)
@@ -568,10 +568,10 @@ status.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param serverId The ID of a server
-	@param networkType The network type
+	@param networkTypeURL
 	@return ApiGetNetworkInterfaceRequest
 	*/
-	GetNetworkInterface(ctx context.Context, serverId string, networkType NetworkType) ApiGetNetworkInterfaceRequest
+	GetNetworkInterface(ctx context.Context, serverId string, networkTypeURL NetworkTypeURL) ApiGetNetworkInterfaceRequest
 
 	// GetNetworkInterfaceExecute executes the request
 	//  @return OperationNetworkInterface
@@ -1087,10 +1087,10 @@ propagated across the network.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param serverId The ID of a server
-	@param networkType The network type
+	@param networkTypeURL
 	@return ApiOpenNetworkInterfaceRequest
 	*/
-	OpenNetworkInterface(ctx context.Context, serverId string, networkType NetworkType) ApiOpenNetworkInterfaceRequest
+	OpenNetworkInterface(ctx context.Context, serverId string, networkTypeURL NetworkTypeURL) ApiOpenNetworkInterfaceRequest
 
 	// OpenNetworkInterfaceExecute executes the request
 	OpenNetworkInterfaceExecute(r ApiOpenNetworkInterfaceRequest) (*http.Response, error)
@@ -1801,7 +1801,7 @@ type ApiCloseNetworkInterfaceRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	serverId string
-	networkType NetworkType
+	networkTypeURL NetworkTypeURL
 }
 
 func (r ApiCloseNetworkInterfaceRequest) Execute() (*http.Response, error) {
@@ -1816,15 +1816,15 @@ Close the network interface of this type of this server.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverId The ID of a server
- @param networkType The network type
+ @param networkTypeURL
  @return ApiCloseNetworkInterfaceRequest
 */
-func (a *DedicatedServerAPIService) CloseNetworkInterface(ctx context.Context, serverId string, networkType NetworkType) ApiCloseNetworkInterfaceRequest {
+func (a *DedicatedServerAPIService) CloseNetworkInterface(ctx context.Context, serverId string, networkTypeURL NetworkTypeURL) ApiCloseNetworkInterfaceRequest {
 	return ApiCloseNetworkInterfaceRequest{
 		ApiService: a,
 		ctx: ctx,
 		serverId: serverId,
-		networkType: networkType,
+		networkTypeURL: networkTypeURL,
 	}
 }
 
@@ -1841,9 +1841,9 @@ func (a *DedicatedServerAPIService) CloseNetworkInterfaceExecute(r ApiCloseNetwo
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/servers/{serverId}/networkInterfaces/{networkType}/close"
+	localVarPath := localBasePath + "/servers/{serverId}/networkInterfaces/{networkTypeURL}/close"
 	localVarPath = strings.Replace(localVarPath, "{"+"serverId"+"}", url.PathEscape(parameterValueToString(r.serverId, "serverId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"networkType"+"}", url.PathEscape(parameterValueToString(r.networkType, "networkType")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"networkTypeURL"+"}", url.PathEscape(parameterValueToString(r.networkTypeURL, "networkTypeURL")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -6560,7 +6560,7 @@ type ApiGetNetworkInterfaceRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	serverId string
-	networkType NetworkType
+	networkTypeURL NetworkTypeURL
 }
 
 func (r ApiGetNetworkInterfaceRequest) Execute() (*OperationNetworkInterface, *http.Response, error) {
@@ -6576,15 +6576,15 @@ status.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverId The ID of a server
- @param networkType The network type
+ @param networkTypeURL
  @return ApiGetNetworkInterfaceRequest
 */
-func (a *DedicatedServerAPIService) GetNetworkInterface(ctx context.Context, serverId string, networkType NetworkType) ApiGetNetworkInterfaceRequest {
+func (a *DedicatedServerAPIService) GetNetworkInterface(ctx context.Context, serverId string, networkTypeURL NetworkTypeURL) ApiGetNetworkInterfaceRequest {
 	return ApiGetNetworkInterfaceRequest{
 		ApiService: a,
 		ctx: ctx,
 		serverId: serverId,
-		networkType: networkType,
+		networkTypeURL: networkTypeURL,
 	}
 }
 
@@ -6603,9 +6603,9 @@ func (a *DedicatedServerAPIService) GetNetworkInterfaceExecute(r ApiGetNetworkIn
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/servers/{serverId}/networkInterfaces/{networkType}"
+	localVarPath := localBasePath + "/servers/{serverId}/networkInterfaces/{networkTypeURL}"
 	localVarPath = strings.Replace(localVarPath, "{"+"serverId"+"}", url.PathEscape(parameterValueToString(r.serverId, "serverId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"networkType"+"}", url.PathEscape(parameterValueToString(r.networkType, "networkType")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"networkTypeURL"+"}", url.PathEscape(parameterValueToString(r.networkTypeURL, "networkTypeURL")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -11734,7 +11734,7 @@ type ApiOpenNetworkInterfaceRequest struct {
 	ctx context.Context
 	ApiService DedicatedServerAPI
 	serverId string
-	networkType NetworkType
+	networkTypeURL NetworkTypeURL
 }
 
 func (r ApiOpenNetworkInterfaceRequest) Execute() (*http.Response, error) {
@@ -11749,15 +11749,15 @@ Open all network interfaces of the given type for this server.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param serverId The ID of a server
- @param networkType The network type
+ @param networkTypeURL
  @return ApiOpenNetworkInterfaceRequest
 */
-func (a *DedicatedServerAPIService) OpenNetworkInterface(ctx context.Context, serverId string, networkType NetworkType) ApiOpenNetworkInterfaceRequest {
+func (a *DedicatedServerAPIService) OpenNetworkInterface(ctx context.Context, serverId string, networkTypeURL NetworkTypeURL) ApiOpenNetworkInterfaceRequest {
 	return ApiOpenNetworkInterfaceRequest{
 		ApiService: a,
 		ctx: ctx,
 		serverId: serverId,
-		networkType: networkType,
+		networkTypeURL: networkTypeURL,
 	}
 }
 
@@ -11774,9 +11774,9 @@ func (a *DedicatedServerAPIService) OpenNetworkInterfaceExecute(r ApiOpenNetwork
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/servers/{serverId}/networkInterfaces/{networkType}/open"
+	localVarPath := localBasePath + "/servers/{serverId}/networkInterfaces/{networkTypeURL}/open"
 	localVarPath = strings.Replace(localVarPath, "{"+"serverId"+"}", url.PathEscape(parameterValueToString(r.serverId, "serverId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"networkType"+"}", url.PathEscape(parameterValueToString(r.networkType, "networkType")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"networkTypeURL"+"}", url.PathEscape(parameterValueToString(r.networkTypeURL, "networkTypeURL")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

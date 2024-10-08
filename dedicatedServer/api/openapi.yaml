@@ -7980,7 +7980,7 @@ paths:
       summary: Open all network interfaces
       tags:
       - dedicatedServer
-  /servers/{serverId}/networkInterfaces/{networkType}:
+  /servers/{serverId}/networkInterfaces/{networkTypeURL}:
     get:
       description: |
         Show the network interface of the given type of this server, including its
@@ -7996,13 +7996,12 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The network type
-        explode: false
+      - explode: false
         in: path
-        name: networkType
+        name: networkTypeURL
         required: true
         schema:
-          $ref: '#/components/schemas/networkType'
+          $ref: '#/components/schemas/networkTypeURL'
         style: simple
       responses:
         "200":
@@ -8063,7 +8062,7 @@ paths:
       summary: Show a network interface
       tags:
       - dedicatedServer
-  /servers/{serverId}/networkInterfaces/{networkType}/close:
+  /servers/{serverId}/networkInterfaces/{networkTypeURL}/close:
     post:
       description: |
         Close the network interface of this type of this server.
@@ -8078,13 +8077,12 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The network type
-        explode: false
+      - explode: false
         in: path
-        name: networkType
+        name: networkTypeURL
         required: true
         schema:
-          $ref: '#/components/schemas/networkType'
+          $ref: '#/components/schemas/networkTypeURL'
         style: simple
       responses:
         "204":
@@ -8134,7 +8132,7 @@ paths:
       summary: Close network interface
       tags:
       - dedicatedServer
-  /servers/{serverId}/networkInterfaces/{networkType}/open:
+  /servers/{serverId}/networkInterfaces/{networkTypeURL}/open:
     post:
       description: |
         Open all network interfaces of the given type for this server.
@@ -8149,13 +8147,12 @@ paths:
         schema:
           type: string
         style: simple
-      - description: The network type
-        explode: false
+      - explode: false
         in: path
-        name: networkType
+        name: networkTypeURL
         required: true
         schema:
-          $ref: '#/components/schemas/networkType'
+          $ref: '#/components/schemas/networkTypeURL'
         style: simple
       responses:
         "204":
@@ -8470,14 +8467,13 @@ components:
       schema:
         type: string
       style: simple
-    networkType:
-      description: The network type
+    networkTypeURL:
       explode: false
       in: path
-      name: networkType
+      name: networkTypeURL
       required: true
       schema:
-        $ref: '#/components/schemas/networkType'
+        $ref: '#/components/schemas/networkTypeURL'
       style: simple
   responses:
     "204":
@@ -11568,6 +11564,14 @@ components:
             $ref: '#/components/schemas/operationNetworkInterface'
           type: array
       type: object
+    networkTypeURL:
+      description: Type of network
+      enum:
+      - internal
+      - public
+      - remoteManagement
+      example: internal
+      type: string
     getDdosNotificationSettingResult:
       example:
         nulling: nulling

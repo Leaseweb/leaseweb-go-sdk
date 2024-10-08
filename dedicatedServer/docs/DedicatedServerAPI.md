@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddServerToPrivateNetwork**](DedicatedServerAPI.md#AddServerToPrivateNetwork) | **Put** /servers/{serverId}/privateNetworks/{privateNetworkId} | Add a server to private network
 [**CancelActiveJob**](DedicatedServerAPI.md#CancelActiveJob) | **Post** /servers/{serverId}/cancelActiveJob | Cancel active job
-[**CloseNetworkInterface**](DedicatedServerAPI.md#CloseNetworkInterface) | **Post** /servers/{serverId}/networkInterfaces/{networkType}/close | Close network interface
+[**CloseNetworkInterface**](DedicatedServerAPI.md#CloseNetworkInterface) | **Post** /servers/{serverId}/networkInterfaces/{networkTypeURL}/close | Close network interface
 [**CloseNetworkInterfaces**](DedicatedServerAPI.md#CloseNetworkInterfaces) | **Post** /servers/{serverId}/networkInterfaces/close | Close all network interfaces
 [**CreateNetworkEquipmentCredential**](DedicatedServerAPI.md#CreateNetworkEquipmentCredential) | **Post** /networkEquipments/{networkEquipmentId}/credentials | Create new network equipment credentials
 [**CreateServerBandwidthNotificationSetting**](DedicatedServerAPI.md#CreateServerBandwidthNotificationSetting) | **Post** /servers/{serverId}/notificationSettings/bandwidth | Create a bandwidth notification setting
@@ -33,7 +33,7 @@ Method | HTTP request | Description
 [**GetNetworkEquipmentList**](DedicatedServerAPI.md#GetNetworkEquipmentList) | **Get** /networkEquipments | List network equipment
 [**GetNetworkEquipmentNullRouteHistory**](DedicatedServerAPI.md#GetNetworkEquipmentNullRouteHistory) | **Get** /networkEquipments/{networkEquipmentId}/nullRouteHistory | Show null route history
 [**GetNetworkEquipmentPowerStatus**](DedicatedServerAPI.md#GetNetworkEquipmentPowerStatus) | **Get** /networkEquipments/{networkEquipmentId}/powerInfo | Show power status
-[**GetNetworkInterface**](DedicatedServerAPI.md#GetNetworkInterface) | **Get** /servers/{serverId}/networkInterfaces/{networkType} | Show a network interface
+[**GetNetworkInterface**](DedicatedServerAPI.md#GetNetworkInterface) | **Get** /servers/{serverId}/networkInterfaces/{networkTypeURL} | Show a network interface
 [**GetNetworkInterfaceList**](DedicatedServerAPI.md#GetNetworkInterfaceList) | **Get** /servers/{serverId}/networkInterfaces | List network interfaces
 [**GetOperatingSystem**](DedicatedServerAPI.md#GetOperatingSystem) | **Get** /operatingSystems/{operatingSystemId} | Show an operating system
 [**GetOperatingSystemList**](DedicatedServerAPI.md#GetOperatingSystemList) | **Get** /operatingSystems | List Operating Systems
@@ -61,7 +61,7 @@ Method | HTTP request | Description
 [**IpmiResetServer**](DedicatedServerAPI.md#IpmiResetServer) | **Post** /servers/{serverId}/ipmiReset | Launch IPMI reset
 [**NullIpRoute**](DedicatedServerAPI.md#NullIpRoute) | **Post** /servers/{serverId}/ips/{ip}/null | Null route an IP
 [**NullNetworkEquipmentIpRoute**](DedicatedServerAPI.md#NullNetworkEquipmentIpRoute) | **Post** /networkEquipments/{networkEquipmentId}/ips/{ip}/null | Null route an IP
-[**OpenNetworkInterface**](DedicatedServerAPI.md#OpenNetworkInterface) | **Post** /servers/{serverId}/networkInterfaces/{networkType}/open | Open network interface
+[**OpenNetworkInterface**](DedicatedServerAPI.md#OpenNetworkInterface) | **Post** /servers/{serverId}/networkInterfaces/{networkTypeURL}/open | Open network interface
 [**OpenNetworkInterfaces**](DedicatedServerAPI.md#OpenNetworkInterfaces) | **Post** /servers/{serverId}/networkInterfaces/open | Open all network interfaces
 [**PowerCycleNetworkEquipment**](DedicatedServerAPI.md#PowerCycleNetworkEquipment) | **Post** /networkEquipments/{networkEquipmentId}/powerCycle | Power cycle a network equipment
 [**PowerCycleServer**](DedicatedServerAPI.md#PowerCycleServer) | **Post** /servers/{serverId}/powerCycle | Power cycle a server
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 ## CloseNetworkInterface
 
-> CloseNetworkInterface(ctx, serverId, networkType).Execute()
+> CloseNetworkInterface(ctx, serverId, networkTypeURL).Execute()
 
 Close network interface
 
@@ -250,11 +250,11 @@ import (
 
 func main() {
 	serverId := "12345" // string | The ID of a server
-	networkType := openapiclient.networkType("INTERNAL") // NetworkType | The network type
+	networkTypeURL := openapiclient.networkTypeURL("internal") // NetworkTypeURL | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.DedicatedServerAPI.CloseNetworkInterface(context.Background(), serverId, networkType).Execute()
+	r, err := apiClient.DedicatedServerAPI.CloseNetworkInterface(context.Background(), serverId, networkTypeURL).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedServerAPI.CloseNetworkInterface``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -269,7 +269,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **serverId** | **string** | The ID of a server | 
-**networkType** | [**NetworkType**](.md) | The network type | 
+**networkTypeURL** | [**NetworkTypeURL**](.md) |  | 
 
 ### Other Parameters
 
@@ -2188,7 +2188,7 @@ Name | Type | Description  | Notes
 
 ## GetNetworkInterface
 
-> OperationNetworkInterface GetNetworkInterface(ctx, serverId, networkType).Execute()
+> OperationNetworkInterface GetNetworkInterface(ctx, serverId, networkTypeURL).Execute()
 
 Show a network interface
 
@@ -2208,11 +2208,11 @@ import (
 
 func main() {
 	serverId := "12345" // string | The ID of a server
-	networkType := openapiclient.networkType("INTERNAL") // NetworkType | The network type
+	networkTypeURL := openapiclient.networkTypeURL("internal") // NetworkTypeURL | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DedicatedServerAPI.GetNetworkInterface(context.Background(), serverId, networkType).Execute()
+	resp, r, err := apiClient.DedicatedServerAPI.GetNetworkInterface(context.Background(), serverId, networkTypeURL).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedServerAPI.GetNetworkInterface``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2229,7 +2229,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **serverId** | **string** | The ID of a server | 
-**networkType** | [**NetworkType**](.md) | The network type | 
+**networkTypeURL** | [**NetworkTypeURL**](.md) |  | 
 
 ### Other Parameters
 
@@ -4254,7 +4254,7 @@ Name | Type | Description  | Notes
 
 ## OpenNetworkInterface
 
-> OpenNetworkInterface(ctx, serverId, networkType).Execute()
+> OpenNetworkInterface(ctx, serverId, networkTypeURL).Execute()
 
 Open network interface
 
@@ -4274,11 +4274,11 @@ import (
 
 func main() {
 	serverId := "12345" // string | The ID of a server
-	networkType := openapiclient.networkType("INTERNAL") // NetworkType | The network type
+	networkTypeURL := openapiclient.networkTypeURL("internal") // NetworkTypeURL | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.DedicatedServerAPI.OpenNetworkInterface(context.Background(), serverId, networkType).Execute()
+	r, err := apiClient.DedicatedServerAPI.OpenNetworkInterface(context.Background(), serverId, networkTypeURL).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DedicatedServerAPI.OpenNetworkInterface``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4293,7 +4293,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **serverId** | **string** | The ID of a server | 
-**networkType** | [**NetworkType**](.md) | The network type | 
+**networkTypeURL** | [**NetworkTypeURL**](.md) |  | 
 
 ### Other Parameters
 

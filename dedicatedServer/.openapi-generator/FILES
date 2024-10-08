@@ -90,6 +90,7 @@ docs/NetworkInterfaces.md
 docs/NetworkSettings.md
 docs/NetworkTraffic.md
 docs/NetworkType.md
+docs/NetworkTypeURL.md
 docs/NotificationSetting.md
 docs/NullRoute.md
 docs/OperatingSystem.md
@@ -216,6 +217,7 @@ model_network_interfaces.go
 model_network_settings.go
 model_network_traffic.go
 model_network_type.go
+model_network_type_url.go
 model_notification_setting.go
 model_null_route.go
 model_operating_system.go

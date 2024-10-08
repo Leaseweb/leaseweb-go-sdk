@@ -80,7 +80,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DedicatedServerAPI* | [**AddServerToPrivateNetwork**](docs/DedicatedServerAPI.md#addservertoprivatenetwork) | **Put** /servers/{serverId}/privateNetworks/{privateNetworkId} | Add a server to private network
 *DedicatedServerAPI* | [**CancelActiveJob**](docs/DedicatedServerAPI.md#cancelactivejob) | **Post** /servers/{serverId}/cancelActiveJob | Cancel active job
-*DedicatedServerAPI* | [**CloseNetworkInterface**](docs/DedicatedServerAPI.md#closenetworkinterface) | **Post** /servers/{serverId}/networkInterfaces/{networkType}/close | Close network interface
+*DedicatedServerAPI* | [**CloseNetworkInterface**](docs/DedicatedServerAPI.md#closenetworkinterface) | **Post** /servers/{serverId}/networkInterfaces/{networkTypeURL}/close | Close network interface
 *DedicatedServerAPI* | [**CloseNetworkInterfaces**](docs/DedicatedServerAPI.md#closenetworkinterfaces) | **Post** /servers/{serverId}/networkInterfaces/close | Close all network interfaces
 *DedicatedServerAPI* | [**CreateNetworkEquipmentCredential**](docs/DedicatedServerAPI.md#createnetworkequipmentcredential) | **Post** /networkEquipments/{networkEquipmentId}/credentials | Create new network equipment credentials
 *DedicatedServerAPI* | [**CreateServerBandwidthNotificationSetting**](docs/DedicatedServerAPI.md#createserverbandwidthnotificationsetting) | **Post** /servers/{serverId}/notificationSettings/bandwidth | Create a bandwidth notification setting
@@ -107,7 +107,7 @@ Class | Method | HTTP request | Description
 *DedicatedServerAPI* | [**GetNetworkEquipmentList**](docs/DedicatedServerAPI.md#getnetworkequipmentlist) | **Get** /networkEquipments | List network equipment
 *DedicatedServerAPI* | [**GetNetworkEquipmentNullRouteHistory**](docs/DedicatedServerAPI.md#getnetworkequipmentnullroutehistory) | **Get** /networkEquipments/{networkEquipmentId}/nullRouteHistory | Show null route history
 *DedicatedServerAPI* | [**GetNetworkEquipmentPowerStatus**](docs/DedicatedServerAPI.md#getnetworkequipmentpowerstatus) | **Get** /networkEquipments/{networkEquipmentId}/powerInfo | Show power status
-*DedicatedServerAPI* | [**GetNetworkInterface**](docs/DedicatedServerAPI.md#getnetworkinterface) | **Get** /servers/{serverId}/networkInterfaces/{networkType} | Show a network interface
+*DedicatedServerAPI* | [**GetNetworkInterface**](docs/DedicatedServerAPI.md#getnetworkinterface) | **Get** /servers/{serverId}/networkInterfaces/{networkTypeURL} | Show a network interface
 *DedicatedServerAPI* | [**GetNetworkInterfaceList**](docs/DedicatedServerAPI.md#getnetworkinterfacelist) | **Get** /servers/{serverId}/networkInterfaces | List network interfaces
 *DedicatedServerAPI* | [**GetOperatingSystem**](docs/DedicatedServerAPI.md#getoperatingsystem) | **Get** /operatingSystems/{operatingSystemId} | Show an operating system
 *DedicatedServerAPI* | [**GetOperatingSystemList**](docs/DedicatedServerAPI.md#getoperatingsystemlist) | **Get** /operatingSystems | List Operating Systems
@@ -135,7 +135,7 @@ Class | Method | HTTP request | Description
 *DedicatedServerAPI* | [**IpmiResetServer**](docs/DedicatedServerAPI.md#ipmiresetserver) | **Post** /servers/{serverId}/ipmiReset | Launch IPMI reset
 *DedicatedServerAPI* | [**NullIpRoute**](docs/DedicatedServerAPI.md#nulliproute) | **Post** /servers/{serverId}/ips/{ip}/null | Null route an IP
 *DedicatedServerAPI* | [**NullNetworkEquipmentIpRoute**](docs/DedicatedServerAPI.md#nullnetworkequipmentiproute) | **Post** /networkEquipments/{networkEquipmentId}/ips/{ip}/null | Null route an IP
-*DedicatedServerAPI* | [**OpenNetworkInterface**](docs/DedicatedServerAPI.md#opennetworkinterface) | **Post** /servers/{serverId}/networkInterfaces/{networkType}/open | Open network interface
+*DedicatedServerAPI* | [**OpenNetworkInterface**](docs/DedicatedServerAPI.md#opennetworkinterface) | **Post** /servers/{serverId}/networkInterfaces/{networkTypeURL}/open | Open network interface
 *DedicatedServerAPI* | [**OpenNetworkInterfaces**](docs/DedicatedServerAPI.md#opennetworkinterfaces) | **Post** /servers/{serverId}/networkInterfaces/open | Open all network interfaces
 *DedicatedServerAPI* | [**PowerCycleNetworkEquipment**](docs/DedicatedServerAPI.md#powercyclenetworkequipment) | **Post** /networkEquipments/{networkEquipmentId}/powerCycle | Power cycle a network equipment
 *DedicatedServerAPI* | [**PowerCycleServer**](docs/DedicatedServerAPI.md#powercycleserver) | **Post** /servers/{serverId}/powerCycle | Power cycle a server
@@ -243,6 +243,7 @@ Class | Method | HTTP request | Description
  - [NetworkSettings](docs/NetworkSettings.md)
  - [NetworkTraffic](docs/NetworkTraffic.md)
  - [NetworkType](docs/NetworkType.md)
+ - [NetworkTypeURL](docs/NetworkTypeURL.md)
  - [NotificationSetting](docs/NotificationSetting.md)
  - [NullRoute](docs/NullRoute.md)
  - [OperatingSystem](docs/OperatingSystem.md)
