@@ -7361,7 +7361,7 @@ type ApiGetInstanceListRequest struct {
 	imageId *string
 	state *State
 	region *RegionName
-	type_ *InstanceType
+	type_ *TypeName
 }
 
 // Limit the number of results returned.
@@ -7420,7 +7420,7 @@ func (r ApiGetInstanceListRequest) Region(region RegionName) ApiGetInstanceListR
 }
 
 // Available instance types for your region can be obtained using &#x60;/v1/instanceTypes&#x60;.
-func (r ApiGetInstanceListRequest) Type_(type_ InstanceType) ApiGetInstanceListRequest {
+func (r ApiGetInstanceListRequest) Type_(type_ TypeName) ApiGetInstanceListRequest {
 	r.type_ = &type_
 	return r
 }

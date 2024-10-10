@@ -2479,7 +2479,7 @@ func main() {
 	imageId := "UBUNTU_22_04_64BIT" // string | Available Images can be obtained using `/v1/images`. (optional)
 	state := openapiclient.state("CREATING") // State | The instance's current state(s), separated by commas. (optional)
 	region := openapiclient.regionName("eu-west-3") // RegionName | Available regions can be obtained using `/v1/regions` (optional)
-	type_ := *openapiclient.NewInstanceType(openapiclient.typeName("lsw.m3.large"), *openapiclient.NewResources(*openapiclient.NewCpu(int32(2), "vCPU"), *openapiclient.NewMemory(float32(3.75), "GiB"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps"), *openapiclient.NewNetworkSpeed(int32(10), "Gbps")), []openapiclient.StorageType{openapiclient.storageType("LOCAL")}, *openapiclient.NewPrices("USD", "$", *openapiclient.NewPrice("0.00004", "0.03000"), *openapiclient.NewStorage(*openapiclient.NewPrice("0.00004", "0.03000"), ))) // InstanceType | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
+	type_ := openapiclient.typeName("lsw.m3.large") // TypeName | Available instance types for your region can be obtained using `/v1/instanceTypes`. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2514,7 +2514,7 @@ Name | Type | Description  | Notes
  **imageId** | **string** | Available Images can be obtained using &#x60;/v1/images&#x60;. | 
  **state** | [**State**](State.md) | The instance&#39;s current state(s), separated by commas. | 
  **region** | [**RegionName**](RegionName.md) | Available regions can be obtained using &#x60;/v1/regions&#x60; | 
- **type_** | [**InstanceType**](InstanceType.md) | Available instance types for your region can be obtained using &#x60;/v1/instanceTypes&#x60;. | 
+ **type_** | [**TypeName**](TypeName.md) | Available instance types for your region can be obtained using &#x60;/v1/instanceTypes&#x60;. | 
 
 ### Return type
 

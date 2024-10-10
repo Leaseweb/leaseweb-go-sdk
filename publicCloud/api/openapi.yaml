@@ -641,7 +641,7 @@ paths:
         name: type
         required: false
         schema:
-          $ref: '#/components/schemas/instanceType'
+          $ref: '#/components/schemas/typeName'
         style: form
       responses:
         "200":
