@@ -810,8 +810,8 @@ paths:
                 hasUserData: true
                 id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                 image:
-                  id: UBUNTU_22_04_64BIT
-                  name: Ubuntu 22.04 LTS (x86_64)
+                  id: UBUNTU_20_04_64BIT
+                  name: Ubuntu 20.04 LTS (x86_64)
                   family: linux
                   flavour: ubuntu
                   custom: false
