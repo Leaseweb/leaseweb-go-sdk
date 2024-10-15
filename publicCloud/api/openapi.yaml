@@ -843,7 +843,7 @@ paths:
                 rootDiskSize: 5
                 rootDiskStorageType: CENTRAL
                 startedAt: null
-                state: STOPPED
+                state: RUNNING
                 type: lsw.m3.large
               schema:
                 $ref: '#/components/schemas/instance'
