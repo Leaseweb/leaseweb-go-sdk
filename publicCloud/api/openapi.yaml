@@ -3344,7 +3344,7 @@ paths:
                 id: 396a3299-1795-464b-aa10-e1f179db1926
                 marketApps: []
                 minDiskSize: null
-                name: Custom image
+                name: Custom image - 03
                 region: eu-west-3
                 state: READY
                 stateReason: null
@@ -3447,7 +3447,7 @@ paths:
                 id: 396a3299-1795-464b-aa10-e1f179db1926
                 marketApps: []
                 minDiskSize: null
-                name: Custom image
+                name: Custom image - 03
                 region: eu-west-3
                 state: READY
                 stateReason: null
