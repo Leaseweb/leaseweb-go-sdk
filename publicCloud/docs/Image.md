@@ -7,14 +7,14 @@ Name | Type | Description | Notes
 **Id** | **string** | imageId can be either an Operating System or a UUID in case of a Custom Image | 
 **Name** | **string** |  | 
 **Family** | **string** |  | 
-**Flavour** | **string** |  | 
+**Flavour** | [**Flavour**](Flavour.md) |  | 
 **Custom** | **bool** | Standard or Custom image | 
 
 ## Methods
 
 ### NewImage
 
-`func NewImage(id string, name string, family string, flavour string, custom bool, ) *Image`
+`func NewImage(id string, name string, family string, flavour Flavour, custom bool, ) *Image`
 
 NewImage instantiates a new Image object
 This constructor will assign default values to properties that have it defined,
@@ -91,20 +91,20 @@ SetFamily sets Family field to given value.
 
 ### GetFlavour
 
-`func (o *Image) GetFlavour() string`
+`func (o *Image) GetFlavour() Flavour`
 
 GetFlavour returns the Flavour field if non-nil, zero value otherwise.
 
 ### GetFlavourOk
 
-`func (o *Image) GetFlavourOk() (*string, bool)`
+`func (o *Image) GetFlavourOk() (*Flavour, bool)`
 
 GetFlavourOk returns a tuple with the Flavour field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFlavour
 
-`func (o *Image) SetFlavour(v string)`
+`func (o *Image) SetFlavour(v Flavour)`
 
 SetFlavour sets Flavour field to given value.
 

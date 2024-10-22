@@ -7,25 +7,25 @@ Name | Type | Description | Notes
 **Id** | **string** | imageId can be either an Operating System or a UUID in case of a Custom Image | 
 **Name** | **string** |  | 
 **Family** | **string** |  | 
-**Flavour** | **string** |  | 
+**Flavour** | [**Flavour**](Flavour.md) |  | 
 **Custom** | **bool** | Standard or Custom image | 
 **StorageSize** | [**NullableStorageSize**](StorageSize.md) |  | 
-**State** | **NullableString** |  | 
+**State** | [**NullableImageState**](ImageState.md) |  | 
 **StateReason** | **NullableString** | The reason in case of failure | 
 **Region** | [**NullableRegionName**](RegionName.md) |  | 
 **CreatedAt** | **NullableTime** | Date when the image was created | 
 **UpdatedAt** | **NullableTime** | Date when the image was updated | 
 **Version** | **NullableString** |  | 
 **Architecture** | **NullableString** |  | 
-**MarketApps** | **[]string** |  | 
-**StorageTypes** | **[]string** | The supported storage types for the instance type | 
+**MarketApps** | [**[]MarketAppId**](MarketAppId.md) |  | 
+**StorageTypes** | [**[]StorageType**](StorageType.md) | The supported storage types | 
 **MinDiskSize** | **NullableInt32** | The image size in GB. | 
 
 ## Methods
 
 ### NewImageDetails
 
-`func NewImageDetails(id string, name string, family string, flavour string, custom bool, storageSize NullableStorageSize, state NullableString, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version NullableString, architecture NullableString, marketApps []string, storageTypes []string, minDiskSize NullableInt32, ) *ImageDetails`
+`func NewImageDetails(id string, name string, family string, flavour Flavour, custom bool, storageSize NullableStorageSize, state NullableImageState, stateReason NullableString, region NullableRegionName, createdAt NullableTime, updatedAt NullableTime, version NullableString, architecture NullableString, marketApps []MarketAppId, storageTypes []StorageType, minDiskSize NullableInt32, ) *ImageDetails`
 
 NewImageDetails instantiates a new ImageDetails object
 This constructor will assign default values to properties that have it defined,
@@ -102,20 +102,20 @@ SetFamily sets Family field to given value.
 
 ### GetFlavour
 
-`func (o *ImageDetails) GetFlavour() string`
+`func (o *ImageDetails) GetFlavour() Flavour`
 
 GetFlavour returns the Flavour field if non-nil, zero value otherwise.
 
 ### GetFlavourOk
 
-`func (o *ImageDetails) GetFlavourOk() (*string, bool)`
+`func (o *ImageDetails) GetFlavourOk() (*Flavour, bool)`
 
 GetFlavourOk returns a tuple with the Flavour field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFlavour
 
-`func (o *ImageDetails) SetFlavour(v string)`
+`func (o *ImageDetails) SetFlavour(v Flavour)`
 
 SetFlavour sets Flavour field to given value.
 
@@ -172,20 +172,20 @@ SetStorageSize sets StorageSize field to given value.
 UnsetStorageSize ensures that no value is present for StorageSize, not even an explicit nil
 ### GetState
 
-`func (o *ImageDetails) GetState() string`
+`func (o *ImageDetails) GetState() ImageState`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *ImageDetails) GetStateOk() (*string, bool)`
+`func (o *ImageDetails) GetStateOk() (*ImageState, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *ImageDetails) SetState(v string)`
+`func (o *ImageDetails) SetState(v ImageState)`
 
 SetState sets State field to given value.
 
@@ -382,40 +382,40 @@ SetArchitecture sets Architecture field to given value.
 UnsetArchitecture ensures that no value is present for Architecture, not even an explicit nil
 ### GetMarketApps
 
-`func (o *ImageDetails) GetMarketApps() []string`
+`func (o *ImageDetails) GetMarketApps() []MarketAppId`
 
 GetMarketApps returns the MarketApps field if non-nil, zero value otherwise.
 
 ### GetMarketAppsOk
 
-`func (o *ImageDetails) GetMarketAppsOk() (*[]string, bool)`
+`func (o *ImageDetails) GetMarketAppsOk() (*[]MarketAppId, bool)`
 
 GetMarketAppsOk returns a tuple with the MarketApps field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMarketApps
 
-`func (o *ImageDetails) SetMarketApps(v []string)`
+`func (o *ImageDetails) SetMarketApps(v []MarketAppId)`
 
 SetMarketApps sets MarketApps field to given value.
 
 
 ### GetStorageTypes
 
-`func (o *ImageDetails) GetStorageTypes() []string`
+`func (o *ImageDetails) GetStorageTypes() []StorageType`
 
 GetStorageTypes returns the StorageTypes field if non-nil, zero value otherwise.
 
 ### GetStorageTypesOk
 
-`func (o *ImageDetails) GetStorageTypesOk() (*[]string, bool)`
+`func (o *ImageDetails) GetStorageTypesOk() (*[]StorageType, bool)`
 
 GetStorageTypesOk returns a tuple with the StorageTypes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStorageTypes
 
-`func (o *ImageDetails) SetStorageTypes(v []string)`
+`func (o *ImageDetails) SetStorageTypes(v []StorageType)`
 
 SetStorageTypes sets StorageTypes field to given value.
 

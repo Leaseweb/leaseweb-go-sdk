@@ -24,7 +24,7 @@ type Image struct {
 	Id string `json:"id"`
 	Name string `json:"name"`
 	Family string `json:"family"`
-	Flavour string `json:"flavour"`
+	Flavour Flavour `json:"flavour"`
 	// Standard or Custom image
 	Custom bool `json:"custom"`
 	AdditionalProperties map[string]interface{}
@@ -36,7 +36,7 @@ type _Image Image
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewImage(id string, name string, family string, flavour string, custom bool) *Image {
+func NewImage(id string, name string, family string, flavour Flavour, custom bool) *Image {
 	this := Image{}
 	this.Id = id
 	this.Name = name
@@ -127,9 +127,9 @@ func (o *Image) SetFamily(v string) {
 }
 
 // GetFlavour returns the Flavour field value
-func (o *Image) GetFlavour() string {
+func (o *Image) GetFlavour() Flavour {
 	if o == nil {
-		var ret string
+		var ret Flavour
 		return ret
 	}
 
@@ -138,7 +138,7 @@ func (o *Image) GetFlavour() string {
 
 // GetFlavourOk returns a tuple with the Flavour field value
 // and a boolean to check if the value has been set.
-func (o *Image) GetFlavourOk() (*string, bool) {
+func (o *Image) GetFlavourOk() (*Flavour, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -146,7 +146,7 @@ func (o *Image) GetFlavourOk() (*string, bool) {
 }
 
 // SetFlavour sets field value
-func (o *Image) SetFlavour(v string) {
+func (o *Image) SetFlavour(v Flavour) {
 	o.Flavour = v
 }
 

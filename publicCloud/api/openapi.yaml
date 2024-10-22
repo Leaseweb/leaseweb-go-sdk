@@ -694,7 +694,7 @@ paths:
                     family: linux
                     flavour: ubuntu
                     custom: false
-                  state: RUNNING
+                  state: STOPPED
                   hasPublicIpV4: true
                   hasPrivateNetwork: false
                   hasUserData: false
@@ -3185,7 +3185,7 @@ paths:
                   flavour: ubuntu
                   architecture: x86_64
                   marketApps:
-                  - LOADBALANCER
+                  - PLESK_WEB_ADMIN
                   storageTypes:
                   - LOCAL
                   - CENTRAL
@@ -3251,7 +3251,7 @@ paths:
                   updatedAt: 2024-07-17T13:14:01+00:00
                   custom: true
                   minDiskSize: null
-                - id: 396a3299-1795-464b-aa10-e1f179db1926
+                - id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                   name: Custom image - 03
                   flavour: ubuntu
                   family: linux
@@ -3341,7 +3341,7 @@ paths:
                 custom: true
                 family: linux
                 flavour: ubuntu
-                id: 396a3299-1795-464b-aa10-e1f179db1926
+                id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                 marketApps: []
                 minDiskSize: null
                 name: Custom image - 03
@@ -3444,7 +3444,7 @@ paths:
                 custom: true
                 family: linux
                 flavour: ubuntu
-                id: 396a3299-1795-464b-aa10-e1f179db1926
+                id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                 marketApps: []
                 minDiskSize: null
                 name: Custom image - 03
@@ -3842,7 +3842,7 @@ paths:
                   flavour: ubuntu
                   architecture: x86_64
                   marketApps:
-                  - LOADBALANCER
+                  - PLESK_WEB_ADMIN
                   storageTypes:
                   - LOCAL
                   - CENTRAL
@@ -3908,7 +3908,7 @@ paths:
                   updatedAt: 2024-07-17T13:14:01+00:00
                   custom: true
                   minDiskSize: null
-                - id: 396a3299-1795-464b-aa10-e1f179db1926
+                - id: ace712e9-a166-47f1-9065-4af0f7e7fce1
                   name: Custom image - 03
                   flavour: ubuntu
                   family: linux
@@ -10998,9 +10998,22 @@ components:
       - warmupTime
       title: autoScalingGroup
       type: object
+    flavour:
+      description: Standard images flavours
+      enum:
+      - ubuntu
+      - debian
+      - freebsd
+      - centos
+      - almalinux
+      - rockylinux
+      - archlinux
+      - windows
+      title: flavour
+      type: string
     image:
       example:
-        flavour: ubuntu
+        flavour: null
         custom: true
         name: Ubuntu 20.04 LTS (x86_64)
         id: UBUNTU_22_04_64BIT
@@ -11019,8 +11032,7 @@ components:
           example: linux
           type: string
         flavour:
-          example: ubuntu
-          type: string
+          $ref: '#/components/schemas/flavour'
         custom:
           description: Standard or Custom image
           type: boolean
@@ -11168,7 +11180,7 @@ components:
         type: object
       example:
         image:
-          flavour: ubuntu
+          flavour: null
           custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
@@ -11242,7 +11254,7 @@ components:
       example:
         instances:
         - image:
-            flavour: ubuntu
+            flavour: null
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
@@ -11313,7 +11325,7 @@ components:
           productType: productType
           hasPublicIpV4: true
         - image:
-            flavour: ubuntu
+            flavour: null
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
@@ -11531,7 +11543,7 @@ components:
         type: object
       example:
         image:
-          flavour: ubuntu
+          flavour: null
           custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
@@ -11910,19 +11922,6 @@ components:
       - PLESK_WEB_ADMIN
       title: marketAppId
       type: string
-    flavour:
-      description: Standard images flavours
-      enum:
-      - ubuntu
-      - debian
-      - freebsd
-      - centos
-      - almalinux
-      - rockylinux
-      - archlinux
-      - windows
-      title: flavour
-      type: string
     imageDetails:
       allOf:
       - $ref: '#/components/schemas/image'
@@ -11930,9 +11929,7 @@ components:
           storageSize:
             $ref: '#/components/schemas/storageSize'
           state:
-            example: READY
-            nullable: true
-            type: string
+            $ref: '#/components/schemas/imageState'
           stateReason:
             description: The reason in case of failure
             example: Could not find configured bucket
@@ -11960,16 +11957,15 @@ components:
             type: string
           marketApps:
             items:
-              example: LOADBALANCER
-              type: string
+              $ref: '#/components/schemas/marketAppId'
             type: array
           storageTypes:
-            description: The supported storage types for the instance type
+            description: The supported storage types
             example:
             - CENTRAL
             - LOCAL
             items:
-              type: string
+              $ref: '#/components/schemas/storageType'
             type: array
           minDiskSize:
             description: The image size in GB.
@@ -11993,9 +11989,9 @@ components:
         type: object
       example:
         marketApps:
-        - LOADBALANCER
-        - LOADBALANCER
-        flavour: ubuntu
+        - null
+        - null
+        flavour: null
         custom: true
         stateReason: Could not find configured bucket
         version: "20.04"
@@ -12005,7 +12001,7 @@ components:
           size: 0.8008281904610115
         name: Ubuntu 20.04 LTS (x86_64)
         id: UBUNTU_22_04_64BIT
-        state: READY
+        state: null
         storageTypes:
         - CENTRAL
         - LOCAL
@@ -12018,9 +12014,9 @@ components:
       example:
         images:
         - marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
-          flavour: ubuntu
+          - null
+          - null
+          flavour: null
           custom: true
           stateReason: Could not find configured bucket
           version: "20.04"
@@ -12030,7 +12026,7 @@ components:
             size: 0.8008281904610115
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: READY
+          state: null
           storageTypes:
           - CENTRAL
           - LOCAL
@@ -12040,9 +12036,9 @@ components:
           updatedAt: 2000-01-23T04:56:07.000+00:00
           architecture: x86_64
         - marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
-          flavour: ubuntu
+          - null
+          - null
+          flavour: null
           custom: true
           stateReason: Could not find configured bucket
           version: "20.04"
@@ -12052,7 +12048,7 @@ components:
             size: 0.8008281904610115
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: READY
+          state: null
           storageTypes:
           - CENTRAL
           - LOCAL
@@ -12098,7 +12094,7 @@ components:
       example:
         marketApps:
         - image:
-            flavour: ubuntu
+            flavour: null
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
@@ -12109,7 +12105,7 @@ components:
           family: family
           version: version
         - image:
-            flavour: ubuntu
+            flavour: null
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
@@ -12143,9 +12139,9 @@ components:
       example:
         images:
         - marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
-          flavour: ubuntu
+          - null
+          - null
+          flavour: null
           custom: true
           stateReason: Could not find configured bucket
           version: "20.04"
@@ -12155,7 +12151,7 @@ components:
             size: 0.8008281904610115
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: READY
+          state: null
           storageTypes:
           - CENTRAL
           - LOCAL
@@ -12165,9 +12161,9 @@ components:
           updatedAt: 2000-01-23T04:56:07.000+00:00
           architecture: x86_64
         - marketApps:
-          - LOADBALANCER
-          - LOADBALANCER
-          flavour: ubuntu
+          - null
+          - null
+          flavour: null
           custom: true
           stateReason: Could not find configured bucket
           version: "20.04"
@@ -12177,7 +12173,7 @@ components:
             size: 0.8008281904610115
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: READY
+          state: null
           storageTypes:
           - CENTRAL
           - LOCAL
@@ -13949,7 +13945,7 @@ components:
       example:
         reference: reference
         image:
-          flavour: ubuntu
+          flavour: null
           custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
@@ -14011,7 +14007,7 @@ components:
         targets:
         - reference: reference
           image:
-            flavour: ubuntu
+            flavour: null
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
@@ -14038,7 +14034,7 @@ components:
             version: null
         - reference: reference
           image:
-            flavour: ubuntu
+            flavour: null
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
@@ -14418,7 +14414,7 @@ components:
     marketApp:
       example:
         image:
-          flavour: ubuntu
+          flavour: null
           custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
