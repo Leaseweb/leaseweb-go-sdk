@@ -2265,9 +2265,9 @@ paths:
         content:
           application/json:
             example:
-              password: a$Ndes-3fad2-rfas@-
+              password: "12341234"
               type: OPERATING_SYSTEM
-              username: another-user
+              username: root
             schema:
               $ref: '#/components/schemas/storeCredentialOpts'
         required: true
@@ -2276,9 +2276,9 @@ paths:
           content:
             application/json:
               example:
-                password: a$Ndes-3fad2-rfas@-
+                password: "12341234"
                 type: OPERATING_SYSTEM
-                username: another-user
+                username: root
               schema:
                 $ref: '#/components/schemas/storeCredentialResult'
           description: OK.
@@ -2680,7 +2680,7 @@ paths:
         content:
           application/json:
             example:
-              password: '@-n3w-Pa$$w0rD'
+              password: "12341234"
             schema:
               $ref: '#/components/schemas/updateCredentialOpts'
         required: true
@@ -2689,9 +2689,9 @@ paths:
           content:
             application/json:
               example:
-                password: '@-n3w-Pa$$w0rD'
+                password: "12341234"
                 type: OPERATING_SYSTEM
-                username: another-user
+                username: root
               schema:
                 $ref: '#/components/schemas/updateCredentialResult'
           description: OK.
