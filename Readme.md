@@ -4,7 +4,9 @@ Leaseweb Go SDK provides a golang client for Leaseweb's REST API.
 ### Installation
 
 ```bash
-go get github.com/LeaseWeb/leaseweb-go-sdk
+go get github.com/LeaseWeb/leaseweb-go-sdk/publicCloud # for publicCloud
+
+go get github.com/LeaseWeb/leaseweb-go-sdk/dedicatedServer # for dedicatedServer
 ```
 
 ### Generate your API Key
@@ -18,20 +20,21 @@ import (
 	"context"
 	"fmt"
 	"os"
+
 	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
 )
 
 func main() {
-	
-    ctx := context.WithValue(
+
+	ctx := context.WithValue(
 		context.Background(),
-		publicCloud.ContextAPIKeys,
-		map[string]publicCloud.APIKey{
+		openapiclient.ContextAPIKeys,
+		map[string]openapiclient.APIKey{
 			"X-LSW-Auth": {Key: "API_KEY_STRING"},
 		},
 	)
 
-    configuration := openapiclient.NewConfiguration()
+	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.PublicCloudAPI.GetInstanceList(ctx).Execute()
 	if err != nil {
@@ -48,6 +51,7 @@ The Leaseweb Go SDK documentation based on product:
 
 - [Public Cloud](publicCloud/README.md)
 - [Dedicated Server](dedicatedServer/README.md)
+- [Aggregation Pack](aggregationPack/README.md)
 - [Abuse](abuse/README.md)
 - [Invoice](invoice/README.md)
 
