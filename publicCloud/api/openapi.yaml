@@ -649,7 +649,7 @@ paths:
             application/json:
               example:
                 _metadata:
-                  totalCount: 1
+                  totalCount: 4
                   limit: 20
                   offset: 0
                 instances:
@@ -693,6 +693,198 @@ paths:
                     name: Ubuntu 22.04 LTS (x86_64)
                     family: linux
                     flavour: ubuntu
+                    custom: false
+                  state: STOPPED
+                  hasPublicIpV4: true
+                  hasPrivateNetwork: false
+                  hasUserData: false
+                  rootDiskStorageType: CENTRAL
+                  rootDiskSize: 10
+                  ips:
+                  - ip: 10.32.60.12
+                    prefixLength: "32"
+                    version: 4
+                    nullRouted: false
+                    reverseLookup: null
+                    mainIp: false
+                    networkType: INTERNAL
+                  startedAt: 2024-04-09T15:11:37+00:00
+                  contract:
+                    billingFrequency: 1
+                    term: 0
+                    type: HOURLY
+                    endsAt: null
+                    renewalsAt: 2024-04-09T15:28:28+00:00
+                    createdAt: 2024-04-09T15:11:21+00:00
+                    state: ACTIVE
+                - marketAppId: null
+                  productType: INSTANCE
+                  autoScalingGroup:
+                    cooldownTime: null
+                    cpuThreshold: null
+                    createdAt: 2024-04-26T09:22:25+00:00
+                    desiredAmount: 2
+                    endsAt: null
+                    id: fb769dab-3daa-47e4-89ed-06a4b6499176
+                    maximumAmount: null
+                    minimumAmount: null
+                    reference: Manual Auto Scaling Group
+                    region: eu-west-3
+                    startsAt: null
+                    state: ACTIVE
+                    type: MANUAL
+                    updatedAt: 2024-04-26T09:22:25+00:00
+                    warmupTime: null
+                  id: f28ba2af-7508-4594-a63a-aa663db4fb3e
+                  type: lsw.m3.large
+                  resources:
+                    cpu:
+                      value: 16
+                      unit: vCPU
+                    memory:
+                      value: 30
+                      unit: GiB
+                    publicNetworkSpeed:
+                      value: 1
+                      unit: Gbps
+                    privateNetworkSpeed:
+                      value: 100
+                      unit: Mbps
+                  region: eu-west-3
+                  reference: my webserver
+                  image:
+                    id: UBUNTU_22_04_64BIT
+                    name: Ubuntu 22.04 LTS (x86_64)
+                    family: linux
+                    flavour: ubuntu
+                    custom: false
+                  state: RUNNING
+                  hasPublicIpV4: true
+                  hasPrivateNetwork: false
+                  hasUserData: false
+                  rootDiskStorageType: CENTRAL
+                  rootDiskSize: 10
+                  ips:
+                  - ip: 10.32.60.12
+                    prefixLength: "32"
+                    version: 4
+                    nullRouted: false
+                    reverseLookup: null
+                    mainIp: false
+                    networkType: INTERNAL
+                  startedAt: 2024-04-09T15:11:37+00:00
+                  contract:
+                    billingFrequency: 1
+                    term: 0
+                    type: HOURLY
+                    endsAt: null
+                    renewalsAt: 2024-04-09T15:28:28+00:00
+                    createdAt: 2024-04-09T15:11:21+00:00
+                    state: ACTIVE
+                - marketAppId: null
+                  productType: INSTANCE
+                  autoScalingGroup:
+                    cooldownTime: null
+                    cpuThreshold: null
+                    createdAt: 2024-04-26T09:22:25+00:00
+                    desiredAmount: 2
+                    endsAt: null
+                    id: fb769dab-3daa-47e4-89ed-06a4b6499176
+                    maximumAmount: null
+                    minimumAmount: null
+                    reference: Manual Auto Scaling Group
+                    region: eu-west-3
+                    startsAt: null
+                    state: ACTIVE
+                    type: MANUAL
+                    updatedAt: 2024-04-26T09:22:25+00:00
+                    warmupTime: null
+                  id: 6871686d-36c4-44f5-b692-a548e62dcf25
+                  type: lsw.m3.large
+                  resources:
+                    cpu:
+                      value: 16
+                      unit: vCPU
+                    memory:
+                      value: 30
+                      unit: GiB
+                    publicNetworkSpeed:
+                      value: 1
+                      unit: Gbps
+                    privateNetworkSpeed:
+                      value: 100
+                      unit: Mbps
+                  region: eu-west-3
+                  reference: my webserver
+                  image:
+                    id: UBUNTU_22_04_64BIT
+                    name: Ubuntu 22.04 LTS (x86_64)
+                    family: linux
+                    flavour: ubuntu
+                    custom: false
+                  state: STOPPED
+                  hasPublicIpV4: true
+                  hasPrivateNetwork: false
+                  hasUserData: false
+                  rootDiskStorageType: CENTRAL
+                  rootDiskSize: 101
+                  ips:
+                  - ip: 10.32.60.12
+                    prefixLength: "32"
+                    version: 4
+                    nullRouted: false
+                    reverseLookup: null
+                    mainIp: false
+                    networkType: INTERNAL
+                  startedAt: 2024-04-09T15:11:37+00:00
+                  contract:
+                    billingFrequency: 1
+                    term: 0
+                    type: HOURLY
+                    endsAt: null
+                    renewalsAt: 2024-04-09T15:28:28+00:00
+                    createdAt: 2024-04-09T15:11:21+00:00
+                    state: ACTIVE
+                - marketAppId: null
+                  productType: INSTANCE
+                  autoScalingGroup:
+                    cooldownTime: null
+                    cpuThreshold: null
+                    createdAt: 2024-04-26T09:22:25+00:00
+                    desiredAmount: 2
+                    endsAt: null
+                    id: fb769dab-3daa-47e4-89ed-06a4b6499176
+                    maximumAmount: null
+                    minimumAmount: null
+                    reference: Manual Auto Scaling Group
+                    region: eu-west-3
+                    startsAt: null
+                    state: ACTIVE
+                    type: MANUAL
+                    updatedAt: 2024-04-26T09:22:25+00:00
+                    warmupTime: null
+                  id: 9c095e3a-e9e3-403b-8d1b-37bb21b5598e
+                  type: lsw.m3.large
+                  resources:
+                    cpu:
+                      value: 16
+                      unit: vCPU
+                    memory:
+                      value: 30
+                      unit: GiB
+                    publicNetworkSpeed:
+                      value: 1
+                      unit: Gbps
+                    privateNetworkSpeed:
+                      value: 100
+                      unit: Mbps
+                  region: eu-west-3
+                  reference: my webserver
+                  image:
+                    id: UBUNTU_22_04_64BIT
+                    name: Ubuntu 22.04 LTS (x86_64)
+                    family: linux
+                    flavour: windows
                     custom: false
                   state: STOPPED
                   hasPublicIpV4: true
