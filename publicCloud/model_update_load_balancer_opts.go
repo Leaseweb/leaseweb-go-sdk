@@ -29,8 +29,6 @@ type UpdateLoadBalancerOpts struct {
 	XForwardedFor *bool `json:"xForwardedFor,omitempty"`
 	// Time to close the connection if load balancer is idle
 	IdleTimeOut *int32 `json:"idleTimeOut,omitempty"`
-	// Port on which the backend (target) servers are listening to handle incoming requests
-	TargetPort *int32 `json:"targetPort,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -287,38 +285,6 @@ func (o *UpdateLoadBalancerOpts) SetIdleTimeOut(v int32) {
 	o.IdleTimeOut = &v
 }
 
-// GetTargetPort returns the TargetPort field value if set, zero value otherwise.
-func (o *UpdateLoadBalancerOpts) GetTargetPort() int32 {
-	if o == nil || IsNil(o.TargetPort) {
-		var ret int32
-		return ret
-	}
-	return *o.TargetPort
-}
-
-// GetTargetPortOk returns a tuple with the TargetPort field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateLoadBalancerOpts) GetTargetPortOk() (*int32, bool) {
-	if o == nil || IsNil(o.TargetPort) {
-		return nil, false
-	}
-	return o.TargetPort, true
-}
-
-// HasTargetPort returns a boolean if a field has been set.
-func (o *UpdateLoadBalancerOpts) HasTargetPort() bool {
-	if o != nil && !IsNil(o.TargetPort) {
-		return true
-	}
-
-	return false
-}
-
-// SetTargetPort gets a reference to the given int32 and assigns it to the TargetPort field.
-func (o *UpdateLoadBalancerOpts) SetTargetPort(v int32) {
-	o.TargetPort = &v
-}
-
 func (o UpdateLoadBalancerOpts) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -350,9 +316,6 @@ func (o UpdateLoadBalancerOpts) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IdleTimeOut) {
 		toSerialize["idleTimeOut"] = o.IdleTimeOut
 	}
-	if !IsNil(o.TargetPort) {
-		toSerialize["targetPort"] = o.TargetPort
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -382,7 +345,6 @@ func (o *UpdateLoadBalancerOpts) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "balance")
 		delete(additionalProperties, "xForwardedFor")
 		delete(additionalProperties, "idleTimeOut")
-		delete(additionalProperties, "targetPort")
 		o.AdditionalProperties = additionalProperties
 	}
 

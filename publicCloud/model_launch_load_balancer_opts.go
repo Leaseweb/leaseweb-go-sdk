@@ -24,13 +24,9 @@ type LaunchLoadBalancerOpts struct {
 	Type TypeName `json:"type"`
 	// An identifying name you can refer to the load balancer
 	Reference *string `json:"reference,omitempty"`
-	// The contract applicable for the load balancer
-	ContractType string `json:"contractType"`
-	// How often you wish to be charged. Used only when contract type is MONTHLY. '1' means every month, '3' every three months and so on.
-	BillingFrequency int32 `json:"billingFrequency"`
-	RootDiskStorageType StorageType `json:"rootDiskStorageType"`
-	// The port that the registered instances listen to
-	TargetPort int32 `json:"targetPort"`
+	ContractType ContractType `json:"contractType"`
+	ContractTerm ContractTerm `json:"contractTerm"`
+	BillingFrequency BillingFrequency `json:"billingFrequency"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -40,14 +36,13 @@ type _LaunchLoadBalancerOpts LaunchLoadBalancerOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLaunchLoadBalancerOpts(region RegionName, type_ TypeName, contractType string, billingFrequency int32, rootDiskStorageType StorageType, targetPort int32) *LaunchLoadBalancerOpts {
+func NewLaunchLoadBalancerOpts(region RegionName, type_ TypeName, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency) *LaunchLoadBalancerOpts {
 	this := LaunchLoadBalancerOpts{}
 	this.Region = region
 	this.Type = type_
 	this.ContractType = contractType
+	this.ContractTerm = contractTerm
 	this.BillingFrequency = billingFrequency
-	this.RootDiskStorageType = rootDiskStorageType
-	this.TargetPort = targetPort
 	return &this
 }
 
@@ -140,9 +135,9 @@ func (o *LaunchLoadBalancerOpts) SetReference(v string) {
 }
 
 // GetContractType returns the ContractType field value
-func (o *LaunchLoadBalancerOpts) GetContractType() string {
+func (o *LaunchLoadBalancerOpts) GetContractType() ContractType {
 	if o == nil {
-		var ret string
+		var ret ContractType
 		return ret
 	}
 
@@ -151,7 +146,7 @@ func (o *LaunchLoadBalancerOpts) GetContractType() string {
 
 // GetContractTypeOk returns a tuple with the ContractType field value
 // and a boolean to check if the value has been set.
-func (o *LaunchLoadBalancerOpts) GetContractTypeOk() (*string, bool) {
+func (o *LaunchLoadBalancerOpts) GetContractTypeOk() (*ContractType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -159,14 +154,38 @@ func (o *LaunchLoadBalancerOpts) GetContractTypeOk() (*string, bool) {
 }
 
 // SetContractType sets field value
-func (o *LaunchLoadBalancerOpts) SetContractType(v string) {
+func (o *LaunchLoadBalancerOpts) SetContractType(v ContractType) {
 	o.ContractType = v
 }
 
-// GetBillingFrequency returns the BillingFrequency field value
-func (o *LaunchLoadBalancerOpts) GetBillingFrequency() int32 {
+// GetContractTerm returns the ContractTerm field value
+func (o *LaunchLoadBalancerOpts) GetContractTerm() ContractTerm {
 	if o == nil {
-		var ret int32
+		var ret ContractTerm
+		return ret
+	}
+
+	return o.ContractTerm
+}
+
+// GetContractTermOk returns a tuple with the ContractTerm field value
+// and a boolean to check if the value has been set.
+func (o *LaunchLoadBalancerOpts) GetContractTermOk() (*ContractTerm, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ContractTerm, true
+}
+
+// SetContractTerm sets field value
+func (o *LaunchLoadBalancerOpts) SetContractTerm(v ContractTerm) {
+	o.ContractTerm = v
+}
+
+// GetBillingFrequency returns the BillingFrequency field value
+func (o *LaunchLoadBalancerOpts) GetBillingFrequency() BillingFrequency {
+	if o == nil {
+		var ret BillingFrequency
 		return ret
 	}
 
@@ -175,7 +194,7 @@ func (o *LaunchLoadBalancerOpts) GetBillingFrequency() int32 {
 
 // GetBillingFrequencyOk returns a tuple with the BillingFrequency field value
 // and a boolean to check if the value has been set.
-func (o *LaunchLoadBalancerOpts) GetBillingFrequencyOk() (*int32, bool) {
+func (o *LaunchLoadBalancerOpts) GetBillingFrequencyOk() (*BillingFrequency, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -183,56 +202,8 @@ func (o *LaunchLoadBalancerOpts) GetBillingFrequencyOk() (*int32, bool) {
 }
 
 // SetBillingFrequency sets field value
-func (o *LaunchLoadBalancerOpts) SetBillingFrequency(v int32) {
+func (o *LaunchLoadBalancerOpts) SetBillingFrequency(v BillingFrequency) {
 	o.BillingFrequency = v
-}
-
-// GetRootDiskStorageType returns the RootDiskStorageType field value
-func (o *LaunchLoadBalancerOpts) GetRootDiskStorageType() StorageType {
-	if o == nil {
-		var ret StorageType
-		return ret
-	}
-
-	return o.RootDiskStorageType
-}
-
-// GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field value
-// and a boolean to check if the value has been set.
-func (o *LaunchLoadBalancerOpts) GetRootDiskStorageTypeOk() (*StorageType, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RootDiskStorageType, true
-}
-
-// SetRootDiskStorageType sets field value
-func (o *LaunchLoadBalancerOpts) SetRootDiskStorageType(v StorageType) {
-	o.RootDiskStorageType = v
-}
-
-// GetTargetPort returns the TargetPort field value
-func (o *LaunchLoadBalancerOpts) GetTargetPort() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.TargetPort
-}
-
-// GetTargetPortOk returns a tuple with the TargetPort field value
-// and a boolean to check if the value has been set.
-func (o *LaunchLoadBalancerOpts) GetTargetPortOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TargetPort, true
-}
-
-// SetTargetPort sets field value
-func (o *LaunchLoadBalancerOpts) SetTargetPort(v int32) {
-	o.TargetPort = v
 }
 
 func (o LaunchLoadBalancerOpts) MarshalJSON() ([]byte, error) {
@@ -251,9 +222,8 @@ func (o LaunchLoadBalancerOpts) ToMap() (map[string]interface{}, error) {
 		toSerialize["reference"] = o.Reference
 	}
 	toSerialize["contractType"] = o.ContractType
+	toSerialize["contractTerm"] = o.ContractTerm
 	toSerialize["billingFrequency"] = o.BillingFrequency
-	toSerialize["rootDiskStorageType"] = o.RootDiskStorageType
-	toSerialize["targetPort"] = o.TargetPort
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -270,9 +240,8 @@ func (o *LaunchLoadBalancerOpts) UnmarshalJSON(data []byte) (err error) {
 		"region",
 		"type",
 		"contractType",
+		"contractTerm",
 		"billingFrequency",
-		"rootDiskStorageType",
-		"targetPort",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -306,9 +275,8 @@ func (o *LaunchLoadBalancerOpts) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "reference")
 		delete(additionalProperties, "contractType")
+		delete(additionalProperties, "contractTerm")
 		delete(additionalProperties, "billingFrequency")
-		delete(additionalProperties, "rootDiskStorageType")
-		delete(additionalProperties, "targetPort")
 		o.AdditionalProperties = additionalProperties
 	}
 

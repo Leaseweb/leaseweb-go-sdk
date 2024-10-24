@@ -7,16 +7,15 @@ Name | Type | Description | Notes
 **Region** | [**RegionName**](RegionName.md) |  | 
 **Type** | [**TypeName**](TypeName.md) |  | 
 **Reference** | Pointer to **string** | An identifying name you can refer to the load balancer | [optional] 
-**ContractType** | **string** | The contract applicable for the load balancer | 
-**BillingFrequency** | **int32** | How often you wish to be charged. Used only when contract type is MONTHLY. &#39;1&#39; means every month, &#39;3&#39; every three months and so on. | 
-**RootDiskStorageType** | [**StorageType**](StorageType.md) |  | 
-**TargetPort** | **int32** | The port that the registered instances listen to | 
+**ContractType** | [**ContractType**](ContractType.md) |  | 
+**ContractTerm** | [**ContractTerm**](ContractTerm.md) |  | 
+**BillingFrequency** | [**BillingFrequency**](BillingFrequency.md) |  | 
 
 ## Methods
 
 ### NewLaunchLoadBalancerOpts
 
-`func NewLaunchLoadBalancerOpts(region RegionName, type_ TypeName, contractType string, billingFrequency int32, rootDiskStorageType StorageType, targetPort int32, ) *LaunchLoadBalancerOpts`
+`func NewLaunchLoadBalancerOpts(region RegionName, type_ TypeName, contractType ContractType, contractTerm ContractTerm, billingFrequency BillingFrequency, ) *LaunchLoadBalancerOpts`
 
 NewLaunchLoadBalancerOpts instantiates a new LaunchLoadBalancerOpts object
 This constructor will assign default values to properties that have it defined,
@@ -98,82 +97,62 @@ HasReference returns a boolean if a field has been set.
 
 ### GetContractType
 
-`func (o *LaunchLoadBalancerOpts) GetContractType() string`
+`func (o *LaunchLoadBalancerOpts) GetContractType() ContractType`
 
 GetContractType returns the ContractType field if non-nil, zero value otherwise.
 
 ### GetContractTypeOk
 
-`func (o *LaunchLoadBalancerOpts) GetContractTypeOk() (*string, bool)`
+`func (o *LaunchLoadBalancerOpts) GetContractTypeOk() (*ContractType, bool)`
 
 GetContractTypeOk returns a tuple with the ContractType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContractType
 
-`func (o *LaunchLoadBalancerOpts) SetContractType(v string)`
+`func (o *LaunchLoadBalancerOpts) SetContractType(v ContractType)`
 
 SetContractType sets ContractType field to given value.
 
 
+### GetContractTerm
+
+`func (o *LaunchLoadBalancerOpts) GetContractTerm() ContractTerm`
+
+GetContractTerm returns the ContractTerm field if non-nil, zero value otherwise.
+
+### GetContractTermOk
+
+`func (o *LaunchLoadBalancerOpts) GetContractTermOk() (*ContractTerm, bool)`
+
+GetContractTermOk returns a tuple with the ContractTerm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContractTerm
+
+`func (o *LaunchLoadBalancerOpts) SetContractTerm(v ContractTerm)`
+
+SetContractTerm sets ContractTerm field to given value.
+
+
 ### GetBillingFrequency
 
-`func (o *LaunchLoadBalancerOpts) GetBillingFrequency() int32`
+`func (o *LaunchLoadBalancerOpts) GetBillingFrequency() BillingFrequency`
 
 GetBillingFrequency returns the BillingFrequency field if non-nil, zero value otherwise.
 
 ### GetBillingFrequencyOk
 
-`func (o *LaunchLoadBalancerOpts) GetBillingFrequencyOk() (*int32, bool)`
+`func (o *LaunchLoadBalancerOpts) GetBillingFrequencyOk() (*BillingFrequency, bool)`
 
 GetBillingFrequencyOk returns a tuple with the BillingFrequency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBillingFrequency
 
-`func (o *LaunchLoadBalancerOpts) SetBillingFrequency(v int32)`
+`func (o *LaunchLoadBalancerOpts) SetBillingFrequency(v BillingFrequency)`
 
 SetBillingFrequency sets BillingFrequency field to given value.
-
-
-### GetRootDiskStorageType
-
-`func (o *LaunchLoadBalancerOpts) GetRootDiskStorageType() StorageType`
-
-GetRootDiskStorageType returns the RootDiskStorageType field if non-nil, zero value otherwise.
-
-### GetRootDiskStorageTypeOk
-
-`func (o *LaunchLoadBalancerOpts) GetRootDiskStorageTypeOk() (*StorageType, bool)`
-
-GetRootDiskStorageTypeOk returns a tuple with the RootDiskStorageType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRootDiskStorageType
-
-`func (o *LaunchLoadBalancerOpts) SetRootDiskStorageType(v StorageType)`
-
-SetRootDiskStorageType sets RootDiskStorageType field to given value.
-
-
-### GetTargetPort
-
-`func (o *LaunchLoadBalancerOpts) GetTargetPort() int32`
-
-GetTargetPort returns the TargetPort field if non-nil, zero value otherwise.
-
-### GetTargetPortOk
-
-`func (o *LaunchLoadBalancerOpts) GetTargetPortOk() (*int32, bool)`
-
-GetTargetPortOk returns a tuple with the TargetPort field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTargetPort
-
-`func (o *LaunchLoadBalancerOpts) SetTargetPort(v int32)`
-
-SetTargetPort sets TargetPort field to given value.
 
 
 

@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **Balance** | Pointer to [**Balance**](Balance.md) |  | [optional] 
 **XForwardedFor** | Pointer to **bool** | Is xForwardedFor enabled or not | [optional] 
 **IdleTimeOut** | Pointer to **int32** | Time to close the connection if load balancer is idle | [optional] 
-**TargetPort** | Pointer to **int32** | Port on which the backend (target) servers are listening to handle incoming requests | [optional] 
 
 ## Methods
 
@@ -216,31 +215,6 @@ SetIdleTimeOut sets IdleTimeOut field to given value.
 `func (o *UpdateLoadBalancerOpts) HasIdleTimeOut() bool`
 
 HasIdleTimeOut returns a boolean if a field has been set.
-
-### GetTargetPort
-
-`func (o *UpdateLoadBalancerOpts) GetTargetPort() int32`
-
-GetTargetPort returns the TargetPort field if non-nil, zero value otherwise.
-
-### GetTargetPortOk
-
-`func (o *UpdateLoadBalancerOpts) GetTargetPortOk() (*int32, bool)`
-
-GetTargetPortOk returns a tuple with the TargetPort field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTargetPort
-
-`func (o *UpdateLoadBalancerOpts) SetTargetPort(v int32)`
-
-SetTargetPort sets TargetPort field to given value.
-
-### HasTargetPort
-
-`func (o *UpdateLoadBalancerOpts) HasTargetPort() bool`
-
-HasTargetPort returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
