@@ -3365,7 +3365,7 @@ paths:
                   storageSize: null
                   state: READY
                   stateReason: null
-                  region: null
+                  region: eu-west-3
                   createdAt: null
                   updatedAt: null
                   custom: false
@@ -3384,7 +3384,7 @@ paths:
                   storageSize: null
                   state: READY
                   stateReason: null
-                  region: null
+                  region: eu-west-3
                   createdAt: null
                   updatedAt: null
                   custom: false
@@ -3402,7 +3402,7 @@ paths:
                   storageSize: null
                   state: READY
                   stateReason: null
-                  region: null
+                  region: eu-west-3
                   createdAt: null
                   updatedAt: null
                   custom: false
@@ -3462,7 +3462,7 @@ paths:
                   custom: true
                   minDiskSize: null
                 _metadata:
-                  totalCount: 12
+                  totalCount: 6
                   limit: 6
                   offset: 0
               schema:
@@ -4022,7 +4022,7 @@ paths:
                   storageSize: null
                   state: READY
                   stateReason: null
-                  region: null
+                  region: eu-west-3
                   createdAt: null
                   updatedAt: null
                   custom: false
@@ -4041,7 +4041,7 @@ paths:
                   storageSize: null
                   state: READY
                   stateReason: null
-                  region: null
+                  region: eu-west-3
                   createdAt: null
                   updatedAt: null
                   custom: false
@@ -4059,7 +4059,7 @@ paths:
                   storageSize: null
                   state: READY
                   stateReason: null
-                  region: null
+                  region: eu-west-3
                   createdAt: null
                   updatedAt: null
                   custom: false
@@ -4119,7 +4119,7 @@ paths:
                   custom: true
                   minDiskSize: null
                 _metadata:
-                  totalCount: 12
+                  totalCount: 6
                   limit: 6
                   offset: 0
               schema:
