@@ -233,6 +233,7 @@ Class | Method | HTTP request | Description
  - [MetricValues](docs/MetricValues.md)
  - [Metrics](docs/Metrics.md)
  - [MetricsMetadata](docs/MetricsMetadata.md)
+ - [Model400ErrorResult](docs/Model400ErrorResult.md)
  - [Motherboard](docs/Motherboard.md)
  - [Network](docs/Network.md)
  - [NetworkCapabilities](docs/NetworkCapabilities.md)

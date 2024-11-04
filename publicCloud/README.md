@@ -263,6 +263,8 @@ Class | Method | HTTP request | Description
  - [MetricsProperties](docs/MetricsProperties.md)
  - [MetricsUnit](docs/MetricsUnit.md)
  - [MetricsValues](docs/MetricsValues.md)
+ - [Model400ErrorResult](docs/Model400ErrorResult.md)
+ - [Model423ErrorResult](docs/Model423ErrorResult.md)
  - [NetworkSpeed](docs/NetworkSpeed.md)
  - [NetworkType](docs/NetworkType.md)
  - [NullRouteIpOpts](docs/NullRouteIpOpts.md)

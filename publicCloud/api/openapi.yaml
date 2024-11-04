@@ -1049,7 +1049,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -1123,7 +1123,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -1421,7 +1421,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -1505,7 +1505,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -1588,7 +1588,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -1671,7 +1671,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -1754,7 +1754,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -1842,7 +1842,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -2483,7 +2483,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -2585,7 +2585,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -2781,7 +2781,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -2896,7 +2896,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -2982,7 +2982,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -3558,7 +3558,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -3661,7 +3661,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -3815,7 +3815,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -3898,7 +3898,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -4134,7 +4134,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -4232,7 +4232,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -4586,7 +4586,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -4660,7 +4660,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -4924,7 +4924,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -5141,7 +5141,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -5223,7 +5223,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -5442,7 +5442,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -5753,7 +5753,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -5871,7 +5871,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -5978,7 +5978,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -6138,7 +6138,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -6272,7 +6272,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -6403,7 +6403,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -6532,7 +6532,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -6673,7 +6673,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -6814,7 +6814,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -6992,7 +6992,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -7170,7 +7170,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -7508,7 +7508,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -7846,7 +7846,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -7932,7 +7932,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -8018,7 +8018,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -8208,7 +8208,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -8298,7 +8298,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -8473,7 +8473,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -8681,7 +8681,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -8796,7 +8796,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -8868,7 +8868,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -8966,7 +8966,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -9106,7 +9106,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -9235,7 +9235,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -9342,7 +9342,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -9449,7 +9449,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -9589,7 +9589,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -9683,7 +9683,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -9755,7 +9755,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -9842,7 +9842,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -9947,7 +9947,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -10067,7 +10067,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -10147,7 +10147,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -10176,7 +10176,7 @@ paths:
                 errorCode: "423"
                 errorMessage: Resource is locked by other process
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/423ErrorResult'
           description: Locked.
         "500":
           content:
@@ -10236,7 +10236,7 @@ paths:
                 errorDetails: {}
                 errorMessage: The API could not interpret your request correctly.
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/400ErrorResult'
           description: Bad Request.
         "401":
           content:
@@ -10265,7 +10265,7 @@ paths:
                 errorCode: "423"
                 errorMessage: Resource is locked by other process
               schema:
-                $ref: '#/components/schemas/errorResult'
+                $ref: '#/components/schemas/423ErrorResult'
           description: Locked.
         "500":
           content:
@@ -10510,7 +10510,7 @@ components:
             errorDetails: {}
             errorMessage: The API could not interpret your request correctly.
           schema:
-            $ref: '#/components/schemas/errorResult'
+            $ref: '#/components/schemas/400ErrorResult'
       description: Bad Request.
     "401":
       content:
@@ -10549,7 +10549,7 @@ components:
             errorCode: "423"
             errorMessage: Resource is locked by other process
           schema:
-            $ref: '#/components/schemas/errorResult'
+            $ref: '#/components/schemas/423ErrorResult'
       description: Locked.
     "500":
       content:
@@ -11655,6 +11655,33 @@ components:
       - region
       - rootDiskStorageType
       - type
+      type: object
+    "400ErrorResult":
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails:
+          key:
+          - errorDetails
+          - errorDetails
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          title: errorDetails
+          type: object
       type: object
     iso:
       example:
@@ -14243,6 +14270,29 @@ components:
         format: uuid
         type: string
       type: array
+    "423ErrorResult":
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        errorDetails:
+          key:
+          - errorDetails
+          - errorDetails
+      properties:
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          title: errorDetails
+          type: object
+      type: object
     region:
       example:
         name: null
