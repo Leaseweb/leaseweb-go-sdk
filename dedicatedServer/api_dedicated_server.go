@@ -2384,7 +2384,7 @@ func (a *DedicatedServerAPIService) CreateServerBandwidthNotificationSettingExec
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2735,7 +2735,7 @@ func (a *DedicatedServerAPIService) CreateServerDataTrafficNotificationSettingEx
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2916,7 +2916,7 @@ func (a *DedicatedServerAPIService) CreateServerDhcpReservationExecute(r ApiCrea
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4060,7 +4060,7 @@ func (a *DedicatedServerAPIService) EnableServerRescueModeExecute(r ApiEnableSer
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4766,7 +4766,7 @@ func (a *DedicatedServerAPIService) GetDdosNotificationSettingExecute(r ApiGetDd
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5651,7 +5651,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentIpExecute(r ApiGetNetwork
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6488,7 +6488,7 @@ func (a *DedicatedServerAPIService) GetNetworkEquipmentPowerStatusExecute(r ApiG
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7755,7 +7755,7 @@ func (a *DedicatedServerAPIService) GetServerBandwidthMetricsExecute(r ApiGetSer
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8857,7 +8857,7 @@ func (a *DedicatedServerAPIService) GetServerDataTrafficMetricsExecute(r ApiGetS
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9538,7 +9538,7 @@ func (a *DedicatedServerAPIService) GetServerHardwareExecute(r ApiGetServerHardw
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9714,7 +9714,7 @@ func (a *DedicatedServerAPIService) GetServerIpExecute(r ApiGetServerIpRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10928,7 +10928,7 @@ func (a *DedicatedServerAPIService) GetServerPowerStatusExecute(r ApiGetServerPo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11123,7 +11123,7 @@ func (a *DedicatedServerAPIService) InstallOperatingSystemExecute(r ApiInstallOp
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11308,7 +11308,7 @@ func (a *DedicatedServerAPIService) IpmiResetServerExecute(r ApiIpmiResetServerR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11485,7 +11485,7 @@ func (a *DedicatedServerAPIService) NullIpRouteExecute(r ApiNullIpRouteRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11662,7 +11662,7 @@ func (a *DedicatedServerAPIService) NullNetworkEquipmentIpRouteExecute(r ApiNull
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12136,7 +12136,7 @@ func (a *DedicatedServerAPIService) PowerCycleNetworkEquipmentExecute(r ApiPower
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12297,7 +12297,7 @@ func (a *DedicatedServerAPIService) PowerCycleServerExecute(r ApiPowerCycleServe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12458,7 +12458,7 @@ func (a *DedicatedServerAPIService) PowerNetworkEquipmentOffExecute(r ApiPowerNe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12619,7 +12619,7 @@ func (a *DedicatedServerAPIService) PowerNetworkEquipmentOnExecute(r ApiPowerNet
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12780,7 +12780,7 @@ func (a *DedicatedServerAPIService) PowerServerOffExecute(r ApiPowerServerOffReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12941,7 +12941,7 @@ func (a *DedicatedServerAPIService) PowerServerOnExecute(r ApiPowerServerOnReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13109,7 +13109,7 @@ func (a *DedicatedServerAPIService) RemoveNullIpRouteExecute(r ApiRemoveNullIpRo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13285,7 +13285,7 @@ func (a *DedicatedServerAPIService) RetryServerJobExecute(r ApiRetryServerJobReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13480,7 +13480,7 @@ func (a *DedicatedServerAPIService) ScanHardwareExecute(r ApiScanHardwareRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13657,7 +13657,7 @@ func (a *DedicatedServerAPIService) UnNullNetworkEquipmentIpRouteExecute(r ApiUn
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13835,7 +13835,7 @@ func (a *DedicatedServerAPIService) UpdateDdosNotificationSettingExecute(r ApiUp
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14015,7 +14015,7 @@ func (a *DedicatedServerAPIService) UpdateIpProfileExecute(r ApiUpdateIpProfileR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14207,7 +14207,7 @@ func (a *DedicatedServerAPIService) UpdateNetworkEquipmentCredentialExecute(r Ap
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14396,7 +14396,7 @@ func (a *DedicatedServerAPIService) UpdateNetworkEquipmentIpExecute(r ApiUpdateN
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14922,7 +14922,7 @@ func (a *DedicatedServerAPIService) UpdateServerCredentialExecute(r ApiUpdateSer
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

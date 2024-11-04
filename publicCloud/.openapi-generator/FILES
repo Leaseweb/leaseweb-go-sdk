@@ -104,8 +104,6 @@ docs/MetricsMetadataPropertiesGranularity.md
 docs/MetricsProperties.md
 docs/MetricsUnit.md
 docs/MetricsValues.md
-docs/Model400ErrorResult.md
-docs/Model423ErrorResult.md
 docs/NetworkSpeed.md
 docs/NetworkType.md
 docs/NullRouteIpOpts.md
@@ -152,8 +150,6 @@ docs/Values.md
 git_push.sh
 go.mod
 go.sum
-model_400_error_result.go
-model_423_error_result.go
 model__metadata.go
 model__schemas_health_check_status.go
 model_attach_iso_opts.go

@@ -1291,7 +1291,7 @@ func (a *PublicCloudAPIService) AddToPrivateNetworkExecute(r ApiAddToPrivateNetw
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1475,7 +1475,7 @@ func (a *PublicCloudAPIService) AttachIsoExecute(r ApiAttachIsoRequest) (*http.R
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1646,7 +1646,7 @@ func (a *PublicCloudAPIService) CancelInstanceTerminationExecute(r ApiCancelInst
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1826,7 +1826,7 @@ func (a *PublicCloudAPIService) CreateAutoScalingGroupExecute(r ApiCreateAutoSca
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2004,7 +2004,7 @@ func (a *PublicCloudAPIService) CreateImageExecute(r ApiCreateImageRequest) (*Im
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2186,7 +2186,7 @@ func (a *PublicCloudAPIService) CreateLoadBalancerListenerExecute(r ApiCreateLoa
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2359,7 +2359,7 @@ func (a *PublicCloudAPIService) CreateSnapshotExecute(r ApiCreateSnapshotRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2539,7 +2539,7 @@ func (a *PublicCloudAPIService) CreateTargetGroupExecute(r ApiCreateTargetGroupR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2708,7 +2708,7 @@ func (a *PublicCloudAPIService) DeleteAutoScalingGroupExecute(r ApiDeleteAutoSca
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3200,7 +3200,7 @@ func (a *PublicCloudAPIService) DeleteLoadBalancerListenerExecute(r ApiDeleteLoa
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3373,7 +3373,7 @@ func (a *PublicCloudAPIService) DeleteSnapshotExecute(r ApiDeleteSnapshotRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3544,7 +3544,7 @@ func (a *PublicCloudAPIService) DeleteTargetGroupExecute(r ApiDeleteTargetGroupR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3717,7 +3717,7 @@ func (a *PublicCloudAPIService) DeregisterAutoScalingGroupTargetGroupExecute(r A
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3897,7 +3897,7 @@ func (a *PublicCloudAPIService) DeregisterTargetsExecute(r ApiDeregisterTargetsR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3930,7 +3930,7 @@ func (a *PublicCloudAPIService) DeregisterTargetsExecute(r ApiDeregisterTargetsR
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v Model423ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4068,7 +4068,7 @@ func (a *PublicCloudAPIService) DetachIsoExecute(r ApiDetachIsoRequest) (*http.R
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4241,7 +4241,7 @@ func (a *PublicCloudAPIService) GetAutoScalingGroupExecute(r ApiGetAutoScalingGr
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4432,7 +4432,7 @@ func (a *PublicCloudAPIService) GetAutoScalingGroupInstanceListExecute(r ApiGetA
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4677,7 +4677,7 @@ func (a *PublicCloudAPIService) GetAutoScalingGroupListExecute(r ApiGetAutoScali
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4876,7 +4876,7 @@ func (a *PublicCloudAPIService) GetConnectionsMetricsExecute(r ApiGetConnections
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5086,7 +5086,7 @@ func (a *PublicCloudAPIService) GetConnectionsPerSecondMetricsExecute(r ApiGetCo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5268,7 +5268,7 @@ func (a *PublicCloudAPIService) GetConsoleAccessToInstanceExecute(r ApiGetConsol
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5478,7 +5478,7 @@ func (a *PublicCloudAPIService) GetCpuMetricsExecute(r ApiGetCpuMetricsRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5668,7 +5668,7 @@ func (a *PublicCloudAPIService) GetCredentialExecute(r ApiGetCredentialRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6025,7 +6025,7 @@ func (a *PublicCloudAPIService) GetCredentialListByTypeExecute(r ApiGetCredentia
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6245,7 +6245,7 @@ func (a *PublicCloudAPIService) GetDataTrafficMetricsExecute(r ApiGetDataTraffic
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6455,7 +6455,7 @@ func (a *PublicCloudAPIService) GetDataTransferredMetricsExecute(r ApiGetDataTra
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6665,7 +6665,7 @@ func (a *PublicCloudAPIService) GetDataTransferredPerSecondMetricsExecute(r ApiG
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9607,7 +9607,7 @@ func (a *PublicCloudAPIService) GetReinstallImageListExecute(r ApiGetReinstallIm
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9817,7 +9817,7 @@ func (a *PublicCloudAPIService) GetRequestsMetricsExecute(r ApiGetRequestsMetric
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10027,7 +10027,7 @@ func (a *PublicCloudAPIService) GetRequestsPerSecondMetricsExecute(r ApiGetReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10237,7 +10237,7 @@ func (a *PublicCloudAPIService) GetResponseCodesMetricsExecute(r ApiGetResponseC
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10447,7 +10447,7 @@ func (a *PublicCloudAPIService) GetResponseCodesPerSecondMetricsExecute(r ApiGet
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10993,7 +10993,7 @@ func (a *PublicCloudAPIService) GetTargetGroupExecute(r ApiGetTargetGroupRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11225,7 +11225,7 @@ func (a *PublicCloudAPIService) GetTargetGroupListExecute(r ApiGetTargetGroupLis
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11416,7 +11416,7 @@ func (a *PublicCloudAPIService) GetTargetListExecute(r ApiGetTargetListRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11795,7 +11795,7 @@ func (a *PublicCloudAPIService) LaunchInstanceExecute(r ApiLaunchInstanceRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11977,7 +11977,7 @@ func (a *PublicCloudAPIService) LaunchLoadBalancerExecute(r ApiLaunchLoadBalance
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12162,7 +12162,7 @@ func (a *PublicCloudAPIService) NullRouteIpExecute(r ApiNullRouteIpRequest) (*Ip
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12342,7 +12342,7 @@ func (a *PublicCloudAPIService) RebootInstanceExecute(r ApiRebootInstanceRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12526,7 +12526,7 @@ func (a *PublicCloudAPIService) RegisterAutoScalingGroupTargetGroupExecute(r Api
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12706,7 +12706,7 @@ func (a *PublicCloudAPIService) RegisterTargetsExecute(r ApiRegisterTargetsReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12739,7 +12739,7 @@ func (a *PublicCloudAPIService) RegisterTargetsExecute(r ApiRegisterTargetsReque
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v Model423ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12894,7 +12894,7 @@ func (a *PublicCloudAPIService) ReinstallInstanceExecute(r ApiReinstallInstanceR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13067,7 +13067,7 @@ func (a *PublicCloudAPIService) RemoveFromPrivateNetworkExecute(r ApiRemoveFromP
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13244,7 +13244,7 @@ func (a *PublicCloudAPIService) RemoveIpNullRouteExecute(r ApiRemoveIpNullRouteR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13426,7 +13426,7 @@ func (a *PublicCloudAPIService) ResetPasswordExecute(r ApiResetPasswordRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13599,7 +13599,7 @@ func (a *PublicCloudAPIService) RestoreSnapshotExecute(r ApiRestoreSnapshotReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13770,7 +13770,7 @@ func (a *PublicCloudAPIService) StartInstanceExecute(r ApiStartInstanceRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13941,7 +13941,7 @@ func (a *PublicCloudAPIService) StopInstanceExecute(r ApiStopInstanceRequest) (*
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14125,7 +14125,7 @@ func (a *PublicCloudAPIService) StoreCredentialExecute(r ApiStoreCredentialReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14305,7 +14305,7 @@ func (a *PublicCloudAPIService) TerminateInstanceExecute(r ApiTerminateInstanceR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14476,7 +14476,7 @@ func (a *PublicCloudAPIService) TerminateLoadBalancerExecute(r ApiTerminateLoadB
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14660,7 +14660,7 @@ func (a *PublicCloudAPIService) UpdateAutoScalingGroupExecute(r ApiUpdateAutoSca
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14850,7 +14850,7 @@ func (a *PublicCloudAPIService) UpdateCredentialExecute(r ApiUpdateCredentialReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15043,7 +15043,7 @@ func (a *PublicCloudAPIService) UpdateImageExecute(r ApiUpdateImageRequest) (*Im
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15227,7 +15227,7 @@ func (a *PublicCloudAPIService) UpdateInstanceExecute(r ApiUpdateInstanceRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15424,7 +15424,7 @@ func (a *PublicCloudAPIService) UpdateIpExecute(r ApiUpdateIpRequest) (*IpDetail
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15617,7 +15617,7 @@ func (a *PublicCloudAPIService) UpdateLoadBalancerExecute(r ApiUpdateLoadBalance
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15812,7 +15812,7 @@ func (a *PublicCloudAPIService) UpdateLoadBalancerListenerExecute(r ApiUpdateLoa
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15994,7 +15994,7 @@ func (a *PublicCloudAPIService) UpdateTargetGroupExecute(r ApiUpdateTargetGroupR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400ErrorResult
+			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

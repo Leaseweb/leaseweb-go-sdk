@@ -17,14 +17,12 @@ docs/GetReportResolutionListResult.md
 docs/GetReportResult.md
 docs/Message.md
 docs/Metadata.md
-docs/Model400ErrorResult.md
 docs/Report.md
 docs/ResolutionList.md
 docs/ResolveReportResult.md
 git_push.sh
 go.mod
 go.sum
-model_400_error_result.go
 model__metadata.go
 model_attachment.go
 model_create_report_message_opts.go

@@ -80,7 +80,6 @@ docs/MetricValue.md
 docs/MetricValues.md
 docs/Metrics.md
 docs/MetricsMetadata.md
-docs/Model400ErrorResult.md
 docs/Motherboard.md
 docs/Network.md
 docs/NetworkCapabilities.md
@@ -135,7 +134,6 @@ docs/Vlan.md
 git_push.sh
 go.mod
 go.sum
-model_400_error_result.go
 model__metadata.go
 model_actions.go
 model_add_server_to_private_network_opts.go

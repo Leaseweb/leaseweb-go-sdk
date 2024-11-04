@@ -101,7 +101,6 @@ Class | Method | HTTP request | Description
  - [GetReportResult](docs/GetReportResult.md)
  - [Message](docs/Message.md)
  - [Metadata](docs/Metadata.md)
- - [Model400ErrorResult](docs/Model400ErrorResult.md)
  - [Report](docs/Report.md)
  - [ResolutionList](docs/ResolutionList.md)
  - [ResolveReportResult](docs/ResolveReportResult.md)
