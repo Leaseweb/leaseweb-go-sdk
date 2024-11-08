@@ -10,18 +10,18 @@ Name | Type | Description | Notes
 **Reference** | **NullableString** | The identifying name set to the load balancer | 
 **State** | [**State**](State.md) |  | 
 **StartedAt** | **NullableTime** | Date and time when the load balancer was started for the first time, right after launching it | 
-**Ips** | [**[]IpDetails**](IpDetails.md) |  | 
 **Region** | [**RegionName**](RegionName.md) |  | 
 **Configuration** | [**NullableLoadBalancerConfiguration**](LoadBalancerConfiguration.md) |  | 
 **AutoScalingGroup** | [**NullableAutoScalingGroup**](AutoScalingGroup.md) |  | 
 **PrivateNetwork** | [**NullablePrivateNetwork**](PrivateNetwork.md) |  | 
 **Contract** | [**Contract**](Contract.md) |  | 
+**Ips** | [**[]IpDetails**](IpDetails.md) |  | 
 
 ## Methods
 
 ### NewLoadBalancerDetails
 
-`func NewLoadBalancerDetails(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, ips []IpDetails, region RegionName, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract, ) *LoadBalancerDetails`
+`func NewLoadBalancerDetails(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, region RegionName, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract, ips []IpDetails, ) *LoadBalancerDetails`
 
 NewLoadBalancerDetails instantiates a new LoadBalancerDetails object
 This constructor will assign default values to properties that have it defined,
@@ -176,26 +176,6 @@ SetStartedAt sets StartedAt field to given value.
 `func (o *LoadBalancerDetails) UnsetStartedAt()`
 
 UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
-### GetIps
-
-`func (o *LoadBalancerDetails) GetIps() []IpDetails`
-
-GetIps returns the Ips field if non-nil, zero value otherwise.
-
-### GetIpsOk
-
-`func (o *LoadBalancerDetails) GetIpsOk() (*[]IpDetails, bool)`
-
-GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIps
-
-`func (o *LoadBalancerDetails) SetIps(v []IpDetails)`
-
-SetIps sets Ips field to given value.
-
-
 ### GetRegion
 
 `func (o *LoadBalancerDetails) GetRegion() RegionName`
@@ -324,6 +304,26 @@ and a boolean to check if the value has been set.
 `func (o *LoadBalancerDetails) SetContract(v Contract)`
 
 SetContract sets Contract field to given value.
+
+
+### GetIps
+
+`func (o *LoadBalancerDetails) GetIps() []IpDetails`
+
+GetIps returns the Ips field if non-nil, zero value otherwise.
+
+### GetIpsOk
+
+`func (o *LoadBalancerDetails) GetIpsOk() (*[]IpDetails, bool)`
+
+GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIps
+
+`func (o *LoadBalancerDetails) SetIps(v []IpDetails)`
+
+SetIps sets Ips field to given value.
 
 
 

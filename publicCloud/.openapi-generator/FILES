@@ -89,6 +89,7 @@ docs/LoadBalancer.md
 docs/LoadBalancerConfiguration.md
 docs/LoadBalancerDetails.md
 docs/LoadBalancerGranularity.md
+docs/LoadBalancerListItem.md
 docs/LoadBalancerListener.md
 docs/LoadBalancerListenerDetails.md
 docs/LoadBalancerListenerOpts.md
@@ -235,6 +236,7 @@ model_load_balancer.go
 model_load_balancer_configuration.go
 model_load_balancer_details.go
 model_load_balancer_granularity.go
+model_load_balancer_list_item.go
 model_load_balancer_listener.go
 model_load_balancer_listener_details.go
 model_load_balancer_listener_opts.go

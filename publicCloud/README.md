@@ -248,6 +248,7 @@ Class | Method | HTTP request | Description
  - [LoadBalancerConfiguration](docs/LoadBalancerConfiguration.md)
  - [LoadBalancerDetails](docs/LoadBalancerDetails.md)
  - [LoadBalancerGranularity](docs/LoadBalancerGranularity.md)
+ - [LoadBalancerListItem](docs/LoadBalancerListItem.md)
  - [LoadBalancerListener](docs/LoadBalancerListener.md)
  - [LoadBalancerListenerDetails](docs/LoadBalancerListenerDetails.md)
  - [LoadBalancerListenerOpts](docs/LoadBalancerListenerOpts.md)

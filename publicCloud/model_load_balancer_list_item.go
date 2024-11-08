@@ -16,11 +16,11 @@ import (
 	"fmt"
 )
 
-// checks if the LoadBalancerDetails type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &LoadBalancerDetails{}
+// checks if the LoadBalancerListItem type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LoadBalancerListItem{}
 
-// LoadBalancerDetails struct for LoadBalancerDetails
-type LoadBalancerDetails struct {
+// LoadBalancerListItem struct for LoadBalancerListItem
+type LoadBalancerListItem struct {
 	// The load balancer unique identifier
 	Id string `json:"id"`
 	Type TypeName `json:"type"`
@@ -35,18 +35,18 @@ type LoadBalancerDetails struct {
 	AutoScalingGroup NullableAutoScalingGroup `json:"autoScalingGroup"`
 	PrivateNetwork NullablePrivateNetwork `json:"privateNetwork"`
 	Contract Contract `json:"contract"`
-	Ips []IpDetails `json:"ips"`
+	Ips []Ip `json:"ips"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _LoadBalancerDetails LoadBalancerDetails
+type _LoadBalancerListItem LoadBalancerListItem
 
-// NewLoadBalancerDetails instantiates a new LoadBalancerDetails object
+// NewLoadBalancerListItem instantiates a new LoadBalancerListItem object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerDetails(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, region RegionName, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract, ips []IpDetails) *LoadBalancerDetails {
-	this := LoadBalancerDetails{}
+func NewLoadBalancerListItem(id string, type_ TypeName, resources Resources, reference NullableString, state State, startedAt NullableTime, region RegionName, configuration NullableLoadBalancerConfiguration, autoScalingGroup NullableAutoScalingGroup, privateNetwork NullablePrivateNetwork, contract Contract, ips []Ip) *LoadBalancerListItem {
+	this := LoadBalancerListItem{}
 	this.Id = id
 	this.Type = type_
 	this.Resources = resources
@@ -62,16 +62,16 @@ func NewLoadBalancerDetails(id string, type_ TypeName, resources Resources, refe
 	return &this
 }
 
-// NewLoadBalancerDetailsWithDefaults instantiates a new LoadBalancerDetails object
+// NewLoadBalancerListItemWithDefaults instantiates a new LoadBalancerListItem object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewLoadBalancerDetailsWithDefaults() *LoadBalancerDetails {
-	this := LoadBalancerDetails{}
+func NewLoadBalancerListItemWithDefaults() *LoadBalancerListItem {
+	this := LoadBalancerListItem{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *LoadBalancerDetails) GetId() string {
+func (o *LoadBalancerListItem) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *LoadBalancerDetails) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetIdOk() (*string, bool) {
+func (o *LoadBalancerListItem) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,12 +90,12 @@ func (o *LoadBalancerDetails) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *LoadBalancerDetails) SetId(v string) {
+func (o *LoadBalancerListItem) SetId(v string) {
 	o.Id = v
 }
 
 // GetType returns the Type field value
-func (o *LoadBalancerDetails) GetType() TypeName {
+func (o *LoadBalancerListItem) GetType() TypeName {
 	if o == nil {
 		var ret TypeName
 		return ret
@@ -106,7 +106,7 @@ func (o *LoadBalancerDetails) GetType() TypeName {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetTypeOk() (*TypeName, bool) {
+func (o *LoadBalancerListItem) GetTypeOk() (*TypeName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -114,12 +114,12 @@ func (o *LoadBalancerDetails) GetTypeOk() (*TypeName, bool) {
 }
 
 // SetType sets field value
-func (o *LoadBalancerDetails) SetType(v TypeName) {
+func (o *LoadBalancerListItem) SetType(v TypeName) {
 	o.Type = v
 }
 
 // GetResources returns the Resources field value
-func (o *LoadBalancerDetails) GetResources() Resources {
+func (o *LoadBalancerListItem) GetResources() Resources {
 	if o == nil {
 		var ret Resources
 		return ret
@@ -130,7 +130,7 @@ func (o *LoadBalancerDetails) GetResources() Resources {
 
 // GetResourcesOk returns a tuple with the Resources field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetResourcesOk() (*Resources, bool) {
+func (o *LoadBalancerListItem) GetResourcesOk() (*Resources, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -138,13 +138,13 @@ func (o *LoadBalancerDetails) GetResourcesOk() (*Resources, bool) {
 }
 
 // SetResources sets field value
-func (o *LoadBalancerDetails) SetResources(v Resources) {
+func (o *LoadBalancerListItem) SetResources(v Resources) {
 	o.Resources = v
 }
 
 // GetReference returns the Reference field value
 // If the value is explicit nil, the zero value for string will be returned
-func (o *LoadBalancerDetails) GetReference() string {
+func (o *LoadBalancerListItem) GetReference() string {
 	if o == nil || o.Reference.Get() == nil {
 		var ret string
 		return ret
@@ -156,7 +156,7 @@ func (o *LoadBalancerDetails) GetReference() string {
 // GetReferenceOk returns a tuple with the Reference field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoadBalancerDetails) GetReferenceOk() (*string, bool) {
+func (o *LoadBalancerListItem) GetReferenceOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -164,12 +164,12 @@ func (o *LoadBalancerDetails) GetReferenceOk() (*string, bool) {
 }
 
 // SetReference sets field value
-func (o *LoadBalancerDetails) SetReference(v string) {
+func (o *LoadBalancerListItem) SetReference(v string) {
 	o.Reference.Set(&v)
 }
 
 // GetState returns the State field value
-func (o *LoadBalancerDetails) GetState() State {
+func (o *LoadBalancerListItem) GetState() State {
 	if o == nil {
 		var ret State
 		return ret
@@ -180,7 +180,7 @@ func (o *LoadBalancerDetails) GetState() State {
 
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetStateOk() (*State, bool) {
+func (o *LoadBalancerListItem) GetStateOk() (*State, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -188,13 +188,13 @@ func (o *LoadBalancerDetails) GetStateOk() (*State, bool) {
 }
 
 // SetState sets field value
-func (o *LoadBalancerDetails) SetState(v State) {
+func (o *LoadBalancerListItem) SetState(v State) {
 	o.State = v
 }
 
 // GetStartedAt returns the StartedAt field value
 // If the value is explicit nil, the zero value for time.Time will be returned
-func (o *LoadBalancerDetails) GetStartedAt() time.Time {
+func (o *LoadBalancerListItem) GetStartedAt() time.Time {
 	if o == nil || o.StartedAt.Get() == nil {
 		var ret time.Time
 		return ret
@@ -206,7 +206,7 @@ func (o *LoadBalancerDetails) GetStartedAt() time.Time {
 // GetStartedAtOk returns a tuple with the StartedAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoadBalancerDetails) GetStartedAtOk() (*time.Time, bool) {
+func (o *LoadBalancerListItem) GetStartedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -214,12 +214,12 @@ func (o *LoadBalancerDetails) GetStartedAtOk() (*time.Time, bool) {
 }
 
 // SetStartedAt sets field value
-func (o *LoadBalancerDetails) SetStartedAt(v time.Time) {
+func (o *LoadBalancerListItem) SetStartedAt(v time.Time) {
 	o.StartedAt.Set(&v)
 }
 
 // GetRegion returns the Region field value
-func (o *LoadBalancerDetails) GetRegion() RegionName {
+func (o *LoadBalancerListItem) GetRegion() RegionName {
 	if o == nil {
 		var ret RegionName
 		return ret
@@ -230,7 +230,7 @@ func (o *LoadBalancerDetails) GetRegion() RegionName {
 
 // GetRegionOk returns a tuple with the Region field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetRegionOk() (*RegionName, bool) {
+func (o *LoadBalancerListItem) GetRegionOk() (*RegionName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -238,13 +238,13 @@ func (o *LoadBalancerDetails) GetRegionOk() (*RegionName, bool) {
 }
 
 // SetRegion sets field value
-func (o *LoadBalancerDetails) SetRegion(v RegionName) {
+func (o *LoadBalancerListItem) SetRegion(v RegionName) {
 	o.Region = v
 }
 
 // GetConfiguration returns the Configuration field value
 // If the value is explicit nil, the zero value for LoadBalancerConfiguration will be returned
-func (o *LoadBalancerDetails) GetConfiguration() LoadBalancerConfiguration {
+func (o *LoadBalancerListItem) GetConfiguration() LoadBalancerConfiguration {
 	if o == nil || o.Configuration.Get() == nil {
 		var ret LoadBalancerConfiguration
 		return ret
@@ -256,7 +256,7 @@ func (o *LoadBalancerDetails) GetConfiguration() LoadBalancerConfiguration {
 // GetConfigurationOk returns a tuple with the Configuration field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoadBalancerDetails) GetConfigurationOk() (*LoadBalancerConfiguration, bool) {
+func (o *LoadBalancerListItem) GetConfigurationOk() (*LoadBalancerConfiguration, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -264,13 +264,13 @@ func (o *LoadBalancerDetails) GetConfigurationOk() (*LoadBalancerConfiguration, 
 }
 
 // SetConfiguration sets field value
-func (o *LoadBalancerDetails) SetConfiguration(v LoadBalancerConfiguration) {
+func (o *LoadBalancerListItem) SetConfiguration(v LoadBalancerConfiguration) {
 	o.Configuration.Set(&v)
 }
 
 // GetAutoScalingGroup returns the AutoScalingGroup field value
 // If the value is explicit nil, the zero value for AutoScalingGroup will be returned
-func (o *LoadBalancerDetails) GetAutoScalingGroup() AutoScalingGroup {
+func (o *LoadBalancerListItem) GetAutoScalingGroup() AutoScalingGroup {
 	if o == nil || o.AutoScalingGroup.Get() == nil {
 		var ret AutoScalingGroup
 		return ret
@@ -282,7 +282,7 @@ func (o *LoadBalancerDetails) GetAutoScalingGroup() AutoScalingGroup {
 // GetAutoScalingGroupOk returns a tuple with the AutoScalingGroup field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoadBalancerDetails) GetAutoScalingGroupOk() (*AutoScalingGroup, bool) {
+func (o *LoadBalancerListItem) GetAutoScalingGroupOk() (*AutoScalingGroup, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -290,13 +290,13 @@ func (o *LoadBalancerDetails) GetAutoScalingGroupOk() (*AutoScalingGroup, bool) 
 }
 
 // SetAutoScalingGroup sets field value
-func (o *LoadBalancerDetails) SetAutoScalingGroup(v AutoScalingGroup) {
+func (o *LoadBalancerListItem) SetAutoScalingGroup(v AutoScalingGroup) {
 	o.AutoScalingGroup.Set(&v)
 }
 
 // GetPrivateNetwork returns the PrivateNetwork field value
 // If the value is explicit nil, the zero value for PrivateNetwork will be returned
-func (o *LoadBalancerDetails) GetPrivateNetwork() PrivateNetwork {
+func (o *LoadBalancerListItem) GetPrivateNetwork() PrivateNetwork {
 	if o == nil || o.PrivateNetwork.Get() == nil {
 		var ret PrivateNetwork
 		return ret
@@ -308,7 +308,7 @@ func (o *LoadBalancerDetails) GetPrivateNetwork() PrivateNetwork {
 // GetPrivateNetworkOk returns a tuple with the PrivateNetwork field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoadBalancerDetails) GetPrivateNetworkOk() (*PrivateNetwork, bool) {
+func (o *LoadBalancerListItem) GetPrivateNetworkOk() (*PrivateNetwork, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -316,12 +316,12 @@ func (o *LoadBalancerDetails) GetPrivateNetworkOk() (*PrivateNetwork, bool) {
 }
 
 // SetPrivateNetwork sets field value
-func (o *LoadBalancerDetails) SetPrivateNetwork(v PrivateNetwork) {
+func (o *LoadBalancerListItem) SetPrivateNetwork(v PrivateNetwork) {
 	o.PrivateNetwork.Set(&v)
 }
 
 // GetContract returns the Contract field value
-func (o *LoadBalancerDetails) GetContract() Contract {
+func (o *LoadBalancerListItem) GetContract() Contract {
 	if o == nil {
 		var ret Contract
 		return ret
@@ -332,7 +332,7 @@ func (o *LoadBalancerDetails) GetContract() Contract {
 
 // GetContractOk returns a tuple with the Contract field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetContractOk() (*Contract, bool) {
+func (o *LoadBalancerListItem) GetContractOk() (*Contract, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -340,14 +340,14 @@ func (o *LoadBalancerDetails) GetContractOk() (*Contract, bool) {
 }
 
 // SetContract sets field value
-func (o *LoadBalancerDetails) SetContract(v Contract) {
+func (o *LoadBalancerListItem) SetContract(v Contract) {
 	o.Contract = v
 }
 
 // GetIps returns the Ips field value
-func (o *LoadBalancerDetails) GetIps() []IpDetails {
+func (o *LoadBalancerListItem) GetIps() []Ip {
 	if o == nil {
-		var ret []IpDetails
+		var ret []Ip
 		return ret
 	}
 
@@ -356,7 +356,7 @@ func (o *LoadBalancerDetails) GetIps() []IpDetails {
 
 // GetIpsOk returns a tuple with the Ips field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerDetails) GetIpsOk() ([]IpDetails, bool) {
+func (o *LoadBalancerListItem) GetIpsOk() ([]Ip, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -364,11 +364,11 @@ func (o *LoadBalancerDetails) GetIpsOk() ([]IpDetails, bool) {
 }
 
 // SetIps sets field value
-func (o *LoadBalancerDetails) SetIps(v []IpDetails) {
+func (o *LoadBalancerListItem) SetIps(v []Ip) {
 	o.Ips = v
 }
 
-func (o LoadBalancerDetails) MarshalJSON() ([]byte, error) {
+func (o LoadBalancerListItem) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -376,7 +376,7 @@ func (o LoadBalancerDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LoadBalancerDetails) ToMap() (map[string]interface{}, error) {
+func (o LoadBalancerListItem) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
@@ -398,7 +398,7 @@ func (o LoadBalancerDetails) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *LoadBalancerDetails) UnmarshalJSON(data []byte) (err error) {
+func (o *LoadBalancerListItem) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -431,15 +431,15 @@ func (o *LoadBalancerDetails) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varLoadBalancerDetails := _LoadBalancerDetails{}
+	varLoadBalancerListItem := _LoadBalancerListItem{}
 
-	err = json.Unmarshal(data, &varLoadBalancerDetails)
+	err = json.Unmarshal(data, &varLoadBalancerListItem)
 
 	if err != nil {
 		return err
 	}
 
-	*o = LoadBalancerDetails(varLoadBalancerDetails)
+	*o = LoadBalancerListItem(varLoadBalancerListItem)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -462,38 +462,38 @@ func (o *LoadBalancerDetails) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableLoadBalancerDetails struct {
-	value *LoadBalancerDetails
+type NullableLoadBalancerListItem struct {
+	value *LoadBalancerListItem
 	isSet bool
 }
 
-func (v NullableLoadBalancerDetails) Get() *LoadBalancerDetails {
+func (v NullableLoadBalancerListItem) Get() *LoadBalancerListItem {
 	return v.value
 }
 
-func (v *NullableLoadBalancerDetails) Set(val *LoadBalancerDetails) {
+func (v *NullableLoadBalancerListItem) Set(val *LoadBalancerListItem) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableLoadBalancerDetails) IsSet() bool {
+func (v NullableLoadBalancerListItem) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableLoadBalancerDetails) Unset() {
+func (v *NullableLoadBalancerListItem) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableLoadBalancerDetails(val *LoadBalancerDetails) *NullableLoadBalancerDetails {
-	return &NullableLoadBalancerDetails{value: val, isSet: true}
+func NewNullableLoadBalancerListItem(val *LoadBalancerListItem) *NullableLoadBalancerListItem {
+	return &NullableLoadBalancerListItem{value: val, isSet: true}
 }
 
-func (v NullableLoadBalancerDetails) MarshalJSON() ([]byte, error) {
+func (v NullableLoadBalancerListItem) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableLoadBalancerDetails) UnmarshalJSON(src []byte) error {
+func (v *NullableLoadBalancerListItem) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

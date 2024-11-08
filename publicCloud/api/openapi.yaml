@@ -4427,7 +4427,6 @@ paths:
                     reverseLookup: null
                     networkType: PUBLIC
                     mainIp: false
-                    ddos: null
                   startedAt: 2024-04-09T15:11:37+00:00
                   contract:
                     billingFrequency: 1
@@ -12396,38 +12395,6 @@ components:
       required:
       - imageId
       type: object
-    loadBalancer:
-      nullable: true
-      properties:
-        id:
-          description: The load balancer unique identifier
-          format: uuid
-          type: string
-        type:
-          $ref: '#/components/schemas/typeName'
-        resources:
-          $ref: '#/components/schemas/resources'
-        reference:
-          description: The identifying name set to the load balancer
-          nullable: true
-          type: string
-        state:
-          $ref: '#/components/schemas/state'
-        startedAt:
-          description: "Date and time when the load balancer was started for the first\
-            \ time, right after launching it"
-          format: date-time
-          nullable: true
-          type: string
-      required:
-      - id
-      - reference
-      - resources
-      - startedAt
-      - state
-      - type
-      title: loadBalancer
-      type: object
     stickySession:
       example:
         maxLifeTime: 0
@@ -12481,6 +12448,311 @@ components:
       - xForwardedFor
       title: loadBalancerConfiguration
       type: object
+    loadBalancer:
+      nullable: true
+      properties:
+        id:
+          description: The load balancer unique identifier
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/typeName'
+        resources:
+          $ref: '#/components/schemas/resources'
+        reference:
+          description: The identifying name set to the load balancer
+          nullable: true
+          type: string
+        state:
+          $ref: '#/components/schemas/state'
+        startedAt:
+          description: "Date and time when the load balancer was started for the first\
+            \ time, right after launching it"
+          format: date-time
+          nullable: true
+          type: string
+        region:
+          $ref: '#/components/schemas/regionName'
+        configuration:
+          $ref: '#/components/schemas/loadBalancerConfiguration'
+        autoScalingGroup:
+          $ref: '#/components/schemas/autoScalingGroup'
+        privateNetwork:
+          $ref: '#/components/schemas/privateNetwork'
+        contract:
+          $ref: '#/components/schemas/contract'
+      required:
+      - autoScalingGroup
+      - configuration
+      - contract
+      - id
+      - privateNetwork
+      - reference
+      - region
+      - resources
+      - startedAt
+      - state
+      - type
+      title: loadBalancer
+      type: object
+    loadBalancerListItem:
+      allOf:
+      - $ref: '#/components/schemas/loadBalancer'
+      - nullable: true
+        properties:
+          ips:
+            items:
+              $ref: '#/components/schemas/ip'
+            type: array
+        required:
+        - ips
+        title: loadBalancerDetails
+        type: object
+      example:
+        reference: reference
+        privateNetwork:
+          subnet: 10.0.0.0/16
+          privateNetworkId: privateNetworkId
+          status: CONFIGURED
+        configuration:
+          balance: null
+          idleTimeOut: 6
+          xForwardedFor: true
+          stickySession:
+            maxLifeTime: 0
+            enabled: true
+        autoScalingGroup:
+          cpuThreshold: 5
+          maximumAmount: 5
+          type: null
+          desiredAmount: 6
+          reference: reference
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          minimumAmount: 1
+          startsAt: 2000-01-23T04:56:07.000+00:00
+          warmupTime: 2
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+          cooldownTime: 7
+          region: null
+          endsAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        contract:
+          billingFrequency: 1
+          createdAt: 2023-11-30T16:31:28Z
+          term: null
+          renewalsAt: 2023-11-30T16:31:28Z
+          state: null
+          type: null
+          endsAt: 2023-11-30T16:31:28Z
+        resources:
+          memory:
+            unit: GiB
+            value: 3.75
+          publicNetworkSpeed:
+            unit: Gbps
+            value: 10
+          cpu:
+            unit: vCPU
+            value: 2
+          privateNetworkSpeed:
+            unit: Gbps
+            value: 10
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state: null
+        type: null
+        region: null
+        ips:
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          networkType: internal
+          version: null
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          networkType: internal
+          version: null
+    getLoadBalancerListResult:
+      example:
+        loadBalancers:
+        - reference: reference
+          privateNetwork:
+            subnet: 10.0.0.0/16
+            privateNetworkId: privateNetworkId
+            status: CONFIGURED
+          configuration:
+            balance: null
+            idleTimeOut: 6
+            xForwardedFor: true
+            stickySession:
+              maxLifeTime: 0
+              enabled: true
+          autoScalingGroup:
+            cpuThreshold: 5
+            maximumAmount: 5
+            type: null
+            desiredAmount: 6
+            reference: reference
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            minimumAmount: 1
+            startsAt: 2000-01-23T04:56:07.000+00:00
+            warmupTime: 2
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: null
+            cooldownTime: 7
+            region: null
+            endsAt: 2000-01-23T04:56:07.000+00:00
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          contract:
+            billingFrequency: 1
+            createdAt: 2023-11-30T16:31:28Z
+            term: null
+            renewalsAt: 2023-11-30T16:31:28Z
+            state: null
+            type: null
+            endsAt: 2023-11-30T16:31:28Z
+          resources:
+            memory:
+              unit: GiB
+              value: 3.75
+            publicNetworkSpeed:
+              unit: Gbps
+              value: 10
+            cpu:
+              unit: vCPU
+              value: 2
+            privateNetworkSpeed:
+              unit: Gbps
+              value: 10
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+          type: null
+          region: null
+          ips:
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: null
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: null
+        - reference: reference
+          privateNetwork:
+            subnet: 10.0.0.0/16
+            privateNetworkId: privateNetworkId
+            status: CONFIGURED
+          configuration:
+            balance: null
+            idleTimeOut: 6
+            xForwardedFor: true
+            stickySession:
+              maxLifeTime: 0
+              enabled: true
+          autoScalingGroup:
+            cpuThreshold: 5
+            maximumAmount: 5
+            type: null
+            desiredAmount: 6
+            reference: reference
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            minimumAmount: 1
+            startsAt: 2000-01-23T04:56:07.000+00:00
+            warmupTime: 2
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            state: null
+            cooldownTime: 7
+            region: null
+            endsAt: 2000-01-23T04:56:07.000+00:00
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          contract:
+            billingFrequency: 1
+            createdAt: 2023-11-30T16:31:28Z
+            term: null
+            renewalsAt: 2023-11-30T16:31:28Z
+            state: null
+            type: null
+            endsAt: 2023-11-30T16:31:28Z
+          resources:
+            memory:
+              unit: GiB
+              value: 3.75
+            publicNetworkSpeed:
+              unit: Gbps
+              value: 10
+            cpu:
+              unit: vCPU
+              value: 2
+            privateNetworkSpeed:
+              unit: Gbps
+              value: 10
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          state: null
+          type: null
+          region: null
+          ips:
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: null
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: null
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        loadBalancers:
+          items:
+            $ref: '#/components/schemas/loadBalancerListItem'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      type: object
+    launchLoadBalancerOpts:
+      properties:
+        region:
+          $ref: '#/components/schemas/regionName'
+        type:
+          $ref: '#/components/schemas/typeName'
+        reference:
+          description: An identifying name you can refer to the load balancer
+          type: string
+        contractType:
+          $ref: '#/components/schemas/contractType'
+        contractTerm:
+          $ref: '#/components/schemas/contractTerm'
+        billingFrequency:
+          $ref: '#/components/schemas/billingFrequency'
+      required:
+      - billingFrequency
+      - contractTerm
+      - contractType
+      - region
+      - type
+      type: object
     loadBalancerDetails:
       allOf:
       - $ref: '#/components/schemas/loadBalancer'
@@ -12490,23 +12762,8 @@ components:
             items:
               $ref: '#/components/schemas/ipDetails'
             type: array
-          region:
-            $ref: '#/components/schemas/regionName'
-          configuration:
-            $ref: '#/components/schemas/loadBalancerConfiguration'
-          autoScalingGroup:
-            $ref: '#/components/schemas/autoScalingGroup'
-          privateNetwork:
-            $ref: '#/components/schemas/privateNetwork'
-          contract:
-            $ref: '#/components/schemas/contract'
         required:
-        - autoScalingGroup
-        - configuration
-        - contract
         - ips
-        - privateNetwork
-        - region
         title: loadBalancerDetails
         type: object
       example:
@@ -12585,193 +12842,6 @@ components:
             protectionType: STANDARD
           networkType: internal
           version: null
-    getLoadBalancerListResult:
-      example:
-        loadBalancers:
-        - reference: reference
-          privateNetwork:
-            subnet: 10.0.0.0/16
-            privateNetworkId: privateNetworkId
-            status: CONFIGURED
-          configuration:
-            balance: null
-            idleTimeOut: 6
-            xForwardedFor: true
-            stickySession:
-              maxLifeTime: 0
-              enabled: true
-          autoScalingGroup:
-            cpuThreshold: 5
-            maximumAmount: 5
-            type: null
-            desiredAmount: 6
-            reference: reference
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            minimumAmount: 1
-            startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 2
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: null
-            cooldownTime: 7
-            region: null
-            endsAt: 2000-01-23T04:56:07.000+00:00
-            updatedAt: 2000-01-23T04:56:07.000+00:00
-          contract:
-            billingFrequency: 1
-            createdAt: 2023-11-30T16:31:28Z
-            term: null
-            renewalsAt: 2023-11-30T16:31:28Z
-            state: null
-            type: null
-            endsAt: 2023-11-30T16:31:28Z
-          resources:
-            memory:
-              unit: GiB
-              value: 3.75
-            publicNetworkSpeed:
-              unit: Gbps
-              value: 10
-            cpu:
-              unit: vCPU
-              value: 2
-            privateNetworkSpeed:
-              unit: Gbps
-              value: 10
-          startedAt: 2000-01-23T04:56:07.000+00:00
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          type: null
-          region: null
-          ips:
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: null
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: null
-        - reference: reference
-          privateNetwork:
-            subnet: 10.0.0.0/16
-            privateNetworkId: privateNetworkId
-            status: CONFIGURED
-          configuration:
-            balance: null
-            idleTimeOut: 6
-            xForwardedFor: true
-            stickySession:
-              maxLifeTime: 0
-              enabled: true
-          autoScalingGroup:
-            cpuThreshold: 5
-            maximumAmount: 5
-            type: null
-            desiredAmount: 6
-            reference: reference
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            minimumAmount: 1
-            startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 2
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: null
-            cooldownTime: 7
-            region: null
-            endsAt: 2000-01-23T04:56:07.000+00:00
-            updatedAt: 2000-01-23T04:56:07.000+00:00
-          contract:
-            billingFrequency: 1
-            createdAt: 2023-11-30T16:31:28Z
-            term: null
-            renewalsAt: 2023-11-30T16:31:28Z
-            state: null
-            type: null
-            endsAt: 2023-11-30T16:31:28Z
-          resources:
-            memory:
-              unit: GiB
-              value: 3.75
-            publicNetworkSpeed:
-              unit: Gbps
-              value: 10
-            cpu:
-              unit: vCPU
-              value: 2
-            privateNetworkSpeed:
-              unit: Gbps
-              value: 10
-          startedAt: 2000-01-23T04:56:07.000+00:00
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          type: null
-          region: null
-          ips:
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: null
-          - prefixLength: "28"
-            reverseLookup: reverseLookup
-            ip: 127.0.0.1
-            nullRouted: true
-            mainIp: true
-            ddos:
-              detectionProfile: STANDARD_DEFAULT
-              protectionType: STANDARD
-            networkType: internal
-            version: null
-        _metadata:
-          offset: 0
-          limit: 5
-          totalCount: 2
-      properties:
-        loadBalancers:
-          items:
-            $ref: '#/components/schemas/loadBalancerDetails'
-          type: array
-        _metadata:
-          $ref: '#/components/schemas/_metadata'
-      type: object
-    launchLoadBalancerOpts:
-      properties:
-        region:
-          $ref: '#/components/schemas/regionName'
-        type:
-          $ref: '#/components/schemas/typeName'
-        reference:
-          description: An identifying name you can refer to the load balancer
-          type: string
-        contractType:
-          $ref: '#/components/schemas/contractType'
-        contractTerm:
-          $ref: '#/components/schemas/contractTerm'
-        billingFrequency:
-          $ref: '#/components/schemas/billingFrequency'
-      required:
-      - billingFrequency
-      - contractTerm
-      - contractType
-      - region
-      - type
-      type: object
     updateLoadBalancerOpts:
       properties:
         type:
