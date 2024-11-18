@@ -426,7 +426,7 @@ Name | Type | Description  | Notes
 
 ## CreateLoadBalancerListener
 
-> LoadBalancerListener CreateLoadBalancerListener(ctx, loadBalancerId).LoadBalancerListenerOpts(loadBalancerListenerOpts).Execute()
+> LoadBalancerListener CreateLoadBalancerListener(ctx, loadBalancerId).LoadBalancerListenerCreateOpts(loadBalancerListenerCreateOpts).Execute()
 
 Create listener
 
@@ -446,11 +446,11 @@ import (
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	loadBalancerListenerOpts := *openapiclient.NewLoadBalancerListenerOpts("Protocol_example", int32(123), *openapiclient.NewCertificate(), "TODO") // LoadBalancerListenerOpts | 
+	loadBalancerListenerCreateOpts := *openapiclient.NewLoadBalancerListenerCreateOpts(openapiclient.protocol("HTTP"), int32(123), *openapiclient.NewLoadBalancerListenerDefaultRule("TargetGroupId_example")) // LoadBalancerListenerCreateOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.CreateLoadBalancerListener(context.Background(), loadBalancerId).LoadBalancerListenerOpts(loadBalancerListenerOpts).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.CreateLoadBalancerListener(context.Background(), loadBalancerId).LoadBalancerListenerCreateOpts(loadBalancerListenerCreateOpts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.CreateLoadBalancerListener``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -476,7 +476,7 @@ Other parameters are passed through a pointer to a apiCreateLoadBalancerListener
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **loadBalancerListenerOpts** | [**LoadBalancerListenerOpts**](LoadBalancerListenerOpts.md) |  | 
+ **loadBalancerListenerCreateOpts** | [**LoadBalancerListenerCreateOpts**](LoadBalancerListenerCreateOpts.md) |  | 
 
 ### Return type
 
@@ -5618,7 +5618,7 @@ Name | Type | Description  | Notes
 
 ## UpdateLoadBalancerListener
 
-> LoadBalancerListener UpdateLoadBalancerListener(ctx, loadBalancerId, listenerId).LoadBalancerListenerUpdateOpts(loadBalancerListenerUpdateOpts).Execute()
+> LoadBalancerListener UpdateLoadBalancerListener(ctx, loadBalancerId, listenerId).LoadBalancerListenerOpts(loadBalancerListenerOpts).Execute()
 
 Update a listener
 
@@ -5637,11 +5637,11 @@ import (
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
 	listenerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Listener ID
-	loadBalancerListenerUpdateOpts := *openapiclient.NewLoadBalancerListenerUpdateOpts("Protocol_example", NullableInt32(123), "TODO", "TODO") // LoadBalancerListenerUpdateOpts | 
+	loadBalancerListenerOpts := *openapiclient.NewLoadBalancerListenerOpts() // LoadBalancerListenerOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.UpdateLoadBalancerListener(context.Background(), loadBalancerId, listenerId).LoadBalancerListenerUpdateOpts(loadBalancerListenerUpdateOpts).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.UpdateLoadBalancerListener(context.Background(), loadBalancerId, listenerId).LoadBalancerListenerOpts(loadBalancerListenerOpts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.UpdateLoadBalancerListener``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5669,7 +5669,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **loadBalancerListenerUpdateOpts** | [**LoadBalancerListenerUpdateOpts**](LoadBalancerListenerUpdateOpts.md) |  | 
+ **loadBalancerListenerOpts** | [**LoadBalancerListenerOpts**](LoadBalancerListenerOpts.md) |  | 
 
 ### Return type
 

@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PrivateKey** | **string** | Client Private Key. Required only if protocol is HTTPS | 
 **Certificate** | **string** | Client Certificate. Required only if protocol is HTTPS | 
-**Chain** | **string** | CA certificate. Not required, but can be added if protocol is HTTPS | 
+**Chain** | Pointer to **string** | CA certificate. Not required, but can be added if protocol is HTTPS | [optional] 
 
 ## Methods
 
 ### NewSslCertificate
 
-`func NewSslCertificate(privateKey string, certificate string, chain string, ) *SslCertificate`
+`func NewSslCertificate(privateKey string, certificate string, ) *SslCertificate`
 
 NewSslCertificate instantiates a new SslCertificate object
 This constructor will assign default values to properties that have it defined,
@@ -86,6 +86,11 @@ and a boolean to check if the value has been set.
 
 SetChain sets Chain field to given value.
 
+### HasChain
+
+`func (o *SslCertificate) HasChain() bool`
+
+HasChain returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

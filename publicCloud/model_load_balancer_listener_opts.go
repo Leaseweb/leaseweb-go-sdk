@@ -12,7 +12,6 @@ package publicCloud
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the LoadBalancerListenerOpts type satisfies the MappedNullable interface at compile time
@@ -20,11 +19,11 @@ var _ MappedNullable = &LoadBalancerListenerOpts{}
 
 // LoadBalancerListenerOpts struct for LoadBalancerListenerOpts
 type LoadBalancerListenerOpts struct {
-	Protocol string `json:"protocol"`
+	Protocol *Protocol `json:"protocol,omitempty"`
 	// Port that the listener listens to
-	Port int32 `json:"port"`
-	Certificate Certificate `json:"certificate"`
-	DefaultRule NullableListenerDefaultRule `json:"defaultRule"`
+	Port *int32 `json:"port,omitempty"`
+	Certificate *SslCertificate `json:"certificate,omitempty"`
+	DefaultRule *LoadBalancerListenerDefaultRule `json:"defaultRule,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,12 +33,8 @@ type _LoadBalancerListenerOpts LoadBalancerListenerOpts
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerListenerOpts(protocol string, port int32, certificate Certificate, defaultRule NullableListenerDefaultRule) *LoadBalancerListenerOpts {
+func NewLoadBalancerListenerOpts() *LoadBalancerListenerOpts {
 	this := LoadBalancerListenerOpts{}
-	this.Protocol = protocol
-	this.Port = port
-	this.Certificate = certificate
-	this.DefaultRule = defaultRule
 	return &this
 }
 
@@ -51,102 +46,132 @@ func NewLoadBalancerListenerOptsWithDefaults() *LoadBalancerListenerOpts {
 	return &this
 }
 
-// GetProtocol returns the Protocol field value
-func (o *LoadBalancerListenerOpts) GetProtocol() string {
-	if o == nil {
-		var ret string
+// GetProtocol returns the Protocol field value if set, zero value otherwise.
+func (o *LoadBalancerListenerOpts) GetProtocol() Protocol {
+	if o == nil || IsNil(o.Protocol) {
+		var ret Protocol
 		return ret
 	}
-
-	return o.Protocol
+	return *o.Protocol
 }
 
-// GetProtocolOk returns a tuple with the Protocol field value
+// GetProtocolOk returns a tuple with the Protocol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerListenerOpts) GetProtocolOk() (*string, bool) {
-	if o == nil {
+func (o *LoadBalancerListenerOpts) GetProtocolOk() (*Protocol, bool) {
+	if o == nil || IsNil(o.Protocol) {
 		return nil, false
 	}
-	return &o.Protocol, true
+	return o.Protocol, true
 }
 
-// SetProtocol sets field value
-func (o *LoadBalancerListenerOpts) SetProtocol(v string) {
-	o.Protocol = v
+// HasProtocol returns a boolean if a field has been set.
+func (o *LoadBalancerListenerOpts) HasProtocol() bool {
+	if o != nil && !IsNil(o.Protocol) {
+		return true
+	}
+
+	return false
 }
 
-// GetPort returns the Port field value
+// SetProtocol gets a reference to the given Protocol and assigns it to the Protocol field.
+func (o *LoadBalancerListenerOpts) SetProtocol(v Protocol) {
+	o.Protocol = &v
+}
+
+// GetPort returns the Port field value if set, zero value otherwise.
 func (o *LoadBalancerListenerOpts) GetPort() int32 {
-	if o == nil {
+	if o == nil || IsNil(o.Port) {
 		var ret int32
 		return ret
 	}
-
-	return o.Port
+	return *o.Port
 }
 
-// GetPortOk returns a tuple with the Port field value
+// GetPortOk returns a tuple with the Port field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LoadBalancerListenerOpts) GetPortOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Port) {
 		return nil, false
 	}
-	return &o.Port, true
+	return o.Port, true
 }
 
-// SetPort sets field value
+// HasPort returns a boolean if a field has been set.
+func (o *LoadBalancerListenerOpts) HasPort() bool {
+	if o != nil && !IsNil(o.Port) {
+		return true
+	}
+
+	return false
+}
+
+// SetPort gets a reference to the given int32 and assigns it to the Port field.
 func (o *LoadBalancerListenerOpts) SetPort(v int32) {
-	o.Port = v
+	o.Port = &v
 }
 
-// GetCertificate returns the Certificate field value
-func (o *LoadBalancerListenerOpts) GetCertificate() Certificate {
-	if o == nil {
-		var ret Certificate
+// GetCertificate returns the Certificate field value if set, zero value otherwise.
+func (o *LoadBalancerListenerOpts) GetCertificate() SslCertificate {
+	if o == nil || IsNil(o.Certificate) {
+		var ret SslCertificate
 		return ret
 	}
-
-	return o.Certificate
+	return *o.Certificate
 }
 
-// GetCertificateOk returns a tuple with the Certificate field value
+// GetCertificateOk returns a tuple with the Certificate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerListenerOpts) GetCertificateOk() (*Certificate, bool) {
-	if o == nil {
+func (o *LoadBalancerListenerOpts) GetCertificateOk() (*SslCertificate, bool) {
+	if o == nil || IsNil(o.Certificate) {
 		return nil, false
 	}
-	return &o.Certificate, true
+	return o.Certificate, true
 }
 
-// SetCertificate sets field value
-func (o *LoadBalancerListenerOpts) SetCertificate(v Certificate) {
-	o.Certificate = v
+// HasCertificate returns a boolean if a field has been set.
+func (o *LoadBalancerListenerOpts) HasCertificate() bool {
+	if o != nil && !IsNil(o.Certificate) {
+		return true
+	}
+
+	return false
 }
 
-// GetDefaultRule returns the DefaultRule field value
-// If the value is explicit nil, the zero value for ListenerDefaultRule will be returned
-func (o *LoadBalancerListenerOpts) GetDefaultRule() ListenerDefaultRule {
-	if o == nil || o.DefaultRule.Get() == nil {
-		var ret ListenerDefaultRule
+// SetCertificate gets a reference to the given SslCertificate and assigns it to the Certificate field.
+func (o *LoadBalancerListenerOpts) SetCertificate(v SslCertificate) {
+	o.Certificate = &v
+}
+
+// GetDefaultRule returns the DefaultRule field value if set, zero value otherwise.
+func (o *LoadBalancerListenerOpts) GetDefaultRule() LoadBalancerListenerDefaultRule {
+	if o == nil || IsNil(o.DefaultRule) {
+		var ret LoadBalancerListenerDefaultRule
 		return ret
 	}
-
-	return *o.DefaultRule.Get()
+	return *o.DefaultRule
 }
 
-// GetDefaultRuleOk returns a tuple with the DefaultRule field value
+// GetDefaultRuleOk returns a tuple with the DefaultRule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoadBalancerListenerOpts) GetDefaultRuleOk() (*ListenerDefaultRule, bool) {
-	if o == nil {
+func (o *LoadBalancerListenerOpts) GetDefaultRuleOk() (*LoadBalancerListenerDefaultRule, bool) {
+	if o == nil || IsNil(o.DefaultRule) {
 		return nil, false
 	}
-	return o.DefaultRule.Get(), o.DefaultRule.IsSet()
+	return o.DefaultRule, true
 }
 
-// SetDefaultRule sets field value
-func (o *LoadBalancerListenerOpts) SetDefaultRule(v ListenerDefaultRule) {
-	o.DefaultRule.Set(&v)
+// HasDefaultRule returns a boolean if a field has been set.
+func (o *LoadBalancerListenerOpts) HasDefaultRule() bool {
+	if o != nil && !IsNil(o.DefaultRule) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefaultRule gets a reference to the given LoadBalancerListenerDefaultRule and assigns it to the DefaultRule field.
+func (o *LoadBalancerListenerOpts) SetDefaultRule(v LoadBalancerListenerDefaultRule) {
+	o.DefaultRule = &v
 }
 
 func (o LoadBalancerListenerOpts) MarshalJSON() ([]byte, error) {
@@ -159,10 +184,18 @@ func (o LoadBalancerListenerOpts) MarshalJSON() ([]byte, error) {
 
 func (o LoadBalancerListenerOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["protocol"] = o.Protocol
-	toSerialize["port"] = o.Port
-	toSerialize["certificate"] = o.Certificate
-	toSerialize["defaultRule"] = o.DefaultRule.Get()
+	if !IsNil(o.Protocol) {
+		toSerialize["protocol"] = o.Protocol
+	}
+	if !IsNil(o.Port) {
+		toSerialize["port"] = o.Port
+	}
+	if !IsNil(o.Certificate) {
+		toSerialize["certificate"] = o.Certificate
+	}
+	if !IsNil(o.DefaultRule) {
+		toSerialize["defaultRule"] = o.DefaultRule
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -172,30 +205,6 @@ func (o LoadBalancerListenerOpts) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *LoadBalancerListenerOpts) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"protocol",
-		"port",
-		"certificate",
-		"defaultRule",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varLoadBalancerListenerOpts := _LoadBalancerListenerOpts{}
 
 	err = json.Unmarshal(data, &varLoadBalancerListenerOpts)

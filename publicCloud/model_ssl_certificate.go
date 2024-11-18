@@ -25,7 +25,7 @@ type SslCertificate struct {
 	// Client Certificate. Required only if protocol is HTTPS
 	Certificate string `json:"certificate"`
 	// CA certificate. Not required, but can be added if protocol is HTTPS
-	Chain string `json:"chain"`
+	Chain *string `json:"chain,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,11 +35,10 @@ type _SslCertificate SslCertificate
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSslCertificate(privateKey string, certificate string, chain string) *SslCertificate {
+func NewSslCertificate(privateKey string, certificate string) *SslCertificate {
 	this := SslCertificate{}
 	this.PrivateKey = privateKey
 	this.Certificate = certificate
-	this.Chain = chain
 	return &this
 }
 
@@ -99,28 +98,36 @@ func (o *SslCertificate) SetCertificate(v string) {
 	o.Certificate = v
 }
 
-// GetChain returns the Chain field value
+// GetChain returns the Chain field value if set, zero value otherwise.
 func (o *SslCertificate) GetChain() string {
-	if o == nil {
+	if o == nil || IsNil(o.Chain) {
 		var ret string
 		return ret
 	}
-
-	return o.Chain
+	return *o.Chain
 }
 
-// GetChainOk returns a tuple with the Chain field value
+// GetChainOk returns a tuple with the Chain field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SslCertificate) GetChainOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Chain) {
 		return nil, false
 	}
-	return &o.Chain, true
+	return o.Chain, true
 }
 
-// SetChain sets field value
+// HasChain returns a boolean if a field has been set.
+func (o *SslCertificate) HasChain() bool {
+	if o != nil && !IsNil(o.Chain) {
+		return true
+	}
+
+	return false
+}
+
+// SetChain gets a reference to the given string and assigns it to the Chain field.
 func (o *SslCertificate) SetChain(v string) {
-	o.Chain = v
+	o.Chain = &v
 }
 
 func (o SslCertificate) MarshalJSON() ([]byte, error) {
@@ -135,7 +142,9 @@ func (o SslCertificate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["privateKey"] = o.PrivateKey
 	toSerialize["certificate"] = o.Certificate
-	toSerialize["chain"] = o.Chain
+	if !IsNil(o.Chain) {
+		toSerialize["chain"] = o.Chain
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -151,7 +160,6 @@ func (o *SslCertificate) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"privateKey",
 		"certificate",
-		"chain",
 	}
 
 	allProperties := make(map[string]interface{})

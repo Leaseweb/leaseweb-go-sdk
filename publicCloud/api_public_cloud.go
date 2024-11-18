@@ -2076,11 +2076,11 @@ type ApiCreateLoadBalancerListenerRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
 	loadBalancerId string
-	loadBalancerListenerOpts *LoadBalancerListenerOpts
+	loadBalancerListenerCreateOpts *LoadBalancerListenerCreateOpts
 }
 
-func (r ApiCreateLoadBalancerListenerRequest) LoadBalancerListenerOpts(loadBalancerListenerOpts LoadBalancerListenerOpts) ApiCreateLoadBalancerListenerRequest {
-	r.loadBalancerListenerOpts = &loadBalancerListenerOpts
+func (r ApiCreateLoadBalancerListenerRequest) LoadBalancerListenerCreateOpts(loadBalancerListenerCreateOpts LoadBalancerListenerCreateOpts) ApiCreateLoadBalancerListenerRequest {
+	r.loadBalancerListenerCreateOpts = &loadBalancerListenerCreateOpts
 	return r
 }
 
@@ -2126,8 +2126,8 @@ func (a *PublicCloudAPIService) CreateLoadBalancerListenerExecute(r ApiCreateLoa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.loadBalancerListenerOpts == nil {
-		return localVarReturnValue, nil, reportError("loadBalancerListenerOpts is required and must be specified")
+	if r.loadBalancerListenerCreateOpts == nil {
+		return localVarReturnValue, nil, reportError("loadBalancerListenerCreateOpts is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2148,7 +2148,7 @@ func (a *PublicCloudAPIService) CreateLoadBalancerListenerExecute(r ApiCreateLoa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.loadBalancerListenerOpts
+	localVarPostBody = r.loadBalancerListenerCreateOpts
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -15701,11 +15701,11 @@ type ApiUpdateLoadBalancerListenerRequest struct {
 	ApiService PublicCloudAPI
 	loadBalancerId string
 	listenerId string
-	loadBalancerListenerUpdateOpts *LoadBalancerListenerUpdateOpts
+	loadBalancerListenerOpts *LoadBalancerListenerOpts
 }
 
-func (r ApiUpdateLoadBalancerListenerRequest) LoadBalancerListenerUpdateOpts(loadBalancerListenerUpdateOpts LoadBalancerListenerUpdateOpts) ApiUpdateLoadBalancerListenerRequest {
-	r.loadBalancerListenerUpdateOpts = &loadBalancerListenerUpdateOpts
+func (r ApiUpdateLoadBalancerListenerRequest) LoadBalancerListenerOpts(loadBalancerListenerOpts LoadBalancerListenerOpts) ApiUpdateLoadBalancerListenerRequest {
+	r.loadBalancerListenerOpts = &loadBalancerListenerOpts
 	return r
 }
 
@@ -15752,8 +15752,8 @@ func (a *PublicCloudAPIService) UpdateLoadBalancerListenerExecute(r ApiUpdateLoa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.loadBalancerListenerUpdateOpts == nil {
-		return localVarReturnValue, nil, reportError("loadBalancerListenerUpdateOpts is required and must be specified")
+	if r.loadBalancerListenerOpts == nil {
+		return localVarReturnValue, nil, reportError("loadBalancerListenerOpts is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -15774,7 +15774,7 @@ func (a *PublicCloudAPIService) UpdateLoadBalancerListenerExecute(r ApiUpdateLoa
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.loadBalancerListenerUpdateOpts
+	localVarPostBody = r.loadBalancerListenerOpts
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

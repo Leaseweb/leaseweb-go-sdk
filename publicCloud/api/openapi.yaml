@@ -5109,12 +5109,32 @@ paths:
               certificate:
                 chain: '-----BEGIN CERTIFICATE-----MIICNDCCAZ2gAwIBAgIUEby6nzM+o7vkKfzcMS/DGA8tgwQwDQYJKoZIhvcNAQELBQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoMGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yNDA0MjUwODE3MjZaFw0yNTA0MjUwODE3MjZaMEUxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMMiux2r1AFLVpIhdZ0bvgIvhiT9XCnfHJlGE7OarGKDKJDQ6XAquCfosLws2XAugGcMJWrsqVWtJEYSu6OMsDLYCJhh39AKqZIW0pktkr8LGlo4VLvzGPqwpHnzWthyCEFsE6p+JJQumDA/izJm2zjZL+xHDocOlNqDTB87AIdrAgMBAAGjITAfMB0GA1UdDgQWBBT3sXUrIR2vcwak0QCXoIsxHa4dDDANBgkqhkiG9w0BAQsFAAOBgQCh/l+5s713J02b8sWicUK2KjTPfyKmZFkoS+Mlo+//B/aM612ZJpGL2tAKGF3v0NDOrRYLZj0t/tlZI55pUNJI9cNj/RExvnfTSSNJIbV+8kQt5AHo50wGxj/apkuEtQre2Fpf4pyovcfIoF6HJvvp1jy96yL14UoEehZypR8FlA==-----END
                   CERTIFICATE-----'
-                certificate: '-----BEGIN CERTIFICATE-----MIIBhDCB7gIBADBFMQswCQYDVQQGEwJBVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtWdKNbZxvkXKAADjJMJ7VTJz6uFoMD403C+gMIF8hwqIsHggzCao6iXrW9sZoyZtUBVBiiq5RumHbbpwvOdMmXrShEB4sTJkWRMDy7yD4D91WCU1fc10E/zBJMwssAvmHZo5kGW1Pj1N9ktb+O/TMsEc6yd5suvdQj6aaJbQlTQIDAQABoAAwDQYJKoZIhvcNAQELBQADgYEAWOQ2CJLRo8MQgJgvhdoSIkHITnrbjB5hS3f/dx0lIcnyI6Q9nOyuQHXkCgkdBaV8lz7l+IbqcGc3CaIRP2ZIVFvo2252n630tOOSsqoqJS1tYIoIKsohi3T3d8T1i/s0BWbTJi8Xgd186wyUn/jHwXROKx2rq6yYsAO6fISDKw8=-----END
-                  CERTIFICATE-----'
+                certificate: |-
+                  -----BEGIN CERTIFICATE-----
+                  MIIDbTCCAlWgAwIBAgIUG5aG8dxJuNEuxdbcfF1d4mP72mIwDQYJKoZIhvcNAQEL
+                  BQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+                  GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAgFw0yNDExMTIxMDAwNDBaGA8yMDUy
+                  MDMzMDEwMDA0MFowRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUx
+                  ITAfBgNVBAoMGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDCCASIwDQYJKoZIhvcN
+                  AQEBBQADggEPADCCAQoCggEBALPIdN+UezxfFEASbmNgeAnAvsPC64wjE+ya6CUT
+                  ybF+JEKpUFdGXf7wjF/G5NoWDVb3Q2MwiIYgCl6qfp8uR5GYteJuZmctVJKlSPgs
+                  JvPyxqGOIFw8CBrvAeaBOmDsr/a2myWmsmfzNKtVs38oXIKiZio4kVj0dvv0PSIa
+                  WDuQA4fhOsXxgdMYOqGrvTlHkJy2B2jsio7+0FpXxkP07GDmiO7cDiRWRpcpP/Bj
+                  pkvmJy75Z6nLRWi+RkURiFp8e8W7dcwVLlxsqKhCq5o6Vn7IJmxzpESdUxgKlEXA
+                  iKO2SslYD/iH3GR0f4o9kbltDkHRJIcyukGJkKVTNtE54W0CAwEAAaNTMFEwHQYD
+                  VR0OBBYEFB0wyhEk622fqyBITXcobT8FxxAZMB8GA1UdIwQYMBaAFB0wyhEk622f
+                  qyBITXcobT8FxxAZMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEB
+                  AENHTRWFAI2apo97pFpKAEurFr9Vg6gzNf8XwrPMl+rHL/DCXjqGYVaVx3T8L2Qn
+                  bOmOnmz3fFga7L26DvhhN3Ww7dFMxKYvdFq8g1WkZ5I+iCWCC2xt5ze+H4Kfi72H
+                  n7DFNG43XJ0OPeJ/+164YZRgrRgzzt8gGubRZYDdGNN2xeu7IjRDckVUkHbAHEIP
+                  O5WCIxYd1y9CnNni+JPnFeon4cpMXFc+Dzv8Sl/JW9UsKHLyB7Ih931EpMTP4+Up
+                  W6Z50/QTQ28TDgl7UbF9mtuKWrvo4P7by79HSOtV2CNYWVoGNjlnM4qrAzMfx4er
+                  q8DlIr8eJ7QH6FrP1LIryKI=
+                  -----END CERTIFICATE-----
                 privateKey: '-----BEGIN EC PRIVATE KEY-----MIHcAgEBBEIBVlC0IObonfQZIQ81l/WILKfWT5Fv96eNnYmQZ7uleu73igfiVESVuPfNlbW9oNEK1XcXli4YNZMxWMkKuzC3w8CgBwYFK4EEACOhgYkDgYYABAHvOqz9d2xeSpm1FNdw0NR5j/q6PMd6whZFsTPNYNj0/PsTpsHk78ZB4MYnJUXwHJjpj+gnKkLNc02f4w/vSF8VXADX4l40XU/w82TAOCftQwoxO5o0jZcwEUIYzl02Zd7uNxhjtKJQnYFi9x8WI8L8zQ6GZB/fJKYwoHaUr0I1h/5LzQ==-----END
                   EC PRIVATE KEY-----'
             schema:
-              $ref: '#/components/schemas/loadBalancerListenerOpts'
+              $ref: '#/components/schemas/loadBalancerListenerCreateOpts'
         required: true
       responses:
         "201":
@@ -5410,12 +5430,32 @@ paths:
               certificate:
                 chain: '-----BEGIN CERTIFICATE-----MIICNDCCAZ2gAwIBAgIUEby6nzM+o7vkKfzcMS/DGA8tgwQwDQYJKoZIhvcNAQELBQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoMGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yNDA0MjUwODE3MjZaFw0yNTA0MjUwODE3MjZaMEUxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMMiux2r1AFLVpIhdZ0bvgIvhiT9XCnfHJlGE7OarGKDKJDQ6XAquCfosLws2XAugGcMJWrsqVWtJEYSu6OMsDLYCJhh39AKqZIW0pktkr8LGlo4VLvzGPqwpHnzWthyCEFsE6p+JJQumDA/izJm2zjZL+xHDocOlNqDTB87AIdrAgMBAAGjITAfMB0GA1UdDgQWBBT3sXUrIR2vcwak0QCXoIsxHa4dDDANBgkqhkiG9w0BAQsFAAOBgQCh/l+5s713J02b8sWicUK2KjTPfyKmZFkoS+Mlo+//B/aM612ZJpGL2tAKGF3v0NDOrRYLZj0t/tlZI55pUNJI9cNj/RExvnfTSSNJIbV+8kQt5AHo50wGxj/apkuEtQre2Fpf4pyovcfIoF6HJvvp1jy96yL14UoEehZypR8FlA==-----END
                   CERTIFICATE-----'
-                certificate: '-----BEGIN CERTIFICATE-----MIIBhDCB7gIBADBFMQswCQYDVQQGEwJBVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtWdKNbZxvkXKAADjJMJ7VTJz6uFoMD403C+gMIF8hwqIsHggzCao6iXrW9sZoyZtUBVBiiq5RumHbbpwvOdMmXrShEB4sTJkWRMDy7yD4D91WCU1fc10E/zBJMwssAvmHZo5kGW1Pj1N9ktb+O/TMsEc6yd5suvdQj6aaJbQlTQIDAQABoAAwDQYJKoZIhvcNAQELBQADgYEAWOQ2CJLRo8MQgJgvhdoSIkHITnrbjB5hS3f/dx0lIcnyI6Q9nOyuQHXkCgkdBaV8lz7l+IbqcGc3CaIRP2ZIVFvo2252n630tOOSsqoqJS1tYIoIKsohi3T3d8T1i/s0BWbTJi8Xgd186wyUn/jHwXROKx2rq6yYsAO6fISDKw8=-----END
-                  CERTIFICATE-----'
+                certificate: |-
+                  -----BEGIN CERTIFICATE-----
+                  MIIDbTCCAlWgAwIBAgIUG5aG8dxJuNEuxdbcfF1d4mP72mIwDQYJKoZIhvcNAQEL
+                  BQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+                  GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAgFw0yNDExMTIxMDAwNDBaGA8yMDUy
+                  MDMzMDEwMDA0MFowRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUx
+                  ITAfBgNVBAoMGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDCCASIwDQYJKoZIhvcN
+                  AQEBBQADggEPADCCAQoCggEBALPIdN+UezxfFEASbmNgeAnAvsPC64wjE+ya6CUT
+                  ybF+JEKpUFdGXf7wjF/G5NoWDVb3Q2MwiIYgCl6qfp8uR5GYteJuZmctVJKlSPgs
+                  JvPyxqGOIFw8CBrvAeaBOmDsr/a2myWmsmfzNKtVs38oXIKiZio4kVj0dvv0PSIa
+                  WDuQA4fhOsXxgdMYOqGrvTlHkJy2B2jsio7+0FpXxkP07GDmiO7cDiRWRpcpP/Bj
+                  pkvmJy75Z6nLRWi+RkURiFp8e8W7dcwVLlxsqKhCq5o6Vn7IJmxzpESdUxgKlEXA
+                  iKO2SslYD/iH3GR0f4o9kbltDkHRJIcyukGJkKVTNtE54W0CAwEAAaNTMFEwHQYD
+                  VR0OBBYEFB0wyhEk622fqyBITXcobT8FxxAZMB8GA1UdIwQYMBaAFB0wyhEk622f
+                  qyBITXcobT8FxxAZMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEB
+                  AENHTRWFAI2apo97pFpKAEurFr9Vg6gzNf8XwrPMl+rHL/DCXjqGYVaVx3T8L2Qn
+                  bOmOnmz3fFga7L26DvhhN3Ww7dFMxKYvdFq8g1WkZ5I+iCWCC2xt5ze+H4Kfi72H
+                  n7DFNG43XJ0OPeJ/+164YZRgrRgzzt8gGubRZYDdGNN2xeu7IjRDckVUkHbAHEIP
+                  O5WCIxYd1y9CnNni+JPnFeon4cpMXFc+Dzv8Sl/JW9UsKHLyB7Ih931EpMTP4+Up
+                  W6Z50/QTQ28TDgl7UbF9mtuKWrvo4P7by79HSOtV2CNYWVoGNjlnM4qrAzMfx4er
+                  q8DlIr8eJ7QH6FrP1LIryKI=
+                  -----END CERTIFICATE-----
                 privateKey: '-----BEGIN EC PRIVATE KEY-----MIHcAgEBBEIBVlC0IObonfQZIQ81l/WILKfWT5Fv96eNnYmQZ7uleu73igfiVESVuPfNlbW9oNEK1XcXli4YNZMxWMkKuzC3w8CgBwYFK4EEACOhgYkDgYYABAHvOqz9d2xeSpm1FNdw0NR5j/q6PMd6whZFsTPNYNj0/PsTpsHk78ZB4MYnJUXwHJjpj+gnKkLNc02f4w/vSF8VXADX4l40XU/w82TAOCftQwoxO5o0jZcwEUIYzl02Zd7uNxhjtKJQnYFi9x8WI8L8zQ6GZB/fJKYwoHaUr0I1h/5LzQ==-----END
                   EC PRIVATE KEY-----'
             schema:
-              $ref: '#/components/schemas/loadBalancerListenerUpdateOpts'
+              $ref: '#/components/schemas/loadBalancerListenerOpts'
         required: true
       responses:
         "200":
@@ -12862,6 +12902,13 @@ components:
           description: Time to close the connection if load balancer is idle
           type: integer
       type: object
+    protocol:
+      enum:
+      - HTTP
+      - HTTPS
+      - TCP
+      example: HTTP
+      type: string
     loadBalancerListenerRule:
       example:
         default: true
@@ -12887,7 +12934,7 @@ components:
       type: object
     loadBalancerListener:
       example:
-        protocol: protocol
+        protocol: HTTP
         port: 0
         rules:
         - default: true
@@ -12899,8 +12946,7 @@ components:
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         protocol:
-          description: Protocol of the listener.
-          type: string
+          $ref: '#/components/schemas/protocol'
         port:
           description: Port for the listener
           type: integer
@@ -12922,7 +12968,7 @@ components:
     getLoadBalancerListenerListResult:
       example:
         listeners:
-        - protocol: protocol
+        - protocol: HTTP
           port: 0
           rules:
           - default: true
@@ -12932,7 +12978,7 @@ components:
             targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - protocol: protocol
+        - protocol: HTTP
           port: 0
           rules:
           - default: true
@@ -12954,50 +13000,59 @@ components:
         _metadata:
           $ref: '#/components/schemas/_metadata'
       type: object
-    loadBalancerListenerOpts:
-      properties:
-        protocol:
-          enum:
-          - HTTPS
-          - HTTP
-          - TCP
-          type: string
-        port:
-          description: Port that the listener listens to
-          type: integer
-        certificate:
-          $ref: '#/components/schemas/certificate'
-        defaultRule:
-          $ref: '#/components/schemas/listenerDefaultRule'
-      required:
-      - certificate
-      - defaultRule
-      - port
-      - protocol
-      title: loadBalancerListenerOpts
-      type: object
     sslCertificate:
       example:
-        privateKey: privateKey
+        privateKey: '-----BEGIN EC PRIVATE KEY-----MIHcAgEBBEIBVlC0IObonfQZIQ81l/WILKfWT5Fv96eNnYmQZ7uleu73igfiVESVuPfNlbW9oNEK1XcXli4YNZMxWMkKuzC3w8CgBwYFK4EEACOhgYkDgYYABAHvOqz9d2xeSpm1FNdw0NR5j/q6PMd6whZFsTPNYNj0/PsTpsHk78ZB4MYnJUXwHJjpj+gnKkLNc02f4w/vSF8VXADX4l40XU/w82TAOCftQwoxO5o0jZcwEUIYzl02Zd7uNxhjtKJQnYFi9x8WI8L8zQ6GZB/fJKYwoHaUr0I1h/5LzQ==-----END
+          EC PRIVATE KEY-----'
         chain: chain
-        certificate: certificate
+        certificate: '-----BEGIN CERTIFICATE-----MIIBhDCB7gIBADBFMQswCQYDVQQGEwJBVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtWdKNbZxvkXKAADjJMJ7VTJz6uFoMD403C+gMIF8hwqIsHggzCao6iXrW9sZoyZtUBVBiiq5RumHbbpwvOdMmXrShEB4sTJkWRMDy7yD4D91WCU1fc10E/zBJMwssAvmHZo5kGW1Pj1N9ktb+O/TMsEc6yd5suvdQj6aaJbQlTQIDAQABoAAwDQYJKoZIhvcNAQELBQADgYEAWOQ2CJLRo8MQgJgvhdoSIkHITnrbjB5hS3f/dx0lIcnyI6Q9nOyuQHXkCgkdBaV8lz7l+IbqcGc3CaIRP2ZIVFvo2252n630tOOSsqoqJS1tYIoIKsohi3T3d8T1i/s0BWbTJi8Xgd186wyUn/jHwXROKx2rq6yYsAO6fISDKw8=-----END
+          CERTIFICATE-----'
       properties:
         privateKey:
           description: Client Private Key. Required only if protocol is HTTPS
+          example: '-----BEGIN EC PRIVATE KEY-----MIHcAgEBBEIBVlC0IObonfQZIQ81l/WILKfWT5Fv96eNnYmQZ7uleu73igfiVESVuPfNlbW9oNEK1XcXli4YNZMxWMkKuzC3w8CgBwYFK4EEACOhgYkDgYYABAHvOqz9d2xeSpm1FNdw0NR5j/q6PMd6whZFsTPNYNj0/PsTpsHk78ZB4MYnJUXwHJjpj+gnKkLNc02f4w/vSF8VXADX4l40XU/w82TAOCftQwoxO5o0jZcwEUIYzl02Zd7uNxhjtKJQnYFi9x8WI8L8zQ6GZB/fJKYwoHaUr0I1h/5LzQ==-----END
+            EC PRIVATE KEY-----'
+          minLength: 1
           type: string
         certificate:
           description: Client Certificate. Required only if protocol is HTTPS
+          example: '-----BEGIN CERTIFICATE-----MIIBhDCB7gIBADBFMQswCQYDVQQGEwJBVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtWdKNbZxvkXKAADjJMJ7VTJz6uFoMD403C+gMIF8hwqIsHggzCao6iXrW9sZoyZtUBVBiiq5RumHbbpwvOdMmXrShEB4sTJkWRMDy7yD4D91WCU1fc10E/zBJMwssAvmHZo5kGW1Pj1N9ktb+O/TMsEc6yd5suvdQj6aaJbQlTQIDAQABoAAwDQYJKoZIhvcNAQELBQADgYEAWOQ2CJLRo8MQgJgvhdoSIkHITnrbjB5hS3f/dx0lIcnyI6Q9nOyuQHXkCgkdBaV8lz7l+IbqcGc3CaIRP2ZIVFvo2252n630tOOSsqoqJS1tYIoIKsohi3T3d8T1i/s0BWbTJi8Xgd186wyUn/jHwXROKx2rq6yYsAO6fISDKw8=-----END
+            CERTIFICATE-----'
+          minLength: 1
           type: string
         chain:
           description: "CA certificate. Not required, but can be added if protocol\
             \ is HTTPS"
+          minLength: 1
           type: string
       required:
       - certificate
-      - chain
       - privateKey
       title: sslCertificate
       type: object
+    loadBalancerListenerOpts:
+      properties:
+        protocol:
+          $ref: '#/components/schemas/protocol'
+        port:
+          description: Port that the listener listens to
+          type: integer
+        certificate:
+          $ref: '#/components/schemas/sslCertificate'
+        defaultRule:
+          $ref: '#/components/schemas/loadBalancerListenerDefaultRule'
+      title: loadBalancerListenerOpts
+      type: object
+    loadBalancerListenerCreateOpts:
+      allOf:
+      - $ref: '#/components/schemas/loadBalancerListenerOpts'
+      - properties: {}
+        required:
+        - defaultRule
+        - port
+        - protocol
+        title: loadBalancerListenerCreateOpts
+        type: object
     loadBalancerListenerDetails:
       allOf:
       - $ref: '#/components/schemas/loadBalancerListener'
@@ -13011,15 +13066,19 @@ components:
         title: loadBalancerListener
         type: object
       example:
-        protocol: protocol
+        protocol: HTTP
         port: 0
         sslCertificates:
-        - privateKey: privateKey
+        - privateKey: '-----BEGIN EC PRIVATE KEY-----MIHcAgEBBEIBVlC0IObonfQZIQ81l/WILKfWT5Fv96eNnYmQZ7uleu73igfiVESVuPfNlbW9oNEK1XcXli4YNZMxWMkKuzC3w8CgBwYFK4EEACOhgYkDgYYABAHvOqz9d2xeSpm1FNdw0NR5j/q6PMd6whZFsTPNYNj0/PsTpsHk78ZB4MYnJUXwHJjpj+gnKkLNc02f4w/vSF8VXADX4l40XU/w82TAOCftQwoxO5o0jZcwEUIYzl02Zd7uNxhjtKJQnYFi9x8WI8L8zQ6GZB/fJKYwoHaUr0I1h/5LzQ==-----END
+            EC PRIVATE KEY-----'
           chain: chain
-          certificate: certificate
-        - privateKey: privateKey
+          certificate: '-----BEGIN CERTIFICATE-----MIIBhDCB7gIBADBFMQswCQYDVQQGEwJBVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtWdKNbZxvkXKAADjJMJ7VTJz6uFoMD403C+gMIF8hwqIsHggzCao6iXrW9sZoyZtUBVBiiq5RumHbbpwvOdMmXrShEB4sTJkWRMDy7yD4D91WCU1fc10E/zBJMwssAvmHZo5kGW1Pj1N9ktb+O/TMsEc6yd5suvdQj6aaJbQlTQIDAQABoAAwDQYJKoZIhvcNAQELBQADgYEAWOQ2CJLRo8MQgJgvhdoSIkHITnrbjB5hS3f/dx0lIcnyI6Q9nOyuQHXkCgkdBaV8lz7l+IbqcGc3CaIRP2ZIVFvo2252n630tOOSsqoqJS1tYIoIKsohi3T3d8T1i/s0BWbTJi8Xgd186wyUn/jHwXROKx2rq6yYsAO6fISDKw8=-----END
+            CERTIFICATE-----'
+        - privateKey: '-----BEGIN EC PRIVATE KEY-----MIHcAgEBBEIBVlC0IObonfQZIQ81l/WILKfWT5Fv96eNnYmQZ7uleu73igfiVESVuPfNlbW9oNEK1XcXli4YNZMxWMkKuzC3w8CgBwYFK4EEACOhgYkDgYYABAHvOqz9d2xeSpm1FNdw0NR5j/q6PMd6whZFsTPNYNj0/PsTpsHk78ZB4MYnJUXwHJjpj+gnKkLNc02f4w/vSF8VXADX4l40XU/w82TAOCftQwoxO5o0jZcwEUIYzl02Zd7uNxhjtKJQnYFi9x8WI8L8zQ6GZB/fJKYwoHaUr0I1h/5LzQ==-----END
+            EC PRIVATE KEY-----'
           chain: chain
-          certificate: certificate
+          certificate: '-----BEGIN CERTIFICATE-----MIIBhDCB7gIBADBFMQswCQYDVQQGEwJBVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtWdKNbZxvkXKAADjJMJ7VTJz6uFoMD403C+gMIF8hwqIsHggzCao6iXrW9sZoyZtUBVBiiq5RumHbbpwvOdMmXrShEB4sTJkWRMDy7yD4D91WCU1fc10E/zBJMwssAvmHZo5kGW1Pj1N9ktb+O/TMsEc6yd5suvdQj6aaJbQlTQIDAQABoAAwDQYJKoZIhvcNAQELBQADgYEAWOQ2CJLRo8MQgJgvhdoSIkHITnrbjB5hS3f/dx0lIcnyI6Q9nOyuQHXkCgkdBaV8lz7l+IbqcGc3CaIRP2ZIVFvo2252n630tOOSsqoqJS1tYIoIKsohi3T3d8T1i/s0BWbTJi8Xgd186wyUn/jHwXROKx2rq6yYsAO6fISDKw8=-----END
+            CERTIFICATE-----'
         rules:
         - default: true
           targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -13028,30 +13087,6 @@ components:
           targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-    loadBalancerListenerUpdateOpts:
-      properties:
-        protocol:
-          enum:
-          - HTTPS
-          - HTTP
-          - TCP
-          nullable: true
-          type: string
-        port:
-          description: Port that the listener listens to
-          nullable: true
-          type: integer
-        certificate:
-          $ref: '#/components/schemas/certificate_1'
-        defaultRule:
-          $ref: '#/components/schemas/listenerDefaultRule'
-      required:
-      - certificate
-      - defaultRule
-      - port
-      - protocol
-      title: loadBalancerListenerUpdateOpts
-      type: object
     getIpListResult:
       example:
         _metadata:
@@ -13678,13 +13713,6 @@ components:
       - reference
       - type
       type: object
-    protocol:
-      enum:
-      - HTTP
-      - HTTPS
-      - TCP
-      example: HTTP
-      type: string
     httpMethod:
       enum:
       - GET
@@ -14680,45 +14708,15 @@ components:
           $ref: '#/components/schemas/image'
       title: marketApp
       type: object
-    certificate:
-      properties:
-        privateKey:
-          description: Client Private Key. Required only if protocol is HTTPS
-          type: string
-        certificate:
-          description: Client Certificate. Required only if protocol is HTTPS
-          type: string
-        chain:
-          description: "CA certificate. Not required, but can be added if protocol\
-            \ is HTTPS"
-          nullable: true
-          type: string
-      title: certificate
-      type: object
-    listenerDefaultRule:
-      nullable: true
+    loadBalancerListenerDefaultRule:
       properties:
         targetGroupId:
           description: The target group unique identifier
           format: uuid
           type: string
-      title: listenerDefaultRule
-      type: object
-    certificate_1:
-      nullable: true
-      properties:
-        privateKey:
-          description: Client Private Key. Required only if protocol is HTTPS
-          type: string
-        certificate:
-          description: Client Certificate. Required only if protocol is HTTPS
-          type: string
-        chain:
-          description: "CA certificate. Not required, but can be added if protocol\
-            \ is HTTPS"
-          nullable: true
-          type: string
-      title: certificate
+      required:
+      - targetGroupId
+      title: loadBalancerListenerDefaultRule
       type: object
     trafficMetricValue:
       example:

@@ -20,8 +20,7 @@ var _ MappedNullable = &LoadBalancerListenerDetails{}
 
 // LoadBalancerListenerDetails struct for LoadBalancerListenerDetails
 type LoadBalancerListenerDetails struct {
-	// Protocol of the listener.
-	Protocol string `json:"protocol"`
+	Protocol Protocol `json:"protocol"`
 	// Port for the listener
 	Port int32 `json:"port"`
 	// The listener unique identifier
@@ -37,7 +36,7 @@ type _LoadBalancerListenerDetails LoadBalancerListenerDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerListenerDetails(protocol string, port int32, id string, rules []LoadBalancerListenerRule, sslCertificates []SslCertificate) *LoadBalancerListenerDetails {
+func NewLoadBalancerListenerDetails(protocol Protocol, port int32, id string, rules []LoadBalancerListenerRule, sslCertificates []SslCertificate) *LoadBalancerListenerDetails {
 	this := LoadBalancerListenerDetails{}
 	this.Protocol = protocol
 	this.Port = port
@@ -56,9 +55,9 @@ func NewLoadBalancerListenerDetailsWithDefaults() *LoadBalancerListenerDetails {
 }
 
 // GetProtocol returns the Protocol field value
-func (o *LoadBalancerListenerDetails) GetProtocol() string {
+func (o *LoadBalancerListenerDetails) GetProtocol() Protocol {
 	if o == nil {
-		var ret string
+		var ret Protocol
 		return ret
 	}
 
@@ -67,7 +66,7 @@ func (o *LoadBalancerListenerDetails) GetProtocol() string {
 
 // GetProtocolOk returns a tuple with the Protocol field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerListenerDetails) GetProtocolOk() (*string, bool) {
+func (o *LoadBalancerListenerDetails) GetProtocolOk() (*Protocol, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -75,7 +74,7 @@ func (o *LoadBalancerListenerDetails) GetProtocolOk() (*string, bool) {
 }
 
 // SetProtocol sets field value
-func (o *LoadBalancerListenerDetails) SetProtocol(v string) {
+func (o *LoadBalancerListenerDetails) SetProtocol(v Protocol) {
 	o.Protocol = v
 }
 

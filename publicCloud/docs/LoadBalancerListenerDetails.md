@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Protocol** | **string** | Protocol of the listener. | 
+**Protocol** | [**Protocol**](Protocol.md) |  | 
 **Port** | **int32** | Port for the listener | 
 **Id** | **string** | The listener unique identifier | 
 **Rules** | [**[]LoadBalancerListenerRule**](LoadBalancerListenerRule.md) |  | 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewLoadBalancerListenerDetails
 
-`func NewLoadBalancerListenerDetails(protocol string, port int32, id string, rules []LoadBalancerListenerRule, sslCertificates []SslCertificate, ) *LoadBalancerListenerDetails`
+`func NewLoadBalancerListenerDetails(protocol Protocol, port int32, id string, rules []LoadBalancerListenerRule, sslCertificates []SslCertificate, ) *LoadBalancerListenerDetails`
 
 NewLoadBalancerListenerDetails instantiates a new LoadBalancerListenerDetails object
 This constructor will assign default values to properties that have it defined,
@@ -31,20 +31,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetProtocol
 
-`func (o *LoadBalancerListenerDetails) GetProtocol() string`
+`func (o *LoadBalancerListenerDetails) GetProtocol() Protocol`
 
 GetProtocol returns the Protocol field if non-nil, zero value otherwise.
 
 ### GetProtocolOk
 
-`func (o *LoadBalancerListenerDetails) GetProtocolOk() (*string, bool)`
+`func (o *LoadBalancerListenerDetails) GetProtocolOk() (*Protocol, bool)`
 
 GetProtocolOk returns a tuple with the Protocol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProtocol
 
-`func (o *LoadBalancerListenerDetails) SetProtocol(v string)`
+`func (o *LoadBalancerListenerDetails) SetProtocol(v Protocol)`
 
 SetProtocol sets Protocol field to given value.
 

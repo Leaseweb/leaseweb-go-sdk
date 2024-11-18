@@ -20,8 +20,7 @@ var _ MappedNullable = &LoadBalancerListener{}
 
 // LoadBalancerListener struct for LoadBalancerListener
 type LoadBalancerListener struct {
-	// Protocol of the listener.
-	Protocol string `json:"protocol"`
+	Protocol Protocol `json:"protocol"`
 	// Port for the listener
 	Port int32 `json:"port"`
 	// The listener unique identifier
@@ -36,7 +35,7 @@ type _LoadBalancerListener LoadBalancerListener
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLoadBalancerListener(protocol string, port int32, id string, rules []LoadBalancerListenerRule) *LoadBalancerListener {
+func NewLoadBalancerListener(protocol Protocol, port int32, id string, rules []LoadBalancerListenerRule) *LoadBalancerListener {
 	this := LoadBalancerListener{}
 	this.Protocol = protocol
 	this.Port = port
@@ -54,9 +53,9 @@ func NewLoadBalancerListenerWithDefaults() *LoadBalancerListener {
 }
 
 // GetProtocol returns the Protocol field value
-func (o *LoadBalancerListener) GetProtocol() string {
+func (o *LoadBalancerListener) GetProtocol() Protocol {
 	if o == nil {
-		var ret string
+		var ret Protocol
 		return ret
 	}
 
@@ -65,7 +64,7 @@ func (o *LoadBalancerListener) GetProtocol() string {
 
 // GetProtocolOk returns a tuple with the Protocol field value
 // and a boolean to check if the value has been set.
-func (o *LoadBalancerListener) GetProtocolOk() (*string, bool) {
+func (o *LoadBalancerListener) GetProtocolOk() (*Protocol, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,7 +72,7 @@ func (o *LoadBalancerListener) GetProtocolOk() (*string, bool) {
 }
 
 // SetProtocol sets field value
-func (o *LoadBalancerListener) SetProtocol(v string) {
+func (o *LoadBalancerListener) SetProtocol(v Protocol) {
 	o.Protocol = v
 }
 
