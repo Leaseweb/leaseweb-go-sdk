@@ -1,150 +1,140 @@
-# HealthCheck
+# HealthCheckOpts
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Protocol** | [**Protocol**](Protocol.md) |  | 
-**Method** | [**NullableHttpMethod**](HttpMethod.md) |  | 
+**Method** | Pointer to [**HttpMethodOpt**](HttpMethodOpt.md) |  | [optional] 
 **Uri** | **string** | URI to check in the target instances | 
-**Host** | **NullableString** | Host for the health check if any | 
+**Host** | Pointer to **string** | Host for the health check if any | [optional] 
 **Port** | **int32** | Port number | 
 
 ## Methods
 
-### NewHealthCheck
+### NewHealthCheckOpts
 
-`func NewHealthCheck(protocol Protocol, method NullableHttpMethod, uri string, host NullableString, port int32, ) *HealthCheck`
+`func NewHealthCheckOpts(protocol Protocol, uri string, port int32, ) *HealthCheckOpts`
 
-NewHealthCheck instantiates a new HealthCheck object
+NewHealthCheckOpts instantiates a new HealthCheckOpts object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewHealthCheckWithDefaults
+### NewHealthCheckOptsWithDefaults
 
-`func NewHealthCheckWithDefaults() *HealthCheck`
+`func NewHealthCheckOptsWithDefaults() *HealthCheckOpts`
 
-NewHealthCheckWithDefaults instantiates a new HealthCheck object
+NewHealthCheckOptsWithDefaults instantiates a new HealthCheckOpts object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetProtocol
 
-`func (o *HealthCheck) GetProtocol() Protocol`
+`func (o *HealthCheckOpts) GetProtocol() Protocol`
 
 GetProtocol returns the Protocol field if non-nil, zero value otherwise.
 
 ### GetProtocolOk
 
-`func (o *HealthCheck) GetProtocolOk() (*Protocol, bool)`
+`func (o *HealthCheckOpts) GetProtocolOk() (*Protocol, bool)`
 
 GetProtocolOk returns a tuple with the Protocol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProtocol
 
-`func (o *HealthCheck) SetProtocol(v Protocol)`
+`func (o *HealthCheckOpts) SetProtocol(v Protocol)`
 
 SetProtocol sets Protocol field to given value.
 
 
 ### GetMethod
 
-`func (o *HealthCheck) GetMethod() HttpMethod`
+`func (o *HealthCheckOpts) GetMethod() HttpMethodOpt`
 
 GetMethod returns the Method field if non-nil, zero value otherwise.
 
 ### GetMethodOk
 
-`func (o *HealthCheck) GetMethodOk() (*HttpMethod, bool)`
+`func (o *HealthCheckOpts) GetMethodOk() (*HttpMethodOpt, bool)`
 
 GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMethod
 
-`func (o *HealthCheck) SetMethod(v HttpMethod)`
+`func (o *HealthCheckOpts) SetMethod(v HttpMethodOpt)`
 
 SetMethod sets Method field to given value.
 
+### HasMethod
 
-### SetMethodNil
+`func (o *HealthCheckOpts) HasMethod() bool`
 
-`func (o *HealthCheck) SetMethodNil(b bool)`
+HasMethod returns a boolean if a field has been set.
 
- SetMethodNil sets the value for Method to be an explicit nil
-
-### UnsetMethod
-`func (o *HealthCheck) UnsetMethod()`
-
-UnsetMethod ensures that no value is present for Method, not even an explicit nil
 ### GetUri
 
-`func (o *HealthCheck) GetUri() string`
+`func (o *HealthCheckOpts) GetUri() string`
 
 GetUri returns the Uri field if non-nil, zero value otherwise.
 
 ### GetUriOk
 
-`func (o *HealthCheck) GetUriOk() (*string, bool)`
+`func (o *HealthCheckOpts) GetUriOk() (*string, bool)`
 
 GetUriOk returns a tuple with the Uri field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUri
 
-`func (o *HealthCheck) SetUri(v string)`
+`func (o *HealthCheckOpts) SetUri(v string)`
 
 SetUri sets Uri field to given value.
 
 
 ### GetHost
 
-`func (o *HealthCheck) GetHost() string`
+`func (o *HealthCheckOpts) GetHost() string`
 
 GetHost returns the Host field if non-nil, zero value otherwise.
 
 ### GetHostOk
 
-`func (o *HealthCheck) GetHostOk() (*string, bool)`
+`func (o *HealthCheckOpts) GetHostOk() (*string, bool)`
 
 GetHostOk returns a tuple with the Host field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHost
 
-`func (o *HealthCheck) SetHost(v string)`
+`func (o *HealthCheckOpts) SetHost(v string)`
 
 SetHost sets Host field to given value.
 
+### HasHost
 
-### SetHostNil
+`func (o *HealthCheckOpts) HasHost() bool`
 
-`func (o *HealthCheck) SetHostNil(b bool)`
+HasHost returns a boolean if a field has been set.
 
- SetHostNil sets the value for Host to be an explicit nil
-
-### UnsetHost
-`func (o *HealthCheck) UnsetHost()`
-
-UnsetHost ensures that no value is present for Host, not even an explicit nil
 ### GetPort
 
-`func (o *HealthCheck) GetPort() int32`
+`func (o *HealthCheckOpts) GetPort() int32`
 
 GetPort returns the Port field if non-nil, zero value otherwise.
 
 ### GetPortOk
 
-`func (o *HealthCheck) GetPortOk() (*int32, bool)`
+`func (o *HealthCheckOpts) GetPortOk() (*int32, bool)`
 
 GetPortOk returns a tuple with the Port field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPort
 
-`func (o *HealthCheck) SetPort(v int32)`
+`func (o *HealthCheckOpts) SetPort(v int32)`
 
 SetPort sets Port field to given value.
 

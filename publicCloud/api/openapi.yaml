@@ -9810,7 +9810,6 @@ paths:
         content:
           application/json:
             example:
-              id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
               name: Target group name
               protocol: HTTP
               port: 80
@@ -9819,10 +9818,10 @@ paths:
                 protocol: HTTP
                 method: GET
                 uri: /
-                host: my-host
+                host: example.com
                 port: 80
             schema:
-              $ref: '#/components/schemas/targetGroup'
+              $ref: '#/components/schemas/createTargetGroupOpts'
         required: true
       responses:
         "201":
@@ -9838,7 +9837,7 @@ paths:
                   protocol: HTTP
                   method: GET
                   uri: /
-                  host: my-host
+                  host: example.com
                   port: 80
               schema:
                 $ref: '#/components/schemas/targetGroup'
@@ -9997,7 +9996,7 @@ paths:
                   protocol: HTTP
                   method: GET
                   uri: /
-                  host: my-host
+                  host: example.com
                   port: 80
               schema:
                 $ref: '#/components/schemas/targetGroup'
@@ -10074,19 +10073,16 @@ paths:
         content:
           application/json:
             example:
-              id: 7e59b33d-05f3-4078-b251-c7831ae8fe14
               name: Target group name
-              protocol: HTTP
               port: 80
-              region: eu-west-2
               healthCheck:
                 protocol: HTTP
                 method: GET
                 uri: /
-                host: my-host
+                host: example.com
                 port: 80
             schema:
-              $ref: '#/components/schemas/targetGroup'
+              $ref: '#/components/schemas/updateTargetGroupOpts'
         required: true
       responses:
         "200":
@@ -10102,7 +10098,7 @@ paths:
                   protocol: HTTP
                   method: GET
                   uri: /
-                  host: my-host
+                  host: example.com
                   port: 80
               schema:
                 $ref: '#/components/schemas/targetGroup'
@@ -13844,51 +13840,22 @@ components:
       - type
       type: object
     httpMethod:
+      description: HTTP method to be used for health check - Required if `protocol`
+        is HTTP or HTTPS. Not allowed if `protocol` is TCP
       enum:
       - GET
       - HEAD
       - POST
       - OPTIONS
-      type: string
-    healthCheck:
-      example:
-        protocol: HTTP
-        method: method
-        port: 9
-        host: host
-        uri: /
       nullable: true
-      properties:
-        protocol:
-          $ref: '#/components/schemas/protocol'
-        method:
-          $ref: '#/components/schemas/httpMethod'
-        uri:
-          description: URI to check in the target instances
-          example: /
-          type: string
-        host:
-          description: Host for the health check if any
-          nullable: true
-          type: string
-        port:
-          description: Port number
-          type: integer
-      required:
-      - host
-      - method
-      - port
-      - protocol
-      - uri
-      title: healthCheck
-      type: object
+      type: string
     targetGroup:
       example:
         protocol: protocol
         port: 7
         healthCheck:
           protocol: HTTP
-          method: method
+          method: null
           port: 9
           host: host
           uri: /
@@ -13934,7 +13901,7 @@ components:
           port: 7
           healthCheck:
             protocol: HTTP
-            method: method
+            method: null
             port: 9
             host: host
             uri: /
@@ -13945,7 +13912,7 @@ components:
           port: 7
           healthCheck:
             protocol: HTTP
-            method: method
+            method: null
             port: 9
             host: host
             uri: /
@@ -14284,7 +14251,7 @@ components:
           port: 7
           healthCheck:
             protocol: HTTP
-            method: method
+            method: null
             port: 9
             host: host
             uri: /
@@ -14295,7 +14262,7 @@ components:
           port: 7
           healthCheck:
             protocol: HTTP
-            method: method
+            method: null
             port: 9
             host: host
             uri: /
@@ -14314,6 +14281,70 @@ components:
         _metadata:
           $ref: '#/components/schemas/_metadata'
       title: targetGroups
+      type: object
+    httpMethodOpt:
+      description: HTTP method to be used for health check - Required if `protocol`
+        is HTTP or HTTPS. Not allowed if `protocol` is TCP
+      enum:
+      - GET
+      - HEAD
+      - POST
+      - OPTIONS
+      type: string
+    healthCheckOpts:
+      properties:
+        protocol:
+          $ref: '#/components/schemas/protocol'
+        method:
+          $ref: '#/components/schemas/httpMethodOpt'
+        uri:
+          description: URI to check in the target instances
+          example: /
+          type: string
+        host:
+          description: Host for the health check if any
+          type: string
+        port:
+          description: Port number
+          type: integer
+      required:
+      - port
+      - protocol
+      - uri
+      title: healthCheckOpts
+      type: object
+    createTargetGroupOpts:
+      properties:
+        name:
+          description: The name of the target group
+          type: string
+        protocol:
+          $ref: '#/components/schemas/protocol'
+        port:
+          description: The port of the target group
+          type: integer
+        region:
+          $ref: '#/components/schemas/regionName'
+        healthCheck:
+          $ref: '#/components/schemas/healthCheckOpts'
+      required:
+      - name
+      - port
+      - protocol
+      - region
+      title: targetGroup
+      type: object
+    updateTargetGroupOpts:
+      properties:
+        name:
+          description: The name of the target group
+          type: string
+        port:
+          description: The port of the target group
+          type: integer
+        healthCheck:
+          $ref: '#/components/schemas/healthCheckOpts'
+      title: targetGroup
       type: object
     healthCheckStatus:
       description: Health check status
@@ -15117,6 +15148,38 @@ components:
         "5xx":
           $ref: '#/components/schemas/metricsProperties'
       title: responseCodesMetrics
+      type: object
+    healthCheck:
+      example:
+        protocol: HTTP
+        method: null
+        port: 9
+        host: host
+        uri: /
+      nullable: true
+      properties:
+        protocol:
+          $ref: '#/components/schemas/protocol'
+        method:
+          $ref: '#/components/schemas/httpMethod'
+        uri:
+          description: URI to check in the target instances
+          example: /
+          type: string
+        host:
+          description: Host for the health check if any
+          nullable: true
+          type: string
+        port:
+          description: Port number
+          type: integer
+      required:
+      - host
+      - method
+      - port
+      - protocol
+      - uri
+      title: healthCheck
       type: object
   securitySchemes:
     BearerAuth:

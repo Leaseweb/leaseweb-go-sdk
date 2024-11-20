@@ -28,6 +28,7 @@ docs/CpuMetricsMetadataSummaryCpuMetrics.md
 docs/CpuMetricsMetadataSummaryPeak.md
 docs/CreateAutoScalingGroupOpts.md
 docs/CreateImageOpts.md
+docs/CreateTargetGroupOpts.md
 docs/Credential.md
 docs/CredentialType.md
 docs/DataTrafficMetrics.md
@@ -66,8 +67,10 @@ docs/GetSnapshotListResult.md
 docs/GetTargetGroupListResult.md
 docs/GetTargetListResult.md
 docs/HealthCheck.md
+docs/HealthCheckOpts.md
 docs/HealthCheckStatus.md
 docs/HttpMethod.md
+docs/HttpMethodOpt.md
 docs/Image.md
 docs/ImageDetails.md
 docs/ImageState.md
@@ -145,6 +148,7 @@ docs/UpdateImageOpts.md
 docs/UpdateInstanceOpts.md
 docs/UpdateIpOpts.md
 docs/UpdateLoadBalancerOpts.md
+docs/UpdateTargetGroupOpts.md
 docs/Values.md
 git_push.sh
 go.mod
@@ -173,6 +177,7 @@ model_cpu_metrics_metadata_summary_cpu_metrics.go
 model_cpu_metrics_metadata_summary_peak.go
 model_create_auto_scaling_group_opts.go
 model_create_image_opts.go
+model_create_target_group_opts.go
 model_credential.go
 model_credential_type.go
 model_data_traffic_metrics.go
@@ -211,8 +216,10 @@ model_get_snapshot_list_result.go
 model_get_target_group_list_result.go
 model_get_target_list_result.go
 model_health_check.go
+model_health_check_opts.go
 model_health_check_status.go
 model_http_method.go
+model_http_method_opt.go
 model_image.go
 model_image_details.go
 model_image_state.go
@@ -287,6 +294,7 @@ model_update_image_opts.go
 model_update_instance_opts.go
 model_update_ip_opts.go
 model_update_load_balancer_opts.go
+model_update_target_group_opts.go
 model_values.go
 response.go
 test/api_public_cloud_test.go

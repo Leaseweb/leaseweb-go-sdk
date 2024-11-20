@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// HttpMethod the model 'HttpMethod'
+// HttpMethod HTTP method to be used for health check - Required if `protocol` is HTTP or HTTPS. Not allowed if `protocol` is TCP
 type HttpMethod string
 
 // List of httpMethod

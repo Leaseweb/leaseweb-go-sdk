@@ -2432,11 +2432,11 @@ func (a *PublicCloudAPIService) CreateSnapshotExecute(r ApiCreateSnapshotRequest
 type ApiCreateTargetGroupRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
-	targetGroup *TargetGroup
+	createTargetGroupOpts *CreateTargetGroupOpts
 }
 
-func (r ApiCreateTargetGroupRequest) TargetGroup(targetGroup TargetGroup) ApiCreateTargetGroupRequest {
-	r.targetGroup = &targetGroup
+func (r ApiCreateTargetGroupRequest) CreateTargetGroupOpts(createTargetGroupOpts CreateTargetGroupOpts) ApiCreateTargetGroupRequest {
+	r.createTargetGroupOpts = &createTargetGroupOpts
 	return r
 }
 
@@ -2479,8 +2479,8 @@ func (a *PublicCloudAPIService) CreateTargetGroupExecute(r ApiCreateTargetGroupR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.targetGroup == nil {
-		return localVarReturnValue, nil, reportError("targetGroup is required and must be specified")
+	if r.createTargetGroupOpts == nil {
+		return localVarReturnValue, nil, reportError("createTargetGroupOpts is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2501,7 +2501,7 @@ func (a *PublicCloudAPIService) CreateTargetGroupExecute(r ApiCreateTargetGroupR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.targetGroup
+	localVarPostBody = r.createTargetGroupOpts
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -15884,11 +15884,11 @@ type ApiUpdateTargetGroupRequest struct {
 	ctx context.Context
 	ApiService PublicCloudAPI
 	targetGroupId string
-	targetGroup *TargetGroup
+	updateTargetGroupOpts *UpdateTargetGroupOpts
 }
 
-func (r ApiUpdateTargetGroupRequest) TargetGroup(targetGroup TargetGroup) ApiUpdateTargetGroupRequest {
-	r.targetGroup = &targetGroup
+func (r ApiUpdateTargetGroupRequest) UpdateTargetGroupOpts(updateTargetGroupOpts UpdateTargetGroupOpts) ApiUpdateTargetGroupRequest {
+	r.updateTargetGroupOpts = &updateTargetGroupOpts
 	return r
 }
 
@@ -15934,8 +15934,8 @@ func (a *PublicCloudAPIService) UpdateTargetGroupExecute(r ApiUpdateTargetGroupR
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.targetGroup == nil {
-		return localVarReturnValue, nil, reportError("targetGroup is required and must be specified")
+	if r.updateTargetGroupOpts == nil {
+		return localVarReturnValue, nil, reportError("updateTargetGroupOpts is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -15956,7 +15956,7 @@ func (a *PublicCloudAPIService) UpdateTargetGroupExecute(r ApiUpdateTargetGroupR
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.targetGroup
+	localVarPostBody = r.updateTargetGroupOpts
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

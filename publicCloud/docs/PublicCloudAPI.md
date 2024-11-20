@@ -566,7 +566,7 @@ Name | Type | Description  | Notes
 
 ## CreateTargetGroup
 
-> TargetGroup CreateTargetGroup(ctx).TargetGroup(targetGroup).Execute()
+> TargetGroup CreateTargetGroup(ctx).CreateTargetGroupOpts(createTargetGroupOpts).Execute()
 
 Create Target Group
 
@@ -585,11 +585,11 @@ import (
 )
 
 func main() {
-	targetGroup := *openapiclient.NewTargetGroup("7e59b33d-05f3-4078-b251-c7831ae8fe14", "Name_example", openapiclient.protocol("HTTP"), int32(123), openapiclient.regionName("eu-west-3"), "TODO") // TargetGroup | 
+	createTargetGroupOpts := *openapiclient.NewCreateTargetGroupOpts("Name_example", openapiclient.protocol("HTTP"), int32(123), openapiclient.regionName("eu-west-3")) // CreateTargetGroupOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.CreateTargetGroup(context.Background()).TargetGroup(targetGroup).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.CreateTargetGroup(context.Background()).CreateTargetGroupOpts(createTargetGroupOpts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.CreateTargetGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -610,7 +610,7 @@ Other parameters are passed through a pointer to a apiCreateTargetGroupRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **targetGroup** | [**TargetGroup**](TargetGroup.md) |  | 
+ **createTargetGroupOpts** | [**CreateTargetGroupOpts**](CreateTargetGroupOpts.md) |  | 
 
 ### Return type
 
@@ -5691,7 +5691,7 @@ Name | Type | Description  | Notes
 
 ## UpdateTargetGroup
 
-> TargetGroup UpdateTargetGroup(ctx, targetGroupId).TargetGroup(targetGroup).Execute()
+> TargetGroup UpdateTargetGroup(ctx, targetGroupId).UpdateTargetGroupOpts(updateTargetGroupOpts).Execute()
 
 Update Target Group
 
@@ -5711,11 +5711,11 @@ import (
 
 func main() {
 	targetGroupId := "fb769dab-3daa-47e4-89ed-06a4b6499176" // string | Target Group ID
-	targetGroup := *openapiclient.NewTargetGroup("7e59b33d-05f3-4078-b251-c7831ae8fe14", "Name_example", openapiclient.protocol("HTTP"), int32(123), openapiclient.regionName("eu-west-3"), "TODO") // TargetGroup | 
+	updateTargetGroupOpts := *openapiclient.NewUpdateTargetGroupOpts() // UpdateTargetGroupOpts | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.UpdateTargetGroup(context.Background(), targetGroupId).TargetGroup(targetGroup).Execute()
+	resp, r, err := apiClient.PublicCloudAPI.UpdateTargetGroup(context.Background(), targetGroupId).UpdateTargetGroupOpts(updateTargetGroupOpts).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.UpdateTargetGroup``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5741,7 +5741,7 @@ Other parameters are passed through a pointer to a apiUpdateTargetGroupRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **targetGroup** | [**TargetGroup**](TargetGroup.md) |  | 
+ **updateTargetGroupOpts** | [**UpdateTargetGroupOpts**](UpdateTargetGroupOpts.md) |  | 
 
 ### Return type
 
