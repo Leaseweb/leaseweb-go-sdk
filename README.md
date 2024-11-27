@@ -4,9 +4,9 @@ Leaseweb Go SDK provides a golang client for Leaseweb's REST API.
 ### Installation
 
 ```bash
-go get github.com/LeaseWeb/leaseweb-go-sdk/publicCloud # for publicCloud
+go get github.com/LeaseWeb/leaseweb-go-sdk/publiccloud # for publicCloud
 
-go get github.com/LeaseWeb/leaseweb-go-sdk/dedicatedServer # for dedicatedServer
+go get github.com/LeaseWeb/leaseweb-go-sdk/dedicatedserver # for dedicatedServer
 ```
 
 ### Generate your API Key
@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"os"
 
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publicCloud"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
@@ -36,21 +36,21 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PublicCloudAPI.GetInstanceList(ctx).Execute()
+	resp, r, err := apiClient.PubliccloudAPI.GetInstanceList(ctx).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PublicCloudAPI.GetInstanceList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetInstanceList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 	// response from `GetInstanceList`: GetInstanceListResult
-	fmt.Fprintf(os.Stdout, "Response from `PublicCloudAPI.GetInstanceList`: %v\n", resp)
+	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetInstanceList`: %v\n", resp)
 }
 ```
 
 ### Documentation
 The Leaseweb Go SDK documentation based on product:
 
-- [Public Cloud](publicCloud/README.md)
-- [Dedicated Server](dedicatedServer/README.md)
+- [Public Cloud](publiccloud/README.md)
+- [Dedicated Server](dedicatedserver/README.md)
 - [Aggregation Pack](aggregationPack/README.md)
 - [Abuse](abuse/README.md)
 - [Invoice](invoice/README.md)
