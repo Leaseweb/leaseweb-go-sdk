@@ -4373,10 +4373,10 @@ func (a *PubliccloudAPIService) GetAutoScalingGroupInstanceListExecute(r ApiGetA
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4600,28 +4600,28 @@ func (a *PubliccloudAPIService) GetAutoScalingGroupListExecute(r ApiGetAutoScali
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
 	}
 	if r.instanceId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "instanceId", r.instanceId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "instanceId", r.instanceId, "form", "")
 	}
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
 	}
 	if r.region != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "form", "")
 	}
 	if r.reference != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reference", r.reference, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reference", r.reference, "form", "")
 	}
 	if r.state != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4814,13 +4814,13 @@ func (a *PubliccloudAPIService) GetConnectionsMetricsExecute(r ApiGetConnections
 	localVarFormParams := url.Values{}
 
 	if r.from != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5024,13 +5024,13 @@ func (a *PubliccloudAPIService) GetConnectionsPerSecondMetricsExecute(r ApiGetCo
 	localVarFormParams := url.Values{}
 
 	if r.from != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5416,13 +5416,13 @@ func (a *PubliccloudAPIService) GetCpuMetricsExecute(r ApiGetCpuMetricsRequest) 
 	localVarFormParams := url.Values{}
 
 	if r.from != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6180,16 +6180,16 @@ func (a *PubliccloudAPIService) GetDataTrafficMetricsExecute(r ApiGetDataTraffic
 	localVarFormParams := url.Values{}
 
 	if r.from != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
 	if r.aggregation != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "aggregation", r.aggregation, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "aggregation", r.aggregation, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6393,13 +6393,13 @@ func (a *PubliccloudAPIService) GetDataTransferredMetricsExecute(r ApiGetDataTra
 	localVarFormParams := url.Values{}
 
 	if r.from != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6603,13 +6603,13 @@ func (a *PubliccloudAPIService) GetDataTransferredPerSecondMetricsExecute(r ApiG
 	localVarFormParams := url.Values{}
 
 	if r.from != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6808,9 +6808,9 @@ func (a *PubliccloudAPIService) GetExpensesExecute(r ApiGetExpensesRequest) (*Ge
 		return localVarReturnValue, nil, reportError("from is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7037,34 +7037,34 @@ func (a *PubliccloudAPIService) GetImageListExecute(r ApiGetImageListRequest) (*
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.custom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "custom", r.custom, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "custom", r.custom, "form", "")
 	}
 	if r.standard != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "standard", r.standard, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "standard", r.standard, "form", "")
 	}
 	if r.state != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "form", "")
 	}
 	if r.marketAppId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "marketAppId", r.marketAppId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "marketAppId", r.marketAppId, "form", "")
 	}
 	if r.storageType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "storageType", r.storageType, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "storageType", r.storageType, "form", "")
 	}
 	if r.name != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
 	}
 	if r.flavour != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "flavour", r.flavour, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "flavour", r.flavour, "form", "")
 	}
 	if r.region != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7466,37 +7466,37 @@ func (a *PubliccloudAPIService) GetInstanceListExecute(r ApiGetInstanceListReque
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.ip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ip", r.ip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ip", r.ip, "form", "")
 	}
 	if r.reference != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reference", r.reference, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reference", r.reference, "form", "")
 	}
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
 	}
 	if r.contractType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "contractType", r.contractType, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contractType", r.contractType, "form", "")
 	}
 	if r.contractState != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "contractState", r.contractState, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contractState", r.contractState, "form", "")
 	}
 	if r.imageId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "imageId", r.imageId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "imageId", r.imageId, "form", "")
 	}
 	if r.state != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "form", "")
 	}
 	if r.region != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "form", "")
 	}
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7675,15 +7675,15 @@ func (a *PubliccloudAPIService) GetInstanceTypeListExecute(r ApiGetInstanceTypeL
 		return localVarReturnValue, nil, reportError("region is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "form", "")
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	} else {
 		var defaultValue int32 = 50
 		r.limit = &defaultValue
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.offset = &defaultValue
@@ -8041,13 +8041,13 @@ func (a *PubliccloudAPIService) GetIpListExecute(r ApiGetIpListRequest) (*GetIpL
 	localVarFormParams := url.Values{}
 
 	if r.version != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "form", "")
 	}
 	if r.nullRouted != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "nullRouted", r.nullRouted, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "nullRouted", r.nullRouted, "form", "")
 	}
 	if r.ips != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ips", r.ips, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ips", r.ips, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8231,10 +8231,10 @@ func (a *PubliccloudAPIService) GetIsoListExecute(r ApiGetIsoListRequest) (*GetI
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8628,34 +8628,34 @@ func (a *PubliccloudAPIService) GetLoadBalancerListExecute(r ApiGetLoadBalancerL
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.ip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ip", r.ip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ip", r.ip, "form", "")
 	}
 	if r.reference != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reference", r.reference, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reference", r.reference, "form", "")
 	}
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
 	}
 	if r.contractState != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "contractState", r.contractState, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contractState", r.contractState, "form", "")
 	}
 	if r.contractType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "contractType", r.contractType, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contractType", r.contractType, "form", "")
 	}
 	if r.state != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "state", r.state, "form", "")
 	}
 	if r.region != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "form", "")
 	}
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9007,10 +9007,10 @@ func (a *PubliccloudAPIService) GetLoadBalancerListenerListExecute(r ApiGetLoadB
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9348,10 +9348,10 @@ func (a *PubliccloudAPIService) GetRegionListExecute(r ApiGetRegionListRequest) 
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9542,16 +9542,16 @@ func (a *PubliccloudAPIService) GetReinstallImageListExecute(r ApiGetReinstallIm
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.custom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "custom", r.custom, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "custom", r.custom, "form", "")
 	}
 	if r.standard != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "standard", r.standard, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "standard", r.standard, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9755,13 +9755,13 @@ func (a *PubliccloudAPIService) GetRequestsMetricsExecute(r ApiGetRequestsMetric
 	localVarFormParams := url.Values{}
 
 	if r.from != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9965,13 +9965,13 @@ func (a *PubliccloudAPIService) GetRequestsPerSecondMetricsExecute(r ApiGetReque
 	localVarFormParams := url.Values{}
 
 	if r.from != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10175,13 +10175,13 @@ func (a *PubliccloudAPIService) GetResponseCodesMetricsExecute(r ApiGetResponseC
 	localVarFormParams := url.Values{}
 
 	if r.from != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10385,13 +10385,13 @@ func (a *PubliccloudAPIService) GetResponseCodesPerSecondMetricsExecute(r ApiGet
 	localVarFormParams := url.Values{}
 
 	if r.from != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
 	}
 	if r.to != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	}
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10763,10 +10763,10 @@ func (a *PubliccloudAPIService) GetSnapshotListExecute(r ApiGetSnapshotListReque
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11151,25 +11151,25 @@ func (a *PubliccloudAPIService) GetTargetGroupListExecute(r ApiGetTargetGroupLis
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.id != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "form", "")
 	}
 	if r.name != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
 	}
 	if r.protocol != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "protocol", r.protocol, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "protocol", r.protocol, "form", "")
 	}
 	if r.port != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "port", r.port, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "port", r.port, "form", "")
 	}
 	if r.region != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "region", r.region, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11357,10 +11357,10 @@ func (a *PubliccloudAPIService) GetTargetListExecute(r ApiGetTargetListRequest) 
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -11546,13 +11546,13 @@ func (a *PubliccloudAPIService) GetUpdateInstanceTypeListExecute(r ApiGetUpdateI
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	} else {
 		var defaultValue int32 = 50
 		r.limit = &defaultValue
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	} else {
 		var defaultValue int32 = 0
 		r.offset = &defaultValue

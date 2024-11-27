@@ -8844,7 +8844,7 @@ components:
       description: Rack details where this network equipment is located at
       example:
         id: id
-        type: null
+        type: SHARED
         capacity: capacity
       properties:
         id:
@@ -8864,7 +8864,7 @@ components:
           brand: brand
         rack:
           id: id
-          type: null
+          type: SHARED
           capacity: capacity
         networkInterfaces:
           internal:
@@ -9004,7 +9004,7 @@ components:
             brand: brand
           rack:
             id: id
-            type: null
+            type: SHARED
             capacity: capacity
           networkInterfaces:
             internal:
@@ -9109,7 +9109,7 @@ components:
             brand: brand
           rack:
             id: id
-            type: null
+            type: SHARED
             capacity: capacity
           networkInterfaces:
             internal:
@@ -9418,18 +9418,18 @@ components:
       example:
         specs:
           cpu:
-            quantity: 0
+            quantity: 6
             type: type
           hdd:
-          - amount: 6
+          - amount: 1
             unit: unit
-            size: 1.4658129805029452
+            size: 5.962133916683182
             id: id
             type: type
             performanceType: performanceType
-          - amount: 6
+          - amount: 1
             unit: unit
-            size: 1.4658129805029452
+            size: 5.962133916683182
             id: id
             type: type
             performanceType: performanceType
@@ -9443,7 +9443,7 @@ components:
             size: 5
         rack:
           id: id
-          type: null
+          type: SHARED
           capacity: capacity
         networkInterfaces:
           internal:
@@ -9534,12 +9534,12 @@ components:
         privateNetworks:
         - subnet: 10.0.0.0/16
           vlanId: "2130"
-          linkSpeed: null
+          linkSpeed: 0
           id: "892"
           status: status
         - subnet: 10.0.0.0/16
           vlanId: "2130"
-          linkSpeed: null
+          linkSpeed: 0
           id: "892"
           status: status
         featureAvailability:
@@ -9591,18 +9591,18 @@ components:
         servers:
         - specs:
             cpu:
-              quantity: 0
+              quantity: 6
               type: type
             hdd:
-            - amount: 6
+            - amount: 1
               unit: unit
-              size: 1.4658129805029452
+              size: 5.962133916683182
               id: id
               type: type
               performanceType: performanceType
-            - amount: 6
+            - amount: 1
               unit: unit
-              size: 1.4658129805029452
+              size: 5.962133916683182
               id: id
               type: type
               performanceType: performanceType
@@ -9616,7 +9616,7 @@ components:
               size: 5
           rack:
             id: id
-            type: null
+            type: SHARED
             capacity: capacity
           networkInterfaces:
             internal:
@@ -9707,12 +9707,12 @@ components:
           privateNetworks:
           - subnet: 10.0.0.0/16
             vlanId: "2130"
-            linkSpeed: null
+            linkSpeed: 0
             id: "892"
             status: status
           - subnet: 10.0.0.0/16
             vlanId: "2130"
-            linkSpeed: null
+            linkSpeed: 0
             id: "892"
             status: status
           featureAvailability:
@@ -9728,18 +9728,18 @@ components:
             name: name
         - specs:
             cpu:
-              quantity: 0
+              quantity: 6
               type: type
             hdd:
-            - amount: 6
+            - amount: 1
               unit: unit
-              size: 1.4658129805029452
+              size: 5.962133916683182
               id: id
               type: type
               performanceType: performanceType
-            - amount: 6
+            - amount: 1
               unit: unit
-              size: 1.4658129805029452
+              size: 5.962133916683182
               id: id
               type: type
               performanceType: performanceType
@@ -9753,7 +9753,7 @@ components:
               size: 5
           rack:
             id: id
-            type: null
+            type: SHARED
             capacity: capacity
           networkInterfaces:
             internal:
@@ -9844,12 +9844,12 @@ components:
           privateNetworks:
           - subnet: 10.0.0.0/16
             vlanId: "2130"
-            linkSpeed: null
+            linkSpeed: 0
             id: "892"
             status: status
           - subnet: 10.0.0.0/16
             vlanId: "2130"
-            linkSpeed: null
+            linkSpeed: 0
             id: "892"
             status: status
           featureAvailability:
@@ -9971,7 +9971,7 @@ components:
       type: string
     credentialWithoutPassword:
       example:
-        type: null
+        type: OPERATING_SYSTEM
         username: username
       properties:
         type:
@@ -9987,9 +9987,9 @@ components:
     credentialList:
       example:
         credentials:
-        - type: null
+        - type: OPERATING_SYSTEM
           username: username
-        - type: null
+        - type: OPERATING_SYSTEM
           username: username
         _metadata:
           offset: 0
@@ -10022,7 +10022,7 @@ components:
     credential:
       example:
         password: password
-        type: null
+        type: OPERATING_SYSTEM
         username: username
       properties:
         password:
@@ -10294,7 +10294,7 @@ components:
     serverJob:
       example:
         bareMetalId: bareMetalId
-        type: null
+        type: install
         serverId: serverId
         uuid: uuid
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -10503,7 +10503,7 @@ components:
     installationJob:
       example:
         bareMetalId: bareMetalId
-        type: null
+        type: install
         serverId: serverId
         uuid: uuid
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -10624,7 +10624,7 @@ components:
       example:
         jobs:
         - bareMetalId: bareMetalId
-          type: null
+          type: install
           serverId: serverId
           uuid: uuid
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -10687,7 +10687,7 @@ components:
           status: status
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - bareMetalId: bareMetalId
-          type: null
+          type: install
           serverId: serverId
           uuid: uuid
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -10772,7 +10772,7 @@ components:
         metadata:
           BATCH_ID: BATCH_ID
         bareMetalId: bareMetalId
-        type: null
+        type: install
         serverId: serverId
         uuid: uuid
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -11702,7 +11702,7 @@ components:
       example:
         subnet: 10.0.0.0/16
         vlanId: "2130"
-        linkSpeed: null
+        linkSpeed: 0
         id: "892"
         status: status
       properties:
@@ -11727,7 +11727,7 @@ components:
     cpu:
       description: CPU of the server
       example:
-        quantity: 0
+        quantity: 6
         type: type
       properties:
         quantity:
@@ -11741,9 +11741,9 @@ components:
     hdd:
       description: A single object of the hard disk drive
       example:
-        amount: 6
+        amount: 1
         unit: unit
-        size: 1.4658129805029452
+        size: 5.962133916683182
         id: id
         type: type
         performanceType: performanceType
@@ -11797,18 +11797,18 @@ components:
       description: Hardware information of the server
       example:
         cpu:
-          quantity: 0
+          quantity: 6
           type: type
         hdd:
-        - amount: 6
+        - amount: 1
           unit: unit
-          size: 1.4658129805029452
+          size: 5.962133916683182
           id: id
           type: type
           performanceType: performanceType
-        - amount: 6
+        - amount: 1
           unit: unit
-          size: 1.4658129805029452
+          size: 5.962133916683182
           id: id
           type: type
           performanceType: performanceType

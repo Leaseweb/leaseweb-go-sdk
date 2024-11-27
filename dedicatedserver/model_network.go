@@ -23,7 +23,7 @@ type Network struct {
 	Lldp *Lldp `json:"lldp,omitempty"`
 	LogicalName *string `json:"logical_name,omitempty"`
 	// Represents a MAC Address in the standard colon delimited format. Eg. `01:23:45:67:89:0A`
-	MacAddress *string `json:"mac_address,omitempty"`
+	MacAddress *string `json:"mac_address,omitempty" validate:"regexp=([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9a-fA-F]{4}\\\\.[0-9a-fA-F]{4}\\\\.[0-9a-fA-F]{4})$"`
 	Product *string `json:"product,omitempty"`
 	Settings *NetworkSettings `json:"settings,omitempty"`
 	Vendor *string `json:"vendor,omitempty"`

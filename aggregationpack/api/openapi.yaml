@@ -364,13 +364,13 @@ components:
     aggregationPack:
       example:
         connectivityType: connectivityType
-        aggregationType: null
-        networkPerformanceType: null
+        aggregationType: Hybrid
+        networkPerformanceType: VOLUME
         billingType: billingType
         contractStartDate: 2000-01-23T04:56:07.000+00:00
         contractTerm: 0
         customerId: customerId
-        dataTrafficCommitUnit: null
+        dataTrafficCommitUnit: Gbps
         id: id
         dataTrafficCommit: 6
         salesOrgId: salesOrgId
@@ -416,24 +416,24 @@ components:
       example:
         connectContractItems:
         - connectivityType: connectivityType
-          aggregationType: null
-          networkPerformanceType: null
+          aggregationType: Hybrid
+          networkPerformanceType: VOLUME
           billingType: billingType
           contractStartDate: 2000-01-23T04:56:07.000+00:00
           contractTerm: 0
           customerId: customerId
-          dataTrafficCommitUnit: null
+          dataTrafficCommitUnit: Gbps
           id: id
           dataTrafficCommit: 6
           salesOrgId: salesOrgId
         - connectivityType: connectivityType
-          aggregationType: null
-          networkPerformanceType: null
+          aggregationType: Hybrid
+          networkPerformanceType: VOLUME
           billingType: billingType
           contractStartDate: 2000-01-23T04:56:07.000+00:00
           contractTerm: 0
           customerId: customerId
-          dataTrafficCommitUnit: null
+          dataTrafficCommitUnit: Gbps
           id: id
           dataTrafficCommit: 6
           salesOrgId: salesOrgId

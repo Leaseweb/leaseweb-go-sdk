@@ -31,7 +31,7 @@ type Lease struct {
 	Ip *string `json:"ip,omitempty"`
 	LastClientRequest *LastClientRequest `json:"lastClientRequest,omitempty"`
 	// Represents a MAC Address in the standard colon delimited format. Eg. `01:23:45:67:89:0A`
-	Mac *string `json:"mac,omitempty"`
+	Mac *string `json:"mac,omitempty" validate:"regexp=([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9a-fA-F]{4}\\\\.[0-9a-fA-F]{4}\\\\.[0-9a-fA-F]{4})$"`
 	// The netmask for this DHCP reservation
 	Netmask *string `json:"netmask,omitempty"`
 	// The site serving this DHCP reservation

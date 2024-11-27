@@ -12,6 +12,7 @@ package publiccloud
 
 import (
 	"encoding/json"
+	"gopkg.in/validator.v2"
 	"fmt"
 )
 
@@ -47,7 +48,11 @@ func (dst *MetricsMetadataPropertiesGranularity) UnmarshalJSON(data []byte) erro
 		if string(jsonCpuGranularity) == "{}" { // empty struct
 			dst.CpuGranularity = nil
 		} else {
-			match++
+			if err = validator.Validate(dst.CpuGranularity); err != nil {
+				dst.CpuGranularity = nil
+			} else {
+				match++
+			}
 		}
 	} else {
 		dst.CpuGranularity = nil
@@ -60,7 +65,11 @@ func (dst *MetricsMetadataPropertiesGranularity) UnmarshalJSON(data []byte) erro
 		if string(jsonLoadBalancerGranularity) == "{}" { // empty struct
 			dst.LoadBalancerGranularity = nil
 		} else {
-			match++
+			if err = validator.Validate(dst.LoadBalancerGranularity); err != nil {
+				dst.LoadBalancerGranularity = nil
+			} else {
+				match++
+			}
 		}
 	} else {
 		dst.LoadBalancerGranularity = nil

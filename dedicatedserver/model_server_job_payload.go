@@ -12,6 +12,7 @@ package dedicatedserver
 
 import (
 	"encoding/json"
+	"gopkg.in/validator.v2"
 	"fmt"
 )
 
@@ -47,7 +48,11 @@ func (dst *ServerJobPayload) UnmarshalJSON(data []byte) error {
 		if string(jsonInstallOperatingSystemPayload) == "{}" { // empty struct
 			dst.InstallOperatingSystemPayload = nil
 		} else {
-			match++
+			if err = validator.Validate(dst.InstallOperatingSystemPayload); err != nil {
+				dst.InstallOperatingSystemPayload = nil
+			} else {
+				match++
+			}
 		}
 	} else {
 		dst.InstallOperatingSystemPayload = nil
@@ -60,7 +65,11 @@ func (dst *ServerJobPayload) UnmarshalJSON(data []byte) error {
 		if string(jsonPayload) == "{}" { // empty struct
 			dst.Payload = nil
 		} else {
-			match++
+			if err = validator.Validate(dst.Payload); err != nil {
+				dst.Payload = nil
+			} else {
+				match++
+			}
 		}
 	} else {
 		dst.Payload = nil

@@ -10782,9 +10782,9 @@ components:
     getRegionListResult:
       example:
         regions:
-        - name: null
+        - name: eu-west-3
           location: Amsterdam
-        - name: null
+        - name: eu-west-3
           location: Amsterdam
         _metadata:
           offset: 0
@@ -11013,7 +11013,7 @@ components:
       type: object
     instanceType:
       example:
-        name: null
+        name: lsw.m3.large
         resources:
           memory:
             unit: GiB
@@ -11028,8 +11028,8 @@ components:
             unit: Gbps
             value: 10
         storageTypes:
-        - null
-        - null
+        - LOCAL
+        - LOCAL
         prices:
           compute:
             monthlyPrice: "0.03000"
@@ -11065,7 +11065,7 @@ components:
     instanceTypes:
       example:
         instanceTypes:
-        - name: null
+        - name: lsw.m3.large
           resources:
             memory:
               unit: GiB
@@ -11080,8 +11080,8 @@ components:
               unit: Gbps
               value: 10
           storageTypes:
-          - null
-          - null
+          - LOCAL
+          - LOCAL
           prices:
             compute:
               monthlyPrice: "0.03000"
@@ -11095,7 +11095,7 @@ components:
               local:
                 monthlyPrice: "0.03000"
                 hourlyPrice: "0.00004"
-        - name: null
+        - name: lsw.m3.large
           resources:
             memory:
               unit: GiB
@@ -11110,8 +11110,8 @@ components:
               unit: Gbps
               value: 10
           storageTypes:
-          - null
-          - null
+          - LOCAL
+          - LOCAL
           prices:
             compute:
               monthlyPrice: "0.03000"
@@ -11196,10 +11196,10 @@ components:
       example:
         billingFrequency: 1
         createdAt: 2023-11-30T16:31:28Z
-        term: null
+        term: 6
         renewalsAt: 2023-11-30T16:31:28Z
-        state: null
-        type: null
+        state: ACTIVE
+        type: HOURLY
         endsAt: 2023-11-30T16:31:28Z
       properties:
         billingFrequency:
@@ -11256,18 +11256,18 @@ components:
       type: string
     autoScalingGroup:
       example:
-        cpuThreshold: 5
+        cpuThreshold: 2
         maximumAmount: 5
-        type: null
-        desiredAmount: 6
+        type: MANUAL
+        desiredAmount: 1
         reference: reference
         createdAt: 2000-01-23T04:56:07.000+00:00
-        minimumAmount: 1
+        minimumAmount: 5
         startsAt: 2000-01-23T04:56:07.000+00:00
-        warmupTime: 2
+        warmupTime: 7
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
-        cooldownTime: 7
+        state: ACTIVE
+        cooldownTime: 9
         region: null
         endsAt: 2000-01-23T04:56:07.000+00:00
         updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -11368,7 +11368,7 @@ components:
       type: string
     image:
       example:
-        flavour: null
+        flavour: ubuntu
         custom: true
         name: Ubuntu 20.04 LTS (x86_64)
         id: UBUNTU_22_04_64BIT
@@ -11491,7 +11491,7 @@ components:
         nullRouted: true
         mainIp: true
         networkType: internal
-        version: null
+        version: 3
       properties:
         ip:
           description: Ip Address
@@ -11535,26 +11535,26 @@ components:
         type: object
       example:
         image:
-          flavour: null
+          flavour: ubuntu
           custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
           family: linux
         hasUserData: true
-        rootDiskStorageType: null
+        rootDiskStorageType: LOCAL
         autoScalingGroup:
-          cpuThreshold: 5
+          cpuThreshold: 2
           maximumAmount: 5
-          type: null
-          desiredAmount: 6
+          type: MANUAL
+          desiredAmount: 1
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 1
+          minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 2
+          warmupTime: 7
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          cooldownTime: 7
+          state: ACTIVE
+          cooldownTime: 9
           region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -11562,10 +11562,10 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: null
+          term: 6
           renewalsAt: 2023-11-30T16:31:28Z
-          state: null
-          type: null
+          state: ACTIVE
+          type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
         hasPrivateNetwork: true
         resources:
@@ -11582,7 +11582,7 @@ components:
             unit: Gbps
             value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
-        type: null
+        type: lsw.m3.large
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -11590,45 +11590,45 @@ components:
           nullRouted: true
           mainIp: true
           networkType: internal
-          version: null
+          version: 3
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
           nullRouted: true
           mainIp: true
           networkType: internal
-          version: null
+          version: 3
         reference: reference
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         marketAppId: CPANEL
-        state: null
-        region: null
+        state: CREATING
+        region: eu-west-3
         productType: productType
         hasPublicIpV4: true
     getInstanceListResult:
       example:
         instances:
         - image:
-            flavour: null
+            flavour: ubuntu
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
           hasUserData: true
-          rootDiskStorageType: null
+          rootDiskStorageType: LOCAL
           autoScalingGroup:
-            cpuThreshold: 5
+            cpuThreshold: 2
             maximumAmount: 5
-            type: null
-            desiredAmount: 6
+            type: MANUAL
+            desiredAmount: 1
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
-            minimumAmount: 1
+            minimumAmount: 5
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 2
+            warmupTime: 7
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: null
-            cooldownTime: 7
+            state: ACTIVE
+            cooldownTime: 9
             region: null
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -11636,10 +11636,10 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: null
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
-            state: null
-            type: null
+            state: ACTIVE
+            type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           hasPrivateNetwork: true
           resources:
@@ -11656,7 +11656,7 @@ components:
               unit: Gbps
               value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
-          type: null
+          type: lsw.m3.large
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -11664,42 +11664,42 @@ components:
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
           reference: reference
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           marketAppId: CPANEL
-          state: null
-          region: null
+          state: CREATING
+          region: eu-west-3
           productType: productType
           hasPublicIpV4: true
         - image:
-            flavour: null
+            flavour: ubuntu
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
           hasUserData: true
-          rootDiskStorageType: null
+          rootDiskStorageType: LOCAL
           autoScalingGroup:
-            cpuThreshold: 5
+            cpuThreshold: 2
             maximumAmount: 5
-            type: null
-            desiredAmount: 6
+            type: MANUAL
+            desiredAmount: 1
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
-            minimumAmount: 1
+            minimumAmount: 5
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 2
+            warmupTime: 7
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: null
-            cooldownTime: 7
+            state: ACTIVE
+            cooldownTime: 9
             region: null
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -11707,10 +11707,10 @@ components:
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: null
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
-            state: null
-            type: null
+            state: ACTIVE
+            type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           hasPrivateNetwork: true
           resources:
@@ -11727,7 +11727,7 @@ components:
               unit: Gbps
               value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
-          type: null
+          type: lsw.m3.large
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -11735,19 +11735,19 @@ components:
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
           reference: reference
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           marketAppId: CPANEL
-          state: null
-          region: null
+          state: CREATING
+          region: eu-west-3
           productType: productType
           hasPublicIpV4: true
         _metadata:
@@ -11878,7 +11878,7 @@ components:
           detectionProfile: STANDARD_DEFAULT
           protectionType: STANDARD
         networkType: internal
-        version: null
+        version: 6
     instanceDetails:
       allOf:
       - $ref: '#/components/schemas/instanceBase'
@@ -11898,13 +11898,13 @@ components:
         type: object
       example:
         image:
-          flavour: null
+          flavour: ubuntu
           custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
           family: linux
         hasUserData: true
-        rootDiskStorageType: null
+        rootDiskStorageType: LOCAL
         iso:
           name: name
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -11913,18 +11913,18 @@ components:
           privateNetworkId: privateNetworkId
           status: CONFIGURED
         autoScalingGroup:
-          cpuThreshold: 5
+          cpuThreshold: 2
           maximumAmount: 5
-          type: null
-          desiredAmount: 6
+          type: MANUAL
+          desiredAmount: 1
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 1
+          minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 2
+          warmupTime: 7
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          cooldownTime: 7
+          state: ACTIVE
+          cooldownTime: 9
           region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -11932,10 +11932,10 @@ components:
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: null
+          term: 6
           renewalsAt: 2023-11-30T16:31:28Z
-          state: null
-          type: null
+          state: ACTIVE
+          type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
         hasPrivateNetwork: true
         resources:
@@ -11952,7 +11952,7 @@ components:
             unit: Gbps
             value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
-        type: null
+        type: lsw.m3.large
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -11963,7 +11963,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: null
+          version: 6
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
@@ -11973,12 +11973,12 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: null
+          version: 6
         reference: reference
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         marketAppId: CPANEL
-        state: null
-        region: null
+        state: CREATING
+        region: eu-west-3
         productType: productType
         hasPublicIpV4: true
     updateInstanceOpts:
@@ -12017,7 +12017,7 @@ components:
       type: string
     credential:
       example:
-        type: null
+        type: OPERATING_SYSTEM
         username: root
       properties:
         type:
@@ -12030,9 +12030,9 @@ components:
     getCredentialListResult:
       example:
         credentials:
-        - type: null
+        - type: OPERATING_SYSTEM
           username: root
-        - type: null
+        - type: OPERATING_SYSTEM
           username: root
         _metadata:
           offset: 0
@@ -12065,7 +12065,7 @@ components:
     storeCredentialResult:
       example:
         password: password
-        type: null
+        type: OPERATING_SYSTEM
         username: username
       properties:
         type:
@@ -12080,9 +12080,9 @@ components:
     getCredentialListByTypeResult:
       example:
         credentials:
-        - type: null
+        - type: OPERATING_SYSTEM
           username: root
-        - type: null
+        - type: OPERATING_SYSTEM
           username: root
         _metadata:
           offset: 0
@@ -12099,7 +12099,7 @@ components:
     getCredentialResult:
       example:
         password: "12341234"
-        type: null
+        type: OPERATING_SYSTEM
         username: root
       properties:
         type:
@@ -12123,7 +12123,7 @@ components:
     updateCredentialResult:
       example:
         password: password
-        type: null
+        type: OPERATING_SYSTEM
         username: username
       properties:
         type:
@@ -12157,15 +12157,15 @@ components:
         billing:
           instances:
           - hours: 14
-            rootDiskStorageType: null
+            rootDiskStorageType: LOCAL
             rootDiskSize: 84
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
-              term: null
+              term: 6
               renewalsAt: 2023-11-30T16:31:28Z
-              state: null
-              type: null
+              state: ACTIVE
+              type: HOURLY
               endsAt: 2023-11-30T16:31:28Z
             resources:
               memory:
@@ -12189,15 +12189,15 @@ components:
             id: b778824a-a96e-4f6f-9713-7b7196f09c4f
             to: 2023-12-01T13:18:41Z
           - hours: 14
-            rootDiskStorageType: null
+            rootDiskStorageType: LOCAL
             rootDiskSize: 84
             contract:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
-              term: null
+              term: 6
               renewalsAt: 2023-11-30T16:31:28Z
-              state: null
-              type: null
+              state: ACTIVE
+              type: HOURLY
               endsAt: 2023-11-30T16:31:28Z
             resources:
               memory:
@@ -12344,9 +12344,9 @@ components:
         type: object
       example:
         marketApps:
-        - null
-        - null
-        flavour: null
+        - CPANEL_30
+        - CPANEL_30
+        flavour: ubuntu
         custom: true
         stateReason: Could not find configured bucket
         version: "20.04"
@@ -12356,12 +12356,12 @@ components:
           size: 0.8008281904610115
         name: Ubuntu 20.04 LTS (x86_64)
         id: UBUNTU_22_04_64BIT
-        state: null
+        state: CREATING
         storageTypes:
         - CENTRAL
         - LOCAL
         family: linux
-        region: null
+        region: eu-west-3
         minDiskSize: 604
         updatedAt: 2000-01-23T04:56:07.000+00:00
         architecture: x86_64
@@ -12369,9 +12369,9 @@ components:
       example:
         images:
         - marketApps:
-          - null
-          - null
-          flavour: null
+          - CPANEL_30
+          - CPANEL_30
+          flavour: ubuntu
           custom: true
           stateReason: Could not find configured bucket
           version: "20.04"
@@ -12381,19 +12381,19 @@ components:
             size: 0.8008281904610115
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: null
+          state: CREATING
           storageTypes:
           - CENTRAL
           - LOCAL
           family: linux
-          region: null
+          region: eu-west-3
           minDiskSize: 604
           updatedAt: 2000-01-23T04:56:07.000+00:00
           architecture: x86_64
         - marketApps:
-          - null
-          - null
-          flavour: null
+          - CPANEL_30
+          - CPANEL_30
+          flavour: ubuntu
           custom: true
           stateReason: Could not find configured bucket
           version: "20.04"
@@ -12403,12 +12403,12 @@ components:
             size: 0.8008281904610115
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: null
+          state: CREATING
           storageTypes:
           - CENTRAL
           - LOCAL
           family: linux
-          region: null
+          region: eu-west-3
           minDiskSize: 604
           updatedAt: 2000-01-23T04:56:07.000+00:00
           architecture: x86_64
@@ -12449,7 +12449,7 @@ components:
       example:
         marketApps:
         - image:
-            flavour: null
+            flavour: ubuntu
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
@@ -12460,7 +12460,7 @@ components:
           family: family
           version: version
         - image:
-            flavour: null
+            flavour: ubuntu
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
@@ -12494,9 +12494,9 @@ components:
       example:
         images:
         - marketApps:
-          - null
-          - null
-          flavour: null
+          - CPANEL_30
+          - CPANEL_30
+          flavour: ubuntu
           custom: true
           stateReason: Could not find configured bucket
           version: "20.04"
@@ -12506,19 +12506,19 @@ components:
             size: 0.8008281904610115
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: null
+          state: CREATING
           storageTypes:
           - CENTRAL
           - LOCAL
           family: linux
-          region: null
+          region: eu-west-3
           minDiskSize: 604
           updatedAt: 2000-01-23T04:56:07.000+00:00
           architecture: x86_64
         - marketApps:
-          - null
-          - null
-          flavour: null
+          - CPANEL_30
+          - CPANEL_30
+          flavour: ubuntu
           custom: true
           stateReason: Could not find configured bucket
           version: "20.04"
@@ -12528,12 +12528,12 @@ components:
             size: 0.8008281904610115
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
-          state: null
+          state: CREATING
           storageTypes:
           - CENTRAL
           - LOCAL
           family: linux
-          region: null
+          region: eu-west-3
           minDiskSize: 604
           updatedAt: 2000-01-23T04:56:07.000+00:00
           architecture: x86_64
@@ -12589,7 +12589,7 @@ components:
     loadBalancerConfiguration:
       description: Different configuration assigned for the load balancer
       example:
-        balance: null
+        balance: roundrobin
         idleTimeOut: 6
         xForwardedFor: true
         stickySession:
@@ -12681,35 +12681,35 @@ components:
           privateNetworkId: privateNetworkId
           status: CONFIGURED
         configuration:
-          balance: null
+          balance: roundrobin
           idleTimeOut: 6
           xForwardedFor: true
           stickySession:
             maxLifeTime: 0
             enabled: true
         autoScalingGroup:
-          cpuThreshold: 5
+          cpuThreshold: 2
           maximumAmount: 5
-          type: null
-          desiredAmount: 6
+          type: MANUAL
+          desiredAmount: 1
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 1
+          minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 2
+          warmupTime: 7
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          cooldownTime: 7
+          state: ACTIVE
+          cooldownTime: 9
           region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: null
+          term: 6
           renewalsAt: 2023-11-30T16:31:28Z
-          state: null
-          type: null
+          state: ACTIVE
+          type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
         resources:
           memory:
@@ -12726,9 +12726,9 @@ components:
             value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
-        type: null
-        region: null
+        state: CREATING
+        type: lsw.m3.large
+        region: eu-west-3
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -12736,14 +12736,14 @@ components:
           nullRouted: true
           mainIp: true
           networkType: internal
-          version: null
+          version: 3
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
           nullRouted: true
           mainIp: true
           networkType: internal
-          version: null
+          version: 3
     getLoadBalancerListResult:
       example:
         loadBalancers:
@@ -12753,35 +12753,35 @@ components:
             privateNetworkId: privateNetworkId
             status: CONFIGURED
           configuration:
-            balance: null
+            balance: roundrobin
             idleTimeOut: 6
             xForwardedFor: true
             stickySession:
               maxLifeTime: 0
               enabled: true
           autoScalingGroup:
-            cpuThreshold: 5
+            cpuThreshold: 2
             maximumAmount: 5
-            type: null
-            desiredAmount: 6
+            type: MANUAL
+            desiredAmount: 1
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
-            minimumAmount: 1
+            minimumAmount: 5
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 2
+            warmupTime: 7
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: null
-            cooldownTime: 7
+            state: ACTIVE
+            cooldownTime: 9
             region: null
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: null
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
-            state: null
-            type: null
+            state: ACTIVE
+            type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           resources:
             memory:
@@ -12798,9 +12798,9 @@ components:
               value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          type: null
-          region: null
+          state: CREATING
+          type: lsw.m3.large
+          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -12808,49 +12808,49 @@ components:
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
         - reference: reference
           privateNetwork:
             subnet: 10.0.0.0/16
             privateNetworkId: privateNetworkId
             status: CONFIGURED
           configuration:
-            balance: null
+            balance: roundrobin
             idleTimeOut: 6
             xForwardedFor: true
             stickySession:
               maxLifeTime: 0
               enabled: true
           autoScalingGroup:
-            cpuThreshold: 5
+            cpuThreshold: 2
             maximumAmount: 5
-            type: null
-            desiredAmount: 6
+            type: MANUAL
+            desiredAmount: 1
             reference: reference
             createdAt: 2000-01-23T04:56:07.000+00:00
-            minimumAmount: 1
+            minimumAmount: 5
             startsAt: 2000-01-23T04:56:07.000+00:00
-            warmupTime: 2
+            warmupTime: 7
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            state: null
-            cooldownTime: 7
+            state: ACTIVE
+            cooldownTime: 9
             region: null
             endsAt: 2000-01-23T04:56:07.000+00:00
             updatedAt: 2000-01-23T04:56:07.000+00:00
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: null
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
-            state: null
-            type: null
+            state: ACTIVE
+            type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           resources:
             memory:
@@ -12867,9 +12867,9 @@ components:
               value: 10
           startedAt: 2000-01-23T04:56:07.000+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          type: null
-          region: null
+          state: CREATING
+          type: lsw.m3.large
+          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -12877,14 +12877,14 @@ components:
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
         _metadata:
           offset: 0
           limit: 5
@@ -12939,35 +12939,35 @@ components:
           privateNetworkId: privateNetworkId
           status: CONFIGURED
         configuration:
-          balance: null
+          balance: roundrobin
           idleTimeOut: 6
           xForwardedFor: true
           stickySession:
             maxLifeTime: 0
             enabled: true
         autoScalingGroup:
-          cpuThreshold: 5
+          cpuThreshold: 2
           maximumAmount: 5
-          type: null
-          desiredAmount: 6
+          type: MANUAL
+          desiredAmount: 1
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 1
+          minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 2
+          warmupTime: 7
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          cooldownTime: 7
+          state: ACTIVE
+          cooldownTime: 9
           region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: null
+          term: 6
           renewalsAt: 2023-11-30T16:31:28Z
-          state: null
-          type: null
+          state: ACTIVE
+          type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
         resources:
           memory:
@@ -12984,9 +12984,9 @@ components:
             value: 10
         startedAt: 2000-01-23T04:56:07.000+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
-        type: null
-        region: null
+        state: CREATING
+        type: lsw.m3.large
+        region: eu-west-3
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -12997,7 +12997,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: null
+          version: 6
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
@@ -13007,7 +13007,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: null
+          version: 6
     updateLoadBalancerOpts:
       properties:
         type:
@@ -13229,7 +13229,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: null
+          version: 6
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
@@ -13239,7 +13239,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: null
+          version: 6
       properties:
         ips:
           items:
@@ -13282,7 +13282,7 @@ components:
       type: string
     trafficMetric:
       example:
-        unit: null
+        unit: '%'
         values:
         - value: 0
           timestamp: 2000-01-23T04:56:07.000+00:00
@@ -13318,7 +13318,7 @@ components:
       type: string
     metricsMetadataProperties:
       example:
-        granularity: null
+        granularity: 5m
         from: 2000-01-23T04:56:07.000+00:00
         aggregation: SUM
         to: 2000-01-23T04:56:07.000+00:00
@@ -13371,14 +13371,14 @@ components:
       example:
         metrics:
           DOWN_PUBLIC:
-            unit: null
+            unit: '%'
             values:
             - value: 0
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0
               timestamp: 2000-01-23T04:56:07.000+00:00
           UP_PUBLIC:
-            unit: null
+            unit: '%'
             values:
             - value: 0
               timestamp: 2000-01-23T04:56:07.000+00:00
@@ -13400,7 +13400,7 @@ components:
               peak:
                 value: value
                 timestamp: 2000-01-23T04:56:07.000+00:00
-          granularity: null
+          granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
           to: 2000-01-23T04:56:07.000+00:00
@@ -13421,7 +13421,7 @@ components:
       type: string
     metricsProperties:
       example:
-        unit: null
+        unit: '%'
         values:
         - value: 0.8008281904610115
           timestamp: 2000-01-23T04:56:07.000+00:00
@@ -13440,7 +13440,7 @@ components:
       example:
         metrics:
           cpuMetrics:
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
@@ -13454,7 +13454,7 @@ components:
               peak:
                 value: 90 %
                 timestamp: 2000-01-23T04:56:07.000+00:00
-          granularity: null
+          granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           to: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -13466,14 +13466,14 @@ components:
     getRequestsMetricsResult:
       example:
         metrics:
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
         _metadata:
-          granularity: null
+          granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
           to: 2000-01-23T04:56:07.000+00:00
@@ -13486,14 +13486,14 @@ components:
     getRequestsPerSecondMetricsResult:
       example:
         metrics:
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
         _metadata:
-          granularity: null
+          granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
           to: 2000-01-23T04:56:07.000+00:00
@@ -13507,21 +13507,21 @@ components:
       example:
         metrics:
           dataOut:
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
           dataIn:
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
         _metadata:
-          granularity: null
+          granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
           to: 2000-01-23T04:56:07.000+00:00
@@ -13535,21 +13535,21 @@ components:
       example:
         metrics:
           dataOut:
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
           dataIn:
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
         _metadata:
-          granularity: null
+          granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
           to: 2000-01-23T04:56:07.000+00:00
@@ -13562,14 +13562,14 @@ components:
     getConnectionsMetricsResult:
       example:
         metrics:
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
         _metadata:
-          granularity: null
+          granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
           to: 2000-01-23T04:56:07.000+00:00
@@ -13582,14 +13582,14 @@ components:
     getConnectionsPerSecondMetricsResult:
       example:
         metrics:
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
         _metadata:
-          granularity: null
+          granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
           to: 2000-01-23T04:56:07.000+00:00
@@ -13603,35 +13603,35 @@ components:
       example:
         metrics:
           "2xx":
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
           "3xx":
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
           "4xx":
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
           "5xx":
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
         _metadata:
-          granularity: null
+          granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
           to: 2000-01-23T04:56:07.000+00:00
@@ -13645,35 +13645,35 @@ components:
       example:
         metrics:
           "2xx":
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
           "3xx":
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
           "4xx":
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
           "5xx":
-            unit: null
+            unit: '%'
             values:
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
             - value: 0.8008281904610115
               timestamp: 2000-01-23T04:56:07.000+00:00
         _metadata:
-          granularity: null
+          granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
           to: 2000-01-23T04:56:07.000+00:00
@@ -13731,33 +13731,33 @@ components:
     getAutoScalingGroupListResult:
       example:
         autoScalingGroups:
-        - cpuThreshold: 5
+        - cpuThreshold: 2
           maximumAmount: 5
-          type: null
-          desiredAmount: 6
+          type: MANUAL
+          desiredAmount: 1
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 1
+          minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 2
+          warmupTime: 7
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          cooldownTime: 7
+          state: ACTIVE
+          cooldownTime: 9
           region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        - cpuThreshold: 5
+        - cpuThreshold: 2
           maximumAmount: 5
-          type: null
-          desiredAmount: 6
+          type: MANUAL
+          desiredAmount: 1
           reference: reference
           createdAt: 2000-01-23T04:56:07.000+00:00
-          minimumAmount: 1
+          minimumAmount: 5
           startsAt: 2000-01-23T04:56:07.000+00:00
-          warmupTime: 2
+          warmupTime: 7
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
-          cooldownTime: 7
+          state: ACTIVE
+          cooldownTime: 9
           region: null
           endsAt: 2000-01-23T04:56:07.000+00:00
           updatedAt: 2000-01-23T04:56:07.000+00:00
@@ -13855,7 +13855,7 @@ components:
         port: 7
         healthCheck:
           protocol: HTTP
-          method: null
+          method: GET
           port: 9
           host: host
           uri: /
@@ -13892,7 +13892,7 @@ components:
       example:
         cpuThreshold: 5
         maximumAmount: 1
-        type: null
+        type: MANUAL
         desiredAmount: 0
         reference: reference
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -13901,7 +13901,7 @@ components:
           port: 7
           healthCheck:
             protocol: HTTP
-            method: null
+            method: GET
             port: 9
             host: host
             uri: /
@@ -13912,7 +13912,7 @@ components:
           port: 7
           healthCheck:
             protocol: HTTP
-            method: null
+            method: GET
             port: 9
             host: host
             uri: /
@@ -13923,9 +13923,9 @@ components:
         startsAt: 2000-01-23T04:56:07.000+00:00
         warmupTime: 5
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
+        state: ACTIVE
         cooldownTime: 2
-        region: null
+        region: eu-west-3
         endsAt: 2000-01-23T04:56:07.000+00:00
         updatedAt: 2000-01-23T04:56:07.000+00:00
       nullable: true
@@ -14083,9 +14083,9 @@ components:
             unit: Gbps
             value: 10
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        state: null
+        state: CREATING
         type: type
-        region: null
+        region: eu-west-3
         ips:
         - prefixLength: "28"
           reverseLookup: reverseLookup
@@ -14096,7 +14096,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: null
+          version: 6
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
@@ -14106,7 +14106,7 @@ components:
             detectionProfile: STANDARD_DEFAULT
             protectionType: STANDARD
           networkType: internal
-          version: null
+          version: 6
         productType: INSTANCE
       properties:
         id:
@@ -14156,9 +14156,9 @@ components:
               unit: Gbps
               value: 10
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
+          state: CREATING
           type: type
-          region: null
+          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -14169,7 +14169,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: null
+            version: 6
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
@@ -14179,7 +14179,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: null
+            version: 6
           productType: INSTANCE
         - reference: reference
           hasPrivateNetwork: true
@@ -14197,9 +14197,9 @@ components:
               unit: Gbps
               value: 10
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          state: null
+          state: CREATING
           type: type
-          region: null
+          region: eu-west-3
           ips:
           - prefixLength: "28"
             reverseLookup: reverseLookup
@@ -14210,7 +14210,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: null
+            version: 6
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
@@ -14220,7 +14220,7 @@ components:
               detectionProfile: STANDARD_DEFAULT
               protectionType: STANDARD
             networkType: internal
-            version: null
+            version: 6
           productType: INSTANCE
         _metadata:
           offset: 0
@@ -14251,7 +14251,7 @@ components:
           port: 7
           healthCheck:
             protocol: HTTP
-            method: null
+            method: GET
             port: 9
             host: host
             uri: /
@@ -14262,7 +14262,7 @@ components:
           port: 7
           healthCheck:
             protocol: HTTP
-            method: null
+            method: GET
             port: 9
             host: host
             uri: /
@@ -14357,7 +14357,7 @@ components:
     _schemas_healthCheckStatus:
       example:
         description: description
-        state: null
+        state: HEALTHY
       nullable: true
       properties:
         state:
@@ -14374,14 +14374,14 @@ components:
       example:
         reference: reference
         image:
-          flavour: null
+          flavour: ubuntu
           custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
           family: linux
         healthCheck:
           description: description
-          state: null
+          state: HEALTHY
         id: id
         state: state
         ips:
@@ -14391,14 +14391,14 @@ components:
           nullRouted: true
           mainIp: true
           networkType: internal
-          version: null
+          version: 3
         - prefixLength: "28"
           reverseLookup: reverseLookup
           ip: 127.0.0.1
           nullRouted: true
           mainIp: true
           networkType: internal
-          version: null
+          version: 3
       properties:
         id:
           description: The ID of the target
@@ -14436,14 +14436,14 @@ components:
         targets:
         - reference: reference
           image:
-            flavour: null
+            flavour: ubuntu
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
           healthCheck:
             description: description
-            state: null
+            state: HEALTHY
           id: id
           state: state
           ips:
@@ -14453,24 +14453,24 @@ components:
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
         - reference: reference
           image:
-            flavour: null
+            flavour: ubuntu
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
           healthCheck:
             description: description
-            state: null
+            state: HEALTHY
           id: id
           state: state
           ips:
@@ -14480,14 +14480,14 @@ components:
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
           - prefixLength: "28"
             reverseLookup: reverseLookup
             ip: 127.0.0.1
             nullRouted: true
             mainIp: true
             networkType: internal
-            version: null
+            version: 3
       properties:
         targets:
           items:
@@ -14504,7 +14504,7 @@ components:
       type: array
     region:
       example:
-        name: null
+        name: eu-west-3
         location: Amsterdam
       properties:
         name:
@@ -14590,15 +14590,15 @@ components:
     expenseResultInstance:
       example:
         hours: 14
-        rootDiskStorageType: null
+        rootDiskStorageType: LOCAL
         rootDiskSize: 84
         contract:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
-          term: null
+          term: 6
           renewalsAt: 2023-11-30T16:31:28Z
-          state: null
-          type: null
+          state: ACTIVE
+          type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
         resources:
           memory:
@@ -14734,15 +14734,15 @@ components:
       example:
         instances:
         - hours: 14
-          rootDiskStorageType: null
+          rootDiskStorageType: LOCAL
           rootDiskSize: 84
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: null
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
-            state: null
-            type: null
+            state: ACTIVE
+            type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           resources:
             memory:
@@ -14766,15 +14766,15 @@ components:
           id: b778824a-a96e-4f6f-9713-7b7196f09c4f
           to: 2023-12-01T13:18:41Z
         - hours: 14
-          rootDiskStorageType: null
+          rootDiskStorageType: LOCAL
           rootDiskSize: 84
           contract:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
-            term: null
+            term: 6
             renewalsAt: 2023-11-30T16:31:28Z
-            state: null
-            type: null
+            state: ACTIVE
+            type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           resources:
             memory:
@@ -14843,7 +14843,7 @@ components:
     marketApp:
       example:
         image:
-          flavour: null
+          flavour: ubuntu
           custom: true
           name: Ubuntu 20.04 LTS (x86_64)
           id: UBUNTU_22_04_64BIT
@@ -14913,14 +14913,14 @@ components:
     dataTrafficMetrics:
       example:
         DOWN_PUBLIC:
-          unit: null
+          unit: '%'
           values:
           - value: 0
             timestamp: 2000-01-23T04:56:07.000+00:00
           - value: 0
             timestamp: 2000-01-23T04:56:07.000+00:00
         UP_PUBLIC:
-          unit: null
+          unit: '%'
           values:
           - value: 0
             timestamp: 2000-01-23T04:56:07.000+00:00
@@ -14978,7 +14978,7 @@ components:
             peak:
               value: value
               timestamp: 2000-01-23T04:56:07.000+00:00
-        granularity: null
+        granularity: 5m
         from: 2000-01-23T04:56:07.000+00:00
         aggregation: SUM
         to: 2000-01-23T04:56:07.000+00:00
@@ -15000,7 +15000,7 @@ components:
     cpuMetrics:
       example:
         cpuMetrics:
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
@@ -15069,7 +15069,7 @@ components:
             peak:
               value: 90 %
               timestamp: 2000-01-23T04:56:07.000+00:00
-        granularity: null
+        granularity: 5m
         from: 2000-01-23T04:56:07.000+00:00
         to: 2000-01-23T04:56:07.000+00:00
       properties:
@@ -15088,14 +15088,14 @@ components:
     dataTransferredMetrics:
       example:
         dataOut:
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
         dataIn:
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
@@ -15111,28 +15111,28 @@ components:
     responseCodesMetrics:
       example:
         "2xx":
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
         "3xx":
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
         "4xx":
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
         "5xx":
-          unit: null
+          unit: '%'
           values:
           - value: 0.8008281904610115
             timestamp: 2000-01-23T04:56:07.000+00:00
@@ -15152,7 +15152,7 @@ components:
     healthCheck:
       example:
         protocol: HTTP
-        method: null
+        method: GET
         port: 9
         host: host
         uri: /

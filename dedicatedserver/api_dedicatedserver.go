@@ -4356,10 +4356,10 @@ func (a *DedicatedserverAPIService) GetControlPanelListExecute(r ApiGetControlPa
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4544,10 +4544,10 @@ func (a *DedicatedserverAPIService) GetControlPanelListByOperatingSystemIdExecut
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5241,10 +5241,10 @@ func (a *DedicatedserverAPIService) GetNetworkEquipmentCredentialListExecute(r A
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5427,10 +5427,10 @@ func (a *DedicatedserverAPIService) GetNetworkEquipmentCredentialListByTypeExecu
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5813,22 +5813,22 @@ func (a *DedicatedserverAPIService) GetNetworkEquipmentIpListExecute(r ApiGetNet
 	localVarFormParams := url.Values{}
 
 	if r.networkType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "networkType", r.networkType, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "networkType", r.networkType, "form", "")
 	}
 	if r.version != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "form", "")
 	}
 	if r.nullRouted != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "nullRouted", r.nullRouted, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "nullRouted", r.nullRouted, "form", "")
 	}
 	if r.ips != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ips", r.ips, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ips", r.ips, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6057,31 +6057,31 @@ func (a *DedicatedserverAPIService) GetNetworkEquipmentListExecute(r ApiGetNetwo
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.reference != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reference", r.reference, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reference", r.reference, "form", "")
 	}
 	if r.ip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ip", r.ip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ip", r.ip, "form", "")
 	}
 	if r.macAddress != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "macAddress", r.macAddress, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "macAddress", r.macAddress, "form", "")
 	}
 	if r.site != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "site", r.site, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "site", r.site, "form", "")
 	}
 	if r.privateRackId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "privateRackId", r.privateRackId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "privateRackId", r.privateRackId, "form", "")
 	}
 	if r.privateNetworkCapable != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "privateNetworkCapable", r.privateNetworkCapable, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "privateNetworkCapable", r.privateNetworkCapable, "form", "")
 	}
 	if r.privateNetworkEnabled != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "privateNetworkEnabled", r.privateNetworkEnabled, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "privateNetworkEnabled", r.privateNetworkEnabled, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6260,10 +6260,10 @@ func (a *DedicatedserverAPIService) GetNetworkEquipmentNullRouteHistoryExecute(r
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6948,7 +6948,7 @@ func (a *DedicatedserverAPIService) GetOperatingSystemExecute(r ApiGetOperatingS
 		return localVarReturnValue, nil, reportError("controlPanelId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "controlPanelId", r.controlPanelId, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "controlPanelId", r.controlPanelId, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -7130,13 +7130,13 @@ func (a *DedicatedserverAPIService) GetOperatingSystemListExecute(r ApiGetOperat
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.controlPanelId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "controlPanelId", r.controlPanelId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "controlPanelId", r.controlPanelId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7320,10 +7320,10 @@ func (a *DedicatedserverAPIService) GetRescueImageListExecute(r ApiGetRescueImag
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7695,12 +7695,12 @@ func (a *DedicatedserverAPIService) GetServerBandwidthMetricsExecute(r ApiGetSer
 		return localVarReturnValue, nil, reportError("aggregation is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "aggregation", r.aggregation, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "aggregation", r.aggregation, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -8053,10 +8053,10 @@ func (a *DedicatedserverAPIService) GetServerBandwidthNotificationSettingListExe
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8408,10 +8408,10 @@ func (a *DedicatedserverAPIService) GetServerCredentialListExecute(r ApiGetServe
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8594,10 +8594,10 @@ func (a *DedicatedserverAPIService) GetServerCredentialListByTypeExecute(r ApiGe
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -8797,12 +8797,12 @@ func (a *DedicatedserverAPIService) GetServerDataTrafficMetricsExecute(r ApiGetS
 		return localVarReturnValue, nil, reportError("aggregation is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", "")
 	if r.granularity != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "form", "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "aggregation", r.aggregation, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "aggregation", r.aggregation, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -9155,10 +9155,10 @@ func (a *DedicatedserverAPIService) GetServerDataTrafficNotificationSettingListE
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -9875,22 +9875,22 @@ func (a *DedicatedserverAPIService) GetServerIpListExecute(r ApiGetServerIpListR
 	localVarFormParams := url.Values{}
 
 	if r.networkType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "networkType", r.networkType, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "networkType", r.networkType, "form", "")
 	}
 	if r.version != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "version", r.version, "form", "")
 	}
 	if r.nullRouted != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "nullRouted", r.nullRouted, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "nullRouted", r.nullRouted, "form", "")
 	}
 	if r.ips != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ips", r.ips, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ips", r.ips, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10254,19 +10254,19 @@ func (a *DedicatedserverAPIService) GetServerJobListExecute(r ApiGetServerJobLis
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "form", "")
 	}
 	if r.isRunning != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "isRunning", r.isRunning, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "isRunning", r.isRunning, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10494,31 +10494,31 @@ func (a *DedicatedserverAPIService) GetServerListExecute(r ApiGetServerListReque
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	if r.reference != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reference", r.reference, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reference", r.reference, "form", "")
 	}
 	if r.ip != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ip", r.ip, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "ip", r.ip, "form", "")
 	}
 	if r.macAddress != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "macAddress", r.macAddress, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "macAddress", r.macAddress, "form", "")
 	}
 	if r.site != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "site", r.site, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "site", r.site, "form", "")
 	}
 	if r.privateRackId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "privateRackId", r.privateRackId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "privateRackId", r.privateRackId, "form", "")
 	}
 	if r.privateNetworkCapable != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "privateNetworkCapable", r.privateNetworkCapable, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "privateNetworkCapable", r.privateNetworkCapable, "form", "")
 	}
 	if r.privateNetworkEnabled != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "privateNetworkEnabled", r.privateNetworkEnabled, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "privateNetworkEnabled", r.privateNetworkEnabled, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10696,10 +10696,10 @@ func (a *DedicatedserverAPIService) GetServerNullRouteHistoryExecute(r ApiGetSer
 	localVarFormParams := url.Values{}
 
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
