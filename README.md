@@ -2,15 +2,12 @@
 Leaseweb Go SDK provides a golang client for Leaseweb's REST API.
 
 ### Installation
-
 ```bash
-go get github.com/LeaseWeb/leaseweb-go-sdk/publiccloud # for publicCloud
-
-go get github.com/LeaseWeb/leaseweb-go-sdk/dedicatedserver # for dedicatedServer
+go get github.com/LeaseWeb/leaseweb-go-sdk/v2
 ```
 
 ### Generate your API Key
-You can generate your API key at the [Customer Portal](https://secure.leaseweb.com/)
+You can generate your API key at the [Customer Portal](https://secure.leaseweb.com/).
 
 ### Example
 ```golang
@@ -21,11 +18,10 @@ import (
 	"fmt"
 	"os"
 
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/v2/publiccloud"
 )
 
 func main() {
-
 	ctx := context.WithValue(
 		context.Background(),
 		openapiclient.ContextAPIKeys,
@@ -38,22 +34,31 @@ func main() {
 	apiClient := openapiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.PubliccloudAPI.GetInstanceList(ctx).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetInstanceList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+		_, err := fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetInstanceList``: %v\n", err)
+		if err != nil {
+			return
+		}
+		_, err = fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+		if err != nil {
+			return
+		}
 	}
 	// response from `GetInstanceList`: GetInstanceListResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetInstanceList`: %v\n", resp)
+	_, err = fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetInstanceList`: %v\n", resp)
+	if err != nil {
+		return
+	}
 }
 ```
 
 ### Documentation
 The Leaseweb Go SDK documentation based on product:
 
-- [Public Cloud](publiccloud/README.md)
-- [Dedicated Server](dedicatedserver/README.md)
-- [Aggregation Pack](aggregationPack/README.md)
-- [Abuse](abuse/README.md)
-- [Invoice](invoice/README.md)
+- [Public Cloud](publiccloud/docs/PubliccloudAPI.md)
+- [Dedicated Server](dedicatedserver/docs/DedicatedserverAPI.md)
+- [Aggregation Pack](aggregationpack/docs/AggregationpackAPI.md)
+- [Abuse](abuse/docs/AbuseAPI.md)
+- [Invoice](invoice/docs/InvoiceAPI.md)
 
 ### Issues
 If you encounter an issue with the project, you are welcome to submit an [issue](https://github.com/Leaseweb/leaseweb-go-sdk/issues).
