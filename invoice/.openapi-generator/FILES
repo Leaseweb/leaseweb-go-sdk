@@ -17,8 +17,6 @@ docs/InvoiceAPI.md
 docs/LineItem.md
 docs/Metadata.md
 git_push.sh
-go.mod
-go.sum
 model__metadata.go
 model_contract_item.go
 model_credit.go

@@ -21,8 +21,6 @@ docs/Report.md
 docs/ResolutionList.md
 docs/ResolveReportResult.md
 git_push.sh
-go.mod
-go.sum
 model__metadata.go
 model_attachment.go
 model_create_report_message_opts.go
