@@ -54,11 +54,11 @@ func main() {
 ### Documentation
 The Leaseweb Go SDK documentation based on product:
 
-- [Public Cloud](publiccloud/docs/PubliccloudAPI.md)
-- [Dedicated Server](dedicatedserver/docs/DedicatedserverAPI.md)
-- [Aggregation Pack](aggregationpack/docs/AggregationpackAPI.md)
-- [Abuse](abuse/docs/AbuseAPI.md)
-- [Invoice](invoice/docs/InvoiceAPI.md)
+- [Public Cloud](publiccloud/README.md)
+- [Dedicated Server](dedicatedserver/README.md)
+- [Aggregation Pack](aggregationpack/README.md)
+- [Abuse](abuse/README.md)
+- [Invoice](invoice/README.md)
 
 ### Issues
 If you encounter an issue with the project, you are welcome to submit an [issue](https://github.com/Leaseweb/leaseweb-go-sdk/issues).
