@@ -45,9 +45,6 @@ func main() {
 	}
 	// response from `GetInstanceList`: GetInstanceListResult
 	_, err = fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetInstanceList`: %v\n", resp)
-	if err != nil {
-		return
-	}
 }
 ```
 
