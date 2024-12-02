@@ -1100,7 +1100,7 @@ paths:
       operationId: terminateInstance
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -1183,7 +1183,7 @@ paths:
       operationId: getInstance
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -1227,7 +1227,9 @@ paths:
                   ddos:
                     detectionProfile: STANDARD_DEFAULT
                     protectionType: STANDARD
-                iso: null
+                iso:
+                  id: ACRONIS_BOOT_MEDIA
+                  name: Acronis Boot Media
                 marketAppId: null
                 privateNetwork: null
                 productType: INSTANCE
@@ -1315,7 +1317,7 @@ paths:
       operationId: updateInstance
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -1385,7 +1387,9 @@ paths:
                   ddos:
                     detectionProfile: STANDARD_DEFAULT
                     protectionType: STANDARD
-                iso: null
+                iso:
+                  id: ACRONIS_BOOT_MEDIA
+                  name: Acronis Boot Media
                 marketAppId: null
                 privateNetwork: null
                 productType: INSTANCE
@@ -1483,7 +1487,7 @@ paths:
       operationId: cancelInstanceTermination
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -1566,7 +1570,7 @@ paths:
       operationId: startInstance
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -1649,7 +1653,7 @@ paths:
       operationId: stopInstance
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -1732,7 +1736,7 @@ paths:
       operationId: rebootInstance
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -1815,7 +1819,7 @@ paths:
       operationId: getConsoleAccessToInstance
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -1903,7 +1907,7 @@ paths:
       operationId: getUpdateInstanceTypeList
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -2292,7 +2296,7 @@ paths:
       operationId: deleteCredentials
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -2362,7 +2366,7 @@ paths:
       operationId: getCredentialList
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -2444,7 +2448,7 @@ paths:
       operationId: storeCredential
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -2544,7 +2548,7 @@ paths:
       operationId: getCredentialListByType
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -2646,7 +2650,7 @@ paths:
       operationId: deleteCredential
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -2734,7 +2738,7 @@ paths:
       operationId: getCredential
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -2841,7 +2845,7 @@ paths:
       operationId: updateCredential
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -2960,7 +2964,7 @@ paths:
       operationId: resetPassword
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -3786,7 +3790,7 @@ paths:
       operationId: attachIso
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -3877,7 +3881,7 @@ paths:
       operationId: detachIso
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -3959,7 +3963,7 @@ paths:
       operationId: getReinstallImageList
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -4202,7 +4206,7 @@ paths:
       operationId: reinstallInstance
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -5662,7 +5666,7 @@ paths:
       operationId: getIpList
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -5775,7 +5779,7 @@ paths:
       operationId: getIp
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -5869,7 +5873,7 @@ paths:
       operationId: updateIp
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -5986,7 +5990,7 @@ paths:
       operationId: nullRouteIp
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -6102,7 +6106,7 @@ paths:
       operationId: removeIpNullRoute
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -6207,7 +6211,7 @@ paths:
       operationId: getDataTrafficMetrics
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -6367,7 +6371,7 @@ paths:
       operationId: getCpuMetrics
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -8079,7 +8083,7 @@ paths:
       operationId: addToPrivateNetwork
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -8165,7 +8169,7 @@ paths:
       operationId: removeFromPrivateNetwork
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -8248,7 +8252,7 @@ paths:
       operationId: getSnapshotList
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -8355,7 +8359,7 @@ paths:
       operationId: createSnapshot
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -8437,7 +8441,7 @@ paths:
       operationId: deleteSnapshot
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -8526,7 +8530,7 @@ paths:
       operationId: getSnapshot
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -8612,7 +8616,7 @@ paths:
       operationId: restoreSnapshot
       parameters:
       - description: Instance's ID
-        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
         name: instanceId
@@ -10479,7 +10483,7 @@ components:
       style: form
     instanceId:
       description: Instance's ID
-      example: 695ddd91-051f-4dd6-9120-938a927a47d0
+      example: ace712e9-a166-47f1-9065-4af0f7e7fce1
       explode: false
       in: path
       name: instanceId

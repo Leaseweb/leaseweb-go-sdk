@@ -107,7 +107,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -175,7 +175,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	attachIsoOpts := *openapiclient.NewAttachIsoOpts("IsoId_example") // AttachIsoOpts | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -245,7 +245,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -517,7 +517,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -719,7 +719,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	type_ := "OPERATING_SYSTEM" // string | Credential type
 	username := "root" // string | Username
 
@@ -793,7 +793,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -930,7 +930,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	snapshotId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -1211,7 +1211,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1653,7 +1653,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1722,7 +1722,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	from := time.Now() // string | The start of the interval to get the metric (optional)
 	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
 	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
@@ -1798,7 +1798,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	type_ := "OPERATING_SYSTEM" // string | Credential type
 	username := "root" // string | Username
 
@@ -1874,7 +1874,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1944,7 +1944,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	type_ := "OPERATING_SYSTEM" // string | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -2016,7 +2016,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	from := time.Now() // string | The start of the interval to get the metric (optional)
 	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
 	granularity := "granularity_example" // string | How the metrics are grouped by (optional)
@@ -2399,7 +2399,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2623,7 +2623,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	ip := "10.0.0.1" // string | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -2696,7 +2696,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	version := int32(4) // int32 |  (optional)
 	nullRouted := true // bool |  (optional)
 	ips := "ips_example" // string | A list of IPs separated by `|` (optional)
@@ -3268,7 +3268,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	limit := int32(20) // int32 | Limit the number of results returned. (optional)
 	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
 	custom := true // bool | Filters the list to include only custom images. (optional)
@@ -3644,7 +3644,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	snapshotId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -3717,7 +3717,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	limit := int32(20) // int32 | Limit the number of results returned. (optional)
 	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
 
@@ -4013,7 +4013,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	limit := int32(56) // int32 |  (optional) (default to 50)
 	offset := int32(56) // int32 |  (optional) (default to 0)
 
@@ -4219,7 +4219,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	ip := "10.0.0.1" // string | 
 	nullRouteIpOpts := *openapiclient.NewNullRouteIpOpts() // NullRouteIpOpts |  (optional)
 
@@ -4294,7 +4294,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -4504,7 +4504,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	reinstallInstanceOpts := *openapiclient.NewReinstallInstanceOpts("ImageId_example") // ReinstallInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -4574,7 +4574,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -4642,7 +4642,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	ip := "10.0.0.1" // string | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -4715,7 +4715,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -4781,7 +4781,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	snapshotId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -4852,7 +4852,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -4920,7 +4920,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -4988,7 +4988,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	storeCredentialOpts := *openapiclient.NewStoreCredentialOpts(openapiclient.credentialType("OPERATING_SYSTEM"), "Username_example", "Password_example") // StoreCredentialOpts | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -5060,7 +5060,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -5268,7 +5268,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	type_ := "OPERATING_SYSTEM" // string | Credential type
 	username := "root" // string | Username
 	updateCredentialOpts := *openapiclient.NewUpdateCredentialOpts("Password_example") // UpdateCredentialOpts | 
@@ -5418,7 +5418,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	updateInstanceOpts := *openapiclient.NewUpdateInstanceOpts() // UpdateInstanceOpts | 
 
 	configuration := openapiclient.NewConfiguration()
@@ -5490,7 +5490,7 @@ import (
 )
 
 func main() {
-	instanceId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Instance's ID
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	ip := "10.0.0.1" // string | 
 	updateIpOpts := *openapiclient.NewUpdateIpOpts("ReverseLookup_example") // UpdateIpOpts | 
 
