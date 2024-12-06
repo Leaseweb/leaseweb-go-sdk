@@ -37,50 +37,35 @@ tags:
   name: API Key Authentication
   x-traitTag: true
   x-displayName: API Key Authentication
-- description: ""
-  name: Getting Started
+- name: Getting Started
   x-displayName: Getting Started
-- description: ""
-  name: IPs
+- name: IPs
   x-displayName: IPs
-- description: ""
-  name: Network Equipment
+- name: Network Equipment
   x-displayName: Network Equipment
-- description: ""
-  name: Private Networks
+- name: Private Networks
   x-displayName: Private Networks
-- description: ""
-  name: Servers
+- name: Servers
   x-displayName: Servers
-- description: ""
-  name: Control Panels
+- name: Control Panels
   x-displayName: Control Panels
-- description: ""
-  name: Credentials
+- name: Credentials
   x-displayName: Credentials
-- description: ""
-  name: DHCP Leases
+- name: DHCP Leases
   x-displayName: DHCP Leases
-- description: ""
-  name: Jobs
+- name: Jobs
   x-displayName: Jobs
-- description: ""
-  name: Operating Systems
+- name: Operating Systems
   x-displayName: Operating Systems
-- description: ""
-  name: Power
+- name: Power
   x-displayName: Power
-- description: ""
-  name: Rescue Images
+- name: Rescue Images
   x-displayName: Rescue Images
-- description: ""
-  name: Metrics
+- name: Metrics
   x-displayName: Metrics
-- description: ""
-  name: Notification Settings
+- name: Notification Settings
   x-displayName: Notification Settings
-- description: ""
-  name: Network Interfaces
+- name: Network Interfaces
   x-displayName: Network Interfaces
 paths:
   /networkEquipments:

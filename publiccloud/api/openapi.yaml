@@ -42,38 +42,22 @@ tags:
     You can generate API keys in the [Customer Portal](https://secure.leaseweb.com/api-client-management/).
   name: API Key Authentication
   x-traitTag: true
-- description: ""
-  name: Regions
-- description: ""
-  name: Instance Types
-- description: ""
-  name: Instances
-- description: ""
-  name: Power
-- description: ""
-  name: Credentials
-- description: ""
-  name: Expenses
-- description: ""
-  name: ISOs
-- description: ""
-  name: Images
-- description: ""
-  name: Target Groups
-- description: ""
-  name: Marketplace Apps
-- description: ""
-  name: Metrics
-- description: ""
-  name: Snapshots
-- description: ""
-  name: IPs
-- description: ""
-  name: Private Networks
-- description: ""
-  name: Load Balancer
-- description: ""
-  name: Auto Scaling Groups
+- name: Regions
+- name: Instance Types
+- name: Instances
+- name: Power
+- name: Credentials
+- name: Expenses
+- name: ISOs
+- name: Images
+- name: Target Groups
+- name: Marketplace Apps
+- name: Metrics
+- name: Snapshots
+- name: IPs
+- name: Private Networks
+- name: Load Balancer
+- name: Auto Scaling Groups
 paths:
   /regions:
     get:

@@ -37,8 +37,7 @@ tags:
     You can generate API keys in the [Customer Portal](https://secure.leaseweb.com/api-client-management/).
   name: API Key Authentication
   x-traitTag: true
-- description: ""
-  name: Aggregation Packs
+- name: Aggregation Packs
 paths:
   /aggregationPacks:
     get:
