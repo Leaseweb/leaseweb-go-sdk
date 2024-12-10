@@ -9047,6 +9047,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "500":
           content:
             application/json:
@@ -9145,6 +9155,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "500":
           content:
             application/json:
@@ -9285,6 +9305,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "500":
           content:
             application/json:
@@ -9414,6 +9444,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "500":
           content:
             application/json:
@@ -9521,6 +9561,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "500":
           content:
             application/json:
@@ -9628,6 +9678,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "500":
           content:
             application/json:
@@ -9933,6 +9993,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "500":
           content:
             application/json:
@@ -10020,6 +10090,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "500":
           content:
             application/json:
@@ -10122,6 +10202,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "500":
           content:
             application/json:
@@ -10242,6 +10332,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "500":
           content:
             application/json:
@@ -10322,6 +10422,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "423":
           content:
             application/json:
@@ -10411,6 +10521,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
         "423":
           content:
             application/json:
