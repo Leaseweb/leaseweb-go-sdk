@@ -16,11 +16,11 @@ import (
 	"fmt"
 )
 
-// checks if the Contract type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Contract{}
+// checks if the VpsContract type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &VpsContract{}
 
-// Contract struct for Contract
-type Contract struct {
+// VpsContract struct for VpsContract
+type VpsContract struct {
 	BillingFrequency BillingFrequency `json:"billingFrequency"`
 	Term ContractTerm `json:"term"`
 	Type ContractType `json:"type"`
@@ -28,39 +28,44 @@ type Contract struct {
 	// Date when the contract was created
 	CreatedAt time.Time `json:"createdAt"`
 	State ContractState `json:"state"`
-	// Date when the contract will be automatically renewed
-	RenewalsAt time.Time `json:"renewalsAt"`
+	Id string `json:"id"`
+	Sla string `json:"sla"`
+	ControlPanel NullableString `json:"controlPanel"`
+	InModification bool `json:"inModification"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _Contract Contract
+type _VpsContract VpsContract
 
-// NewContract instantiates a new Contract object
+// NewVpsContract instantiates a new VpsContract object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContract(billingFrequency BillingFrequency, term ContractTerm, type_ ContractType, endsAt NullableTime, createdAt time.Time, state ContractState, renewalsAt time.Time) *Contract {
-	this := Contract{}
+func NewVpsContract(billingFrequency BillingFrequency, term ContractTerm, type_ ContractType, endsAt NullableTime, createdAt time.Time, state ContractState, id string, sla string, controlPanel NullableString, inModification bool) *VpsContract {
+	this := VpsContract{}
 	this.BillingFrequency = billingFrequency
 	this.Term = term
 	this.Type = type_
 	this.EndsAt = endsAt
 	this.CreatedAt = createdAt
 	this.State = state
-	this.RenewalsAt = renewalsAt
+	this.Id = id
+	this.Sla = sla
+	this.ControlPanel = controlPanel
+	this.InModification = inModification
 	return &this
 }
 
-// NewContractWithDefaults instantiates a new Contract object
+// NewVpsContractWithDefaults instantiates a new VpsContract object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewContractWithDefaults() *Contract {
-	this := Contract{}
+func NewVpsContractWithDefaults() *VpsContract {
+	this := VpsContract{}
 	return &this
 }
 
 // GetBillingFrequency returns the BillingFrequency field value
-func (o *Contract) GetBillingFrequency() BillingFrequency {
+func (o *VpsContract) GetBillingFrequency() BillingFrequency {
 	if o == nil {
 		var ret BillingFrequency
 		return ret
@@ -71,7 +76,7 @@ func (o *Contract) GetBillingFrequency() BillingFrequency {
 
 // GetBillingFrequencyOk returns a tuple with the BillingFrequency field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetBillingFrequencyOk() (*BillingFrequency, bool) {
+func (o *VpsContract) GetBillingFrequencyOk() (*BillingFrequency, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,12 +84,12 @@ func (o *Contract) GetBillingFrequencyOk() (*BillingFrequency, bool) {
 }
 
 // SetBillingFrequency sets field value
-func (o *Contract) SetBillingFrequency(v BillingFrequency) {
+func (o *VpsContract) SetBillingFrequency(v BillingFrequency) {
 	o.BillingFrequency = v
 }
 
 // GetTerm returns the Term field value
-func (o *Contract) GetTerm() ContractTerm {
+func (o *VpsContract) GetTerm() ContractTerm {
 	if o == nil {
 		var ret ContractTerm
 		return ret
@@ -95,7 +100,7 @@ func (o *Contract) GetTerm() ContractTerm {
 
 // GetTermOk returns a tuple with the Term field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetTermOk() (*ContractTerm, bool) {
+func (o *VpsContract) GetTermOk() (*ContractTerm, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,12 +108,12 @@ func (o *Contract) GetTermOk() (*ContractTerm, bool) {
 }
 
 // SetTerm sets field value
-func (o *Contract) SetTerm(v ContractTerm) {
+func (o *VpsContract) SetTerm(v ContractTerm) {
 	o.Term = v
 }
 
 // GetType returns the Type field value
-func (o *Contract) GetType() ContractType {
+func (o *VpsContract) GetType() ContractType {
 	if o == nil {
 		var ret ContractType
 		return ret
@@ -119,7 +124,7 @@ func (o *Contract) GetType() ContractType {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetTypeOk() (*ContractType, bool) {
+func (o *VpsContract) GetTypeOk() (*ContractType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,13 +132,13 @@ func (o *Contract) GetTypeOk() (*ContractType, bool) {
 }
 
 // SetType sets field value
-func (o *Contract) SetType(v ContractType) {
+func (o *VpsContract) SetType(v ContractType) {
 	o.Type = v
 }
 
 // GetEndsAt returns the EndsAt field value
 // If the value is explicit nil, the zero value for time.Time will be returned
-func (o *Contract) GetEndsAt() time.Time {
+func (o *VpsContract) GetEndsAt() time.Time {
 	if o == nil || o.EndsAt.Get() == nil {
 		var ret time.Time
 		return ret
@@ -145,7 +150,7 @@ func (o *Contract) GetEndsAt() time.Time {
 // GetEndsAtOk returns a tuple with the EndsAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Contract) GetEndsAtOk() (*time.Time, bool) {
+func (o *VpsContract) GetEndsAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -153,12 +158,12 @@ func (o *Contract) GetEndsAtOk() (*time.Time, bool) {
 }
 
 // SetEndsAt sets field value
-func (o *Contract) SetEndsAt(v time.Time) {
+func (o *VpsContract) SetEndsAt(v time.Time) {
 	o.EndsAt.Set(&v)
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *Contract) GetCreatedAt() time.Time {
+func (o *VpsContract) GetCreatedAt() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -169,7 +174,7 @@ func (o *Contract) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetCreatedAtOk() (*time.Time, bool) {
+func (o *VpsContract) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -177,12 +182,12 @@ func (o *Contract) GetCreatedAtOk() (*time.Time, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *Contract) SetCreatedAt(v time.Time) {
+func (o *VpsContract) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
 // GetState returns the State field value
-func (o *Contract) GetState() ContractState {
+func (o *VpsContract) GetState() ContractState {
 	if o == nil {
 		var ret ContractState
 		return ret
@@ -193,7 +198,7 @@ func (o *Contract) GetState() ContractState {
 
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetStateOk() (*ContractState, bool) {
+func (o *VpsContract) GetStateOk() (*ContractState, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -201,35 +206,109 @@ func (o *Contract) GetStateOk() (*ContractState, bool) {
 }
 
 // SetState sets field value
-func (o *Contract) SetState(v ContractState) {
+func (o *VpsContract) SetState(v ContractState) {
 	o.State = v
 }
 
-// GetRenewalsAt returns the RenewalsAt field value
-func (o *Contract) GetRenewalsAt() time.Time {
+// GetId returns the Id field value
+func (o *VpsContract) GetId() string {
 	if o == nil {
-		var ret time.Time
+		var ret string
 		return ret
 	}
 
-	return o.RenewalsAt
+	return o.Id
 }
 
-// GetRenewalsAtOk returns a tuple with the RenewalsAt field value
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetRenewalsAtOk() (*time.Time, bool) {
+func (o *VpsContract) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.RenewalsAt, true
+	return &o.Id, true
 }
 
-// SetRenewalsAt sets field value
-func (o *Contract) SetRenewalsAt(v time.Time) {
-	o.RenewalsAt = v
+// SetId sets field value
+func (o *VpsContract) SetId(v string) {
+	o.Id = v
 }
 
-func (o Contract) MarshalJSON() ([]byte, error) {
+// GetSla returns the Sla field value
+func (o *VpsContract) GetSla() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Sla
+}
+
+// GetSlaOk returns a tuple with the Sla field value
+// and a boolean to check if the value has been set.
+func (o *VpsContract) GetSlaOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Sla, true
+}
+
+// SetSla sets field value
+func (o *VpsContract) SetSla(v string) {
+	o.Sla = v
+}
+
+// GetControlPanel returns the ControlPanel field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *VpsContract) GetControlPanel() string {
+	if o == nil || o.ControlPanel.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.ControlPanel.Get()
+}
+
+// GetControlPanelOk returns a tuple with the ControlPanel field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *VpsContract) GetControlPanelOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ControlPanel.Get(), o.ControlPanel.IsSet()
+}
+
+// SetControlPanel sets field value
+func (o *VpsContract) SetControlPanel(v string) {
+	o.ControlPanel.Set(&v)
+}
+
+// GetInModification returns the InModification field value
+func (o *VpsContract) GetInModification() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.InModification
+}
+
+// GetInModificationOk returns a tuple with the InModification field value
+// and a boolean to check if the value has been set.
+func (o *VpsContract) GetInModificationOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InModification, true
+}
+
+// SetInModification sets field value
+func (o *VpsContract) SetInModification(v bool) {
+	o.InModification = v
+}
+
+func (o VpsContract) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -237,7 +316,7 @@ func (o Contract) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Contract) ToMap() (map[string]interface{}, error) {
+func (o VpsContract) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["billingFrequency"] = o.BillingFrequency
 	toSerialize["term"] = o.Term
@@ -245,7 +324,10 @@ func (o Contract) ToMap() (map[string]interface{}, error) {
 	toSerialize["endsAt"] = o.EndsAt.Get()
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["state"] = o.State
-	toSerialize["renewalsAt"] = o.RenewalsAt
+	toSerialize["id"] = o.Id
+	toSerialize["sla"] = o.Sla
+	toSerialize["controlPanel"] = o.ControlPanel.Get()
+	toSerialize["inModification"] = o.InModification
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -254,7 +336,7 @@ func (o Contract) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Contract) UnmarshalJSON(data []byte) (err error) {
+func (o *VpsContract) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -265,7 +347,10 @@ func (o *Contract) UnmarshalJSON(data []byte) (err error) {
 		"endsAt",
 		"createdAt",
 		"state",
-		"renewalsAt",
+		"id",
+		"sla",
+		"controlPanel",
+		"inModification",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -282,15 +367,15 @@ func (o *Contract) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varContract := _Contract{}
+	varVpsContract := _VpsContract{}
 
-	err = json.Unmarshal(data, &varContract)
+	err = json.Unmarshal(data, &varVpsContract)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Contract(varContract)
+	*o = VpsContract(varVpsContract)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -301,45 +386,48 @@ func (o *Contract) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "endsAt")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "state")
-		delete(additionalProperties, "renewalsAt")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "sla")
+		delete(additionalProperties, "controlPanel")
+		delete(additionalProperties, "inModification")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableContract struct {
-	value *Contract
+type NullableVpsContract struct {
+	value *VpsContract
 	isSet bool
 }
 
-func (v NullableContract) Get() *Contract {
+func (v NullableVpsContract) Get() *VpsContract {
 	return v.value
 }
 
-func (v *NullableContract) Set(val *Contract) {
+func (v *NullableVpsContract) Set(val *VpsContract) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableContract) IsSet() bool {
+func (v NullableVpsContract) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableContract) Unset() {
+func (v *NullableVpsContract) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableContract(val *Contract) *NullableContract {
-	return &NullableContract{value: val, isSet: true}
+func NewNullableVpsContract(val *VpsContract) *NullableVpsContract {
+	return &NullableVpsContract{value: val, isSet: true}
 }
 
-func (v NullableContract) MarshalJSON() ([]byte, error) {
+func (v NullableVpsContract) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableContract) UnmarshalJSON(src []byte) error {
+func (v *NullableVpsContract) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

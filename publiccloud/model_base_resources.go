@@ -15,43 +15,41 @@ import (
 	"fmt"
 )
 
-// checks if the Resources type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Resources{}
+// checks if the BaseResources type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BaseResources{}
 
-// Resources struct for Resources
-type Resources struct {
+// BaseResources Available resources
+type BaseResources struct {
 	Cpu Cpu `json:"cpu"`
 	Memory Memory `json:"memory"`
 	PublicNetworkSpeed NetworkSpeed `json:"publicNetworkSpeed"`
-	PrivateNetworkSpeed NetworkSpeed `json:"privateNetworkSpeed"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _Resources Resources
+type _BaseResources BaseResources
 
-// NewResources instantiates a new Resources object
+// NewBaseResources instantiates a new BaseResources object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewResources(cpu Cpu, memory Memory, publicNetworkSpeed NetworkSpeed, privateNetworkSpeed NetworkSpeed) *Resources {
-	this := Resources{}
+func NewBaseResources(cpu Cpu, memory Memory, publicNetworkSpeed NetworkSpeed) *BaseResources {
+	this := BaseResources{}
 	this.Cpu = cpu
 	this.Memory = memory
 	this.PublicNetworkSpeed = publicNetworkSpeed
-	this.PrivateNetworkSpeed = privateNetworkSpeed
 	return &this
 }
 
-// NewResourcesWithDefaults instantiates a new Resources object
+// NewBaseResourcesWithDefaults instantiates a new BaseResources object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewResourcesWithDefaults() *Resources {
-	this := Resources{}
+func NewBaseResourcesWithDefaults() *BaseResources {
+	this := BaseResources{}
 	return &this
 }
 
 // GetCpu returns the Cpu field value
-func (o *Resources) GetCpu() Cpu {
+func (o *BaseResources) GetCpu() Cpu {
 	if o == nil {
 		var ret Cpu
 		return ret
@@ -62,7 +60,7 @@ func (o *Resources) GetCpu() Cpu {
 
 // GetCpuOk returns a tuple with the Cpu field value
 // and a boolean to check if the value has been set.
-func (o *Resources) GetCpuOk() (*Cpu, bool) {
+func (o *BaseResources) GetCpuOk() (*Cpu, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,12 +68,12 @@ func (o *Resources) GetCpuOk() (*Cpu, bool) {
 }
 
 // SetCpu sets field value
-func (o *Resources) SetCpu(v Cpu) {
+func (o *BaseResources) SetCpu(v Cpu) {
 	o.Cpu = v
 }
 
 // GetMemory returns the Memory field value
-func (o *Resources) GetMemory() Memory {
+func (o *BaseResources) GetMemory() Memory {
 	if o == nil {
 		var ret Memory
 		return ret
@@ -86,7 +84,7 @@ func (o *Resources) GetMemory() Memory {
 
 // GetMemoryOk returns a tuple with the Memory field value
 // and a boolean to check if the value has been set.
-func (o *Resources) GetMemoryOk() (*Memory, bool) {
+func (o *BaseResources) GetMemoryOk() (*Memory, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,12 +92,12 @@ func (o *Resources) GetMemoryOk() (*Memory, bool) {
 }
 
 // SetMemory sets field value
-func (o *Resources) SetMemory(v Memory) {
+func (o *BaseResources) SetMemory(v Memory) {
 	o.Memory = v
 }
 
 // GetPublicNetworkSpeed returns the PublicNetworkSpeed field value
-func (o *Resources) GetPublicNetworkSpeed() NetworkSpeed {
+func (o *BaseResources) GetPublicNetworkSpeed() NetworkSpeed {
 	if o == nil {
 		var ret NetworkSpeed
 		return ret
@@ -110,7 +108,7 @@ func (o *Resources) GetPublicNetworkSpeed() NetworkSpeed {
 
 // GetPublicNetworkSpeedOk returns a tuple with the PublicNetworkSpeed field value
 // and a boolean to check if the value has been set.
-func (o *Resources) GetPublicNetworkSpeedOk() (*NetworkSpeed, bool) {
+func (o *BaseResources) GetPublicNetworkSpeedOk() (*NetworkSpeed, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -118,35 +116,11 @@ func (o *Resources) GetPublicNetworkSpeedOk() (*NetworkSpeed, bool) {
 }
 
 // SetPublicNetworkSpeed sets field value
-func (o *Resources) SetPublicNetworkSpeed(v NetworkSpeed) {
+func (o *BaseResources) SetPublicNetworkSpeed(v NetworkSpeed) {
 	o.PublicNetworkSpeed = v
 }
 
-// GetPrivateNetworkSpeed returns the PrivateNetworkSpeed field value
-func (o *Resources) GetPrivateNetworkSpeed() NetworkSpeed {
-	if o == nil {
-		var ret NetworkSpeed
-		return ret
-	}
-
-	return o.PrivateNetworkSpeed
-}
-
-// GetPrivateNetworkSpeedOk returns a tuple with the PrivateNetworkSpeed field value
-// and a boolean to check if the value has been set.
-func (o *Resources) GetPrivateNetworkSpeedOk() (*NetworkSpeed, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.PrivateNetworkSpeed, true
-}
-
-// SetPrivateNetworkSpeed sets field value
-func (o *Resources) SetPrivateNetworkSpeed(v NetworkSpeed) {
-	o.PrivateNetworkSpeed = v
-}
-
-func (o Resources) MarshalJSON() ([]byte, error) {
+func (o BaseResources) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -154,12 +128,11 @@ func (o Resources) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Resources) ToMap() (map[string]interface{}, error) {
+func (o BaseResources) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cpu"] = o.Cpu
 	toSerialize["memory"] = o.Memory
 	toSerialize["publicNetworkSpeed"] = o.PublicNetworkSpeed
-	toSerialize["privateNetworkSpeed"] = o.PrivateNetworkSpeed
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -168,7 +141,7 @@ func (o Resources) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Resources) UnmarshalJSON(data []byte) (err error) {
+func (o *BaseResources) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -176,7 +149,6 @@ func (o *Resources) UnmarshalJSON(data []byte) (err error) {
 		"cpu",
 		"memory",
 		"publicNetworkSpeed",
-		"privateNetworkSpeed",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -193,15 +165,15 @@ func (o *Resources) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varResources := _Resources{}
+	varBaseResources := _BaseResources{}
 
-	err = json.Unmarshal(data, &varResources)
+	err = json.Unmarshal(data, &varBaseResources)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Resources(varResources)
+	*o = BaseResources(varBaseResources)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -209,45 +181,44 @@ func (o *Resources) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "cpu")
 		delete(additionalProperties, "memory")
 		delete(additionalProperties, "publicNetworkSpeed")
-		delete(additionalProperties, "privateNetworkSpeed")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableResources struct {
-	value *Resources
+type NullableBaseResources struct {
+	value *BaseResources
 	isSet bool
 }
 
-func (v NullableResources) Get() *Resources {
+func (v NullableBaseResources) Get() *BaseResources {
 	return v.value
 }
 
-func (v *NullableResources) Set(val *Resources) {
+func (v *NullableBaseResources) Set(val *BaseResources) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableResources) IsSet() bool {
+func (v NullableBaseResources) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableResources) Unset() {
+func (v *NullableBaseResources) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableResources(val *Resources) *NullableResources {
-	return &NullableResources{value: val, isSet: true}
+func NewNullableBaseResources(val *BaseResources) *NullableBaseResources {
+	return &NullableBaseResources{value: val, isSet: true}
 }
 
-func (v NullableResources) MarshalJSON() ([]byte, error) {
+func (v NullableBaseResources) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableResources) UnmarshalJSON(src []byte) error {
+func (v *NullableBaseResources) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

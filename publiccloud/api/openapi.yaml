@@ -54,10 +54,12 @@ tags:
 - name: Marketplace Apps
 - name: Metrics
 - name: Snapshots
+- name: VPS
 - name: IPs
 - name: Private Networks
 - name: Load Balancer
 - name: Auto Scaling Groups
+- name: Reinstall
 paths:
   /regions:
     get:
@@ -1550,7 +1552,7 @@ paths:
       - publiccloud
   /instances/{instanceId}/start:
     post:
-      description: The instance must be stopped before the execution
+      description: The Instance must be stopped before the execution
       operationId: startInstance
       parameters:
       - description: Instance's ID
@@ -1565,7 +1567,7 @@ paths:
         style: simple
       responses:
         "202":
-          description: Request has been accepted and instance is going to be started
+          description: Request has been accepted and the Instance is going to be started
             soon
         "400":
           content:
@@ -1628,12 +1630,178 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Start instance
+      summary: Start a specific resource Instance
+      tags:
+      - publiccloud
+  /loadBalancers/{loadBalancerId}/start:
+    post:
+      description: The Load Balancer must be stopped before the execution
+      operationId: startLoadBalancer
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Request has been accepted and the Load Balancer is going to
+            be started soon
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Start a specific resource Load Balancer
+      tags:
+      - publiccloud
+  /vps/{vpsId}/start:
+    post:
+      description: The VPS must be stopped before the execution
+      operationId: startVPS
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Request has been accepted and the VPS is going to be started
+            soon
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Start a specific resource VPS
       tags:
       - publiccloud
   /instances/{instanceId}/stop:
     post:
-      description: The instance must be running before the execution
+      description: The Instance must be running before the execution
       operationId: stopInstance
       parameters:
       - description: Instance's ID
@@ -1648,7 +1816,7 @@ paths:
         style: simple
       responses:
         "202":
-          description: Request has been accepted and instance is going to be stopped
+          description: Request has been accepted and the Instance is going to be stopped
             soon
         "400":
           content:
@@ -1711,12 +1879,178 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Stop instance
+      summary: Stop a specific Instance
+      tags:
+      - publiccloud
+  /loadBalancers/{loadBalancerId}/stop:
+    post:
+      description: The Load Balancer must be running before the execution
+      operationId: stopLoadBalancer
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Request has been accepted and the Load Balancer is going to
+            be stopped soon
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Stop a specific Load Balancer
+      tags:
+      - publiccloud
+  /vps/{vpsId}/stop:
+    post:
+      description: The VPS must be running before the execution
+      operationId: stopVPS
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Request has been accepted and the VPS is going to be stopped
+            soon
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Stop a specific VPS
       tags:
       - publiccloud
   /instances/{instanceId}/reboot:
     post:
-      description: The instance must be running before the execution
+      description: The Instance must be running before the execution
       operationId: rebootInstance
       parameters:
       - description: Instance's ID
@@ -1731,7 +2065,7 @@ paths:
         style: simple
       responses:
         "202":
-          description: Request has been accepted and instance is going to be rebooted
+          description: Request has been accepted and the Instance is going to be rebooted
             soon
         "400":
           content:
@@ -1794,7 +2128,173 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Reboot instance
+      summary: Reboot a specific Instance
+      tags:
+      - publiccloud
+  /loadBalancers/{loadBalancerId}/reboot:
+    post:
+      description: The Load Balancer must be running before the execution
+      operationId: rebootLoadBalancer
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Request has been accepted and the Load Balancer is going to
+            be rebooted soon
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Reboot a specific Load Balancer
+      tags:
+      - publiccloud
+  /vps/{vpsId}/reboot:
+    post:
+      description: The VPS must be running before the execution
+      operationId: rebootVPS
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Request has been accepted and the VPS is going to be rebooted
+            soon
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Reboot a specific VPS
       tags:
       - publiccloud
   /instances/{instanceId}/console:
@@ -2276,8 +2776,7 @@ paths:
       - publiccloud
   /instances/{instanceId}/credentials:
     delete:
-      description: Delete all credentials stored for a given instance
-      operationId: deleteCredentials
+      operationId: deleteInstanceCredentials
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -2342,12 +2841,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Delete all instance credentials
+      summary: Delete all credentials associated with a specific Instance
       tags:
       - publiccloud
     get:
-      description: Get all credentials stored for the instance
-      operationId: getCredentialList
+      operationId: getInstanceCredentialList
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -2424,12 +2922,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: List credentials stored for instance
+      summary: List credentials stored for a specific Instance
       tags:
       - publiccloud
     post:
-      description: Store credential used for the instance
-      operationId: storeCredential
+      operationId: storeInstanceCredential
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -2523,13 +3020,262 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Store credentials
+      summary: Store credentials for a specific Instance
+      tags:
+      - publiccloud
+  /vps/{vpsId}/credentials:
+    delete:
+      description: Delete all credentials stored for a given VPS.
+      operationId: deleteVPSCredentials
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No content.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Delete all credentials associated with a specific VPS
+      tags:
+      - publiccloud
+    get:
+      operationId: getVPSCredentialList
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 1
+                  limit: 20
+                  offset: 0
+                credentials:
+                - type: OPERATING_SYSTEM
+                  username: root
+              schema:
+                $ref: '#/components/schemas/getCredentialListResult'
+          description: OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List credentials stored for a specific VPS
+      tags:
+      - publiccloud
+    post:
+      operationId: storeVPSCredential
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              password: "12341234"
+              type: OPERATING_SYSTEM
+              username: root
+            schema:
+              $ref: '#/components/schemas/storeCredentialOpts'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                password: "12341234"
+                type: OPERATING_SYSTEM
+                username: root
+              schema:
+                $ref: '#/components/schemas/storeCredentialResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Store credentials for a specific VPS
       tags:
       - publiccloud
   /instances/{instanceId}/credentials/{type}:
     get:
-      description: Get credentials stored for the instance by their types
-      operationId: getCredentialListByType
+      operationId: getInstanceCredentialListByType
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -2541,13 +3287,13 @@ paths:
           format: uuid
           type: string
         style: simple
-      - example: OPERATING_SYSTEM
+      - description: Type of credential
         explode: false
         in: path
         name: type
         required: true
         schema:
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       responses:
         "200":
@@ -2625,32 +3371,131 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Get credentials by type
+      summary: Get credentials by type for a specific Instance
       tags:
       - publiccloud
-  /instances/{instanceId}/credentials/{type}/{username}:
-    delete:
-      description: Delete credential for a given type and username
-      operationId: deleteCredential
+  /vps/{vpsId}/credentials/{type}:
+    get:
+      operationId: getVPSCredentialListByType
       parameters:
-      - description: Instance's ID
+      - description: VPS ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
-        name: instanceId
+        name: vpsId
         required: true
         schema:
           format: uuid
           type: string
         style: simple
-      - description: Credential type
-        example: OPERATING_SYSTEM
+      - description: Type of credential
         explode: false
         in: path
         name: type
         required: true
         schema:
+          $ref: '#/components/schemas/credentialType'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 1
+                  limit: 20
+                  offset: 0
+                credentials:
+                - type: OPERATING_SYSTEM
+                  username: root
+              schema:
+                $ref: '#/components/schemas/getCredentialListByTypeResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get credentials by type for a specific VPS
+      tags:
+      - publiccloud
+  /vps/{vpsId}/credentials/{type}/{username}:
+    delete:
+      operationId: deleteVPSCredential
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
           type: string
+        style: simple
+      - description: Type of credential
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Username
         example: root
@@ -2714,31 +3559,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Delete credentials
+      summary: Delete VPS credential
       tags:
       - publiccloud
     get:
-      description: Get credentials by type and username
-      operationId: getCredential
+      operationId: getVPSCredential
       parameters:
-      - description: Instance's ID
+      - description: VPS ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
-        name: instanceId
+        name: vpsId
         required: true
         schema:
           format: uuid
           type: string
         style: simple
-      - description: Credential type
-        example: OPERATING_SYSTEM
+      - description: Type of credential
         explode: false
         in: path
         name: type
         required: true
         schema:
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Username
         example: root
@@ -2821,31 +3664,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Get credentials by type and username
+      summary: Get VPS credential by type and username.
       tags:
       - publiccloud
     put:
-      description: Update credentials for a given type and username
-      operationId: updateCredential
+      operationId: updateVpsCredential
       parameters:
-      - description: Instance's ID
+      - description: VPS ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
         explode: false
         in: path
-        name: instanceId
+        name: vpsId
         required: true
         schema:
           format: uuid
           type: string
         style: simple
-      - description: Credential type
-        example: OPERATING_SYSTEM
+      - description: Type of credential
         explode: false
         in: path
         name: type
         required: true
         schema:
-          type: string
+          $ref: '#/components/schemas/credentialType'
         style: simple
       - description: Username
         example: root
@@ -2936,7 +3777,312 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Update credentials
+      summary: Update credentials for a given type and username
+      tags:
+      - publiccloud
+  /instances/{instanceId}/credentials/{type}/{username}:
+    delete:
+      operationId: deleteInstanceCredential
+      parameters:
+      - description: Instance's ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: instanceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Type of credential
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          $ref: '#/components/schemas/credentialType'
+        style: simple
+      - description: Username
+        example: root
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No content.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Delete Instance credential for a given type and username
+      tags:
+      - publiccloud
+    get:
+      operationId: getInstanceCredential
+      parameters:
+      - description: Instance's ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: instanceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Type of credential
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          $ref: '#/components/schemas/credentialType'
+        style: simple
+      - description: Username
+        example: root
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                password: "12341234"
+                type: OPERATING_SYSTEM
+                username: root
+              schema:
+                $ref: '#/components/schemas/getCredentialResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get Instance credentials by type and username.
+      tags:
+      - publiccloud
+    put:
+      operationId: updateInstanceCredential
+      parameters:
+      - description: Instance's ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: instanceId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Type of credential
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          $ref: '#/components/schemas/credentialType'
+        style: simple
+      - description: Username
+        example: root
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              password: "12341234"
+            schema:
+              $ref: '#/components/schemas/updateCredentialOpts'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                password: "12341234"
+                type: OPERATING_SYSTEM
+                username: root
+              schema:
+                $ref: '#/components/schemas/updateCredentialResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Update credentials for a given type and username
       tags:
       - publiccloud
   /instances/{instanceId}/resetPassword:
@@ -2945,7 +4091,7 @@ paths:
         The operation may take a few moments to complete.
 
         You can obtain the new credential using the credentials endpoints
-      operationId: resetPassword
+      operationId: resetInstancePassword
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -3022,7 +4168,93 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Reset instance password
+      summary: Reset the password for a specific Instance
+      tags:
+      - publiccloud
+  /vps/{vpsId}/resetPassword:
+    post:
+      description: |-
+        The operation may take a few moments to complete.
+
+        You can obtain the new credential using the credentials endpoints
+      operationId: resetVPSPassword
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: "Accepted. Reinstall process has started, it may take a few\
+            \ moments to complete."
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Reset the password for a specific VPS
       tags:
       - publiccloud
   /equipments/{equipmentId}/expenses:
@@ -3771,7 +5003,7 @@ paths:
         Instance must not have ISO attached, otherwise, it will return a validation error.
 
         Available ISOs can be obtained using `/v1/isos`.
-      operationId: attachIso
+      operationId: attachInstanceISO
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -3855,14 +5087,107 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Attach ISO to instance
+      summary: Attach ISO to a specific Instance
+      tags:
+      - publiccloud
+  /vps/{vpsId}/attachIso:
+    post:
+      description: |-
+        VPS must not have ISO attached, otherwise, it will return a validation error.
+
+        Available ISOs can be obtained using `/v1/isos`.
+      operationId: attachVPSISO
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              isoId: GRML
+            schema:
+              $ref: '#/components/schemas/attachIsoOpts'
+        required: true
+      responses:
+        "202":
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Attach ISO to a specific VPS
       tags:
       - publiccloud
   /instances/{instanceId}/detachIso:
     post:
       description: "Instance must have ISO attached, otherwise, it will return a validation\
         \ error"
-      operationId: detachIso
+      operationId: detachInstanceISO
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -3938,13 +5263,95 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Detach ISO from instance
+      summary: Detach ISO from a specific Instance
+      tags:
+      - publiccloud
+  /vps/{vpsId}/detachIso:
+    post:
+      description: "VPS must have ISO attached, otherwise, it will return a validation\
+        \ error"
+      operationId: detachVPSISO
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Accepted.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Detach ISO from a specific VPS
       tags:
       - publiccloud
   /instances/{instanceId}/reinstall/images:
     get:
-      description: List Images available for reinstall
-      operationId: getReinstallImageList
+      operationId: getReinstallInstanceImageList
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -4177,14 +5584,249 @@ paths:
       summary: List images available for reinstall
       tags:
       - publiccloud
+  /vps/{vpsId}/reinstall/images:
+    get:
+      operationId: getReinstallVPSImageList
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Filters the list to include only custom images.
+        explode: true
+        in: query
+        name: custom
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Filters the list to include only standard images.
+        example: "true"
+        explode: true
+        in: query
+        name: standard
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                images:
+                - id: UBUNTU_24_04_64BIT
+                  name: Ubuntu 24.04 LTS (x86_64)
+                  version: "24.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                  marketApps: []
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
+                  storageSize: null
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: null
+                  updatedAt: null
+                  custom: false
+                  minDiskSize: null
+                - id: UBUNTU_22_04_64BIT
+                  name: Ubuntu 22.04 LTS (x86_64)
+                  version: "22.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                  marketApps:
+                  - PLESK_WEB_ADMIN
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
+                  storageSize: null
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: null
+                  updatedAt: null
+                  custom: false
+                  minDiskSize: null
+                - id: UBUNTU_20_04_64BIT
+                  name: Ubuntu 20.04 LTS (x86_64)
+                  version: "20.04"
+                  family: linux
+                  flavour: ubuntu
+                  architecture: x86_64
+                  marketApps: []
+                  storageTypes:
+                  - LOCAL
+                  - CENTRAL
+                  storageSize: null
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: null
+                  updatedAt: null
+                  custom: false
+                  minDiskSize: null
+                - id: abcc1630-362f-48ba-832f-c496aff24121
+                  name: Custom image - 01
+                  flavour: ubuntu
+                  family: linux
+                  version: null
+                  architecture: null
+                  marketApps: []
+                  storageTypes: []
+                  storageSize:
+                    size: 2.03
+                    unit: GB
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: 2024-07-05T10:44:08+00:00
+                  updatedAt: 2024-07-18T08:52:08+00:00
+                  custom: true
+                  minDiskSize: null
+                - id: 8600b94b-45b4-4887-86e1-2792b06dbb32
+                  name: Custom image - 02
+                  flavour: ubuntu
+                  family: linux
+                  version: null
+                  architecture: null
+                  marketApps: []
+                  storageTypes: []
+                  storageSize:
+                    size: 2.03
+                    unit: GB
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: 2024-07-05T10:47:01+00:00
+                  updatedAt: 2024-07-17T13:14:01+00:00
+                  custom: true
+                  minDiskSize: null
+                - id: ace712e9-a166-47f1-9065-4af0f7e7fce1
+                  name: Custom image - 03
+                  flavour: ubuntu
+                  family: linux
+                  version: null
+                  architecture: null
+                  marketApps: []
+                  storageTypes: []
+                  storageSize:
+                    size: 2.03
+                    unit: GB
+                  state: READY
+                  stateReason: null
+                  region: eu-west-3
+                  createdAt: 2024-07-05T10:54:27+00:00
+                  updatedAt: 2024-07-17T13:14:01+00:00
+                  custom: true
+                  minDiskSize: null
+                _metadata:
+                  totalCount: 6
+                  limit: 6
+                  offset: 0
+              schema:
+                $ref: '#/components/schemas/getReinstallImageListResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List images available for reinstall
+      tags:
+      - publiccloud
   /instances/{instanceId}/reinstall:
     put:
       description: |-
-        Recreates the instance, with optionally different Image and Marketplace App.
+        Recreates the Instance, with optionally different Image and Marketplace App.
 
         Cannot be performed when the instance has snapshots.
 
-        Available Images can be obtained using `/v1/instances/{instanceId}/reinstall/images`.
+        Available Images can be obtained using `/v1/{resource}/{instanceId}/reinstall/images`.
 
         Available Marketplace Apps can be obtained using `/v1/images/{imageId}/marketApps`.
       operationId: reinstallInstance
@@ -4205,7 +5847,7 @@ paths:
             example:
               imageId: UBUNTU_22_04_64BIT
             schema:
-              $ref: '#/components/schemas/reinstallInstanceOpts'
+              $ref: '#/components/schemas/reinstallResourceOpts'
         required: true
       responses:
         "202":
@@ -4272,7 +5914,105 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Reinstall instance
+      summary: Reinstall an Instance
+      tags:
+      - publiccloud
+  /vps/{vpsId}/reinstall:
+    put:
+      description: |-
+        Recreates the VPS, with optionally different Image and Marketplace App.
+
+        Cannot be performed when the VPS has snapshots.
+
+        Available Images can be obtained using `/v1/{resource}/{instanceId}/reinstall/images`.
+
+        Available Marketplace Apps can be obtained using `/v1/images/{imageId}/marketApps`.
+      operationId: reinstallVPS
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              imageId: UBUNTU_22_04_64BIT
+            schema:
+              $ref: '#/components/schemas/reinstallResourceOpts'
+        required: true
+      responses:
+        "202":
+          description: Accepted. The reinstall process has started and may take a
+            few moments to complete.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Reinstall a VPS
       tags:
       - publiccloud
   /loadBalancers:
@@ -5646,8 +7386,8 @@ paths:
       - publiccloud
   /instances/{instanceId}/ips:
     get:
-      description: List the instance's IPs
-      operationId: getIpList
+      description: List the Instance's IPs
+      operationId: getInstanceIPList
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -5664,8 +7404,7 @@ paths:
         name: version
         required: false
         schema:
-          example: 4
-          type: integer
+          $ref: '#/components/schemas/ipVersion'
         style: form
       - explode: true
         in: query
@@ -5703,7 +7442,7 @@ paths:
                     detectionProfile: STANDARD_DEFAULT
                     protectionType: STANDARD
               schema:
-                $ref: '#/components/schemas/getIpListResult'
+                $ref: '#/components/schemas/getIPListResult'
           description: OK.
         "401":
           content:
@@ -5755,12 +7494,238 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: List instance's IPs
+      summary: List IP addresses associated with a specific Instance
+      tags:
+      - publiccloud
+  /loadBalancers/{loadBalancerId}/ips:
+    get:
+      description: List the Load Balancers IPs
+      operationId: getLoadBalancerIPList
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          $ref: '#/components/schemas/ipVersion'
+        style: form
+      - explode: true
+        in: query
+        name: nullRouted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: A list of IPs separated by `|`
+        explode: true
+        in: query
+        name: ips
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 1
+                  limit: 20
+                  offset: 0
+                ips:
+                - ip: 10.0.0.1
+                  prefixLength: "28"
+                  version: 4
+                  reverseLookup: null
+                  mainIp: false
+                  nullRouted: false
+                  networkType: INTERNAL
+                  ddos:
+                    detectionProfile: STANDARD_DEFAULT
+                    protectionType: STANDARD
+              schema:
+                $ref: '#/components/schemas/getIPListResult'
+          description: OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List IP addresses associated with a specific Load Balancer
+      tags:
+      - publiccloud
+  /vps/{vpsId}/ips:
+    get:
+      description: List the VPS's IPs
+      operationId: getVPSIPList
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          $ref: '#/components/schemas/ipVersion'
+        style: form
+      - explode: true
+        in: query
+        name: nullRouted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: A list of IPs separated by `|`
+        explode: true
+        in: query
+        name: ips
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 1
+                  limit: 20
+                  offset: 0
+                ips:
+                - ip: 10.0.0.1
+                  prefixLength: "28"
+                  version: 4
+                  reverseLookup: null
+                  mainIp: false
+                  nullRouted: false
+                  networkType: INTERNAL
+                  ddos:
+                    detectionProfile: STANDARD_DEFAULT
+                    protectionType: STANDARD
+              schema:
+                $ref: '#/components/schemas/getIPListResult'
+          description: OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List IP addresses associated with a specific VPS
       tags:
       - publiccloud
   /instances/{instanceId}/ips/{ip}:
     get:
-      operationId: getIp
+      operationId: getInstanceIP
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -5849,12 +7814,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Get details about an instance's IP
+      summary: Get IP details for a specific Instance
       tags:
       - publiccloud
     put:
       description: Allows you to set the reverse lookup for the IP
-      operationId: updateIp
+      operationId: updateInstanceIP
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -5881,7 +7846,7 @@ paths:
             example:
               reverseLookup: a-valid-domain.xpto
             schema:
-              $ref: '#/components/schemas/updateIpOpts'
+              $ref: '#/components/schemas/updateIPOpts'
         required: true
       responses:
         "200":
@@ -5962,7 +7927,421 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Update IP
+      summary: Update the IP address for a specific Instance
+      tags:
+      - publiccloud
+  /loadBalancers/{loadBalancerId}/ips/{ip}:
+    get:
+      operationId: getLoadBalancerIP
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          example: 10.0.0.1
+          format: ip
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ip: 10.0.0.1
+                prefixLength: "28"
+                version: 4
+                reverseLookup: a-valid-domain.xpto
+                mainIp: false
+                networkType: INTERNAL
+                nullRouted: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+              schema:
+                $ref: '#/components/schemas/ipDetails'
+          description: OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get IP details for a specific Load Balancer
+      tags:
+      - publiccloud
+    put:
+      description: Allows you to set the reverse lookup for the IP
+      operationId: updateLoadBalancerIP
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          example: 10.0.0.1
+          format: ip
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              reverseLookup: a-valid-domain.xpto
+            schema:
+              $ref: '#/components/schemas/updateIPOpts'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ip: 10.0.0.1
+                prefixLength: "28"
+                version: 4
+                reverseLookup: a-valid-domain.xpto
+                mainIp: false
+                networkType: INTERNAL
+                nullRouted: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+              schema:
+                $ref: '#/components/schemas/ipDetails'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Update the IP address for a specific Load Balancer
+      tags:
+      - publiccloud
+  /vps/{vpsId}/ips/{ip}:
+    get:
+      operationId: getVPSIP
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          example: 10.0.0.1
+          format: ip
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ip: 10.0.0.1
+                prefixLength: "28"
+                version: 4
+                reverseLookup: a-valid-domain.xpto
+                mainIp: false
+                networkType: INTERNAL
+                nullRouted: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+              schema:
+                $ref: '#/components/schemas/ipDetails'
+          description: OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get IP details for a specific VPS
+      tags:
+      - publiccloud
+    put:
+      description: Allows you to set the reverse lookup for the IP
+      operationId: updateVPSIP
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          example: 10.0.0.1
+          format: ip
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              reverseLookup: a-valid-domain.xpto
+            schema:
+              $ref: '#/components/schemas/updateIPOpts'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ip: 10.0.0.1
+                prefixLength: "28"
+                version: 4
+                reverseLookup: a-valid-domain.xpto
+                mainIp: false
+                networkType: INTERNAL
+                nullRouted: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+              schema:
+                $ref: '#/components/schemas/ipDetails'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Update the IP address for a specific VPS
       tags:
       - publiccloud
   /instances/{instanceId}/ips/{ip}/null:
@@ -5971,7 +8350,7 @@ paths:
         Null route an IP. It may take a few minutes before the change is propagated across the network.
 
         Only works for IPv4.
-      operationId: nullRouteIp
+      operationId: nullRouteInstanceIP
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -5999,7 +8378,7 @@ paths:
               automatedUnnulingAt: 2
               comment: Getting DDoS
             schema:
-              $ref: '#/components/schemas/nullRouteIpOpts'
+              $ref: '#/components/schemas/nullRouteIPOpts'
         required: false
       responses:
         "200":
@@ -6080,14 +8459,250 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Null route IP
+      summary: Null route IP address for a specific resource Instance
+      tags:
+      - publiccloud
+  /loadBalancers/{loadBalancerId}/ips/{ip}/null:
+    post:
+      description: |-
+        Null route an IP. It may take a few minutes before the change is propagated across the network.
+
+        Only works for IPv4.
+      operationId: nullRouteLoadBalancerIP
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          example: 10.0.0.1
+          format: ip
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              automatedUnnulingAt: 2
+              comment: Getting DDoS
+            schema:
+              $ref: '#/components/schemas/nullRouteIPOpts'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ip: 10.0.0.1
+                prefixLength: "28"
+                version: 4
+                reverseLookup: a-valid-domain.xpto
+                mainIp: false
+                networkType: INTERNAL
+                nullRouted: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+              schema:
+                $ref: '#/components/schemas/ipDetails'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Null route IP address for a specific resource Load Balancer
+      tags:
+      - publiccloud
+  /vps/{vpsId}/ips/{ip}/null:
+    post:
+      description: |-
+        Null route an IP. It may take a few minutes before the change is propagated across the network.
+
+        Only works for IPv4.
+      operationId: nullRouteVPSIP
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          example: 10.0.0.1
+          format: ip
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              automatedUnnulingAt: 2
+              comment: Getting DDoS
+            schema:
+              $ref: '#/components/schemas/nullRouteIPOpts'
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ip: 10.0.0.1
+                prefixLength: "28"
+                version: 4
+                reverseLookup: a-valid-domain.xpto
+                mainIp: false
+                networkType: INTERNAL
+                nullRouted: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+              schema:
+                $ref: '#/components/schemas/ipDetails'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Null route IP address for a specific resource VPS
       tags:
       - publiccloud
   /instances/{instanceId}/ips/{ip}/unnull:
     post:
       description: Remove an IP null route. It may take a few minutes before the change
         is propagated across the network
-      operationId: removeIpNullRoute
+      operationId: removeInstanceIPNullRoute
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -6187,12 +8802,226 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Remove an IP null route
+      summary: Remove an IP null route for a specific Instance
+      tags:
+      - publiccloud
+  /loadBalancers/{loadBalancerId}/ips/{ip}/unnull:
+    post:
+      description: Remove an IP null route. It may take a few minutes before the change
+        is propagated across the network
+      operationId: removeLoadBalancerIPNullRoute
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          example: 10.0.0.1
+          format: ip
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ip: 10.0.0.1
+                prefixLength: "28"
+                version: 4
+                reverseLookup: a-valid-domain.xpto
+                mainIp: false
+                networkType: INTERNAL
+                nullRouted: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+              schema:
+                $ref: '#/components/schemas/ipDetails'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Remove an IP null route for a specific Load Balancer
+      tags:
+      - publiccloud
+  /vps/{vpsId}/ips/{ip}/unnull:
+    post:
+      description: Remove an IP null route. It may take a few minutes before the change
+        is propagated across the network
+      operationId: removeVPSIPNullRoute
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          example: 10.0.0.1
+          format: ip
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ip: 10.0.0.1
+                prefixLength: "28"
+                version: 4
+                reverseLookup: a-valid-domain.xpto
+                mainIp: false
+                networkType: INTERNAL
+                nullRouted: true
+                ddos:
+                  detectionProfile: STANDARD_DEFAULT
+                  protectionType: STANDARD
+              schema:
+                $ref: '#/components/schemas/ipDetails'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Remove an IP null route for a specific VPS
       tags:
       - publiccloud
   /instances/{instanceId}/metrics/datatraffic:
     get:
-      operationId: getDataTrafficMetrics
+      operationId: getInstanceDataTrafficMetrics
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -6347,7 +9176,327 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Get instance data traffic metrics
+      summary: Get data traffic metrics for a specific Instance
+      tags:
+      - publiccloud
+  /loadBalancers/{loadBalancerId}/metrics/datatraffic:
+    get:
+      operationId: getLoadBalancerDataTrafficMetrics
+      parameters:
+      - description: Load balancer ID
+        example: 695ddd91-051f-4dd6-9120-938a927a47d0
+        explode: false
+        in: path
+        name: loadBalancerId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: How the metrics are grouped by
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          enum:
+          - DAY
+          type: string
+        style: form
+      - description: How the metrics are aggregated
+        explode: true
+        in: query
+        name: aggregation
+        required: false
+        schema:
+          enum:
+          - SUM
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 2023-10-01T00:00:00+00:00
+                  to: 2023-10-31T00:00:00+00:00
+                  granularity: DAY
+                  aggregation: SUM
+                  summary:
+                    DOWN_PUBLIC:
+                      average: 855.28 KB
+                      expected: 25.66 MB
+                      total: 1.71 MB
+                      peak:
+                        value: 1.25 MB
+                        timestamp: 2023-10-28T00:00:00+00:00
+                    UP_PUBLIC:
+                      average: 3.69 MB
+                      expected: 110.64 MB
+                      total: 7.38 MB
+                      peak:
+                        value: 6.94 MB
+                        timestamp: 2023-10-28T00:00:00+00:00
+                metrics:
+                  DOWN_PUBLIC:
+                    values:
+                    - value: 461323
+                      timestamp: 2023-10-27T00:00:00+00:00
+                    - value: 1249243
+                      timestamp: 2023-10-28T00:00:00+00:00
+                    unit: B
+                  UP_PUBLIC:
+                    values:
+                    - value: 437565
+                      timestamp: 2023-10-27T00:00:00+00:00
+                    - value: 6938590
+                      timestamp: 2023-10-28T00:00:00+00:00
+                    unit: B
+              schema:
+                $ref: '#/components/schemas/getDataTrafficMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get data traffic metrics for a specific Load Balancer
+      tags:
+      - publiccloud
+  /vps/{vpsId}/metrics/datatraffic:
+    get:
+      operationId: getVPSDataTrafficMetrics
+      parameters:
+      - description: VPS ID
+        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The start of the interval to get the metric
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: The end of the interval to get the metric. Must be greater than
+          the date provided in `from`
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: How the metrics are grouped by
+        explode: true
+        in: query
+        name: granularity
+        required: false
+        schema:
+          enum:
+          - DAY
+          type: string
+        style: form
+      - description: How the metrics are aggregated
+        explode: true
+        in: query
+        name: aggregation
+        required: false
+        schema:
+          enum:
+          - SUM
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  from: 2023-10-01T00:00:00+00:00
+                  to: 2023-10-31T00:00:00+00:00
+                  granularity: DAY
+                  aggregation: SUM
+                  summary:
+                    DOWN_PUBLIC:
+                      average: 855.28 KB
+                      expected: 25.66 MB
+                      total: 1.71 MB
+                      peak:
+                        value: 1.25 MB
+                        timestamp: 2023-10-28T00:00:00+00:00
+                    UP_PUBLIC:
+                      average: 3.69 MB
+                      expected: 110.64 MB
+                      total: 7.38 MB
+                      peak:
+                        value: 6.94 MB
+                        timestamp: 2023-10-28T00:00:00+00:00
+                metrics:
+                  DOWN_PUBLIC:
+                    values:
+                    - value: 461323
+                      timestamp: 2023-10-27T00:00:00+00:00
+                    - value: 1249243
+                      timestamp: 2023-10-28T00:00:00+00:00
+                    unit: B
+                  UP_PUBLIC:
+                    values:
+                    - value: 437565
+                      timestamp: 2023-10-27T00:00:00+00:00
+                    - value: 6938590
+                      timestamp: 2023-10-28T00:00:00+00:00
+                    unit: B
+              schema:
+                $ref: '#/components/schemas/getDataTrafficMetricsResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get data traffic metrics for a specific VPS
       tags:
       - publiccloud
   /instances/{instanceId}/metrics/cpu:
@@ -10563,6 +13712,304 @@ paths:
       summary: Deregister Targets
       tags:
       - publiccloud
+  /vps:
+    get:
+      description: List and filter VPS
+      operationId: getVpsList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Equipment Id
+        example: "123581321"
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          type: string
+        style: form
+      - example: Foo bar
+        explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          $ref: '#/components/schemas/vpsState'
+        style: form
+      - explode: true
+        in: query
+        name: pack
+        required: false
+        schema:
+          $ref: '#/components/schemas/vpsPackType'
+        style: form
+      - explode: true
+        in: query
+        name: region
+        required: false
+        schema:
+          $ref: '#/components/schemas/regionName'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 1
+                  limit: 10
+                  offset: 0
+                vps:
+                - id: "123581321"
+                  pack: Leaseweb VPS 2
+                  resources:
+                    cpu:
+                      value: 4
+                      unit: vCPU
+                    memory:
+                      value: 6
+                      unit: GiB
+                    publicNetworkSpeed:
+                      value: 10000
+                      unit: Mbps
+                  region: eu-central-1
+                  datacenter: FRA-01
+                  reference: testing
+                  image:
+                    id: UBUNTU_22_04_64BIT
+                    name: Ubuntu 22.04 LTS (x86_64)
+                    family: linux
+                    flavour: ubuntu
+                    custom: false
+                  marketAppId: null
+                  state: RUNNING
+                  hasPublicIpV4: true
+                  rootDiskSize: 50
+                  ips:
+                  - ip: 88.17.128.0
+                    prefixLength: "16"
+                    version: 4
+                    nullRouted: false
+                    reverseLookup: ""
+                    mainIp: true
+                    networkType: PUBLIC
+                  contract:
+                    id: "41228459000100"
+                    billingFrequency: 1
+                    term: 12
+                    type: MONTHLY
+                    state: ACTIVE
+                    endsAt: 2024-10-24T21:13:25+00:00
+                    createdAt: 2024-10-24T21:13:25+00:00
+                    sla: Basic
+                    controlPanel: cPanel Admin 5
+                    inModification: false
+                  startedAt: 2024-10-24T21:13:25+00:00
+              schema:
+                $ref: '#/components/schemas/getVpsListResult'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get VPS list
+      tags:
+      - publiccloud
+  /vps/{vpsId}:
+    get:
+      description: Get VPS details.
+      operationId: getVps
+      parameters:
+      - description: Vps ID
+        example: "123581321"
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: "123581321"
+                pack: Leaseweb VPS 2
+                resources:
+                  cpu:
+                    value: 4
+                    unit: vCPU
+                  memory:
+                    value: 6
+                    unit: GiB
+                  publicNetworkSpeed:
+                    value: 10000
+                    unit: Mbps
+                region: eu-central-1
+                datacenter: FRA-01
+                reference: testing
+                image:
+                  id: UBUNTU_22_04_64BIT
+                  name: Ubuntu 22.04 LTS (x86_64)
+                  family: linux
+                  flavour: ubuntu
+                  custom: false
+                marketAppId: null
+                state: RUNNING
+                hasPublicIpV4: true
+                rootDiskSize: 50
+                ips:
+                - ip: 88.17.128.0
+                  prefixLength: "16"
+                  version: 4
+                  nullRouted: false
+                  reverseLookup: ""
+                  mainIp: true
+                  networkType: PUBLIC
+                  ddos:
+                    detectionProfile: STANDARD_DEFAULT
+                    protectionType: STANDARD
+                contract:
+                  id: "41228459000100"
+                  billingFrequency: 1
+                  term: 12
+                  type: MONTHLY
+                  state: ACTIVE
+                  endsAt: 2024-10-24T21:13:25+00:00
+                  createdAt: 2024-10-24T21:13:25+00:00
+                  sla: Basic
+                  controlPanel: cPanel Admin 5
+                  inModification: false
+                startedAt: 2024-10-24T21:13:25+00:00
+                iso: null
+              schema:
+                $ref: '#/components/schemas/vpsDetails'
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get VPS details
+      tags:
+      - publiccloud
 components:
   parameters:
     limit:
@@ -10594,6 +14041,47 @@ components:
       required: true
       schema:
         format: uuid
+        type: string
+      style: simple
+    loadBalancerId:
+      description: Load balancer ID
+      example: 695ddd91-051f-4dd6-9120-938a927a47d0
+      explode: false
+      in: path
+      name: loadBalancerId
+      required: true
+      schema:
+        format: uuid
+        type: string
+      style: simple
+    vpsId:
+      description: VPS ID
+      example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+      explode: false
+      in: path
+      name: vpsId
+      required: true
+      schema:
+        format: uuid
+        type: string
+      style: simple
+    credentialType:
+      description: Type of credential
+      explode: false
+      in: path
+      name: type
+      required: true
+      schema:
+        $ref: '#/components/schemas/credentialType'
+      style: simple
+    username:
+      description: Username
+      example: root
+      explode: false
+      in: path
+      name: username
+      required: true
+      schema:
         type: string
       style: simple
     equipmentId:
@@ -10637,17 +14125,6 @@ components:
         format: uuid
         type: string
       style: simple
-    loadBalancerId:
-      description: Load balancer ID
-      example: 695ddd91-051f-4dd6-9120-938a927a47d0
-      explode: false
-      in: path
-      name: loadBalancerId
-      required: true
-      schema:
-        format: uuid
-        type: string
-      style: simple
     listenerId:
       description: Listener ID
       example: 695ddd91-051f-4dd6-9120-938a927a47d0
@@ -10657,6 +14134,41 @@ components:
       required: true
       schema:
         format: uuid
+        type: string
+      style: simple
+    ipVersion:
+      explode: true
+      in: query
+      name: version
+      required: false
+      schema:
+        $ref: '#/components/schemas/ipVersion'
+      style: form
+    nullRouted:
+      explode: true
+      in: query
+      name: nullRouted
+      required: false
+      schema:
+        type: boolean
+      style: form
+    ips:
+      description: A list of IPs separated by `|`
+      explode: true
+      in: query
+      name: ips
+      required: false
+      schema:
+        type: string
+      style: form
+    ip:
+      explode: false
+      in: path
+      name: ip
+      required: true
+      schema:
+        example: 10.0.0.1
+        format: ip
         type: string
       style: simple
     from:
@@ -10769,6 +14281,51 @@ components:
       required: true
       schema:
         format: uuid
+        type: string
+      style: simple
+    vpsIdQuery:
+      description: Equipment Id
+      example: "123581321"
+      explode: true
+      in: query
+      name: id
+      required: false
+      schema:
+        type: string
+      style: form
+    reference:
+      example: Foo bar
+      explode: true
+      in: query
+      name: reference
+      required: false
+      schema:
+        type: string
+      style: form
+    vpsState:
+      explode: true
+      in: query
+      name: state
+      required: false
+      schema:
+        $ref: '#/components/schemas/vpsState'
+      style: form
+    vpsPack:
+      explode: true
+      in: query
+      name: pack
+      required: false
+      schema:
+        $ref: '#/components/schemas/vpsPackType'
+      style: form
+    vpsIdPath:
+      description: Vps ID
+      example: "123581321"
+      explode: false
+      in: path
+      name: vpsId
+      required: true
+      schema:
         type: string
       style: simple
   responses:
@@ -11029,8 +14586,40 @@ components:
       - value
       title: networkSpeed
       type: object
-    resources:
+    baseResources:
       description: Available resources
+      example:
+        memory:
+          unit: GiB
+          value: 3.75
+        publicNetworkSpeed:
+          unit: Gbps
+          value: 10
+        cpu:
+          unit: vCPU
+          value: 2
+      properties:
+        cpu:
+          $ref: '#/components/schemas/cpu'
+        memory:
+          $ref: '#/components/schemas/memory'
+        publicNetworkSpeed:
+          $ref: '#/components/schemas/networkSpeed'
+      required:
+      - cpu
+      - memory
+      - publicNetworkSpeed
+      title: resources
+      type: object
+    resources:
+      allOf:
+      - $ref: '#/components/schemas/baseResources'
+      - properties:
+          privateNetworkSpeed:
+            $ref: '#/components/schemas/networkSpeed'
+        required:
+        - privateNetworkSpeed
+        type: object
       example:
         memory:
           unit: GiB
@@ -11044,22 +14633,6 @@ components:
         privateNetworkSpeed:
           unit: Gbps
           value: 10
-      properties:
-        cpu:
-          $ref: '#/components/schemas/cpu'
-        memory:
-          $ref: '#/components/schemas/memory'
-        publicNetworkSpeed:
-          $ref: '#/components/schemas/networkSpeed'
-        privateNetworkSpeed:
-          $ref: '#/components/schemas/networkSpeed'
-      required:
-      - cpu
-      - memory
-      - privateNetworkSpeed
-      - publicNetworkSpeed
-      title: resources
-      type: object
     storageType:
       description: Storage type
       enum:
@@ -11300,15 +14873,7 @@ components:
       - 6
       - 12
       type: integer
-    contract:
-      example:
-        billingFrequency: 1
-        createdAt: 2023-11-30T16:31:28Z
-        term: 6
-        renewalsAt: 2023-11-30T16:31:28Z
-        state: ACTIVE
-        type: HOURLY
-        endsAt: 2023-11-30T16:31:28Z
+    baseContract:
       properties:
         billingFrequency:
           $ref: '#/components/schemas/billingFrequency'
@@ -11321,11 +14886,6 @@ components:
           format: date-time
           nullable: true
           type: string
-        renewalsAt:
-          description: Date when the contract will be automatically renewed
-          example: 2023-11-30T16:31:28Z
-          format: date-time
-          type: string
         createdAt:
           description: Date when the contract was created
           example: 2023-11-30T16:31:28Z
@@ -11337,12 +14897,31 @@ components:
       - billingFrequency
       - createdAt
       - endsAt
-      - renewalsAt
       - state
       - term
       - type
       title: contract
       type: object
+    contract:
+      allOf:
+      - $ref: '#/components/schemas/baseContract'
+      - properties:
+          renewalsAt:
+            description: Date when the contract will be automatically renewed
+            example: 2023-11-30T16:31:28Z
+            format: date-time
+            type: string
+        required:
+        - renewalsAt
+        type: object
+      example:
+        billingFrequency: 1
+        createdAt: 2023-11-30T16:31:28Z
+        term: 6
+        state: ACTIVE
+        renewalsAt: 2023-11-30T16:31:28Z
+        type: HOURLY
+        endsAt: 2023-11-30T16:31:28Z
     autoScalingGroupType:
       description: Auto Scaling Group type
       enum:
@@ -11671,8 +15250,8 @@ components:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
           term: 6
-          renewalsAt: 2023-11-30T16:31:28Z
           state: ACTIVE
+          renewalsAt: 2023-11-30T16:31:28Z
           type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
         hasPrivateNetwork: true
@@ -11745,8 +15324,8 @@ components:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
             term: 6
-            renewalsAt: 2023-11-30T16:31:28Z
             state: ACTIVE
+            renewalsAt: 2023-11-30T16:31:28Z
             type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           hasPrivateNetwork: true
@@ -11816,8 +15395,8 @@ components:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
             term: 6
-            renewalsAt: 2023-11-30T16:31:28Z
             state: ACTIVE
+            renewalsAt: 2023-11-30T16:31:28Z
             type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           hasPrivateNetwork: true
@@ -12041,8 +15620,8 @@ components:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
           term: 6
-          renewalsAt: 2023-11-30T16:31:28Z
           state: ACTIVE
+          renewalsAt: 2023-11-30T16:31:28Z
           type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
         hasPrivateNetwork: true
@@ -12271,8 +15850,8 @@ components:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
               term: 6
-              renewalsAt: 2023-11-30T16:31:28Z
               state: ACTIVE
+              renewalsAt: 2023-11-30T16:31:28Z
               type: HOURLY
               endsAt: 2023-11-30T16:31:28Z
             resources:
@@ -12303,8 +15882,8 @@ components:
               billingFrequency: 1
               createdAt: 2023-11-30T16:31:28Z
               term: 6
-              renewalsAt: 2023-11-30T16:31:28Z
               state: ACTIVE
+              renewalsAt: 2023-11-30T16:31:28Z
               type: HOURLY
               endsAt: 2023-11-30T16:31:28Z
             resources:
@@ -12657,7 +16236,7 @@ components:
         _metadata:
           $ref: '#/components/schemas/_metadata'
       type: object
-    reinstallInstanceOpts:
+    reinstallResourceOpts:
       properties:
         imageId:
           description: The Image ID
@@ -12815,8 +16394,8 @@ components:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
           term: 6
-          renewalsAt: 2023-11-30T16:31:28Z
           state: ACTIVE
+          renewalsAt: 2023-11-30T16:31:28Z
           type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
         resources:
@@ -12887,8 +16466,8 @@ components:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
             term: 6
-            renewalsAt: 2023-11-30T16:31:28Z
             state: ACTIVE
+            renewalsAt: 2023-11-30T16:31:28Z
             type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           resources:
@@ -12956,8 +16535,8 @@ components:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
             term: 6
-            renewalsAt: 2023-11-30T16:31:28Z
             state: ACTIVE
+            renewalsAt: 2023-11-30T16:31:28Z
             type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           resources:
@@ -13073,8 +16652,8 @@ components:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
           term: 6
-          renewalsAt: 2023-11-30T16:31:28Z
           state: ACTIVE
+          renewalsAt: 2023-11-30T16:31:28Z
           type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
         resources:
@@ -13321,7 +16900,7 @@ components:
           targetGroupId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-    getIpListResult:
+    getIPListResult:
       example:
         _metadata:
           offset: 0
@@ -13356,14 +16935,14 @@ components:
         _metadata:
           $ref: '#/components/schemas/_metadata'
       type: object
-    updateIpOpts:
+    updateIPOpts:
       properties:
         reverseLookup:
           type: string
       required:
       - reverseLookup
       type: object
-    nullRouteIpOpts:
+    nullRouteIPOpts:
       properties:
         comment:
           description: The reason why the IP is being null-routed
@@ -14610,6 +18189,383 @@ components:
         format: uuid
         type: string
       type: array
+    vpsState:
+      description: The current state
+      enum:
+      - RUNNING
+      - STARTING
+      - STOPPED
+      - STOPPING
+      type: string
+    vpsPackType:
+      description: Vps package type
+      enum:
+      - Leaseweb VPS 1
+      - Leaseweb VPS 2
+      - Leaseweb VPS 3
+      - Leaseweb VPS 4
+      - Leaseweb VPS 5
+      - Leaseweb VPS 6
+      type: string
+    datacenter:
+      enum:
+      - LON-01
+      - MTL-02
+      - AMS-01
+      - FRA-01
+      - WDC-02
+      - SFO-12
+      - SIN-01
+      title: datacenter
+      type: string
+    vpsContract:
+      allOf:
+      - $ref: '#/components/schemas/baseContract'
+      - properties:
+          id:
+            example: "41228459000100"
+            type: string
+          sla:
+            example: Basic
+            type: string
+          controlPanel:
+            example: cPanel Admin 5
+            nullable: true
+            type: string
+          inModification:
+            example: false
+            type: boolean
+        required:
+        - controlPanel
+        - id
+        - inModification
+        - sla
+        type: object
+      example:
+        billingFrequency: 1
+        controlPanel: cPanel Admin 5
+        inModification: false
+        createdAt: 2023-11-30T16:31:28Z
+        sla: Basic
+        term: 6
+        state: ACTIVE
+        id: "41228459000100"
+        type: HOURLY
+        endsAt: 2023-11-30T16:31:28Z
+    vpsBase:
+      properties:
+        id:
+          example: "123581321"
+          type: string
+        pack:
+          $ref: '#/components/schemas/vpsPackType'
+        resources:
+          $ref: '#/components/schemas/baseResources'
+        region:
+          $ref: '#/components/schemas/regionName'
+        datacenter:
+          $ref: '#/components/schemas/datacenter'
+        reference:
+          description: The identifying name set to the instance
+          type: string
+        image:
+          $ref: '#/components/schemas/image'
+        marketAppId:
+          $ref: '#/components/schemas/marketAppId'
+        state:
+          $ref: '#/components/schemas/vpsState'
+        hasPublicIpV4:
+          type: boolean
+        rootDiskSize:
+          description: The root disk's size in GB. Must be at least 5 GB for Linux
+            and FreeBSD instances and 50 GB for Windows instances
+          maximum: 1000
+          minimum: 5
+          type: integer
+        startedAt:
+          description: "Date and time when the VPS was started for the first time,\
+            \ right after launching it"
+          format: date-time
+          nullable: true
+          type: string
+        contract:
+          $ref: '#/components/schemas/vpsContract'
+      required:
+      - contract
+      - datacenter
+      - hasPublicIpV4
+      - id
+      - image
+      - pack
+      - reference
+      - region
+      - resources
+      - rootDiskSize
+      - startedAt
+      - state
+      title: vps
+      type: object
+    vpsList:
+      allOf:
+      - $ref: '#/components/schemas/vpsBase'
+      - properties:
+          ips:
+            items:
+              $ref: '#/components/schemas/ip'
+            type: array
+        required:
+        - ips
+        title: vps
+        type: object
+      example:
+        image:
+          flavour: ubuntu
+          custom: true
+          name: Ubuntu 20.04 LTS (x86_64)
+          id: UBUNTU_22_04_64BIT
+          family: linux
+        rootDiskSize: 84
+        contract:
+          billingFrequency: 1
+          controlPanel: cPanel Admin 5
+          inModification: false
+          createdAt: 2023-11-30T16:31:28Z
+          sla: Basic
+          term: 6
+          state: ACTIVE
+          id: "41228459000100"
+          type: HOURLY
+          endsAt: 2023-11-30T16:31:28Z
+        resources:
+          memory:
+            unit: GiB
+            value: 3.75
+          publicNetworkSpeed:
+            unit: Gbps
+            value: 10
+          cpu:
+            unit: vCPU
+            value: 2
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        datacenter: LON-01
+        pack: pack
+        ips:
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          networkType: internal
+          version: 3
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          networkType: internal
+          version: 3
+        reference: reference
+        id: "123581321"
+        marketAppId: CPANEL_30
+        state: RUNNING
+        region: eu-west-3
+        hasPublicIpV4: true
+    getVpsListResult:
+      example:
+        vps:
+        - image:
+            flavour: ubuntu
+            custom: true
+            name: Ubuntu 20.04 LTS (x86_64)
+            id: UBUNTU_22_04_64BIT
+            family: linux
+          rootDiskSize: 84
+          contract:
+            billingFrequency: 1
+            controlPanel: cPanel Admin 5
+            inModification: false
+            createdAt: 2023-11-30T16:31:28Z
+            sla: Basic
+            term: 6
+            state: ACTIVE
+            id: "41228459000100"
+            type: HOURLY
+            endsAt: 2023-11-30T16:31:28Z
+          resources:
+            memory:
+              unit: GiB
+              value: 3.75
+            publicNetworkSpeed:
+              unit: Gbps
+              value: 10
+            cpu:
+              unit: vCPU
+              value: 2
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          datacenter: LON-01
+          pack: pack
+          ips:
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: 3
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: 3
+          reference: reference
+          id: "123581321"
+          marketAppId: CPANEL_30
+          state: RUNNING
+          region: eu-west-3
+          hasPublicIpV4: true
+        - image:
+            flavour: ubuntu
+            custom: true
+            name: Ubuntu 20.04 LTS (x86_64)
+            id: UBUNTU_22_04_64BIT
+            family: linux
+          rootDiskSize: 84
+          contract:
+            billingFrequency: 1
+            controlPanel: cPanel Admin 5
+            inModification: false
+            createdAt: 2023-11-30T16:31:28Z
+            sla: Basic
+            term: 6
+            state: ACTIVE
+            id: "41228459000100"
+            type: HOURLY
+            endsAt: 2023-11-30T16:31:28Z
+          resources:
+            memory:
+              unit: GiB
+              value: 3.75
+            publicNetworkSpeed:
+              unit: Gbps
+              value: 10
+            cpu:
+              unit: vCPU
+              value: 2
+          startedAt: 2000-01-23T04:56:07.000+00:00
+          datacenter: LON-01
+          pack: pack
+          ips:
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: 3
+          - prefixLength: "28"
+            reverseLookup: reverseLookup
+            ip: 127.0.0.1
+            nullRouted: true
+            mainIp: true
+            networkType: internal
+            version: 3
+          reference: reference
+          id: "123581321"
+          marketAppId: CPANEL_30
+          state: RUNNING
+          region: eu-west-3
+          hasPublicIpV4: true
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        vps:
+          items:
+            $ref: '#/components/schemas/vpsList'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      title: vps
+      type: object
+    vpsDetails:
+      allOf:
+      - $ref: '#/components/schemas/vpsBase'
+      - properties:
+          iso:
+            $ref: '#/components/schemas/iso'
+          ips:
+            items:
+              $ref: '#/components/schemas/ipDetails'
+            type: array
+        required:
+        - ips
+        title: vps
+        type: object
+      example:
+        image:
+          flavour: ubuntu
+          custom: true
+          name: Ubuntu 20.04 LTS (x86_64)
+          id: UBUNTU_22_04_64BIT
+          family: linux
+        iso:
+          name: name
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        rootDiskSize: 84
+        contract:
+          billingFrequency: 1
+          controlPanel: cPanel Admin 5
+          inModification: false
+          createdAt: 2023-11-30T16:31:28Z
+          sla: Basic
+          term: 6
+          state: ACTIVE
+          id: "41228459000100"
+          type: HOURLY
+          endsAt: 2023-11-30T16:31:28Z
+        resources:
+          memory:
+            unit: GiB
+            value: 3.75
+          publicNetworkSpeed:
+            unit: Gbps
+            value: 10
+          cpu:
+            unit: vCPU
+            value: 2
+        startedAt: 2000-01-23T04:56:07.000+00:00
+        datacenter: LON-01
+        pack: pack
+        ips:
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          ddos:
+            detectionProfile: STANDARD_DEFAULT
+            protectionType: STANDARD
+          networkType: internal
+          version: 6
+        - prefixLength: "28"
+          reverseLookup: reverseLookup
+          ip: 127.0.0.1
+          nullRouted: true
+          mainIp: true
+          ddos:
+            detectionProfile: STANDARD_DEFAULT
+            protectionType: STANDARD
+          networkType: internal
+          version: 6
+        reference: reference
+        id: "123581321"
+        marketAppId: CPANEL_30
+        state: RUNNING
+        region: eu-west-3
+        hasPublicIpV4: true
     region:
       example:
         name: eu-west-3
@@ -14704,8 +18660,8 @@ components:
           billingFrequency: 1
           createdAt: 2023-11-30T16:31:28Z
           term: 6
-          renewalsAt: 2023-11-30T16:31:28Z
           state: ACTIVE
+          renewalsAt: 2023-11-30T16:31:28Z
           type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
         resources:
@@ -14848,8 +18804,8 @@ components:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
             term: 6
-            renewalsAt: 2023-11-30T16:31:28Z
             state: ACTIVE
+            renewalsAt: 2023-11-30T16:31:28Z
             type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           resources:
@@ -14880,8 +18836,8 @@ components:
             billingFrequency: 1
             createdAt: 2023-11-30T16:31:28Z
             term: 6
-            renewalsAt: 2023-11-30T16:31:28Z
             state: ACTIVE
+            renewalsAt: 2023-11-30T16:31:28Z
             type: HOURLY
             endsAt: 2023-11-30T16:31:28Z
           resources:

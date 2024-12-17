@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the ReinstallInstanceOpts type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ReinstallInstanceOpts{}
+// checks if the ReinstallResourceOpts type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReinstallResourceOpts{}
 
-// ReinstallInstanceOpts struct for ReinstallInstanceOpts
-type ReinstallInstanceOpts struct {
+// ReinstallResourceOpts struct for ReinstallResourceOpts
+type ReinstallResourceOpts struct {
 	// The Image ID
 	ImageId string `json:"imageId"`
 	// The Market App to be installed
@@ -27,28 +27,28 @@ type ReinstallInstanceOpts struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _ReinstallInstanceOpts ReinstallInstanceOpts
+type _ReinstallResourceOpts ReinstallResourceOpts
 
-// NewReinstallInstanceOpts instantiates a new ReinstallInstanceOpts object
+// NewReinstallResourceOpts instantiates a new ReinstallResourceOpts object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReinstallInstanceOpts(imageId string) *ReinstallInstanceOpts {
-	this := ReinstallInstanceOpts{}
+func NewReinstallResourceOpts(imageId string) *ReinstallResourceOpts {
+	this := ReinstallResourceOpts{}
 	this.ImageId = imageId
 	return &this
 }
 
-// NewReinstallInstanceOptsWithDefaults instantiates a new ReinstallInstanceOpts object
+// NewReinstallResourceOptsWithDefaults instantiates a new ReinstallResourceOpts object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewReinstallInstanceOptsWithDefaults() *ReinstallInstanceOpts {
-	this := ReinstallInstanceOpts{}
+func NewReinstallResourceOptsWithDefaults() *ReinstallResourceOpts {
+	this := ReinstallResourceOpts{}
 	return &this
 }
 
 // GetImageId returns the ImageId field value
-func (o *ReinstallInstanceOpts) GetImageId() string {
+func (o *ReinstallResourceOpts) GetImageId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -59,7 +59,7 @@ func (o *ReinstallInstanceOpts) GetImageId() string {
 
 // GetImageIdOk returns a tuple with the ImageId field value
 // and a boolean to check if the value has been set.
-func (o *ReinstallInstanceOpts) GetImageIdOk() (*string, bool) {
+func (o *ReinstallResourceOpts) GetImageIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,12 +67,12 @@ func (o *ReinstallInstanceOpts) GetImageIdOk() (*string, bool) {
 }
 
 // SetImageId sets field value
-func (o *ReinstallInstanceOpts) SetImageId(v string) {
+func (o *ReinstallResourceOpts) SetImageId(v string) {
 	o.ImageId = v
 }
 
 // GetMarketAppId returns the MarketAppId field value if set, zero value otherwise.
-func (o *ReinstallInstanceOpts) GetMarketAppId() string {
+func (o *ReinstallResourceOpts) GetMarketAppId() string {
 	if o == nil || IsNil(o.MarketAppId) {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *ReinstallInstanceOpts) GetMarketAppId() string {
 
 // GetMarketAppIdOk returns a tuple with the MarketAppId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReinstallInstanceOpts) GetMarketAppIdOk() (*string, bool) {
+func (o *ReinstallResourceOpts) GetMarketAppIdOk() (*string, bool) {
 	if o == nil || IsNil(o.MarketAppId) {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *ReinstallInstanceOpts) GetMarketAppIdOk() (*string, bool) {
 }
 
 // HasMarketAppId returns a boolean if a field has been set.
-func (o *ReinstallInstanceOpts) HasMarketAppId() bool {
+func (o *ReinstallResourceOpts) HasMarketAppId() bool {
 	if o != nil && !IsNil(o.MarketAppId) {
 		return true
 	}
@@ -99,11 +99,11 @@ func (o *ReinstallInstanceOpts) HasMarketAppId() bool {
 }
 
 // SetMarketAppId gets a reference to the given string and assigns it to the MarketAppId field.
-func (o *ReinstallInstanceOpts) SetMarketAppId(v string) {
+func (o *ReinstallResourceOpts) SetMarketAppId(v string) {
 	o.MarketAppId = &v
 }
 
-func (o ReinstallInstanceOpts) MarshalJSON() ([]byte, error) {
+func (o ReinstallResourceOpts) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -111,7 +111,7 @@ func (o ReinstallInstanceOpts) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ReinstallInstanceOpts) ToMap() (map[string]interface{}, error) {
+func (o ReinstallResourceOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["imageId"] = o.ImageId
 	if !IsNil(o.MarketAppId) {
@@ -125,7 +125,7 @@ func (o ReinstallInstanceOpts) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ReinstallInstanceOpts) UnmarshalJSON(data []byte) (err error) {
+func (o *ReinstallResourceOpts) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -147,15 +147,15 @@ func (o *ReinstallInstanceOpts) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varReinstallInstanceOpts := _ReinstallInstanceOpts{}
+	varReinstallResourceOpts := _ReinstallResourceOpts{}
 
-	err = json.Unmarshal(data, &varReinstallInstanceOpts)
+	err = json.Unmarshal(data, &varReinstallResourceOpts)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ReinstallInstanceOpts(varReinstallInstanceOpts)
+	*o = ReinstallResourceOpts(varReinstallResourceOpts)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -168,38 +168,38 @@ func (o *ReinstallInstanceOpts) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableReinstallInstanceOpts struct {
-	value *ReinstallInstanceOpts
+type NullableReinstallResourceOpts struct {
+	value *ReinstallResourceOpts
 	isSet bool
 }
 
-func (v NullableReinstallInstanceOpts) Get() *ReinstallInstanceOpts {
+func (v NullableReinstallResourceOpts) Get() *ReinstallResourceOpts {
 	return v.value
 }
 
-func (v *NullableReinstallInstanceOpts) Set(val *ReinstallInstanceOpts) {
+func (v *NullableReinstallResourceOpts) Set(val *ReinstallResourceOpts) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableReinstallInstanceOpts) IsSet() bool {
+func (v NullableReinstallResourceOpts) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableReinstallInstanceOpts) Unset() {
+func (v *NullableReinstallResourceOpts) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableReinstallInstanceOpts(val *ReinstallInstanceOpts) *NullableReinstallInstanceOpts {
-	return &NullableReinstallInstanceOpts{value: val, isSet: true}
+func NewNullableReinstallResourceOpts(val *ReinstallResourceOpts) *NullableReinstallResourceOpts {
+	return &NullableReinstallResourceOpts{value: val, isSet: true}
 }
 
-func (v NullableReinstallInstanceOpts) MarshalJSON() ([]byte, error) {
+func (v NullableReinstallResourceOpts) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableReinstallInstanceOpts) UnmarshalJSON(src []byte) error {
+func (v *NullableReinstallResourceOpts) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

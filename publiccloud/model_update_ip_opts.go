@@ -15,37 +15,37 @@ import (
 	"fmt"
 )
 
-// checks if the UpdateIpOpts type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateIpOpts{}
+// checks if the UpdateIPOpts type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateIPOpts{}
 
-// UpdateIpOpts struct for UpdateIpOpts
-type UpdateIpOpts struct {
+// UpdateIPOpts struct for UpdateIPOpts
+type UpdateIPOpts struct {
 	ReverseLookup string `json:"reverseLookup"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _UpdateIpOpts UpdateIpOpts
+type _UpdateIPOpts UpdateIPOpts
 
-// NewUpdateIpOpts instantiates a new UpdateIpOpts object
+// NewUpdateIPOpts instantiates a new UpdateIPOpts object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateIpOpts(reverseLookup string) *UpdateIpOpts {
-	this := UpdateIpOpts{}
+func NewUpdateIPOpts(reverseLookup string) *UpdateIPOpts {
+	this := UpdateIPOpts{}
 	this.ReverseLookup = reverseLookup
 	return &this
 }
 
-// NewUpdateIpOptsWithDefaults instantiates a new UpdateIpOpts object
+// NewUpdateIPOptsWithDefaults instantiates a new UpdateIPOpts object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateIpOptsWithDefaults() *UpdateIpOpts {
-	this := UpdateIpOpts{}
+func NewUpdateIPOptsWithDefaults() *UpdateIPOpts {
+	this := UpdateIPOpts{}
 	return &this
 }
 
 // GetReverseLookup returns the ReverseLookup field value
-func (o *UpdateIpOpts) GetReverseLookup() string {
+func (o *UpdateIPOpts) GetReverseLookup() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *UpdateIpOpts) GetReverseLookup() string {
 
 // GetReverseLookupOk returns a tuple with the ReverseLookup field value
 // and a boolean to check if the value has been set.
-func (o *UpdateIpOpts) GetReverseLookupOk() (*string, bool) {
+func (o *UpdateIPOpts) GetReverseLookupOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,11 +64,11 @@ func (o *UpdateIpOpts) GetReverseLookupOk() (*string, bool) {
 }
 
 // SetReverseLookup sets field value
-func (o *UpdateIpOpts) SetReverseLookup(v string) {
+func (o *UpdateIPOpts) SetReverseLookup(v string) {
 	o.ReverseLookup = v
 }
 
-func (o UpdateIpOpts) MarshalJSON() ([]byte, error) {
+func (o UpdateIPOpts) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,7 +76,7 @@ func (o UpdateIpOpts) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateIpOpts) ToMap() (map[string]interface{}, error) {
+func (o UpdateIPOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["reverseLookup"] = o.ReverseLookup
 
@@ -87,7 +87,7 @@ func (o UpdateIpOpts) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *UpdateIpOpts) UnmarshalJSON(data []byte) (err error) {
+func (o *UpdateIPOpts) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -109,15 +109,15 @@ func (o *UpdateIpOpts) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varUpdateIpOpts := _UpdateIpOpts{}
+	varUpdateIPOpts := _UpdateIPOpts{}
 
-	err = json.Unmarshal(data, &varUpdateIpOpts)
+	err = json.Unmarshal(data, &varUpdateIPOpts)
 
 	if err != nil {
 		return err
 	}
 
-	*o = UpdateIpOpts(varUpdateIpOpts)
+	*o = UpdateIPOpts(varUpdateIPOpts)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -129,38 +129,38 @@ func (o *UpdateIpOpts) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableUpdateIpOpts struct {
-	value *UpdateIpOpts
+type NullableUpdateIPOpts struct {
+	value *UpdateIPOpts
 	isSet bool
 }
 
-func (v NullableUpdateIpOpts) Get() *UpdateIpOpts {
+func (v NullableUpdateIPOpts) Get() *UpdateIPOpts {
 	return v.value
 }
 
-func (v *NullableUpdateIpOpts) Set(val *UpdateIpOpts) {
+func (v *NullableUpdateIPOpts) Set(val *UpdateIPOpts) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateIpOpts) IsSet() bool {
+func (v NullableUpdateIPOpts) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateIpOpts) Unset() {
+func (v *NullableUpdateIPOpts) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateIpOpts(val *UpdateIpOpts) *NullableUpdateIpOpts {
-	return &NullableUpdateIpOpts{value: val, isSet: true}
+func NewNullableUpdateIPOpts(val *UpdateIPOpts) *NullableUpdateIPOpts {
+	return &NullableUpdateIPOpts{value: val, isSet: true}
 }
 
-func (v NullableUpdateIpOpts) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateIPOpts) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateIpOpts) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateIPOpts) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

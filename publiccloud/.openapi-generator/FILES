@@ -13,6 +13,8 @@ docs/AutoScalingGroupDetails.md
 docs/AutoScalingGroupState.md
 docs/AutoScalingGroupType.md
 docs/Balance.md
+docs/BaseContract.md
+docs/BaseResources.md
 docs/Billing.md
 docs/BillingFrequency.md
 docs/Contract.md
@@ -33,6 +35,7 @@ docs/Credential.md
 docs/CredentialType.md
 docs/DataTrafficMetrics.md
 docs/DataTransferredMetrics.md
+docs/Datacenter.md
 docs/Ddos.md
 docs/ErrorResult.md
 docs/ExpenseResultInstance.md
@@ -50,9 +53,9 @@ docs/GetDataTrafficMetricsResult.md
 docs/GetDataTransferredMetricsResult.md
 docs/GetDataTransferredPerSecondMetricsResult.md
 docs/GetExpensesResult.md
+docs/GetIPListResult.md
 docs/GetImageListResult.md
 docs/GetInstanceListResult.md
-docs/GetIpListResult.md
 docs/GetIsoListResult.md
 docs/GetLoadBalancerListResult.md
 docs/GetLoadBalancerListenerListResult.md
@@ -66,6 +69,7 @@ docs/GetResponseCodesPerSecondMetricsResult.md
 docs/GetSnapshotListResult.md
 docs/GetTargetGroupListResult.md
 docs/GetTargetListResult.md
+docs/GetVpsListResult.md
 docs/HealthCheck.md
 docs/HealthCheckOpts.md
 docs/HealthCheckStatus.md
@@ -108,7 +112,7 @@ docs/MetricsUnit.md
 docs/MetricsValues.md
 docs/NetworkSpeed.md
 docs/NetworkType.md
-docs/NullRouteIpOpts.md
+docs/NullRouteIPOpts.md
 docs/Peak.md
 docs/Price.md
 docs/Prices.md
@@ -117,7 +121,7 @@ docs/Protocol.md
 docs/PubliccloudAPI.md
 docs/Region.md
 docs/RegionName.md
-docs/ReinstallInstanceOpts.md
+docs/ReinstallResourceOpts.md
 docs/Resources.md
 docs/ResponseCodesMetrics.md
 docs/SchemasHealthCheckStatus.md
@@ -144,12 +148,18 @@ docs/TypeName.md
 docs/UpdateAutoScalingGroupOpts.md
 docs/UpdateCredentialOpts.md
 docs/UpdateCredentialResult.md
+docs/UpdateIPOpts.md
 docs/UpdateImageOpts.md
 docs/UpdateInstanceOpts.md
-docs/UpdateIpOpts.md
 docs/UpdateLoadBalancerOpts.md
 docs/UpdateTargetGroupOpts.md
 docs/Values.md
+docs/VpsBase.md
+docs/VpsContract.md
+docs/VpsDetails.md
+docs/VpsList.md
+docs/VpsPackType.md
+docs/VpsState.md
 git_push.sh
 model__metadata.go
 model__schemas_health_check_status.go
@@ -160,6 +170,8 @@ model_auto_scaling_group_details.go
 model_auto_scaling_group_state.go
 model_auto_scaling_group_type.go
 model_balance.go
+model_base_contract.go
+model_base_resources.go
 model_billing.go
 model_billing_frequency.go
 model_contract.go
@@ -180,6 +192,7 @@ model_credential.go
 model_credential_type.go
 model_data_traffic_metrics.go
 model_data_transferred_metrics.go
+model_datacenter.go
 model_ddos.go
 model_error_result.go
 model_expense_result_instance.go
@@ -213,6 +226,7 @@ model_get_response_codes_per_second_metrics_result.go
 model_get_snapshot_list_result.go
 model_get_target_group_list_result.go
 model_get_target_list_result.go
+model_get_vps_list_result.go
 model_health_check.go
 model_health_check_opts.go
 model_health_check_status.go
@@ -262,7 +276,7 @@ model_private_network.go
 model_protocol.go
 model_region.go
 model_region_name.go
-model_reinstall_instance_opts.go
+model_reinstall_resource_opts.go
 model_resources.go
 model_response_codes_metrics.go
 model_snapshot.go
@@ -294,6 +308,12 @@ model_update_ip_opts.go
 model_update_load_balancer_opts.go
 model_update_target_group_opts.go
 model_values.go
+model_vps_base.go
+model_vps_contract.go
+model_vps_details.go
+model_vps_list.go
+model_vps_pack_type.go
+model_vps_state.go
 response.go
 test/api_publiccloud_test.go
 utils.go

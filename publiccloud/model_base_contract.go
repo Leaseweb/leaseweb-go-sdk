@@ -16,11 +16,11 @@ import (
 	"fmt"
 )
 
-// checks if the Contract type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Contract{}
+// checks if the BaseContract type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &BaseContract{}
 
-// Contract struct for Contract
-type Contract struct {
+// BaseContract struct for BaseContract
+type BaseContract struct {
 	BillingFrequency BillingFrequency `json:"billingFrequency"`
 	Term ContractTerm `json:"term"`
 	Type ContractType `json:"type"`
@@ -28,39 +28,36 @@ type Contract struct {
 	// Date when the contract was created
 	CreatedAt time.Time `json:"createdAt"`
 	State ContractState `json:"state"`
-	// Date when the contract will be automatically renewed
-	RenewalsAt time.Time `json:"renewalsAt"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _Contract Contract
+type _BaseContract BaseContract
 
-// NewContract instantiates a new Contract object
+// NewBaseContract instantiates a new BaseContract object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewContract(billingFrequency BillingFrequency, term ContractTerm, type_ ContractType, endsAt NullableTime, createdAt time.Time, state ContractState, renewalsAt time.Time) *Contract {
-	this := Contract{}
+func NewBaseContract(billingFrequency BillingFrequency, term ContractTerm, type_ ContractType, endsAt NullableTime, createdAt time.Time, state ContractState) *BaseContract {
+	this := BaseContract{}
 	this.BillingFrequency = billingFrequency
 	this.Term = term
 	this.Type = type_
 	this.EndsAt = endsAt
 	this.CreatedAt = createdAt
 	this.State = state
-	this.RenewalsAt = renewalsAt
 	return &this
 }
 
-// NewContractWithDefaults instantiates a new Contract object
+// NewBaseContractWithDefaults instantiates a new BaseContract object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewContractWithDefaults() *Contract {
-	this := Contract{}
+func NewBaseContractWithDefaults() *BaseContract {
+	this := BaseContract{}
 	return &this
 }
 
 // GetBillingFrequency returns the BillingFrequency field value
-func (o *Contract) GetBillingFrequency() BillingFrequency {
+func (o *BaseContract) GetBillingFrequency() BillingFrequency {
 	if o == nil {
 		var ret BillingFrequency
 		return ret
@@ -71,7 +68,7 @@ func (o *Contract) GetBillingFrequency() BillingFrequency {
 
 // GetBillingFrequencyOk returns a tuple with the BillingFrequency field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetBillingFrequencyOk() (*BillingFrequency, bool) {
+func (o *BaseContract) GetBillingFrequencyOk() (*BillingFrequency, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,12 +76,12 @@ func (o *Contract) GetBillingFrequencyOk() (*BillingFrequency, bool) {
 }
 
 // SetBillingFrequency sets field value
-func (o *Contract) SetBillingFrequency(v BillingFrequency) {
+func (o *BaseContract) SetBillingFrequency(v BillingFrequency) {
 	o.BillingFrequency = v
 }
 
 // GetTerm returns the Term field value
-func (o *Contract) GetTerm() ContractTerm {
+func (o *BaseContract) GetTerm() ContractTerm {
 	if o == nil {
 		var ret ContractTerm
 		return ret
@@ -95,7 +92,7 @@ func (o *Contract) GetTerm() ContractTerm {
 
 // GetTermOk returns a tuple with the Term field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetTermOk() (*ContractTerm, bool) {
+func (o *BaseContract) GetTermOk() (*ContractTerm, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,12 +100,12 @@ func (o *Contract) GetTermOk() (*ContractTerm, bool) {
 }
 
 // SetTerm sets field value
-func (o *Contract) SetTerm(v ContractTerm) {
+func (o *BaseContract) SetTerm(v ContractTerm) {
 	o.Term = v
 }
 
 // GetType returns the Type field value
-func (o *Contract) GetType() ContractType {
+func (o *BaseContract) GetType() ContractType {
 	if o == nil {
 		var ret ContractType
 		return ret
@@ -119,7 +116,7 @@ func (o *Contract) GetType() ContractType {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetTypeOk() (*ContractType, bool) {
+func (o *BaseContract) GetTypeOk() (*ContractType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,13 +124,13 @@ func (o *Contract) GetTypeOk() (*ContractType, bool) {
 }
 
 // SetType sets field value
-func (o *Contract) SetType(v ContractType) {
+func (o *BaseContract) SetType(v ContractType) {
 	o.Type = v
 }
 
 // GetEndsAt returns the EndsAt field value
 // If the value is explicit nil, the zero value for time.Time will be returned
-func (o *Contract) GetEndsAt() time.Time {
+func (o *BaseContract) GetEndsAt() time.Time {
 	if o == nil || o.EndsAt.Get() == nil {
 		var ret time.Time
 		return ret
@@ -145,7 +142,7 @@ func (o *Contract) GetEndsAt() time.Time {
 // GetEndsAtOk returns a tuple with the EndsAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Contract) GetEndsAtOk() (*time.Time, bool) {
+func (o *BaseContract) GetEndsAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -153,12 +150,12 @@ func (o *Contract) GetEndsAtOk() (*time.Time, bool) {
 }
 
 // SetEndsAt sets field value
-func (o *Contract) SetEndsAt(v time.Time) {
+func (o *BaseContract) SetEndsAt(v time.Time) {
 	o.EndsAt.Set(&v)
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *Contract) GetCreatedAt() time.Time {
+func (o *BaseContract) GetCreatedAt() time.Time {
 	if o == nil {
 		var ret time.Time
 		return ret
@@ -169,7 +166,7 @@ func (o *Contract) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetCreatedAtOk() (*time.Time, bool) {
+func (o *BaseContract) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -177,12 +174,12 @@ func (o *Contract) GetCreatedAtOk() (*time.Time, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *Contract) SetCreatedAt(v time.Time) {
+func (o *BaseContract) SetCreatedAt(v time.Time) {
 	o.CreatedAt = v
 }
 
 // GetState returns the State field value
-func (o *Contract) GetState() ContractState {
+func (o *BaseContract) GetState() ContractState {
 	if o == nil {
 		var ret ContractState
 		return ret
@@ -193,7 +190,7 @@ func (o *Contract) GetState() ContractState {
 
 // GetStateOk returns a tuple with the State field value
 // and a boolean to check if the value has been set.
-func (o *Contract) GetStateOk() (*ContractState, bool) {
+func (o *BaseContract) GetStateOk() (*ContractState, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -201,35 +198,11 @@ func (o *Contract) GetStateOk() (*ContractState, bool) {
 }
 
 // SetState sets field value
-func (o *Contract) SetState(v ContractState) {
+func (o *BaseContract) SetState(v ContractState) {
 	o.State = v
 }
 
-// GetRenewalsAt returns the RenewalsAt field value
-func (o *Contract) GetRenewalsAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.RenewalsAt
-}
-
-// GetRenewalsAtOk returns a tuple with the RenewalsAt field value
-// and a boolean to check if the value has been set.
-func (o *Contract) GetRenewalsAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.RenewalsAt, true
-}
-
-// SetRenewalsAt sets field value
-func (o *Contract) SetRenewalsAt(v time.Time) {
-	o.RenewalsAt = v
-}
-
-func (o Contract) MarshalJSON() ([]byte, error) {
+func (o BaseContract) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -237,7 +210,7 @@ func (o Contract) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Contract) ToMap() (map[string]interface{}, error) {
+func (o BaseContract) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["billingFrequency"] = o.BillingFrequency
 	toSerialize["term"] = o.Term
@@ -245,7 +218,6 @@ func (o Contract) ToMap() (map[string]interface{}, error) {
 	toSerialize["endsAt"] = o.EndsAt.Get()
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["state"] = o.State
-	toSerialize["renewalsAt"] = o.RenewalsAt
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -254,7 +226,7 @@ func (o Contract) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *Contract) UnmarshalJSON(data []byte) (err error) {
+func (o *BaseContract) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -265,7 +237,6 @@ func (o *Contract) UnmarshalJSON(data []byte) (err error) {
 		"endsAt",
 		"createdAt",
 		"state",
-		"renewalsAt",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -282,15 +253,15 @@ func (o *Contract) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varContract := _Contract{}
+	varBaseContract := _BaseContract{}
 
-	err = json.Unmarshal(data, &varContract)
+	err = json.Unmarshal(data, &varBaseContract)
 
 	if err != nil {
 		return err
 	}
 
-	*o = Contract(varContract)
+	*o = BaseContract(varBaseContract)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -301,45 +272,44 @@ func (o *Contract) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "endsAt")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "state")
-		delete(additionalProperties, "renewalsAt")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableContract struct {
-	value *Contract
+type NullableBaseContract struct {
+	value *BaseContract
 	isSet bool
 }
 
-func (v NullableContract) Get() *Contract {
+func (v NullableBaseContract) Get() *BaseContract {
 	return v.value
 }
 
-func (v *NullableContract) Set(val *Contract) {
+func (v *NullableBaseContract) Set(val *BaseContract) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableContract) IsSet() bool {
+func (v NullableBaseContract) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableContract) Unset() {
+func (v *NullableBaseContract) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableContract(val *Contract) *NullableContract {
-	return &NullableContract{value: val, isSet: true}
+func NewNullableBaseContract(val *BaseContract) *NullableBaseContract {
+	return &NullableBaseContract{value: val, isSet: true}
 }
 
-func (v NullableContract) MarshalJSON() ([]byte, error) {
+func (v NullableBaseContract) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableContract) UnmarshalJSON(src []byte) error {
+func (v *NullableBaseContract) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

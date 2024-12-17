@@ -1,4 +1,4 @@
-# ReinstallInstanceOpts
+# ReinstallResourceOpts
 
 ## Properties
 
@@ -9,65 +9,65 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewReinstallInstanceOpts
+### NewReinstallResourceOpts
 
-`func NewReinstallInstanceOpts(imageId string, ) *ReinstallInstanceOpts`
+`func NewReinstallResourceOpts(imageId string, ) *ReinstallResourceOpts`
 
-NewReinstallInstanceOpts instantiates a new ReinstallInstanceOpts object
+NewReinstallResourceOpts instantiates a new ReinstallResourceOpts object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewReinstallInstanceOptsWithDefaults
+### NewReinstallResourceOptsWithDefaults
 
-`func NewReinstallInstanceOptsWithDefaults() *ReinstallInstanceOpts`
+`func NewReinstallResourceOptsWithDefaults() *ReinstallResourceOpts`
 
-NewReinstallInstanceOptsWithDefaults instantiates a new ReinstallInstanceOpts object
+NewReinstallResourceOptsWithDefaults instantiates a new ReinstallResourceOpts object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetImageId
 
-`func (o *ReinstallInstanceOpts) GetImageId() string`
+`func (o *ReinstallResourceOpts) GetImageId() string`
 
 GetImageId returns the ImageId field if non-nil, zero value otherwise.
 
 ### GetImageIdOk
 
-`func (o *ReinstallInstanceOpts) GetImageIdOk() (*string, bool)`
+`func (o *ReinstallResourceOpts) GetImageIdOk() (*string, bool)`
 
 GetImageIdOk returns a tuple with the ImageId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetImageId
 
-`func (o *ReinstallInstanceOpts) SetImageId(v string)`
+`func (o *ReinstallResourceOpts) SetImageId(v string)`
 
 SetImageId sets ImageId field to given value.
 
 
 ### GetMarketAppId
 
-`func (o *ReinstallInstanceOpts) GetMarketAppId() string`
+`func (o *ReinstallResourceOpts) GetMarketAppId() string`
 
 GetMarketAppId returns the MarketAppId field if non-nil, zero value otherwise.
 
 ### GetMarketAppIdOk
 
-`func (o *ReinstallInstanceOpts) GetMarketAppIdOk() (*string, bool)`
+`func (o *ReinstallResourceOpts) GetMarketAppIdOk() (*string, bool)`
 
 GetMarketAppIdOk returns a tuple with the MarketAppId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMarketAppId
 
-`func (o *ReinstallInstanceOpts) SetMarketAppId(v string)`
+`func (o *ReinstallResourceOpts) SetMarketAppId(v string)`
 
 SetMarketAppId sets MarketAppId field to given value.
 
 ### HasMarketAppId
 
-`func (o *ReinstallInstanceOpts) HasMarketAppId() bool`
+`func (o *ReinstallResourceOpts) HasMarketAppId() bool`
 
 HasMarketAppId returns a boolean if a field has been set.
 

@@ -1,78 +1,78 @@
-# GetIpListResult
+# GetVpsListResult
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ips** | Pointer to [**[]IpDetails**](IpDetails.md) |  | [optional] 
+**Vps** | Pointer to [**[]VpsList**](VpsList.md) |  | [optional] 
 **Metadata** | Pointer to [**Metadata**](Metadata.md) |  | [optional] 
 
 ## Methods
 
-### NewGetIpListResult
+### NewGetVpsListResult
 
-`func NewGetIpListResult() *GetIpListResult`
+`func NewGetVpsListResult() *GetVpsListResult`
 
-NewGetIpListResult instantiates a new GetIpListResult object
+NewGetVpsListResult instantiates a new GetVpsListResult object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewGetIpListResultWithDefaults
+### NewGetVpsListResultWithDefaults
 
-`func NewGetIpListResultWithDefaults() *GetIpListResult`
+`func NewGetVpsListResultWithDefaults() *GetVpsListResult`
 
-NewGetIpListResultWithDefaults instantiates a new GetIpListResult object
+NewGetVpsListResultWithDefaults instantiates a new GetVpsListResult object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetIps
+### GetVps
 
-`func (o *GetIpListResult) GetIps() []IpDetails`
+`func (o *GetVpsListResult) GetVps() []VpsList`
 
-GetIps returns the Ips field if non-nil, zero value otherwise.
+GetVps returns the Vps field if non-nil, zero value otherwise.
 
-### GetIpsOk
+### GetVpsOk
 
-`func (o *GetIpListResult) GetIpsOk() (*[]IpDetails, bool)`
+`func (o *GetVpsListResult) GetVpsOk() (*[]VpsList, bool)`
 
-GetIpsOk returns a tuple with the Ips field if it's non-nil, zero value otherwise
+GetVpsOk returns a tuple with the Vps field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIps
+### SetVps
 
-`func (o *GetIpListResult) SetIps(v []IpDetails)`
+`func (o *GetVpsListResult) SetVps(v []VpsList)`
 
-SetIps sets Ips field to given value.
+SetVps sets Vps field to given value.
 
-### HasIps
+### HasVps
 
-`func (o *GetIpListResult) HasIps() bool`
+`func (o *GetVpsListResult) HasVps() bool`
 
-HasIps returns a boolean if a field has been set.
+HasVps returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *GetIpListResult) GetMetadata() Metadata`
+`func (o *GetVpsListResult) GetMetadata() Metadata`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *GetIpListResult) GetMetadataOk() (*Metadata, bool)`
+`func (o *GetVpsListResult) GetMetadataOk() (*Metadata, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *GetIpListResult) SetMetadata(v Metadata)`
+`func (o *GetVpsListResult) SetMetadata(v Metadata)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *GetIpListResult) HasMetadata() bool`
+`func (o *GetVpsListResult) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 

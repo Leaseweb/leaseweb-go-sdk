@@ -14,69 +14,69 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetIPListResult type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetIPListResult{}
+// checks if the GetVpsListResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetVpsListResult{}
 
-// GetIPListResult struct for GetIPListResult
-type GetIPListResult struct {
-	Ips []IpDetails `json:"ips,omitempty"`
+// GetVpsListResult struct for GetVpsListResult
+type GetVpsListResult struct {
+	Vps []VpsList `json:"vps,omitempty"`
 	Metadata *Metadata `json:"_metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _GetIPListResult GetIPListResult
+type _GetVpsListResult GetVpsListResult
 
-// NewGetIPListResult instantiates a new GetIPListResult object
+// NewGetVpsListResult instantiates a new GetVpsListResult object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetIPListResult() *GetIPListResult {
-	this := GetIPListResult{}
+func NewGetVpsListResult() *GetVpsListResult {
+	this := GetVpsListResult{}
 	return &this
 }
 
-// NewGetIPListResultWithDefaults instantiates a new GetIPListResult object
+// NewGetVpsListResultWithDefaults instantiates a new GetVpsListResult object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetIPListResultWithDefaults() *GetIPListResult {
-	this := GetIPListResult{}
+func NewGetVpsListResultWithDefaults() *GetVpsListResult {
+	this := GetVpsListResult{}
 	return &this
 }
 
-// GetIps returns the Ips field value if set, zero value otherwise.
-func (o *GetIPListResult) GetIps() []IpDetails {
-	if o == nil || IsNil(o.Ips) {
-		var ret []IpDetails
+// GetVps returns the Vps field value if set, zero value otherwise.
+func (o *GetVpsListResult) GetVps() []VpsList {
+	if o == nil || IsNil(o.Vps) {
+		var ret []VpsList
 		return ret
 	}
-	return o.Ips
+	return o.Vps
 }
 
-// GetIpsOk returns a tuple with the Ips field value if set, nil otherwise
+// GetVpsOk returns a tuple with the Vps field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetIPListResult) GetIpsOk() ([]IpDetails, bool) {
-	if o == nil || IsNil(o.Ips) {
+func (o *GetVpsListResult) GetVpsOk() ([]VpsList, bool) {
+	if o == nil || IsNil(o.Vps) {
 		return nil, false
 	}
-	return o.Ips, true
+	return o.Vps, true
 }
 
-// HasIps returns a boolean if a field has been set.
-func (o *GetIPListResult) HasIps() bool {
-	if o != nil && !IsNil(o.Ips) {
+// HasVps returns a boolean if a field has been set.
+func (o *GetVpsListResult) HasVps() bool {
+	if o != nil && !IsNil(o.Vps) {
 		return true
 	}
 
 	return false
 }
 
-// SetIps gets a reference to the given []IpDetails and assigns it to the Ips field.
-func (o *GetIPListResult) SetIps(v []IpDetails) {
-	o.Ips = v
+// SetVps gets a reference to the given []VpsList and assigns it to the Vps field.
+func (o *GetVpsListResult) SetVps(v []VpsList) {
+	o.Vps = v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *GetIPListResult) GetMetadata() Metadata {
+func (o *GetVpsListResult) GetMetadata() Metadata {
 	if o == nil || IsNil(o.Metadata) {
 		var ret Metadata
 		return ret
@@ -86,7 +86,7 @@ func (o *GetIPListResult) GetMetadata() Metadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetIPListResult) GetMetadataOk() (*Metadata, bool) {
+func (o *GetVpsListResult) GetMetadataOk() (*Metadata, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *GetIPListResult) GetMetadataOk() (*Metadata, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *GetIPListResult) HasMetadata() bool {
+func (o *GetVpsListResult) HasMetadata() bool {
 	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
@@ -103,11 +103,11 @@ func (o *GetIPListResult) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
-func (o *GetIPListResult) SetMetadata(v Metadata) {
+func (o *GetVpsListResult) SetMetadata(v Metadata) {
 	o.Metadata = &v
 }
 
-func (o GetIPListResult) MarshalJSON() ([]byte, error) {
+func (o GetVpsListResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -115,10 +115,10 @@ func (o GetIPListResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetIPListResult) ToMap() (map[string]interface{}, error) {
+func (o GetVpsListResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Ips) {
-		toSerialize["ips"] = o.Ips
+	if !IsNil(o.Vps) {
+		toSerialize["vps"] = o.Vps
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["_metadata"] = o.Metadata
@@ -131,21 +131,21 @@ func (o GetIPListResult) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *GetIPListResult) UnmarshalJSON(data []byte) (err error) {
-	varGetIPListResult := _GetIPListResult{}
+func (o *GetVpsListResult) UnmarshalJSON(data []byte) (err error) {
+	varGetVpsListResult := _GetVpsListResult{}
 
-	err = json.Unmarshal(data, &varGetIPListResult)
+	err = json.Unmarshal(data, &varGetVpsListResult)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetIPListResult(varGetIPListResult)
+	*o = GetVpsListResult(varGetVpsListResult)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "ips")
+		delete(additionalProperties, "vps")
 		delete(additionalProperties, "_metadata")
 		o.AdditionalProperties = additionalProperties
 	}
@@ -153,38 +153,38 @@ func (o *GetIPListResult) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableGetIPListResult struct {
-	value *GetIPListResult
+type NullableGetVpsListResult struct {
+	value *GetVpsListResult
 	isSet bool
 }
 
-func (v NullableGetIPListResult) Get() *GetIPListResult {
+func (v NullableGetVpsListResult) Get() *GetVpsListResult {
 	return v.value
 }
 
-func (v *NullableGetIPListResult) Set(val *GetIPListResult) {
+func (v *NullableGetVpsListResult) Set(val *GetVpsListResult) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetIPListResult) IsSet() bool {
+func (v NullableGetVpsListResult) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetIPListResult) Unset() {
+func (v *NullableGetVpsListResult) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetIPListResult(val *GetIPListResult) *NullableGetIPListResult {
-	return &NullableGetIPListResult{value: val, isSet: true}
+func NewNullableGetVpsListResult(val *GetVpsListResult) *NullableGetVpsListResult {
+	return &NullableGetVpsListResult{value: val, isSet: true}
 }
 
-func (v NullableGetIPListResult) MarshalJSON() ([]byte, error) {
+func (v NullableGetVpsListResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetIPListResult) UnmarshalJSON(src []byte) error {
+func (v *NullableGetVpsListResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

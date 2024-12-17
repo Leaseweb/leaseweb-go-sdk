@@ -14,11 +14,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the NullRouteIpOpts type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &NullRouteIpOpts{}
+// checks if the NullRouteIPOpts type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &NullRouteIPOpts{}
 
-// NullRouteIpOpts struct for NullRouteIpOpts
-type NullRouteIpOpts struct {
+// NullRouteIPOpts struct for NullRouteIPOpts
+type NullRouteIPOpts struct {
 	// The reason why the IP is being null-routed
 	Comment *string `json:"comment,omitempty"`
 	// If provided, reverts the operation automatically in the specified value, in hours
@@ -26,27 +26,27 @@ type NullRouteIpOpts struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _NullRouteIpOpts NullRouteIpOpts
+type _NullRouteIPOpts NullRouteIPOpts
 
-// NewNullRouteIpOpts instantiates a new NullRouteIpOpts object
+// NewNullRouteIPOpts instantiates a new NullRouteIPOpts object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNullRouteIpOpts() *NullRouteIpOpts {
-	this := NullRouteIpOpts{}
+func NewNullRouteIPOpts() *NullRouteIPOpts {
+	this := NullRouteIPOpts{}
 	return &this
 }
 
-// NewNullRouteIpOptsWithDefaults instantiates a new NullRouteIpOpts object
+// NewNullRouteIPOptsWithDefaults instantiates a new NullRouteIPOpts object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNullRouteIpOptsWithDefaults() *NullRouteIpOpts {
-	this := NullRouteIpOpts{}
+func NewNullRouteIPOptsWithDefaults() *NullRouteIPOpts {
+	this := NullRouteIPOpts{}
 	return &this
 }
 
 // GetComment returns the Comment field value if set, zero value otherwise.
-func (o *NullRouteIpOpts) GetComment() string {
+func (o *NullRouteIPOpts) GetComment() string {
 	if o == nil || IsNil(o.Comment) {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *NullRouteIpOpts) GetComment() string {
 
 // GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NullRouteIpOpts) GetCommentOk() (*string, bool) {
+func (o *NullRouteIPOpts) GetCommentOk() (*string, bool) {
 	if o == nil || IsNil(o.Comment) {
 		return nil, false
 	}
@@ -64,7 +64,7 @@ func (o *NullRouteIpOpts) GetCommentOk() (*string, bool) {
 }
 
 // HasComment returns a boolean if a field has been set.
-func (o *NullRouteIpOpts) HasComment() bool {
+func (o *NullRouteIPOpts) HasComment() bool {
 	if o != nil && !IsNil(o.Comment) {
 		return true
 	}
@@ -73,12 +73,12 @@ func (o *NullRouteIpOpts) HasComment() bool {
 }
 
 // SetComment gets a reference to the given string and assigns it to the Comment field.
-func (o *NullRouteIpOpts) SetComment(v string) {
+func (o *NullRouteIPOpts) SetComment(v string) {
 	o.Comment = &v
 }
 
 // GetAutomatedUnnulingAt returns the AutomatedUnnulingAt field value if set, zero value otherwise.
-func (o *NullRouteIpOpts) GetAutomatedUnnulingAt() int32 {
+func (o *NullRouteIPOpts) GetAutomatedUnnulingAt() int32 {
 	if o == nil || IsNil(o.AutomatedUnnulingAt) {
 		var ret int32
 		return ret
@@ -88,7 +88,7 @@ func (o *NullRouteIpOpts) GetAutomatedUnnulingAt() int32 {
 
 // GetAutomatedUnnulingAtOk returns a tuple with the AutomatedUnnulingAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NullRouteIpOpts) GetAutomatedUnnulingAtOk() (*int32, bool) {
+func (o *NullRouteIPOpts) GetAutomatedUnnulingAtOk() (*int32, bool) {
 	if o == nil || IsNil(o.AutomatedUnnulingAt) {
 		return nil, false
 	}
@@ -96,7 +96,7 @@ func (o *NullRouteIpOpts) GetAutomatedUnnulingAtOk() (*int32, bool) {
 }
 
 // HasAutomatedUnnulingAt returns a boolean if a field has been set.
-func (o *NullRouteIpOpts) HasAutomatedUnnulingAt() bool {
+func (o *NullRouteIPOpts) HasAutomatedUnnulingAt() bool {
 	if o != nil && !IsNil(o.AutomatedUnnulingAt) {
 		return true
 	}
@@ -105,11 +105,11 @@ func (o *NullRouteIpOpts) HasAutomatedUnnulingAt() bool {
 }
 
 // SetAutomatedUnnulingAt gets a reference to the given int32 and assigns it to the AutomatedUnnulingAt field.
-func (o *NullRouteIpOpts) SetAutomatedUnnulingAt(v int32) {
+func (o *NullRouteIPOpts) SetAutomatedUnnulingAt(v int32) {
 	o.AutomatedUnnulingAt = &v
 }
 
-func (o NullRouteIpOpts) MarshalJSON() ([]byte, error) {
+func (o NullRouteIPOpts) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -117,7 +117,7 @@ func (o NullRouteIpOpts) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NullRouteIpOpts) ToMap() (map[string]interface{}, error) {
+func (o NullRouteIPOpts) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Comment) {
 		toSerialize["comment"] = o.Comment
@@ -133,16 +133,16 @@ func (o NullRouteIpOpts) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *NullRouteIpOpts) UnmarshalJSON(data []byte) (err error) {
-	varNullRouteIpOpts := _NullRouteIpOpts{}
+func (o *NullRouteIPOpts) UnmarshalJSON(data []byte) (err error) {
+	varNullRouteIPOpts := _NullRouteIPOpts{}
 
-	err = json.Unmarshal(data, &varNullRouteIpOpts)
+	err = json.Unmarshal(data, &varNullRouteIPOpts)
 
 	if err != nil {
 		return err
 	}
 
-	*o = NullRouteIpOpts(varNullRouteIpOpts)
+	*o = NullRouteIPOpts(varNullRouteIPOpts)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -155,38 +155,38 @@ func (o *NullRouteIpOpts) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableNullRouteIpOpts struct {
-	value *NullRouteIpOpts
+type NullableNullRouteIPOpts struct {
+	value *NullRouteIPOpts
 	isSet bool
 }
 
-func (v NullableNullRouteIpOpts) Get() *NullRouteIpOpts {
+func (v NullableNullRouteIPOpts) Get() *NullRouteIPOpts {
 	return v.value
 }
 
-func (v *NullableNullRouteIpOpts) Set(val *NullRouteIpOpts) {
+func (v *NullableNullRouteIPOpts) Set(val *NullRouteIPOpts) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNullRouteIpOpts) IsSet() bool {
+func (v NullableNullRouteIPOpts) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNullRouteIpOpts) Unset() {
+func (v *NullableNullRouteIPOpts) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNullRouteIpOpts(val *NullRouteIpOpts) *NullableNullRouteIpOpts {
-	return &NullableNullRouteIpOpts{value: val, isSet: true}
+func NewNullableNullRouteIPOpts(val *NullRouteIPOpts) *NullableNullRouteIPOpts {
+	return &NullableNullRouteIPOpts{value: val, isSet: true}
 }
 
-func (v NullableNullRouteIpOpts) MarshalJSON() ([]byte, error) {
+func (v NullableNullRouteIPOpts) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableNullRouteIpOpts) UnmarshalJSON(src []byte) error {
+func (v *NullableNullRouteIPOpts) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
