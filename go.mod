@@ -1,4 +1,4 @@
-module github.com/leaseweb/leaseweb-go-sdk/v2
+module github.com/leaseweb/leaseweb-go-sdk/v3
 
 go 1.22.9
 
