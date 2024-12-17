@@ -83,7 +83,8 @@ All URIs are relative to *https://api.leaseweb.com/publicCloud/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *PubliccloudAPI* | [**AddToPrivateNetwork**](docs/PubliccloudAPI.md#addtoprivatenetwork) | **Put** /instances/{instanceId}/addToPrivateNetwork | Add instance to Private Network
-*PubliccloudAPI* | [**AttachIso**](docs/PubliccloudAPI.md#attachiso) | **Post** /instances/{instanceId}/attachIso | Attach ISO to instance
+*PubliccloudAPI* | [**AttachInstanceISO**](docs/PubliccloudAPI.md#attachinstanceiso) | **Post** /instances/{instanceId}/attachIso | Attach ISO to a specific Instance
+*PubliccloudAPI* | [**AttachVPSISO**](docs/PubliccloudAPI.md#attachvpsiso) | **Post** /vps/{vpsId}/attachIso | Attach ISO to a specific VPS
 *PubliccloudAPI* | [**CancelInstanceTermination**](docs/PubliccloudAPI.md#cancelinstancetermination) | **Post** /instances/{instanceId}/cancelTermination | Cancel instance termination
 *PubliccloudAPI* | [**CreateAutoScalingGroup**](docs/PubliccloudAPI.md#createautoscalinggroup) | **Post** /autoScalingGroups | Create Auto Scaling Group
 *PubliccloudAPI* | [**CreateImage**](docs/PubliccloudAPI.md#createimage) | **Post** /images | Create Custom Image
@@ -91,14 +92,17 @@ Class | Method | HTTP request | Description
 *PubliccloudAPI* | [**CreateSnapshot**](docs/PubliccloudAPI.md#createsnapshot) | **Post** /instances/{instanceId}/snapshots | Create instance snapshot
 *PubliccloudAPI* | [**CreateTargetGroup**](docs/PubliccloudAPI.md#createtargetgroup) | **Post** /targetGroups | Create Target Group
 *PubliccloudAPI* | [**DeleteAutoScalingGroup**](docs/PubliccloudAPI.md#deleteautoscalinggroup) | **Delete** /autoScalingGroups/{autoScalingGroupId} | Delete Auto Scaling Group
-*PubliccloudAPI* | [**DeleteCredential**](docs/PubliccloudAPI.md#deletecredential) | **Delete** /instances/{instanceId}/credentials/{type}/{username} | Delete credentials
-*PubliccloudAPI* | [**DeleteCredentials**](docs/PubliccloudAPI.md#deletecredentials) | **Delete** /instances/{instanceId}/credentials | Delete all instance credentials
+*PubliccloudAPI* | [**DeleteInstanceCredential**](docs/PubliccloudAPI.md#deleteinstancecredential) | **Delete** /instances/{instanceId}/credentials/{type}/{username} | Delete Instance credential for a given type and username
+*PubliccloudAPI* | [**DeleteInstanceCredentials**](docs/PubliccloudAPI.md#deleteinstancecredentials) | **Delete** /instances/{instanceId}/credentials | Delete all credentials associated with a specific Instance
 *PubliccloudAPI* | [**DeleteLoadBalancerListener**](docs/PubliccloudAPI.md#deleteloadbalancerlistener) | **Delete** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Delete load balancer listener
 *PubliccloudAPI* | [**DeleteSnapshot**](docs/PubliccloudAPI.md#deletesnapshot) | **Delete** /instances/{instanceId}/snapshots/{snapshotId} | Delete instance snapshot
 *PubliccloudAPI* | [**DeleteTargetGroup**](docs/PubliccloudAPI.md#deletetargetgroup) | **Delete** /targetGroups/{targetGroupId} | Delete Target Group
+*PubliccloudAPI* | [**DeleteVPSCredential**](docs/PubliccloudAPI.md#deletevpscredential) | **Delete** /vps/{vpsId}/credentials/{type}/{username} | Delete VPS credential
+*PubliccloudAPI* | [**DeleteVPSCredentials**](docs/PubliccloudAPI.md#deletevpscredentials) | **Delete** /vps/{vpsId}/credentials | Delete all credentials associated with a specific VPS
 *PubliccloudAPI* | [**DeregisterAutoScalingGroupTargetGroup**](docs/PubliccloudAPI.md#deregisterautoscalinggrouptargetgroup) | **Post** /autoScalingGroups/{autoScalingGroupId}/deregisterTargetGroup | Deregister Target Group
 *PubliccloudAPI* | [**DeregisterTargets**](docs/PubliccloudAPI.md#deregistertargets) | **Post** /targetGroups/{targetGroupId}/deregisterTargets | Deregister Targets
-*PubliccloudAPI* | [**DetachIso**](docs/PubliccloudAPI.md#detachiso) | **Post** /instances/{instanceId}/detachIso | Detach ISO from instance
+*PubliccloudAPI* | [**DetachInstanceISO**](docs/PubliccloudAPI.md#detachinstanceiso) | **Post** /instances/{instanceId}/detachIso | Detach ISO from a specific Instance
+*PubliccloudAPI* | [**DetachVPSISO**](docs/PubliccloudAPI.md#detachvpsiso) | **Post** /vps/{vpsId}/detachIso | Detach ISO from a specific VPS
 *PubliccloudAPI* | [**GetAutoScalingGroup**](docs/PubliccloudAPI.md#getautoscalinggroup) | **Get** /autoScalingGroups/{autoScalingGroupId} | Get Auto Scaling Group details
 *PubliccloudAPI* | [**GetAutoScalingGroupInstanceList**](docs/PubliccloudAPI.md#getautoscalinggroupinstancelist) | **Get** /autoScalingGroups/{autoScalingGroupId}/instances | Get list of instances belonging to an Auto Scaling Group
 *PubliccloudAPI* | [**GetAutoScalingGroupList**](docs/PubliccloudAPI.md#getautoscalinggrouplist) | **Get** /autoScalingGroups | Get Auto Scaling Group list
@@ -106,27 +110,31 @@ Class | Method | HTTP request | Description
 *PubliccloudAPI* | [**GetConnectionsPerSecondMetrics**](docs/PubliccloudAPI.md#getconnectionspersecondmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/connectionsPerSecond | Get connections per second metrics
 *PubliccloudAPI* | [**GetConsoleAccessToInstance**](docs/PubliccloudAPI.md#getconsoleaccesstoinstance) | **Get** /instances/{instanceId}/console | Get console access
 *PubliccloudAPI* | [**GetCpuMetrics**](docs/PubliccloudAPI.md#getcpumetrics) | **Get** /instances/{instanceId}/metrics/cpu | Get instance CPU metrics
-*PubliccloudAPI* | [**GetCredential**](docs/PubliccloudAPI.md#getcredential) | **Get** /instances/{instanceId}/credentials/{type}/{username} | Get credentials by type and username
-*PubliccloudAPI* | [**GetCredentialList**](docs/PubliccloudAPI.md#getcredentiallist) | **Get** /instances/{instanceId}/credentials | List credentials stored for instance
-*PubliccloudAPI* | [**GetCredentialListByType**](docs/PubliccloudAPI.md#getcredentiallistbytype) | **Get** /instances/{instanceId}/credentials/{type} | Get credentials by type
-*PubliccloudAPI* | [**GetDataTrafficMetrics**](docs/PubliccloudAPI.md#getdatatrafficmetrics) | **Get** /instances/{instanceId}/metrics/datatraffic | Get instance data traffic metrics
 *PubliccloudAPI* | [**GetDataTransferredMetrics**](docs/PubliccloudAPI.md#getdatatransferredmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/dataTransferred | Get load balancer data transferred metrics
 *PubliccloudAPI* | [**GetDataTransferredPerSecondMetrics**](docs/PubliccloudAPI.md#getdatatransferredpersecondmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/dataTransferredPerSecond | Get load balancer data transferred per second metrics
 *PubliccloudAPI* | [**GetExpenses**](docs/PubliccloudAPI.md#getexpenses) | **Get** /equipments/{equipmentId}/expenses | Get costs for a given month.
 *PubliccloudAPI* | [**GetImageList**](docs/PubliccloudAPI.md#getimagelist) | **Get** /images | List all available Images
 *PubliccloudAPI* | [**GetInstance**](docs/PubliccloudAPI.md#getinstance) | **Get** /instances/{instanceId} | Get instance details
+*PubliccloudAPI* | [**GetInstanceCredential**](docs/PubliccloudAPI.md#getinstancecredential) | **Get** /instances/{instanceId}/credentials/{type}/{username} | Get Instance credentials by type and username.
+*PubliccloudAPI* | [**GetInstanceCredentialList**](docs/PubliccloudAPI.md#getinstancecredentiallist) | **Get** /instances/{instanceId}/credentials | List credentials stored for a specific Instance
+*PubliccloudAPI* | [**GetInstanceCredentialListByType**](docs/PubliccloudAPI.md#getinstancecredentiallistbytype) | **Get** /instances/{instanceId}/credentials/{type} | Get credentials by type for a specific Instance
+*PubliccloudAPI* | [**GetInstanceDataTrafficMetrics**](docs/PubliccloudAPI.md#getinstancedatatrafficmetrics) | **Get** /instances/{instanceId}/metrics/datatraffic | Get data traffic metrics for a specific Instance
+*PubliccloudAPI* | [**GetInstanceIP**](docs/PubliccloudAPI.md#getinstanceip) | **Get** /instances/{instanceId}/ips/{ip} | Get IP details for a specific Instance
+*PubliccloudAPI* | [**GetInstanceIPList**](docs/PubliccloudAPI.md#getinstanceiplist) | **Get** /instances/{instanceId}/ips | List IP addresses associated with a specific Instance
 *PubliccloudAPI* | [**GetInstanceList**](docs/PubliccloudAPI.md#getinstancelist) | **Get** /instances | Get instance list
 *PubliccloudAPI* | [**GetInstanceTypeList**](docs/PubliccloudAPI.md#getinstancetypelist) | **Get** /instanceTypes | List instance types
-*PubliccloudAPI* | [**GetIp**](docs/PubliccloudAPI.md#getip) | **Get** /instances/{instanceId}/ips/{ip} | Get details about an instance&#39;s IP
-*PubliccloudAPI* | [**GetIpList**](docs/PubliccloudAPI.md#getiplist) | **Get** /instances/{instanceId}/ips | List instance&#39;s IPs
 *PubliccloudAPI* | [**GetIsoList**](docs/PubliccloudAPI.md#getisolist) | **Get** /isos | List available ISOs
 *PubliccloudAPI* | [**GetLoadBalancer**](docs/PubliccloudAPI.md#getloadbalancer) | **Get** /loadBalancers/{loadBalancerId} | Get load balancer details
+*PubliccloudAPI* | [**GetLoadBalancerDataTrafficMetrics**](docs/PubliccloudAPI.md#getloadbalancerdatatrafficmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/datatraffic | Get data traffic metrics for a specific Load Balancer
+*PubliccloudAPI* | [**GetLoadBalancerIP**](docs/PubliccloudAPI.md#getloadbalancerip) | **Get** /loadBalancers/{loadBalancerId}/ips/{ip} | Get IP details for a specific Load Balancer
+*PubliccloudAPI* | [**GetLoadBalancerIPList**](docs/PubliccloudAPI.md#getloadbalanceriplist) | **Get** /loadBalancers/{loadBalancerId}/ips | List IP addresses associated with a specific Load Balancer
 *PubliccloudAPI* | [**GetLoadBalancerList**](docs/PubliccloudAPI.md#getloadbalancerlist) | **Get** /loadBalancers | Get load balancer list
 *PubliccloudAPI* | [**GetLoadBalancerListener**](docs/PubliccloudAPI.md#getloadbalancerlistener) | **Get** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Get listener details
 *PubliccloudAPI* | [**GetLoadBalancerListenerList**](docs/PubliccloudAPI.md#getloadbalancerlistenerlist) | **Get** /loadBalancers/{loadBalancerId}/listeners | Get listener list
 *PubliccloudAPI* | [**GetMarketAppList**](docs/PubliccloudAPI.md#getmarketapplist) | **Get** /marketApps | Get marketplace apps
 *PubliccloudAPI* | [**GetRegionList**](docs/PubliccloudAPI.md#getregionlist) | **Get** /regions | List regions
-*PubliccloudAPI* | [**GetReinstallImageList**](docs/PubliccloudAPI.md#getreinstallimagelist) | **Get** /instances/{instanceId}/reinstall/images | List images available for reinstall
+*PubliccloudAPI* | [**GetReinstallInstanceImageList**](docs/PubliccloudAPI.md#getreinstallinstanceimagelist) | **Get** /instances/{instanceId}/reinstall/images | List images available for reinstall
+*PubliccloudAPI* | [**GetReinstallVPSImageList**](docs/PubliccloudAPI.md#getreinstallvpsimagelist) | **Get** /vps/{vpsId}/reinstall/images | List images available for reinstall
 *PubliccloudAPI* | [**GetRequestsMetrics**](docs/PubliccloudAPI.md#getrequestsmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/requests | Get load balancer requests metrics
 *PubliccloudAPI* | [**GetRequestsPerSecondMetrics**](docs/PubliccloudAPI.md#getrequestspersecondmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/requestsPerSecond | Get load balancer requests per second metrics
 *PubliccloudAPI* | [**GetResponseCodesMetrics**](docs/PubliccloudAPI.md#getresponsecodesmetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/responseCodes | Get response codes metrics
@@ -137,30 +145,54 @@ Class | Method | HTTP request | Description
 *PubliccloudAPI* | [**GetTargetGroupList**](docs/PubliccloudAPI.md#gettargetgrouplist) | **Get** /targetGroups | Get Target Group list
 *PubliccloudAPI* | [**GetTargetList**](docs/PubliccloudAPI.md#gettargetlist) | **Get** /targetGroups/{targetGroupId}/targets | Get Targets
 *PubliccloudAPI* | [**GetUpdateInstanceTypeList**](docs/PubliccloudAPI.md#getupdateinstancetypelist) | **Get** /instances/{instanceId}/instanceTypesUpdate | List available instance types for update
+*PubliccloudAPI* | [**GetVPSCredential**](docs/PubliccloudAPI.md#getvpscredential) | **Get** /vps/{vpsId}/credentials/{type}/{username} | Get VPS credential by type and username.
+*PubliccloudAPI* | [**GetVPSCredentialList**](docs/PubliccloudAPI.md#getvpscredentiallist) | **Get** /vps/{vpsId}/credentials | List credentials stored for a specific VPS
+*PubliccloudAPI* | [**GetVPSCredentialListByType**](docs/PubliccloudAPI.md#getvpscredentiallistbytype) | **Get** /vps/{vpsId}/credentials/{type} | Get credentials by type for a specific VPS
+*PubliccloudAPI* | [**GetVPSDataTrafficMetrics**](docs/PubliccloudAPI.md#getvpsdatatrafficmetrics) | **Get** /vps/{vpsId}/metrics/datatraffic | Get data traffic metrics for a specific VPS
+*PubliccloudAPI* | [**GetVPSIP**](docs/PubliccloudAPI.md#getvpsip) | **Get** /vps/{vpsId}/ips/{ip} | Get IP details for a specific VPS
+*PubliccloudAPI* | [**GetVPSIPList**](docs/PubliccloudAPI.md#getvpsiplist) | **Get** /vps/{vpsId}/ips | List IP addresses associated with a specific VPS
+*PubliccloudAPI* | [**GetVps**](docs/PubliccloudAPI.md#getvps) | **Get** /vps/{vpsId} | Get VPS details
+*PubliccloudAPI* | [**GetVpsList**](docs/PubliccloudAPI.md#getvpslist) | **Get** /vps | Get VPS list
 *PubliccloudAPI* | [**LaunchInstance**](docs/PubliccloudAPI.md#launchinstance) | **Post** /instances | Launch instance
 *PubliccloudAPI* | [**LaunchLoadBalancer**](docs/PubliccloudAPI.md#launchloadbalancer) | **Post** /loadBalancers | Launch Load balancer
-*PubliccloudAPI* | [**NullRouteIp**](docs/PubliccloudAPI.md#nullrouteip) | **Post** /instances/{instanceId}/ips/{ip}/null | Null route IP
-*PubliccloudAPI* | [**RebootInstance**](docs/PubliccloudAPI.md#rebootinstance) | **Post** /instances/{instanceId}/reboot | Reboot instance
+*PubliccloudAPI* | [**NullRouteInstanceIP**](docs/PubliccloudAPI.md#nullrouteinstanceip) | **Post** /instances/{instanceId}/ips/{ip}/null | Null route IP address for a specific resource Instance
+*PubliccloudAPI* | [**NullRouteLoadBalancerIP**](docs/PubliccloudAPI.md#nullrouteloadbalancerip) | **Post** /loadBalancers/{loadBalancerId}/ips/{ip}/null | Null route IP address for a specific resource Load Balancer
+*PubliccloudAPI* | [**NullRouteVPSIP**](docs/PubliccloudAPI.md#nullroutevpsip) | **Post** /vps/{vpsId}/ips/{ip}/null | Null route IP address for a specific resource VPS
+*PubliccloudAPI* | [**RebootInstance**](docs/PubliccloudAPI.md#rebootinstance) | **Post** /instances/{instanceId}/reboot | Reboot a specific Instance
+*PubliccloudAPI* | [**RebootLoadBalancer**](docs/PubliccloudAPI.md#rebootloadbalancer) | **Post** /loadBalancers/{loadBalancerId}/reboot | Reboot a specific Load Balancer
+*PubliccloudAPI* | [**RebootVPS**](docs/PubliccloudAPI.md#rebootvps) | **Post** /vps/{vpsId}/reboot | Reboot a specific VPS
 *PubliccloudAPI* | [**RegisterAutoScalingGroupTargetGroup**](docs/PubliccloudAPI.md#registerautoscalinggrouptargetgroup) | **Post** /autoScalingGroups/{autoScalingGroupId}/registerTargetGroup | Register Target Group
 *PubliccloudAPI* | [**RegisterTargets**](docs/PubliccloudAPI.md#registertargets) | **Post** /targetGroups/{targetGroupId}/registerTargets | Register Targets
-*PubliccloudAPI* | [**ReinstallInstance**](docs/PubliccloudAPI.md#reinstallinstance) | **Put** /instances/{instanceId}/reinstall | Reinstall instance
+*PubliccloudAPI* | [**ReinstallInstance**](docs/PubliccloudAPI.md#reinstallinstance) | **Put** /instances/{instanceId}/reinstall | Reinstall an Instance
+*PubliccloudAPI* | [**ReinstallVPS**](docs/PubliccloudAPI.md#reinstallvps) | **Put** /vps/{vpsId}/reinstall | Reinstall a VPS
 *PubliccloudAPI* | [**RemoveFromPrivateNetwork**](docs/PubliccloudAPI.md#removefromprivatenetwork) | **Delete** /instances/{instanceId}/removeFromPrivateNetwork | Remove instance from Private Network
-*PubliccloudAPI* | [**RemoveIpNullRoute**](docs/PubliccloudAPI.md#removeipnullroute) | **Post** /instances/{instanceId}/ips/{ip}/unnull | Remove an IP null route
-*PubliccloudAPI* | [**ResetPassword**](docs/PubliccloudAPI.md#resetpassword) | **Post** /instances/{instanceId}/resetPassword | Reset instance password
+*PubliccloudAPI* | [**RemoveInstanceIPNullRoute**](docs/PubliccloudAPI.md#removeinstanceipnullroute) | **Post** /instances/{instanceId}/ips/{ip}/unnull | Remove an IP null route for a specific Instance
+*PubliccloudAPI* | [**RemoveLoadBalancerIPNullRoute**](docs/PubliccloudAPI.md#removeloadbalanceripnullroute) | **Post** /loadBalancers/{loadBalancerId}/ips/{ip}/unnull | Remove an IP null route for a specific Load Balancer
+*PubliccloudAPI* | [**RemoveVPSIPNullRoute**](docs/PubliccloudAPI.md#removevpsipnullroute) | **Post** /vps/{vpsId}/ips/{ip}/unnull | Remove an IP null route for a specific VPS
+*PubliccloudAPI* | [**ResetInstancePassword**](docs/PubliccloudAPI.md#resetinstancepassword) | **Post** /instances/{instanceId}/resetPassword | Reset the password for a specific Instance
+*PubliccloudAPI* | [**ResetVPSPassword**](docs/PubliccloudAPI.md#resetvpspassword) | **Post** /vps/{vpsId}/resetPassword | Reset the password for a specific VPS
 *PubliccloudAPI* | [**RestoreSnapshot**](docs/PubliccloudAPI.md#restoresnapshot) | **Put** /instances/{instanceId}/snapshots/{snapshotId} | Restore instance snapshot
-*PubliccloudAPI* | [**StartInstance**](docs/PubliccloudAPI.md#startinstance) | **Post** /instances/{instanceId}/start | Start instance
-*PubliccloudAPI* | [**StopInstance**](docs/PubliccloudAPI.md#stopinstance) | **Post** /instances/{instanceId}/stop | Stop instance
-*PubliccloudAPI* | [**StoreCredential**](docs/PubliccloudAPI.md#storecredential) | **Post** /instances/{instanceId}/credentials | Store credentials
+*PubliccloudAPI* | [**StartInstance**](docs/PubliccloudAPI.md#startinstance) | **Post** /instances/{instanceId}/start | Start a specific resource Instance
+*PubliccloudAPI* | [**StartLoadBalancer**](docs/PubliccloudAPI.md#startloadbalancer) | **Post** /loadBalancers/{loadBalancerId}/start | Start a specific resource Load Balancer
+*PubliccloudAPI* | [**StartVPS**](docs/PubliccloudAPI.md#startvps) | **Post** /vps/{vpsId}/start | Start a specific resource VPS
+*PubliccloudAPI* | [**StopInstance**](docs/PubliccloudAPI.md#stopinstance) | **Post** /instances/{instanceId}/stop | Stop a specific Instance
+*PubliccloudAPI* | [**StopLoadBalancer**](docs/PubliccloudAPI.md#stoploadbalancer) | **Post** /loadBalancers/{loadBalancerId}/stop | Stop a specific Load Balancer
+*PubliccloudAPI* | [**StopVPS**](docs/PubliccloudAPI.md#stopvps) | **Post** /vps/{vpsId}/stop | Stop a specific VPS
+*PubliccloudAPI* | [**StoreInstanceCredential**](docs/PubliccloudAPI.md#storeinstancecredential) | **Post** /instances/{instanceId}/credentials | Store credentials for a specific Instance
+*PubliccloudAPI* | [**StoreVPSCredential**](docs/PubliccloudAPI.md#storevpscredential) | **Post** /vps/{vpsId}/credentials | Store credentials for a specific VPS
 *PubliccloudAPI* | [**TerminateInstance**](docs/PubliccloudAPI.md#terminateinstance) | **Delete** /instances/{instanceId} | Terminate instance
 *PubliccloudAPI* | [**TerminateLoadBalancer**](docs/PubliccloudAPI.md#terminateloadbalancer) | **Delete** /loadBalancers/{loadBalancerId} | Delete load balancer
 *PubliccloudAPI* | [**UpdateAutoScalingGroup**](docs/PubliccloudAPI.md#updateautoscalinggroup) | **Put** /autoScalingGroups/{autoScalingGroupId} | Update Auto Scaling Group
-*PubliccloudAPI* | [**UpdateCredential**](docs/PubliccloudAPI.md#updatecredential) | **Put** /instances/{instanceId}/credentials/{type}/{username} | Update credentials
 *PubliccloudAPI* | [**UpdateImage**](docs/PubliccloudAPI.md#updateimage) | **Put** /images/{imageId} | Update Custom Image
 *PubliccloudAPI* | [**UpdateInstance**](docs/PubliccloudAPI.md#updateinstance) | **Put** /instances/{instanceId} | Update instance
-*PubliccloudAPI* | [**UpdateIp**](docs/PubliccloudAPI.md#updateip) | **Put** /instances/{instanceId}/ips/{ip} | Update IP
+*PubliccloudAPI* | [**UpdateInstanceCredential**](docs/PubliccloudAPI.md#updateinstancecredential) | **Put** /instances/{instanceId}/credentials/{type}/{username} | Update credentials for a given type and username
+*PubliccloudAPI* | [**UpdateInstanceIP**](docs/PubliccloudAPI.md#updateinstanceip) | **Put** /instances/{instanceId}/ips/{ip} | Update the IP address for a specific Instance
 *PubliccloudAPI* | [**UpdateLoadBalancer**](docs/PubliccloudAPI.md#updateloadbalancer) | **Put** /loadBalancers/{loadBalancerId} | Update load balancer
+*PubliccloudAPI* | [**UpdateLoadBalancerIP**](docs/PubliccloudAPI.md#updateloadbalancerip) | **Put** /loadBalancers/{loadBalancerId}/ips/{ip} | Update the IP address for a specific Load Balancer
 *PubliccloudAPI* | [**UpdateLoadBalancerListener**](docs/PubliccloudAPI.md#updateloadbalancerlistener) | **Put** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Update a listener
 *PubliccloudAPI* | [**UpdateTargetGroup**](docs/PubliccloudAPI.md#updatetargetgroup) | **Put** /targetGroups/{targetGroupId} | Update Target Group
+*PubliccloudAPI* | [**UpdateVPSIP**](docs/PubliccloudAPI.md#updatevpsip) | **Put** /vps/{vpsId}/ips/{ip} | Update the IP address for a specific VPS
+*PubliccloudAPI* | [**UpdateVpsCredential**](docs/PubliccloudAPI.md#updatevpscredential) | **Put** /vps/{vpsId}/credentials/{type}/{username} | Update credentials for a given type and username
 
 
 ## Documentation For Models
@@ -172,6 +204,8 @@ Class | Method | HTTP request | Description
  - [AutoScalingGroupState](docs/AutoScalingGroupState.md)
  - [AutoScalingGroupType](docs/AutoScalingGroupType.md)
  - [Balance](docs/Balance.md)
+ - [BaseContract](docs/BaseContract.md)
+ - [BaseResources](docs/BaseResources.md)
  - [Billing](docs/Billing.md)
  - [BillingFrequency](docs/BillingFrequency.md)
  - [Contract](docs/Contract.md)
@@ -192,6 +226,7 @@ Class | Method | HTTP request | Description
  - [CredentialType](docs/CredentialType.md)
  - [DataTrafficMetrics](docs/DataTrafficMetrics.md)
  - [DataTransferredMetrics](docs/DataTransferredMetrics.md)
+ - [Datacenter](docs/Datacenter.md)
  - [Ddos](docs/Ddos.md)
  - [ErrorResult](docs/ErrorResult.md)
  - [ExpenseResultInstance](docs/ExpenseResultInstance.md)
@@ -209,9 +244,9 @@ Class | Method | HTTP request | Description
  - [GetDataTransferredMetricsResult](docs/GetDataTransferredMetricsResult.md)
  - [GetDataTransferredPerSecondMetricsResult](docs/GetDataTransferredPerSecondMetricsResult.md)
  - [GetExpensesResult](docs/GetExpensesResult.md)
+ - [GetIPListResult](docs/GetIPListResult.md)
  - [GetImageListResult](docs/GetImageListResult.md)
  - [GetInstanceListResult](docs/GetInstanceListResult.md)
- - [GetIpListResult](docs/GetIpListResult.md)
  - [GetIsoListResult](docs/GetIsoListResult.md)
  - [GetLoadBalancerListResult](docs/GetLoadBalancerListResult.md)
  - [GetLoadBalancerListenerListResult](docs/GetLoadBalancerListenerListResult.md)
@@ -225,6 +260,7 @@ Class | Method | HTTP request | Description
  - [GetSnapshotListResult](docs/GetSnapshotListResult.md)
  - [GetTargetGroupListResult](docs/GetTargetGroupListResult.md)
  - [GetTargetListResult](docs/GetTargetListResult.md)
+ - [GetVpsListResult](docs/GetVpsListResult.md)
  - [HealthCheck](docs/HealthCheck.md)
  - [HealthCheckOpts](docs/HealthCheckOpts.md)
  - [HealthCheckStatus](docs/HealthCheckStatus.md)
@@ -267,7 +303,7 @@ Class | Method | HTTP request | Description
  - [MetricsValues](docs/MetricsValues.md)
  - [NetworkSpeed](docs/NetworkSpeed.md)
  - [NetworkType](docs/NetworkType.md)
- - [NullRouteIpOpts](docs/NullRouteIpOpts.md)
+ - [NullRouteIPOpts](docs/NullRouteIPOpts.md)
  - [Peak](docs/Peak.md)
  - [Price](docs/Price.md)
  - [Prices](docs/Prices.md)
@@ -275,7 +311,7 @@ Class | Method | HTTP request | Description
  - [Protocol](docs/Protocol.md)
  - [Region](docs/Region.md)
  - [RegionName](docs/RegionName.md)
- - [ReinstallInstanceOpts](docs/ReinstallInstanceOpts.md)
+ - [ReinstallResourceOpts](docs/ReinstallResourceOpts.md)
  - [Resources](docs/Resources.md)
  - [ResponseCodesMetrics](docs/ResponseCodesMetrics.md)
  - [SchemasHealthCheckStatus](docs/SchemasHealthCheckStatus.md)
@@ -302,12 +338,18 @@ Class | Method | HTTP request | Description
  - [UpdateAutoScalingGroupOpts](docs/UpdateAutoScalingGroupOpts.md)
  - [UpdateCredentialOpts](docs/UpdateCredentialOpts.md)
  - [UpdateCredentialResult](docs/UpdateCredentialResult.md)
+ - [UpdateIPOpts](docs/UpdateIPOpts.md)
  - [UpdateImageOpts](docs/UpdateImageOpts.md)
  - [UpdateInstanceOpts](docs/UpdateInstanceOpts.md)
- - [UpdateIpOpts](docs/UpdateIpOpts.md)
  - [UpdateLoadBalancerOpts](docs/UpdateLoadBalancerOpts.md)
  - [UpdateTargetGroupOpts](docs/UpdateTargetGroupOpts.md)
  - [Values](docs/Values.md)
+ - [VpsBase](docs/VpsBase.md)
+ - [VpsContract](docs/VpsContract.md)
+ - [VpsDetails](docs/VpsDetails.md)
+ - [VpsList](docs/VpsList.md)
+ - [VpsPackType](docs/VpsPackType.md)
+ - [VpsState](docs/VpsState.md)
 
 
 ## Documentation For Authorization
