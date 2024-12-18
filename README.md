@@ -56,6 +56,7 @@ The Leaseweb Go SDK documentation based on product:
 - [Aggregation Pack](aggregationpack/README.md)
 - [Abuse](abuse/README.md)
 - [Invoice](invoice/README.md)
+- [DNS](dns/README.md)
 
 ### Issues
 If you encounter an issue with the project, you are welcome to submit an [issue](https://github.com/Leaseweb/leaseweb-go-sdk/issues).
