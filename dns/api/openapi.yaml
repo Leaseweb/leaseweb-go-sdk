@@ -1,0 +1,2059 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: ">The base URL for this API is: **https://api.leaseweb.com/hosting/v2**"
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: DNS
+  version: v2
+  x-logo:
+    altText: Leaseweb developer documentation
+    backgroundColor: '#5484c6'
+    href: https://developer.leaseweb.com
+    url: https://developer.leaseweb.com/images/logo.png
+servers:
+- url: https://api.leaseweb.com/hosting/v2
+security:
+- X-LSW-Auth: []
+tags:
+- description: |
+    The API uses standard HTTP status codes to indicate the success or failure of the API call. The response will be JSON. Most APIs use the following format:
+
+    ```json
+    {
+        "errorCode": "APP00800",
+        "errorMessage": "The connection with the DB cannot be established.",
+        "correlationId": "550e8400-e29b-41d4-a716-446655440000",
+        "userMessage": "Cannot handle your request at the moment. Please try again later.",
+        "reference": "https://developer.leaseweb.com/errors/APP00800"
+    }
+    ```
+  name: Errors
+  x-traitTag: true
+- description: |
+    Authentication for the APIs is required. To authenticate your call, you will need to sent your API key as `X-LSW-Auth` header.
+
+    You can generate API keys in the [Customer Portal](https://secure.leaseweb.com/api-client-management/).
+  name: API Key Authentication
+  x-traitTag: true
+paths:
+  /domains/{domainName}/resourceRecordSets:
+    delete:
+      description: |
+        Delete all editable resource record sets for a domain.
+
+        Please note that this action will keep the domain's zone in place.
+      operationId: deleteResourceRecordSets
+      parameters:
+      - description: Domain name
+        example: example.com
+        explode: false
+        in: path
+        name: domainName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Delete resource record sets
+      tags:
+      - dns
+    get:
+      operationId: getResourceRecordSetList
+      parameters:
+      - description: Domain name
+        example: example.com
+        explode: false
+        in: path
+        name: domainName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _links:
+                  self:
+                    href: /domains/example.com/resourceRecordSets
+                  parent:
+                    href: /domains/example.com
+                  validateSet:
+                    href: /domains/example.com/resourceRecordSets/validateSet
+                infoMessage: "EXAMPLE: Sorry, but your domain is not yet listed on\
+                  \ our nameservers. Please create a DNS record first so we can add\
+                  \ your domain."
+                resourceRecordSets:
+                - name: example.com.
+                  type: A
+                  content:
+                  - 85.17.150.50
+                  - 85.17.150.50
+                  - 85.17.150.53
+                  ttl: 300
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/example.com./A
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: subdomain.example.com.
+                  type: A
+                  content:
+                  - 85.17.150.54
+                  ttl: 86400
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/subdomain.example.com./A
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: example.com.
+                  type: AAAA
+                  content:
+                  - 2a02:2770:8:0:216:3eff:fead:8c93
+                  ttl: 28800
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/example.com./AAAA
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: some.example.com.
+                  type: AAAA
+                  content:
+                  - 2a02:2770:8:0:216:3eff:fead:8c93
+                  ttl: 300
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/some.example.com./AAAA
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: example.com.
+                  type: CAA
+                  content:
+                  - 0 issue "comodoca.com"
+                  ttl: 300
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/example.com./CAA
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: anotherurl.example.com.
+                  type: CNAME
+                  content:
+                  - example.com.
+                  ttl: 86400
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/anotherurl.example.com./CNAME
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: example.com.
+                  type: MX
+                  content:
+                  - 10 mail.example.com.
+                  - 20 mailfilter.leaseweb.com.
+                  ttl: 3600
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/example.com./MX
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: subdomain.example.com.
+                  type: NS
+                  content:
+                  - other.nameserver.com
+                  - yet-another.nameserver.com
+                  ttl: 3600
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/subdomain.example.com./NS
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: _service._protocol.example.com.
+                  type: SRV
+                  content:
+                  - 10 5 5060 sipserver.example.com.
+                  ttl: 14400
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/example.com./SRV
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: example.com.
+                  type: TXT
+                  content:
+                  - '"google-site-verification=Kkalsdhl8a9792342lksdo9bSER233"'
+                  - '"v=spf1 a mx -all"'
+                  ttl: 3600
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/example.com./TXT
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: example.com.
+                  type: SOA
+                  content:
+                  - ns0.example.com. postmaster.example.com. 2020021901 10800 3600
+                    604800 300
+                  ttl: 3600
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/example.com./SOA
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: ds.example.com.
+                  type: DS
+                  content:
+                  - 63708 13 2 ce46cb792d263081fe23c7245a1ccce4d59e3e501db22932edf59d858c03fd6e
+                  ttl: 3600
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/ds.example.com./DS
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: _443._tcp.example.com.
+                  type: TLSA
+                  content:
+                  - 3 1 1 9141610c47dab44af34daa405017f576c6d2beb5a083a16ba83a52ce27d91988
+                  ttl: 3600
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/_443._tcp.example.com./TLSA
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+              schema:
+                $ref: '#/components/schemas/getResourceRecordSetListResult'
+            application/ld+json:
+              example:
+                _links:
+                  self:
+                    href: /domains/example.com/resourceRecordSets
+                  parent:
+                    href: /domains/example.com
+                  validateSet:
+                    href: /domains/example.com/resourceRecordSets/validateSet
+                infoMessage: "EXAMPLE: Sorry, but your domain is not yet listed on\
+                  \ our nameservers. Please create a DNS record first so we can add\
+                  \ your domain."
+                resourceRecordSets:
+                - name: geo-10.example.com.
+                  type: A+GEO
+                  geoContent:
+                    closestLocation:
+                    - 1.2.3.4
+                    - 5.6.7.8
+                  ttl: 3600
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+              schema:
+                $ref: '#/components/schemas/getResourceRecordSetListLdResult'
+          description: ""
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List resource record sets
+      tags:
+      - dns
+    post:
+      operationId: createResourceRecordSet
+      parameters:
+      - description: Domain name
+        example: example.com
+        explode: false
+        in: path
+        name: domainName
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              content:
+              - 85.17.150.51
+              - 85.17.150.52
+              - 85.17.150.53
+              name: example.com.
+              ttl: 3600
+              type: A
+            schema:
+              $ref: '#/components/schemas/resourceRecordSet'
+          application/ld+json:
+            example:
+              geoContent:
+                closestLocation:
+                - 1.2.3.4
+                - 5.6.7.8
+              name: geo-10.example.com.
+              ttl: 3600
+              type: A+GEO
+            schema:
+              $ref: '#/components/schemas/ldResourceRecordSet'
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                _links:
+                  self:
+                    href: /domains/example.com/resourceRecordSets/example.com./A
+                  collection:
+                    href: /domains/example.com/resourceRecordSets
+                content:
+                - 85.17.150.51
+                - 85.17.150.52
+                - 85.17.150.53
+                editable: true
+                name: example.com.
+                ttl: 3600
+                type: A
+              schema:
+                $ref: '#/components/schemas/resourceRecordSetDetails'
+            application/ld+json:
+              example:
+                _links:
+                  self:
+                    href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+                  collection:
+                    href: /domains/example.com/resourceRecordSets
+                editable: true
+                geoContent:
+                  closestLocation:
+                  - 1.2.3.4
+                  - 5.6.7.8
+                name: geo-10.example.com.
+                ttl: 3600
+                type: A+GEO
+              schema:
+                $ref: '#/components/schemas/ldResourceRecordSetDetails'
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Create a resource record set
+      tags:
+      - dns
+    put:
+      description: |
+        > This is a full replacement of all editable resource records sets for a domain.
+      operationId: updateResourceRecordSets
+      parameters:
+      - description: Domain name
+        example: example.com
+        explode: false
+        in: path
+        name: domainName
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              resourceRecordSets:
+              - name: example.com.
+                type: A
+                content:
+                - 85.17.150.50
+                - 85.17.150.50
+                - 85.17.150.53
+                ttl: 300
+              - name: '*.example.com.'
+                type: A
+                content:
+                - 85.17.150.54
+                ttl: 86400
+              - name: example.com.
+                type: AAAA
+                content:
+                - 2a02:2770:8:0:216:3eff:fead:8c93
+                ttl: 28800
+              - name: some.example.com.
+                type: AAAA
+                content:
+                - 2a02:2770:8:0:216:3eff:fead:8c93
+                ttl: 60
+              - name: example.com.
+                type: CAA
+                content:
+                - 0 issue "comodoca.com"
+                ttl: 300
+              - name: anotherurl.example.com.
+                type: CNAME
+                content:
+                - example.com.
+                ttl: 86400
+              - name: example.com.
+                type: MX
+                content:
+                - 10 mail.example.com.
+                - 20 mailfilter.leaseweb.com.
+                ttl: 3600
+              - name: subdomain.example.com.
+                type: NS
+                content:
+                - other.nameserver.com
+                - yet-another.nameserver.com
+                ttl: 3600
+              - name: _service._protocol.example.com.
+                type: SRV
+                content:
+                - 10 5 5060 sipserver.example.com.
+                ttl: 14400
+              - name: example.com.
+                type: TXT
+                content:
+                - '"google-site-verification=Kkalsdhl8a9792342lksdo9bSER233"'
+                - '"v=spf1 a mx -all"'
+                ttl: 3600
+              - name: another.example.com.
+                type: SOA
+                ttl: 3600
+                content:
+                - example.com
+              - name: ds.example.com.
+                type: DS
+                content:
+                - 63708 13 2 ce46cb792d263081fe23c7245a1ccce4d59e3e501db22932edf59d858c03fd6e
+                ttl: 14400
+            schema:
+              $ref: '#/components/schemas/resultRecordSets'
+          application/ld+json:
+            example:
+              resourceRecordSets:
+              - name: example.com.
+                type: A+GEO
+                geoContent:
+                  closestLocation:
+                  - 1.2.3.4
+                  - 5.6.7.8
+                ttl: 300
+            schema:
+              $ref: '#/components/schemas/updateResourceRecordSetsLdOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _links:
+                  self:
+                    href: /domains/example.com/resourceRecordSets/example.com./A
+                  collection:
+                    href: /domains/example.com/resourceRecordSets
+                content:
+                - 85.17.150.51
+                - 85.17.150.52
+                - 85.17.150.53
+                editable: true
+                name: example.com.
+                ttl: 3600
+                type: A
+              schema:
+                $ref: '#/components/schemas/resourceRecordSetDetails'
+            application/ld+json:
+              example:
+                _links:
+                  self:
+                    href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+                  collection:
+                    href: /domains/example.com/resourceRecordSets
+                editable: true
+                geoContent:
+                  closestLocation:
+                  - 1.2.3.4
+                  - 5.6.7.8
+                name: geo-10.example.com.
+                ttl: 3600
+                type: A+GEO
+              schema:
+                $ref: '#/components/schemas/ldResourceRecordSetDetails'
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Update resource record sets
+      tags:
+      - dns
+  /domains/{domainName}/resourceRecordSets/{name}/{type}:
+    delete:
+      operationId: deleteResourceRecordSet
+      parameters:
+      - description: Domain name
+        example: example.com
+        explode: false
+        in: path
+        name: domainName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Record name
+        example: example.com.
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Record type
+        example: A
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          enum:
+          - A
+          - AAA
+          - CAA
+          - CNAME
+          - MX
+          - TLSA
+          - NS
+          - SRV
+          - TXT
+          - SOA
+          - DS
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Delete a resource record set
+      tags:
+      - dns
+    get:
+      operationId: getResourceRecordSet
+      parameters:
+      - description: Domain name
+        example: example.com
+        explode: false
+        in: path
+        name: domainName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Record name
+        example: example.com.
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Record type
+        example: A
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          enum:
+          - A
+          - AAA
+          - CAA
+          - CNAME
+          - MX
+          - TLSA
+          - NS
+          - SRV
+          - TXT
+          - SOA
+          - DS
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _links:
+                  self:
+                    href: /domains/example.com/resourceRecordSets/example.com./A
+                  collection:
+                    href: /domains/example.com/resourceRecordSets
+                content:
+                - 85.17.150.51
+                - 85.17.150.52
+                - 85.17.150.53
+                editable: true
+                name: example.com.
+                ttl: 3600
+                type: A
+              schema:
+                $ref: '#/components/schemas/resourceRecordSetDetails'
+            application/ld+json:
+              example:
+                _links:
+                  self:
+                    href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+                  collection:
+                    href: /domains/example.com/resourceRecordSets
+                editable: true
+                geoContent:
+                  closestLocation:
+                  - 1.2.3.4
+                  - 5.6.7.8
+                name: geo-10.example.com.
+                ttl: 3600
+                type: A+GEO
+              schema:
+                $ref: '#/components/schemas/ldResourceRecordSetDetails'
+          description: ""
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Inspect resource record set
+      tags:
+      - dns
+    put:
+      operationId: updateResourceRecordSet
+      parameters:
+      - description: Domain name
+        example: example.com
+        explode: false
+        in: path
+        name: domainName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Record name
+        example: example.com.
+        explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Record type
+        example: A
+        explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          enum:
+          - A
+          - AAA
+          - CAA
+          - CNAME
+          - MX
+          - TLSA
+          - NS
+          - SRV
+          - TXT
+          - SOA
+          - DS
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              content:
+              - 85.17.150.51
+              - 85.17.150.52
+              - 85.17.150.53
+              ttl: 3600
+            schema:
+              $ref: '#/components/schemas/updateResourceRecordSetOpts'
+          application/ld+json:
+            example:
+              geoContent:
+                closestLocation:
+                - 1.2.3.4
+                - 5.6.7.8
+              ttl: 3600
+            schema:
+              $ref: '#/components/schemas/updateResourceRecordSetLdOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _links:
+                  self:
+                    href: /domains/example.com/resourceRecordSets/example.com./A
+                  collection:
+                    href: /domains/example.com/resourceRecordSets
+                content:
+                - 85.17.150.51
+                - 85.17.150.52
+                - 85.17.150.53
+                editable: true
+                name: example.com.
+                ttl: 3600
+                type: A
+              schema:
+                $ref: '#/components/schemas/resourceRecordSetDetails'
+            application/ld+json:
+              example:
+                _links:
+                  self:
+                    href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+                  collection:
+                    href: /domains/example.com/resourceRecordSets
+                editable: true
+                geoContent:
+                  closestLocation:
+                  - 1.2.3.4
+                  - 5.6.7.8
+                name: geo-10.example.com.
+                ttl: 3600
+                type: A+GEO
+              schema:
+                $ref: '#/components/schemas/ldResourceRecordSetDetails'
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Update a resource record set
+      tags:
+      - dns
+  /domains/{domainName}/resourceRecordSets/import:
+    post:
+      operationId: importResourceRecordSets
+      parameters:
+      - description: Domain name
+        example: example.com
+        explode: false
+        in: path
+        name: domainName
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              content: "$ORIGIN example.com. \r\n$TTL 86400 \r\n\tIN\tMX\t10\tmail.example.com.\
+                \       \r\n\r\n\t\r\ndns1\tIN\tA\t10.0.1.1"
+            schema:
+              $ref: '#/components/schemas/importResourceRecordSetsOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                resourceRecordSets:
+                - name: example.com.
+                  type: A
+                  content:
+                  - 10.0.1.1
+                  ttl: 3600
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/example.com./A
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+                - name: example.com.
+                  type: MX
+                  content:
+                  - 10 mail.example.com.
+                  ttl: 3600
+                  editable: true
+                  _links:
+                    self:
+                      href: /domains/example.com/resourceRecordSets/example.com./MX
+                    collection:
+                      href: /domains/example.com/resourceRecordSets
+              schema:
+                $ref: '#/components/schemas/importResourceRecordSetsResult'
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Import dns records from bind file content
+      tags:
+      - dns
+  /domains/{domainName}/resourceRecordSets/validateSet:
+    post:
+      description: "This endpoint may be used to validate whether a resource record\
+        \ set is valid, without actually creating it."
+      operationId: validateResourceRecordSet
+      parameters:
+      - description: Domain name
+        example: example.com
+        explode: false
+        in: path
+        name: domainName
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json - Validate resource with content:
+            example:
+              content:
+              - 85.17.150.51
+              - 85.17.150.52
+              - 85.17.150.53
+              name: example.com.
+              ttl: 3600
+              type: A
+            schema:
+              $ref: '#/components/schemas/resourceRecordSet'
+          application/json - Validate resource with geo content:
+            example:
+              geoContent:
+                closestLocation:
+                - 1.2.3.4
+                - 5.6.7.8
+              name: geo-10.example.com.
+              ttl: 3600
+              type: A+GEO
+            schema:
+              $ref: '#/components/schemas/ldResourceRecordSet'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                infoMessage: Resource record set is valid.
+              schema:
+                $ref: '#/components/schemas/infoMessageResult'
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Validate a resource record set
+      tags:
+      - dns
+  /domains/{domainName}/validateZone:
+    post:
+      description: |
+        This endpoint may be used to validate whether a collection of resource record sets constitute a valid zone, without creating them.
+      operationId: validateZone
+      parameters:
+      - description: Domain name
+        example: example.com
+        explode: false
+        in: path
+        name: domainName
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              resourceRecordSets:
+              - name: example.com.
+                type: A
+                content:
+                - 85.17.150.50
+                - 85.17.150.50
+                - 85.17.150.53
+                ttl: 300
+              - name: '*.example.com.'
+                type: A
+                content:
+                - 85.17.150.54
+                ttl: 86400
+              - name: example.com.
+                type: AAAA
+                content:
+                - 2a02:2770:8:0:216:3eff:fead:8c93
+                ttl: 28800
+              - name: some.example.com.
+                type: AAAA
+                content:
+                - 2a02:2770:8:0:216:3eff:fead:8c93
+                ttl: 60
+              - name: example.com.
+                type: CAA
+                content:
+                - 0 issue "comodoca.com"
+                ttl: 300
+              - name: anotherurl.example.com.
+                type: CNAME
+                content:
+                - example.com.
+                ttl: 86400
+              - name: example.com.
+                type: MX
+                content:
+                - 10 mail.example.com.
+                - 20 mailfilter.leaseweb.com.
+                ttl: 3600
+              - name: subdomain.example.com.
+                type: NS
+                content:
+                - other.nameserver.com
+                - yet-another.nameserver.com
+                ttl: 3600
+              - name: _service._protocol.example.com.
+                type: SRV
+                content:
+                - 10 5 5060 sipserver.example.com.
+                ttl: 14400
+              - name: example.com.
+                type: TXT
+                content:
+                - '"google-site-verification=Kkalsdhl8a9792342lksdo9bSER233"'
+                - '"v=spf1 a mx -all"'
+                ttl: 3600
+              - name: another.example.com.
+                type: SOA
+                ttl: 3600
+                content:
+                - example.com
+              - name: ds.example.com.
+                type: DS
+                content:
+                - 63708 13 2 ce46cb792d263081fe23c7245a1ccce4d59e3e501db22932edf59d858c03fd6e
+                ttl: 14400
+            schema:
+              $ref: '#/components/schemas/resultRecordSets'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                infoMessage: Zone example.com is valid.
+              schema:
+                $ref: '#/components/schemas/validateZoneResult'
+          description: ""
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Validate zone
+      tags:
+      - dns
+components:
+  parameters:
+    domainName:
+      description: Domain name
+      example: example.com
+      explode: false
+      in: path
+      name: domainName
+      required: true
+      schema:
+        type: string
+      style: simple
+    name:
+      description: Record name
+      example: example.com.
+      explode: false
+      in: path
+      name: name
+      required: true
+      schema:
+        type: string
+      style: simple
+    type:
+      description: Record type
+      example: A
+      explode: false
+      in: path
+      name: type
+      required: true
+      schema:
+        enum:
+        - A
+        - AAA
+        - CAA
+        - CNAME
+        - MX
+        - TLSA
+        - NS
+        - SRV
+        - TXT
+        - SOA
+        - DS
+        type: string
+      style: simple
+  responses:
+    "204":
+      description: No Content.
+    "400":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "400"
+            errorDetails: {}
+            errorMessage: The API could not interpret your request correctly.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Bad Request.
+    "401":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "401"
+            errorMessage: You are not authorized to view this resource.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Authorized.
+    "403":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "403"
+            errorMessage: Access to the requested resource is forbidden.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Forbidden.
+    "404":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "404"
+            errorMessage: Resource not found
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Found.
+    "500":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "500"
+            errorMessage: '''The API could not handle your request at this time.'
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Internal Server Error.
+    "503":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "503"
+            errorMessage: The API is not available at the moment.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Service Unavailable.
+  schemas:
+    editable:
+      description: May the set be edited
+      type: boolean
+    self:
+      description: Link to the resource record set resource
+      example:
+        href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+      properties:
+        href:
+          description: Hyperlink to the resource record set's location
+          example: /domains/example.com/resourceRecordSets/example.com./A+GEO
+          type: string
+      title: self
+      type: object
+    ldLinks:
+      description: Links to related resource locations
+      example:
+        self:
+          href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+        collection:
+          href: /domains/example.com/resourceRecordSets
+      properties:
+        self:
+          $ref: '#/components/schemas/self'
+        collection:
+          $ref: '#/components/schemas/collection'
+      title: ldLinks
+      type: object
+    name:
+      description: Name of the resource record set
+      example: example.com.
+      type: string
+    resourceRecordSetType:
+      description: Type of the resource record set
+      enum:
+      - A
+      - AAAA
+      - CAA
+      - CNAME
+      - MX
+      - NS
+      - SRV
+      - TXT
+      - SOA
+      - DS
+      - TLSA
+      type: string
+    content:
+      description: Array of resource record set content entries
+      items:
+        description: Content entries for the resource record set
+        example: 85.17.150.50
+        type: string
+      title: resourceRecordSetContent
+      type: array
+    ttl:
+      description: Time to live of the resource record set
+      enum:
+      - 60
+      - 300
+      - 1800
+      - 3600
+      - 14400
+      - 28800
+      - 43200
+      - 86400
+      type: integer
+    resourceRecordSet:
+      properties:
+        name:
+          description: Name of the resource record set
+          example: example.com.
+          type: string
+        type:
+          $ref: '#/components/schemas/resourceRecordSetType'
+        content:
+          description: Array of resource record set content entries
+          items:
+            description: Content entries for the resource record set
+            example: 85.17.150.50
+            type: string
+          title: resourceRecordSetContent
+          type: array
+        ttl:
+          $ref: '#/components/schemas/ttl'
+      required:
+      - content
+      - name
+      - ttl
+      - type
+      title: resourceRecordSet
+      type: object
+    resourceRecordSetDetails:
+      allOf:
+      - properties:
+          editable:
+            $ref: '#/components/schemas/editable'
+          _links:
+            $ref: '#/components/schemas/ldLinks'
+        required:
+        - editable
+        title: resourceRecordSetDetails
+        type: object
+      - $ref: '#/components/schemas/resourceRecordSet'
+      example:
+        _links:
+          self:
+            href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+          collection:
+            href: /domains/example.com/resourceRecordSets
+        editable: null
+        name: example.com.
+        type: A
+        ttl: 0
+        content:
+        - 85.17.150.50
+        - 85.17.150.50
+    infoMessage:
+      description: Optional additional information
+      example: "Sorry, but your domain is not yet listed on our nameservers. Please\
+        \ create a DNS record first so we can add your domain."
+      type: string
+    links:
+      description: Links to related resource locations
+      example:
+        parent:
+          href: /domains/example.com
+        validateSet:
+          href: /domains/example.com/resourceRecordSets/validateSet
+        self:
+          href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+      properties:
+        self:
+          $ref: '#/components/schemas/self'
+        parent:
+          $ref: '#/components/schemas/parent'
+        validateSet:
+          $ref: '#/components/schemas/validateSet'
+      title: links
+      type: object
+    baseResourceRecordSetList:
+      properties:
+        infoMessage:
+          description: Optional additional information
+          example: "Sorry, but your domain is not yet listed on our nameservers. Please\
+            \ create a DNS record first so we can add your domain."
+          type: string
+        _links:
+          $ref: '#/components/schemas/links'
+      type: object
+    getResourceRecordSetListResult:
+      allOf:
+      - properties:
+          resourceRecordSets:
+            description: Array of resource record sets
+            items:
+              $ref: '#/components/schemas/resourceRecordSetDetails'
+            type: array
+        type: object
+      - $ref: '#/components/schemas/baseResourceRecordSetList'
+      example:
+        _links:
+          parent:
+            href: /domains/example.com
+          validateSet:
+            href: /domains/example.com/resourceRecordSets/validateSet
+          self:
+            href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+        resourceRecordSets:
+        - _links:
+            self:
+              href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+            collection:
+              href: /domains/example.com/resourceRecordSets
+          editable: null
+          name: example.com.
+          type: A
+          ttl: 0
+          content:
+          - 85.17.150.50
+          - 85.17.150.50
+        - _links:
+            self:
+              href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+            collection:
+              href: /domains/example.com/resourceRecordSets
+          editable: null
+          name: example.com.
+          type: A
+          ttl: 0
+          content:
+          - 85.17.150.50
+          - 85.17.150.50
+        infoMessage: "Sorry, but your domain is not yet listed on our nameservers.\
+          \ Please create a DNS record first so we can add your domain."
+    ldResourceRecordSetType:
+      description: Type of the resource record set
+      enum:
+      - A+GEO
+      type: string
+    geoContent:
+      description: GeoContent comprising of closest location ip addresses
+      properties:
+        closestLocation:
+          description: Array of closest location ip addresses
+          items:
+            description: IP address
+            example: 1.2.3.4
+            type: string
+          type: array
+      required:
+      - closestLocation
+      title: resourceRecordSetGeoContent
+      type: object
+    ldResourceRecordSet:
+      properties:
+        name:
+          description: Name of the resource record set
+          example: example.com.
+          type: string
+        type:
+          $ref: '#/components/schemas/ldResourceRecordSetType'
+        geoContent:
+          $ref: '#/components/schemas/geoContent'
+        ttl:
+          $ref: '#/components/schemas/ttl'
+      required:
+      - geoContent
+      - name
+      - ttl
+      - type
+      title: ldResourceRecordSet
+      type: object
+    ldResourceRecordSetDetails:
+      allOf:
+      - properties:
+          editable:
+            $ref: '#/components/schemas/editable'
+          _links:
+            $ref: '#/components/schemas/ldLinks'
+        required:
+        - editable
+        - ttl
+        title: ldResourceRecordSetDetails
+        type: object
+      - $ref: '#/components/schemas/ldResourceRecordSet'
+    getResourceRecordSetListLdResult:
+      allOf:
+      - properties:
+          resourceRecordSets:
+            description: Array of resource record sets
+            items:
+              $ref: '#/components/schemas/ldResourceRecordSetDetails'
+            type: array
+        type: object
+      - $ref: '#/components/schemas/baseResourceRecordSetList'
+    errorResult:
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails:
+          key:
+          - errorDetails
+          - errorDetails
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          title: errorDetails
+          type: object
+      type: object
+    resultRecordSets:
+      properties:
+        resourceRecordSets:
+          description: Array of resource record sets
+          items:
+            $ref: '#/components/schemas/resourceRecordSet'
+          type: array
+      required:
+      - resourceRecordSets
+      type: object
+    updateResourceRecordSetsLdOpts:
+      properties:
+        resourceRecordSets:
+          description: Array of resource record sets
+          items:
+            $ref: '#/components/schemas/ldResourceRecordSet'
+          type: array
+      required:
+      - resourceRecordSets
+      type: object
+    updateResourceRecordSetOpts:
+      properties:
+        content:
+          description: Array of resource record set content entries
+          items:
+            description: Content entries for the resource record set
+            example: 85.17.150.50
+            type: string
+          title: resourceRecordSetContent
+          type: array
+        ttl:
+          $ref: '#/components/schemas/ttl'
+      required:
+      - content
+      - ttl
+      type: object
+    updateResourceRecordSetLdOpts:
+      properties:
+        geoContent:
+          $ref: '#/components/schemas/geoContent'
+        ttl:
+          $ref: '#/components/schemas/ttl'
+      required:
+      - geoContent
+      - ttl
+      type: object
+    importResourceRecordSetsOpts:
+      properties:
+        content:
+          description: Dns bind file content as string
+          example: "[\"$ORIGIN example.com. \\\\r\\\\n$TTL 86400 \\\\r\\\\n\\\\tIN\\\
+            \\tMX\\\\t10\\\\tmail.example.com.       \\\\r\\\\n\\\\r\\\\n\\\\t\\\\\
+            r\\\\ndns1\\\\tIN\\\\tA\\\\t10.0.1.1\"]"
+          type: string
+      required:
+      - content
+      type: object
+    importResourceRecordSetsResult:
+      example:
+        _links:
+          parent:
+            href: /domains/example.com
+          validateSet:
+            href: /domains/example.com/resourceRecordSets/validateSet
+          self:
+            href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+        resourceRecordSets:
+        - _links:
+            self:
+              href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+            collection:
+              href: /domains/example.com/resourceRecordSets
+          editable: null
+          name: example.com.
+          type: A
+          ttl: 0
+          content:
+          - 85.17.150.50
+          - 85.17.150.50
+        - _links:
+            self:
+              href: /domains/example.com/resourceRecordSets/example.com./A+GEO
+            collection:
+              href: /domains/example.com/resourceRecordSets
+          editable: null
+          name: example.com.
+          type: A
+          ttl: 0
+          content:
+          - 85.17.150.50
+          - 85.17.150.50
+        infoMessage: "Sorry, but your domain is not yet listed on our nameservers.\
+          \ Please create a DNS record first so we can add your domain."
+      properties:
+        infoMessage:
+          description: Optional additional information
+          example: "Sorry, but your domain is not yet listed on our nameservers. Please\
+            \ create a DNS record first so we can add your domain."
+          type: string
+        resourceRecordSets:
+          description: Array of resource record sets
+          items:
+            $ref: '#/components/schemas/resourceRecordSetDetails'
+          type: array
+        _links:
+          $ref: '#/components/schemas/links'
+      type: object
+    infoMessageResult:
+      example:
+        infoMessage: "Sorry, but your domain is not yet listed on our nameservers.\
+          \ Please create a DNS record first so we can add your domain."
+      properties:
+        infoMessage:
+          description: Optional additional information
+          example: "Sorry, but your domain is not yet listed on our nameservers. Please\
+            \ create a DNS record first so we can add your domain."
+          type: string
+      type: object
+    validateZoneResult:
+      example:
+        infoMessage: "Sorry, but your domain is not yet listed on our nameservers.\
+          \ Please create a DNS record first so we can add your domain."
+      properties:
+        infoMessage:
+          description: Optional additional information
+          example: "Sorry, but your domain is not yet listed on our nameservers. Please\
+            \ create a DNS record first so we can add your domain."
+          type: string
+      type: object
+    collection:
+      description: Link to the resource record sets collection
+      example:
+        href: /domains/example.com/resourceRecordSets
+      properties:
+        href:
+          description: Hyperlink to the resource record sets collection location
+          example: /domains/example.com/resourceRecordSets
+          type: string
+      title: collection
+      type: object
+    parent:
+      description: Link to the parent resource
+      example:
+        href: /domains/example.com
+      properties:
+        href:
+          description: Hyperlink to the parent resource location
+          example: /domains/example.com
+          type: string
+      title: parent
+      type: object
+    validateSet:
+      description: Link to validate a single resource record set
+      example:
+        href: /domains/example.com/resourceRecordSets/validateSet
+      properties:
+        href:
+          description: Hyperlink to validate a single resource record set for a domain
+          example: /domains/example.com/resourceRecordSets/validateSet
+          type: string
+      title: validateSet
+      type: object
+  securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
+    X-LSW-Auth:
+      description: API key authentication by setting `X-LSW-Auth` header.
+      in: header
+      name: X-LSW-Auth
+      type: apiKey
