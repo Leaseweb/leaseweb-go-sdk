@@ -34,6 +34,8 @@ docs/UpdateResourceRecordSetsLdOpts.md
 docs/ValidateSet.md
 docs/ValidateZoneResult.md
 git_push.sh
+go.mod
+go.sum
 model_base_resource_record_set_list.go
 model_collection.go
 model_error_result.go

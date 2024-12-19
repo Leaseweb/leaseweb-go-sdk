@@ -1,0 +1,14 @@
+github.com/leaseweb/leaseweb-go-sdk/abuse v0.0.0-20241219102910-f0231e20cb8f h1:amB/hLV7R5hKRSXlUsmagX6F5pAr5/eANe/xqBc6ENs=
+github.com/leaseweb/leaseweb-go-sdk/abuse v0.0.0-20241219102910-f0231e20cb8f/go.mod h1:jOsAFFlnv/HkhokuFgZn3CAmVKY4McADa1aVCSkF6fs=
+github.com/leaseweb/leaseweb-go-sdk/aggregationpack v0.0.0-20241219102910-f0231e20cb8f h1:nNjYKgjXEZnpW6FXq5vAYDQJW9YA1KwnBMUlNwZgzkU=
+github.com/leaseweb/leaseweb-go-sdk/aggregationpack v0.0.0-20241219102910-f0231e20cb8f/go.mod h1:h6eNOF5w6M+BuQocjW7B7HDZyQw9qmNRELEqiePefeI=
+github.com/leaseweb/leaseweb-go-sdk/dedicatedserver v0.0.0-20241219102910-f0231e20cb8f h1:jhBE55+uXr5kC6bz6Zt3nZQRPOWvhsmAebXC+zXiHpk=
+github.com/leaseweb/leaseweb-go-sdk/dedicatedserver v0.0.0-20241219102910-f0231e20cb8f/go.mod h1:ncbxW0PkYMXPtRBqNENpf9NA7w96wxeKDxSzXPO5h3M=
+github.com/leaseweb/leaseweb-go-sdk/dns v0.0.0-20241219102910-f0231e20cb8f h1:akB05nEqfX/w4+/2yIVWZKLFPXy1ooSsRy3j/OKPASc=
+github.com/leaseweb/leaseweb-go-sdk/dns v0.0.0-20241219102910-f0231e20cb8f/go.mod h1:WnFo8JWnZb+QByZrxNbJ03zR4CHyFQfKwzbuFi7cJls=
+github.com/leaseweb/leaseweb-go-sdk/invoice v0.0.0-20241219102910-f0231e20cb8f h1:HOfvks/2GGEuHPGuvSQY0A4ELAVfySDqlrjrrKXmiN8=
+github.com/leaseweb/leaseweb-go-sdk/invoice v0.0.0-20241219102910-f0231e20cb8f/go.mod h1:oH8E4L/crizHnZU0KYsBz192+gqIOOQUNP0TKnXjLlA=
+github.com/leaseweb/leaseweb-go-sdk/publiccloud v0.0.0-20241219102910-f0231e20cb8f h1:rvBx8USx2gg/UPIds7/DB0wzmXZYopPhoWD/2IW6Cvo=
+github.com/leaseweb/leaseweb-go-sdk/publiccloud v0.0.0-20241219102910-f0231e20cb8f/go.mod h1:szcANJJmhn6lspnkSq4hf2jz2S1oNN6RIAQSpblRTQE=
+gopkg.in/validator.v2 v2.0.1 h1:xF0KWyGWXm/LM2G1TrEjqOu4pa6coO9AlWSf3msVfDY=
+gopkg.in/validator.v2 v2.0.1/go.mod h1:lIUZBlB3Im4s/eYp39Ry/wkR02yOPhZ9IwIRBjuPuG8=

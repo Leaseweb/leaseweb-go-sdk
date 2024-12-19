@@ -161,6 +161,8 @@ docs/VpsList.md
 docs/VpsPackType.md
 docs/VpsState.md
 git_push.sh
+go.mod
+go.sum
 model__metadata.go
 model__schemas_health_check_status.go
 model_attach_iso_opts.go

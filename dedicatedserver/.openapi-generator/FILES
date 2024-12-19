@@ -132,6 +132,8 @@ docs/UpdateServerCredentialOpts.md
 docs/UpdateServerReferenceOpts.md
 docs/Vlan.md
 git_push.sh
+go.mod
+go.sum
 model__metadata.go
 model_actions.go
 model_add_server_to_private_network_opts.go
