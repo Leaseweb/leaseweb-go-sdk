@@ -3,7 +3,7 @@ Leaseweb Go SDK provides a golang client for Leaseweb's REST API.
 
 ## Installation
 ```bash
-go get github.com/LeaseWeb/leaseweb-go-sdk/v3
+go get github.com/LeaseWeb/leaseweb-go-sdk
 ```
 
 ## Generate your API Key
@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"os"
 
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/v3/publiccloud"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
