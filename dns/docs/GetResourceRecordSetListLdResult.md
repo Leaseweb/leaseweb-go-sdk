@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InfoMessage** | Pointer to **string** | Optional additional information | [optional] 
-**Links** | Pointer to [**Links**](Links.md) |  | [optional] 
-**ResourceRecordSets** | Pointer to [**[]LdResourceRecordSetDetails**](LdResourceRecordSetDetails.md) | Array of resource record sets | [optional] 
+**Links** | [**Links**](Links.md) |  | 
+**ResourceRecordSets** | [**[]LdResourceRecordSetDetails**](LdResourceRecordSetDetails.md) | Array of resource record sets | 
 
 ## Methods
 
 ### NewGetResourceRecordSetListLdResult
 
-`func NewGetResourceRecordSetListLdResult() *GetResourceRecordSetListLdResult`
+`func NewGetResourceRecordSetListLdResult(links Links, resourceRecordSets []LdResourceRecordSetDetails, ) *GetResourceRecordSetListLdResult`
 
 NewGetResourceRecordSetListLdResult instantiates a new GetResourceRecordSetListLdResult object
 This constructor will assign default values to properties that have it defined,
@@ -71,11 +71,6 @@ and a boolean to check if the value has been set.
 
 SetLinks sets Links field to given value.
 
-### HasLinks
-
-`func (o *GetResourceRecordSetListLdResult) HasLinks() bool`
-
-HasLinks returns a boolean if a field has been set.
 
 ### GetResourceRecordSets
 
@@ -96,11 +91,6 @@ and a boolean to check if the value has been set.
 
 SetResourceRecordSets sets ResourceRecordSets field to given value.
 
-### HasResourceRecordSets
-
-`func (o *GetResourceRecordSetListLdResult) HasResourceRecordSets() bool`
-
-HasResourceRecordSets returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

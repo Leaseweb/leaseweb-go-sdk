@@ -1615,6 +1615,8 @@ components:
           description: Hyperlink to the resource record set's location
           example: /domains/example.com/resourceRecordSets/example.com./A+GEO
           type: string
+      required:
+      - href
       title: self
       type: object
     ldLinks:
@@ -1629,6 +1631,9 @@ components:
           $ref: '#/components/schemas/self'
         collection:
           $ref: '#/components/schemas/collection'
+      required:
+      - collection
+      - self
       title: ldLinks
       type: object
     name:
@@ -1703,6 +1708,7 @@ components:
           _links:
             $ref: '#/components/schemas/ldLinks'
         required:
+        - _links
         - editable
         title: resourceRecordSetDetails
         type: object
@@ -1741,6 +1747,10 @@ components:
           $ref: '#/components/schemas/parent'
         validateSet:
           $ref: '#/components/schemas/validateSet'
+      required:
+      - parent
+      - self
+      - validateSet
       title: links
       type: object
     baseResourceRecordSetList:
@@ -1752,6 +1762,8 @@ components:
           type: string
         _links:
           $ref: '#/components/schemas/links'
+      required:
+      - _links
       type: object
     getResourceRecordSetListResult:
       allOf:
@@ -1761,6 +1773,8 @@ components:
             items:
               $ref: '#/components/schemas/resourceRecordSetDetails'
             type: array
+        required:
+        - resourceRecordSets
         type: object
       - $ref: '#/components/schemas/baseResourceRecordSetList'
       example:
@@ -1844,8 +1858,8 @@ components:
           _links:
             $ref: '#/components/schemas/ldLinks'
         required:
+        - _links
         - editable
-        - ttl
         title: ldResourceRecordSetDetails
         type: object
       - $ref: '#/components/schemas/ldResourceRecordSet'
@@ -1857,6 +1871,8 @@ components:
             items:
               $ref: '#/components/schemas/ldResourceRecordSetDetails'
             type: array
+        required:
+        - resourceRecordSets
         type: object
       - $ref: '#/components/schemas/baseResourceRecordSetList'
     errorResult:
@@ -2024,6 +2040,8 @@ components:
           description: Hyperlink to the resource record sets collection location
           example: /domains/example.com/resourceRecordSets
           type: string
+      required:
+      - href
       title: collection
       type: object
     parent:
@@ -2035,6 +2053,8 @@ components:
           description: Hyperlink to the parent resource location
           example: /domains/example.com
           type: string
+      required:
+      - href
       title: parent
       type: object
     validateSet:
@@ -2046,6 +2066,8 @@ components:
           description: Hyperlink to validate a single resource record set for a domain
           example: /domains/example.com/resourceRecordSets/validateSet
           type: string
+      required:
+      - href
       title: validateSet
       type: object
   securitySchemes:

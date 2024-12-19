@@ -9,13 +9,13 @@ Name | Type | Description | Notes
 **Content** | **[]string** | Array of resource record set content entries | 
 **Ttl** | [**Ttl**](Ttl.md) |  | 
 **Editable** | **bool** | May the set be edited | 
-**Links** | Pointer to [**LdLinks**](LdLinks.md) |  | [optional] 
+**Links** | [**LdLinks**](LdLinks.md) |  | 
 
 ## Methods
 
 ### NewResourceRecordSetDetails
 
-`func NewResourceRecordSetDetails(name string, type_ ResourceRecordSetType, content []string, ttl Ttl, editable bool, ) *ResourceRecordSetDetails`
+`func NewResourceRecordSetDetails(name string, type_ ResourceRecordSetType, content []string, ttl Ttl, editable bool, links LdLinks, ) *ResourceRecordSetDetails`
 
 NewResourceRecordSetDetails instantiates a new ResourceRecordSetDetails object
 This constructor will assign default values to properties that have it defined,
@@ -149,11 +149,6 @@ and a boolean to check if the value has been set.
 
 SetLinks sets Links field to given value.
 
-### HasLinks
-
-`func (o *ResourceRecordSetDetails) HasLinks() bool`
-
-HasLinks returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

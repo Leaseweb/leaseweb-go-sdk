@@ -12,6 +12,7 @@ package dns
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the Self type satisfies the MappedNullable interface at compile time
@@ -20,7 +21,7 @@ var _ MappedNullable = &Self{}
 // Self Link to the resource record set resource
 type Self struct {
 	// Hyperlink to the resource record set's location
-	Href *string `json:"href,omitempty"`
+	Href string `json:"href"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,8 +31,9 @@ type _Self Self
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSelf() *Self {
+func NewSelf(href string) *Self {
 	this := Self{}
+	this.Href = href
 	return &this
 }
 
@@ -43,36 +45,28 @@ func NewSelfWithDefaults() *Self {
 	return &this
 }
 
-// GetHref returns the Href field value if set, zero value otherwise.
+// GetHref returns the Href field value
 func (o *Self) GetHref() string {
-	if o == nil || IsNil(o.Href) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Href
+
+	return o.Href
 }
 
-// GetHrefOk returns a tuple with the Href field value if set, nil otherwise
+// GetHrefOk returns a tuple with the Href field value
 // and a boolean to check if the value has been set.
 func (o *Self) GetHrefOk() (*string, bool) {
-	if o == nil || IsNil(o.Href) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Href, true
+	return &o.Href, true
 }
 
-// HasHref returns a boolean if a field has been set.
-func (o *Self) HasHref() bool {
-	if o != nil && !IsNil(o.Href) {
-		return true
-	}
-
-	return false
-}
-
-// SetHref gets a reference to the given string and assigns it to the Href field.
+// SetHref sets field value
 func (o *Self) SetHref(v string) {
-	o.Href = &v
+	o.Href = v
 }
 
 func (o Self) MarshalJSON() ([]byte, error) {
@@ -85,9 +79,7 @@ func (o Self) MarshalJSON() ([]byte, error) {
 
 func (o Self) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Href) {
-		toSerialize["href"] = o.Href
-	}
+	toSerialize["href"] = o.Href
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -97,6 +89,27 @@ func (o Self) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Self) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"href",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varSelf := _Self{}
 
 	err = json.Unmarshal(data, &varSelf)

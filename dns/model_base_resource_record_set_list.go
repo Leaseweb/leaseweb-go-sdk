@@ -12,6 +12,7 @@ package dns
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the BaseResourceRecordSetList type satisfies the MappedNullable interface at compile time
@@ -21,7 +22,7 @@ var _ MappedNullable = &BaseResourceRecordSetList{}
 type BaseResourceRecordSetList struct {
 	// Optional additional information
 	InfoMessage *string `json:"infoMessage,omitempty"`
-	Links *Links `json:"_links,omitempty"`
+	Links Links `json:"_links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,8 +32,9 @@ type _BaseResourceRecordSetList BaseResourceRecordSetList
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBaseResourceRecordSetList() *BaseResourceRecordSetList {
+func NewBaseResourceRecordSetList(links Links) *BaseResourceRecordSetList {
 	this := BaseResourceRecordSetList{}
+	this.Links = links
 	return &this
 }
 
@@ -76,36 +78,28 @@ func (o *BaseResourceRecordSetList) SetInfoMessage(v string) {
 	o.InfoMessage = &v
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
+// GetLinks returns the Links field value
 func (o *BaseResourceRecordSetList) GetLinks() Links {
-	if o == nil || IsNil(o.Links) {
+	if o == nil {
 		var ret Links
 		return ret
 	}
-	return *o.Links
+
+	return o.Links
 }
 
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
+// GetLinksOk returns a tuple with the Links field value
 // and a boolean to check if the value has been set.
 func (o *BaseResourceRecordSetList) GetLinksOk() (*Links, bool) {
-	if o == nil || IsNil(o.Links) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Links, true
+	return &o.Links, true
 }
 
-// HasLinks returns a boolean if a field has been set.
-func (o *BaseResourceRecordSetList) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given Links and assigns it to the Links field.
+// SetLinks sets field value
 func (o *BaseResourceRecordSetList) SetLinks(v Links) {
-	o.Links = &v
+	o.Links = v
 }
 
 func (o BaseResourceRecordSetList) MarshalJSON() ([]byte, error) {
@@ -121,9 +115,7 @@ func (o BaseResourceRecordSetList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InfoMessage) {
 		toSerialize["infoMessage"] = o.InfoMessage
 	}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
-	}
+	toSerialize["_links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -133,6 +125,27 @@ func (o BaseResourceRecordSetList) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *BaseResourceRecordSetList) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"_links",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varBaseResourceRecordSetList := _BaseResourceRecordSetList{}
 
 	err = json.Unmarshal(data, &varBaseResourceRecordSetList)

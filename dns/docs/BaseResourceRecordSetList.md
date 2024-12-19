@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InfoMessage** | Pointer to **string** | Optional additional information | [optional] 
-**Links** | Pointer to [**Links**](Links.md) |  | [optional] 
+**Links** | [**Links**](Links.md) |  | 
 
 ## Methods
 
 ### NewBaseResourceRecordSetList
 
-`func NewBaseResourceRecordSetList() *BaseResourceRecordSetList`
+`func NewBaseResourceRecordSetList(links Links, ) *BaseResourceRecordSetList`
 
 NewBaseResourceRecordSetList instantiates a new BaseResourceRecordSetList object
 This constructor will assign default values to properties that have it defined,
@@ -70,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetLinks sets Links field to given value.
 
-### HasLinks
-
-`func (o *BaseResourceRecordSetList) HasLinks() bool`
-
-HasLinks returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

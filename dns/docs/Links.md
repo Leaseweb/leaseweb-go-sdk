@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Self** | Pointer to [**Self**](Self.md) |  | [optional] 
-**Parent** | Pointer to [**Parent**](Parent.md) |  | [optional] 
-**ValidateSet** | Pointer to [**ValidateSet**](ValidateSet.md) |  | [optional] 
+**Self** | [**Self**](Self.md) |  | 
+**Parent** | [**Parent**](Parent.md) |  | 
+**ValidateSet** | [**ValidateSet**](ValidateSet.md) |  | 
 
 ## Methods
 
 ### NewLinks
 
-`func NewLinks() *Links`
+`func NewLinks(self Self, parent Parent, validateSet ValidateSet, ) *Links`
 
 NewLinks instantiates a new Links object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetSelf sets Self field to given value.
 
-### HasSelf
-
-`func (o *Links) HasSelf() bool`
-
-HasSelf returns a boolean if a field has been set.
 
 ### GetParent
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetParent sets Parent field to given value.
 
-### HasParent
-
-`func (o *Links) HasParent() bool`
-
-HasParent returns a boolean if a field has been set.
 
 ### GetValidateSet
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetValidateSet sets ValidateSet field to given value.
 
-### HasValidateSet
-
-`func (o *Links) HasValidateSet() bool`
-
-HasValidateSet returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

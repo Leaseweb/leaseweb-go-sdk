@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Href** | Pointer to **string** | Hyperlink to the resource record sets collection location | [optional] 
+**Href** | **string** | Hyperlink to the resource record sets collection location | 
 
 ## Methods
 
 ### NewCollection
 
-`func NewCollection() *Collection`
+`func NewCollection(href string, ) *Collection`
 
 NewCollection instantiates a new Collection object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetHref sets Href field to given value.
 
-### HasHref
-
-`func (o *Collection) HasHref() bool`
-
-HasHref returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

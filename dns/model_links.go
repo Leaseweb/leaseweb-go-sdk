@@ -12,6 +12,7 @@ package dns
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the Links type satisfies the MappedNullable interface at compile time
@@ -19,9 +20,9 @@ var _ MappedNullable = &Links{}
 
 // Links Links to related resource locations
 type Links struct {
-	Self *Self `json:"self,omitempty"`
-	Parent *Parent `json:"parent,omitempty"`
-	ValidateSet *ValidateSet `json:"validateSet,omitempty"`
+	Self Self `json:"self"`
+	Parent Parent `json:"parent"`
+	ValidateSet ValidateSet `json:"validateSet"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,8 +32,11 @@ type _Links Links
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLinks() *Links {
+func NewLinks(self Self, parent Parent, validateSet ValidateSet) *Links {
 	this := Links{}
+	this.Self = self
+	this.Parent = parent
+	this.ValidateSet = validateSet
 	return &this
 }
 
@@ -44,100 +48,76 @@ func NewLinksWithDefaults() *Links {
 	return &this
 }
 
-// GetSelf returns the Self field value if set, zero value otherwise.
+// GetSelf returns the Self field value
 func (o *Links) GetSelf() Self {
-	if o == nil || IsNil(o.Self) {
+	if o == nil {
 		var ret Self
 		return ret
 	}
-	return *o.Self
+
+	return o.Self
 }
 
-// GetSelfOk returns a tuple with the Self field value if set, nil otherwise
+// GetSelfOk returns a tuple with the Self field value
 // and a boolean to check if the value has been set.
 func (o *Links) GetSelfOk() (*Self, bool) {
-	if o == nil || IsNil(o.Self) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Self, true
+	return &o.Self, true
 }
 
-// HasSelf returns a boolean if a field has been set.
-func (o *Links) HasSelf() bool {
-	if o != nil && !IsNil(o.Self) {
-		return true
-	}
-
-	return false
-}
-
-// SetSelf gets a reference to the given Self and assigns it to the Self field.
+// SetSelf sets field value
 func (o *Links) SetSelf(v Self) {
-	o.Self = &v
+	o.Self = v
 }
 
-// GetParent returns the Parent field value if set, zero value otherwise.
+// GetParent returns the Parent field value
 func (o *Links) GetParent() Parent {
-	if o == nil || IsNil(o.Parent) {
+	if o == nil {
 		var ret Parent
 		return ret
 	}
-	return *o.Parent
+
+	return o.Parent
 }
 
-// GetParentOk returns a tuple with the Parent field value if set, nil otherwise
+// GetParentOk returns a tuple with the Parent field value
 // and a boolean to check if the value has been set.
 func (o *Links) GetParentOk() (*Parent, bool) {
-	if o == nil || IsNil(o.Parent) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Parent, true
+	return &o.Parent, true
 }
 
-// HasParent returns a boolean if a field has been set.
-func (o *Links) HasParent() bool {
-	if o != nil && !IsNil(o.Parent) {
-		return true
-	}
-
-	return false
-}
-
-// SetParent gets a reference to the given Parent and assigns it to the Parent field.
+// SetParent sets field value
 func (o *Links) SetParent(v Parent) {
-	o.Parent = &v
+	o.Parent = v
 }
 
-// GetValidateSet returns the ValidateSet field value if set, zero value otherwise.
+// GetValidateSet returns the ValidateSet field value
 func (o *Links) GetValidateSet() ValidateSet {
-	if o == nil || IsNil(o.ValidateSet) {
+	if o == nil {
 		var ret ValidateSet
 		return ret
 	}
-	return *o.ValidateSet
+
+	return o.ValidateSet
 }
 
-// GetValidateSetOk returns a tuple with the ValidateSet field value if set, nil otherwise
+// GetValidateSetOk returns a tuple with the ValidateSet field value
 // and a boolean to check if the value has been set.
 func (o *Links) GetValidateSetOk() (*ValidateSet, bool) {
-	if o == nil || IsNil(o.ValidateSet) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ValidateSet, true
+	return &o.ValidateSet, true
 }
 
-// HasValidateSet returns a boolean if a field has been set.
-func (o *Links) HasValidateSet() bool {
-	if o != nil && !IsNil(o.ValidateSet) {
-		return true
-	}
-
-	return false
-}
-
-// SetValidateSet gets a reference to the given ValidateSet and assigns it to the ValidateSet field.
+// SetValidateSet sets field value
 func (o *Links) SetValidateSet(v ValidateSet) {
-	o.ValidateSet = &v
+	o.ValidateSet = v
 }
 
 func (o Links) MarshalJSON() ([]byte, error) {
@@ -150,15 +130,9 @@ func (o Links) MarshalJSON() ([]byte, error) {
 
 func (o Links) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Self) {
-		toSerialize["self"] = o.Self
-	}
-	if !IsNil(o.Parent) {
-		toSerialize["parent"] = o.Parent
-	}
-	if !IsNil(o.ValidateSet) {
-		toSerialize["validateSet"] = o.ValidateSet
-	}
+	toSerialize["self"] = o.Self
+	toSerialize["parent"] = o.Parent
+	toSerialize["validateSet"] = o.ValidateSet
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -168,6 +142,29 @@ func (o Links) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Links) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"self",
+		"parent",
+		"validateSet",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varLinks := _Links{}
 
 	err = json.Unmarshal(data, &varLinks)

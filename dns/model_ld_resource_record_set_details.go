@@ -27,7 +27,7 @@ type LdResourceRecordSetDetails struct {
 	Ttl Ttl `json:"ttl"`
 	// May the set be edited
 	Editable bool `json:"editable"`
-	Links *LdLinks `json:"_links,omitempty"`
+	Links LdLinks `json:"_links"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,13 +37,14 @@ type _LdResourceRecordSetDetails LdResourceRecordSetDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLdResourceRecordSetDetails(name string, type_ LdResourceRecordSetType, geoContent GeoContent, ttl Ttl, editable bool) *LdResourceRecordSetDetails {
+func NewLdResourceRecordSetDetails(name string, type_ LdResourceRecordSetType, geoContent GeoContent, ttl Ttl, editable bool, links LdLinks) *LdResourceRecordSetDetails {
 	this := LdResourceRecordSetDetails{}
 	this.Name = name
 	this.Type = type_
 	this.GeoContent = geoContent
 	this.Ttl = ttl
 	this.Editable = editable
+	this.Links = links
 	return &this
 }
 
@@ -175,36 +176,28 @@ func (o *LdResourceRecordSetDetails) SetEditable(v bool) {
 	o.Editable = v
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
+// GetLinks returns the Links field value
 func (o *LdResourceRecordSetDetails) GetLinks() LdLinks {
-	if o == nil || IsNil(o.Links) {
+	if o == nil {
 		var ret LdLinks
 		return ret
 	}
-	return *o.Links
+
+	return o.Links
 }
 
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
+// GetLinksOk returns a tuple with the Links field value
 // and a boolean to check if the value has been set.
 func (o *LdResourceRecordSetDetails) GetLinksOk() (*LdLinks, bool) {
-	if o == nil || IsNil(o.Links) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Links, true
+	return &o.Links, true
 }
 
-// HasLinks returns a boolean if a field has been set.
-func (o *LdResourceRecordSetDetails) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given LdLinks and assigns it to the Links field.
+// SetLinks sets field value
 func (o *LdResourceRecordSetDetails) SetLinks(v LdLinks) {
-	o.Links = &v
+	o.Links = v
 }
 
 func (o LdResourceRecordSetDetails) MarshalJSON() ([]byte, error) {
@@ -222,9 +215,7 @@ func (o LdResourceRecordSetDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["geoContent"] = o.GeoContent
 	toSerialize["ttl"] = o.Ttl
 	toSerialize["editable"] = o.Editable
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
-	}
+	toSerialize["_links"] = o.Links
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -243,6 +234,7 @@ func (o *LdResourceRecordSetDetails) UnmarshalJSON(data []byte) (err error) {
 		"geoContent",
 		"ttl",
 		"editable",
+		"_links",
 	}
 
 	allProperties := make(map[string]interface{})

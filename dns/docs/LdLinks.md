@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Self** | Pointer to [**Self**](Self.md) |  | [optional] 
-**Collection** | Pointer to [**Collection**](Collection.md) |  | [optional] 
+**Self** | [**Self**](Self.md) |  | 
+**Collection** | [**Collection**](Collection.md) |  | 
 
 ## Methods
 
 ### NewLdLinks
 
-`func NewLdLinks() *LdLinks`
+`func NewLdLinks(self Self, collection Collection, ) *LdLinks`
 
 NewLdLinks instantiates a new LdLinks object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetSelf sets Self field to given value.
 
-### HasSelf
-
-`func (o *LdLinks) HasSelf() bool`
-
-HasSelf returns a boolean if a field has been set.
 
 ### GetCollection
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetCollection sets Collection field to given value.
 
-### HasCollection
-
-`func (o *LdLinks) HasCollection() bool`
-
-HasCollection returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

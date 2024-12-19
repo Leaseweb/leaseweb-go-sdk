@@ -12,6 +12,7 @@ package dns
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the GetResourceRecordSetListLdResult type satisfies the MappedNullable interface at compile time
@@ -21,9 +22,9 @@ var _ MappedNullable = &GetResourceRecordSetListLdResult{}
 type GetResourceRecordSetListLdResult struct {
 	// Optional additional information
 	InfoMessage *string `json:"infoMessage,omitempty"`
-	Links *Links `json:"_links,omitempty"`
+	Links Links `json:"_links"`
 	// Array of resource record sets
-	ResourceRecordSets []LdResourceRecordSetDetails `json:"resourceRecordSets,omitempty"`
+	ResourceRecordSets []LdResourceRecordSetDetails `json:"resourceRecordSets"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,8 +34,10 @@ type _GetResourceRecordSetListLdResult GetResourceRecordSetListLdResult
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetResourceRecordSetListLdResult() *GetResourceRecordSetListLdResult {
+func NewGetResourceRecordSetListLdResult(links Links, resourceRecordSets []LdResourceRecordSetDetails) *GetResourceRecordSetListLdResult {
 	this := GetResourceRecordSetListLdResult{}
+	this.Links = links
+	this.ResourceRecordSets = resourceRecordSets
 	return &this
 }
 
@@ -78,66 +81,50 @@ func (o *GetResourceRecordSetListLdResult) SetInfoMessage(v string) {
 	o.InfoMessage = &v
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
+// GetLinks returns the Links field value
 func (o *GetResourceRecordSetListLdResult) GetLinks() Links {
-	if o == nil || IsNil(o.Links) {
+	if o == nil {
 		var ret Links
 		return ret
 	}
-	return *o.Links
+
+	return o.Links
 }
 
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
+// GetLinksOk returns a tuple with the Links field value
 // and a boolean to check if the value has been set.
 func (o *GetResourceRecordSetListLdResult) GetLinksOk() (*Links, bool) {
-	if o == nil || IsNil(o.Links) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Links, true
+	return &o.Links, true
 }
 
-// HasLinks returns a boolean if a field has been set.
-func (o *GetResourceRecordSetListLdResult) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given Links and assigns it to the Links field.
+// SetLinks sets field value
 func (o *GetResourceRecordSetListLdResult) SetLinks(v Links) {
-	o.Links = &v
+	o.Links = v
 }
 
-// GetResourceRecordSets returns the ResourceRecordSets field value if set, zero value otherwise.
+// GetResourceRecordSets returns the ResourceRecordSets field value
 func (o *GetResourceRecordSetListLdResult) GetResourceRecordSets() []LdResourceRecordSetDetails {
-	if o == nil || IsNil(o.ResourceRecordSets) {
+	if o == nil {
 		var ret []LdResourceRecordSetDetails
 		return ret
 	}
+
 	return o.ResourceRecordSets
 }
 
-// GetResourceRecordSetsOk returns a tuple with the ResourceRecordSets field value if set, nil otherwise
+// GetResourceRecordSetsOk returns a tuple with the ResourceRecordSets field value
 // and a boolean to check if the value has been set.
 func (o *GetResourceRecordSetListLdResult) GetResourceRecordSetsOk() ([]LdResourceRecordSetDetails, bool) {
-	if o == nil || IsNil(o.ResourceRecordSets) {
+	if o == nil {
 		return nil, false
 	}
 	return o.ResourceRecordSets, true
 }
 
-// HasResourceRecordSets returns a boolean if a field has been set.
-func (o *GetResourceRecordSetListLdResult) HasResourceRecordSets() bool {
-	if o != nil && !IsNil(o.ResourceRecordSets) {
-		return true
-	}
-
-	return false
-}
-
-// SetResourceRecordSets gets a reference to the given []LdResourceRecordSetDetails and assigns it to the ResourceRecordSets field.
+// SetResourceRecordSets sets field value
 func (o *GetResourceRecordSetListLdResult) SetResourceRecordSets(v []LdResourceRecordSetDetails) {
 	o.ResourceRecordSets = v
 }
@@ -155,12 +142,8 @@ func (o GetResourceRecordSetListLdResult) ToMap() (map[string]interface{}, error
 	if !IsNil(o.InfoMessage) {
 		toSerialize["infoMessage"] = o.InfoMessage
 	}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
-	}
-	if !IsNil(o.ResourceRecordSets) {
-		toSerialize["resourceRecordSets"] = o.ResourceRecordSets
-	}
+	toSerialize["_links"] = o.Links
+	toSerialize["resourceRecordSets"] = o.ResourceRecordSets
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -170,6 +153,28 @@ func (o GetResourceRecordSetListLdResult) ToMap() (map[string]interface{}, error
 }
 
 func (o *GetResourceRecordSetListLdResult) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"_links",
+		"resourceRecordSets",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varGetResourceRecordSetListLdResult := _GetResourceRecordSetListLdResult{}
 
 	err = json.Unmarshal(data, &varGetResourceRecordSetListLdResult)

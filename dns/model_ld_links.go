@@ -12,6 +12,7 @@ package dns
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the LdLinks type satisfies the MappedNullable interface at compile time
@@ -19,8 +20,8 @@ var _ MappedNullable = &LdLinks{}
 
 // LdLinks Links to related resource locations
 type LdLinks struct {
-	Self *Self `json:"self,omitempty"`
-	Collection *Collection `json:"collection,omitempty"`
+	Self Self `json:"self"`
+	Collection Collection `json:"collection"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,8 +31,10 @@ type _LdLinks LdLinks
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLdLinks() *LdLinks {
+func NewLdLinks(self Self, collection Collection) *LdLinks {
 	this := LdLinks{}
+	this.Self = self
+	this.Collection = collection
 	return &this
 }
 
@@ -43,68 +46,52 @@ func NewLdLinksWithDefaults() *LdLinks {
 	return &this
 }
 
-// GetSelf returns the Self field value if set, zero value otherwise.
+// GetSelf returns the Self field value
 func (o *LdLinks) GetSelf() Self {
-	if o == nil || IsNil(o.Self) {
+	if o == nil {
 		var ret Self
 		return ret
 	}
-	return *o.Self
+
+	return o.Self
 }
 
-// GetSelfOk returns a tuple with the Self field value if set, nil otherwise
+// GetSelfOk returns a tuple with the Self field value
 // and a boolean to check if the value has been set.
 func (o *LdLinks) GetSelfOk() (*Self, bool) {
-	if o == nil || IsNil(o.Self) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Self, true
+	return &o.Self, true
 }
 
-// HasSelf returns a boolean if a field has been set.
-func (o *LdLinks) HasSelf() bool {
-	if o != nil && !IsNil(o.Self) {
-		return true
-	}
-
-	return false
-}
-
-// SetSelf gets a reference to the given Self and assigns it to the Self field.
+// SetSelf sets field value
 func (o *LdLinks) SetSelf(v Self) {
-	o.Self = &v
+	o.Self = v
 }
 
-// GetCollection returns the Collection field value if set, zero value otherwise.
+// GetCollection returns the Collection field value
 func (o *LdLinks) GetCollection() Collection {
-	if o == nil || IsNil(o.Collection) {
+	if o == nil {
 		var ret Collection
 		return ret
 	}
-	return *o.Collection
+
+	return o.Collection
 }
 
-// GetCollectionOk returns a tuple with the Collection field value if set, nil otherwise
+// GetCollectionOk returns a tuple with the Collection field value
 // and a boolean to check if the value has been set.
 func (o *LdLinks) GetCollectionOk() (*Collection, bool) {
-	if o == nil || IsNil(o.Collection) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Collection, true
+	return &o.Collection, true
 }
 
-// HasCollection returns a boolean if a field has been set.
-func (o *LdLinks) HasCollection() bool {
-	if o != nil && !IsNil(o.Collection) {
-		return true
-	}
-
-	return false
-}
-
-// SetCollection gets a reference to the given Collection and assigns it to the Collection field.
+// SetCollection sets field value
 func (o *LdLinks) SetCollection(v Collection) {
-	o.Collection = &v
+	o.Collection = v
 }
 
 func (o LdLinks) MarshalJSON() ([]byte, error) {
@@ -117,12 +104,8 @@ func (o LdLinks) MarshalJSON() ([]byte, error) {
 
 func (o LdLinks) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Self) {
-		toSerialize["self"] = o.Self
-	}
-	if !IsNil(o.Collection) {
-		toSerialize["collection"] = o.Collection
-	}
+	toSerialize["self"] = o.Self
+	toSerialize["collection"] = o.Collection
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -132,6 +115,28 @@ func (o LdLinks) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *LdLinks) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"self",
+		"collection",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varLdLinks := _LdLinks{}
 
 	err = json.Unmarshal(data, &varLdLinks)
