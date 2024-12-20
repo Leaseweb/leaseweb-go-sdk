@@ -23,10 +23,13 @@ jobs:
 
       # Step 3: Run go mod tidy and commit changes
       - name: Run go mod tidy
+        env:
+          TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           go mod tidy
           git config --global user.name "majidkarimizadeh"
           git config --global user.email "m.karimizadeh@global.leaseweb.com"
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/leaseweb/leaseweb-go-sdk.git
           git diff --quiet || (
             git add go.mod go.sum
             git commit -m "chore: tidy go.mod and go.sum"
