@@ -1,0 +1,63 @@
+name: Go Release Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release Go Project
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Go environment
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.18' # Specify your Go version
+
+      # Step 3: Run go mod tidy and commit changes
+      - name: Run go mod tidy
+        run: |
+          go mod tidy
+          git config --global user.name "majidkarimizadeh"
+          git config --global user.email "m.karimizadeh@global.leaseweb.com"
+          git diff --quiet || (
+            git add go.mod go.sum
+            git commit -m "chore: tidy go.mod and go.sum"
+            git push origin HEAD
+          )
+      
+      # Step 4: Tag the release
+      - name: Create a Git tag
+        run: |
+          VERSION="v0.0.1-$(git rev-parse --short HEAD)"
+          git tag -a $VERSION -m "Release $VERSION"
+          git push origin $VERSION
+
+      # Step 5: Run GoReleaser to create the release
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v4
+        with:
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  automerge:
+    name: Enable Auto-Merge for Release Pull Requests
+    runs-on: ubuntu-latest
+    needs: release
+
+    steps:
+      - name: Enable Auto-Merge
+        uses: "peter-evans/enable-pull-request-automerge@v2"
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: squash
