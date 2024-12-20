@@ -1,4 +1,4 @@
-name: Go Release Workflow
+name: Automatic Release Workflow
 
 on:
   push:
@@ -6,6 +6,58 @@ on:
       - main
 
 jobs:
+  create_and_merge_pr:
+    name: Create and Merge PR Automatically
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Go environment
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.18'
+
+      # Step 3: Run `go mod tidy` and check for changes
+      - name: Run go mod tidy
+        run: |
+          go mod tidy
+          git config user.name "majidkarimizadeh"
+          git config user.email "m.karimizadeh@global.leaseweb.com"
+          git diff --quiet || (
+            git checkout -b tidy-go-mod
+            git add go.mod go.sum
+            git commit -m "chore: tidy go.mod and go.sum"
+          )
+
+      # Step 4: Push changes (if any) to a new branch
+      - name: Push changes to branch
+        if: success()
+        run: |
+          git diff --quiet || git push origin tidy-go-mod
+
+      # Step 5: Create a pull request
+      - name: Create Pull Request
+        id: create_pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: tidy-go-mod
+          commit-message: "chore: tidy go.mod and go.sum"
+          title: "chore: tidy go.mod and go.sum"
+          body: "This PR ensures go.mod and go.sum are clean."
+          labels: "automerge"
+
+      # Step 6: Enable auto-merge for the PR
+      - name: Enable Auto-Merge
+        uses: "peter-evans/enable-pull-request-automerge@v2"
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.create_pr.outputs.pull_request_number }}
+          merge-method: squash
+
   release:
     name: Release Go Project
     runs-on: ubuntu-latest
@@ -20,21 +72,6 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '1.18' # Specify your Go version
-
-      # Step 3: Run go mod tidy and commit changes
-      - name: Run go mod tidy
-        env:
-          TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          go mod tidy
-          git config --global user.name "majidkarimizadeh"
-          git config --global user.email "m.karimizadeh@global.leaseweb.com"
-          git remote set-url origin https://x-access-token:${TOKEN}@github.com/leaseweb/leaseweb-go-sdk.git
-          git diff --quiet || (
-            git add go.mod go.sum
-            git commit -m "chore: tidy go.mod and go.sum"
-            git push origin HEAD
-          )
       
       # Step 4: Tag the release
       - name: Create a Git tag
