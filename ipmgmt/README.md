@@ -104,7 +104,6 @@ Class | Method | HTTP request | Description
  - [NullRoutedIP](docs/NullRoutedIP.md)
  - [ProtocolVersion](docs/ProtocolVersion.md)
  - [ReverseLookup](docs/ReverseLookup.md)
- - [Sort](docs/Sort.md)
  - [Subnet](docs/Subnet.md)
  - [UpdateIPOpts](docs/UpdateIPOpts.md)
  - [UpdateNullRouteOpts](docs/UpdateNullRouteOpts.md)
