@@ -177,7 +177,7 @@ type ApiGetIPListRequest struct {
 	ips *string
 	equipmentIds *string
 	assignedContractIds *string
-	sort *string
+	sort *Sort
 	reverseLookup *string
 }
 
@@ -254,7 +254,7 @@ func (r ApiGetIPListRequest) AssignedContractIds(assignedContractIds string) Api
 }
 
 // Comma-separated list of sort field names. Prepend the field name with &#39;-&#39; for descending order. E.g. &#x60;sort&#x3D;ip,-nullrouted&#x60;. Sortable field names are ip, nullRouted, reverseLookup.
-func (r ApiGetIPListRequest) Sort(sort string) ApiGetIPListRequest {
+func (r ApiGetIPListRequest) Sort(sort Sort) ApiGetIPListRequest {
 	r.sort = &sort
 	return r
 }
@@ -470,7 +470,7 @@ type ApiGetNullRouteHistoryListRequest struct {
 	ticketId *string
 	contractId *string
 	equipmentId *string
-	sort *string
+	sort *Sort
 }
 
 // Limit the number of results returned.
@@ -540,7 +540,7 @@ func (r ApiGetNullRouteHistoryListRequest) EquipmentId(equipmentId string) ApiGe
 }
 
 // Comma-separated list of sort field names. Prepend the field name with &#39;-&#39; for descending order. E.g. &#x60;sort&#x3D;ip,-nullrouted&#x60;. Sortable field names are ip, nullRouted, reverseLookup.
-func (r ApiGetNullRouteHistoryListRequest) Sort(sort string) ApiGetNullRouteHistoryListRequest {
+func (r ApiGetNullRouteHistoryListRequest) Sort(sort Sort) ApiGetNullRouteHistoryListRequest {
 	r.sort = &sort
 	return r
 }

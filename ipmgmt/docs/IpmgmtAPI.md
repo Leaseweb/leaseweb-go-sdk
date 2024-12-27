@@ -48,7 +48,7 @@ func main() {
 	ips := "ips_example" // string | Return only IPs specified as a comma-separated list (optional)
 	equipmentIds := "equipmentIds_example" // string | Return only IPs assigned to equipment items specified as a comma-separated list of IDs (optional)
 	assignedContractIds := "assignedContractIds_example" // string | Return only IPs assigned to contracts specified as a comma-separated list of IDs (optional)
-	sort := "sort_example" // string | Comma-separated list of sort field names. Prepend the field name with '-' for descending order. E.g. `sort=ip,-nullrouted`. Sortable field names are ip, nullRouted, reverseLookup. (optional)
+	sort := openapiclient.sort("ip") // Sort | Comma-separated list of sort field names. Prepend the field name with '-' for descending order. E.g. `sort=ip,-nullrouted`. Sortable field names are ip, nullRouted, reverseLookup. (optional)
 	reverseLookup := "mydomain1.example.com" // string | Filter by reverse lookup. (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
  **ips** | **string** | Return only IPs specified as a comma-separated list | 
  **equipmentIds** | **string** | Return only IPs assigned to equipment items specified as a comma-separated list of IDs | 
  **assignedContractIds** | **string** | Return only IPs assigned to contracts specified as a comma-separated list of IDs | 
- **sort** | **string** | Comma-separated list of sort field names. Prepend the field name with &#39;-&#39; for descending order. E.g. &#x60;sort&#x3D;ip,-nullrouted&#x60;. Sortable field names are ip, nullRouted, reverseLookup. | 
+ **sort** | [**Sort**](Sort.md) | Comma-separated list of sort field names. Prepend the field name with &#39;-&#39; for descending order. E.g. &#x60;sort&#x3D;ip,-nullrouted&#x60;. Sortable field names are ip, nullRouted, reverseLookup. | 
  **reverseLookup** | **string** | Filter by reverse lookup. | 
 
 ### Return type
@@ -138,7 +138,7 @@ func main() {
 	ticketId := "ticketId_example" // string | Filter by the reference stored with the null route (optional)
 	contractId := "contractId_example" // string | Filter by ID of the contract assigned to the IP at the time of null route creation (optional)
 	equipmentId := "equipmentId_example" // string | Filter by ID of the server assigned to the IP at the time of null route creation (optional)
-	sort := "sort_example" // string | Comma-separated list of sort field names. Prepend the field name with '-' for descending order. E.g. `sort=ip,-nullrouted`. Sortable field names are ip, nullRouted, reverseLookup. (optional)
+	sort := openapiclient.sort("ip") // Sort | Comma-separated list of sort field names. Prepend the field name with '-' for descending order. E.g. `sort=ip,-nullrouted`. Sortable field names are ip, nullRouted, reverseLookup. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
  **ticketId** | **string** | Filter by the reference stored with the null route | 
  **contractId** | **string** | Filter by ID of the contract assigned to the IP at the time of null route creation | 
  **equipmentId** | **string** | Filter by ID of the server assigned to the IP at the time of null route creation | 
- **sort** | **string** | Comma-separated list of sort field names. Prepend the field name with &#39;-&#39; for descending order. E.g. &#x60;sort&#x3D;ip,-nullrouted&#x60;. Sortable field names are ip, nullRouted, reverseLookup. | 
+ **sort** | [**Sort**](Sort.md) | Comma-separated list of sort field names. Prepend the field name with &#39;-&#39; for descending order. E.g. &#x60;sort&#x3D;ip,-nullrouted&#x60;. Sortable field names are ip, nullRouted, reverseLookup. | 
 
 ### Return type
 

@@ -151,7 +151,7 @@ paths:
         name: sort
         required: false
         schema:
-          type: string
+          $ref: '#/components/schemas/sort'
         style: form
       - description: Filter by reverse lookup.
         example: mydomain1.example.com
@@ -887,7 +887,7 @@ paths:
         name: sort
         required: false
         schema:
-          type: string
+          $ref: '#/components/schemas/sort'
         style: form
       responses:
         "200":
@@ -1182,7 +1182,7 @@ components:
       name: sort
       required: false
       schema:
-        type: string
+        $ref: '#/components/schemas/sort'
       style: form
     reverseLookup:
       description: Filter by reverse lookup.
@@ -1286,6 +1286,12 @@ components:
       - ROUTER1
       - ROUTER2
       - IPMI
+      type: string
+    sort:
+      enum:
+      - ip
+      - nullRouted
+      - reverseLookup
       type: string
     assignedContract:
       description: An explanation about the purpose of this instance.
