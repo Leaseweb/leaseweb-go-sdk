@@ -1,0 +1,1768 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: "> The base URL for this API is: **https://api.leaseweb.com/ipMgmt/v2/**"
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  title: LeaseWeb API for IP address management
+  version: v2
+  x-logo:
+    altText: Leaseweb developer documentation
+    backgroundColor: '#5484c6'
+    href: https://developer.leaseweb.com
+    url: https://developer.leaseweb.com/images/logo.png
+servers:
+- url: https://api.leaseweb.com/ipMgmt/v2
+security:
+- X-LSW-Auth: []
+tags:
+- description: |
+    The API uses standard HTTP status codes to indicate the success or failure of the API call. The response will be JSON. Most APIs use the following format:
+
+    ```json
+    {
+        "errorCode": "APP00800",
+        "errorMessage": "The connection with the DB cannot be established.",
+        "correlationId": "550e8400-e29b-41d4-a716-446655440000",
+        "userMessage": "Cannot handle your request at the moment. Please try again later.",
+        "reference": "https://developer.leaseweb.com/errors/APP00800"
+    }
+    ```
+  name: Errors
+  x-traitTag: true
+- description: |
+    Authentication for the APIs is required. To authenticate your call, you will need to sent your API key as `X-LSW-Auth` header.
+
+    You can generate API keys in the [Customer Portal](https://secure.leaseweb.com/api-client-management/).
+  name: API Key Authentication
+  x-traitTag: true
+paths:
+  /ips:
+    get:
+      operationId: getIPList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Filter by subnet
+        explode: true
+        in: query
+        name: subnetId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter by protocol version
+        explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          $ref: '#/components/schemas/protocolVersion'
+        style: form
+      - description: Filter by IP type
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          $ref: '#/components/schemas/ipType'
+        style: form
+      - description: Filter by whether or not the IP has an active null route (true
+          or false)
+        explode: true
+        in: query
+        name: nullRouted
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Filter by whether or not the IP is primary (true or false)
+        explode: true
+        in: query
+        name: primary
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Return only IPs greater or equal to the specified address
+        explode: true
+        in: query
+        name: fromIp
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Return only IPs lower or equal to the specified address
+        explode: true
+        in: query
+        name: toIp
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Return only IPs specified as a comma-separated list
+        explode: true
+        in: query
+        name: ips
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Return only IPs assigned to equipment items specified as a comma-separated
+          list of IDs
+        explode: true
+        in: query
+        name: equipmentIds
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Return only IPs assigned to contracts specified as a comma-separated
+          list of IDs
+        explode: true
+        in: query
+        name: assignedContractIds
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Comma-separated list of sort field names. Prepend the field\
+          \ name with '-' for descending order. E.g. `sort=ip,-nullrouted`. Sortable\
+          \ field names are ip, nullRouted, reverseLookup."
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter by reverse lookup.
+        example: mydomain1.example.com
+        explode: true
+        in: query
+        name: reverseLookup
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 2
+                  offset: 0
+                  limit: 50
+                ips:
+                - ip: 192.0.2.1
+                  version: 4
+                  type: NORMAL_IP
+                  prefixLength: 32
+                  primary: true
+                  reverseLookup: mydomain1.example.com
+                  nullRouted: false
+                  nullLevel: null
+                  unnullingAllowed: false
+                  equipmentId: "1234"
+                  assignedContract:
+                    id: "5643634"
+                  subnet:
+                    id: 192.0.2.0_24
+                    networkIp: 192.0.2.0
+                    prefixLength: 24
+                    gateway: 192.0.2.254
+                - ip: 192.0.2.2
+                  version: 4
+                  type: NORMAL_IP
+                  prefixLength: 32
+                  primary: false
+                  reverseLookup: mydomain2.example.com
+                  nullRouted: false
+                  nullLevel: null
+                  unnullingAllowed: false
+                  equipmentId: "1235"
+                  assignedContract:
+                    id: "4363465"
+                  subnet:
+                    id: 192.0.2.0_24
+                    networkIp: 192.0.2.0
+                    prefixLength: 24
+                    gateway: 192.0.2.254
+              schema:
+                $ref: '#/components/schemas/getIPListResult'
+          description: ""
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List IPs
+      tags:
+      - ips
+  /ips/{ip}:
+    get:
+      operationId: getIP
+      parameters:
+      - description: "IP address or IP address with prefixLength {ip}_{prefix}. If\
+          \ prefixLength is not given, then we assume 32 (for IPv4) or 128 (for IPv6).\
+          \ PrefixLength is mandatory for IP range, for example, the IPv6 address\
+          \ range with prefixLength = 112"
+        example: 192.0.2.1
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ip: 192.0.2.1
+                version: 4
+                type: NORMAL_IP
+                prefixLength: 32
+                primary: true
+                reverseLookup: mydomain1.example.com
+                nullRouted: false
+                nullLevel: null
+                unnullingAllowed: false
+                equipmentId: "1234"
+                assignedContract:
+                  id: "5643634"
+                subnet:
+                  id: 192.0.2.0_24
+                  networkIp: 192.0.2.0
+                  prefixLength: 24
+                  gateway: 192.0.2.254
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: ""
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Inspect an IP
+      tags:
+      - ips
+    put:
+      description: Use this operation to set reverse lookup for IPv4 IP addresses.
+      operationId: updateIP
+      parameters:
+      - description: "IP address or IP address with prefixLength {ip}_{prefix}. If\
+          \ prefixLength is not given, then we assume 32"
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          format: ipv4
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              reverseLookup: mydomain1.example.com
+            schema:
+              $ref: '#/components/schemas/updateIPOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                ip: 192.0.2.1
+                version: 4
+                type: NORMAL_IP
+                prefixLength: 32
+                primary: true
+                reverseLookup: mydomain1.example.com
+                nullRouted: false
+                nullLevel: null
+                unnullingAllowed: false
+                equipmentId: "1234"
+                assignedContract:
+                  id: "5643634"
+                subnet:
+                  id: 192.0.2.0_24
+                  networkIp: 192.0.2.0
+                  prefixLength: 24
+                  gateway: 192.0.2.254
+              schema:
+                $ref: '#/components/schemas/ip'
+          description: ""
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Update an IP
+      tags:
+      - ips
+  /ips/{ip}/reverseLookup:
+    get:
+      description: Get reverse lookup values set for IPs in the specified range
+      operationId: getReverseLookupRecordList
+      parameters:
+      - description: "IP address or IP address with prefixLength {ip}_{prefix}. If\
+          \ prefixLength is not given, then we assume 32 (for IPv4) or 128 (for IPv6).\
+          \ PrefixLength is mandatory for IP range, for example, the IPv6 address\
+          \ range with prefixLength = 112"
+        example: 192.0.2.1
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Filter by reverse lookup.
+        example: mydomain1.example.com
+        explode: true
+        in: query
+        name: reverseLookup
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 3
+                  offset: 0
+                  limit: 2
+                reverseLookups:
+                - ip: 2001:db8::0
+                  reverseLookup: name1.example.com
+                - ip: 2001:db8::1
+                  reverseLookup: name2.example.com
+              schema:
+                $ref: '#/components/schemas/getReverseLookupRecordListResult'
+          description: ""
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List reverse lookup records for an IPv6 range
+      tags:
+      - ips
+    put:
+      description: |
+        This endpoint allows to set or unset reverse lookup for multiple IPv6 IPs in a specific IP range. To remove reverse lookup for an IP address set it to `null` or `""`.
+        Reverse lookup values of IPs not listed in the request body will not be affected.
+        You can set up to 20 records in a single request.
+      operationId: updateReverseLookupRecords
+      parameters:
+      - description: "IP address or IP address with prefixLength {ip}_{prefix}. If\
+          \ prefixLength is not given, then we assume 32 (for IPv4) or 128 (for IPv6).\
+          \ PrefixLength is mandatory for IP range, for example, the IPv6 address\
+          \ range with prefixLength = 112"
+        example: 192.0.2.1
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              reverseLookups:
+              - ip: 2001:db8::0
+                reverseLookup: name1.example.com
+              - ip: 2001:db8::1
+                reverseLookup: name2.example.com
+            schema:
+              $ref: '#/components/schemas/updateReverseLookupRecordsOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                reverseLookups:
+                - ip: 2001:db8::0
+                  reverseLookup: name1.example.com
+                - ip: 2001:db8::1
+                  reverseLookup: name2.example.com
+              schema:
+                $ref: '#/components/schemas/updateReverseLookupRecordsResult'
+          description: The request has been processed.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Set or remove reverse lookup records for an IPv6 range
+      tags:
+      - ips
+  /ips/{ip}/nullRoute:
+    delete:
+      operationId: removeIPNullRoute
+      parameters:
+      - description: "IP address or IP address with prefixLength {ip}_{prefix}. If\
+          \ prefixLength is not given, then we assume 32 (for IPv4) or 128 (for IPv6).\
+          \ PrefixLength is mandatory for IP range, for example, the IPv6 address\
+          \ range with prefixLength = 112"
+        example: 192.0.2.1
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: Null-route successfully deleted
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Remove a null route
+      tags:
+      - ips
+    post:
+      operationId: nullRouteIP
+      parameters:
+      - description: "IP address or IP address with prefixLength {ip}_{prefix}. If\
+          \ prefixLength is not given, then we assume 32 (for IPv4) or 128 (for IPv6).\
+          \ PrefixLength is mandatory for IP range, for example, the IPv6 address\
+          \ range with prefixLength = 112"
+        example: 192.0.2.1
+        explode: false
+        in: path
+        name: ip
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              automatedUnnullingAt: 2015-06-25T11:13:00Z
+              comment: This IP is evil
+              ticketId: "188612"
+            schema:
+              $ref: '#/components/schemas/nullRouteIPOpts'
+        description: ""
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                assignedContract:
+                  id: "123456"
+                automatedUnnullingAt: 2015-06-25T11:13:00Z
+                comment: This IP is evil
+                equipmentId: "456"
+                id: "4534536"
+                ip: 192.0.2.1
+                nullLevel: 1
+                nulledAt: 2015-06-28T12:00:00Z
+                nulledBy: john.doe@example.com
+                ticketId: "188612"
+                unnulledAt: null
+                unnulledBy: null
+              schema:
+                $ref: '#/components/schemas/nullRoutedIP'
+          description: ""
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Null route an IP
+      tags:
+      - ips
+  /nullRoutes:
+    get:
+      operationId: getNullRouteHistoryList
+      parameters:
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return only IPs greater or equal to the specified address
+        explode: true
+        in: query
+        name: fromIp
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Return only IPs lower or equal to the specified address
+        explode: true
+        in: query
+        name: toIp
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Return only null routes active after the specified date and time
+        explode: true
+        in: query
+        name: fromDate
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: Return only null routes active before the specified date and
+          time
+        explode: true
+        in: query
+        name: toDate
+        required: false
+        schema:
+          format: date
+          type: string
+        style: form
+      - description: Filter by the email address of the user who created the null
+          route
+        explode: true
+        in: query
+        name: nulledBy
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter by the email address of the user who removed the null
+          route
+        explode: true
+        in: query
+        name: unnulledBy
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter by the reference stored with the null route
+        explode: true
+        in: query
+        name: ticketId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter by ID of the contract assigned to the IP at the time of
+          null route creation
+        explode: true
+        in: query
+        name: contractId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter by ID of the server assigned to the IP at the time of
+          null route creation
+        explode: true
+        in: query
+        name: equipmentId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Comma-separated list of sort field names. Prepend the field\
+          \ name with '-' for descending order. E.g. `sort=ip,-nullrouted`. Sortable\
+          \ field names are ip, nullRouted, reverseLookup."
+        explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 2
+                  offset: 0
+                  limit: 50
+                nullroutes:
+                - id: "4534536"
+                  ip: 192.0.2.1
+                  nulledAt: 2015-06-28T12:00:00Z
+                  nulledBy: john.doe@example.com
+                  nullLevel: 1
+                  automatedUnnullingAt: 2015-06-28T13:00:00Z
+                  unnulledAt: null
+                  unnulledBy: null
+                  ticketId: "188612"
+                  comment: This IP is evil
+                  equipmentId: "456"
+                  assignedContract:
+                    id: "123456"
+                - id: "4534535"
+                  ip: 192.0.2.1
+                  nulledAt: 2015-06-27T12:00:00Z
+                  nulledBy: john.doe@example.com
+                  nullLevel: 1
+                  automatedUnnullingAt: 2015-06-27T13:00:00Z
+                  unnulledAt: 2015-06-27T13:00:05Z
+                  unnulledBy: UnnullRunner
+                  ticketId: "188612"
+                  comment: This IP is evil
+                  equipmentId: "456"
+                  assignedContract:
+                    id: "123456"
+              schema:
+                $ref: '#/components/schemas/getNullRouteHistoryListResult'
+          description: ""
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Inspect null route history
+      tags:
+      - ips
+  /nullRoutes/{id}:
+    get:
+      operationId: getNullRouteHistory
+      parameters:
+      - description: Null route ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: "23234"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                assignedContract:
+                  id: "123456"
+                automatedUnnullingAt: 2015-06-25T11:13:00Z
+                comment: This IP is evil
+                equipmentId: "456"
+                id: "4534536"
+                ip: 192.0.2.1
+                nullLevel: 1
+                nulledAt: 2015-06-28T12:00:00Z
+                nulledBy: john.doe@example.com
+                ticketId: "188612"
+                unnulledAt: null
+                unnulledBy: null
+              schema:
+                $ref: '#/components/schemas/nullRoutedIP'
+          description: ""
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Inspect null route history
+      tags:
+      - ips
+    put:
+      operationId: updateNullRoute
+      parameters:
+      - description: Null route ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: "23234"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            example:
+              automatedUnnullingAt: 2015-06-25T11:13:00Z
+              comment: This IP is evil
+              ticketId: "188612"
+            schema:
+              $ref: '#/components/schemas/updateNullRouteOpts'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                assignedContract:
+                  id: "123456"
+                automatedUnnullingAt: 2015-06-25T11:13:00Z
+                comment: This IP is evil
+                equipmentId: "456"
+                id: "4534536"
+                ip: 192.0.2.1
+                nullLevel: 1
+                nulledAt: 2015-06-28T12:00:00Z
+                nulledBy: john.doe@example.com
+                ticketId: "188612"
+                unnulledAt: null
+                unnulledBy: null
+              schema:
+                $ref: '#/components/schemas/nullRoutedIP'
+          description: ""
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Update a null route
+      tags:
+      - ips
+components:
+  parameters:
+    limit:
+      description: Limit the number of results returned.
+      example: 20
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+      style: form
+    offset:
+      description: Return results starting from the given offset.
+      example: 10
+      explode: true
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+      style: form
+    fromIP:
+      description: Return only IPs greater or equal to the specified address
+      explode: true
+      in: query
+      name: fromIp
+      required: false
+      schema:
+        type: string
+      style: form
+    toIP:
+      description: Return only IPs lower or equal to the specified address
+      explode: true
+      in: query
+      name: toIp
+      required: false
+      schema:
+        type: string
+      style: form
+    sort:
+      description: "Comma-separated list of sort field names. Prepend the field name\
+        \ with '-' for descending order. E.g. `sort=ip,-nullrouted`. Sortable field\
+        \ names are ip, nullRouted, reverseLookup."
+      explode: true
+      in: query
+      name: sort
+      required: false
+      schema:
+        type: string
+      style: form
+    reverseLookup:
+      description: Filter by reverse lookup.
+      example: mydomain1.example.com
+      explode: true
+      in: query
+      name: reverseLookup
+      required: false
+      schema:
+        type: string
+      style: form
+    ip:
+      description: "IP address or IP address with prefixLength {ip}_{prefix}. If prefixLength\
+        \ is not given, then we assume 32 (for IPv4) or 128 (for IPv6). PrefixLength\
+        \ is mandatory for IP range, for example, the IPv6 address range with prefixLength\
+        \ = 112"
+      example: 192.0.2.1
+      explode: false
+      in: path
+      name: ip
+      required: true
+      schema:
+        type: string
+      style: simple
+    ipv4:
+      description: "IP address or IP address with prefixLength {ip}_{prefix}. If prefixLength\
+        \ is not given, then we assume 32"
+      explode: false
+      in: path
+      name: ip
+      required: true
+      schema:
+        format: ipv4
+        type: string
+      style: simple
+  responses:
+    "400":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "400"
+            errorDetails: {}
+            errorMessage: The API could not interpret your request correctly.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Bad Request.
+    "401":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "401"
+            errorMessage: You are not authorized to view this resource.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Not Authorized.
+    "403":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "403"
+            errorMessage: Access to the requested resource is forbidden.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Forbidden.
+    "500":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "500"
+            errorMessage: '''The API could not handle your request at this time.'
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Internal Server Error.
+    "503":
+      content:
+        application/json:
+          example:
+            correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+            errorCode: "503"
+            errorMessage: The API is not available at the moment.
+          schema:
+            $ref: '#/components/schemas/errorResult'
+      description: Service Unavailable.
+  schemas:
+    protocolVersion:
+      description: Protocol version
+      enum:
+      - 4
+      - 6
+      type: integer
+    ipType:
+      enum:
+      - NORMAL_IP
+      - NETWORK
+      - BROADCAST
+      - GATEWAY
+      - ROUTER1
+      - ROUTER2
+      - IPMI
+      type: string
+    assignedContract:
+      description: An explanation about the purpose of this instance.
+      example:
+        id: "123456"
+      nullable: true
+      properties:
+        id:
+          description: ID of the contract connected to the IP.
+          example: "123456"
+          type: string
+      required:
+      - id
+      type: object
+    ip:
+      example:
+        prefixLength: 6
+        nullLevel: 1
+        subnet:
+          prefixLength: 5
+          networkIp: networkIp
+          id: id
+          gateway: gateway
+        unnullingAllowed: false
+        reverseLookup: reverseLookup
+        ip: ip
+        nullRouted: false
+        assignedContract:
+          id: "123456"
+        type: NORMAL_IP
+        version: 0
+        equipmentId: equipmentId
+        primary: true
+      properties:
+        ip:
+          description: IP address
+          type: string
+        version:
+          $ref: '#/components/schemas/protocolVersion'
+        type:
+          $ref: '#/components/schemas/ipType'
+        prefixLength:
+          default: 0
+          description: "Prefix length of the IP range represented by the record. Note:\
+            \ this is not the same as `subnet.prefixLength`."
+          type: integer
+        primary:
+          description: Boolean indicating if this is the primary IP of the assigned
+            equipment
+          type: boolean
+        reverseLookup:
+          description: "Reverse lookup set for the IP. This only applies to IPv4.\
+            \ For IPv6 see [GET /ips/{ip}/reverseLookup](#operation/get/ips/{ip}/reverseLookup)."
+          nullable: true
+          type: string
+        nullRouted:
+          default: false
+          description: Boolean to indicate if the IP is null-routed
+          type: boolean
+        nullLevel:
+          description: Null route level
+          nullable: true
+          type: integer
+        unnullingAllowed:
+          default: false
+          description: Boolean indicating if the null route can be removed
+          type: boolean
+        equipmentId:
+          description: ID of the equipment using the IP
+          type: string
+        assignedContract:
+          $ref: '#/components/schemas/assignedContract'
+        subnet:
+          $ref: '#/components/schemas/subnet'
+      required:
+      - assignedContract
+      - equipmentId
+      - ip
+      - nullLevel
+      - nullRouted
+      - prefixLength
+      - primary
+      - reverseLookup
+      - subnet
+      - type
+      - unnullingAllowed
+      - version
+      title: ip
+      type: object
+    _metadata:
+      description: Metadata about the collection
+      example:
+        offset: 0
+        limit: 5
+        totalCount: 2
+      properties:
+        totalCount:
+          description: Total amount of elements in this collection
+          example: 2
+          minimum: 0
+          type: integer
+        offset:
+          default: 0
+          description: The offset used to generate this response
+          example: 0
+          minimum: 0
+          type: integer
+        limit:
+          default: 5
+          description: The limit used to generate this response
+          example: 5
+          minimum: 0
+          type: integer
+      required:
+      - limit
+      - offset
+      - totalCount
+      title: metadata
+      type: object
+    getIPListResult:
+      example:
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+        ips:
+        - prefixLength: 6
+          nullLevel: 1
+          subnet:
+            prefixLength: 5
+            networkIp: networkIp
+            id: id
+            gateway: gateway
+          unnullingAllowed: false
+          reverseLookup: reverseLookup
+          ip: ip
+          nullRouted: false
+          assignedContract:
+            id: "123456"
+          type: NORMAL_IP
+          version: 0
+          equipmentId: equipmentId
+          primary: true
+        - prefixLength: 6
+          nullLevel: 1
+          subnet:
+            prefixLength: 5
+            networkIp: networkIp
+            id: id
+            gateway: gateway
+          unnullingAllowed: false
+          reverseLookup: reverseLookup
+          ip: ip
+          nullRouted: false
+          assignedContract:
+            id: "123456"
+          type: NORMAL_IP
+          version: 0
+          equipmentId: equipmentId
+          primary: true
+      properties:
+        ips:
+          items:
+            $ref: '#/components/schemas/ip'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      required:
+      - _metadata
+      - ips
+      type: object
+    errorResult:
+      example:
+        errorMessage: errorMessage
+        errorCode: errorCode
+        correlationId: correlationId
+        errorDetails:
+          key:
+          - errorDetails
+          - errorDetails
+      properties:
+        correlationId:
+          description: The correlation ID of the current request.
+          type: string
+        errorCode:
+          description: The error code.
+          type: string
+        errorMessage:
+          description: A human friendly description of the error.
+          type: string
+        errorDetails:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          title: errorDetails
+          type: object
+      type: object
+    updateIPOpts:
+      properties:
+        reverseLookup:
+          example: mydomain1.example.com
+          type: string
+      required:
+      - reverseLookup
+      type: object
+    reverseLookup:
+      description: Reverse lookup set for a specific IP address
+      example:
+        reverseLookup: reverseLookup
+        ip: ip
+      properties:
+        ip:
+          description: IP address
+          type: string
+        reverseLookup:
+          description: Reverse lookup value
+          nullable: true
+          type: string
+      required:
+      - ip
+      - reverseLookup
+      title: reverseLookup
+      type: object
+    getReverseLookupRecordListResult:
+      description: Object containing a list of reverse lookup values set for ips in
+        a specific range
+      example:
+        reverseLookups:
+        - reverseLookup: reverseLookup
+          ip: ip
+        - reverseLookup: reverseLookup
+          ip: ip
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        reverseLookups:
+          items:
+            $ref: '#/components/schemas/reverseLookup'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      required:
+      - _metadata
+      - reverseLookups
+      type: object
+    updateReverseLookupRecordsOpts:
+      properties:
+        reverseLookups:
+          items:
+            $ref: '#/components/schemas/reverseLookup'
+          type: array
+      required:
+      - reverseLookups
+      type: object
+    updateReverseLookupRecordsResult:
+      example:
+        reverseLookups:
+        - reverseLookup: reverseLookup
+          ip: ip
+        - reverseLookup: reverseLookup
+          ip: ip
+      properties:
+        reverseLookups:
+          items:
+            $ref: '#/components/schemas/reverseLookup'
+          type: array
+      required:
+      - reverseLookups
+      type: object
+    nullRouteIPOpts:
+      properties:
+        automatedUnnullingAt:
+          description: The date and time when the null route is to be deactivated.
+            The date and time should be specified using the format yyyy-mm-ddThh:mm:ss±hh:mm
+            (with time zone designator) or yyyy-mm-ddThh:mm:ssZ (UTC). If this field
+            is not present then the null route will not be automatically removed.
+          example: 2015-06-25T11:13:00Z
+          format: date-time
+          type: string
+        comment:
+          description: A comment to be stored with the null route (e.g. null route
+            reason)
+          example: This IP is evil
+          type: string
+        ticketId:
+          description: A reference to be stored with the null route
+          example: "188612"
+          type: string
+      type: object
+    nullRoutedIP:
+      example:
+        nullLevel: 0
+        ip: 192.0.2.1
+        assignedContract:
+          id: "123456"
+        automatedUnnullingAt: 2000-01-23T04:56:07.000+00:00
+        unnulledBy: unnulledBy
+        nulledBy: john.doe@example.com
+        comment: This IP is evil
+        id: "4534536"
+        unnulledAt: 2000-01-23T04:56:07.000+00:00
+        equipmentId: "456"
+        nulledAt: 2000-01-23T04:56:07.000+00:00
+        ticketId: "188612"
+      properties:
+        id:
+          description: Null route ID
+          example: "4534536"
+          type: string
+        ip:
+          description: IP address
+          example: 192.0.2.1
+          type: string
+        nulledAt:
+          description: Null route date in UTC in format yyyy-mm-ddThh:mm:ssZ
+          format: date-time
+          type: string
+        nulledBy:
+          description: Email address of the user who created the null route or 'LeaseWeb'
+            if null route was created by LeaseWeb.
+          example: john.doe@example.com
+          type: string
+        nullLevel:
+          default: 0
+          description: Null route permission level. If greater than 1 then the null
+            route can only be removed by LeaseWeb.
+          type: integer
+        automatedUnnullingAt:
+          description: The date and time when the null route is to be automatically
+            removed.
+          format: date-time
+          nullable: true
+          type: string
+        unnulledAt:
+          description: The date and time when the null route has been removed. If
+            null then the null route is still active.
+          format: date-time
+          nullable: true
+          type: string
+        unnulledBy:
+          description: Email address of the user who removed the null route or 'LeaseWeb'
+            if null route was removed by LeaseWeb.
+          nullable: true
+          type: string
+        ticketId:
+          description: Reference stored with the null route.
+          example: "188612"
+          nullable: true
+          type: string
+        comment:
+          description: Comment stored with the null route.
+          example: This IP is evil
+          nullable: true
+          type: string
+        equipmentId:
+          description: ID of the equipment which was assigned to the IP at the time
+            of null route creation.
+          example: "456"
+          type: string
+        assignedContract:
+          $ref: '#/components/schemas/assignedContract'
+      required:
+      - assignedContract
+      - automatedUnnullingAt
+      - comment
+      - equipmentId
+      - id
+      - ip
+      - nullLevel
+      - nulledAt
+      - nulledBy
+      - ticketId
+      - unnulledAt
+      - unnulledBy
+    getNullRouteHistoryListResult:
+      example:
+        nullroutes:
+        - nullLevel: 0
+          ip: 192.0.2.1
+          assignedContract:
+            id: "123456"
+          automatedUnnullingAt: 2000-01-23T04:56:07.000+00:00
+          unnulledBy: unnulledBy
+          nulledBy: john.doe@example.com
+          comment: This IP is evil
+          id: "4534536"
+          unnulledAt: 2000-01-23T04:56:07.000+00:00
+          equipmentId: "456"
+          nulledAt: 2000-01-23T04:56:07.000+00:00
+          ticketId: "188612"
+        - nullLevel: 0
+          ip: 192.0.2.1
+          assignedContract:
+            id: "123456"
+          automatedUnnullingAt: 2000-01-23T04:56:07.000+00:00
+          unnulledBy: unnulledBy
+          nulledBy: john.doe@example.com
+          comment: This IP is evil
+          id: "4534536"
+          unnulledAt: 2000-01-23T04:56:07.000+00:00
+          equipmentId: "456"
+          nulledAt: 2000-01-23T04:56:07.000+00:00
+          ticketId: "188612"
+        _metadata:
+          offset: 0
+          limit: 5
+          totalCount: 2
+      properties:
+        nullroutes:
+          items:
+            $ref: '#/components/schemas/nullRoutedIP'
+          type: array
+        _metadata:
+          $ref: '#/components/schemas/_metadata'
+      required:
+      - _metadata
+      - nullroutes
+      type: object
+    updateNullRouteOpts:
+      properties:
+        automatedUnnullingAt:
+          description: The date and time when the null route is to be deactivated.
+            The date and time should be specified using the format yyyy-mm-ddThh:mm:ss±hh:mm
+            (with time zone designator) or yyyy-mm-ddThh:mm:ssZ (UTC). If this field
+            is not present then the null route will not be automatically removed.
+          example: 2015-06-25T11:13:00Z
+          format: date-time
+          type: string
+        comment:
+          description: A comment to be stored with the null route (e.g. null route
+            reason)
+          example: This IP is evil
+          type: string
+        ticketId:
+          description: A reference to be stored with the null route
+          example: "188612"
+          type: string
+      type: object
+    subnet:
+      default: {}
+      description: Object containing information about the network and gateway
+      example:
+        prefixLength: 5
+        networkIp: networkIp
+        id: id
+        gateway: gateway
+      properties:
+        id:
+          description: Subnet identifier consisting of network IP and prefix length
+            separated by underscore (e.g. 192.0.2.0_24)
+          type: string
+        networkIp:
+          description: Network IP of the subnet
+          type: string
+        prefixLength:
+          default: 0
+          description: Address prefix length
+          type: integer
+        gateway:
+          description: The gateway IP to be used in network settings
+          type: string
+      required:
+      - gateway
+      - id
+      - networkIp
+      - prefixLength
+      title: subnet
+      type: object
+  securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
+    X-LSW-Auth:
+      description: API key authentication by setting `X-LSW-Auth` header.
+      in: header
+      name: X-LSW-Auth
+      type: apiKey
