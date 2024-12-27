@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -45,5 +44,4 @@ model_update_null_route_opts.go
 model_update_reverse_lookup_records_opts.go
 model_update_reverse_lookup_records_result.go
 response.go
-test/api_ips_test.go
 utils.go

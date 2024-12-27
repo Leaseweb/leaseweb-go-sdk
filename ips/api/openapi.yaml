@@ -1728,7 +1728,6 @@ components:
           type: string
       type: object
     subnet:
-      default: {}
       description: Object containing information about the network and gateway
       example:
         prefixLength: 5

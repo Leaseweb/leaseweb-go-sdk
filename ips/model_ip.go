@@ -77,8 +77,6 @@ func NewIpWithDefaults() *Ip {
 	this.NullRouted = nullRouted
 	var unnullingAllowed bool = false
 	this.UnnullingAllowed = unnullingAllowed
-	var subnet Subnet = {}
-	this.Subnet = subnet
 	return &this
 }
 

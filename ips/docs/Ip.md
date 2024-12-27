@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **UnnullingAllowed** | **bool** | Boolean indicating if the null route can be removed | [default to false]
 **EquipmentId** | **string** | ID of the equipment using the IP | 
 **AssignedContract** | [**NullableAssignedContract**](AssignedContract.md) |  | 
-**Subnet** | [**Subnet**](Subnet.md) |  | [default to {}]
+**Subnet** | [**Subnet**](Subnet.md) |  | 
 
 ## Methods
 
