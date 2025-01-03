@@ -7,6 +7,7 @@ import (
 	_ "github.com/leaseweb/leaseweb-go-sdk/dedicatedserver"
 	_ "github.com/leaseweb/leaseweb-go-sdk/dns"
 	_ "github.com/leaseweb/leaseweb-go-sdk/invoice"
+    _ "github.com/leaseweb/leaseweb-go-sdk/ipmgmt"
 	_ "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
