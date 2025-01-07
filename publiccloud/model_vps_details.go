@@ -23,7 +23,6 @@ var _ MappedNullable = &VpsDetails{}
 type VpsDetails struct {
 	Id string `json:"id"`
 	Pack VpsPackType `json:"pack"`
-	Resources BaseResources `json:"resources"`
 	Region RegionName `json:"region"`
 	Datacenter Datacenter `json:"datacenter"`
 	// The identifying name set to the instance
@@ -36,9 +35,10 @@ type VpsDetails struct {
 	RootDiskSize int32 `json:"rootDiskSize"`
 	// Date and time when the VPS was started for the first time, right after launching it
 	StartedAt NullableTime `json:"startedAt"`
-	Contract VpsContract `json:"contract"`
 	Iso NullableIso `json:"iso,omitempty"`
 	Ips []IpDetails `json:"ips"`
+	Resources BaseResources `json:"resources"`
+	Contract VpsContract `json:"contract"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,11 +48,10 @@ type _VpsDetails VpsDetails
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVpsDetails(id string, pack VpsPackType, resources BaseResources, region RegionName, datacenter Datacenter, reference string, image Image, state VpsState, hasPublicIpV4 bool, rootDiskSize int32, startedAt NullableTime, contract VpsContract, ips []IpDetails) *VpsDetails {
+func NewVpsDetails(id string, pack VpsPackType, region RegionName, datacenter Datacenter, reference string, image Image, state VpsState, hasPublicIpV4 bool, rootDiskSize int32, startedAt NullableTime, ips []IpDetails, resources BaseResources, contract VpsContract) *VpsDetails {
 	this := VpsDetails{}
 	this.Id = id
 	this.Pack = pack
-	this.Resources = resources
 	this.Region = region
 	this.Datacenter = datacenter
 	this.Reference = reference
@@ -61,8 +60,9 @@ func NewVpsDetails(id string, pack VpsPackType, resources BaseResources, region 
 	this.HasPublicIpV4 = hasPublicIpV4
 	this.RootDiskSize = rootDiskSize
 	this.StartedAt = startedAt
-	this.Contract = contract
 	this.Ips = ips
+	this.Resources = resources
+	this.Contract = contract
 	return &this
 }
 
@@ -120,30 +120,6 @@ func (o *VpsDetails) GetPackOk() (*VpsPackType, bool) {
 // SetPack sets field value
 func (o *VpsDetails) SetPack(v VpsPackType) {
 	o.Pack = v
-}
-
-// GetResources returns the Resources field value
-func (o *VpsDetails) GetResources() BaseResources {
-	if o == nil {
-		var ret BaseResources
-		return ret
-	}
-
-	return o.Resources
-}
-
-// GetResourcesOk returns a tuple with the Resources field value
-// and a boolean to check if the value has been set.
-func (o *VpsDetails) GetResourcesOk() (*BaseResources, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Resources, true
-}
-
-// SetResources sets field value
-func (o *VpsDetails) SetResources(v BaseResources) {
-	o.Resources = v
 }
 
 // GetRegion returns the Region field value
@@ -372,30 +348,6 @@ func (o *VpsDetails) SetStartedAt(v time.Time) {
 	o.StartedAt.Set(&v)
 }
 
-// GetContract returns the Contract field value
-func (o *VpsDetails) GetContract() VpsContract {
-	if o == nil {
-		var ret VpsContract
-		return ret
-	}
-
-	return o.Contract
-}
-
-// GetContractOk returns a tuple with the Contract field value
-// and a boolean to check if the value has been set.
-func (o *VpsDetails) GetContractOk() (*VpsContract, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Contract, true
-}
-
-// SetContract sets field value
-func (o *VpsDetails) SetContract(v VpsContract) {
-	o.Contract = v
-}
-
 // GetIso returns the Iso field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VpsDetails) GetIso() Iso {
 	if o == nil || IsNil(o.Iso.Get()) {
@@ -462,6 +414,54 @@ func (o *VpsDetails) SetIps(v []IpDetails) {
 	o.Ips = v
 }
 
+// GetResources returns the Resources field value
+func (o *VpsDetails) GetResources() BaseResources {
+	if o == nil {
+		var ret BaseResources
+		return ret
+	}
+
+	return o.Resources
+}
+
+// GetResourcesOk returns a tuple with the Resources field value
+// and a boolean to check if the value has been set.
+func (o *VpsDetails) GetResourcesOk() (*BaseResources, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Resources, true
+}
+
+// SetResources sets field value
+func (o *VpsDetails) SetResources(v BaseResources) {
+	o.Resources = v
+}
+
+// GetContract returns the Contract field value
+func (o *VpsDetails) GetContract() VpsContract {
+	if o == nil {
+		var ret VpsContract
+		return ret
+	}
+
+	return o.Contract
+}
+
+// GetContractOk returns a tuple with the Contract field value
+// and a boolean to check if the value has been set.
+func (o *VpsDetails) GetContractOk() (*VpsContract, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Contract, true
+}
+
+// SetContract sets field value
+func (o *VpsDetails) SetContract(v VpsContract) {
+	o.Contract = v
+}
+
 func (o VpsDetails) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -474,7 +474,6 @@ func (o VpsDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["pack"] = o.Pack
-	toSerialize["resources"] = o.Resources
 	toSerialize["region"] = o.Region
 	toSerialize["datacenter"] = o.Datacenter
 	toSerialize["reference"] = o.Reference
@@ -486,11 +485,12 @@ func (o VpsDetails) ToMap() (map[string]interface{}, error) {
 	toSerialize["hasPublicIpV4"] = o.HasPublicIpV4
 	toSerialize["rootDiskSize"] = o.RootDiskSize
 	toSerialize["startedAt"] = o.StartedAt.Get()
-	toSerialize["contract"] = o.Contract
 	if o.Iso.IsSet() {
 		toSerialize["iso"] = o.Iso.Get()
 	}
 	toSerialize["ips"] = o.Ips
+	toSerialize["resources"] = o.Resources
+	toSerialize["contract"] = o.Contract
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -506,7 +506,6 @@ func (o *VpsDetails) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"pack",
-		"resources",
 		"region",
 		"datacenter",
 		"reference",
@@ -515,8 +514,9 @@ func (o *VpsDetails) UnmarshalJSON(data []byte) (err error) {
 		"hasPublicIpV4",
 		"rootDiskSize",
 		"startedAt",
-		"contract",
 		"ips",
+		"resources",
+		"contract",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -548,7 +548,6 @@ func (o *VpsDetails) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "pack")
-		delete(additionalProperties, "resources")
 		delete(additionalProperties, "region")
 		delete(additionalProperties, "datacenter")
 		delete(additionalProperties, "reference")
@@ -558,9 +557,10 @@ func (o *VpsDetails) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "hasPublicIpV4")
 		delete(additionalProperties, "rootDiskSize")
 		delete(additionalProperties, "startedAt")
-		delete(additionalProperties, "contract")
 		delete(additionalProperties, "iso")
 		delete(additionalProperties, "ips")
+		delete(additionalProperties, "resources")
+		delete(additionalProperties, "contract")
 		o.AdditionalProperties = additionalProperties
 	}
 

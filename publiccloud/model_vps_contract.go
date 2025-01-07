@@ -32,6 +32,7 @@ type VpsContract struct {
 	Sla string `json:"sla"`
 	ControlPanel NullableString `json:"controlPanel"`
 	InModification bool `json:"inModification"`
+	DataTraffic DataTraffic `json:"dataTraffic"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,7 +42,7 @@ type _VpsContract VpsContract
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVpsContract(billingFrequency BillingFrequency, term ContractTerm, type_ ContractType, endsAt NullableTime, createdAt time.Time, state ContractState, id string, sla string, controlPanel NullableString, inModification bool) *VpsContract {
+func NewVpsContract(billingFrequency BillingFrequency, term ContractTerm, type_ ContractType, endsAt NullableTime, createdAt time.Time, state ContractState, id string, sla string, controlPanel NullableString, inModification bool, dataTraffic DataTraffic) *VpsContract {
 	this := VpsContract{}
 	this.BillingFrequency = billingFrequency
 	this.Term = term
@@ -53,6 +54,7 @@ func NewVpsContract(billingFrequency BillingFrequency, term ContractTerm, type_ 
 	this.Sla = sla
 	this.ControlPanel = controlPanel
 	this.InModification = inModification
+	this.DataTraffic = dataTraffic
 	return &this
 }
 
@@ -308,6 +310,30 @@ func (o *VpsContract) SetInModification(v bool) {
 	o.InModification = v
 }
 
+// GetDataTraffic returns the DataTraffic field value
+func (o *VpsContract) GetDataTraffic() DataTraffic {
+	if o == nil {
+		var ret DataTraffic
+		return ret
+	}
+
+	return o.DataTraffic
+}
+
+// GetDataTrafficOk returns a tuple with the DataTraffic field value
+// and a boolean to check if the value has been set.
+func (o *VpsContract) GetDataTrafficOk() (*DataTraffic, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DataTraffic, true
+}
+
+// SetDataTraffic sets field value
+func (o *VpsContract) SetDataTraffic(v DataTraffic) {
+	o.DataTraffic = v
+}
+
 func (o VpsContract) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -328,6 +354,7 @@ func (o VpsContract) ToMap() (map[string]interface{}, error) {
 	toSerialize["sla"] = o.Sla
 	toSerialize["controlPanel"] = o.ControlPanel.Get()
 	toSerialize["inModification"] = o.InModification
+	toSerialize["dataTraffic"] = o.DataTraffic
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -351,6 +378,7 @@ func (o *VpsContract) UnmarshalJSON(data []byte) (err error) {
 		"sla",
 		"controlPanel",
 		"inModification",
+		"dataTraffic",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -390,6 +418,7 @@ func (o *VpsContract) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "sla")
 		delete(additionalProperties, "controlPanel")
 		delete(additionalProperties, "inModification")
+		delete(additionalProperties, "dataTraffic")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -33,6 +33,7 @@ docs/CreateImageOpts.md
 docs/CreateTargetGroupOpts.md
 docs/Credential.md
 docs/CredentialType.md
+docs/DataTraffic.md
 docs/DataTrafficMetrics.md
 docs/DataTransferredMetrics.md
 docs/Datacenter.md
@@ -44,7 +45,7 @@ docs/GetAutoScalingGroupInstanceListResult.md
 docs/GetAutoScalingGroupListResult.md
 docs/GetConnectionsMetricsResult.md
 docs/GetConnectionsPerSecondMetricsResult.md
-docs/GetConsoleAccessToInstanceResult.md
+docs/GetConsoleAccessResult.md
 docs/GetCpuMetricsResult.md
 docs/GetCredentialListByTypeResult.md
 docs/GetCredentialListResult.md
@@ -192,6 +193,7 @@ model_create_image_opts.go
 model_create_target_group_opts.go
 model_credential.go
 model_credential_type.go
+model_data_traffic.go
 model_data_traffic_metrics.go
 model_data_transferred_metrics.go
 model_datacenter.go
@@ -203,7 +205,7 @@ model_get_auto_scaling_group_instance_list_result.go
 model_get_auto_scaling_group_list_result.go
 model_get_connections_metrics_result.go
 model_get_connections_per_second_metrics_result.go
-model_get_console_access_to_instance_result.go
+model_get_console_access_result.go
 model_get_cpu_metrics_result.go
 model_get_credential_list_by_type_result.go
 model_get_credential_list_result.go

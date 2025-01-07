@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
 **Pack** | [**VpsPackType**](VpsPackType.md) |  | 
-**Resources** | [**BaseResources**](BaseResources.md) |  | 
 **Region** | [**RegionName**](RegionName.md) |  | 
 **Datacenter** | [**Datacenter**](Datacenter.md) |  | 
 **Reference** | **string** | The identifying name set to the instance | 
@@ -16,13 +15,12 @@ Name | Type | Description | Notes
 **HasPublicIpV4** | **bool** |  | 
 **RootDiskSize** | **int32** | The root disk&#39;s size in GB. Must be at least 5 GB for Linux and FreeBSD instances and 50 GB for Windows instances | 
 **StartedAt** | **NullableTime** | Date and time when the VPS was started for the first time, right after launching it | 
-**Contract** | [**VpsContract**](VpsContract.md) |  | 
 
 ## Methods
 
 ### NewVpsBase
 
-`func NewVpsBase(id string, pack VpsPackType, resources BaseResources, region RegionName, datacenter Datacenter, reference string, image Image, state VpsState, hasPublicIpV4 bool, rootDiskSize int32, startedAt NullableTime, contract VpsContract, ) *VpsBase`
+`func NewVpsBase(id string, pack VpsPackType, region RegionName, datacenter Datacenter, reference string, image Image, state VpsState, hasPublicIpV4 bool, rootDiskSize int32, startedAt NullableTime, ) *VpsBase`
 
 NewVpsBase instantiates a new VpsBase object
 This constructor will assign default values to properties that have it defined,
@@ -75,26 +73,6 @@ and a boolean to check if the value has been set.
 `func (o *VpsBase) SetPack(v VpsPackType)`
 
 SetPack sets Pack field to given value.
-
-
-### GetResources
-
-`func (o *VpsBase) GetResources() BaseResources`
-
-GetResources returns the Resources field if non-nil, zero value otherwise.
-
-### GetResourcesOk
-
-`func (o *VpsBase) GetResourcesOk() (*BaseResources, bool)`
-
-GetResourcesOk returns a tuple with the Resources field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetResources
-
-`func (o *VpsBase) SetResources(v BaseResources)`
-
-SetResources sets Resources field to given value.
 
 
 ### GetRegion
@@ -302,26 +280,6 @@ SetStartedAt sets StartedAt field to given value.
 `func (o *VpsBase) UnsetStartedAt()`
 
 UnsetStartedAt ensures that no value is present for StartedAt, not even an explicit nil
-### GetContract
-
-`func (o *VpsBase) GetContract() VpsContract`
-
-GetContract returns the Contract field if non-nil, zero value otherwise.
-
-### GetContractOk
-
-`func (o *VpsBase) GetContractOk() (*VpsContract, bool)`
-
-GetContractOk returns a tuple with the Contract field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetContract
-
-`func (o *VpsBase) SetContract(v VpsContract)`
-
-SetContract sets Contract field to given value.
-
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -14,37 +14,37 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetConsoleAccessToInstanceResult type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetConsoleAccessToInstanceResult{}
+// checks if the GetConsoleAccessResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetConsoleAccessResult{}
 
-// GetConsoleAccessToInstanceResult struct for GetConsoleAccessToInstanceResult
-type GetConsoleAccessToInstanceResult struct {
+// GetConsoleAccessResult struct for GetConsoleAccessResult
+type GetConsoleAccessResult struct {
 	// The URL to the console
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _GetConsoleAccessToInstanceResult GetConsoleAccessToInstanceResult
+type _GetConsoleAccessResult GetConsoleAccessResult
 
-// NewGetConsoleAccessToInstanceResult instantiates a new GetConsoleAccessToInstanceResult object
+// NewGetConsoleAccessResult instantiates a new GetConsoleAccessResult object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetConsoleAccessToInstanceResult() *GetConsoleAccessToInstanceResult {
-	this := GetConsoleAccessToInstanceResult{}
+func NewGetConsoleAccessResult() *GetConsoleAccessResult {
+	this := GetConsoleAccessResult{}
 	return &this
 }
 
-// NewGetConsoleAccessToInstanceResultWithDefaults instantiates a new GetConsoleAccessToInstanceResult object
+// NewGetConsoleAccessResultWithDefaults instantiates a new GetConsoleAccessResult object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetConsoleAccessToInstanceResultWithDefaults() *GetConsoleAccessToInstanceResult {
-	this := GetConsoleAccessToInstanceResult{}
+func NewGetConsoleAccessResultWithDefaults() *GetConsoleAccessResult {
+	this := GetConsoleAccessResult{}
 	return &this
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
-func (o *GetConsoleAccessToInstanceResult) GetUrl() string {
+func (o *GetConsoleAccessResult) GetUrl() string {
 	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
@@ -54,7 +54,7 @@ func (o *GetConsoleAccessToInstanceResult) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetConsoleAccessToInstanceResult) GetUrlOk() (*string, bool) {
+func (o *GetConsoleAccessResult) GetUrlOk() (*string, bool) {
 	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
@@ -62,7 +62,7 @@ func (o *GetConsoleAccessToInstanceResult) GetUrlOk() (*string, bool) {
 }
 
 // HasUrl returns a boolean if a field has been set.
-func (o *GetConsoleAccessToInstanceResult) HasUrl() bool {
+func (o *GetConsoleAccessResult) HasUrl() bool {
 	if o != nil && !IsNil(o.Url) {
 		return true
 	}
@@ -71,11 +71,11 @@ func (o *GetConsoleAccessToInstanceResult) HasUrl() bool {
 }
 
 // SetUrl gets a reference to the given string and assigns it to the Url field.
-func (o *GetConsoleAccessToInstanceResult) SetUrl(v string) {
+func (o *GetConsoleAccessResult) SetUrl(v string) {
 	o.Url = &v
 }
 
-func (o GetConsoleAccessToInstanceResult) MarshalJSON() ([]byte, error) {
+func (o GetConsoleAccessResult) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -83,7 +83,7 @@ func (o GetConsoleAccessToInstanceResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetConsoleAccessToInstanceResult) ToMap() (map[string]interface{}, error) {
+func (o GetConsoleAccessResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
@@ -96,16 +96,16 @@ func (o GetConsoleAccessToInstanceResult) ToMap() (map[string]interface{}, error
 	return toSerialize, nil
 }
 
-func (o *GetConsoleAccessToInstanceResult) UnmarshalJSON(data []byte) (err error) {
-	varGetConsoleAccessToInstanceResult := _GetConsoleAccessToInstanceResult{}
+func (o *GetConsoleAccessResult) UnmarshalJSON(data []byte) (err error) {
+	varGetConsoleAccessResult := _GetConsoleAccessResult{}
 
-	err = json.Unmarshal(data, &varGetConsoleAccessToInstanceResult)
+	err = json.Unmarshal(data, &varGetConsoleAccessResult)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetConsoleAccessToInstanceResult(varGetConsoleAccessToInstanceResult)
+	*o = GetConsoleAccessResult(varGetConsoleAccessResult)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -117,38 +117,38 @@ func (o *GetConsoleAccessToInstanceResult) UnmarshalJSON(data []byte) (err error
 	return err
 }
 
-type NullableGetConsoleAccessToInstanceResult struct {
-	value *GetConsoleAccessToInstanceResult
+type NullableGetConsoleAccessResult struct {
+	value *GetConsoleAccessResult
 	isSet bool
 }
 
-func (v NullableGetConsoleAccessToInstanceResult) Get() *GetConsoleAccessToInstanceResult {
+func (v NullableGetConsoleAccessResult) Get() *GetConsoleAccessResult {
 	return v.value
 }
 
-func (v *NullableGetConsoleAccessToInstanceResult) Set(val *GetConsoleAccessToInstanceResult) {
+func (v *NullableGetConsoleAccessResult) Set(val *GetConsoleAccessResult) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetConsoleAccessToInstanceResult) IsSet() bool {
+func (v NullableGetConsoleAccessResult) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetConsoleAccessToInstanceResult) Unset() {
+func (v *NullableGetConsoleAccessResult) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetConsoleAccessToInstanceResult(val *GetConsoleAccessToInstanceResult) *NullableGetConsoleAccessToInstanceResult {
-	return &NullableGetConsoleAccessToInstanceResult{value: val, isSet: true}
+func NewNullableGetConsoleAccessResult(val *GetConsoleAccessResult) *NullableGetConsoleAccessResult {
+	return &NullableGetConsoleAccessResult{value: val, isSet: true}
 }
 
-func (v NullableGetConsoleAccessToInstanceResult) MarshalJSON() ([]byte, error) {
+func (v NullableGetConsoleAccessResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetConsoleAccessToInstanceResult) UnmarshalJSON(src []byte) error {
+func (v *NullableGetConsoleAccessResult) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

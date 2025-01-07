@@ -14,12 +14,13 @@ Name | Type | Description | Notes
 **Sla** | **string** |  | 
 **ControlPanel** | **NullableString** |  | 
 **InModification** | **bool** |  | 
+**DataTraffic** | [**DataTraffic**](DataTraffic.md) |  | 
 
 ## Methods
 
 ### NewVpsContract
 
-`func NewVpsContract(billingFrequency BillingFrequency, term ContractTerm, type_ ContractType, endsAt NullableTime, createdAt time.Time, state ContractState, id string, sla string, controlPanel NullableString, inModification bool, ) *VpsContract`
+`func NewVpsContract(billingFrequency BillingFrequency, term ContractTerm, type_ ContractType, endsAt NullableTime, createdAt time.Time, state ContractState, id string, sla string, controlPanel NullableString, inModification bool, dataTraffic DataTraffic, ) *VpsContract`
 
 NewVpsContract instantiates a new VpsContract object
 This constructor will assign default values to properties that have it defined,
@@ -252,6 +253,26 @@ and a boolean to check if the value has been set.
 `func (o *VpsContract) SetInModification(v bool)`
 
 SetInModification sets InModification field to given value.
+
+
+### GetDataTraffic
+
+`func (o *VpsContract) GetDataTraffic() DataTraffic`
+
+GetDataTraffic returns the DataTraffic field if non-nil, zero value otherwise.
+
+### GetDataTrafficOk
+
+`func (o *VpsContract) GetDataTrafficOk() (*DataTraffic, bool)`
+
+GetDataTrafficOk returns a tuple with the DataTraffic field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDataTraffic
+
+`func (o *VpsContract) SetDataTraffic(v DataTraffic)`
+
+SetDataTraffic sets DataTraffic field to given value.
 
 
 

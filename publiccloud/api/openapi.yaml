@@ -1722,13 +1722,12 @@ paths:
       operationId: startVPS
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       responses:
@@ -1796,7 +1795,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
-      summary: Start a specific resource VPS
+      summary: Start a specific VPS
       tags:
       - publiccloud
   /instances/{instanceId}/stop:
@@ -1971,13 +1970,12 @@ paths:
       operationId: stopVPS
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       responses:
@@ -2220,13 +2218,12 @@ paths:
       operationId: rebootVPS
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       responses:
@@ -2300,7 +2297,7 @@ paths:
   /instances/{instanceId}/console:
     get:
       description: Get console access to the instance
-      operationId: getConsoleAccessToInstance
+      operationId: getInstanceConsoleAccess
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -2319,7 +2316,94 @@ paths:
               example:
                 url: https://public-cloud.leaseweb.com/resource/noVNC/vnc.html?autoconnect=true&port=8080&token=dvoPyDxbBl8LC9OsXI55CmAUmUA50lY19b0/v/7jrA6VkrdflVWw8S2XuxDZrBaaSo4XdBAYmpfqC0kUr2aOVHjMlGFb6movdnKNxvMOEmC0spwU9XbdZJrWXzGicCLT4X4GMxgN13nn1oDQb8k9ag2rMMxENyiPZ3bbV1iGuL4cWLEMad8hHFXjJ7P2MvbnpiasXK5wKuHadrR76778ZM22xxzvjarg9S6bAWziH1u3VdKIQyJMIrDmAdjYRqL1IHqrN+uLrY6WPzv+s51lnNYd0zeQtB7YWBZup8VDcZSt5C0GrYnZx3Vh4fXWOOsFlWZgdEGKf9oM9y9RX2G/jLlVeVv4LmVCN02GRr7SAfyx8WcuWGXS7WsxpXTzdxWEm9EMZDrPQhFiZKo20PXRdgT6KbdnqCI/j8z5iPAKGO3YI5BcK5sUdhHgFUMNgJUw/qhz71/xivIP8UKrWVgZMRWXmt6hNWIeHLqrdZ0n5m9It4Os8UaKgeBvwlFTpzNTUWxvoI0+2sa8GAmW3RCe9mfK3xvW/iy1MZ651cALLVmoj6imZl7K7P33iQ==
               schema:
-                $ref: '#/components/schemas/getConsoleAccessToInstanceResult'
+                $ref: '#/components/schemas/getConsoleAccessResult'
+          description: OK.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get console access
+      tags:
+      - publiccloud
+  /vps/{vpsId}/console:
+    get:
+      description: Get console access to the VPS
+      operationId: getVPSConsoleAccess
+      parameters:
+      - description: VPS ID
+        example: "999999999"
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                url: https://public-cloud.leaseweb.com/resource/noVNC/vnc.html?autoconnect=true&port=8080&token=dvoPyDxbBl8LC9OsXI55CmAUmUA50lY19b0/v/7jrA6VkrdflVWw8S2XuxDZrBaaSo4XdBAYmpfqC0kUr2aOVHjMlGFb6movdnKNxvMOEmC0spwU9XbdZJrWXzGicCLT4X4GMxgN13nn1oDQb8k9ag2rMMxENyiPZ3bbV1iGuL4cWLEMad8hHFXjJ7P2MvbnpiasXK5wKuHadrR76778ZM22xxzvjarg9S6bAWziH1u3VdKIQyJMIrDmAdjYRqL1IHqrN+uLrY6WPzv+s51lnNYd0zeQtB7YWBZup8VDcZSt5C0GrYnZx3Vh4fXWOOsFlWZgdEGKf9oM9y9RX2G/jLlVeVv4LmVCN02GRr7SAfyx8WcuWGXS7WsxpXTzdxWEm9EMZDrPQhFiZKo20PXRdgT6KbdnqCI/j8z5iPAKGO3YI5BcK5sUdhHgFUMNgJUw/qhz71/xivIP8UKrWVgZMRWXmt6hNWIeHLqrdZ0n5m9It4Os8UaKgeBvwlFTpzNTUWxvoI0+2sa8GAmW3RCe9mfK3xvW/iy1MZ651cALLVmoj6imZl7K7P33iQ==
+              schema:
+                $ref: '#/components/schemas/getConsoleAccessResult'
           description: OK.
         "400":
           content:
@@ -3029,13 +3113,12 @@ paths:
       operationId: deleteVPSCredentials
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       responses:
@@ -3098,13 +3181,12 @@ paths:
       operationId: getVPSCredentialList
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       responses:
@@ -3179,13 +3261,12 @@ paths:
       operationId: storeVPSCredential
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       requestBody:
@@ -3379,13 +3460,12 @@ paths:
       operationId: getVPSCredentialListByType
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - description: Type of credential
@@ -3480,13 +3560,12 @@ paths:
       operationId: deleteVPSCredential
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - description: Type of credential
@@ -3566,13 +3645,12 @@ paths:
       operationId: getVPSCredential
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - description: Type of credential
@@ -3671,13 +3749,12 @@ paths:
       operationId: updateVpsCredential
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - description: Type of credential
@@ -4180,13 +4257,12 @@ paths:
       operationId: resetVPSPassword
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       responses:
@@ -5099,13 +5175,12 @@ paths:
       operationId: attachVPSISO
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       requestBody:
@@ -5273,13 +5348,12 @@ paths:
       operationId: detachVPSISO
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       responses:
@@ -5589,13 +5663,12 @@ paths:
       operationId: getReinstallVPSImageList
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - description: Limit the number of results returned.
@@ -5930,13 +6003,12 @@ paths:
       operationId: reinstallVPS
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       requestBody:
@@ -7616,13 +7688,12 @@ paths:
       operationId: getVPSIPList
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - explode: true
@@ -8142,13 +8213,12 @@ paths:
       operationId: getVPSIP
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - explode: false
@@ -8236,13 +8306,12 @@ paths:
       operationId: updateVPSIP
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - explode: false
@@ -8589,13 +8658,12 @@ paths:
       operationId: nullRouteVPSIP
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - explode: false
@@ -8919,13 +8987,12 @@ paths:
       operationId: removeVPSIPNullRoute
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - explode: false
@@ -9344,13 +9411,12 @@ paths:
       operationId: getVPSDataTrafficMetrics
       parameters:
       - description: VPS ID
-        example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
         required: true
         schema:
-          format: uuid
           type: string
         style: simple
       - description: The start of the interval to get the metric
@@ -11382,7 +11448,7 @@ paths:
   /instances/{instanceId}/snapshots:
     get:
       description: List instance snapshots
-      operationId: getSnapshotList
+      operationId: getInstanceSnapshotList
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -11489,7 +11555,7 @@ paths:
         The time taken to create the snapshot depends on several factors, including memory size and usage.
 
         Allowed only one snapshot per instance.
-      operationId: createSnapshot
+      operationId: createInstanceSnapshot
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -11571,7 +11637,7 @@ paths:
       - publiccloud
   /instances/{instanceId}/snapshots/{snapshotId}:
     delete:
-      operationId: deleteSnapshot
+      operationId: deleteInstanceSnapshot
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -11593,8 +11659,8 @@ paths:
         style: simple
       responses:
         "202":
-          description: Request has been accepted and instance and snapshot is going
-            to be deleted. Its current state can be checked using the snapshots endpoints.
+          description: Request has been accepted and snapshot is going to be deleted.
+            Its current state can be checked using the snapshots endpoints.
         "400":
           content:
             application/json:
@@ -11660,7 +11726,7 @@ paths:
       tags:
       - publiccloud
     get:
-      operationId: getSnapshot
+      operationId: getInstanceSnapshot
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -11746,7 +11812,7 @@ paths:
       tags:
       - publiccloud
     put:
-      operationId: restoreSnapshot
+      operationId: restoreInstanceSnapshot
       parameters:
       - description: Instance's ID
         example: ace712e9-a166-47f1-9065-4af0f7e7fce1
@@ -11768,8 +11834,8 @@ paths:
         style: simple
       responses:
         "202":
-          description: Request has been accepted and instance and snapshot is going
-            to be restored to instance soon.
+          description: Request has been accepted and snapshot is going to be restored
+            to instance soon.
         "400":
           content:
             application/json:
@@ -11832,6 +11898,456 @@ paths:
                 $ref: '#/components/schemas/errorResult'
           description: Service Unavailable.
       summary: Restore instance snapshot
+      tags:
+      - publiccloud
+  /vps/{vpsId}/snapshots:
+    get:
+      description: List VPS snapshots
+      operationId: getVPSSnapshotList
+      parameters:
+      - description: VPS ID
+        example: "999999999"
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Limit the number of results returned.
+        example: 20
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Return results starting from the given offset.
+        example: 10
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                _metadata:
+                  totalCount: 1
+                  limit: 20
+                  offset: 0
+                snapshots:
+                - id: 624c53c3-48e9-41d1-833f-90a9abf5fd95
+                  displayName: snapshot 1
+                  state: READY
+                  created: 2023-11-02T07:31:28+0000
+              schema:
+                $ref: '#/components/schemas/getSnapshotListResult'
+          description: OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: List snapshots
+      tags:
+      - publiccloud
+    post:
+      description: |-
+        The VPS must be running before the execution.
+
+        The time taken to create the snapshot depends on several factors, including memory size and usage.
+
+        Allowed only one snapshot per VPS.
+      operationId: createVPSSnapshot
+      parameters:
+      - description: VPS ID
+        example: "999999999"
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Request has been accepted and snapshot is going to be ready
+            soon.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Create VPS snapshot
+      tags:
+      - publiccloud
+  /vps/{vpsId}/snapshots/{snapshotId}:
+    delete:
+      operationId: deleteVPSSnapshot
+      parameters:
+      - description: VPS ID
+        example: "999999999"
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Request has been accepted and snapshot is going to be deleted.
+            Its current state can be checked using the snapshots endpoints.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Delete VPS snapshot
+      tags:
+      - publiccloud
+    get:
+      operationId: getVPSSnapshot
+      parameters:
+      - description: VPS ID
+        example: "999999999"
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                created: 2023-11-02T07:31:28+0000
+                displayName: snapshot 1
+                id: ef73e9e2-95cd-49ef-940f-a24e6ad6c4a0
+                state: READY
+              schema:
+                $ref: '#/components/schemas/snapshot'
+          description: OK.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Get snapshot detail
+      tags:
+      - publiccloud
+    put:
+      operationId: restoreVPSSnapshot
+      parameters:
+      - description: VPS ID
+        example: "999999999"
+        explode: false
+        in: path
+        name: vpsId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: snapshotId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "202":
+          description: Request has been accepted and snapshot is going to be restored
+            to VPS soon.
+        "400":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "400"
+                errorDetails: {}
+                errorMessage: The API could not interpret your request correctly.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Bad Request.
+        "401":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "401"
+                errorMessage: You are not authorized to view this resource.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Authorized.
+        "403":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "403"
+                errorMessage: Access to the requested resource is forbidden.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Forbidden.
+        "404":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "404"
+                errorMessage: Resource not found
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Not Found.
+        "500":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "500"
+                errorMessage: '''The API could not handle your request at this time.'
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Internal Server Error.
+        "503":
+          content:
+            application/json:
+              example:
+                correlationId: 289346a1-3eaf-4da4-b707-62ef12eb08be
+                errorCode: "503"
+                errorMessage: The API is not available at the moment.
+              schema:
+                $ref: '#/components/schemas/errorResult'
+          description: Service Unavailable.
+      summary: Restore VPS snapshot
       tags:
       - publiccloud
   /autoScalingGroups:
@@ -13735,8 +14251,8 @@ paths:
         schema:
           type: integer
         style: form
-      - description: Equipment Id
-        example: "123581321"
+      - description: VPS Equipment Id
+        example: "999999999"
         explode: true
         in: query
         name: id
@@ -13785,16 +14301,6 @@ paths:
                 vps:
                 - id: "123581321"
                   pack: Leaseweb VPS 2
-                  resources:
-                    cpu:
-                      value: 4
-                      unit: vCPU
-                    memory:
-                      value: 6
-                      unit: GiB
-                    publicNetworkSpeed:
-                      value: 10000
-                      unit: Mbps
                   region: eu-central-1
                   datacenter: FRA-01
                   reference: testing
@@ -13816,17 +14322,6 @@ paths:
                     reverseLookup: ""
                     mainIp: true
                     networkType: PUBLIC
-                  contract:
-                    id: "41228459000100"
-                    billingFrequency: 1
-                    term: 12
-                    type: MONTHLY
-                    state: ACTIVE
-                    endsAt: 2024-10-24T21:13:25+00:00
-                    createdAt: 2024-10-24T21:13:25+00:00
-                    sla: Basic
-                    controlPanel: cPanel Admin 5
-                    inModification: false
                   startedAt: 2024-10-24T21:13:25+00:00
               schema:
                 $ref: '#/components/schemas/getVpsListResult'
@@ -13890,8 +14385,8 @@ paths:
       description: Get VPS details.
       operationId: getVps
       parameters:
-      - description: Vps ID
-        example: "123581321"
+      - description: VPS ID
+        example: "999999999"
         explode: false
         in: path
         name: vpsId
@@ -13951,6 +14446,9 @@ paths:
                   sla: Basic
                   controlPanel: cPanel Admin 5
                   inModification: false
+                  dataTraffic:
+                    value: 30
+                    unit: TB
                 startedAt: 2024-10-24T21:13:25+00:00
                 iso: null
               schema:
@@ -14056,13 +14554,12 @@ components:
       style: simple
     vpsId:
       description: VPS ID
-      example: ace712e9-a166-47f1-9065-4af0f7e7fce1
+      example: "999999999"
       explode: false
       in: path
       name: vpsId
       required: true
       schema:
-        format: uuid
         type: string
       style: simple
     credentialType:
@@ -14284,8 +14781,8 @@ components:
         type: string
       style: simple
     vpsIdQuery:
-      description: Equipment Id
-      example: "123581321"
+      description: VPS Equipment Id
+      example: "999999999"
       explode: true
       in: query
       name: id
@@ -14319,8 +14816,8 @@ components:
         $ref: '#/components/schemas/vpsPackType'
       style: form
     vpsIdPath:
-      description: Vps ID
-      example: "123581321"
+      description: VPS ID
+      example: "999999999"
       explode: false
       in: path
       name: vpsId
@@ -15688,7 +16185,7 @@ components:
           minimum: 5
           type: integer
       type: object
-    getConsoleAccessToInstanceResult:
+    getConsoleAccessResult:
       example:
         url: url
       properties:
@@ -18218,40 +18715,6 @@ components:
       - SIN-01
       title: datacenter
       type: string
-    vpsContract:
-      allOf:
-      - $ref: '#/components/schemas/baseContract'
-      - properties:
-          id:
-            example: "41228459000100"
-            type: string
-          sla:
-            example: Basic
-            type: string
-          controlPanel:
-            example: cPanel Admin 5
-            nullable: true
-            type: string
-          inModification:
-            example: false
-            type: boolean
-        required:
-        - controlPanel
-        - id
-        - inModification
-        - sla
-        type: object
-      example:
-        billingFrequency: 1
-        controlPanel: cPanel Admin 5
-        inModification: false
-        createdAt: 2023-11-30T16:31:28Z
-        sla: Basic
-        term: 6
-        state: ACTIVE
-        id: "41228459000100"
-        type: HOURLY
-        endsAt: 2023-11-30T16:31:28Z
     vpsBase:
       properties:
         id:
@@ -18259,8 +18722,6 @@ components:
           type: string
         pack:
           $ref: '#/components/schemas/vpsPackType'
-        resources:
-          $ref: '#/components/schemas/baseResources'
         region:
           $ref: '#/components/schemas/regionName'
         datacenter:
@@ -18288,10 +18749,7 @@ components:
           format: date-time
           nullable: true
           type: string
-        contract:
-          $ref: '#/components/schemas/vpsContract'
       required:
-      - contract
       - datacenter
       - hasPublicIpV4
       - id
@@ -18299,7 +18757,6 @@ components:
       - pack
       - reference
       - region
-      - resources
       - rootDiskSize
       - startedAt
       - state
@@ -18318,6 +18775,7 @@ components:
         title: vps
         type: object
       example:
+        reference: reference
         image:
           flavour: ubuntu
           custom: true
@@ -18325,29 +18783,12 @@ components:
           id: UBUNTU_22_04_64BIT
           family: linux
         rootDiskSize: 84
-        contract:
-          billingFrequency: 1
-          controlPanel: cPanel Admin 5
-          inModification: false
-          createdAt: 2023-11-30T16:31:28Z
-          sla: Basic
-          term: 6
-          state: ACTIVE
-          id: "41228459000100"
-          type: HOURLY
-          endsAt: 2023-11-30T16:31:28Z
-        resources:
-          memory:
-            unit: GiB
-            value: 3.75
-          publicNetworkSpeed:
-            unit: Gbps
-            value: 10
-          cpu:
-            unit: vCPU
-            value: 2
         startedAt: 2000-01-23T04:56:07.000+00:00
         datacenter: LON-01
+        id: "123581321"
+        marketAppId: CPANEL_30
+        state: RUNNING
+        region: eu-west-3
         pack: pack
         ips:
         - prefixLength: "28"
@@ -18364,45 +18805,24 @@ components:
           mainIp: true
           networkType: internal
           version: 3
-        reference: reference
-        id: "123581321"
-        marketAppId: CPANEL_30
-        state: RUNNING
-        region: eu-west-3
         hasPublicIpV4: true
     getVpsListResult:
       example:
         vps:
-        - image:
+        - reference: reference
+          image:
             flavour: ubuntu
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
           rootDiskSize: 84
-          contract:
-            billingFrequency: 1
-            controlPanel: cPanel Admin 5
-            inModification: false
-            createdAt: 2023-11-30T16:31:28Z
-            sla: Basic
-            term: 6
-            state: ACTIVE
-            id: "41228459000100"
-            type: HOURLY
-            endsAt: 2023-11-30T16:31:28Z
-          resources:
-            memory:
-              unit: GiB
-              value: 3.75
-            publicNetworkSpeed:
-              unit: Gbps
-              value: 10
-            cpu:
-              unit: vCPU
-              value: 2
           startedAt: 2000-01-23T04:56:07.000+00:00
           datacenter: LON-01
+          id: "123581321"
+          marketAppId: CPANEL_30
+          state: RUNNING
+          region: eu-west-3
           pack: pack
           ips:
           - prefixLength: "28"
@@ -18419,42 +18839,21 @@ components:
             mainIp: true
             networkType: internal
             version: 3
-          reference: reference
-          id: "123581321"
-          marketAppId: CPANEL_30
-          state: RUNNING
-          region: eu-west-3
           hasPublicIpV4: true
-        - image:
+        - reference: reference
+          image:
             flavour: ubuntu
             custom: true
             name: Ubuntu 20.04 LTS (x86_64)
             id: UBUNTU_22_04_64BIT
             family: linux
           rootDiskSize: 84
-          contract:
-            billingFrequency: 1
-            controlPanel: cPanel Admin 5
-            inModification: false
-            createdAt: 2023-11-30T16:31:28Z
-            sla: Basic
-            term: 6
-            state: ACTIVE
-            id: "41228459000100"
-            type: HOURLY
-            endsAt: 2023-11-30T16:31:28Z
-          resources:
-            memory:
-              unit: GiB
-              value: 3.75
-            publicNetworkSpeed:
-              unit: Gbps
-              value: 10
-            cpu:
-              unit: vCPU
-              value: 2
           startedAt: 2000-01-23T04:56:07.000+00:00
           datacenter: LON-01
+          id: "123581321"
+          marketAppId: CPANEL_30
+          state: RUNNING
+          region: eu-west-3
           pack: pack
           ips:
           - prefixLength: "28"
@@ -18471,11 +18870,6 @@ components:
             mainIp: true
             networkType: internal
             version: 3
-          reference: reference
-          id: "123581321"
-          marketAppId: CPANEL_30
-          state: RUNNING
-          region: eu-west-3
           hasPublicIpV4: true
         _metadata:
           offset: 0
@@ -18490,6 +18884,46 @@ components:
           $ref: '#/components/schemas/_metadata'
       title: vps
       type: object
+    vpsContract:
+      allOf:
+      - $ref: '#/components/schemas/baseContract'
+      - properties:
+          id:
+            example: "41228459000100"
+            type: string
+          sla:
+            example: Basic
+            type: string
+          controlPanel:
+            example: cPanel Admin 5
+            nullable: true
+            type: string
+          inModification:
+            example: false
+            type: boolean
+          dataTraffic:
+            $ref: '#/components/schemas/dataTraffic'
+        required:
+        - controlPanel
+        - dataTraffic
+        - id
+        - inModification
+        - sla
+        type: object
+      example:
+        billingFrequency: 1
+        controlPanel: cPanel Admin 5
+        inModification: false
+        createdAt: 2023-11-30T16:31:28Z
+        sla: Basic
+        term: 6
+        state: ACTIVE
+        id: "41228459000100"
+        dataTraffic:
+          unit: TB
+          value: 30
+        type: HOURLY
+        endsAt: 2023-11-30T16:31:28Z
     vpsDetails:
       allOf:
       - $ref: '#/components/schemas/vpsBase'
@@ -18500,8 +18934,14 @@ components:
             items:
               $ref: '#/components/schemas/ipDetails'
             type: array
+          resources:
+            $ref: '#/components/schemas/baseResources'
+          contract:
+            $ref: '#/components/schemas/vpsContract'
         required:
+        - contract
         - ips
+        - resources
         title: vps
         type: object
       example:
@@ -18524,8 +18964,12 @@ components:
           term: 6
           state: ACTIVE
           id: "41228459000100"
+          dataTraffic:
+            unit: TB
+            value: 30
           type: HOURLY
           endsAt: 2023-11-30T16:31:28Z
+        startedAt: 2000-01-23T04:56:07.000+00:00
         resources:
           memory:
             unit: GiB
@@ -18536,7 +18980,6 @@ components:
           cpu:
             unit: vCPU
             value: 2
-        startedAt: 2000-01-23T04:56:07.000+00:00
         datacenter: LON-01
         pack: pack
         ips:
@@ -19244,6 +19687,23 @@ components:
       - protocol
       - uri
       title: healthCheck
+      type: object
+    dataTraffic:
+      description: Data traffic commitment
+      example:
+        unit: TB
+        value: 30
+      properties:
+        value:
+          example: 30
+          type: number
+        unit:
+          enum:
+          - TB
+          - GB
+          example: TB
+          type: string
+      title: dataTraffic
       type: object
   securitySchemes:
     BearerAuth:

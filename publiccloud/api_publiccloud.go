@@ -113,6 +113,24 @@ Available ISOs can be obtained using `/v1/isos`.
 	CreateImageExecute(r ApiCreateImageRequest) (*ImageDetails, *http.Response, error)
 
 	/*
+	CreateInstanceSnapshot Create instance snapshot
+
+	The instance must be running before the execution.
+
+The time taken to create the snapshot depends on several factors, including memory size and usage.
+
+Allowed only one snapshot per instance.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiCreateInstanceSnapshotRequest
+	*/
+	CreateInstanceSnapshot(ctx context.Context, instanceId string) ApiCreateInstanceSnapshotRequest
+
+	// CreateInstanceSnapshotExecute executes the request
+	CreateInstanceSnapshotExecute(r ApiCreateInstanceSnapshotRequest) (*http.Response, error)
+
+	/*
 	CreateLoadBalancerListener Create listener
 
 	Create listener
@@ -128,24 +146,6 @@ Available ISOs can be obtained using `/v1/isos`.
 	CreateLoadBalancerListenerExecute(r ApiCreateLoadBalancerListenerRequest) (*LoadBalancerListener, *http.Response, error)
 
 	/*
-	CreateSnapshot Create instance snapshot
-
-	The instance must be running before the execution.
-
-The time taken to create the snapshot depends on several factors, including memory size and usage.
-
-Allowed only one snapshot per instance.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param instanceId Instance's ID
-	@return ApiCreateSnapshotRequest
-	*/
-	CreateSnapshot(ctx context.Context, instanceId string) ApiCreateSnapshotRequest
-
-	// CreateSnapshotExecute executes the request
-	CreateSnapshotExecute(r ApiCreateSnapshotRequest) (*http.Response, error)
-
-	/*
 	CreateTargetGroup Create Target Group
 
 	Create a Target Group
@@ -158,6 +158,24 @@ Allowed only one snapshot per instance.
 	// CreateTargetGroupExecute executes the request
 	//  @return TargetGroup
 	CreateTargetGroupExecute(r ApiCreateTargetGroupRequest) (*TargetGroup, *http.Response, error)
+
+	/*
+	CreateVPSSnapshot Create VPS snapshot
+
+	The VPS must be running before the execution.
+
+The time taken to create the snapshot depends on several factors, including memory size and usage.
+
+Allowed only one snapshot per VPS.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param vpsId VPS ID
+	@return ApiCreateVPSSnapshotRequest
+	*/
+	CreateVPSSnapshot(ctx context.Context, vpsId string) ApiCreateVPSSnapshotRequest
+
+	// CreateVPSSnapshotExecute executes the request
+	CreateVPSSnapshotExecute(r ApiCreateVPSSnapshotRequest) (*http.Response, error)
 
 	/*
 	DeleteAutoScalingGroup Delete Auto Scaling Group
@@ -200,6 +218,19 @@ Allowed only one snapshot per instance.
 	DeleteInstanceCredentialsExecute(r ApiDeleteInstanceCredentialsRequest) (*http.Response, error)
 
 	/*
+	DeleteInstanceSnapshot Delete instance snapshot
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param snapshotId
+	@return ApiDeleteInstanceSnapshotRequest
+	*/
+	DeleteInstanceSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiDeleteInstanceSnapshotRequest
+
+	// DeleteInstanceSnapshotExecute executes the request
+	DeleteInstanceSnapshotExecute(r ApiDeleteInstanceSnapshotRequest) (*http.Response, error)
+
+	/*
 	DeleteLoadBalancerListener Delete load balancer listener
 
 	Delete a listener
@@ -213,19 +244,6 @@ Allowed only one snapshot per instance.
 
 	// DeleteLoadBalancerListenerExecute executes the request
 	DeleteLoadBalancerListenerExecute(r ApiDeleteLoadBalancerListenerRequest) (*http.Response, error)
-
-	/*
-	DeleteSnapshot Delete instance snapshot
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param instanceId Instance's ID
-	@param snapshotId
-	@return ApiDeleteSnapshotRequest
-	*/
-	DeleteSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiDeleteSnapshotRequest
-
-	// DeleteSnapshotExecute executes the request
-	DeleteSnapshotExecute(r ApiDeleteSnapshotRequest) (*http.Response, error)
 
 	/*
 	DeleteTargetGroup Delete Target Group
@@ -268,6 +286,19 @@ Allowed only one snapshot per instance.
 
 	// DeleteVPSCredentialsExecute executes the request
 	DeleteVPSCredentialsExecute(r ApiDeleteVPSCredentialsRequest) (*http.Response, error)
+
+	/*
+	DeleteVPSSnapshot Delete VPS snapshot
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param vpsId VPS ID
+	@param snapshotId
+	@return ApiDeleteVPSSnapshotRequest
+	*/
+	DeleteVPSSnapshot(ctx context.Context, vpsId string, snapshotId string) ApiDeleteVPSSnapshotRequest
+
+	// DeleteVPSSnapshotExecute executes the request
+	DeleteVPSSnapshotExecute(r ApiDeleteVPSSnapshotRequest) (*http.Response, error)
 
 	/*
 	DeregisterAutoScalingGroupTargetGroup Deregister Target Group
@@ -397,21 +428,6 @@ Allowed only one snapshot per instance.
 	GetConnectionsPerSecondMetricsExecute(r ApiGetConnectionsPerSecondMetricsRequest) (*GetConnectionsPerSecondMetricsResult, *http.Response, error)
 
 	/*
-	GetConsoleAccessToInstance Get console access
-
-	Get console access to the instance
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param instanceId Instance's ID
-	@return ApiGetConsoleAccessToInstanceRequest
-	*/
-	GetConsoleAccessToInstance(ctx context.Context, instanceId string) ApiGetConsoleAccessToInstanceRequest
-
-	// GetConsoleAccessToInstanceExecute executes the request
-	//  @return GetConsoleAccessToInstanceResult
-	GetConsoleAccessToInstanceExecute(r ApiGetConsoleAccessToInstanceRequest) (*GetConsoleAccessToInstanceResult, *http.Response, error)
-
-	/*
 	GetCpuMetrics Get instance CPU metrics
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -489,6 +505,21 @@ Allowed only one snapshot per instance.
 	// GetInstanceExecute executes the request
 	//  @return InstanceDetails
 	GetInstanceExecute(r ApiGetInstanceRequest) (*InstanceDetails, *http.Response, error)
+
+	/*
+	GetInstanceConsoleAccess Get console access
+
+	Get console access to the instance
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetInstanceConsoleAccessRequest
+	*/
+	GetInstanceConsoleAccess(ctx context.Context, instanceId string) ApiGetInstanceConsoleAccessRequest
+
+	// GetInstanceConsoleAccessExecute executes the request
+	//  @return GetConsoleAccessResult
+	GetInstanceConsoleAccessExecute(r ApiGetInstanceConsoleAccessRequest) (*GetConsoleAccessResult, *http.Response, error)
 
 	/*
 	GetInstanceCredential Get Instance credentials by type and username.
@@ -587,6 +618,35 @@ Allowed only one snapshot per instance.
 	// GetInstanceListExecute executes the request
 	//  @return GetInstanceListResult
 	GetInstanceListExecute(r ApiGetInstanceListRequest) (*GetInstanceListResult, *http.Response, error)
+
+	/*
+	GetInstanceSnapshot Get snapshot detail
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@param snapshotId
+	@return ApiGetInstanceSnapshotRequest
+	*/
+	GetInstanceSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiGetInstanceSnapshotRequest
+
+	// GetInstanceSnapshotExecute executes the request
+	//  @return Snapshot
+	GetInstanceSnapshotExecute(r ApiGetInstanceSnapshotRequest) (*Snapshot, *http.Response, error)
+
+	/*
+	GetInstanceSnapshotList List snapshots
+
+	List instance snapshots
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId Instance's ID
+	@return ApiGetInstanceSnapshotListRequest
+	*/
+	GetInstanceSnapshotList(ctx context.Context, instanceId string) ApiGetInstanceSnapshotListRequest
+
+	// GetInstanceSnapshotListExecute executes the request
+	//  @return GetSnapshotListResult
+	GetInstanceSnapshotListExecute(r ApiGetInstanceSnapshotListRequest) (*GetSnapshotListResult, *http.Response, error)
 
 	/*
 	GetInstanceTypeList List instance types
@@ -823,35 +883,6 @@ Allowed only one snapshot per instance.
 	GetResponseCodesPerSecondMetricsExecute(r ApiGetResponseCodesPerSecondMetricsRequest) (*GetResponseCodesPerSecondMetricsResult, *http.Response, error)
 
 	/*
-	GetSnapshot Get snapshot detail
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param instanceId Instance's ID
-	@param snapshotId
-	@return ApiGetSnapshotRequest
-	*/
-	GetSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiGetSnapshotRequest
-
-	// GetSnapshotExecute executes the request
-	//  @return Snapshot
-	GetSnapshotExecute(r ApiGetSnapshotRequest) (*Snapshot, *http.Response, error)
-
-	/*
-	GetSnapshotList List snapshots
-
-	List instance snapshots
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param instanceId Instance's ID
-	@return ApiGetSnapshotListRequest
-	*/
-	GetSnapshotList(ctx context.Context, instanceId string) ApiGetSnapshotListRequest
-
-	// GetSnapshotListExecute executes the request
-	//  @return GetSnapshotListResult
-	GetSnapshotListExecute(r ApiGetSnapshotListRequest) (*GetSnapshotListResult, *http.Response, error)
-
-	/*
 	GetTargetGroup Get Target Group details
 
 	Get Target Group details.
@@ -909,6 +940,21 @@ Allowed only one snapshot per instance.
 	// GetUpdateInstanceTypeListExecute executes the request
 	//  @return InstanceTypes
 	GetUpdateInstanceTypeListExecute(r ApiGetUpdateInstanceTypeListRequest) (*InstanceTypes, *http.Response, error)
+
+	/*
+	GetVPSConsoleAccess Get console access
+
+	Get console access to the VPS
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param vpsId VPS ID
+	@return ApiGetVPSConsoleAccessRequest
+	*/
+	GetVPSConsoleAccess(ctx context.Context, vpsId string) ApiGetVPSConsoleAccessRequest
+
+	// GetVPSConsoleAccessExecute executes the request
+	//  @return GetConsoleAccessResult
+	GetVPSConsoleAccessExecute(r ApiGetVPSConsoleAccessRequest) (*GetConsoleAccessResult, *http.Response, error)
 
 	/*
 	GetVPSCredential Get VPS credential by type and username.
@@ -995,12 +1041,41 @@ Allowed only one snapshot per instance.
 	GetVPSIPListExecute(r ApiGetVPSIPListRequest) (*GetIPListResult, *http.Response, error)
 
 	/*
+	GetVPSSnapshot Get snapshot detail
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param vpsId VPS ID
+	@param snapshotId
+	@return ApiGetVPSSnapshotRequest
+	*/
+	GetVPSSnapshot(ctx context.Context, vpsId string, snapshotId string) ApiGetVPSSnapshotRequest
+
+	// GetVPSSnapshotExecute executes the request
+	//  @return Snapshot
+	GetVPSSnapshotExecute(r ApiGetVPSSnapshotRequest) (*Snapshot, *http.Response, error)
+
+	/*
+	GetVPSSnapshotList List snapshots
+
+	List VPS snapshots
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param vpsId VPS ID
+	@return ApiGetVPSSnapshotListRequest
+	*/
+	GetVPSSnapshotList(ctx context.Context, vpsId string) ApiGetVPSSnapshotListRequest
+
+	// GetVPSSnapshotListExecute executes the request
+	//  @return GetSnapshotListResult
+	GetVPSSnapshotListExecute(r ApiGetVPSSnapshotListRequest) (*GetSnapshotListResult, *http.Response, error)
+
+	/*
 	GetVps Get VPS details
 
 	Get VPS details.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param vpsId Vps ID
+	@param vpsId VPS ID
 	@return ApiGetVpsRequest
 	*/
 	GetVps(ctx context.Context, vpsId string) ApiGetVpsRequest
@@ -1323,17 +1398,30 @@ You can obtain the new credential using the credentials endpoints
 	ResetVPSPasswordExecute(r ApiResetVPSPasswordRequest) (*http.Response, error)
 
 	/*
-	RestoreSnapshot Restore instance snapshot
+	RestoreInstanceSnapshot Restore instance snapshot
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param instanceId Instance's ID
 	@param snapshotId
-	@return ApiRestoreSnapshotRequest
+	@return ApiRestoreInstanceSnapshotRequest
 	*/
-	RestoreSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiRestoreSnapshotRequest
+	RestoreInstanceSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiRestoreInstanceSnapshotRequest
 
-	// RestoreSnapshotExecute executes the request
-	RestoreSnapshotExecute(r ApiRestoreSnapshotRequest) (*http.Response, error)
+	// RestoreInstanceSnapshotExecute executes the request
+	RestoreInstanceSnapshotExecute(r ApiRestoreInstanceSnapshotRequest) (*http.Response, error)
+
+	/*
+	RestoreVPSSnapshot Restore VPS snapshot
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param vpsId VPS ID
+	@param snapshotId
+	@return ApiRestoreVPSSnapshotRequest
+	*/
+	RestoreVPSSnapshot(ctx context.Context, vpsId string, snapshotId string) ApiRestoreVPSSnapshotRequest
+
+	// RestoreVPSSnapshotExecute executes the request
+	RestoreVPSSnapshotExecute(r ApiRestoreVPSSnapshotRequest) (*http.Response, error)
 
 	/*
 	StartInstance Start a specific resource Instance
@@ -1364,7 +1452,7 @@ You can obtain the new credential using the credentials endpoints
 	StartLoadBalancerExecute(r ApiStartLoadBalancerRequest) (*http.Response, error)
 
 	/*
-	StartVPS Start a specific resource VPS
+	StartVPS Start a specific VPS
 
 	The VPS must be stopped before the execution
 
@@ -2714,6 +2802,181 @@ func (a *PubliccloudAPIService) CreateImageExecute(r ApiCreateImageRequest) (*Im
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateInstanceSnapshotRequest struct {
+	ctx context.Context
+	ApiService PubliccloudAPI
+	instanceId string
+}
+
+func (r ApiCreateInstanceSnapshotRequest) Execute() (*http.Response, error) {
+	return r.ApiService.CreateInstanceSnapshotExecute(r)
+}
+
+/*
+CreateInstanceSnapshot Create instance snapshot
+
+The instance must be running before the execution.
+
+The time taken to create the snapshot depends on several factors, including memory size and usage.
+
+Allowed only one snapshot per instance.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param instanceId Instance's ID
+ @return ApiCreateInstanceSnapshotRequest
+*/
+func (a *PubliccloudAPIService) CreateInstanceSnapshot(ctx context.Context, instanceId string) ApiCreateInstanceSnapshotRequest {
+	return ApiCreateInstanceSnapshotRequest{
+		ApiService: a,
+		ctx: ctx,
+		instanceId: instanceId,
+	}
+}
+
+// Execute executes the request
+func (a *PubliccloudAPIService) CreateInstanceSnapshotExecute(r ApiCreateInstanceSnapshotRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.CreateInstanceSnapshot")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/instances/{instanceId}/snapshots"
+	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiCreateLoadBalancerListenerRequest struct {
 	ctx context.Context
 	ApiService PubliccloudAPI
@@ -2896,181 +3159,6 @@ func (a *PubliccloudAPIService) CreateLoadBalancerListenerExecute(r ApiCreateLoa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateSnapshotRequest struct {
-	ctx context.Context
-	ApiService PubliccloudAPI
-	instanceId string
-}
-
-func (r ApiCreateSnapshotRequest) Execute() (*http.Response, error) {
-	return r.ApiService.CreateSnapshotExecute(r)
-}
-
-/*
-CreateSnapshot Create instance snapshot
-
-The instance must be running before the execution.
-
-The time taken to create the snapshot depends on several factors, including memory size and usage.
-
-Allowed only one snapshot per instance.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param instanceId Instance's ID
- @return ApiCreateSnapshotRequest
-*/
-func (a *PubliccloudAPIService) CreateSnapshot(ctx context.Context, instanceId string) ApiCreateSnapshotRequest {
-	return ApiCreateSnapshotRequest{
-		ApiService: a,
-		ctx: ctx,
-		instanceId: instanceId,
-	}
-}
-
-// Execute executes the request
-func (a *PubliccloudAPIService) CreateSnapshotExecute(r ApiCreateSnapshotRequest) (*http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.CreateSnapshot")
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/instances/{instanceId}/snapshots"
-	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["X-LSW-Auth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-LSW-Auth"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 503 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
 type ApiCreateTargetGroupRequest struct {
 	ctx context.Context
 	ApiService PubliccloudAPI
@@ -3247,6 +3335,181 @@ func (a *PubliccloudAPIService) CreateTargetGroupExecute(r ApiCreateTargetGroupR
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateVPSSnapshotRequest struct {
+	ctx context.Context
+	ApiService PubliccloudAPI
+	vpsId string
+}
+
+func (r ApiCreateVPSSnapshotRequest) Execute() (*http.Response, error) {
+	return r.ApiService.CreateVPSSnapshotExecute(r)
+}
+
+/*
+CreateVPSSnapshot Create VPS snapshot
+
+The VPS must be running before the execution.
+
+The time taken to create the snapshot depends on several factors, including memory size and usage.
+
+Allowed only one snapshot per VPS.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param vpsId VPS ID
+ @return ApiCreateVPSSnapshotRequest
+*/
+func (a *PubliccloudAPIService) CreateVPSSnapshot(ctx context.Context, vpsId string) ApiCreateVPSSnapshotRequest {
+	return ApiCreateVPSSnapshotRequest{
+		ApiService: a,
+		ctx: ctx,
+		vpsId: vpsId,
+	}
+}
+
+// Execute executes the request
+func (a *PubliccloudAPIService) CreateVPSSnapshotExecute(r ApiCreateVPSSnapshotRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.CreateVPSSnapshot")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/vps/{vpsId}/snapshots"
+	localVarPath = strings.Replace(localVarPath, "{"+"vpsId"+"}", url.PathEscape(parameterValueToString(r.vpsId, "vpsId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteAutoScalingGroupRequest struct {
@@ -3744,52 +4007,50 @@ func (a *PubliccloudAPIService) DeleteInstanceCredentialsExecute(r ApiDeleteInst
 	return localVarHTTPResponse, nil
 }
 
-type ApiDeleteLoadBalancerListenerRequest struct {
+type ApiDeleteInstanceSnapshotRequest struct {
 	ctx context.Context
 	ApiService PubliccloudAPI
-	loadBalancerId string
-	listenerId string
+	instanceId string
+	snapshotId string
 }
 
-func (r ApiDeleteLoadBalancerListenerRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteLoadBalancerListenerExecute(r)
+func (r ApiDeleteInstanceSnapshotRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteInstanceSnapshotExecute(r)
 }
 
 /*
-DeleteLoadBalancerListener Delete load balancer listener
-
-Delete a listener
+DeleteInstanceSnapshot Delete instance snapshot
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param loadBalancerId Load balancer ID
- @param listenerId Listener ID
- @return ApiDeleteLoadBalancerListenerRequest
+ @param instanceId Instance's ID
+ @param snapshotId
+ @return ApiDeleteInstanceSnapshotRequest
 */
-func (a *PubliccloudAPIService) DeleteLoadBalancerListener(ctx context.Context, loadBalancerId string, listenerId string) ApiDeleteLoadBalancerListenerRequest {
-	return ApiDeleteLoadBalancerListenerRequest{
+func (a *PubliccloudAPIService) DeleteInstanceSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiDeleteInstanceSnapshotRequest {
+	return ApiDeleteInstanceSnapshotRequest{
 		ApiService: a,
 		ctx: ctx,
-		loadBalancerId: loadBalancerId,
-		listenerId: listenerId,
+		instanceId: instanceId,
+		snapshotId: snapshotId,
 	}
 }
 
 // Execute executes the request
-func (a *PubliccloudAPIService) DeleteLoadBalancerListenerExecute(r ApiDeleteLoadBalancerListenerRequest) (*http.Response, error) {
+func (a *PubliccloudAPIService) DeleteInstanceSnapshotExecute(r ApiDeleteInstanceSnapshotRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.DeleteLoadBalancerListener")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.DeleteInstanceSnapshot")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/loadBalancers/{loadBalancerId}/listeners/{listenerId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"loadBalancerId"+"}", url.PathEscape(parameterValueToString(r.loadBalancerId, "loadBalancerId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"listenerId"+"}", url.PathEscape(parameterValueToString(r.listenerId, "listenerId")), -1)
+	localVarPath := localBasePath + "/instances/{instanceId}/snapshots/{snapshotId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -3919,50 +4180,52 @@ func (a *PubliccloudAPIService) DeleteLoadBalancerListenerExecute(r ApiDeleteLoa
 	return localVarHTTPResponse, nil
 }
 
-type ApiDeleteSnapshotRequest struct {
+type ApiDeleteLoadBalancerListenerRequest struct {
 	ctx context.Context
 	ApiService PubliccloudAPI
-	instanceId string
-	snapshotId string
+	loadBalancerId string
+	listenerId string
 }
 
-func (r ApiDeleteSnapshotRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteSnapshotExecute(r)
+func (r ApiDeleteLoadBalancerListenerRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteLoadBalancerListenerExecute(r)
 }
 
 /*
-DeleteSnapshot Delete instance snapshot
+DeleteLoadBalancerListener Delete load balancer listener
+
+Delete a listener
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param instanceId Instance's ID
- @param snapshotId
- @return ApiDeleteSnapshotRequest
+ @param loadBalancerId Load balancer ID
+ @param listenerId Listener ID
+ @return ApiDeleteLoadBalancerListenerRequest
 */
-func (a *PubliccloudAPIService) DeleteSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiDeleteSnapshotRequest {
-	return ApiDeleteSnapshotRequest{
+func (a *PubliccloudAPIService) DeleteLoadBalancerListener(ctx context.Context, loadBalancerId string, listenerId string) ApiDeleteLoadBalancerListenerRequest {
+	return ApiDeleteLoadBalancerListenerRequest{
 		ApiService: a,
 		ctx: ctx,
-		instanceId: instanceId,
-		snapshotId: snapshotId,
+		loadBalancerId: loadBalancerId,
+		listenerId: listenerId,
 	}
 }
 
 // Execute executes the request
-func (a *PubliccloudAPIService) DeleteSnapshotExecute(r ApiDeleteSnapshotRequest) (*http.Response, error) {
+func (a *PubliccloudAPIService) DeleteLoadBalancerListenerExecute(r ApiDeleteLoadBalancerListenerRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.DeleteSnapshot")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.DeleteLoadBalancerListener")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/instances/{instanceId}/snapshots/{snapshotId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
+	localVarPath := localBasePath + "/loadBalancers/{loadBalancerId}/listeners/{listenerId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"loadBalancerId"+"}", url.PathEscape(parameterValueToString(r.loadBalancerId, "loadBalancerId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"listenerId"+"}", url.PathEscape(parameterValueToString(r.listenerId, "listenerId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -4528,6 +4791,179 @@ func (a *PubliccloudAPIService) DeleteVPSCredentialsExecute(r ApiDeleteVPSCreden
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteVPSSnapshotRequest struct {
+	ctx context.Context
+	ApiService PubliccloudAPI
+	vpsId string
+	snapshotId string
+}
+
+func (r ApiDeleteVPSSnapshotRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteVPSSnapshotExecute(r)
+}
+
+/*
+DeleteVPSSnapshot Delete VPS snapshot
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param vpsId VPS ID
+ @param snapshotId
+ @return ApiDeleteVPSSnapshotRequest
+*/
+func (a *PubliccloudAPIService) DeleteVPSSnapshot(ctx context.Context, vpsId string, snapshotId string) ApiDeleteVPSSnapshotRequest {
+	return ApiDeleteVPSSnapshotRequest{
+		ApiService: a,
+		ctx: ctx,
+		vpsId: vpsId,
+		snapshotId: snapshotId,
+	}
+}
+
+// Execute executes the request
+func (a *PubliccloudAPIService) DeleteVPSSnapshotExecute(r ApiDeleteVPSSnapshotRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.DeleteVPSSnapshot")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/vps/{vpsId}/snapshots/{snapshotId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"vpsId"+"}", url.PathEscape(parameterValueToString(r.vpsId, "vpsId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ErrorResult
@@ -6366,188 +6802,6 @@ func (a *PubliccloudAPIService) GetConnectionsPerSecondMetricsExecute(r ApiGetCo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetConsoleAccessToInstanceRequest struct {
-	ctx context.Context
-	ApiService PubliccloudAPI
-	instanceId string
-}
-
-func (r ApiGetConsoleAccessToInstanceRequest) Execute() (*GetConsoleAccessToInstanceResult, *http.Response, error) {
-	return r.ApiService.GetConsoleAccessToInstanceExecute(r)
-}
-
-/*
-GetConsoleAccessToInstance Get console access
-
-Get console access to the instance
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param instanceId Instance's ID
- @return ApiGetConsoleAccessToInstanceRequest
-*/
-func (a *PubliccloudAPIService) GetConsoleAccessToInstance(ctx context.Context, instanceId string) ApiGetConsoleAccessToInstanceRequest {
-	return ApiGetConsoleAccessToInstanceRequest{
-		ApiService: a,
-		ctx: ctx,
-		instanceId: instanceId,
-	}
-}
-
-// Execute executes the request
-//  @return GetConsoleAccessToInstanceResult
-func (a *PubliccloudAPIService) GetConsoleAccessToInstanceExecute(r ApiGetConsoleAccessToInstanceRequest) (*GetConsoleAccessToInstanceResult, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetConsoleAccessToInstanceResult
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.GetConsoleAccessToInstance")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/instances/{instanceId}/console"
-	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["X-LSW-Auth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-LSW-Auth"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 503 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiGetCpuMetricsRequest struct {
 	ctx context.Context
 	ApiService PubliccloudAPI
@@ -7712,6 +7966,188 @@ func (a *PubliccloudAPIService) GetInstanceExecute(r ApiGetInstanceRequest) (*In
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetInstanceConsoleAccessRequest struct {
+	ctx context.Context
+	ApiService PubliccloudAPI
+	instanceId string
+}
+
+func (r ApiGetInstanceConsoleAccessRequest) Execute() (*GetConsoleAccessResult, *http.Response, error) {
+	return r.ApiService.GetInstanceConsoleAccessExecute(r)
+}
+
+/*
+GetInstanceConsoleAccess Get console access
+
+Get console access to the instance
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param instanceId Instance's ID
+ @return ApiGetInstanceConsoleAccessRequest
+*/
+func (a *PubliccloudAPIService) GetInstanceConsoleAccess(ctx context.Context, instanceId string) ApiGetInstanceConsoleAccessRequest {
+	return ApiGetInstanceConsoleAccessRequest{
+		ApiService: a,
+		ctx: ctx,
+		instanceId: instanceId,
+	}
+}
+
+// Execute executes the request
+//  @return GetConsoleAccessResult
+func (a *PubliccloudAPIService) GetInstanceConsoleAccessExecute(r ApiGetInstanceConsoleAccessRequest) (*GetConsoleAccessResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetConsoleAccessResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.GetInstanceConsoleAccess")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/instances/{instanceId}/console"
+	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ErrorResult
@@ -9130,6 +9566,370 @@ func (a *PubliccloudAPIService) GetInstanceListExecute(r ApiGetInstanceListReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetInstanceSnapshotRequest struct {
+	ctx context.Context
+	ApiService PubliccloudAPI
+	instanceId string
+	snapshotId string
+}
+
+func (r ApiGetInstanceSnapshotRequest) Execute() (*Snapshot, *http.Response, error) {
+	return r.ApiService.GetInstanceSnapshotExecute(r)
+}
+
+/*
+GetInstanceSnapshot Get snapshot detail
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param instanceId Instance's ID
+ @param snapshotId
+ @return ApiGetInstanceSnapshotRequest
+*/
+func (a *PubliccloudAPIService) GetInstanceSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiGetInstanceSnapshotRequest {
+	return ApiGetInstanceSnapshotRequest{
+		ApiService: a,
+		ctx: ctx,
+		instanceId: instanceId,
+		snapshotId: snapshotId,
+	}
+}
+
+// Execute executes the request
+//  @return Snapshot
+func (a *PubliccloudAPIService) GetInstanceSnapshotExecute(r ApiGetInstanceSnapshotRequest) (*Snapshot, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Snapshot
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.GetInstanceSnapshot")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/instances/{instanceId}/snapshots/{snapshotId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetInstanceSnapshotListRequest struct {
+	ctx context.Context
+	ApiService PubliccloudAPI
+	instanceId string
+	limit *int32
+	offset *int32
+}
+
+// Limit the number of results returned.
+func (r ApiGetInstanceSnapshotListRequest) Limit(limit int32) ApiGetInstanceSnapshotListRequest {
+	r.limit = &limit
+	return r
+}
+
+// Return results starting from the given offset.
+func (r ApiGetInstanceSnapshotListRequest) Offset(offset int32) ApiGetInstanceSnapshotListRequest {
+	r.offset = &offset
+	return r
+}
+
+func (r ApiGetInstanceSnapshotListRequest) Execute() (*GetSnapshotListResult, *http.Response, error) {
+	return r.ApiService.GetInstanceSnapshotListExecute(r)
+}
+
+/*
+GetInstanceSnapshotList List snapshots
+
+List instance snapshots
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param instanceId Instance's ID
+ @return ApiGetInstanceSnapshotListRequest
+*/
+func (a *PubliccloudAPIService) GetInstanceSnapshotList(ctx context.Context, instanceId string) ApiGetInstanceSnapshotListRequest {
+	return ApiGetInstanceSnapshotListRequest{
+		ApiService: a,
+		ctx: ctx,
+		instanceId: instanceId,
+	}
+}
+
+// Execute executes the request
+//  @return GetSnapshotListResult
+func (a *PubliccloudAPIService) GetInstanceSnapshotListExecute(r ApiGetInstanceSnapshotListRequest) (*GetSnapshotListResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetSnapshotListResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.GetInstanceSnapshotList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/instances/{instanceId}/snapshots"
+	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v ErrorResult
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -12531,370 +13331,6 @@ func (a *PubliccloudAPIService) GetResponseCodesPerSecondMetricsExecute(r ApiGet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSnapshotRequest struct {
-	ctx context.Context
-	ApiService PubliccloudAPI
-	instanceId string
-	snapshotId string
-}
-
-func (r ApiGetSnapshotRequest) Execute() (*Snapshot, *http.Response, error) {
-	return r.ApiService.GetSnapshotExecute(r)
-}
-
-/*
-GetSnapshot Get snapshot detail
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param instanceId Instance's ID
- @param snapshotId
- @return ApiGetSnapshotRequest
-*/
-func (a *PubliccloudAPIService) GetSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiGetSnapshotRequest {
-	return ApiGetSnapshotRequest{
-		ApiService: a,
-		ctx: ctx,
-		instanceId: instanceId,
-		snapshotId: snapshotId,
-	}
-}
-
-// Execute executes the request
-//  @return Snapshot
-func (a *PubliccloudAPIService) GetSnapshotExecute(r ApiGetSnapshotRequest) (*Snapshot, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Snapshot
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.GetSnapshot")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/instances/{instanceId}/snapshots/{snapshotId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["X-LSW-Auth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-LSW-Auth"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 503 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetSnapshotListRequest struct {
-	ctx context.Context
-	ApiService PubliccloudAPI
-	instanceId string
-	limit *int32
-	offset *int32
-}
-
-// Limit the number of results returned.
-func (r ApiGetSnapshotListRequest) Limit(limit int32) ApiGetSnapshotListRequest {
-	r.limit = &limit
-	return r
-}
-
-// Return results starting from the given offset.
-func (r ApiGetSnapshotListRequest) Offset(offset int32) ApiGetSnapshotListRequest {
-	r.offset = &offset
-	return r
-}
-
-func (r ApiGetSnapshotListRequest) Execute() (*GetSnapshotListResult, *http.Response, error) {
-	return r.ApiService.GetSnapshotListExecute(r)
-}
-
-/*
-GetSnapshotList List snapshots
-
-List instance snapshots
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param instanceId Instance's ID
- @return ApiGetSnapshotListRequest
-*/
-func (a *PubliccloudAPIService) GetSnapshotList(ctx context.Context, instanceId string) ApiGetSnapshotListRequest {
-	return ApiGetSnapshotListRequest{
-		ApiService: a,
-		ctx: ctx,
-		instanceId: instanceId,
-	}
-}
-
-// Execute executes the request
-//  @return GetSnapshotListResult
-func (a *PubliccloudAPIService) GetSnapshotListExecute(r ApiGetSnapshotListRequest) (*GetSnapshotListResult, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSnapshotListResult
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.GetSnapshotList")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/instances/{instanceId}/snapshots"
-	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
-	}
-	if r.offset != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["X-LSW-Auth"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["X-LSW-Auth"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 503 {
-			var v ErrorResult
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiGetTargetGroupRequest struct {
 	ctx context.Context
 	ApiService PubliccloudAPI
@@ -13636,6 +14072,188 @@ func (a *PubliccloudAPIService) GetUpdateInstanceTypeListExecute(r ApiGetUpdateI
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVPSConsoleAccessRequest struct {
+	ctx context.Context
+	ApiService PubliccloudAPI
+	vpsId string
+}
+
+func (r ApiGetVPSConsoleAccessRequest) Execute() (*GetConsoleAccessResult, *http.Response, error) {
+	return r.ApiService.GetVPSConsoleAccessExecute(r)
+}
+
+/*
+GetVPSConsoleAccess Get console access
+
+Get console access to the VPS
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param vpsId VPS ID
+ @return ApiGetVPSConsoleAccessRequest
+*/
+func (a *PubliccloudAPIService) GetVPSConsoleAccess(ctx context.Context, vpsId string) ApiGetVPSConsoleAccessRequest {
+	return ApiGetVPSConsoleAccessRequest{
+		ApiService: a,
+		ctx: ctx,
+		vpsId: vpsId,
+	}
+}
+
+// Execute executes the request
+//  @return GetConsoleAccessResult
+func (a *PubliccloudAPIService) GetVPSConsoleAccessExecute(r ApiGetVPSConsoleAccessRequest) (*GetConsoleAccessResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetConsoleAccessResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.GetVPSConsoleAccess")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/vps/{vpsId}/console"
+	localVarPath = strings.Replace(localVarPath, "{"+"vpsId"+"}", url.PathEscape(parameterValueToString(r.vpsId, "vpsId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ErrorResult
@@ -14839,6 +15457,370 @@ func (a *PubliccloudAPIService) GetVPSIPListExecute(r ApiGetVPSIPListRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetVPSSnapshotRequest struct {
+	ctx context.Context
+	ApiService PubliccloudAPI
+	vpsId string
+	snapshotId string
+}
+
+func (r ApiGetVPSSnapshotRequest) Execute() (*Snapshot, *http.Response, error) {
+	return r.ApiService.GetVPSSnapshotExecute(r)
+}
+
+/*
+GetVPSSnapshot Get snapshot detail
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param vpsId VPS ID
+ @param snapshotId
+ @return ApiGetVPSSnapshotRequest
+*/
+func (a *PubliccloudAPIService) GetVPSSnapshot(ctx context.Context, vpsId string, snapshotId string) ApiGetVPSSnapshotRequest {
+	return ApiGetVPSSnapshotRequest{
+		ApiService: a,
+		ctx: ctx,
+		vpsId: vpsId,
+		snapshotId: snapshotId,
+	}
+}
+
+// Execute executes the request
+//  @return Snapshot
+func (a *PubliccloudAPIService) GetVPSSnapshotExecute(r ApiGetVPSSnapshotRequest) (*Snapshot, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Snapshot
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.GetVPSSnapshot")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/vps/{vpsId}/snapshots/{snapshotId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"vpsId"+"}", url.PathEscape(parameterValueToString(r.vpsId, "vpsId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVPSSnapshotListRequest struct {
+	ctx context.Context
+	ApiService PubliccloudAPI
+	vpsId string
+	limit *int32
+	offset *int32
+}
+
+// Limit the number of results returned.
+func (r ApiGetVPSSnapshotListRequest) Limit(limit int32) ApiGetVPSSnapshotListRequest {
+	r.limit = &limit
+	return r
+}
+
+// Return results starting from the given offset.
+func (r ApiGetVPSSnapshotListRequest) Offset(offset int32) ApiGetVPSSnapshotListRequest {
+	r.offset = &offset
+	return r
+}
+
+func (r ApiGetVPSSnapshotListRequest) Execute() (*GetSnapshotListResult, *http.Response, error) {
+	return r.ApiService.GetVPSSnapshotListExecute(r)
+}
+
+/*
+GetVPSSnapshotList List snapshots
+
+List VPS snapshots
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param vpsId VPS ID
+ @return ApiGetVPSSnapshotListRequest
+*/
+func (a *PubliccloudAPIService) GetVPSSnapshotList(ctx context.Context, vpsId string) ApiGetVPSSnapshotListRequest {
+	return ApiGetVPSSnapshotListRequest{
+		ApiService: a,
+		ctx: ctx,
+		vpsId: vpsId,
+	}
+}
+
+// Execute executes the request
+//  @return GetSnapshotListResult
+func (a *PubliccloudAPIService) GetVPSSnapshotListExecute(r ApiGetVPSSnapshotListRequest) (*GetSnapshotListResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetSnapshotListResult
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.GetVPSSnapshotList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/vps/{vpsId}/snapshots"
+	localVarPath = strings.Replace(localVarPath, "{"+"vpsId"+"}", url.PathEscape(parameterValueToString(r.vpsId, "vpsId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+	}
+	if r.offset != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetVpsRequest struct {
 	ctx context.Context
 	ApiService PubliccloudAPI
@@ -14855,7 +15837,7 @@ GetVps Get VPS details
 Get VPS details.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param vpsId Vps ID
+ @param vpsId VPS ID
  @return ApiGetVpsRequest
 */
 func (a *PubliccloudAPIService) GetVps(ctx context.Context, vpsId string) ApiGetVpsRequest {
@@ -15034,7 +16016,7 @@ func (r ApiGetVpsListRequest) Offset(offset int32) ApiGetVpsListRequest {
 	return r
 }
 
-// Equipment Id
+// VPS Equipment Id
 func (r ApiGetVpsListRequest) Id(id string) ApiGetVpsListRequest {
 	r.id = &id
 	return r
@@ -18549,27 +19531,27 @@ func (a *PubliccloudAPIService) ResetVPSPasswordExecute(r ApiResetVPSPasswordReq
 	return localVarHTTPResponse, nil
 }
 
-type ApiRestoreSnapshotRequest struct {
+type ApiRestoreInstanceSnapshotRequest struct {
 	ctx context.Context
 	ApiService PubliccloudAPI
 	instanceId string
 	snapshotId string
 }
 
-func (r ApiRestoreSnapshotRequest) Execute() (*http.Response, error) {
-	return r.ApiService.RestoreSnapshotExecute(r)
+func (r ApiRestoreInstanceSnapshotRequest) Execute() (*http.Response, error) {
+	return r.ApiService.RestoreInstanceSnapshotExecute(r)
 }
 
 /*
-RestoreSnapshot Restore instance snapshot
+RestoreInstanceSnapshot Restore instance snapshot
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param instanceId Instance's ID
  @param snapshotId
- @return ApiRestoreSnapshotRequest
+ @return ApiRestoreInstanceSnapshotRequest
 */
-func (a *PubliccloudAPIService) RestoreSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiRestoreSnapshotRequest {
-	return ApiRestoreSnapshotRequest{
+func (a *PubliccloudAPIService) RestoreInstanceSnapshot(ctx context.Context, instanceId string, snapshotId string) ApiRestoreInstanceSnapshotRequest {
+	return ApiRestoreInstanceSnapshotRequest{
 		ApiService: a,
 		ctx: ctx,
 		instanceId: instanceId,
@@ -18578,20 +19560,193 @@ func (a *PubliccloudAPIService) RestoreSnapshot(ctx context.Context, instanceId 
 }
 
 // Execute executes the request
-func (a *PubliccloudAPIService) RestoreSnapshotExecute(r ApiRestoreSnapshotRequest) (*http.Response, error) {
+func (a *PubliccloudAPIService) RestoreInstanceSnapshotExecute(r ApiRestoreInstanceSnapshotRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.RestoreSnapshot")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.RestoreInstanceSnapshot")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/instances/{instanceId}/snapshots/{snapshotId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"instanceId"+"}", url.PathEscape(parameterValueToString(r.instanceId, "instanceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["X-LSW-Auth"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["X-LSW-Auth"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 503 {
+			var v ErrorResult
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiRestoreVPSSnapshotRequest struct {
+	ctx context.Context
+	ApiService PubliccloudAPI
+	vpsId string
+	snapshotId string
+}
+
+func (r ApiRestoreVPSSnapshotRequest) Execute() (*http.Response, error) {
+	return r.ApiService.RestoreVPSSnapshotExecute(r)
+}
+
+/*
+RestoreVPSSnapshot Restore VPS snapshot
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param vpsId VPS ID
+ @param snapshotId
+ @return ApiRestoreVPSSnapshotRequest
+*/
+func (a *PubliccloudAPIService) RestoreVPSSnapshot(ctx context.Context, vpsId string, snapshotId string) ApiRestoreVPSSnapshotRequest {
+	return ApiRestoreVPSSnapshotRequest{
+		ApiService: a,
+		ctx: ctx,
+		vpsId: vpsId,
+		snapshotId: snapshotId,
+	}
+}
+
+// Execute executes the request
+func (a *PubliccloudAPIService) RestoreVPSSnapshotExecute(r ApiRestoreVPSSnapshotRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PubliccloudAPIService.RestoreVPSSnapshot")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/vps/{vpsId}/snapshots/{snapshotId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"vpsId"+"}", url.PathEscape(parameterValueToString(r.vpsId, "vpsId")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"snapshotId"+"}", url.PathEscape(parameterValueToString(r.snapshotId, "snapshotId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -19075,7 +20230,7 @@ func (r ApiStartVPSRequest) Execute() (*http.Response, error) {
 }
 
 /*
-StartVPS Start a specific resource VPS
+StartVPS Start a specific VPS
 
 The VPS must be stopped before the execution
 
