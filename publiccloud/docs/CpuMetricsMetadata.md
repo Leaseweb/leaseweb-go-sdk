@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **From** | Pointer to **time.Time** |  | [optional] 
 **To** | Pointer to **time.Time** |  | [optional] 
+**Unit** | Pointer to **string** |  | [optional] 
 **Granularity** | Pointer to [**MetricsGranularity**](MetricsGranularity.md) |  | [optional] 
 **Summary** | Pointer to [**CpuMetricsMetadataSummary**](CpuMetricsMetadataSummary.md) |  | [optional] 
 
@@ -77,6 +78,31 @@ SetTo sets To field to given value.
 `func (o *CpuMetricsMetadata) HasTo() bool`
 
 HasTo returns a boolean if a field has been set.
+
+### GetUnit
+
+`func (o *CpuMetricsMetadata) GetUnit() string`
+
+GetUnit returns the Unit field if non-nil, zero value otherwise.
+
+### GetUnitOk
+
+`func (o *CpuMetricsMetadata) GetUnitOk() (*string, bool)`
+
+GetUnitOk returns a tuple with the Unit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnit
+
+`func (o *CpuMetricsMetadata) SetUnit(v string)`
+
+SetUnit sets Unit field to given value.
+
+### HasUnit
+
+`func (o *CpuMetricsMetadata) HasUnit() bool`
+
+HasUnit returns a boolean if a field has been set.
 
 ### GetGranularity
 

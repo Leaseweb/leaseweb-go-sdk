@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | Pointer to **string** | The highest CPU usage given the provided aggregation and granularity | [optional] 
+**Value** | Pointer to **float32** | The highest CPU usage given the provided aggregation and granularity | [optional] 
 **Timestamp** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetValue
 
-`func (o *CpuMetricsMetadataSummaryPeak) GetValue() string`
+`func (o *CpuMetricsMetadataSummaryPeak) GetValue() float32`
 
 GetValue returns the Value field if non-nil, zero value otherwise.
 
 ### GetValueOk
 
-`func (o *CpuMetricsMetadataSummaryPeak) GetValueOk() (*string, bool)`
+`func (o *CpuMetricsMetadataSummaryPeak) GetValueOk() (*float32, bool)`
 
 GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetValue
 
-`func (o *CpuMetricsMetadataSummaryPeak) SetValue(v string)`
+`func (o *CpuMetricsMetadataSummaryPeak) SetValue(v float32)`
 
 SetValue sets Value field to given value.
 

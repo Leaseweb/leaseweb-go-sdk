@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | Pointer to **string** | The highest amount of incoming traffic given the provided aggregation and granularity | [optional] 
+**Value** | Pointer to **float32** | The highest amount of incoming traffic given the provided aggregation and granularity | [optional] 
 **Timestamp** | Pointer to **time.Time** |  | [optional] 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetValue
 
-`func (o *Peak) GetValue() string`
+`func (o *Peak) GetValue() float32`
 
 GetValue returns the Value field if non-nil, zero value otherwise.
 
 ### GetValueOk
 
-`func (o *Peak) GetValueOk() (*string, bool)`
+`func (o *Peak) GetValueOk() (*float32, bool)`
 
 GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetValue
 
-`func (o *Peak) SetValue(v string)`
+`func (o *Peak) SetValue(v float32)`
 
 SetValue sets Value field to given value.
 

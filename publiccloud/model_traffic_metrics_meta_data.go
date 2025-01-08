@@ -22,9 +22,11 @@ var _ MappedNullable = &TrafficMetricsMetaData{}
 type TrafficMetricsMetaData struct {
 	From *time.Time `json:"from,omitempty"`
 	To *time.Time `json:"to,omitempty"`
-	Granularity *MetricsMetadataPropertiesGranularity `json:"granularity,omitempty"`
+	Granularity *MetricsDataTrafficMetadataPropertiesGranularity `json:"granularity,omitempty"`
 	// Defined by the query
 	Aggregation *string `json:"aggregation,omitempty"`
+	// The unit of the summary values
+	Unit *string `json:"unit,omitempty"`
 	Summary *Summary `json:"summary,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -113,9 +115,9 @@ func (o *TrafficMetricsMetaData) SetTo(v time.Time) {
 }
 
 // GetGranularity returns the Granularity field value if set, zero value otherwise.
-func (o *TrafficMetricsMetaData) GetGranularity() MetricsMetadataPropertiesGranularity {
+func (o *TrafficMetricsMetaData) GetGranularity() MetricsDataTrafficMetadataPropertiesGranularity {
 	if o == nil || IsNil(o.Granularity) {
-		var ret MetricsMetadataPropertiesGranularity
+		var ret MetricsDataTrafficMetadataPropertiesGranularity
 		return ret
 	}
 	return *o.Granularity
@@ -123,7 +125,7 @@ func (o *TrafficMetricsMetaData) GetGranularity() MetricsMetadataPropertiesGranu
 
 // GetGranularityOk returns a tuple with the Granularity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TrafficMetricsMetaData) GetGranularityOk() (*MetricsMetadataPropertiesGranularity, bool) {
+func (o *TrafficMetricsMetaData) GetGranularityOk() (*MetricsDataTrafficMetadataPropertiesGranularity, bool) {
 	if o == nil || IsNil(o.Granularity) {
 		return nil, false
 	}
@@ -139,8 +141,8 @@ func (o *TrafficMetricsMetaData) HasGranularity() bool {
 	return false
 }
 
-// SetGranularity gets a reference to the given MetricsMetadataPropertiesGranularity and assigns it to the Granularity field.
-func (o *TrafficMetricsMetaData) SetGranularity(v MetricsMetadataPropertiesGranularity) {
+// SetGranularity gets a reference to the given MetricsDataTrafficMetadataPropertiesGranularity and assigns it to the Granularity field.
+func (o *TrafficMetricsMetaData) SetGranularity(v MetricsDataTrafficMetadataPropertiesGranularity) {
 	o.Granularity = &v
 }
 
@@ -174,6 +176,38 @@ func (o *TrafficMetricsMetaData) HasAggregation() bool {
 // SetAggregation gets a reference to the given string and assigns it to the Aggregation field.
 func (o *TrafficMetricsMetaData) SetAggregation(v string) {
 	o.Aggregation = &v
+}
+
+// GetUnit returns the Unit field value if set, zero value otherwise.
+func (o *TrafficMetricsMetaData) GetUnit() string {
+	if o == nil || IsNil(o.Unit) {
+		var ret string
+		return ret
+	}
+	return *o.Unit
+}
+
+// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TrafficMetricsMetaData) GetUnitOk() (*string, bool) {
+	if o == nil || IsNil(o.Unit) {
+		return nil, false
+	}
+	return o.Unit, true
+}
+
+// HasUnit returns a boolean if a field has been set.
+func (o *TrafficMetricsMetaData) HasUnit() bool {
+	if o != nil && !IsNil(o.Unit) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnit gets a reference to the given string and assigns it to the Unit field.
+func (o *TrafficMetricsMetaData) SetUnit(v string) {
+	o.Unit = &v
 }
 
 // GetSummary returns the Summary field value if set, zero value otherwise.
@@ -230,6 +264,9 @@ func (o TrafficMetricsMetaData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Aggregation) {
 		toSerialize["aggregation"] = o.Aggregation
 	}
+	if !IsNil(o.Unit) {
+		toSerialize["unit"] = o.Unit
+	}
 	if !IsNil(o.Summary) {
 		toSerialize["summary"] = o.Summary
 	}
@@ -259,6 +296,7 @@ func (o *TrafficMetricsMetaData) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "to")
 		delete(additionalProperties, "granularity")
 		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "unit")
 		delete(additionalProperties, "summary")
 		o.AdditionalProperties = additionalProperties
 	}

@@ -20,9 +20,9 @@ var _ MappedNullable = &CpuMetricsMetadataSummaryCpuMetrics{}
 // CpuMetricsMetadataSummaryCpuMetrics struct for CpuMetricsMetadataSummaryCpuMetrics
 type CpuMetricsMetadataSummaryCpuMetrics struct {
 	// Average CPU based on the amount of grouped data points, in percentage
-	Average *string `json:"average,omitempty"`
+	Average *float32 `json:"average,omitempty"`
 	// Expected CPU given the average times the amount of days between the `from` and `to` dates, in percentage
-	Expected *string `json:"expected,omitempty"`
+	Expected *float32 `json:"expected,omitempty"`
 	Peak *CpuMetricsMetadataSummaryPeak `json:"peak,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -47,9 +47,9 @@ func NewCpuMetricsMetadataSummaryCpuMetricsWithDefaults() *CpuMetricsMetadataSum
 }
 
 // GetAverage returns the Average field value if set, zero value otherwise.
-func (o *CpuMetricsMetadataSummaryCpuMetrics) GetAverage() string {
+func (o *CpuMetricsMetadataSummaryCpuMetrics) GetAverage() float32 {
 	if o == nil || IsNil(o.Average) {
-		var ret string
+		var ret float32
 		return ret
 	}
 	return *o.Average
@@ -57,7 +57,7 @@ func (o *CpuMetricsMetadataSummaryCpuMetrics) GetAverage() string {
 
 // GetAverageOk returns a tuple with the Average field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetricsMetadataSummaryCpuMetrics) GetAverageOk() (*string, bool) {
+func (o *CpuMetricsMetadataSummaryCpuMetrics) GetAverageOk() (*float32, bool) {
 	if o == nil || IsNil(o.Average) {
 		return nil, false
 	}
@@ -73,15 +73,15 @@ func (o *CpuMetricsMetadataSummaryCpuMetrics) HasAverage() bool {
 	return false
 }
 
-// SetAverage gets a reference to the given string and assigns it to the Average field.
-func (o *CpuMetricsMetadataSummaryCpuMetrics) SetAverage(v string) {
+// SetAverage gets a reference to the given float32 and assigns it to the Average field.
+func (o *CpuMetricsMetadataSummaryCpuMetrics) SetAverage(v float32) {
 	o.Average = &v
 }
 
 // GetExpected returns the Expected field value if set, zero value otherwise.
-func (o *CpuMetricsMetadataSummaryCpuMetrics) GetExpected() string {
+func (o *CpuMetricsMetadataSummaryCpuMetrics) GetExpected() float32 {
 	if o == nil || IsNil(o.Expected) {
-		var ret string
+		var ret float32
 		return ret
 	}
 	return *o.Expected
@@ -89,7 +89,7 @@ func (o *CpuMetricsMetadataSummaryCpuMetrics) GetExpected() string {
 
 // GetExpectedOk returns a tuple with the Expected field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetricsMetadataSummaryCpuMetrics) GetExpectedOk() (*string, bool) {
+func (o *CpuMetricsMetadataSummaryCpuMetrics) GetExpectedOk() (*float32, bool) {
 	if o == nil || IsNil(o.Expected) {
 		return nil, false
 	}
@@ -105,8 +105,8 @@ func (o *CpuMetricsMetadataSummaryCpuMetrics) HasExpected() bool {
 	return false
 }
 
-// SetExpected gets a reference to the given string and assigns it to the Expected field.
-func (o *CpuMetricsMetadataSummaryCpuMetrics) SetExpected(v string) {
+// SetExpected gets a reference to the given float32 and assigns it to the Expected field.
+func (o *CpuMetricsMetadataSummaryCpuMetrics) SetExpected(v float32) {
 	o.Expected = &v
 }
 

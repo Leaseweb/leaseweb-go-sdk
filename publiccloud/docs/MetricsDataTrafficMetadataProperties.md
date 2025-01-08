@@ -1,4 +1,4 @@
-# TrafficMetricsMetaData
+# MetricsDataTrafficMetadataProperties
 
 ## Properties
 
@@ -9,176 +9,150 @@ Name | Type | Description | Notes
 **Granularity** | Pointer to [**MetricsDataTrafficMetadataPropertiesGranularity**](MetricsDataTrafficMetadataPropertiesGranularity.md) |  | [optional] 
 **Aggregation** | Pointer to **string** | Defined by the query | [optional] 
 **Unit** | Pointer to **string** | The unit of the summary values | [optional] 
-**Summary** | Pointer to [**Summary**](Summary.md) |  | [optional] 
 
 ## Methods
 
-### NewTrafficMetricsMetaData
+### NewMetricsDataTrafficMetadataProperties
 
-`func NewTrafficMetricsMetaData() *TrafficMetricsMetaData`
+`func NewMetricsDataTrafficMetadataProperties() *MetricsDataTrafficMetadataProperties`
 
-NewTrafficMetricsMetaData instantiates a new TrafficMetricsMetaData object
+NewMetricsDataTrafficMetadataProperties instantiates a new MetricsDataTrafficMetadataProperties object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewTrafficMetricsMetaDataWithDefaults
+### NewMetricsDataTrafficMetadataPropertiesWithDefaults
 
-`func NewTrafficMetricsMetaDataWithDefaults() *TrafficMetricsMetaData`
+`func NewMetricsDataTrafficMetadataPropertiesWithDefaults() *MetricsDataTrafficMetadataProperties`
 
-NewTrafficMetricsMetaDataWithDefaults instantiates a new TrafficMetricsMetaData object
+NewMetricsDataTrafficMetadataPropertiesWithDefaults instantiates a new MetricsDataTrafficMetadataProperties object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetFrom
 
-`func (o *TrafficMetricsMetaData) GetFrom() time.Time`
+`func (o *MetricsDataTrafficMetadataProperties) GetFrom() time.Time`
 
 GetFrom returns the From field if non-nil, zero value otherwise.
 
 ### GetFromOk
 
-`func (o *TrafficMetricsMetaData) GetFromOk() (*time.Time, bool)`
+`func (o *MetricsDataTrafficMetadataProperties) GetFromOk() (*time.Time, bool)`
 
 GetFromOk returns a tuple with the From field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFrom
 
-`func (o *TrafficMetricsMetaData) SetFrom(v time.Time)`
+`func (o *MetricsDataTrafficMetadataProperties) SetFrom(v time.Time)`
 
 SetFrom sets From field to given value.
 
 ### HasFrom
 
-`func (o *TrafficMetricsMetaData) HasFrom() bool`
+`func (o *MetricsDataTrafficMetadataProperties) HasFrom() bool`
 
 HasFrom returns a boolean if a field has been set.
 
 ### GetTo
 
-`func (o *TrafficMetricsMetaData) GetTo() time.Time`
+`func (o *MetricsDataTrafficMetadataProperties) GetTo() time.Time`
 
 GetTo returns the To field if non-nil, zero value otherwise.
 
 ### GetToOk
 
-`func (o *TrafficMetricsMetaData) GetToOk() (*time.Time, bool)`
+`func (o *MetricsDataTrafficMetadataProperties) GetToOk() (*time.Time, bool)`
 
 GetToOk returns a tuple with the To field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTo
 
-`func (o *TrafficMetricsMetaData) SetTo(v time.Time)`
+`func (o *MetricsDataTrafficMetadataProperties) SetTo(v time.Time)`
 
 SetTo sets To field to given value.
 
 ### HasTo
 
-`func (o *TrafficMetricsMetaData) HasTo() bool`
+`func (o *MetricsDataTrafficMetadataProperties) HasTo() bool`
 
 HasTo returns a boolean if a field has been set.
 
 ### GetGranularity
 
-`func (o *TrafficMetricsMetaData) GetGranularity() MetricsDataTrafficMetadataPropertiesGranularity`
+`func (o *MetricsDataTrafficMetadataProperties) GetGranularity() MetricsDataTrafficMetadataPropertiesGranularity`
 
 GetGranularity returns the Granularity field if non-nil, zero value otherwise.
 
 ### GetGranularityOk
 
-`func (o *TrafficMetricsMetaData) GetGranularityOk() (*MetricsDataTrafficMetadataPropertiesGranularity, bool)`
+`func (o *MetricsDataTrafficMetadataProperties) GetGranularityOk() (*MetricsDataTrafficMetadataPropertiesGranularity, bool)`
 
 GetGranularityOk returns a tuple with the Granularity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGranularity
 
-`func (o *TrafficMetricsMetaData) SetGranularity(v MetricsDataTrafficMetadataPropertiesGranularity)`
+`func (o *MetricsDataTrafficMetadataProperties) SetGranularity(v MetricsDataTrafficMetadataPropertiesGranularity)`
 
 SetGranularity sets Granularity field to given value.
 
 ### HasGranularity
 
-`func (o *TrafficMetricsMetaData) HasGranularity() bool`
+`func (o *MetricsDataTrafficMetadataProperties) HasGranularity() bool`
 
 HasGranularity returns a boolean if a field has been set.
 
 ### GetAggregation
 
-`func (o *TrafficMetricsMetaData) GetAggregation() string`
+`func (o *MetricsDataTrafficMetadataProperties) GetAggregation() string`
 
 GetAggregation returns the Aggregation field if non-nil, zero value otherwise.
 
 ### GetAggregationOk
 
-`func (o *TrafficMetricsMetaData) GetAggregationOk() (*string, bool)`
+`func (o *MetricsDataTrafficMetadataProperties) GetAggregationOk() (*string, bool)`
 
 GetAggregationOk returns a tuple with the Aggregation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAggregation
 
-`func (o *TrafficMetricsMetaData) SetAggregation(v string)`
+`func (o *MetricsDataTrafficMetadataProperties) SetAggregation(v string)`
 
 SetAggregation sets Aggregation field to given value.
 
 ### HasAggregation
 
-`func (o *TrafficMetricsMetaData) HasAggregation() bool`
+`func (o *MetricsDataTrafficMetadataProperties) HasAggregation() bool`
 
 HasAggregation returns a boolean if a field has been set.
 
 ### GetUnit
 
-`func (o *TrafficMetricsMetaData) GetUnit() string`
+`func (o *MetricsDataTrafficMetadataProperties) GetUnit() string`
 
 GetUnit returns the Unit field if non-nil, zero value otherwise.
 
 ### GetUnitOk
 
-`func (o *TrafficMetricsMetaData) GetUnitOk() (*string, bool)`
+`func (o *MetricsDataTrafficMetadataProperties) GetUnitOk() (*string, bool)`
 
 GetUnitOk returns a tuple with the Unit field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUnit
 
-`func (o *TrafficMetricsMetaData) SetUnit(v string)`
+`func (o *MetricsDataTrafficMetadataProperties) SetUnit(v string)`
 
 SetUnit sets Unit field to given value.
 
 ### HasUnit
 
-`func (o *TrafficMetricsMetaData) HasUnit() bool`
+`func (o *MetricsDataTrafficMetadataProperties) HasUnit() bool`
 
 HasUnit returns a boolean if a field has been set.
-
-### GetSummary
-
-`func (o *TrafficMetricsMetaData) GetSummary() Summary`
-
-GetSummary returns the Summary field if non-nil, zero value otherwise.
-
-### GetSummaryOk
-
-`func (o *TrafficMetricsMetaData) GetSummaryOk() (*Summary, bool)`
-
-GetSummaryOk returns a tuple with the Summary field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSummary
-
-`func (o *TrafficMetricsMetaData) SetSummary(v Summary)`
-
-SetSummary sets Summary field to given value.
-
-### HasSummary
-
-`func (o *TrafficMetricsMetaData) HasSummary() bool`
-
-HasSummary returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

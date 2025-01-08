@@ -21,7 +21,7 @@ var _ MappedNullable = &CpuMetricsMetadataSummaryPeak{}
 // CpuMetricsMetadataSummaryPeak struct for CpuMetricsMetadataSummaryPeak
 type CpuMetricsMetadataSummaryPeak struct {
 	// The highest CPU usage given the provided aggregation and granularity
-	Value *string `json:"value,omitempty"`
+	Value *float32 `json:"value,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -46,9 +46,9 @@ func NewCpuMetricsMetadataSummaryPeakWithDefaults() *CpuMetricsMetadataSummaryPe
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *CpuMetricsMetadataSummaryPeak) GetValue() string {
+func (o *CpuMetricsMetadataSummaryPeak) GetValue() float32 {
 	if o == nil || IsNil(o.Value) {
-		var ret string
+		var ret float32
 		return ret
 	}
 	return *o.Value
@@ -56,7 +56,7 @@ func (o *CpuMetricsMetadataSummaryPeak) GetValue() string {
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CpuMetricsMetadataSummaryPeak) GetValueOk() (*string, bool) {
+func (o *CpuMetricsMetadataSummaryPeak) GetValueOk() (*float32, bool) {
 	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
@@ -72,8 +72,8 @@ func (o *CpuMetricsMetadataSummaryPeak) HasValue() bool {
 	return false
 }
 
-// SetValue gets a reference to the given string and assigns it to the Value field.
-func (o *CpuMetricsMetadataSummaryPeak) SetValue(v string) {
+// SetValue gets a reference to the given float32 and assigns it to the Value field.
+func (o *CpuMetricsMetadataSummaryPeak) SetValue(v float32) {
 	o.Value = &v
 }
 

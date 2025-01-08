@@ -16,29 +16,29 @@ import (
 	"fmt"
 )
 
-// MetricsMetadataPropertiesGranularity - struct for MetricsMetadataPropertiesGranularity
-type MetricsMetadataPropertiesGranularity struct {
+// MetricsDataTrafficMetadataPropertiesGranularity - struct for MetricsDataTrafficMetadataPropertiesGranularity
+type MetricsDataTrafficMetadataPropertiesGranularity struct {
 	CpuGranularity *CpuGranularity
 	LoadBalancerGranularity *LoadBalancerGranularity
 }
 
-// CpuGranularityAsMetricsMetadataPropertiesGranularity is a convenience function that returns CpuGranularity wrapped in MetricsMetadataPropertiesGranularity
-func CpuGranularityAsMetricsMetadataPropertiesGranularity(v *CpuGranularity) MetricsMetadataPropertiesGranularity {
-	return MetricsMetadataPropertiesGranularity{
+// CpuGranularityAsMetricsDataTrafficMetadataPropertiesGranularity is a convenience function that returns CpuGranularity wrapped in MetricsDataTrafficMetadataPropertiesGranularity
+func CpuGranularityAsMetricsDataTrafficMetadataPropertiesGranularity(v *CpuGranularity) MetricsDataTrafficMetadataPropertiesGranularity {
+	return MetricsDataTrafficMetadataPropertiesGranularity{
 		CpuGranularity: v,
 	}
 }
 
-// LoadBalancerGranularityAsMetricsMetadataPropertiesGranularity is a convenience function that returns LoadBalancerGranularity wrapped in MetricsMetadataPropertiesGranularity
-func LoadBalancerGranularityAsMetricsMetadataPropertiesGranularity(v *LoadBalancerGranularity) MetricsMetadataPropertiesGranularity {
-	return MetricsMetadataPropertiesGranularity{
+// LoadBalancerGranularityAsMetricsDataTrafficMetadataPropertiesGranularity is a convenience function that returns LoadBalancerGranularity wrapped in MetricsDataTrafficMetadataPropertiesGranularity
+func LoadBalancerGranularityAsMetricsDataTrafficMetadataPropertiesGranularity(v *LoadBalancerGranularity) MetricsDataTrafficMetadataPropertiesGranularity {
+	return MetricsDataTrafficMetadataPropertiesGranularity{
 		LoadBalancerGranularity: v,
 	}
 }
 
 
 // Unmarshal JSON data into one of the pointers in the struct
-func (dst *MetricsMetadataPropertiesGranularity) UnmarshalJSON(data []byte) error {
+func (dst *MetricsDataTrafficMetadataPropertiesGranularity) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
 	// try to unmarshal data into CpuGranularity
@@ -80,16 +80,16 @@ func (dst *MetricsMetadataPropertiesGranularity) UnmarshalJSON(data []byte) erro
 		dst.CpuGranularity = nil
 		dst.LoadBalancerGranularity = nil
 
-		return fmt.Errorf("data matches more than one schema in oneOf(MetricsMetadataPropertiesGranularity)")
+		return fmt.Errorf("data matches more than one schema in oneOf(MetricsDataTrafficMetadataPropertiesGranularity)")
 	} else if match == 1 {
 		return nil // exactly one match
 	} else { // no match
-		return fmt.Errorf("data failed to match schemas in oneOf(MetricsMetadataPropertiesGranularity)")
+		return fmt.Errorf("data failed to match schemas in oneOf(MetricsDataTrafficMetadataPropertiesGranularity)")
 	}
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src MetricsMetadataPropertiesGranularity) MarshalJSON() ([]byte, error) {
+func (src MetricsDataTrafficMetadataPropertiesGranularity) MarshalJSON() ([]byte, error) {
 	if src.CpuGranularity != nil {
 		return json.Marshal(&src.CpuGranularity)
 	}
@@ -102,7 +102,7 @@ func (src MetricsMetadataPropertiesGranularity) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *MetricsMetadataPropertiesGranularity) GetActualInstance() (interface{}) {
+func (obj *MetricsDataTrafficMetadataPropertiesGranularity) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -118,38 +118,38 @@ func (obj *MetricsMetadataPropertiesGranularity) GetActualInstance() (interface{
 	return nil
 }
 
-type NullableMetricsMetadataPropertiesGranularity struct {
-	value *MetricsMetadataPropertiesGranularity
+type NullableMetricsDataTrafficMetadataPropertiesGranularity struct {
+	value *MetricsDataTrafficMetadataPropertiesGranularity
 	isSet bool
 }
 
-func (v NullableMetricsMetadataPropertiesGranularity) Get() *MetricsMetadataPropertiesGranularity {
+func (v NullableMetricsDataTrafficMetadataPropertiesGranularity) Get() *MetricsDataTrafficMetadataPropertiesGranularity {
 	return v.value
 }
 
-func (v *NullableMetricsMetadataPropertiesGranularity) Set(val *MetricsMetadataPropertiesGranularity) {
+func (v *NullableMetricsDataTrafficMetadataPropertiesGranularity) Set(val *MetricsDataTrafficMetadataPropertiesGranularity) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMetricsMetadataPropertiesGranularity) IsSet() bool {
+func (v NullableMetricsDataTrafficMetadataPropertiesGranularity) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMetricsMetadataPropertiesGranularity) Unset() {
+func (v *NullableMetricsDataTrafficMetadataPropertiesGranularity) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMetricsMetadataPropertiesGranularity(val *MetricsMetadataPropertiesGranularity) *NullableMetricsMetadataPropertiesGranularity {
-	return &NullableMetricsMetadataPropertiesGranularity{value: val, isSet: true}
+func NewNullableMetricsDataTrafficMetadataPropertiesGranularity(val *MetricsDataTrafficMetadataPropertiesGranularity) *NullableMetricsDataTrafficMetadataPropertiesGranularity {
+	return &NullableMetricsDataTrafficMetadataPropertiesGranularity{value: val, isSet: true}
 }
 
-func (v NullableMetricsMetadataPropertiesGranularity) MarshalJSON() ([]byte, error) {
+func (v NullableMetricsDataTrafficMetadataPropertiesGranularity) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMetricsMetadataPropertiesGranularity) UnmarshalJSON(src []byte) error {
+func (v *NullableMetricsDataTrafficMetadataPropertiesGranularity) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

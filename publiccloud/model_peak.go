@@ -21,7 +21,7 @@ var _ MappedNullable = &Peak{}
 // Peak struct for Peak
 type Peak struct {
 	// The highest amount of incoming traffic given the provided aggregation and granularity
-	Value *string `json:"value,omitempty"`
+	Value *float32 `json:"value,omitempty"`
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -46,9 +46,9 @@ func NewPeakWithDefaults() *Peak {
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *Peak) GetValue() string {
+func (o *Peak) GetValue() float32 {
 	if o == nil || IsNil(o.Value) {
-		var ret string
+		var ret float32
 		return ret
 	}
 	return *o.Value
@@ -56,7 +56,7 @@ func (o *Peak) GetValue() string {
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Peak) GetValueOk() (*string, bool) {
+func (o *Peak) GetValueOk() (*float32, bool) {
 	if o == nil || IsNil(o.Value) {
 		return nil, false
 	}
@@ -72,8 +72,8 @@ func (o *Peak) HasValue() bool {
 	return false
 }
 
-// SetValue gets a reference to the given string and assigns it to the Value field.
-func (o *Peak) SetValue(v string) {
+// SetValue gets a reference to the given float32 and assigns it to the Value field.
+func (o *Peak) SetValue(v float32) {
 	o.Value = &v
 }
 

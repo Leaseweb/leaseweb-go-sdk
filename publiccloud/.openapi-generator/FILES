@@ -105,9 +105,10 @@ docs/MarketApp.md
 docs/MarketAppId.md
 docs/Memory.md
 docs/Metadata.md
+docs/MetricsDataTrafficMetadataProperties.md
+docs/MetricsDataTrafficMetadataPropertiesGranularity.md
 docs/MetricsGranularity.md
 docs/MetricsMetadataProperties.md
-docs/MetricsMetadataPropertiesGranularity.md
 docs/MetricsProperties.md
 docs/MetricsUnit.md
 docs/MetricsValues.md
@@ -264,9 +265,10 @@ model_load_balancer_listener_rule.go
 model_market_app.go
 model_market_app_id.go
 model_memory.go
+model_metrics_data_traffic_metadata_properties.go
+model_metrics_data_traffic_metadata_properties_granularity.go
 model_metrics_granularity.go
 model_metrics_metadata_properties.go
-model_metrics_metadata_properties_granularity.go
 model_metrics_properties.go
 model_metrics_unit.go
 model_metrics_values.go

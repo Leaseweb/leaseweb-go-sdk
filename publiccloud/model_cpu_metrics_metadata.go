@@ -22,6 +22,7 @@ var _ MappedNullable = &CpuMetricsMetadata{}
 type CpuMetricsMetadata struct {
 	From *time.Time `json:"from,omitempty"`
 	To *time.Time `json:"to,omitempty"`
+	Unit *string `json:"unit,omitempty"`
 	Granularity *MetricsGranularity `json:"granularity,omitempty"`
 	Summary *CpuMetricsMetadataSummary `json:"summary,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -110,6 +111,38 @@ func (o *CpuMetricsMetadata) SetTo(v time.Time) {
 	o.To = &v
 }
 
+// GetUnit returns the Unit field value if set, zero value otherwise.
+func (o *CpuMetricsMetadata) GetUnit() string {
+	if o == nil || IsNil(o.Unit) {
+		var ret string
+		return ret
+	}
+	return *o.Unit
+}
+
+// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CpuMetricsMetadata) GetUnitOk() (*string, bool) {
+	if o == nil || IsNil(o.Unit) {
+		return nil, false
+	}
+	return o.Unit, true
+}
+
+// HasUnit returns a boolean if a field has been set.
+func (o *CpuMetricsMetadata) HasUnit() bool {
+	if o != nil && !IsNil(o.Unit) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnit gets a reference to the given string and assigns it to the Unit field.
+func (o *CpuMetricsMetadata) SetUnit(v string) {
+	o.Unit = &v
+}
+
 // GetGranularity returns the Granularity field value if set, zero value otherwise.
 func (o *CpuMetricsMetadata) GetGranularity() MetricsGranularity {
 	if o == nil || IsNil(o.Granularity) {
@@ -190,6 +223,9 @@ func (o CpuMetricsMetadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.To) {
 		toSerialize["to"] = o.To
 	}
+	if !IsNil(o.Unit) {
+		toSerialize["unit"] = o.Unit
+	}
 	if !IsNil(o.Granularity) {
 		toSerialize["granularity"] = o.Granularity
 	}
@@ -220,6 +256,7 @@ func (o *CpuMetricsMetadata) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "from")
 		delete(additionalProperties, "to")
+		delete(additionalProperties, "unit")
 		delete(additionalProperties, "granularity")
 		delete(additionalProperties, "summary")
 		o.AdditionalProperties = additionalProperties

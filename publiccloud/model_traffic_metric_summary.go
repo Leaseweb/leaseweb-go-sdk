@@ -19,12 +19,12 @@ var _ MappedNullable = &TrafficMetricSummary{}
 
 // TrafficMetricSummary struct for TrafficMetricSummary
 type TrafficMetricSummary struct {
-	// Average incoming traffic based on the amount of grouped data points, in human-readable format (KB, MB, GB)
-	Average *string `json:"average,omitempty"`
-	// Expected incoming traffic given the average times the amount of days between the `from` and `to` dates, in human-readable format (KB, MB, GB)
-	Expected *string `json:"expected,omitempty"`
-	// Total incoming traffic, in human-readable format (KB, MB, GB)
-	Total *string `json:"total,omitempty"`
+	// Average incoming traffic based on the amount of grouped data points, in bytes
+	Average *float32 `json:"average,omitempty"`
+	// Expected incoming traffic given the average times the amount of days between the `from` and `to` dates, in bytes
+	Expected *float32 `json:"expected,omitempty"`
+	// Total incoming traffic, in bytes
+	Total *float32 `json:"total,omitempty"`
 	Peak *Peak `json:"peak,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -49,9 +49,9 @@ func NewTrafficMetricSummaryWithDefaults() *TrafficMetricSummary {
 }
 
 // GetAverage returns the Average field value if set, zero value otherwise.
-func (o *TrafficMetricSummary) GetAverage() string {
+func (o *TrafficMetricSummary) GetAverage() float32 {
 	if o == nil || IsNil(o.Average) {
-		var ret string
+		var ret float32
 		return ret
 	}
 	return *o.Average
@@ -59,7 +59,7 @@ func (o *TrafficMetricSummary) GetAverage() string {
 
 // GetAverageOk returns a tuple with the Average field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TrafficMetricSummary) GetAverageOk() (*string, bool) {
+func (o *TrafficMetricSummary) GetAverageOk() (*float32, bool) {
 	if o == nil || IsNil(o.Average) {
 		return nil, false
 	}
@@ -75,15 +75,15 @@ func (o *TrafficMetricSummary) HasAverage() bool {
 	return false
 }
 
-// SetAverage gets a reference to the given string and assigns it to the Average field.
-func (o *TrafficMetricSummary) SetAverage(v string) {
+// SetAverage gets a reference to the given float32 and assigns it to the Average field.
+func (o *TrafficMetricSummary) SetAverage(v float32) {
 	o.Average = &v
 }
 
 // GetExpected returns the Expected field value if set, zero value otherwise.
-func (o *TrafficMetricSummary) GetExpected() string {
+func (o *TrafficMetricSummary) GetExpected() float32 {
 	if o == nil || IsNil(o.Expected) {
-		var ret string
+		var ret float32
 		return ret
 	}
 	return *o.Expected
@@ -91,7 +91,7 @@ func (o *TrafficMetricSummary) GetExpected() string {
 
 // GetExpectedOk returns a tuple with the Expected field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TrafficMetricSummary) GetExpectedOk() (*string, bool) {
+func (o *TrafficMetricSummary) GetExpectedOk() (*float32, bool) {
 	if o == nil || IsNil(o.Expected) {
 		return nil, false
 	}
@@ -107,15 +107,15 @@ func (o *TrafficMetricSummary) HasExpected() bool {
 	return false
 }
 
-// SetExpected gets a reference to the given string and assigns it to the Expected field.
-func (o *TrafficMetricSummary) SetExpected(v string) {
+// SetExpected gets a reference to the given float32 and assigns it to the Expected field.
+func (o *TrafficMetricSummary) SetExpected(v float32) {
 	o.Expected = &v
 }
 
 // GetTotal returns the Total field value if set, zero value otherwise.
-func (o *TrafficMetricSummary) GetTotal() string {
+func (o *TrafficMetricSummary) GetTotal() float32 {
 	if o == nil || IsNil(o.Total) {
-		var ret string
+		var ret float32
 		return ret
 	}
 	return *o.Total
@@ -123,7 +123,7 @@ func (o *TrafficMetricSummary) GetTotal() string {
 
 // GetTotalOk returns a tuple with the Total field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TrafficMetricSummary) GetTotalOk() (*string, bool) {
+func (o *TrafficMetricSummary) GetTotalOk() (*float32, bool) {
 	if o == nil || IsNil(o.Total) {
 		return nil, false
 	}
@@ -139,8 +139,8 @@ func (o *TrafficMetricSummary) HasTotal() bool {
 	return false
 }
 
-// SetTotal gets a reference to the given string and assigns it to the Total field.
-func (o *TrafficMetricSummary) SetTotal(v string) {
+// SetTotal gets a reference to the given float32 and assigns it to the Total field.
+func (o *TrafficMetricSummary) SetTotal(v float32) {
 	o.Total = &v
 }
 

@@ -9149,20 +9149,21 @@ paths:
                   to: 2023-10-31T00:00:00+00:00
                   granularity: DAY
                   aggregation: SUM
+                  unit: B
                   summary:
                     DOWN_PUBLIC:
-                      average: 855.28 KB
-                      expected: 25.66 MB
-                      total: 1.71 MB
+                      average: 340733979
+                      expected: 10222019370
+                      total: 1022201937
                       peak:
-                        value: 1.25 MB
+                        value: 896116855
                         timestamp: 2023-10-28T00:00:00+00:00
                     UP_PUBLIC:
-                      average: 3.69 MB
-                      expected: 110.64 MB
-                      total: 7.38 MB
+                      average: 5.992002367E7
+                      expected: 1.7976007101E9
+                      total: 179760071
                       peak:
-                        value: 6.94 MB
+                        value: 85089279
                         timestamp: 2023-10-28T00:00:00+00:00
                 metrics:
                   DOWN_PUBLIC:
@@ -9309,20 +9310,21 @@ paths:
                   to: 2023-10-31T00:00:00+00:00
                   granularity: DAY
                   aggregation: SUM
+                  unit: B
                   summary:
                     DOWN_PUBLIC:
-                      average: 855.28 KB
-                      expected: 25.66 MB
-                      total: 1.71 MB
+                      average: 340733979
+                      expected: 10222019370
+                      total: 1022201937
                       peak:
-                        value: 1.25 MB
+                        value: 896116855
                         timestamp: 2023-10-28T00:00:00+00:00
                     UP_PUBLIC:
-                      average: 3.69 MB
-                      expected: 110.64 MB
-                      total: 7.38 MB
+                      average: 5.992002367E7
+                      expected: 1.7976007101E9
+                      total: 179760071
                       peak:
-                        value: 6.94 MB
+                        value: 85089279
                         timestamp: 2023-10-28T00:00:00+00:00
                 metrics:
                   DOWN_PUBLIC:
@@ -9468,20 +9470,21 @@ paths:
                   to: 2023-10-31T00:00:00+00:00
                   granularity: DAY
                   aggregation: SUM
+                  unit: B
                   summary:
                     DOWN_PUBLIC:
-                      average: 855.28 KB
-                      expected: 25.66 MB
-                      total: 1.71 MB
+                      average: 340733979
+                      expected: 10222019370
+                      total: 1022201937
                       peak:
-                        value: 1.25 MB
+                        value: 896116855
                         timestamp: 2023-10-28T00:00:00+00:00
                     UP_PUBLIC:
-                      average: 3.69 MB
-                      expected: 110.64 MB
-                      total: 7.38 MB
+                      average: 5.992002367E7
+                      expected: 1.7976007101E9
+                      total: 179760071
                       peak:
-                        value: 6.94 MB
+                        value: 85089279
                         timestamp: 2023-10-28T00:00:00+00:00
                 metrics:
                   DOWN_PUBLIC:
@@ -9615,12 +9618,13 @@ paths:
                   from: 2023-10-27T08:00:00+00:00
                   to: 2023-10-28T08:00:00+00:00
                   granularity: 5m
+                  unit: '%'
                   summary:
                     cpuMetrics:
-                      average: 8.13 %
-                      expected: 8.13 %
+                      average: 8.13
+                      expected: 8.13
                       peak:
-                        value: 9.98 %
+                        value: 9.98
                         timestamp: 2023-10-27T08:10:24+00:00
                 metrics:
                   cpuMetrics:
@@ -17500,12 +17504,7 @@ components:
       - 1d
       - 1w
       type: string
-    metricsMetadataProperties:
-      example:
-        granularity: 5m
-        from: 2000-01-23T04:56:07.000+00:00
-        aggregation: SUM
-        to: 2000-01-23T04:56:07.000+00:00
+    metricsDataTrafficMetadataProperties:
       properties:
         from:
           format: date-time
@@ -17514,39 +17513,40 @@ components:
           format: date-time
           type: string
         granularity:
-          $ref: '#/components/schemas/metricsMetadataProperties_granularity'
+          $ref: '#/components/schemas/metricsDataTrafficMetadataProperties_granularity'
         aggregation:
           description: Defined by the query
           enum:
           - SUM
           type: string
+        unit:
+          description: The unit of the summary values
+          type: string
       title: metricsMetadataProperties
       type: object
     trafficMetricSummary:
       example:
-        average: 855.28 KB
-        total: 1.71 MB
-        expected: 25.66 MB
+        average: 340733979
+        total: 1022201937
+        expected: 10222019370
         peak:
-          value: value
+          value: 6.027456183070403
           timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         average:
           description: "Average incoming traffic based on the amount of grouped data\
-            \ points, in human-readable format (KB, MB, GB)"
-          example: 855.28 KB
-          type: string
+            \ points, in bytes"
+          example: 340733979
+          type: number
         expected:
           description: "Expected incoming traffic given the average times the amount\
-            \ of days between the `from` and `to` dates, in human-readable format\
-            \ (KB, MB, GB)"
-          example: 25.66 MB
-          type: string
+            \ of days between the `from` and `to` dates, in bytes"
+          example: 10222019370
+          type: number
         total:
-          description: "Total incoming traffic, in human-readable format (KB, MB,\
-            \ GB)"
-          example: 1.71 MB
-          type: string
+          description: "Total incoming traffic, in bytes"
+          example: 1022201937
+          type: number
         peak:
           $ref: '#/components/schemas/peak'
       title: trafficMetricSummary
@@ -17571,19 +17571,20 @@ components:
         _metadata:
           summary:
             DOWN_PUBLIC:
-              average: 855.28 KB
-              total: 1.71 MB
-              expected: 25.66 MB
+              average: 340733979
+              total: 1022201937
+              expected: 10222019370
               peak:
-                value: value
+                value: 6.027456183070403
                 timestamp: 2000-01-23T04:56:07.000+00:00
             UP_PUBLIC:
-              average: 855.28 KB
-              total: 1.71 MB
-              expected: 25.66 MB
+              average: 340733979
+              total: 1022201937
+              expected: 10222019370
               peak:
-                value: value
+                value: 6.027456183070403
                 timestamp: 2000-01-23T04:56:07.000+00:00
+          unit: unit
           granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           aggregation: SUM
@@ -17633,11 +17634,12 @@ components:
         _metadata:
           summary:
             cpuMetrics:
-              average: 10 %
-              expected: 10 %
+              average: 10
+              expected: 10
               peak:
-                value: 90 %
+                value: 90
                 timestamp: 2000-01-23T04:56:07.000+00:00
+          unit: unit
           granularity: 5m
           from: 2000-01-23T04:56:07.000+00:00
           to: 2000-01-23T04:56:07.000+00:00
@@ -17646,6 +17648,28 @@ components:
           $ref: '#/components/schemas/cpuMetrics'
         _metadata:
           $ref: '#/components/schemas/cpuMetricsMetadata'
+      type: object
+    metricsMetadataProperties:
+      example:
+        granularity: 5m
+        from: 2000-01-23T04:56:07.000+00:00
+        aggregation: SUM
+        to: 2000-01-23T04:56:07.000+00:00
+      properties:
+        from:
+          format: date-time
+          type: string
+        to:
+          format: date-time
+          type: string
+        granularity:
+          $ref: '#/components/schemas/metricsDataTrafficMetadataProperties_granularity'
+        aggregation:
+          description: Defined by the query
+          enum:
+          - SUM
+          type: string
+      title: metricsMetadataProperties
       type: object
     getRequestsMetricsResult:
       example:
@@ -19399,19 +19423,19 @@ components:
           type: string
       title: trafficMetricValue
       type: object
-    metricsMetadataProperties_granularity:
+    metricsDataTrafficMetadataProperties_granularity:
       oneOf:
       - $ref: '#/components/schemas/cpuGranularity'
       - $ref: '#/components/schemas/loadBalancerGranularity'
     peak:
       example:
-        value: value
+        value: 6.027456183070403
         timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         value:
           description: The highest amount of incoming traffic given the provided aggregation
             and granularity
-          type: string
+          type: number
         timestamp:
           format: date-time
           type: string
@@ -19443,18 +19467,18 @@ components:
     summary:
       example:
         DOWN_PUBLIC:
-          average: 855.28 KB
-          total: 1.71 MB
-          expected: 25.66 MB
+          average: 340733979
+          total: 1022201937
+          expected: 10222019370
           peak:
-            value: value
+            value: 6.027456183070403
             timestamp: 2000-01-23T04:56:07.000+00:00
         UP_PUBLIC:
-          average: 855.28 KB
-          total: 1.71 MB
-          expected: 25.66 MB
+          average: 340733979
+          total: 1022201937
+          expected: 10222019370
           peak:
-            value: value
+            value: 6.027456183070403
             timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         DOWN_PUBLIC:
@@ -19465,26 +19489,27 @@ components:
       type: object
     trafficMetricsMetaData:
       allOf:
-      - $ref: '#/components/schemas/metricsMetadataProperties'
+      - $ref: '#/components/schemas/metricsDataTrafficMetadataProperties'
       - properties:
           summary:
             $ref: '#/components/schemas/summary'
       example:
         summary:
           DOWN_PUBLIC:
-            average: 855.28 KB
-            total: 1.71 MB
-            expected: 25.66 MB
+            average: 340733979
+            total: 1022201937
+            expected: 10222019370
             peak:
-              value: value
+              value: 6.027456183070403
               timestamp: 2000-01-23T04:56:07.000+00:00
           UP_PUBLIC:
-            average: 855.28 KB
-            total: 1.71 MB
-            expected: 25.66 MB
+            average: 340733979
+            total: 1022201937
+            expected: 10222019370
             peak:
-              value: value
+              value: 6.027456183070403
               timestamp: 2000-01-23T04:56:07.000+00:00
+        unit: unit
         granularity: 5m
         from: 2000-01-23T04:56:07.000+00:00
         aggregation: SUM
@@ -19520,13 +19545,13 @@ components:
       type: object
     cpuMetricsMetadataSummaryPeak:
       example:
-        value: 90 %
+        value: 90
         timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         value:
           description: The highest CPU usage given the provided aggregation and granularity
-          example: 90 %
-          type: string
+          example: 90
+          type: number
         timestamp:
           format: date-time
           type: string
@@ -19534,22 +19559,22 @@ components:
       type: object
     cpuMetricsMetadataSummaryCpuMetrics:
       example:
-        average: 10 %
-        expected: 10 %
+        average: 10
+        expected: 10
         peak:
-          value: 90 %
+          value: 90
           timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         average:
           description: "Average CPU based on the amount of grouped data points, in\
             \ percentage"
-          example: 10 %
-          type: string
+          example: 10
+          type: number
         expected:
           description: "Expected CPU given the average times the amount of days between\
             \ the `from` and `to` dates, in percentage"
-          example: 10 %
-          type: string
+          example: 10
+          type: number
         peak:
           $ref: '#/components/schemas/cpuMetricsMetadataSummaryPeak'
       title: cpuMetricsMetadataSummaryCpuMetrics
@@ -19557,10 +19582,10 @@ components:
     cpuMetricsMetadataSummary:
       example:
         cpuMetrics:
-          average: 10 %
-          expected: 10 %
+          average: 10
+          expected: 10
           peak:
-            value: 90 %
+            value: 90
             timestamp: 2000-01-23T04:56:07.000+00:00
       properties:
         cpuMetrics:
@@ -19571,11 +19596,12 @@ components:
       example:
         summary:
           cpuMetrics:
-            average: 10 %
-            expected: 10 %
+            average: 10
+            expected: 10
             peak:
-              value: 90 %
+              value: 90
               timestamp: 2000-01-23T04:56:07.000+00:00
+        unit: unit
         granularity: 5m
         from: 2000-01-23T04:56:07.000+00:00
         to: 2000-01-23T04:56:07.000+00:00
@@ -19585,6 +19611,8 @@ components:
           type: string
         to:
           format: date-time
+          type: string
+        unit:
           type: string
         granularity:
           $ref: '#/components/schemas/metricsGranularity'

@@ -15,40 +15,42 @@ import (
 	"time"
 )
 
-// checks if the MetricsMetadataProperties type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &MetricsMetadataProperties{}
+// checks if the MetricsDataTrafficMetadataProperties type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MetricsDataTrafficMetadataProperties{}
 
-// MetricsMetadataProperties struct for MetricsMetadataProperties
-type MetricsMetadataProperties struct {
+// MetricsDataTrafficMetadataProperties struct for MetricsDataTrafficMetadataProperties
+type MetricsDataTrafficMetadataProperties struct {
 	From *time.Time `json:"from,omitempty"`
 	To *time.Time `json:"to,omitempty"`
 	Granularity *MetricsDataTrafficMetadataPropertiesGranularity `json:"granularity,omitempty"`
 	// Defined by the query
 	Aggregation *string `json:"aggregation,omitempty"`
+	// The unit of the summary values
+	Unit *string `json:"unit,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _MetricsMetadataProperties MetricsMetadataProperties
+type _MetricsDataTrafficMetadataProperties MetricsDataTrafficMetadataProperties
 
-// NewMetricsMetadataProperties instantiates a new MetricsMetadataProperties object
+// NewMetricsDataTrafficMetadataProperties instantiates a new MetricsDataTrafficMetadataProperties object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetricsMetadataProperties() *MetricsMetadataProperties {
-	this := MetricsMetadataProperties{}
+func NewMetricsDataTrafficMetadataProperties() *MetricsDataTrafficMetadataProperties {
+	this := MetricsDataTrafficMetadataProperties{}
 	return &this
 }
 
-// NewMetricsMetadataPropertiesWithDefaults instantiates a new MetricsMetadataProperties object
+// NewMetricsDataTrafficMetadataPropertiesWithDefaults instantiates a new MetricsDataTrafficMetadataProperties object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewMetricsMetadataPropertiesWithDefaults() *MetricsMetadataProperties {
-	this := MetricsMetadataProperties{}
+func NewMetricsDataTrafficMetadataPropertiesWithDefaults() *MetricsDataTrafficMetadataProperties {
+	this := MetricsDataTrafficMetadataProperties{}
 	return &this
 }
 
 // GetFrom returns the From field value if set, zero value otherwise.
-func (o *MetricsMetadataProperties) GetFrom() time.Time {
+func (o *MetricsDataTrafficMetadataProperties) GetFrom() time.Time {
 	if o == nil || IsNil(o.From) {
 		var ret time.Time
 		return ret
@@ -58,7 +60,7 @@ func (o *MetricsMetadataProperties) GetFrom() time.Time {
 
 // GetFromOk returns a tuple with the From field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MetricsMetadataProperties) GetFromOk() (*time.Time, bool) {
+func (o *MetricsDataTrafficMetadataProperties) GetFromOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.From) {
 		return nil, false
 	}
@@ -66,7 +68,7 @@ func (o *MetricsMetadataProperties) GetFromOk() (*time.Time, bool) {
 }
 
 // HasFrom returns a boolean if a field has been set.
-func (o *MetricsMetadataProperties) HasFrom() bool {
+func (o *MetricsDataTrafficMetadataProperties) HasFrom() bool {
 	if o != nil && !IsNil(o.From) {
 		return true
 	}
@@ -75,12 +77,12 @@ func (o *MetricsMetadataProperties) HasFrom() bool {
 }
 
 // SetFrom gets a reference to the given time.Time and assigns it to the From field.
-func (o *MetricsMetadataProperties) SetFrom(v time.Time) {
+func (o *MetricsDataTrafficMetadataProperties) SetFrom(v time.Time) {
 	o.From = &v
 }
 
 // GetTo returns the To field value if set, zero value otherwise.
-func (o *MetricsMetadataProperties) GetTo() time.Time {
+func (o *MetricsDataTrafficMetadataProperties) GetTo() time.Time {
 	if o == nil || IsNil(o.To) {
 		var ret time.Time
 		return ret
@@ -90,7 +92,7 @@ func (o *MetricsMetadataProperties) GetTo() time.Time {
 
 // GetToOk returns a tuple with the To field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MetricsMetadataProperties) GetToOk() (*time.Time, bool) {
+func (o *MetricsDataTrafficMetadataProperties) GetToOk() (*time.Time, bool) {
 	if o == nil || IsNil(o.To) {
 		return nil, false
 	}
@@ -98,7 +100,7 @@ func (o *MetricsMetadataProperties) GetToOk() (*time.Time, bool) {
 }
 
 // HasTo returns a boolean if a field has been set.
-func (o *MetricsMetadataProperties) HasTo() bool {
+func (o *MetricsDataTrafficMetadataProperties) HasTo() bool {
 	if o != nil && !IsNil(o.To) {
 		return true
 	}
@@ -107,12 +109,12 @@ func (o *MetricsMetadataProperties) HasTo() bool {
 }
 
 // SetTo gets a reference to the given time.Time and assigns it to the To field.
-func (o *MetricsMetadataProperties) SetTo(v time.Time) {
+func (o *MetricsDataTrafficMetadataProperties) SetTo(v time.Time) {
 	o.To = &v
 }
 
 // GetGranularity returns the Granularity field value if set, zero value otherwise.
-func (o *MetricsMetadataProperties) GetGranularity() MetricsDataTrafficMetadataPropertiesGranularity {
+func (o *MetricsDataTrafficMetadataProperties) GetGranularity() MetricsDataTrafficMetadataPropertiesGranularity {
 	if o == nil || IsNil(o.Granularity) {
 		var ret MetricsDataTrafficMetadataPropertiesGranularity
 		return ret
@@ -122,7 +124,7 @@ func (o *MetricsMetadataProperties) GetGranularity() MetricsDataTrafficMetadataP
 
 // GetGranularityOk returns a tuple with the Granularity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MetricsMetadataProperties) GetGranularityOk() (*MetricsDataTrafficMetadataPropertiesGranularity, bool) {
+func (o *MetricsDataTrafficMetadataProperties) GetGranularityOk() (*MetricsDataTrafficMetadataPropertiesGranularity, bool) {
 	if o == nil || IsNil(o.Granularity) {
 		return nil, false
 	}
@@ -130,7 +132,7 @@ func (o *MetricsMetadataProperties) GetGranularityOk() (*MetricsDataTrafficMetad
 }
 
 // HasGranularity returns a boolean if a field has been set.
-func (o *MetricsMetadataProperties) HasGranularity() bool {
+func (o *MetricsDataTrafficMetadataProperties) HasGranularity() bool {
 	if o != nil && !IsNil(o.Granularity) {
 		return true
 	}
@@ -139,12 +141,12 @@ func (o *MetricsMetadataProperties) HasGranularity() bool {
 }
 
 // SetGranularity gets a reference to the given MetricsDataTrafficMetadataPropertiesGranularity and assigns it to the Granularity field.
-func (o *MetricsMetadataProperties) SetGranularity(v MetricsDataTrafficMetadataPropertiesGranularity) {
+func (o *MetricsDataTrafficMetadataProperties) SetGranularity(v MetricsDataTrafficMetadataPropertiesGranularity) {
 	o.Granularity = &v
 }
 
 // GetAggregation returns the Aggregation field value if set, zero value otherwise.
-func (o *MetricsMetadataProperties) GetAggregation() string {
+func (o *MetricsDataTrafficMetadataProperties) GetAggregation() string {
 	if o == nil || IsNil(o.Aggregation) {
 		var ret string
 		return ret
@@ -154,7 +156,7 @@ func (o *MetricsMetadataProperties) GetAggregation() string {
 
 // GetAggregationOk returns a tuple with the Aggregation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MetricsMetadataProperties) GetAggregationOk() (*string, bool) {
+func (o *MetricsDataTrafficMetadataProperties) GetAggregationOk() (*string, bool) {
 	if o == nil || IsNil(o.Aggregation) {
 		return nil, false
 	}
@@ -162,7 +164,7 @@ func (o *MetricsMetadataProperties) GetAggregationOk() (*string, bool) {
 }
 
 // HasAggregation returns a boolean if a field has been set.
-func (o *MetricsMetadataProperties) HasAggregation() bool {
+func (o *MetricsDataTrafficMetadataProperties) HasAggregation() bool {
 	if o != nil && !IsNil(o.Aggregation) {
 		return true
 	}
@@ -171,11 +173,43 @@ func (o *MetricsMetadataProperties) HasAggregation() bool {
 }
 
 // SetAggregation gets a reference to the given string and assigns it to the Aggregation field.
-func (o *MetricsMetadataProperties) SetAggregation(v string) {
+func (o *MetricsDataTrafficMetadataProperties) SetAggregation(v string) {
 	o.Aggregation = &v
 }
 
-func (o MetricsMetadataProperties) MarshalJSON() ([]byte, error) {
+// GetUnit returns the Unit field value if set, zero value otherwise.
+func (o *MetricsDataTrafficMetadataProperties) GetUnit() string {
+	if o == nil || IsNil(o.Unit) {
+		var ret string
+		return ret
+	}
+	return *o.Unit
+}
+
+// GetUnitOk returns a tuple with the Unit field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetricsDataTrafficMetadataProperties) GetUnitOk() (*string, bool) {
+	if o == nil || IsNil(o.Unit) {
+		return nil, false
+	}
+	return o.Unit, true
+}
+
+// HasUnit returns a boolean if a field has been set.
+func (o *MetricsDataTrafficMetadataProperties) HasUnit() bool {
+	if o != nil && !IsNil(o.Unit) {
+		return true
+	}
+
+	return false
+}
+
+// SetUnit gets a reference to the given string and assigns it to the Unit field.
+func (o *MetricsDataTrafficMetadataProperties) SetUnit(v string) {
+	o.Unit = &v
+}
+
+func (o MetricsDataTrafficMetadataProperties) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -183,7 +217,7 @@ func (o MetricsMetadataProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MetricsMetadataProperties) ToMap() (map[string]interface{}, error) {
+func (o MetricsDataTrafficMetadataProperties) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.From) {
 		toSerialize["from"] = o.From
@@ -197,6 +231,9 @@ func (o MetricsMetadataProperties) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Aggregation) {
 		toSerialize["aggregation"] = o.Aggregation
 	}
+	if !IsNil(o.Unit) {
+		toSerialize["unit"] = o.Unit
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -205,16 +242,16 @@ func (o MetricsMetadataProperties) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *MetricsMetadataProperties) UnmarshalJSON(data []byte) (err error) {
-	varMetricsMetadataProperties := _MetricsMetadataProperties{}
+func (o *MetricsDataTrafficMetadataProperties) UnmarshalJSON(data []byte) (err error) {
+	varMetricsDataTrafficMetadataProperties := _MetricsDataTrafficMetadataProperties{}
 
-	err = json.Unmarshal(data, &varMetricsMetadataProperties)
+	err = json.Unmarshal(data, &varMetricsDataTrafficMetadataProperties)
 
 	if err != nil {
 		return err
 	}
 
-	*o = MetricsMetadataProperties(varMetricsMetadataProperties)
+	*o = MetricsDataTrafficMetadataProperties(varMetricsDataTrafficMetadataProperties)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -223,44 +260,45 @@ func (o *MetricsMetadataProperties) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "to")
 		delete(additionalProperties, "granularity")
 		delete(additionalProperties, "aggregation")
+		delete(additionalProperties, "unit")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableMetricsMetadataProperties struct {
-	value *MetricsMetadataProperties
+type NullableMetricsDataTrafficMetadataProperties struct {
+	value *MetricsDataTrafficMetadataProperties
 	isSet bool
 }
 
-func (v NullableMetricsMetadataProperties) Get() *MetricsMetadataProperties {
+func (v NullableMetricsDataTrafficMetadataProperties) Get() *MetricsDataTrafficMetadataProperties {
 	return v.value
 }
 
-func (v *NullableMetricsMetadataProperties) Set(val *MetricsMetadataProperties) {
+func (v *NullableMetricsDataTrafficMetadataProperties) Set(val *MetricsDataTrafficMetadataProperties) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableMetricsMetadataProperties) IsSet() bool {
+func (v NullableMetricsDataTrafficMetadataProperties) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableMetricsMetadataProperties) Unset() {
+func (v *NullableMetricsDataTrafficMetadataProperties) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableMetricsMetadataProperties(val *MetricsMetadataProperties) *NullableMetricsMetadataProperties {
-	return &NullableMetricsMetadataProperties{value: val, isSet: true}
+func NewNullableMetricsDataTrafficMetadataProperties(val *MetricsDataTrafficMetadataProperties) *NullableMetricsDataTrafficMetadataProperties {
+	return &NullableMetricsDataTrafficMetadataProperties{value: val, isSet: true}
 }
 
-func (v NullableMetricsMetadataProperties) MarshalJSON() ([]byte, error) {
+func (v NullableMetricsDataTrafficMetadataProperties) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableMetricsMetadataProperties) UnmarshalJSON(src []byte) error {
+func (v *NullableMetricsDataTrafficMetadataProperties) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
