@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **SalesOrgId** | Pointer to **string** |  | [optional] 
 **DeliveryStatus** | Pointer to **string** |  | [optional] 
 **Reference** | Pointer to **NullableString** |  | [optional] 
-**PrivateNetworkPortSpeed** | Pointer to **NullableString** |  | [optional] 
+**PrivateNetworkPortSpeed** | Pointer to **NullableFloat32** |  | [optional] 
 **Subnets** | Pointer to [**[]Subnet**](Subnet.md) |  | [optional] 
 **Status** | Pointer to **string** |  | [optional] 
 **StartsAt** | Pointer to **time.Time** |  | [optional] 
@@ -183,20 +183,20 @@ HasReference returns a boolean if a field has been set.
 UnsetReference ensures that no value is present for Reference, not even an explicit nil
 ### GetPrivateNetworkPortSpeed
 
-`func (o *Contract) GetPrivateNetworkPortSpeed() string`
+`func (o *Contract) GetPrivateNetworkPortSpeed() float32`
 
 GetPrivateNetworkPortSpeed returns the PrivateNetworkPortSpeed field if non-nil, zero value otherwise.
 
 ### GetPrivateNetworkPortSpeedOk
 
-`func (o *Contract) GetPrivateNetworkPortSpeedOk() (*string, bool)`
+`func (o *Contract) GetPrivateNetworkPortSpeedOk() (*float32, bool)`
 
 GetPrivateNetworkPortSpeedOk returns a tuple with the PrivateNetworkPortSpeed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrivateNetworkPortSpeed
 
-`func (o *Contract) SetPrivateNetworkPortSpeed(v string)`
+`func (o *Contract) SetPrivateNetworkPortSpeed(v float32)`
 
 SetPrivateNetworkPortSpeed sets PrivateNetworkPortSpeed field to given value.
 

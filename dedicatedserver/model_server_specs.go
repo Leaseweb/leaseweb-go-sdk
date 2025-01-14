@@ -19,6 +19,8 @@ var _ MappedNullable = &ServerSpecs{}
 
 // ServerSpecs Hardware information of the server
 type ServerSpecs struct {
+	// The brand description of the server
+	Brand *string `json:"brand,omitempty"`
 	// The chassis description of the server
 	Chassis *string `json:"chassis,omitempty"`
 	Cpu *Cpu `json:"cpu,omitempty"`
@@ -49,6 +51,38 @@ func NewServerSpecs() *ServerSpecs {
 func NewServerSpecsWithDefaults() *ServerSpecs {
 	this := ServerSpecs{}
 	return &this
+}
+
+// GetBrand returns the Brand field value if set, zero value otherwise.
+func (o *ServerSpecs) GetBrand() string {
+	if o == nil || IsNil(o.Brand) {
+		var ret string
+		return ret
+	}
+	return *o.Brand
+}
+
+// GetBrandOk returns a tuple with the Brand field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ServerSpecs) GetBrandOk() (*string, bool) {
+	if o == nil || IsNil(o.Brand) {
+		return nil, false
+	}
+	return o.Brand, true
+}
+
+// HasBrand returns a boolean if a field has been set.
+func (o *ServerSpecs) HasBrand() bool {
+	if o != nil && !IsNil(o.Brand) {
+		return true
+	}
+
+	return false
+}
+
+// SetBrand gets a reference to the given string and assigns it to the Brand field.
+func (o *ServerSpecs) SetBrand(v string) {
+	o.Brand = &v
 }
 
 // GetChassis returns the Chassis field value if set, zero value otherwise.
@@ -253,6 +287,9 @@ func (o ServerSpecs) MarshalJSON() ([]byte, error) {
 
 func (o ServerSpecs) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Brand) {
+		toSerialize["brand"] = o.Brand
+	}
 	if !IsNil(o.Chassis) {
 		toSerialize["chassis"] = o.Chassis
 	}
@@ -293,6 +330,7 @@ func (o *ServerSpecs) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "brand")
 		delete(additionalProperties, "chassis")
 		delete(additionalProperties, "cpu")
 		delete(additionalProperties, "hardwareRaidCapable")

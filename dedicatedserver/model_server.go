@@ -25,6 +25,12 @@ type Server struct {
 	FeatureAvailability *FeatureAvailability `json:"featureAvailability,omitempty"`
 	// Id of the server
 	Id *string `json:"id,omitempty"`
+	// Whether private network enabled or not
+	IsPrivateNetworkEnabled *bool `json:"isPrivateNetworkEnabled,omitempty"`
+	// Whether capable of private network or not
+	IsPrivateNetworkCapable *bool `json:"isPrivateNetworkCapable,omitempty"`
+	// Whether capable of redundant private network or not
+	IsRedundantPrivateNetworkCapable *bool `json:"isRedundantPrivateNetworkCapable,omitempty"`
 	Location *Location `json:"location,omitempty"`
 	NetworkInterfaces *NetworkInterfaces `json:"networkInterfaces,omitempty"`
 	// List of ports that can be used to manage power of the server
@@ -183,6 +189,102 @@ func (o *Server) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *Server) SetId(v string) {
 	o.Id = &v
+}
+
+// GetIsPrivateNetworkEnabled returns the IsPrivateNetworkEnabled field value if set, zero value otherwise.
+func (o *Server) GetIsPrivateNetworkEnabled() bool {
+	if o == nil || IsNil(o.IsPrivateNetworkEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPrivateNetworkEnabled
+}
+
+// GetIsPrivateNetworkEnabledOk returns a tuple with the IsPrivateNetworkEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Server) GetIsPrivateNetworkEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsPrivateNetworkEnabled) {
+		return nil, false
+	}
+	return o.IsPrivateNetworkEnabled, true
+}
+
+// HasIsPrivateNetworkEnabled returns a boolean if a field has been set.
+func (o *Server) HasIsPrivateNetworkEnabled() bool {
+	if o != nil && !IsNil(o.IsPrivateNetworkEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPrivateNetworkEnabled gets a reference to the given bool and assigns it to the IsPrivateNetworkEnabled field.
+func (o *Server) SetIsPrivateNetworkEnabled(v bool) {
+	o.IsPrivateNetworkEnabled = &v
+}
+
+// GetIsPrivateNetworkCapable returns the IsPrivateNetworkCapable field value if set, zero value otherwise.
+func (o *Server) GetIsPrivateNetworkCapable() bool {
+	if o == nil || IsNil(o.IsPrivateNetworkCapable) {
+		var ret bool
+		return ret
+	}
+	return *o.IsPrivateNetworkCapable
+}
+
+// GetIsPrivateNetworkCapableOk returns a tuple with the IsPrivateNetworkCapable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Server) GetIsPrivateNetworkCapableOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsPrivateNetworkCapable) {
+		return nil, false
+	}
+	return o.IsPrivateNetworkCapable, true
+}
+
+// HasIsPrivateNetworkCapable returns a boolean if a field has been set.
+func (o *Server) HasIsPrivateNetworkCapable() bool {
+	if o != nil && !IsNil(o.IsPrivateNetworkCapable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsPrivateNetworkCapable gets a reference to the given bool and assigns it to the IsPrivateNetworkCapable field.
+func (o *Server) SetIsPrivateNetworkCapable(v bool) {
+	o.IsPrivateNetworkCapable = &v
+}
+
+// GetIsRedundantPrivateNetworkCapable returns the IsRedundantPrivateNetworkCapable field value if set, zero value otherwise.
+func (o *Server) GetIsRedundantPrivateNetworkCapable() bool {
+	if o == nil || IsNil(o.IsRedundantPrivateNetworkCapable) {
+		var ret bool
+		return ret
+	}
+	return *o.IsRedundantPrivateNetworkCapable
+}
+
+// GetIsRedundantPrivateNetworkCapableOk returns a tuple with the IsRedundantPrivateNetworkCapable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Server) GetIsRedundantPrivateNetworkCapableOk() (*bool, bool) {
+	if o == nil || IsNil(o.IsRedundantPrivateNetworkCapable) {
+		return nil, false
+	}
+	return o.IsRedundantPrivateNetworkCapable, true
+}
+
+// HasIsRedundantPrivateNetworkCapable returns a boolean if a field has been set.
+func (o *Server) HasIsRedundantPrivateNetworkCapable() bool {
+	if o != nil && !IsNil(o.IsRedundantPrivateNetworkCapable) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsRedundantPrivateNetworkCapable gets a reference to the given bool and assigns it to the IsRedundantPrivateNetworkCapable field.
+func (o *Server) SetIsRedundantPrivateNetworkCapable(v bool) {
+	o.IsRedundantPrivateNetworkCapable = &v
 }
 
 // GetLocation returns the Location field value if set, zero value otherwise.
@@ -431,6 +533,15 @@ func (o Server) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+	if !IsNil(o.IsPrivateNetworkEnabled) {
+		toSerialize["isPrivateNetworkEnabled"] = o.IsPrivateNetworkEnabled
+	}
+	if !IsNil(o.IsPrivateNetworkCapable) {
+		toSerialize["isPrivateNetworkCapable"] = o.IsPrivateNetworkCapable
+	}
+	if !IsNil(o.IsRedundantPrivateNetworkCapable) {
+		toSerialize["isRedundantPrivateNetworkCapable"] = o.IsRedundantPrivateNetworkCapable
+	}
 	if !IsNil(o.Location) {
 		toSerialize["location"] = o.Location
 	}
@@ -478,6 +589,9 @@ func (o *Server) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "contract")
 		delete(additionalProperties, "featureAvailability")
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "isPrivateNetworkEnabled")
+		delete(additionalProperties, "isPrivateNetworkCapable")
+		delete(additionalProperties, "isRedundantPrivateNetworkCapable")
 		delete(additionalProperties, "location")
 		delete(additionalProperties, "networkInterfaces")
 		delete(additionalProperties, "powerPorts")

@@ -25,7 +25,7 @@ type Contract struct {
 	SalesOrgId *string `json:"salesOrgId,omitempty"`
 	DeliveryStatus *string `json:"deliveryStatus,omitempty"`
 	Reference NullableString `json:"reference,omitempty"`
-	PrivateNetworkPortSpeed NullableString `json:"privateNetworkPortSpeed,omitempty"`
+	PrivateNetworkPortSpeed NullableFloat32 `json:"privateNetworkPortSpeed,omitempty"`
 	Subnets []Subnet `json:"subnets,omitempty"`
 	Status *string `json:"status,omitempty"`
 	StartsAt *time.Time `json:"startsAt,omitempty"`
@@ -239,9 +239,9 @@ func (o *Contract) UnsetReference() {
 }
 
 // GetPrivateNetworkPortSpeed returns the PrivateNetworkPortSpeed field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Contract) GetPrivateNetworkPortSpeed() string {
+func (o *Contract) GetPrivateNetworkPortSpeed() float32 {
 	if o == nil || IsNil(o.PrivateNetworkPortSpeed.Get()) {
-		var ret string
+		var ret float32
 		return ret
 	}
 	return *o.PrivateNetworkPortSpeed.Get()
@@ -250,7 +250,7 @@ func (o *Contract) GetPrivateNetworkPortSpeed() string {
 // GetPrivateNetworkPortSpeedOk returns a tuple with the PrivateNetworkPortSpeed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Contract) GetPrivateNetworkPortSpeedOk() (*string, bool) {
+func (o *Contract) GetPrivateNetworkPortSpeedOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -266,8 +266,8 @@ func (o *Contract) HasPrivateNetworkPortSpeed() bool {
 	return false
 }
 
-// SetPrivateNetworkPortSpeed gets a reference to the given NullableString and assigns it to the PrivateNetworkPortSpeed field.
-func (o *Contract) SetPrivateNetworkPortSpeed(v string) {
+// SetPrivateNetworkPortSpeed gets a reference to the given NullableFloat32 and assigns it to the PrivateNetworkPortSpeed field.
+func (o *Contract) SetPrivateNetworkPortSpeed(v float32) {
 	o.PrivateNetworkPortSpeed.Set(&v)
 }
 // SetPrivateNetworkPortSpeedNil sets the value for PrivateNetworkPortSpeed to be an explicit nil

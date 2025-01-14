@@ -20,7 +20,7 @@ var _ MappedNullable = &SoftwareLicense{}
 // SoftwareLicense struct for SoftwareLicense
 type SoftwareLicense struct {
 	Name *string `json:"name,omitempty"`
-	Price *float32 `json:"price,omitempty"`
+	Price NullableFloat32 `json:"price,omitempty"`
 	Currency *string `json:"currency,omitempty"`
 	Type *string `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -77,36 +77,46 @@ func (o *SoftwareLicense) SetName(v string) {
 	o.Name = &v
 }
 
-// GetPrice returns the Price field value if set, zero value otherwise.
+// GetPrice returns the Price field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoftwareLicense) GetPrice() float32 {
-	if o == nil || IsNil(o.Price) {
+	if o == nil || IsNil(o.Price.Get()) {
 		var ret float32
 		return ret
 	}
-	return *o.Price
+	return *o.Price.Get()
 }
 
 // GetPriceOk returns a tuple with the Price field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SoftwareLicense) GetPriceOk() (*float32, bool) {
-	if o == nil || IsNil(o.Price) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Price, true
+	return o.Price.Get(), o.Price.IsSet()
 }
 
 // HasPrice returns a boolean if a field has been set.
 func (o *SoftwareLicense) HasPrice() bool {
-	if o != nil && !IsNil(o.Price) {
+	if o != nil && o.Price.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPrice gets a reference to the given float32 and assigns it to the Price field.
+// SetPrice gets a reference to the given NullableFloat32 and assigns it to the Price field.
 func (o *SoftwareLicense) SetPrice(v float32) {
-	o.Price = &v
+	o.Price.Set(&v)
+}
+// SetPriceNil sets the value for Price to be an explicit nil
+func (o *SoftwareLicense) SetPriceNil() {
+	o.Price.Set(nil)
+}
+
+// UnsetPrice ensures that no value is present for Price, not even an explicit nil
+func (o *SoftwareLicense) UnsetPrice() {
+	o.Price.Unset()
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
@@ -186,8 +196,8 @@ func (o SoftwareLicense) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.Price) {
-		toSerialize["price"] = o.Price
+	if o.Price.IsSet() {
+		toSerialize["price"] = o.Price.Get()
 	}
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency

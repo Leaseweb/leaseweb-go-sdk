@@ -8,6 +8,9 @@ Name | Type | Description | Notes
 **Contract** | Pointer to [**Contract**](Contract.md) |  | [optional] 
 **FeatureAvailability** | Pointer to [**FeatureAvailability**](FeatureAvailability.md) |  | [optional] 
 **Id** | Pointer to **string** | Id of the server | [optional] 
+**IsPrivateNetworkEnabled** | Pointer to **bool** | Whether private network enabled or not | [optional] 
+**IsPrivateNetworkCapable** | Pointer to **bool** | Whether capable of private network or not | [optional] 
+**IsRedundantPrivateNetworkCapable** | Pointer to **bool** | Whether capable of redundant private network or not | [optional] 
 **Location** | Pointer to [**Location**](Location.md) |  | [optional] 
 **NetworkInterfaces** | Pointer to [**NetworkInterfaces**](NetworkInterfaces.md) |  | [optional] 
 **PowerPorts** | Pointer to [**[]Port**](Port.md) | List of ports that can be used to manage power of the server | [optional] 
@@ -134,6 +137,81 @@ SetId sets Id field to given value.
 `func (o *Server) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetIsPrivateNetworkEnabled
+
+`func (o *Server) GetIsPrivateNetworkEnabled() bool`
+
+GetIsPrivateNetworkEnabled returns the IsPrivateNetworkEnabled field if non-nil, zero value otherwise.
+
+### GetIsPrivateNetworkEnabledOk
+
+`func (o *Server) GetIsPrivateNetworkEnabledOk() (*bool, bool)`
+
+GetIsPrivateNetworkEnabledOk returns a tuple with the IsPrivateNetworkEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPrivateNetworkEnabled
+
+`func (o *Server) SetIsPrivateNetworkEnabled(v bool)`
+
+SetIsPrivateNetworkEnabled sets IsPrivateNetworkEnabled field to given value.
+
+### HasIsPrivateNetworkEnabled
+
+`func (o *Server) HasIsPrivateNetworkEnabled() bool`
+
+HasIsPrivateNetworkEnabled returns a boolean if a field has been set.
+
+### GetIsPrivateNetworkCapable
+
+`func (o *Server) GetIsPrivateNetworkCapable() bool`
+
+GetIsPrivateNetworkCapable returns the IsPrivateNetworkCapable field if non-nil, zero value otherwise.
+
+### GetIsPrivateNetworkCapableOk
+
+`func (o *Server) GetIsPrivateNetworkCapableOk() (*bool, bool)`
+
+GetIsPrivateNetworkCapableOk returns a tuple with the IsPrivateNetworkCapable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPrivateNetworkCapable
+
+`func (o *Server) SetIsPrivateNetworkCapable(v bool)`
+
+SetIsPrivateNetworkCapable sets IsPrivateNetworkCapable field to given value.
+
+### HasIsPrivateNetworkCapable
+
+`func (o *Server) HasIsPrivateNetworkCapable() bool`
+
+HasIsPrivateNetworkCapable returns a boolean if a field has been set.
+
+### GetIsRedundantPrivateNetworkCapable
+
+`func (o *Server) GetIsRedundantPrivateNetworkCapable() bool`
+
+GetIsRedundantPrivateNetworkCapable returns the IsRedundantPrivateNetworkCapable field if non-nil, zero value otherwise.
+
+### GetIsRedundantPrivateNetworkCapableOk
+
+`func (o *Server) GetIsRedundantPrivateNetworkCapableOk() (*bool, bool)`
+
+GetIsRedundantPrivateNetworkCapableOk returns a tuple with the IsRedundantPrivateNetworkCapable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsRedundantPrivateNetworkCapable
+
+`func (o *Server) SetIsRedundantPrivateNetworkCapable(v bool)`
+
+SetIsRedundantPrivateNetworkCapable sets IsRedundantPrivateNetworkCapable field to given value.
+
+### HasIsRedundantPrivateNetworkCapable
+
+`func (o *Server) HasIsRedundantPrivateNetworkCapable() bool`
+
+HasIsRedundantPrivateNetworkCapable returns a boolean if a field has been set.
 
 ### GetLocation
 

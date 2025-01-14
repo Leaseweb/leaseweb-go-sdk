@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | Private network id | [optional] 
 **LinkSpeed** | Pointer to [**LinkSpeed**](LinkSpeed.md) |  | [optional] 
 **Status** | Pointer to **string** | Configuration status | [optional] 
+**Dhcp** | Pointer to **string** | dhcp status | [optional] 
 **Subnet** | Pointer to **string** |  | [optional] 
 **VlanId** | Pointer to **string** | VLAN id | [optional] 
 
@@ -103,6 +104,31 @@ SetStatus sets Status field to given value.
 `func (o *PrivateNetwork) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetDhcp
+
+`func (o *PrivateNetwork) GetDhcp() string`
+
+GetDhcp returns the Dhcp field if non-nil, zero value otherwise.
+
+### GetDhcpOk
+
+`func (o *PrivateNetwork) GetDhcpOk() (*string, bool)`
+
+GetDhcpOk returns a tuple with the Dhcp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDhcp
+
+`func (o *PrivateNetwork) SetDhcp(v string)`
+
+SetDhcp sets Dhcp field to given value.
+
+### HasDhcp
+
+`func (o *PrivateNetwork) HasDhcp() bool`
+
+HasDhcp returns a boolean if a field has been set.
 
 ### GetSubnet
 

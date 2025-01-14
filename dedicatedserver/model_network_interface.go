@@ -20,7 +20,7 @@ var _ MappedNullable = &NetworkInterface{}
 // NetworkInterface struct for NetworkInterface
 type NetworkInterface struct {
 	// Represents a MAC Address in the standard colon delimited format. Eg. `01:23:45:67:89:0A`
-	Mac NullableString `json:"mac,omitempty" validate:"regexp=^([A-F0-9]{2}:){5}[A-F0-9]{2}$"`
+	Mac NullableString `json:"mac,omitempty"`
 	Ip NullableString `json:"ip,omitempty"`
 	NullRouted NullableBool `json:"nullRouted,omitempty"`
 	Gateway NullableString `json:"gateway,omitempty"`

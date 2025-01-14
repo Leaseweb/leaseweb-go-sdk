@@ -22,12 +22,22 @@ type RackType string
 const (
 	RACKTYPE_SHARED RackType = "SHARED"
 	RACKTYPE_DEDICATED RackType = "DEDICATED"
+	RACKTYPE_SHARED_10_GE RackType = "SHARED_10GE"
+	RACKTYPE_SHARED_40_GE RackType = "SHARED_40GE"
+	RACKTYPE_SHARED_100_GE RackType = "SHARED_100GE"
+	RACKTYPE_SHARED_200_GE RackType = "SHARED_200GE"
+	RACKTYPE_SHARED_400_GE RackType = "SHARED_400GE"
 )
 
 // All allowed values of RackType enum
 var AllowedRackTypeEnumValues = []RackType{
 	"SHARED",
 	"DEDICATED",
+	"SHARED_10GE",
+	"SHARED_40GE",
+	"SHARED_100GE",
+	"SHARED_200GE",
+	"SHARED_400GE",
 }
 
 func (v *RackType) UnmarshalJSON(src []byte) error {

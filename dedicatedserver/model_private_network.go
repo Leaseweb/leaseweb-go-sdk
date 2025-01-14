@@ -24,6 +24,8 @@ type PrivateNetwork struct {
 	LinkSpeed *LinkSpeed `json:"linkSpeed,omitempty"`
 	// Configuration status
 	Status *string `json:"status,omitempty"`
+	// dhcp status
+	Dhcp *string `json:"dhcp,omitempty"`
 	Subnet *string `json:"subnet,omitempty"`
 	// VLAN id
 	VlanId *string `json:"vlanId,omitempty"`
@@ -145,6 +147,38 @@ func (o *PrivateNetwork) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetDhcp returns the Dhcp field value if set, zero value otherwise.
+func (o *PrivateNetwork) GetDhcp() string {
+	if o == nil || IsNil(o.Dhcp) {
+		var ret string
+		return ret
+	}
+	return *o.Dhcp
+}
+
+// GetDhcpOk returns a tuple with the Dhcp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PrivateNetwork) GetDhcpOk() (*string, bool) {
+	if o == nil || IsNil(o.Dhcp) {
+		return nil, false
+	}
+	return o.Dhcp, true
+}
+
+// HasDhcp returns a boolean if a field has been set.
+func (o *PrivateNetwork) HasDhcp() bool {
+	if o != nil && !IsNil(o.Dhcp) {
+		return true
+	}
+
+	return false
+}
+
+// SetDhcp gets a reference to the given string and assigns it to the Dhcp field.
+func (o *PrivateNetwork) SetDhcp(v string) {
+	o.Dhcp = &v
+}
+
 // GetSubnet returns the Subnet field value if set, zero value otherwise.
 func (o *PrivateNetwork) GetSubnet() string {
 	if o == nil || IsNil(o.Subnet) {
@@ -228,6 +262,9 @@ func (o PrivateNetwork) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+	if !IsNil(o.Dhcp) {
+		toSerialize["dhcp"] = o.Dhcp
+	}
 	if !IsNil(o.Subnet) {
 		toSerialize["subnet"] = o.Subnet
 	}
@@ -259,6 +296,7 @@ func (o *PrivateNetwork) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "linkSpeed")
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "dhcp")
 		delete(additionalProperties, "subnet")
 		delete(additionalProperties, "vlanId")
 		o.AdditionalProperties = additionalProperties

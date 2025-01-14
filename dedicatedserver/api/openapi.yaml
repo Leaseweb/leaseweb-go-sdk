@@ -1429,93 +1429,116 @@ paths:
           content:
             application/json:
               example:
-                assetId: "627294"
+                assetId: "1234561882"
                 contract:
-                  billingCycle: 12
-                  billingFrequency: MONTH
-                  contractTerm: 12
-                  currency: EUR
-                  customerId: "32923828192"
+                  id: "12123412312"
+                  customerId: "1235458"
+                  salesOrgId: "2200"
                   deliveryStatus: ACTIVE
-                  endsAt: 2023-01-01T00:00:00Z
-                  id: "674382"
+                  reference: this is ref
+                  privateNetworkPortSpeed: 10000
+                  subnets: []
+                  status: ACTIVE
+                  startsAt: 2024-04-01T00:00:00Z
+                  endsAt: null
+                  sla: Bronze
+                  contractTerm: 36
+                  contractType: NORMAL
+                  billingCycle: 1
+                  billingFrequency: MONTH
+                  pricePerFrequency: "12.5"
+                  currency: EUR
                   networkTraffic:
-                    datatrafficLimit: 100
-                    datatrafficUnit: TB|Mbps
-                    trafficType: PREMIUM|VOLUME
-                    type: 95|FLATFEE|DATATRAFFIC
-                  pricePerFrequency: "1090.52"
-                  reference: database.server
-                  salesOrgId: "2300"
-                  sla: BRONZE
+                    type: 90TH
+                    connectivityType: CONNECTED_AGGREGATION_POOL
+                    trafficType: VOLUME
+                    datatrafficLimit: null
+                    datatrafficUnit: null
                   softwareLicenses:
-                  - currency: EUR
-                    name: WINDOWS_2012_R2_SERVER
-                    price: 12.12
-                  startsAt: 2010-01-01T00:00:00Z
+                  - name: No Control Panel
+                    price: null
+                    currency: EUR
+                    type: CONTROL_PANEL
+                  managedServices: []
+                  aggregationPackId: "127648"
+                  ipv4Quantity: 1
                 featureAvailability:
                   automation: true
-                  ipmiReboot: false
                   powerCycle: true
+                  ipmiReboot: false
                   privateNetwork: true
-                  remoteManagement: false
-                id: "12345"
+                  remoteManagement: true
+                id: "123456"
+                isPrivateNetworkCapable: true
+                isPrivateNetworkEnabled: true
+                isRedundantPrivateNetworkCapable: false
                 location:
-                  rack: "13"
-                  site: AMS-01
-                  suite: A6
-                  unit: 16-17
+                  site: AMS-02
+                  suite: HALL1
+                  rack: LK18
+                  unit: "12"
                 networkInterfaces:
-                  internal:
-                    gateway: 123.123.123.126
-                    ip: 123.123.123.123/27
-                    mac: AA:BB:CC:DD:EE:FF
-                    ports: []
                   public:
-                    gateway: 123.123.123.126
-                    ip: 123.123.123.123/27
-                    mac: AA:BB:CC:DD:EE:FF
+                    mac: macmacmac
+                    ip: 127.0.0.1
+                    nullRouted: false
+                    gateway: 127.0.0.1
                     ports:
-                    - name: EVO-JV12-1
-                      port: "33"
-                  remoteManagement:
-                    mac: null
+                    - name: AMS-01-PUB-SW01231
+                      port: 0-0-21
+                    locationId: "274912387"
+                  internal:
+                    mac: macmacmac
                     ip: null
                     nullRouted: null
                     gateway: null
-                    ports: []
+                    ports:
+                    - name: AMS-02-INT-SW0123441
+                      port: 0-0-21
                     locationId: null
+                  remoteManagement:
+                    mac: macmacmac
+                    ip: 127.0.0.1
+                    gateway: 127.0.0.1
+                    ports:
+                    - name: AMS-02-INT-SW0123441
+                      port: 0-0-21
+                    locationId: "1238427449"
                 powerPorts:
-                - name: EVO-JV12-APC02
-                  port: "10"
+                - name: AMS-02-INT-SW0123441
+                  port: "14"
+                - name: AMS-02-INT-SW0123441222
+                  port: "11"
                 privateNetworks:
-                - id: "1"
-                  linkSpeed: 1000
+                - id: "1238793"
+                  linkSpeed: 10000
                   status: CONFIGURED
-                  subnet: 127.0.0.80/24
-                  vlanId: "2120"
+                  dhcp: DISABLED
+                  subnet: "24"
+                  vlanId: "1912639"
                 rack:
-                  type: DEDICATED
-                serialNumber: JDK18291JK
+                  id: "5162"
+                  type: SHARED_100GE
+                  capacity: 12G
+                serialNumber: HN2XGHSD02H04
                 specs:
-                  chassis: Dell R210 II
+                  brand: HP
+                  chassis: Dell R7612121 (8xSF/2NVMe)
+                  hardwareRaidCapable: false
                   cpu:
-                    quantity: 4
-                    type: Intel Xeon E3-1220
-                  hardwareRaidCapable: true
-                  hdd:
-                  - amount: 2
-                    id: SATA2TB
-                    performanceType: null
-                    size: 2
-                    type: SATA
-                    unit: TB
-                  pciCards:
-                  - description: 2x10GE UTP card
-                  - description: 2x30GE UTP card
+                    type: AMD INT AMD
+                    quantity: 2
                   ram:
-                    size: 32
+                    size: 64
                     unit: GB
+                  hdd:
+                  - id: SSDDD480GB
+                    size: 480
+                    unit: GB
+                    amount: 1
+                    type: SSD
+                    performanceType: WRITE_INTENSIVE
+                  pciCards: []
               schema:
                 $ref: '#/components/schemas/server'
           description: Ok.
@@ -8582,19 +8605,19 @@ components:
         - managedServices
         - managedServices
         softwareLicenses:
-        - price: 5.637376656633329
+        - price: 2.3021358869347655
           name: name
           currency: USD
           type: CONTROL_PANEL
-        - price: 5.637376656633329
+        - price: 2.3021358869347655
           name: name
           currency: USD
           type: CONTROL_PANEL
         sla: sla
         aggregationPackId: aggregationPackId
         reference: reference
-        billingCycle: 1
-        contractTerm: 6
+        billingCycle: 5
+        contractTerm: 1
         customerId: customerId
         startsAt: 2000-01-23T04:56:07.000+00:00
         networkTraffic:
@@ -8602,13 +8625,13 @@ components:
           trafficType: trafficType
           datatrafficUnit: datatrafficUnit
           type: type
-          datatrafficLimit: 5.962133916683182
-        privateNetworkPortSpeed: privateNetworkPortSpeed
+          datatrafficLimit: 5.637376656633329
+        privateNetworkPortSpeed: 0.8008281904610115
         subnets:
-        - quantity: 0
+        - quantity: 6
           subnetSize: subnetSize
           networkType: INTERNAL
-        - quantity: 0
+        - quantity: 6
           subnetSize: subnetSize
           networkType: INTERNAL
         currency: USD
@@ -8616,7 +8639,7 @@ components:
         pricePerFrequency: pricePerFrequency
         endsAt: 2000-01-23T04:56:07.000+00:00
         deliveryStatus: deliveryStatus
-        ipv4Quantity: 2
+        ipv4Quantity: 7
         salesOrgId: salesOrgId
         status: status
       properties:
@@ -8633,7 +8656,7 @@ components:
           type: string
         privateNetworkPortSpeed:
           nullable: true
-          type: string
+          type: number
         subnets:
           items:
             $ref: '#/components/schemas/subnet'
@@ -8751,7 +8774,6 @@ components:
           description: Represents a MAC Address in the standard colon delimited format.
             Eg. `01:23:45:67:89:0A`
           nullable: true
-          pattern: "^([A-F0-9]{2}:){5}[A-F0-9]{2}$"
           type: string
         ip:
           format: ipv4
@@ -8823,6 +8845,11 @@ components:
       enum:
       - SHARED
       - DEDICATED
+      - SHARED_10GE
+      - SHARED_40GE
+      - SHARED_100GE
+      - SHARED_200GE
+      - SHARED_400GE
       title: rackType
       type: string
     rack:
@@ -8893,19 +8920,19 @@ components:
           - managedServices
           - managedServices
           softwareLicenses:
-          - price: 5.637376656633329
+          - price: 2.3021358869347655
             name: name
             currency: USD
             type: CONTROL_PANEL
-          - price: 5.637376656633329
+          - price: 2.3021358869347655
             name: name
             currency: USD
             type: CONTROL_PANEL
           sla: sla
           aggregationPackId: aggregationPackId
           reference: reference
-          billingCycle: 1
-          contractTerm: 6
+          billingCycle: 5
+          contractTerm: 1
           customerId: customerId
           startsAt: 2000-01-23T04:56:07.000+00:00
           networkTraffic:
@@ -8913,13 +8940,13 @@ components:
             trafficType: trafficType
             datatrafficUnit: datatrafficUnit
             type: type
-            datatrafficLimit: 5.962133916683182
-          privateNetworkPortSpeed: privateNetworkPortSpeed
+            datatrafficLimit: 5.637376656633329
+          privateNetworkPortSpeed: 0.8008281904610115
           subnets:
-          - quantity: 0
+          - quantity: 6
             subnetSize: subnetSize
             networkType: INTERNAL
-          - quantity: 0
+          - quantity: 6
             subnetSize: subnetSize
             networkType: INTERNAL
           currency: USD
@@ -8927,7 +8954,7 @@ components:
           pricePerFrequency: pricePerFrequency
           endsAt: 2000-01-23T04:56:07.000+00:00
           deliveryStatus: deliveryStatus
-          ipv4Quantity: 2
+          ipv4Quantity: 7
           salesOrgId: salesOrgId
           status: status
         name: name
@@ -9033,19 +9060,19 @@ components:
             - managedServices
             - managedServices
             softwareLicenses:
-            - price: 5.637376656633329
+            - price: 2.3021358869347655
               name: name
               currency: USD
               type: CONTROL_PANEL
-            - price: 5.637376656633329
+            - price: 2.3021358869347655
               name: name
               currency: USD
               type: CONTROL_PANEL
             sla: sla
             aggregationPackId: aggregationPackId
             reference: reference
-            billingCycle: 1
-            contractTerm: 6
+            billingCycle: 5
+            contractTerm: 1
             customerId: customerId
             startsAt: 2000-01-23T04:56:07.000+00:00
             networkTraffic:
@@ -9053,13 +9080,13 @@ components:
               trafficType: trafficType
               datatrafficUnit: datatrafficUnit
               type: type
-              datatrafficLimit: 5.962133916683182
-            privateNetworkPortSpeed: privateNetworkPortSpeed
+              datatrafficLimit: 5.637376656633329
+            privateNetworkPortSpeed: 0.8008281904610115
             subnets:
-            - quantity: 0
+            - quantity: 6
               subnetSize: subnetSize
               networkType: INTERNAL
-            - quantity: 0
+            - quantity: 6
               subnetSize: subnetSize
               networkType: INTERNAL
             currency: USD
@@ -9067,7 +9094,7 @@ components:
             pricePerFrequency: pricePerFrequency
             endsAt: 2000-01-23T04:56:07.000+00:00
             deliveryStatus: deliveryStatus
-            ipv4Quantity: 2
+            ipv4Quantity: 7
             salesOrgId: salesOrgId
             status: status
           name: name
@@ -9138,19 +9165,19 @@ components:
             - managedServices
             - managedServices
             softwareLicenses:
-            - price: 5.637376656633329
+            - price: 2.3021358869347655
               name: name
               currency: USD
               type: CONTROL_PANEL
-            - price: 5.637376656633329
+            - price: 2.3021358869347655
               name: name
               currency: USD
               type: CONTROL_PANEL
             sla: sla
             aggregationPackId: aggregationPackId
             reference: reference
-            billingCycle: 1
-            contractTerm: 6
+            billingCycle: 5
+            contractTerm: 1
             customerId: customerId
             startsAt: 2000-01-23T04:56:07.000+00:00
             networkTraffic:
@@ -9158,13 +9185,13 @@ components:
               trafficType: trafficType
               datatrafficUnit: datatrafficUnit
               type: type
-              datatrafficLimit: 5.962133916683182
-            privateNetworkPortSpeed: privateNetworkPortSpeed
+              datatrafficLimit: 5.637376656633329
+            privateNetworkPortSpeed: 0.8008281904610115
             subnets:
-            - quantity: 0
+            - quantity: 6
               subnetSize: subnetSize
               networkType: INTERNAL
-            - quantity: 0
+            - quantity: 6
               subnetSize: subnetSize
               networkType: INTERNAL
             currency: USD
@@ -9172,7 +9199,7 @@ components:
             pricePerFrequency: pricePerFrequency
             endsAt: 2000-01-23T04:56:07.000+00:00
             deliveryStatus: deliveryStatus
-            ipv4Quantity: 2
+            ipv4Quantity: 7
             salesOrgId: salesOrgId
             status: status
           name: name
@@ -9401,6 +9428,62 @@ components:
       type: integer
     server:
       example:
+        rack:
+          id: id
+          type: SHARED
+          capacity: capacity
+        serialNumber: serialNumber
+        isPrivateNetworkCapable: true
+        contract:
+          billingFrequency: billingFrequency
+          contractType: NORMAL
+          managedServices:
+          - managedServices
+          - managedServices
+          softwareLicenses:
+          - price: 2.3021358869347655
+            name: name
+            currency: USD
+            type: CONTROL_PANEL
+          - price: 2.3021358869347655
+            name: name
+            currency: USD
+            type: CONTROL_PANEL
+          sla: sla
+          aggregationPackId: aggregationPackId
+          reference: reference
+          billingCycle: 5
+          contractTerm: 1
+          customerId: customerId
+          startsAt: 2000-01-23T04:56:07.000+00:00
+          networkTraffic:
+            connectivityType: connectivityType
+            trafficType: trafficType
+            datatrafficUnit: datatrafficUnit
+            type: type
+            datatrafficLimit: 5.637376656633329
+          privateNetworkPortSpeed: 0.8008281904610115
+          subnets:
+          - quantity: 6
+            subnetSize: subnetSize
+            networkType: INTERNAL
+          - quantity: 6
+            subnetSize: subnetSize
+            networkType: INTERNAL
+          currency: USD
+          id: id
+          pricePerFrequency: pricePerFrequency
+          endsAt: 2000-01-23T04:56:07.000+00:00
+          deliveryStatus: deliveryStatus
+          ipv4Quantity: 7
+          salesOrgId: salesOrgId
+          status: status
+        featureAvailability:
+          ipmiReboot: true
+          automation: true
+          privateNetwork: true
+          powerCycle: true
+          remoteManagement: true
         specs:
           cpu:
             quantity: 6
@@ -9423,13 +9506,10 @@ components:
           - description: description
           - description: description
           chassis: chassis
+          brand: brand
           ram:
             unit: unit
             size: 5
-        rack:
-          id: id
-          type: SHARED
-          capacity: capacity
         networkInterfaces:
           internal:
             locationId: locationId
@@ -9464,52 +9544,9 @@ components:
               name: name
             mac: mac
             gateway: gateway
-        serialNumber: serialNumber
         assetId: assetId
-        contract:
-          billingFrequency: billingFrequency
-          contractType: NORMAL
-          managedServices:
-          - managedServices
-          - managedServices
-          softwareLicenses:
-          - price: 5.637376656633329
-            name: name
-            currency: USD
-            type: CONTROL_PANEL
-          - price: 5.637376656633329
-            name: name
-            currency: USD
-            type: CONTROL_PANEL
-          sla: sla
-          aggregationPackId: aggregationPackId
-          reference: reference
-          billingCycle: 1
-          contractTerm: 6
-          customerId: customerId
-          startsAt: 2000-01-23T04:56:07.000+00:00
-          networkTraffic:
-            connectivityType: connectivityType
-            trafficType: trafficType
-            datatrafficUnit: datatrafficUnit
-            type: type
-            datatrafficLimit: 5.962133916683182
-          privateNetworkPortSpeed: privateNetworkPortSpeed
-          subnets:
-          - quantity: 0
-            subnetSize: subnetSize
-            networkType: INTERNAL
-          - quantity: 0
-            subnetSize: subnetSize
-            networkType: INTERNAL
-          currency: USD
-          id: id
-          pricePerFrequency: pricePerFrequency
-          endsAt: 2000-01-23T04:56:07.000+00:00
-          deliveryStatus: deliveryStatus
-          ipv4Quantity: 2
-          salesOrgId: salesOrgId
-          status: status
+        isPrivateNetworkEnabled: true
+        isRedundantPrivateNetworkCapable: true
         location:
           site: site
           rack: rack
@@ -9521,18 +9558,14 @@ components:
           vlanId: "2130"
           linkSpeed: 0
           id: "892"
+          dhcp: dhcp
           status: status
         - subnet: 10.0.0.0/16
           vlanId: "2130"
           linkSpeed: 0
           id: "892"
+          dhcp: dhcp
           status: status
-        featureAvailability:
-          ipmiReboot: true
-          automation: true
-          privateNetwork: true
-          powerCycle: true
-          remoteManagement: true
         powerPorts:
         - port: port
           name: name
@@ -9549,6 +9582,15 @@ components:
         id:
           description: Id of the server
           type: string
+        isPrivateNetworkEnabled:
+          description: Whether private network enabled or not
+          type: boolean
+        isPrivateNetworkCapable:
+          description: Whether capable of private network or not
+          type: boolean
+        isRedundantPrivateNetworkCapable:
+          description: Whether capable of redundant private network or not
+          type: boolean
         location:
           $ref: '#/components/schemas/location'
         networkInterfaces:
@@ -9574,7 +9616,63 @@ components:
     getServerListResult:
       example:
         servers:
-        - specs:
+        - rack:
+            id: id
+            type: SHARED
+            capacity: capacity
+          serialNumber: serialNumber
+          isPrivateNetworkCapable: true
+          contract:
+            billingFrequency: billingFrequency
+            contractType: NORMAL
+            managedServices:
+            - managedServices
+            - managedServices
+            softwareLicenses:
+            - price: 2.3021358869347655
+              name: name
+              currency: USD
+              type: CONTROL_PANEL
+            - price: 2.3021358869347655
+              name: name
+              currency: USD
+              type: CONTROL_PANEL
+            sla: sla
+            aggregationPackId: aggregationPackId
+            reference: reference
+            billingCycle: 5
+            contractTerm: 1
+            customerId: customerId
+            startsAt: 2000-01-23T04:56:07.000+00:00
+            networkTraffic:
+              connectivityType: connectivityType
+              trafficType: trafficType
+              datatrafficUnit: datatrafficUnit
+              type: type
+              datatrafficLimit: 5.637376656633329
+            privateNetworkPortSpeed: 0.8008281904610115
+            subnets:
+            - quantity: 6
+              subnetSize: subnetSize
+              networkType: INTERNAL
+            - quantity: 6
+              subnetSize: subnetSize
+              networkType: INTERNAL
+            currency: USD
+            id: id
+            pricePerFrequency: pricePerFrequency
+            endsAt: 2000-01-23T04:56:07.000+00:00
+            deliveryStatus: deliveryStatus
+            ipv4Quantity: 7
+            salesOrgId: salesOrgId
+            status: status
+          featureAvailability:
+            ipmiReboot: true
+            automation: true
+            privateNetwork: true
+            powerCycle: true
+            remoteManagement: true
+          specs:
             cpu:
               quantity: 6
               type: type
@@ -9596,13 +9694,10 @@ components:
             - description: description
             - description: description
             chassis: chassis
+            brand: brand
             ram:
               unit: unit
               size: 5
-          rack:
-            id: id
-            type: SHARED
-            capacity: capacity
           networkInterfaces:
             internal:
               locationId: locationId
@@ -9637,52 +9732,9 @@ components:
                 name: name
               mac: mac
               gateway: gateway
-          serialNumber: serialNumber
           assetId: assetId
-          contract:
-            billingFrequency: billingFrequency
-            contractType: NORMAL
-            managedServices:
-            - managedServices
-            - managedServices
-            softwareLicenses:
-            - price: 5.637376656633329
-              name: name
-              currency: USD
-              type: CONTROL_PANEL
-            - price: 5.637376656633329
-              name: name
-              currency: USD
-              type: CONTROL_PANEL
-            sla: sla
-            aggregationPackId: aggregationPackId
-            reference: reference
-            billingCycle: 1
-            contractTerm: 6
-            customerId: customerId
-            startsAt: 2000-01-23T04:56:07.000+00:00
-            networkTraffic:
-              connectivityType: connectivityType
-              trafficType: trafficType
-              datatrafficUnit: datatrafficUnit
-              type: type
-              datatrafficLimit: 5.962133916683182
-            privateNetworkPortSpeed: privateNetworkPortSpeed
-            subnets:
-            - quantity: 0
-              subnetSize: subnetSize
-              networkType: INTERNAL
-            - quantity: 0
-              subnetSize: subnetSize
-              networkType: INTERNAL
-            currency: USD
-            id: id
-            pricePerFrequency: pricePerFrequency
-            endsAt: 2000-01-23T04:56:07.000+00:00
-            deliveryStatus: deliveryStatus
-            ipv4Quantity: 2
-            salesOrgId: salesOrgId
-            status: status
+          isPrivateNetworkEnabled: true
+          isRedundantPrivateNetworkCapable: true
           location:
             site: site
             rack: rack
@@ -9694,24 +9746,76 @@ components:
             vlanId: "2130"
             linkSpeed: 0
             id: "892"
+            dhcp: dhcp
             status: status
           - subnet: 10.0.0.0/16
             vlanId: "2130"
             linkSpeed: 0
             id: "892"
+            dhcp: dhcp
             status: status
-          featureAvailability:
-            ipmiReboot: true
-            automation: true
-            privateNetwork: true
-            powerCycle: true
-            remoteManagement: true
           powerPorts:
           - port: port
             name: name
           - port: port
             name: name
-        - specs:
+        - rack:
+            id: id
+            type: SHARED
+            capacity: capacity
+          serialNumber: serialNumber
+          isPrivateNetworkCapable: true
+          contract:
+            billingFrequency: billingFrequency
+            contractType: NORMAL
+            managedServices:
+            - managedServices
+            - managedServices
+            softwareLicenses:
+            - price: 2.3021358869347655
+              name: name
+              currency: USD
+              type: CONTROL_PANEL
+            - price: 2.3021358869347655
+              name: name
+              currency: USD
+              type: CONTROL_PANEL
+            sla: sla
+            aggregationPackId: aggregationPackId
+            reference: reference
+            billingCycle: 5
+            contractTerm: 1
+            customerId: customerId
+            startsAt: 2000-01-23T04:56:07.000+00:00
+            networkTraffic:
+              connectivityType: connectivityType
+              trafficType: trafficType
+              datatrafficUnit: datatrafficUnit
+              type: type
+              datatrafficLimit: 5.637376656633329
+            privateNetworkPortSpeed: 0.8008281904610115
+            subnets:
+            - quantity: 6
+              subnetSize: subnetSize
+              networkType: INTERNAL
+            - quantity: 6
+              subnetSize: subnetSize
+              networkType: INTERNAL
+            currency: USD
+            id: id
+            pricePerFrequency: pricePerFrequency
+            endsAt: 2000-01-23T04:56:07.000+00:00
+            deliveryStatus: deliveryStatus
+            ipv4Quantity: 7
+            salesOrgId: salesOrgId
+            status: status
+          featureAvailability:
+            ipmiReboot: true
+            automation: true
+            privateNetwork: true
+            powerCycle: true
+            remoteManagement: true
+          specs:
             cpu:
               quantity: 6
               type: type
@@ -9733,13 +9837,10 @@ components:
             - description: description
             - description: description
             chassis: chassis
+            brand: brand
             ram:
               unit: unit
               size: 5
-          rack:
-            id: id
-            type: SHARED
-            capacity: capacity
           networkInterfaces:
             internal:
               locationId: locationId
@@ -9774,52 +9875,9 @@ components:
                 name: name
               mac: mac
               gateway: gateway
-          serialNumber: serialNumber
           assetId: assetId
-          contract:
-            billingFrequency: billingFrequency
-            contractType: NORMAL
-            managedServices:
-            - managedServices
-            - managedServices
-            softwareLicenses:
-            - price: 5.637376656633329
-              name: name
-              currency: USD
-              type: CONTROL_PANEL
-            - price: 5.637376656633329
-              name: name
-              currency: USD
-              type: CONTROL_PANEL
-            sla: sla
-            aggregationPackId: aggregationPackId
-            reference: reference
-            billingCycle: 1
-            contractTerm: 6
-            customerId: customerId
-            startsAt: 2000-01-23T04:56:07.000+00:00
-            networkTraffic:
-              connectivityType: connectivityType
-              trafficType: trafficType
-              datatrafficUnit: datatrafficUnit
-              type: type
-              datatrafficLimit: 5.962133916683182
-            privateNetworkPortSpeed: privateNetworkPortSpeed
-            subnets:
-            - quantity: 0
-              subnetSize: subnetSize
-              networkType: INTERNAL
-            - quantity: 0
-              subnetSize: subnetSize
-              networkType: INTERNAL
-            currency: USD
-            id: id
-            pricePerFrequency: pricePerFrequency
-            endsAt: 2000-01-23T04:56:07.000+00:00
-            deliveryStatus: deliveryStatus
-            ipv4Quantity: 2
-            salesOrgId: salesOrgId
-            status: status
+          isPrivateNetworkEnabled: true
+          isRedundantPrivateNetworkCapable: true
           location:
             site: site
             rack: rack
@@ -9831,18 +9889,14 @@ components:
             vlanId: "2130"
             linkSpeed: 0
             id: "892"
+            dhcp: dhcp
             status: status
           - subnet: 10.0.0.0/16
             vlanId: "2130"
             linkSpeed: 0
             id: "892"
+            dhcp: dhcp
             status: status
-          featureAvailability:
-            ipmiReboot: true
-            automation: true
-            privateNetwork: true
-            powerCycle: true
-            remoteManagement: true
           powerPorts:
           - port: port
             name: name
@@ -11586,7 +11640,7 @@ components:
       type: object
     subnet:
       example:
-        quantity: 0
+        quantity: 6
         subnetSize: subnetSize
         networkType: INTERNAL
       properties:
@@ -11605,7 +11659,7 @@ components:
         trafficType: trafficType
         datatrafficUnit: datatrafficUnit
         type: type
-        datatrafficLimit: 5.962133916683182
+        datatrafficLimit: 5.637376656633329
       properties:
         type:
           description: Type of network traffic
@@ -11630,7 +11684,7 @@ components:
       type: object
     softwareLicense:
       example:
-        price: 5.637376656633329
+        price: 2.3021358869347655
         name: name
         currency: USD
         type: CONTROL_PANEL
@@ -11638,6 +11692,7 @@ components:
         name:
           type: string
         price:
+          nullable: true
           type: number
         currency:
           example: USD
@@ -11689,6 +11744,7 @@ components:
         vlanId: "2130"
         linkSpeed: 0
         id: "892"
+        dhcp: dhcp
         status: status
       properties:
         id:
@@ -11699,6 +11755,9 @@ components:
           $ref: '#/components/schemas/linkSpeed'
         status:
           description: Configuration status
+          type: string
+        dhcp:
+          description: dhcp status
           type: string
         subnet:
           example: 10.0.0.0/16
@@ -11802,10 +11861,14 @@ components:
         - description: description
         - description: description
         chassis: chassis
+        brand: brand
         ram:
           unit: unit
           size: 5
       properties:
+        brand:
+          description: The brand description of the server
+          type: string
         chassis:
           description: The chassis description of the server
           type: string

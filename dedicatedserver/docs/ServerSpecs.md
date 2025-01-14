@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Brand** | Pointer to **string** | The brand description of the server | [optional] 
 **Chassis** | Pointer to **string** | The chassis description of the server | [optional] 
 **Cpu** | Pointer to [**Cpu**](Cpu.md) |  | [optional] 
 **HardwareRaidCapable** | Pointer to **bool** | Hardware RAID capability of the server | [optional] 
@@ -29,6 +30,31 @@ will change when the set of required properties is changed
 NewServerSpecsWithDefaults instantiates a new ServerSpecs object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBrand
+
+`func (o *ServerSpecs) GetBrand() string`
+
+GetBrand returns the Brand field if non-nil, zero value otherwise.
+
+### GetBrandOk
+
+`func (o *ServerSpecs) GetBrandOk() (*string, bool)`
+
+GetBrandOk returns a tuple with the Brand field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBrand
+
+`func (o *ServerSpecs) SetBrand(v string)`
+
+SetBrand sets Brand field to given value.
+
+### HasBrand
+
+`func (o *ServerSpecs) HasBrand() bool`
+
+HasBrand returns a boolean if a field has been set.
 
 ### GetChassis
 
