@@ -3,7 +3,7 @@ Leaseweb Go SDK provides a golang client for Leaseweb services.
 
 ## Installation
 ```bash
-go get github.com/Leaseweb/leaseweb-go-sdk/publiccloud # Replace publiccloud with the package you want to use.
+go get github.com/leaseweb/leaseweb-go-sdk/publiccloud # Replace publiccloud with the package you want to use.
 ```
 
 ## Generate your API Key
@@ -11,7 +11,7 @@ You can generate your API key at the [Customer Portal](https://secure.leaseweb.c
 
 ## Example
 ```bash
-go get github.com/Leaseweb/leaseweb-go-sdk/publiccloud
+go get github.com/leaseweb/leaseweb-go-sdk/publiccloud
 ```
 
 ```golang
@@ -56,7 +56,7 @@ func main() {
 Documentation for the Leaseweb Go SDK Services can be found [here](https://pkg.go.dev/github.com/leaseweb/leaseweb-go-sdk#section-directories).
 
 ## Issues
-If you encounter an issue with the project, you are welcome to submit an [issue](https://github.com/Leaseweb/leaseweb-go-sdk/issues).
+If you encounter an issue with the project, you are welcome to submit an [issue](https://github.com/leaseweb/leaseweb-go-sdk/issues).
 
 ## Pull requests
 We ask that an issue is always opened prior to a PR to give us the opportunity to discuss the best place for the change before investing your effort on a patch that we may not be able to accept.
