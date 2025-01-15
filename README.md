@@ -1,15 +1,19 @@
 # Leaseweb Go SDK
-Leaseweb Go SDK provides a golang client for Leaseweb's REST API.
+Leaseweb Go SDK provides a golang client for Leaseweb services.
 
 ## Installation
 ```bash
-go get github.com/LeaseWeb/leaseweb-go-sdk
+go get github.com/Leaseweb/leaseweb-go-sdk/publiccloud # Replace publiccloud with the package you want to use.
 ```
 
 ## Generate your API Key
 You can generate your API key at the [Customer Portal](https://secure.leaseweb.com/).
 
 ## Example
+```bash
+go get github.com/Leaseweb/leaseweb-go-sdk/publiccloud
+```
+
 ```golang
 package main
 
@@ -18,20 +22,20 @@ import (
 	"fmt"
 	"os"
 
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+	apiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
 	ctx := context.WithValue(
 		context.Background(),
-		openapiclient.ContextAPIKeys,
-		map[string]openapiclient.APIKey{
+		apiclient.ContextAPIKeys,
+		map[string]apiclient.APIKey{
 			"X-LSW-Auth": {Key: "API_KEY_STRING"},
 		},
 	)
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	configuration := apiclient.NewConfiguration()
+	apiClient := apiclient.NewAPIClient(configuration)
 	resp, r, err := apiClient.PubliccloudAPI.GetInstanceList(ctx).Execute()
 	if err != nil {
 		_, err := fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetInstanceList``: %v\n", err)
@@ -49,14 +53,7 @@ func main() {
 ```
 
 ### Documentation
-The Leaseweb Go SDK documentation based on product:
-
-- [Public Cloud](publiccloud/README.md)
-- [Dedicated Server](dedicatedserver/README.md)
-- [Aggregation Pack](aggregationpack/README.md)
-- [Abuse](abuse/README.md)
-- [Invoice](invoice/README.md)
-- [DNS](dns/README.md)
+Documentation for the Leaseweb Go SDK Services can be found [here](https://pkg.go.dev/github.com/leaseweb/leaseweb-go-sdk#section-directories).
 
 ## Issues
 If you encounter an issue with the project, you are welcome to submit an [issue](https://github.com/Leaseweb/leaseweb-go-sdk/issues).
