@@ -5,49 +5,41 @@ All URIs are relative to *https://api.leaseweb.com/publicCloud/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddToPrivateNetwork**](PubliccloudAPI.md#AddToPrivateNetwork) | **Put** /instances/{instanceId}/addToPrivateNetwork | Add instance to Private Network
-[**AttachInstanceISO**](PubliccloudAPI.md#AttachInstanceISO) | **Post** /instances/{instanceId}/attachIso | Attach ISO to a specific Instance
-[**AttachVPSISO**](PubliccloudAPI.md#AttachVPSISO) | **Post** /vps/{vpsId}/attachIso | Attach ISO to a specific VPS
+[**AttachIso**](PubliccloudAPI.md#AttachIso) | **Post** /instances/{instanceId}/attachIso | Attach ISO to a specific Instance
 [**CancelInstanceTermination**](PubliccloudAPI.md#CancelInstanceTermination) | **Post** /instances/{instanceId}/cancelTermination | Cancel instance termination
 [**CreateAutoScalingGroup**](PubliccloudAPI.md#CreateAutoScalingGroup) | **Post** /autoScalingGroups | Create Auto Scaling Group
 [**CreateImage**](PubliccloudAPI.md#CreateImage) | **Post** /images | Create Custom Image
-[**CreateInstanceSnapshot**](PubliccloudAPI.md#CreateInstanceSnapshot) | **Post** /instances/{instanceId}/snapshots | Create instance snapshot
 [**CreateLoadBalancerListener**](PubliccloudAPI.md#CreateLoadBalancerListener) | **Post** /loadBalancers/{loadBalancerId}/listeners | Create listener
+[**CreateSnapshot**](PubliccloudAPI.md#CreateSnapshot) | **Post** /instances/{instanceId}/snapshots | Create instance snapshot
 [**CreateTargetGroup**](PubliccloudAPI.md#CreateTargetGroup) | **Post** /targetGroups | Create Target Group
-[**CreateVPSSnapshot**](PubliccloudAPI.md#CreateVPSSnapshot) | **Post** /vps/{vpsId}/snapshots | Create VPS snapshot
 [**DeleteAutoScalingGroup**](PubliccloudAPI.md#DeleteAutoScalingGroup) | **Delete** /autoScalingGroups/{autoScalingGroupId} | Delete Auto Scaling Group
-[**DeleteInstanceCredential**](PubliccloudAPI.md#DeleteInstanceCredential) | **Delete** /instances/{instanceId}/credentials/{type}/{username} | Delete Instance credential for a given type and username
-[**DeleteInstanceCredentials**](PubliccloudAPI.md#DeleteInstanceCredentials) | **Delete** /instances/{instanceId}/credentials | Delete all credentials associated with a specific Instance
-[**DeleteInstanceSnapshot**](PubliccloudAPI.md#DeleteInstanceSnapshot) | **Delete** /instances/{instanceId}/snapshots/{snapshotId} | Delete instance snapshot
+[**DeleteCredential**](PubliccloudAPI.md#DeleteCredential) | **Delete** /instances/{instanceId}/credentials/{type}/{username} | Delete Instance credential for a given type and username
+[**DeleteCredentials**](PubliccloudAPI.md#DeleteCredentials) | **Delete** /instances/{instanceId}/credentials | Delete all credentials associated with a specific Instance
 [**DeleteLoadBalancerListener**](PubliccloudAPI.md#DeleteLoadBalancerListener) | **Delete** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Delete load balancer listener
+[**DeleteSnapshot**](PubliccloudAPI.md#DeleteSnapshot) | **Delete** /instances/{instanceId}/snapshots/{snapshotId} | Delete instance snapshot
 [**DeleteTargetGroup**](PubliccloudAPI.md#DeleteTargetGroup) | **Delete** /targetGroups/{targetGroupId} | Delete Target Group
-[**DeleteVPSCredential**](PubliccloudAPI.md#DeleteVPSCredential) | **Delete** /vps/{vpsId}/credentials/{type}/{username} | Delete VPS credential
-[**DeleteVPSCredentials**](PubliccloudAPI.md#DeleteVPSCredentials) | **Delete** /vps/{vpsId}/credentials | Delete all credentials associated with a specific VPS
-[**DeleteVPSSnapshot**](PubliccloudAPI.md#DeleteVPSSnapshot) | **Delete** /vps/{vpsId}/snapshots/{snapshotId} | Delete VPS snapshot
 [**DeregisterAutoScalingGroupTargetGroup**](PubliccloudAPI.md#DeregisterAutoScalingGroupTargetGroup) | **Post** /autoScalingGroups/{autoScalingGroupId}/deregisterTargetGroup | Deregister Target Group
 [**DeregisterTargets**](PubliccloudAPI.md#DeregisterTargets) | **Post** /targetGroups/{targetGroupId}/deregisterTargets | Deregister Targets
-[**DetachInstanceISO**](PubliccloudAPI.md#DetachInstanceISO) | **Post** /instances/{instanceId}/detachIso | Detach ISO from a specific Instance
-[**DetachVPSISO**](PubliccloudAPI.md#DetachVPSISO) | **Post** /vps/{vpsId}/detachIso | Detach ISO from a specific VPS
+[**DetachIso**](PubliccloudAPI.md#DetachIso) | **Post** /instances/{instanceId}/detachIso | Detach ISO from a specific Instance
 [**GetAutoScalingGroup**](PubliccloudAPI.md#GetAutoScalingGroup) | **Get** /autoScalingGroups/{autoScalingGroupId} | Get Auto Scaling Group details
 [**GetAutoScalingGroupInstanceList**](PubliccloudAPI.md#GetAutoScalingGroupInstanceList) | **Get** /autoScalingGroups/{autoScalingGroupId}/instances | Get list of instances belonging to an Auto Scaling Group
 [**GetAutoScalingGroupList**](PubliccloudAPI.md#GetAutoScalingGroupList) | **Get** /autoScalingGroups | Get Auto Scaling Group list
 [**GetConnectionsMetrics**](PubliccloudAPI.md#GetConnectionsMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/connections | Get connections metrics
 [**GetConnectionsPerSecondMetrics**](PubliccloudAPI.md#GetConnectionsPerSecondMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/connectionsPerSecond | Get connections per second metrics
+[**GetConsoleAccess**](PubliccloudAPI.md#GetConsoleAccess) | **Get** /instances/{instanceId}/console | Get console access
 [**GetCpuMetrics**](PubliccloudAPI.md#GetCpuMetrics) | **Get** /instances/{instanceId}/metrics/cpu | Get instance CPU metrics
+[**GetCredential**](PubliccloudAPI.md#GetCredential) | **Get** /instances/{instanceId}/credentials/{type}/{username} | Get Instance credentials by type and username.
+[**GetCredentialList**](PubliccloudAPI.md#GetCredentialList) | **Get** /instances/{instanceId}/credentials | List credentials stored for a specific Instance
+[**GetCredentialListByType**](PubliccloudAPI.md#GetCredentialListByType) | **Get** /instances/{instanceId}/credentials/{type} | Get credentials by type for a specific Instance
 [**GetDataTransferredMetrics**](PubliccloudAPI.md#GetDataTransferredMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/dataTransferred | Get load balancer data transferred metrics
 [**GetDataTransferredPerSecondMetrics**](PubliccloudAPI.md#GetDataTransferredPerSecondMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/dataTransferredPerSecond | Get load balancer data transferred per second metrics
 [**GetExpenses**](PubliccloudAPI.md#GetExpenses) | **Get** /equipments/{equipmentId}/expenses | Get costs for a given month.
 [**GetImageList**](PubliccloudAPI.md#GetImageList) | **Get** /images | List all available Images
 [**GetInstance**](PubliccloudAPI.md#GetInstance) | **Get** /instances/{instanceId} | Get instance details
-[**GetInstanceConsoleAccess**](PubliccloudAPI.md#GetInstanceConsoleAccess) | **Get** /instances/{instanceId}/console | Get console access
-[**GetInstanceCredential**](PubliccloudAPI.md#GetInstanceCredential) | **Get** /instances/{instanceId}/credentials/{type}/{username} | Get Instance credentials by type and username.
-[**GetInstanceCredentialList**](PubliccloudAPI.md#GetInstanceCredentialList) | **Get** /instances/{instanceId}/credentials | List credentials stored for a specific Instance
-[**GetInstanceCredentialListByType**](PubliccloudAPI.md#GetInstanceCredentialListByType) | **Get** /instances/{instanceId}/credentials/{type} | Get credentials by type for a specific Instance
 [**GetInstanceDataTrafficMetrics**](PubliccloudAPI.md#GetInstanceDataTrafficMetrics) | **Get** /instances/{instanceId}/metrics/datatraffic | Get data traffic metrics for a specific Instance
 [**GetInstanceIP**](PubliccloudAPI.md#GetInstanceIP) | **Get** /instances/{instanceId}/ips/{ip} | Get IP details for a specific Instance
 [**GetInstanceIPList**](PubliccloudAPI.md#GetInstanceIPList) | **Get** /instances/{instanceId}/ips | List IP addresses associated with a specific Instance
 [**GetInstanceList**](PubliccloudAPI.md#GetInstanceList) | **Get** /instances | Get instance list
-[**GetInstanceSnapshot**](PubliccloudAPI.md#GetInstanceSnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
-[**GetInstanceSnapshotList**](PubliccloudAPI.md#GetInstanceSnapshotList) | **Get** /instances/{instanceId}/snapshots | List snapshots
 [**GetInstanceTypeList**](PubliccloudAPI.md#GetInstanceTypeList) | **Get** /instanceTypes | List instance types
 [**GetIsoList**](PubliccloudAPI.md#GetIsoList) | **Get** /isos | List available ISOs
 [**GetLoadBalancer**](PubliccloudAPI.md#GetLoadBalancer) | **Get** /loadBalancers/{loadBalancerId} | Get load balancer details
@@ -59,68 +51,47 @@ Method | HTTP request | Description
 [**GetLoadBalancerListenerList**](PubliccloudAPI.md#GetLoadBalancerListenerList) | **Get** /loadBalancers/{loadBalancerId}/listeners | Get listener list
 [**GetMarketAppList**](PubliccloudAPI.md#GetMarketAppList) | **Get** /marketApps | Get marketplace apps
 [**GetRegionList**](PubliccloudAPI.md#GetRegionList) | **Get** /regions | List regions
-[**GetReinstallInstanceImageList**](PubliccloudAPI.md#GetReinstallInstanceImageList) | **Get** /instances/{instanceId}/reinstall/images | List images available for reinstall
-[**GetReinstallVPSImageList**](PubliccloudAPI.md#GetReinstallVPSImageList) | **Get** /vps/{vpsId}/reinstall/images | List images available for reinstall
+[**GetReinstallImageList**](PubliccloudAPI.md#GetReinstallImageList) | **Get** /instances/{instanceId}/reinstall/images | List images available for reinstall
 [**GetRequestsMetrics**](PubliccloudAPI.md#GetRequestsMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/requests | Get load balancer requests metrics
 [**GetRequestsPerSecondMetrics**](PubliccloudAPI.md#GetRequestsPerSecondMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/requestsPerSecond | Get load balancer requests per second metrics
 [**GetResponseCodesMetrics**](PubliccloudAPI.md#GetResponseCodesMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/responseCodes | Get response codes metrics
 [**GetResponseCodesPerSecondMetrics**](PubliccloudAPI.md#GetResponseCodesPerSecondMetrics) | **Get** /loadBalancers/{loadBalancerId}/metrics/responseCodesPerSecond | Get response codes per second metrics
+[**GetSnapshot**](PubliccloudAPI.md#GetSnapshot) | **Get** /instances/{instanceId}/snapshots/{snapshotId} | Get snapshot detail
+[**GetSnapshotList**](PubliccloudAPI.md#GetSnapshotList) | **Get** /instances/{instanceId}/snapshots | List snapshots
 [**GetTargetGroup**](PubliccloudAPI.md#GetTargetGroup) | **Get** /targetGroups/{targetGroupId} | Get Target Group details
 [**GetTargetGroupList**](PubliccloudAPI.md#GetTargetGroupList) | **Get** /targetGroups | Get Target Group list
 [**GetTargetList**](PubliccloudAPI.md#GetTargetList) | **Get** /targetGroups/{targetGroupId}/targets | Get Targets
 [**GetUpdateInstanceTypeList**](PubliccloudAPI.md#GetUpdateInstanceTypeList) | **Get** /instances/{instanceId}/instanceTypesUpdate | List available instance types for update
-[**GetVPSConsoleAccess**](PubliccloudAPI.md#GetVPSConsoleAccess) | **Get** /vps/{vpsId}/console | Get console access
-[**GetVPSCredential**](PubliccloudAPI.md#GetVPSCredential) | **Get** /vps/{vpsId}/credentials/{type}/{username} | Get VPS credential by type and username.
-[**GetVPSCredentialList**](PubliccloudAPI.md#GetVPSCredentialList) | **Get** /vps/{vpsId}/credentials | List credentials stored for a specific VPS
-[**GetVPSCredentialListByType**](PubliccloudAPI.md#GetVPSCredentialListByType) | **Get** /vps/{vpsId}/credentials/{type} | Get credentials by type for a specific VPS
-[**GetVPSDataTrafficMetrics**](PubliccloudAPI.md#GetVPSDataTrafficMetrics) | **Get** /vps/{vpsId}/metrics/datatraffic | Get data traffic metrics for a specific VPS
-[**GetVPSIP**](PubliccloudAPI.md#GetVPSIP) | **Get** /vps/{vpsId}/ips/{ip} | Get IP details for a specific VPS
-[**GetVPSIPList**](PubliccloudAPI.md#GetVPSIPList) | **Get** /vps/{vpsId}/ips | List IP addresses associated with a specific VPS
-[**GetVPSSnapshot**](PubliccloudAPI.md#GetVPSSnapshot) | **Get** /vps/{vpsId}/snapshots/{snapshotId} | Get snapshot detail
-[**GetVPSSnapshotList**](PubliccloudAPI.md#GetVPSSnapshotList) | **Get** /vps/{vpsId}/snapshots | List snapshots
-[**GetVps**](PubliccloudAPI.md#GetVps) | **Get** /vps/{vpsId} | Get VPS details
-[**GetVpsList**](PubliccloudAPI.md#GetVpsList) | **Get** /vps | Get VPS list
 [**LaunchInstance**](PubliccloudAPI.md#LaunchInstance) | **Post** /instances | Launch instance
 [**LaunchLoadBalancer**](PubliccloudAPI.md#LaunchLoadBalancer) | **Post** /loadBalancers | Launch Load balancer
 [**NullRouteInstanceIP**](PubliccloudAPI.md#NullRouteInstanceIP) | **Post** /instances/{instanceId}/ips/{ip}/null | Null route IP address for a specific resource Instance
 [**NullRouteLoadBalancerIP**](PubliccloudAPI.md#NullRouteLoadBalancerIP) | **Post** /loadBalancers/{loadBalancerId}/ips/{ip}/null | Null route IP address for a specific resource Load Balancer
-[**NullRouteVPSIP**](PubliccloudAPI.md#NullRouteVPSIP) | **Post** /vps/{vpsId}/ips/{ip}/null | Null route IP address for a specific resource VPS
 [**RebootInstance**](PubliccloudAPI.md#RebootInstance) | **Post** /instances/{instanceId}/reboot | Reboot a specific Instance
 [**RebootLoadBalancer**](PubliccloudAPI.md#RebootLoadBalancer) | **Post** /loadBalancers/{loadBalancerId}/reboot | Reboot a specific Load Balancer
-[**RebootVPS**](PubliccloudAPI.md#RebootVPS) | **Post** /vps/{vpsId}/reboot | Reboot a specific VPS
 [**RegisterAutoScalingGroupTargetGroup**](PubliccloudAPI.md#RegisterAutoScalingGroupTargetGroup) | **Post** /autoScalingGroups/{autoScalingGroupId}/registerTargetGroup | Register Target Group
 [**RegisterTargets**](PubliccloudAPI.md#RegisterTargets) | **Post** /targetGroups/{targetGroupId}/registerTargets | Register Targets
 [**ReinstallInstance**](PubliccloudAPI.md#ReinstallInstance) | **Put** /instances/{instanceId}/reinstall | Reinstall an Instance
-[**ReinstallVPS**](PubliccloudAPI.md#ReinstallVPS) | **Put** /vps/{vpsId}/reinstall | Reinstall a VPS
 [**RemoveFromPrivateNetwork**](PubliccloudAPI.md#RemoveFromPrivateNetwork) | **Delete** /instances/{instanceId}/removeFromPrivateNetwork | Remove instance from Private Network
 [**RemoveInstanceIPNullRoute**](PubliccloudAPI.md#RemoveInstanceIPNullRoute) | **Post** /instances/{instanceId}/ips/{ip}/unnull | Remove an IP null route for a specific Instance
 [**RemoveLoadBalancerIPNullRoute**](PubliccloudAPI.md#RemoveLoadBalancerIPNullRoute) | **Post** /loadBalancers/{loadBalancerId}/ips/{ip}/unnull | Remove an IP null route for a specific Load Balancer
-[**RemoveVPSIPNullRoute**](PubliccloudAPI.md#RemoveVPSIPNullRoute) | **Post** /vps/{vpsId}/ips/{ip}/unnull | Remove an IP null route for a specific VPS
-[**ResetInstancePassword**](PubliccloudAPI.md#ResetInstancePassword) | **Post** /instances/{instanceId}/resetPassword | Reset the password for a specific Instance
-[**ResetVPSPassword**](PubliccloudAPI.md#ResetVPSPassword) | **Post** /vps/{vpsId}/resetPassword | Reset the password for a specific VPS
-[**RestoreInstanceSnapshot**](PubliccloudAPI.md#RestoreInstanceSnapshot) | **Put** /instances/{instanceId}/snapshots/{snapshotId} | Restore instance snapshot
-[**RestoreVPSSnapshot**](PubliccloudAPI.md#RestoreVPSSnapshot) | **Put** /vps/{vpsId}/snapshots/{snapshotId} | Restore VPS snapshot
+[**ResetPassword**](PubliccloudAPI.md#ResetPassword) | **Post** /instances/{instanceId}/resetPassword | Reset the password for a specific Instance
+[**RestoreSnapshot**](PubliccloudAPI.md#RestoreSnapshot) | **Put** /instances/{instanceId}/snapshots/{snapshotId} | Restore instance snapshot
 [**StartInstance**](PubliccloudAPI.md#StartInstance) | **Post** /instances/{instanceId}/start | Start a specific resource Instance
 [**StartLoadBalancer**](PubliccloudAPI.md#StartLoadBalancer) | **Post** /loadBalancers/{loadBalancerId}/start | Start a specific resource Load Balancer
-[**StartVPS**](PubliccloudAPI.md#StartVPS) | **Post** /vps/{vpsId}/start | Start a specific VPS
 [**StopInstance**](PubliccloudAPI.md#StopInstance) | **Post** /instances/{instanceId}/stop | Stop a specific Instance
 [**StopLoadBalancer**](PubliccloudAPI.md#StopLoadBalancer) | **Post** /loadBalancers/{loadBalancerId}/stop | Stop a specific Load Balancer
-[**StopVPS**](PubliccloudAPI.md#StopVPS) | **Post** /vps/{vpsId}/stop | Stop a specific VPS
-[**StoreInstanceCredential**](PubliccloudAPI.md#StoreInstanceCredential) | **Post** /instances/{instanceId}/credentials | Store credentials for a specific Instance
-[**StoreVPSCredential**](PubliccloudAPI.md#StoreVPSCredential) | **Post** /vps/{vpsId}/credentials | Store credentials for a specific VPS
+[**StoreCredential**](PubliccloudAPI.md#StoreCredential) | **Post** /instances/{instanceId}/credentials | Store credentials for a specific Instance
 [**TerminateInstance**](PubliccloudAPI.md#TerminateInstance) | **Delete** /instances/{instanceId} | Terminate instance
 [**TerminateLoadBalancer**](PubliccloudAPI.md#TerminateLoadBalancer) | **Delete** /loadBalancers/{loadBalancerId} | Delete load balancer
 [**UpdateAutoScalingGroup**](PubliccloudAPI.md#UpdateAutoScalingGroup) | **Put** /autoScalingGroups/{autoScalingGroupId} | Update Auto Scaling Group
+[**UpdateCredential**](PubliccloudAPI.md#UpdateCredential) | **Put** /instances/{instanceId}/credentials/{type}/{username} | Update credentials for a given type and username
 [**UpdateImage**](PubliccloudAPI.md#UpdateImage) | **Put** /images/{imageId} | Update Custom Image
 [**UpdateInstance**](PubliccloudAPI.md#UpdateInstance) | **Put** /instances/{instanceId} | Update instance
-[**UpdateInstanceCredential**](PubliccloudAPI.md#UpdateInstanceCredential) | **Put** /instances/{instanceId}/credentials/{type}/{username} | Update credentials for a given type and username
 [**UpdateInstanceIP**](PubliccloudAPI.md#UpdateInstanceIP) | **Put** /instances/{instanceId}/ips/{ip} | Update the IP address for a specific Instance
 [**UpdateLoadBalancer**](PubliccloudAPI.md#UpdateLoadBalancer) | **Put** /loadBalancers/{loadBalancerId} | Update load balancer
 [**UpdateLoadBalancerIP**](PubliccloudAPI.md#UpdateLoadBalancerIP) | **Put** /loadBalancers/{loadBalancerId}/ips/{ip} | Update the IP address for a specific Load Balancer
 [**UpdateLoadBalancerListener**](PubliccloudAPI.md#UpdateLoadBalancerListener) | **Put** /loadBalancers/{loadBalancerId}/listeners/{listenerId} | Update a listener
 [**UpdateTargetGroup**](PubliccloudAPI.md#UpdateTargetGroup) | **Put** /targetGroups/{targetGroupId} | Update Target Group
-[**UpdateVPSIP**](PubliccloudAPI.md#UpdateVPSIP) | **Put** /vps/{vpsId}/ips/{ip} | Update the IP address for a specific VPS
-[**UpdateVpsCredential**](PubliccloudAPI.md#UpdateVpsCredential) | **Put** /vps/{vpsId}/credentials/{type}/{username} | Update credentials for a given type and username
 
 
 
@@ -192,9 +163,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## AttachInstanceISO
+## AttachIso
 
-> AttachInstanceISO(ctx, instanceId).AttachIsoOpts(attachIsoOpts).Execute()
+> AttachIso(ctx, instanceId).AttachIsoOpts(attachIsoOpts).Execute()
 
 Attach ISO to a specific Instance
 
@@ -218,9 +189,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.AttachInstanceISO(context.Background(), instanceId).AttachIsoOpts(attachIsoOpts).Execute()
+	r, err := apiClient.PubliccloudAPI.AttachIso(context.Background(), instanceId).AttachIsoOpts(attachIsoOpts).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.AttachInstanceISO``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.AttachIso``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -236,77 +207,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiAttachInstanceISORequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **attachIsoOpts** | [**AttachIsoOpts**](AttachIsoOpts.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## AttachVPSISO
-
-> AttachVPSISO(ctx, vpsId).AttachIsoOpts(attachIsoOpts).Execute()
-
-Attach ISO to a specific VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	attachIsoOpts := *openapiclient.NewAttachIsoOpts("IsoId_example") // AttachIsoOpts | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.AttachVPSISO(context.Background(), vpsId).AttachIsoOpts(attachIsoOpts).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.AttachVPSISO``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAttachVPSISORequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiAttachIsoRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -532,74 +433,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateInstanceSnapshot
-
-> CreateInstanceSnapshot(ctx, instanceId).Execute()
-
-Create instance snapshot
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.CreateInstanceSnapshot(context.Background(), instanceId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.CreateInstanceSnapshot``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**instanceId** | **string** | Instance&#39;s ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateInstanceSnapshotRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## CreateLoadBalancerListener
 
 > LoadBalancerListener CreateLoadBalancerListener(ctx, loadBalancerId).LoadBalancerListenerCreateOpts(loadBalancerListenerCreateOpts).Execute()
@@ -657,6 +490,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LoadBalancerListener**](LoadBalancerListener.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateSnapshot
+
+> CreateSnapshot(ctx, instanceId).CreateSnapshotOpts(createSnapshotOpts).Execute()
+
+Create instance snapshot
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+)
+
+func main() {
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
+	createSnapshotOpts := *openapiclient.NewCreateSnapshotOpts("Name_example") // CreateSnapshotOpts | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PubliccloudAPI.CreateSnapshot(context.Background(), instanceId).CreateSnapshotOpts(createSnapshotOpts).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.CreateSnapshot``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateSnapshotRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createSnapshotOpts** | [**CreateSnapshotOpts**](CreateSnapshotOpts.md) |  | 
+
+### Return type
+
+ (empty response body)
 
 ### Authorization
 
@@ -738,74 +641,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## CreateVPSSnapshot
-
-> CreateVPSSnapshot(ctx, vpsId).Execute()
-
-Create VPS snapshot
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.CreateVPSSnapshot(context.Background(), vpsId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.CreateVPSSnapshot``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCreateVPSSnapshotRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## DeleteAutoScalingGroup
 
 > DeleteAutoScalingGroup(ctx, autoScalingGroupId).Execute()
@@ -874,9 +709,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteInstanceCredential
+## DeleteCredential
 
-> DeleteInstanceCredential(ctx, instanceId, type_, username).Execute()
+> DeleteCredential(ctx, instanceId, type_, username).Execute()
 
 Delete Instance credential for a given type and username
 
@@ -899,9 +734,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.DeleteInstanceCredential(context.Background(), instanceId, type_, username).Execute()
+	r, err := apiClient.PubliccloudAPI.DeleteCredential(context.Background(), instanceId, type_, username).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DeleteInstanceCredential``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DeleteCredential``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -919,7 +754,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteInstanceCredentialRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteCredentialRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -946,9 +781,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteInstanceCredentials
+## DeleteCredentials
 
-> DeleteInstanceCredentials(ctx, instanceId).Execute()
+> DeleteCredentials(ctx, instanceId).Execute()
 
 Delete all credentials associated with a specific Instance
 
@@ -969,9 +804,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.DeleteInstanceCredentials(context.Background(), instanceId).Execute()
+	r, err := apiClient.PubliccloudAPI.DeleteCredentials(context.Background(), instanceId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DeleteInstanceCredentials``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DeleteCredentials``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -987,80 +822,11 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteInstanceCredentialsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteCredentialsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteInstanceSnapshot
-
-> DeleteInstanceSnapshot(ctx, instanceId, snapshotId).Execute()
-
-Delete instance snapshot
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
-	snapshotId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.DeleteInstanceSnapshot(context.Background(), instanceId, snapshotId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DeleteInstanceSnapshot``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**instanceId** | **string** | Instance&#39;s ID | 
-**snapshotId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteInstanceSnapshotRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
 
 
 ### Return type
@@ -1152,6 +918,75 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteSnapshot
+
+> DeleteSnapshot(ctx, instanceId, snapshotId).Execute()
+
+Delete instance snapshot
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+)
+
+func main() {
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
+	snapshotId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.PubliccloudAPI.DeleteSnapshot(context.Background(), instanceId, snapshotId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DeleteSnapshot``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+**snapshotId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteSnapshotRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteTargetGroup
 
 > DeleteTargetGroup(ctx, targetGroupId).Execute()
@@ -1200,215 +1035,6 @@ Other parameters are passed through a pointer to a apiDeleteTargetGroupRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteVPSCredential
-
-> DeleteVPSCredential(ctx, vpsId, type_, username).Execute()
-
-Delete VPS credential
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | Type of credential
-	username := "root" // string | Username
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.DeleteVPSCredential(context.Background(), vpsId, type_, username).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DeleteVPSCredential``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**type_** | [**CredentialType**](.md) | Type of credential | 
-**username** | **string** | Username | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteVPSCredentialRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteVPSCredentials
-
-> DeleteVPSCredentials(ctx, vpsId).Execute()
-
-Delete all credentials associated with a specific VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.DeleteVPSCredentials(context.Background(), vpsId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DeleteVPSCredentials``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteVPSCredentialsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteVPSSnapshot
-
-> DeleteVPSSnapshot(ctx, vpsId, snapshotId).Execute()
-
-Delete VPS snapshot
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	snapshotId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.DeleteVPSSnapshot(context.Background(), vpsId, snapshotId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DeleteVPSSnapshot``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**snapshotId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteVPSSnapshotRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
 
 
 ### Return type
@@ -1571,9 +1197,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DetachInstanceISO
+## DetachIso
 
-> DetachInstanceISO(ctx, instanceId).Execute()
+> DetachIso(ctx, instanceId).Execute()
 
 Detach ISO from a specific Instance
 
@@ -1596,9 +1222,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.DetachInstanceISO(context.Background(), instanceId).Execute()
+	r, err := apiClient.PubliccloudAPI.DetachIso(context.Background(), instanceId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DetachInstanceISO``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DetachIso``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -1614,75 +1240,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDetachInstanceISORequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DetachVPSISO
-
-> DetachVPSISO(ctx, vpsId).Execute()
-
-Detach ISO from a specific VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.DetachVPSISO(context.Background(), vpsId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.DetachVPSISO``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDetachVPSISORequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDetachIsoRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -2081,6 +1639,76 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetConsoleAccess
+
+> GetConsoleAccessResult GetConsoleAccess(ctx, instanceId).Execute()
+
+Get console access
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+)
+
+func main() {
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PubliccloudAPI.GetConsoleAccess(context.Background(), instanceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetConsoleAccess``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetConsoleAccess`: GetConsoleAccessResult
+	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetConsoleAccess`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetConsoleAccessRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetConsoleAccessResult**](GetConsoleAccessResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetCpuMetrics
 
 > GetCpuMetricsResult GetCpuMetrics(ctx, instanceId).From(from).To(to).Granularity(granularity).Execute()
@@ -2141,6 +1769,219 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetCpuMetricsResult**](GetCpuMetricsResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCredential
+
+> GetCredentialResult GetCredential(ctx, instanceId, type_, username).Execute()
+
+Get Instance credentials by type and username.
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+)
+
+func main() {
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | Type of credential
+	username := "root" // string | Username
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PubliccloudAPI.GetCredential(context.Background(), instanceId, type_, username).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetCredential``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCredential`: GetCredentialResult
+	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetCredential`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+**type_** | [**CredentialType**](.md) | Type of credential | 
+**username** | **string** | Username | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCredentialRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**GetCredentialResult**](GetCredentialResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCredentialList
+
+> GetCredentialListResult GetCredentialList(ctx, instanceId).Execute()
+
+List credentials stored for a specific Instance
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+)
+
+func main() {
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PubliccloudAPI.GetCredentialList(context.Background(), instanceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetCredentialList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCredentialList`: GetCredentialListResult
+	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetCredentialList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCredentialListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**GetCredentialListResult**](GetCredentialListResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetCredentialListByType
+
+> GetCredentialListByTypeResult GetCredentialListByType(ctx, instanceId, type_).Execute()
+
+Get credentials by type for a specific Instance
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+)
+
+func main() {
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | Type of credential
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PubliccloudAPI.GetCredentialListByType(context.Background(), instanceId, type_).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetCredentialListByType``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetCredentialListByType`: GetCredentialListByTypeResult
+	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetCredentialListByType`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+**type_** | [**CredentialType**](.md) | Type of credential | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetCredentialListByTypeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**GetCredentialListByTypeResult**](GetCredentialListByTypeResult.md)
 
 ### Authorization
 
@@ -2531,289 +2372,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetInstanceConsoleAccess
-
-> GetConsoleAccessResult GetInstanceConsoleAccess(ctx, instanceId).Execute()
-
-Get console access
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetInstanceConsoleAccess(context.Background(), instanceId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetInstanceConsoleAccess``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetInstanceConsoleAccess`: GetConsoleAccessResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetInstanceConsoleAccess`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**instanceId** | **string** | Instance&#39;s ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetInstanceConsoleAccessRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**GetConsoleAccessResult**](GetConsoleAccessResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetInstanceCredential
-
-> GetCredentialResult GetInstanceCredential(ctx, instanceId, type_, username).Execute()
-
-Get Instance credentials by type and username.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
-	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | Type of credential
-	username := "root" // string | Username
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetInstanceCredential(context.Background(), instanceId, type_, username).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetInstanceCredential``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetInstanceCredential`: GetCredentialResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetInstanceCredential`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**instanceId** | **string** | Instance&#39;s ID | 
-**type_** | [**CredentialType**](.md) | Type of credential | 
-**username** | **string** | Username | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetInstanceCredentialRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**GetCredentialResult**](GetCredentialResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetInstanceCredentialList
-
-> GetCredentialListResult GetInstanceCredentialList(ctx, instanceId).Execute()
-
-List credentials stored for a specific Instance
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetInstanceCredentialList(context.Background(), instanceId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetInstanceCredentialList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetInstanceCredentialList`: GetCredentialListResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetInstanceCredentialList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**instanceId** | **string** | Instance&#39;s ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetInstanceCredentialListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**GetCredentialListResult**](GetCredentialListResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetInstanceCredentialListByType
-
-> GetCredentialListByTypeResult GetInstanceCredentialListByType(ctx, instanceId, type_).Execute()
-
-Get credentials by type for a specific Instance
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
-	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | Type of credential
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetInstanceCredentialListByType(context.Background(), instanceId, type_).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetInstanceCredentialListByType``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetInstanceCredentialListByType`: GetCredentialListByTypeResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetInstanceCredentialListByType`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**instanceId** | **string** | Instance&#39;s ID | 
-**type_** | [**CredentialType**](.md) | Type of credential | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetInstanceCredentialListByTypeRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**GetCredentialListByTypeResult**](GetCredentialListByTypeResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## GetInstanceDataTrafficMetrics
 
 > GetDataTrafficMetricsResult GetInstanceDataTrafficMetrics(ctx, instanceId).From(from).To(to).Granularity(granularity).Aggregation(aggregation).Execute()
@@ -3109,151 +2667,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetInstanceListResult**](GetInstanceListResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetInstanceSnapshot
-
-> Snapshot GetInstanceSnapshot(ctx, instanceId, snapshotId).Execute()
-
-Get snapshot detail
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
-	snapshotId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetInstanceSnapshot(context.Background(), instanceId, snapshotId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetInstanceSnapshot``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetInstanceSnapshot`: Snapshot
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetInstanceSnapshot`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**instanceId** | **string** | Instance&#39;s ID | 
-**snapshotId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetInstanceSnapshotRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**Snapshot**](Snapshot.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetInstanceSnapshotList
-
-> GetSnapshotListResult GetInstanceSnapshotList(ctx, instanceId).Limit(limit).Offset(offset).Execute()
-
-List snapshots
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
-	limit := int32(20) // int32 | Limit the number of results returned. (optional)
-	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetInstanceSnapshotList(context.Background(), instanceId).Limit(limit).Offset(offset).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetInstanceSnapshotList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetInstanceSnapshotList`: GetSnapshotListResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetInstanceSnapshotList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**instanceId** | **string** | Instance&#39;s ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetInstanceSnapshotListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **limit** | **int32** | Limit the number of results returned. | 
- **offset** | **int32** | Return results starting from the given offset. | 
-
-### Return type
-
-[**GetSnapshotListResult**](GetSnapshotListResult.md)
 
 ### Authorization
 
@@ -4059,9 +3472,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetReinstallInstanceImageList
+## GetReinstallImageList
 
-> GetReinstallImageListResult GetReinstallInstanceImageList(ctx, instanceId).Limit(limit).Offset(offset).Custom(custom).Standard(standard).Execute()
+> GetReinstallImageListResult GetReinstallImageList(ctx, instanceId).Limit(limit).Offset(offset).Custom(custom).Standard(standard).Execute()
 
 List images available for reinstall
 
@@ -4086,13 +3499,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetReinstallInstanceImageList(context.Background(), instanceId).Limit(limit).Offset(offset).Custom(custom).Standard(standard).Execute()
+	resp, r, err := apiClient.PubliccloudAPI.GetReinstallImageList(context.Background(), instanceId).Limit(limit).Offset(offset).Custom(custom).Standard(standard).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetReinstallInstanceImageList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetReinstallImageList``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetReinstallInstanceImageList`: GetReinstallImageListResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetReinstallInstanceImageList`: %v\n", resp)
+	// response from `GetReinstallImageList`: GetReinstallImageListResult
+	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetReinstallImageList`: %v\n", resp)
 }
 ```
 
@@ -4106,83 +3519,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetReinstallInstanceImageListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **limit** | **int32** | Limit the number of results returned. | 
- **offset** | **int32** | Return results starting from the given offset. | 
- **custom** | **bool** | Filters the list to include only custom images. | 
- **standard** | **bool** | Filters the list to include only standard images. | 
-
-### Return type
-
-[**GetReinstallImageListResult**](GetReinstallImageListResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetReinstallVPSImageList
-
-> GetReinstallImageListResult GetReinstallVPSImageList(ctx, vpsId).Limit(limit).Offset(offset).Custom(custom).Standard(standard).Execute()
-
-List images available for reinstall
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	limit := int32(20) // int32 | Limit the number of results returned. (optional)
-	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
-	custom := true // bool | Filters the list to include only custom images. (optional)
-	standard := true // bool | Filters the list to include only standard images. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetReinstallVPSImageList(context.Background(), vpsId).Limit(limit).Offset(offset).Custom(custom).Standard(standard).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetReinstallVPSImageList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetReinstallVPSImageList`: GetReinstallImageListResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetReinstallVPSImageList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetReinstallVPSImageListRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetReinstallImageListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -4511,6 +3848,151 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetSnapshot
+
+> Snapshot GetSnapshot(ctx, instanceId, snapshotId).Execute()
+
+Get snapshot detail
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+)
+
+func main() {
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
+	snapshotId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PubliccloudAPI.GetSnapshot(context.Background(), instanceId, snapshotId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetSnapshot``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSnapshot`: Snapshot
+	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetSnapshot`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+**snapshotId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSnapshotRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**Snapshot**](Snapshot.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSnapshotList
+
+> GetSnapshotListResult GetSnapshotList(ctx, instanceId).Limit(limit).Offset(offset).Execute()
+
+List snapshots
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+)
+
+func main() {
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
+	limit := int32(20) // int32 | Limit the number of results returned. (optional)
+	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PubliccloudAPI.GetSnapshotList(context.Background(), instanceId).Limit(limit).Offset(offset).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetSnapshotList``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSnapshotList`: GetSnapshotListResult
+	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetSnapshotList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSnapshotListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **limit** | **int32** | Limit the number of results returned. | 
+ **offset** | **int32** | Return results starting from the given offset. | 
+
+### Return type
+
+[**GetSnapshotListResult**](GetSnapshotListResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetTargetGroup
 
 > TargetGroup GetTargetGroup(ctx, targetGroupId).Execute()
@@ -4792,806 +4274,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**InstanceTypes**](InstanceTypes.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVPSConsoleAccess
-
-> GetConsoleAccessResult GetVPSConsoleAccess(ctx, vpsId).Execute()
-
-Get console access
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVPSConsoleAccess(context.Background(), vpsId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVPSConsoleAccess``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVPSConsoleAccess`: GetConsoleAccessResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVPSConsoleAccess`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVPSConsoleAccessRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**GetConsoleAccessResult**](GetConsoleAccessResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVPSCredential
-
-> GetCredentialResult GetVPSCredential(ctx, vpsId, type_, username).Execute()
-
-Get VPS credential by type and username.
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | Type of credential
-	username := "root" // string | Username
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVPSCredential(context.Background(), vpsId, type_, username).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVPSCredential``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVPSCredential`: GetCredentialResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVPSCredential`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**type_** | [**CredentialType**](.md) | Type of credential | 
-**username** | **string** | Username | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVPSCredentialRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-
-### Return type
-
-[**GetCredentialResult**](GetCredentialResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVPSCredentialList
-
-> GetCredentialListResult GetVPSCredentialList(ctx, vpsId).Execute()
-
-List credentials stored for a specific VPS
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVPSCredentialList(context.Background(), vpsId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVPSCredentialList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVPSCredentialList`: GetCredentialListResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVPSCredentialList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVPSCredentialListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**GetCredentialListResult**](GetCredentialListResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVPSCredentialListByType
-
-> GetCredentialListByTypeResult GetVPSCredentialListByType(ctx, vpsId, type_).Execute()
-
-Get credentials by type for a specific VPS
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | Type of credential
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVPSCredentialListByType(context.Background(), vpsId, type_).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVPSCredentialListByType``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVPSCredentialListByType`: GetCredentialListByTypeResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVPSCredentialListByType`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**type_** | [**CredentialType**](.md) | Type of credential | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVPSCredentialListByTypeRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**GetCredentialListByTypeResult**](GetCredentialListByTypeResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVPSDataTrafficMetrics
-
-> GetDataTrafficMetricsResult GetVPSDataTrafficMetrics(ctx, vpsId).From(from).To(to).Granularity(granularity).Aggregation(aggregation).Execute()
-
-Get data traffic metrics for a specific VPS
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-    "time"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	from := time.Now() // string | The start of the interval to get the metric (optional)
-	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
-	granularity := "granularity_example" // string | How the metrics are grouped by (optional)
-	aggregation := "aggregation_example" // string | How the metrics are aggregated (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVPSDataTrafficMetrics(context.Background(), vpsId).From(from).To(to).Granularity(granularity).Aggregation(aggregation).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVPSDataTrafficMetrics``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVPSDataTrafficMetrics`: GetDataTrafficMetricsResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVPSDataTrafficMetrics`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVPSDataTrafficMetricsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **from** | **string** | The start of the interval to get the metric | 
- **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
- **granularity** | **string** | How the metrics are grouped by | 
- **aggregation** | **string** | How the metrics are aggregated | 
-
-### Return type
-
-[**GetDataTrafficMetricsResult**](GetDataTrafficMetricsResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVPSIP
-
-> IpDetails GetVPSIP(ctx, vpsId, ip).Execute()
-
-Get IP details for a specific VPS
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	ip := "10.0.0.1" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVPSIP(context.Background(), vpsId, ip).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVPSIP``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVPSIP`: IpDetails
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVPSIP`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**ip** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVPSIPRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**IpDetails**](IpDetails.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVPSIPList
-
-> GetIPListResult GetVPSIPList(ctx, vpsId).Version(version).NullRouted(nullRouted).Ips(ips).Execute()
-
-List IP addresses associated with a specific VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	version := openapiclient.ipVersion(4) // IpVersion |  (optional)
-	nullRouted := true // bool |  (optional)
-	ips := "ips_example" // string | A list of IPs separated by `|` (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVPSIPList(context.Background(), vpsId).Version(version).NullRouted(nullRouted).Ips(ips).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVPSIPList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVPSIPList`: GetIPListResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVPSIPList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVPSIPListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **version** | [**IpVersion**](IpVersion.md) |  | 
- **nullRouted** | **bool** |  | 
- **ips** | **string** | A list of IPs separated by &#x60;|&#x60; | 
-
-### Return type
-
-[**GetIPListResult**](GetIPListResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVPSSnapshot
-
-> Snapshot GetVPSSnapshot(ctx, vpsId, snapshotId).Execute()
-
-Get snapshot detail
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	snapshotId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVPSSnapshot(context.Background(), vpsId, snapshotId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVPSSnapshot``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVPSSnapshot`: Snapshot
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVPSSnapshot`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**snapshotId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVPSSnapshotRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**Snapshot**](Snapshot.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVPSSnapshotList
-
-> GetSnapshotListResult GetVPSSnapshotList(ctx, vpsId).Limit(limit).Offset(offset).Execute()
-
-List snapshots
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	limit := int32(20) // int32 | Limit the number of results returned. (optional)
-	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVPSSnapshotList(context.Background(), vpsId).Limit(limit).Offset(offset).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVPSSnapshotList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVPSSnapshotList`: GetSnapshotListResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVPSSnapshotList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVPSSnapshotListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **limit** | **int32** | Limit the number of results returned. | 
- **offset** | **int32** | Return results starting from the given offset. | 
-
-### Return type
-
-[**GetSnapshotListResult**](GetSnapshotListResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVps
-
-> VpsDetails GetVps(ctx, vpsId).Execute()
-
-Get VPS details
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVps(context.Background(), vpsId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVps``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVps`: VpsDetails
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVps`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVpsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**VpsDetails**](VpsDetails.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetVpsList
-
-> GetVpsListResult GetVpsList(ctx).Limit(limit).Offset(offset).Id(id).Reference(reference).State(state).Pack(pack).Region(region).Execute()
-
-Get VPS list
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	limit := int32(20) // int32 | Limit the number of results returned. (optional)
-	offset := int32(10) // int32 | Return results starting from the given offset. (optional)
-	id := "999999999" // string | VPS Equipment Id (optional)
-	reference := "Foo bar" // string |  (optional)
-	state := openapiclient.vpsState("RUNNING") // VpsState |  (optional)
-	pack := openapiclient.vpsPackType("Leaseweb VPS 1") // VpsPackType |  (optional)
-	region := openapiclient.regionName("eu-west-3") // RegionName |  (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.GetVpsList(context.Background()).Limit(limit).Offset(offset).Id(id).Reference(reference).State(state).Pack(pack).Region(region).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.GetVpsList``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetVpsList`: GetVpsListResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.GetVpsList`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetVpsListRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **limit** | **int32** | Limit the number of results returned. | 
- **offset** | **int32** | Return results starting from the given offset. | 
- **id** | **string** | VPS Equipment Id | 
- **reference** | **string** |  | 
- **state** | [**VpsState**](VpsState.md) |  | 
- **pack** | [**VpsPackType**](VpsPackType.md) |  | 
- **region** | [**RegionName**](RegionName.md) |  | 
-
-### Return type
-
-[**GetVpsListResult**](GetVpsListResult.md)
 
 ### Authorization
 
@@ -5889,81 +4571,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## NullRouteVPSIP
-
-> IpDetails NullRouteVPSIP(ctx, vpsId, ip).NullRouteIPOpts(nullRouteIPOpts).Execute()
-
-Null route IP address for a specific resource VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	ip := "10.0.0.1" // string | 
-	nullRouteIPOpts := *openapiclient.NewNullRouteIPOpts() // NullRouteIPOpts |  (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.NullRouteVPSIP(context.Background(), vpsId, ip).NullRouteIPOpts(nullRouteIPOpts).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.NullRouteVPSIP``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `NullRouteVPSIP`: IpDetails
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.NullRouteVPSIP`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**ip** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiNullRouteVPSIPRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **nullRouteIPOpts** | [**NullRouteIPOpts**](NullRouteIPOpts.md) |  | 
-
-### Return type
-
-[**IpDetails**](IpDetails.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## RebootInstance
 
 > RebootInstance(ctx, instanceId).Execute()
@@ -6076,74 +4683,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiRebootLoadBalancerRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RebootVPS
-
-> RebootVPS(ctx, vpsId).Execute()
-
-Reboot a specific VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.RebootVPS(context.Background(), vpsId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.RebootVPS``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRebootVPSRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -6355,76 +4894,6 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiReinstallInstanceRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **reinstallResourceOpts** | [**ReinstallResourceOpts**](ReinstallResourceOpts.md) |  | 
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ReinstallVPS
-
-> ReinstallVPS(ctx, vpsId).ReinstallResourceOpts(reinstallResourceOpts).Execute()
-
-Reinstall a VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	reinstallResourceOpts := *openapiclient.NewReinstallResourceOpts("ImageId_example") // ReinstallResourceOpts | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.ReinstallVPS(context.Background(), vpsId).ReinstallResourceOpts(reinstallResourceOpts).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.ReinstallVPS``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiReinstallVPSRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -6664,82 +5133,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## RemoveVPSIPNullRoute
+## ResetPassword
 
-> IpDetails RemoveVPSIPNullRoute(ctx, vpsId, ip).Execute()
-
-Remove an IP null route for a specific VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	ip := "10.0.0.1" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.RemoveVPSIPNullRoute(context.Background(), vpsId, ip).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.RemoveVPSIPNullRoute``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `RemoveVPSIPNullRoute`: IpDetails
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.RemoveVPSIPNullRoute`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**ip** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRemoveVPSIPNullRouteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**IpDetails**](IpDetails.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ResetInstancePassword
-
-> ResetInstancePassword(ctx, instanceId).Execute()
+> ResetPassword(ctx, instanceId).Execute()
 
 Reset the password for a specific Instance
 
@@ -6762,9 +5158,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.ResetInstancePassword(context.Background(), instanceId).Execute()
+	r, err := apiClient.PubliccloudAPI.ResetPassword(context.Background(), instanceId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.ResetInstancePassword``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.ResetPassword``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -6780,7 +5176,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiResetInstancePasswordRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiResetPasswordRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -6805,77 +5201,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ResetVPSPassword
+## RestoreSnapshot
 
-> ResetVPSPassword(ctx, vpsId).Execute()
-
-Reset the password for a specific VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.ResetVPSPassword(context.Background(), vpsId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.ResetVPSPassword``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiResetVPSPasswordRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RestoreInstanceSnapshot
-
-> RestoreInstanceSnapshot(ctx, instanceId, snapshotId).Execute()
+> RestoreSnapshot(ctx, instanceId, snapshotId).Execute()
 
 Restore instance snapshot
 
@@ -6897,9 +5225,9 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.RestoreInstanceSnapshot(context.Background(), instanceId, snapshotId).Execute()
+	r, err := apiClient.PubliccloudAPI.RestoreSnapshot(context.Background(), instanceId, snapshotId).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.RestoreInstanceSnapshot``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.RestoreSnapshot``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -6916,76 +5244,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiRestoreInstanceSnapshotRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RestoreVPSSnapshot
-
-> RestoreVPSSnapshot(ctx, vpsId, snapshotId).Execute()
-
-Restore VPS snapshot
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	snapshotId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.RestoreVPSSnapshot(context.Background(), vpsId, snapshotId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.RestoreVPSSnapshot``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**snapshotId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRestoreVPSSnapshotRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiRestoreSnapshotRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -7147,74 +5406,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## StartVPS
-
-> StartVPS(ctx, vpsId).Execute()
-
-Start a specific VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.StartVPS(context.Background(), vpsId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.StartVPS``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiStartVPSRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## StopInstance
 
 > StopInstance(ctx, instanceId).Execute()
@@ -7351,77 +5542,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## StopVPS
+## StoreCredential
 
-> StopVPS(ctx, vpsId).Execute()
-
-Stop a specific VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PubliccloudAPI.StopVPS(context.Background(), vpsId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.StopVPS``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiStopVPSRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## StoreInstanceCredential
-
-> StoreCredentialResult StoreInstanceCredential(ctx, instanceId).StoreCredentialOpts(storeCredentialOpts).Execute()
+> StoreCredentialResult StoreCredential(ctx, instanceId).StoreCredentialOpts(storeCredentialOpts).Execute()
 
 Store credentials for a specific Instance
 
@@ -7443,13 +5566,13 @@ func main() {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.StoreInstanceCredential(context.Background(), instanceId).StoreCredentialOpts(storeCredentialOpts).Execute()
+	resp, r, err := apiClient.PubliccloudAPI.StoreCredential(context.Background(), instanceId).StoreCredentialOpts(storeCredentialOpts).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.StoreInstanceCredential``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.StoreCredential``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `StoreInstanceCredential`: StoreCredentialResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.StoreInstanceCredential`: %v\n", resp)
+	// response from `StoreCredential`: StoreCredentialResult
+	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.StoreCredential`: %v\n", resp)
 }
 ```
 
@@ -7463,77 +5586,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiStoreInstanceCredentialRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **storeCredentialOpts** | [**StoreCredentialOpts**](StoreCredentialOpts.md) |  | 
-
-### Return type
-
-[**StoreCredentialResult**](StoreCredentialResult.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## StoreVPSCredential
-
-> StoreCredentialResult StoreVPSCredential(ctx, vpsId).StoreCredentialOpts(storeCredentialOpts).Execute()
-
-Store credentials for a specific VPS
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	storeCredentialOpts := *openapiclient.NewStoreCredentialOpts(openapiclient.credentialType("OPERATING_SYSTEM"), "Username_example", "Password_example") // StoreCredentialOpts | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.StoreVPSCredential(context.Background(), vpsId).StoreCredentialOpts(storeCredentialOpts).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.StoreVPSCredential``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `StoreVPSCredential`: StoreCredentialResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.StoreVPSCredential`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiStoreVPSCredentialRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiStoreCredentialRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -7767,6 +5820,82 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateCredential
+
+> UpdateCredentialResult UpdateCredential(ctx, instanceId, type_, username).UpdateCredentialOpts(updateCredentialOpts).Execute()
+
+Update credentials for a given type and username
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
+)
+
+func main() {
+	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
+	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | Type of credential
+	username := "root" // string | Username
+	updateCredentialOpts := *openapiclient.NewUpdateCredentialOpts("Password_example") // UpdateCredentialOpts | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.PubliccloudAPI.UpdateCredential(context.Background(), instanceId, type_, username).UpdateCredentialOpts(updateCredentialOpts).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.UpdateCredential``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateCredential`: UpdateCredentialResult
+	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.UpdateCredential`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**instanceId** | **string** | Instance&#39;s ID | 
+**type_** | [**CredentialType**](.md) | Type of credential | 
+**username** | **string** | Username | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateCredentialRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **updateCredentialOpts** | [**UpdateCredentialOpts**](UpdateCredentialOpts.md) |  | 
+
+### Return type
+
+[**UpdateCredentialResult**](UpdateCredentialResult.md)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateImage
 
 > ImageDetails UpdateImage(ctx, imageId).UpdateImageOpts(updateImageOpts).Execute()
@@ -7896,82 +6025,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**InstanceDetails**](InstanceDetails.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateInstanceCredential
-
-> UpdateCredentialResult UpdateInstanceCredential(ctx, instanceId, type_, username).UpdateCredentialOpts(updateCredentialOpts).Execute()
-
-Update credentials for a given type and username
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
-	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | Type of credential
-	username := "root" // string | Username
-	updateCredentialOpts := *openapiclient.NewUpdateCredentialOpts("Password_example") // UpdateCredentialOpts | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.UpdateInstanceCredential(context.Background(), instanceId, type_, username).UpdateCredentialOpts(updateCredentialOpts).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.UpdateInstanceCredential``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateInstanceCredential`: UpdateCredentialResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.UpdateInstanceCredential`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**instanceId** | **string** | Instance&#39;s ID | 
-**type_** | [**CredentialType**](.md) | Type of credential | 
-**username** | **string** | Username | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateInstanceCredentialRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **updateCredentialOpts** | [**UpdateCredentialOpts**](UpdateCredentialOpts.md) |  | 
-
-### Return type
-
-[**UpdateCredentialResult**](UpdateCredentialResult.md)
 
 ### Authorization
 
@@ -8339,157 +6392,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TargetGroup**](TargetGroup.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateVPSIP
-
-> IpDetails UpdateVPSIP(ctx, vpsId, ip).UpdateIPOpts(updateIPOpts).Execute()
-
-Update the IP address for a specific VPS
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	ip := "10.0.0.1" // string | 
-	updateIPOpts := *openapiclient.NewUpdateIPOpts("ReverseLookup_example") // UpdateIPOpts | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.UpdateVPSIP(context.Background(), vpsId, ip).UpdateIPOpts(updateIPOpts).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.UpdateVPSIP``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateVPSIP`: IpDetails
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.UpdateVPSIP`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**ip** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateVPSIPRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **updateIPOpts** | [**UpdateIPOpts**](UpdateIPOpts.md) |  | 
-
-### Return type
-
-[**IpDetails**](IpDetails.md)
-
-### Authorization
-
-[X-LSW-Auth](../README.md#X-LSW-Auth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UpdateVpsCredential
-
-> UpdateCredentialResult UpdateVpsCredential(ctx, vpsId, type_, username).UpdateCredentialOpts(updateCredentialOpts).Execute()
-
-Update credentials for a given type and username
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
-)
-
-func main() {
-	vpsId := "999999999" // string | VPS ID
-	type_ := openapiclient.credentialType("OPERATING_SYSTEM") // CredentialType | Type of credential
-	username := "root" // string | Username
-	updateCredentialOpts := *openapiclient.NewUpdateCredentialOpts("Password_example") // UpdateCredentialOpts | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PubliccloudAPI.UpdateVpsCredential(context.Background(), vpsId, type_, username).UpdateCredentialOpts(updateCredentialOpts).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PubliccloudAPI.UpdateVpsCredential``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdateVpsCredential`: UpdateCredentialResult
-	fmt.Fprintf(os.Stdout, "Response from `PubliccloudAPI.UpdateVpsCredential`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**vpsId** | **string** | VPS ID | 
-**type_** | [**CredentialType**](.md) | Type of credential | 
-**username** | **string** | Username | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiUpdateVpsCredentialRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
- **updateCredentialOpts** | [**UpdateCredentialOpts**](UpdateCredentialOpts.md) |  | 
-
-### Return type
-
-[**UpdateCredentialResult**](UpdateCredentialResult.md)
 
 ### Authorization
 
