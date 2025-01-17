@@ -64,6 +64,19 @@ func Test_dns_DnsAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DnsAPIService ExportResourceRecordSets", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var domainName string
+
+		httpRes, err := apiClient.DnsAPI.ExportResourceRecordSets(context.Background(), domainName).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DnsAPIService GetResourceRecordSet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test

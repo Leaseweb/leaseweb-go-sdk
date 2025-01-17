@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**CreateResourceRecordSet**](DnsAPI.md#CreateResourceRecordSet) | **Post** /domains/{domainName}/resourceRecordSets | Create a resource record set
 [**DeleteResourceRecordSet**](DnsAPI.md#DeleteResourceRecordSet) | **Delete** /domains/{domainName}/resourceRecordSets/{name}/{type} | Delete a resource record set
 [**DeleteResourceRecordSets**](DnsAPI.md#DeleteResourceRecordSets) | **Delete** /domains/{domainName}/resourceRecordSets | Delete resource record sets
+[**ExportResourceRecordSets**](DnsAPI.md#ExportResourceRecordSets) | **Get** /domains/{domainName}/resourceRecordSets/import | Export dns records as a bind file content
 [**GetResourceRecordSet**](DnsAPI.md#GetResourceRecordSet) | **Get** /domains/{domainName}/resourceRecordSets/{name}/{type} | Inspect resource record set
 [**GetResourceRecordSetList**](DnsAPI.md#GetResourceRecordSetList) | **Get** /domains/{domainName}/resourceRecordSets | List resource record sets
 [**ImportResourceRecordSets**](DnsAPI.md#ImportResourceRecordSets) | **Post** /domains/{domainName}/resourceRecordSets/import | Import dns records from bind file content
@@ -221,6 +222,72 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ExportResourceRecordSets
+
+> ExportResourceRecordSets(ctx, domainName).Execute()
+
+Export dns records as a bind file content
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/leaseweb/leaseweb-go-sdk/dns"
+)
+
+func main() {
+	domainName := "example.com" // string | Domain name
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.DnsAPI.ExportResourceRecordSets(context.Background(), domainName).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DnsAPI.ExportResourceRecordSets``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**domainName** | **string** | Domain name | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiExportResourceRecordSetsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[X-LSW-Auth](../README.md#X-LSW-Auth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
