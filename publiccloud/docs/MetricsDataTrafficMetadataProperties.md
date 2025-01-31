@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **From** | Pointer to **time.Time** |  | [optional] 
 **To** | Pointer to **time.Time** |  | [optional] 
-**Granularity** | Pointer to [**MetricsDataTrafficMetadataPropertiesGranularity**](MetricsDataTrafficMetadataPropertiesGranularity.md) |  | [optional] 
+**Granularity** | Pointer to [**DataTrafficMetricsGranularity**](DataTrafficMetricsGranularity.md) |  | [optional] 
 **Aggregation** | Pointer to **string** | Defined by the query | [optional] 
 **Unit** | Pointer to **string** | The unit of the summary values | [optional] 
 
@@ -81,20 +81,20 @@ HasTo returns a boolean if a field has been set.
 
 ### GetGranularity
 
-`func (o *MetricsDataTrafficMetadataProperties) GetGranularity() MetricsDataTrafficMetadataPropertiesGranularity`
+`func (o *MetricsDataTrafficMetadataProperties) GetGranularity() DataTrafficMetricsGranularity`
 
 GetGranularity returns the Granularity field if non-nil, zero value otherwise.
 
 ### GetGranularityOk
 
-`func (o *MetricsDataTrafficMetadataProperties) GetGranularityOk() (*MetricsDataTrafficMetadataPropertiesGranularity, bool)`
+`func (o *MetricsDataTrafficMetadataProperties) GetGranularityOk() (*DataTrafficMetricsGranularity, bool)`
 
 GetGranularityOk returns a tuple with the Granularity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetGranularity
 
-`func (o *MetricsDataTrafficMetadataProperties) SetGranularity(v MetricsDataTrafficMetadataPropertiesGranularity)`
+`func (o *MetricsDataTrafficMetadataProperties) SetGranularity(v DataTrafficMetricsGranularity)`
 
 SetGranularity sets Granularity field to given value.
 

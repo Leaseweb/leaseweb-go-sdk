@@ -1,4 +1,4 @@
-# LoadBalancerGranularity
+# LoadBalancerMetricsGranularity
 
 ## Enum
 

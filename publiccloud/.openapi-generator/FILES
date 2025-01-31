@@ -24,6 +24,7 @@ docs/ContractType.md
 docs/Cpu.md
 docs/CpuGranularity.md
 docs/CpuMetrics.md
+docs/CpuMetricsGranularity.md
 docs/CpuMetricsMetadata.md
 docs/CpuMetricsMetadataSummary.md
 docs/CpuMetricsMetadataSummaryCpuMetrics.md
@@ -35,6 +36,7 @@ docs/CreateTargetGroupOpts.md
 docs/Credential.md
 docs/CredentialType.md
 docs/DataTrafficMetrics.md
+docs/DataTrafficMetricsGranularity.md
 docs/DataTransferredMetrics.md
 docs/Ddos.md
 docs/ErrorResult.md
@@ -91,7 +93,6 @@ docs/LaunchLoadBalancerOpts.md
 docs/LoadBalancer.md
 docs/LoadBalancerConfiguration.md
 docs/LoadBalancerDetails.md
-docs/LoadBalancerGranularity.md
 docs/LoadBalancerListItem.md
 docs/LoadBalancerListener.md
 docs/LoadBalancerListenerCreateOpts.md
@@ -99,14 +100,14 @@ docs/LoadBalancerListenerDefaultRule.md
 docs/LoadBalancerListenerDetails.md
 docs/LoadBalancerListenerOpts.md
 docs/LoadBalancerListenerRule.md
+docs/LoadBalancerMetricsGranularity.md
 docs/MarketApp.md
 docs/MarketAppId.md
 docs/Memory.md
 docs/Metadata.md
 docs/MetricsDataTrafficMetadataProperties.md
-docs/MetricsDataTrafficMetadataPropertiesGranularity.md
-docs/MetricsGranularity.md
 docs/MetricsMetadataProperties.md
+docs/MetricsMetadataPropertiesGranularity.md
 docs/MetricsProperties.md
 docs/MetricsUnit.md
 docs/MetricsValues.md
@@ -177,6 +178,7 @@ model_contract_type.go
 model_cpu.go
 model_cpu_granularity.go
 model_cpu_metrics.go
+model_cpu_metrics_granularity.go
 model_cpu_metrics_metadata.go
 model_cpu_metrics_metadata_summary.go
 model_cpu_metrics_metadata_summary_cpu_metrics.go
@@ -188,6 +190,7 @@ model_create_target_group_opts.go
 model_credential.go
 model_credential_type.go
 model_data_traffic_metrics.go
+model_data_traffic_metrics_granularity.go
 model_data_transferred_metrics.go
 model_ddos.go
 model_error_result.go
@@ -244,7 +247,6 @@ model_launch_load_balancer_opts.go
 model_load_balancer.go
 model_load_balancer_configuration.go
 model_load_balancer_details.go
-model_load_balancer_granularity.go
 model_load_balancer_list_item.go
 model_load_balancer_listener.go
 model_load_balancer_listener_create_opts.go
@@ -252,13 +254,13 @@ model_load_balancer_listener_default_rule.go
 model_load_balancer_listener_details.go
 model_load_balancer_listener_opts.go
 model_load_balancer_listener_rule.go
+model_load_balancer_metrics_granularity.go
 model_market_app.go
 model_market_app_id.go
 model_memory.go
 model_metrics_data_traffic_metadata_properties.go
-model_metrics_data_traffic_metadata_properties_granularity.go
-model_metrics_granularity.go
 model_metrics_metadata_properties.go
+model_metrics_metadata_properties_granularity.go
 model_metrics_properties.go
 model_metrics_unit.go
 model_metrics_values.go

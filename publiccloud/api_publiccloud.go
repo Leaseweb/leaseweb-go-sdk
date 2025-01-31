@@ -4945,13 +4945,13 @@ type ApiGetConnectionsMetricsRequest struct {
 	granularity *string
 }
 
-// The start of the interval to get the metric
+// The start of the interval to get the metric, in ISO 8601 format
 func (r ApiGetConnectionsMetricsRequest) From(from string) ApiGetConnectionsMetricsRequest {
 	r.from = &from
 	return r
 }
 
-// The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60;
+// The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;.
 func (r ApiGetConnectionsMetricsRequest) To(to string) ApiGetConnectionsMetricsRequest {
 	r.to = &to
 	return r
@@ -5155,13 +5155,13 @@ type ApiGetConnectionsPerSecondMetricsRequest struct {
 	granularity *string
 }
 
-// The start of the interval to get the metric
+// The start of the interval to get the metric, in ISO 8601 format
 func (r ApiGetConnectionsPerSecondMetricsRequest) From(from string) ApiGetConnectionsPerSecondMetricsRequest {
 	r.from = &from
 	return r
 }
 
-// The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60;
+// The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;.
 func (r ApiGetConnectionsPerSecondMetricsRequest) To(to string) ApiGetConnectionsPerSecondMetricsRequest {
 	r.to = &to
 	return r
@@ -5544,7 +5544,7 @@ type ApiGetCpuMetricsRequest struct {
 	instanceId string
 	from *string
 	to *string
-	granularity *MetricsGranularity
+	granularity *CpuMetricsGranularity
 }
 
 // The start of the interval to get the metric
@@ -5560,7 +5560,7 @@ func (r ApiGetCpuMetricsRequest) To(to string) ApiGetCpuMetricsRequest {
 }
 
 // The interval for each metric
-func (r ApiGetCpuMetricsRequest) Granularity(granularity MetricsGranularity) ApiGetCpuMetricsRequest {
+func (r ApiGetCpuMetricsRequest) Granularity(granularity CpuMetricsGranularity) ApiGetCpuMetricsRequest {
 	r.granularity = &granularity
 	return r
 }
@@ -6295,23 +6295,23 @@ type ApiGetDataTransferredMetricsRequest struct {
 	loadBalancerId string
 	from *string
 	to *string
-	granularity *MetricsGranularity
+	granularity *string
 }
 
-// The start of the interval to get the metric
+// The start of the interval to get the metric, in ISO 8601 format
 func (r ApiGetDataTransferredMetricsRequest) From(from string) ApiGetDataTransferredMetricsRequest {
 	r.from = &from
 	return r
 }
 
-// The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60;
+// The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;.
 func (r ApiGetDataTransferredMetricsRequest) To(to string) ApiGetDataTransferredMetricsRequest {
 	r.to = &to
 	return r
 }
 
 // The interval for each metric
-func (r ApiGetDataTransferredMetricsRequest) Granularity(granularity MetricsGranularity) ApiGetDataTransferredMetricsRequest {
+func (r ApiGetDataTransferredMetricsRequest) Granularity(granularity string) ApiGetDataTransferredMetricsRequest {
 	r.granularity = &granularity
 	return r
 }
@@ -6505,23 +6505,23 @@ type ApiGetDataTransferredPerSecondMetricsRequest struct {
 	loadBalancerId string
 	from *string
 	to *string
-	granularity *MetricsGranularity
+	granularity *string
 }
 
-// The start of the interval to get the metric
+// The start of the interval to get the metric, in ISO 8601 format
 func (r ApiGetDataTransferredPerSecondMetricsRequest) From(from string) ApiGetDataTransferredPerSecondMetricsRequest {
 	r.from = &from
 	return r
 }
 
-// The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60;
+// The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;.
 func (r ApiGetDataTransferredPerSecondMetricsRequest) To(to string) ApiGetDataTransferredPerSecondMetricsRequest {
 	r.to = &to
 	return r
 }
 
 // The interval for each metric
-func (r ApiGetDataTransferredPerSecondMetricsRequest) Granularity(granularity MetricsGranularity) ApiGetDataTransferredPerSecondMetricsRequest {
+func (r ApiGetDataTransferredPerSecondMetricsRequest) Granularity(granularity string) ApiGetDataTransferredPerSecondMetricsRequest {
 	r.granularity = &granularity
 	return r
 }
@@ -10467,23 +10467,23 @@ type ApiGetRequestsMetricsRequest struct {
 	loadBalancerId string
 	from *string
 	to *string
-	granularity *MetricsGranularity
+	granularity *string
 }
 
-// The start of the interval to get the metric
+// The start of the interval to get the metric, in ISO 8601 format
 func (r ApiGetRequestsMetricsRequest) From(from string) ApiGetRequestsMetricsRequest {
 	r.from = &from
 	return r
 }
 
-// The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60;
+// The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;.
 func (r ApiGetRequestsMetricsRequest) To(to string) ApiGetRequestsMetricsRequest {
 	r.to = &to
 	return r
 }
 
 // The interval for each metric
-func (r ApiGetRequestsMetricsRequest) Granularity(granularity MetricsGranularity) ApiGetRequestsMetricsRequest {
+func (r ApiGetRequestsMetricsRequest) Granularity(granularity string) ApiGetRequestsMetricsRequest {
 	r.granularity = &granularity
 	return r
 }
@@ -10677,23 +10677,23 @@ type ApiGetRequestsPerSecondMetricsRequest struct {
 	loadBalancerId string
 	from *string
 	to *string
-	granularity *MetricsGranularity
+	granularity *string
 }
 
-// The start of the interval to get the metric
+// The start of the interval to get the metric, in ISO 8601 format
 func (r ApiGetRequestsPerSecondMetricsRequest) From(from string) ApiGetRequestsPerSecondMetricsRequest {
 	r.from = &from
 	return r
 }
 
-// The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60;
+// The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;.
 func (r ApiGetRequestsPerSecondMetricsRequest) To(to string) ApiGetRequestsPerSecondMetricsRequest {
 	r.to = &to
 	return r
 }
 
 // The interval for each metric
-func (r ApiGetRequestsPerSecondMetricsRequest) Granularity(granularity MetricsGranularity) ApiGetRequestsPerSecondMetricsRequest {
+func (r ApiGetRequestsPerSecondMetricsRequest) Granularity(granularity string) ApiGetRequestsPerSecondMetricsRequest {
 	r.granularity = &granularity
 	return r
 }
@@ -10890,13 +10890,13 @@ type ApiGetResponseCodesMetricsRequest struct {
 	granularity *string
 }
 
-// The start of the interval to get the metric
+// The start of the interval to get the metric, in ISO 8601 format
 func (r ApiGetResponseCodesMetricsRequest) From(from string) ApiGetResponseCodesMetricsRequest {
 	r.from = &from
 	return r
 }
 
-// The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60;
+// The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;.
 func (r ApiGetResponseCodesMetricsRequest) To(to string) ApiGetResponseCodesMetricsRequest {
 	r.to = &to
 	return r
@@ -11100,13 +11100,13 @@ type ApiGetResponseCodesPerSecondMetricsRequest struct {
 	granularity *string
 }
 
-// The start of the interval to get the metric
+// The start of the interval to get the metric, in ISO 8601 format
 func (r ApiGetResponseCodesPerSecondMetricsRequest) From(from string) ApiGetResponseCodesPerSecondMetricsRequest {
 	r.from = &from
 	return r
 }
 
-// The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60;
+// The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;.
 func (r ApiGetResponseCodesPerSecondMetricsRequest) To(to string) ApiGetResponseCodesPerSecondMetricsRequest {
 	r.to = &to
 	return r

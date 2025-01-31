@@ -27,6 +27,7 @@ const (
 	REGIONNAME_US_WEST_1 RegionName = "us-west-1"
 	REGIONNAME_EU_WEST_2 RegionName = "eu-west-2"
 	REGIONNAME_CA_CENTRAL_1 RegionName = "ca-central-1"
+	REGIONNAME_AP_NORTHEAST_1 RegionName = "ap-northeast-1"
 )
 
 // All allowed values of RegionName enum
@@ -38,6 +39,7 @@ var AllowedRegionNameEnumValues = []RegionName{
 	"us-west-1",
 	"eu-west-2",
 	"ca-central-1",
+	"ap-northeast-1",
 }
 
 func (v *RegionName) UnmarshalJSON(src []byte) error {

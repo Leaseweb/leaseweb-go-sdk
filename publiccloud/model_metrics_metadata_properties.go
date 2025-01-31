@@ -22,7 +22,7 @@ var _ MappedNullable = &MetricsMetadataProperties{}
 type MetricsMetadataProperties struct {
 	From *time.Time `json:"from,omitempty"`
 	To *time.Time `json:"to,omitempty"`
-	Granularity *MetricsDataTrafficMetadataPropertiesGranularity `json:"granularity,omitempty"`
+	Granularity *MetricsMetadataPropertiesGranularity `json:"granularity,omitempty"`
 	// Defined by the query
 	Aggregation *string `json:"aggregation,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -112,9 +112,9 @@ func (o *MetricsMetadataProperties) SetTo(v time.Time) {
 }
 
 // GetGranularity returns the Granularity field value if set, zero value otherwise.
-func (o *MetricsMetadataProperties) GetGranularity() MetricsDataTrafficMetadataPropertiesGranularity {
+func (o *MetricsMetadataProperties) GetGranularity() MetricsMetadataPropertiesGranularity {
 	if o == nil || IsNil(o.Granularity) {
-		var ret MetricsDataTrafficMetadataPropertiesGranularity
+		var ret MetricsMetadataPropertiesGranularity
 		return ret
 	}
 	return *o.Granularity
@@ -122,7 +122,7 @@ func (o *MetricsMetadataProperties) GetGranularity() MetricsDataTrafficMetadataP
 
 // GetGranularityOk returns a tuple with the Granularity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MetricsMetadataProperties) GetGranularityOk() (*MetricsDataTrafficMetadataPropertiesGranularity, bool) {
+func (o *MetricsMetadataProperties) GetGranularityOk() (*MetricsMetadataPropertiesGranularity, bool) {
 	if o == nil || IsNil(o.Granularity) {
 		return nil, false
 	}
@@ -138,8 +138,8 @@ func (o *MetricsMetadataProperties) HasGranularity() bool {
 	return false
 }
 
-// SetGranularity gets a reference to the given MetricsDataTrafficMetadataPropertiesGranularity and assigns it to the Granularity field.
-func (o *MetricsMetadataProperties) SetGranularity(v MetricsDataTrafficMetadataPropertiesGranularity) {
+// SetGranularity gets a reference to the given MetricsMetadataPropertiesGranularity and assigns it to the Granularity field.
+func (o *MetricsMetadataProperties) SetGranularity(v MetricsMetadataPropertiesGranularity) {
 	o.Granularity = &v
 }
 

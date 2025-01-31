@@ -1504,14 +1504,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-    "time"
 	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	from := time.Now() // string | The start of the interval to get the metric (optional)
-	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	from := "2025-01-28T10:34:01+00:00" // string | The start of the interval to get the metric, in ISO 8601 format (optional)
+	to := "2025-01-28T11:44:01+00:00" // string | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in `from`. (optional)
 	granularity := "granularity_example" // string | The interval for each metric (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1542,8 +1541,8 @@ Other parameters are passed through a pointer to a apiGetConnectionsMetricsReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **from** | **string** | The start of the interval to get the metric | 
- **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **from** | **string** | The start of the interval to get the metric, in ISO 8601 format | 
+ **to** | **string** | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;. | 
  **granularity** | **string** | The interval for each metric | 
 
 ### Return type
@@ -1579,14 +1578,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-    "time"
 	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	from := time.Now() // string | The start of the interval to get the metric (optional)
-	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	from := "2025-01-28T10:34:01+00:00" // string | The start of the interval to get the metric, in ISO 8601 format (optional)
+	to := "2025-01-28T11:44:01+00:00" // string | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in `from`. (optional)
 	granularity := "granularity_example" // string | The interval for each metric (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -1617,8 +1615,8 @@ Other parameters are passed through a pointer to a apiGetConnectionsPerSecondMet
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **from** | **string** | The start of the interval to get the metric | 
- **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **from** | **string** | The start of the interval to get the metric, in ISO 8601 format | 
+ **to** | **string** | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;. | 
  **granularity** | **string** | The interval for each metric | 
 
 ### Return type
@@ -1732,7 +1730,7 @@ func main() {
 	instanceId := "ace712e9-a166-47f1-9065-4af0f7e7fce1" // string | Instance's ID
 	from := time.Now() // string | The start of the interval to get the metric (optional)
 	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
-	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
+	granularity := openapiclient.cpuMetricsGranularity("5m") // CpuMetricsGranularity | The interval for each metric (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1764,7 +1762,7 @@ Name | Type | Description  | Notes
 
  **from** | **string** | The start of the interval to get the metric | 
  **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
- **granularity** | [**MetricsGranularity**](MetricsGranularity.md) | The interval for each metric | 
+ **granularity** | [**CpuMetricsGranularity**](CpuMetricsGranularity.md) | The interval for each metric | 
 
 ### Return type
 
@@ -2012,15 +2010,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-    "time"
 	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	from := time.Now() // string | The start of the interval to get the metric (optional)
-	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
-	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
+	from := "2025-01-28T10:34:01+00:00" // string | The start of the interval to get the metric, in ISO 8601 format (optional)
+	to := "2025-01-28T11:44:01+00:00" // string | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in `from`. (optional)
+	granularity := "granularity_example" // string | The interval for each metric (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2050,9 +2047,9 @@ Other parameters are passed through a pointer to a apiGetDataTransferredMetricsR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **from** | **string** | The start of the interval to get the metric | 
- **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
- **granularity** | [**MetricsGranularity**](MetricsGranularity.md) | The interval for each metric | 
+ **from** | **string** | The start of the interval to get the metric, in ISO 8601 format | 
+ **to** | **string** | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;. | 
+ **granularity** | **string** | The interval for each metric | 
 
 ### Return type
 
@@ -2087,15 +2084,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-    "time"
 	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	from := time.Now() // string | The start of the interval to get the metric (optional)
-	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
-	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
+	from := "2025-01-28T10:34:01+00:00" // string | The start of the interval to get the metric, in ISO 8601 format (optional)
+	to := "2025-01-28T11:44:01+00:00" // string | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in `from`. (optional)
+	granularity := "granularity_example" // string | The interval for each metric (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2125,9 +2121,9 @@ Other parameters are passed through a pointer to a apiGetDataTransferredPerSecon
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **from** | **string** | The start of the interval to get the metric | 
- **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
- **granularity** | [**MetricsGranularity**](MetricsGranularity.md) | The interval for each metric | 
+ **from** | **string** | The start of the interval to get the metric, in ISO 8601 format | 
+ **to** | **string** | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;. | 
+ **granularity** | **string** | The interval for each metric | 
 
 ### Return type
 
@@ -3563,15 +3559,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-    "time"
 	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	from := time.Now() // string | The start of the interval to get the metric (optional)
-	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
-	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
+	from := "2025-01-28T10:34:01+00:00" // string | The start of the interval to get the metric, in ISO 8601 format (optional)
+	to := "2025-01-28T11:44:01+00:00" // string | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in `from`. (optional)
+	granularity := "granularity_example" // string | The interval for each metric (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3601,9 +3596,9 @@ Other parameters are passed through a pointer to a apiGetRequestsMetricsRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **from** | **string** | The start of the interval to get the metric | 
- **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
- **granularity** | [**MetricsGranularity**](MetricsGranularity.md) | The interval for each metric | 
+ **from** | **string** | The start of the interval to get the metric, in ISO 8601 format | 
+ **to** | **string** | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;. | 
+ **granularity** | **string** | The interval for each metric | 
 
 ### Return type
 
@@ -3638,15 +3633,14 @@ import (
 	"context"
 	"fmt"
 	"os"
-    "time"
 	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	from := time.Now() // string | The start of the interval to get the metric (optional)
-	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
-	granularity := openapiclient.metricsGranularity("5m") // MetricsGranularity | The interval for each metric (optional)
+	from := "2025-01-28T10:34:01+00:00" // string | The start of the interval to get the metric, in ISO 8601 format (optional)
+	to := "2025-01-28T11:44:01+00:00" // string | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in `from`. (optional)
+	granularity := "granularity_example" // string | The interval for each metric (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3676,9 +3670,9 @@ Other parameters are passed through a pointer to a apiGetRequestsPerSecondMetric
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **from** | **string** | The start of the interval to get the metric | 
- **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
- **granularity** | [**MetricsGranularity**](MetricsGranularity.md) | The interval for each metric | 
+ **from** | **string** | The start of the interval to get the metric, in ISO 8601 format | 
+ **to** | **string** | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;. | 
+ **granularity** | **string** | The interval for each metric | 
 
 ### Return type
 
@@ -3713,14 +3707,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-    "time"
 	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	from := time.Now() // string | The start of the interval to get the metric (optional)
-	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	from := "2025-01-28T10:34:01+00:00" // string | The start of the interval to get the metric, in ISO 8601 format (optional)
+	to := "2025-01-28T11:44:01+00:00" // string | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in `from`. (optional)
 	granularity := "granularity_example" // string | The interval for each metric (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -3751,8 +3744,8 @@ Other parameters are passed through a pointer to a apiGetResponseCodesMetricsReq
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **from** | **string** | The start of the interval to get the metric | 
- **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **from** | **string** | The start of the interval to get the metric, in ISO 8601 format | 
+ **to** | **string** | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;. | 
  **granularity** | **string** | The interval for each metric | 
 
 ### Return type
@@ -3788,14 +3781,13 @@ import (
 	"context"
 	"fmt"
 	"os"
-    "time"
 	openapiclient "github.com/leaseweb/leaseweb-go-sdk/publiccloud"
 )
 
 func main() {
 	loadBalancerId := "695ddd91-051f-4dd6-9120-938a927a47d0" // string | Load balancer ID
-	from := time.Now() // string | The start of the interval to get the metric (optional)
-	to := time.Now() // string | The end of the interval to get the metric. Must be greater than the date provided in `from` (optional)
+	from := "2025-01-28T10:34:01+00:00" // string | The start of the interval to get the metric, in ISO 8601 format (optional)
+	to := "2025-01-28T11:44:01+00:00" // string | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in `from`. (optional)
 	granularity := "granularity_example" // string | The interval for each metric (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -3826,8 +3818,8 @@ Other parameters are passed through a pointer to a apiGetResponseCodesPerSecondM
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **from** | **string** | The start of the interval to get the metric | 
- **to** | **string** | The end of the interval to get the metric. Must be greater than the date provided in &#x60;from&#x60; | 
+ **from** | **string** | The start of the interval to get the metric, in ISO 8601 format | 
+ **to** | **string** | The end of the interval to get the metric in format ISO 8601. Must be greater than the date provided in &#x60;from&#x60;. | 
  **granularity** | **string** | The interval for each metric | 
 
 ### Return type

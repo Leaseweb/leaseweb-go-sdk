@@ -19,8 +19,8 @@ var _ MappedNullable = &Summary{}
 
 // Summary struct for Summary
 type Summary struct {
-	DOWN_PUBLIC *TrafficMetricSummary `json:"DOWN_PUBLIC,omitempty"`
-	UP_PUBLIC *TrafficMetricSummary `json:"UP_PUBLIC,omitempty"`
+	DownPublic *TrafficMetricSummary `json:"downPublic,omitempty"`
+	UpPublic *TrafficMetricSummary `json:"upPublic,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,68 +43,68 @@ func NewSummaryWithDefaults() *Summary {
 	return &this
 }
 
-// GetDOWN_PUBLIC returns the DOWN_PUBLIC field value if set, zero value otherwise.
-func (o *Summary) GetDOWN_PUBLIC() TrafficMetricSummary {
-	if o == nil || IsNil(o.DOWN_PUBLIC) {
+// GetDownPublic returns the DownPublic field value if set, zero value otherwise.
+func (o *Summary) GetDownPublic() TrafficMetricSummary {
+	if o == nil || IsNil(o.DownPublic) {
 		var ret TrafficMetricSummary
 		return ret
 	}
-	return *o.DOWN_PUBLIC
+	return *o.DownPublic
 }
 
-// GetDOWN_PUBLICOk returns a tuple with the DOWN_PUBLIC field value if set, nil otherwise
+// GetDownPublicOk returns a tuple with the DownPublic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Summary) GetDOWN_PUBLICOk() (*TrafficMetricSummary, bool) {
-	if o == nil || IsNil(o.DOWN_PUBLIC) {
+func (o *Summary) GetDownPublicOk() (*TrafficMetricSummary, bool) {
+	if o == nil || IsNil(o.DownPublic) {
 		return nil, false
 	}
-	return o.DOWN_PUBLIC, true
+	return o.DownPublic, true
 }
 
-// HasDOWN_PUBLIC returns a boolean if a field has been set.
-func (o *Summary) HasDOWN_PUBLIC() bool {
-	if o != nil && !IsNil(o.DOWN_PUBLIC) {
+// HasDownPublic returns a boolean if a field has been set.
+func (o *Summary) HasDownPublic() bool {
+	if o != nil && !IsNil(o.DownPublic) {
 		return true
 	}
 
 	return false
 }
 
-// SetDOWN_PUBLIC gets a reference to the given TrafficMetricSummary and assigns it to the DOWN_PUBLIC field.
-func (o *Summary) SetDOWN_PUBLIC(v TrafficMetricSummary) {
-	o.DOWN_PUBLIC = &v
+// SetDownPublic gets a reference to the given TrafficMetricSummary and assigns it to the DownPublic field.
+func (o *Summary) SetDownPublic(v TrafficMetricSummary) {
+	o.DownPublic = &v
 }
 
-// GetUP_PUBLIC returns the UP_PUBLIC field value if set, zero value otherwise.
-func (o *Summary) GetUP_PUBLIC() TrafficMetricSummary {
-	if o == nil || IsNil(o.UP_PUBLIC) {
+// GetUpPublic returns the UpPublic field value if set, zero value otherwise.
+func (o *Summary) GetUpPublic() TrafficMetricSummary {
+	if o == nil || IsNil(o.UpPublic) {
 		var ret TrafficMetricSummary
 		return ret
 	}
-	return *o.UP_PUBLIC
+	return *o.UpPublic
 }
 
-// GetUP_PUBLICOk returns a tuple with the UP_PUBLIC field value if set, nil otherwise
+// GetUpPublicOk returns a tuple with the UpPublic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Summary) GetUP_PUBLICOk() (*TrafficMetricSummary, bool) {
-	if o == nil || IsNil(o.UP_PUBLIC) {
+func (o *Summary) GetUpPublicOk() (*TrafficMetricSummary, bool) {
+	if o == nil || IsNil(o.UpPublic) {
 		return nil, false
 	}
-	return o.UP_PUBLIC, true
+	return o.UpPublic, true
 }
 
-// HasUP_PUBLIC returns a boolean if a field has been set.
-func (o *Summary) HasUP_PUBLIC() bool {
-	if o != nil && !IsNil(o.UP_PUBLIC) {
+// HasUpPublic returns a boolean if a field has been set.
+func (o *Summary) HasUpPublic() bool {
+	if o != nil && !IsNil(o.UpPublic) {
 		return true
 	}
 
 	return false
 }
 
-// SetUP_PUBLIC gets a reference to the given TrafficMetricSummary and assigns it to the UP_PUBLIC field.
-func (o *Summary) SetUP_PUBLIC(v TrafficMetricSummary) {
-	o.UP_PUBLIC = &v
+// SetUpPublic gets a reference to the given TrafficMetricSummary and assigns it to the UpPublic field.
+func (o *Summary) SetUpPublic(v TrafficMetricSummary) {
+	o.UpPublic = &v
 }
 
 func (o Summary) MarshalJSON() ([]byte, error) {
@@ -117,11 +117,11 @@ func (o Summary) MarshalJSON() ([]byte, error) {
 
 func (o Summary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DOWN_PUBLIC) {
-		toSerialize["DOWN_PUBLIC"] = o.DOWN_PUBLIC
+	if !IsNil(o.DownPublic) {
+		toSerialize["downPublic"] = o.DownPublic
 	}
-	if !IsNil(o.UP_PUBLIC) {
-		toSerialize["UP_PUBLIC"] = o.UP_PUBLIC
+	if !IsNil(o.UpPublic) {
+		toSerialize["upPublic"] = o.UpPublic
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -145,8 +145,8 @@ func (o *Summary) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "DOWN_PUBLIC")
-		delete(additionalProperties, "UP_PUBLIC")
+		delete(additionalProperties, "downPublic")
+		delete(additionalProperties, "upPublic")
 		o.AdditionalProperties = additionalProperties
 	}
 

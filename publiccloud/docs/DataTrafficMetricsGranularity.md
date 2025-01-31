@@ -1,15 +1,7 @@
-# MetricsGranularity
+# DataTrafficMetricsGranularity
 
 ## Enum
 
-
-* `_5M` (value: `"5m"`)
-
-* `_10M` (value: `"10m"`)
-
-* `_30M` (value: `"30m"`)
-
-* `_60M` (value: `"60m"`)
 
 * `DAY` (value: `"DAY"`)
 

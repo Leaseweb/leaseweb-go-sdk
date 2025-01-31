@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DOWN_PUBLIC** | Pointer to [**TrafficMetric**](TrafficMetric.md) |  | [optional] 
-**UP_PUBLIC** | Pointer to [**TrafficMetric**](TrafficMetric.md) |  | [optional] 
+**DownPublic** | Pointer to [**TrafficMetric**](TrafficMetric.md) |  | [optional] 
+**UpPublic** | Pointer to [**TrafficMetric**](TrafficMetric.md) |  | [optional] 
 
 ## Methods
 
@@ -26,55 +26,55 @@ NewDataTrafficMetricsWithDefaults instantiates a new DataTrafficMetrics object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetDOWN_PUBLIC
+### GetDownPublic
 
-`func (o *DataTrafficMetrics) GetDOWN_PUBLIC() TrafficMetric`
+`func (o *DataTrafficMetrics) GetDownPublic() TrafficMetric`
 
-GetDOWN_PUBLIC returns the DOWN_PUBLIC field if non-nil, zero value otherwise.
+GetDownPublic returns the DownPublic field if non-nil, zero value otherwise.
 
-### GetDOWN_PUBLICOk
+### GetDownPublicOk
 
-`func (o *DataTrafficMetrics) GetDOWN_PUBLICOk() (*TrafficMetric, bool)`
+`func (o *DataTrafficMetrics) GetDownPublicOk() (*TrafficMetric, bool)`
 
-GetDOWN_PUBLICOk returns a tuple with the DOWN_PUBLIC field if it's non-nil, zero value otherwise
+GetDownPublicOk returns a tuple with the DownPublic field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDOWN_PUBLIC
+### SetDownPublic
 
-`func (o *DataTrafficMetrics) SetDOWN_PUBLIC(v TrafficMetric)`
+`func (o *DataTrafficMetrics) SetDownPublic(v TrafficMetric)`
 
-SetDOWN_PUBLIC sets DOWN_PUBLIC field to given value.
+SetDownPublic sets DownPublic field to given value.
 
-### HasDOWN_PUBLIC
+### HasDownPublic
 
-`func (o *DataTrafficMetrics) HasDOWN_PUBLIC() bool`
+`func (o *DataTrafficMetrics) HasDownPublic() bool`
 
-HasDOWN_PUBLIC returns a boolean if a field has been set.
+HasDownPublic returns a boolean if a field has been set.
 
-### GetUP_PUBLIC
+### GetUpPublic
 
-`func (o *DataTrafficMetrics) GetUP_PUBLIC() TrafficMetric`
+`func (o *DataTrafficMetrics) GetUpPublic() TrafficMetric`
 
-GetUP_PUBLIC returns the UP_PUBLIC field if non-nil, zero value otherwise.
+GetUpPublic returns the UpPublic field if non-nil, zero value otherwise.
 
-### GetUP_PUBLICOk
+### GetUpPublicOk
 
-`func (o *DataTrafficMetrics) GetUP_PUBLICOk() (*TrafficMetric, bool)`
+`func (o *DataTrafficMetrics) GetUpPublicOk() (*TrafficMetric, bool)`
 
-GetUP_PUBLICOk returns a tuple with the UP_PUBLIC field if it's non-nil, zero value otherwise
+GetUpPublicOk returns a tuple with the UpPublic field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUP_PUBLIC
+### SetUpPublic
 
-`func (o *DataTrafficMetrics) SetUP_PUBLIC(v TrafficMetric)`
+`func (o *DataTrafficMetrics) SetUpPublic(v TrafficMetric)`
 
-SetUP_PUBLIC sets UP_PUBLIC field to given value.
+SetUpPublic sets UpPublic field to given value.
 
-### HasUP_PUBLIC
+### HasUpPublic
 
-`func (o *DataTrafficMetrics) HasUP_PUBLIC() bool`
+`func (o *DataTrafficMetrics) HasUpPublic() bool`
 
-HasUP_PUBLIC returns a boolean if a field has been set.
+HasUpPublic returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

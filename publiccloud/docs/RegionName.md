@@ -17,6 +17,8 @@
 
 * `CA_CENTRAL_1` (value: `"ca-central-1"`)
 
+* `AP_NORTHEAST_1` (value: `"ap-northeast-1"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

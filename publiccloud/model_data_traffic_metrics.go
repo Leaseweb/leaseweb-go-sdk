@@ -19,8 +19,8 @@ var _ MappedNullable = &DataTrafficMetrics{}
 
 // DataTrafficMetrics struct for DataTrafficMetrics
 type DataTrafficMetrics struct {
-	DOWN_PUBLIC *TrafficMetric `json:"DOWN_PUBLIC,omitempty"`
-	UP_PUBLIC *TrafficMetric `json:"UP_PUBLIC,omitempty"`
+	DownPublic *TrafficMetric `json:"downPublic,omitempty"`
+	UpPublic *TrafficMetric `json:"upPublic,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,68 +43,68 @@ func NewDataTrafficMetricsWithDefaults() *DataTrafficMetrics {
 	return &this
 }
 
-// GetDOWN_PUBLIC returns the DOWN_PUBLIC field value if set, zero value otherwise.
-func (o *DataTrafficMetrics) GetDOWN_PUBLIC() TrafficMetric {
-	if o == nil || IsNil(o.DOWN_PUBLIC) {
+// GetDownPublic returns the DownPublic field value if set, zero value otherwise.
+func (o *DataTrafficMetrics) GetDownPublic() TrafficMetric {
+	if o == nil || IsNil(o.DownPublic) {
 		var ret TrafficMetric
 		return ret
 	}
-	return *o.DOWN_PUBLIC
+	return *o.DownPublic
 }
 
-// GetDOWN_PUBLICOk returns a tuple with the DOWN_PUBLIC field value if set, nil otherwise
+// GetDownPublicOk returns a tuple with the DownPublic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataTrafficMetrics) GetDOWN_PUBLICOk() (*TrafficMetric, bool) {
-	if o == nil || IsNil(o.DOWN_PUBLIC) {
+func (o *DataTrafficMetrics) GetDownPublicOk() (*TrafficMetric, bool) {
+	if o == nil || IsNil(o.DownPublic) {
 		return nil, false
 	}
-	return o.DOWN_PUBLIC, true
+	return o.DownPublic, true
 }
 
-// HasDOWN_PUBLIC returns a boolean if a field has been set.
-func (o *DataTrafficMetrics) HasDOWN_PUBLIC() bool {
-	if o != nil && !IsNil(o.DOWN_PUBLIC) {
+// HasDownPublic returns a boolean if a field has been set.
+func (o *DataTrafficMetrics) HasDownPublic() bool {
+	if o != nil && !IsNil(o.DownPublic) {
 		return true
 	}
 
 	return false
 }
 
-// SetDOWN_PUBLIC gets a reference to the given TrafficMetric and assigns it to the DOWN_PUBLIC field.
-func (o *DataTrafficMetrics) SetDOWN_PUBLIC(v TrafficMetric) {
-	o.DOWN_PUBLIC = &v
+// SetDownPublic gets a reference to the given TrafficMetric and assigns it to the DownPublic field.
+func (o *DataTrafficMetrics) SetDownPublic(v TrafficMetric) {
+	o.DownPublic = &v
 }
 
-// GetUP_PUBLIC returns the UP_PUBLIC field value if set, zero value otherwise.
-func (o *DataTrafficMetrics) GetUP_PUBLIC() TrafficMetric {
-	if o == nil || IsNil(o.UP_PUBLIC) {
+// GetUpPublic returns the UpPublic field value if set, zero value otherwise.
+func (o *DataTrafficMetrics) GetUpPublic() TrafficMetric {
+	if o == nil || IsNil(o.UpPublic) {
 		var ret TrafficMetric
 		return ret
 	}
-	return *o.UP_PUBLIC
+	return *o.UpPublic
 }
 
-// GetUP_PUBLICOk returns a tuple with the UP_PUBLIC field value if set, nil otherwise
+// GetUpPublicOk returns a tuple with the UpPublic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DataTrafficMetrics) GetUP_PUBLICOk() (*TrafficMetric, bool) {
-	if o == nil || IsNil(o.UP_PUBLIC) {
+func (o *DataTrafficMetrics) GetUpPublicOk() (*TrafficMetric, bool) {
+	if o == nil || IsNil(o.UpPublic) {
 		return nil, false
 	}
-	return o.UP_PUBLIC, true
+	return o.UpPublic, true
 }
 
-// HasUP_PUBLIC returns a boolean if a field has been set.
-func (o *DataTrafficMetrics) HasUP_PUBLIC() bool {
-	if o != nil && !IsNil(o.UP_PUBLIC) {
+// HasUpPublic returns a boolean if a field has been set.
+func (o *DataTrafficMetrics) HasUpPublic() bool {
+	if o != nil && !IsNil(o.UpPublic) {
 		return true
 	}
 
 	return false
 }
 
-// SetUP_PUBLIC gets a reference to the given TrafficMetric and assigns it to the UP_PUBLIC field.
-func (o *DataTrafficMetrics) SetUP_PUBLIC(v TrafficMetric) {
-	o.UP_PUBLIC = &v
+// SetUpPublic gets a reference to the given TrafficMetric and assigns it to the UpPublic field.
+func (o *DataTrafficMetrics) SetUpPublic(v TrafficMetric) {
+	o.UpPublic = &v
 }
 
 func (o DataTrafficMetrics) MarshalJSON() ([]byte, error) {
@@ -117,11 +117,11 @@ func (o DataTrafficMetrics) MarshalJSON() ([]byte, error) {
 
 func (o DataTrafficMetrics) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DOWN_PUBLIC) {
-		toSerialize["DOWN_PUBLIC"] = o.DOWN_PUBLIC
+	if !IsNil(o.DownPublic) {
+		toSerialize["downPublic"] = o.DownPublic
 	}
-	if !IsNil(o.UP_PUBLIC) {
-		toSerialize["UP_PUBLIC"] = o.UP_PUBLIC
+	if !IsNil(o.UpPublic) {
+		toSerialize["upPublic"] = o.UpPublic
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -145,8 +145,8 @@ func (o *DataTrafficMetrics) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "DOWN_PUBLIC")
-		delete(additionalProperties, "UP_PUBLIC")
+		delete(additionalProperties, "downPublic")
+		delete(additionalProperties, "upPublic")
 		o.AdditionalProperties = additionalProperties
 	}
 
